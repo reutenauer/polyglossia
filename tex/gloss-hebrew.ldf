@@ -1,0 +1,209 @@
+\ProvidesFile{gloss-hebrew.ldf}[polyglossia: module for hebrew]
+\RequirePackage{bidi}
+\RequirePackage{hebrewcal}
+\makeatletter
+
+\ifx\l@hebrew\@undefined
+  \xpg@nopatterns{Hebrew}%
+  \adddialect\l@hebrew0
+\fi
+
+\def\hebrew@RL{\relax}
+
+\newif\if@calendar@hebrew
+\def\tmp@hebrew{hebrew}
+\define@key{hebrew}{calendar}[gregorian]{%
+	\def\@tmpa{#1}%
+	\ifx\@tmpa\tmp@hebrew%
+        \@calendar@hebrewtrue%
+	\else%
+          \@calendar@hebrewfalse%
+	\fi}
+
+% hebrewcal.sty also defines the boolean key fullyear (default=false)
+
+\newif\if@hebrew@numerals
+\def\tmp@hebrew{hebrew}
+\define@key{hebrew}{numerals}[arabic]{%
+	\def\@tmpa{#1}%
+	\ifx\@tmpa\tmp@hebrew%
+	  \@hebrew@numeralstrue%
+	\else%
+          \@hebrew@numeralsfalse%
+	\fi}
+
+\setkeys{hebrew}{numerals}
+
+\def\captionshebrew{%
+  \def\prefacename{מבוא}%
+  \def\refname{מקורות}%
+  \def\abstractname{תקציר}%
+  \def\bibname{ביבליוגרפיה}%
+  \def\chaptername{פרק}%
+  \def\appendixname{נספח}%
+  \def\contentsname{תוכן העניינים}%
+  \def\listfigurename{רשימת האיורים}%
+  \def\listtablename{רשימת הטבלאות}%
+  \def\indexname{מפתח}%
+  \def\figurename{איור}%
+  \def\tablename{טבלה}%
+  \def\partname{חלק}%
+  \def\enclname{רצ"ב}%
+  \def\ccname{העטקים}%
+  \def\headtoname{אל}%
+  \def\pagename{עמוד}%
+  \def\psname{נ.ב.}%
+  \def\seename{ראה}%
+  \def\alsoname{ראה גם}% check
+  \def\proofname{הוכחה}
+  \def\glossaryname{מילון מונחים}% check
+}
+\def\datehebrew{%
+  \def\today{%
+    \if@calendar@hebrew%
+      \hebrewtoday%
+    \else%
+      \hebrewnumber\day%
+      \space ב\hebrewgregmonth{\month}\space%
+      \hebrewnumber\year%
+     \fi}%
+}
+
+\def\hebrewgregmonth#1{\ifcase#1%
+  \or ינואר% יאנואר
+    \or פברואר\or מרץ% מרס / מארס
+    \or אפריל\or מאי% מי
+    \or יוני\or יולי\or אוגוסט %אבגוסט
+    \or ספטמבר\or אוקטובר\or נובמבר\or דצמבר\fi}
+
+
+\def\hebrewalph#1{%
+\ifnum#1>9999 \xpg@warning{Illegal value (#1) for Hebrew numeral} {#1}
+\else
+  \ifnum#1<\z@\space\xpg@warning{Illegal value (#1) for Hebrew numeral}%
+  \else
+    \ifnum#1<10\expandafter\heb@num@i\number#1%
+    \else
+      \ifnum#1<100\expandafter\heb@num@ii\number#1%
+      \else
+        \ifnum#1<\@m\expandafter\heb@num@iii\number#1%
+        \else
+          \ifnum#1<\@M\expandafter\heb@num@iv\number#1%
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+\fi
+}
+\let\hebrewnumeral\hebrewalph
+
+\def\hebnum@zero{}
+
+%Hebrew alphabetic numerals (primitive implementation -- the code in Babel is more complex):
+\def\heb@num@i#1{%
+  \ifcase#1\or\char"05D0\or\char"05D1\or\char"05D2\or\char"05D3\or\char"05D4%
+           \or\char"05D5\or\char"05D6\or\char"05D7\or\char"05D8\fi
+  \ifnum#1=\z@\hebnum@zero\fi}
+\def\heb@num@ii#1{%
+  \ifcase#1\or\char"05D9\or\char"05DB\or\char"05DC\or\char"05DE\or\char"05E0%
+           \or\char"05E1\or\char"05E2\or\char"05E4\or\char"05E6\fi 
+  \ifnum#1=\z@\fi\heb@num@i}
+\def\heb@num@iii#1{%
+  \ifcase#1\or\char"05E7\or\char"05E8\or\char"05E9\or\char"05EA\or\char"05DA%
+           \or\char"05DD\or\char"05DF\or\char"05E3\or\char"05E5\fi
+  \ifnum#1=\z@\fi\heb@num@ii}
+\def\heb@num@iv#1{%
+  \ifcase#1\or\char"05D0\char"05F3\or\char"05D1\char"05F3\or\char"05D2\char"05F3%
+           \or\char"05D3\char"05F3\or\char"05D4\char"05F3\or\char"05D5\char"05F3%
+	   \or\char"05D6\char"05F3\or\char"05D7\char"05F3\or\char"05D8\char"05F3\fi
+  \ifnum#1=\z@\fi\heb@num@iii}
+%TODO [optionally] 
+% -insert gereshayim (\char"05F4) before last letter of a sequence of two letters or more
+% -insert geresh (\char"05F3) after letter if it is alone
+
+\def\hebrew@numbers{%
+   \let\@latinalph\@alph%
+   \let\@latinAlph\@Alph%
+   \let\@alph\hebrewalph%
+   \let\@Alph\hebrewalph%
+}
+\def\nohebrew@numbers{%
+  \let\@alph\@latinalph%
+  \let\@Alph\@latinAlph%
+  }
+
+\def\hebrewnumber#1{%
+   \if@hebrew@numerals\hebrewalph{#1}%
+   \else{\reset@font\number#1}%
+   \fi}
+
+\def\hebrew@globalnumbers{%
+   \let\@latinarabic\@arabic%
+   \let\@arabic\hebrewnumber%
+   \renewcommand\thefootnote{\protect\hebrewnumber{\c@footnote}}%
+   }
+
+\def\nohebrew@globalnumbers{
+   \let\@arabic\@latinarabic%
+   \renewcommand\thefootnote{\protect\number{\c@footnote}}%
+   }
+
+\def\hebrew@language{\language=\l@hebrew}
+
+\def\hebrew@font{%
+  \@ifundefined{hebrewfont}{%
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \zf@check@ot@script{hebr}%
+    \if@tempswa%
+      \addfontfeature{Script=Hebrew}%
+    \else%
+      \PackageError{polyglossia}{^^J
+      The current font does not contain the Hebrew script!^^J
+      Please define \string\hebrewfont\space with \string\newfontfamily}%
+    \fi%
+    }%
+{\hebrewfont}}
+
+% TODO add setup to define Sans and Mono Hebrew fonts if desired
+\def\hebrew@font@sf{%
+  \@ifundefined{hebrewfontsf}{%
+%  \sffamily% FIXME
+%    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+%  \zf@check@ot@script{arab}%
+%  \if@tempswa%
+%    \addfontfeature{Script=Hebrew}%
+%  \else%
+    \hebrew@font%
+%  \fi%  
+  }%
+  {\hebrewfontsf}%
+}
+\def\hebrew@font@tt{%
+  \@ifundefined{hebrewfonttt}{%
+%    \ttfamily% FIXME
+%    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+%  \zf@check@ot@script{arab}%
+%  \if@tempswa%
+%    \addfontfeature{Script=Hebrew}%
+%  \else%
+    \hebrew@font%
+%  \fi%  
+  }%
+  {\hebrewfonttt}%
+}
+\def\selectnormalfonthebrew{%
+   \let\normalfont=\hebrew@font%
+   \let\rmfamily=\hebrew@font%
+   \let\sffamily=\hebrew@font@sf%
+   \let\ttfamily=\hebrew@font@tt%
+   \def\reset@font{\normalfont}}
+
+\def\blockextras@hebrew{%
+   \let\@@MakeUppercase\MakeUppercase%
+   \def\MakeUppercase##1{##1}%
+   }
+\def\noextras@hebrew{%
+   \let\MakeUppercase\@@MakeUppercase%
+   }
+\endinput

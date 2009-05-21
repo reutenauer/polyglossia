@@ -1,0 +1,56 @@
+\ProvidesFile{gloss-polish.ldf}[polyglossia: module for polish]
+\makeatletter
+\def\polish@font{\normalfontlatin}
+
+\ifx\l@polish\@undefined
+   \xpg@nopatterns{polish}
+   \adddialect\l@polish0
+\fi
+
+\def\captionspolish{%
+  \def\prefacename{Przedmowa}%
+  \def\refname{Literatura}%
+  \def\abstractname{Streszczenie}%
+  \def\bibname{Bibliografia}%
+  \def\chaptername{Rozdział}%
+  \def\appendixname{Dodatek}%
+  \def\contentsname{Spis treści}%
+  \def\listfigurename{Spis rysunków}%
+  \def\listtablename{Spis tablic}%
+  \def\indexname{Indeks}%
+  \def\figurename{Rysunek}%
+  \def\tablename{Tablica}%
+  \def\partname{Część}%
+  \def\enclname{Załącznik}%
+  \def\ccname{Kopie:}%
+  \def\headtoname{Do}%
+  \def\pagename{Strona}%
+  \def\seename{Porównaj}%
+  \def\alsoname{Porównaj także}%
+  \def\proofname{Dowód}%
+  \def\glossaryname{Glossary}% <-- Needs translation
+   }
+\def\datepolish{%
+   \def\today{\ifcase\month\or%
+      stycznia\or lutego\or marca\or kwietnia\or maja\or czerwca\or%
+      lipca\or sierpnia\or września\or października\or%
+      listopada\or grudnia\fi%
+      \space\number\day, \number\year}}
+
+\def\polish@language{\protect\language=\l@polish}
+
+\setlocalhyphenmins{polish}{2}{2}%
+
+\def\noextras@polish{%
+   \nonfrenchspacing%
+}
+
+\def\blockextras@polish{%
+   \frenchspacing%
+}
+
+\def\inlineextras@polish{%
+   \frenchspacing%
+}
+
+\endinput

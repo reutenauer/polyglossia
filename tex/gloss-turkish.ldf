@@ -1,0 +1,80 @@
+\ProvidesFile{gloss-turkish.ldf}[polyglossia: module for turkish]
+\makeatletter
+
+\def\turkish@font{%
+\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+\@ifundefined{turkishfont}{%
+	\zf@check@ot@lang{TUR}%
+	\if@tempswa\addfontfeature{Language=Turkish}\fi}
+     {\turkishfont}%
+}%
+
+\ifx\l@turkish\@undefined
+   \xpg@nopatterns{turkish}
+   \adddialect\l@turkish0
+\fi
+
+\def\turkish@punctuation{%
+   \frenchspacing%
+   \XeTeXinterchartokenstate=1%
+   \XeTeXcharclass `\! 7%
+   \XeTeXcharclass `\= 8%
+   \XeTeXcharclass `\: 7%
+   \XeTeXinterchartoks 0 7 = {\unskip\penalty\@M\thinspace}%
+   \XeTeXinterchartoks 0 8 = {\unskip\kern\fontdimen2\font\kern-1.4\fontdimen3\font}%
+}
+
+\def\noturkish@punctuation{%
+   \nonfrenchspacing%
+   \XeTeXinterchartokenstate=0%
+}
+
+\def\captionsturkish{%
+  \def\prefacename{Önsöz}%
+  \def\refname{Kaynaklar}%
+  \def\abstractname{Özet}%
+  \def\bibname{Kaynakça}%
+  \def\chaptername{Bölüm}%
+  \def\appendixname{Ek}%
+  \def\contentsname{İçindekiler}%
+  \def\listfigurename{Şekil Listesi}%
+  \def\listtablename{Tablo Listesi}%
+  \def\indexname{Dizin}%
+  \def\figurename{Şekil}%
+  \def\tablename{Tablo}%
+  \def\partname{Kısım}%
+  \def\enclname{İlişik}%
+  \def\ccname{Diğer Alıcılar}%
+  \def\headtoname{Alıcı}%
+  \def\pagename{Sayfa}%
+  \def\subjectname{İlgili}%
+  \def\seename{bkz.}%
+  \def\alsoname{ayrıca bkz.}%
+  \def\proofname{Kanıt}%
+  \def\glossaryname{Glossary}% <-- Needs translation
+   }
+\def\dateturkish{%
+   \def\today{\number\day~\ifcase\month\or
+    Ocak\or Şubat\or Mart\or Nisan\or Mayıs\or Haziran\or
+    Temmuz\or Ağustos\or Eylül\or Ekim\or Kasım\or
+    Aralık\fi
+    \space\number\year}
+}
+
+\def\turkish@language{\protect\language=\l@turkish}
+
+\setlocalhyphenmins{turkish}{2}{2}%
+
+\def\noextras@turkish{%
+   \noturkish@punctuation%
+}
+
+\def\blockextras@turkish{%
+   \turkish@punctuation%
+}
+
+\def\inlineextras@turkish{%
+   \turkish@punctuation%
+}
+
+\endinput

@@ -1,0 +1,50 @@
+\ProvidesFile{gloss-portuges.ldf}[polyglossia: module for portuguese]
+\makeatletter
+\def\portuges@font{\normalfontlatin}
+
+%FIXME check this:
+\ifx\l@portuges\@undefined
+  \ifx\l@portuguese\@undefined
+    \xpg@nopatterns{Portuguese}
+    \adddialect\l@portuges0
+  \else
+    \let\l@portuges\l@portuguese
+  \fi
+\fi
+
+\def\captionsbrazil{%
+   \def\refname{Referências}%
+   \def\abstractname{Resumo}%
+   \def\bibname{Referências Bibliográficas}%
+   \def\prefacename{Prefácio}%
+   \def\chaptername{Capítulo}%
+   \def\appendixname{Apêndice}%
+   \def\contentsname{Sumário}%
+   \def\listfigurename{Lista de Figuras}%
+   \def\listtablename{Lista de Tabelas}%
+   \def\indexname{Índice Remissivo}%
+   \def\figurename{Figura}%
+   \def\tablename{Tabela}%
+   %\def\thepart{}%
+   \def\partname{Parte}%
+   \def\pagename{Página}%
+   \def\seename{veja}%
+   \def\alsoname{veja também}%
+   \def\enclname{Anexo}%
+   \def\ccname{Cópia para}%
+   \def\headtoname{Para}%
+   \def\proofname{Demonstração}%
+   \def\glossaryname{Glossary}%
+   }
+\def\datebrazil{%   
+   \def\today{\number\day\space de\space\ifcase\month\or
+      janeiro\or fevereiro\or março\or abril\or maio\or junho\or
+      julho\or agosto\or setembro\or outubro\or novembro\or dezembro%
+      \fi\space de\space\number\year}%
+      }
+     
+\def\brazil@language{\protect\language=\l@portuges}
+
+\setlocalhyphenmins{brazil}{2}{3}
+
+\endinput

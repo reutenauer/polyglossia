@@ -1,0 +1,44 @@
+\ProvidesFile{gloss-galician.ldf}[polyglossia: module for galician]
+\makeatletter
+\def\galician@font{\normalfontlatin}
+
+\ifx\l@galician\@undefined%
+   \xpg@nopatterns{Galician}%
+   \adddialect\l@galician0%
+\fi
+
+\def\captionsgalician{%
+   \def\refname{Referencias}%
+   \def\abstractname{Resumo}%
+   \def\bibname{Bibliografía}%
+   \def\prefacename{Prefacio}%
+   \def\chaptername{Capítulo}%
+   \def\appendixname{Apéndice}%
+   \def\contentsname{Índice Xeral}%
+   \def\listfigurename{Índice de Figuras}%
+   \def\listtablename{Índice de Táboas}%
+   \def\indexname{Índice de Materias}%
+   \def\figurename{Figura}%
+   \def\tablename{Táboa}%
+   %\def\thepart{}%
+   \def\partname{Parte}%
+   \def\pagename{Páxina}%
+   \def\seename{véxase}%
+   \def\alsoname{véxase tamén}%
+   \def\enclname{Adxunto}%
+   \def\ccname{Copia a}%
+   \def\headtoname{A}%
+   \def\proofname{Demostración}%
+   \def\glossaryname{Glosario}%
+   }
+\def\dategalician{%
+   \def\today{\number\day~de\space\ifcase\month\or
+    xaneiro\or febreiro\or marzo\or abril\or maio\or xuño\or
+    xullo\or agosto\or setembro\or outubro\or novembro\or decembro\fi
+    \space de~\number\year}}
+
+\def\galician@language{\protect\language=\l@galician}
+
+\setlocalhyphenmins{galician}{2}{2}%
+
+\endinput

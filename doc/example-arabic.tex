@@ -1,0 +1,105 @@
+\documentclass[a4paper]{book}%
+\usepackage[no-math]{fontspec}
+\usepackage{xltxtra,url,amsmath}
+\usepackage[quiet]{polyglossia}
+\setdefaultlanguage[calendar=gregorian,hijricorrection=1,locale=mashriq]{arabic}
+\setotherlanguage[variant=british]{english}
+\setotherlanguage{farsi}
+\defaultfontfeatures{Scale=MatchLowercase}
+\newfontfamily\arabicfont[Script=Arabic,Scale=1.3]{Scheherazade}%
+\newfontfamily\arabicfonttt[Script=Arabic,Scale=.75]{DejaVu Sans Mono}
+\newfontfamily\farsifont[Script=Arabic,Scale=1.1,WordSpace=2]{IranNastaliq}
+\parindent 0pt
+\makeatletter
+\makeatother
+\title{امتحان تأييد اللغة العربية}
+\author{فرانسوا شاريت}
+\begin{document}
+\pagenumbering{alph}
+\maketitle
+\tableofcontents
+\chapter{امتحان}
+\pagenumbering{arabic}
+\section{لغات مختلفة}
+
+
+\textbf{العربية}\footnote{%
+من «\LR{\textenglish{\url{http://ar.wikipedia.org/wiki/}}\RL{\ttfamily لغة عربية}}»} 
+أكبر لغات المجموعة السامية من حيث عدد المتحدثين، وإحدى أكثر اللغات انتشارا في
+العالم، يتحدثها أكثر من ٤٢٢ مليون نسمة،١ ويتوزع متحدثوها في المنطقة المعروفة
+باسم الوطن العربي، بالإضافة إلى العديد من المناطق الأخرى المجاورة كالأحواز وتركيا
+وتشاد ومالي والسنغال. وللغة العربية أهمية قصوى لدى أتباع الديانة الإسلامية، فهي
+لغة مصدري التشريع الأساسيين في الإسلام: القرآن، والأحاديث النبوية المروية عن النبي
+محمد، ولا تتم الصلاة في الإسلام (وعبادات أخرى) إلا بإتقان بعض من كلمات هذه اللغة.
+والعربية هي أيضاً لغة طقسية رئيسية لدى عدد من الكنائس المسيحية في العالم العربي،
+كما كتبت بها الكثير من أهم الأعمال الدينية والفكرية اليهودية في العصور الوسطى.
+وإثر انتشار الإسلام، وتأسيسه دولا، ارتفعت مكانة اللغة العربية، وأصبحت لغة السياسة
+والعلم والأدب لقرون طويلة في الأراضي التي حكمها المسلمون، وأثرت العربية، تأثيرا
+مباشرا أو غير مباشر على كثير من اللغات الأخرى في العالم الإسلامي، كالتركية
+والفارسية والأردية مثلا.
+
+\textfarsi{\bfseries فارسی}\footnote{%
+از «\LR{\textenglish{\url{http://fa.wikipedia.org/wiki/}}\RL{\ttfamily فارسي}}»}
+\begin{farsi}
+یا پارسی، (که دری، فارسی دری، و پارسی دری نیز نامیده می‌شود) زبانی است که
+در کشورهای ایران، افغانستان، تاجیکستان و ازبکستان به آن سخن می‌رانند.
+(برخی زبان فارسی در تاجیکستان و ازبکستان و چین را فارسی تاجیکی نام
+می‌گذارند).  
+\end{farsi}
+
+\newpage
+\begin{english}
+\textbf{English}\footnote{%
+	From \url{http://en.wikipedia.org/wiki/English_language}} 
+is a West Germanic language originating in England, and the first language for
+most people in Australia, Canada, the Commonwealth Caribbean, Ireland, New
+Zealand, the United Kingdom and the United States of America (also commonly
+known as the Anglosphere). It is used extensively as a second language and as
+an official language throughout the world, especially in Commonwealth countries
+and in many international organisations.
+
+\textarabic{١ ٢ ٣}
+
+\end{english}
+\clearpage
+
+\section{أعمال تأريخية \textenglish{(Calendar operations)}}
+
+
+\textenglish{\today} = \LR{\today} = \today\ = \Hijritoday\footnote{ 
+	محسوب بـ \textenglish{\textsf{hijrical.sty}}} 
+
+%\newpage
+\subsection{فلان}
+\textenglish{This is English: a b c}\marginpar{انكليزي} %FIXME! cf farsitex?
+
+\subsubsection{فلان فلان}
+\begin{enumerate}
+	\item مثال
+	\item مثال
+		\begin{enumerate}
+			\item مثال
+			\item مثال
+		\end{enumerate}
+
+	\item مثال	
+\end{enumerate}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{cc}
+		ا & ب  \\
+		ج & د  
+	\end{tabular}
+	\caption{هذا المثال}
+\end{table}
+
+\[
+x^\text{مال مال}
+\]
+
+\begin{equation}
+	x^2 + y^2 = z^2
+	\label{test}
+\end{equation}
+\end{document}

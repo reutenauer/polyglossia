@@ -1,0 +1,54 @@
+\ProvidesFile{gloss-danish.ldf}[polyglossia: module for danish]
+\makeatletter
+\def\danish@font{\normalfontlatin}
+
+\ifx\l@danish\@undefined
+         \xpg@nopatterns{Danish}
+         \adddialect\l@danish0
+\fi
+
+\def\captionsdanish{%
+  \def\prefacename{Forord}%
+  \def\refname{Litteratur}%
+  \def\abstractname{Resumé}%
+  \def\bibname{Litteratur}%
+  \def\chaptername{Kapitel}%
+  \def\appendixname{Bilag}%
+  \def\contentsname{Indhold}%
+  \def\listfigurename{Figurer}%
+  \def\listtablename{Tabeller}%
+  \def\indexname{Indeks}%
+  \def\figurename{Figur}%
+  \def\tablename{Tabel}%
+  \def\partname{Del}%
+  \def\enclname{Vedlagt}%
+  \def\ccname{Kopi til}%   or    Kopi sendt til
+  \def\headtoname{Til}% in letter
+  \def\pagename{Side}%
+  \def\seename{Se}%
+  \def\alsoname{Se også}}%
+  \def\proofname{Bevis}%
+  \def\glossaryname{Gloseliste}%
+  \def\today{\number\day.~\ifcase\month\or
+    januar\or februar\or marts\or april\or maj\or juni\or
+    juli\or august\or september\or oktober\or november\or december\fi
+    \space\number\year}
+
+\def\danish@language{%
+   \protect\language=\l@danish}
+
+\setlocalhyphenmins{danish}{2}{3}%
+
+\def\noextras@danish{%
+   \nonfrenchspacing%
+   }
+
+\def\blockextras@danish{%
+   \frenchspacing%
+   }
+
+\def\inlineextras@danish{%
+   \frenchspacing%
+   }
+
+\endinput

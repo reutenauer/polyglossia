@@ -1,0 +1,99 @@
+\ProvidesFile{gloss-hindi.ldf}[polyglossia: module for hindi]
+% UTF-8 strings kindly provided by Zdenek Wagner, 10-03-2008
+% TODO: add option for velthuis transliteration with link to
+% Velthuis Devanagari project: http://devnag.sarovar.org. 
+\makeatletter
+
+\ifx\l@hindi\@undefined%
+  \ifx\l@sanskrit\@undefined%
+    \xpg@nopatterns{Hindi}%
+    \adddialect\l@hindi0%
+  \else
+    \let\l@hindi\l@sanskrit%
+  \fi
+\fi
+
+\def\captionshindi{%
+     \def\abstractname{सारांश}%
+     \def\appendixname{परिशिष्ट}%
+     \def\bibname{संदर ग्रन्थ}% (?)
+     \def\ccname{}%
+     \def\chaptername{अध्याय}%
+     \def\contentsname{विषय सूची}%
+     \def\enclname{}%
+     \def\figurename{चित्र}% रेखाचित्र
+     \def\headpagename{पृषठ}%
+     \def\headtoname{}%
+     \def\indexname{सूची}%
+     %              सूचक
+     %              अनुक्रमणिका
+     %              अनुक्रमणि
+     \def\listfigurename{चित्रों की सूची}%
+     \def\listtablename{तालिकाओं की सूची}%
+     \def\pagename{पृषठ}%
+     \def\partname{खणड}%
+     \def\prefacename{प्रस्तावना}% प्राक्कथन
+     \def\refname{हवाले}%
+     \def\tablename{तालिका}%
+     \def\seename{देखिए}%
+     \def\alsoname{और देखिए}%
+     \def\alsoseename{और देखिए}%
+}
+\def\datehindi{%
+   \def\today{\number\day\space\ifcase\month\or
+     जनवरी\or
+     फ़रवरी\or
+     मार्च\or
+     अपरैल\or
+     मई\or
+     जून\or
+     जलाई\or
+     अगस्त\or
+     सितम्बर\or
+     अक्तूबर\or
+     नवम्बर\or
+     दिसम्बर\fi
+     \space\number\year}%
+}
+
+\def\hindi@language{\protect\language=\l@hindi}
+
+\def\hindi@font{%
+\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+\@ifundefined{hindifont}{%
+      \@ifundefined{devanagarifont}{%
+        \zf@check@ot@script{deva}%
+	\if@tempswa%
+	  \addfontfeature{Script=Devanagari}%
+	\else%
+	  \PackageError{polyglossia}{^^J
+	  The current font does not contain the Devanagari script!^^J
+	  Please define \string\devanagarifont\space or \string\hindifont\space with \string\newfontfamily}%
+	\fi%
+	\zf@check@ot@lang{HIN}%
+	\if@tempswa\addfontfeature{Language=Hindi}\fi%
+	}%
+      {\devanagarifont%
+	\zf@check@ot@lang{HIN}%
+	\if@tempswa\addfontfeature{Language=Hindi}\fi%
+      }}% 
+     {\hindifont}%
+}
+
+\def\selectnormalfonthindi{%
+   \let\normalfont=\hindi@font%
+   \let\rmfamily=\hindi@font%
+   % TODO add setup to define Sans and Mono fonts if desired
+   \let\sffamily=\hindi@font%
+   \let\ttfamily=\hindi@font%
+   \def\reset@font{\normalfont}}
+
+\def\blockextras@hindi{%
+   \let\@@MakeUppercase\MakeUppercase%
+   \def\MakeUppercase##1{##1}%
+   }
+\def\noextras@hindi{%
+   \let\MakeUppercase\@@MakeUppercase%
+   }
+
+\endinput

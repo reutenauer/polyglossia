@@ -1,0 +1,58 @@
+\ProvidesFile{gloss-lsorbian.ldf}[polyglossia: module for lower sorbian]
+\makeatletter
+\def\lsorbian@font{\normalfontlatin}
+
+\ifx\l@lowersorbian\@undefined
+  \ifx\l@lsorbian\@undefined
+    \xpg@nopatterns{Lsorbian}
+    \adddialect\l@lsorbian\z@
+    \let\l@lowersorbian\l@lsorbian
+  \else
+    \let\l@lowersorbian\l@lsorbian
+  \fi
+\else
+  \let\l@lsorbian\l@lowersorbian
+\fi
+
+\def\captionslsorbian{%
+   \def\refname{Referency}%
+   \def\abstractname{Abstrakt}%
+   \def\bibname{Literatura}%
+   \def\prefacename{Zawod}%
+   \def\chaptername{Kapitl}%
+   \def\appendixname{Dodawki}%
+   \def\contentsname{Wopśimjeśe}%
+   \def\listfigurename{Zapis wobrazow}%
+   \def\listtablename{Zapis tabulkow}%
+   \def\indexname{Indeks}%
+   \def\figurename{Wobraz}%
+   \def\tablename{Tabulka}%
+   %\def\thepart{}%
+   \def\partname{Źěl}%
+   \def\pagename{Strona}%
+   \def\seename{gl.}%
+   \def\alsoname{gl.~teke}%
+   \def\enclname{Pśiłoga}%
+   \def\ccname{CC}%
+   \def\headtoname{Komu}%
+   \def\proofname{Proof}%
+   \def\glossaryname{Glossary}%
+   }
+\def\datelsorbian{%
+    \def\today{\number\day.~\ifcase\month\or
+    januara\or februara\or měrca\or apryla\or maja\or
+    junija\or julija\or awgusta\or septembra\or oktobra\or
+    nowembra\or decembra\fi
+    \space \number\year}%
+    \def\oldtoday{\textlsorbian{\number\day.~\ifcase\month\or
+    wjelikego rožka\or małego rožka\or nalětnika\or
+    jatšownika\or rožownika\or smažnika\or pražnika\or
+    žnjeńca\or požnjeńca\or winowca\or nazymnika\or 
+    godownika\fi\space \number\year}}%
+    }
+
+\def\lsorbian@language{\protect\language=\l@lsorbian}
+
+\setlocalhyphenmins{lsorbian}{2}{2}%
+
+\endinput

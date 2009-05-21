@@ -1,0 +1,137 @@
+\documentclass[a4paper]{article}
+\usepackage[no-math]{fontspec}
+\usepackage{xltxtra,url}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\setotherlanguage[variant=british,ordinalmonthday=false]{english}
+\setotherlanguage[variant=poly]{greek}
+\setotherlanguage[numerals=thai]{thai}
+\setotherlanguages{german,latin,russian,turkish,polish,latvian,sanskrit,ukrainian,arabic,farsi,syriac,divehi,hebrew,amharic}
+\setromanfont{Linux Libertine}
+\defaultfontfeatures{Scale=MatchLowercase,RawFeature={+locl}}
+\setmonofont{Inconsolata}
+\setsansfont{Gill Sans Std}
+\newfontfamily\arabicfont[Script=Arabic]{Adobe Arabic}%{Scheherazade}%
+\newfontfamily\syriacfont[ExternalLocation="/mnt/data/fonts/syriac/",
+                          Script=Syriac]{SyrCOMJerusalem.otf}
+\newfontfamily\hebrewfont[Script=Hebrew,Scale=1]{Adobe Hebrew}
+\newfontfamily\sanskritfont[Script=Devanagari]{Sanskrit 2003}
+\newfontfamily\thaifont[ExternalLocation="/mnt/data/fonts/thai/",Script=Thai]{Norasi.ttf}%{Arial Unicode MS}
+\newfontfamily\thaanafont[Script=Thaana,WordSpace=2]{TITUS Cyberbit Basic}
+\newfontfamily\ethiopicfont[Script=Ethiopic]{Abyssinica SIL}
+\parskip 1.33\baselineskip
+\newcommand\showhyphmin{\fbox{\the\lefthyphenmin\ \the\righthyphenmin}}
+\begin{document}
+\hyphenation{Bru-xel-les}
+\noindent
+\textbf{Le français}\footnote{ From \url{http://fr.wikipedia.org/wiki/Français}} est une langue romane parlée en France, dont elle est originaire (la «langue d'oïl»), ainsi qu'en Afrique francophone, au Canada (principalement au Québec, au Nouveau-Brunswick et en Ontario), en Belgique (en Région wallonne et à Bruxelles), en Suisse, au Liban, en Haïti et dans d'autres régions du monde, soit au total dans 51 pays du monde ayant pour la plupart fait partie des anciens empires coloniaux français et belge. \\
+(Aujourd'hui! \today)
+
+\begin{english}
+\textbf{English}\footnote{From \url{http://en.wikipedia.org/wiki/English_language}} is a West Germanic language originating in England, and the first language for most people in Australia, Canada, the Commonwealth Caribbean, Ireland, New Zealand, the United Kingdom and the United States of America (also commonly known as the Anglosphere). It is used extensively as a second language and as an official language throughout the world, especially in Commonwealth countries and in many international organisations. \\
+(\today)
+\end{english}
+
+\begin{german}[spelling=new,latesthyphen=true]
+\textbf{Die deutsche Sprache}\footnote{ From \url{http://de.wikipedia.org/wiki/Deutsche_Sprache}} (auch das Deutsche) gehört zum westlichen Zweig der germanischen Sprachen und ist eine der meistgesprochenen europäischen Sprachen weltweit, und gilt so als Weltsprache.\\
+(\today)
+\end{german}
+
+\begin{russian}
+\textbf{Русский язык} — один из восточнославянских языков, один из крупнейших языков мира, в том числе самый распространённый из славянских языков и самый распространённый язык Европы, как географически, так и по числу носителей языка как родного (хотя значительная, и географически бо́льшая, часть русского языкового ареала находится в Азии).	\\
+(\today)
+\end{russian}
+
+\begin{latin}
+\textbf{Lingua Latina} est lingua Indoeuropaea. Nomen ductum est de terra in paeninsula Italica quam Latine loquentes incolebant, Vetus Latium appellata sitaque inter flumen Tiberis, Volscam terram, mare Tyrrhenicum, montes Apenninos. 
+Quamquam sermone nativo fungi desinit, cumque nostris diebus perpauci Latine loqui possint, lingua mortua appellari solet, multas tamen peperit linguas quae linguae romanicae vocantur, sicut Hispanicam, Francogallicam, Italicam, Lusitanam, Dacoromanicam, Gallaicam, ne omnes afferam. \\
+(\today) 
+\end{latin}
+
+\begin{greek}
+\textbf{Η ελληνική γλώσσα} είναι μία από τις ινδοευρωπαϊκές γλώσσες, για την
+οποία έχουμε γραπτά κείμενα από τον 15ο αιώνα π.Χ. μέχρι σήμερα. Αποτελεί το
+μοναδικό μέλος ενός κλάδου της ινδοευρωπαϊκής οικογένειας γλωσσών. Ανήκει
+επίσης στον βαλκανικό γλωσσικό δεσμό.\\	
+(\today) 
+\end{greek}
+
+
+\begin{hebrew}[numerals=hebrew]
+\textbf{עברית} היא שפה ממשפחת השפות השמיות, הידועה כשפתו של העם היהודי, ואשר ניב מודרני שלה משמש כשפה הרשמית והעיקרית של מדינת ישראל. \\
+(\today\ = \hebrewtoday)
+\end{hebrew}
+
+\begin{syriac}%\footnotesize
+ܠܫܢܐ ܐܪܡܝܐ ܐܘ ܐܪܡܝܬ ܗܘ ܠܫܢ̈ܐ ܥܡ ܬܫܥܝܬܐ ܕ\textrm{3000} ܫܢ̈ܝܐ܂ ܗܘܐ ܠܫܢܐ ܕܡܠܟܘ̈ܬܐ ܘܬܘܕ̈ܝܬܐ܂ ܥܡ ܠܫܢܐ ܥܒܪܝܐ܄ ܗܘܐ ܠܫܢܐ ܕܣܦܪ̈ܐ ܕܕܢܝܐܝܠ ܘܥܙܪܐ ܘܗܘ ܠܫܢܐ ܚܕܢܝܐ ܕܬܠܡܘܕ܂ ܐܪܡܝܐ ܗܘܐ ܠܫܢܐ ܕܝܫܘܥ܂ ܐܕܝܘܡ܄ ܐܪܡܝܐ ܗܘ ܠܫܢܐ ܕܟܠܕ̈ܝܐ܄ ܐܬܘܪ̈ܝܐ܄ ܡܪ̈ܘܢܝܐ܄ ܘܣܘܪ̈ܝܝܐ܀ \\
+(\today)
+\end{syriac}
+
+\begin{turkish}
+\textbf{Türkiye Türkçesi}, Ural-Altay Dilleri içerisinde Türk dil ailesinin Oğuz Grubu'na mensup lehçedir. Anadolu, Kıbrıs, Balkanlar ve Orta Avrupa'da geniş yayılım alanı bulmuş olup, Türkiye Cumhuriyeti, Kuzey Kıbrıs Türk Cumhuriyeti, Güney Kıbrıs Rum Kesimi, Makedonya ve Kosova'nın resmî dilidir. \\
+(Bugün: \today)
+\end{turkish}
+
+\begin{polish}
+\textbf{Język polski (polszczyzna)} należy wraz z językiem czeskim, słowackim, pomorskim (kaszubskim), dolnołużyckim, górnołużyckim oraz wymarłym połabskim do grupy języków zachodniosłowiańskich, stanowiących część rodziny języków indoeuropejskich. Ocenia się, że język polski jest językiem ojczystym około 44 milionów ludzi na świecie (w literaturze naukowej można spotkać szacunki od 40 do 48 milionów), mieszkańców Polski oraz Polaków zamieszkałych za granicą (Polonia).\\
+(\today)
+\end{polish}
+
+\begin{latvian} 
+\textbf{Latviešu valoda} ir dzimtā valoda apmēram 1,5 miljoniem cilvēku, galvenokārt Latvijā, kurā tā ir vienīgā valsts valoda. Lielākās latviešu valodas pratēju kopienas ārzemēs ir Austrālijā, ASV, Zviedrijā, Lielbritānijā, Vācijā, Brazīlijā, Krievijā. Latviešu valoda pieder indoeiropiešu valodu saimes baltu valodu grupai.\\
+(\today)
+\end{latvian}
+
+\begin{ukrainian}
+\textbf{Українська мова} — східнослов'янська мова, входить до однієї підгрупи з білоруською та російською. Подібно до цих мов українську записують кирилицею. Історично білоруська та українська мови походять з давньоруської (давньоукраїнської) — розмовної мови Київської Русі.\\
+(\today)
+\end{ukrainian}
+
+\begin{sanskrit}
+{\Large ससकत} पृथिव्यां प्राचीना समृद्घा वैज्ञानिकी च भाषा मन्यते । विश्ववाङ्‌मयेषु संस्कृतं श्रेष्ठरत्नम् इति न केवलं भारते अपि तु समग्रविश्वे एतद्विषये निर्णयाधिकारिभि: जनै: स्वीकृतम् । महर्षि पाणिनिना विरचिता अष्टाध्यायी इति संस्कृतव्याकरणम्‌ अधुनापि भारते विदेशेषु च भाषाविज्ञानिनां प्रेरणास्‍थानं वर्तते . संस्कृतशब्दा: एव उत्तरं दक्षिणं च भारतं संयोजयन्ति ।
+\end{sanskrit}
+
+\begin{Arabic}[]
+%في فضل علم التاريخ وتحقيق مذاهبه والأملاع لما يعرض للمؤرخين من المغالط والأوهام وذكر شيء من أسبابها. 
+«اعلم أنّ فنّ التاريخ فنّ عزيز المذهب، جمّ الفوائد، شريف الغاية؛ إذ هو يوقفنا على أحوال الماضين من الأمم في أخلاقهم، و الأنبياء في سيرهم، و الملوك في دولهم و سياستهم؛ حتّى تتمّ فائدة الإقتداء في ذلك لمن يرومه في أحوال الدين و الدنيا.» (ابن خلدون، المقدّمة)\\
+%فهو محتاج إلى مآخذ متعددة و معارف متنوعة و حسن نظر و تثبت يفضيان بصاحبهما إلى الحق و ينكبان به عن المزلات و المغالط لأن الأخبار إذا اعتمد فيها على مجرد النقل و لم تحكم أصول العادة و قواعد السياسة و طبيعة العمران و الأحوال في الاجتماع الإنساني و لا قيس الغائب منها بالشاهد و الحاضر بالذاهب فربما لم يؤمن فيها من العثور و مزلة القدم و الحيد عن جادة الصدق و كثيراً ما وقع للمؤرخين و المفسرين و أئمة النقل من المغالط في الحكايات و الوقائع لاعتمادهم فيها على مجرد النقل غثاً أو سميناً و لم يعرضوها على أصولها و لا قاسوها بأشباهها و لا سبروها بمعيار الحكمة و الوقوف على طبائع الكائنات و تحكيم النظر و البصيرة في الأخبار فضلوا عن الحق و تاهوا في بيداء الوهم و الغلط و لا سيما في إحصاء الأعداد من الأموال و العساكر إذا عرضت في الحكايات إذ هي مظنة الكذب و مطية الهذر و لا بد من ردها إلى الأصول و عرضها على القواعد.
+(\today\ = \Hijritoday[0])
+\end{Arabic}
+
+\begin{farsi}
+فارسی یا پارسی، (که دری، فارسی دری، و پارسی دری نیز نامیده می‌شود) زبانی است که
+در کشورهای ایران، افغانستان، تاجیکستان و ازبکستان به آن سخن می‌رانند. \\
+(\Jalalitoday)
+\end{farsi}
+
+\begin{thai}
+เป็น\wbr แผนงานเพื่อ\wbr สนับสนุน\wbr การ\wbr ร่วมกัน\wbr สร้าง, การ\wbr ร่วมกันใช้, และ\wbr การ%
+ร่วมกัน\wbr พัฒนา\wbr ทรัพยากร\wbr ทาง\wbr ภาษา\wbr ของ\wbr ภาษา\wbr ไทย, บน\wbr เครือข่าย World Wide Web. แผนงานนี้\wbr มี%
+จุด\wbr ประสงค์หลั\wbr กอยู่\wbr สอง\wbr ประการคือ เพื่อแก้ปัญหา\wbr กำ\wbr แพง\wbr ทาง\wbr ภาษา, และรักษา%
+ไว้เพื่อ\wbr ความค\wbr งอยู่\wbr ของ\wbr ภาษา\wbr และ\wbr วัฒนธรรม\wbr ไทย. \\
+(\today)
+\end{thai}
+
+\begin{divehi}\small\sloppy
+ދިވެހިބަހަކީ ދިވެހިރާއްޖޭގެ ރަސްމީ ބަހެވެ. މި ބަހުން ވާހަކަ ދައްކައި އުޅެނީ ދިވެހިރާއްޖޭގެ އަހުލުވެރިންގެ އިތުރުން ހިންދުސްތާނުގެ މަލިކު ގެ
+އަހުލުވެރިންނެވެ. އެބައިމީހުން މި ބަހަށް ކިޔަނީ މަހަލް ބަހެވެ. ބަހާބެހޭ މާހިރުން ދިވެހިބަސް ހިމަނުއްވައިފައިވަނީ އިންޑޯ އާރިޔަން ބަސްތަކުގެ
+ތެރޭގަ އެވެ. 
+%ދިވެހި ބަހުގެ މަތިކޮޅުގައި އެންމެ ކުރީޒަމާނުގައި އޮތް މައި ބަސް " ޕުރޯޓޯ- އިންޑޯ- ޔޫރަޕިއަން" ބަހުން ވާހަކަދައްކާ އުލުނު
+%ބަޔަކު ދެބަޔަކަށް ބެހިގެން، އެއްބަޔަކު ހުޅަނގުގެ ރަށްރަށަށް އަނެއްބަޔަކު އިރުމަތީ ރަށްރަށަށް ގޮސް އެތަންތާނގައި ރަށްވެހިވީ އެވެ. މި މީހުން
+%ވާހަކަދައްކާ އުޅުނު ބަސް ބަދަލުވެ ތަރައްޤީވެ ވަކި ބަސް ބަހަށްވީ އެތައް ވޭލާއެއްގެ ނުވަތަ ޒަމާނެއްގެ ތެރޭގަ އެވެ. އިރުމައްޗަށް އައި މައިގަނޑު
+%ބަހަކީ އިންޑޯ- އިރޭނިއަން ބަހެވެ. މި ބަސް ކަފިވީ އިރޭނިއަން ބަހަށާއި، އިންޑޯ އާރިއަން (ސާންސްކިރިތު) ބަހަށެވެ. މިދެންނެވި ސާންސްކިރިތުގެ
+%ހުޅަނގާއި، ހުޅަނގު ދެކުނުގެ ބައިގައިވަނީ ގުޖަރާތީ މަރާޓީ ކޮންކަނީ، ދިވެހި، ސިންހަޅަ، މި ބަސްބަހެވެ، ވީމާ، މިބަސް ތަކުގައި ބޭނުންކުރާ
+%ލަފުޒުތަކާއި، ޤަވާއިދާއި އަދި ބަހުގެ އަދަބުތަކުގައި ތިމާގެކަންހުރެ އެވެ. ހުޅަނގަށް ގޮސްފައިވާ ގޮފީގެ ބަސްތަކާއި، އަލުގަނޑުމެންގެ އިންޑިކު
+%ނުވަތަ ސާންސްކިރިތުން އުފެދިފައިވާ ބަސްތަކާއި ވަރަށް ތަފާތެވެ. އިނގިރާސި ބަހަކީ މިދެންނެވި ހުޅަނގަށް ގޮސްފައިވާ ގޮފީގެ އަލްމާނީ ބަހެކެވެ.
+\end{divehi}
+
+%\fontspec[Script=Georgian]{DejaVu Serif}
+%ქართული ენა არის საქართველოს სახელმწიფო ენა (აფხაზეთის ავტონომიურ რესპ\-უბლიკაში მის პარალელურად სახელმწიფო ენად აღიარებულია აგრეთვე აფხაზური ენა). ქართულ ენაზე 7 მილიონზე მეტი ადამიანი ლაპარაკობს.
+%
+
+\begin{amharic}
+\textbf{አማርኛ} የኢትዮጵያ መደበኛ ቋንቋ ነው። ከሴማዊ ቋንቋዎች እንደ ዕብራይስጥ ወይም ዓረብኛ አንዱ ነው። እንዲያውም 27 ሚሊዮን ያህል ተናጋሪዎች እያሉት፣ አማርኛ ከአረብኛ ቀጥሎ ትልቁ ሴማዊ ቋንቋ ነው። የሚጻፈውም በግዕዝ ፊደል ነው። አማርኛ ክዓረብኛና ከዕብራይስጥ ያለው መሰረታዊ ልዩነት አንደላቲን ከግራ ወደ ቀኝ መጻፉ ነው። \\
+(\today)
+\end{amharic}
+
+\end{document}

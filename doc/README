@@ -1,0 +1,68 @@
+
+   ¦----------------------------------------------¦
+   ¦                                              ¦
+   ¦       THE POLYGLOSSIA PACKAGE v1.0.2         ¦
+   ¦                                              ¦
+   ¦ Modern multilingual typesetting with XeLaTeX ¦
+   ¦                                              ¦
+   ¦----------------------------------------------¦
+
+This package for provides a complete Babel replacement for users of XeLaTeX.
+This version includes support for 55 different languages.
+
+Polyglossia makes it possible to automate the following tasks:
+
+* Loading the appropriate hyphenation patterns.
+* Setting the script and language tags of the current font (if possible and
+  available), using the package fontspec.
+* Switching to a font assigned by the user to a particular script or language.
+* Adjusting some typographical conventions in function of the current language
+  (such as afterindent, frenchindent, spaces before or after punctuation marks, 
+  etc.).
+* redefining the document strings (like “chapter”, “figure”, “bibliography”).
+* Adapting the formatting of dates (for non-gregorian calendars via external
+  packages bundled with polyglossia: currently the hebrew, islamic and farsi
+  calendars are supported).
+* For languages that have their own numeration system, modifying the formatting 
+  of numbers appropriately.
+* Ensuring the proper directionality if the document contains languages 
+  written from right to left (via the package bidi, available separately).
+
+Several features of Babel that do not make sense in the XeTeX world (like font 
+encodings, shorthands, etc) are not supported.
+
+Polyglossia is distributed in the traditional way with *.dtx and *.ins files,
+and also comes with a TDS-conformant ready-to-unpack zip file.
+
+To install from source (i.e. using polyglossia.dtx), run 
+	xelatex polyglossia.dtx
+which will generate all files and produce the pdf documentation all at once. 
+Alternatively if you have the file polyglossia.ins run
+	xetex polyglossia.ins 
+and follow the instructions displayed.
+
+CHANGES
+
+1.0.2 
+   This is mostly a bug fixes release.
+   * Captions corrected in Hebrew, Russian and Spanish
+   * Removed all \text<lang> wrappers within caption definitions
+   * Improved compatibility with Babel
+   * New option "babelshorthands" for German
+   * New option "Script" for Sanskrit
+
+1.0.1
+   * Improved documentation (added sections on font setup and numeration mappings)
+   * Improvements and bugfixes for English and German
+   * Bugfix in gloss-syriac.ldf (spurious space after \textsyriac{...})
+   * Extended the scope of \syriacabjad
+   * Added gloss-amharic.ldf (ported from ethiop.ldf in the package ethiop)
+
+1.0 
+   * Initial release on CTAN 
+
+
+  ------------------------------
+   François Charette, Jan 2009
+    <firmicus ατ gmx δοτ net>
+  ------------------------------

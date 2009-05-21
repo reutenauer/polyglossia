@@ -1,0 +1,179 @@
+\ProvidesFile{gloss-syriac.ldf}[polyglossia: module for syriac]
+\RequirePackage{bidi}[0.3]
+\makeatletter
+
+\ifx\l@syriac\@undefined
+  \xpg@nopatterns{Syriac}%
+  \adddialect\l@syriac0
+\fi
+
+\def\syriac@RL{\relax}
+
+\def\syriacnumber#1{\@syriacnumber{#1}}%
+
+\newif\if@eastern@numerals
+\def\tmp@eastern{eastern}
+\def\tmp@abjad{abjad}
+\define@key{syriac}{numerals}[western]{%
+	\def\@tmpa{#1}%
+	\ifx\@tmpa\tmp@abjad%
+	  \let\syriacnumber\abjadsyriac%
+	\else%
+	  \ifx\@tmpa\tmp@eastern%
+            \@eastern@numeralstrue%
+	  \else%
+            \@eastern@numeralsfalse%
+ 	  \fi%
+        \fi}
+
+\setkeys{syriac}{numerals}
+	
+\def\syriac@font{%
+  \@ifundefined{syriacfont}{%
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \zf@check@ot@script{syrc}%
+    \if@tempswa%
+      \addfontfeature{Script=Syriac}%
+    \else%
+      \PackageError{polyglossia}{^^J
+      The current font does not contain the Syriac script!^^J
+      Please define \string\syriacfont\space with \string\newfontfamily}%
+    \fi%
+    }%
+  {\syriacfont}%
+}
+
+\def\selectnormalfontsyriac{%
+   \let\normalfont=\syriac@font%
+   \let\rmfamily=\syriac@font%
+   % TODO add setup to define Sans and Mono Syriac fonts if desired
+   \let\sffamily=\syriac@font%
+   \let\ttfamily=\syriac@font%
+   \def\reset@font{\normalfont}}
+
+%\define@key{polyglossia}{syriaclocale}[default]{%
+%	\def\@syriac@locale{#1}}
+%
+%\def\captionssyriac{%
+%\def\prefacename{\@ensure@RL{}}% 
+%\def\refname{\@ensure@RL{}}
+%\def\abstractname{\@ensure@RL{}}%
+%\def\bibname{\@ensure@RL{}}%
+%\def\chaptername{\@ensure@RL{}}%
+%\def\appendixname{\@ensure@RL{}}%
+%\def\contentsname{\@ensure@RL{}}
+%\def\listfigurename{\@ensure@RL{}}%
+%\def\listtablename{\@ensure@RL{}}%
+%\def\indexname{\@ensure@RL{}}%
+%\def\figurename{\@ensure@RL{}}%
+%\def\tablename{\@ensure@RL{}}%
+%\def\partname{\@ensure@RL{}}%
+%\def\enclname{\@ensure@RL{}}%
+%\def\ccname{\@ensure@RL{}}%
+%\def\headtoname{\@ensure@RL{}}%
+%\def\pagename{\@ensure@RL{}}%
+%\def\seename{\@ensure@RL{}}%
+%\def\alsoname{\@ensure@RL{}}%
+%\def\proofname{\@ensure@RL{}}%
+%\def\glossaryname{\@ensure@RL{}}%
+%}
+
+\def\datesyriac{%
+  \def\syriac@month##1{\ifcase##1%
+  \or ܟܢܘܢ ܐܚܪܝ\or ܫܒܛ\or ܐܕܪ\or ܢܝܣܢ\or ܐܝܪ\or ܚܙܝܪܢ\or ܬܡܘܙ\or ܐܒ\or ܐܝܠܘܠ% ܐܠܘܠ
+   \or ܬܫܪܝܢ ܩܕܡ% ܬܫܪܝܢ ܩܕܝܡ
+   \or ܬܫܪܝܢ ܐܚܪܝ\or ܟܢܘܢ ܩܕܡ% ܟܢܘܢ ܩܕܝܡ
+   \fi}%
+   \def\today{\@ensure@RL{\syriacnumber\day{\space}%
+    \syriac@month{\month}{\space}\syriacnumber\year}}%
+}
+
+\def\syriac@zero{}
+
+\def\abjadsyriac#1{%
+\ifnum#1>9999\xpg@ill@value{#1}{abjadsyriac}%
+\else%
+  \ifnum#1<\z@\space\xpg@ill@value{#1}{abjadsyriac}%
+  \else%
+    \ifnum#1<10\expandafter\abj@syr@num@i\number#1%
+    \else%
+      \ifnum#1<100\expandafter\abj@syr@num@ii\number#1%
+      \else%
+        \ifnum#1<1000\expandafter\abj@syr@num@iii\number#1%
+	\else%
+          \expandafter\abj@syr@num@iv\number#1%
+	\fi%
+      \fi%
+    \fi%
+  \fi%
+\fi%
+}
+\def\abj@syr@num@i#1{%
+  \ifcase#1\or\char"0710\or\char"0712\or\char"0713\or\char"0715%
+ \or\char"0717\or\char"0718\or\char"0719\or\char"071A\or\char"071B\fi%
+  \ifnum#1=\z@\syriac@zero\fi}
+\def\abj@syr@num@ii#1{%
+  \ifcase#1\or\char"071D\or\char"071F\or\char"0720\or\char"0721\or\char"0722%
+          \or\char"0723\or\char"0725\or\char"0726\or\char"0728\fi%
+  \ifnum#1=\z@\fi\abj@syr@num@i}
+\def\abj@syr@num@iii#1{%
+  \ifcase#1\or\char"0729\or\char"072A\or\char"072B\or\char"072C%
+  \or\char"0722\char"0307\or\char"0723\char"0307\or\char"0725\char"0307%
+  \or\char"0726\char"0307\or\char"0728\char"0307\fi%
+  \ifnum#1=\z@\fi\abj@syr@num@ii}
+\def\abj@syr@num@iv#1{%
+  \ifcase#1\or\char"0710\char"0748\or\char"0712\char"0748%
+  \or\char"0713\char"0748\or\char"0715\char"0748%
+  \or\char"0717\char"0748\or\char"0718\char"0748%
+  \or\char"0719\char"0748\or\char"071A\char"0748\or\char"071B\char"0748\fi%
+  \ifnum#1=\z@\fi\abj@syr@num@iii}
+
+\def\@syriacnumber#1{%
+   \if@eastern@numerals{%
+     \ifnum\XeTeXcharglyph"0661 > 0%
+      %%% we test for the presence of one of ١٢٣٤٥٦٧٨٩٠ in the Syriac font, 
+      %%% else we try \arabicfont if defined (and give a warning), 
+      %%% else we fall back to the Western numerals.
+       \protect\addfontfeature{Mapping=arabicdigits}\number#1}%
+     \else%
+         \ifcsdef{arabicfont}%
+         {{\protect\arabicfont\protect\addfontfeature{Mapping=arabicdigits}%
+           \number#1}%
+         \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: I am using \string\arabicfont instead}}%
+	 {\RL{\reset@font\number#1}%
+	 \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: since \string\arabicfont is not defined, we'll use Western numerals instead}}%
+     \fi%
+   \else%
+     \RL{\reset@font\number#1}%
+   \fi}
+
+\def\syriac@globalnumbers{%
+   \let\@latinarabic\@arabic%
+   \let\@arabic\syriacnumber%
+   \renewcommand\thefootnote{\protect\syriacnumber{\c@footnote}}%
+   }
+\def\nosyriac@globalnumbers{%
+   \let\@arabic\@latinarabic%
+   }
+\def\syriac@numbers{%
+   \let\@latinalph\@alph%
+   \let\@latinAlph\@Alph%
+   \let\@alph\abjadsyriac%
+   \let\@Alph\abjadsyriac%
+}
+\def\nosyriac@numbers{%
+  \let\@alph\@latinalph%
+  \let\@Alph\@latinAlph%
+  }
+
+\def\syriac@language{\language=\l@syriac}
+
+\def\blockextras@syriac{%
+   \let\@@MakeUppercase\MakeUppercase%
+   \def\MakeUppercase##1{##1}%
+   }
+\def\noextras@syriac{%
+   \let\MakeUppercase\@@MakeUppercase%
+   }
+
+\endinput

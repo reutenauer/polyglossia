@@ -1,0 +1,73 @@
+\ProvidesFile{gloss-divehi.ldf}[polyglossia: module for divehi]
+\RequirePackage{bidi}
+\makeatletter
+
+\ifx\l@divehi\@undefined%
+   \xpg@nopatterns{Divehi}%
+   \adddialect\l@divehi0%
+\fi
+
+\def\divehi@RL{\relax}
+
+%\def\captionsdivehi{%
+%   \def\refname{<++>}%
+%   \def\abstractname{<++>}%
+%   \def\bibname{<++>}%
+%   \def\prefacename{<++>}%
+%   \def\chaptername{<++>}%
+%   \def\appendixname{<++>}%
+%   \def\contentsname{<++>}%
+%   \def\listfigurename{<++>}%
+%   \def\listtablename{<++>}%
+%   \def\indexname{<++>}%
+%   \def\figurename{<++>}%
+%   \def\tablename{<++>}%
+%   \def\thepart{}%
+%   \def\partname{<++>}%
+%   \def\pagename{<++>}%
+%   \def\seename{<++>}%
+%   \def\alsoname{<++>}%
+%   \def\enclname{<++>}%
+%   \def\ccname{<++>}%
+%   \def\headtoname{<++>}%
+%   \def\proofname{<++>}%
+%   \def\glossaryname{<++>}%
+%   }
+%\def\datedivehi{\def\today{<++>}}
+
+\def\divehi@language{\protect\language=\l@divehi}
+
+\def\divehi@font{%
+\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+\@ifundefined{divehifont}{%
+      \@ifundefined{thaanafont}{%
+        \zf@check@ot@script{thaa}%
+	\if@tempswa%
+	  \addfontfeature{Script=Thaana}%
+	\else%
+	  \PackageError{polyglossia}{^^J
+	  The current font does not contain the Thaana script!^^J
+	  Please define \string\thaanafont\space or \string\divehifont\space with \string\newfontfamily}%
+	\fi%
+	}%
+      {\thaanafont}}% 
+{\divehifont}%
+}
+
+\def\selectnormalfontdivehi{%
+   \let\normalfont=\divehi@font%
+   \let\rmfamily=\divehi@font%
+   % TODO add setup to define Sans and Mono fonts if desired
+   \let\sffamily=\divehi@font%
+   \let\ttfamily=\divehi@font%
+   \def\reset@font{\normalfont}}
+
+\def\blockextras@divehi{%
+   \let\@@MakeUppercase\MakeUppercase%
+   \def\MakeUppercase##1{##1}%
+   }
+\def\noextras@divehi{%
+   \let\MakeUppercase\@@MakeUppercase%
+   }
+
+\endinput

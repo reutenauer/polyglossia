@@ -1,0 +1,45 @@
+\ProvidesFile{gloss-catalan.ldf}[polyglossia: module for catalan]
+\makeatletter
+\def\catalan@font{\normalfontlatin}
+
+\ifx\l@catalan\@undefined%
+   \xpg@nopatterns{Catalan}%
+   \adddialect\l@catalan0%
+\fi
+
+\def\captionscatalan{%
+   \def\refname{Referències}%
+   \def\abstractname{Resum}%
+   \def\bibname{Bibliografia}%
+   \def\prefacename{Pròleg}%
+   \def\chaptername{Capítol}%
+   \def\appendixname{Apèndix}%
+   \def\contentsname{Índex}%
+   \def\listfigurename{Índex de figures}%
+   \def\listtablename{Índex de taules}%
+   \def\indexname{Índex alfabètic}%
+   \def\figurename{Figura}%
+   \def\tablename{Taula}%
+   %\def\thepart{}%
+   \def\partname{Part}%
+   \def\pagename{Pàgina}%
+   \def\seename{Vegeu}%
+   \def\alsoname{Vegeu també}%
+   \def\enclname{Adjunt}%
+   \def\ccname{Còpies a}%
+   \def\headtoname{A}%
+   \def\proofname{Demostració}%
+   \def\glossaryname{Glossari}%
+   }
+\datecatalan{%   
+   \def\today{\number\day~\ifcase\month\or
+    de gener\or de febrer\or de març\or d'abril\or de maig\or
+    de juny\or de juliol\or d'agost\or de setembre\or d'octubre\or
+    de novembre\or de desembre\fi
+    \space de~\number\year}}
+
+\def\catalan@language{\protect\language=\l@catalan}
+
+\setlocalhyphenmins{catalan}{2}{2}
+
+\endinput

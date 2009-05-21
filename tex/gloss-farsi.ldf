@@ -1,0 +1,200 @@
+\ProvidesFile{gloss-farsi.ldf}[polyglossia: module for farsi]
+\RequirePackage{bidi}
+\RequirePackage{farsical}
+\makeatletter
+
+%\ifx\l@farsi\@undefined
+%  \xpg@nopatterns{Farsi}%
+\adddialect\l@farsi0
+%\fi
+
+\def\farsi@RL{\relax}
+
+\newif\if@western@numerals
+\def\tmp@western{western}
+\define@key{farsi}{numerals}[eastern]{%
+	\def\@tmpa{#1}%
+	\ifx\@tmpa\tmp@western\@western@numeralstrue\else%
+	  \@western@numeralsfalse%
+	\fi}
+
+% NOT YET USED	
+\define@key{farsi}{locale}[default]{%
+	\def\@farsi@locale{#1}}
+
+%TODO add option for CALENDAR
+
+\setkeys{farsi}{locale,numerals}
+
+\def\farsigregmonth#1{\ifcase#1%
+  \or ژانویه\or فوریه\or مارس\or آوریل\or مه\or ژوئن\or ژوئیه؛\or ژویه\or اوت\or سپتامبر\or اکتبر\or نوامبر\or دسامبر\fi}
+\def\farsimonth#1{\ifcase#1%
+  \or کانون ثانی\or شباط\or اذار%؛\or ادار
+    \or نیسان\or ایار\or حزیران\or تموز\or آب\or ایلول\or تشرین اول\or تشرین ثانی\or کانون اول\fi}
+
+\def\captionsfarsi{%
+\def\prefacename{\@ensure@RL{پیشگفتار}}% 
+\def\refname{\@ensure@RL{مراجع}}%
+\def\abstractname{\@ensure@RL{چکیده}}%
+\def\bibname{\@ensure@RL{کتاب‌نامه}}%
+\def\chaptername{\@ensure@RL{فصل}}%
+\def\appendixname{\@ensure@RL{پیوست}}%
+\def\contentsname{\@ensure@RL{فهرست مطالب}}%
+\def\listfigurename{\@ensure@RL{لیست تصاویر}}%
+\def\listtablename{\@ensure@RL{لیست جداول}}%
+\def\indexname{\@ensure@RL{نمایه}}%
+\def\figurename{\@ensure@RL{شكل}}%
+\def\tablename{\@ensure@RL{جدول}}%
+\def\partname{\@ensure@RL{بخش}}%
+%\def\enclname{\@ensure@RL{}}%<-- Needs translation
+%\def\ccname{\@ensure@RL{}}%<-- Needs translation
+%\def\headtoname{\@ensure@RL{}}%<-- Needs translation
+\def\pagename{\@ensure@RL{صفحة}}%
+%\def\seename{\@ensure@RL{}}%<-- Needs translation
+%\def\alsoname{\@ensure@RL{}}%<-- Needs translation
+\def\proofname{\@ensure@RL{برهان}}%
+\def\glossaryname{\@ensure@RL{لغت‌نامه}}%<-- Needs to be checked
+}
+\def\datefarsi{%
+   \def\today{\@ensure@RL{\farsinumber\day\space\farsigregmonth{\month}\space\farsinumber\year}}%
+}
+
+\def\farsinumber#1{\if@western@numerals\RL{\number#1}\else%
+\ifnum\XeTeXcharglyph"06F0 > 0%
+{\protect\addfontfeature{Mapping=farsidigits}\number#1}%
+\else%
+{\protect\addfontfeature{Mapping=arabicdigits}\number#1}%
+\fi\fi}
+
+%\def\farsinum#1{\expandafter\farsinumber\csname c@#1\endcsname}
+%\def\farsibracenum#1{(\expandafter\farsinumber\csname c@#1\endcsname)}
+%\def\farsiornatebracenum#1{\char"FD3E\expandafter\farsinumber\csname c@#1\endcsname\char"FD3F}
+%\def\farsialph#1{\expandafter\@farsialph\csname c@#1\endcsname}
+
+\ifcsdef{abjad}{}{%
+\def\abjad#1{%
+\ifnum#1>1999 \xpg@warning{Illegal value (#1) for abjad numeral} {#1}
+\else
+  \ifnum#1<\z@\space\xpg@warning{Illegal value (#1) for abjad numeral}%
+  \else
+    \ifnum#1<10\expandafter\abj@num@i\number#1%
+    \else
+      \ifnum#1<100\expandafter\abj@num@ii\number#1%
+      \else
+        \ifnum#1<\@m\expandafter\abj@num@iii\number#1%
+        \else
+          \ifnum#1<\@M\expandafter\abj@num@iv\number#1%since #1<2000, we must have 1000
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+\fi
+}
+\def\abjad@zero{}
+\def\abj@num@i#1{%
+  \ifcase#1\or ا\or ب\or ج\char"200D\or د% 
+           \or ه\or و\or ز\or ح\or ط\fi
+  \ifnum#1=\z@\abjad@zero\fi}
+\def\abj@num@ii#1{%
+  \ifcase#1\or ي\or ك\or ل\or م\or ن%
+           \or س\or ع\or ف\or ص\fi 
+  \ifnum#1=\z@\fi\abj@num@i}
+\def\abj@num@iii#1{%
+  \ifcase#1\or ق\or ر\or ش\or ت\or ث%
+            \or خ\or ذ\or ض\or ظ\fi
+  \ifnum#1=\z@\fi\abj@num@ii}
+\def\abj@num@iv#1{%
+  \ifcase#1\or غ\fi
+  \ifnum#1=\z@\fi\abj@num@iii}
+}
+
+\def\farsi@numbers{%
+   \let\@latinalph\@alph%
+   \let\@latinAlph\@Alph%
+   \let\@alph\abjad%
+   \let\@Alph\abjad%
+}
+\def\nofarsi@numbers{%
+  \let\@alph\@latinalph%
+  \let\@Alph\@latinAlph%
+  }
+
+\def\farsi@globalnumbers{%
+   \let\@latinarabic\@arabic%
+   \let\@arabic\farsinumber%
+   % For some reason \thefootnote needs to be set separately:
+   \renewcommand\thefootnote{\protect\farsinumber{\c@footnote}}%
+   }
+
+\def\nofarsi@globalnumbers{
+   \let\@arabic\@latinarabic%
+   \renewcommand\thefootnote{\protect\number{\c@footnote}}%
+   }
+
+\def\farsi@language{\language=\l@farsi}
+
+\def\farsi@font{%
+\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+\@ifundefined{farsifont}{%
+      \@ifundefined{arabicfont}{%
+        \zf@check@ot@script{arab}%
+	\if@tempswa%
+	  \addfontfeature{Script=Arabic}%
+	\else%
+	  \PackageError{polyglossia}{^^J
+	  The current font does not contain the Arabic script!^^J
+	  Please define \string\arabicfont\space or \string\farsifont\space with \newfontfamily}%
+	\fi%
+	\zf@check@ot@lang{FAR}%
+	\if@tempswa\addfontfeature{Language=Farsi}\fi
+	}%
+      {\arabicfont%
+       \zf@check@ot@lang{FAR}%
+       \if@tempswa\addfontfeature{Language=Farsi}\fi}
+      }% 
+{\farsifont}}
+% TODO add setup to define Sans and Mono Arabic fonts if desired
+\def\farsi@font@sf{%
+  \@ifundefined{farsifontsf}{%
+%  \sffamily% FIXME
+%    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+%  \zf@check@ot@script{arab}%
+%  \if@tempswa%
+%    \addfontfeature{Script=Arabic}%
+%  \else%
+    \farsi@font%
+%  \fi%  
+  }%
+  {\farsifontsf}%
+}
+\def\farsi@font@tt{%
+  \@ifundefined{farsifonttt}{%
+%    \ttfamily% FIXME
+%    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+%  \zf@check@ot@script{arab}%
+%  \if@tempswa%
+%    \addfontfeature{Script=Arabic}%
+%  \else%
+    \farsi@font%
+%  \fi%  
+  }%
+  {\farsifonttt}%
+}
+
+\def\selectnormalfontfarsi{%
+   \let\normalfont=\farsi@font%
+   \let\rmfamily=\farsi@font%
+   \let\sffamily=\farsi@font@sf%
+   \let\ttfamily=\farsi@font@tt%
+   \def\reset@font{\normalfont}}
+
+\def\blockextras@farsi{%
+   \let\@@MakeUppercase\MakeUppercase%
+   \def\MakeUppercase##1{##1}%
+   }
+\def\noextras@farsi{%
+   \let\MakeUppercase\@@MakeUppercase%
+   }
+\endinput
+

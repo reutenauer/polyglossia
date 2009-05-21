@@ -1,0 +1,46 @@
+\ProvidesFile{gloss-slovenian.ldf}[polyglossia: module for slovenian]
+\makeatletter
+\def\slovenian@font{\normalfontlatin}
+
+\ifx\l@slovenian\@undefined%
+ \ifx\l@slovene\@undefined%
+   \xpg@nopatterns{Slovenian}%
+   \adddialect\l@slovenian0%
+\fi\fi
+
+\def\captionsslovenian{%
+   \def\refname{Literatura}%
+   \def\abstractname{Povzetek}%
+   \def\bibname{Literatura}%
+   \def\prefacename{Predgovor}%
+   \def\chaptername{Poglavje}%
+   \def\appendixname{Dodatek}%
+   \def\contentsname{Kazalo}%
+   \def\listfigurename{Slike}%
+   \def\listtablename{Tabele}%
+   \def\indexname{Stvarno kazalo}%
+   \def\figurename{Slika}%
+   \def\tablename{Tabela}%
+   %\def\thepart{}%
+   \def\partname{Del}%
+   \def\pagename{Stran}%
+   \def\seename{glej}%
+   \def\alsoname{glej tudi}%
+   \def\enclname{Priloge}%
+   \def\ccname{Kopije}%
+   \def\headtoname{Prejme}%
+   \def\proofname{Dokaz}%
+   \def\glossaryname{Glosar}% <-- CHECK!
+   }
+\def\dateslovenian{%   
+   \def\today{\number\day.~\ifcase\month\or
+    januar\or februar\or marec\or april\or maj\or junij\or
+    julij\or avgust\or september\or oktober\or november\or december\fi
+    \space \number\year}%
+    }
+
+\def\slovenian@language{\protect\language=\l@slovenian}
+
+\setlocalhyphenmins{slovenian}{2}{2}%
+
+\endinput

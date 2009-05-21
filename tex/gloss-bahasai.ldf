@@ -1,0 +1,68 @@
+\ProvidesFile{gloss-bahasai.ldf}[polyglossia: module for bahasa indonesia]
+\makeatletter
+\def\bahasai@font{\normalfontlatin}
+
+\ifx\l@bahasa\@undefined
+  \ifx\l@bahasai\@undefined
+    \ifx\l@indon\@undefined
+      \ifx\l@indonesian\@undefined
+        \ifx\l@bahasam\@undefined
+          \ifx\l@malay\@undefined
+            \ifx\l@meyalu\@undefined
+              \xpg@nopatterns{Bahasa Indonesia}
+              \adddialect\l@bahasa0\relax
+            \else
+              \let\l@bahasa\l@meyalu
+            \fi
+          \else
+            \let\l@bahasa\l@malay
+          \fi
+        \else
+          \let\l@bahasa\l@bahasam
+        \fi
+      \else
+        \let\l@bahasa\l@indonesian
+      \fi
+    \else
+      \let\l@bahasa\l@indon
+    \fi
+  \else
+    \let\l@bahasa\l@bahasai
+  \fi
+\fi
+
+\def\captionsbahasai{%
+   \def\refname{Pustaka}%
+   \def\abstractname{Ringkasan}%
+   \def\bibname{Bibliografi}%
+   \def\prefacename{Pendahuluan}%
+   \def\chaptername{Bab}%
+   \def\appendixname{Lampiran}%
+   \def\contentsname{Daftar Isi}%
+   \def\listfigurename{Daftar Gambar}%
+   \def\listtablename{Daftar Tabel}%
+   \def\indexname{Indeks}%
+   \def\figurename{Gambar}%
+   \def\tablename{Tabel}%
+   %\def\thepart{}%
+   \def\partname{Bagian}%
+   \def\pagename{Halaman}%
+   \def\seename{lihat}%
+   \def\alsoname{lihat juga}%
+   \def\enclname{Lampiran}%
+   \def\ccname{cc}%
+   \def\headtoname{Kepada}%
+   \def\proofname{Bukti}%
+   \def\glossaryname{Daftar Istilah}%
+   }
+\def\datebahasai{%
+   \def\today{\number\day~\ifcase\month\or
+    Januari\or Pebruari\or Maret\or April\or Mei\or Juni\or
+    Juli\or Agustus\or September\or Oktober\or Nopember\or Desember\fi
+    \space \number\year}}
+
+\def\bahasai@language{\protect\language=\l@bahasai}
+
+\setlocalhyphenmins{bahasai}{2}{2}
+
+\endinput

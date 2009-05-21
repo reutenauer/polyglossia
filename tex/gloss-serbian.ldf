@@ -1,0 +1,155 @@
+\ProvidesFile{gloss-serbian.ldf}[polyglossia: module for serbian]
+\makeatletter
+
+%TODO eventually there will be patterns for Serbian-Latin as well as Serbian-Cyrillic
+\ifx\l@serbian\@undefined%
+   \xpg@nopatterns{Serbian}%
+   \adddialect\l@serbian0%
+\fi
+
+\newif\if@serbian@cyr
+\def\tmp@cyrillic{cyrillic}
+\define@key{serbian}{script}[cyrillic]{%
+	\def\@tmpa{#1}%
+	\ifx\@tmpa\tmp@cyrillic\@serbian@cyrtrue\else%
+	  \@serbian@cyrfalse\fi%
+	\fi}
+
+\setkeys{serbian}{script}
+
+\def\captionsserbian{%
+   \if@serbian@cyr\captionsserbian@cyr\else\captionsserbian@lat\fi%
+   }
+
+\def\dateserbian{%
+   \if@serbian@cyr\dateserbian@cyr\else\dateserbian@lat\fi%
+   }
+
+\def\captionsserbian@lat{%
+   \def\refname{Literatura}%
+   \def\abstractname{Sažetak}%
+   \def\bibname{Bibliografija}%
+   \def\prefacename{Predgovor}%
+   \def\chaptername{Glava}%
+   \def\appendixname{Dodatak}%
+   \def\contentsname{Sadržaj}%
+   \def\listfigurename{Slike}%
+   \def\listtablename{Tabele}%
+   \def\indexname{Indeks}%
+   \def\figurename{Slika}%
+   \def\tablename{Tabela}%
+   \def\partname{Deo}%
+   \def\pagename{Strana}%
+   \def\seename{Vidi}%
+   \def\alsoname{Vidi takođe}%
+   \def\enclname{Prilozi}%
+   \def\ccname{Kopije}%
+   \def\headtoname{Prima}%
+   \def\proofname{Dokaz}%
+   \def\glossaryname{Glosar}% <-- CHECK
+   }
+\def\dateserbian@lat{%   
+   \def\today{\number\day .~\ifcase\month\or
+    januar\or februar\or mart\or april\or maj\or
+    juni\or juli\or avgust\or septembar\or oktobar\or novembar\or
+    decembar\fi \space \number\year}%
+    }
+
+%%%TODO ASK SOMEONE TO CHECK THESE!
+\def\captionsserbian@cyr{%
+   \def\refname{Литература}%
+   \def\abstractname{Сажетак}%
+   \def\bibname{Библиографија}%
+   \def\prefacename{Предговор}%
+   \def\chaptername{Глава}%
+   \def\appendixname{Додатак}%
+   \def\contentsname{Садржај}%
+   \def\listfigurename{Слике}%
+   \def\listtablename{Табеле}%
+   \def\indexname{Индекс}%
+   \def\figurename{Слика}%
+   \def\tablename{Табела}%
+   %\def\thepart{}%
+   \def\partname{Део}%
+   \def\pagename{Страна}%
+   \def\seename{Види}%
+   \def\alsoname{Види такође}%
+   \def\enclname{Прилоzи}%
+   \def\ccname{Копије}%
+   \def\headtoname{Прима}%
+   \def\proofname{Докаz}%
+   \def\glossaryname{Глосар}% <-- CHECK
+   }
+\def\dateserbian@cyr{%
+   \def\today{\number\day .~\ifcase\month\or
+    јануар\or фебруар\or март\or април\or мај\or
+    јуни\or јули\or август\or септембар\or октобар\or нобембар\or
+    децембар\fi \space \number\year}%
+    }
+
+\def\serbian@font@cyr{%
+\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+\@ifundefined{serbianfont}{%
+      \@ifundefined{cyrillicfont}{%
+        \zf@check@ot@script{cyrl}%
+	\if@tempswa%
+	  \addfontfeature{Script=Cyrillic}%
+	\else%
+	  \PackageError{polyglossia}{^^J
+	  The current font does not contain the Cyrillic script!^^J
+	  Please define \string\cyrillicfont\space or \string\serbianfont\space with \string\newfontfamily}%
+	\fi%
+	\zf@check@ot@lang{SRB}%
+	\if@tempswa\addfontfeature{Language=Serbian}\fi%
+	}%
+        {\cyrillicfont%
+         \zf@check@ot@lang{SRB}%
+	 \if@tempswa\addfontfeature{Language=Serbian}\fi%
+        }%
+     }% 
+     {\serbianfont}%
+}
+
+\def\serbian@font@lat{%
+  \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+   \@ifundefined{serbianfontlatin}{%
+     \zf@check@ot@lang{SRB}%
+     \if@tempswa\addfontfeature{Language=Serbian}\fi}%
+    {\serbianfontlatin}%
+}
+
+\def\serbian@font{%
+   \if@serbian@cyr\serbian@font@cyr\else\serbian@font@lat\fi}
+
+%TODO when available load latin hyphenation patterns as well!
+\def\serbian@language{\protect\language=\l@serbian}
+
+\setlocalhyphenmins{serbian}{2}{2}%
+
+\def\noextras@serbian{%
+   \nofrench@indent%
+   }
+
+\def\blockextras@serbian{%
+   \french@indent%
+   }
+\endinput
+% TODO ? stuff from babel
+
+\def\sh{\mathop{\operator@font sh}\nolimits} % same as \sinh
+\def\ch{\mathop{\operator@font ch}\nolimits} % same as \cosh
+\def\th{\mathop{\operator@font th}\nolimits} % same as \tanh
+\def\cth{\mathop{\operator@font cth}\nolimits} % same as \coth
+\def\arsh{\mathop{\operator@font arsh}\nolimits}
+\def\arch{\mathop{\operator@font arch}\nolimits}
+\def\arth{\mathop{\operator@font arth}\nolimits}
+\def\arcth{\mathop{\operator@font arcth}\nolimits}
+\def\tg{\mathop{\operator@font tg}\nolimits} % same as \tan
+\def\ctg{\mathop{\operator@font ctg}\nolimits} % same as \cot
+\def\arctg{\mathop{\operator@font arctg}\nolimits} % same as \arctan
+\def\arcctg{\mathop{\operator@font arcctg}\nolimits}
+\def\Prob{\mathop{\mathsf P\hskip0pt}\nolimits}
+\def\Expect{\mathop{\mathsf E\hskip0pt}\nolimits}
+\def\Variance{\mathop{\mathsf D\hskip0pt}\nolimits}
+
+

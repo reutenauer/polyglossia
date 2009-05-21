@@ -1,0 +1,57 @@
+\ProvidesFile{gloss-latin.ldf}[polyglossia: module for latin]
+\makeatletter
+\def\latin@font{\normalfontlatin}
+
+\ifx\l@latin\@undefined
+   \xpg@nopatterns{latin}
+   \adddialect\l@latin0
+\fi
+
+\def\captionslatin{%
+   \def\prefacename{Praefatio}%
+   \def\refname{Conspectus librorum}%
+   \def\abstractname{Summarium}%
+   \def\bibname{Conspectus librorum}%
+   \def\chaptername{Caput}%
+   \def\appendixname{Additamentum}%
+   \def\contentsname{Index}%
+   \def\listfigurename{Conspectus descriptionum}%
+   \def\listtablename{Conspectus tabularum}%
+   \def\indexname{Index rerum notabilium}%
+   \def\figurename{Descriptio}%
+   \def\tablename{Tabula}%
+   \def\partname{Pars}%
+   \def\enclname{Additur}%
+   \def\ccname{Exemplar}%
+   \def\headtoname{\ignorespaces}%
+   \def\pagename{pagina}%
+   \def\seename{cfr.}%
+   \def\alsoname{cfr.}%
+   \def\proofname{Demonstratio}%
+   \def\glossaryname{Glossarium}%
+   }
+\def\datelatin{%   
+   \def\today{\uppercase\expandafter{\romannumeral\day}%
+      \space \ifcase\month%
+      \or Januarii\or Februarii\or Martii\or Aprilis\or Maji\or Junii\or%
+      Julii\or Augusti\or Septembris\or Octobris\or Novembris\or%
+      Decembris\fi%
+      \space \uppercase\expandafter{\romannumeral\year}}}
+
+\def\latin@language{\protect\language=\l@latin}
+
+\setlocalhyphenmins{latin}{2}{2}%
+
+\def\noextras@latin{%
+   \nonfrenchspacing%
+}
+
+\def\blockextras@latin{%
+   \frenchspacing%
+}
+
+\def\inlineextras@latin{%
+   \frenchspacing%
+}
+
+\endinput

@@ -1,0 +1,366 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{polyglossia}[2009/01/25 v1.0.2 
+	Babel replacement for XeLaTeX]
+\RequirePackage{etoolbox}
+\RequirePackage{fontspec} %which itself depends on xkeyval
+
+%% This is for compatibility with Babel-aware package:
+\cslet{ver@babel.sty}{\@empty} % this "fakes" babel
+\def\languageshorthands#1{\relax} %this is for scrlttr2 class
+\AtEndPreamble{\let\bbl@set@language\xpg@set@language} %for biblatex
+\AtEndPreamble{\let\bbl@main@language\xpg@main@language} %for biblatex
+
+%% custom message macros
+\providecommand*{\xpg@warning}[1]{%
+   \PackageWarning{polyglossia}%
+   {#1}}      
+\providecommand*{\xpg@info}[1]{%
+   \PackageInfo{polyglossia}%
+   {#1\@gobble}} %% the \@gobble is to prevent displaying the line nr
+\providecommand*{\xpg@nopatterns}[1]{%
+   \xpg@warning{No hyphenation patterns were loaded for `#1'\MessageBreak
+         I will use the patterns loaded for \string\language=0\MessageBreak instead}}
+\providecommand*{\xpg@nolang}[1]{%
+   \xpg@warning{File gloss-#1.ldf does not exist!^^J
+   I will nevertheless try to use hyphenation patterns for #1.}}%
+      %TODO try at least to load the hyphenation patterns for #1.
+\def\xpg@ill@value#1#2{%
+  \xpg@warning{Illegal value (#1) for #2}}
+
+%% use macro if defined, else warn that it is not
+\def\xpg@csifdef@warn#1{%
+   \ifcsundef{#1}{\PackageWarning{polyglossia}{ #1 is not defined}}%
+   {\expandafter\protect\csname #1\endcsname}}
+%% same without warning
+\def\xpg@csifdef#1{\ifcsundef{#1}{\relax}{\expandafter\protect\csname #1\endcsname}}
+
+%% ensure directionality if bidi is loaded, else ignore
+\def\@@ensure@dir#1{\ifcsundef{@ensure@dir}{#1}{\@ensure@dir{#1}}}
+\def\@@ensure@maindir#1{\ifcsundef{@ensure@maindir}{#1}{\@ensure@maindir{#1}}}
+
+%% compatibility with babel
+\let\addto\gappto% gappto is defined in etoolbox
+%%
+%% ensure localization of \markright and \markboth commands
+\def\opt@enabled{on}
+\def\opt@disabled{off}
+\define@key{polyglossia}{localmarks}[on]{%
+   \def\@tmpa{#1}
+   \ifx\@tmpa\opt@enabled
+      \def\local@marks##1{%
+         \def\markboth####1####2{%
+            \begingroup%
+               \let\label\relax \let\index\relax \let\glossary\relax%
+               \unrestored@protected@xdef\@themark%
+	       {{\foreignlanguage{##1}{%	         
+	          \protect\@@ensure@maindir{####1}}}%
+	        {\foreignlanguage{##1}{% 
+		  \protect\@@ensure@maindir{####2}}}}%
+               \@temptokena \expandafter{\@themark}%
+               \mark{\the\@temptokena}%
+            \endgroup%
+            \if@nobreak\ifvmode\nobreak\fi\fi}%
+            \def\markright####1{%
+               \begingroup%
+                  \let\label\relax \let\index\relax \let\glossary\relax%
+                  \expandafter\@markright\@themark%
+		  {\foreignlanguage{##1}{\protect\@@ensure@maindir{####1}}}%
+                  \@temptokena \expandafter{\@themark}%
+                  \mark{\the\@temptokena}%
+               \endgroup%
+               \if@nobreak\ifvmode\nobreak\fi\fi}%
+            \def\@markright####1####2####3{\@temptokena{\protect\@@ensure@maindir{####1}}%
+               \unrestored@protected@xdef\@themark{{\the\@temptokena}%
+               {{\protect\@@ensure@maindir{####3}}}}}}
+   \else%\ifx\@tmpa\opt@disabled
+      \def\local@marks##1{}
+      \xpg@info{Option: localmarks=off}
+      %\fi%
+   \fi%
+}
+\setkeys{polyglossia}{localmarks=on}
+
+\newcommand{\setdefaultlanguage}[2][]{%
+   \IfFileExists{gloss-#2.ldf}%
+   {\ifcsundef{#2@loaded}%
+     {\input{gloss-#2.ldf}%
+     \xpg@info{Default language is #2.}
+     \def\languagename{#2}%
+      % This is needed because \arabic is a built-in LaTeX command:
+      % so now we have \begin{Arabic}... instead of \begin{arabic}...  
+      \edef\@tmpa{arabic}%
+      \edef\@tmpb{#2}%
+      \ifx\@tmpb\@tmpa%
+      \newenvironment{Arabic}[1][]{\begin{otherlanguage}[####1]{arabic}}%
+         {\end{otherlanguage}}%
+      \else%   
+      \newenvironment{#2}[1][]{\begin{otherlanguage}[####1]{#2}}%
+         {\end{otherlanguage}}%
+      \fi%
+      \expandafter\newcommand\csname text#2\endcsname[2][]{%
+      \ifcsdef{RL}%
+      {\ifcsundef{#2@RL}%
+          {\@ensure@LR{\foreignlanguage[####1]{#2}{####2}}}%
+	  {\@ensure@RL{\foreignlanguage[####1]{#2}{####2}}}}%
+      {\foreignlanguage[####1]{#2}{####2}}%
+      }%
+      \csletcs{local#2}{text#2}%
+      \csgdef{#2@loaded}{}%
+      \gdef\xpg@main@language{#2}%
+      }%
+    {\PackageWarning{polyglossia}{gloss-#2.ldf is already loaded!}}%
+    %% The following settings are for the default language and script:
+    \ifcsundef{#2@RL}{}%
+    {\@rlmaintrue\@rl@footnotetrue%
+      \let\@@oddfoot\@oddfoot%
+      \let\@@evenfoot\@evenfoot%
+      \let\@oddfoot\@@evenfoot%
+      \let\@evenfoot\@@oddfoot%
+      \let\@@oddhead\@oddhead%
+      \let\@@evenhead\@evenhead%
+      \let\@oddhead\@@evenhead%
+      \let\@evenhead\@@oddhead%
+    }%
+    \AtBeginDocument{%
+    \selectlanguage[#1]{#2}%
+    \selectbackgroundlanguage{#2}}%
+   }%
+   %ELSE
+   {\xpg@nolang{#2}\hyphenrules{#2}}}%
+
+\let\setmainlanguage=\setdefaultlanguage
+
+\newcommand{\resetdefaultlanguage}[2][]{%
+    \ifcsundef{#2@loaded}{%
+     \PackageError{polyglossia}{gloss-#2.ldf is not loaded!}}%
+    {\def\languagename{#2}%
+    \ifcsundef{#2@RL}{}{\@rlmaintrue\@rl@footnotetrue}%
+    \selectlanguage[#1]{#2}%
+    \selectbackgroundlanguage{#2}}}
+
+% This saves the normalfont for the latin script since we may change normalfont in other scripts
+\let\normalfontlatin=\normalfont%
+\let\rmfamilylatin=\rmfamily%
+\let\sffamilylatin=\sffamily%
+\let\ttfamilylatin=\ttfamily%
+
+\def\reset@latin@script{%
+   \let\rmfamily=\rmfamilylatin%
+   \let\sffamily=\sffamilylatin%
+   \let\ttfamily=\ttfamilylatin%
+   \normalfontlatin}
+
+\def\reset@LR{\xpg@csifdef{setLR}}
+
+\let\@@fterindentfalse\@afterindentfalse
+\def\french@indent{\let\@afterindentfalse\@afterindenttrue
+                        \@afterindenttrue}
+\def\nofrench@indent{\let\@afterindentfalse\@@fterindentfalse
+                          \@afterindentfalse}
+
+\newcommand{\selectbackgroundlanguage}[1]{%
+    \xpg@csifdef{selectnormalfont#1}%
+    \xpg@csifdef{#1@globalnumbers}%
+    }
+
+\newcommand{\setotherlanguage}[2][]{%
+   \IfFileExists{gloss-#2.ldf}%
+   {\ifcsundef{#2@loaded}%
+     {\input{gloss-#2.ldf}%
+      \setkeys{#2}{#1}%
+      \edef\@tmpa{arabic}%
+      \edef\@tmpb{#2}%
+      \ifx\@tmpb\@tmpa%
+      \newenvironment{Arabic}[1][]{\begin{otherlanguage}[####1]{arabic}}%
+         {\end{otherlanguage}}%
+      \else%   
+      \newenvironment{#2}[1][]{\begin{otherlanguage}[####1]{#2}}%
+         {\end{otherlanguage}}%
+      \fi%
+      \expandafter\newcommand\csname text#2\endcsname[2][]{%
+      \ifcsdef{RL}{%
+	  \ifcsundef{#2@RL}%
+	  {\@ensure@LR{\foreignlanguage[####1]{#2}{####2}}}%
+          {\@ensure@RL{\foreignlanguage[####1]{#2}{####2}}}%
+       }{% else
+          \foreignlanguage[####1]{#2}{####2}%
+       }}%
+      \csletcs{local#2}{text#2}%
+      \csgdef{#2@loaded}{}%
+     }%
+     {\PackageWarning{polyglossia}{gloss-#2.ldf is already loaded!}}%
+   }%
+   %ELSE  
+   {\xpg@nolang{#2}\hyphenrules{#2}}%
+   %TODO ? \expandafter\ifx\csname l@#2\endcsname\@undefined
+   %\xpg@nopatterns{#2}\expandafter\adddialect\csname l@#2\endcsname 0%
+   %\else\expandafter\expandafter\protect\language=\csname l@#2\endcsname\fi%
+}
+
+\newcommand\setotherlanguages[1]{%
+   \def\do##1{\setotherlanguage{##1}}%
+   \docsvlist{#1}}%
+
+\def\common@language{%
+   \protect\language=0%
+   \lefthyphenmin=2\righthyphenmin=3}
+
+\def\noextrascurrent#1{\xpg@csifdef{noextras@#1}}
+
+\def\xpg@initial@setup{\ifcsundef{languagename}{}%
+   {\noextrascurrent{\languagename}}%
+   \common@language}
+
+\AtBeginDocument{\xpg@initial@setup}
+
+\ifcsundef{foreignlanguage}{}%
+   {\let\foreignlanguage\@undefined}
+
+\newcommand{\foreignlanguage}[3][]{%
+   \ifcsundef{#2@loaded}{\xpg@nolang{#2}\hyphenrules{#2}}{%
+     {\def\languagename{#2}%
+      \setkeys{#2}{#1}%
+      \xpg@csifdef@warn{#2@font}%
+      \xpg@csifdef@warn{#2@language}%
+      \xpg@csifdef{date#2}%
+      \xpg@csifdef{#2@numbers}%
+      \use@localhyphenmins{#2}%
+      \xpg@csifdef{inlineextras@#2}%
+      #3}%
+}}
+
+\ifcsundef{selectlanguage}{}%
+   {\let\selectlanguage\@undefined}
+
+\newcommand{\selectlanguage}[2][]{%
+   \ifcsundef{#2@loaded}{\xpg@nolang{#2}\hyphenrules{#2}}{%
+      \def\xpg@pop@language{%
+         \xpg@set@language{\languagename}%
+         \let\emp@langname\@undefined}%
+      \aftergroup\xpg@pop@language%
+      \setkeys{#2}{#1}%
+      \xpg@set@language{#2}%
+}}
+
+\newcommand{\xpg@set@language}[1]{%
+   \select@language{#1}%
+   \if@filesw%
+      \protected@write\@auxout{}{\protect\select@language{#1}}%
+      \addtocontents{toc}{\protect\select@language{#1}}%
+      \addtocontents{lof}{\protect\select@language{#1}}%
+      \addtocontents{lot}{\protect\select@language{#1}}%
+   \fi%
+}
+
+\ifcsundef{select@language}{}%
+   {\let\select@language\@undefined}
+
+\newcommand{\select@language}[1]{%
+   \xpg@initial@setup%
+   \edef\languagename{#1}%
+   \ifcsundef{RL}{}%
+   {\ifcsundef{#1@RL}{\setLR}{\setRL}}%
+   \xpg@csifdef@warn{#1@font}%
+   \xpg@csifdef@warn{#1@language}%
+   \use@localhyphenmins{#1}%
+   \xpg@csifdef{captions#1}%
+   \xpg@csifdef{date#1}%
+   \xpg@csifdef{#1@numbers}%
+   \local@marks{#1}%
+   \xpg@csifdef{blockextras@#1}%
+}
+
+\let\xpg@pop@language\relax
+
+\ifcsundef{otherlanguage}{}%
+   {\let\otherlanguage\@undefined}
+\ifcsundef{endotherlanguage}{}%
+   {\let\endotherlanguage\@undefined}
+
+\newenvironment{otherlanguage}[2][]{%
+   \selectlanguage[#1]{#2}%
+   }{}
+
+\newcommand{\setlocalhyphenmins}[3]{%
+   \expandafter\ifx\csname l@#1\endcsname\relax%
+     \xpg@warning{\string\setlocalhyphenmin useless for unknown language #1}%
+   \else
+      \expandafter\ifx\csname l@#1\endcsname\l@nohyphenation%
+        \xpg@warning{\string\setlocalhyphenmin useless for unhyphenated language #1}%
+      \else%
+      \providehyphenmins{#1}{#2#3}%
+      \fi%
+   \fi}
+
+\def\use@localhyphenmins#1{%
+   \ifcsundef{#1hyphenmins}{}%
+   {\expandafter\expandafter\expandafter\set@hyphenmins\csname #1hyphenmins\endcsname\relax}}
+
+%% package options
+\DeclareOption{nolocalmarks}{\setkeys{polyglossia}{localmarks=off}}
+\DeclareOption{quiet}{%
+   \gdef\@latex@info#1{\relax}% no latex info
+   \gdef\@font@info#1{\relax}% no latex font info
+   \gdef\@font@warning#1{\relax}% no latex font warnings
+   \gdef\zf@PackageInfo#1{\relax}% no fontspec info
+   \gdef\xpg@info#1{\relax}}% no polyglossia info
+\DeclareOption{USenglish}{%
+\ifcsundef{xpg@main@language}%
+ {\edef\@temp{\noexpand\setdefaultlanguage[variant=american]{english}}}%
+ {\edef\@temp{\noexpand\setotherlanguage[variant=american]{english}}}%
+   \@temp}
+\DeclareOption{american}{%
+\ifcsundef{xpg@main@language}%
+ {\edef\@temp{\noexpand\setdefaultlanguage[variant=american]{english}}}%
+ {\edef\@temp{\noexpand\setotherlanguage[variant=american]{english}}}%
+   \@temp}
+\DeclareOption{UKenglish}{%
+\ifcsundef{xpg@main@language}%
+ {\edef\@temp{\noexpand\setdefaultlanguage[variant=british]{english}}}%
+ {\edef\@temp{\noexpand\setotherlanguage[variant=british]{english}}}%
+   \@temp}
+\DeclareOption{british}{%
+\ifcsundef{xpg@main@language}%
+ {\edef\@temp{\noexpand\setdefaultlanguage[variant=british]{english}}}%
+ {\edef\@temp{\noexpand\setotherlanguage[variant=british]{english}}}%
+   \@temp}
+\DeclareOption{australian}{%
+\ifcsundef{xpg@main@language}%
+ {\edef\@temp{\noexpand\setdefaultlanguage[variant=australian]{english}}}%
+ {\edef\@temp{\noexpand\setotherlanguage[variant=australian]{english}}}%
+   \@temp}
+\DeclareOption{newzealand}{%
+\ifcsundef{xpg@main@language}%
+ {\edef\@temp{\noexpand\setdefaultlanguage[variant=newzealand]{english}}}%
+ {\edef\@temp{\noexpand\setotherlanguage[variant=newzealand]{english}}}%
+   \@temp}
+\DeclareOption{ngerman}{%
+\ifcsundef{xpg@main@language}%
+ {\edef\@temp{\noexpand\setdefaultlanguage[spelling=new]{german}}}%
+ {\edef\@temp{\noexpand\setotherlanguage[spelling=new]{german}}}%
+   \@temp}
+\DeclareOption{polygreek}{%
+\ifcsundef{xpg@main@language}%
+ {\edef\@temp{\noexpand\setdefaultlanguage[variant=poly]{greek}}}%
+ {\edef\@temp{\noexpand\setotherlanguage[variant=poly]{greek}}}%
+   \@temp}
+\DeclareOption{monogreek}{%
+\ifcsundef{xpg@main@language}%
+ {\edef\@temp{\noexpand\setdefaultlanguage[variant=mono]{greek}}}%
+ {\edef\@temp{\noexpand\setotherlanguage[variant=mono]{greek}}}%
+   \@temp}
+\DeclareOption{ancientgreek}{%
+\ifcsundef{xpg@main@language}%
+ {\edef\@temp{\noexpand\setdefaultlanguage[variant=ancient]{greek}}}%
+ {\edef\@temp{\noexpand\setotherlanguage[variant=ancient]{greek}}}%
+   \@temp}
+%%% FIXME: this does not work when gloss-<option>.ldf contains a \RequirePackage command !!!
+%%%        let's try with \AtEndOfPackage (not tested)
+\DeclareOption*{%
+\ifcsundef{xpg@main@language}%
+{\edef\@temp{\noexpand\setdefaultlanguage{\CurrentOption}}}%
+{\edef\@temp{\noexpand\setotherlanguage{\CurrentOption}}}%
+   \AtEndOfPackage{\@temp}}
+\ProcessOptions*
+\endinput
+

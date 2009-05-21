@@ -1,0 +1,68 @@
+\ProvidesFile{gloss-bahasam.ldf}[polyglossia: module for bahasa malaysia]
+\makeatletter
+\def\bahasam@font{\normalfontlatin}
+
+\ifx\l@malay\@undefined
+  \ifx\l@meyalu\@undefined
+    \ifx\l@bahasam\@undefined
+      \ifx\l@bahasa\@undefined
+        \ifx\l@bahasai\@undefined
+          \ifx\l@indon\@undefined
+            \ifx\l@indonesian\@undefined
+              \xpg@nopatterns{Bahasa Malaysia}
+              \adddialect\l@malay0\relax
+            \else
+              \let\l@malay\l@indonesian
+            \fi
+          \else
+            \let\l@malay\l@indon
+          \fi
+        \else
+          \let\l@malay\l@bahasai
+        \fi
+      \else
+        \let\l@malay\l@bahasa
+      \fi
+    \else
+      \let\l@malay\l@bahasam
+    \fi
+  \else
+    \let\l@malay\l@meyalu
+  \fi
+\fi
+
+\def\captionsbahasam{%
+   \def\refname{Pustaka}%
+   \def\abstractname{Ringkasan}%
+   \def\bibname{Bibliografi}%
+   \def\prefacename{Pendahuluan}%
+   \def\chaptername{Bab}%
+   \def\appendixname{Lampiran}%
+   \def\contentsname{Kandungan}%
+   \def\listfigurename{Senarai Gambar}%
+   \def\listtablename{Senarai Jadual}%
+   \def\indexname{Indeks}%
+   \def\figurename{Gambar}%
+   \def\tablename{Jadual}%
+   \def\thepart{}%
+   \def\partname{Bahagian}%
+   \def\pagename{Halaman}%
+   \def\seename{lihat}%
+   \def\alsoname{lihat juga}%
+   \def\enclname{Lampiran}%
+   \def\ccname{cc}%
+   \def\headtoname{Kepada}%
+   \def\proofname{Bukti}%
+   \def\glossaryname{Istilah}%
+   }
+\def\datebahasam{%
+   \def\today{\number\day~\ifcase\month\or
+    Januari\or Pebruari\or Mac\or April\or Mei\or Jun\or
+    Julai\or Ogos\or September\or Oktober\or November\or Disember\fi
+    \space \number\year}}
+
+\def\bahasam@language{\protect\language=\l@bahasam}
+
+\setlocalhyphenmins{bahasam}{2}{2}
+
+\endinput

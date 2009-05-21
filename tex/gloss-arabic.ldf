@@ -1,0 +1,278 @@
+\ProvidesFile{gloss-arabic.ldf}[polyglossia: module for arabic]
+\RequirePackage{bidi}[0.3]
+\RequirePackage{hijrical}
+\makeatletter
+
+\ifx\l@arabic\@undefined
+  \xpg@nopatterns{arabic}%
+  \adddialect\l@arabic0
+\fi
+
+\def\arabic@RL{\relax}
+
+\newif\if@eastern@numerals
+\def\tmp@mashriq{mashriq}
+\def\tmp@maghrib{maghrib}
+\define@key{arabic}{numerals}[mashriq]{%
+	\def\@tmpa{#1}%
+	\ifx\@tmpa\tmp@mashriq\@eastern@numeralstrue\else%
+	  \ifx\@tmpa\tmp@maghrib\@eastern@numeralsfalse\fi%
+	\fi}
+
+\def\tmp@morocco{morocco}
+\def\tmp@algeria{algeria}
+\define@key{arabic}{locale}[default]{%
+        \def\@tmpa{#1}%
+	\ifx\@tmpa\tmp@morocco%
+	    \@eastern@numeralsfalse%
+        \else\ifx\@tmpa\tmp@algeria%
+	    \@eastern@numeralsfalse%
+	    \fi%
+	\fi%
+	\gdef\@@arabic@month{\@arabic@month{#1}}}
+
+\newif\if@hijrical
+\def\tmp@hijri{hijri}
+\def\tmp@islamic{islamic}
+\define@key{arabic}{calendar}[islamic]{%
+	\def\@tmpa{#1}%
+        \ifx\@tmpa\tmp@hijri\@hijricaltrue%
+	\else%
+	  \ifx\@tmpa\tmp@islamic\@hijricaltrue%
+	\else\@hijricalfalse%
+	\fi\fi}
+
+\define@key{arabic}{hijricorrection}[0]{%
+	\gdef\@hijri@correction{#1}}%
+
+% This should set the defaults
+\setkeys{arabic}{locale,calendar,numerals,hijricorrection}
+
+\def\arabicgregmonth@default#1{\ifcase#1%
+  % Egypt, Sudan, Yemen and Golf states
+  \or يناير\or فبراير\or مارس\or ابريل\or مايو\or يونيو\or يوليو\or اغستس\or سبتمبر\or أكتوبر\or نوفمبر\or ديسمبر\fi}
+\def\arabicgregmonth@mashriq#1{\ifcase#1%
+  % Iraq Syria Jordan Lebanon Palestine
+  \or  كانون الثاني\or شباط\or آذار\or نيسان\or أيار\or حزيران\or تموز\or آب\or أيلول\or تشرين الأول\or تشرين الثاني\or كانون الأول\fi}
+\def\arabicgregmonth@libya#1{\ifcase#1%
+  %Lybia «تعرف في ليبيا بأسماء عربية وضعها معمر القذافي ترمز إلى فصول السنة وبعض الشخصيات التاريخية» (ar.wikipedia.org)
+  \or أي النار\or النوار\or الربيع\or الطير\or الماء\or الصيف\or ناصر\or هانيبال\or الفاتح\or التمور\or الحرث\or الكانون\fi}
+\def\arabicgregmonth@morocco#1{\ifcase#1%
+  \or يناير\or فبراير\or مارس\or أبريل\or ماي\or يونيو\or يوليوز\or غشت\or شتنبر\or أكتوبر\or نونبر\or دجنبر\fi}
+\def\arabicgregmonth@algeria#1{\ifcase#1%
+  % Tunisia and Algeria
+  \or جانفي\or فيفري\or مارس\or أفريل\or ماي\or جوان\or جويلية\or أوت\or سبتمبر\or أكتوبر\or نوفمبر\or ديسمبر\fi}
+\let\arabicgregmonth@tunisia\arabicgregmonth@algeria
+\def\arabicgregmonth@mauritania#1{\ifcase#1%
+  \or يناير\or فبراير\or مارس\or إبريل\or مايو\or يونيو\or يوليو\or أغشت\or شتمبر\or أكتوبر\or نوفمبر\or دجمبر\fi}
+
+\def\@arabic@month#1{\ifcsdef{arabicgregmonth@#1}{\expandafter\csname arabicgregmonth@#1\endcsname}%
+{\xpg@warning{Option `locale=#1' is not defined for Arabic: using `default' instead}%
+\arabicgregmonth@default}}
+
+\def\captionsarabic{%
+\def\prefacename{\@ensure@RL{مدخل}}% 
+\def\refname{\@ensure@RL{المراجع}}
+\def\abstractname{\@ensure@RL{ملخص}}%
+\def\bibname{\@ensure@RL{المصادر}}%
+\def\chaptername{\@ensure@RL{الباب}}%
+\def\appendixname{\@ensure@RL{الملاحق}}%
+\def\contentsname{\@ensure@RL{المحتويات}}
+%\def\contentsname{\@ensure@RL{الفهرس}}%
+\def\listfigurename{\@ensure@RL{قائمة الأشكال}}%
+\def\listtablename{\@ensure@RL{قائمة الجداول}}%
+\def\indexname{\@ensure@RL{الفهرس}}%
+\def\figurename{\@ensure@RL{شكل}}%
+\def\tablename{\@ensure@RL{جدول}}%
+\def\partname{\@ensure@RL{القسم}}%
+\def\enclname{\@ensure@RL{المرفقات}}%<-- Needs translation
+\def\ccname{\@ensure@RL{نسخة ل‬}}% <<
+\def\headtoname{\@ensure@RL{إلى}}%<-- Needs translation
+\def\pagename{\@ensure@RL{صفحة}}%
+\def\seename{\@ensure@RL{راجع}}%\alefhamza\nun\za\ra
+\def\alsoname{\@ensure@RL{راجع أيضاً}}%<<\alefhamza\nun\za\ra
+\def\proofname{\@ensure@RL{برهان}}%
+\def\glossaryname{\@ensure@RL{قاموس}}%<<
+}
+\def\datearabic{%
+ \def\today{%
+  \if@hijrical%
+    \Hijritoday[\@hijri@correction]%
+  \else%
+    \if@rl%
+       \arabicnumber\day\space\@@arabic@month{\month}%
+        \space\arabicnumber\year%
+    \else% in LR environment we format the gregorian date within \textenglish 
+       \ifcsdef{english@loaded}{\textenglish{\today}}%else US format
+       {\normalfontlatin\ifcase\month\or January\or February\or March\or April\or May\or June\or%
+       July\or August\or September\or October\or November\or December\fi%
+       \space\number\day,\space\number\year}%
+    \fi%
+ \fi}}
+
+
+\def\arabicnumber#1{\if@eastern@numerals{\protect\addfontfeature{Mapping=arabicdigits}\number#1}\else\RL{\reset@font\number#1}\fi}
+
+\def\@ornatebracearabic#1{\RL{\char"FD3F\@arabic#1\char"FD3E}}
+\def\@ornatebracealph#1{\RL{\char"FD3F\@alph#1\char"FD3E}}
+
+\ifcsdef{abjad}{}{%
+\def\abjad#1{%
+\ifnum#1>1999\xpg@ill@value{#1}{abjad numeral}%
+\else%
+\ifnum#1<\z@\space\xpg@ill@value{#1}{abjad numeral}%
+  \else%
+    \ifnum#1<10\expandafter\abj@num@i\number#1%
+    \else%
+      \ifnum#1<100\expandafter\abj@num@ii\number#1%
+      \else%
+        \ifnum#1<\@m\expandafter\abj@num@iii\number#1%
+        \else%
+          \ifnum#1<\@M\expandafter\abj@num@iv\number#1%since #1<2000, we must have 1000
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+\fi
+}
+\def\abjad@zero{}
+\def\abj@num@i#1{%
+  \ifcase#1\or ا\or ب\or ج\char"200D\or د% 
+           \or ه\or و\or ز\or ح\or ط\fi%
+  \ifnum#1=\z@\abjad@zero\fi}
+\def\abj@num@ii#1{%
+  \ifcase#1\or ي\or ك\or ل\or م\or ن%
+           \or س\or ع\or ف\or ص\fi% 
+  \ifnum#1=\z@\fi\abj@num@i}
+\def\abj@num@iii#1{%
+  \ifcase#1\or ق\or ر\or ش\or ت\or ث%
+            \or خ\or ذ\or ض\or ظ\fi%
+  \ifnum#1=\z@\fi\abj@num@ii}
+\def\abj@num@iv#1{%
+  \ifcase#1\or غ\fi
+  \ifnum#1=\z@\fi\abj@num@iii}
+}
+
+\def\abjadmaghribi#1{%
+\ifnum#1>1999\xpg@ill@value{#1}{abjad}%
+\else
+  \ifnum#1<\z@\space\xpg@ill@value{#1}{abjad}%
+  \else
+    \ifnum#1<10\expandafter\abj@num@i\number#1%
+    \else
+      \ifnum#1<100\expandafter\abj@maghribi@num@ii\number#1%
+      \else
+        \ifnum#1<\@m\expandafter\abj@maghribi@num@iii\number#1%
+        \else
+          \ifnum#1<\@M\expandafter\abj@maghribi@num@iv\number#1%
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+\fi
+}
+
+
+%maghribi س -> ص ص -> ض ش -> س ض -> ظ ظ -> غ غ -> ش
+\def\abj@maghribi@num@ii#1{%
+  \ifcase#1\or ي\or ك\or ل\or م\or ن%
+           \or ص\or ع\or ف\or ض\fi 
+  \ifnum#1=\z@\abjad@zero\fi\abj@num@i}
+\def\abj@maghribi@num@iii#1{%
+  \ifcase#1\or ق\or ر\or س\or ت\or ث%
+           \or خ\or ذ\or ظ\or غ\fi
+  \ifnum#1=\z@\fi\abj@maghribi@num@ii}
+\def\abj@maghribi@num@iv#1{%
+  \ifcase#1\or ش\fi
+  \ifnum#1=\z@\fi\abj@maghribi@num@iii}
+
+\def\arabic@numbers{%
+   \let\@latinalph\@alph%
+   \let\@latinAlph\@Alph%
+   \let\@alph\abjad%
+   \let\@Alph\abjad%
+}
+\def\noarabic@numbers{%
+  \let\@alph\@latinalph%
+  \let\@Alph\@latinAlph%
+  }
+
+\def\arabic@globalnumbers{%
+   \let\default@arabic\@arabic%
+   \let\@arabic\arabicnumber%
+   % For some reason these need to be set separately:
+   \renewcommand\thefootnote{\protect\arabicnumber{\c@footnote}}%
+   %%\ifcsundef{thechapter}{}{\renewcommand\thechapter{\protect\arabicnumber{\c@chapter}}}% <<<<<<<<<<
+   %%\ifcsundef{thesection}{}{\renewcommand\thesection{\protect\arabicnumber{\c@section}}}% <<<<<<<<<<
+   }
+
+\def\noarabic@globalnumbers{
+   \let\@arabic\default@arabic%
+   \renewcommand\thefootnote{\protect\number{\c@footnote}}%
+   %%\ifcsundef{thechapter}{}{\renewcommand\thechapter{\protect\number{\c@chapter}}}% <<<<<<<<<<
+   %%\ifcsundef{thesection}{}{\renewcommand\thesection{\protect\number{\c@section}}}% <<<<<<<<<<
+   }
+
+\def\arabic@language{\language=\l@arabic}
+
+\def\arabic@font{%
+  \@ifundefined{arabicfont}{%
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \zf@check@ot@script{arab}%
+    \if@tempswa%
+      \addfontfeature{Script=Arabic}%
+    \else%
+      \PackageError{polyglossia}{^^J
+      The current font does not contain the Arabic script!^^J
+      Please define \string\arabicfont\space with \string\newfontfamily}%
+    \fi%
+    }%
+  {\arabicfont}% 
+}
+% TODO add setup to define Sans and Mono Arabic fonts if desired
+\def\arabic@font@sf{%
+  \@ifundefined{arabicfontsf}{%
+%  \sffamily% FIXME
+%    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+%  \zf@check@ot@script{arab}%
+%  \if@tempswa%
+%    \addfontfeature{Script=Arabic}%
+%  \else%
+    \arabic@font%
+%  \fi%  
+  }%
+  {\arabicfontsf}%
+}
+\def\arabic@font@tt{%
+  \@ifundefined{arabicfonttt}{%
+%    \ttfamily% FIXME
+%    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+%  \zf@check@ot@script{arab}%
+%  \if@tempswa%
+%    \addfontfeature{Script=Arabic}%
+%  \else%
+    \arabic@font%
+%  \fi%  
+  }%
+  {\arabicfonttt}%
+}
+
+\def\selectnormalfontarabic{%
+   \let\normalfont=\arabic@font%
+   \let\rmfamily=\arabic@font%
+   \let\sffamily=\arabic@font@sf%
+   \let\ttfamily=\arabic@font@tt%
+   \def\reset@font{\normalfont}}
+
+\def\blockextras@arabic{%
+   \let\@@MakeUppercase\MakeUppercase%
+   \def\MakeUppercase##1{##1}%
+   % TODO disable \@Roman and \@roman ?
+   }
+\def\noextras@arabic{%
+   \let\MakeUppercase\@@MakeUppercase%
+   }
+
+\endinput

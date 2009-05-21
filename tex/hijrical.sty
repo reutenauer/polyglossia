@@ -1,0 +1,84 @@
+\ProvidesPackage{hijrical}
+        [2007/12/27 v0.1 %
+         Islamic calendar]
+\RequirePackage{bidi}
+
+\@ifundefined{@Remainder}{\input{cal-util.def}}{}
+
+%% The following functions are straightforward implementation 
+%% of Reingold & Dershowitz, Calendrical Calculations, The Millenium Edition
+%%
+
+\def\@FixedFromHijri#1#2#3#4{% year,month,day,counter
+\@ifundefined{c@#4}{\newcounter{#4}}{}%
+\setcounter{tmpA}{#2/2}% see errata of Reingold+Dershowitz
+%\message{tmpA is \thetmpA}%
+\setcounter{tmpB}{(3+11*#1)/30}%
+%\message{tmpB is \thetmpB}%
+\setcounter{#4}{227014+(#1-1)*354+\value{tmpB}+(29*(#2-1))+\value{tmpA}+#3}%
+}
+
+\newcounter{Hijriday}\newcounter{Hijrimonth}\newcounter{Hijriyear}
+
+\def\HijriFromGregorian#1#2#3{% year,month,day
+\@FixedFromGregorian{#1}{#2}{#3}{RDdate}%
+\setcounter{Hijriyear}{(30*(\value{RDdate}-227015)+10646)/10631}%
+\@FixedFromHijri{\value{Hijriyear}}{1}{1}{tmpx}%
+%\message{tmpx is \thetmpx}%
+\setcounter{tmpB}{\value{RDdate}-\value{tmpx}}%
+%\message{tmpB is \thetmpB}%
+\setcounter{Hijrimonth}{((11*\value{tmpB})+330)/325}%
+\@FixedFromHijri{\value{Hijriyear}}{\value{Hijrimonth}}{1}{tmpy}%
+%\message{tmpy is \thetmpy}%
+\setcounter{Hijriday}{1+\value{RDdate}-\value{tmpy}}%
+}
+
+%\HijriFromGregorian{\year}{\month}{\day}%
+
+%\def\PlainHijritoday{%
+%\theHijriday.\theHijrimonth.\theHijriyear}
+
+\def\Hijridate#1#2#3{%
+    \HijriFromGregorian{#1}{#2}{#3}%
+    \if@rl%
+       \FormatHijriDate%
+    \else%
+       \FormatHijriDateEnglish%
+    \fi}
+% added option \Hijritoday[n] (default 0) for adjusting the date + n days
+\@ifundefined{@hijri@correction}{\gdef\@hijri@correction{0}}{}
+\newcommand\Hijritoday[1][\@hijri@correction]{%
+ \@ifundefined{c@adj@day}{\global\newcounter{adj@day}}{}%
+ \setcounter{adj@day}{\the\day+#1}% 
+ \Hijridate{\year}{\month}{\value{adj@day}}}
+%\def\Hijritoday{\Hijridate{\year}{\month}{\day}}
+\let\hijritoday=\Hijritoday
+%FIXME necessary?
+%\def\Hijrisetreg{%
+% \HijriFromGregorian{\year}{\month}{\day}}
+
+\def\HijriMonthTranslit#1{\ifcase#1\or Muḥarram\or Ṣafar\or Rabīʿ I\or Rabīʿ II\or%
+Jumādā I\or Jumādā II\or Rajab\or Shaʿbān\or Ramaḍān\or%
+Shawwāl\or Dhū ’l-Qaʿda\or Dhū ’l-Ḥijja\fi}
+
+\def\HijriMonthArabic#1{\ifcase#1\or محرم\or صفر\or ربيع الأول\or ربيع الآخر\or%
+جمادى الأولى\or جمادى الآخرة\or رجب\or شعبان\or رمضان\or%
+شوال\or ذو القعدة\or ذو الحجة\fi}
+
+\def\FormatHijriDateEnglish{%
+\number\value{Hijriday}\space\HijriMonthTranslit{\value{Hijrimonth}}\space\number\value{Hijriyear}}
+
+%FIXME : this is already in gloss-arabic
+\def\@rabicnumb@r#1{\@ifundefined{arabicnumber}{{\addfontfeature{Mapping=arabicdigits} #1}}%
+{\arabicnumber{#1}}}
+
+\def\FormatHijriDate{\@ensure@RL{%
+\@rabicnumb@r{\value{Hijriday}}\space\HijriMonthArabic{\value{Hijrimonth}}\space\@rabicnumb@r{\value{Hijriyear}}}}
+
+\endinput
+
+%TODO
+\def\CYearsFromHijri#1{%yields the corr julian or gregorian years
+} % e.g. \CYearsFromHijri{425} -> 1033/34
+
+

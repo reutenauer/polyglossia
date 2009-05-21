@@ -1,0 +1,60 @@
+\documentclass[a4paper]{article}
+\usepackage[no-math]{fontspec}
+\usepackage{xltxtra,url}
+\usepackage{polyglossia}
+\setdefaultlanguage[numerals=thai]{thai}
+\setotherlanguage{english}
+\setromanfont{Norasi}
+\defaultfontfeatures{Scale=MatchLowercase}
+\setmonofont{Inconsolata}
+\setsansfont{Lucida Sans Unicode}
+\begin{document}
+\begin{center}
+	\abstractname
+\end{center}
+\begin{english}
+Some English to begin with.\footnote{ %
+	Blabla}
+\end{english}
+%%% NOTE: The wordbreak (\wbr) commands were inserted by the preprocessor cttex 
+%%% (available from http://linux.thai.net/pub/thailinux/cvs/software/cttex/ 
+%%% or from http://packages.debian.org/cttex) 
+%%% using the command :
+%%% $ cttex-utf8 <infile.tex> <outfile.tex>
+%%% where cttex-utf8 is the following simple shell script:
+%%% #!/bin/bash 
+%%% cat $1 | iconv -f UTF-8 -t TIS-620 | cttex -w | sed 's/<WBR>/\\wbr /g' | iconv -f TIS-620 -t UTF8 > $2
+%%% (this should also work on MacOSX; windows users need to tweak it into a batch file I guess)
+
+เป็น\wbr แผนงานเพื่อ\wbr สนับสนุน\wbr การ\wbr ร่วมกัน\wbr สร้าง, การ\wbr ร่วมกันใช้, และ\wbr การ%
+ร่วมกัน\wbr พัฒนา\wbr ทรัพยากร\wbr ทาง\wbr ภาษา\wbr ของ\wbr ภาษา\wbr ไทย, บน\wbr เครือข่าย World Wide Web. แผนงานนี้\wbr มี%
+จุด\wbr ประสงค์หลั\wbr กอยู่\wbr สอง\wbr ประการคือ เพื่อแก้ปัญหา\wbr กำ\wbr แพง\wbr ทาง\wbr ภาษา, และรักษา%
+ไว้เพื่อ\wbr ความค\wbr งอยู่\wbr ของ\wbr ภาษา\wbr และ\wbr วัฒนธรรม\wbr ไทย.
+
+เรา\wbr ตระหนัก\wbr ดีถึง\wbr ความ\wbr สำคัญ\wbr ของ\wbr ภาษา ซึ่ง\wbr นอกจาก\wbr จะ\wbr เป็นสื่อ\wbr ระหว่าง\wbr คนกับ\wbr คน\wbr แล้ว ยัง\wbr เป็น%
+รูปแทน\wbr ความคิด และ\wbr เป็น\wbr เครื่องมือ\wbr ใน\wbr การใช้\wbr ความคิด\wbr ด้วย. เครือข่าย\wbr คอมพิวเตอร์%
+ใน\wbr ปัจจุบัน\wbr ทำให้ข้อมูล\wbr ข่าวสาร\wbr แพร่หลาย\wbr ไป\wbr อย่าง\wbr รวดเร็ว. เครื่องมือที่ใช้\wbr ใน\wbr การแส\wbr ดง\wbr ผล%
+และ\wbr การเต\wbr รี\wbr ยมข้อมูล\wbr ข่าวสาร\wbr นั้น จึง\wbr เป็นสิ่ง\wbr จำ\wbr เป็น. ด้วย\wbr เทคโนโลยีที่\wbr ก้าวหน้า\wbr ไป%
+อย่าง\wbr รวดเร็ว, การที่\wbr เพียง\wbr จะ\wbr สามารถแส\wbr ดง\wbr ผลได้หรือ\wbr ป้อนข้อมูลได้\wbr เท่านั้น ไม่\wbr เป็นที่%
+เพียงพออีก\wbr แล้ว. การแส\wbr ดง\wbr ผลที่\wbr สวย\wbr งาม\wbr ถูก\wbr ต้อง\wbr ตาม\wbr แบบแผน หรือ\wbr การเต\wbr รี\wbr ยมข้อมูลได้\wbr อย่าง%
+ถูก\wbr ต้อง และ\wbr รวดเร็วจึง\wbr เป็นสิ่งที่\wbr จำ\wbr เป็นที่\wbr จะ\wbr ต้อง\wbr พัฒนาให้\wbr ทันตาม\wbr การ\wbr เปลี่ยนแปลง\wbr ของ%
+เทคโนโลยี.\footnote{ %
+	Second footnote}
+
+\today
+
+\begin{english}
+This is today: \today
+\end{english}
+
+\begin{enumerate}
+	\item A
+	\item B	
+	\begin{enumerate}
+		\item a
+		\item b	
+		\item c	
+	\end{enumerate}
+	\item C	
+\end{enumerate}
+\end{document}

@@ -1,0 +1,40 @@
+#!/bin/bash
+
+root="/home/francois/dev/polyglossia"
+builddir="$root/build"
+
+#pdf="$root/doc/polyglossia.pdf"
+#pdfsrc="$root/doc/polyglossia.tex"
+# check if  is older than polyglossia.tex
+#if [[ $pdf -ot $pdfsrc  ]] ; then
+#	cd doc/xelatex/polyglossia 
+#	xelatex $pdfsrc || exit 1
+#	xelatex $pdfsrc || exit 1
+#fi
+#cd $svnroot
+#make tds
+cd $builddir
+mkdir -p source/xelatex/polyglossia
+mkdir -p tex/xelatex/polyglossia
+mkdir -p fonts/misc/xetex/fontmapping/polyglossia
+cp polyglossia.{dtx,ins} source/xelatex/polyglossia/
+cp ../tex/* tex/xelatex/polyglossia/
+cp ../fontmappings/* fonts/misc/xetex/fontmapping/polyglossia/
+tarball="polyglossia.tds.zip"
+zip $tarball tex/xelatex/polyglossia/*.{ldf,sty}
+zip $tarball tex/xelatex/polyglossia/cal-util.def
+zip $tarball fonts/misc/xetex/fontmapping/polyglossia/*
+zip $tarball source/xelatex/polyglossia/polyglossia.dtx
+zip $tarball doc/xelatex/polyglossia/*.{tex,pdf}
+zip $tarball doc/xelatex/polyglossia/{README,gloss-template.ldf}
+ctanzip="polyglossia.zip"
+mkdir -p tmp/polyglossia
+mv tmp
+mv $root/$tarball polyglossia/
+cp $root/source/xelatex/polyglossia/polyglossia.{dtx,ins} polyglossia/
+cp $root/doc/xelatex/polyglossia/{polyglossia.pdf,README} polyglossia/
+zip $ctanzip polyglossia/*
+mv $ctanzip $root/
+cd $root
+rm -rf build
+echo "$ctanzip is ready to upload"

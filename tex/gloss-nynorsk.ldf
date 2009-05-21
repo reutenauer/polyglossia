@@ -1,0 +1,58 @@
+\ProvidesFile{gloss-nynorsk.ldf}[polyglossia: module for norwegian (Nynorsk)]
+\makeatletter
+\def\nynorsk@font{\normalfontlatin}
+
+\ifx\l@nynorsk\@undefined%
+   \xpg@nopatterns{Nynorsk}%
+   \adddialect\l@nynorsk0%
+\fi
+
+\def\captionsnynorsk{%
+   \def\refname{Referansar}%
+   \def\abstractname{Sammendrag}%
+   \def\bibname{Litteratur}%
+   \def\prefacename{Forord}%
+   \def\chaptername{Kapittel}%
+   \def\appendixname{Tillegg}%
+   \def\contentsname{Innhald}%
+   \def\listfigurename{Figurar}%
+   \def\listtablename{Tabellar}%
+   \def\indexname{Register}%
+   \def\figurename{Figur}%
+   \def\tablename{Tabell}%
+   %\def\thepart{}% <<<
+   \def\partname{Del}%
+   \def\pagename{Side}%
+   \def\seename{Sjå}%
+   \def\alsoname{Sjå òg}%
+   \def\enclname{Vedlegg}%
+   \def\ccname{Kopi til}%
+   \def\headtoname{Til}%
+   \def\proofname{Bevis}%
+   \def\glossaryname{Ordliste}%
+   }
+\def\datenynorsk{%   
+   \def\today{\number\day.~\ifcase\month\or
+    januar\or februar\or mars\or april\or mai\or juni\or
+    juli\or august\or september\or oktober\or november\or desember
+    \fi\space\number\year}%
+    }
+
+\def\norsk@language{\protect\language=\l@nynorsk}
+
+\setlocalhyphenmins{nynorsk}{2}{2}%
+
+\def\noextras@nynorsk{%
+   \nonfrenchspacing%
+   }
+
+\def\blockextras@nynorsk{%
+   \frenchspacing%
+   }
+
+\def\inlineextras@nynorsk{%
+   \frenchspacing%
+   }
+
+\endinput
+
