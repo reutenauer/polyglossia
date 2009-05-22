@@ -41,8 +41,18 @@
 
 \setlocalhyphenmins{italian}{2}{2}%
 
-%\def\blockextras@italian{%
-%   %TODO ? \clubpenalty3000\widowpenalty3000\finalhyphendemerits50000000
-%   }
+\def\noextras@italian{%
+   \lccode"2019=0%
+   \nofrench@indent}
+
+\def\blockextras@italian{%
+   \lccode"2019="2019%
+   %TODO ? \clubpenalty3000\widowpenalty3000\finalhyphendemerits50000000 << in Babel
+   \french@indent%
+   }
+
+\def\inlineextras@italian{%
+   \lccode"2019="2019%
+   }
 
 \endinput

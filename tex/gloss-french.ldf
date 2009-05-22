@@ -1,7 +1,6 @@
 \ProvidesFile{gloss-french.ldf}[polyglossia: module for french]
 \makeatletter
 \def\french@font{\normalfontlatin}
-\lccode"2019="2019
 
 \ifx\l@french\@undefined%
    \xpg@nopatterns{French}%
@@ -10,6 +9,7 @@
 
 \def\french@punctuation{%
     \frenchspacing%
+    \lccode"2019="2019%
     \XeTeXinterchartokenstate=1%
     \XeTeXcharclass `\! 7%
     \XeTeXcharclass `\? 7%
@@ -20,6 +20,7 @@
 
 \def\nofrench@punctuation{%
     \nonfrenchspacing%
+    \lccode"2019=0%
     \XeTeXinterchartokenstate=0%
 }
 
