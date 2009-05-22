@@ -4,7 +4,7 @@
 
 \ifx\l@french\@undefined%
    \xpg@nopatterns{French}%
-   \adddialect\l@french0%
+   \adddialect\l@french\l@nohyphenation%
 \fi
 
 \def\french@punctuation{%

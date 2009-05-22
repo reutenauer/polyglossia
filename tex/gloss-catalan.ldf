@@ -4,7 +4,7 @@
 
 \ifx\l@catalan\@undefined%
    \xpg@nopatterns{Catalan}%
-   \adddialect\l@catalan0%
+   \adddialect\l@catalan\l@nohyphenation%
 \fi
 
 \def\captionscatalan{%

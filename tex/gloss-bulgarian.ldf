@@ -3,7 +3,7 @@
 
 \ifx\l@bulgarian\@undefined%
    \xpg@nopatterns{Bulgarian}%
-   \adddialect\l@bulgarian0%
+   \adddialect\l@bulgarian\l@nohyphenation%
 \fi
 
 \def\bulgarian@Alph#1{%

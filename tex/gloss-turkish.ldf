@@ -11,7 +11,7 @@
 
 \ifx\l@turkish\@undefined
    \xpg@nopatterns{turkish}
-   \adddialect\l@turkish0
+   \adddialect\l@turkish\l@nohyphenation
 \fi
 
 \def\turkish@punctuation{%

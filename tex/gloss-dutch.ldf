@@ -4,7 +4,7 @@
 
 \ifx\l@dutch\@undefined
    \xpg@nopatterns{Dutch}
-   \adddialect\l@dutch0
+   \adddialect\l@dutch\l@nohyphenation
 \fi
 
 \def\dutch@punctuation{%

@@ -5,7 +5,7 @@
 \ifx\l@magyar\@undefined
   \ifx\l@hungarian\@undefined
     \xpg@nopatterns{Magyar}
-    \adddialect\l@magyar0
+    \adddialect\l@magyar\l@nohyphenation
   \else
     \let\l@magyar\l@hungarian
   \fi

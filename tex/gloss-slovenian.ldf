@@ -5,7 +5,7 @@
 \ifx\l@slovenian\@undefined%
  \ifx\l@slovene\@undefined%
    \xpg@nopatterns{Slovenian}%
-   \adddialect\l@slovenian0%
+   \adddialect\l@slovenian\l@nohyphenation%
 \fi\fi
 
 \def\captionsslovenian{%

@@ -5,7 +5,7 @@
 
 \ifx\l@hebrew\@undefined
   \xpg@nopatterns{Hebrew}%
-  \adddialect\l@hebrew0
+  \adddialect\l@hebrew\l@nohyphenation
 \fi
 
 \def\hebrew@RL{\relax}

@@ -4,7 +4,7 @@
 
 \ifx\l@czech\@undefined%
    \xpg@nopatterns{Czech}%
-   \adddialect\l@czech0%
+   \adddialect\l@czech\l@nohyphenation%
 \fi
 
 \def\captionsczech{%

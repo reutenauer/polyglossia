@@ -3,7 +3,7 @@
 
 \ifx\l@interlingua\@undefined%
    \xpg@nopatterns{Interlingua}%
-   \adddialect\l@interlingua0%
+   \adddialect\l@interlingua\l@nohyphenation%
 \fi
 
 \def\captionsinterlingua{%

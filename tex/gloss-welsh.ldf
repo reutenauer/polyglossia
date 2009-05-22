@@ -4,7 +4,7 @@
 
 \ifx\l@welsh\@undefined%
    \xpg@nopatterns{Welsh}%
-   \adddialect\l@welsh0%
+   \adddialect\l@welsh\l@nohyphenation%
 \fi
 
 \def\captionswelsh{%

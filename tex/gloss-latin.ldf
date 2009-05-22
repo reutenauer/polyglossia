@@ -4,7 +4,7 @@
 
 \ifx\l@latin\@undefined
    \xpg@nopatterns{latin}
-   \adddialect\l@latin0
+   \adddialect\l@latin\l@nohyphenation
 \fi
 
 \def\captionslatin{%

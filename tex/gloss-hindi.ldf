@@ -7,7 +7,7 @@
 \ifx\l@hindi\@undefined%
   \ifx\l@sanskrit\@undefined%
     \xpg@nopatterns{Hindi}%
-    \adddialect\l@hindi0%
+    \adddialect\l@hindi\l@nohyphenation%
   \else
     \let\l@hindi\l@sanskrit%
   \fi

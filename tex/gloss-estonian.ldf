@@ -4,7 +4,7 @@
 
 \ifx\l@estonian\@undefined%
    \xpg@nopatterns{Estonian}%
-   \adddialect\l@estonian0%
+   \adddialect\l@estonian\l@nohyphenation%
 \fi
 
 \def\captionsestonian{%

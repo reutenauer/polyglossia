@@ -4,7 +4,7 @@
 
 \ifx\l@spanish\@undefined
    \xpg@nopatterns{spanish}
-   \adddialect\l@spanish0
+   \adddialect\l@spanish\l@nohyphenation
 \fi
 
 \def\captionsspanish{%

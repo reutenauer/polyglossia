@@ -4,7 +4,7 @@
 
 \ifx\l@finnish\@undefined%
    \xpg@nopatterns{Finnish}%
-   \adddialect\l@finnish0%
+   \adddialect\l@finnish\l@nohyphenation%
 \fi
 
 \def\captionsfinnish{%

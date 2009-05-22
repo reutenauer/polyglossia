@@ -4,7 +4,7 @@
 
 \ifx\l@swedish\@undefined%
    \xpg@nopatterns{Swedish}%
-   \adddialect\l@swedish0%
+   \adddialect\l@swedish\l@nohyphenation%
 \fi
 
 \def\captionsswedish{%

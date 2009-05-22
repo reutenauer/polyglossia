@@ -4,7 +4,7 @@
 
 \ifx\l@polish\@undefined
    \xpg@nopatterns{polish}
-   \adddialect\l@polish0
+   \adddialect\l@polish\l@nohyphenation
 \fi
 
 \def\captionspolish{%

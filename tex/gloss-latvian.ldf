@@ -4,7 +4,7 @@
 
 \ifx\l@latvian\@undefined
    \xpg@nopatterns{Latvian}
-   \adddialect\l@latvian0
+   \adddialect\l@latvian\l@nohyphenation
 \fi
 
 \def\captionslatvian{%

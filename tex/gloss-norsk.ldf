@@ -4,7 +4,7 @@
 
 \ifx\l@norsk\@undefined%
    \xpg@nopatterns{Norsk}%
-   \adddialect\l@norsk0%
+   \adddialect\l@norsk\l@nohyphenation%
 \fi
 
 \def\captionsnorsk{%

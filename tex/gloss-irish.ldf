@@ -4,7 +4,7 @@
 
 \ifx\l@irish\@undefined%
    \xpg@nopatterns{Irish}%
-   \adddialect\l@irish0%
+   \adddialect\l@irish\l@nohyphenation%
 \fi
 
 \def\captionsirish{%

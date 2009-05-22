@@ -4,7 +4,7 @@
 
 \ifx\l@italian\@undefined
    \xpg@nopatterns{Italian}
-   \adddialect\l@italian0
+   \adddialect\l@italian\l@nohyphenation
 \fi
 
 \def\captionsitalian{%

@@ -6,7 +6,7 @@
    \ifx\l@USenglish\@undefined%
       \ifx\l@american\@undefined%
          \xpg@nopatterns{English}%
-         \adddialect\l@english0%
+         \adddialect\l@english\l@nohyphenation%
       \else%
          \let\l@english\l@american%
       \fi%

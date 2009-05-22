@@ -10,7 +10,7 @@
           \ifx\l@malay\@undefined
             \ifx\l@meyalu\@undefined
               \xpg@nopatterns{Bahasa Indonesia}
-              \adddialect\l@bahasa0\relax
+              \adddialect\l@bahasa\l@nohyphenation\relax
             \else
               \let\l@bahasa\l@meyalu
             \fi

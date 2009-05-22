@@ -3,7 +3,7 @@
 
 \ifx\l@coptic\@undefined%
    \xpg@nopatterns{Coptic}%
-   \adddialect\l@coptic0%
+   \adddialect\l@coptic\l@nohyphenation%
 \fi
 
 %\def\captionscoptic{%

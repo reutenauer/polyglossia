@@ -4,7 +4,7 @@
 \ifx\l@sanskrit\@undefined%
   \ifx\l@prakrit\@undefined%
     \xpg@nopatterns{Sanskrit}%
-    \adddialect\l@sanskrit0%
+    \adddialect\l@sanskrit\l@nohyphenation%
   \else%
     \let\l@sanskrit=\l@prakrit%
   \fi%

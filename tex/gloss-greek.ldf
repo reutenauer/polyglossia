@@ -316,7 +316,7 @@
 \ifx\l@greek\@undefined
    \ifx\l@polygreek\@undefined
       \xpg@nopatterns{Greek}
-      \adddialect\l@greek0
+      \adddialect\l@greek\l@nohyphenation
    \else
       \let\l@greek\l@polygreek
    \fi

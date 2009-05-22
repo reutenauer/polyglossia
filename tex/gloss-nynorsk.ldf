@@ -4,7 +4,7 @@
 
 \ifx\l@nynorsk\@undefined%
    \xpg@nopatterns{Nynorsk}%
-   \adddialect\l@nynorsk0%
+   \adddialect\l@nynorsk\l@nohyphenation%
 \fi
 
 \def\captionsnynorsk{%

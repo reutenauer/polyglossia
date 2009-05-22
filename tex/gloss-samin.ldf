@@ -4,7 +4,7 @@
 
 \ifx\l@samin\@undefined%
    \xpg@nopatterns{Samin}%
-   \adddialect\l@samin0%
+   \adddialect\l@samin\l@nohyphenation%
 \fi
 
 %\def\samin@punctuation{%

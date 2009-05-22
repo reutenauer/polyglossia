@@ -3,7 +3,7 @@
 
 \ifx\l@russian\@undefined
    \xpg@nopatterns{Russian}
-   \adddialect\l@russian0
+   \adddialect\l@russian\l@nohyphenation
 \fi
 
 \def\russian@font{%

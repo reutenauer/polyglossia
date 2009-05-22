@@ -4,7 +4,7 @@
 
 \ifx\l@syriac\@undefined
   \xpg@nopatterns{Syriac}%
-  \adddialect\l@syriac0
+  \adddialect\l@syriac\l@nohyphenation
 \fi
 
 \def\syriac@RL{\relax}

@@ -5,7 +5,7 @@
 \ifx\l@uppersorbian\@undefined
   \ifx\l@usorbian\@undefined
     \xpg@nopatterns{Upper Sorbian}
-    \adddialect\l@usorbian0
+    \adddialect\l@usorbian\l@nohyphenation
     \let\l@uppersorbian\l@usorbian
   \else
     \let\l@uppersorbian\l@usorbian

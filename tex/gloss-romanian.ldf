@@ -4,7 +4,7 @@
 
 \ifx\l@romanian\@undefined%
    \xpg@nopatterns{Romanian}%
-   \adddialect\l@romanian0%
+   \adddialect\l@romanian\l@nohyphenation%
 \fi
 
 \def\captionsromanian{%

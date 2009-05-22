@@ -6,7 +6,7 @@
 \ifx\l@portuges\@undefined
   \ifx\l@portuguese\@undefined
     \xpg@nopatterns{Portuguese}
-    \adddialect\l@portuges0
+    \adddialect\l@portuges\l@nohyphenation
   \else
     \let\l@portuges\l@portuguese
   \fi

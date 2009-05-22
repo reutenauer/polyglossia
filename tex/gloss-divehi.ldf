@@ -4,7 +4,7 @@
 
 \ifx\l@divehi\@undefined%
    \xpg@nopatterns{Divehi}%
-   \adddialect\l@divehi0%
+   \adddialect\l@divehi\l@nohyphenation%
 \fi
 
 \def\divehi@RL{\relax}

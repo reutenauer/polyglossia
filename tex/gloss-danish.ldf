@@ -4,7 +4,7 @@
 
 \ifx\l@danish\@undefined
          \xpg@nopatterns{Danish}
-         \adddialect\l@danish0
+         \adddialect\l@danish\l@nohyphenation
 \fi
 
 \def\captionsdanish{%

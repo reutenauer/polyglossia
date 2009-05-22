@@ -5,7 +5,7 @@
 
 \ifx\l@arabic\@undefined
   \xpg@nopatterns{arabic}%
-  \adddialect\l@arabic0
+  \adddialect\l@arabic\l@nohyphenation
 \fi
 
 \def\arabic@RL{\relax}

@@ -6,7 +6,7 @@
 
 \ifx\l@ukrainian\@undefined%
    \xpg@nopatterns{Ukrainian}%
-   \adddialect\l@ukrainian0%
+   \adddialect\l@ukrainian\l@nohyphenation%
 \fi
 
 \def\ukrainian@font{%

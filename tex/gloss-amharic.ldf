@@ -4,7 +4,7 @@
 
 \ifx\l@amharic\@undefined%
    \xpg@nopatterns{Amharic}%
-   \adddialect\l@amharic0%
+   \adddialect\l@amharic\l@nohyphenation%
 \fi
 
 \def\captionsamharic{%

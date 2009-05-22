@@ -4,7 +4,7 @@
 
 \ifx\l@icelandic\@undefined%
    \xpg@nopatterns{Icelandic}%
-   \adddialect\l@icelandic0%
+   \adddialect\l@icelandic\l@nohyphenation%
 \fi
 
 \def\captionsicelandic{%

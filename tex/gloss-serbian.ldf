@@ -4,7 +4,7 @@
 %TODO eventually there will be patterns for Serbian-Latin as well as Serbian-Cyrillic
 \ifx\l@serbian\@undefined%
    \xpg@nopatterns{Serbian}%
-   \adddialect\l@serbian0%
+   \adddialect\l@serbian\l@nohyphenation%
 \fi
 
 \newif\if@serbian@cyr

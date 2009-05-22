@@ -4,7 +4,7 @@
 
 \ifx\l@croatian\@undefined%
    \xpg@nopatterns{Croatian}%
-   \adddialect\l@croatian0%
+   \adddialect\l@croatian\l@nohyphenation%
 \fi
 
 \def\captionscroatian{%

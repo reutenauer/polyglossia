@@ -4,7 +4,7 @@
 
 \ifx\l@scottish\@undefined%
    \xpg@nopatterns{Scottish}%
-   \adddialect\l@scottish0%
+   \adddialect\l@scottish\l@nohyphenation%
 \fi
 
 \def\captionsscottish{%

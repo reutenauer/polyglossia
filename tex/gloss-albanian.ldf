@@ -4,7 +4,7 @@
 
 \ifx\l@albanian\@undefined
     \xpg@nopatterns{Albanian}
-    \adddialect\l@albanian0\fi
+    \adddialect\l@albanian\l@nohyphenation\fi
 
 \def\captionsalbanian{%
    \def\refname{Referencat}%

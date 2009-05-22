@@ -12,7 +12,7 @@
 
 \ifx\l@vietnamese\@undefined%
    \xpg@nopatterns{Vietnamese}%
-   \adddialect\l@vietnamese0%
+   \adddialect\l@vietnamese\l@nohyphenation%
 \fi
 
 \def\captionsvietnamese{%

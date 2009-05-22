@@ -4,7 +4,7 @@
 
 \ifx\l@basque\@undefined%
    \xpg@nopatterns{Basque}%
-   \adddialect\l@basque0%
+   \adddialect\l@basque\l@nohyphenation%
 \fi
 
 \def\captionsbasque{%

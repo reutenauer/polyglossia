@@ -80,6 +80,10 @@
 }
 \setkeys{polyglossia}{localmarks=on}
 
+%% when no patterns are available, we use \l@nohyphenation, assigned to 255
+%%  (suggestion by Enrico Gregorio)
+\@ifundefined{l@nohyphenation}{\chardef\l@nohyphenation=255 }{}
+
 \newcommand{\setdefaultlanguage}[2][]{%
    \IfFileExists{gloss-#2.ldf}%
    {\ifcsundef{#2@loaded}%

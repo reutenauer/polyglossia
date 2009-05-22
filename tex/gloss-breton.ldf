@@ -4,7 +4,7 @@
 
 \ifx\l@breton\@undefined%
    \xpg@nopatterns{Breton}%
-   \adddialect\l@breton0%
+   \adddialect\l@breton\l@nohyphenation%
 \fi
 
 \def\breton@punctuation{%

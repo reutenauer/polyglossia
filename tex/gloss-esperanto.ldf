@@ -4,7 +4,7 @@
 
 \ifx\l@esperanto\@undefined%
    \xpg@nopatterns{Esperanto}%
-   \adddialect\l@esperanto0%
+   \adddialect\l@esperanto\l@nohyphenation%
 \fi
 
 \def\captionsesperanto{%

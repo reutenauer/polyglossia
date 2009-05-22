@@ -5,7 +5,7 @@
 
 %\ifx\l@farsi\@undefined
 %  \xpg@nopatterns{Farsi}%
-\adddialect\l@farsi0
+\adddialect\l@farsi\l@nohyphenation
 %\fi
 
 \def\farsi@RL{\relax}
