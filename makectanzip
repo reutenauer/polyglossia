@@ -1,40 +1,84 @@
 #!/bin/bash
 
-root="/home/francois/dev/polyglossia"
+root="$HOME/dev/polyglossia"
 builddir="$root/build"
 
-#pdf="$root/doc/polyglossia.pdf"
-#pdfsrc="$root/doc/polyglossia.tex"
-# check if  is older than polyglossia.tex
-#if [[ $pdf -ot $pdfsrc  ]] ; then
-#	cd doc/xelatex/polyglossia 
-#	xelatex $pdfsrc || exit 1
-#	xelatex $pdfsrc || exit 1
-#fi
-#cd $svnroot
-#make tds
-cd $builddir
-mkdir -p source/xelatex/polyglossia
-mkdir -p tex/xelatex/polyglossia
-mkdir -p fonts/misc/xetex/fontmapping/polyglossia
-cp polyglossia.{dtx,ins} source/xelatex/polyglossia/
-cp ../tex/* tex/xelatex/polyglossia/
-cp ../fontmappings/* fonts/misc/xetex/fontmapping/polyglossia/
-tarball="polyglossia.tds.zip"
-zip $tarball tex/xelatex/polyglossia/*.{ldf,sty}
-zip $tarball tex/xelatex/polyglossia/cal-util.def
-zip $tarball fonts/misc/xetex/fontmapping/polyglossia/*
-zip $tarball source/xelatex/polyglossia/polyglossia.dtx
-zip $tarball doc/xelatex/polyglossia/*.{tex,pdf}
-zip $tarball doc/xelatex/polyglossia/{README,gloss-template.ldf}
-ctanzip="polyglossia.zip"
-mkdir -p tmp/polyglossia
-mv tmp
-mv $root/$tarball polyglossia/
-cp $root/source/xelatex/polyglossia/polyglossia.{dtx,ins} polyglossia/
-cp $root/doc/xelatex/polyglossia/{polyglossia.pdf,README} polyglossia/
-zip $ctanzip polyglossia/*
-mv $ctanzip $root/
+pdf="$root/doc/polyglossia.pdf"
+pdfsrc="$root/doc/polyglossia.tex"
+
 cd $root
-rm -rf build
+
+# check if pdf is older than polyglossia.tex
+if [[ ! -f $pdf || $pdf -ot $pdfsrc  ]] ; then
+    echo "Updating PDF documentation ..."
+	cd $root/doc 
+	xelatex $pdfsrc || exit 1
+	xelatex $pdfsrc 
+    rm $pdfsrc.{aux,toc,lof,lot,lop,log,out,nav,bbl,blg,ind,idx,glo,ilg,dvi}
+fi
+
+cd $root
+echo "Making polyglossia.{dtx,ins}"
+test -d $builddir || mkdir $builddir
+perl makepolyglossiadtx.pl || exit 1
+mv polyglossia.dtx $builddir || exit 1
+cd $builddir
+(
+cat <<'EOF'
+\begingroup
+\input docstrip.tex
+\keepsilent
+\nopreamble\nopostamble
+\generate{\file{polyglossia.ins}{\from{polyglossia.dtx}{batchfile}}}
+\endgroup
+\bye
+EOF
+) > makeins.tex
+xetex makeins.tex 2&> /dev/null
+rm makeins.*
+#rm *.{sty,def,ldf,map,txt,tex,glo,log,out,idx,aux,toc} 2&> /dev/null
+
+echo "Create TDS tree ..."
+TDS_src="$builddir/source/xelatex/polyglossia"
+TDS_tex="$builddir/tex/xelatex/polyglossia"
+TDS_doc="$builddir/doc/xelatex/polyglossia"
+TDS_map="$builddir/fonts/misc/xetex/fontmapping/polyglossia"
+mkdir -p $TDS_src
+mkdir -p $TDS_tex
+mkdir -p $TDS_doc
+mkdir -p $TDS_map
+cp polyglossia.dtx $TDS_src/ || exit 1
+cp $root/tex/* $TDS_tex/ || exit 1
+cp $root/doc/* $TDS_doc/ || exit 1
+cp $root/fontmapping/* $TDS_map/ || exit 1
+
+echo "Update TECkit mappings ..."
+cd $TDS_map
+for map in *.map; do
+    teckit_compile $map || exit 1
+done
+
+echo "Make TDS tarball ..."
+cd $builddir
+tarball="polyglossia.tds.zip"
+zip $tarball tex/xelatex/polyglossia/*.{ldf,sty} || exit 1
+zip $tarball tex/xelatex/polyglossia/cal-util.def || exit 1
+zip $tarball fonts/misc/xetex/fontmapping/polyglossia/* || exit 1
+zip $tarball source/xelatex/polyglossia/polyglossia.dtx || exit 1
+zip $tarball doc/xelatex/polyglossia/*.{tex,pdf} || exit 1
+zip $tarball doc/xelatex/polyglossia/{README,gloss-template.ldf} || exit 1
+
+echo "Make CTAN zip ..."
+ctanzip="polyglossia.zip"
+mkdir -p $builddir/tmp/polyglossia
+cd $builddir/tmp
+mv $builddir/$tarball polyglossia/ || exit 1
+mv $builddir/polyglossia.{dtx,ins} polyglossia/ || exit 1
+cp $root/doc/{polyglossia.pdf,README} polyglossia/ || exit 1
+zip -9 $ctanzip polyglossia/* || exit 1
+mv $ctanzip $root/ || exit 1
+cd $root
+#rm -rf $builddir
+
 echo "$ctanzip is ready to upload"
+exit 0
