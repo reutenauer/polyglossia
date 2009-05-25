@@ -63,7 +63,7 @@
    \let\@alph\latin@alph%
 }
 
-\def\esperanto@language{\protect\language=\l@esperanto}
+\def\esperanto@language{\language=\l@esperanto}
 
 \setlocalhyphenmins{esperanto}{2}{2}%
 

@@ -96,7 +96,7 @@
    \let\@alph\latin@alph%
 }
    
-\def\ukrainian@language{\protect\language=\l@ukrainian}
+\def\ukrainian@language{\language=\l@ukrainian}
 
 \setlocalhyphenmins{ukrainian}{2}{2}%
 

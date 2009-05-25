@@ -79,7 +79,7 @@
     \def\todayRoman{\number\day.\,\month@Roman.\,\number\year~г.}%
     }
 
-\def\bulgarian@language{\protect\language=\l@bulgarian}
+\def\bulgarian@language{\language=\l@bulgarian}
 
 \def\bulgarian@font{%
 \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt

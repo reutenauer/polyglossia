@@ -61,7 +61,7 @@
     \space\number\year}
 }
 
-\def\turkish@language{\protect\language=\l@turkish}
+\def\turkish@language{\language=\l@turkish}
 
 \setlocalhyphenmins{turkish}{2}{2}%
 

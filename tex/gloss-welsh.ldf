@@ -40,7 +40,7 @@
      \space\number\year}%
      }
 
-\def\welsh@language{\protect\language=\l@welsh}
+\def\welsh@language{\language=\l@welsh}
 
 \setlocalhyphenmins{welsh}{2}{3}%
 

@@ -38,7 +38,7 @@
     \fi\space\number\year}%
     }
 
-\def\norsk@language{\protect\language=\l@nynorsk}
+\def\norsk@language{\language=\l@nynorsk}
 
 \setlocalhyphenmins{nynorsk}{2}{2}%
 

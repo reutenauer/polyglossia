@@ -9,7 +9,7 @@
 
 \def\french@punctuation{%
     \frenchspacing%
-    \lccode"2019="2019%
+    \lccode"2019="2019
     \XeTeXinterchartokenstate=1%
     \XeTeXcharclass `\! 7%
     \XeTeXcharclass `\? 7%
@@ -20,8 +20,8 @@
 
 \def\nofrench@punctuation{%
     \nonfrenchspacing%
-    \lccode"2019=0%
-    \XeTeXinterchartokenstate=0%
+    \lccode"2019=\z@
+    \XeTeXinterchartokenstate=\z@%
 }
 
 \def\french@guillemets{%
@@ -105,7 +105,7 @@
       décembre\fi%
       \space \number\year}}
 
-\def\french@language{\protect\language=\l@french}
+\def\french@language{\language=\l@french}
 
 \setlocalhyphenmins{french}{2}{2}%
 

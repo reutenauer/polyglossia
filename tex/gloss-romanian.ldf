@@ -39,7 +39,7 @@
     \space \number\year}%
     }
 
-\def\romanian@language{\protect\language=\l@romanian}
+\def\romanian@language{\language=\l@romanian}
 
 \setlocalhyphenmins{romanian}{2}{2}%
 

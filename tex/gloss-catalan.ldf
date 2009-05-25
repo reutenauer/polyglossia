@@ -38,7 +38,7 @@
     de novembre\or de desembre\fi
     \space de~\number\year}}
 
-\def\catalan@language{\protect\language=\l@catalan}
+\def\catalan@language{\language=\l@catalan}
 
 \setlocalhyphenmins{catalan}{2}{2}
 

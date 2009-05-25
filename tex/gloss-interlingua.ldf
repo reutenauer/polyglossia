@@ -37,7 +37,7 @@
     decembre\fi
     \space \number\year}}
 
-\def\interlingua@language{\protect\language=\l@interlingua}
+\def\interlingua@language{\language=\l@interlingua}
 
 \setlocalhyphenmins{interlingua}{2}{2}%
 

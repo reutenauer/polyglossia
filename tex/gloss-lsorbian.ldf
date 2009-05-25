@@ -51,7 +51,7 @@
     godownika\fi\space \number\year}}%
     }
 
-\def\lsorbian@language{\protect\language=\l@lsorbian}
+\def\lsorbian@language{\language=\l@lsorbian}
 
 \setlocalhyphenmins{lsorbian}{2}{2}%
 

@@ -35,7 +35,7 @@
 %   }
 %\def\datedivehi{\def\today{<++>}}
 
-\def\divehi@language{\protect\language=\l@divehi}
+\def\divehi@language{\language=\l@divehi}
 
 \def\divehi@font{%
 \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt

@@ -36,7 +36,7 @@
     Qershor\or Korrik\or Gusht\or Shtator\or Tetor\or Nëntor\or
     Dhjetor\fi \space \number\year}}}
 
-\def\albanian@language{\protect\language=\l@albanian}
+\def\albanian@language{\language=\l@albanian}
 
 \setlocalhyphenmins{albanian}{2}{2}
 

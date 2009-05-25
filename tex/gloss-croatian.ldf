@@ -36,7 +36,7 @@
     lipnja\or srpnja\or kolovoza\or rujna\or listopada\or studenog\or
     prosinca\fi \space \number\year.}}
 
-\def\croatian@language{\protect\language=\l@croatian}
+\def\croatian@language{\language=\l@croatian}
 
 \setlocalhyphenmins{croatian}{2}{2}
 

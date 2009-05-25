@@ -37,7 +37,7 @@
     dicembre\fi\space \number\year}
 }
 
-\def\italian@language{\protect\language=\l@italian}
+\def\italian@language{\language=\l@italian}
 
 \setlocalhyphenmins{italian}{2}{2}%
 
@@ -46,13 +46,13 @@
    \nofrench@indent}
 
 \def\blockextras@italian{%
-   \lccode"2019="2019%
+   \lccode"2019="2019
    %TODO ? \clubpenalty3000\widowpenalty3000\finalhyphendemerits50000000 << in Babel
    \french@indent%
    }
 
 \def\inlineextras@italian{%
-   \lccode"2019="2019%
+   \lccode"2019="2019
    }
 
 \endinput

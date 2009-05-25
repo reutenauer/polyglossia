@@ -35,7 +35,7 @@
     \space\number\year}
 
 \def\danish@language{%
-   \protect\language=\l@danish}
+   \language=\l@danish}
 
 \setlocalhyphenmins{danish}{2}{3}%
 

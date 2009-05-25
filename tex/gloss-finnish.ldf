@@ -38,7 +38,7 @@
     syyskuuta\or lokakuuta\or marraskuuta\or joulukuuta\fi
     \space\number\year}}
 
-\def\finnish@language{\protect\language=\l@finnish}
+\def\finnish@language{\language=\l@finnish}
 
 \setlocalhyphenmins{finnish}{2}{2}%
 

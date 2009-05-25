@@ -38,7 +38,7 @@
     října\or listopadu\or prosince\fi
     \space \number\year}}
 
-\def\czech@language{\protect\language=\l@czech}
+\def\czech@language{\language=\l@czech}
 
 \setlocalhyphenmins{czech}{2}{2}%
 

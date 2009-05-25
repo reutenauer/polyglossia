@@ -34,7 +34,7 @@
 %   \def\today{<++>}%
 %   }
 
-\def\coptic@language{\protect\language=\l@coptic}
+\def\coptic@language{\language=\l@coptic}
 
 \def\coptic@font{%
 \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt

@@ -653,7 +653,7 @@
   \let\greek@Alph\@undefined%
   }
 
-\def\greek@language{\protect\language=\greek@variant}
+\def\greek@language{\language=\greek@variant}
 
 \def\greek@font{%
   \@ifundefined{greekfont}{%

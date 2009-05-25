@@ -37,7 +37,7 @@
     xullo\or agosto\or setembro\or outubro\or novembro\or decembro\fi
     \space de~\number\year}}
 
-\def\galician@language{\protect\language=\l@galician}
+\def\galician@language{\language=\l@galician}
 
 \setlocalhyphenmins{galician}{2}{2}%
 

@@ -156,7 +156,7 @@
    \if@german@fraktur\date@german@fraktur\else\date@german\fi%
    }
 
-\def\german@language{\protect\language=%
+\def\german@language{\language=%
   \csname l@\if@german@oldspelling\else n\fi german\ifgerman@latesthyphen -x-latest\fi\endcsname}
 
 \setlocalhyphenmins{german}{2}{2}%

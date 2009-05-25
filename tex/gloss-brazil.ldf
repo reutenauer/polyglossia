@@ -43,7 +43,7 @@
       \fi\space de\space\number\year}%
       }
      
-\def\brazil@language{\protect\language=\l@portuges}
+\def\brazil@language{\language=\l@portuges}
 
 \setlocalhyphenmins{brazil}{2}{3}
 

@@ -122,7 +122,7 @@
    \if@serbian@cyr\serbian@font@cyr\else\serbian@font@lat\fi}
 
 %TODO when available load latin hyphenation patterns as well!
-\def\serbian@language{\protect\language=\l@serbian}
+\def\serbian@language{\language=\l@serbian}
 
 \setlocalhyphenmins{serbian}{2}{2}%
 

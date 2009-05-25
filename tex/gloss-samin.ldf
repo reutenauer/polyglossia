@@ -64,7 +64,7 @@
     \space\number\day.~b.\space\number\year}%
     }
 
-\def\samin@language{\protect\language=\l@samin}
+\def\samin@language{\language=\l@samin}
 
 \setlocalhyphenmins{samin}{2}{2}%
 

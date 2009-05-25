@@ -39,7 +39,7 @@
     \space \number\year}%
     }
 
-\def\slovenian@language{\protect\language=\l@slovenian}
+\def\slovenian@language{\language=\l@slovenian}
 
 \setlocalhyphenmins{slovenian}{2}{2}%
 

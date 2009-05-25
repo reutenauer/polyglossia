@@ -55,7 +55,7 @@
     Gouere\or Eost\or Gwengolo\or Here\or Du\or Kerzu\fi
     \space\number\year}}
 
-\def\breton@language{\protect\language=\l@breton}
+\def\breton@language{\language=\l@breton}
 
 \setlocalhyphenmins{breton}{2}{2}
 

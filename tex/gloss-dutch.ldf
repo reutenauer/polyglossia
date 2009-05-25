@@ -43,7 +43,7 @@
       Desember\fi
       \space \number\year}}
 
-\def\dutch@language{\protect\language=\l@dutch}
+\def\dutch@language{\language=\l@dutch}
 
 \setlocalhyphenmins{dutch}{2}{2}%
 

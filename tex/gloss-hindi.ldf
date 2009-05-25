@@ -56,7 +56,7 @@
      \space\number\year}%
 }
 
-\def\hindi@language{\protect\language=\l@hindi}
+\def\hindi@language{\language=\l@hindi}
 
 \def\hindi@font{%
 \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt

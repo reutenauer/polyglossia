@@ -37,7 +37,7 @@
       listopada\or grudnia\fi%
       \space\number\day, \number\year}}
 
-\def\polish@language{\protect\language=\l@polish}
+\def\polish@language{\language=\l@polish}
 
 \setlocalhyphenmins{polish}{2}{2}%
 

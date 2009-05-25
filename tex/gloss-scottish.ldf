@@ -41,7 +41,7 @@
     \space \number\year}%
     }
 
-\def\scottish@language{\protect\language=\l@scottish}
+\def\scottish@language{\language=\l@scottish}
 
 \setlocalhyphenmins{scottish}{2}{2}%
 

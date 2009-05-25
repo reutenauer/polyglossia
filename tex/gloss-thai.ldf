@@ -120,7 +120,7 @@
    \let\ttfamily=\thai@font%
    \def\reset@font{\normalfont}}
 
-\def\thai@language{\protect\language=\l@nohyphenation}
+\def\thai@language{\language=\l@nohyphenation}
 
 \def\blockextras@thai{%
    \renewcommand{\baselinestretch}{1.2}% FIXME restore default value in noextras?

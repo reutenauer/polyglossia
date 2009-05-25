@@ -42,7 +42,7 @@
       \fi\space de\space\number\year}%
       }
      
-\def\portuges@language{\protect\language=\l@portuges}
+\def\portuges@language{\language=\l@portuges}
 
 %\setlocalhyphenmins{portuges}{2}{3}% this is the default
 

@@ -37,7 +37,7 @@
     diciembre\fi\space \number\year}
 }
 
-\def\spanish@language{\protect\language=\l@spanish}
+\def\spanish@language{\language=\l@spanish}
 
 \setlocalhyphenmins{spanish}{2}{2}%
 

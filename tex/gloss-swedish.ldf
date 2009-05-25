@@ -44,7 +44,7 @@
      \def\today{\number\day/\number\month\space\number\year}}%
     }
 
-\def\swedish@language{\protect\language=\l@swedish}
+\def\swedish@language{\language=\l@swedish}
 
 \setlocalhyphenmins{swedish}{2}{2}%
 

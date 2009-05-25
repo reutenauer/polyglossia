@@ -45,7 +45,7 @@
     năm \number\year}%
    }
 
-\def\vietnamese@language{\protect\language=\l@vietnamese}
+\def\vietnamese@language{\language=\l@vietnamese}
 
 \setlocalhyphenmins{vietnamese}{2}{2}%
 

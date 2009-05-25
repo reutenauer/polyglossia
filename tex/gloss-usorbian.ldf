@@ -52,7 +52,7 @@
     hodownika\fi \space \number\year}%
     }
 
-\def\usorbian@language{\protect\language=\l@usorbian}
+\def\usorbian@language{\language=\l@usorbian}
 
 \setlocalhyphenmins{usorbian}{2}{2}%
 

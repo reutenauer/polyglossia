@@ -37,7 +37,7 @@
     juuli\or august\or september\or oktoober\or november\or
     detsember\fi\space\number\year.\space a.}}
 
-\def\estonian@language{\protect\language=\l@estonian}
+\def\estonian@language{\language=\l@estonian}
 
 \setlocalhyphenmins{estonian}{2}{2}%
 

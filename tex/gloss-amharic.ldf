@@ -225,6 +225,6 @@
    \let\normalfont=\amharic@font%
    \def\reset@font{\normalfont}}
 
-\def\amharic@language{\protect\language=\l@amharic}
+\def\amharic@language{\language=\l@amharic}
 
 

@@ -61,7 +61,7 @@
     Juli\or Agustus\or September\or Oktober\or Nopember\or Desember\fi
     \space \number\year}}
 
-\def\bahasai@language{\protect\language=\l@bahasai}
+\def\bahasai@language{\language=\l@bahasai}
 
 \setlocalhyphenmins{bahasai}{2}{2}
 

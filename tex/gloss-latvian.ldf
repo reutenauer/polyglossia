@@ -39,7 +39,7 @@
       jūlijā\or augustā\or septembrī\or%
       oktobrī\or novembrī\or decembrī\fi}}
 
-\def\latvian@language{\protect\language=\l@latvian}
+\def\latvian@language{\language=\l@latvian}
 
 \setlocalhyphenmins{latvian}{2}{2}%
 

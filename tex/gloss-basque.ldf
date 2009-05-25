@@ -38,7 +38,7 @@
     irailaren\or urriaren\or azaroaren\or
     abenduaren\fi~\number\day}}
 
-\def\basque@language{\protect\language=\l@basque}
+\def\basque@language{\language=\l@basque}
 
 \setlocalhyphenmins{basque}{2}{2}
 

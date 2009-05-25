@@ -62,7 +62,7 @@
      31-én\fi}}%
    \let\ontoday\ondatemagyar}
 
-\def\magyar@language{\protect\language=\l@magyar}
+\def\magyar@language{\language=\l@magyar}
 
 \def\noextras@magyar{%
    \let\ontoday\@undefined

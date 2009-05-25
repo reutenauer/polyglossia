@@ -38,7 +38,7 @@
       Decembris\fi%
       \space \uppercase\expandafter{\romannumeral\year}}}
 
-\def\latin@language{\protect\language=\l@latin}
+\def\latin@language{\language=\l@latin}
 
 \setlocalhyphenmins{latin}{2}{2}%
 

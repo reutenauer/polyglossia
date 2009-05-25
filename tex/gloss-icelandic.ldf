@@ -39,7 +39,7 @@
     \space\number\year}%
     }
 
-\def\icelandic@language{\protect\language=\l@icelandic}
+\def\icelandic@language{\language=\l@icelandic}
 
 \setlocalhyphenmins{icelandic}{2}{2}%
 

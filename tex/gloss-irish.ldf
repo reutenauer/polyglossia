@@ -41,7 +41,7 @@
     Mí na Samhna\or Mí na Nollag\fi
     \space \number\year}}
 
-\def\irish@language{\protect\language=\l@irish}
+\def\irish@language{\language=\l@irish}
 
 \setlocalhyphenmins{irish}{2}{2}%
 
