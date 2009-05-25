@@ -21,7 +21,7 @@
 \def\nofrench@punctuation{%
     \nonfrenchspacing%
     \lccode"2019=\z@
-    \XeTeXinterchartokenstate=\z@%
+    \XeTeXinterchartokenstate=0%
 }
 
 \def\french@guillemets{%
