@@ -51,7 +51,7 @@
   \def\seename{bkz.}%
   \def\alsoname{ayrıca bkz.}%
   \def\proofname{Kanıt}%
-  \def\glossaryname{Glossary}% <-- Needs translation
+  \def\glossaryname{Lügatçe}%
    }
 \def\dateturkish{%
    \def\today{\number\day~\ifcase\month\or
