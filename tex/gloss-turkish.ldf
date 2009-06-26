@@ -5,7 +5,13 @@
 \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
 \@ifundefined{turkishfont}{%
 	\zf@check@ot@lang{TUR}%
-	\if@tempswa\addfontfeature{Language=Turkish}\fi}
+	\if@tempswa
+	\addfontfeature{Language=Turkish}%
+	\else
+	\zf@check@ot@lang{TRK}%
+	\if@tempswa
+	\addfontfeature{Language=Turkish}\fi%
+	\fi}
      {\turkishfont}%
 }%
 
