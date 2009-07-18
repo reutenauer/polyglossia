@@ -34,7 +34,7 @@
    \def\ccname{Cópia para}%
    \def\headtoname{Para}%
    \def\proofname{Demonstração}%
-   \def\glossaryname{Glossary}%
+   \def\glossaryname{Glossário}%
    }
 \def\datebrazil{%   
    \def\today{\number\day\space de\space\ifcase\month\or
