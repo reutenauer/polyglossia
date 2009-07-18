@@ -1,14 +1,14 @@
-\ProvidesFile{gloss-portuges.ldf}[polyglossia: module for portuguese]
+\ProvidesFile{gloss-brazil.ldf}[polyglossia: module for portuguese]
 \makeatletter
-\def\portuges@font{\normalfontlatin}
+\def\brazil@font{\normalfontlatin}
 
 %FIXME check this:
-\ifx\l@portuges\@undefined
+\ifx\l@brazil\@undefined
   \ifx\l@portuguese\@undefined
-    \xpg@nopatterns{Portuguese}
-    \adddialect\l@portuges\l@nohyphenation
+    \xpg@nopatterns{Brazilian Portuguese}
+    \adddialect\l@brazil\l@nohyphenation
   \else
-    \let\l@portuges\l@portuguese
+    \let\l@brazil\l@portuguese
   \fi
 \fi
 
@@ -43,7 +43,7 @@
       \fi\space de\space\number\year}%
       }
      
-\def\brazil@language{\language=\l@portuges}
+\def\brazil@language{\language=\l@brazil}
 
 \setlocalhyphenmins{brazil}{2}{3}
 
