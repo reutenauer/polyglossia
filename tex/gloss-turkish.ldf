@@ -26,7 +26,7 @@
    \XeTeXcharclass `\! 7%
    \XeTeXcharclass `\= 8%
    \XeTeXcharclass `\: 7%
-   \XeTeXinterchartoks 0 7 = {\unskip\penalty\@M\thinspace}%
+   \XeTeXinterchartoks 0 7 = {\ifdim\lastskip>\z@\unskip\penalty\@M\thinspace\fi}%
    \XeTeXinterchartoks 0 8 = {\unskip\kern\fontdimen2\font\kern-1.4\fontdimen3\font}%
 }
 
