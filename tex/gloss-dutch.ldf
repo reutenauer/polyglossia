@@ -38,9 +38,9 @@
     \def\proofname{Bewĳs}%
     \def\glossaryname{Verklarende Woordenlĳst}%
     \def\today{\number\day~\ifcase\month%
-      Januarie\or Februarie\or Maart\or April\or Mei\or Junie\or
-      Julie\or  Augustus\or September\or Oktober\or November\or
-      Desember\fi
+      \or januari\or februari\or maart\or april\or mei\or juni\or
+      juli\or augustus\or september\or oktober\or november\or
+      december\fi
       \space \number\year}}
 
 \def\dutch@language{\language=\l@dutch}
