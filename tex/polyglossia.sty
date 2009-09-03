@@ -75,8 +75,8 @@
    \else%\ifx\@tmpa\opt@disabled
       \def\local@marks##1{}
       \xpg@info{Option: localmarks=off}
-      %\fi%
-   \fi%
+      %\fi
+   \fi
 }
 \setkeys{polyglossia}{localmarks=on}
 
@@ -100,7 +100,7 @@
       \else%   
       \newenvironment{#2}[1][]{\begin{otherlanguage}[####1]{#2}}%
          {\end{otherlanguage}}%
-      \fi%
+      \fi
       \expandafter\newcommand\csname text#2\endcsname[2][]{%
       \ifcsdef{RL}%
       {\ifcsundef{#2@RL}%
@@ -180,7 +180,7 @@
       \else%   
       \newenvironment{#2}[1][]{\begin{otherlanguage}[####1]{#2}}%
          {\end{otherlanguage}}%
-      \fi%
+      \fi
       \expandafter\newcommand\csname text#2\endcsname[2][]{%
       \ifcsdef{RL}{%
 	  \ifcsundef{#2@RL}%
@@ -198,7 +198,7 @@
    {\xpg@nolang{#2}\hyphenrules{#2}}%
    %TODO ? \expandafter\ifx\csname l@#2\endcsname\@undefined
    %\xpg@nopatterns{#2}\expandafter\adddialect\csname l@#2\endcsname 0%
-   %\else\expandafter\expandafter\protect\language=\csname l@#2\endcsname\fi%
+   %\else\expandafter\expandafter\protect\language=\csname l@#2\endcsname\fi
 }
 
 \newcommand\setotherlanguages[1]{%
@@ -253,7 +253,7 @@
       \addtocontents{toc}{\protect\select@language{#1}}%
       \addtocontents{lof}{\protect\select@language{#1}}%
       \addtocontents{lot}{\protect\select@language{#1}}%
-   \fi%
+   \fi
 }
 
 \ifcsundef{select@language}{}%
@@ -291,9 +291,9 @@
    \else
       \expandafter\ifx\csname l@#1\endcsname\l@nohyphenation%
         \xpg@warning{\string\setlocalhyphenmin useless for unhyphenated language #1}%
-      \else%
+      \else
       \providehyphenmins{#1}{#2#3}%
-      \fi%
+      \fi
    \fi}
 
 \def\use@localhyphenmins#1{%
@@ -301,6 +301,8 @@
    {\expandafter\expandafter\expandafter\set@hyphenmins\csname #1hyphenmins\endcsname\relax}}
 
 %% package options
+
+\DeclareOption{shorthands}{\setkeys{polyglossia}{shorthands=true}}
 \DeclareOption{nolocalmarks}{\setkeys{polyglossia}{localmarks=off}}
 \DeclareOption{quiet}{%
    \gdef\@latex@info#1{\relax}% no latex info
@@ -308,56 +310,19 @@
    \gdef\@font@warning#1{\relax}% no latex font warnings
    \gdef\zf@PackageInfo#1{\relax}% no fontspec info
    \gdef\xpg@info#1{\relax}}% no polyglossia info
-\DeclareOption{USenglish}{%
-\ifcsundef{xpg@main@language}%
- {\edef\@temp{\noexpand\setdefaultlanguage[variant=american]{english}}}%
- {\edef\@temp{\noexpand\setotherlanguage[variant=american]{english}}}%
-   \@temp}
-\DeclareOption{american}{%
-\ifcsundef{xpg@main@language}%
- {\edef\@temp{\noexpand\setdefaultlanguage[variant=american]{english}}}%
- {\edef\@temp{\noexpand\setotherlanguage[variant=american]{english}}}%
-   \@temp}
-\DeclareOption{UKenglish}{%
-\ifcsundef{xpg@main@language}%
- {\edef\@temp{\noexpand\setdefaultlanguage[variant=british]{english}}}%
- {\edef\@temp{\noexpand\setotherlanguage[variant=british]{english}}}%
-   \@temp}
-\DeclareOption{british}{%
-\ifcsundef{xpg@main@language}%
- {\edef\@temp{\noexpand\setdefaultlanguage[variant=british]{english}}}%
- {\edef\@temp{\noexpand\setotherlanguage[variant=british]{english}}}%
-   \@temp}
-\DeclareOption{australian}{%
-\ifcsundef{xpg@main@language}%
- {\edef\@temp{\noexpand\setdefaultlanguage[variant=australian]{english}}}%
- {\edef\@temp{\noexpand\setotherlanguage[variant=australian]{english}}}%
-   \@temp}
-\DeclareOption{newzealand}{%
-\ifcsundef{xpg@main@language}%
- {\edef\@temp{\noexpand\setdefaultlanguage[variant=newzealand]{english}}}%
- {\edef\@temp{\noexpand\setotherlanguage[variant=newzealand]{english}}}%
-   \@temp}
-\DeclareOption{ngerman}{%
-\ifcsundef{xpg@main@language}%
- {\edef\@temp{\noexpand\setdefaultlanguage[spelling=new]{german}}}%
- {\edef\@temp{\noexpand\setotherlanguage[spelling=new]{german}}}%
-   \@temp}
-\DeclareOption{polygreek}{%
-\ifcsundef{xpg@main@language}%
- {\edef\@temp{\noexpand\setdefaultlanguage[variant=poly]{greek}}}%
- {\edef\@temp{\noexpand\setotherlanguage[variant=poly]{greek}}}%
-   \@temp}
-\DeclareOption{monogreek}{%
-\ifcsundef{xpg@main@language}%
- {\edef\@temp{\noexpand\setdefaultlanguage[variant=mono]{greek}}}%
- {\edef\@temp{\noexpand\setotherlanguage[variant=mono]{greek}}}%
-   \@temp}
-\DeclareOption{ancientgreek}{%
-\ifcsundef{xpg@main@language}%
- {\edef\@temp{\noexpand\setdefaultlanguage[variant=ancient]{greek}}}%
- {\edef\@temp{\noexpand\setotherlanguage[variant=ancient]{greek}}}%
-   \@temp}
+\def\xpg@option#1#2{%
+  \ifcsundef{xpg@main@language}{\setdefaultlanguage}{\setotherlanguage}%
+    [#1]{#2}}
+\DeclareOption{USenglish}{\xpg@option{variant=american}{english}}
+\DeclareOption{american}{\xpg@option{variant=american}{english}}
+\DeclareOption{UKenglish}{\xpg@option{variant=british}{english}}
+\DeclareOption{british}{\xpg@option{variant=british}{english}}
+\DeclareOption{australian}{\xpg@option{variant=australian}{english}}
+\DeclareOption{newzealand}{\xpg@option{variant=newzealand}{english}}
+\DeclareOption{ngerman}{\xpg@option{spelling=new}{german}}
+\DeclareOption{polygreek}{\xpg@option{variant=poly}{greek}}
+\DeclareOption{monogreek}{\xpg@option{variant=mono}{greek}}
+\DeclareOption{ancientgreek}{\xpg@option{variant=ancient}{greek}}
 %%% FIXME: this does not work when gloss-<option>.ldf contains a \RequirePackage command !!!
 %%%        let's try with \AtEndOfPackage (not tested)
 \DeclareOption*{%
