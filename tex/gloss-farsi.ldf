@@ -33,30 +33,30 @@
     \or نیسان\or ایار\or حزیران\or تموز\or آب\or ایلول\or تشرین اول\or تشرین ثانی\or کانون اول\fi}
 
 \def\captionsfarsi{%
-\def\prefacename{\@ensure@RL{پیشگفتار}}% 
-\def\refname{\@ensure@RL{مراجع}}%
-\def\abstractname{\@ensure@RL{چکیده}}%
-\def\bibname{\@ensure@RL{کتاب‌نامه}}%
-\def\chaptername{\@ensure@RL{فصل}}%
-\def\appendixname{\@ensure@RL{پیوست}}%
-\def\contentsname{\@ensure@RL{فهرست مطالب}}%
-\def\listfigurename{\@ensure@RL{لیست تصاویر}}%
-\def\listtablename{\@ensure@RL{لیست جداول}}%
-\def\indexname{\@ensure@RL{نمایه}}%
-\def\figurename{\@ensure@RL{شكل}}%
-\def\tablename{\@ensure@RL{جدول}}%
-\def\partname{\@ensure@RL{بخش}}%
-%\def\enclname{\@ensure@RL{}}%<-- Needs translation
-%\def\ccname{\@ensure@RL{}}%<-- Needs translation
-%\def\headtoname{\@ensure@RL{}}%<-- Needs translation
-\def\pagename{\@ensure@RL{صفحة}}%
-%\def\seename{\@ensure@RL{}}%<-- Needs translation
-%\def\alsoname{\@ensure@RL{}}%<-- Needs translation
-\def\proofname{\@ensure@RL{برهان}}%
-\def\glossaryname{\@ensure@RL{لغت‌نامه}}%<-- Needs to be checked
+\def\prefacename{\@ensure@RTL{پیشگفتار}}% 
+\def\refname{\@ensure@RTL{مراجع}}%
+\def\abstractname{\@ensure@RTL{چکیده}}%
+\def\bibname{\@ensure@RTL{کتاب‌نامه}}%
+\def\chaptername{\@ensure@RTL{فصل}}%
+\def\appendixname{\@ensure@RTL{پیوست}}%
+\def\contentsname{\@ensure@RTL{فهرست مطالب}}%
+\def\listfigurename{\@ensure@RTL{لیست تصاویر}}%
+\def\listtablename{\@ensure@RTL{لیست جداول}}%
+\def\indexname{\@ensure@RTL{نمایه}}%
+\def\figurename{\@ensure@RTL{شكل}}%
+\def\tablename{\@ensure@RTL{جدول}}%
+\def\partname{\@ensure@RTL{بخش}}%
+%\def\enclname{\@ensure@RTL{}}%<-- Needs translation
+%\def\ccname{\@ensure@RTL{}}%<-- Needs translation
+%\def\headtoname{\@ensure@RTL{}}%<-- Needs translation
+\def\pagename{\@ensure@RTL{صفحة}}%
+%\def\seename{\@ensure@RTL{}}%<-- Needs translation
+%\def\alsoname{\@ensure@RTL{}}%<-- Needs translation
+\def\proofname{\@ensure@RTL{برهان}}%
+\def\glossaryname{\@ensure@RTL{لغت‌نامه}}%<-- Needs to be checked
 }
 \def\datefarsi{%
-   \def\today{\@ensure@RL{\farsinumber\day\space\farsigregmonth{\month}\space\farsinumber\year}}%
+   \def\today{\@ensure@RTL{\farsinumber\day\space\farsigregmonth{\month}\space\farsinumber\year}}%
 }
 
 \def\farsinumber#1{\if@western@numerals\RL{\number#1}\else%

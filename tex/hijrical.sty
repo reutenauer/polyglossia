@@ -72,7 +72,7 @@ Shawwāl\or Dhū ’l-Qaʿda\or Dhū ’l-Ḥijja\fi}
 \def\@rabicnumb@r#1{\@ifundefined{arabicnumber}{{\addfontfeature{Mapping=arabicdigits} #1}}%
 {\arabicnumber{#1}}}
 
-\def\FormatHijriDate{\@ensure@RL{%
+\def\FormatHijriDate{\@ensure@RTL{%
 \@rabicnumb@r{\value{Hijriday}}\space\HijriMonthArabic{\value{Hijrimonth}}\space\@rabicnumb@r{\value{Hijriyear}}}}
 
 \endinput

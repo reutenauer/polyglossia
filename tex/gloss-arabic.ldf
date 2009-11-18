@@ -71,28 +71,28 @@
 \arabicgregmonth@default}}
 
 \def\captionsarabic{%
-\def\prefacename{\@ensure@RL{مدخل}}% 
-\def\refname{\@ensure@RL{المراجع}}
-\def\abstractname{\@ensure@RL{ملخص}}%
-\def\bibname{\@ensure@RL{المصادر}}%
-\def\chaptername{\@ensure@RL{الباب}}%
-\def\appendixname{\@ensure@RL{الملاحق}}%
-\def\contentsname{\@ensure@RL{المحتويات}}
-%\def\contentsname{\@ensure@RL{الفهرس}}%
-\def\listfigurename{\@ensure@RL{قائمة الأشكال}}%
-\def\listtablename{\@ensure@RL{قائمة الجداول}}%
-\def\indexname{\@ensure@RL{الفهرس}}%
-\def\figurename{\@ensure@RL{شكل}}%
-\def\tablename{\@ensure@RL{جدول}}%
-\def\partname{\@ensure@RL{القسم}}%
-\def\enclname{\@ensure@RL{المرفقات}}%<-- Needs translation
-\def\ccname{\@ensure@RL{نسخة ل‬}}% <<
-\def\headtoname{\@ensure@RL{إلى}}%<-- Needs translation
-\def\pagename{\@ensure@RL{صفحة}}%
-\def\seename{\@ensure@RL{راجع}}%\alefhamza\nun\za\ra
-\def\alsoname{\@ensure@RL{راجع أيضاً}}%<<\alefhamza\nun\za\ra
-\def\proofname{\@ensure@RL{برهان}}%
-\def\glossaryname{\@ensure@RL{قاموس}}%<<
+\def\prefacename{\@ensure@RTL{مدخل}}% 
+\def\refname{\@ensure@RTL{المراجع}}
+\def\abstractname{\@ensure@RTL{ملخص}}%
+\def\bibname{\@ensure@RTL{المصادر}}%
+\def\chaptername{\@ensure@RTL{الباب}}%
+\def\appendixname{\@ensure@RTL{الملاحق}}%
+\def\contentsname{\@ensure@RTL{المحتويات}}
+%\def\contentsname{\@ensure@RTL{الفهرس}}%
+\def\listfigurename{\@ensure@RTL{قائمة الأشكال}}%
+\def\listtablename{\@ensure@RTL{قائمة الجداول}}%
+\def\indexname{\@ensure@RTL{الفهرس}}%
+\def\figurename{\@ensure@RTL{شكل}}%
+\def\tablename{\@ensure@RTL{جدول}}%
+\def\partname{\@ensure@RTL{القسم}}%
+\def\enclname{\@ensure@RTL{المرفقات}}%<-- Needs translation
+\def\ccname{\@ensure@RTL{نسخة ل‬}}% <<
+\def\headtoname{\@ensure@RTL{إلى}}%<-- Needs translation
+\def\pagename{\@ensure@RTL{صفحة}}%
+\def\seename{\@ensure@RTL{راجع}}%\alefhamza\nun\za\ra
+\def\alsoname{\@ensure@RTL{راجع أيضاً}}%<<\alefhamza\nun\za\ra
+\def\proofname{\@ensure@RTL{برهان}}%
+\def\glossaryname{\@ensure@RTL{قاموس}}%<<
 }
 \def\datearabic{%
  \def\today{%

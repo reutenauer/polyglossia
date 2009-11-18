@@ -105,7 +105,7 @@
       \ifcsdef{RL}%
       {\ifcsundef{#2@RL}%
           {\@ensure@LR{\foreignlanguage[####1]{#2}{####2}}}%
-	  {\@ensure@RL{\foreignlanguage[####1]{#2}{####2}}}}%
+	  {\@ensure@RTL{\foreignlanguage[####1]{#2}{####2}}}}%
       {\foreignlanguage[####1]{#2}{####2}}%
       }%
       \csletcs{local#2}{text#2}%
@@ -185,7 +185,7 @@
       \ifcsdef{RL}{%
 	  \ifcsundef{#2@RL}%
 	  {\@ensure@LR{\foreignlanguage[####1]{#2}{####2}}}%
-          {\@ensure@RL{\foreignlanguage[####1]{#2}{####2}}}%
+          {\@ensure@RTL{\foreignlanguage[####1]{#2}{####2}}}%
        }{% else
           \foreignlanguage[####1]{#2}{####2}%
        }}%

@@ -55,27 +55,27 @@
 %	\def\@syriac@locale{#1}}
 %
 %\def\captionssyriac{%
-%\def\prefacename{\@ensure@RL{}}% 
-%\def\refname{\@ensure@RL{}}
-%\def\abstractname{\@ensure@RL{}}%
-%\def\bibname{\@ensure@RL{}}%
-%\def\chaptername{\@ensure@RL{}}%
-%\def\appendixname{\@ensure@RL{}}%
-%\def\contentsname{\@ensure@RL{}}
-%\def\listfigurename{\@ensure@RL{}}%
-%\def\listtablename{\@ensure@RL{}}%
-%\def\indexname{\@ensure@RL{}}%
-%\def\figurename{\@ensure@RL{}}%
-%\def\tablename{\@ensure@RL{}}%
-%\def\partname{\@ensure@RL{}}%
-%\def\enclname{\@ensure@RL{}}%
-%\def\ccname{\@ensure@RL{}}%
-%\def\headtoname{\@ensure@RL{}}%
-%\def\pagename{\@ensure@RL{}}%
-%\def\seename{\@ensure@RL{}}%
-%\def\alsoname{\@ensure@RL{}}%
-%\def\proofname{\@ensure@RL{}}%
-%\def\glossaryname{\@ensure@RL{}}%
+%\def\prefacename{\@ensure@RTL{}}% 
+%\def\refname{\@ensure@RTL{}}
+%\def\abstractname{\@ensure@RTL{}}%
+%\def\bibname{\@ensure@RTL{}}%
+%\def\chaptername{\@ensure@RTL{}}%
+%\def\appendixname{\@ensure@RTL{}}%
+%\def\contentsname{\@ensure@RTL{}}
+%\def\listfigurename{\@ensure@RTL{}}%
+%\def\listtablename{\@ensure@RTL{}}%
+%\def\indexname{\@ensure@RTL{}}%
+%\def\figurename{\@ensure@RTL{}}%
+%\def\tablename{\@ensure@RTL{}}%
+%\def\partname{\@ensure@RTL{}}%
+%\def\enclname{\@ensure@RTL{}}%
+%\def\ccname{\@ensure@RTL{}}%
+%\def\headtoname{\@ensure@RTL{}}%
+%\def\pagename{\@ensure@RTL{}}%
+%\def\seename{\@ensure@RTL{}}%
+%\def\alsoname{\@ensure@RTL{}}%
+%\def\proofname{\@ensure@RTL{}}%
+%\def\glossaryname{\@ensure@RTL{}}%
 %}
 
 \def\datesyriac{%
@@ -84,7 +84,7 @@
    \or ܬܫܪܝܢ ܩܕܡ% ܬܫܪܝܢ ܩܕܝܡ
    \or ܬܫܪܝܢ ܐܚܪܝ\or ܟܢܘܢ ܩܕܡ% ܟܢܘܢ ܩܕܝܡ
    \fi}%
-   \def\today{\@ensure@RL{\syriacnumber\day{\space}%
+   \def\today{\@ensure@RTL{\syriacnumber\day{\space}%
     \syriac@month{\month}{\space}\syriacnumber\year}}%
 }
 
