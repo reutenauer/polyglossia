@@ -11,39 +11,44 @@
 \def\arabic@RL{\relax}
 
 \newif\if@eastern@numerals
+\@eastern@numeralstrue
 \def\tmp@mashriq{mashriq}
 \def\tmp@maghrib{maghrib}
 \define@key{arabic}{numerals}[mashriq]{%
-	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@mashriq\@eastern@numeralstrue\else%
-	  \ifx\@tmpa\tmp@maghrib\@eastern@numeralsfalse\fi%
-	\fi}
+  \def\@tmpa{#1}%
+  \ifx\@tmpa\tmp@mashriq%
+    \@eastern@numeralstrue%
+  \else
+    \ifx\@tmpa\tmp@maghrib\@eastern@numeralsfalse\fi%
+  \fi}
 
 \def\tmp@morocco{morocco}
 \def\tmp@algeria{algeria}
 \define@key{arabic}{locale}[default]{%
-        \def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@morocco%
-	    \@eastern@numeralsfalse%
-        \else\ifx\@tmpa\tmp@algeria%
-	    \@eastern@numeralsfalse%
-	    \fi%
-	\fi%
-	\gdef\@@arabic@month{\@arabic@month{#1}}}
+  \def\@tmpa{#1}%
+  \ifx\@tmpa\tmp@morocco%
+    \@eastern@numeralsfalse%
+  \else
+    \ifx\@tmpa\tmp@algeria%
+      \@eastern@numeralsfalse%
+    \fi%
+  \fi%
+  \gdef\@@arabic@month{\@arabic@month{#1}}}
 
 \newif\if@hijrical
 \def\tmp@hijri{hijri}
 \def\tmp@islamic{islamic}
 \define@key{arabic}{calendar}[islamic]{%
-	\def\@tmpa{#1}%
-        \ifx\@tmpa\tmp@hijri\@hijricaltrue%
-	\else%
-	  \ifx\@tmpa\tmp@islamic\@hijricaltrue%
-	\else\@hijricalfalse%
-	\fi\fi}
+  \def\@tmpa{#1}%
+  \ifx\@tmpa\tmp@hijri\@hijricaltrue%
+  \else
+    \ifx\@tmpa\tmp@islamic\@hijricaltrue%
+    \else\@hijricalfalse%
+    \fi
+  \fi}
 
 \define@key{arabic}{hijricorrection}[0]{%
-	\gdef\@hijri@correction{#1}}%
+  \gdef\@hijri@correction{#1}}%
 
 % This should set the defaults
 \setkeys{arabic}{locale,calendar,numerals,hijricorrection}

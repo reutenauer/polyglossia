@@ -4,7 +4,7 @@
 \makeatletter
 
 \ifx\l@farsi\@undefined
-%  \xpg@nopatterns{Farsi}%
+  %\xpg@nopatterns{Farsi}%
   \adddialect\l@farsi\l@nohyphenation
 \fi
 

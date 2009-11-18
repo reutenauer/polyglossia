@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{polyglossia}[2009/01/25 v1.0.2 
-	Babel replacement for XeLaTeX]
+  Babel replacement for XeLaTeX]
 \RequirePackage{etoolbox}
 \RequirePackage{fontspec} %which itself depends on xkeyval
 
@@ -52,10 +52,10 @@
             \begingroup%
                \let\label\relax \let\index\relax \let\glossary\relax%
                \unrestored@protected@xdef\@themark%
-	       {{\foreignlanguage{##1}{%	         
-	          \protect\@@ensure@maindir{####1}}}%
-	        {\foreignlanguage{##1}{% 
-		  \protect\@@ensure@maindir{####2}}}}%
+         {{\foreignlanguage{##1}{%           
+            \protect\@@ensure@maindir{####1}}}%
+          {\foreignlanguage{##1}{% 
+      \protect\@@ensure@maindir{####2}}}}%
                \@temptokena \expandafter{\@themark}%
                \mark{\the\@temptokena}%
             \endgroup%
@@ -64,7 +64,7 @@
                \begingroup%
                   \let\label\relax \let\index\relax \let\glossary\relax%
                   \expandafter\@markright\@themark%
-		  {\foreignlanguage{##1}{\protect\@@ensure@maindir{####1}}}%
+      {\foreignlanguage{##1}{\protect\@@ensure@maindir{####1}}}%
                   \@temptokena \expandafter{\@themark}%
                   \mark{\the\@temptokena}%
                \endgroup%
@@ -105,7 +105,7 @@
       \ifcsdef{RL}%
       {\ifcsundef{#2@RL}%
           {\@ensure@LR{\foreignlanguage[####1]{#2}{####2}}}%
-	  {\@ensure@RTL{\foreignlanguage[####1]{#2}{####2}}}}%
+    {\@ensure@RTL{\foreignlanguage[####1]{#2}{####2}}}}%
       {\foreignlanguage[####1]{#2}{####2}}%
       }%
       \csletcs{local#2}{text#2}%
@@ -183,8 +183,8 @@
       \fi
       \expandafter\newcommand\csname text#2\endcsname[2][]{%
       \ifcsdef{RL}{%
-	  \ifcsundef{#2@RL}%
-	  {\@ensure@LR{\foreignlanguage[####1]{#2}{####2}}}%
+    \ifcsundef{#2@RL}%
+    {\@ensure@LR{\foreignlanguage[####1]{#2}{####2}}}%
           {\@ensure@RTL{\foreignlanguage[####1]{#2}{####2}}}%
        }{% else
           \foreignlanguage[####1]{#2}{####2}%
