@@ -2,4 +2,7 @@
 *.dtx
 *.ins
 *.tec
+*.swp
+*.log
+*.aux
 etc/*
