@@ -11,7 +11,7 @@
    \def\refname{Bibliografie}%
    \def\abstractname{Rezumat}%
    \def\bibname{Bibliografie}%
-   \def\prefacename{Prefaţă}%
+   \def\prefacename{Prefață}%
    \def\chaptername{Capitolul}%
    \def\appendixname{Anexa}%
    \def\contentsname{Cuprins}%
@@ -28,7 +28,7 @@
    \def\enclname{Anexă}%
    \def\ccname{Copie}%
    \def\headtoname{Pentru}%
-   \def\proofname{Demonstraţie}%
+   \def\proofname{Demonstrație}%
    \def\glossaryname{Glosar}%
    }
 \def\dateromanian{%   
