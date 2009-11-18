@@ -4,7 +4,7 @@
 \makeatletter
 
 \ifx\l@hebrew\@undefined
-  \xpg@nopatterns{Hebrew}%
+  %\xpg@nopatterns{Hebrew}%
   \adddialect\l@hebrew\l@nohyphenation
 \fi
 

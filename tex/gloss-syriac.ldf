@@ -3,7 +3,7 @@
 \makeatletter
 
 \ifx\l@syriac\@undefined
-  \xpg@nopatterns{Syriac}%
+  %\xpg@nopatterns{Syriac}%
   \adddialect\l@syriac\l@nohyphenation
 \fi
 

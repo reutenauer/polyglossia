@@ -3,7 +3,7 @@
 \makeatletter
 
 \ifx\l@amharic\@undefined%
-   \xpg@nopatterns{Amharic}%
+   %\xpg@nopatterns{Amharic}%
    \adddialect\l@amharic\l@nohyphenation%
 \fi
 

@@ -3,7 +3,7 @@
 \makeatletter
 
 \ifx\l@divehi\@undefined%
-   \xpg@nopatterns{Divehi}%
+   %\xpg@nopatterns{Divehi}%
    \adddialect\l@divehi\l@nohyphenation%
 \fi
 
