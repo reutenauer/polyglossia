@@ -99,7 +99,7 @@
   \if@hijrical%
     \Hijritoday[\@hijri@correction]%
   \else%
-    \if@rl%
+    \if@RTL%
        \arabicnumber\day\space\@@arabic@month{\month}%
         \space\arabicnumber\year%
     \else% in LR environment we format the gregorian date within \textenglish 

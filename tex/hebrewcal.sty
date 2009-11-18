@@ -15,7 +15,7 @@
 \def\hebrewdate#1#2#3{%
     \HebrewFromGregorian{#1}{#2}{#3}%
                         {\hebrewday}{\hebrewmonth}{\hebrewyear}%
-    \if@rl%
+    \if@RTL%
       \@FormatForHebrew{\hebrewday}{\hebrewmonth}{\hebrewyear}%
     \else%
       \@FormatForEnglish{\hebrewday}{\hebrewmonth}{\hebrewyear}%
