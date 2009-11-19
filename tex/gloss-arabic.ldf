@@ -21,6 +21,15 @@
     \ifx\@tmpa\tmp@maghrib\eastern@numeralsfalse\fi%
   \fi}
 
+\newif\ifabjad@jim@notail
+\def\tmp@true{true}
+\define@key{arabic}{abjadjimnotail}[true]{%
+  \def\@tmpa{#1}%
+  \ifx\@tmpa\tmp@true\abjad@jim@notailtrue%
+  \else
+    \abjad@jim@notailfalse
+  \fi}
+
 \def\tmp@morocco{morocco}
 \def\tmp@algeria{algeria}
 \define@key{arabic}{locale}[default]{%
@@ -50,7 +59,7 @@
   \gdef\@hijri@correction{#1}}%
 
 % This should set the defaults
-\setkeys{arabic}{locale,calendar,numerals,hijricorrection}
+\setkeys{arabic}{locale,calendar,numerals,hijricorrection,abjadjimnotail=false}
 
 \def\arabicgregmonth@default#1{\ifcase#1%
   % Egypt, Sudan, Yemen and Golf states
@@ -141,12 +150,13 @@
 \fi
 }
 \def\abjad@zero{}
+\def\abjad@three{ج\ifabjad@jim@notail\char"200D\fi}
 \def\abj@num@i@iso#1{%
-  \ifcase#1\or ا\or ب\or ج\or د%
+  \ifcase#1\or ا\or ب\or\abjad@three\or د%
            \or ه\char"200D\or و\or ز\or ح\or ط\fi%
   \ifnum#1=\z@\abjad@zero\fi}
 \def\abj@num@i#1{%
-  \ifcase#1\or ا\or ب\or ج\or د%
+  \ifcase#1\or ا\or ب\or\abjad@three\or د%
            \or ه\or و\or ز\or ح\or ط\fi%
   \ifnum#1=\z@\abjad@zero\fi}
 \def\abj@num@ii#1{%
