@@ -4,7 +4,7 @@
 \fi
 \ProvidesFile{babelsh.def}
          [2009/05/07 %
-         Babel common definitions for shorthands %
+         Babel common definitions for shorthands^^J
          Taken verbatim from babel.def (2008/07/06 v3.8l)]
 \def\bbl@add@special#1{\begingroup
     \def\do{\noexpand\do\noexpand}%
