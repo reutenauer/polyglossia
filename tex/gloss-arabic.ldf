@@ -10,16 +10,15 @@
 
 \def\arabic@RL{\relax}
 
-\newif\if@eastern@numerals
-\@eastern@numeralstrue
+\newif\ifeastern@numerals
 \def\tmp@mashriq{mashriq}
 \def\tmp@maghrib{maghrib}
 \define@key{arabic}{numerals}[mashriq]{%
   \def\@tmpa{#1}%
   \ifx\@tmpa\tmp@mashriq%
-    \@eastern@numeralstrue%
+    \eastern@numeralstrue%
   \else
-    \ifx\@tmpa\tmp@maghrib\@eastern@numeralsfalse\fi%
+    \ifx\@tmpa\tmp@maghrib\eastern@numeralsfalse\fi%
   \fi}
 
 \def\tmp@morocco{morocco}
@@ -27,10 +26,10 @@
 \define@key{arabic}{locale}[default]{%
   \def\@tmpa{#1}%
   \ifx\@tmpa\tmp@morocco%
-    \@eastern@numeralsfalse%
+    \eastern@numeralsfalse%
   \else
     \ifx\@tmpa\tmp@algeria%
-      \@eastern@numeralsfalse%
+      \eastern@numeralsfalse%
     \fi%
   \fi%
   \gdef\@@arabic@month{\@arabic@month{#1}}}
@@ -116,7 +115,7 @@
  \fi}}
 
 
-\def\arabicnumber#1{\if@eastern@numerals{\protect\addfontfeature{Mapping=arabicdigits}\number#1}\else\RL{\reset@font\number#1}\fi}
+\def\arabicnumber#1{\ifeastern@numerals{\addfontfeature{Mapping=arabicdigits}\number#1}\else\RL{\reset@font\number#1}\fi}
 
 \def\@ornatebracearabic#1{\RL{\char"FD3F\@arabic#1\char"FD3E}}
 \def\@ornatebracealph#1{\RL{\char"FD3F\@alph#1\char"FD3E}}
