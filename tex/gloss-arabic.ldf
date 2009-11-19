@@ -143,8 +143,8 @@
 }
 \def\abjad@zero{}
 \def\abj@num@i#1{%
-  \ifcase#1\or ا\or ب\or ج\char"200D\or د% 
-           \or ه\or و\or ز\or ح\or ط\fi%
+  \ifcase#1\or ا\or ب\or ج\or د% 
+           \or ه\char"200D\or و\or ز\or ح\or ط\fi%
   \ifnum#1=\z@\abjad@zero\fi}
 \def\abj@num@ii#1{%
   \ifcase#1\or ي\or ك\or ل\or م\or ن%
