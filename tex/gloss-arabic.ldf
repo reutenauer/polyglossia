@@ -38,7 +38,7 @@
 \newif\if@hijrical
 \def\tmp@hijri{hijri}
 \def\tmp@islamic{islamic}
-\define@key{arabic}{calendar}[islamic]{%
+\define@key{arabic}{calendar}[gregorian]{%
   \def\@tmpa{#1}%
   \ifx\@tmpa\tmp@hijri\@hijricaltrue%
   \else
