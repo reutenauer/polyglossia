@@ -37,7 +37,7 @@
 \newif\if@hijrical
 \def\tmp@hijri{hijri}
 \def\tmp@islamic{islamic}
-\define@key{arabic}{calendar}[islamic]{%
+\define@key{arabic}{calendar}[gregorian]{%
   \def\@tmpa{#1}%
   \ifx\@tmpa\tmp@hijri\@hijricaltrue%
   \else
@@ -54,7 +54,7 @@
 
 \def\arabicgregmonth@default#1{\ifcase#1%
   % Egypt, Sudan, Yemen and Golf states
-  \or يناير\or فبراير\or مارس\or ابريل\or مايو\or يونيو\or يوليو\or اغستس\or سبتمبر\or أكتوبر\or نوفمبر\or ديسمبر\fi}
+  \or يناير\or فبراير\or مارس\or أبريل\or مايو\or يونيو\or يوليو\or أغسطس\or سبتمبر\or أكتوبر\or نوفمبر\or ديسمبر\fi}
 \def\arabicgregmonth@mashriq#1{\ifcase#1%
   % Iraq Syria Jordan Lebanon Palestine
   \or  كانون الثاني\or شباط\or آذار\or نيسان\or أيار\or حزيران\or تموز\or آب\or أيلول\or تشرين الأول\or تشرين الثاني\or كانون الأول\fi}
@@ -79,7 +79,7 @@
 \def\refname{\@ensure@RTL{المراجع}}
 \def\abstractname{\@ensure@RTL{ملخص}}%
 \def\bibname{\@ensure@RTL{المصادر}}%
-\def\chaptername{\@ensure@RTL{الباب}}%
+\def\chaptername{\@ensure@RTL{باب}}%
 \def\appendixname{\@ensure@RTL{الملاحق}}%
 \def\contentsname{\@ensure@RTL{المحتويات}}
 %\def\contentsname{\@ensure@RTL{الفهرس}}%
@@ -94,7 +94,7 @@
 \def\headtoname{\@ensure@RTL{إلى}}%<-- Needs translation
 \def\pagename{\@ensure@RTL{صفحة}}%
 \def\seename{\@ensure@RTL{راجع}}%\alefhamza\nun\za\ra
-\def\alsoname{\@ensure@RTL{راجع أيضاً}}%<<\alefhamza\nun\za\ra
+\def\alsoname{\@ensure@RTL{راجع أيضًا}}%<<\alefhamza\nun\za\ra
 \def\proofname{\@ensure@RTL{برهان}}%
 \def\glossaryname{\@ensure@RTL{قاموس}}%<<
 }
@@ -142,8 +142,8 @@
 }
 \def\abjad@zero{}
 \def\abj@num@i#1{%
-  \ifcase#1\or ا\or ب\or ج\char"200D\or د% 
-           \or ه\or و\or ز\or ح\or ط\fi%
+  \ifcase#1\or ا\or ب\or ج\or د% 
+           \or ه\char"200D\or و\or ز\or ح\or ط\fi%
   \ifnum#1=\z@\abjad@zero\fi}
 \def\abj@num@ii#1{%
   \ifcase#1\or ي\or ك\or ل\or م\or ن%
