@@ -72,9 +72,9 @@
 \defaultfontfeatures{Scale=MatchLowercase}
 \setmonofont{DejaVu Sans Mono}%{Consolas}
 \setsansfont{Lucida Sans Unicode}
-\newfontfamily\arabicfont[Script=Arabic,Scale=1.5]{Scheherazade}
-\newfontfamily\farsifont[Script=Arabic,Scale=1.33]{Farsi Simple Bold}
-\newfontfamily\syriacfont[Script=Syriac,Scale=1.5,ExternalLocation="/mnt/data/fonts/syriac/"]{SyrCOMJerusalem.otf}
+\newfontfamily\arabicfont[Script=Arabic]{Scheherazade}
+\newfontfamily\farsifont[Script=Arabic]{Farsi Simple Bold}
+\newfontfamily\syriacfont[Script=Syriac]{Serto Jerusalem}
 \newfontfamily\hebrewfont[Script=Hebrew]{SBL Hebrew}
 
 \newcommand\Babel{\pkg{babel}\xspace}
@@ -90,7 +90,7 @@
 \GetFileInfo{polyglossia.sty}
 
 \title{\textcolor{lightblue}{\huge
-\fontspec[ExternalLocation="/mnt/data/fonts/greek/"]{GFSAmbrosia.otf}
+\fontspec{GFS Ambrosia}
 Π$\;\,$ο$\;\,$λ$\;\,$υ$\;\,$γ$\;\,$λ$\;\,$ω$\;\,$σ$\;\,$σ$\;\,$ι$\;\,$α}\\[16pt]
 \color{myblue}Polyglossia: A Babel Replacement for \XeLaTeX}
 \author{\scshape\color{myblue}François Charette}
@@ -344,6 +344,8 @@ The default value of each option is given in italic.
 		as well as the form of the numerals (unless overriden by the following option).
 	\item \TB{numerals} = \textit{mashriq} or maghrib 
 		(the latter is the default when locale = algeria, tunisia or morocco)
+  \item \TB{abjadjimnotail} = \textit{false} or true. 
+    Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍}\ – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
 	\end{itemize}
 \textbf{Commands}:
 	\begin{itemize}
@@ -571,7 +573,7 @@ It also accepts an optional argument to add or subtract a correction
 (in days) to the date computed by the arithmetical algorithm.\footnote{ %
 	The Islamic calendar is indeed a purely lunar calendar based on the observation 
 	of the first visibility of the lunar crescent at the beginning of the lunar month,
-	so their can be differences between different localities, as well as between
+	so there can be differences between different localities, as well as between
 	civil and religious authorities.}
 For instance if ¦\Hijritoday¦ yields the date “7 Rajab 1429” (which is the date that was 
 displayed on the front page of \href{http://www.aljazeera.net}{aljazeera.net} on
