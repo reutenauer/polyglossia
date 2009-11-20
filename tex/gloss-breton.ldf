@@ -7,15 +7,21 @@
    \adddialect\l@breton\l@nohyphenation%
 \fi
 
+\newXeTeXintercharclass\breton@punctthin % ! ? ;
+\newXeTeXintercharclass\breton@punctthick % :
+
+\def\breton@punctthinspace{\unskip\thinspace}
+\def\breton@punctthickspace{\unskip\nobreakspace}
+
 \def\breton@punctuation{%
     \frenchspacing%
     \XeTeXinterchartokenstate=1%
-    \XeTeXcharclass `\! 7%
-    \XeTeXcharclass `\; 7%
-    \XeTeXcharclass `\: 7%
-    \XeTeXcharclass `\? 8%
-    \XeTeXinterchartoks 0 7 = {\unskip\kern.1667em}%
-    \XeTeXinterchartoks 0 8 = {\unskip\kern\fontdimen2\font\kern-1.4\fontdimen3\font}%
+    \XeTeXcharclass `\! \breton@punctthin
+    \XeTeXcharclass `\? \breton@punctthin
+    \XeTeXcharclass `\; \breton@punctthin
+    \XeTeXcharclass `\: \breton@punctthick
+    \XeTeXinterchartoks \z@ \breton@punctthin = \breton@punctthinspace
+    \XeTeXinterchartoks \z@ \breton@punctthick = \breton@punctthickspace
     }
 
 \def\nobreton@punctuation{%

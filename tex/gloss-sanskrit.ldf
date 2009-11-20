@@ -16,16 +16,19 @@
 
 \setkeys{sanskrit}{Script}
 
+\newXeTeXintercharclass\sanskrit@punctthin % ! ? ; : danda double_danda
+\def\sanskrit@punctthinspace{\unskip\thinspace}
+
 \def\sanskrit@punctuation{%
     \frenchspacing%
     \XeTeXinterchartokenstate=1%
-    \XeTeXcharclass `\! 7%
-    \XeTeXcharclass `\? 7%
-    \XeTeXcharclass `\; 7%
-    \XeTeXcharclass `\: 7%
-    \XeTeXcharclass `\। 7% danda        \ as requested by
-    \XeTeXcharclass `\॥ 7% double danda / Yves Codet
-    \XeTeXinterchartoks 0 7 = {\unskip\kern.1667em}%
+    \XeTeXcharclass `\! \sankskrit@punctthin
+    \XeTeXcharclass `\? \sankskrit@punctthin
+    \XeTeXcharclass `\; \sankskrit@punctthin
+    \XeTeXcharclass `\: \sankskrit@punctthin
+    \XeTeXcharclass `\। \sankskrit@punctthin
+    \XeTeXcharclass `\॥ \sankskrit@punctthin
+    \XeTeXinterchartoks \z@ \sanskrit@punctthin = \sanskrit@punctthinspace
 }
 
 \def\nosanskrit@punctuation{%

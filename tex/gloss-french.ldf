@@ -7,64 +7,44 @@
    \adddialect\l@french\l@nohyphenation%
 \fi
 
+\newXeTeXintercharclass\french@punctthin % ! ? ;
+\newXeTeXintercharclass\french@punctthick % :
+\newXeTeXintercharclass\french@punctguill % « »
+
+\def\french@punctthinspace{\unskip\thinspace}
+\def\french@punctthickspace{\unskip\nobreakspace}
+
 \def\french@punctuation{%
-    \frenchspacing%
+    \frenchspacing
     \lccode"2019="2019
-    \XeTeXinterchartokenstate=1%
-    \XeTeXcharclass `\! 7%
-    \XeTeXcharclass `\? 7%
-    \XeTeXcharclass `\; 7%
-    \XeTeXcharclass `\: 7%
-    \XeTeXinterchartoks 0 7 = {\unskip\kern.1667em}%
+    \XeTeXinterchartokenstate=1
+    \XeTeXcharclass `\! \french@punctthin
+    \XeTeXcharclass `\? \french@punctthin
+    \XeTeXcharclass `\; \french@punctthin
+    \XeTeXcharclass `\: \french@punctthick
+    \XeTeXinterchartoks \z@ \french@punctthin = \french@punctthinspace
+    \XeTeXinterchartoks \z@ \french@punctthick = \french@punctthickspace
     }
 
 \def\nofrench@punctuation{%
-    \nonfrenchspacing%
+    \nonfrenchspacing
     \lccode"2019=\z@
-    \XeTeXinterchartokenstate=0%
+    \XeTeXinterchartokenstate=0
 }
 
 \def\french@guillemets{%
-    \XeTeXinterchartokenstate=1%
-    \XeTeXcharclass `\« 8%
-    \XeTeXcharclass `\» 8%
-    \XeTeXinterchartoks 8 0 = {\kern.1667em}%
-    \XeTeXinterchartoks 0 8 = {\unskip\kern.1667em}%
-    \XeTeXinterchartoks 8 7 = {\unskip\kern.1667em}% "»;" -> "» ;"
-    \XeTeXinterchartoks 7 8 = {\unskip\kern.1667em}% "?»" -> "? »"
+    \XeTeXinterchartokenstate=1
+    \XeTeXcharclass `\« \french@punctguill
+    \XeTeXcharclass `\» \french@punctguill
+    \XeTeXinterchartoks \french@punctguill \z@ = \french@punctthickspace
+    \XeTeXinterchartoks \z@ \french@punctguill = \french@punctthickspace
+    \XeTeXinterchartoks \french@punctguill \french@punctthin = \french@punctthinspace
+        % "»;" -> "» ;"
+    \XeTeXinterchartoks \french@punctguill \french@punctthick = \french@punctthickspace
+        % "»:" -> "» :"
+    \XeTeXinterchartoks \french@punctthin \french@punctguill  = \french@punctthickspace
+        % "?»" -> "? »"
 }
-
-%\newcounter{niveauguillemets}[paragraph]
-%
-%\def\tmp@normal{normal}
-%\def\tmp@paragraphe{paragraphe}
-%\def\tmp@ligne{ligne}
-
-%TODO
-%\define@key{french}{guillemets}[normal]{
-%   \def\@tmpa{#1}
-%   \ifx\@tmpa\tmp@ligne%
-%      \def\french@guill@mets{% FIXME
-%      \def\LeftPointingDoubleAngleQuotationMark{«\kern.1667em\setcounter{niveauguillemets}{1}%
-%      \ifthenelse{\value{niveauguillemets} = 1}{\localleftbox{«\kern.1667em}}%
-%      {\everypar={{«}\kern.1667em}\setcounter{niveauguillemets}{1}}}%
-%      \def\RightPointingDoubleAngleQuotationMark{\unskip\kern.1667em»%
-%      \everypar={}\localleftbox{}}}%
-%   \else\ifx\@tmpa\tmp@paragraphe%
-%      \def\french@guill@mets{\def\LeftPointingDoubleAngleQuotationMark{«\kern.1667em%
-%      \everypar={«\kern.1667em}}\def\RightPointingDoubleAngleQuotationMark%
-%      {\unskip\kern.1667em»\everypar={}}}%
-%   \else\ifx\@tmpa\tmp@normal%
-%      \def\french@guill@mets{\def\LeftPointingDoubleAngleQuotationMark{«\kern.1667em}%
-%      \def\RightPointingDoubleAngleQuotationMark{\unskip\kern.1667em»}}%
-%\fi\fi\fi}
-%
-%\def\tmp@sans{sansaccents}
-%\define@key{french}{majuscules}{%
-%   \def\@tmpa{#1}%
-%   \ifx\@tmpa\tmp@sans%
-%      \addfontfeature{Mapping=sansaccents}% <<< TODO!
-%   \fi}
 
 \def\captionsfrench{%
    \def\refname{Références}%

@@ -7,22 +7,6 @@
    \adddialect\l@samin\l@nohyphenation%
 \fi
 
-%\def\samin@punctuation{%
-%    \frenchspacing%
-%    \XeTeXinterchartokenstate=1%
-%    \XeTeXcharclass `\! 7%
-%    \XeTeXcharclass `\? 7%
-%    \XeTeXcharclass `\; 7%
-%    \XeTeXcharclass `\: 7%
-%    \XeTeXinterchartoks 0 7 = {\unskip\kern.1667em}%
-%    }
-%
-%\def\nosamin@punctuation{%
-%    \nonfrenchspacing%
-%    \XeTeXinterchartokenstate=0%
-%}
-
-
 \def\captionssamin{%
    \def\refname{Čujuhusat}%
    \def\abstractname{Čoahkkáigeassu}%
