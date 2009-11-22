@@ -17,17 +17,17 @@
 \setkeys{sanskrit}{Script}
 
 \newXeTeXintercharclass\sanskrit@punctthin % ! ? ; : danda double_danda
-\def\sanskrit@punctthinspace{\unskip\thinspace}
+\def\sanskrit@punctthinspace{{\unskip\thinspace}}
 
 \def\sanskrit@punctuation{%
     \frenchspacing%
     \XeTeXinterchartokenstate=1%
-    \XeTeXcharclass `\! \sankskrit@punctthin
-    \XeTeXcharclass `\? \sankskrit@punctthin
-    \XeTeXcharclass `\; \sankskrit@punctthin
-    \XeTeXcharclass `\: \sankskrit@punctthin
-    \XeTeXcharclass `\। \sankskrit@punctthin
-    \XeTeXcharclass `\॥ \sankskrit@punctthin
+    \XeTeXcharclass `\! \sanskrit@punctthin
+    \XeTeXcharclass `\? \sanskrit@punctthin
+    \XeTeXcharclass `\; \sanskrit@punctthin
+    \XeTeXcharclass `\: \sanskrit@punctthin
+    \XeTeXcharclass `\। \sanskrit@punctthin
+    \XeTeXcharclass `\॥ \sanskrit@punctthin
     \XeTeXinterchartoks \z@ \sanskrit@punctthin = \sanskrit@punctthinspace
 }
 

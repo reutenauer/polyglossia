@@ -11,8 +11,8 @@
 \newXeTeXintercharclass\french@punctthick % :
 \newXeTeXintercharclass\french@punctguill % « »
 
-\def\french@punctthinspace{\unskip\thinspace}
-\def\french@punctthickspace{\unskip\nobreakspace}
+\def\french@punctthinspace{{\unskip\thinspace}}
+\def\french@punctthickspace{{\unskip\nobreakspace}}
 
 \def\french@punctuation{%
     \frenchspacing

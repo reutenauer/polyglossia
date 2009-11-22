@@ -10,8 +10,8 @@
 \newXeTeXintercharclass\breton@punctthin % ! ? ;
 \newXeTeXintercharclass\breton@punctthick % :
 
-\def\breton@punctthinspace{\unskip\thinspace}
-\def\breton@punctthickspace{\unskip\nobreakspace}
+\def\breton@punctthinspace{{\unskip\thinspace}}
+\def\breton@punctthickspace{{\unskip\nobreakspace}}
 
 \def\breton@punctuation{%
     \frenchspacing%

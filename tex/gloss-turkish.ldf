@@ -23,8 +23,8 @@
 \newXeTeXintercharclass\turkish@punctthin % ! :
 \newXeTeXintercharclass\turkish@punctthick % =
 
-\def\turkish@punctthinspace{\ifdim\lastskip>\z@\unskip\penalty\@M\thinspace\fi}
-\def\turkish@punctthickspace{\unskip\nobreakspace}
+\def\turkish@punctthinspace{{\ifdim\lastskip>\z@\unskip\penalty\@M\thinspace\fi}}
+\def\turkish@punctthickspace{{\unskip\nobreakspace}}
 
 \def\turkish@punctuation{%
    \frenchspacing%
