@@ -80,6 +80,9 @@
 }
 \setkeys{polyglossia}{localmarks=on}
 
+% to reset the intercharclass of a character to "normal"
+\newXeTeXintercharclass\xpg@normalclass
+
 %% when no patterns are available, we use \l@nohyphenation, assigned to 255
 %%  (suggestion by Enrico Gregorio)
 \@ifundefined{l@nohyphenation}{\chardef\l@nohyphenation=255 }{}
@@ -104,7 +107,7 @@
       \expandafter\newcommand\csname text#2\endcsname[2][]{%
       \ifcsdef{RL}%
       {\ifcsundef{#2@RL}%
-          {\@ensure@LR{\foreignlanguage[####1]{#2}{####2}}}%
+          {\@ensure@LTR{\foreignlanguage[####1]{#2}{####2}}}%
     {\@ensure@RTL{\foreignlanguage[####1]{#2}{####2}}}}%
       {\foreignlanguage[####1]{#2}{####2}}%
       }%
@@ -184,7 +187,7 @@
       \expandafter\newcommand\csname text#2\endcsname[2][]{%
       \ifcsdef{RL}{%
     \ifcsundef{#2@RL}%
-    {\@ensure@LR{\foreignlanguage[####1]{#2}{####2}}}%
+    {\@ensure@LTR{\foreignlanguage[####1]{#2}{####2}}}%
           {\@ensure@RTL{\foreignlanguage[####1]{#2}{####2}}}%
        }{% else
           \foreignlanguage[####1]{#2}{####2}%
