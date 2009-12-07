@@ -98,7 +98,7 @@
 
 \def\sanskrit@language{\language=\l@sanskrit}
 
-\setlocalhyphenmins{sanskrit}{1}{5}%
+\setlocalhyphenmins{sanskrit}{1}{3}%
 
 \def\noextras@sanskrit{%
    \nosanskrit@punctuation%
