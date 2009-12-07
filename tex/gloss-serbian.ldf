@@ -12,7 +12,7 @@
 \define@key{serbian}{script}[cyrillic]{%
 	\def\@tmpa{#1}%
 	\ifx\@tmpa\tmp@cyrillic\@serbian@cyrtrue\else%
-	  \@serbian@cyrfalse\fi%
+	  \@serbian@cyrfalse
 	\fi}
 
 \setkeys{serbian}{script}

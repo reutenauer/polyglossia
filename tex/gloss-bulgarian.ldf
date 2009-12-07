@@ -74,7 +74,7 @@
        октомври\or
        ноември\or
        декември\fi%
-       \number\year~г.}%
+       \ \number\year~г.}%
     \def\month@Roman{\expandafter\@Roman\month}%
     \def\todayRoman{\number\day.\,\month@Roman.\,\number\year~г.}%
     }
