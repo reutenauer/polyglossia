@@ -1,7 +1,7 @@
 
    ¦----------------------------------------------¦
    ¦                                              ¦
-   ¦       THE POLYGLOSSIA PACKAGE v1.1.0         ¦
+   ¦       THE POLYGLOSSIA PACKAGE v1.1.0a        ¦
    ¦                                              ¦
    ¦ Modern multilingual typesetting with XeLaTeX ¦
    ¦                                              ¦
@@ -44,6 +44,8 @@ and follow the instructions displayed.
 
 CHANGES
 
+1.1.0a
+   * Bugfix for interchar tokens
 1.1.0
    * Use \newXeTeXintercharclass (thanks to Enrico Gregorio)
    * Fixed implementation of shorthands for German (Babel code in file babelsh.def)
