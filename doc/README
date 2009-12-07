@@ -45,6 +45,7 @@ and follow the instructions displayed.
 CHANGES
 
 1.1.0b
+   * Modify hyphenmins for Sanskrit (Yves Codet)
    * Bugfixes for Serbian and Bulgarian (Enrico Gregorio)
 1.1.0a
    * Bugfix for interchar tokens
