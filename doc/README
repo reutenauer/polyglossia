@@ -1,7 +1,7 @@
 
    ¦----------------------------------------------¦
    ¦                                              ¦
-   ¦       THE POLYGLOSSIA PACKAGE v1.1.0a        ¦
+   ¦       THE POLYGLOSSIA PACKAGE v1.1.0b        ¦
    ¦                                              ¦
    ¦ Modern multilingual typesetting with XeLaTeX ¦
    ¦                                              ¦
@@ -44,6 +44,8 @@ and follow the instructions displayed.
 
 CHANGES
 
+1.1.0b
+   * Bugfixes for Serbian and Bulgarian (Enrico Gregorio)
 1.1.0a
    * Bugfix for interchar tokens
 1.1.0
