@@ -31,7 +31,7 @@
    \def\proofname{Demostració}%
    \def\glossaryname{Glossari}%
    }
-\datecatalan{%   
+\def\datecatalan{%
    \def\today{\number\day~\ifcase\month\or
     de gener\or de febrer\or de març\or d'abril\or de maig\or
     de juny\or de juliol\or d'agost\or de setembre\or d'octubre\or
