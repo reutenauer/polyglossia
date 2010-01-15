@@ -71,7 +71,7 @@
                \if@nobreak\ifvmode\nobreak\fi\fi}%
             \def\@markright####1####2####3{\@temptokena{\protect\@@ensure@maindir{####1}}%
                \unrestored@protected@xdef\@themark{{\the\@temptokena}%
-               {{\protect\@@ensure@maindir{####3}}}}}}
+               {\protect\@@ensure@maindir{####3}}}}}
    \else%\ifx\@tmpa\opt@disabled
       \def\local@marks##1{}
       \xpg@info{Option: localmarks=off}
