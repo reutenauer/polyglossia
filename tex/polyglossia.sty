@@ -296,6 +296,27 @@
    \ifcsundef{#1hyphenmins}{}%
    {\expandafter\expandafter\expandafter\set@hyphenmins\csname #1hyphenmins\endcsname\relax}}
 
+% FIXME: remove this eventually (say in 2012)
+% taken from xelatex.ini, in case the xelatex format is too old
+\ifcsundef{newXeTeXintercharclass}{%
+  \xpg@warning{Your xelatex format appears to be outdated!^^J
+    Please update your system and recreate it.}
+  \newcount\xe@alloc@intercharclass % allocates intercharclass
+  \xe@alloc@intercharclass=\thr@@ % from 4 (1,2 and 3 are used by CJK, AFAIK)
+  \def\xe@alloc@#1#2#3#4#5{\global\advance#1\@ne
+  \xe@ch@ck#1#4#2% make sure there's still room
+  \allocationnumber#1%
+  \global#3#5\allocationnumber
+  \wlog{\string#5=\string#2\the\allocationnumber}}
+  \def\xe@ch@ck#1#2#3{%
+  \ifnum#1<#2\else
+    \errmessage{No room for a new #3}%
+  \fi}
+  \def\newXeTeXintercharclass{%
+  \xe@alloc@\xe@alloc@intercharclass\XeTeXintercharclass\chardef\@cclv} %at most 254
+  }
+  {}
+
 %% package options
 
 %%\DeclareOption{shorthands}{\setkeys{polyglossia}{shorthands=true}}
