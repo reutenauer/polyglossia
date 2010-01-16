@@ -209,8 +209,9 @@
    \docsvlist{#1}}%
 
 \def\common@language{%
-   \protect\language=0%
-   \lefthyphenmin=2\righthyphenmin=3}
+   \language=\z@
+   \lefthyphenmin=\tw@
+   \righthyphenmin=\thr@@}
 
 \def\noextrascurrent#1{\xpg@csifdef{noextras@#1}}
 
@@ -220,10 +221,9 @@
 
 \AtBeginDocument{\xpg@initial@setup}
 
-\ifcsundef{foreignlanguage}{}%
-   {\let\foreignlanguage\@undefined}
+\providecommand{\foreignlanguage}{}
 
-\newcommand{\foreignlanguage}[3][]{%
+\renewcommand{\foreignlanguage}[3][]{%
    \ifcsundef{#2@loaded}{\xpg@nolang{#2}\hyphenrules{#2}}{%
      {\def\languagename{#2}%
       \setkeys{#2}{#1}%
@@ -236,10 +236,9 @@
       #3}%
 }}
 
-\ifcsundef{selectlanguage}{}%
-   {\let\selectlanguage\@undefined}
+\providecommand{\selectlanguage}{}
 
-\newcommand{\selectlanguage}[2][]{%
+\renewcommand{\selectlanguage}[2][]{%
    \ifcsundef{#2@loaded}{\xpg@nolang{#2}\hyphenrules{#2}}{%
       \def\xpg@pop@language{%
          \xpg@set@language{\languagename}%
@@ -259,10 +258,7 @@
    \fi
 }
 
-\ifcsundef{select@language}{}%
-   {\let\select@language\@undefined}
-
-\newcommand{\select@language}[1]{%
+\def\select@language#1{%
    \xpg@initial@setup%
    \edef\languagename{#1}%
    \ifcsundef{RL}{}%
@@ -279,14 +275,11 @@
 
 \let\xpg@pop@language\relax
 
-\ifcsundef{otherlanguage}{}%
-   {\let\otherlanguage\@undefined}
-\ifcsundef{endotherlanguage}{}%
-   {\let\endotherlanguage\@undefined}
+\provideenvironment{otherlanguage}{}{}
 
-\newenvironment{otherlanguage}[2][]{%
-   \selectlanguage[#1]{#2}%
-   }{}
+\renewenvironment{otherlanguage}[2][]
+   {\selectlanguage[#1]{#2}}
+   {}
 
 \newcommand{\setlocalhyphenmins}[3]{%
    \expandafter\ifx\csname l@#1\endcsname\relax%
