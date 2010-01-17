@@ -1,0 +1,241 @@
+Various requests and bug reports that still need to be considered
+
+//////////////////////////////////////////////////////////
+
+V. Lomov:
+Also I would like to suggest to remove lines
+   \let\@Alph\russian@Alph%
+   \let\@alph\russian@alph%
+
+from '\russian@numbers' macro. This will mimics babel behaviour
+(russianb.ldf from babel defines '\[Aa]sbuk' in the same way as
+'\russian@[Aa]lph' is defined in gloss-russian.ldf. By
+default
+\usepackage[russian]{babel}
+causes latin letters to be used for enumerate envorinment).
+Or may be there is way to enable '\norussian@numbers' when document has
+\usepackage[russian]{polyglossia} ?
+
+//////////////////////////////////////////////////////////
+
+Nikos Platis a écrit :
+> Hi Francois
+>
+> Regarding the problem I had with the exam class when greek is used as the main language, its author has traced the problem and suggested a workaround. Unfortunately the problem still remains.
+>
+> I am forwarding his email.
+>
+> It is interesting that in his last paragraph he mentions something about how the numbers and the \alph command is redefined for greek. Could this be related to the other problem that I have reported about the numbering of appendices?
+>
+> Regards,
+> Nikos
+>
+>> The error you report ("Incomplete \iffalse...") is only because this
+>> is the first run of xelatex, and so \numpages expands to
+>>
+>>   {\mbox{\normalfont\bf ??}}
+>>
+>> which is certainly not a number, which is why the \ifthenelse causes
+>> an error.  The definition of \numpages from exam.cls is:
+>>
+>> \def\numpages{\@ifundefined{exam@lastpage}%
+>>   {\mbox{\normalfont\bf ??}}%
+>>   \exam@lastpage
+>> }% numpages
+>>
+>> The reason you got hung up is that, once this error occurs, you never
+>> get to complete the run of xelatex, and so you never get the line
+>>
+>> \gdef\exam@lastpage{1}
+>>
+>> put into the .aux file, and so the error repeats.
+>>
+>> Here's a fix: Put the following into your preamble:
+>>
+>> \makeatletter
+>>   \@ifundefined{exam@lastpage}{\def\exam@lastpage{0}}{}
+>> \makeatother
+>>
+>> That way, if \exam@lastpage isn't defined in the .aux file (as will be
+>> the case on your first run of xelatex), that bit of code will define
+>> it to be 0, and so your \ifthenelse will find the number it's looking
+>> for, and all should be well.
+>>
+>>
+>> So why does this happen only when using polyglossia and Greek?  I
+>> don't know.  I assume it's related to the Greek package of polyglossia
+>> messing around with numbers, and perhaps the command \alph, but I
+>> haven't had the chance to check this out yet.
+>>
+>> Anyway, the above should be a temporary workaround.
+>>
+>> Best regards,
+>> Phil
+
+
+//////////////////////////////////////////////////////////
+
+
+U. Fischer:
+
+The problem is \thepage: Polyglossia redefines \@arabic
+to \hebrewnumber, and \hebrewnumber contains \reset@font in one part
+of its definition. Using 
+\nohebrew@globalnumbers or \@hebrew@numeralstrue or removing the
+\reset@font all solves the problem. \protect\reset@font seems to
+work too, but I don't know if the remaining \reset@font in the aux
+can make problems later.
+
+
+\documentclass{article}
+\usepackage{polyglossia}
+\setdefaultlanguage{hebrew}
+\setmainfont{DejaVu Sans}
+\usepackage{fontspec}
+
+\begin{document}
+\makeatletter
+%\nohebrew@globalnumbers
+%\@hebrew@numeralstrue
+\def\hebrewnumber#1{%
+   \if@hebrew@numerals\hebrewalph{#1}%
+   \else {%\reset@font
+    \number#1}%
+   \fi}
+\hebrew@globalnumbers   
+
+
+abc\pageref{ABC}\label{ABC}
+\end{document}
+
+---
+Vafa Khalighi:
+
+François Charette has done some changes/redefinitions in \@arabic macro for
+RTL languages in polyglossia and I told him that there is no need for such
+change/redefinition as bidi makes sure that section numbers and anything that
+needs to use arabic counter, is done properly. I think chaning/redefining
+\@arabic counter would have some side effects. For instance, I think if you
+redefine \@arabic the way polyglossia has done and then you use algorithm
+package to typeset algorithms, you no longer would get line numbers for the
+algorithm you typeset and so you have to modify algorithm package too, so my
+point is eventually that \@arabic should not be changed in any way as bidi
+makes sure that everything is done properly.
+
+//////////////////////////////////////////////////////////
+
+E. Gregorio:
+
+There is also the problem of locally changing variables: I'm not so fussy
+about orphan and widow lines as the author of babel's Italian module, but
+this aspect might prove essential for other languages. But this requires
+some thinking; it seems to be essential, though.
+
+Say that a package uses \XeTeXinterchartokenstate=1 for the same
+reasons as before:
+
+===
+...
+\usepackage{somepackage} % this says \XeTeXinterchartokenstate=1
+...
+\begin{document}
+\selectlanguage{english} % now \XeTeXinterchartokenstate=1
+Some text
+
+\selectlanguage{french} % still \XeTeXinterchartokenstate=1
+Mots en français
+
+\selectlanguage{english} % now \XeTeXinterchartokenstate=0
+Some other text
+===
+
+Yikes! This doesn't occur if an environment is used, since \noextras@french
+is not executed, AFAIK, but with a \selectlanguage switch it is.
+
+//////////////////////////////////////////////////////////
+
+
+François Charette wrote:
+> > sjo a écrit :
+>> >> I have tried doing Hebrew with polyglossia and ran into two problems.
+>> >>
+>> >> 1. In \begin{enumerate}, numbers are arabic, not in Hebrew. I am
+>> >> invoking Hebrew as
+>> >> \begin{hebrew}[numerals=hebrew]. Is there a way to get enumerations to
+>> >> work in Hebrew?
+>> >>
+>> >>   
+> > Add
+> > \renewcommand\theenumi{\alph{enumi}}
+> > in your preamble
+> > 
+>> >> 2. The date for today shows up 5769 but the 5 is a ה rather than a ש, etc.
+>> >>   
+> > 
+> > I get ‫ה׳ןסט‬ which is correct afaik. Note that the ה is followed by a
+> > Geresh symbol (U+05F3) that separates blocks of three digits. Compare
+> > the definition of  \@hebrew@numeral in §63.3.1 of the babel
+> > documentation. See also http://en.wikipedia.org/wiki/Hebrew_numerals
+> > 
+> > I am aware that there are many ways to write Hebrew numerals, and
+> > polyglossia only has a pretty basic algorithm. If you are willing to
+> > submit a patch, I'd be most grateful!
+> > 
+> > Best,
+> > FC
+
+Shouldn't the date 23 April 2009 be displayed as ‫כ״ג באפריל ב׳ט‬,
+rather than ‫כגבאפריל ב׳ט‬? That is: a space is missing between the day
+numeral and the month name, and gershayim should be between the day
+numerals.
+
+The Hebrew date is written ‫כט בניסן ה׳ןסט‬. Again, I would say there
+should be gershayim between the day numerals. I would write the current
+year (5769) as תשס״ט without writing the leading 5000, or ה׳תשס״ט when
+writing it. The version in Polyglossia uses the letter nun sofit to
+replace tav-shin, which I think is less common. Perhaps Polyglossia
+could offer options whether to use sofit letters or not, and whether to
+write the millennium at all in dates (i.e. leave off the leading ה׳).
+The Hebrew date is displayed in the top right of Ha'Aretz website
+(http://www.haaretz.co.il/) for comparison.
+
+I also notice that the numerals for 15 and 16 should have special forms
+to prevent writing parts of the Name — 15 should be ‫ט״ו‬, and 16 should
+be ‫ט״ז‬.
+
+Gareth.
+
+---
+
+Hi,
+
+sjo wrote:
+> > I have tried doing Hebrew with polyglossia and ran into two problems.
+> > 2. The date for today shows up 5769 but the 5 is a ה rather than a ש, etc.
+> >   
+0. This looks like oddness in \hebrewnumeral, which is used to generate 
+the numeric date.  It's using a chart similar to 
+http://www.inner.org/gematria/gemchart.php where the final letters 
+represent numbers between 500 and 900.  The heh-geresh represents 5000.  
+The nun sofit represents 700.  It's not the representation of Hebrew 
+numerals that most readers would be familiar with.
+
+The other obvious strange things in the implementation are:
+1. The Gregorian date as represented in Hebrew has no space between the 
+day number and the month name (it says "כגבאפריל" instead of "כג באפריל")
+2. I would usually expect a gershayim indicating that the value is 
+numeric -- כ״ט = 29, instead of  כט.  In really old documents, all the 
+letters in the number might have upper dots attached.
+3. The values used for 15 and 16 (yod-heh and yod-vav) are never used to 
+represent those numbers; it's usually tet-vav and tet-zayin.
+
+These look like bugs (or, in the case of #0, an odd feature) in 
+Polyglossia (or whatever Polyglossia is using as its backend).  I'm not 
+much of a TeX expert, and I haven't looked into the source code to see 
+how correctable they are.
+
+-- ---- Efraim Feinstein feinst@fas.harvard.edu Harvard University Physics Department/Program in Biophysics 17 Oxford St, Cambridge, MA 02138 _______________________________________________ XeTeX mailing list postmaster@tug.org http://tug.org/mailman/listinfo/xetex 
+
+//////////////////////////////////////////////////////////
+
+

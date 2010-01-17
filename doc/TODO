@@ -18,6 +18,17 @@ polyglossia.sty:
 	  \-   like the old \-, but allowing hyphenation in the rest of the word.
 
 
+See file etc/SHORTHANDS_TO_ADD.txt
+
+
+******************
+
+Suggestion from Vafa:
+
+I think it would be nice if you could in your next release add options for
+controlling footnote rule via bidi footnote interface, i.e. \autoffotnoterule,
+\rightfootnoterule, \leftfootnoterule and \textwidthfootnoterule
+
 TEST THIS:
 ============================================================================
 \newcommand{\PolyglossiaSetup}[2]{%
@@ -57,7 +68,7 @@ TEST THIS:
 Example (at the end of a gloss file): 
 \PolyglossiaSetup{<lang>}{%
    Script=Latin, %default=Latin
-   Direction=LR, %default=LR
+   Direction=LTR, %default=LTR
 %   LanguageString=<lang>, %default=<lang>
 %   Aliases={Foo,Bar},
    hyphenmins={x,y} %default={2,2} ?  {2,3} in babel...
@@ -66,7 +77,7 @@ Example (at the end of a gloss file):
    }
 
 => \<lang>@latin is defined and if \<lang>@font is not def. it is set to \normalfontlatin
-=> if Direction=RL , \<lang>@RL is defined
+=> if Direction=RTL , \<lang>@RL is defined
 => \providehyphenmins{<lang>}{xy}
 => \frenchspacing etc are set in \select@language etc
 
