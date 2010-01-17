@@ -15,9 +15,9 @@
 \define@key{hebrew}{calendar}[gregorian]{%
 	\def\@tmpa{#1}%
 	\ifx\@tmpa\tmp@hebrew%
-        \@calendar@hebrewtrue%
+    \@calendar@hebrewtrue%
 	\else%
-          \@calendar@hebrewfalse%
+    \@calendar@hebrewfalse%
 	\fi}
 
 % hebrewcal.sty also defines the boolean key fullyear (default=false)
@@ -29,7 +29,7 @@
 	\ifx\@tmpa\tmp@hebrew%
 	  \@hebrew@numeralstrue%
 	\else%
-          \@hebrew@numeralsfalse%
+    \@hebrew@numeralsfalse%
 	\fi}
 
 \setkeys{hebrew}{numerals}
@@ -127,7 +127,7 @@
    \let\@latinAlph\@Alph%
    \let\@alph\hebrewalph%
    \let\@Alph\hebrewalph%
-}
+  }
 \def\nohebrew@numbers{%
   \let\@alph\@latinalph%
   \let\@Alph\@latinAlph%
@@ -136,7 +136,8 @@
 \def\hebrewnumber#1{%
    \if@hebrew@numerals\hebrewalph{#1}%
    \else{\reset@font\number#1}%
-   \fi}
+   \fi
+   }
 
 \def\hebrew@globalnumbers{%
    \let\@latinarabic\@arabic%
