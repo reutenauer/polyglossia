@@ -9,23 +9,23 @@
 \def\russian@font{%
 \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
 \@ifundefined{russianfont}{%
-      \@ifundefined{cyrillicfont}{%
-        \zf@check@ot@script{cyrl}%
-	\if@tempswa%
-	  \addfontfeature{Script=Cyrillic}%
-	\else%
-	  \PackageError{polyglossia}{^^J
-	  The current font does not contain the Cyrillic script!^^J
-	  Please define \string\cyrillicfont\space or \string\russianfont\space with \string\newfontfamily}%
-	\fi%
-	\zf@check@ot@lang{RUS}%
-	\if@tempswa\addfontfeature{Language=Russian}\fi%
-	}%
-        {\cyrillicfont%
-	\zf@check@ot@lang{RUS}%
-	\if@tempswa\addfontfeature{Language=Russian}\fi}%
-     }% 
-     {\russianfont}%
+  \@ifundefined{cyrillicfont}{%
+    \zf@check@ot@script{cyrl}%
+  \if@tempswa%
+    \addfontfeature{Script=Cyrillic}%
+  \else%
+    \PackageError{polyglossia}{^^J
+    The current font does not contain the Cyrillic script!^^J
+    Please define \string\cyrillicfont\space or \string\russianfont\space with \string\newfontfamily}%
+  \fi%
+  \zf@check@ot@lang{RUS}%
+  \if@tempswa\addfontfeature{Language=Russian}\fi%
+  }%
+  {\cyrillicfont%
+  \zf@check@ot@lang{RUS}%
+  \if@tempswa\addfontfeature{Language=Russian}\fi}%
+  }% 
+  {\russianfont}%
 }
 
 \def\tmp@old{old}
@@ -39,7 +39,19 @@
      \def\daterussian{\daterussian@modern}%
    \fi}
 
-\setkeys{russian}{spelling}
+%TODO: enable key to switch between latin and cyrillic \alph
+\def\tmp@latin{latin}
+\newif\iflatin@numerals
+\define@key{russian}{numerals}[russian]{%
+   \def\@tmpa{#1}%
+   \ifx\@tmpa\tmp@latin
+     \latin@numeralstrue
+   \else
+     \latin@numeralsfalse
+   \fi
+}
+
+\setkeys{russian}{spelling,numerals}
 
 \def\captionsrussian@modern{%
    \def\prefacename{Предисловие}%
@@ -49,8 +61,8 @@
    \def\chaptername{Глава}%
    \def\appendixname{Приложение}%
    \ifcsundef{thechapter}%
-   	{\def\contentsname{Содержание}}%
-	{\def\contentsname{Оглавление}}%
+     {\def\contentsname{Содержание}}%
+     {\def\contentsname{Оглавление}}%
    \def\listfigurename{Список иллюстраций}%
    \def\listtablename{Список таблиц}%
    \def\indexname{Предметный указатель}%
@@ -91,8 +103,8 @@
    \def\chaptername{Глава}%
    \def\appendixname{Приложеніе}%
    \ifcsundef{thechapter}%
-   	{\def\contentsname{Содержаніе}}%
-	{\def\contentsname{Оглавленіе}}%
+     {\def\contentsname{Содержаніе}}%
+     {\def\contentsname{Оглавленіе}}%
    \def\listfigurename{Списокъ иллюстрацій}%
    \def\listtablename{Списокъ таблицъ}%
    \def\indexname{Предмѣтный указатель}%
@@ -174,11 +186,13 @@
 \def\noextras@russian{%
    \nonfrenchspacing%
    \def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
+   \iflatin@numerals\else\norussian@numbers\fi
    }
-   
+
 \def\blockextras@russian{%
    \frenchspacing%
    \russian@capsformat%
+   \iflatin@numerals\else\russian@numbers\fi
    }
 
 \def\inlineextras@russian{%
@@ -186,24 +200,3 @@
    }
 
 \endinput
-
-%\def\russian@punctuation{%
-%   \frenchspacing%
-%   \def\No{№\kern.1667em}%
-%   \def\cyrdash{—}%
-%   \def\PlainTextEmDash{\ifdim\lastskip>\z@\unskip\nobreak\hskip.2em\fi%
-%      \cyrdash\hskip.2em\ignorespaces}%
-%   \def\CompoundNamesEmDash{\leavevmode\ifdim\lastskip>\z@\unskip\fi%
-%      \nobreak\cyrdash\penalty\exhyphenpenalty\hskip\z@skip\ignorespaces}%
-%   \def\DirectSpeechEmDash{\leavevmode%
-%      \nobreak\cyrdash\nobreak\hskip.35em\ignorespaces}}
-%
-%\def\norussian@punctuation{%
-%   \nonfrenchspacing%
-%   \let\No\@undefined%
-%   \let\cyrdash\@undefined%
-%   \let\PlainTextEmDash\@undefined%
-%   \let\CompoundNamesEmDash\@undefined%
-%   \let\DirectSpeechEmDash\@undefined%
-%}
-
