@@ -1,6 +1,38 @@
 Various requests and bug reports that still need to be considered
 
 //////////////////////////////////////////////////////////
+Garret Hughes (re: Syriac numerals)
+
+I remember we had a conversation about a year and a half ago about
+Syriac numerals. I've just written up a more complete guide to the
+subject for some students. It's publicly available at
+http://www.garzo.co.uk/documents/syriac-numerals.pdf if you have the
+time for it. Likewise, it might be possible to fine tune Polyglossia's
+Syriac definitions, but only if you have the time and inclination.
+Although it would be useful to be able to set which specific system of
+numerals should be used for automatic page numbering.
+
+//////////////////////////////////////////////////////////
+Ricard Torres:
+
+By the way, the catalan language has a peculiarity in the 
+successor to the latin double l, which in catalan is written with
+a centered dot at the middle, eg 'col·laborar' means collaborate.
+The peculiarity is that, when hyphenated, the dot disappears,
+as in: 
+
+col-
+laborar.
+
+Babel goes to some pains to ensure that this happens, defining
+the macros \lgem and \Lgem. I wonder if those macros could be
+copied verbatim into 'gloss-catalan.ldf'. If you think this
+would not break anything, I may send you a suggested addition (or
+perhaps you may ask the author/s of the babel macros to do it).
+
+
+
+//////////////////////////////////////////////////////////
 
 V. Lomov:
 Also I would like to suggest to remove lines
