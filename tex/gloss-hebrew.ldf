@@ -49,7 +49,7 @@
   \def\tablename{טבלה}%
   \def\partname{חלק}%
   \def\enclname{רצ"ב}%
-  \def\ccname{העטקים}%
+  \def\ccname{העתקים}%
   \def\headtoname{אל}%
   \def\pagename{עמוד}%
   \def\psname{נ.ב.}%
