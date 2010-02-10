@@ -57,8 +57,8 @@
    \def\listfigurename{Table des figures}%
    \def\listtablename{Liste des tableaux}%
    \def\indexname{Index}%
-   \def\figurename{\scshape Fig.}%
-   \def\tablename{\scshape Tab.}%
+   \def\figurename{\textsc{Fig.}}%
+   \def\tablename{\textsc{Tab.}}%
    \def\@Fpt{\ifcase\value{part}\or Première\or Deuxième\or%
    Troisième\or Quatrième\or Cinquième\or Sixième\or%
    Septième\or Huitième\or Neuvième\or Dixième\or Onzième\or%
