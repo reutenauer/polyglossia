@@ -81,7 +81,7 @@
 \setkeys{polyglossia}{localmarks=on}
 
 % to reset the intercharclass of a character to "normal"
-\newXeTeXintercharclass\xpg@normalclass
+\newXeTeXintercharclass\xpg@normalclass %TODO
 
 %% when no patterns are available, we use \l@nohyphenation, assigned to 255
 %%  (suggestion by Enrico Gregorio)
@@ -186,12 +186,12 @@
       \fi
       \expandafter\newcommand\csname text#2\endcsname[2][]{%
       \ifcsdef{RL}{%
-    \ifcsundef{#2@RL}%
-    {\@ensure@LTR{\foreignlanguage[####1]{#2}{####2}}}%
+        \ifcsundef{#2@RL}%
+          {\@ensure@LTR{\foreignlanguage[####1]{#2}{####2}}}%
           {\@ensure@RTL{\foreignlanguage[####1]{#2}{####2}}}%
-       }{% else
+      }{% else
           \foreignlanguage[####1]{#2}{####2}%
-       }}%
+      }}%
       \csletcs{local#2}{text#2}%
       \csgdef{#2@loaded}{}%
      }%
@@ -234,7 +234,8 @@
       \use@localhyphenmins{#2}%
       \xpg@csifdef{inlineextras@#2}%
       #3}%
-}}
+   }%
+}
 
 \providecommand{\selectlanguage}{}
 
@@ -296,7 +297,7 @@
    \ifcsundef{#1hyphenmins}{}%
    {\expandafter\expandafter\expandafter\set@hyphenmins\csname #1hyphenmins\endcsname\relax}}
 
-% FIXME: remove this eventually (say in 2012)
+% FIXME: remove this eventually, say in 2012 :)
 % taken from xelatex.ini, in case the xelatex format is too old
 \ifcsundef{newXeTeXintercharclass}{%
   \xpg@warning{Your xelatex format appears to be outdated!^^J
@@ -317,9 +318,9 @@
   }
   {}
 
-%% package options
+%% Package Options %%
 
-%%\DeclareOption{shorthands}{\setkeys{polyglossia}{shorthands=true}}
+%TODO\DeclareOption{shorthands}{\setkeys{polyglossia}{shorthands=true}}
 \DeclareOption{nolocalmarks}{\setkeys{polyglossia}{localmarks=off}}
 \DeclareOption{quiet}{%
    \gdef\@latex@info#1{\relax}% no latex info
@@ -340,8 +341,8 @@
 \DeclareOption{polygreek}{\xpg@option{variant=poly}{greek}}
 \DeclareOption{monogreek}{\xpg@option{variant=mono}{greek}}
 \DeclareOption{ancientgreek}{\xpg@option{variant=ancient}{greek}}
-%%% FIXME: this does not work when gloss-<option>.ldf contains a \RequirePackage command !!!
-%%%        let's try with \AtEndOfPackage (not tested)
+%%% FIXME: This does not work when gloss-<option>.ldf contains a \RequirePackage command!
+%%%        Try with \AtEndOfPackage (not tested)
 \DeclareOption*{%
 \ifcsundef{xpg@main@language}%
 {\edef\@temp{\noexpand\setdefaultlanguage{\CurrentOption}}}%
@@ -349,4 +350,3 @@
    \AtEndOfPackage{\@temp}}
 \ProcessOptions*
 \endinput
-
