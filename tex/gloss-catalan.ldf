@@ -7,6 +7,74 @@
    \adddialect\l@catalan\l@nohyphenation%
 \fi
 
+\define@boolkey{catalan}[catalan@]{babelshorthands}[true]{}
+\setkeys{catalan}{babelshorthands}
+\ifcsundef{initiate@active@char}{%
+\input{babelsh.def}%
+\initiate@active@char{"}%
+}{}
+
+%%% copied from Babel's catalan.ldf:
+% TODO check if char · exists, and use it instead of raised dot?
+\newdimen\leftllkern \newdimen\rightllkern \newdimen\raiselldim
+\def\lgem{%
+  \ifmmode
+    \csname normal@char\string"\endcsname l%
+  \else
+    \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
+    \setbox0\hbox{l}\setbox1\hbox{l\/}\setbox2\hbox{.}%
+    \advance\raiselldim by \the\fontdimen5\the\font
+    \advance\raiselldim by -\ht2%
+    \leftllkern=-.25\wd0%
+    \advance\leftllkern by \wd1%
+    \advance\leftllkern by -\wd0%
+    \rightllkern=-.25\wd0%
+    \advance\rightllkern by -\wd1%
+    \advance\rightllkern by \wd0%
+    \allowhyphens\discretionary{l-}{l}%
+    {\hbox{l}\kern\leftllkern\raise\raiselldim\hbox{.}%
+      \kern\rightllkern\hbox{l}}\allowhyphens
+  \fi
+}
+\def\Lgem{%
+  \ifmmode
+    \csname normal@char\string"\endcsname L%
+  \else
+    \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
+    \setbox0\hbox{L}\setbox1\hbox{L\/}\setbox2\hbox{.}%
+    \advance\raiselldim by .5\ht0%
+    \advance\raiselldim by -.5\ht2%
+    \leftllkern=-.125\wd0%
+    \advance\leftllkern by \wd1%
+    \advance\leftllkern by -\wd0%
+    \rightllkern=-\wd0%
+    \divide\rightllkern by 6%
+    \advance\rightllkern by -\wd1%
+    \advance\rightllkern by \wd0%
+    \allowhyphens\discretionary{L-}{L}%
+    {\hbox{L}\kern\leftllkern\raise\raiselldim\hbox{.}%
+      \kern\rightllkern\hbox{L}}\allowhyphens
+  \fi
+}
+\AtBeginDocument{%
+  \let\lslash\l
+  \let\Lslash\L
+  \DeclareRobustCommand\l{\@ifnextchar.\bbl@l\lslash}
+  \DeclareRobustCommand\L{\@ifnextchar.\bbl@L\Lslash}}
+\def\bbl@l#1#2{\lgem}
+\def\bbl@L#1#2{\Lgem}
+
+\def\catalan@shorthands{%
+  \bbl@activate{"}%
+  \def\language@group{catalan}%
+  \declare@shorthand{catalan}{"l}{\lgem{}}
+  \declare@shorthand{catalan}{"L}{\Lgem{}}
+}
+
+\def\nocatalan@shorthands{%
+    \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+
 \def\captionscatalan{%
    \def\refname{Referències}%
    \def\abstractname{Resum}%
@@ -42,4 +110,18 @@
 
 \setlocalhyphenmins{catalan}{2}{2}
 
+\def\noextras@catalan{%
+   \nonfrenchspacing%
+   \nocatalan@shorthands%
+}
+
+\def\blockextras@catalan{%
+   \frenchspacing%
+   \ifcatalan@babelshorthands\catalan@shorthands\fi%
+}
+
+\def\inlineextras@catalan{%
+   \frenchspacing%
+   \ifcatalan@babelshorthands\catalan@shorthands\fi%
+}
 \endinput
