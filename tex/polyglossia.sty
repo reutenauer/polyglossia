@@ -342,12 +342,14 @@
 \DeclareOption{polygreek}{\xpg@option{variant=poly}{greek}}
 \DeclareOption{monogreek}{\xpg@option{variant=mono}{greek}}
 \DeclareOption{ancientgreek}{\xpg@option{variant=ancient}{greek}}
-%%% FIXME: This does not work when gloss-<option>.ldf contains a \RequirePackage command!
-%%%        Try with \AtEndOfPackage (not tested)
 \DeclareOption*{%
-\ifcsundef{xpg@main@language}%
-{\edef\@temp{\noexpand\setdefaultlanguage{\CurrentOption}}}%
-{\edef\@temp{\noexpand\setotherlanguage{\CurrentOption}}}%
-   \AtEndOfPackage{\@temp}}
+  \edef\@temp{%
+    \noexpand\ifcsundef{xpg@main@language}%
+      \noexpand\setdefaultlanguage
+      \noexpand\setotherlanguage
+    {\CurrentOption}%
+  }%
+  \expandafter\AtEndOfPackage\expandafter{\@temp}%
+}
 \ProcessOptions*
 \endinput
