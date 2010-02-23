@@ -135,7 +135,7 @@
 
 \def\hebrewnumber#1{%
    \if@hebrew@numerals\hebrewalph{#1}%
-   \else{\reset@font\number#1}%
+   \else{\protect\reset@font\number#1}%
    \fi
    }
 

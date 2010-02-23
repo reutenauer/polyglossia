@@ -140,11 +140,11 @@
          {{\protect\arabicfont\protect\addfontfeature{Mapping=arabicdigits}%
            \number#1}%
          \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: I am using \string\arabicfont instead}}%
-	 {\RL{\reset@font\number#1}%
+	 {\RL{\protect\reset@font\number#1}%
 	 \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: since \string\arabicfont is not defined, we'll use Western numerals instead}}%
      \fi%
    \else%
-     \RL{\reset@font\number#1}%
+     \RL{\protect\reset@font\number#1}%
    \fi}
 
 \def\syriac@globalnumbers{%

@@ -124,7 +124,10 @@
  \fi}}
 
 
-\def\arabicnumber#1{\ifeastern@numerals{\addfontfeature{Mapping=arabicdigits}\number#1}\else\RL{\reset@font\number#1}\fi}
+\def\arabicnumber#1{%
+  \ifeastern@numerals{\addfontfeature{Mapping=arabicdigits}\number#1}%
+  \else\RL{\protect\reset@font\number#1}%
+  \fi}
 
 \def\@ornatebracearabic#1{\RL{\char"FD3F\@arabic#1\char"FD3E}}
 \def\@ornatebracealph#1{\RL{\char"FD3F\@alph#1\char"FD3E}}
