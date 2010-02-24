@@ -8,21 +8,28 @@
 \fi
 
 \define@boolkey{catalan}[catalan@]{babelshorthands}[true]{}
-\setkeys{catalan}{babelshorthands}
+\ifsystem@babelshorthands
+  \setkeys{catalan}{babelshorthands=true}
+\else
+  \setkeys{catalan}{babelshorthands=false}
+\fi
 \ifcsundef{initiate@active@char}{%
 \input{babelsh.def}%
 \initiate@active@char{"}%
 }{}
 
-%%% copied from Babel's catalan.ldf:
-% TODO check if char · exists, and use it instead of raised dot?
+%%% adapted from Babel's catalan.ldf
 \newdimen\leftllkern \newdimen\rightllkern \newdimen\raiselldim
+% we check if char · exists, and use it instead of raised dot:
+\def\xpg@raiseddot{\ifnum\XeTeXcharglyph"00B7 > 0\hbox{\char"00B7}%
+  \else\raise\raiselldim\hbox{.}\fi}
 \def\lgem{%
   \ifmmode
     \csname normal@char\string"\endcsname l%
   \else
     \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
-    \setbox0\hbox{l}\setbox1\hbox{l\/}\setbox2\hbox{.}%
+    \setbox0\hbox{l}\setbox1\hbox{l\/}%
+    \ifnum\XeTeXcharglyph"00B7 > 0\setbox2\hbox{\char"00B7}\else\setbox2\hbox{.}\fi
     \advance\raiselldim by \the\fontdimen5\the\font
     \advance\raiselldim by -\ht2%
     \leftllkern=-.25\wd0%
@@ -31,9 +38,9 @@
     \rightllkern=-.25\wd0%
     \advance\rightllkern by -\wd1%
     \advance\rightllkern by \wd0%
-    \discretionary{l-}{l}%
-    {\hbox{l}\kern\leftllkern\raise\raiselldim\hbox{.}%
-      \kern\rightllkern\hbox{l}}%
+    \allowhyphens\discretionary{l-}{l}%
+    {\hbox{l}\kern\leftllkern\xpg@raiseddot%
+      \kern\rightllkern\hbox{l}}\allowhyphens
   \fi
 }
 \def\Lgem{%
@@ -41,7 +48,8 @@
     \csname normal@char\string"\endcsname L%
   \else
     \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
-    \setbox0\hbox{L}\setbox1\hbox{L\/}\setbox2\hbox{.}%
+    \setbox0\hbox{L}\setbox1\hbox{L\/}%
+    \ifnum\XeTeXcharglyph"00B7 > 0\setbox2\hbox{\char"00B7}\else\setbox2\hbox{.}\fi
     \advance\raiselldim by .5\ht0%
     \advance\raiselldim by -.5\ht2%
     \leftllkern=-.125\wd0%
@@ -51,9 +59,9 @@
     \divide\rightllkern by 6%
     \advance\rightllkern by -\wd1%
     \advance\rightllkern by \wd0%
-    \discretionary{L-}{L}%
-    {\hbox{L}\kern\leftllkern\raise\raiselldim\hbox{.}%
-      \kern\rightllkern\hbox{L}}%
+    \allowhyphens\discretionary{L-}{L}%
+    {\hbox{L}\kern\leftllkern\xpg@raiseddot%
+      \kern\rightllkern\hbox{L}}\allowhyphens
   \fi
 }
 \AtBeginDocument{%
