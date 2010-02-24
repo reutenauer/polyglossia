@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{polyglossia}[2009/11/20 v1.1.0
+\ProvidesPackage{polyglossia}[2010/02/23 v1.1.1
   Babel replacement for XeLaTeX]
 \RequirePackage{etoolbox}
 \RequirePackage{makecmds}
@@ -302,7 +302,7 @@
 % taken from xelatex.ini, in case the xelatex format is too old
 \ifcsundef{newXeTeXintercharclass}{%
   \xpg@warning{Your xelatex format appears to be outdated!^^J
-    Please update your system and recreate it.}
+    Please update your system and recreate it with fmtutil.}
   \newcount\xe@alloc@intercharclass % allocates intercharclass
   \xe@alloc@intercharclass=\thr@@ % from 4 (1,2 and 3 are used by CJK, AFAIK)
   \def\xe@alloc@#1#2#3#4#5{\global\advance#1\@ne
@@ -319,10 +319,11 @@
   }
   {}
 
-%% Package Options %%
+\define@boolkey{polyglossia}[system@]{babelshorthands}[false]{}
 
-%TODO\DeclareOption{shorthands}{\setkeys{polyglossia}{shorthands=true}}
+%% Package Options %%
 \DeclareOption{nolocalmarks}{\setkeys{polyglossia}{localmarks=off}}
+\DeclareOption{babelshorthands}{\setkeys{polyglossia}{babelshorthands=true}}
 \DeclareOption{quiet}{%
    \gdef\@latex@info#1{\relax}% no latex info
    \gdef\@font@info#1{\relax}% no latex font info
