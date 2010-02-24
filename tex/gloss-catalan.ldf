@@ -31,9 +31,9 @@
     \rightllkern=-.25\wd0%
     \advance\rightllkern by -\wd1%
     \advance\rightllkern by \wd0%
-    \allowhyphens\discretionary{l-}{l}%
+    \discretionary{l-}{l}%
     {\hbox{l}\kern\leftllkern\raise\raiselldim\hbox{.}%
-      \kern\rightllkern\hbox{l}}\allowhyphens
+      \kern\rightllkern\hbox{l}}%
   \fi
 }
 \def\Lgem{%
@@ -51,9 +51,9 @@
     \divide\rightllkern by 6%
     \advance\rightllkern by -\wd1%
     \advance\rightllkern by \wd0%
-    \allowhyphens\discretionary{L-}{L}%
+    \discretionary{L-}{L}%
     {\hbox{L}\kern\leftllkern\raise\raiselldim\hbox{.}%
-      \kern\rightllkern\hbox{L}}\allowhyphens
+      \kern\rightllkern\hbox{L}}%
   \fi
 }
 \AtBeginDocument{%
