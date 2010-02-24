@@ -297,7 +297,11 @@
 \bbl@activate{~}
 \def\bbl@disc#1#2{%
   \nobreak\discretionary{#2-}{}{#1}\allowhyphens}
-%HERE ENDS THE CODE COPIED FROM babel.def --------------------
+\def\bbl@t@one{T1}
+\def\allowhyphens{%
+  \ifx\cf@encoding\bbl@t@one\else\bbl@allowhyphens\fi}
+\def\bbl@allowhyphens{\nobreak\hskip\z@skip}
+%HERE ENDS THE CODE COPIED FROM babel.def -------------------- 
 \def\bbl@disc@german#1#2{%
   \nobreak\discretionary{#2-}{}{#1}}
 \endinput
