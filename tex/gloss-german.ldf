@@ -47,9 +47,15 @@
 
 \define@boolkey{german}[german@]{latesthyphen}[false]{}
 
-\define@boolkey{german}[german@]{babelshorthands}[false]{}
+\define@boolkey{german}[german@]{babelshorthands}[true]{}
 
-\setkeys{german}{spelling,latesthyphen,babelshorthands,script}
+\setkeys{german}{spelling,latesthyphen,script}
+
+\ifsystem@babelshorthands
+  \setkeys{german}{babelshorthands=true}
+\else
+  \setkeys{german}{babelshorthands=false}
+\fi
 
 \ifcsundef{initiate@active@char}{%
 \input{babelsh.def}%
