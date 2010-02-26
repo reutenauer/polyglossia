@@ -67,8 +67,8 @@
 \AtBeginDocument{%
   \let\lslash\l
   \let\Lslash\L
-  \DeclareRobustCommand\l{\@ifnextchar.\bbl@l\lslash}
-  \DeclareRobustCommand\L{\@ifnextchar.\bbl@L\Lslash}}
+  \DeclareRobustCommand\l{\@ifnextchar.\bbl@l{\@ifnextchar·\bbl@l\lslash}}
+  \DeclareRobustCommand\L{\@ifnextchar.\bbl@L{\@ifnextchar·\bbl@L\Lslash}}}
 \def\bbl@l#1#2{\lgem}
 \def\bbl@L#1#2{\Lgem}
 
