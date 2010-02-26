@@ -65,9 +65,10 @@
                \fi}%
             \fi}
         \fi
-        \@ifpackagewith{babel}{KeepShorthandsActive}{}{%
+        %%\@ifpackagewith{babel}{KeepShorthandsActive}{}{%
           \edef\bbl@tempa{\catcode`\noexpand##1\the\catcode`##1}%
-          \expandafter\AtEndOfPackage\expandafter{\bbl@tempa}}%
+          \expandafter\AtEndOfPackage\expandafter{\bbl@tempa}%
+        %%}%
         \@tempcnta=\lccode`\~
         \lccode`~=`##1%
         \lowercase{%
@@ -237,7 +238,7 @@
    \fi
 }
 \def\@notshorthand#1{%
-       \PackageError{babel}{%
+       \PackageError{polyglossia}{%
          The character `\string #1' should be made
          a shorthand character;\MessageBreak
          add the command \string\useshorthands\string{#1\string} to
@@ -248,7 +249,7 @@
 \newcommand*\shorthandoff[1]{\bbl@switch@sh{off}#1\@nil}
 \def\bbl@switch@sh#1#2#3\@nil{%
   \@ifundefined{active@char\string#2}{%
-    \PackageError{babel}{%
+    \PackageError{polyglossia}{%
       The character '\string #2' is not a shorthand character
       in \languagename}{%
       Maybe you made a typing mistake?\MessageBreak
