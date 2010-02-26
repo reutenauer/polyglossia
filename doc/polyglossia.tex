@@ -9,7 +9,7 @@
 \definecolor{darkgray}{gray}{0.3}
 \definecolor{lightgray}{gray}{0.6}
 \definecolor{mygreen}{rgb}{0,.43,0}
-\usepackage[dvipdfm,
+\usepackage[
     bookmarks=true,
     colorlinks=true,
     linkcolor=myblue,
@@ -18,16 +18,18 @@
     hyperindex=false,
     hyperfootnotes=false,
     pdftitle={Polyglossia: A Babel replacement for XeLaTeX},
-    pdfauthor={F Charette <firmicus ατ gmx δοτ net>},
+    pdfauthor={F Charette <firmicus · gmx · net>},
     pdfkeywords={xetex, xelatex, multilingual, babel, hyphenation}
     ]{hyperref}
-\usepackage{polyglossia,farsical}
+\usepackage[babelshorthands]{polyglossia}
+\usepackage{farsical}
 \setmainlanguage[variant=uk]{english}
-\setotherlanguages{arabic,hebrew,syriac,greek,russian}
+\setotherlanguages{arabic,hebrew,syriac,greek,russian,catalan}
 \newcommand*\Cmd[1]{\cmd{#1}\DescribeMacro{#1}\xspace}
 \newcommand*\pkg[1]{\textsf{\color{myblue}#1}}
 \newcommand*\file[1]{\texttt{\color{myblue}#1}}
 \newcommand*\TR[1]{\textcolor{myred}{#1}}
+\newcommand*\TX[1]{\hyperref[#1]{\textcolor{myred}{#1}}}
 \newcommand*\TB[1]{\textcolor{myblue}{\bf #1}}
 \def\eg{\textit{e.g.,}\xspace}
 \def\ie{\textit{i.e.,}\xspace}
@@ -36,10 +38,6 @@
 \def\Ie{\textit{I.e.,}\xspace}
 \def\etc{\@ifnextchar.{\textit{etc}}{\textit{etc.}\@\xspace}}
 
-\newlength{\oldparindent}
-\newcommand{\parindentoff}{\setlength{\oldparindent}{\parindent} \setlength{\parindent}{0pt}}
-\newcommand{\parindenton}{\setlength{\parindent}{\oldparindent}}
-
 %% Sidenotes  << copied from fontspec.dtx
 \newcommand\warn[2]{%
   \edef\thisversion{#1}%
@@ -47,16 +45,16 @@
   $\leftarrow$}%
   \marginpar{\raggedleft
     \small%
-      {\ifx\thisversion\fileversion\color{red}\fi$\rightarrow$}%
-      \,{\notefont #1:~#2}}}
+    \ifx\thisversion\fileversion\color{red}\fi
+    \notefont #1:~#2}}
 
 \newcommand\new[1]{%
   \edef\thisversion{#1}%
   \ifhmode\unskip~\fi{\ifx\thisversion\fileversion\color{blue}\else\color[gray]{0.5}\fi
   $\leftarrow$}%
-  \marginpar{\raggedleft
+  \marginpar{\centering
     \small\ifx\thisversion\fileversion\color{blue}\else\color[gray]{0.5}\fi
-    $\rightarrow$\,{\notefont #1:~New!}}}
+    \notefont #1}}
 \newcommand\displaycmd[2]{%
   \\\DescribeMacro{#2}\centerline{\cmd{#1}}} 
 \renewenvironment{itemize}{\begin{compactitem}[\char"2023]}%[{\fontspec{DejaVu Sans}\char"25BB}]}%
@@ -112,7 +110,7 @@
 \section{Introduction}
 
 Polyglossia is a package for facilitating multilingual typesetting with \XeLaTeX.
-Basically, it can be used as a replacement of \Babel{} for performing the 
+Basically, it can be used as a replacement of \Babel for performing the 
 following tasks automatically:
 
 \begin{enumerate}
@@ -135,10 +133,10 @@ following tasks automatically:
       available separately).
 \end{enumerate}
 
-Several features of \Babel{} that do not make sense in the \XeTeX\ world (like font 
-encodings, shorthands, etc.) are (obviously) not supported.
+Several features of \Babel that do not make sense in the \XeTeX\ world (like font 
+encodings, shorthands, etc.) are not supported.
 Generally speaking, \pkg{polyglossia} aims to remain as compatible as possible
-with the fundamental features of \Babel{} while being cleaner, light-weight,
+with the fundamental features of \Babel while being cleaner, light-weight,
 and modern. The package \pkg{antomega} has been much beneficial in our attempt to 
 reach this objective.
 
@@ -146,7 +144,7 @@ reach this objective.
 macros defined in the \pkg{etoolbox} package by Philipp Lehmann. Being designed 
 specifically for \XeLaTeX, it obviously also relies on \pkg{fontspec} by Will
 Robertson. For languages written from right to left, it needs the package \pkg{bidi}
-(by the present author). Polyglossia also bundles three packages for calendaric 
+by Vafa Khaliqi (\textarabic{وفا خالقي}). Polyglossia also bundles three packages for calendaric 
 computations (\pkg{hebrewcal}, \pkg{hijrical}, and \pkg{farsical}).
 
 \section{Loading language definition files}
@@ -167,7 +165,7 @@ Language-specific options can be set or changed at any time by means of
 	
 
 \subsection{The “Babel way”}
-As with \Babel{}, \pkg{polyglossia} also allows to load language definition files 
+As with \Babel, \pkg{polyglossia} also allows to load language definition files 
 as package options. In most cases, option \texttt{⟨lang⟩} will load the file
 \file{gloss-⟨lang⟩.ldf}. Note however that the \textit{first} language listed in \\
 \centerline{\cmd{\usepackage[lang1,lang2,…]{polyglossia}}}
@@ -184,26 +182,88 @@ that are explained in section \ref{specific} below.
 
 \begin{table}[h]\centering
 \label{tab:lang}
-\begin{tabular}{lllll}\hline
-albanian &   croatian &  galician & \TR{lsorbian}  &\TR{serbian} \\ 		       
-amharic\footnotemark  &   czech    &  \TR{german}   & \TR{magyar}&   slovak \\
-\TR{arabic}& danish   &  \TR{greek}    &   norsk    &   slovenian\\
-bahasai  &   divehi   &  \TR{hebrew}   &   nynorsk  &   spanish	\\
-bahasam  &   dutch    &    hindi       &   polish   &   swedish	\\
-basque   &\TR{english}&    icelandic   &   portuges & \TR{syriac} \\
-brazil   &\TR{esperanto}&  interlingua &   romanian & \TR{thai} \\
-breton   &   estonian &    irish       &\TR{russian}&   turkish	\\
-bulgarian&\TR{farsi}  &    italian     &   samin    &   ukrainian \\
-catalan  &   finnish  &    latin       &   sanskrit &\TR{usorbian} \\
-coptic   &   french   &    latvian     &   scottish &   welsh	\\
+%albanian
+%amharic\footnotemark
+%\TX{arabic}
+%asturian\footnotemark
+%bahasai
+%bahasam
+%basque
+%brazil
+%breton
+%bulgarian
+%\TX{catalan}
+%coptic
+%croatian
+%czech
+%danish
+%divehi
+%\TX{dutch}
+%\TX{english}
+%\TX{esperanto}
+%estonian
+%\TX{farsi}
+%finnish
+%french
+%galician
+%\TX{german}
+%\TX{greek}
+%\TX{hebrew}
+%hindi
+%icelandic
+%interlingua 
+%irish
+%italian
+%latin
+%latvian
+%\TX{lsorbian}
+%\TX{magyar}
+%norsk
+%nynorsk
+%polish
+%portuges 
+%romanian 
+%\TX{russian}
+%samin
+%sanskrit 
+%scottish 
+%\TX{serbian}
+%slovak
+%slovenian 
+%spanish
+%swedish
+%\TX{syriac}
+%\TX{thai}
+%turkish
+%ukrainian
+%\TX{usorbian}
+%welsh
+%%%%% the following table was automatically generated with "maketabular.pl 5 < above_input"
+\begin{tabular}{lllll}
+\hline
+albanian              & croatian       & \TX{german}   & norsk        & spanish       \\
+amharic\footnotemark  & czech          & \TX{greek}    & nynorsk      & swedish       \\
+\TX{arabic}           & danish         & \TX{hebrew}   & polish       & \TX{syriac}   \\
+asturian\footnotemark & divehi         & hindi         & portuges     & \TX{thai}     \\
+bahasai               & \TX{dutch}     & icelandic     & romanian     & turkish       \\
+bahasam               & \TX{english}   & interlingua   & \TX{russian} & ukrainian     \\
+basque                & \TX{esperanto} & irish         & samin        & \TX{usorbian} \\
+brazil                & estonian       & italian       & sanskrit     & welsh         \\
+breton                & \TX{farsi}     & latin         & scottish     &               \\
+bulgarian             & finnish        & latvian       & \TX{serbian} &               \\
+\TX{catalan}          & french         & \TX{lsorbian} & slovak       &               \\
+coptic                & galician       & \TX{magyar}   & slovenian    &               \\
 \hline
 \end{tabular}
 \caption{Languages currently supported in \pkg{polyglossia}}
 \end{table}
-\footnotetext{ New in version 1.0.1. This should be considered an experimental attempt to
+\footnotetext{ New in version 1.0.1. 
+This should be considered an experimental attempt to
 port the package \pkg{ethiop}. Feedbacks are welcome.}
+\footnotetext{ New in version 1.1.1. 
+Language definition file provided by Kevin Godby and Xuacu Saturio.}
 
-Some options are convenient shortcuts for loading languages with 
+Some package options are convenient shortcuts for loading languages with 
 specific options:
 
 \begin{itemize}
@@ -218,6 +278,11 @@ specific options:
 \item polygreek = greek with option ‘variant=polytonic’ (or ‘poly’)
 \item ancientgreek = greek with option ‘variant=ancient’
 \end{itemize}
+
+Polyglossia can also be loaded with the option ‘babelshorthands’\new{v1.1.1}, which 
+globally activates \Babel shorthands whenever available. Currently shorthands are
+only implemented for German and Catalan: see below for details.
+
 Another option (turned off by default) is ‘nolocalmarks’, which 
 prevents the redefinition of the internal \LaTeX\ macros 
 \cmd\markboth\ and \cmd\markright.
@@ -296,14 +361,15 @@ ought to be mentioned here.
 	and the environment ¦otherlanguage¦\DescribeEnv{otherlanguage}.
 \end{itemize}
 %
-Since the \XeLaTeX\ format incorporates \Babel{}'s \file{hyphen.cfg}, 
+Since the \XeLaTeX\ format incorporates \Babel’s \file{hyphen.cfg}, 
 the low-level commands for hyphenation and language switching
-defined there are also accessible.\footnote{ %
-	The file \file{hyphen\_cfg} (available on the  
-	\href{http://scripts.sil.org/svn-view/xetex/TRUNK/texmf/tex/xelatex/polyglossia/hyphen\_cfg}{\XeTeX\ subversion repository}) 
-	is meant to eventually replace \Babel’s \file{hyphen.cfg}. If you want
-	to experiment with it, rename it into \file{hyphen.cfg}, copy it to
-	\texttt{…/tex/xelatex/polyglossia/} and rebuild the xelatex format.}
+defined there are also accessible.
+%%\footnote{ %
+%%	The file \file{hyphen\_cfg} (available on the  
+%%	\href{http://scripts.sil.org/svn-view/xetex/TRUNK/texmf/tex/xelatex/polyglossia/hyphen\_cfg}{\XeTeX\ subversion repository})
+%%	is meant to eventually replace \Babel’s \file{hyphen.cfg}. If you want
+%%	to experiment with it, rename it into \file{hyphen.cfg}, copy it to
+%%	\texttt{…/tex/xelatex/polyglossia/} and rebuild the xelatex format.}
 
 
 \section{Font setup}
@@ -329,9 +395,9 @@ of that language, an error message is displayed.
 This section gives a list of all languages for which options and end-user commands are defined.
 The default value of each option is given in italic.
 
-%\subsection{amharic}
+%\subsection{amharic}\label{amharic}
 
-\subsection{arabic}
+\subsection{arabic}\label{arabic}
 \textbf{Options}: 
 	\begin{itemize}
 	\item \TB{calendar} = \textit{gregorian} or islamic (= hijri)
@@ -344,7 +410,7 @@ The default value of each option is given in italic.
 		as well as the form of the numerals (unless overriden by the following option).
 	\item \TB{numerals} = \textit{mashriq} or maghrib 
 		(the latter is the default when locale = algeria, tunisia or morocco)
-  \item \TB{abjadjimnotail} = \textit{false} or true.\new{1.0.3}
+  \item \TB{abjadjimnotail} = \textit{false} or true. \new{v1.0.3}
     Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍}\ – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
 	\end{itemize}
 \textbf{Commands}:
@@ -352,20 +418,50 @@ The default value of each option is given in italic.
 	\item \Cmd\abjad and \Cmd\abjadmaghribi (see section \ref{abjad})
 	\end{itemize}
 
-\subsection{english}
+\subsection{catalan}\label{catalan}
+\textbf{Options:}
+\begin{itemize}
+  \item \TB{babelshorthands} = \textit{false} or true. \new{v1.1.1}
+    Activates the shorthands \texttt{"l} and \texttt{"L} to type geminated l’s.    
+\end{itemize}
+\textbf{Commands}:
+\begin{itemize}
+  \item \Cmd{\l.l} and \Cmd{\L.L} behave as in \Babel to type a geminated l, as in \textit{co\l.laborar}. \new{v1.1.1}
+    In polyglossia the same can also be achieved with \Cmd{\l·l} and \Cmd{\L·L}.\footnote{ %
+        NB: · is the glyph U+00B7 MIDDLE DOT.}
+\end{itemize}
+
+\pagebreak
+\subsection{dutch}\label{dutch}
+\textbf{Options:}
+\begin{itemize}
+  \item \TB{babelshorthands} = \textit{false} or true. \new{v1.1.1}
+		if this is turned on, all shorthands defined in \Babel
+		for fine-tuning the hyphenation of Dutch words are activated.
+		\begin{itemize}
+		\item ¦"-¦ for an explicit hyphen sign, allowing hyphenation in the rest of the word
+		\item ¦"~¦ for a compound word mark without a breakpoint
+		\item ¦"|¦ disables the ligature at this position
+		\item ¦""¦ is like ¦"-¦, but produces no hyphen sign 
+			(for compound words with an hyphen, e.g., ¦foo-""bar¦)
+		\item ¦"/¦ to enable hyphenation in two words written together but separated by a slash.
+		\end{itemize}
+\end{itemize}
+
+\subsection{english}\label{english}
 \textbf{Options}: 
 	\begin{itemize}
 	\item \TB{variant} = \textit{american} (= us), usmax (same as ‘american’ but with additional hyphenation patterns), british (= uk), australian or newzealand
 	\item \TB{ordinalmonthday} = true/\textit{false} (true by default only when variant = british)	
 	\end{itemize}
 
-\subsection{esperanto}
+\subsection{esperanto}\label{esperanto}
 \textbf{Commands}:
 	\begin{itemize}
-	\item \Cmd\hodiau\ and \Cmd\hodiaun are special forms of \cmd\today\ (see the \Babel\ documentation)
+	\item \Cmd\hodiau\ and \Cmd\hodiaun are special forms of \cmd\today\ (see the \Babel documentation)
 	\end{itemize}
 
-\subsection{farsi}
+\subsection{farsi}\label{farsi}
 \textbf{Options}: 
 	\begin{itemize}
 	\item \TB{numerals} = western or \textit{eastern}
@@ -377,7 +473,8 @@ The default value of each option is given in italic.
 	\item \Cmd\abjad (see section \ref{abjad})
 	\end{itemize}
 
-\subsection{german}
+\pagebreak
+\subsection{german}\label{german}
 \textbf{Options}: 
 	\begin{itemize}
 	\item \TB{spelling} = \textit{new} (= 1996) or old (= 1901): 
@@ -387,10 +484,9 @@ The default value of each option is given in italic.
 		the latest (experimental) hyphenation patterns ‘(n)german-x-latest’ 
 		will be loaded instead of ‘german’ or ‘ngerman’. NB: This is based on
 		the file \texttt{language.dat} that comes with \TeX Live 2008.
-	\item\TB{babelshorthands} = \textit{false} or true: \new{1.0.3} 
-		if this is turned on, all shorthands defined in the Babel
-		language for fine-tuning the hyphenation of German words are
-		activated. (NB: This feature was broken in the previous version.)
+	\item\TB{babelshorthands} = \textit{false} or true: \new{v1.0.3} 
+		if this is turned on, all shorthands defined in \Babel
+		for fine-tuning the hyphenation of German words are activated. 
 		\begin{itemize}
 		\item  ¦"ck¦ for ¦ck¦ to be hyphenated as ¦k-k¦
 		\item  ¦"ff¦ for ¦ff¦ to be hyphenated as ¦ff-f¦; this is also available for the letters l, m, n, p, r and t
@@ -412,7 +508,7 @@ The default value of each option is given in italic.
 		\end{itemize}
 	\end{itemize}
 
-\subsection{greek}
+\subsection{greek}\label{greek}
 \textbf{Options}: 
 	\begin{itemize}
 	\item \TB{variant} = \textit{monotonic} (= mono), polytonic (= poly), or ancient
@@ -429,7 +525,7 @@ The default value of each option is given in italic.
 	  	See the documentation of the \pkg{xgreek} package for more details.}
 	\end{itemize}
 
-\subsection{hebrew}
+\subsection{hebrew}\label{hebrew}
 \textbf{Options}: 
 	\begin{itemize}
 	\item \TB{numerals} = hebrew or \textit{arabic}
@@ -441,27 +537,27 @@ The default value of each option is given in italic.
 	\end{itemize}
 
 
-\subsection{lsorbian and usorbian}
+\subsection{lsorbian and usorbian}\label{lsorbian}\label{usorbian}
 \textbf{Commands}:
 	\begin{itemize}
 	\item \Cmd\oldtoday : see the \Babel documentation.
 	\end{itemize}
 
-\subsection{magyar}
+\subsection{magyar}\label{magyar}
 \textbf{Commands}:
 	\begin{itemize}
 	\item \Cmd\ontoday\ (= \Cmd\ondatemagyar): special forms of \cmd\today\
-		(see the \Babel\ documentation).
+		(see the \Babel documentation).
 	\end{itemize}
 
 
-\subsection{russian}
+\subsection{russian}\label{russian}
 \textbf{Options}: 
 	\begin{itemize}
 	\item \TB{spelling} = \textit{modern} or old (for captions and date only, not for hyphenation)
 	\end{itemize}
 
-\subsection{sanskrit}
+\subsection{sanskrit}\label{sanskrit}
 \textbf{Options}: 
 	\begin{itemize}
 	\item \TB{Script} (default = Devanagari). \new{1.0.2}
@@ -470,25 +566,25 @@ The default value of each option is given in italic.
 	Sanskrit texts in scripts other than Devanagari.
 	\end{itemize}
 
-\subsection{serbian}
+\subsection{serbian}\label{serbian}
 \textbf{Options}: 
 	\begin{itemize}
 	\item \TB{script} = \textit{cyrillic} or latin
 	\end{itemize}
 
-\subsection{syriac}
+\subsection{syriac}\label{syriac}
 \textbf{Options}: 
 	\begin{itemize}
 	\item \TB{numerals} = \textit{western} (i.e., 1234567890), eastern 
 		(for which the Oriental Arabic numerals are used: \textarabic{١٢٣٤٥٦٧٨٩٠}),
-		or abjad\new{1.0.1}.
+		or abjad. \new{v1.0.1}.
 	\end{itemize}
 \textbf{Commands}:
 	\begin{itemize}
 	\item \Cmd\abjadsyriac (see section \ref{abjad})
 	\end{itemize}
 
-\subsection{thai}
+\subsection{thai}\label{thai}
 \textbf{Options}: 
 	\begin{itemize}
 	\item \TB{numerals} = thai or \textit{arabic}
@@ -501,7 +597,7 @@ that comes with this package.
 \section{Modifying or extending captions and date formats}
 
 To redefine internal macros, you can use the command ¦\gappto¦ from the package 
-\pkg{etoolbox}. For compatibility with Babel the command ¦\addto¦ is also available
+\pkg{etoolbox}. For compatibility with \Babel the command ¦\addto¦ is also available
 with the same effect. For instance, to change the ¦\chaptername¦ for language ¦lingua¦, 
 you can do this:
 \begin{verbatim}

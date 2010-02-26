@@ -4,11 +4,11 @@ polyglossia.sty:
 	* for languages with hyphenation patterns but without
 	  a gloss-* module, allow to load it with only a warning message ?
 	  => perhaps better use hyphenrules: DONE
-	* MAKE polyglossia cooperate with Babel-aware packages and classes, for
+	* Make polyglossia cooperate with Babel-aware packages and classes, for
 	  example scrlttr2! Lines 1347 to 1708 of scrlttr2.cls are a sort of 
 	  patch for Babel, which is not compatible with polyglossia right now...
 
-	* hyphenation shorthands: 
+	* Hyphenation shorthands: 
 	  Perhaps implement the following as an option, based on dutch module of babel:
 
 	  "|   disable ligature at this position
@@ -100,6 +100,7 @@ gloss-finnish.ldf:
 	* hyphenpenalty as in Babel?
 
 gloss-french.ldf:
+  * Implement all the other good stuff from Babel ... Aucune âme volontaire?
 	* \define@key{french}{guillemets}[normal]{…}
 	* \addfontfeature{Mapping=sansaccents}%
 
