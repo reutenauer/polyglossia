@@ -15,6 +15,38 @@
    \nonfrenchspacing%
 }
 
+\define@boolkey{dutch}[dutch@]{babelshorthands}[true]{}
+
+\ifsystem@babelshorthands
+  \setkeys{dutch}{babelshorthands=true}
+\else
+  \setkeys{dutch}{babelshorthands=false}
+\fi
+
+\ifcsundef{initiate@active@char}{%
+\input{babelsh.def}%
+\initiate@active@char{"}%
+}{}
+
+\def\dutch@shorthands{%
+  \bbl@activate{"}%
+  \def\language@group{dutch}%
+  \declare@shorthand{dutch}{"-}{\nobreak-\bbl@allowhyphens}
+  \declare@shorthand{dutch}{"~}{\textormath{\leavevmode\hbox{-}}{-}}
+  \declare@shorthand{dutch}{"|}{%
+    \textormath{\discretionary{-}{}{\kern.03em}}{}}
+  \declare@shorthand{dutch}{""}{\hskip\z@skip}
+  \declare@shorthand{dutch}{"/}{\textormath
+    {\bbl@allowhyphens\discretionary{/}{}{/}\bbl@allowhyphens}{}}
+  %TODO?
+  %\babel@save\-%
+  %\def\-{\bbl@allowhyphens\discretionary{-}{}{}\bbl@allowhyphens}
+}
+
+\def\nodutch@shorthands{%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+
 \def\captionsdutch{%
     \def\prefacename{Voorwoord}%
     \def\refname{Referenties}%
@@ -48,15 +80,18 @@
 \setlocalhyphenmins{dutch}{2}{2}%
 
 \def\noextras@dutch{%
-   \nodutch@punctuation%
+  \nodutch@punctuation%
+  \nodutch@shorthands%
 }
 
 \def\blockextras@dutch{%
-   \dutch@punctuation%
+  \dutch@punctuation%
+  \ifdutch@babelshorthands\dutch@shorthands\fi%
 }
 
 \def\inlineextras@dutch{%
-   \dutch@punctuation%
+  \dutch@punctuation%
+  \ifdutch@babelshorthands\dutch@shorthands\fi%
 }
 
 \endinput
