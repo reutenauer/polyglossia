@@ -37,14 +37,13 @@
     \textormath{\discretionary{-}{}{\kern.03em}}{}}
   \declare@shorthand{dutch}{""}{\hskip\z@skip}
   \declare@shorthand{dutch}{"/}{\textormath
-    {\bbl@allowhyphens\discretionary{/}{}{/}\bbl@allowhyphens}{}}
-  %TODO?
-  %\babel@save\-%
-  %\def\-{\bbl@allowhyphens\discretionary{-}{}{}\bbl@allowhyphens}
+    {\bbl@allowhyphens\discretionary{/}{}{/}\bbl@allowhyphens}{}}%
+  \def\-{\bbl@allowhyphens\discretionary{-}{}{}\bbl@allowhyphens}%
 }
 
 \def\nodutch@shorthands{%
   \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \def\-{\discretionary{-}{}{}}% << original def in latex.ltx
 }
 
 \def\captionsdutch{%
