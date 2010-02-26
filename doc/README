@@ -1,14 +1,14 @@
 
    ¦----------------------------------------------¦
    ¦                                              ¦
-   ¦       THE POLYGLOSSIA PACKAGE v1.1.0b        ¦
+   ¦       THE POLYGLOSSIA PACKAGE v1.1.1         ¦
    ¦                                              ¦
    ¦ Modern multilingual typesetting with XeLaTeX ¦
    ¦                                              ¦
    ¦----------------------------------------------¦
 
 This package for provides a complete Babel replacement for users of XeLaTeX.
-This version includes support for 55 different languages.
+This version includes support for 57 different languages.
 
 Polyglossia makes it possible to automate the following tasks:
 
@@ -43,6 +43,24 @@ Alternatively if you have the file polyglossia.ins run
 and follow the instructions displayed.
 
 CHANGES
+
+1.1.1
+  * Enable babelshorthands for Dutch
+  * Add missing macro \allowhyphens
+  * Add global option babelshorthands
+  * Support Catalan geminated l
+  * Bugfix when declaring more than one pkg option
+  * Protect \reset@font
+  * Add missing requirement makecmds
+  * Bugfix for smallcaps in captions
+  * Typo for ccname in Hebrew
+  * Add option numerals to gloss-russian
+  * New ldf for asturian language
+  * Provide newXeTeXintercharclass when undefined
+  * Bug fix for russian alph
+  * Remove superfluous level of {} in def of markright
+  * Bugfix for \datecatalan
+  * Change hyphenmins for sanskrit
 
 1.1.0b
    * Modify hyphenmins for Sanskrit (Yves Codet)
