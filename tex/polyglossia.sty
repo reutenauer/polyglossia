@@ -238,12 +238,16 @@
    }%
 }
 
-\providecommand{\selectlanguage}{}
+%Hook that other package authors can use
+%(for instance biblatex):
+\newcommand*{\xpg@hook@setlanguage}{}
 
+\providecommand{\selectlanguage}{}
 \renewcommand{\selectlanguage}[2][]{%
    \ifcsundef{#2@loaded}{\xpg@nolang{#2}\hyphenrules{#2}}{%
       \def\xpg@pop@language{%
          \xpg@set@language{\languagename}%
+         \xpg@hook@setlanguage%
          \let\emp@langname\@undefined}%
       \aftergroup\xpg@pop@language%
       \setkeys{#2}{#1}%
