@@ -30,8 +30,12 @@ my $docsrcdir		 = "$basedir/doc";
 my $fontmapsrcdir	 = "$basedir/fontmapping";
 my $docsrc			 = "$docsrcdir/polyglossia.tex";
 my $readme			 = "$docsrcdir/README";
-my @docsrcfiles	     = qw/README gloss-template.ldf examples.tex 
-                          example-arabic.tex example-thai.tex/;
+my @docsrcfiles	     = qw(README
+                          gloss-template.ldf
+                          examples.tex
+                          example-arabic.tex
+                          example-thai.tex
+                          example-urdu.tex);
 my $patternop       = "=";
 my $verbose         = 0;
 my $noins           = 0;
@@ -48,7 +52,7 @@ my $preamble        = <<_END
   ____________________________
 
   The polyglossia package         
-  (C) 2009  François Charette    
+  (C) 2008–$year François Charette    
   License information appended
 
 _END
