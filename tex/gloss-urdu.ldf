@@ -1,0 +1,213 @@
+%%% Contributed by Kamal Abdali
+\ProvidesFile{gloss-urdu.ldf}[polyglossia: module for Urdu]
+\RequirePackage{bidi}
+\RequirePackage{hijrical}
+\makeatletter
+
+\ifx\l@urdu\@undefined
+  %\xpg@nopatterns{urdu}%
+  \adddialect\l@urdu\l@nohyphenation
+\fi
+
+\def\urdu@RL{\relax}
+
+\newif\if@western@numerals
+\def\tmp@western{western}
+\define@key{urdu}{numerals}[eastern]{%
+	\def\@tmpa{#1}%
+	\ifx\@tmpa\tmp@western\@western@numeralstrue%
+	  \else\@western@numeralsfalse%
+	\fi}
+
+\newif\if@hijrical
+\def\tmp@hijri{hijri}
+\define@key{urdu}{calendar}[gregorian]{%
+  \def\@tmpa{#1}%
+  \ifx\@tmpa\tmp@hijri\@hijricaltrue%
+    \else\@hijricalfalse%
+  \fi}
+
+\define@key{urdu}{hijricorrection}[0]{%
+  \gdef\@hijri@correction{#1}}%
+
+% This should set the defaults
+\setkeys{urdu}{calendar,numerals,hijricorrection}
+
+\def\urdugregmonth#1{\ifcase#1%
+  \or جنوری\or فروری\or مارچ\or اپریل\or مئی\or جون\or جولائی\or اگست\or  ستمبر\or اکتوبر\or نومبر\or دسمبر\fi}
+
+\def\urduhijrimonth#1{\ifcase#1%
+  \or محرّم\or صفر\or ربیع الاوّل\or ربیع الثّانی\or جمادی الاوّل\or جمادی الثّانی\or رجب\or شعبان\or  رمضان\or شوّال\or ذیقعد\or ذی الحج\fi}
+
+\def\captionsurdu{%
+\def\refname{\@ensure@RTL{حوالہ جات}}%
+\def\abstractname{\@ensure@RTL{ملخّص}}%
+\def\bibname{\@ensure@RTL{کتابیات}}%
+\def\prefacename{\@ensure@RTL{دیباچہ}}% 
+%\def\chaptername{\@ensure@RTL{باب}}%
+\def\appendixname{\@ensure@RTL{ضمیمہ}}%
+\def\contentsname{\@ensure@RTL{فہرست عنوانات}}%
+\def\listfigurename{\@ensure@RTL{فہرست اشکال}}%
+\def\listtablename{\@ensure@RTL{فہرست جداول}}%
+\def\indexname{\@ensure@RTL{اشاریہ}}%
+\def\figurename{\@ensure@RTL{شكل}}%
+\def\tablename{\@ensure@RTL{جدول}}%
+%\def\thepart{\text<lang>{}}%
+\def\partname{\@ensure@RTL{حصّہ}}%
+\def\pagename{\@ensure@RTL{صفحہ}}%
+\def\seename{\@ensure@RTL{ملاحطہ ہو}}%
+\def\alsoname{\@ensure@RTL{ایضاً}}%
+\def\enclname{\@ensure@RTL{منسلک}}%
+\def\ccname{\@ensure@RTL{نقل}}%
+\def\headtoname{\@ensure@RTL{بملاحظہ}}%
+\def\proofname{\@ensure@RTL{ثبوت}}%
+\def\glossaryname{\@ensure@RTL{لغت}}%
+\def\sectionname{\@ensure@RTL{فصل}}%
+}
+
+\def\dateurdu{%
+  \def\today{%
+    \if@hijrical%
+     \Hijritoday[\@hijri@correction]%
+    \else%
+      \@ensure@RTL{\urdunumber\day؍\space\urdugregmonth{\month}%
+         \space\urdunumber\year}%
+    \fi}%
+}
+
+\def\urdunumber#1{%
+  \if@western@numerals
+    \number#1%
+    \else
+      {\protect\addfontfeature{Mapping=arabicdigits}\number#1}%
+  \fi}
+
+\ifcsdef{abjad}{}{%
+\def\abjad#1{%
+\ifnum#1>1999 \xpg@warning{Illegal value (#1) for abjad numeral} {#1}
+\else
+  \ifnum#1<\z@\space\xpg@warning{Illegal value (#1) for abjad numeral}%
+  \else
+    \ifnum#1<10\expandafter\abj@num@i\number#1%
+    \else
+      \ifnum#1<100\expandafter\abj@num@ii\number#1%
+      \else
+        \ifnum#1<\@m\expandafter\abj@num@iii\number#1%
+        \else
+          \ifnum#1<\@M\expandafter\abj@num@iv\number#1%since #1<2000, we must have 1000
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+\fi
+}
+\def\abjad@zero{}
+\def\abj@num@i#1{%
+  \ifcase#1\or ا\or ب\or ج\char"200D\or د% 
+           \or ه\or و\or ز\or ح\or ط\fi
+  \ifnum#1=\z@\abjad@zero\fi}
+\def\abj@num@ii#1{%
+  \ifcase#1\or ي\or ك\or ل\or م\or ن%
+           \or س\or ع\or ف\or ص\fi 
+  \ifnum#1=\z@\fi\abj@num@i}
+\def\abj@num@iii#1{%
+  \ifcase#1\or ق\or ر\or ش\or ت\or ث%
+            \or خ\or ذ\or ض\or ظ\fi
+  \ifnum#1=\z@\fi\abj@num@ii}
+\def\abj@num@iv#1{%
+  \ifcase#1\or غ\fi
+  \ifnum#1=\z@\fi\abj@num@iii}
+}
+
+\def\urdu@numbers{%
+   \let\@latinalph\@alph%
+   \let\@latinAlph\@Alph%
+   \let\@alph\abjad%
+   \let\@Alph\abjad%
+}
+\def\nourdu@numbers{%
+  \let\@alph\@latinalph%
+  \let\@Alph\@latinAlph%
+  }
+
+\def\urdu@globalnumbers{%
+   \let\orig@arabic\@arabic%
+   \let\@arabic\urdunumber%
+   % For some reason \thefootnote needs to be set separately:
+   \renewcommand\thefootnote{\protect\urdunumber{\c@footnote}}%
+   }
+
+\def\nourdu@globalnumbers{
+   \let\@arabic\orig@arabic%
+   \renewcommand\thefootnote{\protect\number{\c@footnote}}%
+   }
+
+\def\urdu@language{\language=\l@urdu}
+
+\def\urdu@font{%
+\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+\@ifundefined{urdufont}{%
+  \@ifundefined{arabicfont}{%
+    \zf@check@ot@script{arab}%
+    \if@tempswa%
+      \addfontfeature{Script=Arabic}%
+    \else%
+      \PackageError{polyglossia}{^^J
+      The current font does not contain the Arabic script!^^J
+      Please define \string\arabicfont\space or \string\urdufont\space with \newfontfamily}%
+    \fi%
+    \zf@check@ot@lang{URD}%urd
+    \if@tempswa\addfontfeature{Language=urdu}\fi
+	}%
+  {\arabicfont%
+    \zf@check@ot@lang{URD}%urd
+    \if@tempswa\addfontfeature{Language=urdu}\fi
+  }%
+}%
+{\urdufont}
+}
+% TODO add setup to define Sans and Mono Arabic fonts if desired
+\def\urdu@font@sf{%
+  \@ifundefined{urdufontsf}{%
+%  \sffamily% FIXME
+%    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+%  \zf@check@ot@script{arab}%
+%  \if@tempswa%
+%    \addfontfeature{Script=Arabic}%
+%  \else%
+    \urdu@font%
+%  \fi%  
+  }%
+  {\urdufontsf}%
+}
+\def\urdu@font@tt{%
+  \@ifundefined{urdufonttt}{%
+%    \ttfamily% FIXME
+%    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+%  \zf@check@ot@script{arab}%
+%  \if@tempswa%
+%    \addfontfeature{Script=Arabic}%
+%  \else%
+    \urdu@font%
+%  \fi%  
+  }%
+  {\urdufonttt}%
+}
+
+\def\selectnormalfonturdu{%
+   \let\normalfont=\urdu@font%
+   \let\rmfamily=\urdu@font%
+   \let\sffamily=\urdu@font@sf%
+   \let\ttfamily=\urdu@font@tt%
+   \def\reset@font{\normalfont}}
+
+\def\blockextras@urdu{%
+   \let\@@MakeUppercase\MakeUppercase%
+   \def\MakeUppercase##1{##1}%
+   }
+\def\noextras@urdu{%
+   \let\MakeUppercase\@@MakeUppercase%
+   }
+\endinput
+
