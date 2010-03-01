@@ -10,11 +10,11 @@ cd $root
 
 # check if pdf is older than polyglossia.tex
 if [[ ! -f $pdf || $pdf -ot $pdfsrc  ]] ; then
-    echo "Updating PDF documentation ..."
+  echo "Updating PDF documentation ..."
 	cd $root/doc 
 	xelatex $pdfsrc || exit 1
 	xelatex $pdfsrc 
-    rm $pdfsrc.{aux,toc,lof,lot,lop,log,out,nav,bbl,blg,ind,idx,glo,ilg,dvi}
+  rm $pdfsrc.{aux,toc,lof,lot,lop,log,out,nav,bbl,blg,ind,idx,glo,ilg,dvi}
 fi
 
 cd $root
