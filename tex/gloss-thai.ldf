@@ -62,7 +62,26 @@
 %\catcode"200b=\active
 %\def^^200b{\hskip 0pt plus .4em}
 
-\def\thainumber#1{\if@thai@numerals{\protect\addfontfeature{Mapping=thaidigits}\protect\number#1}\else{\protect\reset@font\protect\number#1}\fi}
+\def\thaidigits#1{\expandafter\@thai@digits #1@}
+\def\@thai@digits#1{%
+  \ifx @#1% then terminate
+  \else
+    \ifcat0#1%
+      \ifcase #1 ๐\or ๑\or ๒\or ๓\or ๔\or ๕\or ๖\or ๗\or ๘\or ๙\fi
+    \else #1%
+    \fi
+    \expandafter\@thai@digits
+  \fi
+}
+
+\def\thainumber#1{%
+  \if@thai@numerals%
+    \thaidigits{\number#1}%
+    %%{\protect\addfontfeature{Mapping=thaidigits}\protect\number#1}
+  \else%
+    \number#1%
+    %%{\protect\reset@font\number#1}
+  \fi}
 
 \def\@thaialph#1{%
   \ifcase#1\or ก\or ข\or ค\or ง\or จ\or ฉ\or ช\or ซ\or ฌ\or ญ\or ฎ\or
@@ -82,7 +101,7 @@
    \if@thai@numerals%
      \let\@alph\@thaialph%
      \let\@Alph\@thaiAlph%
-   \fi%
+   \fi
    }
 \def\nothai@numbers{%
   \let\@alph\@latinalph%
@@ -90,13 +109,13 @@
   }
 
 \def\thai@globalnumbers{%
-   \let\@latinarabic\@arabic%
+   \let\orig@arabic\@arabic%
    \let\@arabic\thainumber%
    \renewcommand{\thefootnote}{\protect\thainumber{\c@footnote}}%
    }
 \def\nothai@globalnumbers{%
-   \let\@arabic\@latinarabic%
-   \renewcommand{\thefootnote}{\protect\number{\c@footnote}}%
+   \let\@arabic\orig@arabic%
+   \renewcommand\thefootnote{\protect\number{\c@footnote}}%
    }
 
 \def\thai@font{%
@@ -123,7 +142,11 @@
 \def\thai@language{\language=\l@nohyphenation}
 
 \def\blockextras@thai{%
-   \renewcommand{\baselinestretch}{1.2}% FIXME restore default value in noextras?
+   \let\orig@baselinestrech\baselinestretch%
+   \renewcommand{\baselinestretch}{1.2}%
+   }
+\def\noblockextras@thai{%
+   \let\baselinestrech\orig@baselinestretch%
    }
 \endinput
 

@@ -16,15 +16,15 @@
 \def\tmp@abjad{abjad}
 \define@key{syriac}{numerals}[western]{%
 	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@abjad%
-	  \let\syriacnumber\abjadsyriac%
-	\else%
-	  \ifx\@tmpa\tmp@eastern%
-            \@eastern@numeralstrue%
-	  \else%
-            \@eastern@numeralsfalse%
- 	  \fi%
-        \fi}
+	\ifx\@tmpa\tmp@abjad
+	  \let\syriacnumber\abjadsyriac
+	\else
+	  \ifx\@tmpa\tmp@eastern
+      \@eastern@numeralstrue
+	  \else
+      \@eastern@numeralsfalse
+ 	  \fi
+  \fi}
 
 \setkeys{syriac}{numerals}
 	
@@ -32,13 +32,13 @@
   \@ifundefined{syriacfont}{%
     \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
     \zf@check@ot@script{syrc}%
-    \if@tempswa%
+    \if@tempswa
       \addfontfeature{Script=Syriac}%
-    \else%
+    \else
       \PackageError{polyglossia}{^^J
       The current font does not contain the Syriac script!^^J
       Please define \string\syriacfont\space with \string\newfontfamily}%
-    \fi%
+    \fi
     }%
   {\syriacfont}%
 }
@@ -88,6 +88,8 @@
     \syriac@month{\month}{\space}\syriacnumber\year}}%
 }
 
+\input{polyglossia-arabic-common.def}
+
 \def\syriac@zero{}
 
 \def\abjadsyriac#1{%
@@ -129,32 +131,25 @@
   \ifnum#1=\z@\fi\abj@syr@num@iii}
 
 \def\@syriacnumber#1{%
-   \if@eastern@numerals{%
+   \if@eastern@numerals
      \ifnum\XeTeXcharglyph"0661 > 0%
-      %%% we test for the presence of one of ١٢٣٤٥٦٧٨٩٠ in the Syriac font, 
-      %%% else we try \arabicfont if defined (and give a warning), 
-      %%% else we fall back to the Western numerals.
-       \protect\addfontfeature{Mapping=arabicdigits}\number#1}%
+     %%% we test for the presence of one of ١٢٣٤٥٦٧٨٩٠ in the Syriac font, 
+     %%% else we try \arabicfont if defined (and give a warning), 
+     %%% else we fall back to the Western numerals.
+       %%\protect\addfontfeature{Mapping=arabicdigits}\number#1}%
+       \protect\arabicdigits{\number#1}%
      \else%
-         \ifcsdef{arabicfont}%
-         {{\protect\arabicfont\protect\addfontfeature{Mapping=arabicdigits}%
-           \number#1}%
-         \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: I am using \string\arabicfont instead}}%
-	 {\RL{\protect\reset@font\number#1}%
-	 \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: since \string\arabicfont is not defined, we'll use Western numerals instead}}%
-     \fi%
-   \else%
-     \RL{\protect\reset@font\number#1}%
+       \ifcsdef{arabicfont}%
+         {\protect\arabicdigits{\number#1}%
+          \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: I am using \string\arabicfont instead}}%
+         {\number#1%%% <---changed from \RL{\protect\reset@font\protect\number#1}%
+          \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: since \string\arabicfont is not defined, we'll use Western numerals instead}}%
+     \fi
+   \else
+     %%\RL{\protect\reset@font\number#1}%
+     \number#1%
    \fi}
 
-\def\syriac@globalnumbers{%
-   \let\@latinarabic\@arabic%
-   \let\@arabic\syriacnumber%
-   \renewcommand\thefootnote{\protect\syriacnumber{\c@footnote}}%
-   }
-\def\nosyriac@globalnumbers{%
-   \let\@arabic\@latinarabic%
-   }
 \def\syriac@numbers{%
    \let\@latinalph\@alph%
    \let\@latinAlph\@Alph%
@@ -164,6 +159,15 @@
 \def\nosyriac@numbers{%
   \let\@alph\@latinalph%
   \let\@Alph\@latinAlph%
+  }
+\def\syriac@globalnumbers{%
+  \let\orig@arabic\@arabic%
+  \let\@arabic\syriacnumber%
+  \renewcommand\thefootnote{\protect\syriacnumber{\c@footnote}}%
+}
+\def\nosyriac@globalnumbers{%
+  \let\@arabic\orig@arabic%
+  \renewcommand\thefootnote{\protect\number{\c@footnote}}%
   }
 
 \def\syriac@language{\language=\l@syriac}

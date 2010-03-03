@@ -75,69 +75,33 @@
     \fi}%
 }
 
+\input{polyglossia-arabic-common.def}
+
 \def\urdunumber#1{%
   \if@western@numerals
     \number#1%
-    \else
-      {\protect\addfontfeature{Mapping=arabicdigits}\number#1}%
-  \fi}
-
-\ifcsdef{abjad}{}{%
-\def\abjad#1{%
-\ifnum#1>1999 \xpg@warning{Illegal value (#1) for abjad numeral} {#1}
-\else
-  \ifnum#1<\z@\space\xpg@warning{Illegal value (#1) for abjad numeral}%
   \else
-    \ifnum#1<10\expandafter\abj@num@i\number#1%
-    \else
-      \ifnum#1<100\expandafter\abj@num@ii\number#1%
-      \else
-        \ifnum#1<\@m\expandafter\abj@num@iii\number#1%
-        \else
-          \ifnum#1<\@M\expandafter\abj@num@iv\number#1%since #1<2000, we must have 1000
-          \fi
-        \fi
-      \fi
-    \fi
-  \fi
-\fi
-}
-\def\abjad@zero{}
-\def\abj@num@i#1{%
-  \ifcase#1\or ا\or ب\or ج\char"200D\or د% 
-           \or ه\or و\or ز\or ح\or ط\fi
-  \ifnum#1=\z@\abjad@zero\fi}
-\def\abj@num@ii#1{%
-  \ifcase#1\or ي\or ك\or ل\or م\or ن%
-           \or س\or ع\or ف\or ص\fi 
-  \ifnum#1=\z@\fi\abj@num@i}
-\def\abj@num@iii#1{%
-  \ifcase#1\or ق\or ر\or ش\or ت\or ث%
-            \or خ\or ذ\or ض\or ظ\fi
-  \ifnum#1=\z@\fi\abj@num@ii}
-\def\abj@num@iv#1{%
-  \ifcase#1\or غ\fi
-  \ifnum#1=\z@\fi\abj@num@iii}
-}
+    %%FIXME use farsidigits instead???
+    \protect\arabicdigits{\number#1}%
+    %%{\protect\addfontfeature{Mapping=arabicdigits}\number#1}%
+  \fi}
 
 \def\urdu@numbers{%
    \let\@latinalph\@alph%
    \let\@latinAlph\@Alph%
    \let\@alph\abjad%
    \let\@Alph\abjad%
-}
+  }
 \def\nourdu@numbers{%
   \let\@alph\@latinalph%
   \let\@Alph\@latinAlph%
   }
-
 \def\urdu@globalnumbers{%
    \let\orig@arabic\@arabic%
    \let\@arabic\urdunumber%
    % For some reason \thefootnote needs to be set separately:
    \renewcommand\thefootnote{\protect\urdunumber{\c@footnote}}%
    }
-
 \def\nourdu@globalnumbers{
    \let\@arabic\orig@arabic%
    \renewcommand\thefootnote{\protect\number{\c@footnote}}%
