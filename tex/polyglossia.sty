@@ -118,17 +118,7 @@
       }%
     {\PackageWarning{polyglossia}{gloss-#2.ldf is already loaded!}}%
     %% The following settings are for the default language and script:
-    \ifcsundef{#2@RL}{}%
-    {\@rlmaintrue\@rl@footnotetrue%
-      \let\@@oddfoot\@oddfoot%
-      \let\@@evenfoot\@evenfoot%
-      \let\@oddfoot\@@evenfoot%
-      \let\@evenfoot\@@oddfoot%
-      \let\@@oddhead\@oddhead%
-      \let\@@evenhead\@evenhead%
-      \let\@oddhead\@@evenhead%
-      \let\@evenhead\@@oddhead%
-    }%
+    \ifcsundef{#2@RL}{}{\@RTLmaintrue}% this tells bidi.sty that the document is RTL
     \AtBeginDocument{%
     \selectlanguage[#1]{#2}%
     \selectbackgroundlanguage{#2}}%
@@ -141,7 +131,9 @@
 \newcommand{\resetdefaultlanguage}[2][]{%
     \ifcsundef{#2@loaded}{%
      \PackageError{polyglossia}{gloss-#2.ldf is not loaded!}}%
-    {\def\languagename{#2}%
+    {\xpg@csifdef{no\xpg@main@language @globalnumbers}% disable globalnumbers of previously defined default language
+    \xpg@csifdef{noextras@\xpg@main@language}%
+    \def\languagename{#2}%
     \ifcsundef{#2@RL}{}{\@rlmaintrue\@rl@footnotetrue}%
     \selectlanguage[#1]{#2}%
     \selectbackgroundlanguage{#2}}}
@@ -157,6 +149,11 @@
    \let\sffamily=\sffamilylatin%
    \let\ttfamily=\ttfamilylatin%
    \normalfontlatin}
+
+\def\selectnormalfontlatin{%
+  \if\normalfont\ttfamily\ttfamilylatin\else
+    \if\normalfont\sffamily\sffamilylatin\else
+      \normalfontlatin\fi\fi}
 
 \def\reset@LR{\xpg@csifdef{setLR}}
 
@@ -323,6 +320,15 @@
   }
   {}
 
+%% patch lastpage to avoid problem with \thepage when \@arabic is redefined for non-Latin numbers
+%\@ifpackageloaded{lastpage}{%
+%\xpg@info{Redefining lastpage command \string\lastpage@putlabel}%
+%\def\lastpage@putlabel{\addtocounter{page}{-1}%
+%   \immediate\write\@auxout{\string
+%   \newlabel{LastPage}{{}{\number\c@page}}}%
+%   \addtocounter{page}{1}}}%
+%   {}
+%
 \define@boolkey{polyglossia}[system@]{babelshorthands}[false]{}
 
 %% Package Options %%
