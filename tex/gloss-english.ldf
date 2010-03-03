@@ -1,5 +1,6 @@
 \ProvidesFile{gloss-english.ldf}[polyglossia: module for english]
 \makeatletter
+%TODO change to \selectnormalfontlatin in all ldfs
 \def\english@font{\normalfontlatin}
 
 \ifx\l@english\@undefined%
