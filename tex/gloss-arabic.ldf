@@ -123,57 +123,18 @@
     \fi%
  \fi}}
 
+\input{polyglossia-arabic-common.def}
 
 \def\arabicnumber#1{%
-  \ifeastern@numerals{\addfontfeature{Mapping=arabicdigits}\number#1}%
-  \else\RL{\protect\reset@font\number#1}%
+  \ifeastern@numerals
+    \arabicdigits{\number#1}%
+  \else
+    %%\RL{\protect\reset@font\number#1}%
+    \number#1%
   \fi}
 
 \def\@ornatebracearabic#1{\RL{\char"FD3F\@arabic#1\char"FD3E}}
 \def\@ornatebracealph#1{\RL{\char"FD3F\@alph#1\char"FD3E}}
-
-\ifcsdef{abjad}{}{%
-\def\abjad#1{%
-\ifnum#1>1999\xpg@ill@value{#1}{abjad numeral}%
-\else%
-\ifnum#1<\z@\space\xpg@ill@value{#1}{abjad numeral}%
-  \else%
-    \ifnum#1<10\expandafter\abj@num@i@iso\number#1%
-    \else%
-      \ifnum#1<100\expandafter\abj@num@ii\number#1%
-      \else%
-        \ifnum#1<\@m\expandafter\abj@num@iii\number#1%
-        \else%
-          \ifnum#1<\@M\expandafter\abj@num@iv\number#1%since #1<2000, we must have 1000
-          \fi
-        \fi
-      \fi
-    \fi
-  \fi
-\fi
-}
-\def\abjad@zero{}
-\def\abjad@three{ج\ifabjad@jim@notail\char"200D\fi}
-\def\abj@num@i@iso#1{%
-  \ifcase#1\or ا\or ب\or\abjad@three\or د%
-           \or ه\char"200D\or و\or ز\or ح\or ط\fi%
-  \ifnum#1=\z@\abjad@zero\fi}
-\def\abj@num@i#1{%
-  \ifcase#1\or ا\or ب\or\abjad@three\or د%
-           \or ه\or و\or ز\or ح\or ط\fi%
-  \ifnum#1=\z@\abjad@zero\fi}
-\def\abj@num@ii#1{%
-  \ifcase#1\or ي\or ك\or ل\or م\or ن%
-           \or س\or ع\or ف\or ص\fi% 
-  \ifnum#1=\z@\fi\abj@num@i}
-\def\abj@num@iii#1{%
-  \ifcase#1\or ق\or ر\or ش\or ت\or ث%
-            \or خ\or ذ\or ض\or ظ\fi%
-  \ifnum#1=\z@\fi\abj@num@ii}
-\def\abj@num@iv#1{%
-  \ifcase#1\or غ\fi
-  \ifnum#1=\z@\fi\abj@num@iii}
-}
 
 \def\abjadmaghribi#1{%
 \ifnum#1>1999\xpg@ill@value{#1}{abjad}%
@@ -194,7 +155,6 @@
   \fi
 \fi
 }
-
 
 %maghribi س -> ص ص -> ض ش -> س ض -> ظ ظ -> غ غ -> ش
 \def\abj@maghribi@num@ii#1{%
