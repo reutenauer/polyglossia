@@ -43,8 +43,8 @@
 \def\refname{\@ensure@RTL{حوالہ جات}}%
 \def\abstractname{\@ensure@RTL{ملخّص}}%
 \def\bibname{\@ensure@RTL{کتابیات}}%
-\def\prefacename{\@ensure@RTL{دیباچہ}}% 
-%\def\chaptername{\@ensure@RTL{باب}}%
+\def\prefacename{\@ensure@RTL{دیباچہ}}%
+\def\chaptername{\@ensure@RTL{باب}}%
 \def\appendixname{\@ensure@RTL{ضمیمہ}}%
 \def\contentsname{\@ensure@RTL{فہرست عنوانات}}%
 \def\listfigurename{\@ensure@RTL{فہرست اشکال}}%
@@ -67,9 +67,9 @@
 
 \def\dateurdu{%
   \def\today{%
-    \if@hijrical%
+    \if@hijrical
      \Hijritoday[\@hijri@correction]%
-    \else%
+    \else
       \@ensure@RTL{\urdunumber\day؍\space\urdugregmonth{\month}%
          \space\urdunumber\year}%
     \fi}%
@@ -142,7 +142,7 @@
 %    \addfontfeature{Script=Arabic}%
 %  \else%
     \urdu@font%
-%  \fi%  
+%  \fi%
   }%
   {\urdufontsf}%
 }
@@ -155,7 +155,7 @@
 %    \addfontfeature{Script=Arabic}%
 %  \else%
     \urdu@font%
-%  \fi%  
+%  \fi%
   }%
   {\urdufonttt}%
 }
