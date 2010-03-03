@@ -13,14 +13,14 @@
 \newif\if@western@numerals
 \def\tmp@western{western}
 \define@key{farsi}{numerals}[eastern]{%
-	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@western\@western@numeralstrue\else%
-	  \@western@numeralsfalse%
-	\fi}
+  \def\@tmpa{#1}%
+  \ifx\@tmpa\tmp@western\@western@numeralstrue\else%
+    \@western@numeralsfalse%
+  \fi}
 
-% NOT YET USED	
+% NOT YET USED
 \define@key{farsi}{locale}[default]{%
-	\def\@farsi@locale{#1}}
+  \def\@farsi@locale{#1}}
 
 %TODO add option for CALENDAR
 
@@ -33,7 +33,7 @@
     \or نیسان\or ایار\or حزیران\or تموز\or آب\or ایلول\or تشرین اول\or تشرین ثانی\or کانون اول\fi}
 
 \def\captionsfarsi{%
-\def\prefacename{\@ensure@RTL{پیشگفتار}}% 
+\def\prefacename{\@ensure@RTL{پیشگفتار}}%
 \def\refname{\@ensure@RTL{مراجع}}%
 \def\abstractname{\@ensure@RTL{چکیده}}%
 \def\bibname{\@ensure@RTL{کتاب‌نامه}}%
@@ -67,7 +67,7 @@
   \else
     \ifcat0#1%
       \ifcase #1 ۰\or ۱\or ۲\or ۳\or ۴\or ۵\or ۶\or ۷\or ۸\or ۹\fi
-    \else 
+    \else
       #1%
     \fi
     \expandafter\@farsi@digits
@@ -118,36 +118,39 @@
 \def\farsi@language{\language=\l@farsi}
 
 \def\farsi@font{%
-\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-\@ifundefined{farsifont}{%
-      \@ifundefined{arabicfont}{%
-        \zf@check@ot@script{arab}%
-	\if@tempswa%
-	  \addfontfeature{Script=Arabic}%
-	\else%
-	  \PackageError{polyglossia}{^^J
-	  The current font does not contain the Arabic script!^^J
-	  Please define \string\arabicfont\space or \string\farsifont\space with \newfontfamily}%
-	\fi%
-	\zf@check@ot@lang{FAR}%
-	\if@tempswa\addfontfeature{Language=Farsi}\fi
-	}%
-      {\arabicfont%
-       \zf@check@ot@lang{FAR}%
-       \if@tempswa\addfontfeature{Language=Farsi}\fi}
-      }% 
-{\farsifont}}
+  \@ifundefined{farsifont}{%
+    \@ifundefined{arabicfont}{%
+      \normalfontlatin%
+      \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+      \zf@check@ot@script{arab}%
+      \if@tempswa
+        \addfontfeature{Script=Arabic}%
+      \else
+        \PackageError{polyglossia}{^^J
+    The current font does not contain the Arabic script!^^J
+    Please define \string\arabicfont\space or \string\farsifont\space with \newfontfamily}%
+      \fi
+      \zf@check@ot@lang{FAR}%
+      \if@tempswa\addfontfeature{Language=Farsi}\fi}%
+    {\arabicfont%
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \zf@check@ot@lang{FAR}%
+    \if@tempswa\addfontfeature{Language=Farsi}\fi}%
+  }%
+  {\farsifont}%
+}
+
 % TODO add setup to define Sans and Mono Arabic fonts if desired
 \def\farsi@font@sf{%
   \@ifundefined{farsifontsf}{%
 %  \sffamily% FIXME
 %    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
 %  \zf@check@ot@script{arab}%
-%  \if@tempswa%
+%  \if@tempswa
 %    \addfontfeature{Script=Arabic}%
-%  \else%
+%  \else
     \farsi@font%
-%  \fi%  
+%  \fi
   }%
   {\farsifontsf}%
 }
@@ -156,11 +159,11 @@
 %    \ttfamily% FIXME
 %    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
 %  \zf@check@ot@script{arab}%
-%  \if@tempswa%
+%  \if@tempswa
 %    \addfontfeature{Script=Arabic}%
-%  \else%
+%  \else
     \farsi@font%
-%  \fi%  
+%  \fi
   }%
   {\farsifonttt}%
 }

@@ -195,17 +195,16 @@
 
 \def\arabic@font{%
   \@ifundefined{arabicfont}{%
-%    \rmfamilylatin%
+    \normalfontlatin%
     \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
     \zf@check@ot@script{arab}%
-    \if@tempswa%
+    \if@tempswa
       \addfontfeature{Script=Arabic}%
-    \else%
+    \else
       \PackageError{polyglossia}{^^J
-      The current font does not contain the Arabic script!^^J
-      Please define \string\arabicfont\space with \string\newfontfamily}%
-    \fi%
-  }%
+    The current font does not contain the Arabic script!^^J
+    Please define \string\arabicfont\space with \string\newfontfamily}%
+    \fi}%
   {\arabicfont}% 
 }
 \def\arabic@font@sf{%

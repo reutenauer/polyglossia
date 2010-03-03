@@ -112,22 +112,23 @@
 
 \def\hebrew@font{%
   \@ifundefined{hebrewfont}{%
+    \normalfontlatin%
     \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
     \zf@check@ot@script{hebr}%
-    \if@tempswa%
+    \if@tempswa
       \addfontfeature{Script=Hebrew}%
-    \else%
+    \else
       \PackageError{polyglossia}{^^J
-      The current font does not contain the Hebrew script!^^J
-      Please define \string\hebrewfont\space with \string\newfontfamily}%
-    \fi%
-    }%
-{\hebrewfont}}
+    The current font does not contain the Hebrew script!^^J
+    Please define \string\hebrewfont\space with \string\newfontfamily}%
+    \fi}%
+  {\hebrewfont}%
+}
 
 % TODO add setup to define Sans and Mono Hebrew fonts if desired
 \def\hebrew@font@sf{%
   \@ifundefined{hebrewfontsf}{%
-%  \sffamily% FIXME
+%  \sffamilylatin% FIXME
 %    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
 %  \zf@check@ot@script{arab}%
 %  \if@tempswa%
@@ -140,7 +141,7 @@
 }
 \def\hebrew@font@tt{%
   \@ifundefined{hebrewfonttt}{%
-%   \ttfamily% FIXME
+%   \ttfamilylatin% FIXME
 %   \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
 %   \zf@check@ot@script{arab}%
 %   \if@tempswa%

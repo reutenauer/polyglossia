@@ -38,20 +38,21 @@
 \def\divehi@language{\language=\l@divehi}
 
 \def\divehi@font{%
-\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-\@ifundefined{divehifont}{%
-      \@ifundefined{thaanafont}{%
-        \zf@check@ot@script{thaa}%
-	\if@tempswa%
-	  \addfontfeature{Script=Thaana}%
-	\else%
-	  \PackageError{polyglossia}{^^J
-	  The current font does not contain the Thaana script!^^J
-	  Please define \string\thaanafont\space or \string\divehifont\space with \string\newfontfamily}%
-	\fi%
-	}%
-      {\thaanafont}}% 
-{\divehifont}%
+  \@ifundefined{divehifont}{%
+    \@ifundefined{thaanafont}{%
+      \normalfontlatin%
+      \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+      \zf@check@ot@script{thaa}%
+      \if@tempswa
+        \addfontfeature{Script=Thaana}%
+      \else
+        \PackageError{polyglossia}{^^J
+    The current font does not contain the Thaana script!^^J
+    Please define \string\thaanafont\space or \string\divehifont\space with \string\newfontfamily}%
+      \fi
+    }%
+    {\thaanafont}}%
+  {\divehifont}%
 }
 
 \def\selectnormalfontdivehi{%

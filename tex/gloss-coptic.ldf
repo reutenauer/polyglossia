@@ -37,20 +37,20 @@
 \def\coptic@language{\language=\l@coptic}
 
 \def\coptic@font{%
-\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-\@ifundefined{copticfont}{%
-        \zf@check@ot@script{copt}%
-	\if@tempswa%
-	  \addfontfeature{Script=Coptic}%
-	  \zf@check@ot@lang{COP}%
-	  \if@tempswa\addfontfeature{Language=Coptic}\fi%
-	\else%
-	  \PackageError{polyglossia}{^^J
-	  The current font does not contain the Coptic script!^^J
-	  Please define \string\copticfont\space with \string\newfontfamily}%
-	\fi%
-	}%
-     {\copticfont}%
+  \@ifundefined{copticfont}{%
+    \normalfontlatin%
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \zf@check@ot@script{copt}%
+    \if@tempswa
+	    \addfontfeature{Script=Coptic}%
+	    \zf@check@ot@lang{COP}%
+	    \if@tempswa\addfontfeature{Language=Coptic}\fi
+    \else
+	    \PackageError{polyglossia}{^^J
+    The current font does not contain the Coptic script!^^J
+    Please define \string\copticfont\space with \string\newfontfamily}%
+    \fi}%
+  {\copticfont}%
 }
 
 \def\selectnormalfontcoptic{%

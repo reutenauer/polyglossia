@@ -30,16 +30,16 @@
 	
 \def\syriac@font{%
   \@ifundefined{syriacfont}{%
+    \normalfontlatin%
     \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
     \zf@check@ot@script{syrc}%
     \if@tempswa
       \addfontfeature{Script=Syriac}%
     \else
       \PackageError{polyglossia}{^^J
-      The current font does not contain the Syriac script!^^J
-      Please define \string\syriacfont\space with \string\newfontfamily}%
-    \fi
-    }%
+    The current font does not contain the Syriac script!^^J
+    Please define \string\syriacfont\space with \string\newfontfamily}%
+    \fi}%
   {\syriacfont}%
 }
 

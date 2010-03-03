@@ -10,10 +10,10 @@
 \newif\if@serbian@cyr
 \def\tmp@cyrillic{cyrillic}
 \define@key{serbian}{script}[cyrillic]{%
-	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@cyrillic\@serbian@cyrtrue\else%
-	  \@serbian@cyrfalse
-	\fi}
+  \def\@tmpa{#1}%
+  \ifx\@tmpa\tmp@cyrillic\@serbian@cyrtrue\else%
+    \@serbian@cyrfalse
+  \fi}
 
 \setkeys{serbian}{script}
 
@@ -48,7 +48,7 @@
    \def\proofname{Dokaz}%
    \def\glossaryname{Glosar}% <-- CHECK
    }
-\def\dateserbian@lat{%   
+\def\dateserbian@lat{%
    \def\today{\number\day .~\ifcase\month\or
     januar\or februar\or mart\or april\or maj\or
     juni\or juli\or avgust\or septembar\or oktobar\or novembar\or
@@ -88,34 +88,35 @@
     }
 
 \def\serbian@font@cyr{%
-\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-\@ifundefined{serbianfont}{%
-      \@ifundefined{cyrillicfont}{%
-        \zf@check@ot@script{cyrl}%
-	\if@tempswa%
-	  \addfontfeature{Script=Cyrillic}%
-	\else%
-	  \PackageError{polyglossia}{^^J
-	  The current font does not contain the Cyrillic script!^^J
-	  Please define \string\cyrillicfont\space or \string\serbianfont\space with \string\newfontfamily}%
-	\fi%
-	\zf@check@ot@lang{SRB}%
-	\if@tempswa\addfontfeature{Language=Serbian}\fi%
-	}%
-        {\cyrillicfont%
-         \zf@check@ot@lang{SRB}%
-	 \if@tempswa\addfontfeature{Language=Serbian}\fi%
-        }%
-     }% 
-     {\serbianfont}%
+  \@ifundefined{serbianfont}{%
+    \@ifundefined{cyrillicfont}{%
+      \normalfontlatin%
+      \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+      \zf@check@ot@script{cyrl}%
+      \if@tempswa
+        \addfontfeature{Script=Cyrillic}%
+      \else
+        \PackageError{polyglossia}{^^J
+    The current font does not contain the Cyrillic script!^^J
+    Please define \string\cyrillicfont\space or \string\serbianfont\space with \string\newfontfamily}%
+      \fi%
+      \zf@check@ot@lang{SRB}%
+      \if@tempswa\addfontfeature{Language=Serbian}\fi}%
+    {\cyrillicfont%
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \zf@check@ot@lang{SRB}%
+    \if@tempswa\addfontfeature{Language=Serbian}\fi}%
+  }%
+  {\serbianfont}%
 }
 
 \def\serbian@font@lat{%
-  \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-   \@ifundefined{serbianfontlatin}{%
-     \zf@check@ot@lang{SRB}%
-     \if@tempswa\addfontfeature{Language=Serbian}\fi}%
-    {\serbianfontlatin}%
+  \@ifundefined{serbianfontlatin}{%
+    \normalfontlatin%
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \zf@check@ot@lang{SRB}%
+    \if@tempswa\addfontfeature{Language=Serbian}\fi}%
+  {\serbianfontlatin}%
 }
 
 \def\serbian@font{%

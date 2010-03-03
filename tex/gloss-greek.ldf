@@ -657,6 +657,7 @@
 
 \def\greek@font{%
   \@ifundefined{greekfont}{%
+    \normalfontlatin%
     \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
     \zf@check@ot@script{grek}%
     \if@tempswa%

@@ -25,14 +25,14 @@
    \xpg@ill@value{#1}{bulgarian@alph}\fi}%
 
 \def\bulgarian@numbers{%
-   \let\latin@Alph\@Alph% 
-   \let\latin@alph\@alph% 
+   \let\latin@Alph\@Alph%
+   \let\latin@alph\@alph%
    \let\@Alph\bulgarian@Alph%
    \let\@alph\bulgarian@alph%
  }
 
 \def\nobulgarian@numbers{%
-   \let\@Alph\latin@Alph% 
+   \let\@Alph\latin@Alph%
    \let\@alph\latin@alph%
 }
 
@@ -82,25 +82,28 @@
 \def\bulgarian@language{\language=\l@bulgarian}
 
 \def\bulgarian@font{%
-\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-\@ifundefined{bulgarianfont}{%
-      \@ifundefined{cyrillicfont}{%
-        \zf@check@ot@script{cyrl}%
-	\if@tempswa%
-	  \addfontfeature{Script=Cyrillic}%
-	\else%
-	  \PackageError{polyglossia}{^^J
-	  The current font does not contain the Cyrillic script!^^J
-	  Please define \string\cyrillicfont\space or \string\bulgarianfont\space with \string\newfontfamily}%
-	\fi%
-	\zf@check@ot@lang{BGR}%
-	\if@tempswa\addfontfeature{Language=Bulgarian}\fi
-	}%
-      {\cyrillicfont%
-	\zf@check@ot@lang{BGR}%
-	\if@tempswa\addfontfeature{Language=Bulgarian}\fi%
-      }}% 
-{\bulgarianfont}}
+  \@ifundefined{bulgarianfont}{%
+    \@ifundefined{cyrillicfont}{%
+      \normalfontlatin%
+      \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+      \zf@check@ot@script{cyrl}%
+      \if@tempswa
+        \addfontfeature{Script=Cyrillic}%
+      \else
+        \PackageError{polyglossia}{^^J
+        The current font does not contain the Cyrillic script!^^J
+        Please define \string\cyrillicfont\space or \string\bulgarianfont\space with \string\newfontfamily}%
+      \fi
+      \zf@check@ot@lang{BGR}%
+      \if@tempswa\addfontfeature{Language=Bulgarian}\fi
+    }%
+    {\cyrillicfont%
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \zf@check@ot@lang{BGR}%
+    \if@tempswa\addfontfeature{Language=Bulgarian}\fi
+    }}%
+  {\bulgarianfont}%
+}
 
 \setlocalhyphenmins{bulgarian}{2}{2}%
 

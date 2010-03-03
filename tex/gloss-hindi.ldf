@@ -1,7 +1,7 @@
 \ProvidesFile{gloss-hindi.ldf}[polyglossia: module for hindi]
 % UTF-8 strings kindly provided by Zdenek Wagner, 10-03-2008
 % TODO: add option for velthuis transliteration with link to
-% Velthuis Devanagari project: http://devnag.sarovar.org. 
+% Velthuis Devanagari project: http://devnag.sarovar.org.
 \makeatletter
 
 \ifx\l@hindi\@undefined%
@@ -59,25 +59,26 @@
 \def\hindi@language{\language=\l@hindi}
 
 \def\hindi@font{%
-\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-\@ifundefined{hindifont}{%
-      \@ifundefined{devanagarifont}{%
-        \zf@check@ot@script{deva}%
-	\if@tempswa%
-	  \addfontfeature{Script=Devanagari}%
-	\else%
-	  \PackageError{polyglossia}{^^J
-	  The current font does not contain the Devanagari script!^^J
-	  Please define \string\devanagarifont\space or \string\hindifont\space with \string\newfontfamily}%
-	\fi%
-	\zf@check@ot@lang{HIN}%
-	\if@tempswa\addfontfeature{Language=Hindi}\fi%
-	}%
-      {\devanagarifont%
-	\zf@check@ot@lang{HIN}%
-	\if@tempswa\addfontfeature{Language=Hindi}\fi%
-      }}% 
-     {\hindifont}%
+  \@ifundefined{hindifont}{%
+    \normalfontlatin%
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \@ifundefined{devanagarifont}{%
+      \zf@check@ot@script{deva}%
+      \if@tempswa%
+        \addfontfeature{Script=Devanagari}%
+      \else%
+        \PackageError{polyglossia}{^^J
+    The current font does not contain the Devanagari script!^^J
+    Please define \string\devanagarifont\space or \string\hindifont\space with \string\newfontfamily}%
+      \fi%
+      \zf@check@ot@lang{HIN}%
+      \if@tempswa\addfontfeature{Language=Hindi}\fi%
+    }%
+    {\devanagarifont%
+    \zf@check@ot@lang{HIN}%
+    \if@tempswa\addfontfeature{Language=Hindi}\fi%
+    }}%
+  {\hindifont}%
 }
 
 \def\selectnormalfonthindi{%

@@ -200,25 +200,26 @@
 }
 
 \def\amharic@font{%
-\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-\@ifundefined{amharicfont}{%
+  \@ifundefined{amharicfont}{%
+    \normalfontlatin%
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
       \@ifundefined{ethiopicfont}{%
         \zf@check@ot@script{ethi}%
-	\if@tempswa%
-	  \addfontfeature{Script=Ethiopic}%
-	\else%
-	  \PackageError{polyglossia}{^^J
-	  The current font does not contain the Ethiopic script!^^J
-	  Please define \string\ethiopicfont\space or \string\amharicfont\space with \string\newfontfamily}%
-	\fi%
-	\zf@check@ot@lang{AMH}%
-	\if@tempswa\addfontfeature{Language=Amharic}\fi%
-	}%
+        \if@tempswa
+          \addfontfeature{Script=Ethiopic}%
+        \else
+          \PackageError{polyglossia}{^^J
+      The current font does not contain the Ethiopic script!^^J
+      Please define \string\ethiopicfont\space or \string\amharicfont\space with \string\newfontfamily}%
+        \fi
+        \zf@check@ot@lang{AMH}%
+        \if@tempswa\addfontfeature{Language=Amharic}\fi
+      }%
       {\ethiopicfont%
-	\zf@check@ot@lang{AMH}%
-	\if@tempswa\addfontfeature{Language=Amharic}\fi%
+      \zf@check@ot@lang{AMH}%
+      \if@tempswa\addfontfeature{Language=Amharic}\fi
       }}% 
-     {\amharicfont}%
+  {\amharicfont}%
 }
 
 \def\selectnormalfontamharic{%

@@ -120,17 +120,18 @@
 
 \def\thai@font{%
   \@ifundefined{thaifont}{%
+    \normalfontlatin%
     \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
     \zf@check@ot@script{thai}%
-    \if@tempswa%
+    \if@tempswa
       \addfontfeature{Script=Thai}%
-    \else%
+    \else
       \PackageError{polyglossia}{^^J
-      The current font does not contain the Thai script!^^J
-      Please define \string\thaifont\space with \string\newfontfamily}%
-    \fi%
-    }%
-    {\thaifont}}
+    The current font does not contain the Thai script!^^J
+    Please define \string\thaifont\space with \string\newfontfamily}%
+    \fi}%
+  {\thaifont}%
+}
 
 \def\selectnormalfontthai{%
    \let\normalfont=\thai@font%

@@ -110,27 +110,28 @@
 \def\urdu@language{\language=\l@urdu}
 
 \def\urdu@font{%
-\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-\@ifundefined{urdufont}{%
-  \@ifundefined{arabicfont}{%
-    \zf@check@ot@script{arab}%
-    \if@tempswa%
-      \addfontfeature{Script=Arabic}%
-    \else%
-      \PackageError{polyglossia}{^^J
-      The current font does not contain the Arabic script!^^J
-      Please define \string\arabicfont\space or \string\urdufont\space with \newfontfamily}%
-    \fi%
-    \zf@check@ot@lang{URD}%urd
-    \if@tempswa\addfontfeature{Language=urdu}\fi
-	}%
-  {\arabicfont%
-    \zf@check@ot@lang{URD}%urd
-    \if@tempswa\addfontfeature{Language=urdu}\fi
-  }%
-}%
-{\urdufont}
+  \@ifundefined{urdufont}{%
+    \@ifundefined{arabicfont}{%
+      \normalfontlatin%
+      \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+      \zf@check@ot@script{arab}%
+      \if@tempswa
+        \addfontfeature{Script=Arabic}%
+      \else
+        \PackageError{polyglossia}{^^J
+    The current font does not contain the Arabic script!^^J
+    Please define \string\arabicfont\space or \string\urdufont\space with \newfontfamily}%
+      \fi
+      \zf@check@ot@lang{URD}%
+      \if@tempswa\addfontfeature{Language=urdu}\fi}%
+    {\arabicfont%
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \zf@check@ot@lang{URD}%
+    \if@tempswa\addfontfeature{Language=urdu}\fi}%
+    }%
+  {\urdufont}%
 }
+
 % TODO add setup to define Sans and Mono Arabic fonts if desired
 \def\urdu@font@sf{%
   \@ifundefined{urdufontsf}{%

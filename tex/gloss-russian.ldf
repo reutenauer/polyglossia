@@ -7,23 +7,25 @@
 \fi
 
 \def\russian@font{%
-\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-\@ifundefined{russianfont}{%
-  \@ifundefined{cyrillicfont}{%
-    \zf@check@ot@script{cyrl}%
-  \if@tempswa%
-    \addfontfeature{Script=Cyrillic}%
-  \else%
-    \PackageError{polyglossia}{^^J
+  \@ifundefined{russianfont}{%
+    \@ifundefined{cyrillicfont}{%
+      \normalfontlatin%
+      \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+      \zf@check@ot@script{cyrl}%
+      \if@tempswa
+        \addfontfeature{Script=Cyrillic}%
+      \else
+        \PackageError{polyglossia}{^^J
     The current font does not contain the Cyrillic script!^^J
     Please define \string\cyrillicfont\space or \string\russianfont\space with \string\newfontfamily}%
-  \fi%
-  \zf@check@ot@lang{RUS}%
-  \if@tempswa\addfontfeature{Language=Russian}\fi%
-  }%
-  {\cyrillicfont%
-  \zf@check@ot@lang{RUS}%
-  \if@tempswa\addfontfeature{Language=Russian}\fi}%
+      \fi
+      \zf@check@ot@lang{RUS}%
+      \if@tempswa\addfontfeature{Language=Russian}\fi
+    }%
+    {\cyrillicfont%
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \zf@check@ot@lang{RUS}%
+    \if@tempswa\addfontfeature{Language=Russian}\fi}%
   }% 
   {\russianfont}%
 }
