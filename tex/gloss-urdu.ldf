@@ -1,6 +1,7 @@
-%%% Contributed by Kamal Abdali
+%%% Adapted from a file contributed by Kamal Abdali
 \ProvidesFile{gloss-urdu.ldf}[polyglossia: module for Urdu]
 \RequirePackage{bidi}
+\RequirePackage{arabicnumbers}
 \RequirePackage{hijrical}
 \makeatletter
 
@@ -74,8 +75,6 @@
          \space\urdunumber\year}%
     \fi}%
 }
-
-\ifcsdef{arabicdigits}{}{\input{polyglossia-arabic-common.def}}
 
 \def\urdunumber#1{%
   \if@western@numerals

@@ -1,5 +1,6 @@
 \ProvidesFile{gloss-farsi.ldf}[polyglossia: module for farsi]
 \RequirePackage{bidi}
+\RequirePackage{arabicnumbers}
 \RequirePackage{farsical}
 \makeatletter
 
@@ -58,8 +59,6 @@
 \def\datefarsi{%
    \def\today{\@ensure@RTL{\farsinumber\day\space\farsigregmonth{\month}\space\farsinumber\year}}%
 }
-
-\ifcsdef{arabicdigits}{}{\input{polyglossia-arabic-common.def}}
 
 \def\farsinumber#1{%
   \if@western@numerals

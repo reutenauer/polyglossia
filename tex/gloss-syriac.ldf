@@ -1,5 +1,6 @@
 \ProvidesFile{gloss-syriac.ldf}[polyglossia: module for syriac]
-\RequirePackage{bidi}[0.3]
+\RequirePackage{bidi}
+\RequirePackage{arabicnumbers}
 \makeatletter
 
 \ifx\l@syriac\@undefined
@@ -87,8 +88,6 @@
    \def\today{\@ensure@RTL{\syriacnumber\day{\space}%
     \syriac@month{\month}{\space}\syriacnumber\year}}%
 }
-
-\ifcsdef{arabicdigits}{}{\input{polyglossia-arabic-common.def}}
 
 \def\syriac@zero{}
 

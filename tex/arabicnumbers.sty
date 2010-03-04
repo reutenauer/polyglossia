@@ -1,4 +1,31 @@
-\ifcsdef{arabicdigits}{\endinput}{}
+\ProvidesPackage{arabicnumbers}
+        [2010/03/04 v0.1 %
+         Formatting of Arabic and Farsi digits and of Arabic abjad numerals]
+
+\def\arabicdigits#1{\expandafter\@arabic@digits #1@}
+\def\@arabic@digits#1{%
+  \ifx @#1% then terminate
+  \else
+    \ifcat0#1%
+      \ifcase #1٠\or ١\or ٢\or ٣\or ٤\or٥\or ٦\or ٧\or ٨\or ٩\fi
+    \else #1%
+    \fi
+    \expandafter\@arabic@digits
+ \fi
+}
+
+\def\farsidigits#1{\expandafter\@farsi@digits #1@}
+\def\@farsi@digits#1{%
+  \ifx @#1% then terminate
+  \else
+    \ifcat0#1%
+      \ifcase #1 ۰\or ۱\or ۲\or ۳\or ۴\or ۵\or ۶\or ۷\or ۸\or ۹\fi
+    \else
+      #1%
+    \fi
+    \expandafter\@farsi@digits
+  \fi
+}
 
 \def\abjad#1{%
 \ifnum#1>1999\xpg@ill@value{#1}{abjad numeral}%
@@ -40,30 +67,4 @@
 \def\abj@num@iv#1{%
   \ifcase#1\or غ\fi
   \ifnum#1=\z@\fi\abj@num@iii}
-
-
-\def\arabicdigits#1{\expandafter\@arabic@digits #1@}
-\def\@arabic@digits#1{%
-  \ifx @#1% then terminate
-  \else
-    \ifcat0#1%
-      \ifcase #1٠\or ١\or ٢\or ٣\or ٤\or٥\or ٦\or ٧\or ٨\or ٩\fi
-    \else #1%
-    \fi
-    \expandafter\@arabic@digits
- \fi
-}
-
-\def\farsidigits#1{\expandafter\@farsi@digits #1@}
-\def\@farsi@digits#1{%
-  \ifx @#1% then terminate
-  \else
-    \ifcat0#1%
-      \ifcase #1 ۰\or ۱\or ۲\or ۳\or ۴\or ۵\or ۶\or ۷\or ۸\or ۹\fi
-    \else
-      #1%
-    \fi
-    \expandafter\@farsi@digits
-  \fi
-}
 \endinput
