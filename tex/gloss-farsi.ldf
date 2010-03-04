@@ -59,20 +59,7 @@
    \def\today{\@ensure@RTL{\farsinumber\day\space\farsigregmonth{\month}\space\farsinumber\year}}%
 }
 
-\input{polyglossia-arabic-common.def}
-
-\def\farsidigits#1{\expandafter\@farsi@digits #1@}
-\def\@farsi@digits#1{%
-  \ifx @#1% then terminate
-  \else
-    \ifcat0#1%
-      \ifcase #1 ۰\or ۱\or ۲\or ۳\or ۴\or ۵\or ۶\or ۷\or ۸\or ۹\fi
-    \else
-      #1%
-    \fi
-    \expandafter\@farsi@digits
-  \fi
-}
+\ifcsdef{arabicdigits}{}{\input{polyglossia-arabic-common.def}}
 
 \def\farsinumber#1{%
   \if@western@numerals
