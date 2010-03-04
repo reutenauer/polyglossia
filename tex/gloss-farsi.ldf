@@ -33,6 +33,10 @@
   \or کانون ثانی\or شباط\or اذار%%or ادار
     \or نیسان\or ایار\or حزیران\or تموز\or آب\or ایلول\or تشرین اول\or تشرین ثانی\or کانون اول\fi}
 
+%\Hijritoday is now locale-aware and will format the date with this macro:
+\DefineFormatHijriDate{farsi}{\@ensure@RTL{%
+\farsinumber{\value{Hijriday}}\space\HijriMonthArabic{\value{Hijrimonth}}\space\farsinumber{\value{Hijriyear}}}}
+
 \def\captionsfarsi{%
 \def\prefacename{\@ensure@RTL{پیشگفتار}}%
 \def\refname{\@ensure@RTL{مراجع}}%

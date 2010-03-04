@@ -2,6 +2,7 @@
         [2007/12/27 v0.1 %
          Islamic calendar]
 \RequirePackage{bidi}
+\RequirePackage{arabicnumbers}
 
 \@ifundefined{@Remainder}{\input{cal-util.def}}{}
 
@@ -68,13 +69,17 @@ Shawwāl\or Dhū ’l-Qaʿda\or Dhū ’l-Ḥijja\fi}
 \def\FormatHijriDateEnglish{%
 \number\value{Hijriday}\space\HijriMonthTranslit{\value{Hijrimonth}}\space\number\value{Hijriyear}}
 
-%FIXME : this is already in gloss-arabic
-\def\@rabicnumb@r#1{\@ifundefined{arabicnumber}{{\addfontfeature{Mapping=arabicdigits} #1}}%
-{\arabicnumber{#1}}}
+%% This macro is now locale-aware!
+\newcommand\FormatHijriDate{%
+  \@ifundefined{FormatHijriDate@\languagename}{\FormatHijriDate@arabic}%
+  {\csname FormatHijriDate@\languagename\endcsname}}
 
-\def\FormatHijriDate{\@ensure@RTL{%
-\@rabicnumb@r{\value{Hijriday}}\space\HijriMonthArabic{\value{Hijrimonth}}\space\@rabicnumb@r{\value{Hijriyear}}}}
-
+% we provide this as a reasonable default.
+% Further definitions are in polyglossia's language definition files.
+\newcommand\DefineFormatHijriDate[2]{%
+   \@namedef{FormatHijriDate@#1}{#2}}
+\DefineFormatHijriDate{default}{\@ensure@RTL{%
+\arabicdigits{\value{Hijriday}}\space\HijriMonthArabic{\value{Hijrimonth}}\space\arabicdigits{\value{Hijriyear}}}}
 \endinput
 
 %TODO

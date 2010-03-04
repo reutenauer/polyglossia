@@ -84,6 +84,10 @@
 {\xpg@warning{Option `locale=#1' is not defined for Arabic: using `default' instead}%
 \arabicgregmonth@default}}
 
+%\Hijritoday is now locale-aware and will format the date with this macro:
+\DefineFormatHijriDate{arabic}{\@ensure@RTL{%
+\arabicnumber{\value{Hijriday}}\space\HijriMonthArabic{\value{Hijrimonth}}\space\arabicnumber{\value{Hijriyear}}}}
+
 \def\captionsarabic{%
 \def\prefacename{\@ensure@RTL{مدخل}}% 
 \def\refname{\@ensure@RTL{المراجع}}

@@ -40,6 +40,10 @@
 \def\urduhijrimonth#1{\ifcase#1%
   \or محرّم\or صفر\or ربیع الاوّل\or ربیع الثّانی\or جمادی الاوّل\or جمادی الثّانی\or رجب\or شعبان\or  رمضان\or شوّال\or ذیقعد\or ذی الحج\fi}
 
+%\Hijritoday is now locale-aware and will format the date with this macro:
+\DefineFormatHijriDate{urdu}{\@ensure@RTL{%
+\urdunumber{\value{Hijriday}}؍\space\urduhijrimonth{\value{Hijrimonth}}\space\urdunumber{\value{Hijriyear}}}}
+
 \def\captionsurdu{%
 \def\refname{\@ensure@RTL{حوالہ جات}}%
 \def\abstractname{\@ensure@RTL{ملخّص}}%

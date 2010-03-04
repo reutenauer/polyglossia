@@ -1,7 +1,7 @@
 \ProvidesPackage{farsical}
         [2008/07/02 v0.1 %
          Farsi (jalali) calendar]
-\RequirePackage{bidi,calc}
+\RequirePackage{bidi,calc,arabicnumbers}
 
 %TODO - rewrite completely using calc 
 %%    - use Reingold & Dershowitz ME
@@ -184,17 +184,16 @@
   \JALALI@d = \JALALI@dn \advance \JALALI@d by -\JALALI@sn
 \fi
 %% DATE FORMATTING
-\if@RTL{\farsinumber\JALALI@d\space%
-\Jalalimonth{\JALALI@m}\space\farsinumber\JALALI@y}%
-\else%
+\if@RTL{\farsidigits{\number\JALALI@d}\space%
+\Jalalimonth{\JALALI@m}\space\farsidigits{\number\JALALI@y}}%
+\else
 \number\JALALI@d\space\JalalimonthEnglish{\JALALI@m}%
 \space\number\JALALI@y%
-\fi
-}
+\fi}
 %%%
-\def\Jalalimonth#1{\ifcase#1\or فروردین\or 
-اردیبهشت\or خرداد\or تیر\or مرداد\or شهریور
-\or مهر\or آبان\or آذر\or دی\or بهمن\or اسفند
+\def\Jalalimonth#1{\ifcase#1\or فروردین\or
+اردیبهشت\or خرداد\or تیر\or مرداد\or شهریور%
+\or مهر\or آبان\or آذر\or دی\or بهمن\or اسفند%
 \fi}
 \def\JalalimonthEnglish#1{\ifcase#1%
 \or Farvardīn\or Ordībehesht\or Khordād\or Tīr
