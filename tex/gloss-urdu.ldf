@@ -75,7 +75,7 @@
     \fi}%
 }
 
-\input{polyglossia-arabic-common.def}
+\ifcsdef{arabicdigits}{}{\input{polyglossia-arabic-common.def}}
 
 \def\urdunumber#1{%
   \if@western@numerals

@@ -123,7 +123,7 @@
     \fi%
  \fi}}
 
-\input{polyglossia-arabic-common.def}
+\ifcsdef{arabicdigits}{}{\input{polyglossia-arabic-common.def}}
 
 \def\arabicnumber#1{%
   \ifeastern@numerals

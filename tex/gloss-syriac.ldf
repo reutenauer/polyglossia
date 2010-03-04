@@ -88,7 +88,7 @@
     \syriac@month{\month}{\space}\syriacnumber\year}}%
 }
 
-\input{polyglossia-arabic-common.def}
+\ifcsdef{arabicdigits}{}{\input{polyglossia-arabic-common.def}}
 
 \def\syriac@zero{}
 
@@ -112,22 +112,22 @@
 }
 \def\abj@syr@num@i#1{%
   \ifcase#1\or\char"0710\or\char"0712\or\char"0713\or\char"0715%
- \or\char"0717\or\char"0718\or\char"0719\or\char"071A\or\char"071B\fi%
+ \or\char"0717\or\char"0718\or\char"0719\or\char"071A\or\char"071B\fi
   \ifnum#1=\z@\syriac@zero\fi}
 \def\abj@syr@num@ii#1{%
   \ifcase#1\or\char"071D\or\char"071F\or\char"0720\or\char"0721\or\char"0722%
-          \or\char"0723\or\char"0725\or\char"0726\or\char"0728\fi%
+          \or\char"0723\or\char"0725\or\char"0726\or\char"0728\fi
   \ifnum#1=\z@\fi\abj@syr@num@i}
 \def\abj@syr@num@iii#1{%
   \ifcase#1\or\char"0729\or\char"072A\or\char"072B\or\char"072C%
   \or\char"0722\char"0307\or\char"0723\char"0307\or\char"0725\char"0307%
-  \or\char"0726\char"0307\or\char"0728\char"0307\fi%
+  \or\char"0726\char"0307\or\char"0728\char"0307\fi
   \ifnum#1=\z@\fi\abj@syr@num@ii}
 \def\abj@syr@num@iv#1{%
   \ifcase#1\or\char"0710\char"0748\or\char"0712\char"0748%
   \or\char"0713\char"0748\or\char"0715\char"0748%
   \or\char"0717\char"0748\or\char"0718\char"0748%
-  \or\char"0719\char"0748\or\char"071A\char"0748\or\char"071B\char"0748\fi%
+  \or\char"0719\char"0748\or\char"071A\char"0748\or\char"071B\char"0748\fi
   \ifnum#1=\z@\fi\abj@syr@num@iii}
 
 \def\@syriacnumber#1{%
