@@ -27,9 +27,9 @@
 \setkeys{farsi}{locale,numerals}
 
 \def\farsigregmonth#1{\ifcase#1%
-  \or ژانویه\or فوریه\or مارس\or آوریل\or مه\or ژوئن\or ژوئیه؛\or ژویه\or اوت\or سپتامبر\or اکتبر\or نوامبر\or دسامبر\fi}
+  \or ژانویه\or فوریه\or مارس\or آوریل\or مه\or ژوئن\or ژوئیه\or اوت\or سپتامبر\or اکتبر\or نوامبر\or دسامبر\fi}
 \def\farsimonth#1{\ifcase#1%
-  \or کانون ثانی\or شباط\or اذار%؛\or ادار
+  \or کانون ثانی\or شباط\or اذار%%or ادار
     \or نیسان\or ایار\or حزیران\or تموز\or آب\or ایلول\or تشرین اول\or تشرین ثانی\or کانون اول\fi}
 
 \def\captionsfarsi{%
