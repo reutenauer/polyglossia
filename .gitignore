@@ -5,5 +5,6 @@
 *.swp
 *.log
 *.aux
+localupdate
 etc/*
 doc/REQUESTS
