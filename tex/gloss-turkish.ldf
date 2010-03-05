@@ -1,4 +1,5 @@
 \ProvidesFile{gloss-turkish.ldf}[polyglossia: module for turkish]
+\RequirePackage{hijrical}
 \makeatletter
 
 \def\turkish@font{%
@@ -72,6 +73,11 @@
     Aralık\fi
     \space\number\year}
 }
+\def\hijrimonthturkish#1{\ifcase#1%
+\or Muharrem\or Safer\or Rebiülevvel\or Rebiülahir\or Cemaziyelevvel\or Cemaziyelahir\or Recep\or Şaban\or Ramazan\or Şevval\or Zilkade\or Zilhicce\fi}
+%%\Hijritoday is now locale-aware and will format the date with this macro:
+\DefineFormatHijriDate{turkish}{%
+\number\value{Hijriday}\space\hijrimonthturkish{\value{Hijrimonth}}\space\number\value{Hijriyear}}
 
 \def\turkish@language{\language=\l@turkish}
 

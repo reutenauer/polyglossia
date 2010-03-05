@@ -41,11 +41,8 @@
 
 \def\Hijridate#1#2#3{%
     \HijriFromGregorian{#1}{#2}{#3}%
-    \if@RTL%
-       \FormatHijriDate%
-    \else%
-       \FormatHijriDateEnglish%
-    \fi}
+    \FormatHijriDate}
+
 % added option \Hijritoday[n] (default 0) for adjusting the date + n days
 \@ifundefined{@hijri@correction}{\gdef\@hijri@correction{0}}{}
 \newcommand\Hijritoday[1][\@hijri@correction]{%
@@ -66,20 +63,22 @@ Shawwāl\or Dhū ’l-Qaʿda\or Dhū ’l-Ḥijja\fi}
 جمادى الأولى\or جمادى الآخرة\or رجب\or شعبان\or رمضان\or%
 شوال\or ذو القعدة\or ذو الحجة\fi}
 
-\def\FormatHijriDateEnglish{%
-\number\value{Hijriday}\space\HijriMonthTranslit{\value{Hijrimonth}}\space\number\value{Hijriyear}}
-
 %% This macro is now locale-aware!
-\newcommand\FormatHijriDate{%
-  \@ifundefined{FormatHijriDate@\languagename}{\FormatHijriDate@arabic}%
-  {\csname FormatHijriDate@\languagename\endcsname}}
+\def\FormatHijriDate{%
+  \@ifundefined{FormatHijriDate@\languagename}%
+    {\if@RTL\FormatHijriDate@defaultRTL\else\FormatHijriDate@defaultLTR\fi}%
+    {\csname FormatHijriDate@\languagename\endcsname}}
+
+\newcommand\DefineFormatHijriDate[2]{%
+   \@namedef{FormatHijriDate@#1}{#2}}
 
 % we provide this as a reasonable default.
 % Further definitions are in polyglossia's language definition files.
-\newcommand\DefineFormatHijriDate[2]{%
-   \@namedef{FormatHijriDate@#1}{#2}}
-\DefineFormatHijriDate{default}{\@ensure@RTL{%
+\DefineFormatHijriDate{defaultRTL}{\@ensure@RTL{%
 \arabicdigits{\value{Hijriday}}\space\HijriMonthArabic{\value{Hijrimonth}}\space\arabicdigits{\value{Hijriyear}}}}
+
+\DefineFormatHijriDate{defaultLTR}{%
+\number\value{Hijriday}\space\HijriMonthTranslit{\value{Hijrimonth}}\space\number\value{Hijriyear}}
 \endinput
 
 %TODO

@@ -1,4 +1,5 @@
 \ProvidesFile{gloss-bahasam.ldf}[polyglossia: module for bahasa malaysia]
+\RequirePackage{hijrical}
 \makeatletter
 \def\bahasam@font{\normalfontlatin}
 
@@ -60,6 +61,12 @@
     Januari\or Pebruari\or Mac\or April\or Mei\or Jun\or
     Julai\or Ogos\or September\or Oktober\or November\or Disember\fi
     \space \number\year}}
+
+\def\hijrimonthbahasam#1{\ifcase#1%
+\or Muharram\or Safar\or Rabiulawal\or Rabiulakhir\or Jamadilawal\or Jamadilakhir\or Rejab%
+\or Syaaban\or Ramadan\or Syawal\or Zulkaedah\or Zulhijah\fi}
+\DefineFormatHijriDate{bahasam}{%
+\number\value{Hijriday}\space\hijrimonthbahasam{\value{Hijrimonth}}\space\number\value{Hijriyear}}
 
 \def\bahasam@language{\language=\l@bahasam}
 

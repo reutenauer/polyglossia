@@ -1,4 +1,5 @@
 \ProvidesFile{gloss-bahasai.ldf}[polyglossia: module for bahasa indonesia]
+\RequirePackage{hijrical}
 \makeatletter
 \def\bahasai@font{\normalfontlatin}
 
@@ -60,6 +61,12 @@
     Januari\or Pebruari\or Maret\or April\or Mei\or Juni\or
     Juli\or Agustus\or September\or Oktober\or Nopember\or Desember\fi
     \space \number\year}}
+
+\def\hijrimonthbahasai#1{\ifcase#1%
+\or Muharram\or Safar\or Rabiul awal\or Rabiul akhir\or Jumadil awal\or Jumadil akhir\or Rajab%
+\or Sya'ban\or Ramadhan\or Syawal\or Dzulkaidah\or Dzulhijjah\fi}
+\DefineFormatHijriDate{bahasai}{%
+\number\value{Hijriday}\space\hijrimonthbahasai{\value{Hijrimonth}}\space\number\value{Hijriyear}}
 
 \def\bahasai@language{\language=\l@bahasai}
 
