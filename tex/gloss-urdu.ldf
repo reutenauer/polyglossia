@@ -38,7 +38,7 @@
   \or جنوری\or فروری\or مارچ\or اپریل\or مئی\or جون\or جولائی\or اگست\or  ستمبر\or اکتوبر\or نومبر\or دسمبر\fi}
 
 \def\urduhijrimonth#1{\ifcase#1%
-  \or محرّم\or صفر\or ربیع الاوّل\or ربیع الثّانی\or جمادی الاوّل\or جمادی الثّانی\or رجب\or شعبان\or  رمضان\or شوّال\or ذیقعد\or ذی الحج\fi}
+ \or محرّم\or صفر\or ربیع الاوّل\or ربیع الثّانی\or جمادی الاوّل\or جمادی الثّانی\or رجب\or شعبان\or  رمضان\or شوّال\or ذیقعدہ\or ذی الحجّہ\fi}
 
 %\Hijritoday is now locale-aware and will format the date with this macro:
 \DefineFormatHijriDate{urdu}{\@ensure@RTL{%
@@ -60,7 +60,7 @@
 %\def\thepart{\text<lang>{}}%
 \def\partname{\@ensure@RTL{حصّہ}}%
 \def\pagename{\@ensure@RTL{صفحہ}}%
-\def\seename{\@ensure@RTL{ملاحطہ ہو}}%
+\def\seename{\@ensure@RTL{ملاحظہ ہو}}%
 \def\alsoname{\@ensure@RTL{ایضاً}}%
 \def\enclname{\@ensure@RTL{منسلک}}%
 \def\ccname{\@ensure@RTL{نقل}}%
