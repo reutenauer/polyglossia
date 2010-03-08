@@ -2,6 +2,7 @@
 \RequirePackage{bidi}
 \RequirePackage{arabicnumbers}
 \RequirePackage{farsical}
+\RequirePackage{hijrical}
 \makeatletter
 
 \ifx\l@farsi\@undefined
