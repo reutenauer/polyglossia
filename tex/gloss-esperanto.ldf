@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-esperanto.ldf}[polyglossia: module for esperanto]
 \makeatletter
-\def\esperanto@font{\normalfontlatin}
+\def\esperanto@font{\selectfontfamilylatin}
 
 \ifx\l@esperanto\@undefined%
    \xpg@nopatterns{Esperanto}%

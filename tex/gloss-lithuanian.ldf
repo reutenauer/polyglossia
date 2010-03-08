@@ -50,7 +50,7 @@
    \def\today{\textlithuanian{\number\year~m.~\lithuanianmonth~\number\day~d.}}%
    }
 
-\def\lithuanian@font{\normalfontlatin} % <== if the script is Latin
+\def\lithuanian@font{\selectfontfamilylatin} % <== if the script is Latin
 
 \def\lithuanian@language{\protect\language=\l@lithuanian}
 

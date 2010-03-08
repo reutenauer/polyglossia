@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-romanian.ldf}[polyglossia: module for romanian]
 \makeatletter
-\def\romanian@font{\normalfontlatin}
+\def\romanian@font{\selectfontfamilylatin}
 
 \ifx\l@romanian\@undefined%
    \xpg@nopatterns{Romanian}%

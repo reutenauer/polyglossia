@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-latin.ldf}[polyglossia: module for latin]
 \makeatletter
-\def\latin@font{\normalfontlatin}
+\def\latin@font{\selectfontfamilylatin}
 
 \ifx\l@latin\@undefined
    \xpg@nopatterns{latin}

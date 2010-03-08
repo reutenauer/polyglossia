@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-finnish.ldf}[polyglossia: module for finnish]
 \makeatletter
-\def\finnish@font{\normalfontlatin}
+\def\finnish@font{\selectfontfamilylatin}
 
 \ifx\l@finnish\@undefined%
    \xpg@nopatterns{Finnish}%

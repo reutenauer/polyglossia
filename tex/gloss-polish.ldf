@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-polish.ldf}[polyglossia: module for polish]
 \makeatletter
-\def\polish@font{\normalfontlatin}
+\def\polish@font{\selectfontfamilylatin}
 
 \ifx\l@polish\@undefined
    \xpg@nopatterns{polish}

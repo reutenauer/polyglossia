@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-brazil.ldf}[polyglossia: module for portuguese]
 \makeatletter
-\def\brazil@font{\normalfontlatin}
+\def\brazil@font{\selectfontfamilylatin}
 
 %FIXME check this:
 \ifx\l@brazil\@undefined

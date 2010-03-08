@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-czech.ldf}[polyglossia: module for czech]
 \makeatletter
-\def\czech@font{\normalfontlatin}
+\def\czech@font{\selectfontfamilylatin}
 
 \ifx\l@czech\@undefined%
    \xpg@nopatterns{Czech}%

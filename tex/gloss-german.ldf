@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-german.ldf}[polyglossia: module for german]
 \makeatletter
-\def\german@font{\normalfontlatin}
+\def\german@font{\selectfontfamilylatin}
 
 \def\tmp@old{old}
 \def\tmp@oldyr{1901}
