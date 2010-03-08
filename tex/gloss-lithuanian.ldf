@@ -5,7 +5,7 @@
 
 \ifx\l@lithuanian\@undefined%
    \xpg@nopatterns{Lithuanian}%
-   \adddialect\l@lithuanian0%
+   \adddialect\l@lithuanian\l@nohyphenation\relax
 \fi
 
 \def\captionslithuanian{%
@@ -51,10 +51,6 @@
    }
 
 \def\lithuanian@font{\normalfontlatin} % <== if the script is Latin
-
-\def\selectnormalfontlithuanian{%
-   \let\normalfont=\lithuanian@font%
-   \def\reset@font{\normalfont}}
 
 \def\lithuanian@language{\protect\language=\l@lithuanian}
 
