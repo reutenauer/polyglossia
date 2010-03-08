@@ -1,0 +1,71 @@
+% Translated by Paulius Sladkevičius <komsas@gmail.com>
+
+\ProvidesFile{gloss-lithuanian.ldf}[polyglossia: module for lithuanian]
+\makeatletter
+
+\ifx\l@lithuanian\@undefined%
+   \xpg@nopatterns{Lithuanian}%
+   \adddialect\l@lithuanian0%
+\fi
+
+\def\captionslithuanian{%
+   \def\refname{\textlithuanian{Literatūra}}%
+   \def\abstractname{\textlithuanian{Santrauka}}%
+   \def\bibname{\textlithuanian{Literatūra}}%
+   \def\prefacename{\textlithuanian{Pratarmė}}%
+   \def\chaptername{\textlithuanian{Skyrius}}%
+   \def\appendixname{\textlithuanian{Priedas}}%
+   \def\contentsname{\textlithuanian{Turinys}}%
+   \def\listfigurename{\textlithuanian{Iliustracijų sąrašas}}%
+   \def\listtablename{\textlithuanian{Lentelių sąrašas}}%
+   \def\indexname{\textlithuanian{Rodyklė}}%
+   \def\figurename{\textlithuanian{Pav.}}%
+   \def\tablename{\textlithuanian{Lentelė}}%
+   %\def\thepart{\textlithuanian{}}% Roman numerals are fine
+   \def\partname{\textlithuanian{Dalis}}%
+   \def\pagename{\textlithuanian{Puslapis}}%
+   \def\seename{\textlithuanian{žiūrėk}}%
+   \def\alsoname{\textlithuanian{tai pat}}%
+   \def\enclname{\textlithuanian{Įdėta}}%
+   \def\ccname{\textlithuanian{Kopijos}}%
+   \def\headtoname{\textlithuanian{Kam}}%
+   \def\proofname{\textlithuanian{Įrodymas}}%
+   \def\glossaryname{\textlithuanian{Terminų žodynas}}%
+   }
+\def\datelithuanian{%
+   \def\lithuanianmonth{\ifcase\month\or%
+      sausio\or% Jan
+      vasario\or% Feb
+      kovo\or% Mar
+      balandžio\or% Apr
+      gegužės\or% May
+      birželio\or% Jun
+      liepos\or% Jul
+      rugpjūčio\or% Aug
+      rugsėjo\or% Sep
+      spalio\or% Oct
+      lapkričio\or% Nov
+      gruodžio% Dec
+      \fi}
+   \def\today{\textlithuanian{\number\year~m.~\lithuanianmonth~\number\day~d.}}%
+   }
+
+\def\lithuanian@font{\normalfontlatin} % <== if the script is Latin
+
+\def\selectnormalfontlithuanian{%
+   \let\normalfont=\lithuanian@font%
+   \def\reset@font{\normalfont}}
+
+\def\lithuanian@language{\protect\language=\l@lithuanian}
+
+\setlocalhyphenmins{lithuanian}{2}{2}%
+
+\def\noextras@lithuanian{%
+   }
+
+\def\blockextras@lithuanian{%
+   }
+
+\def\inlineextras@lithuanian{%
+   }
+
