@@ -61,14 +61,14 @@
 \def\figurename{\@ensure@RTL{شكل}}%
 \def\tablename{\@ensure@RTL{جدول}}%
 \def\partname{\@ensure@RTL{بخش}}%
-%\def\enclname{\@ensure@RTL{}}%<-- Needs translation
-%\def\ccname{\@ensure@RTL{}}%<-- Needs translation
-%\def\headtoname{\@ensure@RTL{}}%<-- Needs translation
+\def\enclname{\@ensure@RTL{پیوست}}%
+\def\ccname{\@ensure@RTL{رونوشت}}%
+\def\headtoname{\@ensure@RTL{به}}%
 \def\pagename{\@ensure@RTL{صفحة}}%
-%\def\seename{\@ensure@RTL{}}%<-- Needs translation
-%\def\alsoname{\@ensure@RTL{}}%<-- Needs translation
+\def\seename{\@ensure@RTL{ببینید}}%
+\def\alsoname{\@ensure@RTL{نیز ببینید}}%
 \def\proofname{\@ensure@RTL{برهان}}%
-\def\glossaryname{\@ensure@RTL{لغت‌نامه}}%<-- Needs to be checked
+\def\glossaryname{\@ensure@RTL{دانش‌نامه}}%
 }
 \def\datefarsi{%
    \def\today{\@ensure@RTL{\farsinumber\day\space\farsigregmonth{\month}\space\farsinumber\year}}%
