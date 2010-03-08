@@ -1,4 +1,4 @@
-\ProvidesFile{gloss-bahasam.ldf}[polyglossia: module for bahasa malaysia]
+\ProvidesFile{gloss-bahasam.ldf}[polyglossia: module for bahasa melayu]
 \RequirePackage{hijrical}
 \makeatletter
 \def\bahasam@font{\normalfontlatin}
@@ -10,7 +10,7 @@
         \ifx\l@bahasai\@undefined
           \ifx\l@indon\@undefined
             \ifx\l@indonesian\@undefined
-              \xpg@nopatterns{Bahasa Malaysia}
+              \xpg@nopatterns{Bahasa Melayu}%
               \adddialect\l@malay\l@nohyphenation\relax
             \else
               \let\l@malay\l@indonesian
@@ -68,7 +68,7 @@
 \DefineFormatHijriDate{bahasam}{%
 \number\value{Hijriday}\space\hijrimonthbahasam{\value{Hijrimonth}}\space\number\value{Hijriyear}}
 
-\def\bahasam@language{\language=\l@bahasam}
+\def\bahasam@language{\language=\l@malay}
 
 \setlocalhyphenmins{bahasam}{2}{2}
 

@@ -68,7 +68,7 @@
 \DefineFormatHijriDate{bahasai}{%
 \number\value{Hijriday}\space\hijrimonthbahasai{\value{Hijrimonth}}\space\number\value{Hijriyear}}
 
-\def\bahasai@language{\language=\l@bahasai}
+\def\bahasai@language{\language=\l@bahasa}
 
 \setlocalhyphenmins{bahasai}{2}{2}
 
