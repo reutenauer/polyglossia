@@ -27,6 +27,9 @@
   \fi
 }
 
+\newif\ifabjad@jim@notail
+\abjad@jim@notailfalse
+
 \def\abjad#1{%
 \ifnum#1>1999\xpg@ill@value{#1}{abjad numeral}%
 \else

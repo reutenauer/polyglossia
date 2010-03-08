@@ -22,7 +22,7 @@
     \ifx\@tmpa\tmp@maghrib\eastern@numeralsfalse\fi%
   \fi}
 
-\newif\ifabjad@jim@notail
+%this is needed for \abjad in arabicnumbers.sty
 \def\tmp@true{true}
 \define@key{arabic}{abjadjimnotail}[true]{%
   \def\@tmpa{#1}%

@@ -20,6 +20,15 @@
 	  \else\@western@numeralsfalse%
 	\fi}
 
+%this is needed for \abjad in arabicnumbers.sty
+\def\tmp@true{true}
+\define@key{urdu}{abjadjimnotail}[true]{%
+  \def\@tmpa{#1}%
+  \ifx\@tmpa\tmp@true\abjad@jim@notailtrue%
+  \else
+    \abjad@jim@notailfalse
+  \fi}
+
 \newif\if@hijrical
 \def\tmp@hijri{hijri}
 \define@key{urdu}{calendar}[gregorian]{%

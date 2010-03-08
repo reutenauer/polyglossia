@@ -20,6 +20,15 @@
     \@western@numeralsfalse%
   \fi}
 
+%this is needed for \abjad in arabicnumbers.sty
+\def\tmp@true{true}
+\define@key{farsi}{abjadjimnotail}[true]{%
+  \def\@tmpa{#1}%
+  \ifx\@tmpa\tmp@true\abjad@jim@notailtrue%
+  \else
+    \abjad@jim@notailfalse
+  \fi}
+
 % NOT YET USED
 \define@key{farsi}{locale}[default]{%
   \def\@farsi@locale{#1}}
