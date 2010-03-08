@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-norsk.ldf}[polyglossia: module for norwegian]
 \makeatletter
-\def\norsk@font{\normalfontlatin}
+\def\norsk@font{\selectfontfamilylatin}
 
 \ifx\l@norsk\@undefined%
    \xpg@nopatterns{Norsk}%

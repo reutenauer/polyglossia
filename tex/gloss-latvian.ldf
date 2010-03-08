@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-latvian.ldf}[polyglossia: module for latvian]
 \makeatletter
-\def\latvian@font{\normalfontlatin}
+\def\latvian@font{\selectfontfamilylatin}
 
 \ifx\l@latvian\@undefined
    \xpg@nopatterns{Latvian}

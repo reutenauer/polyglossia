@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-icelandic.ldf}[polyglossia: module for icelandic]
 \makeatletter
-\def\icelandic@font{\normalfontlatin}
+\def\icelandic@font{\selectfontfamilylatin}
 
 \ifx\l@icelandic\@undefined%
    \xpg@nopatterns{Icelandic}%

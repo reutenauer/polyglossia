@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-spanish.ldf}[polyglossia: module for spanish]
 \makeatletter
-\def\spanish@font{\normalfontlatin}
+\def\spanish@font{\selectfontfamilylatin}
 
 \ifx\l@spanish\@undefined
    \xpg@nopatterns{spanish}

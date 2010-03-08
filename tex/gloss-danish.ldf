@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-danish.ldf}[polyglossia: module for danish]
 \makeatletter
-\def\danish@font{\normalfontlatin}
+\def\danish@font{\selectfontfamilylatin}
 
 \ifx\l@danish\@undefined
          \xpg@nopatterns{Danish}

@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-breton.ldf}[polyglossia: module for breton]
 \makeatletter
-\def\breton@font{\normalfontlatin}
+\def\breton@font{\selectfontfamilylatin}
 
 \ifx\l@breton\@undefined%
    \xpg@nopatterns{Breton}%

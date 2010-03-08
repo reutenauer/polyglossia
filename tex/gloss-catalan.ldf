@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-catalan.ldf}[polyglossia: module for catalan]
 \makeatletter
-\def\catalan@font{\normalfontlatin}
+\def\catalan@font{\selectfontfamilylatin}
 
 \ifx\l@catalan\@undefined%
    \xpg@nopatterns{Catalan}%

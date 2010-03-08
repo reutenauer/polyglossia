@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-lsorbian.ldf}[polyglossia: module for lower sorbian]
 \makeatletter
-\def\lsorbian@font{\normalfontlatin}
+\def\lsorbian@font{\selectfontfamilylatin}
 
 \ifx\l@lowersorbian\@undefined
   \ifx\l@lsorbian\@undefined

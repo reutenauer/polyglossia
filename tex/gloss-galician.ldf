@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-galician.ldf}[polyglossia: module for galician]
 \makeatletter
-\def\galician@font{\normalfontlatin}
+\def\galician@font{\selectfontfamilylatin}
 
 \ifx\l@galician\@undefined%
    \xpg@nopatterns{Galician}%

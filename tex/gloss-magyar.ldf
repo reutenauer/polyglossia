@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-magyar.ldf}[polyglossia: module for magyar]
 \makeatletter
-\def\magyar@font{\normalfontlatin}
+\def\magyar@font{\selectfontfamilylatin}
 
 \ifx\l@magyar\@undefined
   \ifx\l@hungarian\@undefined

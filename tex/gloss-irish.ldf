@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-irish.ldf}[polyglossia: module for irish]
 \makeatletter
-\def\irish@font{\normalfontlatin}
+\def\irish@font{\selectfontfamilylatin}
 
 \ifx\l@irish\@undefined%
    \xpg@nopatterns{Irish}%

@@ -1,7 +1,7 @@
 \ProvidesFile{gloss-bahasai.ldf}[polyglossia: module for bahasa indonesia]
 \RequirePackage{hijrical}
 \makeatletter
-\def\bahasai@font{\normalfontlatin}
+\def\bahasai@font{\selectfontfamilylatin}
 
 \ifx\l@bahasai\@undefined
   \ifx\l@bahasa\@undefined

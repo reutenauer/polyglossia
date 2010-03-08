@@ -1,7 +1,7 @@
 \ProvidesFile{gloss-bahasam.ldf}[polyglossia: module for bahasa melayu]
 \RequirePackage{hijrical}
 \makeatletter
-\def\bahasam@font{\normalfontlatin}
+\def\bahasam@font{\selectfontfamilylatin}
 
 \ifx\l@malay\@undefined
   \ifx\l@meyalu\@undefined

@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-scottish.ldf}[polyglossia: module for scottish]
 \makeatletter
-\def\scottish@font{\normalfontlatin}
+\def\scottish@font{\selectfontfamilylatin}
 
 \ifx\l@scottish\@undefined%
    \xpg@nopatterns{Scottish}%

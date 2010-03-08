@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-french.ldf}[polyglossia: module for french]
 \makeatletter
-\def\french@font{\normalfontlatin}
+\def\french@font{\selectfontfamilylatin}
 
 \ifx\l@french\@undefined%
    \xpg@nopatterns{French}%

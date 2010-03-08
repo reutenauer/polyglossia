@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-italian.ldf}[polyglossia: module for italian]
 \makeatletter
-\def\italian@font{\normalfontlatin}
+\def\italian@font{\selectfontfamilylatin}
 
 \ifx\l@italian\@undefined
    \xpg@nopatterns{Italian}
