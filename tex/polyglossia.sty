@@ -150,11 +150,6 @@
    \let\ttfamily=\ttfamilylatin%
    \normalfontlatin}
 
-\def\selectnormalfontlatin{%
-  \if\normalfont\ttfamily\ttfamilylatin\else
-    \if\normalfont\sffamily\sffamilylatin\else
-      \normalfontlatin\fi\fi}
-
 \def\reset@LR{\xpg@csifdef{setLR}}
 
 \let\@@fterindentfalse\@afterindentfalse
