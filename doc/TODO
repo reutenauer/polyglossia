@@ -31,35 +31,34 @@ controlling footnote rule via bidi footnote interface, i.e. \autoffotnoterule,
 
 TEST THIS:
 ============================================================================
-\newcommand{\PolyglossiaSetup}[2]{%
+\newcommand\PolyglossiaSetup[2]{%
    \xpg@define@keys{#1}%
-   \setkeys[xpg@setup]{#1}{script,direction,hyphenmins,frenchspacing,frenchindent}% to set the defaults
+   %%\setkeys[xpg@setup]{#1}{script,direction,hyphenmins,frenchspacing,frenchindent}% to set the defaults << needed?
    \setkeys[xpg@setup]{#1}{#2}}
 
 \def\xpg@first#1,#2{#1}
 \def\xpg@second#1,#2{#2}
 
 \def\xpg@define@keys#1{%
-    \define@key[xpg@setup]{#1}{script}{%
-       \def\@tmpa{##1}\def\tmp@latin{latin}%
-       \csgdef{#1@script}{\@tmpa}% -> could be eventually useful
-       \ifx\@tmpa\tmp@latin%
-          \csgdef{#1@script@latin}{\relax}%
-	  \ifcsundef{#1@font}{\cslet{#1@font}{\normalfontlatin}}{}%
-       \fi}%
-    \define@choicekey+[xpg@setup]{#1}[\tmp@val]{Direction}{LR,RL}[LR]{%
-        \def\tmp@RL{RL}%
-	\ifx\tmp@val\tmp@RL%
-	   \csgdef{#1@RL}{\relax}%
-	\else%
-	   \cslet{#1@RL}{\@undefined}
+    \define@key[xpg@setup]{#1}{Script}{%
+      \def\@tmpa{##1}\def\tmp@latin{latin}%
+      \csgdef{xpg@#1@script}{\@tmpa}% -> could be eventually useful
+      \ifx\@tmpa\tmp@latin
+        \csgdef{#1@script@latin}{}% << remove this
+	      \ifcsundef{#1@font}{\cslet{#1@font}{\selectfontfamilylatin}}{}%
+      \fi}%
+    \define@choicekey+[xpg@setup]{#1}[\tmp@val]{Direction}{LR,RL}[LR]%
+        {\def\tmp@RL{RL}%
+        \ifx\tmp@val\tmp@RL
+          \csgdef{#1@RL}{}%
+        \else
+          \cslet{#1@RL}{\@undefined}%
         \fi}%
-       {\PackageWarning{polyglossia}{#1: Invalid value for key Direction}}% 
-    \define@key[xpg@setup]{#1}{hyphenmins}[{2,2}]{%
-           \edef\@tmpb{\xpg@first{##1}}%
-           \edef\@tmpc{\xpg@second{##1}}%
-	   \providehyphenmins{#1}{\@tmpb\@tmpc\relax}%
-         }%
+        {\PackageWarning{polyglossia}{#1: Invalid value \tmp@val for key Direction}}% 
+    \define@key[xpg@setup]{#1}{hyphenmins}[{2,2}]%
+        {\edef\@tmpb{\xpg@first{##1}}%
+         \edef\@tmpc{\xpg@second{##1}}%
+         \providehyphenmins{#1}{\@tmpb\@tmpc\relax}}%
     \define@boolkeys[xpg@setup]{#1}[#1@]{frenchspacing,frenchindent}[false]%
 }
    
@@ -67,10 +66,12 @@ TEST THIS:
 
 Example (at the end of a gloss file): 
 \PolyglossiaSetup{<lang>}{%
-   Script=Latin, %default=Latin
-   Direction=LTR, %default=LTR
-%   LanguageString=<lang>, %default=<lang>
-%   Aliases={Foo,Bar},
+   Script=Latin,%default=Latin
+   Direction=LTR,%default=LTR
+   ScriptTag=latn,
+   LanguageTag=XYZ,
+   PatternString=<lang>, %default=<lang>
+   PatternAliases={Foo,Bar},
    hyphenmins={x,y} %default={2,2} ?  {2,3} in babel...
    frenchspacing=true, %default=false
    frenchindent=true %default=false
