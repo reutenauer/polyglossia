@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{polyglossia}[2010/02/26 v1.1.1
+\ProvidesPackage{polyglossia}[2010/XX/YY v1.2.0
   Babel replacement for XeLaTeX]
 \RequirePackage{etoolbox}
 \RequirePackage{makecmds}
@@ -24,7 +24,6 @@
 \providecommand*{\xpg@nolang}[1]{%
    \xpg@warning{File gloss-#1.ldf does not exist!^^J
    I will nevertheless try to use hyphenation patterns for #1.}}%
-      %TODO try at least to load the hyphenation patterns for #1.
 \def\xpg@ill@value#1#2{%
   \xpg@warning{Illegal value (#1) for #2}}
 
@@ -41,7 +40,7 @@
 
 %% compatibility with babel
 \let\addto\gappto% gappto is defined in etoolbox
-%%
+
 %% ensure localization of \markright and \markboth commands
 \def\opt@enabled{on}
 \def\opt@disabled{off}
@@ -73,10 +72,9 @@
             \def\@markright####1####2####3{\@temptokena{\protect\@@ensure@maindir{####1}}%
                \unrestored@protected@xdef\@themark{{\the\@temptokena}%
                {\protect\@@ensure@maindir{####3}}}}}
-   \else%\ifx\@tmpa\opt@disabled
+   \else
       \def\local@marks##1{}
       \xpg@info{Option: localmarks=off}
-      %\fi
    \fi
 }
 \setkeys{polyglossia}{localmarks=on}
@@ -153,11 +151,6 @@
    \let\sffamily=\sffamilylatin%
    \let\ttfamily=\ttfamilylatin%
    \normalfontlatin}
-
-\def\selectnormalfontlatin{%
-  \if\normalfont\ttfamily\ttfamilylatin\else
-    \if\normalfont\sffamily\sffamilylatin\else
-      \normalfontlatin\fi\fi}
 
 \DeclareRobustCommand\selectfontfamilylatin{%
   \def\tmp@tt{tt}\def\tmp@sf{sf}%
