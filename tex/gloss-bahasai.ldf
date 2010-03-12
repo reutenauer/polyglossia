@@ -1,36 +1,12 @@
 \ProvidesFile{gloss-bahasai.ldf}[polyglossia: module for bahasa indonesia]
 \RequirePackage{hijrical}
 \makeatletter
-\def\bahasai@font{\selectfontfamilylatin}
 
-\ifx\l@bahasai\@undefined
-  \ifx\l@bahasa\@undefined
-    \ifx\l@indon\@undefined
-      \ifx\l@indonesian\@undefined
-        \ifx\l@bahasam\@undefined
-          \ifx\l@malay\@undefined
-            \ifx\l@meyalu\@undefined
-              \xpg@nopatterns{Bahasa Indonesia}
-              \adddialect\l@bahasai\l@nohyphenation\relax
-            \else
-              \let\l@bahasai\l@meyalu
-            \fi
-          \else
-            \let\l@bahasai\l@malay
-          \fi
-        \else
-          \let\l@bahasai\l@bahasam
-        \fi
-      \else
-        \let\l@bahasai\l@indonesian
-      \fi
-    \else
-      \let\l@bahasai\l@indon
-    \fi
-  \else
-    \let\l@bahasai\l@bahasa
-  \fi
-\fi
+\PolyglossiaSetup{french}{%
+  language=Bahasa Indonesia,
+  hyphennames={bahasai,indon,indonesian,bahasa,bahasam,malay,melayu},
+  hyphenmins={2,2},
+  fontsetup=auto}
 
 \def\captionsbahasai{%
    \def\refname{Pustaka}%
@@ -67,9 +43,5 @@
 \or Sya'ban\or Ramadhan\or Syawal\or Dzulkaidah\or Dzulhijjah\fi}
 \DefineFormatHijriDate{bahasai}{%
 \number\value{Hijriday}\space\hijrimonthbahasai{\value{Hijrimonth}}\space\number\value{Hijriyear}}
-
-\def\bahasai@language{\language=\l@bahasai}
-
-\setlocalhyphenmins{bahasai}{2}{2}
 
 \endinput

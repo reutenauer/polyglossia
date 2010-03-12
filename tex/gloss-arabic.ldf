@@ -4,12 +4,14 @@
 \RequirePackage{hijrical}
 \makeatletter
 
-\ifx\l@arabic\@undefined
-  %\xpg@nopatterns{arabic}%
-  \adddialect\l@arabic\l@nohyphenation
-\fi
-
-\def\arabic@RL{\relax}
+\PolyglossiaSetup{arabic}{
+  script=Arabic,
+  direction=RL,
+  langtag=ARA,
+  scripttag=arab,
+  hyphennames={nohyphenation},
+  fontsetup=auto
+}
 
 \newif\ifeastern@numerals
 \def\tmp@mashriq{mashriq}
@@ -85,32 +87,32 @@
 \arabicgregmonth@default}}
 
 %\Hijritoday is now locale-aware and will format the date with this macro:
-\DefineFormatHijriDate{arabic}{\@ensure@RTL{%
-\arabicnumber{\value{Hijriday}}\space\HijriMonthArabic{\value{Hijrimonth}}\space\arabicnumber{\value{Hijriyear}}}}
+\DefineFormatHijriDate{arabic}{\@ensure@RTL{\arabicnumber{\value{Hijriday}}%
+  \space\HijriMonthArabic{\value{Hijrimonth}}\space\arabicnumber{\value{Hijriyear}}}}
 
 \def\captionsarabic{%
-\def\prefacename{\@ensure@RTL{مدخل}}% 
-\def\refname{\@ensure@RTL{المراجع}}
-\def\abstractname{\@ensure@RTL{ملخص}}%
-\def\bibname{\@ensure@RTL{المصادر}}%
-\def\chaptername{\@ensure@RTL{باب}}%
-\def\appendixname{\@ensure@RTL{الملاحق}}%
-\def\contentsname{\@ensure@RTL{المحتويات}}
-%\def\contentsname{\@ensure@RTL{الفهرس}}%
-\def\listfigurename{\@ensure@RTL{قائمة الأشكال}}%
-\def\listtablename{\@ensure@RTL{قائمة الجداول}}%
-\def\indexname{\@ensure@RTL{الفهرس}}%
-\def\figurename{\@ensure@RTL{شكل}}%
-\def\tablename{\@ensure@RTL{جدول}}%
-\def\partname{\@ensure@RTL{القسم}}%
-\def\enclname{\@ensure@RTL{المرفقات}}%<-- Needs translation
-\def\ccname{\@ensure@RTL{نسخة ل‬}}% <<
-\def\headtoname{\@ensure@RTL{إلى}}%<-- Needs translation
-\def\pagename{\@ensure@RTL{صفحة}}%
-\def\seename{\@ensure@RTL{راجع}}%\alefhamza\nun\za\ra
-\def\alsoname{\@ensure@RTL{راجع أيضًا}}%<<\alefhamza\nun\za\ra
-\def\proofname{\@ensure@RTL{برهان}}%
-\def\glossaryname{\@ensure@RTL{قاموس}}%<<
+  \def\prefacename{\@ensure@RTL{مدخل}}% 
+  \def\refname{\@ensure@RTL{المراجع}}
+  \def\abstractname{\@ensure@RTL{ملخص}}%
+  \def\bibname{\@ensure@RTL{المصادر}}%
+  \def\chaptername{\@ensure@RTL{باب}}%
+  \def\appendixname{\@ensure@RTL{الملاحق}}%
+  \def\contentsname{\@ensure@RTL{المحتويات}}
+  %\def\contentsname{\@ensure@RTL{الفهرس}}%
+  \def\listfigurename{\@ensure@RTL{قائمة الأشكال}}%
+  \def\listtablename{\@ensure@RTL{قائمة الجداول}}%
+  \def\indexname{\@ensure@RTL{الفهرس}}%
+  \def\figurename{\@ensure@RTL{شكل}}%
+  \def\tablename{\@ensure@RTL{جدول}}%
+  \def\partname{\@ensure@RTL{القسم}}%
+  \def\enclname{\@ensure@RTL{المرفقات}}%<-- Needs translation
+  \def\ccname{\@ensure@RTL{نسخة ل‬}}% <<
+  \def\headtoname{\@ensure@RTL{إلى}}%<-- Needs translation
+  \def\pagename{\@ensure@RTL{صفحة}}%
+  \def\seename{\@ensure@RTL{راجع}}%\alefhamza\nun\za\ra
+  \def\alsoname{\@ensure@RTL{راجع أيضًا}}%<<\alefhamza\nun\za\ra
+  \def\proofname{\@ensure@RTL{برهان}}%
+  \def\glossaryname{\@ensure@RTL{قاموس}}%<<
 }
 \def\datearabic{%
  \def\today{%
@@ -193,61 +195,6 @@
 \def\noarabic@globalnumbers{
    \let\@arabic\orig@arabic%
    \renewcommand\thefootnote{\protect\number{\c@footnote}}%
-   }
-
-\def\arabic@language{\language=\l@arabic}
-
-\def\arabic@font{%
-  \@ifundefined{arabicfont}{%
-    \normalfontlatin%
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-    \zf@check@ot@script{arab}%
-    \if@tempswa
-      \addfontfeature{Script=Arabic}%
-    \else
-      \PackageError{polyglossia}{^^J
-    The current font does not contain the Arabic script!^^J
-    Please define \string\arabicfont\space with \string\newfontfamily}%
-    \fi}%
-  {\arabicfont}% 
-}
-\def\arabic@font@sf{%
-  \@ifundefined{arabicfontsf}{%
-%    \sffamilylatin%
-%    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-%    \zf@check@ot@script{arab}%
-%    \if@tempswa%
-%      \addfontfeature{Script=Arabic}%
-%    \else%
-      \arabic@font%
-%    \fi%
-  }%
-  {\arabicfontsf}%
-}
-\def\arabic@font@tt{%
-  \@ifundefined{arabicfonttt}{%
-%    \ttfamilylatin%
-%    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-%    \zf@check@ot@script{arab}%
-%    \if@tempswa%
-%      \addfontfeature{Script=Arabic}%
-%    \else%
-      \arabic@font%
-%    \fi%
-  }%
-  {\arabicfonttt}%
-}
-
-\def\selectnormalfontarabic{%
-   %\edef\@tempa{\if\normalfont\sffamily\noexpand\arabic@font@sf\else
-   % \if\normalfont\ttfamily\noexpand\arabic@font@tt\else
-   %   \noexpand\arabic@font\fi\fi}%
-   \let\normalfont=\arabic@font%
-   \let\rmfamily=\arabic@font%
-   \let\sffamily=\arabic@font@sf%
-   \let\ttfamily=\arabic@font@tt%
-   \def\reset@font{\normalfont}%
-   %\expand\@tempa%
    }
 
 \def\blockextras@arabic{%

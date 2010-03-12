@@ -1,36 +1,14 @@
 \ProvidesFile{gloss-ukrainian.ldf}[polyglossia: module for ukrainian]
 % Strings taken from Babel
 % and revised by Roman Kyrylych
-%
-\makeatletter
-
-\ifx\l@ukrainian\@undefined%
-   \xpg@nopatterns{Ukrainian}%
-   \adddialect\l@ukrainian\l@nohyphenation%
-\fi
-
-\def\ukrainian@font{%
-  \@ifundefined{ukrainianfont}{%
-    \@ifundefined{cyrillicfont}{%
-      \normalfontlatin%
-      \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-      \zf@check@ot@script{cyrl}%
-      \if@tempswa
-        \addfontfeature{Script=Cyrillic}%
-      \else
-        \PackageError{polyglossia}{^^J
-    The current font does not contain the Cyrillic script!^^J
-    Please define \string\cyrillicfont\space or \string\ukrainianfont\space with \newfontfamily}%
-      \fi
-      \zf@check@ot@lang{UKR}%
-      \if@tempswa\addfontfeature{Language=Ukrainian}\fi
-    }%
-    {\cyrillicfont%
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-    \zf@check@ot@lang{UKR}%
-    \if@tempswa\addfontfeature{Language=Ukrainian}\fi}}%
-  {\ukrainianfont}%
+\PolyglossiaSetup{ukrainian}{
+  script=Cyrillic,
+  hyphennames={ukrainian},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  fontsetup=auto
 }
+\makeatletter
 
 \def\captionsukrainian{%
    \def\refname{Література}%
@@ -89,28 +67,12 @@
    \let\latin@alph\@alph%
    \let\@Alph\ukrainian@Alph%
    \let\@alph\ukrainian@alph%
- }
+}
 
 \def\noukrainian@numbers{%
    \let\@Alph\latin@Alph%
    \let\@alph\latin@alph%
 }
-
-\def\ukrainian@language{\language=\l@ukrainian}
-
-\setlocalhyphenmins{ukrainian}{2}{2}%
-
-\def\noextras@ukrainian{%
-   \nonfrenchspacing%
-   }
-
-\def\blockextras@ukrainian{%
-   \frenchspacing%
-   }
-
-\def\inlineextras@ukrainian{%
-   \frenchspacing%
-   }
 
 \endinput
 

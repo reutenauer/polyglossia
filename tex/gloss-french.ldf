@@ -1,11 +1,14 @@
 \ProvidesFile{gloss-french.ldf}[polyglossia: module for french]
 \makeatletter
-\def\french@font{\selectfontfamilylatin}
 
-\ifx\l@french\@undefined%
-   \xpg@nopatterns{French}%
-   \adddialect\l@french\l@nohyphenation%
-\fi
+\PolyglossiaSetup{french}{%
+  language=French,
+  script=Latin,
+  hyphennames={french,francais},
+  frenchspacing=true,
+  frenchindent=true,
+  hyphenmins={2,2},
+  fontsetup=auto}
 
 \newXeTeXintercharclass\french@punctthin % ! ? ;
 \newXeTeXintercharclass\french@punctthick % :
@@ -15,7 +18,6 @@
 \def\french@punctthickspace{{\unskip\nobreakspace}}
 
 \def\french@punctuation{%
-    \frenchspacing
     \lccode"2019="2019
     \XeTeXinterchartokenstate=1
     \XeTeXcharclass `\! \french@punctthin
@@ -24,11 +26,16 @@
     \XeTeXcharclass `\: \french@punctthick
     \XeTeXinterchartoks \z@ \french@punctthin = \french@punctthinspace
     \XeTeXinterchartoks \z@ \french@punctthick = \french@punctthickspace
-    }
+}
 
 \def\nofrench@punctuation{%
-    \nonfrenchspacing
     \lccode"2019=\z@
+    \XeTeXcharclass `\! \z@
+    \XeTeXcharclass `\? \z@
+    \XeTeXcharclass `\; \z@
+    \XeTeXcharclass `\: \z@
+    \XeTeXcharclass `\« \z@
+    \XeTeXcharclass `\» \z@
     \XeTeXinterchartokenstate=0
 }
 
@@ -74,28 +81,22 @@
    \def\ccname{Copie à }%
    \def\headtoname{}%
    \def\proofname{Démonstration}%
-   }
+}
+
 \def\datefrench{%
-   \def\today{\ifx\ier\undefined\def\ier{er}\fi%
-      \ifnum\day=1\relax 1\ier%
-      \else \number\day\fi%
-      \space \ifcase\month%
-      \or janvier\or février\or mars\or avril\or mai\or juin\or%
-      juillet\or août\or septembre\or octobre\or novembre\or%
-      décembre\fi%
-      \space \number\year}}
+  \def\today{\ifx\ier\undefined\def\ier{er}\fi%
+    \ifnum\day=1\relax 1\ier%
+    \else \number\day\fi
+    \space \ifcase\month%
+    \or janvier\or février\or mars\or avril\or mai\or juin\or juillet\or
+    août\or septembre\or octobre\or novembre\or décembre\fi
+    \space \number\year}%
+}
 
-\def\french@language{\language=\l@french}
-
-\setlocalhyphenmins{french}{2}{2}%
-
-\def\noextras@french{%
-   \nofrench@punctuation%
-   \nofrench@indent}
+\def\noextras@french{\nofrench@punctuation}
 
 \def\blockextras@french{%
    \french@punctuation%
-   \french@indent%
    \french@guillemets%
    }
 
