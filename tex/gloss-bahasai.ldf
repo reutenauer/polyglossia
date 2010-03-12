@@ -3,32 +3,32 @@
 \makeatletter
 \def\bahasai@font{\selectfontfamilylatin}
 
-\ifx\l@bahasa\@undefined
-  \ifx\l@bahasai\@undefined
+\ifx\l@bahasai\@undefined
+  \ifx\l@bahasa\@undefined
     \ifx\l@indon\@undefined
       \ifx\l@indonesian\@undefined
         \ifx\l@bahasam\@undefined
           \ifx\l@malay\@undefined
             \ifx\l@meyalu\@undefined
               \xpg@nopatterns{Bahasa Indonesia}
-              \adddialect\l@bahasa\l@nohyphenation\relax
+              \adddialect\l@bahasai\l@nohyphenation\relax
             \else
-              \let\l@bahasa\l@meyalu
+              \let\l@bahasai\l@meyalu
             \fi
           \else
-            \let\l@bahasa\l@malay
+            \let\l@bahasai\l@malay
           \fi
         \else
-          \let\l@bahasa\l@bahasam
+          \let\l@bahasai\l@bahasam
         \fi
       \else
-        \let\l@bahasa\l@indonesian
+        \let\l@bahasai\l@indonesian
       \fi
     \else
-      \let\l@bahasa\l@indon
+      \let\l@bahasai\l@indon
     \fi
   \else
-    \let\l@bahasa\l@bahasai
+    \let\l@bahasai\l@bahasa
   \fi
 \fi
 
@@ -68,7 +68,7 @@
 \DefineFormatHijriDate{bahasai}{%
 \number\value{Hijriday}\space\hijrimonthbahasai{\value{Hijrimonth}}\space\number\value{Hijriyear}}
 
-\def\bahasai@language{\language=\l@bahasa}
+\def\bahasai@language{\language=\l@bahasai}
 
 \setlocalhyphenmins{bahasai}{2}{2}
 
