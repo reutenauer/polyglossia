@@ -41,6 +41,252 @@
 %% compatibility with babel
 \let\addto\gappto% gappto is defined in etoolbox
 
+%% Utility macros
+%% they are needed because \MakeUppercase and \MakeLowercase are protected 
+%% and we need them during on-the-fly generation of csnames
+\def\xpg@uppercasefirst#1{\expandafter\xpg@@uppercasefirst #1}
+\def\xpg@@uppercasefirst#1{%
+       \if a#1A\else
+       \if b#1B\else
+       \if c#1C\else
+       \if d#1D\else
+       \if e#1E\else
+       \if f#1F\else
+       \if g#1G\else
+       \if h#1H\else
+       \if i#1I\else
+       \if j#1J\else
+       \if k#1K\else
+       \if l#1L\else
+       \if m#1M\else
+       \if n#1N\else
+       \if o#1O\else
+       \if p#1P\else
+       \if q#1Q\else
+       \if r#1R\else
+       \if s#1S\else
+       \if t#1T\else
+       \if u#1U\else
+       \if v#1V\else
+       \if w#1W\else
+       \if x#1X\else
+       \if y#1Y\else
+       \if z#1Z\else
+       \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+}
+
+\def\xpg@lowercasefirst#1{\expandafter\xpg@@lowercasefirst #1}
+\def\xpg@@lowercasefirst#1{%
+       \if A#1a\else
+       \if B#1b\else
+       \if C#1c\else
+       \if D#1d\else
+       \if E#1e\else
+       \if F#1f\else
+       \if G#1g\else
+       \if H#1h\else
+       \if I#1i\else
+       \if J#1j\else
+       \if K#1k\else
+       \if L#1l\else
+       \if M#1m\else
+       \if N#1n\else
+       \if O#1o\else
+       \if P#1p\else
+       \if Q#1q\else
+       \if R#1r\else
+       \if S#1s\else
+       \if T#1t\else
+       \if U#1u\else
+       \if V#1v\else
+       \if W#1w\else
+       \if X#1x\else
+       \if Y#1y\else
+       \if Z#1z\else
+       \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+}
+
+%% NEW EXPERIMENTAL SETUP INTERFACE FOR GLOSS FILES 
+%% options currently available:
+%% language : the name of the language (as understood by fontspec)
+%% hyphennames : the different hyphenation patterns to try (comma separated list)
+%% script : the name of the script (as understood by fontspec) – default is Latin
+%% direction : the direction of the script: LR or RL
+%% scripttag : the OpenType tag for the script
+%% langtag : the OpenType tag for the language
+%% hyphenmins : the hyphenmins for this language (comma-sep list of two integers)
+%% frenchspacing : boolean
+%% frenchindent : boolean
+%% fontsetup : none, custom or auto
+%% TODO: localalph = <csname>
+%% TODO: localdigits = <csname>
+
+\newcommand*\PolyglossiaSetup[2]{%
+  %define booleans etoolbox style and set defaults
+  \newtoggle{#1@RL}\togglefalse{#1@RL}%
+  \newtoggle{#1@latin}\toggletrue{#1@latin}%
+  \newtoggle{#1@scriptlangequal}% whether lang and script names are same: e.g. Hebrew, Arabic
+  \csgdef{xpg@languagename@#1}{\xpg@uppercasefirst{##1}}%
+  %needed for docvslist with hyphennames key:
+  \providecommand*{\do}[1]{}%
+  \renewcommand*{\do}[1]{%
+    \ifcsdef{l@#1}{}{%
+      \ifstrequal{#1}{##1}{}%
+      {\ifcsdef{l@##1}%
+        {\csletcs{l@#1}{l@##1}\listbreak}%
+        {}%
+      }%
+    }%
+  }%
+  %define all keys:
+  \xpg@define@keys{#1}%
+  \setkeys[xpg@setup]{#1}{#2}%
+  %\edef\@tempa{\csname #1@fontsetup\endcsname}%
+  %\xpg@fontsetup{\@tempa}{#1}%
+  % if l@#1 does not yet exist,
+  % we assign it to nohyphenation
+  % we do this here in case the hyphennames key was omitted
+  \ifcsundef{l@#1}%
+    {\xpg@nopatterns{\csname xpg@languagename@#1\endcsname}%
+     \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}{}%
+  \csdef{#1@language}{\language=\csname l@#1\endcsname}%
+}
+
+\def\xpg@first#1,#2{#1}
+\def\xpg@second#1,#2{#2}
+
+\def\xpg@define@keys#1{%
+  \define@key[xpg@setup]{#1}{script}{%
+    \ifstrequal{##1}{Latin}%
+      {\toggletrue{#1@latin}}%
+      {\togglefalse{#1@latin}}%
+    \csgdef{xpg@scriptname@#1}{##1}
+    \csgdef{xpg@scriptname@#1@lc}{\xpg@lowercasefirst{##1}}}%
+  \define@key[xpg@setup]{#1}{scripttag}{%
+    \csgdef{xpg@scripttag@#1}{##1}}%
+  \define@key[xpg@setup]{#1}{language}{%
+    \csgdef{xpg@languagename@#1}{##1}}%
+  \define@key[xpg@setup]{#1}{langtag}{%
+    \csgdef{xpg@langtag@#1}{##1}}%
+  \define@key[xpg@setup]{#1}{hyphennames}{%
+    \docsvlist{##1}}%
+  \define@choicekey+[xpg@setup]{#1}{direction}[\val\nr]{LR,RL}[LR]%
+    {\ifcase\nr\relax
+        \toggletrue{#1@RL}%
+      \or
+        \togglefalse{#1@RL}%
+    \fi}%
+    {\PackageWarning{polyglossia}{#1: Invalid value \val\space for key "direction"}}% 
+  \define@key[xpg@setup]{#1}{hyphenmins}[{2,2}]%
+    {\edef\@tmpb{\xpg@first{##1}}%
+     \edef\@tmpc{\xpg@second{##1}}%
+     \setlocalhyphenmins{#1}{\@tmpb}{\@tmpc}}%
+  \define@boolkeys[xpg@setup]{#1}[#1@]{frenchspacing,frenchindent}[true]{}%
+  \define@choicekey*+[xpg@setup]{#1}{fontsetup}[\val\nr]{none,custom,auto}[none]%
+    %{\csgdef{#1@fontsetup}{\val}}%
+    {\xpg@fontsetup{\val}{#1}}%
+    {\PackageWarning{polyglossia}{Invalid value \val\space for key "fontsetup" in module "#1"}}%
+}
+
+\def\xpg@fontsetup#1{\xpg@csifdef@warn{xpg@fontsetup@#1}}
+
+\def\xpg@fontsetup@none#1{\csdef{#1@font}{\ifcsdef{#1font}{\csname #1font\endcsname}{}}} %<-- simplistic
+\def\xpg@fontsetup@custom#1{\csuse{#1@font}}
+\def\xpg@fontsetup@auto#1{\iftoggle{#1@latin}%
+  {%TODO check whether scripttag, langtag, scriptname and langname are defined?
+  \xpg@fontsetup@latin{#1}}%
+  {\xpg@fontsetup@nonlatin{#1}}%
+}
+
+\def\xpg@addfontfeature@lang#1#2{% #1 is langtag, #2 is langname
+  \ifblank{#1}{}{%
+    \ifblank{#2}{}{%
+      \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+      \zf@check@ot@lang{#1}%TODO for Turkish we need to check both for TRK and TUR
+      \if@tempswa
+        \addfontfeature{Language=#2}%
+      \fi}}
+\def\xpg@addfontfeature@script#1#2{% #1 is scripttag, #2 is scriptname
+  \ifblank{#1}{}{%
+    \ifblank{#2}{}{%
+      \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+      \zf@check@ot@script{#1}%
+      \if@tempswa
+        \addfontfeature{Script=#2}%
+      \else
+        \PackageError{polyglossia}{^^J
+      The current roman font does not contain the #2 script!^^J
+      Please define \expandafter\string\csname \xpg@lowercasefirst{#2}font\endcsname\space with \string\newfontfamily}%
+      \fi}}
+
+\def\xpg@fontsetup@latin#1{%
+  \def\tmp@lang@tag{\csuse{xpg@langtag@#1}}%
+  \def\tmp@langname{\csuse{xpg@languagename@#1}}%
+  \csgdef{#1@font@rm}{%
+    \ifcsdef{#1font}{\csname #1font\endcsname}%
+      {\rmfamilylatin%
+      \xpg@addfontfeature@lang{\tmp@lang@tag}{\tmp@langname}}}%
+  \csgdef{#1@font@sf}{%
+    \ifcsdef{#1fontsf}{\csname #1fontsf\endcsname}%
+      {\sffamilylatin%
+      \xpg@addfontfeature@lang{\tmp@lang@tag}{\tmp@langname}}}%
+  \csgdef{#1@font@tt}{%
+    \ifcsdef{#1fonttt}{\csname #1fonttt\endcsname}%
+      {\ttfamilylatin%
+      \xpg@addfontfeature@lang{\tmp@lang@tag}{\tmp@langname}}}%
+}
+
+\def\xpg@fontsetup@nonlatin#1{%
+  \def\tmp@script@tag{\csuse{xpg@scripttag@#1}}% eg cyrl
+  \def\tmp@scriptname{\csuse{xpg@scriptname@#1}}% eg Cyrillic
+  \def\tmp@lang@tag{\csuse{xpg@langtag@#1}}% eg UKR
+  \def\tmp@langname{\csuse{xpg@languagename@#1}}% eg Ukrainian
+  \def\tmp@langname@lc{#1}% eg ukrainian
+  \def\tmp@scriptname@lc{\csuse{xpg@scriptname@#1@lc}}% eg cyrillic
+  \ifx\tmp@scriptname@lc\tmp@langname@lc
+    \toggletrue{#1@scriptlangequal}%
+  \else
+    \togglefalse{#1@scriptlangequal}%
+  \fi
+  \csgdef{#1@font@rm}{%
+    \ifcsdef{#1font}%
+      {\@nameuse{#1font}}%
+      {\iftoggle{#1@scriptlangequal}%
+        {\rmfamilylatin}%
+        {\ifcsdef{\tmp@scriptname@lc font}%
+          {\@nameuse{\tmp@scriptname@lc font}}%
+          {\rmfamilylatin}}%
+        \xpg@addfontfeature@script{\tmp@script@tag}{\tmp@scriptname}%
+        \xpg@addfontfeature@lang{\tmp@lang@tag}{\tmp@langname}%
+      }%
+  }%
+  \csgdef{#1@font@sf}{%
+    \ifcsdef{#1fontsf}%
+      {\@nameuse{#1fontsf}}%
+      {\iftoggle{#1@scriptlangequal}%
+        {\sffamilylatin}%
+        {\ifcsdef{\tmp@scriptname@lc fontsf}%
+          {\@nameuse{\tmp@scriptname@lc fontsf}}%
+          {\sffamilylatin}}%
+        \xpg@addfontfeature@script{\tmp@script@tag}{\tmp@scriptname}%
+        \xpg@addfontfeature@lang{\tmp@lang@tag}{\tmp@langname}%
+      }%
+  }%
+  \csgdef{#1@font@tt}{%
+    \ifcsdef{#1fonttt}%
+      {\@nameuse{#1fonttt}}%
+      {\iftoggle{#1@scriptlangequal}%
+        {\ttfamilylatin}%
+        {\ifcsdef{\tmp@scriptname@lc fontsf}%
+          {\@nameuse{\tmp@scriptname@lc fontsf}}%
+          {\ttfamilylatin}}%
+        \xpg@addfontfeature@script{\tmp@script@tag}{\tmp@scriptname}%
+        \xpg@addfontfeature@lang{\tmp@lang@tag}{\tmp@langname}%
+      }%
+  }%
+}
+%%% END OF PolyglossiaSetup
+
 %% ensure localization of \markright and \markboth commands
 \def\opt@enabled{on}
 \def\opt@disabled{off}
@@ -146,19 +392,34 @@
 \let\sffamilylatin=\sffamily%
 \let\ttfamilylatin=\ttfamily%
 
-\def\reset@latin@script{%
+\def\resetfontlatin{%
    \let\rmfamily=\rmfamilylatin%
    \let\sffamily=\sffamilylatin%
    \let\ttfamily=\ttfamilylatin%
-   \normalfontlatin}
+   \let\normalfont=\normalfontlatin}
 
-\DeclareRobustCommand\selectfontfamilylatin{%
+\def\selectfontfamilylatin{%
   \def\tmp@tt{tt}\def\tmp@sf{sf}%
   \ifx\familytype\tmp@tt%
     \ttfamilylatin%
     \else\ifx\familytype\tmp@sf%
       \sffamilylatin%
       \else\rmfamilylatin\fi\fi}
+
+\def\xpg@select@fontfamily#1{%
+  \def\tmp@tt{tt}\def\tmp@sf{sf}%
+  \ifx\familytype\tmp@tt%
+    \xpg@csifdef@warn{#1@font@tt}%
+  \else\ifx\familytype\tmp@sf%
+    \xpg@csifdef@warn{#1@font@sf}%
+      \else\xpg@csifdef@warn{#1@font@rm}\fi\fi}
+
+\def\set@normalfont#1{%
+  \letcs{\rmfamily}{#1@font@rm}%
+  \letcs{\sffamily}{#1@font@sf}%
+  \letcs{\ttfamily}{#1@font@tt}%
+  \letcs{\normalfont}{#1@font@rm}%
+}
 
 \def\reset@LR{\xpg@csifdef{setLR}}
 
@@ -169,7 +430,7 @@
                           \@afterindentfalse}
 
 \newcommand{\selectbackgroundlanguage}[1]{%
-    \xpg@csifdef{selectnormalfont#1}%
+    \xpg@set@normalfont{#1}%
     \xpg@csifdef{#1@globalnumbers}%
     }
 
@@ -230,7 +491,7 @@
    \ifcsundef{#2@loaded}{\xpg@nolang{#2}\hyphenrules{#2}}{%
      {\def\languagename{#2}%
       \setkeys{#2}{#1}%
-      \xpg@csifdef@warn{#2@font}%
+      \xpg@select@fontfamily{#2}%
       \xpg@csifdef@warn{#2@language}%
       \xpg@csifdef{date#2}%
       \xpg@csifdef{#2@numbers}%
