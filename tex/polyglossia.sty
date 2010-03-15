@@ -29,8 +29,8 @@
 
 %% use macro if defined, else warn that it is not
 \def\xpg@csifdef@warn#1{%
-   \ifcsundef{#1}{\PackageWarning{polyglossia}{ #1 is not defined}}%
-   {\expandafter\protect\csname #1\endcsname}}
+   \ifcsundef{#1}{\PackageWarning{polyglossia}{ \expandafter\string\csname #1\endcsname\space is not defined}}%
+   {\csname #1\endcsname}}
 %% same without warning
 \def\xpg@csifdef#1{\ifcsundef{#1}{\relax}{\expandafter\protect\csname #1\endcsname}}
 
