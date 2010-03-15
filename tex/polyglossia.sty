@@ -455,10 +455,10 @@
 \def\xpg@select@fontfamily#1{%
   \def\tmp@tt{tt}\def\tmp@sf{sf}%
   \ifx\familytype\tmp@tt%
-    \xpg@csuse@warn{#1@font@tt}%
+    \csuse@warn{#1@font@tt}%
   \else\ifx\familytype\tmp@sf%
-    \xpg@csuse@warn{#1@font@sf}%
-      \else\xpg@csuse@warn{#1@font@rm}\fi\fi}
+    \csuse@warn{#1@font@sf}%
+      \else\csuse@warn{#1@font@rm}\fi\fi}
 
 \def\xpg@set@normalfont#1{%
   \letcs{\rmfamily}{#1@font@rm}%
@@ -537,7 +537,7 @@
      {{\def\languagename{#2}%
       \setkeys{#2}{#1}%
       \xpg@select@fontfamily{#2}%
-      \xpg@csuse@warn{#2@language}%
+      \csuse@warn{#2@language}%
       \csuse{date#2}%
       \csuse{#2@numbers}%
       \use@localhyphenmins{#2}%
@@ -580,7 +580,7 @@
    \ifcsundef{setRL}{}%
    {\iftoggle{#1@RL}{\setRL}{\setLR}}%
    \xpg@select@fontfamily{#1}%
-   \xpg@csuse@warn{#1@language}%
+   \csuse@warn{#1@language}%
    \use@localhyphenmins{#1}%
    \csuse{captions#1}%
    \csuse{date#1}%
