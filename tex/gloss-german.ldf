@@ -8,40 +8,40 @@
 \@german@oldspellingfalse
 \define@key{german}{spelling}[new]{%
    \def\@tmpa{#1}%
-   \ifx\@tmpa\tmp@old%
-	\ifx\l@german\@undefined%
+   \ifx\@tmpa\tmp@old
+	\ifx\l@german\@undefined
 	   \xpg@nopatterns{german}%
-	   \adddialect\l@german\l@nohyphenation%
-	\fi%
-        \@german@oldspellingtrue%
-   \else%
-     \ifx\@tmpa\tmp@oldyr%
-        \ifx\l@german\@undefined%
+	   \adddialect\l@german\l@nohyphenation
+	\fi
+        \@german@oldspellingtrue
+   \else
+     \ifx\@tmpa\tmp@oldyr
+        \ifx\l@german\@undefined
 	   \xpg@nopatterns{german}%
-	   \adddialect\l@german\l@nohyphenation%
-        \fi%
-        \@german@oldspellingtrue%
-     \else%
-	\ifx\l@ngerman\@undefined%
-	    \ifx\l@german\@undefined%
+	   \adddialect\l@german\l@nohyphenation
+        \fi
+        \@german@oldspellingtrue
+     \else
+	\ifx\l@ngerman\@undefined
+	    \ifx\l@german\@undefined
 	      \xpg@nopatterns{ngerman}%
-	      \adddialect\l@ngerman\l@nohyphenation%
-	    \else%
+	      \adddialect\l@ngerman\l@nohyphenation
+	    \else
 	      \xpg@warning{You asked for `ngerman' but only `german' hyphenation is available!}%
-              \@german@oldspellingtrue%
-	    \fi%
-	\else%
+              \@german@oldspellingtrue
+	    \fi
+	\else
             \@german@oldspellingfalse
-	\fi%
-      \fi%
-   \fi%
+	\fi
+      \fi
+   \fi
 }
 
 \newif\if@german@fraktur
 \def\tmp@fraktur{fraktur}
 \define@key{german}{script}[latin]{%
 	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@fraktur\@german@frakturtrue\else%
+	\ifx\@tmpa\tmp@fraktur\@german@frakturtrue\else
 	  \@german@frakturfalse%
 	\fi}
 
@@ -132,7 +132,7 @@
     \space \ifcase\month%TODO add option for Austrian forms (Jänner etc)
     \or Januar\or Februar\or März\or April\or Mai\or Juni\or%
     Juli\or August\or September\or Oktober\or November\or%
-    Dezember\fi%
+    Dezember\fi
     \space \number\year}%
 }
 
@@ -150,16 +150,16 @@
     \space \ifcase\month%TODO add option for Austrian forms (Jänner etc)
     \or Januar\or Februar\or März\or April\or Mai\or Juni\or%
     Juli\or Auguſt\or September\or Oktober\or November\or%
-    Dezember\fi%
+    Dezember\fi
     \space \number\year}%
 }
 
 \def\captionsgerman{%
-  \if@german@fraktur\captions@german@fraktur\else\captions@german\fi%
+  \if@german@fraktur\captions@german@fraktur\else\captions@german\fi
 }
 
 \def\dategerman{%
-  \if@german@fraktur\date@german@fraktur\else\date@german\fi%
+  \if@german@fraktur\date@german@fraktur\else\date@german\fi
 }
 
 \def\german@language{\language=%
@@ -174,12 +174,12 @@
 
 \def\blockextras@german{%
   \frenchspacing%
-  \ifgerman@babelshorthands\german@shorthands\fi%
+  \ifgerman@babelshorthands\german@shorthands\fi
 }
 
 \def\inlineextras@german{%
   \frenchspacing%
-  \ifgerman@babelshorthands\german@shorthands\fi%
+  \ifgerman@babelshorthands\german@shorthands\fi
 }
 
 \endinput

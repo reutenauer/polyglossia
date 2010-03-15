@@ -2,11 +2,11 @@
 \RequirePackage{hijrical}
 \makeatletter
 
-\PolyglossiaSetup{french}{%
+\PolyglossiaSetup{bahasai}{%
   language=Bahasa Indonesia,
   hyphennames={bahasai,indon,indonesian,bahasa,bahasam,malay,melayu},
   hyphenmins={2,2},
-  fontsetup=auto}
+  fontsetup=true}
 
 \def\captionsbahasai{%
    \def\refname{Pustaka}%

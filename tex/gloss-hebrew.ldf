@@ -8,7 +8,7 @@
   direction=RL,
   scripttag=hebr,
   hyphennames={nohyphenation},
-  fontsetup=auto
+  fontsetup=true
 }
 
 \newif\if@calendar@hebrew

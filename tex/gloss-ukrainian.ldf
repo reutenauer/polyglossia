@@ -1,14 +1,17 @@
 \ProvidesFile{gloss-ukrainian.ldf}[polyglossia: module for ukrainian]
 % Strings taken from Babel
 % and revised by Roman Kyrylych
+\makeatletter
+
 \PolyglossiaSetup{ukrainian}{
   script=Cyrillic,
+  scripttag=cyrl,
+  langtag=UKR,
   hyphennames={ukrainian},
   hyphenmins={2,2},
   frenchspacing=true,
-  fontsetup=auto
+  fontsetup=true
 }
-\makeatletter
 
 \def\captionsukrainian{%
    \def\refname{Література}%

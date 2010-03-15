@@ -8,7 +8,7 @@
   frenchspacing=true,
   frenchindent=true,
   hyphenmins={2,2},
-  fontsetup=auto}
+  fontsetup=true}
 
 \newXeTeXintercharclass\french@punctthin % ! ? ;
 \newXeTeXintercharclass\french@punctthick % :

@@ -10,7 +10,7 @@
   langtag=ARA,
   scripttag=arab,
   hyphennames={nohyphenation},
-  fontsetup=auto
+  fontsetup=true
 }
 
 \newif\ifeastern@numerals

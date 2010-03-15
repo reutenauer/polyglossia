@@ -1,25 +1,13 @@
 \ProvidesFile{gloss-turkish.ldf}[polyglossia: module for turkish]
 \RequirePackage{hijrical}
 \makeatletter
-
-\def\turkish@font{%
-\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-\@ifundefined{turkishfont}{%
-	\zf@check@ot@lang{TUR}%
-	\if@tempswa
-	\addfontfeature{Language=Turkish}%
-	\else
-	\zf@check@ot@lang{TRK}%
-	\if@tempswa
-	\addfontfeature{Language=Turkish}\fi%
-	\fi}
-     {\turkishfont}%
-}%
-
-\ifx\l@turkish\@undefined
-   \xpg@nopatterns{turkish}
-   \adddialect\l@turkish\l@nohyphenation
-\fi
+\PolyglossiaSetup{turkish}{
+  hyphennames={turkish},
+  hyphenmins={2,2},
+  langtag=TRK,
+  frenchspacing=true,
+  fontsetup=true
+  }
 
 \newXeTeXintercharclass\turkish@punctthin % ! :
 \newXeTeXintercharclass\turkish@punctthick % =
@@ -28,7 +16,6 @@
 \def\turkish@punctthickspace{{\unskip\nobreakspace}}
 
 \def\turkish@punctuation{%
-   \frenchspacing%
    \XeTeXinterchartokenstate=1%
    \XeTeXcharclass `\! \turkish@punctthin
    \XeTeXcharclass `\: \turkish@punctthin
@@ -38,7 +25,6 @@
 }
 
 \def\noturkish@punctuation{%
-   \nonfrenchspacing%
    \XeTeXinterchartokenstate=0%
 }
 
@@ -78,10 +64,6 @@
 %%\Hijritoday is now locale-aware and will format the date with this macro:
 \DefineFormatHijriDate{turkish}{%
 \number\value{Hijriday}\space\hijrimonthturkish{\value{Hijrimonth}}\space\number\value{Hijriyear}}
-
-\def\turkish@language{\language=\l@turkish}
-
-\setlocalhyphenmins{turkish}{2}{2}%
 
 \def\noextras@turkish{%
    \noturkish@punctuation%
