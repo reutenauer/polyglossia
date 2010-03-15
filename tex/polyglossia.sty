@@ -29,11 +29,9 @@
   \xpg@warning{Illegal value (#1) for #2}}
 
 %% use macro if defined, else warn that it is not
-\def\xpg@csifdef@warn#1{%
+\def\csuse@warn#1{%
    \ifcsundef{#1}{\PackageWarning{polyglossia}{ \expandafter\string\csname #1\endcsname\space is not defined}}%
    {\csname #1\endcsname}}
-%% same without warning
-\def\xpg@csifdef#1{\ifcsundef{#1}{\relax}{\expandafter\protect\csname #1\endcsname}}
 
 %% ensure directionality if bidi is loaded, else ignore
 \def\@@ensure@dir#1{\ifcsundef{@ensure@dir}{#1}{\@ensure@dir{#1}}}
@@ -131,8 +129,8 @@
 \newcommand{\resetdefaultlanguage}[2][]{%
     \ifcsundef{#2@loaded}{%
      \PackageError{polyglossia}{gloss-#2.ldf is not loaded!}}%
-    {\xpg@csifdef{no\xpg@main@language @globalnumbers}% disable globalnumbers of previously defined default language
-    \xpg@csifdef{noextras@\xpg@main@language}%
+    {\csuse{no\xpg@main@language @globalnumbers}% disable globalnumbers of previously defined default language
+    \csuse{noextras@\xpg@main@language}%
     \def\languagename{#2}%
     \ifcsundef{#2@RL}{}{\@rlmaintrue\@rl@footnotetrue}%
     \selectlanguage[#1]{#2}%
@@ -150,7 +148,7 @@
    \let\ttfamily=\ttfamilylatin%
    \normalfontlatin}
 
-\def\reset@LR{\xpg@csifdef{setLR}}
+\def\reset@LR{\csuse{setLR}}
 
 \let\@@fterindentfalse\@afterindentfalse
 \def\french@indent{\let\@afterindentfalse\@afterindenttrue
@@ -159,8 +157,8 @@
                           \@afterindentfalse}
 
 \newcommand{\selectbackgroundlanguage}[1]{%
-    \xpg@csifdef{selectnormalfont#1}%
-    \xpg@csifdef{#1@globalnumbers}%
+    \csuse{selectnormalfont#1}%
+    \csuse{#1@globalnumbers}%
     }
 
 \newcommand{\setotherlanguage}[2][]{%
@@ -206,7 +204,7 @@
    \lefthyphenmin=\tw@
    \righthyphenmin=\thr@@}
 
-\def\noextrascurrent#1{\xpg@csifdef{noextras@#1}}
+\def\noextrascurrent#1{\csuse{noextras@#1}}
 
 \def\xpg@initial@setup{\ifcsundef{languagename}{}%
    {\noextrascurrent{\languagename}}%
@@ -220,12 +218,12 @@
    \ifcsundef{#2@loaded}{\xpg@nolang{#2}\hyphenrules{#2}}{%
      {\def\languagename{#2}%
       \setkeys{#2}{#1}%
-      \xpg@csifdef@warn{#2@font}%
-      \xpg@csifdef@warn{#2@language}%
-      \xpg@csifdef{date#2}%
-      \xpg@csifdef{#2@numbers}%
+      \csuse@warn{#2@font}%
+      \csuse@warn{#2@language}%
+      \csuse{date#2}%
+      \csuse{#2@numbers}%
       \use@localhyphenmins{#2}%
-      \xpg@csifdef{inlineextras@#2}%
+      \csuse{inlineextras@#2}%
       #3}%
    }%
 }
@@ -261,14 +259,14 @@
    \edef\languagename{#1}%
    \ifcsundef{RL}{}%
    {\ifcsundef{#1@RL}{\setLR}{\setRL}}%
-   \xpg@csifdef@warn{#1@font}%
-   \xpg@csifdef@warn{#1@language}%
+   \csuse@warn{#1@font}%
+   \csuse@warn{#1@language}%
    \use@localhyphenmins{#1}%
-   \xpg@csifdef{captions#1}%
-   \xpg@csifdef{date#1}%
-   \xpg@csifdef{#1@numbers}%
+   \csuse{captions#1}%
+   \csuse{date#1}%
+   \csuse{#1@numbers}%
    \local@marks{#1}%
-   \xpg@csifdef{blockextras@#1}%
+   \csuse{blockextras@#1}%
 }
 
 \let\xpg@pop@language\relax
