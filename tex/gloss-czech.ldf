@@ -1,11 +1,11 @@
 \ProvidesFile{gloss-czech.ldf}[polyglossia: module for czech]
 \makeatletter
-\def\czech@font{\selectfontfamilylatin}
-
-\ifx\l@czech\@undefined%
-   \xpg@nopatterns{Czech}%
-   \adddialect\l@czech\l@nohyphenation%
-\fi
+\PolyglossiaSetup{czech}{
+  hyphennames={czech},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  fontsetup=true,
+}
 
 \def\captionsczech{%
    \def\refname{Reference}%
@@ -37,21 +37,5 @@
     června\or července\or srpna\or září\or
     října\or listopadu\or prosince\fi
     \space \number\year}}
-
-\def\czech@language{\language=\l@czech}
-
-\setlocalhyphenmins{czech}{2}{2}%
-
-\def\noextras@czech{%
-   \nonfrenchspacing%
-   }
-
-\def\blockextras@czech{%
-   \frenchspacing%
-   }
-
-\def\inlineextras@czech{%
-   \frenchspacing%
-   }
 
 \endinput

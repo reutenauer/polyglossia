@@ -1,11 +1,11 @@
 \ProvidesFile{gloss-danish.ldf}[polyglossia: module for danish]
 \makeatletter
-\def\danish@font{\selectfontfamilylatin}
-
-\ifx\l@danish\@undefined
-         \xpg@nopatterns{Danish}
-         \adddialect\l@danish\l@nohyphenation
-\fi
+\PolyglossiaSetup{danish}{
+  hyphennames={danish},
+  hyphenmins={2,3},
+  frenchspacing=true,
+  fontsetup=true,
+}
 
 \def\captionsdanish{%
   \def\prefacename{Forord}%
@@ -33,22 +33,5 @@
     januar\or februar\or marts\or april\or maj\or juni\or
     juli\or august\or september\or oktober\or november\or december\fi
     \space\number\year}
-
-\def\danish@language{%
-   \language=\l@danish}
-
-\setlocalhyphenmins{danish}{2}{3}%
-
-\def\noextras@danish{%
-   \nonfrenchspacing%
-   }
-
-\def\blockextras@danish{%
-   \frenchspacing%
-   }
-
-\def\inlineextras@danish{%
-   \frenchspacing%
-   }
 
 \endinput

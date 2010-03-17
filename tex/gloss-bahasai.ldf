@@ -4,7 +4,7 @@
 
 \PolyglossiaSetup{bahasai}{%
   language=Bahasa Indonesia,
-  hyphennames={bahasai,indon,indonesian,bahasa,bahasam,malay,melayu},
+  hyphennames={indonesian,indon,bahasai,bahasa,bahasam,malay,melayu},
   hyphenmins={2,2},
   fontsetup=true}
 

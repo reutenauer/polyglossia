@@ -1,33 +1,14 @@
 \ProvidesFile{gloss-russian.ldf}[polyglossia: module for russian]
 \makeatletter
-
-\ifx\l@russian\@undefined
-   \xpg@nopatterns{Russian}
-   \adddialect\l@russian\l@nohyphenation
-\fi
-
-\def\russian@font{%
-  \@ifundefined{russianfont}{%
-    \@ifundefined{cyrillicfont}{%
-      \normalfontlatin%
-      \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-      \zf@check@ot@script{cyrl}%
-      \if@tempswa
-        \addfontfeature{Script=Cyrillic}%
-      \else
-        \PackageError{polyglossia}{^^J
-    The current font does not contain the Cyrillic script!^^J
-    Please define \string\cyrillicfont\space or \string\russianfont\space with \string\newfontfamily}%
-      \fi
-      \zf@check@ot@lang{RUS}%
-      \if@tempswa\addfontfeature{Language=Russian}\fi
-    }%
-    {\cyrillicfont%
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-    \zf@check@ot@lang{RUS}%
-    \if@tempswa\addfontfeature{Language=Russian}\fi}%
-  }% 
-  {\russianfont}%
+\PolyglossiaSetup{russian}{
+  script=Cyrillic,
+  scripttag=cyrl,
+  langtag=RUS,
+  hyphennames={russian},
+  hyphenmins={2,2},
+  frenchspacing,
+  fontsetup
+  %TODO localalph={russian@alph,russian@Alph}
 }
 
 \def\tmp@old{old}
@@ -181,24 +162,14 @@
    \let\@alph\latin@alph%
 }
 
-\def\russian@language{\language=\l@russian}
-
-\setlocalhyphenmins{russian}{2}{2}%
-
 \def\noextras@russian{%
-   \nonfrenchspacing%
    \def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
    \iflatin@numerals\else\norussian@numbers\fi
    }
 
 \def\blockextras@russian{%
-   \frenchspacing%
    \russian@capsformat%
    \iflatin@numerals\else\russian@numbers\fi
-   }
-
-\def\inlineextras@russian{%
-   \frenchspacing%
    }
 
 \endinput

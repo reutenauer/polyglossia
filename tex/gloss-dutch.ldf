@@ -1,18 +1,10 @@
 \ProvidesFile{gloss-dutch.ldf}[polyglossia: module for dutch]
 \makeatletter
-\def\dutch@font{\selectfontfamilylatin}
-
-\ifx\l@dutch\@undefined
-   \xpg@nopatterns{Dutch}
-   \adddialect\l@dutch\l@nohyphenation
-\fi
-
-\def\dutch@punctuation{%
-   \frenchspacing%
-}
-
-\def\nodutch@punctuation{%
-   \nonfrenchspacing%
+\PolyglossiaSetup{dutch}{
+  hyphennames={dutch},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  fontsetup=true,
 }
 
 \define@boolkey{dutch}[dutch@]{babelshorthands}[true]{}
@@ -74,22 +66,15 @@
       december\fi
       \space \number\year}}
 
-\def\dutch@language{\language=\l@dutch}
-
-\setlocalhyphenmins{dutch}{2}{2}%
-
 \def\noextras@dutch{%
-  \nodutch@punctuation%
   \nodutch@shorthands%
 }
 
 \def\blockextras@dutch{%
-  \dutch@punctuation%
   \ifdutch@babelshorthands\dutch@shorthands\fi%
 }
 
 \def\inlineextras@dutch{%
-  \dutch@punctuation%
   \ifdutch@babelshorthands\dutch@shorthands\fi%
 }
 

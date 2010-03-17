@@ -1,11 +1,14 @@
-%% RENAME TO gloss-amharic.ldf
 \ProvidesFile{gloss-amharic.ldf}[polyglossia: module for amharic]
 \makeatletter
-
-\ifx\l@amharic\@undefined%
-   %\xpg@nopatterns{Amharic}%
-   \adddialect\l@amharic\l@nohyphenation%
-\fi
+\PolyglossiaSetup{amharic}{
+  script=Ethiopic,
+  scripttag=ethi,
+  langtag=AMH,
+  hyphennames={amharic,nohyphenation},
+  hyphenmins={2,2},
+  fontsetup=true,
+  %TODO localalph=ethnum
+}
 
 \def\captionsamharic{%
    \def\refname{የነሥ ጹሁፍ ምንጭ}%
@@ -198,34 +201,4 @@
   \ifnum#1>0\relax ፼\fi%
   \ethnum@five%
 }
-
-\def\amharic@font{%
-  \@ifundefined{amharicfont}{%
-    \normalfontlatin%
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-      \@ifundefined{ethiopicfont}{%
-        \zf@check@ot@script{ethi}%
-        \if@tempswa
-          \addfontfeature{Script=Ethiopic}%
-        \else
-          \PackageError{polyglossia}{^^J
-      The current font does not contain the Ethiopic script!^^J
-      Please define \string\ethiopicfont\space or \string\amharicfont\space with \string\newfontfamily}%
-        \fi
-        \zf@check@ot@lang{AMH}%
-        \if@tempswa\addfontfeature{Language=Amharic}\fi
-      }%
-      {\ethiopicfont%
-      \zf@check@ot@lang{AMH}%
-      \if@tempswa\addfontfeature{Language=Amharic}\fi
-      }}% 
-  {\amharicfont}%
-}
-
-\def\selectnormalfontamharic{%
-   \let\normalfont=\amharic@font%
-   \def\reset@font{\normalfont}}
-
-\def\amharic@language{\language=\l@amharic}
-
 

@@ -1,16 +1,11 @@
 \ProvidesFile{gloss-brazil.ldf}[polyglossia: module for portuguese]
 \makeatletter
-\def\brazil@font{\selectfontfamilylatin}
-
-%FIXME check this:
-\ifx\l@brazil\@undefined
-  \ifx\l@portuguese\@undefined
-    \xpg@nopatterns{Brazilian Portuguese}
-    \adddialect\l@brazil\l@nohyphenation
-  \else
-    \let\l@brazil\l@portuguese
-  \fi
-\fi
+\PolyglossiaSetup{brazil}{
+  language=Brazilian Portuguese,
+  hyphennames={brazil,portuguese,portuges},
+  hyphenmins={2,3},
+  fontsetup=true,
+}
 
 \def\captionsbrazil{%
    \def\refname{Referências}%
@@ -43,8 +38,4 @@
       \fi\space de\space\number\year}%
       }
      
-\def\brazil@language{\language=\l@brazil}
-
-\setlocalhyphenmins{brazil}{2}{3}
-
 \endinput

@@ -1,11 +1,12 @@
 \ProvidesFile{gloss-breton.ldf}[polyglossia: module for breton]
 \makeatletter
-\def\breton@font{\selectfontfamilylatin}
-
-\ifx\l@breton\@undefined%
-   \xpg@nopatterns{Breton}%
-   \adddialect\l@breton\l@nohyphenation%
-\fi
+\PolyglossiaSetup{breton}{
+  hyphennames={breton},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  frenchindent=true,
+  fontsetup=true,
+}
 
 \newXeTeXintercharclass\breton@punctthin % ! ? ;
 \newXeTeXintercharclass\breton@punctthick % :
@@ -14,7 +15,6 @@
 \def\breton@punctthickspace{{\unskip\nobreakspace}}
 
 \def\breton@punctuation{%
-    \frenchspacing%
     \XeTeXinterchartokenstate=1%
     \XeTeXcharclass `\! \breton@punctthin
     \XeTeXcharclass `\? \breton@punctthin
@@ -22,10 +22,13 @@
     \XeTeXcharclass `\: \breton@punctthick
     \XeTeXinterchartoks \z@ \breton@punctthin = \breton@punctthinspace
     \XeTeXinterchartoks \z@ \breton@punctthick = \breton@punctthickspace
-    }
+}
 
 \def\nobreton@punctuation{%
-    \nonfrenchspacing%
+    \XeTeXcharclass `\! \z@
+    \XeTeXcharclass `\? \z@
+    \XeTeXcharclass `\; \z@
+    \XeTeXcharclass `\: \z@
     \XeTeXinterchartokenstate=0%
 }
 
@@ -60,10 +63,6 @@
     Genver\or C'hwevrer\or Meurzh\or Ebrel\or Mae\or Mezheven\or
     Gouere\or Eost\or Gwengolo\or Here\or Du\or Kerzu\fi
     \space\number\year}}
-
-\def\breton@language{\language=\l@breton}
-
-\setlocalhyphenmins{breton}{2}{2}
 
 \def\noextras@breton{%
    \nobreton@punctuation%

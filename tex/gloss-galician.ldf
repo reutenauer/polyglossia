@@ -1,11 +1,10 @@
 \ProvidesFile{gloss-galician.ldf}[polyglossia: module for galician]
 \makeatletter
-\def\galician@font{\selectfontfamilylatin}
-
-\ifx\l@galician\@undefined%
-   \xpg@nopatterns{Galician}%
-   \adddialect\l@galician\l@nohyphenation%
-\fi
+\PolyglossiaSetup{galician}{
+  hyphennames={galician},
+  hyphenmins={2,2},
+  fontsetup=true,
+}
 
 \def\captionsgalician{%
    \def\refname{Referencias}%
@@ -36,9 +35,5 @@
     xaneiro\or febreiro\or marzo\or abril\or maio\or xuño\or
     xullo\or agosto\or setembro\or outubro\or novembro\or decembro\fi
     \space de~\number\year}}
-
-\def\galician@language{\language=\l@galician}
-
-\setlocalhyphenmins{galician}{2}{2}%
 
 \endinput

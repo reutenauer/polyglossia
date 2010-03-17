@@ -1,11 +1,11 @@
 \ProvidesFile{gloss-esperanto.ldf}[polyglossia: module for esperanto]
 \makeatletter
-\def\esperanto@font{\selectfontfamilylatin}
-
-\ifx\l@esperanto\@undefined%
-   \xpg@nopatterns{Esperanto}%
-   \adddialect\l@esperanto\l@nohyphenation%
-\fi
+\PolyglossiaSetup{esperanto}{
+  hyphennames={esperanto},
+  hyphenmins={2,2},
+  fontsetup=true,
+  %TODO localalph={esperanto@alph,esperanto@Alph}
+}
 
 \def\captionsesperanto{%
    \def\refname{Citaĵoj}%
@@ -52,8 +52,8 @@
      P\or R\or S\or Ŝ\or T\or U\or Ŭ\or V\or Z\else\xpg@ill@value{#1}{esperanto@Alph}\fi}%
 
 \def\esperanto@numbers{%
-   \let\latin@Alph\@Alph% 
-   \let\latin@alph\@alph% 
+   \let\latin@Alph\@Alph%
+   \let\latin@alph\@alph%
    \let\@Alph\esperanto@Alph%
    \let\@alph\esperanto@alph%
  }
@@ -62,9 +62,5 @@
    \let\@Alph\latin@Alph% 
    \let\@alph\latin@alph%
 }
-
-\def\esperanto@language{\language=\l@esperanto}
-
-\setlocalhyphenmins{esperanto}{2}{2}%
 
 \endinput

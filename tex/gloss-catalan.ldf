@@ -1,11 +1,11 @@
 \ProvidesFile{gloss-catalan.ldf}[polyglossia: module for catalan]
 \makeatletter
-\def\catalan@font{\selectfontfamilylatin}
-
-\ifx\l@catalan\@undefined%
-   \xpg@nopatterns{Catalan}%
-   \adddialect\l@catalan\l@nohyphenation%
-\fi
+\PolyglossiaSetup{catalan}{
+  hyphennames={catalan},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  fontsetup=true,
+}
 
 \define@boolkey{catalan}[catalan@]{babelshorthands}[true]{}
 \ifsystem@babelshorthands
@@ -114,22 +114,15 @@
     de novembre\or de desembre\fi
     \space de~\number\year}}
 
-\def\catalan@language{\language=\l@catalan}
-
-\setlocalhyphenmins{catalan}{2}{2}
-
 \def\noextras@catalan{%
-   \nonfrenchspacing%
    \nocatalan@shorthands%
 }
 
 \def\blockextras@catalan{%
-   \frenchspacing%
    \ifcatalan@babelshorthands\catalan@shorthands\fi%
 }
 
 \def\inlineextras@catalan{%
-   \frenchspacing%
    \ifcatalan@babelshorthands\catalan@shorthands\fi%
 }
 \endinput

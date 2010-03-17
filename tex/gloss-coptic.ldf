@@ -1,10 +1,14 @@
 \ProvidesFile{gloss-coptic.ldf}[polyglossia: module for coptic]
 \makeatletter
-
-\ifx\l@coptic\@undefined%
-   \xpg@nopatterns{Coptic}%
-   \adddialect\l@coptic\l@nohyphenation%
-\fi
+\PolyglossiaSetup{coptic}{
+  script=Coptic,
+  direction=RL,
+  scripttag=copt,
+  langtag=COP,
+  hyphennames={coptic},
+  hyphenmins={2,2},
+  fontsetup=true
+}
 
 %\def\captionscoptic{%
 %   \def\refname{<++>}%
@@ -33,30 +37,5 @@
 %\def\datecoptic{%
 %   \def\today{<++>}%
 %   }
-
-\def\coptic@language{\language=\l@coptic}
-
-\def\coptic@font{%
-  \@ifundefined{copticfont}{%
-    \normalfontlatin%
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-    \zf@check@ot@script{copt}%
-    \if@tempswa
-	    \addfontfeature{Script=Coptic}%
-	    \zf@check@ot@lang{COP}%
-	    \if@tempswa\addfontfeature{Language=Coptic}\fi
-    \else
-	    \PackageError{polyglossia}{^^J
-    The current font does not contain the Coptic script!^^J
-    Please define \string\copticfont\space with \string\newfontfamily}%
-    \fi}%
-  {\copticfont}%
-}
-
-\def\selectnormalfontcoptic{%
-   \let\normalfont=\coptic@font%
-   \def\reset@font{\normalfont}}
-
-\setlocalhyphenmins{coptic}{2}{2}
 
 \endinput

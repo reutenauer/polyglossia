@@ -1,11 +1,10 @@
 \ProvidesFile{gloss-basque.ldf}[polyglossia: module for basque]
 \makeatletter
-\def\basque@font{\selectfontfamilylatin}
-
-\ifx\l@basque\@undefined%
-   \xpg@nopatterns{Basque}%
-   \adddialect\l@basque\l@nohyphenation%
-\fi
+\PolyglossiaSetup{basque}{
+  hyphennames={basque},
+  hyphenmins={2,2},
+  fontsetup=true,
+}
 
 \def\captionsbasque{%
    \def\refname{Erreferentziak}%
@@ -37,9 +36,5 @@
     maiatzaren\or ekainaren\or uztailaren\or abuztuaren\or
     irailaren\or urriaren\or azaroaren\or
     abenduaren\fi~\number\day}}
-
-\def\basque@language{\language=\l@basque}
-
-\setlocalhyphenmins{basque}{2}{2}
 
 \endinput

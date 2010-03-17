@@ -8,7 +8,9 @@
   direction=RL,
   scripttag=hebr,
   hyphennames={nohyphenation},
-  fontsetup=true
+  fontsetup=true,
+  %TODO localalph={hebrewnumeral,Hebrewnumeral}
+  %digits = hebrewnumber
 }
 
 \newif\if@calendar@hebrew
@@ -83,7 +85,6 @@
    \if@hebrew@numerals
      \protect\hebrewnumeral{#1}%
    \else
-     %%\RL{\protect\reset@font\protect\number#1}%
      \number#1%
    \fi
 }

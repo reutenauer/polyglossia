@@ -1,10 +1,12 @@
 \ProvidesFile{gloss-albanian.ldf}[polyglossia: module for albanian]
 \makeatletter
-\def\albanian@font{\selectfontfamilylatin}
 
-\ifx\l@albanian\@undefined
-    \xpg@nopatterns{Albanian}
-    \adddialect\l@albanian\l@nohyphenation\fi
+\PolyglossiaSetup{albanian}{
+  hyphennames={albanian},
+  hyphenmins={2,2},
+  frenchindent=true,
+  fontsetup=true,
+}
 
 \def\captionsalbanian{%
    \def\refname{Referencat}%
@@ -35,18 +37,6 @@
     Janar\or Shkurt\or Mars\or Prill\or Maj\or
     Qershor\or Korrik\or Gusht\or Shtator\or Tetor\or Nëntor\or
     Dhjetor\fi \space \number\year}}}
-
-\def\albanian@language{\language=\l@albanian}
-
-\setlocalhyphenmins{albanian}{2}{2}
-
-\def\noextras@albanian{%
-   \nofrench@indent%
-   }
-
-\def\blockextras@albanian{%
-   \french@indent%
-   }
 
 \endinput
   

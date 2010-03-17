@@ -1,10 +1,15 @@
 \ProvidesFile{gloss-bulgarian.ldf}[polyglossia: module for bulgarian]
 \makeatletter
-
-\ifx\l@bulgarian\@undefined%
-   \xpg@nopatterns{Bulgarian}%
-   \adddialect\l@bulgarian\l@nohyphenation%
-\fi
+\PolyglossiaSetup{bulgarian}{
+  script=Cyrillic,
+  scripttag=cyrl,
+  langtag=BGR,
+  hyphennames={bulgarian},
+  hyphenmins={2,2},
+  frenchspacing,
+  fontsetup
+  %TODO localalph=bulgarian@alph
+}
 
 \def\bulgarian@Alph#1{%
    \ifcase#1\or
@@ -78,46 +83,6 @@
     \def\month@Roman{\expandafter\@Roman\month}%
     \def\todayRoman{\number\day.\,\month@Roman.\,\number\year~г.}%
     }
-
-\def\bulgarian@language{\language=\l@bulgarian}
-
-\def\bulgarian@font{%
-  \@ifundefined{bulgarianfont}{%
-    \@ifundefined{cyrillicfont}{%
-      \normalfontlatin%
-      \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-      \zf@check@ot@script{cyrl}%
-      \if@tempswa
-        \addfontfeature{Script=Cyrillic}%
-      \else
-        \PackageError{polyglossia}{^^J
-        The current font does not contain the Cyrillic script!^^J
-        Please define \string\cyrillicfont\space or \string\bulgarianfont\space with \string\newfontfamily}%
-      \fi
-      \zf@check@ot@lang{BGR}%
-      \if@tempswa\addfontfeature{Language=Bulgarian}\fi
-    }%
-    {\cyrillicfont%
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-    \zf@check@ot@lang{BGR}%
-    \if@tempswa\addfontfeature{Language=Bulgarian}\fi
-    }}%
-  {\bulgarianfont}%
-}
-
-\setlocalhyphenmins{bulgarian}{2}{2}%
-
-\def\noextras@bulgarian{%
-   \nonfrenchspacing%
-   }
-
-\def\blockextras@bulgarian{%
-   \frenchspacing%
-   }
-
-\def\inlineextras@bulgarian{%
-   \frenchspacing%
-   }
 
 \endinput
 

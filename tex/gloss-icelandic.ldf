@@ -1,11 +1,10 @@
 \ProvidesFile{gloss-icelandic.ldf}[polyglossia: module for icelandic]
 \makeatletter
-\def\icelandic@font{\selectfontfamilylatin}
-
-\ifx\l@icelandic\@undefined%
-   \xpg@nopatterns{Icelandic}%
-   \adddialect\l@icelandic\l@nohyphenation%
-\fi
+\PolyglossiaSetup{icelandic}{
+  hyphennames={icelandic},
+  hyphenmins={2,2},
+  fontsetup=true,
+}
 
 \def\captionsicelandic{%
    \def\refname{Heimildir}%
@@ -31,6 +30,7 @@
    \def\proofname{Sönnun}%
    \def\glossaryname{Orðalisti}%
    }
+
 \def\dateicelandic{%
    \def\today{\number\day.~\ifcase\month\or
     janúar\or febrúar\or mars\or apríl\or maí\or
@@ -39,14 +39,10 @@
     \space\number\year}%
     }
 
-\def\icelandic@language{\language=\l@icelandic}
-
-\setlocalhyphenmins{icelandic}{2}{2}%
-
 \endinput
 
 
-%% implement this as a separate module ?
+%%TODO: implement this as a separate module ?
 %\mathchardef\m@comma="013B 
 %\def\@comma@{\ifmmode\m@comma\else,\fi}
 %\def\f@thousandsep{\ifmmode\mskip5.5mu\else\penalty\@M\kern.3em\fi}

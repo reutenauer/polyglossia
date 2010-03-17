@@ -1,11 +1,11 @@
 \ProvidesFile{gloss-estonian.ldf}[polyglossia: module for estonian]
 \makeatletter
-\def\estonian@font{\selectfontfamilylatin}
-
-\ifx\l@estonian\@undefined%
-   \xpg@nopatterns{Estonian}%
-   \adddialect\l@estonian\l@nohyphenation%
-\fi
+\PolyglossiaSetup{estonian}{
+  hyphennames={estonian},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  fontsetup=true,
+}
 
 \def\captionsestonian{%
    \def\refname{Viited}%
@@ -36,21 +36,5 @@
     jaanuar\or veebruar\or märts\or aprill\or mai\or juuni\or
     juuli\or august\or september\or oktoober\or november\or
     detsember\fi\space\number\year.\space a.}}
-
-\def\estonian@language{\language=\l@estonian}
-
-\setlocalhyphenmins{estonian}{2}{2}%
-
-\def\noextras@estonian{%
-   \nonfrenchspacing%
-   }
-
-\def\blockextras@estonian{%
-   \frenchspacing%
-   }
-
-\def\inlineextras@estonian{%
-   \frenchspacing%
-   }
 
 \endinput

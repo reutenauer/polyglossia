@@ -1,40 +1,37 @@
 \ProvidesFile{gloss-german.ldf}[polyglossia: module for german]
 \makeatletter
-\def\german@font{\selectfontfamilylatin}
+\PolyglossiaSetup{german}{
+  hyphenmins={2,2},
+  frenchspacing=true,
+  fontsetup=true,
+}
 
 \def\tmp@old{old}
 \def\tmp@oldyr{1901}
 \newif\if@german@oldspelling
 \@german@oldspellingfalse
 \define@key{german}{spelling}[new]{%
-   \def\@tmpa{#1}%
-   \ifx\@tmpa\tmp@old
-	\ifx\l@german\@undefined
-	   \xpg@nopatterns{german}%
-	   \adddialect\l@german\l@nohyphenation
-	\fi
+  \def\@tmpa{#1}%
+  \ifx\@tmpa\tmp@oldyr\def\@tmpa{old}\fi
+  \ifx\@tmpa\tmp@old
+    \ifx\l@german\@undefined
+      \xpg@nopatterns{german}%
+      \adddialect\l@german\l@nohyphenation
+    \fi
+    \@german@oldspellingtrue
+  \else %try ngerman
+    \ifx\l@ngerman\@undefined
+      \ifx\l@german\@undefined
+        \xpg@nopatterns{ngerman}%
+        \adddialect\l@ngerman\l@nohyphenation
+      \else
+        \xpg@warning{You asked for `ngerman' but only `german' hyphenation is available!}%
         \@german@oldspellingtrue
-   \else
-     \ifx\@tmpa\tmp@oldyr
-        \ifx\l@german\@undefined
-	   \xpg@nopatterns{german}%
-	   \adddialect\l@german\l@nohyphenation
-        \fi
-        \@german@oldspellingtrue
-     \else
-	\ifx\l@ngerman\@undefined
-	    \ifx\l@german\@undefined
-	      \xpg@nopatterns{ngerman}%
-	      \adddialect\l@ngerman\l@nohyphenation
-	    \else
-	      \xpg@warning{You asked for `ngerman' but only `german' hyphenation is available!}%
-              \@german@oldspellingtrue
-	    \fi
-	\else
-            \@german@oldspellingfalse
-	\fi
       \fi
-   \fi
+    \else %we use ngerman
+      \@german@oldspellingfalse
+    \fi
+  \fi
 }
 
 \newif\if@german@fraktur
@@ -165,20 +162,15 @@
 \def\german@language{\language=%
   \csname l@\if@german@oldspelling\else n\fi german\ifgerman@latesthyphen -x-latest\fi\endcsname}
 
-\setlocalhyphenmins{german}{2}{2}%
-
 \def\noextras@german{%
-  \nonfrenchspacing%
   \nogerman@shorthands%
 }
 
 \def\blockextras@german{%
-  \frenchspacing%
   \ifgerman@babelshorthands\german@shorthands\fi
 }
 
 \def\inlineextras@german{%
-  \frenchspacing%
   \ifgerman@babelshorthands\german@shorthands\fi
 }
 

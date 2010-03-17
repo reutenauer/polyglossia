@@ -4,13 +4,14 @@
 \RequirePackage{farsical}
 \RequirePackage{hijrical}
 \makeatletter
-
-\ifx\l@farsi\@undefined
-  %\xpg@nopatterns{Farsi}%
-  \adddialect\l@farsi\l@nohyphenation
-\fi
-
-\def\farsi@RL{\relax}
+\PolyglossiaSetup{farsi}{
+  script=Arabic,
+  direction=RL,
+  scripttag=arab,
+  langtag=FAR,
+  hyphennames={nohyphenation},
+  fontsetup=true
+}
 
 \newif\if@western@numerals
 \def\tmp@western{western}
@@ -115,66 +116,6 @@
    \renewcommand\thefootnote{\protect\number{\c@footnote}}%
    }
 
-\def\farsi@language{\language=\l@farsi}
-
-\def\farsi@font{%
-  \@ifundefined{farsifont}{%
-    \@ifundefined{arabicfont}{%
-      \normalfontlatin%
-      \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-      \zf@check@ot@script{arab}%
-      \if@tempswa
-        \addfontfeature{Script=Arabic}%
-      \else
-        \PackageError{polyglossia}{^^J
-    The current font does not contain the Arabic script!^^J
-    Please define \string\arabicfont\space or \string\farsifont\space with \newfontfamily}%
-      \fi
-      \zf@check@ot@lang{FAR}%
-      \if@tempswa\addfontfeature{Language=Farsi}\fi}%
-    {\arabicfont%
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-    \zf@check@ot@lang{FAR}%
-    \if@tempswa\addfontfeature{Language=Farsi}\fi}%
-  }%
-  {\farsifont}%
-}
-
-% TODO add setup to define Sans and Mono Arabic fonts if desired
-\def\farsi@font@sf{%
-  \@ifundefined{farsifontsf}{%
-%  \sffamily% FIXME
-%    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-%  \zf@check@ot@script{arab}%
-%  \if@tempswa
-%    \addfontfeature{Script=Arabic}%
-%  \else
-    \farsi@font%
-%  \fi
-  }%
-  {\farsifontsf}%
-}
-\def\farsi@font@tt{%
-  \@ifundefined{farsifonttt}{%
-%    \ttfamily% FIXME
-%    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-%  \zf@check@ot@script{arab}%
-%  \if@tempswa
-%    \addfontfeature{Script=Arabic}%
-%  \else
-    \farsi@font%
-%  \fi
-  }%
-  {\farsifonttt}%
-}
-
-\def\selectnormalfontfarsi{%
-   \let\normalfont=\farsi@font%
-   \let\rmfamily=\farsi@font%
-   \let\sffamily=\farsi@font@sf%
-   \let\ttfamily=\farsi@font@tt%
-   \def\reset@font{\normalfont}}
-
 \def\blockextras@farsi{%
    \let\@@MakeUppercase\MakeUppercase%
    \def\MakeUppercase##1{##1}%
@@ -183,4 +124,3 @@
    \let\MakeUppercase\@@MakeUppercase%
    }
 \endinput
-

@@ -1,13 +1,13 @@
 \ProvidesFile{gloss-divehi.ldf}[polyglossia: module for divehi]
 \RequirePackage{bidi}
 \makeatletter
-
-\ifx\l@divehi\@undefined%
-   %\xpg@nopatterns{Divehi}%
-   \adddialect\l@divehi\l@nohyphenation%
-\fi
-
-\def\divehi@RL{\relax}
+\PolyglossiaSetup{divehi}{
+  script=Thaana,
+  scripttag=thaa,
+  direction=RL,
+  hyphennames={nohyphenation},
+  fontsetup=true
+}
 
 %\def\captionsdivehi{%
 %   \def\refname{<++>}%
@@ -34,34 +34,6 @@
 %   \def\glossaryname{<++>}%
 %   }
 %\def\datedivehi{\def\today{<++>}}
-
-\def\divehi@language{\language=\l@divehi}
-
-\def\divehi@font{%
-  \@ifundefined{divehifont}{%
-    \@ifundefined{thaanafont}{%
-      \normalfontlatin%
-      \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-      \zf@check@ot@script{thaa}%
-      \if@tempswa
-        \addfontfeature{Script=Thaana}%
-      \else
-        \PackageError{polyglossia}{^^J
-    The current font does not contain the Thaana script!^^J
-    Please define \string\thaanafont\space or \string\divehifont\space with \string\newfontfamily}%
-      \fi
-    }%
-    {\thaanafont}}%
-  {\divehifont}%
-}
-
-\def\selectnormalfontdivehi{%
-   \let\normalfont=\divehi@font%
-   \let\rmfamily=\divehi@font%
-   % TODO add setup to define Sans and Mono fonts if desired
-   \let\sffamily=\divehi@font%
-   \let\ttfamily=\divehi@font%
-   \def\reset@font{\normalfont}}
 
 \def\blockextras@divehi{%
    \let\@@MakeUppercase\MakeUppercase%
