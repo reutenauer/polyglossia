@@ -25,6 +25,9 @@
 }
 
 \def\noturkish@punctuation{%
+   \XeTeXcharclass `\! \z@
+   \XeTeXcharclass `\: \z@
+   \XeTeXcharclass `\= \z@
    \XeTeXinterchartokenstate=0%
 }
 
