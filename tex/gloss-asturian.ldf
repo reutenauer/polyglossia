@@ -3,12 +3,12 @@
 %
 \ProvidesFile{gloss-asturian.ldf}[polyglossia: module for asturian]
 \makeatletter
-\def\asturian@font{\selectfontfamilylatin}
-
-\ifx\l@asturian\@undefined
-   \xpg@nopatterns{asturian}
-   \adddialect\l@asturian\l@nohyphenation
-\fi
+\PolyglossiaSetup{asturian}{
+  hyphennames={asturian,catalan},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  fontsetup=true,
+}
 
 \def\captionsasturian{%
    \def\prefacename{Entamu}%
@@ -38,22 +38,6 @@
     de~xineru\or de~febreru\or de~marzu\or d'abril\or de~mayu\or de~xunu\or
     de~xunetu\or d'agostu\or de~setiembre\or d'ochobre\or de~payares\or
     d'avientu\fi\space de~\number\year}%
-}
-
-\def\asturian@language{\language=\l@asturian}
-
-\setlocalhyphenmins{asturian}{2}{2}%
-
-\def\noextras@asturian{%
-   \nonfrenchspacing%
-}
-
-\def\blockextras@asturian{%
-   \frenchspacing%
-}
-
-\def\inlineextras@asturian{%
-   \frenchspacing%
 }
 
 \endinput
