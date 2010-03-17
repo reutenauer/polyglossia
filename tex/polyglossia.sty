@@ -17,13 +17,24 @@
 %% custom message macros
 \providecommand*{\xpg@warning}[1]{%
    \PackageWarning{polyglossia}%
-   {#1}}      
+   {#1}}
+
 \providecommand*{\xpg@info}[1]{%
    \PackageInfo{polyglossia}%
    {#1\@gobble}} %% the \@gobble is to prevent displaying the line nr
-\providecommand*{\xpg@nopatterns}[1]{%
+
+%TODO change all instances of \xpg@nopatterns in gloss-*.ldf files
+\providecommand*{\xpg@nopatterns@fallback}[2][nohyphenation]{%
+   \xpg@warning{No hyphenation patterns were loaded for `#2'\MessageBreak
+         I will use \string\language=\string\l@ #1\space instead}%
+   \expandafter\adddialect\csname l@#2\expandafter\endcsname\csname l@#1\endcsname\relax}
+
+   \providecommand*{\xpg@nopatterns}[1]{%
    \xpg@warning{No hyphenation patterns were loaded for `#1'\MessageBreak
-         I will use the patterns loaded for \string\language=0\MessageBreak instead}}
+         I will use \string\language=\string\l@nohyphenation\space instead}%
+   %%TODO? \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax
+   }
+
 \def\xpg@ill@value#1#2{%
   \xpg@warning{Illegal value (#1) for #2}}
 
@@ -39,9 +50,11 @@
 %% compatibility with babel
 \let\addto\gappto% gappto is defined in etoolbox
 
-%% Utility macros
-%% they are needed because \MakeUppercase and \MakeLowercase are protected 
-%% and we need to change case when generating csnames for non-latin scripts
+%% == Utility macros ==
+%%   They are needed because \MakeUppercase and \MakeLowercase are protected,
+%%   but we need to change case while defining csnames when setting up fonts for 
+%%   non-Latin scripts. For instance with "Script=Arabic" we need to lowercase 
+%%   "Arabic" to create \arabicfont.
 \def\xpg@uppercasefirst#1{\expandafter\xpg@@uppercasefirst #1}
 \def\xpg@@uppercasefirst#1{%
        \if a#1A\else
@@ -115,15 +128,16 @@
 %% hyphenmins : the hyphenmins for this language (comma-sep list of two integers)
 %% frenchspacing : boolean
 %% frenchindent : boolean
-%% fontsetup : none, custom or auto >> change to boolean key!!!
-%% TODO: localalph = <csname>
+%% fontsetup : boolean
+%% TODO: localalph = {<alph_csname>,<Alph_csname>}
 %% TODO: localdigits = <csname>
 
 \newcommand*\PolyglossiaSetup[2]{%
   %define booleans etoolbox style and set defaults
-  \newtoggle{#1@RL}\togglefalse{#1@RL}%
-  \newtoggle{#1@latin}\toggletrue{#1@latin}%
-  \newtoggle{#1@scriptlangequal}% whether lang and script names are same: e.g. Hebrew, Arabic
+  %% TODO ? \providetoggle{#1@setup@done}%
+  \providetoggle{#1@RL}%
+  \providetoggle{#1@latin}\toggletrue{#1@latin}%
+  \providetoggle{#1@scriptlangequal}% whether lang and script names are same: e.g. Hebrew, Arabic
   \providebool{#1@fontsetup}%
   % we initialize these so that we can use \gappto below
   \csgdef{init@extras@#1}{}%
@@ -142,17 +156,11 @@
   %define all keys:
   \xpg@define@keys{#1}%
   \setkeys[xpg@setup]{#1}{#2}%
-  % if l@#1 does not yet exist,
-  % we assign it to nohyphenation
-  % we do this here in case the hyphennames key was omitted
-  \ifcsundef{l@#1}%
-    {\xpg@nopatterns{\csname xpg@languagename@#1\endcsname}%
-     \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}{}%
-  \csdef{#1@language}{\language=\csname l@#1\endcsname}%
   % here we do the fontsetup:
   \ifbool{#1@fontsetup}%
     {\xpg@fontsetup@auto{#1}}%
     {\xpg@info{Skipping automatic font setup for language #1}}%
+  %% TODO? \toggletrue{#1@setup@done}%
 }
 
 \def\xpg@first#1,#2{#1}
@@ -172,7 +180,15 @@
   \define@key[xpg@setup]{#1}{langtag}{%
     \csgdef{xpg@langtag@#1}{##1}}%
   \define@key[xpg@setup]{#1}{hyphennames}[{#1}]{%
-    \docsvlist{##1}}%
+    \docsvlist{##1}%
+    % if l@#1 does not yet exist,
+    % we assign it to nohyphenation
+    % we do this here in case the hyphennames key was omitted
+    \ifcsundef{l@#1}%
+      {\xpg@nopatterns{\csname xpg@languagename@#1\endcsname}%
+       \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}{}%
+    \csdef{#1@language}{\language=\csname l@#1\endcsname}%
+    }%
   \define@choicekey+[xpg@setup]{#1}{direction}[\val\nr]{LR,RL}[LR]%
     {\ifcase\nr\relax
         \togglefalse{#1@RL}%
@@ -211,13 +227,14 @@
 
 \def\xpg@addfontfeature@lang#1#2{% #1 is langtag, #2 is langname
   % Turkish is a special case:
-  \ifstrequal{#2}{Turkish}{\addfontfeature{Language=Turkish}}%
+  \ifstrequal{#2}{Turkish}{\addfontfeature{Language=Turkish}}% fontspec will complain if it fails
   % else not Turkish
   {\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
   \zf@check@ot@lang{#1}%
   \if@tempswa
     \addfontfeature{Language=#2}%
   \fi}}
+
 \def\xpg@addfontfeature@script#1#2{% #1 is scripttag, #2 is scriptname
   \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
   \zf@check@ot@script{#1}%
@@ -541,6 +558,7 @@
       \csuse{date#2}%
       \csuse{#2@numbers}%
       \use@localhyphenmins{#2}%
+      \iftoggle{#2@frenchspacing}{\frenchspacing}{}%
       \csuse{inlineextras@#2}%
       #3}%
      }%
