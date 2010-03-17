@@ -1,10 +1,12 @@
 \ProvidesFile{gloss-interlingua.ldf}[polyglossia: module for interlingua]
 \makeatletter
-
-\ifx\l@interlingua\@undefined%
-   \xpg@nopatterns{Interlingua}%
-   \adddialect\l@interlingua\l@nohyphenation%
-\fi
+\PolyglossiaSetup{interlingua}{
+  hyphennames={interlingua},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  frenchindent=true,
+  fontsetup=true,
+}
 
 \def\captionsinterlingua{%
    \def\refname{Referentias}%
@@ -36,9 +38,5 @@
     julio\or augusto\or septembre\or octobre\or novembre\or
     decembre\fi
     \space \number\year}}
-
-\def\interlingua@language{\language=\l@interlingua}
-
-\setlocalhyphenmins{interlingua}{2}{2}%
 
 \endinput

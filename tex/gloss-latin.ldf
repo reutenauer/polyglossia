@@ -1,11 +1,11 @@
 \ProvidesFile{gloss-latin.ldf}[polyglossia: module for latin]
 \makeatletter
-\def\latin@font{\selectfontfamilylatin}
-
-\ifx\l@latin\@undefined
-   \xpg@nopatterns{latin}
-   \adddialect\l@latin\l@nohyphenation
-\fi
+\PolyglossiaSetup{latin}{
+  hyphennames={latin},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  fontsetup=true,
+}
 
 \def\captionslatin{%
    \def\prefacename{Praefatio}%
@@ -37,21 +37,5 @@
       Julii\or Augusti\or Septembris\or Octobris\or Novembris\or%
       Decembris\fi%
       \space \uppercase\expandafter{\romannumeral\year}}}
-
-\def\latin@language{\language=\l@latin}
-
-\setlocalhyphenmins{latin}{2}{2}%
-
-\def\noextras@latin{%
-   \nonfrenchspacing%
-}
-
-\def\blockextras@latin{%
-   \frenchspacing%
-}
-
-\def\inlineextras@latin{%
-   \frenchspacing%
-}
 
 \endinput

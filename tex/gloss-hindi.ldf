@@ -3,15 +3,27 @@
 % TODO: add option for velthuis transliteration with link to
 % Velthuis Devanagari project: http://devnag.sarovar.org.
 \makeatletter
+\PolyglossiaSetup{hindi}{
+  script=Devanagari,
+  scripttag=deva,
+  langtag=HIN,
+%%  hyphennames={hindi,!sanskrit},
+  fontsetup=true
+  %TODO localalph={xxx@alph,xxx@Alph}
+}
 
 \ifx\l@hindi\@undefined%
   \ifx\l@sanskrit\@undefined%
     \xpg@nopatterns{Hindi}%
     \adddialect\l@hindi\l@nohyphenation%
   \else
-    \let\l@hindi\l@sanskrit%
+    \xpg@warning{No hyphenation patterns were loaded for Hindi\MessageBreak
+    I will use the patterns for Sanskrit instead}
+    \adddialect\l@hindi\l@sanskrit%
   \fi
 \fi
+
+\def\hindi@language{\language=\l@hindi}
 
 \def\captionshindi{%
      \def\abstractname{सारांश}%
@@ -55,39 +67,6 @@
      दिसम्बर\fi
      \space\number\year}%
 }
-
-\def\hindi@language{\language=\l@hindi}
-
-\def\hindi@font{%
-  \@ifundefined{hindifont}{%
-    \normalfontlatin%
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-    \@ifundefined{devanagarifont}{%
-      \zf@check@ot@script{deva}%
-      \if@tempswa%
-        \addfontfeature{Script=Devanagari}%
-      \else%
-        \PackageError{polyglossia}{^^J
-    The current font does not contain the Devanagari script!^^J
-    Please define \string\devanagarifont\space or \string\hindifont\space with \string\newfontfamily}%
-      \fi%
-      \zf@check@ot@lang{HIN}%
-      \if@tempswa\addfontfeature{Language=Hindi}\fi%
-    }%
-    {\devanagarifont%
-    \zf@check@ot@lang{HIN}%
-    \if@tempswa\addfontfeature{Language=Hindi}\fi%
-    }}%
-  {\hindifont}%
-}
-
-\def\selectnormalfonthindi{%
-   \let\normalfont=\hindi@font%
-   \let\rmfamily=\hindi@font%
-   % TODO add setup to define Sans and Mono fonts if desired
-   \let\sffamily=\hindi@font%
-   \let\ttfamily=\hindi@font%
-   \def\reset@font{\normalfont}}
 
 \def\blockextras@hindi{%
    \let\@@MakeUppercase\MakeUppercase%

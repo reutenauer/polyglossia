@@ -1,11 +1,10 @@
 \ProvidesFile{gloss-latvian.ldf}[polyglossia: module for latvian]
 \makeatletter
-\def\latvian@font{\selectfontfamilylatin}
-
-\ifx\l@latvian\@undefined
-   \xpg@nopatterns{Latvian}
-   \adddialect\l@latvian\l@nohyphenation\relax
-\fi
+\PolyglossiaSetup{latvian}{
+  hyphennames={latvian},
+  hyphenmins={2,2},
+  fontsetup=true,
+}
 
 \def\captionslatvian{%
    \def\prefacename{Priekšvārds}%
@@ -38,9 +37,5 @@
       aprīlī\or maijā\or jūnijā\or%
       jūlijā\or augustā\or septembrī\or%
       oktobrī\or novembrī\or decembrī\fi}}
-
-\def\latvian@language{\language=\l@latvian}
-
-\setlocalhyphenmins{latvian}{2}{2}%
 
 \endinput

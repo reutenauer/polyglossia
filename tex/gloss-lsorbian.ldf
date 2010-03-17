@@ -1,18 +1,10 @@
 \ProvidesFile{gloss-lsorbian.ldf}[polyglossia: module for lower sorbian]
 \makeatletter
-\def\lsorbian@font{\selectfontfamilylatin}
-
-\ifx\l@lowersorbian\@undefined
-  \ifx\l@lsorbian\@undefined
-    \xpg@nopatterns{Lsorbian}
-    \adddialect\l@lsorbian\z@
-    \let\l@lowersorbian\l@lsorbian
-  \else
-    \let\l@lowersorbian\l@lsorbian
-  \fi
-\else
-  \let\l@lsorbian\l@lowersorbian
-\fi
+\PolyglossiaSetup{lsorbian}{
+  hyphennames={lsorbian,lowersorbian,Lsorbian},
+  hyphenmins={2,2},
+  fontsetup=true,
+}
 
 \def\captionslsorbian{%
    \def\refname{Referency}%
@@ -50,9 +42,5 @@
     žnjeńca\or požnjeńca\or winowca\or nazymnika\or 
     godownika\fi\space \number\year}}%
     }
-
-\def\lsorbian@language{\language=\l@lsorbian}
-
-\setlocalhyphenmins{lsorbian}{2}{2}%
 
 \endinput

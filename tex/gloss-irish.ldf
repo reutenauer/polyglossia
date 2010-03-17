@@ -1,11 +1,10 @@
 \ProvidesFile{gloss-irish.ldf}[polyglossia: module for irish]
 \makeatletter
-\def\irish@font{\selectfontfamilylatin}
-
-\ifx\l@irish\@undefined%
-   \xpg@nopatterns{Irish}%
-   \adddialect\l@irish\l@nohyphenation%
-\fi
+\PolyglossiaSetup{irish}{
+  hyphennames={irish},
+  hyphenmins={2,2},
+  fontsetup=true,
+}
 
 \def\captionsirish{%
    \def\refname{Tagairtí}%
@@ -40,9 +39,5 @@
     Meán Fómhair\or Deireadh Fómhair\or
     Mí na Samhna\or Mí na Nollag\fi
     \space \number\year}}
-
-\def\irish@language{\language=\l@irish}
-
-\setlocalhyphenmins{irish}{2}{2}%
 
 \endinput

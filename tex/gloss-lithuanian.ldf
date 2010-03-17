@@ -1,36 +1,35 @@
 % Translated by Paulius Sladkevičius <komsas@gmail.com>
 
 \ProvidesFile{gloss-lithuanian.ldf}[polyglossia: module for lithuanian]
-\makeatletter
-
-\ifx\l@lithuanian\@undefined%
-   \xpg@nopatterns{Lithuanian}%
-   \adddialect\l@lithuanian\l@nohyphenation\relax
-\fi
+\PolyglossiaSetup{lithuanian}{
+  hyphennames={lithuanian},
+  hyphenmins={2,2},
+  fontsetup=true,
+}
 
 \def\captionslithuanian{%
-   \def\refname{\textlithuanian{Literatūra}}%
-   \def\abstractname{\textlithuanian{Santrauka}}%
-   \def\bibname{\textlithuanian{Literatūra}}%
-   \def\prefacename{\textlithuanian{Pratarmė}}%
-   \def\chaptername{\textlithuanian{Skyrius}}%
-   \def\appendixname{\textlithuanian{Priedas}}%
-   \def\contentsname{\textlithuanian{Turinys}}%
-   \def\listfigurename{\textlithuanian{Iliustracijų sąrašas}}%
-   \def\listtablename{\textlithuanian{Lentelių sąrašas}}%
-   \def\indexname{\textlithuanian{Rodyklė}}%
-   \def\figurename{\textlithuanian{Pav.}}%
-   \def\tablename{\textlithuanian{Lentelė}}%
-   %\def\thepart{\textlithuanian{}}% Roman numerals are fine
-   \def\partname{\textlithuanian{Dalis}}%
-   \def\pagename{\textlithuanian{Puslapis}}%
-   \def\seename{\textlithuanian{žiūrėk}}%
-   \def\alsoname{\textlithuanian{tai pat}}%
-   \def\enclname{\textlithuanian{Įdėta}}%
-   \def\ccname{\textlithuanian{Kopijos}}%
-   \def\headtoname{\textlithuanian{Kam}}%
-   \def\proofname{\textlithuanian{Įrodymas}}%
-   \def\glossaryname{\textlithuanian{Terminų žodynas}}%
+   \def\refname{Literatūra}%
+   \def\abstractname{Santrauka}%
+   \def\bibname{Literatūra}%
+   \def\prefacename{Pratarmė}%
+   \def\chaptername{Skyrius}%
+   \def\appendixname{Priedas}%
+   \def\contentsname{Turinys}%
+   \def\listfigurename{Iliustracijų sąrašas}%
+   \def\listtablename{Lentelių sąrašas}%
+   \def\indexname{Rodyklė}%
+   \def\figurename{Pav.}%
+   \def\tablename{Lentelė}%
+   %\def\thepart{}% Roman numerals are fine
+   \def\partname{Dalis}%
+   \def\pagename{Puslapis}%
+   \def\seename{žiūrėk}%
+   \def\alsoname{tai pat}%
+   \def\enclname{Įdėta}%
+   \def\ccname{Kopijos}%
+   \def\headtoname{Kam}%
+   \def\proofname{Įrodymas}%
+   \def\glossaryname{Terminų žodynas}%
    }
 \def\datelithuanian{%
    \def\lithuanianmonth{\ifcase\month\or%
@@ -46,22 +45,7 @@
       spalio\or% Oct
       lapkričio\or% Nov
       gruodžio% Dec
-      \fi}
-   \def\today{\textlithuanian{\number\year~m.~\lithuanianmonth~\number\day~d.}}%
+      \fi}%
+   \def\today{\number\year~m.~\lithuanianmonth~\number\day~d.}%
    }
-
-\def\lithuanian@font{\selectfontfamilylatin} % <== if the script is Latin
-
-\def\lithuanian@language{\protect\language=\l@lithuanian}
-
-\setlocalhyphenmins{lithuanian}{2}{2}%
-
-\def\noextras@lithuanian{%
-   }
-
-\def\blockextras@lithuanian{%
-   }
-
-\def\inlineextras@lithuanian{%
-   }
-
+\endinput

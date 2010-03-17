@@ -121,6 +121,7 @@
 %% options currently available:
 %% language : the name of the language (as understood by fontspec)
 %% hyphennames : the different hyphenation patterns to try (comma separated list)
+%%%   TODO: if pattern is prefixed by !, then it should be loaded as a fallback, with \xpg@nopatterns@fallback - i.e. with a warning. 
 %% script : the name of the script (as understood by fontspec) – default is Latin
 %% direction : the direction of the script: LR or RL
 %% scripttag : the OpenType tag for the script
@@ -330,9 +331,11 @@
       }}%
   \endgroup
 }
+
 %%% END OF PolyglossiaSetup
 
 %% ensure localization of \markright and \markboth commands
+%TODO change this to a boolean for consistency?
 \def\opt@enabled{on}
 \def\opt@disabled{off}
 \define@key{polyglossia}{localmarks}[on]{%

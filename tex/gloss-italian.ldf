@@ -1,11 +1,12 @@
 \ProvidesFile{gloss-italian.ldf}[polyglossia: module for italian]
 \makeatletter
-\def\italian@font{\selectfontfamilylatin}
-
-\ifx\l@italian\@undefined
-   \xpg@nopatterns{Italian}
-   \adddialect\l@italian\l@nohyphenation
-\fi
+\PolyglossiaSetup{italian}{
+  hyphennames={italian},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  frenchindent=true,
+  fontsetup=true,
+}
 
 \def\captionsitalian{%
   \def\prefacename{Prefazione}%
@@ -34,21 +35,15 @@
    \def\today{\number\day~\ifcase\month\or
     gennaio\or febbraio\or marzo\or aprile\or maggio\or giugno\or
     luglio\or agosto\or settembre\or ottobre\or novembre\or
-    dicembre\fi\space \number\year}
-}
-
-\def\italian@language{\language=\l@italian}
-
-\setlocalhyphenmins{italian}{2}{2}%
+    dicembre\fi\space \number\year}}
 
 \def\noextras@italian{%
    \lccode"2019=0%
-   \nofrench@indent}
+   }
 
 \def\blockextras@italian{%
    \lccode"2019="2019
    %TODO ? \clubpenalty3000\widowpenalty3000\finalhyphendemerits50000000 << in Babel
-   \french@indent%
    }
 
 \def\inlineextras@italian{%
