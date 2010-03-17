@@ -1,11 +1,11 @@
 \ProvidesFile{gloss-romanian.ldf}[polyglossia: module for romanian]
 \makeatletter
-\def\romanian@font{\selectfontfamilylatin}%TODO\addfontfeature{Language=Romanian}
 
-\ifx\l@romanian\@undefined%
-   \xpg@nopatterns{Romanian}%
-   \adddialect\l@romanian\l@nohyphenation%
-\fi
+\PolyglossiaSetup{romanian}{
+  hyphennames={romanian},
+  hyphenmins={2,2},
+  fontsetup=true,
+}
 
 \def\captionsromanian{%
    \def\refname{Bibliografie}%
@@ -31,16 +31,13 @@
    \def\proofname{Demonstrație}%
    \def\glossaryname{Glosar}%
    }
-\def\dateromanian{%   
-   \def\today{\number\day~\ifcase\month\or
+
+\def\dateromanian{%
+  \def\today{\number\day~\ifcase\month\or
     ianuarie\or februarie\or martie\or aprilie\or mai\or
     iunie\or iulie\or august\or septembrie\or octombrie\or
     noiembrie\or decembrie\fi
     \space \number\year}%
-    }
-
-\def\romanian@language{\language=\l@romanian}
-
-\setlocalhyphenmins{romanian}{2}{2}%
+  }
 
 \endinput

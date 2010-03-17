@@ -3,12 +3,14 @@
 \RequirePackage{arabicnumbers}
 \makeatletter
 
-\ifx\l@syriac\@undefined
-  %\xpg@nopatterns{Syriac}%
-  \adddialect\l@syriac\l@nohyphenation
-\fi
-
-\def\syriac@RL{\relax}
+\PolyglossiaSetup{syriac}{
+  script=Syriac,
+  scripttag=syrc,
+  direction=RL,
+  hyphennames={syriac,nohyphenation},
+  fontsetup=true,
+  %TODO localalph
+}
 
 \def\syriacnumber#1{\@syriacnumber{#1}}%
 
@@ -29,29 +31,6 @@
 
 \setkeys{syriac}{numerals}
 	
-\def\syriac@font{%
-  \@ifundefined{syriacfont}{%
-    \normalfontlatin%
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-    \zf@check@ot@script{syrc}%
-    \if@tempswa
-      \addfontfeature{Script=Syriac}%
-    \else
-      \PackageError{polyglossia}{^^J
-    The current font does not contain the Syriac script!^^J
-    Please define \string\syriacfont\space with \string\newfontfamily}%
-    \fi}%
-  {\syriacfont}%
-}
-
-\def\selectnormalfontsyriac{%
-   \let\normalfont=\syriac@font%
-   \let\rmfamily=\syriac@font%
-   % TODO add setup to define Sans and Mono Syriac fonts if desired
-   \let\sffamily=\syriac@font%
-   \let\ttfamily=\syriac@font%
-   \def\reset@font{\normalfont}}
-
 %\define@key{polyglossia}{syriaclocale}[default]{%
 %	\def\@syriac@locale{#1}}
 %
@@ -168,8 +147,6 @@
   \let\@arabic\orig@arabic%
   \renewcommand\thefootnote{\protect\number{\c@footnote}}%
   }
-
-\def\syriac@language{\language=\l@syriac}
 
 \def\blockextras@syriac{%
    \let\@@MakeUppercase\MakeUppercase%

@@ -1,38 +1,39 @@
 \ProvidesFile{gloss-swedish.ldf}[polyglossia: module for swedish]
-\makeatletter
-\def\swedish@font{\selectfontfamilylatin}
 
-\ifx\l@swedish\@undefined%
-   \xpg@nopatterns{Swedish}%
-   \adddialect\l@swedish\l@nohyphenation%
-\fi
+\PolyglossiaSetup{swedish}{
+  hyphennames={swedish},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  fontsetup=true,
+}
 
 \def\captionsswedish{%
-   \def\refname{Referenser}%
-   \def\abstractname{Sammanfattning}%
-   \def\bibname{Litteraturförteckning}%
-   \def\prefacename{Förord}%
-   \def\chaptername{Kapitel}%
-   \def\appendixname{Bilaga}%
-   \def\contentsname{Innehåll}%
-   \def\listfigurename{Figurer}%
-   \def\listtablename{Tabeller}%
-   \def\indexname{Sakregister}%
-   \def\figurename{Figur}%
-   \def\tablename{Tabell}%
-   %\def\thepart{}%
-   \def\partname{Del}%
-   \def\pagename{Sida}%
-   \def\seename{se}%
-   \def\alsoname{se även}%
-   \def\enclname{Bil.}%
-   \def\ccname{Kopia för kännedom}%
-   \def\headtoname{Till}%
-   \def\proofname{Bevis}%
-   \def\glossaryname{Ordlista}%
-   }
+  \def\refname{Referenser}%
+  \def\abstractname{Sammanfattning}%
+  \def\bibname{Litteraturförteckning}%
+  \def\prefacename{Förord}%
+  \def\chaptername{Kapitel}%
+  \def\appendixname{Bilaga}%
+  \def\contentsname{Innehåll}%
+  \def\listfigurename{Figurer}%
+  \def\listtablename{Tabeller}%
+  \def\indexname{Sakregister}%
+  \def\figurename{Figur}%
+  \def\tablename{Tabell}%
+  %\def\thepart{}%
+  \def\partname{Del}%
+  \def\pagename{Sida}%
+  \def\seename{se}%
+  \def\alsoname{se även}%
+  \def\enclname{Bil.}%
+  \def\ccname{Kopia för kännedom}%
+  \def\headtoname{Till}%
+  \def\proofname{Bevis}%
+  \def\glossaryname{Ordlista}%
+  }
+
 \def\dateswedish{%   
-   \def\today{%
+  \def\today{%
     \number\day~\ifcase\month\or
     januari\or februari\or mars\or april\or maj\or juni\or
     juli\or augusti\or september\or oktober\or november\or
@@ -43,21 +44,5 @@
     \def\datesdmy{%
      \def\today{\number\day/\number\month\space\number\year}}%
     }
-
-\def\swedish@language{\language=\l@swedish}
-
-\setlocalhyphenmins{swedish}{2}{2}%
-
-\def\noextras@swedish{%
-   \nonfrenchspacing%
-   }
-
-\def\blockextras@swedish{%
-   \frenchspacing%
-   }
-
-\def\inlineextras@swedish{%
-   \frenchspacing%
-   }
 
 \endinput

@@ -1,11 +1,11 @@
 \ProvidesFile{gloss-slovak.ldf}[polyglossia: module for slovak]
 \makeatletter
-\def\slovak@font{\selectfontfamilylatin}
 
-\ifx\l@slovak\@undefined%
-   \xpg@nopatterns{Slovak}%
-   \adddialect\l@slovak\l@nohyphenation%
-\fi
+\PolyglossiaSetup{slovak}{
+  hyphennames={slovak},
+  hyphenmins={2,2},
+  fontsetup=true,
+}
 
 \def\captionsslovak{%
    \def\refname{Referencie}%
@@ -31,16 +31,13 @@
    \def\proofname{Dôkaz}%
    \def\glossaryname{Slovník}%
    }
+
 \def\dateslovak{%   
-   \def\today{\number\day.~\ifcase\month\or
+  \def\today{\number\day.~\ifcase\month\or
     januára\or februára\or marca\or apríla\or mája\or
     júna\or júla\or augusta\or septembra\or októbra\or
     novembra\or decembra\fi
     \space \number\year}%
-    }
-
-\def\slovak@language{\language=\l@slovak}
-
-\setlocalhyphenmins{slovak}{2}{2}%
+  }
 
 \endinput

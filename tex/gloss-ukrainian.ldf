@@ -11,6 +11,7 @@
   hyphenmins={2,2},
   frenchspacing=true,
   fontsetup=true
+  %TODO localalph
 }
 
 \def\captionsukrainian{%

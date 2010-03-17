@@ -9,6 +9,14 @@
 %%%%              Thai Linux Working Group
 %%%%              http://linux.thai.net/
 %%%%
+\PolyglossiaSetup{thai}{
+  script=Thai,
+  scripttag=thai,
+  hyphennames={nohyphenation},
+  fontsetup=true
+  %TODO localalph={xxx@alph,xxx@Alph}
+  %TODO localdigits=thainumber
+}
 
 \newif\if@thai@numerals
 \def\tmp@thai{thai}
@@ -118,30 +126,6 @@
    \renewcommand\thefootnote{\protect\number{\c@footnote}}%
    }
 
-\def\thai@font{%
-  \@ifundefined{thaifont}{%
-    \normalfontlatin%
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-    \zf@check@ot@script{thai}%
-    \if@tempswa
-      \addfontfeature{Script=Thai}%
-    \else
-      \PackageError{polyglossia}{^^J
-    The current font does not contain the Thai script!^^J
-    Please define \string\thaifont\space with \string\newfontfamily}%
-    \fi}%
-  {\thaifont}%
-}
-
-\def\selectnormalfontthai{%
-   \let\normalfont=\thai@font%
-   \let\rmfamily=\thai@font%
-   \let\sffamily=\thai@font%
-   \let\ttfamily=\thai@font%
-   \def\reset@font{\normalfont}}
-
-\def\thai@language{\language=\l@nohyphenation}
-
 \def\blockextras@thai{%
    \let\orig@baselinestrech\baselinestretch%
    \renewcommand{\baselinestretch}{1.2}%
@@ -149,6 +133,7 @@
 \def\noblockextras@thai{%
    \let\baselinestrech\orig@baselinestretch%
    }
+
 \endinput
 
 %TODO ?

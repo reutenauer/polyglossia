@@ -131,7 +131,7 @@
 %% frenchindent : boolean
 %% fontsetup : boolean
 %% TODO: localalph = {<alph_csname>,<Alph_csname>}
-%% TODO: localdigits = <csname>
+%% TODO: localnumber = <csname>
 
 \newcommand*\PolyglossiaSetup[2]{%
   %define booleans etoolbox style and set defaults
@@ -215,6 +215,12 @@
 %    {\xpg@fontsetup{\val}{#1}}%
 %    {\PackageWarning{polyglossia}{Invalid value \val\space for key "fontsetup" in module "#1"}}%
   \define@boolkey[xpg@setup]{#1}[#1@]{fontsetup}[true]{}%
+  %TODO assign csnames corr. to localized alph and Alph
+  %  \define@key[xpg@setup]{#1}{localalph}[{#1@alph,#1@Alph}]{%
+  %  \cslet{xpg@localalph@#1}{\expandafter\csname\xpg@first##1\endcsname}%
+  %  \cslet{xpg@localAlph@#1}{\expandafter\csname\xpg@second##1\endcsname}%
+  %}%
+  %TODO same thing with localdigits
 }
 
 %\def\xpg@fontsetup#1{\xpg@csifdef@warn{xpg@fontsetup@#1}}

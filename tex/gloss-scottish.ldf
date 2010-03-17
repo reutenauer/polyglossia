@@ -1,11 +1,11 @@
 \ProvidesFile{gloss-scottish.ldf}[polyglossia: module for scottish]
 \makeatletter
-\def\scottish@font{\selectfontfamilylatin}
 
-\ifx\l@scottish\@undefined%
-   \xpg@nopatterns{Scottish}%
-   \adddialect\l@scottish\l@nohyphenation%
-\fi
+\PolyglossiaSetup{scottish}{
+  hyphennames={scottish},
+  hyphenmins={2,2},
+  fontsetup=true,
+}
 
 \def\captionsscottish{%
    \def\refname{Iomraidh}%
@@ -31,6 +31,7 @@
    \def\proofname{Proof}%    <-- needs translation 
    \def\glossaryname{Glossary}%    <-- needs translation
    }
+
 \def\datescottish{%
    \def\today{%
     \number\day\space \ifcase\month\or
@@ -40,9 +41,5 @@
     an t-Samhainn\or an Dubhlachd\fi
     \space \number\year}%
     }
-
-\def\scottish@language{\language=\l@scottish}
-
-\setlocalhyphenmins{scottish}{2}{2}%
 
 \endinput

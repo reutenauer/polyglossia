@@ -1,49 +1,41 @@
 \ProvidesFile{gloss-portuges.ldf}[polyglossia: module for portuguese]
 \makeatletter
-\def\portuges@font{\selectfontfamilylatin}
-
-\ifx\l@portuges\@undefined
-  \ifx\l@portuguese\@undefined
-    \xpg@nopatterns{Portuguese}
-    \adddialect\l@portuges\l@nohyphenation
-  \else
-    \let\l@portuges\l@portuguese
-  \fi
-\fi
+\PolyglossiaSetup{portuges}{
+  hyphennames={portuges,portuguese},
+  hyphenmins={2,3},
+  fontsetup=true,
+}
 
 \def\captionsportuges{%
-   \def\refname{Referências}%
-   \def\abstractname{Resumo}%
-   \def\bibname{Bibliografia}%
-   \def\prefacename{Prefácio}%
-   \def\chaptername{Capítulo}%
-   \def\appendixname{Apêndice}%
-   \def\contentsname{Conteúdo}%
-   \def\listfigurename{Lista de Figuras}%
-   \def\listtablename{Lista de Tabelas}%
-   \def\indexname{Índice}%
-   \def\figurename{Figura}%
-   \def\tablename{Tabela}%
-   %\def\thepart{}%
-   \def\partname{Parte}%
-   \def\pagename{Página}%
-   \def\seename{ver}%
-   \def\alsoname{ver também}%
-   \def\enclname{Anexo}%
-   \def\ccname{Com cópia a}%
-   \def\headtoname{Para}%
-   \def\proofname{Demonstração}%
-   \def\glossaryname{Glossário}%
-   }
+  \def\refname{Referências}%
+  \def\abstractname{Resumo}%
+  \def\bibname{Bibliografia}%
+  \def\prefacename{Prefácio}%
+  \def\chaptername{Capítulo}%
+  \def\appendixname{Apêndice}%
+  \def\contentsname{Conteúdo}%
+  \def\listfigurename{Lista de Figuras}%
+  \def\listtablename{Lista de Tabelas}%
+  \def\indexname{Índice}%
+  \def\figurename{Figura}%
+  \def\tablename{Tabela}%
+  %\def\thepart{}%
+  \def\partname{Parte}%
+  \def\pagename{Página}%
+  \def\seename{ver}%
+  \def\alsoname{ver também}%
+  \def\enclname{Anexo}%
+  \def\ccname{Com cópia a}%
+  \def\headtoname{Para}%
+  \def\proofname{Demonstração}%
+  \def\glossaryname{Glossário}%
+  }
+
 \def\dateportuges{%   
-   \def\today{\number\day\space de\space\ifcase\month\or
-      Janeiro\or Fevereiro\or Março\or Abril\or Maio\or Junho\or
-      Julho\or Agosto\or Setembro\or Outubro\or Novembro\or Dezembro%
-      \fi\space de\space\number\year}%
-      }
+  \def\today{\number\day\space de\space\ifcase\month\or
+    Janeiro\or Fevereiro\or Março\or Abril\or Maio\or Junho\or
+    Julho\or Agosto\or Setembro\or Outubro\or Novembro\or Dezembro\fi
+    \space de\space\number\year}%
+  }
      
-\def\portuges@language{\language=\l@portuges}
-
-%\setlocalhyphenmins{portuges}{2}{3}% this is the default
-
 \endinput

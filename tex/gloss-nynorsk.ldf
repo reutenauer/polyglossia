@@ -1,11 +1,11 @@
 \ProvidesFile{gloss-nynorsk.ldf}[polyglossia: module for norwegian (Nynorsk)]
 \makeatletter
-\def\nynorsk@font{\selectfontfamilylatin}
-
-\ifx\l@nynorsk\@undefined%
-   \xpg@nopatterns{Nynorsk}%
-   \adddialect\l@nynorsk\l@nohyphenation%
-\fi
+\PolyglossiaSetup{nynorsk}{
+  hyphennames={nynorsk},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  fontsetup=true,
+}
 
 \def\captionsnynorsk{%
    \def\refname{Referansar}%
@@ -31,28 +31,13 @@
    \def\proofname{Bevis}%
    \def\glossaryname{Ordliste}%
    }
+
 \def\datenynorsk{%   
    \def\today{\number\day.~\ifcase\month\or
     januar\or februar\or mars\or april\or mai\or juni\or
     juli\or august\or september\or oktober\or november\or desember
     \fi\space\number\year}%
     }
-
-\def\norsk@language{\language=\l@nynorsk}
-
-\setlocalhyphenmins{nynorsk}{2}{2}%
-
-\def\noextras@nynorsk{%
-   \nonfrenchspacing%
-   }
-
-\def\blockextras@nynorsk{%
-   \frenchspacing%
-   }
-
-\def\inlineextras@nynorsk{%
-   \frenchspacing%
-   }
 
 \endinput
 

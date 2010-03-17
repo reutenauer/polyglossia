@@ -3,22 +3,38 @@
 %TODO split into gloss-serbiancyr.ldf and gloss-serbianlat.ldf
 %% load these automatically from polyglossia.sty according to the script option ??
 %% same thing for all languages that have a "script" key !
+%% BETTER APPROACH: see gloss-sanskrit!
 
-%TODO eventually there will be patterns for Serbian-Latin as well as Serbian-Cyrillic
-\ifx\l@serbian\@undefined%
-   \xpg@nopatterns{Serbian}%
-   \adddialect\l@serbian\l@nohyphenation%
-\fi
+\PolyglossiaSetup{serbian}{
+  langtag=SRB,
+  hyphennames={serbian},
+  hyphenmins={2,2},
+  frenchindent=true,
+  fontsetup=false
+  %TODO localalph
+}
 
 \newif\if@serbian@cyr
-\def\tmp@cyrillic{cyrillic}
-\define@key{serbian}{script}[cyrillic]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@cyrillic\@serbian@cyrtrue\else%
-    \@serbian@cyrfalse
-  \fi}
 
-\setkeys{serbian}{script}
+\define@key{serbian}{Script}[Cyrillic]{% TODO FIXDOC: keyname is CHANGED: script -> Script !!! 
+  \ifstrequal{#1}{Cyrillic}%
+    {\@serbian@cyrtrue
+     \setkeys[xpg@setup]{serbian}{script=Cyrillic}%
+     \def\xpg@scripttag@serbian{cyrl}%
+     \xpg@fontsetup@nonlatin{serbian}%
+    }%
+    {\ifstrequal{#1}{Latin}%
+      {\@serbian@cyrfalse
+      \xpg@fontsetup@latin{serbian}%
+      %TODO \def\serbian@language{\language=\l@serbianlat}% 
+      % or should we use Croatian patterns as a fallback for the time being???
+      }%
+      {\xpg@error{Unknown script `#1' for Serbian language\MessageBreak
+      Valid values are "Cyrillic" and "Latin"}}%
+    }
+}
+
+\setkeys{serbian}{Script}
 
 \def\captionsserbian{%
    \if@serbian@cyr\captionsserbian@cyr\else\captionsserbian@lat\fi%
@@ -90,53 +106,6 @@
     децембар\fi \space \number\year}%
     }
 
-\def\serbian@font@cyr{%
-  \@ifundefined{serbianfont}{%
-    \@ifundefined{cyrillicfont}{%
-      \normalfontlatin%
-      \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-      \zf@check@ot@script{cyrl}%
-      \if@tempswa
-        \addfontfeature{Script=Cyrillic}%
-      \else
-        \PackageError{polyglossia}{^^J
-    The current font does not contain the Cyrillic script!^^J
-    Please define \string\cyrillicfont\space or \string\serbianfont\space with \string\newfontfamily}%
-      \fi%
-      \zf@check@ot@lang{SRB}%
-      \if@tempswa\addfontfeature{Language=Serbian}\fi}%
-    {\cyrillicfont%
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-    \zf@check@ot@lang{SRB}%
-    \if@tempswa\addfontfeature{Language=Serbian}\fi}%
-  }%
-  {\serbianfont}%
-}
-
-\def\serbian@font@lat{%
-  \@ifundefined{serbianfontlatin}{%
-    \normalfontlatin%
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-    \zf@check@ot@lang{SRB}%
-    \if@tempswa\addfontfeature{Language=Serbian}\fi}%
-  {\serbianfontlatin}%
-}
-
-\def\serbian@font{%
-   \if@serbian@cyr\serbian@font@cyr\else\serbian@font@lat\fi}
-
-%TODO when available load latin hyphenation patterns as well!
-\def\serbian@language{\language=\l@serbian}
-
-\setlocalhyphenmins{serbian}{2}{2}%
-
-\def\noextras@serbian{%
-   \nofrench@indent%
-   }
-
-\def\blockextras@serbian{%
-   \french@indent%
-   }
 \endinput
 % TODO ? stuff from babel
 

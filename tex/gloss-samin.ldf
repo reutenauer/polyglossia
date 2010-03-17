@@ -1,11 +1,11 @@
 \ProvidesFile{gloss-samin.ldf}[polyglossia: module for samin]
 \makeatletter
-\def\samin@font{\selectfontfamilylatin}
 
-\ifx\l@samin\@undefined%
-   \xpg@nopatterns{Samin}%
-   \adddialect\l@samin\l@nohyphenation%
-\fi
+\PolyglossiaSetup{samin}{
+  hyphennames={samin},
+  hyphenmins={2,2},
+  fontsetup=true,
+}
 
 \def\captionssamin{%
    \def\refname{Čujuhusat}%
@@ -31,8 +31,8 @@
    \def\proofname{Duođaštus}%
    \def\glossaryname{Sátnelistu}%
    }
-\def\datesamin{%   
-   \def\today{\ifcase\month\or
+\def\datesamin{%
+  \def\today{\ifcase\month\or
     ođđajagemánu\or
     guovvamánu\or
     njukčamánu\or
@@ -46,10 +46,6 @@
     skábmamánu\or
     juovlamánu\fi
     \space\number\day.~b.\space\number\year}%
-    }
-
-\def\samin@language{\language=\l@samin}
-
-\setlocalhyphenmins{samin}{2}{2}%
+  }
 
 \endinput

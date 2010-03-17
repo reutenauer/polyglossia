@@ -1,12 +1,10 @@
 \ProvidesFile{gloss-slovenian.ldf}[polyglossia: module for slovenian]
-\makeatletter
-\def\slovenian@font{\selectfontfamilylatin}
 
-\ifx\l@slovenian\@undefined%
- \ifx\l@slovene\@undefined%
-   \xpg@nopatterns{Slovenian}%
-   \adddialect\l@slovenian\l@nohyphenation%
-\fi\fi
+\PolyglossiaSetup{slovenian}{
+  hyphennames={slovenian,slovene},
+  hyphenmins={2,2},
+  fontsetup=true,
+}
 
 \def\captionsslovenian{%
    \def\refname{Literatura}%
@@ -32,15 +30,12 @@
    \def\proofname{Dokaz}%
    \def\glossaryname{Glosar}% <-- CHECK!
    }
+
 \def\dateslovenian{%   
-   \def\today{\number\day.~\ifcase\month\or
+  \def\today{\number\day.~\ifcase\month\or
     januar\or februar\or marec\or april\or maj\or junij\or
     julij\or avgust\or september\or oktober\or november\or december\fi
     \space \number\year}%
-    }
-
-\def\slovenian@language{\language=\l@slovenian}
-
-\setlocalhyphenmins{slovenian}{2}{2}%
+  }
 
 \endinput

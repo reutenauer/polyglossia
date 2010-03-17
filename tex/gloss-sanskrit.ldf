@@ -1,26 +1,48 @@
 \ProvidesFile{gloss-sanskrit.ldf}[polyglossia: module for sanskrit]
 \makeatletter
 
-\ifx\l@sanskrit\@undefined%
-  \ifx\l@prakrit\@undefined%
-    \xpg@nopatterns{Sanskrit}%
-    \adddialect\l@sanskrit\l@nohyphenation%
-  \else%
-    \let\l@sanskrit=\l@prakrit%
-  \fi%
-\fi
+\PolyglossiaSetup{sanskrit}{
+  langtag=SAN,
+  hyphennames={sanskrit,prakrit},
+  hyphenmins={1,3},
+  frenchspacing=true,
+  fontsetup=false, % will be done below
+}
 
-\def\tmp@deva{Devanagari}
 \define@key{sanskrit}{Script}[Devanagari]{%
-    \gdef\sanskrit@script{#1}}
+  \setkeys[xpg@setup]{sanskrit}{script=#1}%
+  \ifcsdef{fontsetup@sanskrit@#1}%
+    {\csname fontsetup@sanskrit@#1\endcsname}%
+    {\xpg@error{`#1' is not a valid script for Sanskrit}%
+  }%
+}
 
-\setkeys{sanskrit}{Script}
+\def\fontsetup@sanskrit@Devanagari{%
+  \def\xpg@scripttag@sanskrit{deva}%
+  \xpg@fontsetup@nonlatin{sanskrit}}
+\def\fontsetup@sanskrit@Gujarati{%
+  \def\xpg@scripttag@sanskrit{gujr}%
+  \xpg@fontsetup@nonlatin{sanskrit}}
+\def\fontsetup@sanskrit@Malayalam{%
+  \def\xpg@scripttag@sanskrit{mlym}%
+  \xpg@fontsetup@nonlatin{sanskrit}}
+\def\fontsetup@sanskrit@Bengali{%
+  \def\xpg@scripttag@sanskrit{beng}%
+  \xpg@fontsetup@nonlatin{sanskrit}}
+\def\fontsetup@sanskrit@Kannada{%
+  \def\xpg@scripttag@sanskrit{knda}%
+  \xpg@fontsetup@nonlatin{sanskrit}}
+\def\fontsetup@sanskrit@Telugu{%
+  \def\xpg@scripttag@sanskrit{telu}%
+  \xpg@fontsetup@nonlatin{sanskrit}}
+
+\setkeys{sanskrit}{Script} %sets the default for Devanagari
 
 \newXeTeXintercharclass\sanskrit@punctthin % ! ? ; : danda double_danda
+
 \def\sanskrit@punctthinspace{{\unskip\thinspace}}
 
 \def\sanskrit@punctuation{%
-    \frenchspacing%
     \XeTeXinterchartokenstate=1%
     \XeTeXcharclass `\! \sanskrit@punctthin
     \XeTeXcharclass `\? \sanskrit@punctthin
@@ -32,73 +54,14 @@
 }
 
 \def\nosanskrit@punctuation{%
-    \nonfrenchspacing%
+    \XeTeXcharclass `\! \z@
+    \XeTeXcharclass `\? \z@
+    \XeTeXcharclass `\; \z@
+    \XeTeXcharclass `\: \z@
+    \XeTeXcharclass `\। \z@
+    \XeTeXcharclass `\॥ \z@
     \XeTeXinterchartokenstate=0%
 }
-
-%\def\captionssanskrit{%
-%   \def\refname{<++>}%
-%   \def\abstractname{<++>}%
-%   \def\bibname{<++>}%
-%   \def\prefacename{<++>}%
-%   \def\chaptername{<++>}%
-%   \def\appendixname{<++>}%
-%   \def\contentsname{<++>}%
-%   \def\listfigurename{<++>}%
-%   \def\listtablename{<++>}%
-%   \def\indexname{<++>}%
-%   \def\figurename{<++>}%
-%   \def\tablename{<++>}%
-%   \def\thepart{}%
-%   \def\partname{<++>}%
-%   \def\pagename{<++>}%
-%   \def\seename{<++>}%
-%   \def\alsoname{<++>}%
-%   \def\enclname{<++>}%
-%   \def\ccname{<++>}%
-%   \def\headtoname{<++>}%
-%   \def\proofname{<++>}%
-%   \def\glossaryname{<++>}%
-%   \def\today{<++>}}
-
-\def\sanskrit@font{%
-\@ifundefined{sanskritfont}{%
-      \@ifundefined{devanagarifont}{%
-        \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-        \zf@check@ot@script{deva}%
-        \ifx\sanskrit@script\tmp@deva%
-		\if@tempswa%
-		  \addfontfeature{Script=Devanagari}%
-		\else%
-		  \PackageError{polyglossia}{^^J
-		  The current font does not contain the devanagari script!^^J
-		  Please define \string\devanagarifont\space or \string\sanskritfont\space with \string\newfontfamily}%
-		\fi%
-	\else%
-		\addfontfeature{Script=\sanskrit@script}%
-	\fi%
-	\zf@check@ot@lang{SAN}%
-	\if@tempswa\addfontfeature{Language=Sanskrit}\fi%
-	}%
-        {\devanagarifont%
-         \zf@check@ot@lang{SAN}%
-         \if@tempswa\addfontfeature{Language=Sanskrit}\fi%
-	}%
-     }% 
-     {\sanskritfont}%
-}
-
-\def\selectnormalfontsanskrit{%
-   \let\normalfont=\sanskrit@font%
-   \let\rmfamily=\sanskrit@font%
-   % TODO add setup to define Sans and Mono Sanskrit fonts if desired
-   \let\sffamily=\sanskrit@font%
-   \let\ttfamily=\sanskrit@font%
-   \def\reset@font{\normalfont}}
-
-\def\sanskrit@language{\language=\l@sanskrit}
-
-\setlocalhyphenmins{sanskrit}{1}{3}%
 
 \def\noextras@sanskrit{%
    \nosanskrit@punctuation%

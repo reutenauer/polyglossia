@@ -11,6 +11,8 @@
   scripttag=arab,
   hyphennames={nohyphenation},
   fontsetup=true
+  %TODO localalph={abjad,abjad}
+  %TODO localnumber=arabicnumber
 }
 
 \newif\ifeastern@numerals

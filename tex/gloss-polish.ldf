@@ -1,11 +1,11 @@
 \ProvidesFile{gloss-polish.ldf}[polyglossia: module for polish]
 \makeatletter
-\def\polish@font{\selectfontfamilylatin}
-
-\ifx\l@polish\@undefined
-   \xpg@nopatterns{polish}
-   \adddialect\l@polish\l@nohyphenation
-\fi
+\PolyglossiaSetup{polish}{
+  hyphennames={polish},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  fontsetup=true,
+}
 
 \def\captionspolish{%
   \def\prefacename{Przedmowa}%
@@ -29,28 +29,14 @@
   \def\alsoname{Porównaj także}%
   \def\proofname{Dowód}%
   \def\glossaryname{Glossary}% <-- Needs translation
-   }
+  }
+
 \def\datepolish{%
-   \def\today{\ifcase\month\or%
-      stycznia\or lutego\or marca\or kwietnia\or maja\or czerwca\or%
-      lipca\or sierpnia\or września\or października\or%
-      listopada\or grudnia\fi%
-      \space\number\day, \number\year}}
-
-\def\polish@language{\language=\l@polish}
-
-\setlocalhyphenmins{polish}{2}{2}%
-
-\def\noextras@polish{%
-   \nonfrenchspacing%
-}
-
-\def\blockextras@polish{%
-   \frenchspacing%
-}
-
-\def\inlineextras@polish{%
-   \frenchspacing%
-}
+  \def\today{\ifcase\month\or
+      stycznia\or lutego\or marca\or kwietnia\or maja\or czerwca\or
+      lipca\or sierpnia\or września\or października\or
+      listopada\or grudnia\fi
+      \space\number\day, \number\year}%
+  }
 
 \endinput
