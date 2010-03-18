@@ -66,10 +66,7 @@
 \def\@thai@digits#1{%
   \ifx @#1% then terminate
   \else
-    \ifcat0#1%
-      \ifcase #1 ๐\or ๑\or ๒\or ๓\or ๔\or ๕\or ๖\or ๗\or ๘\or ๙\fi
-    \else #1%
-    \fi
+    \ifx0#1๐\else\ifx1#1๑\else\ifx2#1๒\else\ifx3#1๓\else\ifx4#1๔\else\ifx5#1๕\else\ifx6#1๖\else\ifx7#1๗\else\ifx8#1๘\else\ifx9#1๙\else#1\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
     \expandafter\@thai@digits
   \fi
 }
