@@ -20,17 +20,17 @@
    {#1\@gobble}} %% the \@gobble is to prevent displaying the line nr
 \providecommand*{\xpg@nopatterns}[1]{%
    \xpg@warning{No hyphenation patterns were loaded for `#1'\MessageBreak
-         I will use the patterns loaded for \string\language=0\MessageBreak instead}}
+    I will use the patterns for \string\language=\string\l@nohyphenation\space instead}}
 \providecommand*{\xpg@nolang}[1]{%
    \xpg@warning{File gloss-#1.ldf does not exist!^^J
-   I will nevertheless try to use hyphenation patterns for #1.}}%
+    I will nevertheless try to use hyphenation patterns for #1.}}%
       %TODO try at least to load the hyphenation patterns for #1.
 \def\xpg@ill@value#1#2{%
   \xpg@warning{Illegal value (#1) for #2}}
 
 %% use macro if defined, else warn that it is not
 \def\csuse@warn#1{%
-   \ifcsundef{#1}{\PackageWarning{polyglossia}{ \expandafter\string\csname #1\endcsname\space is not defined}}%
+  \ifcsundef{#1}{\xpg@warning{ \expandafter\string\csname #1\endcsname\space is not defined}}%
    {\csname #1\endcsname}}
 
 %% ensure directionality if bidi is loaded, else ignore
