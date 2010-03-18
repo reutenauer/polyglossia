@@ -1,28 +1,21 @@
 \ProvidesPackage{arabicnumbers}
-        [2010/03/04 v0.1 %
+        [2010/03/18 v0.2 %
          Formatting of Arabic and Farsi digits and of Arabic abjad numerals]
 
 \def\arabicdigits#1{\expandafter\@arabic@digits #1@}
 \def\@arabic@digits#1{%
   \ifx @#1% then terminate
   \else
-    \ifcat0#1%
-      \ifcase #1٠\or ١\or ٢\or ٣\or ٤\or٥\or ٦\or ٧\or ٨\or ٩\fi
-    \else #1%
-    \fi
+    \ifx0#1٠\else\ifx1#1١\else\ifx2#1٢\else\ifx3#1٣\else\ifx4#1٤\else\ifx5#1٥\else\ifx6#1٦\else\ifx7#1٧\else\ifx8#1٨\else\ifx9#1٩\else#1\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
     \expandafter\@arabic@digits
- \fi
+  \fi
 }
 
 \def\farsidigits#1{\expandafter\@farsi@digits #1@}
 \def\@farsi@digits#1{%
   \ifx @#1% then terminate
   \else
-    \ifcat0#1%
-      \ifcase #1 ۰\or ۱\or ۲\or ۳\or ۴\or ۵\or ۶\or ۷\or ۸\or ۹\fi
-    \else
-      #1%
-    \fi
+    \ifx0#1۰\else\ifx1#1۱\else\ifx2#1۲\else\ifx3#1۳\else\ifx4#1۴\else\ifx5#1۵\else\ifx6#1۶\else\ifx7#1۷\else\ifx8#1۸\else\ifx9#1۹\else#1\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
     \expandafter\@farsi@digits
   \fi
 }
