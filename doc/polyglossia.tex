@@ -614,23 +614,26 @@ you can do this:
 
 \section{Non-Western decimal digits}
 
-Several scripts have their own versions of the decimal digits commonly called ‘Arabic numerals’.
-Polyglossia can automatically convert from their Western form to their Arabic, 
-Farsi or Thai equivalent. 
+Several scripts have their own versions of the decimal digits commonly called
+‘Arabic numerals’.  With the appropriate language option set, \pkg{polyglossia}
+will automatically convert the output of internal LaTeX counters to their
+localized forms, for instance to display page, chapter and section numbers.
 
-
-In previous versions this conversion was achieved my means of fontmappings.
+In previous versions this conversion was achieved my means of TECKit fontmappings.
 If needed they can be activated with the fontspec option
 ¦Mapping=arabicdigits¦ (or ¦farsidigits¦ or ¦thaidigits¦).
 For instance if \cmd\arabicfont\ is defined with the option ¦Mapping=arabicdigits¦,
 then by typing ¦\textarabic{2010}¦ one will obtain \textarabic{٢٠١٠}.
 
-With version v1.1.1\new{v1.1.1} the same conversion is achieved directly by macros, which
-prevents some problems when the value of counters have to be written and read
-from auxiliary files.\footnote{ %
-  For instance the package \pkg{lastpage} did not work well with polyglossia in situations
+With version v1.1.1\new{v1.1.1} the same conversion is achieved directly by
+simple \TeX\ macros. This prevents some problems that occur when the value of a
+counter has to be written and read from auxiliary files.\footnote{ %
+  For instance the package \pkg{lastpage} did not work with \pkg{polyglossia} in situations
   where the display of counters was redefined to include a font-switching command.}
-
+These macros (currently \Cmd\arabicdigits, \Cmd\farsidigits\ and \Cmd\thaidigits\ are provided) 
+are also available to the users. For instance in an Arabic environment
+¦\arabicdigits{9182/738543-X}¦ yields
+\textarabic{\arabicdigits{9182/738543-X}}.
 
 \section{Alphabetic numbering in Greek, Arabic, Hebrew, Syriac and Farsi}\label{abjad}
 
