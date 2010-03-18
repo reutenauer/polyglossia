@@ -6,8 +6,14 @@
 \def\asturian@font{\selectfontfamilylatin}
 
 \ifx\l@asturian\@undefined
-   \xpg@nopatterns{asturian}
-   \adddialect\l@asturian\l@nohyphenation
+  \ifx\l@catalan\@undefined%
+    \xpg@nopatterns{asturian}
+    \adddialect\l@asturian\l@nohyphenation
+  \else
+    \xpg@warning{No hyphenation patterns were loaded for `asturian'\MessageBreak
+         I will use \string\language=\string\l@catalan\space instead}
+    \adddialect\l@asturian\l@catalan
+  \fi
 \fi
 
 \def\captionsasturian{%
