@@ -10,48 +10,59 @@
   hyphenmins={2,2},
   fontsetup=true}
 
-\newXeTeXintercharclass\french@punctthin % ! ? ;
+\newXeTeXintercharclass\french@punctthin % ! ? ; et autres
 \newXeTeXintercharclass\french@punctthick % :
-\newXeTeXintercharclass\french@punctguill % « »
+\newXeTeXintercharclass\french@punctguillstart % « ‹
+\newXeTeXintercharclass\french@punctguillend % » ›
 
-\def\french@punctthinspace{{\unskip\thinspace}}
-\def\french@punctthickspace{{\unskip\nobreakspace}}
+\def\xpg@nospace#1{\ifx#1\space\else#1\fi}
 
 \def\french@punctuation{%
     \lccode"2019="2019
     \XeTeXinterchartokenstate=1
     \XeTeXcharclass `\! \french@punctthin
     \XeTeXcharclass `\? \french@punctthin
+    \XeTeXcharclass `\‼ \french@punctthin
+    \XeTeXcharclass `\⁇ \french@punctthin
+    \XeTeXcharclass `\⁈ \french@punctthin
+    \XeTeXcharclass `\⁉ \french@punctthin
     \XeTeXcharclass `\; \french@punctthin
     \XeTeXcharclass `\: \french@punctthick
-    \XeTeXinterchartoks \z@ \french@punctthin = \french@punctthinspace
-    \XeTeXinterchartoks \z@ \french@punctthick = \french@punctthickspace
-}
+    \XeTeXcharclass `\« \french@punctguillstart
+    \XeTeXcharclass `\» \french@punctguillend
+    \XeTeXcharclass `\‹ \french@punctguillstart
+    \XeTeXcharclass `\› \french@punctguillend
+    \XeTeXinterchartoks \z@ \french@punctthin = {\nobreak\thinspace}
+    \XeTeXinterchartoks \z@ \french@punctthick = {\nobreakspace}
+    \XeTeXinterchartoks 255 \french@punctthin = {\unskip\nobreak\thinspace}
+    \XeTeXinterchartoks 255 \french@punctthick = {\unskip\nobreakspace}
+    \XeTeXinterchartoks \french@punctguillstart \z@ = {\nobreakspace}  % "«a" -> "« a"
+%   \XeTeXinterchartoks \z@ \french@punctguillstart = {\nobreakspace} % "a«" unchanged?
+%   \XeTeXinterchartoks \french@punctguillend \z@ = {\nobreakspace}   % "»a" unchanged?
+    \XeTeXinterchartoks \z@ \french@punctguillend = {\nobreakspace}    % "a»" -> "a »"
+    \XeTeXinterchartoks \french@punctguillstart 255 = {\nobreakspace\xpg@nospace} % "«  " -> "«~"
+    \XeTeXinterchartoks 255 \french@punctguillend = {\unskip\nobreakspace} % "  »" -> "~»"
+    \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\nobreak\thinspace} % "»;" -> "» ;"
+    \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace} % "»:" -> "» :"
+    \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\nobreakspace} % "?»" -> "? »"
+    }
 
 \def\nofrench@punctuation{%
     \lccode"2019=\z@
     \XeTeXcharclass `\! \z@
     \XeTeXcharclass `\? \z@
+    \XeTeXcharclass `\‼ \z@
+    \XeTeXcharclass `\⁇ \z@
+    \XeTeXcharclass `\⁈ \z@
+    \XeTeXcharclass `\⁉ \z@
     \XeTeXcharclass `\; \z@
     \XeTeXcharclass `\: \z@
     \XeTeXcharclass `\« \z@
     \XeTeXcharclass `\» \z@
+    \XeTeXcharclass `\‹ \z@
+    \XeTeXcharclass `\› \z@
     \XeTeXinterchartokenstate=0
-}
-
-\def\french@guillemets{%
-    \XeTeXinterchartokenstate=1
-    \XeTeXcharclass `\« \french@punctguill
-    \XeTeXcharclass `\» \french@punctguill
-    \XeTeXinterchartoks \french@punctguill \z@ = \french@punctthickspace
-    \XeTeXinterchartoks \z@ \french@punctguill = \french@punctthickspace
-    \XeTeXinterchartoks \french@punctguill \french@punctthin = \french@punctthinspace
-        % "»;" -> "» ;"
-    \XeTeXinterchartoks \french@punctguill \french@punctthick = \french@punctthickspace
-        % "»:" -> "» :"
-    \XeTeXinterchartoks \french@punctthin \french@punctguill  = \french@punctthickspace
-        % "?»" -> "? »"
-}
+    }
 
 \def\captionsfrench{%
    \def\refname{Références}%
@@ -66,11 +77,11 @@
    \def\indexname{Index}%
    \def\figurename{\textsc{Fig.}}%
    \def\tablename{\textsc{Tab.}}%
-   \def\@Fpt{\ifcase\value{part}\or Première\or Deuxième\or%
-   Troisième\or Quatrième\or Cinquième\or Sixième\or%
-   Septième\or Huitième\or Neuvième\or Dixième\or Onzième\or%
-   Douzième\or Treizième\or Quatorzième\or Quinzième\or%
-   Seizième\or Dix-septième\or Dix-huitième\or Dix-neuvième\or%
+   \def\@Fpt{\ifcase\value{part}\or Première\or Deuxième\or
+   Troisième\or Quatrième\or Cinquième\or Sixième\or
+   Septième\or Huitième\or Neuvième\or Dixième\or Onzième\or
+   Douzième\or Treizième\or Quatorzième\or Quinzième\or
+   Seizième\or Dix-septième\or Dix-huitième\or Dix-neuvième\or
    Vingtième\fi\space}%
    \def\thepart{}%
    \def\partname{\protect\@Fpt partie}%
@@ -81,28 +92,27 @@
    \def\ccname{Copie à }%
    \def\headtoname{}%
    \def\proofname{Démonstration}%
-}
-
+   }
 \def\datefrench{%
-  \def\today{\ifx\ier\undefined\def\ier{er}\fi%
-    \ifnum\day=1\relax 1\ier%
-    \else \number\day\fi
-    \space \ifcase\month%
-    \or janvier\or février\or mars\or avril\or mai\or juin\or juillet\or
-    août\or septembre\or octobre\or novembre\or décembre\fi
-    \space \number\year}%
-}
+   \def\today{\ifx\ier\undefined\def\ier{er}\fi
+      \ifnum\day=1\relax 1\ier%
+      \else \number\day\fi
+      \space \ifcase\month%
+      \or janvier\or février\or mars\or avril\or mai\or juin\or
+      juillet\or août\or septembre\or octobre\or novembre\or
+      décembre\fi
+      \space \number\year}}
 
-\def\noextras@french{\nofrench@punctuation}
+\def\noextras@french{%
+   \nofrench@punctuation%
+   }
 
 \def\blockextras@french{%
    \french@punctuation%
-   \french@guillemets%
    }
 
 \def\inlineextras@french{%
    \french@punctuation%
-   \french@guillemets%
    }
 
 \endinput
