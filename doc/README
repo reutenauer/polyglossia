@@ -17,34 +17,47 @@ Polyglossia makes it possible to automate the following tasks:
   available), using the package fontspec.
 * Switching to a font assigned by the user to a particular script or language.
 * Adjusting some typographical conventions in function of the current language
-  (such as afterindent, frenchindent, spaces before or after punctuation marks, 
+  (such as afterindent, frenchindent, spaces before or after punctuation marks,
   etc.).
-* redefining the document strings (like “chapter”, “figure”, “bibliography”).
+* Redefining the document strings (like “chapter”, “figure”, “bibliography”).
 * Adapting the formatting of dates (for non-gregorian calendars via external
-  packages bundled with polyglossia: currently the hebrew, islamic and farsi
+  packages bundled with polyglossia: currently the Hebrew, Islamic and Farsi
   calendars are supported).
-* For languages that have their own numeration system, modifying the formatting 
+* For languages that have their own numeration system, modifying the formatting
   of numbers appropriately.
-* Ensuring the proper directionality if the document contains languages 
+* Ensuring the proper directionality if the document contains languages
   written from right to left (via the package bidi, available separately).
 
-Several features of Babel that do not make sense in the XeTeX world (like font 
-encodings, shorthands, etc) are not supported. For German however, several 
+Several features of Babel that do not make sense in the XeTeX world (like font
+encodings, shorthands, etc) are not supported. For German however, several
 shorthands do make sense and can be activated with the language option babelshorthands=true.
 
 Polyglossia is distributed in the traditional way with *.dtx and *.ins files,
 and also comes with a TDS-conformant ready-to-unpack zip file.
 
-To install from source (i.e. using polyglossia.dtx), run 
+To install from source (i.e. using polyglossia.dtx), run
 	xelatex polyglossia.dtx
-which will generate all files and produce the pdf documentation all at once. 
+which will generate all files and produce the pdf documentation all at once.
 Alternatively if you have the file polyglossia.ins run
-	xetex polyglossia.ins 
+	xetex polyglossia.ins
 and follow the instructions displayed.
 
 CHANGES
 
 1.1.1
+  * Bugfix for French: explicit spaces before/after double punctuation
+    signs ("Par exemple : les grands « espaces » du Canada ! ") are
+    now replaced by the appropriate non-breaking spaces, as in Babel.
+  * Bugfix for font switching mechanism within Latin script
+    (pending a complete re-implementation in v1.2):
+    the font shape and series are no longer reset when switching language.
+  * New macros for non-Western decimal digits
+    (instead of fontmappings)
+  * New gloss files for Asturian, Lithuanian and Urdu
+  * hijrical.sty is now locale-aware: \hijritoday is
+    formatted differently in Arabic, Farsi, Urdu, Turkish
+    and Bahasa Indonesia.
+---NB: the above five items were not part of v1.1.1-rc1 which was made available on github---
   * Enable babelshorthands for Dutch
   * Add missing macro \allowhyphens
   * Add global option babelshorthands
@@ -57,7 +70,7 @@ CHANGES
   * Add option numerals to gloss-russian
   * New ldf for asturian language
   * Provide newXeTeXintercharclass when undefined
-  * Bug fix for russian alph
+  * Bugfix for russian alph
   * Remove superfluous level of {} in def of markright
   * Bugfix for \datecatalan
   * Change hyphenmins for sanskrit
@@ -70,7 +83,7 @@ CHANGES
 1.1.0
    * Use \newXeTeXintercharclass (thanks to Enrico Gregorio)
    * Fixed implementation of shorthands for German (Babel code in file babelsh.def)
-   * Arabic (Khaled Hosny): 
+   * Arabic (Khaled Hosny):
      - Fix abjad form for 3 and 5 and add option abjadjimnotail
      - bugfix for \arabicnumber
      - make Gregorian calender the default
@@ -93,7 +106,7 @@ CHANGES
    * Fix frenchspacing for vietnamese
    * Other minor bugfixes
 
-1.0.2 
+1.0.2
    This is mostly a bug fixes release.
    * Captions corrected in Hebrew, Russian and Spanish
    * Removed all \text<lang> wrappers within caption definitions
@@ -108,8 +121,8 @@ CHANGES
    * Extended the scope of \syriacabjad
    * Added gloss-amharic.ldf (ported from ethiop.ldf in the package ethiop)
 
-1.0 
-   * Initial release on CTAN 
+1.0
+   * Initial release on CTAN
 
 
   ------------------------------
