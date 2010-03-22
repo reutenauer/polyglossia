@@ -12,7 +12,8 @@
 \newXeTeXintercharclass\french@punctguillstart % « ‹
 \newXeTeXintercharclass\french@punctguillend % » ›
 
-\def\xpg@nospace#1{\ifx#1\space\else#1\fi}
+\def\xpg@unskip{\ifhmode\ifdim\lastskip>\z@\unskip\fi\fi}
+\def\xpg@nospace#1{#1}
 
 \def\french@punctuation{%
     \frenchspacing
@@ -30,19 +31,19 @@
     \XeTeXcharclass `\» \french@punctguillend
     \XeTeXcharclass `\‹ \french@punctguillstart
     \XeTeXcharclass `\› \french@punctguillend
-    \XeTeXinterchartoks \z@ \french@punctthin = {\nobreak\thinspace}
-    \XeTeXinterchartoks \z@ \french@punctthick = {\nobreakspace}
-    \XeTeXinterchartoks 255 \french@punctthin = {\unskip\nobreak\thinspace}
-    \XeTeXinterchartoks 255 \french@punctthick = {\unskip\nobreakspace}
-    \XeTeXinterchartoks \french@punctguillstart \z@ = {\nobreakspace}  % "«a" -> "« a"
-%   \XeTeXinterchartoks \z@ \french@punctguillstart = {\nobreakspace} % "a«" unchanged?
-%   \XeTeXinterchartoks \french@punctguillend \z@ = {\nobreakspace}   % "»a" unchanged?
-    \XeTeXinterchartoks \z@ \french@punctguillend = {\nobreakspace}    % "a»" -> "a »"
-    \XeTeXinterchartoks \french@punctguillstart 255 = {\nobreakspace\xpg@nospace} % "«  " -> "«~"
-    \XeTeXinterchartoks 255 \french@punctguillend = {\unskip\nobreakspace} % "  »" -> "~»"
-    \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\nobreak\thinspace} % "»;" -> "» ;"
-    \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace} % "»:" -> "» :"
-    \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\nobreakspace} % "?»" -> "? »"
+    \XeTeXinterchartoks \z@ \french@punctthin = {\nobreak\thinspace}%
+    \XeTeXinterchartoks \z@ \french@punctthick = {\nobreakspace}%
+    \XeTeXinterchartoks 255 \french@punctthin = {\xpg@unskip\nobreak\thinspace}%
+    \XeTeXinterchartoks 255 \french@punctthick = {\xpg@unskip\nobreakspace}%
+    \XeTeXinterchartoks \french@punctguillstart \z@ = {\nobreakspace}% "«a" -> "« a"
+%   \XeTeXinterchartoks \z@ \french@punctguillstart = {\nobreakspace}% "a«" unchanged?
+%   \XeTeXinterchartoks \french@punctguillend \z@ = {\nobreakspace}% "»a" unchanged?
+    \XeTeXinterchartoks \z@ \french@punctguillend = {\nobreakspace}% "a»" -> "a »"
+    \XeTeXinterchartoks \french@punctguillstart 255 = {\nobreakspace\xpg@nospace}% "«  " -> "«~"
+    \XeTeXinterchartoks 255 \french@punctguillend = {\xpg@unskip\nobreakspace}% "  »" -> "~»"
+    \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\nobreak\thinspace}% "»;" -> "» ;"
+    \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace}% "»:" -> "» :"
+    \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\nobreakspace}% "?»" -> "? »"
     }
 
 \def\nofrench@punctuation{%
