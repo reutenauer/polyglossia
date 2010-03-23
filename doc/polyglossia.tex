@@ -31,6 +31,7 @@
 \newcommand*\TR[1]{\textcolor{myred}{#1}}
 \newcommand*\TX[1]{\hyperref[#1]{\textcolor{myred}{#1}}}
 \newcommand*\TB[1]{\textcolor{myblue}{\bf #1}}
+\newcommand*\link[1]{\href{#1}{#1}}
 \def\eg{\textit{e.g.,}\xspace}
 \def\ie{\textit{i.e.,}\xspace}
 \def\ca{\textit{ca.}\@\xspace}
@@ -75,7 +76,7 @@
 \newfontfamily\syriacfont[Script=Syriac]{Serto Jerusalem}
 \newfontfamily\hebrewfont[Script=Hebrew]{SBL Hebrew}
 
-\newcommand\Babel{\pkg{babel}\xspace}
+\newcommand\Babel{\pkg{Babel}\xspace}
 
 \linespread{1.05}
 \frenchspacing
@@ -438,7 +439,6 @@ The default value of each option is given in italic.
         NB: · is the glyph U+00B7 MIDDLE DOT.}
 \end{itemize}
 
-\pagebreak
 \subsection{dutch}\label{dutch}
 \textbf{Options:}
 \begin{itemize}
@@ -481,7 +481,15 @@ The default value of each option is given in italic.
 	\item \Cmd\abjad (see section \ref{abjad})
 	\end{itemize}
 
-\pagebreak
+%\subsection{french}\label{french}
+%\textbf{Options}:
+%	\begin{itemize}
+%    \item \TB{espacedeuxpoints} = thick or half \new{v1.2}
+%  \footnote{ %
+%    Can be customized by redefining \french@colonspace }
+%	\end{itemize}
+% 
+
 \subsection{german}\label{german}
 \textbf{Options}:
 	\begin{itemize}
@@ -491,7 +499,7 @@ The default value of each option is given in italic.
 	\item \TB{latesthyphen} = \textit{false} or true: if this option is set to true,
 		the latest (experimental) hyphenation patterns ‘(n)german-x-latest’
 		will be loaded instead of ‘german’ or ‘ngerman’. NB: This is based on
-		the file \texttt{language.dat} that comes with \TeX Live 2008.
+		the file \texttt{language.dat} that comes with \TeX Live 2008 and later.
 	\item\TB{babelshorthands} = \textit{false} or true: \new{v1.0.3}
 		if this is turned on, all shorthands defined in \Babel
 		for fine-tuning the hyphenation of German words are activated.
@@ -654,16 +662,20 @@ of the \textit{abjad} numerals are obtained with the \Cmd\abjadmaghribi\ command
 Example: ¦\abjadmaghribi{1863}¦ yields {\arabicfont\abjadmaghribi{1863}}.
 
 The code for Hebrew numerals, which was incorrect in previous versions, was
-ported from the implementation in \pkg{Babel} with v1.1.1\new{v1.1.1}, and the 
-user interface is identical to the one in \pkg{Babel}.
-The commands \Cmd\hebrewnumeral, \Cmd\Hebrewnumeral and \Cmd\Hebrewnumeralfinal 
-… … …
-Example:
-¦\hebrewnumeral{1863}¦ yields {\hebrewfont\hebrewnumeral{1863}}. 
+ported from the implementation in \Babel with v1.1.1\new{v1.1.1}, and the 
+user interface is identical to the one in \Babel.
+The commands \Cmd\hebrewnumeral, \Cmd\Hebrewnumeral and \Cmd\Hebrewnumeralfinal\ behave exactly 
+as they do in \Babel: the second command prints the number with \textit{gereshayim} before
+the last letter, and the latter uses in addition the final forms of Hebrew letters.
+Examples:
+¦\hebrewnumeral{1750}¦ yields {\hebrewfont\hebrewnumeral{1750}}.
+¦\Hebrewnumeral{1750}¦ yields {\hebrewfont\Hebrewnumeral{1750}}.
+¦\Hebrewnumeralfinal{1750}¦ yields {\hebrewfont\Hebrewnumeralfinal{1750}}.
 
 
 Support is also provided for Syriac abjad numerals, which can be generated
-with \Cmd\abjadsyriac.
+with \Cmd\abjadsyriac.\footnote{ %
+A fine guide to numerals in Syriac can be found at \link{http://www.garzo.co.uk/documents/syriac-numerals.pdf}.}
 Example: ¦\abjadsyriac{463}¦ yields {\syriacfont\abjadsyriac{463}}.
 
 
@@ -693,7 +705,7 @@ provide a localized version of ¦\Hijritoday¦.
 If the formatting macro for the current language is undefined, the Hijri date will be formatted 
 in Arabic or in roman transliteration, depending of the current writing direction.
 You can define a new format or redefine one with the command
-\Cmd{\DefineHijriDateFormat{<lang>}{<code>}}.
+  \displaycmd{\DefineHijriDateFormat\{<lang>\}\{<code>\}}{\DefineHijriDateFormat}.
 
 The command ¦\Hijritoday¦ also accepts an optional argument to add or subtract a correction
 (in days) to the date computed by the arithmetical algorithm.\footnote{ %
