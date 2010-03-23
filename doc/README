@@ -51,7 +51,7 @@ http://github.com/fc7/polyglossia/issues
 
 CHANGES
 
-1.1.1
+1.1.1 (23-03-2010)
   * Bugfix for French: explicit spaces before/after double punctuation
     signs ("Par exemple : les grands « espaces » du Canada ! ") are
     now replaced by the appropriate non-breaking spaces, as in Babel.
