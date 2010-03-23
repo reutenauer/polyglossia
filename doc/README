@@ -42,6 +42,13 @@ Alternatively if you have the file polyglossia.ins run
 	xetex polyglossia.ins
 and follow the instructions displayed.
 
+
+BUGS
+
+Users are encouraged to report bugs on the github tracker:
+http://github.com/fc7/polyglossia/issues
+
+
 CHANGES
 
 1.1.1
@@ -68,12 +75,11 @@ CHANGES
   * Bugfix for smallcaps in captions
   * Typo for ccname in Hebrew
   * Add option numerals to gloss-russian
-  * New ldf for asturian language
   * Provide newXeTeXintercharclass when undefined
-  * Bugfix for russian alph
+  * Bugfix for Russian alph
   * Remove superfluous level of {} in def of markright
   * Bugfix for \datecatalan
-  * Change hyphenmins for sanskrit
+  * Change hyphenmins for Sanskrit
 
 1.1.0b
    * Modify hyphenmins for Sanskrit (Yves Codet)
