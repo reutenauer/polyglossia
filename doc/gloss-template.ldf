@@ -1,3 +1,8 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IMPORTANT: The format of gloss-*.ldf files will become much simpler in v1.2.
+% If you want to write new support files for polyglossia, you are urged to 
+% contact the author. The present template will very soon be deprecated!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ProvidesFile{gloss-<lang>.ldf}[polyglossia: module for <lang>]
 \makeatletter
 

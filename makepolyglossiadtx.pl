@@ -34,8 +34,7 @@ my @docsrcfiles	     = qw(README
                           gloss-template.ldf
                           examples.tex
                           example-arabic.tex
-                          example-thai.tex
-                          example-urdu.tex);
+                          example-thai.tex);
 my $patternop       = "=";
 my $verbose         = 0;
 my $noins           = 0;
