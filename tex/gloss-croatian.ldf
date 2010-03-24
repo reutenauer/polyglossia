@@ -20,7 +20,7 @@
    \def\indexname{Indeks}%
    \def\figurename{Slika}%
    \def\tablename{Tablica}%
-   \def\partname{Deo}% <<< CHECK (taken from Serbian)
+   \def\partname{Dio}%
    \def\pagename{Stranica}%
    \def\seename{Vidjeti}%
    \def\alsoname{Vidjeti i}%
