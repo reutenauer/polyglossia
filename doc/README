@@ -1,14 +1,15 @@
 
    ¦----------------------------------------------¦
    ¦                                              ¦
-   ¦       THE POLYGLOSSIA PACKAGE v1.1.1         ¦
+   ¦       THE POLYGLOSSIA PACKAGE v1.2.0         ¦
+   ¦                  (UNRELEASED)                ¦
    ¦                                              ¦
    ¦ Modern multilingual typesetting with XeLaTeX ¦
    ¦                                              ¦
    ¦----------------------------------------------¦
 
 This package for provides a complete Babel replacement for users of XeLaTeX.
-This version includes support for 57 different languages.
+This version includes support for 66 different languages.
 
 Polyglossia makes it possible to automate the following tasks:
 
@@ -50,6 +51,11 @@ http://github.com/fc7/polyglossia/issues
 
 
 CHANGES
+
+1.2.0 (unreleased)
+  * New implementation of a \PolyglossiaSetup interface
+  * Many internal enhancements
+  * New gloss files for Occitan, Bengali, Malayalam, Marathi, Tamil, Telugu, Turkmen
 
 1.1.1 (23-03-2010)
   * Bugfix for French: explicit spaces before/after double punctuation
