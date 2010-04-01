@@ -121,7 +121,7 @@
 %% options currently available:
 %% language : the name of the language (as understood by fontspec)
 %% hyphennames : the different hyphenation patterns to try (comma separated list)
-%%%   TODO: if pattern is prefixed by !, then it should be loaded as a fallback, with \xpg@nopatterns@fallback - i.e. with a warning. 
+%%%   TODO: if pattern is prefixed by !, then it should be loaded as a fallback, with \xpg@nopatterns@fallback - i.e. with a warning: e.g. sanskrit for hindi, or catalan for asturian.
 %% script : the name of the script (as understood by fontspec) – default is Latin
 %% direction : the direction of the script: LR or RL
 %% scripttag : the OpenType tag for the script
@@ -130,6 +130,7 @@
 %% frenchspacing : boolean
 %% frenchindent : boolean
 %% fontsetup : boolean
+%% TODO: nouppercase : boolean (for scripts like Arabic, Devanagari, etc which have no concept of uppercase/lowercase)
 %% TODO: localalph = {<alph_csname>,<Alph_csname>}
 %% TODO: localnumber = <csname>
 
