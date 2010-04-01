@@ -1,15 +1,18 @@
-\ProvidesFile{gloss-hindi.ldf}[polyglossia: module for hindi]
 % UTF-8 strings kindly provided by Zdenek Wagner, 10-03-2008
 % TODO: add option for velthuis transliteration with link to
 % Velthuis Devanagari project: http://devnag.sarovar.org.
+
+\ProvidesFile{gloss-hindi.ldf}[polyglossia: module for hindi]
+\RequirePackage{devanagaridigits}
 \makeatletter
 \PolyglossiaSetup{hindi}{
   script=Devanagari,
   scripttag=deva,
   langtag=HIN,
-%%  hyphennames={hindi,!sanskrit},
+%%  hyphennames={hindi,!sanskrit}, TODO: implement fallback patterns (with ! prefix)
   fontsetup=true
-  %TODO localalph={xxx@alph,xxx@Alph}
+  %TODO nouppercase=true,
+  %TODO localnumber=hindinumber
 }
 
 \ifx\l@hindi\@undefined%
@@ -24,6 +27,23 @@
 \fi
 
 \def\hindi@language{\language=\l@hindi}
+
+\def\tmp@western{Western}
+\newif\ifhindi@devanagari@numerals
+\hindi@devanagari@numeralstrue
+
+\define@key{hindi}{numerals}[Devanagari]{%
+  \def\@tmpa{#1}%
+  \ifx\@tmpa\tmp@western
+    \hindi@devanagari@numeralsfalse
+  \fi}
+
+\def\hindinumber#1{%
+  \ifhindi@devanagari@numerals
+    \devanagaridigits{\number#1}%
+  \else
+    \number#1%
+  \fi}
 
 \def\captionshindi{%
      \def\abstractname{सारांश}%
@@ -52,28 +72,28 @@
      \def\alsoseename{और देखिए}%
 }
 \def\datehindi{%
-   \def\today{\number\day\space\ifcase\month\or
-     जनवरी\or
-     फ़रवरी\or
-     मार्च\or
-     अपरैल\or
-     मई\or
-     जून\or
-     जलाई\or
-     अगस्त\or
-     सितम्बर\or
-     अक्तूबर\or
-     नवम्बर\or
-     दिसम्बर\fi
-     \space\number\year}%
+  \def\today{\hindinumber\day\space\ifcase\month\or
+    जनवरी\or
+    फ़रवरी\or
+    मार्च\or
+    अपरैल\or
+    मई\or
+    जून\or
+    जलाई\or
+    अगस्त\or
+    सितम्बर\or
+    अक्तूबर\or
+    नवम्बर\or
+    दिसम्बर\fi
+    \space\hindinumber\year}%
 }
 
 \def\blockextras@hindi{%
-   \let\@@MakeUppercase\MakeUppercase%
-   \def\MakeUppercase##1{##1}%
-   }
+  \let\@@MakeUppercase\MakeUppercase%
+  \def\MakeUppercase##1{##1}%
+}
 \def\noextras@hindi{%
-   \let\MakeUppercase\@@MakeUppercase%
-   }
+  \let\MakeUppercase\@@MakeUppercase%
+}
 
 \endinput
