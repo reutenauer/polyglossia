@@ -38,7 +38,7 @@
     dicembre\fi\space \number\year}}
 
 \def\noextras@italian{%
-   \lccode"2019=0%
+   \lccode"2019=\z@
    }
 
 \def\blockextras@italian{%
