@@ -34,7 +34,7 @@
    \def\today{\number\day~\ifcase\month\or
     gennaio\or febbraio\or marzo\or aprile\or maggio\or giugno\or
     luglio\or agosto\or settembre\or ottobre\or novembre\or
-    dicembre\fi\space \number\year}
+    dicembre\fi\space \number\year}%
 }
 
 \def\italian@language{\language=\l@italian}
@@ -42,13 +42,13 @@
 \setlocalhyphenmins{italian}{2}{2}%
 
 \def\noextras@italian{%
-   \lccode"2019=0%
+   \lccode"2019=\z@
    \nofrench@indent}
 
 \def\blockextras@italian{%
    \lccode"2019="2019
    %TODO ? \clubpenalty3000\widowpenalty3000\finalhyphendemerits50000000 << in Babel
-   \french@indent%
+   \french@indent
    }
 
 \def\inlineextras@italian{%
