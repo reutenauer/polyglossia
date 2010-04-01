@@ -132,7 +132,6 @@
     \fi%
  \fi}}
 
-
 \def\arabicnumber#1{%
   \ifeastern@numerals
     \arabicdigits{\number#1}%
