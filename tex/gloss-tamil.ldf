@@ -1,0 +1,54 @@
+﻿\ProvidesFile{gloss-tamil.ldf}[polyglossia: module for tamil]
+% Translations provided by Kevin & Siji, 01-11-2009
+\makeatletter
+
+\PolyglossiaSetup{tamil}{
+  script=Tamil,
+  scripttag=taml,
+  langtag=TAM,
+  hyphennames={tamil},
+  hyphenmins={2,2}, %FIXME?
+  fontsetup=true,
+}
+
+\def\captionstamil{%
+     \def\abstractname{சாராம்சம்}%
+     \def\appendixname{பிற்சேர்க்கை}%பின்னிணைப்பு
+     %\def\bibname{}%
+     %\def\ccname{}%
+     \def\chaptername{அத்தியாயம்}%
+     \def\contentsname{உள்ளே}%
+     %\def\enclname{}%
+     \def\figurename{படம்}%
+     %\def\headpagename{}%
+     %\def\headtoname{}%
+     \def\indexname{சுட்டி}%பொருளடக்க அட்டவணை
+     \def\listfigurename{படங்களின் பட்டியல்}%
+     \def\listtablename{அட்டவணை பட்டியல்}%
+     %\def\pagename{}%
+     \def\partname{பகுதி}%
+     %\def\prefacename{}% 
+     %\def\refname{}%
+     \def\tablename{அட்டவணை}%
+     \def\seename{பார்க்க}%
+     %\def\alsoname{}%
+     %\def\alsoseename{}%
+}
+\def\datetamil{%TODO TODO TODO
+   \def\today{\number\year\space\ifcase\month\or
+     January\or
+     February\or
+     March\or
+     April\or
+     May\or
+     June\or
+     July\or
+     August\or
+     September\or
+     October\or
+     November\or
+     December\fi
+     \space\number\day}%
+}
+
+\endinput
