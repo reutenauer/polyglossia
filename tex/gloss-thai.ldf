@@ -124,10 +124,12 @@
    }
 
 \def\blockextras@thai{%
+%%TODO \XeTeXlinebreaklocales "th"% uses ICU to find line breaks on the basis of a dictionary lookup-- make this optional? (in case a user might prefer a preprocessor
    \let\orig@baselinestrech\baselinestretch%
    \renewcommand{\baselinestretch}{1.2}%
    }
 \def\noblockextras@thai{%
+%%TODO \XeTeXlinebreaklocales "en"%
    \let\baselinestrech\orig@baselinestretch%
    }
 
