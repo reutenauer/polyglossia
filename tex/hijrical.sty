@@ -1,7 +1,8 @@
 \ProvidesPackage{hijrical}
         [2007/12/27 v0.1 %
          Islamic calendar]
-\RequirePackage{bidi}
+%%FIXME \RequirePackage{bidi} : 
+%%TODO  \@ifpackageloaded{bidi}{}{\newif\if@RTL\@RTLfalse}
 \RequirePackage{arabicnumbers}
 
 \@ifundefined{@Remainder}{\input{cal-util.def}}{}
