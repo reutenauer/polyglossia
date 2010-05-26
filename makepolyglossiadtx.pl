@@ -93,7 +93,7 @@ if ($verbose)
 
 # work out the derived files
 
-my @srcdirfile = glob("$srcdir/*");
+my @srcdirfile = glob("$srcdir/*.{sty,ldf,def}");
 
 my @derivedfiles = ();
 
