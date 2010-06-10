@@ -351,11 +351,8 @@
 
 %% ensure localization of \markright and \markboth commands
 %TODO change this to a boolean for consistency?
-\def\opt@enabled{on}
-\def\opt@disabled{off}
 \define@key{polyglossia}{localmarks}[on]{%
-   \def\@tmpa{#1}
-   \ifx\@tmpa\opt@enabled
+   \ifstrequal{#1}{on}{%
       \def\local@marks##1{%
          \def\markboth####1####2{%
             \begingroup%
@@ -381,10 +378,10 @@
             \def\@markright####1####2####3{\@temptokena{\protect\@@ensure@maindir{####1}}%
                \unrestored@protected@xdef\@themark{{\the\@temptokena}%
                {\protect\@@ensure@maindir{####3}}}}}
-   \else
+    }{% else
       \def\local@marks##1{}
       \xpg@info{Option: localmarks=off}
-   \fi
+    }
 }
 \setkeys{polyglossia}{localmarks=on}
 
@@ -415,15 +412,11 @@
      \def\languagename{#2}%
       % This is needed because \arabic is a built-in LaTeX command:
       % so now we have \begin{Arabic}... instead of \begin{arabic}...  
-      \edef\@tmpa{arabic}%
-      \edef\@tmpb{#2}%
-      \ifx\@tmpb\@tmpa%
-      \newenvironment{Arabic}[1][]{\begin{otherlanguage}[####1]{arabic}}%
-         {\end{otherlanguage}}%
-      \else%   
-      \newenvironment{#2}[1][]{\begin{otherlanguage}[####1]{#2}}%
-         {\end{otherlanguage}}%
-      \fi
+      \ifstrequal{#2}{arabic}%
+      {\newenvironment{Arabic}[1][]{\begin{otherlanguage}[####1]{arabic}}%
+        {\end{otherlanguage}}}%
+      {\newenvironment{#2}[1][]{\begin{otherlanguage}[####1]{#2}}%
+        {\end{otherlanguage}}}%
       \expandafter\newcommand\csname text#2\endcsname[2][]{%
         \ifcsdef{RTL}%
           {\iftoggle{#2@RL}%
@@ -463,6 +456,7 @@
     \selectlanguage[#1]{#2}%
     \selectbackgroundlanguage{#2}}}
 
+% FIXME all this crap should be made robust ;)
 \def\familytype{rm}
 \gappto\rmfamily{\def\familytype{rm}}
 \gappto\sffamily{\def\familytype{sf}}
