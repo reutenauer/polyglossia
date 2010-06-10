@@ -45,7 +45,63 @@
       {\cyrillic@numeralsfalse}
 }
 
+\define@boolkey{russian}[russian@]{babelshorthands}[false]{}
+
 \setkeys{russian}{spelling,numerals}
+
+\ifsystem@babelshorthands
+  \setkeys{russian}{babelshorthands=true}
+\else
+  \setkeys{russian}{babelshorthands=false}
+\fi
+
+\ifcsundef{initiate@active@char}{%
+  \input{babelsh.def}%
+  \initiate@active@char{"}%
+}{}
+
+\def\russian@shorthands{%
+  \bbl@activate{"}%
+  \def\language@group{russian}%
+%  \declare@shorthand{russian}{"`}{„}%
+%  \declare@shorthand{russian}{"'}{“}%
+%  \declare@shorthand{russian}{"<}{«}%
+%  \declare@shorthand{russian}{">}{»}%
+  \declare@shorthand{russian}{""}{\hskip\z@skip}%
+  \declare@shorthand{russian}{"~}{\textormath{\leavevmode\hbox{-}}{-}}%
+  \declare@shorthand{russian}{"=}{\nobreak\-\hskip\z@skip}%
+  \declare@shorthand{russian}{"|}{\textormath{\nobreak\discretionary{-}{}{\kern.03em}\allowhyphens}{}}%
+  \declare@shorthand{russian}{"-}{%
+    \def\russian@sh@tmp{%
+      \if\russian@sh@next-\expandafter\russian@sh@emdash
+      \else\expandafter\russian@sh@hyphen\fi
+    }%
+    \futurelet\russian@sh@next\russian@sh@tmp}%
+  \def\russian@sh@hyphen{%
+    \nobreak\-\bbl@allowhyphens}%
+  \def\russian@sh@emdash##1##2{\cdash-##1##2}%
+  \def\cdash##1##2##3{\def\tempx@{##3}%
+  \def\tempa@{-}\def\tempb@{~}\def\tempc@{*}%
+   \ifx\tempx@\tempa@\@Acdash\else
+    \ifx\tempx@\tempb@\@Bcdash\else
+     \ifx\tempx@\tempc@\@Ccdash\else
+      \errmessage{Wrong usage of cdash}\fi\fi\fi}
+  \def\@Acdash{\ifdim\lastskip>\z@\unskip\nobreak\hskip.2em\fi
+    \cyrdash\hskip.2em\ignorespaces}%
+  \def\@Bcdash{\leavevmode\ifdim\lastskip>\z@\unskip\fi
+   \nobreak\cyrdash\penalty\exhyphenpenalty\hskip\z@skip\ignorespaces}%
+  \def\@Ccdash{\leavevmode
+   \nobreak\cyrdash\nobreak\hskip.35em\ignorespaces}%
+  \ifx\cyrdash\undefined
+    \def\cyrdash{\hbox to.8em{--\hss--}}
+  \fi
+  \declare@shorthand{russian}{",}{\nobreak\hskip.2em\ignorespaces}%
+}
+
+\def\norussian@shorthands{%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+
 
 \def\captionsrussian@modern{%
    \def\prefacename{Предисловие}%
@@ -185,16 +241,19 @@
    \nonfrenchspacing%
    \def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
    \ifcyrillic@numerals\norussian@numbers\fi
+   \norussian@shorthands%
    }
 
 \def\blockextras@russian{%
    \frenchspacing%
    \russian@capsformat%
    \ifcyrillic@numerals\russian@numbers\fi
+   \ifrussian@babelshorthands\russian@shorthands\fi
    }
 
 \def\inlineextras@russian{%
    \frenchspacing%
+   \ifrussian@babelshorthands\russian@shorthands\fi%
    }
 
 %%% These lines taken from russianb.ldf, part of babel package.
@@ -215,6 +274,7 @@
 \def\NOD   {\mathop{\mathrm{НОД}}\nolimits}
 \def\NOK   {\mathop{\mathrm{НОК}}\nolimits}
 \def\Proj  {\mathop{\mathrm{Пр}}\nolimits}
+%\DeclareRobustCommand{\No}{№}
 
 \endinput
 
