@@ -3,9 +3,9 @@
 \makeatletter
 \PolyglossiaSetup{turkmen}{
   hyphennames={turkmen},
-  hyphenmins={1,2},
+  hyphenmins={2,2},
   langtag=TKM,
-  frenchspacing=true,
+  frenchspacing=false,
   fontsetup=true
 }
 
