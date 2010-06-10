@@ -3,7 +3,12 @@
   Babel replacement for XeLaTeX]
 \RequirePackage{etoolbox}
 \RequirePackage{makecmds}
-\RequirePackage{fontspec} %which itself depends on xkeyval
+\RequirePackage{fontspec}[2010/06/08]% v2.0
+
+\ifcsundef{newXeTeXintercharclass}{%
+  \xpg@error{Your xelatex format appears to be outdated!^^J
+    Please update your system and recreate it with fmtutil.}
+  }{}
 
 %% This is for compatibility with Babel-aware package:
 \cslet{ver@babel.sty}{\@empty} % this "fakes" babel
@@ -236,25 +241,26 @@
 }
 
 \def\xpg@addfontfeature@lang#1#2{% #1 is langtag, #2 is langname
-  % Turkish is a special case:
-  \ifstrequal{#2}{Turkish}{\addfontfeature{Language=Turkish}}% fontspec will complain if it fails
-  % else not Turkish
-  {\font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-  \zf@check@ot@lang{#1}%
-  \if@tempswa
-    \addfontfeature{Language=#2}%
-  \fi}}
+  % Turkish is a special case: tag can be TRK or TUR
+  \ifstrequal{#2}{Turkish}%
+    {\fontspec_if_language:nTF {TRK}%
+      {\addfontfeature{Language=Turkish}}%
+      {\fontspec_if_language:nTF {TUR}%
+        {\addfontfeature{Language=Turkish}}%
+        {}}}%
+    % else not Turkish
+    {\fontspec_if_language:nTF {#1}%
+      {\addfontfeature{Language=#2}}%
+      {}%
+    }%
+}
 
 \def\xpg@addfontfeature@script#1#2{% #1 is scripttag, #2 is scriptname
-  \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
-  \zf@check@ot@script{#1}%
-  \if@tempswa
-    \addfontfeature{Script=#2}%
-  \else
-    \PackageError{polyglossia}{^^J
+  \fontspec_if_script:nTF {#1}{\addfontfeature{Script=#2}}%
+    {\PackageError{polyglossia}{^^J
   The current roman font does not contain the #2 script!^^J
-  Please define \expandafter\string\csname \xpg@lowercasefirst{#2}font\endcsname\space with \string\newfontfamily}%
-  \fi}
+  Please define \expandafter\string\csname \xpg@lowercasefirst{#2}font\endcsname\space with \string\newfontfamily}}%
+}
 
 \def\xpg@fontsetup@latin#1{%
   \begingroup
@@ -642,27 +648,6 @@
 \def\use@localhyphenmins#1{%
    \ifcsundef{#1hyphenmins}{}%
    {\expandafter\expandafter\expandafter\set@hyphenmins\csname #1hyphenmins\endcsname\relax}}
-
-% FIXME: remove this eventually, say in 2012 :)
-% taken from xelatex.ini, in case the xelatex format is too old
-\ifcsundef{newXeTeXintercharclass}{%
-  \xpg@warning{Your xelatex format appears to be outdated!^^J
-    Please update your system and recreate it with fmtutil.}
-  \newcount\xe@alloc@intercharclass % allocates intercharclass
-  \xe@alloc@intercharclass=\thr@@ % from 4 (1,2 and 3 are used by CJK, AFAIK)
-  \def\xe@alloc@#1#2#3#4#5{\global\advance#1\@ne
-  \xe@ch@ck#1#4#2% make sure there's still room
-  \allocationnumber#1%
-  \global#3#5\allocationnumber
-  \wlog{\string#5=\string#2\the\allocationnumber}}
-  \def\xe@ch@ck#1#2#3{%
-  \ifnum#1<#2\else
-    \errmessage{No room for a new #3}%
-  \fi}
-  \def\newXeTeXintercharclass{%
-  \xe@alloc@\xe@alloc@intercharclass\XeTeXintercharclass\chardef\@cclv} %at most 254
-  }
-  {}
 
 %% patch lastpage to avoid problem with \thepage when \@arabic is redefined for non-Latin numbers
 %\@ifpackageloaded{lastpage}{%
