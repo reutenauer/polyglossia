@@ -8,17 +8,17 @@
   fontsetup=true}
 
 \def\captionsbahasam{%
-   \def\refname{Pustaka}%
-   \def\abstractname{Ringkasan}%
+   \def\refname{Rujukan}%
+   \def\abstractname{Abstrak}%
    \def\bibname{Bibliografi}%
    \def\prefacename{Pendahuluan}%
    \def\chaptername{Bab}%
    \def\appendixname{Lampiran}%
    \def\contentsname{Kandungan}%
-   \def\listfigurename{Senarai Gambar}%
+   \def\listfigurename{Senarai Rajah}%
    \def\listtablename{Senarai Jadual}%
    \def\indexname{Indeks}%
-   \def\figurename{Gambar}%
+   \def\figurename{Rajah}%
    \def\tablename{Jadual}%
    \def\thepart{}%
    \def\partname{Bahagian}%
@@ -26,14 +26,23 @@
    \def\seename{lihat}%
    \def\alsoname{lihat juga}%
    \def\enclname{Lampiran}%
-   \def\ccname{cc}%
+   \def\ccname{salinan kpd}%
    \def\headtoname{Kepada}%
    \def\proofname{Bukti}%
-   \def\glossaryname{Istilah}%
+   \def\glossaryname{Senarai Istilah}%
    }
 \def\datebahasam{%
-   \def\today{\number\day~\ifcase\month\or
-    Januari\or Pebruari\or Mac\or April\or Mei\or Jun\or
+   \def\bahasam@day{%
+      \ifcase\day\or%
+        1hb\or 2hb\or 3hb\or 4hb\or 5hb\or%
+        6hb\or 7hb\or 8hb\or 9hb\or 10hb\or%
+        11hb\or 12hb\or 13hb\or 14hb\or 15hb\or%
+        16hb\or 17hb\or 18hb\or 19hb\or 20hb\or%
+        21hb\or 22hb\or 23hb\or 24hb\or 25hb\or%
+        26hb\or 27hb\or 28hb\or 29hb\or 30hb\or%
+        31hb\fi}%
+   \def\today{\bahasam@day~\ifcase\month\or
+    Januari\or Februari\or Mac\or April\or Mei\or Jun\or
     Julai\or Ogos\or September\or Oktober\or November\or Disember\fi
     \space \number\year}}
 
