@@ -15,10 +15,10 @@
 \define@key{russian}{spelling}[modern]{%
    \def\@tmpa{#1}%
    \ifx\@tmpa\tmp@old
-    \def\captionsrussian{\captionsrussian@old}
+    \def\captionsrussian{\captionsrussian@old}%
     \def\daterussian{\daterussian@old}%
    \else%
-     \def\captionsrussian{\captionsrussian@modern}
+     \def\captionsrussian{\captionsrussian@modern}%
      \def\daterussian{\daterussian@modern}%
    \fi}
 
@@ -103,7 +103,7 @@
    \def\alsoname{см.~также}%
    \def\proofname{Доказательство}%
 }  
-\def\daterussian@old{
+\def\daterussian@old{%
       \def\today{\number\day%
       \space\ifcase\month\or%
       января\or
