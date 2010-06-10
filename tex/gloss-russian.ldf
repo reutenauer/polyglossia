@@ -11,27 +11,19 @@
   %TODO localalph={russian@alph,russian@Alph}
 }
 
-\def\tmp@old{old}
 \define@key{russian}{spelling}[modern]{%
-   \def\@tmpa{#1}%
-   \ifx\@tmpa\tmp@old
-    \def\captionsrussian{\captionsrussian@old}%
-    \def\daterussian{\daterussian@old}%
-   \else%
-     \def\captionsrussian{\captionsrussian@modern}%
-     \def\daterussian{\daterussian@modern}%
-   \fi}
+  \ifstrequal{#1}{old}%
+    {\def\captionsrussian{\captionsrussian@old}%
+     \def\daterussian{\daterussian@old}}%
+    {\def\captionsrussian{\captionsrussian@modern}%
+     \def\daterussian{\daterussian@modern}}%
+}
 
-%TODO: enable key to switch between latin and cyrillic \alph
-\def\tmp@latin{latin}
-\newif\iflatin@numerals
-\define@key{russian}{numerals}[russian]{%
-   \def\@tmpa{#1}%
-   \ifx\@tmpa\tmp@latin
-     \latin@numeralstrue
-   \else
-     \latin@numeralsfalse
-   \fi
+\newif\ifcyrillic@numerals
+\define@key{russian}{numerals}[latin]{%
+   \ifstrequal{#1}{cyrillic}%
+      {\cyrillic@numeralstrue}
+      {\cyrillic@numeralsfalse}
 }
 
 \setkeys{russian}{spelling,numerals}
@@ -139,37 +131,41 @@
    \def\preparagraph{}%
    \def\presubparagraph{}}
 
+\def\Asbuk#1{\expandafter\russian@Alph\csname c@#1\endcsname}
 \def\russian@Alph#1{\ifcase#1\or
    А\or Б\or В\or Г\or Д\or Е\or Ж\or
    З\or И\or К\or Л\or М\or Н\or О\or
    П\or Р\or С\or Т\or У\or Ф\or Х\or
    Ц\or Ч\or Ш\or Щ\or Э\or Ю\or Я\else\xpg@ill@value{#1}{russian@Alph}\fi}
-\def\russian@alph#1{\ifcase#1\or 
+\def\asbuk#1{\expandafter\russian@alph\csname c@#1\endcsname}
+\def\russian@alph#1{\ifcase#1\or
    а\or б\or в\or г\or д\or е\or ж\or
    з\or и\or к\or л\or м\or н\or о\or
    п\or р\or с\or т\or у\or ф\or х\or
    ц\or ч\or ш\or щ\or э\or ю\or я\else\xpg@ill@value{#1}{russian@alph}\fi}
 
 \def\russian@numbers{%
-   \let\latin@Alph\@Alph% 
-   \let\latin@alph\@alph% 
-   \let\@Alph\russian@Alph%
-   \let\@alph\russian@alph%
+   \let\latin@alph\@alph%
+   \let\latin@Alph\@Alph%
+   \ifcyrillic@numerals
+     \let\@alph\russian@alph%
+     \let\@Alph\russian@Alph%
+   \fi
 }
 
 \def\norussian@numbers{%
-   \let\@Alph\latin@Alph% 
    \let\@alph\latin@alph%
+   \let\@Alph\latin@Alph%
 }
 
 \def\noextras@russian{%
    \def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
-   \iflatin@numerals\else\norussian@numbers\fi
+   \ifcyrillic@numerals\norussian@numbers\fi
    }
 
 \def\blockextras@russian{%
    \russian@capsformat%
-   \iflatin@numerals\else\russian@numbers\fi
+   \ifcyrillic@numerals\russian@numbers\fi
    }
 
 \endinput
