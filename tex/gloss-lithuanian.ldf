@@ -49,4 +49,16 @@
    \def\today{\number\year~m.~\lithuanianmonth~\number\day~d.}%
 }
 
+\def\blockextras@lithuanian{%
+  \let\fnum@figure@orig\fnum@figure
+  \let\fnum@table@orig\fnum@table
+  \def\fnum@figure{\thefigure\nobreakspace\figurename}%
+  \def\fnum@table{\thetable\nobreakspace\tablename}%
+}
+
+\def\noblockextras@lithuanian{%
+  \let\fnum@figure\fnum@figure@orig
+  \let\fnum@table\fnum@table@orig
+}
+
 \endinput
