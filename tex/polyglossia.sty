@@ -577,6 +577,23 @@
      }%
 }
 
+% otherlanguage* is the environment equivalent of \foreignlanguage
+\expandafter\providecommand\csname otherlanguage*\endcsname{}
+\renewenvironment{otherlanguage*}[2][]{%
+   \ifcsundef{#2@loaded}%
+     {\xpg@nogloss{#2}}%
+     {\bgroup\def\languagename{#2}%
+      \setkeys{#2}{#1}%
+      \xpg@select@fontfamily{#2}%
+      \csuse@warn{#2@language}%
+      \csuse{date#2}%
+      \csuse{#2@numbers}%
+      \use@localhyphenmins{#2}%
+      \ifbool{#2@frenchspacing}{\frenchspacing}{\nonfrenchspacing}%
+      \csuse{inlineextras@#2}%
+     }%
+}{\egroup}
+
 %Hook that other package authors can use
 %(for instance biblatex):
 \newcommand*{\xpg@hook@setlanguage}{}
