@@ -280,7 +280,7 @@
 % Common code for `\select@language' and `\foreignlanguage'.
 \newcommand{\select@@language}[1]{%
   \edef\languagename{#1}%
-  \csuse@warn{#1@font}%
+  \csuse@warn{#1font}%
   \csuse@warn{#1@language}%
   \csuse{date#1}%
   \csuse{#1@numbers}%
