@@ -3,6 +3,7 @@
 \PolyglossiaSetup{basque}{
   hyphennames={basque},
   hyphenmins={2,2},
+  indentfirst=true,
   fontsetup=true,
 }
 
