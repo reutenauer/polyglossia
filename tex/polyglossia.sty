@@ -134,7 +134,7 @@
 %% langtag : the OpenType tag for the language
 %% hyphenmins : the hyphenmins for this language (comma-sep list of two integers)
 %% frenchspacing : boolean
-%% frenchindent : boolean
+%% indentfirst : boolean
 %% fontsetup : boolean
 %% TODO: nouppercase : boolean (for scripts like Arabic, Devanagari, etc which have no concept of uppercase/lowercase)
 %% TODO: localalph = {<alph_csname>,<Alph_csname>}
@@ -147,8 +147,8 @@
   \providetoggle{#1@latin}\toggletrue{#1@latin}%
   \providetoggle{#1@scriptlangequal}% whether lang and script names are same: e.g. Hebrew, Arabic
   \providebool{#1@fontsetup}%
+  \providebool{#1@indentfirst}%
   \providebool{#1@frenchspacing}%
-  \providebool{#1@frenchindent}%
   % we initialize these so that we can use \gappto below
   \csgdef{init@extras@#1}{}%
   \csgdef{init@noextras@#1}{}% we don't use this yet: remove?
@@ -215,8 +215,8 @@
     \ifbool{#1@frenchspacing}%
       {\csgappto{init@extras@#1}{\frenchspacing}}%
       {\csgappto{init@extras@#1}{\nonfrenchspacing}}}%
-  \define@boolkey[xpg@setup]{#1}[#1@]{frenchindent}[true]{%
-    \ifbool{#1@frenchspacing}%
+  \define@boolkey[xpg@setup]{#1}[#1@]{indentfirst}[true]{%
+    \ifbool{#1@indentfirst}%
       {\csgappto{init@extras@#1}{\french@indent}}%
       {\csgappto{init@extras@#1}{\nofrench@indent}}}%
 %  \define@choicekey*+[xpg@setup]{#1}{fontsetup}[\val\nr]{none,custom,auto}[none]%

@@ -6,7 +6,7 @@
   script=Latin,
   hyphennames={french,francais},
   frenchspacing=true,
-  frenchindent=true,
+  indentfirst=true,
   hyphenmins={2,2},
   fontsetup=true}
 

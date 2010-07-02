@@ -4,7 +4,7 @@
   hyphennames={breton},
   hyphenmins={2,2},
   frenchspacing=true,
-  frenchindent=true,
+  indentfirst=true,
   fontsetup=true,
 }
 

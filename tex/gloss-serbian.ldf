@@ -9,7 +9,7 @@
   langtag=SRB,
   hyphennames={serbian},
   hyphenmins={2,2},
-  frenchindent=true,
+  indentfirst=true,
   fontsetup=false
   %TODO localalph
 }
