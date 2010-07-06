@@ -6,7 +6,7 @@
   langtag=RUS,
   hyphennames={russian},
   hyphenmins={2,2},
-  frenchspacing,
+  frenchspacing=true,
   fontsetup
   %TODO localalph={russian@alph,russian@Alph}
 }

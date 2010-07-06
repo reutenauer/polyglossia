@@ -6,7 +6,7 @@
   langtag=BGR,
   hyphennames={bulgarian},
   hyphenmins={2,2},
-  frenchspacing,
+  frenchspacing=true,
   fontsetup
   %TODO localalph=bulgarian@alph
 }
