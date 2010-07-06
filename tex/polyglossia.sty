@@ -565,12 +565,8 @@
 \renewcommand{\foreignlanguage}[3][]{%
    \ifcsundef{#2@loaded}%
      {\xpg@nogloss{#2}}%
-     {{\def\languagename{#2}%
+     {{\select@@language{#2}%
       \setkeys{#2}{#1}%
-      \xpg@select@fontfamily{#2}%
-      \csuse@warn{#2@language}%
-      \csuse{date#2}%
-      \csuse{#2@numbers}%
       \use@localhyphenmins{#2}%
       \ifbool{#2@frenchspacing}{\frenchspacing}{\nonfrenchspacing}%
       \csuse{inlineextras@#2}%
@@ -582,13 +578,9 @@
 \expandafter\providecommand\csname otherlanguage*\endcsname{}
 \renewenvironment{otherlanguage*}[2][]{%
    \ifcsundef{#2@loaded}%
-     {\xpg@nogloss{#2}}%
-     {\bgroup\def\languagename{#2}%
+     {\bgroup\xpg@nogloss{#2}}%
+     {\bgroup\select@@language{#2}%
       \setkeys{#2}{#1}%
-      \xpg@select@fontfamily{#2}%
-      \csuse@warn{#2@language}%
-      \csuse{date#2}%
-      \csuse{#2@numbers}%
       \use@localhyphenmins{#2}%
       \ifbool{#2@frenchspacing}{\frenchspacing}{\nonfrenchspacing}%
       \csuse{inlineextras@#2}%
@@ -625,19 +617,25 @@
 
 \def\select@language#1{%
    \xpg@initial@setup%
-   \edef\languagename{#1}%
+   \select@@language{#1}%
    \ifcsundef{setRL}{}%
    {\iftoggle{#1@RL}{\setRL}{\setLR}}%
-   \xpg@select@fontfamily{#1}%
-   \csuse@warn{#1@language}%
-   \use@localhyphenmins{#1}%
    \csuse{captions#1}%
-   \csuse{date#1}%
-   \csuse{#1@numbers}%
    \local@marks{#1}%
    \csuse{init@extras@#1}%
    \csuse{blockextras@#1}%
 }
+
+% Common code for `\select@language' and `\foreignlanguage'.
+\newcommand{\select@@language}[1]{%
+  \edef\languagename{#1}%
+  \xpg@select@fontfamily{#1}%
+  \csuse@warn{#1@language}%
+  \csuse{date#1}%
+  \csuse{#1@numbers}%
+  \use@localhyphenmins{#1}%
+}
+
 
 \let\xpg@pop@language\relax
 
