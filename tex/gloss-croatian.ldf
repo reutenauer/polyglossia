@@ -3,6 +3,7 @@
 \PolyglossiaSetup{croatian}{
   hyphennames={croatian},
   hyphenmins={2,2},
+  indentfirst=true,
   fontsetup=true,
 }
 
