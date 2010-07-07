@@ -171,6 +171,8 @@
     {\xpg@fontsetup@auto{#1}}%
     {\xpg@info{Skipping automatic font setup for language #1}}%
   %% TODO? \toggletrue{#1@setup@done}%
+  % reinit \do
+  \renewcommand*{\do}[1]{\setotherlanguage{##1}}%
 }
 
 \def\xpg@first#1,#2{#1}
