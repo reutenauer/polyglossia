@@ -22,9 +22,9 @@
 \def\tmp@thai{thai}
 \define@key{thai}{numerals}[arabic]{%
 	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@thai\@thai@numeralstrue\else%
-	  \@thai@numeralsfalse\fi%
-	}
+	\ifx\@tmpa\tmp@thai\@thai@numeralstrue\else
+	  \@thai@numeralsfalse\fi
+}
 
 \setkeys{thai}{numerals}
 
@@ -51,7 +51,7 @@
    \def\headtoname{เรียน}%
    \def\proofname{พิสูจน์}%
    %\def\glossaryname{}%
-   }
+}
 \def\datethai{%   
    \def\thai@month{%
      \ifcase\month\or
@@ -62,7 +62,7 @@
    \thai@year=\year%
    \advance\thai@year by 543%
    \def\today{\thainumber\day \space \thai@month\space พ.ศ.~\thainumber\thai@year}%
-   }
+}
 
 %NB: thai-latex had "plus 0.6pt", but .4em appears to give better results
 % FIXME to avoid name clashes, rename \wbr to \wordbreak or \thaiworkbreak ?
@@ -80,10 +80,10 @@
 }
 
 \def\thainumber#1{%
-  \if@thai@numerals%
+  \if@thai@numerals
     \thaidigits{\number#1}%
     %%{\protect\addfontfeature{Mapping=thaidigits}\protect\number#1}
-  \else%
+  \else
     \number#1%
     %%{\protect\reset@font\number#1}
   \fi}
@@ -103,35 +103,35 @@
 \def\thai@numbers{%
    \let\@latinalph\@alph%
    \let\@latinAlph\@Alph%
-   \if@thai@numerals%
+   \if@thai@numerals
      \let\@alph\@thaialph%
      \let\@Alph\@thaiAlph%
    \fi
-   }
+}
 \def\nothai@numbers{%
   \let\@alph\@latinalph%
   \let\@Alph\@latinAlph%
-  }
+}
 
 \def\thai@globalnumbers{%
    \let\orig@arabic\@arabic%
    \let\@arabic\thainumber%
    \renewcommand{\thefootnote}{\protect\thainumber{\c@footnote}}%
-   }
+}
 \def\nothai@globalnumbers{%
    \let\@arabic\orig@arabic%
    \renewcommand\thefootnote{\protect\number{\c@footnote}}%
-   }
+}
 
 \def\blockextras@thai{%
 %%TODO \XeTeXlinebreaklocales "th"% uses ICU to find line breaks on the basis of a dictionary lookup-- make this optional? (in case a user might prefer a preprocessor
    \let\orig@baselinestrech\baselinestretch%
    \renewcommand{\baselinestretch}{1.2}%
-   }
+}
 \def\noblockextras@thai{%
 %%TODO \XeTeXlinebreaklocales "en"%
    \let\baselinestrech\orig@baselinestretch%
-   }
+}
 
 \endinput
 
