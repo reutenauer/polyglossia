@@ -4,7 +4,8 @@
   script=Lao,
   scripttag=lao,
   hyphennames={lao},
-  fontsetup=true
+  hyphenmins={1,1},
+  fontsetup=true,
   %TODO localalph={xxx@alph,xxx@Alph}
   %TODO localdigits=laonumber
 }
@@ -13,9 +14,9 @@
 \def\tmp@lao{lao}
 \define@key{lao}{numerals}[arabic]{%
 	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@lao\@lao@numeralstrue\else%
-	  \@lao@numeralsfalse\fi%
-	}
+	\ifx\@tmpa\tmp@lao\@lao@numeralstrue\else
+	  \@lao@numeralsfalse\fi
+}
 
 \setkeys{lao}{numerals}
 
@@ -43,6 +44,23 @@
   \def\proofname{ຂໍ້ພິສູດ}%
   \def\glossaryname{ປະມວນສັບ}% 
 }
+\def\datelao{%   
+   \def\lao@month{%
+     \ifcase\month\or
+      ມັງກອນ\or
+      ກຸມພາ\or
+      ມີນາ\or
+      ເມສາ\or
+      ພຶດສະພາ\or
+      ມິຖຸນາ\or
+      ກໍລະກົດ\or
+      ສິງຫາ\or
+      ກັນຍາ\or
+      ຕຸລາ\or
+      ພະຈິກ\or
+      ທັນວາ\fi}%
+   \def\today{\laonumber\day \space \lao@month \space \laonumber\year}%
+}
 
 \def\laodigits#1{\expandafter\@lao@digits #1@}
 \def\@lao@digits#1{%
@@ -54,9 +72,9 @@
 }
 
 \def\laonumber#1{%
-  \if@lao@numerals%
+  \if@lao@numerals
     \laodigits{\number#1}%
-  \else%
+  \else
     \number#1%
   \fi}
 
