@@ -4,6 +4,8 @@
 \RequirePackage{etoolbox}
 \RequirePackage{makecmds}
 \RequirePackage{fontspec}[2010/06/08]% v2.0
+% fontspec now uses LaTeX3 packages such as expl3, so we need this:
+% TODO is is possible to localize this further?
 \ExplSyntaxOn
 
 \ifcsundef{newXeTeXintercharclass}{%
@@ -139,6 +141,7 @@
 %% TODO: nouppercase : boolean (for scripts like Arabic, Devanagari, etc which have no concept of uppercase/lowercase)
 %% TODO: localalph = {<alph_csname>,<Alph_csname>}
 %% TODO: localnumber = <csname>
+%%       or even better localdigits = {0123456789} for fully automatic setup
 
 \newcommand*\PolyglossiaSetup[2]{%
   %define booleans etoolbox style and set defaults
@@ -649,10 +652,10 @@
 
 \newcommand{\setlocalhyphenmins}[3]{%
    \expandafter\ifx\csname l@#1\endcsname\relax%
-     \xpg@warning{\string\setlocalhyphenmin useless for unknown language #1}%
+     \xpg@warning{\string\setlocalhyphenmin\space useless for unknown language #1}%
    \else
       \expandafter\ifx\csname l@#1\endcsname\l@nohyphenation%
-        \xpg@warning{\string\setlocalhyphenmin useless for unhyphenated language #1}%
+        \xpg@warning{\string\setlocalhyphenmin\space useless for unhyphenated language #1}%
       \else
       \providehyphenmins{#1}{#2#3}%
       \fi
