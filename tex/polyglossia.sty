@@ -23,6 +23,12 @@
 \providecommand*{\do}[1]{}%
 
 %% custom message macros
+\providecommand*{\xpg@error}[1]{%
+   %\ExplSyntaxOff\ExplSyntaxNamesOff
+   \PackageError{polyglossia}{#1}{}%
+   %\ExplSyntaxOn\ExplSyntaxNamesOn
+}
+
 \providecommand*{\xpg@warning}[1]{%
    \PackageWarning{polyglossia}%
    {#1}}
