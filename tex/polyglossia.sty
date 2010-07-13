@@ -399,9 +399,8 @@
 %%% END OF PolyglossiaSetup
 
 %% ensure localization of \markright and \markboth commands
-%TODO change this to a boolean for consistency?
-\define@key{polyglossia}{localmarks}[on]{%
-   \ifstrequal{#1}{on}{%
+\define@boolkey{polyglossia}[xpg@]{localmarks}[true]{%
+   \ifbool{xpg@localmarks}{%
       \def\local@marks##1{%
          \def\markboth####1####2{%
             \begingroup%
@@ -429,10 +428,10 @@
                {\protect\@@ensure@maindir{####3}}}}}
     }{% else
       \def\local@marks##1{}
-      \xpg@info{Option:~ localmarks=off}
+      \xpg@info{Option:~ nolocalmarks}
     }
 }
-\setkeys{polyglossia}{localmarks=on}
+\setkeys{polyglossia}{localmarks=true}
 
 % to reset the intercharclass of a character to "normal"
 \newXeTeXintercharclass\xpg@normalclass %TODO
@@ -543,7 +542,7 @@
   \letcs{\rmfamily}{#1@font@rm}%
   \letcs{\sffamily}{#1@font@sf}%
   \letcs{\ttfamily}{#1@font@tt}%
-  \def\normalfont{\normalfontlatin\xpg@select@fontfamily{#1}}% <<< FIXME!
+  \def\normalfont{\normalfontlatin\xpg@select@fontfamily{#1}}%
 }
 
 \let\@@fterindentfalse\@afterindentfalse
