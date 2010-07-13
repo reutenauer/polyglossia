@@ -718,6 +718,8 @@
    \gdef\@font@warning#1{\relax}% no latex font warnings
    \gdef\zf@PackageInfo#1{\relax}% no fontspec info
    \gdef\xpg@info#1{\relax}}% no polyglossia info
+%
+% FIXME these should also be loaded \AtEndOfPackage !!!
 \def\xpg@option#1#2{%
   \ifcsundef{xpg@main@language}{\setdefaultlanguage}{\setotherlanguage}%
     [#1]{#2}}
@@ -731,6 +733,7 @@
 \DeclareOption{polygreek}{\xpg@option{variant=poly}{greek}}
 \DeclareOption{monogreek}{\xpg@option{variant=mono}{greek}}
 \DeclareOption{ancientgreek}{\xpg@option{variant=ancient}{greek}}
+%% TODO add warning message that this approach is deprecated <<<<<<<<<<<<<<
 \DeclareOption*{%
   \edef\@temp{%
     \noexpand\ifcsundef{xpg@main@language}%
