@@ -24,22 +24,16 @@
 
 %% custom message macros
 \providecommand*{\xpg@error}[1]{%
-   %\ExplSyntaxOff\ExplSyntaxNamesOff
    \PackageError{polyglossia}{#1}{}%
-   %\ExplSyntaxOn\ExplSyntaxNamesOn
 }
 
 \providecommand*{\xpg@warning}[1]{%
-   %\ExplSyntaxOff\ExplSyntaxNamesOff
    \PackageWarning{polyglossia}{#1}%
-   %\ExplSyntaxOn\ExplSyntaxNamesOn
 }
 
 \providecommand*{\xpg@info}[1]{%
-   %\ExplSyntaxOff\ExplSyntaxNamesOff
    \PackageInfo{polyglossia}%
    {#1\@gobble}%
-   %\ExplSyntaxOn\ExplSyntaxNamesOn
 } %% the \@gobble is to prevent displaying the line nr
 
 %TODO change all instances of \xpg@nopatterns in gloss-*.ldf files
