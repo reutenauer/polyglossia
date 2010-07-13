@@ -5,7 +5,7 @@
   scripttag=ethi,
   langtag=AMH,
   hyphennames={amharic,nohyphenation},
-  hyphenmins={2,2},
+  %hyphenmins={2,2},
   fontsetup=true,
   %TODO localalph=ethnum
 }
