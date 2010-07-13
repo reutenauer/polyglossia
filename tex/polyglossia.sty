@@ -166,7 +166,7 @@
   % we initialize these so that we can use \gappto below
   \csgdef{init@extras@#1}{}%
   \csgdef{init@noextras@#1}{}% we don't use this yet: remove?
-  \csgdef{xpg@languagename@#1}{\xpg@uppercasefirst{#1}}%
+  \csgdef{xpg@langname@#1}{\xpg@uppercasefirst{#1}}%
   %needed for docvslist with hyphennames key:
   \renewcommand*{\do}[1]{%
     \ifcsdef{l@#1}{}{%
@@ -197,12 +197,12 @@
     \ifstrequal{##1}{Latin}%
       {\toggletrue{#1@latin}}%
       {\togglefalse{#1@latin}}%
-    \csgdef{xpg@scriptname@#1}{##1}
+    \csgdef{xpg@scriptname@#1}{##1}%
     \csgdef{xpg@scriptname@#1@lc}{\xpg@lowercasefirst{##1}}}%
   \define@key[xpg@setup]{#1}{scripttag}{%
     \csgdef{xpg@scripttag@#1}{##1}}%
   \define@key[xpg@setup]{#1}{language}{%
-    \csgdef{xpg@languagename@#1}{##1}}%
+    \csgdef{xpg@langname@#1}{##1}}%
   \define@key[xpg@setup]{#1}{langtag}{%
     \csgdef{xpg@langtag@#1}{##1}}%
   \define@key[xpg@setup]{#1}{hyphennames}[{#1}]{%
@@ -211,7 +211,7 @@
     % we assign it to nohyphenation
     % we do this here in case the hyphennames key was omitted
     \ifcsundef{l@#1}%
-      {\xpg@nopatterns{\csname xpg@languagename@#1\endcsname}%
+      {\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
        \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}{}%
     \csdef{#1@language}{\language=\csname l@#1\endcsname}%
     }%
@@ -259,64 +259,69 @@
 
 \def\xpg@addfontfeature@lang#1#2{% #1 is langtag, #2 is langname
   % Turkish is a special case: tag can be TRK or TUR
-  \ifstrequal{#2}{Turkish}%
-    {\fontspec_if_language:nTF {TRK}%
+  \edef\tmp@Turkish{Turkish}%
+  \edef\tmp@@langname{#2}%
+  %  \ifstrequal{#2}{Turkish}%
+  \ifx\tmp@@langname\tmp@Turkish
+    \fontspec_if_language:nTF {TRK}%
       {\addfontfeature{Language=Turkish}}%
       {\fontspec_if_language:nTF {TUR}%
         {\addfontfeature{Language=Turkish}}%
-        {}}}%
+        {}}%
     % else not Turkish
-    {\fontspec_if_language:nTF {#1}%
-      {\addfontfeature{Language=#2}}%
+  \else
+     \edef\tmp@@langparam{Language=#2}%
+     \expandafter\expandafter\expandafter\fontspec_if_language:nTF \expandafter{#1}%
+      {\expandafter\expandafter\expandafter\addfontfeature\expandafter{\tmp@@langparam}}%
       {}%
-    }%
+  \fi
 }
 
 \def\xpg@addfontfeature@script#1#2{% #1 is scripttag, #2 is scriptname
-  \fontspec_if_script:nTF {#1}{\addfontfeature{Script=#2}}%
-    {\PackageError{polyglossia}{^^J
-  The current roman font does not contain the #2 script!^^J
-  Please define \expandafter\string\csname \xpg@lowercasefirst{#2}font\endcsname\space with \string\newfontfamily}}%
+  \edef\tmp@@scriptparam{Script=#2}%
+  \expandafter\expandafter\expandafter\fontspec_if_script:nTF \expandafter{#1}%
+    {\expandafter\expandafter\expandafter\addfontfeature\expandafter{\tmp@@scriptparam}}%
+    {\xpg@error{^^J
+  The~ current~ roman~ font~ does~ not~ contain~ the~ \expandafter\noexpand#2 ~ script!^^J
+  Please~ define~ \expandafter\string\csname \xpg@lowercasefirst{#2}font\endcsname\space with~ \string\newfontfamily}}%
 }
 
 \def\xpg@fontsetup@latin#1{%
   \begingroup
-  \edef\tmp@lang@tag{\csuse{xpg@langtag@#1}}%
-  \edef\tmp@langname{\csuse{xpg@languagename@#1}}%
-  %%\xpg@info{\string\tmp@lang@tag\space is "\tmp@lang@tag"}%
-  %%\xpg@info{\string\tmp@langname\space is "\tmp@langname"}%
   \csgdef{#1@font@rm}{%
     \ifcsdef{#1font}{\csname #1font\endcsname}%
-      {\rmfamilylatin%
-      \ifdefvoid{\tmp@lang@tag}{}{%
-        \ifdefvoid{\tmp@langname}{}{\xpg@addfontfeature@lang{\tmp@lang@tag}{\tmp@langname}}%
+      {\edef\tmp@langtag{\csuse{xpg@langtag@#1}}%
+       \edef\tmp@langname{\csuse{xpg@langname@#1}}%
+       \rmfamilylatin%
+        \ifcsvoid{xpg@langtag@#1}{}{%
+          \ifcsvoid{xpg@langname@#1}{}{%
+           \xpg@addfontfeature@lang{\tmp@langtag}{\tmp@langname}}%
       }}}%
   \csgdef{#1@font@sf}{%
     \ifcsdef{#1fontsf}{\csname #1fontsf\endcsname}%
-      {\sffamilylatin%
-      \ifdefvoid{\tmp@lang@tag}{}{%
-        \ifdefvoid{\tmp@langname}{}{\xpg@addfontfeature@lang{\tmp@lang@tag}{\tmp@langname}}%
+      {\edef\tmp@langtag{\csuse{xpg@langtag@#1}}%
+       \edef\tmp@langname{\csuse{xpg@langname@#1}}%
+       \sffamilylatin%
+      \ifcsvoid{xpg@langtag@#1}{}{%
+        \ifcsvoid{xpg@langname@#1}{}{%
+           \xpg@addfontfeature@lang{\tmp@langtag}{\tmp@langname}}%
       }}}%
   \csgdef{#1@font@tt}{%
     \ifcsdef{#1fonttt}{\csname #1fonttt\endcsname}%
-      {\ttfamilylatin%
-      \ifdefvoid{\tmp@lang@tag}{}{%
-        \ifdefvoid{\tmp@langname}{}{\xpg@addfontfeature@lang{\tmp@lang@tag}{\tmp@langname}}%
+      {\edef\tmp@langtag{\csuse{xpg@langtag@#1}}%
+       \edef\tmp@langname{\csuse{xpg@langname@#1}}%
+       \ttfamilylatin%
+      \ifcsvoid{xpg@langtag@#1}{}{%
+        \ifcsvoid{xpg@langname@#1}{}{%
+           \xpg@addfontfeature@lang{\tmp@langtag}{\tmp@langname}}%
       }}}%
   \endgroup
 }
 
 \def\xpg@fontsetup@nonlatin#1{%
   \begingroup
-  \edef\tmp@script@tag{\csuse{xpg@scripttag@#1}}% eg cyrl
-  \edef\tmp@scriptname{\csuse{xpg@scriptname@#1}}% eg Cyrillic
-  \edef\tmp@lang@tag{\csuse{xpg@langtag@#1}}% eg UKR
-  \edef\tmp@langname{\csuse{xpg@languagename@#1}}% eg Ukrainian
   \edef\tmp@langname@lc{#1}% eg ukrainian
   \edef\tmp@scriptname@lc{\csuse{xpg@scriptname@#1@lc}}% eg cyrillic
-  \edef\tmp@scriptfont{\expandafter\noexpand\csname\tmp@scriptname@lc font\endcsname}%
-  \edef\tmp@scriptfontsf{\expandafter\noexpand\csname\tmp@scriptname@lc fontsf\endcsname}%
-  \edef\tmp@scriptfonttt{\expandafter\noexpand\csname\tmp@scriptname@lc fonttt\endcsname}%
   \ifx\tmp@scriptname@lc\tmp@langname@lc
     \toggletrue{#1@scriptlangequal}%
   \else
@@ -325,41 +330,74 @@
   \csgdef{#1@font@rm}{%
     \ifcsdef{#1font}%
       {\@nameuse{#1font}}%
-      {\iftoggle{#1@scriptlangequal}%
+      {\edef\tmp@scripttag{\csuse{xpg@scripttag@#1}}% eg cyrl
+       \edef\tmp@scriptname{\csuse{xpg@scriptname@#1}}% eg Cyrillic
+       \edef\tmp@langtag{\csuse{xpg@langtag@#1}}% eg UKR
+       \edef\tmp@langname{\csuse{xpg@langname@#1}}% eg Ukrainian
+       \newtoggle{#1@use@script@font}%
+       \iftoggle{#1@scriptlangequal}%
         {\rmfamilylatin}%
-        {\ifdef{\tmp@scriptfont}%
-          {\tmp@scriptfont}%
-          {\rmfamilylatin}}%
-       \ifdefvoid{\tmp@script@tag}{}{%
-         \ifdefvoid{\tmp@scriptname}{}{\xpg@addfontfeature@script{\tmp@script@tag}{\tmp@scriptname}}}%
-       \ifdefvoid{\tmp@lang@tag}{}{%
-         \ifdefvoid{\tmp@langname}{}{\xpg@addfontfeature@lang{\tmp@lang@tag}{\tmp@langname}}}%
+        {\expandafter\ifcsname\csuse{xpg@scriptname@#1@lc} font\endcsname% eg \cyrillicfont
+           \toggletrue{#1@use@script@font}%
+           \expandafter\csname\csuse{xpg@scriptname@#1@lc} font\endcsname
+         \else
+           \rmfamilylatin
+         \fi}
+       \iftoggle{#1@use@script@font}{}{%
+         \ifcsvoid{xpg@scripttag@#1}{}{%
+           \ifcsvoid{xpg@scriptname@#1}{}{%
+             \xpg@addfontfeature@script{\tmp@scripttag}{\tmp@scriptname}}}}%
+       \ifcsvoid{xpg@langtag@#1}{}{%
+         \ifcsvoid{xpg@langname@#1}{}{%
+         \xpg@addfontfeature@lang{\tmp@langtag}{\tmp@langname}}}%
       }}%
   \csgdef{#1@font@sf}{%
     \ifcsdef{#1fontsf}%
       {\@nameuse{#1fontsf}}%
-      {\iftoggle{#1@scriptlangequal}%
+      {\edef\tmp@scripttag{\csuse{xpg@scripttag@#1}}% eg cyrl
+       \edef\tmp@scriptname{\csuse{xpg@scriptname@#1}}% eg Cyrillic
+       \edef\tmp@langtag{\csuse{xpg@langtag@#1}}% eg UKR
+       \edef\tmp@langname{\csuse{xpg@langname@#1}}% eg Ukrainian
+       \newtoggle{#1@use@script@fontsf}%
+       \iftoggle{#1@scriptlangequal}%
         {\sffamilylatin}%
-        {\ifdef{\tmp@scriptfontsf}%
-          {\tmp@scriptfontsf}%
-          {\sffamilylatin}}%
-       \ifdefvoid{\tmp@script@tag}{}{%
-         \ifdefvoid{\tmp@scriptname}{}{\xpg@addfontfeature@script{\tmp@script@tag}{\tmp@scriptname}}}%
-       \ifdefvoid{\tmp@lang@tag}{}{%
-         \ifdefvoid{\tmp@langname}{}{\xpg@addfontfeature@lang{\tmp@lang@tag}{\tmp@langname}}}%
+        {\expandafter\ifcsname\csuse{xpg@scriptname@#1@lc} fontsf\endcsname% eg \cyrillicfontsf
+           \toggletrue{#1@use@script@fontsf}%
+           \expandafter\csname\csuse{xpg@scriptname@#1@lc} fontsf\endcsname
+         \else
+           \sffamilylatin
+         \fi}
+       \iftoggle{#1@use@script@fontsf}{}{%
+         \ifcsvoid{xpg@scripttag@#1}{}{%
+           \ifcsvoid{xpg@scriptname@#1}{}{%
+             \xpg@addfontfeature@script{\tmp@scripttag}{\tmp@scriptname}}}}%
+       \ifcsvoid{xpg@langtag@#1}{}{%
+         \ifcsvoid{xpg@langname@#1}{}{%
+         \xpg@addfontfeature@lang{\tmp@langtag}{\tmp@langname}}}%
       }}%
   \csgdef{#1@font@tt}{%
     \ifcsdef{#1fonttt}%
       {\@nameuse{#1fonttt}}%
-      {\iftoggle{#1@scriptlangequal}%
+      {\edef\tmp@scripttag{\csuse{xpg@scripttag@#1}}% eg cyrl
+       \edef\tmp@scriptname{\csuse{xpg@scriptname@#1}}% eg Cyrillic
+       \edef\tmp@langtag{\csuse{xpg@langtag@#1}}% eg UKR
+       \edef\tmp@langname{\csuse{xpg@langname@#1}}% eg Ukrainian
+       \newtoggle{#1@use@script@fonttt}%
+       \iftoggle{#1@scriptlangequal}%
         {\ttfamilylatin}%
-        {\ifdef{\tmp@scriptfonttt}%
-          {\tmp@scriptfonttt}%
-          {\ttfamilylatin}}%
-       \ifdefvoid{\tmp@script@tag}{}{%
-         \ifdefvoid{\tmp@scriptname}{}{\xpg@addfontfeature@script{\tmp@script@tag}{\tmp@scriptname}}}%
-       \ifdefvoid{\tmp@lang@tag}{}{%
-         \ifdefvoid{\tmp@langname}{}{\xpg@addfontfeature@lang{\tmp@lang@tag}{\tmp@langname}}}%
+        {\expandafter\ifcsname\csuse{xpg@scriptname@#1@lc} fonttt\endcsname% eg \cyrillicfonttt
+           \toggletrue{#1@use@script@fonttt}%
+           \expandafter\csname\csuse{xpg@scriptname@#1@lc} fonttt\endcsname
+         \else
+           \ttfamilylatin
+         \fi}
+       \iftoggle{#1@use@script@fonttt}{}{%
+         \ifcsvoid{xpg@scripttag@#1}{}{%
+           \ifcsvoid{xpg@scriptname@#1}{}{%
+             \xpg@addfontfeature@script{\tmp@scripttag}{\tmp@scriptname}}}}%
+       \ifcsvoid{xpg@langtag@#1}{}{%
+         \ifcsvoid{xpg@langname@#1}{}{%
+         \xpg@addfontfeature@lang{\tmp@langtag}{\tmp@langname}}}%
       }}%
   \endgroup
 }
