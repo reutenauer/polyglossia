@@ -13,9 +13,15 @@
 
 \define@boolkey{english}[english@]{ordinalmonthday}[true]{}
 
-%% English is a special case in that \l@english is reserved for US English, so 
+%% English is a special case in that \l@english is reserved for US English, so
 %% we need to handle it differently
 \define@key{english}{variant}{%
+  %needs to be reset for loop over hyphennames below:
+  \renewcommand*{\do}[1]{%
+      \ifcsdef{l@#1}%
+        {\csletcs{l@english}{l@#1}\listbreak}%
+        {}%
+  }%
   \ifstrequal{#1}{uk}%
     {\@british@localetrue
      \xpg@info{Option: english variant=british}}%
@@ -50,6 +56,8 @@
        \adddialect\l@ukenglish\l@english\relax}{}%
     \gdef\english@language{\language=\l@ukenglish}%
   \fi
+  % and we reset \do to its previous definition here:
+  \renewcommand*{\do}[1]{\setotherlanguage{#1}}%
 }
 
 \def\captionsenglish{%
@@ -73,7 +81,7 @@
    \def\seename{see}%
    \def\alsoname{see also}%
    \def\proofname{Proof}%
-} 
+}
 \def\dateenglish{%
    \def\english@day{%
      \ifenglish@ordinalmonthday
