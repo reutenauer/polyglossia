@@ -1,9 +1,9 @@
 \ProvidesPackage{hijrical}
-        [2007/12/27 v0.1 %
+        [2010/07/12 v0.2 %
          Islamic calendar]
-%%FIXME \RequirePackage{bidi} : 
-%%TODO  \@ifpackageloaded{bidi}{}{\newif\if@RTL\@RTLfalse}
+\RequirePackage{calc}
 \RequirePackage{arabicnumbers}
+\@ifpackageloaded{bidi}{}{\newif\if@RTL\@RTLfalse}
 
 \@ifundefined{@Remainder}{\input{cal-util.def}}{}
 
