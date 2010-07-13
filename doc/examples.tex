@@ -1,7 +1,12 @@
 \documentclass[a4paper]{article}
+%temporary: prevents loading l3calc
+\makeatletter
+\expandafter\def\csname ver@l3calc.sty\endcsname{} 
+\makeatother
 \usepackage[no-math]{fontspec}
 \usepackage{xltxtra,url}
 \usepackage{polyglossia}
+\usepackage{trace}
 \setdefaultlanguage{french}
 \setotherlanguage[variant=british,ordinalmonthday=false]{english}
 \setotherlanguage[variant=poly]{greek}
@@ -18,7 +23,7 @@
 \newfontfamily\hebrewfont[Script=Hebrew]{David CLM}
 \newfontfamily\sanskritfont[Script=Devanagari]{Sanskrit 2003}
 \newfontfamily\thaifont[Script=Thai]{Norasi}%{Arial Unicode MS}
-\newfontfamily\thaanafont[Script=Thaana,WordSpace=2]{TITUS Cyberbit Basic}
+\newfontfamily\thaanafont[Script=Thaana,WordSpace=2]{TITUS Cyberbit Basic}%this font does not have OT script tags, but it still seems to work
 \newfontfamily\ethiopicfont[Script=Ethiopic]{Abyssinica SIL}
 \parskip 1.33\baselineskip
 %\newcommand\showhyphmin{\fbox{\the\lefthyphenmin\ \the\righthyphenmin}}
