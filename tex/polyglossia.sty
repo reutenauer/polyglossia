@@ -707,15 +707,6 @@
    \ifcsundef{#1hyphenmins}{}%
    {\expandafter\expandafter\expandafter\set@hyphenmins\csname #1hyphenmins\endcsname\relax}}
 
-%% patch lastpage to avoid problem with \thepage when \@arabic is redefined for non-Latin numbers
-%\@ifpackageloaded{lastpage}{%
-%\xpg@info{Redefining lastpage command \string\lastpage@putlabel}%
-%\def\lastpage@putlabel{\addtocounter{page}{-1}%
-%   \immediate\write\@auxout{\string
-%   \newlabel{LastPage}{{}{\number\c@page}}}%
-%   \addtocounter{page}{1}}}%
-%   {}
-%
 \define@boolkey{polyglossia}[system@]{babelshorthands}[false]{}
 
 %% Package Options %%
