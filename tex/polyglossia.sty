@@ -71,8 +71,8 @@
 
 %% == Utility macros ==
 %%   They are needed because \MakeUppercase and \MakeLowercase are protected,
-%%   but we need to change case while defining csnames when setting up fonts for 
-%%   non-Latin scripts. For instance with "Script=Arabic" we need to lowercase 
+%%   but we need to change case while defining csnames when setting up fonts for
+%%   non-Latin scripts. For instance with "Script=Arabic" we need to lowercase
 %%   "Arabic" to create \arabicfont.
 \def\xpg@uppercasefirst#1{\expandafter\xpg@@uppercasefirst #1}
 \def\xpg@@uppercasefirst#1{%
@@ -136,7 +136,7 @@
        \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
 }
 
-%% NEW EXPERIMENTAL SETUP INTERFACE FOR GLOSS FILES 
+%% NEW EXPERIMENTAL SETUP INTERFACE FOR GLOSS FILES
 %% options currently available:
 %% language : the name of the language (as understood by fontspec)
 %% hyphennames : the different hyphenation patterns to try (comma separated list)
@@ -222,7 +222,7 @@
         \toggletrue{#1@RL}%
         \ifcsundef{RTL}{\RequirePackage{bidi}}{}%
     \fi}%
-    {\xpg@warning{#1: Invalid value \val\space for key "direction"}}% 
+    {\xpg@warning{#1: Invalid value \val\space for key "direction"}}%
   \define@key[xpg@setup]{#1}{hyphenmins}[{2,3}]%
     {\edef\@tmpfirst{\xpg@first##1}%
      \edef\@tmpsecond{\xpg@second##1}%
@@ -375,9 +375,9 @@
             \begingroup%
                \let\label\relax \let\index\relax \let\glossary\relax%
                \unrestored@protected@xdef\@themark%
-         {{\foreignlanguage{##1}{%           
+         {{\foreignlanguage{##1}{%
             \protect\@@ensure@maindir{####1}}}%
-          {\foreignlanguage{##1}{% 
+          {\foreignlanguage{##1}{%
       \protect\@@ensure@maindir{####2}}}}%
                \@temptokena \expandafter{\@themark}%
                \mark{\the\@temptokena}%
@@ -428,7 +428,7 @@
      \xpg@info{Default~ language~ is~ #2.}
      \def\languagename{#2}%
       % This is needed because \arabic is a built-in LaTeX command:
-      % so now we have \begin{Arabic}... instead of \begin{arabic}...  
+      % so now we have \begin{Arabic}... instead of \begin{arabic}...
       \ifstrequal{#2}{arabic}%
       {\newenvironment{Arabic}[1][]{\begin{otherlanguage}[####1]{arabic}}%
         {\end{otherlanguage}}}%
@@ -535,7 +535,7 @@
       \ifx\@tmpb\@tmpa%
       \newenvironment{Arabic}[1][]{\begin{otherlanguage}[####1]{arabic}}%
          {\end{otherlanguage}}%
-      \else%   
+      \else
       \newenvironment{#2}[1][]{\begin{otherlanguage}[####1]{#2}}%
          {\end{otherlanguage}}%
       \fi
