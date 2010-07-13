@@ -9,8 +9,8 @@
 \ExplSyntaxOn
 
 \ifcsundef{newXeTeXintercharclass}{%
-  \xpg@error{Your xelatex format appears to be outdated!^^J
-    Please update your system and recreate it with fmtutil.}
+  \xpg@error{Your~ xelatex~ format~ appears~ to~ be~ outdated!^^J
+~~~~Please~ update~ your~ system~ and~ recreate~ it~ with~ fmtutil.}
   }{}
 
 %% This is for compatibility with Babel-aware package:
@@ -30,31 +30,36 @@
 }
 
 \providecommand*{\xpg@warning}[1]{%
-   \PackageWarning{polyglossia}%
-   {#1}}
+   %\ExplSyntaxOff\ExplSyntaxNamesOff
+   \PackageWarning{polyglossia}{#1}%
+   %\ExplSyntaxOn\ExplSyntaxNamesOn
+}
 
 \providecommand*{\xpg@info}[1]{%
+   %\ExplSyntaxOff\ExplSyntaxNamesOff
    \PackageInfo{polyglossia}%
-   {#1\@gobble}} %% the \@gobble is to prevent displaying the line nr
+   {#1\@gobble}%
+   %\ExplSyntaxOn\ExplSyntaxNamesOn
+} %% the \@gobble is to prevent displaying the line nr
 
 %TODO change all instances of \xpg@nopatterns in gloss-*.ldf files
 \providecommand*{\xpg@nopatterns@fallback}[2][nohyphenation]{%
-   \xpg@warning{No hyphenation patterns were loaded for `#2'\MessageBreak
-         I will use \string\language=\string\l@ #1\space instead}%
+   \xpg@warning{No~ hyphenation~ patterns~ were~ loaded~ for~ `#2'\MessageBreak
+         I~ will~ use~ \string\language=\string\l@ #1\space instead}%
    \expandafter\adddialect\csname l@#2\expandafter\endcsname\csname l@#1\endcsname\relax}
 
    \providecommand*{\xpg@nopatterns}[1]{%
-   \xpg@warning{No hyphenation patterns were loaded for `#1'\MessageBreak
-         I will use \string\language=\string\l@nohyphenation\space instead}%
+   \xpg@warning{No~ hyphenation~ patterns~ were~ loaded~ for~ `#1'\MessageBreak
+         I~ will~ use~ \string\language=\string\l@nohyphenation\space instead}%
    %%TODO? \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax
    }
 
 \def\xpg@ill@value#1#2{%
-  \xpg@warning{Illegal value (#1) for #2}}
+  \xpg@warning{Illegal~ value~ (#1)~ for~ #2}}
 
 %% use macro if defined, else warn that it is not
 \def\csuse@warn#1{%
-   \ifcsundef{#1}{\PackageWarning{polyglossia}{ \expandafter\string\csname #1\endcsname\space is not defined}}%
+   \ifcsundef{#1}{\xpg@warning{ \expandafter\string\csname #1\endcsname\space is~ not~ defined}}%
    {\csname #1\endcsname}}
 
 %% ensure directionality if bidi is loaded, else ignore
@@ -178,7 +183,7 @@
   % here we do the fontsetup:
   \ifbool{#1@fontsetup}%
     {\xpg@fontsetup@auto{#1}}%
-    {\xpg@info{Skipping automatic font setup for language #1}}%
+    {\xpg@info{Skipping~ automatic~ font~ setup~ for~ language~ #1}}%
   %% TODO? \toggletrue{#1@setup@done}%
   % reinit \do
   \renewcommand*{\do}[1]{\setotherlanguage{##1}}%
@@ -217,7 +222,7 @@
         \toggletrue{#1@RL}%
         \ifcsundef{RTL}{\RequirePackage{bidi}}{}%
     \fi}%
-    {\PackageWarning{polyglossia}{#1: Invalid value \val\space for key "direction"}}% 
+    {\xpg@warning{#1: Invalid value \val\space for key "direction"}}% 
   \define@key[xpg@setup]{#1}{hyphenmins}[{2,3}]%
     {\edef\@tmpfirst{\xpg@first##1}%
      \edef\@tmpsecond{\xpg@second##1}%
@@ -233,7 +238,7 @@
 %  \define@choicekey*+[xpg@setup]{#1}{fontsetup}[\val\nr]{none,custom,auto}[none]%
 %    %{\csgdef{#1@fontsetup}{\val}}%
 %    {\xpg@fontsetup{\val}{#1}}%
-%    {\PackageWarning{polyglossia}{Invalid value \val\space for key "fontsetup" in module "#1"}}%
+%    {\xpg@warning{Invalid value \val\space for key "fontsetup" in module "#1"}}%
   \define@boolkey[xpg@setup]{#1}[#1@]{fontsetup}[true]{}%
   %TODO assign csnames corr. to localized alph and Alph
   %  \define@key[xpg@setup]{#1}{localalph}[{#1@alph,#1@Alph}]{%
@@ -392,7 +397,7 @@
                {\protect\@@ensure@maindir{####3}}}}}
     }{% else
       \def\local@marks##1{}
-      \xpg@info{Option: localmarks=off}
+      \xpg@info{Option:~ localmarks=off}
     }
 }
 \setkeys{polyglossia}{localmarks=on}
@@ -406,8 +411,8 @@
 
 %we call this macro when a gloss file is not found for a given language
 \def\xpg@nogloss#1{%
-   \xpg@warning{File gloss-#1.ldf does not exist!^^J
-   I will nevertheless try to use hyphenation patterns for #1.}%
+   \xpg@warning{File~ gloss-#1.ldf~ does~ not~ exist!^^J
+   I~ will~ nevertheless~ try~ to~ use~ hyphenation~ patterns~ for~ #1.}%
   \PolyglossiaSetup{#1}{hyphenmins,hyphennames={#1},fontsetup=true}%
   % the above amounts to:
   %\ifcsundef{l@#1}%
@@ -420,7 +425,7 @@
    \IfFileExists{gloss-#2.ldf}%
    {\ifcsundef{#2@loaded}%
      {\input{gloss-#2.ldf}%
-     \xpg@info{Default language is #2.}
+     \xpg@info{Default~ language~ is~ #2.}
      \def\languagename{#2}%
       % This is needed because \arabic is a built-in LaTeX command:
       % so now we have \begin{Arabic}... instead of \begin{arabic}...  
@@ -436,7 +441,7 @@
             {\@ensure@LTR{\foreignlanguage[####1]{#2}{####2}}}%
           }% else bidi not loaded
           {\iftoggle{#2@RL}%
-            {\PackageError{polyglossia}{Language #2 is right-to-left, but bidi package was not loaded!}}%
+            {\xpg@error{Language~ #2~ is~ right-to-left,~ but~ bidi~ package~ was~ not~ loaded!}}%
             {\foreignlanguage[####1]{#2}{####2}}%
           }%
       }%
@@ -444,7 +449,7 @@
       \csgdef{#2@loaded}{}%
       \gdef\xpg@main@language{#2}%
       }%
-      {\PackageWarning{polyglossia}{gloss-#2.ldf is already loaded!}}%
+      {\xpg@warning{gloss-#2.ldf~ is~ already~ loaded!}}%:
       %% The following settings are for the default language and script:
       \iftoggle{#2@RL}{\@RTLmaintrue}{}% this tells bidi.sty that the document is RTL
       \AtBeginDocument{%
@@ -459,7 +464,7 @@
 
 \newcommand{\resetdefaultlanguage}[2][]{%
     \ifcsundef{#2@loaded}{%
-     \PackageError{polyglossia}{gloss-#2.ldf is not loaded!}}%
+     \xpg@error{gloss-#2.ldf~ is~ not~ loaded!}}%
     {\csuse{no\xpg@main@language @globalnumbers}% disable globalnumbers of previously defined default language
     \csuse{noextras@\xpg@main@language}%
     \csuse{init@noextras@\xpg@main@language}%
@@ -541,14 +546,14 @@
             {\@ensure@LTR{\foreignlanguage[####1]{#2}{####2}}}%
           }% else bidi not loaded
           {\iftoggle{#2@RL}%
-            {\PackageError{polyglossia}{Language #2 is right-to-left, but bidi package was not loaded!}}%
+            {\xpg@error{Language~ #2~ is~ right-to-left,~ but~ bidi~ package~ was~ not~ loaded!}}%
             {\foreignlanguage[####1]{#2}{####2}}%
           }%
         }%
      \csletcs{local#2}{text#2}%
      \csgdef{#2@loaded}{}%
      }%
-     {\PackageWarning{polyglossia}{gloss-#2.ldf is already loaded!}}%
+     {\xpg@warning{gloss-#2.ldf~ is~ already~ loaded!}}%
    }%
    %ELSE
    {\xpg@nogloss{#2}}%
@@ -658,10 +663,10 @@
 
 \newcommand{\setlocalhyphenmins}[3]{%
    \expandafter\ifx\csname l@#1\endcsname\relax%
-     \xpg@warning{\string\setlocalhyphenmin\space useless for unknown language #1}%
+     \xpg@warning{\string\setlocalhyphenmin\space~ useless~ for~ unknown~ language~ #1}%
    \else
       \expandafter\ifx\csname l@#1\endcsname\l@nohyphenation%
-        \xpg@warning{\string\setlocalhyphenmin\space useless for unhyphenated language #1}%
+        \xpg@warning{\string\setlocalhyphenmin\space~ useless~ for~ unhyphenated~ language~ #1}%
       \else
       \providehyphenmins{#1}{#2#3}%
       \fi
