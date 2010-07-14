@@ -22,7 +22,7 @@
     pdfkeywords={xetex, xelatex, multilingual, babel, hyphenation}
     ]{hyperref}
 \usepackage[babelshorthands]{polyglossia}
-\usepackage{farsical}
+%\usepackage{farsical} <<< needs to be disabled otherwise we have too many counters!
 \setmainlanguage[variant=uk]{english}
 \setotherlanguages{arabic,hebrew,syriac,greek,russian,catalan}
 \newcommand*\Cmd[1]{\cmd{#1}\DescribeMacro{#1}\xspace}
@@ -751,7 +751,7 @@ itself a slight modification of ¦ftoday.sty¦ in Farsi\TeX.\footnote{ %
 	One day I may rewrite \pkg{farsical} from scratch using the algorithm in
 	Reingold \& Gershowitz (ref.~n.~\ref{reingold}).}
 Here we have renamed the command \cmd\ftoday\ to
-\Cmd\Jalalitoday. Example: today is \Jalalitoday.
+\Cmd\Jalalitoday. %Example: today is \Jalalitoday.
 
 
 %\section{Varia}
