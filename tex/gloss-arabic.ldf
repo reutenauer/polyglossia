@@ -15,6 +15,8 @@
   %TODO localnumber=arabicnumber
 }
 
+\newcommand*{\aemph}[1]{$\overline{\hboxR{#1}}$}
+
 \newif\ifeastern@numerals
 \def\tmp@mashriq{mashriq}
 \def\tmp@maghrib{maghrib}
@@ -93,7 +95,7 @@
   \space\HijriMonthArabic{\value{Hijrimonth}}\space\arabicnumber{\value{Hijriyear}}}}
 
 \def\captionsarabic{%
-  \def\prefacename{\@ensure@RTL{مدخل}}% 
+  \def\prefacename{\@ensure@RTL{مدخل}}%
   \def\refname{\@ensure@RTL{المراجع}}
   \def\abstractname{\@ensure@RTL{ملخص}}%
   \def\bibname{\@ensure@RTL{المصادر}}%
@@ -124,7 +126,7 @@
     \if@RTL%
        \arabicnumber\day\space\@@arabic@month{\month}%
         \space\arabicnumber\year%
-    \else% in LR environment we format the gregorian date within \textenglish 
+    \else% in LR environment we format the gregorian date within \textenglish
        \ifcsdef{english@loaded}{\textenglish{\today}}%else US format
        {\normalfontlatin\ifcase\month\or January\or February\or March\or April\or May\or June\or%
        July\or August\or September\or October\or November\or December\fi%
@@ -166,7 +168,7 @@
 %maghribi س -> ص ص -> ض ش -> س ض -> ظ ظ -> غ غ -> ش
 \def\abj@maghribi@num@ii#1{%
   \ifcase#1\or ي\or ك\or ل\or م\or ن%
-           \or ص\or ع\or ف\or ض\fi 
+           \or ص\or ع\or ف\or ض\fi
   \ifnum#1=\z@\abjad@zero\fi\abj@num@i}
 \def\abj@maghribi@num@iii#1{%
   \ifcase#1\or ق\or ر\or س\or ت\or ث%
