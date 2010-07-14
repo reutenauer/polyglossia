@@ -709,6 +709,8 @@
 
 \define@boolkey{polyglossia}[system@]{babelshorthands}[false]{}
 
+\@ifpackageloaded{bidi}{\newcommand*{\aemph}[1]{$\overline{\hboxR{#1}}$}}{}
+
 %% Package Options %%
 \DeclareOption{nolocalmarks}{\setkeys{polyglossia}{localmarks=off}}
 \DeclareOption{babelshorthands}{\setkeys{polyglossia}{babelshorthands=true}}

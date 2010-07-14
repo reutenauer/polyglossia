@@ -15,8 +15,6 @@
   %TODO localnumber=arabicnumber
 }
 
-\newcommand*{\aemph}[1]{$\overline{\hboxR{#1}}$}
-
 \newif\ifeastern@numerals
 \def\tmp@mashriq{mashriq}
 \def\tmp@maghrib{maghrib}
