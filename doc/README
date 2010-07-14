@@ -2,14 +2,13 @@
    ¦----------------------------------------------¦
    ¦                                              ¦
    ¦       THE POLYGLOSSIA PACKAGE v1.2.0         ¦
-   ¦                  (UNRELEASED)                ¦
    ¦                                              ¦
    ¦ Modern multilingual typesetting with XeLaTeX ¦
    ¦                                              ¦
    ¦----------------------------------------------¦
 
 This package for provides a complete Babel replacement for users of XeLaTeX.
-This version includes support for 66 different languages.
+This version includes support for 68 different languages.
 
 Polyglossia makes it possible to automate the following tasks:
 
@@ -52,10 +51,30 @@ http://github.com/fc7/polyglossia/issues
 
 CHANGES
 
-1.2.0 (unreleased)
+1.2.0 (14-07-2010)
+  * Adapted for fontspec 2.0 (will not work with earlier versions!)
   * New implementation of a \PolyglossiaSetup interface
-  * Many internal enhancements
-  * New gloss files for Occitan, Bengali, Malayalam, Marathi, Tamil, Telugu, Turkmen
+    that simplifies writing gloss-*.ldf files
+  * Many internal enhancements and refactoring
+    (including a patch by Dirk Ulrich)
+  * Improved automatic font setup when \<lang>font is not defined
+  * New environment otherlanguage* (env. equivalent of \foreignlanguage
+    (Enrico Gregorio)
+  * Bugfix to prevent bogus expansion of \{rm,sf,tt}family even in aux files
+    (Enrico Gregorio)
+  * New gloss files for Armenian, Bengali, Occitan, Bengali, Lao,
+    Malayalam, Marathi, Tamil, Telugu, and Turkmen
+    (thanks to various contributors, notably Kevin Godby and the Ubuntu Manual Project).
+  * New auxiliary packages 'devanagaridigits' and 'bengalidigits'
+  * hijrical no longer loads bidi and checks for incompatible l3calc
+  * Add Babel shorthands for Russian (based on a patch by Vladimir Lomov)
+  * Fix \fnum@{table,figure} for Lithuanian
+  * Various improvements in gloss-russian (provided by Vladimir Lomov and others)
+  * Corrected captions for Bahasai, Lithuanian, Russian, Croatian
+  * Add option indentfirst=true for Spanish, Croation and other languages
+    (NB: indentfirst was previously named frenchindent)
+  * New option 'script' for German: Setting script=fraktur modifies the captions
+    for typesetting in Fraktur.
 
 1.1.1 (23-03-2010)
   * Bugfix for French: explicit spaces before/after double punctuation
@@ -138,6 +157,6 @@ CHANGES
 
 
   ------------------------------
-   François Charette, Dec 2009
+   François Charette, July 2010
     <firmicus ατ gmx δοτ net>
   ------------------------------
