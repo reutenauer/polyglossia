@@ -328,7 +328,7 @@
        \edef\tmp@scriptname{\csuse{xpg@scriptname@#1}}% eg Cyrillic
        \edef\tmp@langtag{\csuse{xpg@langtag@#1}}% eg UKR
        \edef\tmp@langname{\csuse{xpg@langname@#1}}% eg Ukrainian
-       \newtoggle{#1@use@script@font}%
+       \providetoggle{#1@use@script@font}%
        \iftoggle{#1@scriptlangequal}%
         {\rmfamilylatin}%
         {\expandafter\ifcsname\csuse{xpg@scriptname@#1@lc} font\endcsname% eg \cyrillicfont
@@ -352,7 +352,7 @@
        \edef\tmp@scriptname{\csuse{xpg@scriptname@#1}}% eg Cyrillic
        \edef\tmp@langtag{\csuse{xpg@langtag@#1}}% eg UKR
        \edef\tmp@langname{\csuse{xpg@langname@#1}}% eg Ukrainian
-       \newtoggle{#1@use@script@fontsf}%
+       \providetoggle{#1@use@script@fontsf}%
        \iftoggle{#1@scriptlangequal}%
         {\sffamilylatin}%
         {\expandafter\ifcsname\csuse{xpg@scriptname@#1@lc} fontsf\endcsname% eg \cyrillicfontsf
@@ -376,7 +376,7 @@
        \edef\tmp@scriptname{\csuse{xpg@scriptname@#1}}% eg Cyrillic
        \edef\tmp@langtag{\csuse{xpg@langtag@#1}}% eg UKR
        \edef\tmp@langname{\csuse{xpg@langname@#1}}% eg Ukrainian
-       \newtoggle{#1@use@script@fonttt}%
+       \providetoggle{#1@use@script@fonttt}%
        \iftoggle{#1@scriptlangequal}%
         {\ttfamilylatin}%
         {\expandafter\ifcsname\csuse{xpg@scriptname@#1@lc} fonttt\endcsname% eg \cyrillicfonttt
