@@ -167,14 +167,17 @@ Language-specific options can be set or changed at any time by means of
 
 
 \subsection{The “Babel way”}
-As with \Babel, \pkg{polyglossia} also allows you to load language definition files
-as package options. In most cases, option \texttt{⟨lang⟩} will load the file
-\file{gloss-⟨lang⟩.ldf}. Note however that the \textit{first} language listed in \\
-\centerline{\cmd{\usepackage[lang1,lang2,…]{polyglossia}}}
-will be the default language for the document, which
-is the opposite convention of \Babel.
-Note also that this method may not work in some cases, and should be
-considered deprecated.
+\new{v1.2.0}
+{\color{red}\bfseries Warning}: \pkg{polyglossia} no longer supports loading
+language definition files as package options!
+%As with \Babel, \pkg{polyglossia} also allows you to load language definition files
+%as package options. In most cases, option \texttt{⟨lang⟩} will load the file
+%\file{gloss-⟨lang⟩.ldf}. Note however that the \textit{first} language listed in \\
+%\centerline{\cmd{\usepackage[lang1,lang2,…]{polyglossia}}}
+%will be the default language for the document, which
+%is the opposite convention of \Babel.
+%Note also that this method may not work in some cases, and should be
+%considered deprecated.
 
 \subsection{Supported languages}
 
@@ -187,11 +190,13 @@ that are explained in section \ref{specific} below.
 %albanian
 %amharic
 %\TX{arabic}
+%armenian
 %asturian
 %bahasai
 %bahasam
 %basque
-%brazil
+%\TX{bengali}
+%brazil[ian]
 %breton
 %bulgarian
 %\TX{catalan}
@@ -211,18 +216,22 @@ that are explained in section \ref{specific} below.
 %\TX{german}
 %\TX{greek}
 %\TX{hebrew}
-%hindi
+%\TX{hindi}
 %icelandic
 %interlingua
 %irish
 %italian
+%\TX{lao}
 %latin
 %latvian
 %lithuanian
 %\TX{lsorbian}
 %\TX{magyar}
+%malayalam
+%marathi
 %norsk
 %nynorsk
+%occitan
 %polish
 %portuges
 %romanian
@@ -236,27 +245,33 @@ that are explained in section \ref{specific} below.
 %spanish
 %swedish
 %\TX{syriac}
+%tamil
+%telugu
 %\TX{thai}
 %turkish
+%turkmen
 %ukrainian
 %urdu
 %\TX{usorbian}
+%vietnamese
 %welsh
-%%%%% the following table was automatically generated with "maketabular.pl 5 < above_input"
+%%%%% private note: the following table was automatically generated with "maketabular.pl 5 < above_input"
 \begin{tabular}{lllll}
 \hline
-albanian     & croatian       & \TX{german}   & \TX{magyar}  & slovenian     \\
-amharic      & czech          & \TX{greek}    & norsk        & spanish       \\
-\TX{arabic}  & danish         & \TX{hebrew}   & nynorsk      & swedish       \\
-asturian     & divehi         & hindi         & polish       & \TX{syriac}   \\
-bahasai      & \TX{dutch}     & icelandic     & portuges     & \TX{thai}     \\
-bahasam      & \TX{english}   & interlingua   & romanian     & turkish       \\
-basque       & \TX{esperanto} & irish         & \TX{russian} & ukrainian     \\
-brazil       & estonian       & italian       & samin        & urdu          \\
-breton       & \TX{farsi}     & latin         & sanskrit     & \TX{usorbian} \\
-bulgarian    & finnish        & latvian       & scottish     & welsh         \\
-\TX{catalan} & french         & lithuanian    & \TX{serbian} &               \\
-coptic       & galician       & \TX{lsorbian} & slovak       &               \\
+albanian     & croatian       & \TX{hebrew}   & norsk        & swedish       \\
+amharic      & czech          & \TX{hindi}    & nynorsk      & \TX{syriac}   \\
+\TX{arabic}  & danish         & icelandic     & occitan      & tamil         \\
+armenian     & divehi         & interlingua   & polish       & telugu        \\
+asturian     & \TX{dutch}     & irish         & portuges     & \TX{thai}     \\
+bahasai      & \TX{english}   & italian       & romanian     & turkish       \\
+bahasam      & \TX{esperanto} & \TX{lao}      & \TX{russian} & turkmen       \\
+basque       & estonian       & latin         & samin        & ukrainian     \\
+\TX{bengali} & \TX{farsi}     & latvian       & sanskrit     & urdu          \\
+brazil[ian]  & finnish        & lithuanian    & scottish     & \TX{usorbian} \\
+breton       & french         & \TX{lsorbian} & \TX{serbian} & vietnamese    \\
+bulgarian    & galician       & \TX{magyar}   & slovak       & welsh         \\
+\TX{catalan} & \TX{german}    & malayalam     & slovenian    &               \\
+coptic       & \TX{greek}     & marathi       & spanish      &               \\
 \hline
 \end{tabular}
 \caption{Languages currently supported in \pkg{polyglossia}}
@@ -270,22 +285,9 @@ The language definition files for Asturian\footnote{ %
 and Urdu\footnote{ %
   Provided by Kamal Abdali.}
 are new in version 1.1.1\new{v1.1.1}.
-
-Some package options are convenient shortcuts for loading languages with
-specific options:
-
-\begin{itemize}
-\item american = english with option ‘variant=american’
-\item USenglish = english with option ‘variant=american’
-\item UKenglish = english with option ‘variant=british’
-\item british = english with option ‘variant=british’
-\item australian = english with option ‘variant=australian’
-\item newzealand = english with option ‘variant=newzealand’
-\item ogerman = german with option ‘spelling=old’
-\item monogreek = greek with option ‘variant=monotonic’ (or ‘mono’)
-\item polygreek = greek with option ‘variant=polytonic’ (or ‘poly’)
-\item ancientgreek = greek with option ‘variant=ancient’
-\end{itemize}
+%
+Version 1.2\new{v1.2.0} adds support for Armenian, Bengali, Occitan, Bengali,
+Lao, Malayalam, Marathi, Tamil, Telugu, and Turkmen.
 
 Polyglossia can also be loaded with the option ‘babelshorthands’\new{v1.1.1}, which
 globally activates \Babel shorthands whenever available. Currently shorthands are
@@ -389,6 +391,9 @@ For instance, if the default roman font defined by \cmd\setromanfont\
 does not support Greek, then one can define the font used to display Greek with:\\
 \centerline{ \cmd\newfontfamily\cmd{\greekfont[⟨options⟩]\{⟨font⟩\}}. }
 See the \pkg{fontspec} documentation for more information.
+If a specific sans or monospace fonts is needed for a particular script or language,
+it can be specified by means of \new{v1.2.0}
+¦\⟨script⟩fontsf¦\ or ¦\⟨language⟩fontsf¦ and ¦\⟨script⟩fonttt¦\ or ¦\⟨language⟩fonttt¦, respectively.
 
 Whenever a new language is activated, \pkg{polyglossia} will first check whether
 a font has been defined for that language or – for languages in non-Latin scripts –
@@ -424,6 +429,12 @@ The default value of each option is given in italic.
 \textbf{Commands}:
 	\begin{itemize}
 	\item \Cmd\abjad and \Cmd\abjadmaghribi (see section \ref{abjad})
+	\end{itemize}
+
+\subsection{bengali}\label{bengali}\new{v1.2.0}
+\textbf{Options}:
+	\begin{itemize}
+    \item \TB{numerals} = Western or \textit{Devanagari}
 	\end{itemize}
 
 \subsection{catalan}\label{catalan}
@@ -484,11 +495,11 @@ The default value of each option is given in italic.
 %\subsection{french}\label{french}
 %\textbf{Options}:
 %	\begin{itemize}
-%    \item \TB{espacedeuxpoints} = thick or half \new{v1.2}
+%    \item \TB{espacedeuxpoints} = thick or half \new{v1.2.x} ???
 %  \footnote{ %
 %    Can be customized by redefining \french@colonspace }
 %	\end{itemize}
-% 
+%
 
 \subsection{german}\label{german}
 \textbf{Options}:
@@ -522,6 +533,8 @@ The default value of each option is given in italic.
 		\item  ¦"<¦ for French left double quotes («)
 		\item  ¦">¦ for French right double quotes (»).
 		\end{itemize}
+  \item\TB{script} = \textit{latin} or fraktur.\new{v1.2.0}
+    Setting script=fraktur modifies the captions for typesetting German in Fraktur.
 	\end{itemize}
 
 \subsection{greek}\label{greek}
@@ -552,6 +565,17 @@ The default value of each option is given in italic.
 	\item \Cmd\hebrewnumeral\ (= \Cmd\hebrewalph) (see section \ref{abjad}).
 	\end{itemize}
 
+\subsection{hindi}\label{hindi}\new{v1.2.0}
+\textbf{Options}:
+	\begin{itemize}
+    \item \TB{numerals} = Western or \textit{Devanagari}
+	\end{itemize}
+
+\subsection{lao}\label{lao}\new{v1.2.0}
+\textbf{Options}:
+	\begin{itemize}
+	\item \TB{numerals} = lao or \textit{arabic}
+	\end{itemize}
 
 \subsection{lsorbian and usorbian}\label{lsorbian}\label{usorbian}
 \textbf{Commands}:
@@ -576,10 +600,11 @@ The default value of each option is given in italic.
 \subsection{sanskrit}\label{sanskrit}
 \textbf{Options}:
 	\begin{itemize}
-	\item \TB{Script} (default = Devanagari). \new{1.0.2}
+	\item \TB{Script} (default = Devanagari). \new{v1.0.2}
 	The value is passed to \pkg{fontspec} in cases where ¦\sanskritfont¦ or
 	¦\devanagarifont¦ are not defined. This can be useful if you typeset
 	Sanskrit texts in scripts other than Devanagari.
+  %TODO \item Numerals <<<<
 	\end{itemize}
 
 \subsection{serbian}\label{serbian}
@@ -638,7 +663,7 @@ simple \TeX\ macros. This prevents some problems that occur when the value of a
 counter has to be written and read from auxiliary files.\footnote{ %
   For instance the package \pkg{lastpage} did not work with \pkg{polyglossia} in situations
   where the display of counters was redefined to include a font-switching command.}
-These macros (currently \Cmd\arabicdigits, \Cmd\farsidigits\ and \Cmd\thaidigits\ are provided) 
+These macros (currently \Cmd\arabicdigits, \Cmd\farsidigits\ and \Cmd\thaidigits\ are provided)
 are also available to the users. For instance in an Arabic environment
 ¦\arabicdigits{9182/738543-X}¦ yields
 \textarabic{\arabicdigits{9182/738543-X}}.
@@ -662,9 +687,9 @@ of the \textit{abjad} numerals are obtained with the \Cmd\abjadmaghribi\ command
 Example: ¦\abjadmaghribi{1863}¦ yields {\arabicfont\abjadmaghribi{1863}}.
 
 The code for Hebrew numerals, which was incorrect in previous versions, was
-ported from the implementation in \Babel with v1.1.1\new{v1.1.1}, and the 
+ported from the implementation in \Babel with v1.1.1\new{v1.1.1}, and the
 user interface is identical to the one in \Babel.
-The commands \Cmd\hebrewnumeral, \Cmd\Hebrewnumeral and \Cmd\Hebrewnumeralfinal\ behave exactly 
+The commands \Cmd\hebrewnumeral, \Cmd\Hebrewnumeral and \Cmd\Hebrewnumeralfinal\ behave exactly
 as they do in \Babel: the second command prints the number with \textit{gereshayim} before
 the last letter, and the latter uses in addition the final forms of Hebrew letters.
 Examples:
@@ -697,12 +722,12 @@ It provides two macros for the end-user.
 The command
 	\displaycmd{\HijriFromGregorian\{⟨year⟩\}\{⟨month⟩\}\{⟨day⟩\}}{\HijriFromGregorian}
 sets the counters ¦Hijriday¦, ¦Hijrimonth¦ and ¦Hijriyear¦.
-\Cmd\Hijritoday\ formats the Hijri date for the current day. 
-This command is now locale-aware\new{v1.1.1}: its output will differ depending on the 
-currently active language. Presently \pkg{polyglossia}’s language definition files 
-for Arabic, Farsi, Urdu, Turkish, Bahasa Indonesia and Bahasa Melayu 
+\Cmd\Hijritoday\ formats the Hijri date for the current day.
+This command is now locale-aware\new{v1.1.1}: its output will differ depending on the
+currently active language. Presently \pkg{polyglossia}’s language definition files
+for Arabic, Farsi, Urdu, Turkish, Bahasa Indonesia and Bahasa Melayu
 provide a localized version of ¦\Hijritoday¦.
-If the formatting macro for the current language is undefined, the Hijri date will be formatted 
+If the formatting macro for the current language is undefined, the Hijri date will be formatted
 in Arabic or in roman transliteration, depending of the current writing direction.
 You can define a new format or redefine one with the command
   \displaycmd{\DefineHijriDateFormat\{<lang>\}\{<code>\}}{\DefineHijriDateFormat}.
@@ -737,18 +762,22 @@ whose splendid work has made my task almost trivial in comparision: Johannes
 Braams and the numerous contributors to the \Babel{} package (in particular
 Boris Lavva and others for its Hebrew support), Alexej Kryukov (\pkg{antomega}), Will
 Robertson (\pkg{fontspec}), Apostolos Syropoulos (\pkg{xgreek}), Youssef Jabri
-(\pkg{arabi}), and Vafa Khalighi (\pkg{xepersian} and \pkg{bidi}). I should also thank other
+(\pkg{arabi}), and Vafa Khalighi (\pkg{xepersian} and \pkg{bidi}).
+The work of Mojca Miklavec and Arthur Reutenauer on hyphenation patterns with their package
+\pkg{hyph-utf8} is of course invaluable. I should also thank other
 individuals for their assistance in supporting specific languages: Yves Codet
 (Sanskrit), Zdenek Wagner (Hindi), Mikhal Oren (Hebrew), Sergey Astanin (Russian),
 Khaled Hosny (Arabic), Sertaç Ö. Yıldız (Turkish), Kamal Abdali (Urdu),
 and several other members of the \XeTeX\ user community, notably Enrico Gregorio, who
 has sent me many useful suggestions and corrections and contributed the ¦\newXeTeXintercharclass¦
-mechanism in xelatex.ini which is now used by polyglossia. 
-More recently, Kevin Godby of the \href{http://ubuntu-manual.org}{Ubuntu Manual} project has 
+mechanism in xelatex.ini which is now used by polyglossia.
+More recently, Kevin Godby of the \href{http://ubuntu-manual.org}{Ubuntu Manual} project has
 contributed very useful feedback, bug hunting and, with the help of translators,
-new language definition files for Asturian and Lithuanian. It is particularly heartening to 
-realize that this package is used to typeset a document in dozens of different languages! 
-I also thank Alan Munn for kindly proof-reading the documentation.
+new language definition files for Asturian, Lithuanian, Occitan, Bengali, Malayalam, Marathi, Tamil, and Telugu.
+It is particularly heartening to realize that this package is used to typeset a widely-read
+document in dozens of different languages!
+Support for Lao was also added thanks to Brian Wilson.
+I also thank Alan Munn for kindly proof-reading the penultimate version of this documentation.
 And of course my gratitude also goes to Jonathan Kew, the formidable author of \XeTeX!
 \end{document}
 
