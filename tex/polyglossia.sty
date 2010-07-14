@@ -725,25 +725,25 @@
 \def\xpg@option#1#2{%
   \ifcsundef{xpg@main@language}{\setdefaultlanguage}{\setotherlanguage}%
     [#1]{#2}}
-\DeclareOption{USenglish}{\xpg@option{variant=american}{english}}
-\DeclareOption{american}{\xpg@option{variant=american}{english}}
-\DeclareOption{UKenglish}{\xpg@option{variant=british}{english}}
-\DeclareOption{british}{\xpg@option{variant=british}{english}}
-\DeclareOption{australian}{\xpg@option{variant=australian}{english}}
-\DeclareOption{newzealand}{\xpg@option{variant=newzealand}{english}}
-\DeclareOption{ngerman}{\xpg@option{spelling=new}{german}}
-\DeclareOption{polygreek}{\xpg@option{variant=poly}{greek}}
-\DeclareOption{monogreek}{\xpg@option{variant=mono}{greek}}
-\DeclareOption{ancientgreek}{\xpg@option{variant=ancient}{greek}}
-%% TODO add warning message that this approach is deprecated <<<<<<<<<<<<<<
-\DeclareOption*{%
-  \edef\@temp{%
-    \noexpand\ifcsundef{xpg@main@language}%
-      \noexpand\setdefaultlanguage
-      \noexpand\setotherlanguage
-    {\CurrentOption}%
-  }%
-  \expandafter\AtEndOfPackage\expandafter{\@temp}%
-}
+%\DeclareOption{USenglish}{\xpg@option{variant=american}{english}}
+%\DeclareOption{american}{\xpg@option{variant=american}{english}}
+%\DeclareOption{UKenglish}{\xpg@option{variant=british}{english}}
+%\DeclareOption{british}{\xpg@option{variant=british}{english}}
+%\DeclareOption{australian}{\xpg@option{variant=australian}{english}}
+%\DeclareOption{newzealand}{\xpg@option{variant=newzealand}{english}}
+%\DeclareOption{ngerman}{\xpg@option{spelling=new}{german}}
+%\DeclareOption{polygreek}{\xpg@option{variant=poly}{greek}}
+%\DeclareOption{monogreek}{\xpg@option{variant=mono}{greek}}
+%\DeclareOption{ancientgreek}{\xpg@option{variant=ancient}{greek}}
+%%% TODO add warning message that this approach is deprecated <<<<<<<<<<<<<<
+%\DeclareOption*{%
+%  \edef\@temp{%
+%    \noexpand\ifcsundef{xpg@main@language}%
+%      \noexpand\setdefaultlanguage
+%      \noexpand\setotherlanguage
+%    {\CurrentOption}%
+%  }%
+%  \expandafter\AtEndOfPackage\expandafter{\@temp}%
+%}
 \ProcessOptions*
 \endinput
