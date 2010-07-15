@@ -65,7 +65,7 @@ zip $tarball tex/xelatex/polyglossia/*.{ldf,def,sty} || exit 1
 zip $tarball fonts/misc/xetex/fontmapping/polyglossia/* || exit 1
 zip $tarball source/xelatex/polyglossia/polyglossia.dtx || exit 1
 zip $tarball doc/xelatex/polyglossia/*.{tex,pdf} || exit 1
-zip $tarball doc/xelatex/polyglossia/{README,gloss-template.ldf} || exit 1
+zip $tarball doc/xelatex/polyglossia/README || exit 1
 
 echo "Make CTAN zip ..."
 ctanzip="polyglossia.zip"
