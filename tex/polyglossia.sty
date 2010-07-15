@@ -399,39 +399,40 @@
 %%% END OF PolyglossiaSetup
 
 %% ensure localization of \markright and \markboth commands
-\define@boolkey{polyglossia}[xpg@]{localmarks}[true]{%
+%%% THIS IS NOW DISABLED BY DEFAULT
+\define@boolkey{polyglossia}[xpg@]{localmarks}[false]{%
    \ifbool{xpg@localmarks}{%
+      \xpg@info{Option:~ localmarks}%
       \def\local@marks##1{%
          \def\markboth####1####2{%
-            \begingroup%
-               \let\label\relax \let\index\relax \let\glossary\relax%
-               \unrestored@protected@xdef\@themark%
+            \begingroup
+               \let\label\relax \let\index\relax \let\glossary\relax
+               \unrestored@protected@xdef\@themark
          {{\foreignlanguage{##1}{%
             \protect\@@ensure@maindir{####1}}}%
           {\foreignlanguage{##1}{%
       \protect\@@ensure@maindir{####2}}}}%
                \@temptokena \expandafter{\@themark}%
                \mark{\the\@temptokena}%
-            \endgroup%
+            \endgroup
             \if@nobreak\ifvmode\nobreak\fi\fi}%
             \def\markright####1{%
-               \begingroup%
-                  \let\label\relax \let\index\relax \let\glossary\relax%
-                  \expandafter\@markright\@themark%
+               \begingroup
+                  \let\label\relax \let\index\relax \let\glossary\relax
+                  \expandafter\@markright\@themark
       {\foreignlanguage{##1}{\protect\@@ensure@maindir{####1}}}%
                   \@temptokena \expandafter{\@themark}%
                   \mark{\the\@temptokena}%
-               \endgroup%
+               \endgroup
                \if@nobreak\ifvmode\nobreak\fi\fi}%
             \def\@markright####1####2####3{\@temptokena{\protect\@@ensure@maindir{####1}}%
                \unrestored@protected@xdef\@themark{{\the\@temptokena}%
-               {\protect\@@ensure@maindir{####3}}}}}
+               {\protect\@@ensure@maindir{####3}}}}}%
     }{% else
-      \def\local@marks##1{}
-      \xpg@info{Option:~ nolocalmarks}
-    }
+      \def\local@marks##1{}%
+    }%
 }
-\setkeys{polyglossia}{localmarks=true}
+\setkeys{polyglossia}{localmarks=false}
 
 % to reset the intercharclass of a character to "normal"
 \newXeTeXintercharclass\xpg@normalclass %TODO
@@ -713,7 +714,8 @@
 \AtEndPreamble{\@ifpackageloaded{bidi}{\newcommand*{\aemph}[1]{$\overline{\hboxR{#1}}$}}{}}
 
 %% Package Options %%
-\DeclareOption{nolocalmarks}{\setkeys{polyglossia}{localmarks=off}}
+\DeclareOption{nolocalmarks}{\setkeys{polyglossia}{localmarks=false}}
+\DeclareOption{localmarks}{\setkeys{polyglossia}{localmarks=true}}
 \DeclareOption{babelshorthands}{\setkeys{polyglossia}{babelshorthands=true}}
 \DeclareOption{quiet}{%
    \gdef\@latex@info#1{\relax}% no latex info
