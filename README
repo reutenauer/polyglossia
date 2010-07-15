@@ -4,3 +4,7 @@ The current version includes support for 66 different languages.
 
 See http://tug.ctan.org/tex-archive/macros/xetex/latex/polyglossia/
 
+**Note**
+The branch previously named "1.2" is now "master" and the old master has been
+renamed 1.1.x.
+
