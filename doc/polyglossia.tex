@@ -293,9 +293,11 @@ Polyglossia can also be loaded with the option ‘babelshorthands’\new{v1.1.1}
 globally activates \Babel shorthands whenever available. Currently shorthands are
 only implemented for German and Catalan: see below for details.
 
-Another option (turned off by default) is ‘nolocalmarks’, which
-prevents the redefinition of the internal \LaTeX\ macros
-\cmd\markboth\ and \cmd\markright.
+Another option (turned off by default) is ‘localmarks’, which
+redefines the internal \LaTeX\ macros \cmd\markboth\ and \cmd\markright.
+\new{v1.2.0}Note that this was formerly turned on by default, but ẃe
+now realize that it causes more problems than otherwise. For backwards-compatibility
+the opposite option ‘nolocalmarks’ is still available.
 
 There is also the option ‘quiet’ which turns off most info messages and some of the warnings
 issued by \LaTeX, \pkg{fontspec} and \pkg{polyglossia}.

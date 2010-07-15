@@ -51,7 +51,7 @@ http://github.com/fc7/polyglossia/issues
 
 CHANGES
 
-1.2.0 (14-07-2010)
+1.2.0 (15-07-2010)
   * Adapted for fontspec 2.0 (will not work with earlier versions!)
   * New implementation of a \PolyglossiaSetup interface
     that simplifies writing gloss-*.ldf files
@@ -63,19 +63,24 @@ CHANGES
   * Bugfix to prevent bogus expansion of \{rm,sf,tt}family even in aux files
     (Enrico Gregorio)
   * New gloss files for Armenian, Bengali, Occitan, Bengali, Lao,
-    Malayalam, Marathi, Tamil, Telugu, and Turkmen
-    (thanks to various contributors, notably Kevin Godby and the Ubuntu Manual Project).
+    Malayalam, Marathi, Tamil, Telugu, and Turkmen.
   * New auxiliary packages 'devanagaridigits' and 'bengalidigits'
   * hijrical no longer loads bidi and checks for incompatible l3calc
   * Add Babel shorthands for Russian (based on a patch by Vladimir Lomov)
   * Fix \fnum@{table,figure} for Lithuanian
-  * Various improvements in gloss-russian (provided by Vladimir Lomov and others)
+  * Various improvements in gloss-russian (provided by Vladimir Lomov and
+    others)
   * Corrected captions for Bahasai, Lithuanian, Russian, Croatian
   * Add option indentfirst=true for Spanish, Croation and other languages
     (NB: indentfirst was previously named frenchindent)
-  * New option 'script' for German: Setting script=fraktur modifies the captions
-    for typesetting in Fraktur.
-  * New command \aemph for Arabic, Farsi, Urdu, etc. to mark emphasis through overlining.
+  * New option 'script' for German: Setting script=fraktur modifies the
+    captions for typesetting in Fraktur.
+  * New command \aemph for Arabic, Farsi, Urdu, etc. to mark emphasis through
+    overlining.
+  * Package option 'nolocalmarks' is now true by default: to activate it the
+    option 'localmarks' must be passed instead.
+  * Loading languages à la Babel as package options is no longer possible (this
+    feature was deprecated since v1.1.0).
 
 1.1.1 (23-03-2010)
   * Bugfix for French: explicit spaces before/after double punctuation
