@@ -46,6 +46,7 @@
                  {\ifstrequal{#1}{newzealand}%
                    {\@british@hyphentrue\english@ordinalmonthdayfalse
                     \xpg@info{Option: english variant=newzealand}}%
+                    {\xpg@warning{Unknown English variant `#1'}}%
   }}}}%
   \if@british@locale\@british@hyphentrue\english@ordinalmonthdaytrue\fi
   \if@british@hyphen
