@@ -5,9 +5,10 @@
 \RequirePackage{arabicnumbers}
 \@ifpackageloaded{bidi}{}{\newif\if@RTL\@RTLfalse}
 \@ifpackageloaded{l3calc}{\PackageError{hijrical}{\MessageBreak
-    Package l3calc is loaded, which replaces the functionality of calc.\MessageBreak
-    Computation of Hijri dates will not work properly with l3calc!\MessageBreak
-    The latest version of expl3 on CTAN no longer loads l3calc. Please update expl3!
+Package l3calc is loaded, which replaces the functionality of
+calc. Computation of Hijri dates will not work properly with
+l3calc! The latest version of expl3 on CTAN no longer loads
+l3calc. Please update expl3!
 }{}}{}
 
 \@ifundefined{@Remainder}{\input{cal-util.def}}{}
