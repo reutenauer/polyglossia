@@ -532,9 +532,9 @@
 
 \def\xpg@select@fontfamily#1{%
   \def\tmp@tt{tt}\def\tmp@sf{sf}%
-  \ifx\familytype\tmp@tt%
+  \ifx\familytype\tmp@tt
     \csuse@warn{#1@font@tt}%
-  \else\ifx\familytype\tmp@sf%
+  \else\ifx\familytype\tmp@sf
     \csuse@warn{#1@font@sf}%
       \else\csuse@warn{#1@font@rm}\fi\fi}
 
@@ -542,7 +542,8 @@
   \letcs{\rmfamily}{#1@font@rm}%
   \letcs{\sffamily}{#1@font@sf}%
   \letcs{\ttfamily}{#1@font@tt}%
-  \def\normalfont{\normalfontlatin\xpg@select@fontfamily{#1}}%
+  \gdef\normalfont{\protect\xpg@select@fontfamily{#1}}%
+  \gdef\reset@font{\protect\normalfont}%
 }
 
 \let\@@fterindentfalse\@afterindentfalse
