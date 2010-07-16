@@ -505,7 +505,13 @@
     \selectlanguage[#1]{#2}%
     \selectbackgroundlanguage{#2}}}
 
-\def\familytype{rm}
+\expandafter\ifx\familydefault\sfdefault
+  \def\familytype{sf}
+\else\expandafter\ifx\familydefault\ttdefault
+  \def\familytype{tt}
+\else
+  \def\familytype{rm}
+\fi\fi
 % This robustifies the redefinitions of \<xx>family (suggestion by Enrico Gregorio)
 % e.g. to prevent expansion of the \familytype redefinition in auxiliary files
 \csgappto{rmfamily }{\def\familytype{rm}}
