@@ -16,7 +16,7 @@
 
 \newif\if@serbian@cyr
 
-\define@key{serbian}{Script}[Cyrillic]{% TODO FIXDOC: keyname is CHANGED: script -> Script !!! 
+\define@key{serbian}{Script}[Cyrillic]{% TODO FIXDOC: keyname is CHANGED: script -> Script !!!
   \ifstrequal{#1}{Cyrillic}%
     {\@serbian@cyrtrue
      \setkeys[xpg@setup]{serbian}{script=Cyrillic}%
@@ -26,7 +26,7 @@
     {\ifstrequal{#1}{Latin}%
       {\@serbian@cyrfalse
       \xpg@fontsetup@latin{serbian}%
-      %TODO \def\serbian@language{\language=\l@serbianlat}% 
+      %TODO \def\serbian@language{\language=\l@serbianlat}%
       % or should we use Croatian patterns as a fallback for the time being???
       }%
       {\xpg@error{Unknown script `#1' for Serbian language\MessageBreak

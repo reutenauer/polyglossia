@@ -71,7 +71,7 @@
   \def\indexname{\@ensure@RTL{اشاریہ}}%
   \def\figurename{\@ensure@RTL{شكل}}%
   \def\tablename{\@ensure@RTL{جدول}}%
-  %\def\thepart{\text<lang>{}}%
+  %\def\thepart{}%
   \def\partname{\@ensure@RTL{حصّہ}}%
   \def\pagename{\@ensure@RTL{صفحہ}}%
   \def\seename{\@ensure@RTL{ملاحظہ ہو}}%

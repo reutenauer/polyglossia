@@ -22,7 +22,7 @@
    \def\indexname{Indèx}%
    \def\figurename{Figura}%
    \def\tablename{Tablèu}%
-   %\def\thepart{\textoccitan{}}%
+   %\def\thepart{}%
    \def\partname{Partida}%
    \def\pagename{Pagina}%
    \def\seename{vejatz}%
