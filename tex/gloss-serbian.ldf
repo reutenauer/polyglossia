@@ -37,11 +37,11 @@
 \setkeys{serbian}{Script}
 
 \def\captionsserbian{%
-   \if@serbian@cyr\captionsserbian@cyr\else\captionsserbian@lat\fi%
+   \if@serbian@cyr\captionsserbian@cyr\else\captionsserbian@lat\fi
    }
 
 \def\dateserbian{%
-   \if@serbian@cyr\dateserbian@cyr\else\dateserbian@lat\fi%
+   \if@serbian@cyr\dateserbian@cyr\else\dateserbian@lat\fi
    }
 
 \def\captionsserbian@lat{%
@@ -70,8 +70,8 @@
 \def\dateserbian@lat{%
    \def\today{\number\day .~\ifcase\month\or
     januar\or februar\or mart\or april\or maj\or
-    juni\or juli\or avgust\or septembar\or oktobar\or novembar\or
-    decembar\fi \space \number\year}%
+    jun\or jul\or avgust\or septembar\or oktobar\or novembar\or
+    decembar\fi \space \number\year.}%
     }
 
 %%%TODO ASK SOMEONE TO CHECK THESE!
@@ -102,8 +102,8 @@
 \def\dateserbian@cyr{%
    \def\today{\number\day .~\ifcase\month\or
     јануар\or фебруар\or март\or април\or мај\or
-    јуни\or јули\or август\or септембар\or октобар\or нобембар\or
-    децембар\fi \space \number\year}%
+    јун\or јул\or август\or септембар\or октобар\or нобембар\or
+    децембар\fi \space \number\year.}%
     }
 
 \endinput
