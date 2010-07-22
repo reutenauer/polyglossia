@@ -45,19 +45,24 @@
    }
 
 \def\captionsserbian@lat{%
-   \def\refname{Literatura}%
+   \def\refname{Spisak literature}%
    \def\abstractname{Sažetak}%
-   \def\bibname{Bibliografija}%
+   \def\bibname{Literatura}%
    \def\prefacename{Predgovor}%
    \def\chaptername{Glava}%
    \def\appendixname{Dodatak}%
    \def\contentsname{Sadržaj}%
-   \def\listfigurename{Slike}%
-   \def\listtablename{Tabele}%
-   \def\indexname{Indeks}%
+   \def\listfigurename{Spisak slika}%
+   \def\listtablename{Spisak tabela}%
+   \def\indexname{Registar}%
    \def\figurename{Slika}%
    \def\tablename{Tabela}%
    \def\partname{Deo}%
+   \renewcommand\thepart{\ifcase\value{part}\or Prvi\or Drugi\or
+      Treći\or Čevrti\or Peti\or Šesti\or Sedmi\or Osmi\or
+      Deveti\or Deseti\or Jedanaesti\or Dvanaesti\or Trinaesti\or
+      Četrnaesti\or Petnaesti\or Šesnaesti\or Sedamnaesti\or
+      Osamnaesti\or Devetnaesti\or Dvadeseti\fi}%
    \def\pagename{Strana}%
    \def\seename{Vidi}%
    \def\alsoname{Vidi takođe}%
@@ -65,7 +70,7 @@
    \def\ccname{Kopije}%
    \def\headtoname{Prima}%
    \def\proofname{Dokaz}%
-   \def\glossaryname{Glosar}% <-- CHECK
+   \def\glossaryname{Rečnik nepoznatih reči}%
    }
 \def\dateserbian@lat{%
    \def\today{\number\day .~\ifcase\month\or
@@ -74,30 +79,32 @@
     decembar\fi \space \number\year.}%
     }
 
-%%%TODO ASK SOMEONE TO CHECK THESE!
 \def\captionsserbian@cyr{%
-   \def\refname{Литература}%
+   \def\refname{Списак Слика}%
    \def\abstractname{Сажетак}%
-   \def\bibname{Библиографија}%
+   \def\bibname{Литература}%
    \def\prefacename{Предговор}%
    \def\chaptername{Глава}%
    \def\appendixname{Додатак}%
    \def\contentsname{Садржај}%
-   \def\listfigurename{Слике}%
-   \def\listtablename{Табеле}%
-   \def\indexname{Индекс}%
+   \def\listfigurename{Списак слика}%
+   \def\listtablename{Списак табела}%
+   \def\indexname{Регистар}%
    \def\figurename{Слика}%
    \def\tablename{Табела}%
-   %\def\thepart{}%
-   \def\partname{Део}%
+   \def\partname{\protect\thepart\space Део}%
+   \renewcommand\thepart{\ifcase\value{part}\or Први\or Други\or Трећи\or
+   Четврти\or Пети\or Шести\or Седми\or Осми\or Девети\or Десети\or
+   Једанаести\or Дванаести\or Тринаести\or Четрнаести\or Петнаести\or
+   Шеснаести\or Седамнаести\or Осамнаести\or Деветнаести\or Двадесети\fi}%
    \def\pagename{Страна}%
    \def\seename{Види}%
    \def\alsoname{Види такође}%
    \def\enclname{Прилоzи}%
    \def\ccname{Копије}%
    \def\headtoname{Прима}%
-   \def\proofname{Докаz}%
-   \def\glossaryname{Глосар}% <-- CHECK
+   \def\proofname{Доказ}%
+   \def\glossaryname{Речник непознатих речи}%
    }
 \def\dateserbian@cyr{%
    \def\today{\number\day .~\ifcase\month\or
