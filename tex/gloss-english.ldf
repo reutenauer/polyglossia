@@ -31,23 +31,26 @@
         {\ifstrequal{#1}{us}% these patterns are the default so we don't need to reset them
           {\@british@hyphenfalse\english@ordinalmonthdayfalse
            \xpg@info{Option: english variant=american}}%
-           {\ifstrequal{#1}{usmax}%
-             {\@british@hyphenfalse\english@ordinalmonthdayfalse
-              \setkeys[xpg@setup]{english}{hyphennames={usenglishmax}}%
-              \xpg@info{Option: english variant=american (with additional patterns)}}%
-              \ifcsundef{l@usenglishmax}%
-                {\xpg@warning{No hyphenation patterns were loaded for "US English Max"\MessageBreak
-                  I will use the standard patterns for US English instead}%
-                \adddialect\l@usenglishmax\l@english\relax}{}%
-              \gdef\english@language{\language=\l@usenglishmax}}%
-              {\ifstrequal{#1}{australian}%
-                {\@british@hyphentrue\english@ordinalmonthdayfalse
-                 \xpg@info{Option: english variant=australian}}%
-                 {\ifstrequal{#1}{newzealand}%
-                   {\@british@hyphentrue\english@ordinalmonthdayfalse
-                    \xpg@info{Option: english variant=newzealand}}%
-                    {\xpg@warning{Unknown English variant `#1'}}%
-  }}}}%
+          {\ifstrequal{#1}{american}%
+            {\@british@hyphenfalse\english@ordinalmonthdayfalse
+            \xpg@info{Option: english variant=american}}%
+            {\ifstrequal{#1}{usmax}%
+              {\@british@hyphenfalse\english@ordinalmonthdayfalse
+                \setkeys[xpg@setup]{english}{hyphennames={usenglishmax}}%
+                \xpg@info{Option: english variant=american (with additional patterns)}%
+                \ifcsundef{l@usenglishmax}%
+                  {\xpg@warning{No hyphenation patterns were loaded for "US English Max"\MessageBreak
+                    I will use the standard patterns for US English instead}%
+                  \adddialect\l@usenglishmax\l@english\relax}{}%
+                \gdef\english@language{\language=\l@usenglishmax}}%
+                {\ifstrequal{#1}{australian}%
+                  {\@british@hyphentrue\english@ordinalmonthdayfalse
+                  \xpg@info{Option: english variant=australian}}%
+                  {\ifstrequal{#1}{newzealand}%
+                    {\@british@hyphentrue\english@ordinalmonthdayfalse
+                      \xpg@info{Option: english variant=newzealand}}%
+                      {\xpg@warning{Unknown English variant `#1'}}%
+  }}}}}}%
   \if@british@locale\@british@hyphentrue\english@ordinalmonthdaytrue\fi
   \if@british@hyphen
     \setkeys[xpg@setup]{english}{hyphennames={ukenglish,british,UKenglish}}%
