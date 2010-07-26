@@ -33,6 +33,7 @@
       Valid values are "Cyrillic" and "Latin"}}%
     }
 }
+\define@key{serbian}{script}[Cyrillic]{\setkeys{serbian}{Script=#1}}
 
 \setkeys{serbian}{Script}
 
@@ -80,7 +81,7 @@
     }
 
 \def\captionsserbian@cyr{%
-   \def\refname{Списак Слика}%
+   \def\refname{Списак литературе}%
    \def\abstractname{Сажетак}%
    \def\bibname{Литература}%
    \def\prefacename{Предговор}%
@@ -92,7 +93,7 @@
    \def\indexname{Регистар}%
    \def\figurename{Слика}%
    \def\tablename{Табела}%
-   \def\partname{\protect\thepart\space Део}%
+   \def\partname{Део}%
    \renewcommand\thepart{\ifcase\value{part}\or Први\or Други\or Трећи\or
    Четврти\or Пети\or Шести\or Седми\or Осми\or Девети\or Десети\or
    Једанаести\or Дванаести\or Тринаести\or Четрнаести\or Петнаести\or
