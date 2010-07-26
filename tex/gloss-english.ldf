@@ -103,7 +103,7 @@
       \english@day\space\english@month\space\number\year
     \else
       \english@month\space\english@day, \number\year
-    \fi}
+    \fi}%
 }
 
 \endinput
