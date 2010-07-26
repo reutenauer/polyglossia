@@ -74,20 +74,14 @@
 
 \def\greek@language{\language=\greek@variant}
 
-\def\tmp@arabic{arabic}
 \newif\if@greek@numerals
 \define@key{greek}{numerals}[greek]{%
-\def\@tmpa{#1}\ifx\@tmpa\tmp@arabic\@greek@numeralsfalse\else\@greek@numeralstrue\fi}
+\ifstrequal{#1}{arabic}{\@greek@numeralsfalse}{\@greek@numeralstrue}}
 
-\def\tmp@false{false}
-\newif\if@attic@numerals
-\define@key{greek}{attic}[true]{%
-\def\@tmpa{#1}
-\ifx\@tmpa\tmp@false\@attic@numeralsfalse
-\else\@attic@numeralstrue\fi}
+\define@boolkey{greek}{attic}[true]{\xpg@warning{Greek option `attic' is no longer required.}}
 
 % This sets the defaults
-\setkeys{greek}{numerals,attic=false}
+\setkeys{greek}{numerals}
 
 \def\monogreekcaptions{%
    \def\refname{Αναφορές}%
@@ -291,8 +285,7 @@
   ͵\ifcase#1\or ρ\or σ\or τ\or υ\or φ\or χ\or ψ\or ω\or ϡ\fi
   \gr@num@v}
 
-%%%% Attic numerals (optional)
-\if@attic@numerals%
+%%%% Attic numerals (no longer optional)
 \newcount\@attic@num
 \DeclareRobustCommand*{\@@atticnum}[1]{%
         \@attic@num#1\relax
@@ -332,8 +325,6 @@
      \@attic@num#1\relax
      \@atticnum{\@attic@num}}
 \let\atticnum=\atticnumeral
-\fi
-%%%%
 
 \def\greek@numbers{%
    \let\latin@alph\@alph%
