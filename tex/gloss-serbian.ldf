@@ -110,7 +110,7 @@
 \def\dateserbian@cyr{%
    \def\today{\number\day .~\ifcase\month\or
     јануар\or фебруар\or март\or април\or мај\or
-    јун\or јул\or август\or септембар\or октобар\or нобембар\or
+    јун\or јул\or август\or септембар\or октобар\or новембар\or
     децембар\fi \space \number\year.}%
     }
 
