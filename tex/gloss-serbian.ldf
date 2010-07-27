@@ -46,7 +46,7 @@
    }
 
 \def\captionsserbian@lat{%
-   \def\refname{Spisak literature}%
+   \def\refname{Bibliografija}%
    \def\abstractname{Sažetak}%
    \def\bibname{Literatura}%
    \def\prefacename{Predgovor}%
@@ -81,7 +81,7 @@
     }
 
 \def\captionsserbian@cyr{%
-   \def\refname{Списак литературе}%
+   \def\refname{Библиографија}%
    \def\abstractname{Сажетак}%
    \def\bibname{Литература}%
    \def\prefacename{Предговор}%
@@ -101,7 +101,7 @@
    \def\pagename{Страна}%
    \def\seename{Види}%
    \def\alsoname{Види такође}%
-   \def\enclname{Прилоzи}%
+   \def\enclname{Прилози}%
    \def\ccname{Копије}%
    \def\headtoname{Прима}%
    \def\proofname{Доказ}%
