@@ -51,6 +51,16 @@ http://github.com/fc7/polyglossia/issues
 
 CHANGES
 
+1.2.0a (27-07-2010)
+  * Initialize \fontfamily acc to value of \familydefault
+    (Fixes a bug when using polyglossia with beamer)
+  * Remove spurious space in def of \dateenglish
+  * Add missing English variant "american"
+  * Serbian: fix date format and captions (Latin+Cyrillic)
+  * Fix \atticnumeral in gloss-greek
+  * Small improvements and fixes in documentation
+
+
 1.2.0 (15-07-2010)
   * Adapted for fontspec 2.0 (will not work with earlier versions!)
   * New implementation of a \PolyglossiaSetup interface
