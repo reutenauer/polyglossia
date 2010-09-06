@@ -31,7 +31,7 @@
       }%
       {\xpg@error{Unknown script `#1' for Serbian language\MessageBreak
       Valid values are "Cyrillic" and "Latin"}}%
-    }
+    }%
 }
 \define@key{serbian}{script}[Cyrillic]{\setkeys{serbian}{Script=#1}}
 
