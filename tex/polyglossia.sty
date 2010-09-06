@@ -637,7 +637,7 @@
       \setkeys{#2}{#1}%
       \use@localhyphenmins{#2}%
       \ifbool{#2@frenchspacing}{\frenchspacing}{\nonfrenchspacing}%
-      \csuse{inlineextras@#2}%
+      \csuse{inlineextras@#2}\csuse{date#2}%
      }%
 }{\egroup}
 
