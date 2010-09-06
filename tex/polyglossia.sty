@@ -452,10 +452,14 @@
   %\csdef{#1@language}{\language=\csname l@#1\endcsname}%
 }
 
+\newcommand{\xpg@input}[1]{%
+  \chardef\xpg@atcatcode\catcode`\@
+  \input{#1}\catcode`\@=\xpg@atcatcode}
+
 \newcommand{\setdefaultlanguage}[2][]{%
    \IfFileExists{gloss-#2.ldf}%
    {\ifcsundef{#2@loaded}%
-     {\input{gloss-#2.ldf}%
+     {\xpg@input{gloss-#2.ldf}%
      \xpg@info{Default~ language~ is~ #2}%
      \def\languagename{#2}%
       % This is needed because \arabic is a built-in LaTeX command:
@@ -566,7 +570,7 @@
 \newcommand{\setotherlanguage}[2][]{%
    \IfFileExists{gloss-#2.ldf}%
    {\ifcsundef{#2@loaded}%
-     {\input{gloss-#2.ldf}%
+     {\xpg@input{gloss-#2.ldf}%
       \setkeys{#2}{#1}%
       \edef\@tmpa{arabic}%
       \edef\@tmpb{#2}%
