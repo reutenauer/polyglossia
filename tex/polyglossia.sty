@@ -636,14 +636,14 @@
 \expandafter\providecommand\csname otherlanguage*\endcsname{}
 \renewenvironment{otherlanguage*}[2][]{%
    \ifcsundef{#2@loaded}%
-     {\bgroup\xpg@nogloss{#2}}%
-     {\bgroup\select@@language{#2}%
+     {\xpg@nogloss{#2}}%
+     {\select@@language{#2}%
       \setkeys{#2}{#1}%
       \use@localhyphenmins{#2}%
       \ifbool{#2@frenchspacing}{\frenchspacing}{\nonfrenchspacing}%
       \csuse{inlineextras@#2}\csuse{date#2}%
      }%
-}{\egroup}
+}{}
 
 %Hook that other package authors can use
 %(for instance biblatex):
