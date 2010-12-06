@@ -217,9 +217,8 @@
     \fi}%
     {\xpg@warning{#1: Invalid value \val\space for key "direction"}}%
   \define@key[xpg@setup]{#1}{hyphenmins}[{2,3}]%
-    {\edef\@tmpfirst{\xpg@first##1}%
-     \edef\@tmpsecond{\xpg@second##1}%
-     \setlocalhyphenmins{#1}{\@tmpfirst}{\@tmpsecond}}%
+    {\begingroup\edef\x{\endgroup
+       \noexpand\setlocalhyphenmins{#1}{\xpg@first##1}{\xpg@second##1}}\x}
   \define@boolkey[xpg@setup]{#1}[#1@]{frenchspacing}[true]{%
     \ifbool{#1@frenchspacing}%
       {\csgappto{init@extras@#1}{\frenchspacing}}%
