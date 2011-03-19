@@ -38,16 +38,16 @@
     dicembre\fi\space \number\year}}
 
 \def\noextras@italian{%
-   \lccode"2019=\z@
+   \lccode\string"2019=\z@
    }
 
 \def\blockextras@italian{%
-   \lccode"2019="2019
+   \lccode\string"2019=\string"2019
    %TODO ? \clubpenalty3000\widowpenalty3000\finalhyphendemerits50000000 << in Babel
    }
 
 \def\inlineextras@italian{%
-   \lccode"2019="2019
+   \lccode\string"2019=\string"2019
    }
 
 \endinput
