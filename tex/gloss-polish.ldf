@@ -32,11 +32,11 @@
   }
 
 \def\datepolish{%
-  \def\today{\ifcase\month\or
+  \def\today{\number\day\space\ifcase\month\or
       stycznia\or lutego\or marca\or kwietnia\or maja\or czerwca\or
       lipca\or sierpnia\or września\or października\or
       listopada\or grudnia\fi
-      \space\number\day, \number\year}%
+      \number\year}%
   }
 
 \endinput
