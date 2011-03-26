@@ -4,11 +4,11 @@
          Adapted from hebrew.ldf (2005/03/30 v2.3h)]
 \newif\if@gim@apost  % whether we print apostrophes (gereshayim)
 \newif\if@gim@final  % whether we use final or initial letters
-\newcommand*{\hebrewnumeral}[1]      % no apostrophe, no final letters
+\newrobustcmd*{\hebrewnumeral}[1]      % no apostrophe, no final letters
  {{\@gim@finalfalse\@gim@apostfalse\@hebrew@numeral{#1}}}
-\newcommand*{\Hebrewnumeral}[1]      % apostrophe, no final letters
+\newrobustcmd*{\Hebrewnumeral}[1]      % apostrophe, no final letters
  {{\@gim@finalfalse\@gim@aposttrue\@hebrew@numeral{#1}}}
-\newcommand*{\Hebrewnumeralfinal}[1] % apostrophe, final letters
+\newrobustcmd*{\Hebrewnumeralfinal}[1] % apostrophe, final letters
  {{\@gim@finaltrue\@gim@aposttrue\@hebrew@numeral{#1}}}
 \newcommand*{\@hebrew@numeral}[1]{%
   \ifnum#1<\z@\space\xpg@warning{Illegal value (#1) for Hebrew numeral}%
