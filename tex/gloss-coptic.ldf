@@ -2,7 +2,6 @@
 \makeatletter
 \PolyglossiaSetup{coptic}{
   script=Coptic,
-  direction=RL,
   scripttag=copt,
   langtag=COP,
   hyphennames={coptic},
