@@ -59,7 +59,7 @@
     \def\seename{zie}%
     \def\alsoname{zie ook}%
     \def\proofname{Bewijs}%
-    \def\glossaryname{Verklarende Woordenlijst}%
+    \def\glossaryname{Verklarende woordenlijst}%
     \def\today{\number\day~\ifcase\month%
       \or januari\or februari\or maart\or april\or mei\or juni\or
       juli\or augustus\or september\or oktober\or november\or
