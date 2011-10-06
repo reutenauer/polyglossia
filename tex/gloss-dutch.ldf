@@ -44,22 +44,22 @@
     \def\abstractname{Samenvatting}%
     \def\bibname{Bibliografie}%
     \def\chaptername{Hoofdstuk}%
-    \def\appendixname{Bĳlage}%
+    \def\appendixname{Bijlage}%
     \def\contentsname{Inhoudsopgave}%
-    \def\listfigurename{Lĳst van figuren}%
-    \def\listtablename{Lĳst van tabellen}%
+    \def\listfigurename{Lijst van figuren}%
+    \def\listtablename{Lijst van tabellen}%
     \def\indexname{Index}%
     \def\figurename{Figuur}%
     \def\tablename{Tabel}%
     \def\partname{Deel}%
-    \def\enclname{Bĳlage(n)}%
+    \def\enclname{Bijlage(n)}%
     \def\ccname{cc}%
     \def\headtoname{Aan}%
     \def\pagename{Pagina}%
     \def\seename{zie}%
     \def\alsoname{zie ook}%
-    \def\proofname{Bewĳs}%
-    \def\glossaryname{Verklarende Woordenlĳst}%
+    \def\proofname{Bewijs}%
+    \def\glossaryname{Verklarende woordenlijst}%
     \def\today{\number\day~\ifcase\month%
       \or januari\or februari\or maart\or april\or mei\or juni\or
       juli\or augustus\or september\or oktober\or november\or
