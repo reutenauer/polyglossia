@@ -25,13 +25,10 @@ sub main()
   my $workdir = $ARGV[0];
   opendir WORKDIR, $workdir or die "Could not open directory $workdir: $!.\n";
   my @glossfiles = grep { /^gloss-.*\.ldf$/ && -f "$workdir/$_" } readdir(WORKDIR);
-  # my @glossfiles = readdir(WORKDIR);
   closedir WORKDIR;
-  print STDERR "Found $#glossfiles gloss files.\n";
 
   foreach my $glossfile (@glossfiles)
   {
-    print STDERR "Opening $glossfile.\n";
     rename "$workdir/$glossfile", "$workdir/$glossfile.bak";
     open GLOSSFILE, "$workdir/$glossfile.bak";
     open STDOUT, ">$workdir/$glossfile";
@@ -42,7 +39,7 @@ sub main()
 
       if($chomped_line =~ /^\\endinput/)
       {
-        print "\\makeatother\n$_\n";
+        print "\\makeatother\n$_";
         $endinput_found = 1;
       }
       else { print }
