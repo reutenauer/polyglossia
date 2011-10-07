@@ -76,6 +76,7 @@
    \breton@punctuation%
    }
 
+\makeatother
 \endinput
 
 % These are defined in Babel 

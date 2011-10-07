@@ -63,4 +63,5 @@
    \let\@alph\latin@alph%
 }
 
+\makeatother
 \endinput

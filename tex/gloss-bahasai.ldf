@@ -44,4 +44,5 @@
 \DefineFormatHijriDate{bahasai}{%
 \number\value{Hijriday}\space\hijrimonthbahasai{\value{Hijrimonth}}\space\number\value{Hijriyear}}
 
+\makeatother
 \endinput

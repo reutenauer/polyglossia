@@ -38,4 +38,5 @@
       \fi\space de\space\number\year}%
       }
      
+\makeatother
 \endinput

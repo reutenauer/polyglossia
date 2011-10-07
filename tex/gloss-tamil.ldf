@@ -51,4 +51,5 @@
      \space\number\day}%
 }
 
+\makeatother
 \endinput

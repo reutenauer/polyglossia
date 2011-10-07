@@ -50,4 +50,5 @@
     Նոյեմբեր\or
     Դեկտեմբեր\fi
     \number\day,\space\number\year}}
+\makeatother
 \endinput

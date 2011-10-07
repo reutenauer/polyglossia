@@ -37,4 +37,5 @@
     xullo\or agosto\or setembro\or outubro\or novembro\or decembro\fi
     \space de~\number\year}}
 
+\makeatother
 \endinput

@@ -55,4 +55,5 @@
    \def\today{\occitanday \occitanmonth\space de~\number\year}%
 }
 
+\makeatother
 \endinput

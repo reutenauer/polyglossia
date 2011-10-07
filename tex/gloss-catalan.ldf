@@ -126,4 +126,5 @@
 \def\inlineextras@catalan{%
    \ifcatalan@babelshorthands\catalan@shorthands\fi%
 }
+\makeatother
 \endinput

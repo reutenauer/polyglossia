@@ -343,5 +343,6 @@
   \let\greek@Alph\@undefined%
   }
 
+\makeatother
 \endinput
 

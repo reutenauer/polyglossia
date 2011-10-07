@@ -38,4 +38,5 @@
     října\or listopadu\or prosince\fi
     \space \number\year}}
 
+\makeatother
 \endinput

@@ -76,4 +76,5 @@
    \def\today{\marathinumber\day\space\marathimonth\space\marathinumber\year}%
 }
 
+\makeatother
 \endinput

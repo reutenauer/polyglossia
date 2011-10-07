@@ -250,5 +250,6 @@
 \def\Proj  {\mathop{\mathrm{Пр}}\nolimits}
 %\DeclareRobustCommand{\No}{№}
 
+\makeatother
 \endinput
 

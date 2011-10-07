@@ -37,4 +37,5 @@
 %   \def\today{<++>}%
 %   }
 
+\makeatother
 \endinput

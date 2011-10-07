@@ -133,6 +133,7 @@
    \let\baselinestrech\orig@baselinestretch%
 }
 
+\makeatother
 \endinput
 
 %TODO ?

@@ -117,4 +117,5 @@
 \def\noextras@hebrew{%
    \let\MakeUppercase\@@MakeUppercase%
    }
+\makeatother
 \endinput

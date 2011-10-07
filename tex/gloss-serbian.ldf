@@ -114,6 +114,7 @@
     децембар\fi \space \number\year.}%
     }
 
+\makeatother
 \endinput
 % TODO ? stuff from babel
 

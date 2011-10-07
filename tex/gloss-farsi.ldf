@@ -123,4 +123,5 @@
 \def\noextras@farsi{%
    \let\MakeUppercase\@@MakeUppercase%
    }
+\makeatother
 \endinput

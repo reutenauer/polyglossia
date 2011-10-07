@@ -88,4 +88,5 @@
    \renewcommand\thefootnote{\protect\number{\c@footnote}}%
 }
 
+\makeatother
 \endinput

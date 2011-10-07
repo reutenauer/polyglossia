@@ -78,6 +78,7 @@
    \let\@alph\latin@alph%
 }
 
+\makeatother
 \endinput
 
 %TODO? stuff from Babel

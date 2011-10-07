@@ -38,4 +38,5 @@
       Decembris\fi%
       \space \uppercase\expandafter{\romannumeral\year}}}
 
+\makeatother
 \endinput

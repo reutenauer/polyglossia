@@ -50,4 +50,5 @@
    \lccode\string"2019=\string"2019
    }
 
+\makeatother
 \endinput

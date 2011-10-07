@@ -78,4 +78,5 @@
   \ifdutch@babelshorthands\dutch@shorthands\fi%
 }
 
+\makeatother
 \endinput

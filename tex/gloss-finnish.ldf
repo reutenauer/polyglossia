@@ -38,6 +38,7 @@
     syyskuuta\or lokakuuta\or marraskuuta\or joulukuuta\fi
     \space\number\year}}
 
+\makeatother
 \endinput
 
 % TODO ? this is set in babel:

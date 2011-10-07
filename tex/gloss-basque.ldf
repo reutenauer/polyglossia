@@ -38,4 +38,5 @@
     irailaren\or urriaren\or azaroaren\or
     abenduaren\fi~\number\day}}
 
+\makeatother
 \endinput

@@ -43,4 +43,5 @@
    \let\MakeUppercase\@@MakeUppercase%
    }
 
+\makeatother
 \endinput

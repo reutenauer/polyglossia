@@ -42,4 +42,5 @@
     \space \number\year}%
     }
 
+\makeatother
 \endinput

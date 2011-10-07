@@ -45,4 +45,5 @@
      \def\today{\number\day/\number\month\space\number\year}}%
     }
 
+\makeatother
 \endinput

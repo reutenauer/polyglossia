@@ -174,4 +174,5 @@
   \ifgerman@babelshorthands\german@shorthands\fi
 }
 
+\makeatother
 \endinput

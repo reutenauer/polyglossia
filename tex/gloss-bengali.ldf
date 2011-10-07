@@ -75,4 +75,5 @@
     \number#1%
   \fi}
 
+\makeatother
 \endinput

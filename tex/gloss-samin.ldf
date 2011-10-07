@@ -48,4 +48,5 @@
     \space\number\day.~b.\space\number\year}%
   }
 
+\makeatother
 \endinput

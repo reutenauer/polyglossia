@@ -54,4 +54,5 @@
    \def\today{\telugu@month\space\number\day,\space\number\year}%
 }
 
+\makeatother
 \endinput

@@ -39,4 +39,5 @@
     decembre\fi
     \space \number\year}}
 
+\makeatother
 \endinput
