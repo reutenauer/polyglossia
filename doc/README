@@ -53,8 +53,8 @@ CHANGES
 
 1.2.0cc (12-10-2011)
   * Update to gloss-italian.ldf by Claudio Beccari, incorporating changes
-    from Enrico Gregorio.
-  * Conclude every gloss file by \makeatother to match the initial
+    by Enrico Gregorio.
+  * Conclude every gloss file with \makeatother to match the initial
     \makeatletter.
   * Conclude polyglossia.sty with \ExplSyntaxOff to match the initial
     \ExplSyntaxOn
