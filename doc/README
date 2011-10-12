@@ -51,7 +51,7 @@ http://github.com/reutenauer/polyglossia/issues
 
 CHANGES
 
-1.2.0cc (12-10-2011) [First upload by Arthur Reutenauer]
+1.2.0cc (12-10-2011) [First update by Arthur Reutenauer]
   * Update to gloss-italian.ldf by Claudio Beccari, incorporating changes
     by Enrico Gregorio.
   * Conclude every gloss file with \makeatother to match the initial
@@ -62,11 +62,11 @@ CHANGES
   * Corrections to the gloss-dutch.ldf thanks to Wouter Bolsterlee.
   * Several patches by Enrico Gregorio, fixing long-standing bugs.
 
-1.2.0b (03-10-2011) [Upload by Philipp Stephani]
+1.2.0b (03-10-2011) [Update by Philipp Stephani]
   * Load xkeyval package explicitly since newer versions
     of fontspec don't load it any more
 
-1.2.0a (27-07-2010) [Last upload by François Charette]
+1.2.0a (27-07-2010) [Last update by François Charette]
   * Initialize \fontfamily acc to value of \familydefault
     (Fixes a bug when using polyglossia with beamer)
   * Remove spurious space in def of \dateenglish
