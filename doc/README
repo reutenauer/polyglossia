@@ -58,6 +58,7 @@ CHANGES
     \makeatletter.
   * Conclude polyglossia.sty with \ExplSyntaxOff to match the initial
     \ExplSyntaxOn
+  * Added gloss file for Kannada, contributed by Aravinda VK and others.
   * Corrections to the gloss-dutch.ldf thanks to Wouter Bolsterlee.
   * Several patches by Enrico Gregorio, fixing long-standing bugs.
 
