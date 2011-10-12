@@ -1,7 +1,7 @@
 
    ¦----------------------------------------------¦
    ¦                                              ¦
-   ¦       THE POLYGLOSSIA PACKAGE v1.2.0b        ¦
+   ¦       THE POLYGLOSSIA PACKAGE v1.2.0cc       ¦
    ¦                                              ¦
    ¦ Modern multilingual typesetting with XeLaTeX ¦
    ¦                                              ¦
@@ -51,7 +51,17 @@ http://github.com/fc7/polyglossia/issues
 
 CHANGES
 
-1.2.0b (03-10-2011)
+1.2.0cc (12-10-2011)
+  * Update to gloss-italian.ldf by Claudio Beccari, incorporating changes
+    from Enrico Gregorio.
+  * Conclude every gloss file by \makeatother to match the initial
+    \makeatletter.
+  * Conclude polyglossia.sty with \ExplSyntaxOff to match the initial
+    \ExplSyntaxOn
+  * Corrections to the gloss-dutch.ldf thanks to Wouter Bolsterlee.
+  * Several patches by Enrico Gregorio, fixing long-standing bugs.
+
+1.2.0b (03-10-2011) [Thanks to Philipp Stephani]
   * Load xkeyval package explicitly since newer versions
     of fontspec don't load it any more
 
