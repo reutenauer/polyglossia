@@ -46,27 +46,27 @@ and follow the instructions displayed.
 BUGS
 
 Users are encouraged to report bugs on the github tracker:
-http://github.com/fc7/polyglossia/issues
+http://github.com/reutenauer/polyglossia/issues
 
 
 CHANGES
 
-1.2.0cc (12-10-2011)
+1.2.0cc (12-10-2011) [First upload by Arthur Reutenauer]
   * Update to gloss-italian.ldf by Claudio Beccari, incorporating changes
     by Enrico Gregorio.
   * Conclude every gloss file with \makeatother to match the initial
     \makeatletter.
   * Conclude polyglossia.sty with \ExplSyntaxOff to match the initial
-    \ExplSyntaxOn
+    \ExplSyntaxOn.
   * Added gloss file for Kannada, contributed by Aravinda VK and others.
   * Corrections to the gloss-dutch.ldf thanks to Wouter Bolsterlee.
   * Several patches by Enrico Gregorio, fixing long-standing bugs.
 
-1.2.0b (03-10-2011) [Thanks to Philipp Stephani]
+1.2.0b (03-10-2011) [Upload by Philipp Stephani]
   * Load xkeyval package explicitly since newer versions
     of fontspec don't load it any more
 
-1.2.0a (27-07-2010)
+1.2.0a (27-07-2010) [Last upload by François Charette]
   * Initialize \fontfamily acc to value of \familydefault
     (Fixes a bug when using polyglossia with beamer)
   * Remove spurious space in def of \dateenglish
@@ -188,6 +188,10 @@ CHANGES
 
 
   ------------------------------
-   François Charette, July 2010
-    <firmicus ατ gmx δοτ net>
+   Arthur Reutenauer, October 2011
+     <arthur 'dot' reutenauer 'at' normalesup 'dot' org>
+
+   Original author:
+   François Charette
+     <firmicus ατ gmx δοτ net>
   ------------------------------
