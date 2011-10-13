@@ -55,12 +55,22 @@ CHANGES
   * Update to gloss-italian.ldf by Claudio Beccari, incorporating changes
     by Enrico Gregorio.
   * Conclude every gloss file with \makeatother to match the initial
-    \makeatletter.
+    \makeatletter.  (Not necessary from a technical point of vue, because of one of the changes by Enrico reported below, but I like it better that way :-)
   * Conclude polyglossia.sty with \ExplSyntaxOff to match the initial
     \ExplSyntaxOn.
   * Added gloss file for Kannada, contributed by Aravinda VK and others.
   * Corrections to the gloss-dutch.ldf thanks to Wouter Bolsterlee.
   * Several patches by Enrico Gregorio, fixing long-standing bugs.
+    From the git log:
+    - Deleted setup for right-to-left writing direction, see http://tug.org/pipermail/xetex/2011-April/020319.html
+    - Changed three appearances of \newcommand to \newrobustcmd, as the commands needs to be protected. Bug reported by "kamensky".
+    - Corrected \datepolish as suggested by Piotr Kempa
+    - Changed \lccode" into \lccode\string", because it might come into action at wrong times when " is active
+    - Changed definition of key xpg@setup, as \@tmpfirst and \@tmpsecond were not expanded, causing dependence of \lefthyphenmin and \righthyphenmin to the last loaded language.  Raised by Vadim Rodionov on the XeTeX mailing list.
+    - Deleted \bgroup and \egroup tokens from the definition of otherlanguage*; they serve no purpose (we are already inside an environment) and conflict with csquotes. Noticed by P. Lehman.
+    - Changed the calls of \input to \xpg@input, which inputs the required file and resets the catcode of @ to the same value as it had before the input. Since each .ldf file starts with \makeatletter, the old behaviour would leave a category 11 @, which is wrong.
+    - Added "\csuse{date#2}" to the definition of "otherlanguage*"
+
 
 1.2.0b (03-10-2011) [Update by Philipp Stephani]
   * Load xkeyval package explicitly since newer versions
