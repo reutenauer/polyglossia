@@ -7,7 +7,6 @@ builddir="$root/build"
 pdf="$root/doc/polyglossia.pdf"
 pdfsrc="$root/doc/polyglossia.tex"
 pdfbasename=${pdf%.pdf}
-ex_docs="$root/doc/example-arabic $root/doc/example-thai $root/doc/examples"
 
 cd $root
 
@@ -18,11 +17,13 @@ if [[ ! -f $pdf || $pdf -ot $pdfsrc  ]] ; then
 	xelatex $pdfsrc || exit 1
 	xelatex $pdfsrc 
   rm $pdfbasename.{aux,toc,lof,lot,lop,log,out,nav,bbl,blg,ind,idx,glo,ilg,dvi}
-  for doc in ex_docs; do
+  for doc in example-arabic example-thai examples; do
+    echo "COMPILING doc '$doc'"
     cd $root/doc
-    xelatex $doc.tex || exit 1
+    xelatex $doc.tex || exit 1 && "Failed to compile $doc.tex"
     xelatex $doc.tex
     rm $doc.{log,aux}
+    cd $root
   done
 fi
 
