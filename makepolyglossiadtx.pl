@@ -15,7 +15,7 @@
 # <basename> : create <basename>.dtx and <basename>.ins
 
 #BEGIN {
-#	system("rm *.{dtx,sty,def,ldf,map,txt,tex,glo,log,ins,out,idx,aux}");
+#  system("rm *.{dtx,sty,def,ldf,map,txt,tex,glo,log,ins,out,idx,aux}");
 #};
 
 
@@ -25,12 +25,12 @@ use strict;
 use Cwd;
 
 my $basedir         = getcwd ;
-my $srcdir	         = "$basedir/tex";
-my $docsrcdir		 = "$basedir/doc";
-my $fontmapsrcdir	 = "$basedir/fontmapping";
-my $docsrc			 = "$docsrcdir/polyglossia.tex";
-my $readme			 = "$docsrcdir/README";
-my @docsrcfiles	     = qw(README
+my $srcdir          = "$basedir/tex";
+my $docsrcdir       = "$basedir/doc";
+my $fontmapsrcdir   = "$basedir/fontmapping";
+my $docsrc          = "$docsrcdir/polyglossia.tex";
+my $readme          = "$docsrcdir/README";
+my @docsrcfiles     = qw(README
                           examples.tex
                           example-arabic.tex
                           example-thai.tex);
@@ -39,8 +39,8 @@ my $verbose         = 0;
 my $noins           = 0;
 my $askforoverwrite = 0;
 my $version         = '0.94b';
-my $author          = 'François Charette';
-my $email			 = "<firmicus ατ gmx δοτ net>";
+my $author          = 'Arthur Reutenauer';
+my $email           = "<arthur 'dot' reutenauer 'at' normalesup 'dot' org>";
 (my $sec, my $min, my $hour, my $mday, my $mon, my $year, my $wday, my $yday, my $isdst) 
     = localtime(time);
 
@@ -50,7 +50,8 @@ my $preamble        = <<_END
   ____________________________
 
   The polyglossia package         
-  (C) 2008–$year François Charette    
+  (C) 2008–2010 François Charette    
+  (C) $year Arthur Reutenauer
   License information appended
 
 _END
@@ -146,18 +147,18 @@ foreach my $source (@source)
 }
 
 foreach my $docfile (@docsrcfiles) {
-	my $docin = "$docsrcdir/$docfile";
-	push @deriveddocfiles, { in => $docin, out => $docfile };
-	push @outputdocfiles, $docfile;
+  my $docin = "$docsrcdir/$docfile";
+  push @deriveddocfiles, { in => $docin, out => $docfile };
+  push @outputdocfiles, $docfile;
 }
 
 my @fontmapsrcfiles = glob("$fontmapsrcdir/*.map");
 
 foreach my $fontmap (@fontmapsrcfiles) {
-	my $fontmapout = $fontmap;
-	   $fontmapout =~ s|.+/([^/]+\.map)|$1| ;
-	push @derivedfiles, { in => $fontmap, out => $fontmapout };
-	push @outputfiles, $fontmapout;
+  my $fontmapout = $fontmap;
+  $fontmapout =~ s|.+/([^/]+\.map)|$1|;
+  push @derivedfiles, { in => $fontmap, out => $fontmapout };
+  push @outputfiles, $fontmapout;
 }
 
 
@@ -175,7 +176,7 @@ _END
 ;
 open README, "< $readme";
 while (<README>) {
-	print DTX $_;
+  print DTX $_;
 };
 close README;
 print DTX <<_END
@@ -470,7 +471,7 @@ for (my $idx = 0; $idx <= $#derivedfiles; $idx++)
 #
    while (<SRC>)
    {  
-	  last if m/^\\endinput/;
+      last if m/^\\endinput/;
       print DTX "$_";
    }
 
