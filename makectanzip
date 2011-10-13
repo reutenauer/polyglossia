@@ -1,10 +1,12 @@
 #!/bin/bash
 
-root="$HOME/dev/polyglossia"
+# root="$HOME/dev/polyglossia"
+root="$HOME/perso/TeX/Polyglossia/polyglossia"
 builddir="$root/build"
 
 pdf="$root/doc/polyglossia.pdf"
 pdfsrc="$root/doc/polyglossia.tex"
+pdfbasename=${pdf%.pdf}
 
 cd $root
 
@@ -14,7 +16,8 @@ if [[ ! -f $pdf || $pdf -ot $pdfsrc  ]] ; then
 	cd $root/doc 
 	xelatex $pdfsrc || exit 1
 	xelatex $pdfsrc 
-  rm $pdfsrc.{aux,toc,lof,lot,lop,log,out,nav,bbl,blg,ind,idx,glo,ilg,dvi}
+  echo "Running rm $pdfbasename.{aux,toc,lof,lot,lop,log,out,nav,bbl,blg,ind,idx,glo,ilg,dvi}"
+  rm $pdfbasename.{aux,toc,lof,lot,lop,log,out,nav,bbl,blg,ind,idx,glo,ilg,dvi}
 fi
 
 cd $root
@@ -77,7 +80,7 @@ cp $root/doc/{polyglossia.pdf,README} polyglossia/ || exit 1
 zip -9 $ctanzip polyglossia/* || exit 1
 mv $ctanzip $root/ || exit 1
 cd $root
-#rm -rf $builddir
+rm -rf $builddir
 
 echo "$ctanzip is ready to upload"
 exit 0
