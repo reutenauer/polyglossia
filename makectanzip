@@ -87,6 +87,7 @@ cp $root/doc/{polyglossia.pdf,README} polyglossia/ || exit 1
 zip -9 $ctanzip polyglossia/* || exit 1
 mv $ctanzip $root/ || exit 1
 cd $root
+mv -f $root/doc/*.pdf $root/generated || exit 1
 rm -rf $builddir
 
 echo "$ctanzip is ready to upload"
