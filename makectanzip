@@ -16,13 +16,13 @@ if [[ ! -f $pdf || $pdf -ot $pdfsrc  ]] ; then
 	cd $root/doc 
 	xelatex $pdfsrc || exit 1
 	xelatex $pdfsrc 
-  rm $pdfbasename.{aux,toc,lof,lot,lop,log,out,nav,bbl,blg,ind,idx,glo,ilg,dvi}
+  rm -f $pdfbasename.{aux,toc,lof,lot,lop,log,out,nav,bbl,blg,ind,idx,glo,ilg,dvi}
   for doc in example-arabic example-thai examples; do
     echo "COMPILING doc '$doc'"
     cd $root/doc
     xelatex $doc.tex || exit 1 && "Failed to compile $doc.tex"
     xelatex $doc.tex
-    rm $doc.{log,aux}
+    rm -f $doc.{log,aux,toc}
     cd $root
   done
 fi
