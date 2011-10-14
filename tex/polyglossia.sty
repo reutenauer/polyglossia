@@ -454,6 +454,7 @@
 
 \newcommand{\xpg@input}[1]{%
   \chardef\xpg@atcatcode\catcode`\@
+  \catcode`\@=11\relax
   \input{#1}\catcode`\@=\xpg@atcatcode}
 
 \newcommand{\setdefaultlanguage}[2][]{%
