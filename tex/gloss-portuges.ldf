@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-portuges.ldf}[polyglossia: module for portuguese]
-\makeatletter
 \PolyglossiaSetup{portuges}{
   hyphennames={portuges,portuguese},
   hyphenmins={2,3},
@@ -38,5 +37,4 @@
     \space de\space\number\year}%
   }
      
-\makeatother
 \endinput

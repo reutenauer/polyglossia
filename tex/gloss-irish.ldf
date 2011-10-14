@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-irish.ldf}[polyglossia: module for irish]
-\makeatletter
 \PolyglossiaSetup{irish}{
   hyphennames={irish},
   hyphenmins={2,2},
@@ -40,5 +39,4 @@
     Mí na Samhna\or Mí na Nollag\fi
     \space \number\year}}
 
-\makeatother
 \endinput

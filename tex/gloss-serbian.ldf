@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-serbian.ldf}[polyglossia: module for serbian]
-\makeatletter
 %TODO split into gloss-serbiancyr.ldf and gloss-serbianlat.ldf
 %% load these automatically from polyglossia.sty according to the script option ??
 %% same thing for all languages that have a "script" key !
@@ -114,7 +113,6 @@
     децембар\fi \space \number\year.}%
     }
 
-\makeatother
 \endinput
 % TODO ? stuff from babel
 

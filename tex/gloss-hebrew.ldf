@@ -1,7 +1,6 @@
 \ProvidesFile{gloss-hebrew.ldf}[polyglossia: module for hebrew]
 \RequirePackage{bidi}
 \RequirePackage{hebrewcal}
-\makeatletter
 
 \PolyglossiaSetup{hebrew}{
   script=Hebrew,
@@ -117,5 +116,4 @@
 \def\noextras@hebrew{%
    \let\MakeUppercase\@@MakeUppercase%
    }
-\makeatother
 \endinput

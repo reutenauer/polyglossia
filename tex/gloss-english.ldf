@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-english.ldf}[polyglossia: module for english]
-\makeatletter
 \PolyglossiaSetup{english}{
   hyphennames={english,american,usenglish,USenglish},
   hyphenmins={2,3},
@@ -109,5 +108,4 @@
     \fi}%
 }
 
-\makeatother
 \endinput

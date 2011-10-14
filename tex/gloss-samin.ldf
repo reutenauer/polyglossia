@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-samin.ldf}[polyglossia: module for samin]
-\makeatletter
 
 \PolyglossiaSetup{samin}{
   hyphennames={samin},
@@ -48,5 +47,4 @@
     \space\number\day.~b.\space\number\year}%
   }
 
-\makeatother
 \endinput

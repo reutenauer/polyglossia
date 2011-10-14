@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-bulgarian.ldf}[polyglossia: module for bulgarian]
-\makeatletter
 \PolyglossiaSetup{bulgarian}{
   script=Cyrillic,
   scripttag=cyrl,
@@ -84,7 +83,6 @@
     \def\todayRoman{\number\day.\,\month@Roman.\,\number\year~г.}%
     }
 
-\makeatother
 \endinput
 
 %% TODO?

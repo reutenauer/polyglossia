@@ -1,6 +1,5 @@
 \ProvidesFile{gloss-turkish.ldf}[polyglossia: module for turkish]
 \RequirePackage{hijrical}
-\makeatletter
 \PolyglossiaSetup{turkish}{
   hyphennames={turkish},
   hyphenmins={2,2},
@@ -80,5 +79,4 @@
    \turkish@punctuation%
 }
 
-\makeatother
 \endinput

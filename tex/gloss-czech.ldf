@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-czech.ldf}[polyglossia: module for czech]
-\makeatletter
 \PolyglossiaSetup{czech}{
   hyphennames={czech},
   hyphenmins={2,2},
@@ -38,5 +37,4 @@
     října\or listopadu\or prosince\fi
     \space \number\year}}
 
-\makeatother
 \endinput

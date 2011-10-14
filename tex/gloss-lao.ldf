@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-lao.ldf}[polyglossia: module for Lao]
-\makeatletter
 \PolyglossiaSetup{lao}{
   script=Lao,
   scripttag=lao,
@@ -88,5 +87,4 @@
    \renewcommand\thefootnote{\protect\number{\c@footnote}}%
 }
 
-\makeatother
 \endinput

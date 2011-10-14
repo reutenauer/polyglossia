@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-thai.ldf}[polyglossia: module for thai]
-\makeatletter
 %% This is partly based on thai-latex for Babel:
 %%%% Copyright (C) 1999 - 2006
 %%%%           by Surapant Meknavin,
@@ -133,7 +132,6 @@
    \let\baselinestrech\orig@baselinestretch%
 }
 
-\makeatother
 \endinput
 
 %TODO ?

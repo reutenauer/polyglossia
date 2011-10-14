@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-catalan.ldf}[polyglossia: module for catalan]
-\makeatletter
 \PolyglossiaSetup{catalan}{
   hyphennames={catalan},
   hyphenmins={2,2},
@@ -126,5 +125,4 @@
 \def\inlineextras@catalan{%
    \ifcatalan@babelshorthands\catalan@shorthands\fi%
 }
-\makeatother
 \endinput

@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-interlingua.ldf}[polyglossia: module for interlingua]
-\makeatletter
 \PolyglossiaSetup{interlingua}{
   hyphennames={interlingua},
   hyphenmins={2,2},
@@ -39,5 +38,4 @@
     decembre\fi
     \space \number\year}}
 
-\makeatother
 \endinput

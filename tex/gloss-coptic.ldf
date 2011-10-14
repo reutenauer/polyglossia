@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-coptic.ldf}[polyglossia: module for coptic]
-\makeatletter
 \PolyglossiaSetup{coptic}{
   script=Coptic,
   scripttag=copt,
@@ -37,5 +36,4 @@
 %   \def\today{<++>}%
 %   }
 
-\makeatother
 \endinput

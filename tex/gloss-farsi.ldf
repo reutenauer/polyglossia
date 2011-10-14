@@ -3,7 +3,6 @@
 \RequirePackage{arabicnumbers}
 \RequirePackage{farsical}
 \RequirePackage{hijrical}
-\makeatletter
 \PolyglossiaSetup{farsi}{
   script=Arabic,
   direction=RL,
@@ -123,5 +122,4 @@
 \def\noextras@farsi{%
    \let\MakeUppercase\@@MakeUppercase%
    }
-\makeatother
 \endinput

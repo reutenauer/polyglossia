@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-lsorbian.ldf}[polyglossia: module for lower sorbian]
-\makeatletter
 \PolyglossiaSetup{lsorbian}{
   hyphennames={lsorbian,lowersorbian,Lsorbian},
   hyphenmins={2,2},
@@ -43,5 +42,4 @@
     godownika\fi\space \number\year}}%
     }
 
-\makeatother
 \endinput

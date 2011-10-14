@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-latvian.ldf}[polyglossia: module for latvian]
-\makeatletter
 \PolyglossiaSetup{latvian}{
   hyphennames={latvian},
   hyphenmins={2,2},
@@ -38,5 +37,4 @@
       jūlijā\or augustā\or septembrī\or%
       oktobrī\or novembrī\or decembrī\fi}}
 
-\makeatother
 \endinput

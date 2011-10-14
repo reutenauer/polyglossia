@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-french.ldf}[polyglossia: module for french]
-\makeatletter
 
 \PolyglossiaSetup{french}{%
   language=French,
@@ -116,5 +115,4 @@
    \french@punctuation%
    }
 
-\makeatother
 \endinput

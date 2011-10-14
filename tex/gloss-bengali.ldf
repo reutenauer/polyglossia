@@ -3,7 +3,6 @@
 
 \ProvidesFile{gloss-bengali.ldf}[polyglossia: module for bengali]
 \RequirePackage{devanagaridigits}
-\makeatletter
 
 \PolyglossiaSetup{bengali}{
   script=Bengali,
@@ -75,5 +74,4 @@
     \number#1%
   \fi}
 
-\makeatother
 \endinput

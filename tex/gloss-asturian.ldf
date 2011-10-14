@@ -2,7 +2,6 @@
 % Contributed by Kevin Godby <godbyk at gmail dot com>
 %
 \ProvidesFile{gloss-asturian.ldf}[polyglossia: module for asturian]
-\makeatletter
 \PolyglossiaSetup{asturian}{
   hyphennames={asturian,catalan},
   hyphenmins={2,2},
@@ -41,5 +40,4 @@
     d'avientu\fi\space de~\number\year}%
 }
 
-\makeatother
 \endinput

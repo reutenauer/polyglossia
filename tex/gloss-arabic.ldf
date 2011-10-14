@@ -2,7 +2,6 @@
 \RequirePackage{bidi}
 \RequirePackage{arabicnumbers}
 \RequirePackage{hijrical}
-\makeatletter
 
 \PolyglossiaSetup{arabic}{
   script=Arabic,
@@ -207,5 +206,4 @@
    \let\MakeUppercase\orig@MakeUppercase%
    }
 
-\makeatother
 \endinput

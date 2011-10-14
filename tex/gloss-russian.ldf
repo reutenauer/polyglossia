@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-russian.ldf}[polyglossia: module for russian]
-\makeatletter
 \PolyglossiaSetup{russian}{
   script=Cyrillic,
   scripttag=cyrl,
@@ -250,6 +249,5 @@
 \def\Proj  {\mathop{\mathrm{Пр}}\nolimits}
 %\DeclareRobustCommand{\No}{№}
 
-\makeatother
 \endinput
 

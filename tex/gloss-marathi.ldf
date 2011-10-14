@@ -3,7 +3,6 @@
 
 \ProvidesFile{gloss-marathi.ldf}[polyglossia: module for marathi]
 \RequirePackage{devanagaridigits}
-\makeatletter
 
 \PolyglossiaSetup{marathi}{
   script=Devaganari,
@@ -76,5 +75,4 @@
    \def\today{\marathinumber\day\space\marathimonth\space\marathinumber\year}%
 }
 
-\makeatother
 \endinput

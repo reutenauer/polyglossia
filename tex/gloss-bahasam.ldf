@@ -1,6 +1,5 @@
 \ProvidesFile{gloss-bahasam.ldf}[polyglossia: module for bahasa melayu]
 \RequirePackage{hijrical}
-\makeatletter
 \PolyglossiaSetup{bahasam}{%
   language=Bahasa Melayu,
   hyphennames={malay,melayu,bahasam,bahasa,bahasai,indonesian,indon},
@@ -52,5 +51,4 @@
 \DefineFormatHijriDate{bahasam}{%
 \number\value{Hijriday}\space\hijrimonthbahasam{\value{Hijrimonth}}\space\number\value{Hijriyear}}
 
-\makeatother
 \endinput

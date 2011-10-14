@@ -1,6 +1,5 @@
 \ProvidesFile{gloss-divehi.ldf}[polyglossia: module for divehi]
 \RequirePackage{bidi}
-\makeatletter
 \PolyglossiaSetup{divehi}{
   script=Thaana,
   scripttag=thaa,
@@ -43,5 +42,4 @@
    \let\MakeUppercase\@@MakeUppercase%
    }
 
-\makeatother
 \endinput

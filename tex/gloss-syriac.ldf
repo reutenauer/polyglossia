@@ -1,7 +1,6 @@
 \ProvidesFile{gloss-syriac.ldf}[polyglossia: module for syriac]
 \RequirePackage{bidi}
 \RequirePackage{arabicnumbers}
-\makeatletter
 
 \PolyglossiaSetup{syriac}{
   script=Syriac,
@@ -156,5 +155,4 @@
    \let\MakeUppercase\@@MakeUppercase%
    }
 
-\makeatother
 \endinput

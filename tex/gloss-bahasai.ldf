@@ -1,6 +1,5 @@
 \ProvidesFile{gloss-bahasai.ldf}[polyglossia: module for bahasa indonesia]
 \RequirePackage{hijrical}
-\makeatletter
 
 \PolyglossiaSetup{bahasai}{%
   language=Bahasa Indonesia,
@@ -44,5 +43,4 @@
 \DefineFormatHijriDate{bahasai}{%
 \number\value{Hijriday}\space\hijrimonthbahasai{\value{Hijrimonth}}\space\number\value{Hijriyear}}
 
-\makeatother
 \endinput

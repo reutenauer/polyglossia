@@ -1,6 +1,5 @@
 ﻿\ProvidesFile{gloss-malayalam.ldf}[polyglossia: module for malayalam]
 % Translations provided by Kevin & Siji, 01-11-2009
-\makeatletter
 
 \PolyglossiaSetup{malayalam}{
   script=Malayalam,
@@ -51,5 +50,4 @@
      \space\number\day}%
 }
 
-\makeatother
 \endinput

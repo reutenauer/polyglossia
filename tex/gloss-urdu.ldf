@@ -3,7 +3,6 @@
 \RequirePackage{bidi}
 \RequirePackage{arabicnumbers}
 \RequirePackage{hijrical}
-\makeatletter
 
 \PolyglossiaSetup{urdu}{
   script=Arabic,
@@ -135,6 +134,5 @@
   \let\MakeUppercase\@@MakeUppercase%
   }
 
-\makeatother
 \endinput
 

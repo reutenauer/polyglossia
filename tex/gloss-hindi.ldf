@@ -4,7 +4,6 @@
 
 \ProvidesFile{gloss-hindi.ldf}[polyglossia: module for hindi]
 \RequirePackage{devanagaridigits}
-\makeatletter
 \PolyglossiaSetup{hindi}{
   script=Devanagari,
   scripttag=deva,
@@ -96,5 +95,4 @@
   \let\MakeUppercase\@@MakeUppercase%
 }
 
-\makeatother
 \endinput

@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-icelandic.ldf}[polyglossia: module for icelandic]
-\makeatletter
 \PolyglossiaSetup{icelandic}{
   hyphennames={icelandic},
   hyphenmins={2,2},
@@ -39,7 +38,6 @@
     \space\number\year}%
     }
 
-\makeatother
 \endinput
 
 

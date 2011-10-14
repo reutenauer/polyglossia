@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-amharic.ldf}[polyglossia: module for amharic]
-\makeatletter
 \PolyglossiaSetup{amharic}{
   script=Ethiopic,
   scripttag=ethi,

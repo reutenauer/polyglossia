@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-german.ldf}[polyglossia: module for german]
-\makeatletter
 \PolyglossiaSetup{german}{
   hyphenmins={2,2},
   frenchspacing=true,
@@ -174,5 +173,4 @@
   \ifgerman@babelshorthands\german@shorthands\fi
 }
 
-\makeatother
 \endinput

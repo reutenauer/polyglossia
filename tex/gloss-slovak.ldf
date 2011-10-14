@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-slovak.ldf}[polyglossia: module for slovak]
-\makeatletter
 
 \PolyglossiaSetup{slovak}{
   hyphennames={slovak},
@@ -40,5 +39,4 @@
     \space \number\year}%
   }
 
-\makeatother
 \endinput

@@ -1,6 +1,5 @@
 \ProvidesFile{gloss-turkmen.ldf}[polyglossia: module for turkmen]
 %% Translations provided by Nazar Annagurban <nazartm at gmail dot com>
-\makeatletter
 \PolyglossiaSetup{turkmen}{
   hyphennames={turkmen},
   hyphenmins={2,2},
@@ -40,5 +39,4 @@
     Dekabr\fi
     \space\number\year}%
 }
-\makeatother
 \endinput

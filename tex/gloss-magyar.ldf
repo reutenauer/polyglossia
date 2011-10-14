@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-magyar.ldf}[polyglossia: module for magyar]
-\makeatletter
 \PolyglossiaSetup{magyar}{
   hyphennames={magyar,hungarian},
   hyphenmins={2,2},
@@ -58,5 +57,4 @@
    \let\ontoday\@undefined
 }
 
-\makeatother
 \endinput

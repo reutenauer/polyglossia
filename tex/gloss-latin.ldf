@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-latin.ldf}[polyglossia: module for latin]
-\makeatletter
 \PolyglossiaSetup{latin}{
   hyphennames={latin},
   hyphenmins={2,2},
@@ -38,5 +37,4 @@
       Decembris\fi%
       \space \uppercase\expandafter{\romannumeral\year}}}
 
-\makeatother
 \endinput

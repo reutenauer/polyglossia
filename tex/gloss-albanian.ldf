@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-albanian.ldf}[polyglossia: module for albanian]
-\makeatletter
 
 \PolyglossiaSetup{albanian}{
   hyphennames={albanian},
@@ -38,7 +37,6 @@
     Qershor\or Korrik\or Gusht\or Shtator\or Tetor\or Nëntor\or
     Dhjetor\fi \space \number\year}}}
 
-\makeatother
 \endinput
   
 %\def\sh{\mathop{\operator@font sh}\nolimits} % same as \sinh

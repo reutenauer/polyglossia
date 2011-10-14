@@ -1,6 +1,5 @@
 \ProvidesFile{gloss-telugu.ldf}[polyglossia: module for telugu]
 % Translations provided by Anmol Sharma <unmole.in@gmail.com>
-\makeatletter
 
 \PolyglossiaSetup{telugu}{
   script=Telugu,
@@ -54,5 +53,4 @@
    \def\today{\telugu@month\space\number\day,\space\number\year}%
 }
 
-\makeatother
 \endinput

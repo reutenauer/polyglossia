@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-scottish.ldf}[polyglossia: module for scottish]
-\makeatletter
 
 \PolyglossiaSetup{scottish}{
   hyphennames={scottish},
@@ -42,5 +41,4 @@
     \space \number\year}%
     }
 
-\makeatother
 \endinput

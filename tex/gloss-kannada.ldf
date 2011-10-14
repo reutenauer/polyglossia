@@ -17,7 +17,6 @@
 %
 % This work consists of the file gloss-kannada.ldf
 \ProvidesFile{gloss-kannada.ldf}[polyglossia: module for kannada]
-\makeatletter
 \PolyglossiaSetup{kannada}{
   script=Kannada,
   scripttag=knda,
@@ -101,5 +100,4 @@
   \fi
 }
 
-\makeatother
 \endinput

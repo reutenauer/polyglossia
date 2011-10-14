@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-basque.ldf}[polyglossia: module for basque]
-\makeatletter
 \PolyglossiaSetup{basque}{
   hyphennames={basque},
   hyphenmins={2,2},
@@ -38,5 +37,4 @@
     irailaren\or urriaren\or azaroaren\or
     abenduaren\fi~\number\day}}
 
-\makeatother
 \endinput

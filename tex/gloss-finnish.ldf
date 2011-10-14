@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-finnish.ldf}[polyglossia: module for finnish]
-\makeatletter
 \PolyglossiaSetup{finnish}{
   hyphennames={finnish},
   hyphenmins={2,2},
@@ -38,7 +37,6 @@
     syyskuuta\or lokakuuta\or marraskuuta\or joulukuuta\fi
     \space\number\year}}
 
-\makeatother
 \endinput
 
 % TODO ? this is set in babel:

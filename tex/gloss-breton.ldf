@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-breton.ldf}[polyglossia: module for breton]
-\makeatletter
 \PolyglossiaSetup{breton}{
   hyphennames={breton},
   hyphenmins={2,2},
@@ -76,7 +75,6 @@
    \breton@punctuation%
    }
 
-\makeatother
 \endinput
 
 % These are defined in Babel 

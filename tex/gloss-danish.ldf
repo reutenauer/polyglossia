@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-danish.ldf}[polyglossia: module for danish]
-\makeatletter
 \PolyglossiaSetup{danish}{
   hyphennames={danish},
   hyphenmins={2,3},
@@ -34,5 +33,4 @@
     juli\or august\or september\or oktober\or november\or december\fi
     \space\number\year}
 
-\makeatother
 \endinput

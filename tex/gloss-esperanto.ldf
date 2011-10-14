@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-esperanto.ldf}[polyglossia: module for esperanto]
-\makeatletter
 \PolyglossiaSetup{esperanto}{
   hyphennames={esperanto},
   hyphenmins={2,2},
@@ -63,5 +62,4 @@
    \let\@alph\latin@alph%
 }
 
-\makeatother
 \endinput

@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-dutch.ldf}[polyglossia: module for dutch]
-\makeatletter
 \PolyglossiaSetup{dutch}{
   hyphennames={dutch},
   hyphenmins={2,2},
@@ -78,5 +77,4 @@
   \ifdutch@babelshorthands\dutch@shorthands\fi%
 }
 
-\makeatother
 \endinput

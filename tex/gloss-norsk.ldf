@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-norsk.ldf}[polyglossia: module for norwegian]
-\makeatletter
 \PolyglossiaSetup{norsk}{
   hyphennames={norsk},
   hyphenmins={2,2},
@@ -39,6 +38,5 @@
     \fi\space\number\year}%
     }
 
-\makeatother
 \endinput
 

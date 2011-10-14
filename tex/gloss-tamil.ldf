@@ -1,6 +1,5 @@
 ﻿\ProvidesFile{gloss-tamil.ldf}[polyglossia: module for tamil]
 % Translations provided by Kevin & Siji, 01-11-2009
-\makeatletter
 
 \PolyglossiaSetup{tamil}{
   script=Tamil,
@@ -51,5 +50,4 @@
      \space\number\day}%
 }
 
-\makeatother
 \endinput

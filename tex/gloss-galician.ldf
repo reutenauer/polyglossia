@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-galician.ldf}[polyglossia: module for galician]
-\makeatletter
 \PolyglossiaSetup{galician}{
   hyphennames={galician},
   hyphenmins={2,2},
@@ -37,5 +36,4 @@
     xullo\or agosto\or setembro\or outubro\or novembro\or decembro\fi
     \space de~\number\year}}
 
-\makeatother
 \endinput

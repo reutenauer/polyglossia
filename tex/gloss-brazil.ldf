@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-brazil.ldf}[polyglossia: module for portuguese]
-\makeatletter
 \PolyglossiaSetup{brazil}{
   language=Brazilian Portuguese,
   hyphennames={brazil,portuguese,portuges},
@@ -38,5 +37,4 @@
       \fi\space de\space\number\year}%
       }
      
-\makeatother
 \endinput

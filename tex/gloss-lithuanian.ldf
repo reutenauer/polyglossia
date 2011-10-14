@@ -61,5 +61,4 @@
   \let\fnum@table\fnum@table@orig
 }
 
-\makeatother
 \endinput

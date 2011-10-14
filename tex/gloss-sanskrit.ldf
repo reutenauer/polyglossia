@@ -1,6 +1,5 @@
 \ProvidesFile{gloss-sanskrit.ldf}[polyglossia: module for sanskrit]
 \RequirePackage{devanagaridigits}
-\makeatletter
 
 \PolyglossiaSetup{sanskrit}{
   langtag=SAN,
@@ -84,5 +83,4 @@
   \sanskrit@punctuation%
 }
 
-\makeatother
 \endinput

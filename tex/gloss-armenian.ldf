@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-armenian.ldf}[polyglossia: module for armenian]
-\makeatletter
 
 \PolyglossiaSetup{armenian}{
   script=Armenian,
@@ -50,5 +49,4 @@
     Նոյեմբեր\or
     Դեկտեմբեր\fi
     \number\day,\space\number\year}}
-\makeatother
 \endinput

@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-romanian.ldf}[polyglossia: module for romanian]
-\makeatletter
 
 \PolyglossiaSetup{romanian}{
   hyphennames={romanian},
@@ -40,5 +39,4 @@
     \space \number\year}%
   }
 
-\makeatother
 \endinput

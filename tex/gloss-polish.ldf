@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-polish.ldf}[polyglossia: module for polish]
-\makeatletter
 \PolyglossiaSetup{polish}{
   hyphennames={polish},
   hyphenmins={2,2},
@@ -39,5 +38,4 @@
       \number\year}%
   }
 
-\makeatother
 \endinput

@@ -1,7 +1,6 @@
 \ProvidesFile{gloss-ukrainian.ldf}[polyglossia: module for ukrainian]
 % Strings taken from Babel
 % and revised by Roman Kyrylych
-\makeatletter
 
 \PolyglossiaSetup{ukrainian}{
   script=Cyrillic,
@@ -78,7 +77,6 @@
    \let\@alph\latin@alph%
 }
 
-\makeatother
 \endinput
 
 %TODO? stuff from Babel

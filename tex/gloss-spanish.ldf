@@ -1,5 +1,4 @@
 \ProvidesFile{gloss-spanish.ldf}[polyglossia: module for spanish]
-\makeatletter
 \PolyglossiaSetup{spanish}{
   hyphennames={spanish},
   hyphenmins={2,2},
@@ -39,5 +38,4 @@
     diciembre\fi\space \number\year}%
   }
 
-\makeatother
 \endinput
