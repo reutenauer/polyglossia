@@ -6,7 +6,6 @@
 
 use strict;
 
-my $endinput_found = 0;
 my $chomped_line;
 
 sub usage()
@@ -37,17 +36,10 @@ sub main()
       $chomped_line = $_;
       chomp($chomped_line);
 
-      if($chomped_line =~ /^\\endinput/)
-      {
-        print "\\makeatother\n$_";
-        $endinput_found = 1;
-      }
-      else { print }
+      if($chomped_line !~ /^\\makeat(letter|other)$/) { print }
     }
     close GLOSSFILE;
   }
-
-  if(!$endinput_found) { warn "No \\endinput found in this file!\n" }
 }
 
 main()
