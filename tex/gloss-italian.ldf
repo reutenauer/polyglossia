@@ -1,5 +1,5 @@
 % !TEX encoding = UTF-8 Unicode
-\ProvidesFile{gloss-italian.ldf}[polyglossia: module for italian - unofficial test version]
+\ProvidesFile{gloss-italian.ldf}[polyglossia: module for italian]
 \PolyglossiaSetup{italian}{
   hyphennames={italian},
   hyphenmins={2,2},
