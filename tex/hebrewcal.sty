@@ -22,6 +22,9 @@
       \@FormatForEnglish{\hebrewday}{\hebrewmonth}{\hebrewyear}%
     \fi}
 \def\hebrewtoday{\hebrewdate{\day}{\month}{\year}}
+% The command name is capitalised in the doc, and this is consistent
+% with other names such as \Hijritoday and \Jalalitoday.
+\let\Hebrewtoday=\hebrewtoday
 \def\hebrewsetreg{%
     \HebrewFromGregorian{\day}{\month}{\year}%
                         {\hebrewday}{\hebrewmonth}{\hebrewyear}}
