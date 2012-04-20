@@ -54,9 +54,6 @@ CHANGES
 1.2.0d (12-01-2012)
   * Removed \makeatletter and \makeother from gloss file entirely.
 
-  In memory of my little cousin, Simon Reutenauer, passed away on 11
-January 2012, aged 4 months and 23 days.
-
 1.2.0cc (12-10-2011) [First update by Arthur Reutenauer]
   * Update to gloss-italian.ldf by Claudio Beccari, incorporating changes
     by Enrico Gregorio.
