@@ -7,6 +7,8 @@
 \@ifpackageloaded{l3calc}{\PackageError{hijrical}{\MessageBreak
 Package l3calc is loaded, which replaces the functionality of
 calc. Computation of Hijri dates will not work properly with
+% FIXME by Arthur: François couldn’t possibly mean ‘l3calc’ on the
+% following line :-)  Find out if he meant ‘calc’.
 l3calc! The latest version of expl3 on CTAN no longer loads
 l3calc. Please update expl3!
 }{}}{}
@@ -80,7 +82,7 @@ Shawwāl\or Dhū ’l-Qaʿda\or Dhū ’l-Ḥijja\fi}
    \@namedef{FormatHijriDate@#1}{#2}}
 
 % we provide this as a reasonable default.
-% Further definitions are in polyglossia's language definition files.
+% Further definitions are in polyglossia’s language definition files.
 \DefineFormatHijriDate{defaultRTL}{\@ensure@RTL{%
 \arabicdigits{\value{Hijriday}}\space\HijriMonthArabic{\value{Hijrimonth}}\space\arabicdigits{\value{Hijriyear}}}}
 
