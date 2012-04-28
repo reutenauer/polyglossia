@@ -3,7 +3,7 @@
 \PolyglossiaSetup{romansh}{%
   hyphennames={romansh},
   hyphenmins={2,2},
-  indentfirst-true,
+  indentfirst=true,
   fontsetup=true,
 }
 
