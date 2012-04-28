@@ -50,8 +50,9 @@
 
 \def\noextras@friulan{%
    \lccode\string"2019=\z@
-   \noitalian@shorthands
-   \xpgit@savedvalues
+   % TODO Figure out what the two lines below were supposed to be good for.
+   % \noitalian@shorthands
+   % \xpgit@savedvalues
 }
 
 \def\blockextras@friulan{%
