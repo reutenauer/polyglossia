@@ -263,7 +263,7 @@ amharic      & czech          & \TX{hindi}    & nynorsk      & \TX{syriac}   \\
 \TX{arabic}  & danish         & icelandic     & occitan      & tamil         \\
 armenian     & divehi         & interlingua   & polish       & telugu        \\
 asturian     & \TX{dutch}     & irish         & portuges     & \TX{thai}     \\
-bahasai      & \TX{english}   & italian       & romanian     & turkish       \\
+bahasai      & \TX{english}   & \TX{italian}  & romanian     & turkish       \\
 bahasam      & \TX{esperanto} & \TX{lao}      & \TX{russian} & turkmen       \\
 basque       & estonian       & latin         & samin        & ukrainian     \\
 \TX{bengali} & \TX{farsi}     & latvian       & \TX{sanskrit}& urdu          \\
@@ -289,9 +289,10 @@ Lao, Malayalam, Marathi, Tamil, Telugu, and Turkmen.\footnote{ %
 
 
 
-Polyglossia can also be loaded with the option ‘babelshorthands’\new{v1.1.1}, which
-globally activates \Babel shorthands whenever available. Currently shorthands are
-only implemented for German and Catalan: see below for details.
+Polyglossia can also be loaded with the option
+‘babelshorthands’\new{v1.1.1}, which globally activates \Babel
+shorthands whenever available. Currently shorthands are only implemented
+for Catalan, Dutch, German, and Italian: see below for details.
 
 Another option (turned off by default) is ‘localmarks’, which
 redefines the internal \LaTeX\ macros \cmd\markboth\ and \cmd\markright.
@@ -336,6 +337,9 @@ as \cmd\arabic\ is defined internally by \LaTeX. In this case
 we need to use the environment ¦Arabic¦ instead\DescribeEnv{Arabic}.
 This is the beginning of Ibn Khaldūn’s \textit{Muqaddima}:
 
+% TODO: convince XeTeX to typeset right-to-left, even in verbatim.
+% The individual words are set correctly, but the whole paragraph is
+% left-to-right!
 \begin{Verbatim}[formatcom={\color{myblue}\addfontfeature{Script=Arabic}}]
 \begin{Arabic}
 اعلم أنّ فنّ التاريخ فنّ عزيز المذهب، جمّ الفوائد، شريف الغاية؛ إذ هو
@@ -581,6 +585,21 @@ The default value of each option is given in italic.
 	\begin{itemize}
     \item \TB{numerals} = Western or \textit{Devanagari}
 	\end{itemize}
+
+\subsection{italian}\label{italian}
+\textbf{Option:}
+\begin{itemize}
+  \item \TB{babelshorthands} = \textit{false} or true. \new{v1.2.0cc}% TODO: check version
+	Activates the ¦"¦ character as a switch to perform etymological
+	hyphenation when followed by a letter, or other tasks when followed by
+	certain analphabetic characters; in particular ¦""¦ is used to enter
+	double raised open quotes (the Italian keyboard misses the backtick),
+	and ¦"<¦  and ¦">¦ to insert open and closed guillemets without any
+	spacing after the open or before the closed sign. ¦"/¦ is made
+	equivalent to \slash allowing a linebreak after the slash without any
+	hyphen sign; ¦"-¦ produces  a short rule/hyphen and a discretional line
+	break alowing line breaks in the second compound word fragment.
+\end{itemize}
 
 \subsection{lao}\label{lao}\new{v1.2.0}
 \textbf{Options}:
