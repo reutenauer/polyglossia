@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # root="$HOME/dev/polyglossia"
-root="$HOME/perso/TeX/Polyglossia/polyglossia"
+# root="$HOME/perso/TeX/Polyglossia/polyglossia"
+root="$HOME/polyglossia"
 builddir="$root/build"
 
 pdf="$root/doc/polyglossia.pdf"
@@ -10,6 +11,13 @@ pdfbasename=${pdf%.pdf}
 
 cd $root
 
+# Overrides the default 79.  This makes for overly long lines in TeX’s
+# output, but at least it’s easy to see what’s on the same line and
+# what’s not (within the first 2048, of course).
+# The default is set by kpathsea, but it’s just easier to make it an
+# environment variable).
+max_print_line=2048
+export max_print_line
 # check if pdf is older than polyglossia.tex
 if [[ ! -f $pdf || $pdf -ot $pdfsrc  ]] ; then
   echo "Updating PDF documentation ..."
@@ -20,7 +28,12 @@ if [[ ! -f $pdf || $pdf -ot $pdfsrc  ]] ; then
   for doc in example-arabic example-thai examples; do
     echo "COMPILING doc '$doc'"
     cd $root/doc
-    xelatex $doc.tex || exit 1 && "Failed to compile $doc.tex"
+    # The line below generates an error even if things don’t go wrong,
+    # and quite frankly I don’t know what it’s good for.
+    # First of all, the last bit should be echo "Failed to compile ..."
+    # but I won’t bother
+    # xelatex $doc.tex || exit 1 && "Failed to compile $doc.tex"
+    xelatex $doc.tex || exit 1
     xelatex $doc.tex
     rm -f $doc.{log,aux,toc}
     cd $root

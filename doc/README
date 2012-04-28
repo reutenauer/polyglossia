@@ -1,7 +1,7 @@
 
    ¦----------------------------------------------¦
    ¦                                              ¦
-   ¦       THE POLYGLOSSIA PACKAGE v1.2.0d        ¦
+   ¦       THE POLYGLOSSIA PACKAGE v1.2.0e        ¦
    ¦                                              ¦
    ¦ Modern multilingual typesetting with XeLaTeX ¦
    ¦                                              ¦
@@ -51,8 +51,13 @@ http://github.com/reutenauer/polyglossia/issues
 
 CHANGES
 
+1.2.0e (28-01-2012)
+  * Fixed a number of outstanding and not very interesting bugs.
+  * Added gloss files for Romansh and Friulan, contributed by Claudio
+    Beccari.
+
 1.2.0d (12-01-2012)
-  * Removed \makeatletter and \makeother from gloss file entirely.
+  * Removed \makeatletter and \makeother from gloss files entirely.
 
 1.2.0cc (12-10-2011) [First update by Arthur Reutenauer]
   * Update to gloss-italian.ldf by Claudio Beccari, incorporating changes
