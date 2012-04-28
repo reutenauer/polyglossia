@@ -1,0 +1,23 @@
+\documentclass{minimal}
+
+\usepackage{polyglossia}
+\setmainlanguage{english}
+
+\setmainlanguage{vietnamese}
+\setmainlanguage{romansh}
+\setmainlanguage{friulan}
+
+\begin{document}
+
+\day=29
+\month=4
+\year=2012
+
+% Should be Ngày 29 tháng 4 năm 2012
+\textvietnamese{\today}
+% ils 29 da avrigl 2012
+\textromansh{\today}
+% 29 di Avril dal 2012
+\textfriulan{\today}
+
+\end{document}
