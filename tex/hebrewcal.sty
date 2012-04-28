@@ -269,7 +269,8 @@
              304 \or%
              334%
         \fi%
-        \if@GregorianLeap{#2}%
+        \@CheckIfGregorianLeap{#2}%
+        \if@GregorianLeap%
             \ifnum #1 > 2%        % if month after February
                 \advance #3 by 1% % add leap day
             \fi%
