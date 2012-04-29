@@ -100,6 +100,7 @@
 %%% ORIGINAL END %%%
 
 %%% CHANGES START %%% by Enrico Gregorio
+\let\xpgit@savedvalues\empty
 \AtEndPreamble{% the user or the class might define different values
   \edef\xpgit@savedvalues{%
     \clubpenalty=\the\clubpenalty\space
