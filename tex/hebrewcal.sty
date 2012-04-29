@@ -6,6 +6,10 @@
 
 \newif\if@xpg@hebrewcal@marcheshvan
 \DeclareOption{marcheshvan}{\@xpg@hebrewcal@marcheshvantrue}
+\ifx\if@xpg@hebrew@marcheshvan\undefined
+  \newif\if@xpg@hebrew@marcheshvan
+  \@xpg@hebrew@marcheshvanfalse
+\fi
 
 %% TODO rewrite this on the basis of Reingold & Dershowitz 
 %%      on the model of hijrical (using calc)
@@ -59,15 +63,10 @@
            \else אדר%
         \fi%
     \else%
-        \show\if@xpg@hebrew@marcheshvan
-        \show\if@xpg@hebrewcal@marcheshvan
-        \showthe#1%
         \ifcase#1%
            % nothing for 0
            \or תשרי%
-           % \or חשון%
-           % \or \if@hebrew@marcheshvan אבחשון\elseחשון\fi%
-           \or\if@xpg@hebrewcal@marcheshvan\message{I’m at 1}מרחשון\else\if@xpg@hebrew@marcheshvan\message{I’m at 2}מרחשון\else\message{I’m at 3}חשון\fi\fi%
+           \or\if@xpg@hebrewcal@marcheshvanמרחשון\else\if@xpg@hebrew@marcheshvanמרחשון\elseחשון\fi\fi%
            \or כסלו%
            \or טבת%
            \or שבט%
@@ -92,7 +91,8 @@
         \ifcase #1%
             % nothing for 0
             \or Tishrei%
-            \or \if@xpg@hebrewcal@marcheshvan Marcheshvan\else\if@xpg@hebrew@marcheshvan Marcheshvan\else Heshvan\fi\fi%
+            % \or\if@xpg@hebrewcal@marcheshvan Marcheshvan\else\if@xpg@hebrew@marcheshvan Marcheshvan\else Heshvan\fi\fi%
+            \or\if@xpg@hebrewcal@marcheshvan Marcheshvan\else\if@xpg@hebrew@marcheshvan Marcheshvan\else Heshvan\fi\fi%
             \or Kislev%
             \or Tebeth%
             \or Shebat%
