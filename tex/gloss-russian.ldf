@@ -49,7 +49,7 @@
 %  \declare@shorthand{russian}{">}{»}%
   \declare@shorthand{russian}{""}{\hskip\z@skip}%
   \declare@shorthand{russian}{"~}{\textormath{\leavevmode\hbox{-}}{-}}%
-  \declare@shorthand{russian}{"=}{\nobreak\-\hskip\z@skip}%
+  \declare@shorthand{russian}{"=}{\nobreak-\hskip\z@skip}%
   \declare@shorthand{russian}{"|}{\textormath{\nobreak\discretionary{-}{}{\kern.03em}\allowhyphens}{}}%
   \declare@shorthand{russian}{"-}{%
     \def\russian@sh@tmp{%
