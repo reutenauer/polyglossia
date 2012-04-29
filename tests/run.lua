@@ -21,7 +21,7 @@ local dirnamepatt = C(slash * (nonslash^1 * slash)^0)
 local testdir = match(dirnamepatt, abspath)
 
 -- TODO I don’t like that at all ...
-local alnum = lpeg.S'-_' + lpeg.R'az' + lpeg.R'AZ'
+local alnum = lpeg.S'-_' + lpeg.R'az' + lpeg.R'AZ' + lpeg.R'09'
 local dottex = alnum^0 * P'.tex' * -1
 
 -- lfs.chdir(testdir + 'out')
