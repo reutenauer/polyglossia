@@ -35,7 +35,7 @@
   \def\today{\number\day~de~\ifcase\month\or
     enero\or febrero\or marzo\or abril\or mayo\or junio\or
     julio\or agosto\or septiembre\or octubre\or noviembre\or
-    diciembre\fi\space \number\year}%
+    diciembre\fi\space ~de~\number\year}%
   }
 
 \endinput
