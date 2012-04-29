@@ -7,3 +7,4 @@
 localupdate
 etc/*
 doc/REQUESTS
+tests/out
