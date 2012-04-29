@@ -15,6 +15,8 @@ end
 
 -- TODO no idea why it doesn’t work the other way round: C((slash * nonslash^1)^1) * slash
 local dirnamepatt = C(slash * (nonslash^1 * slash)^0)
+-- local sdn = slash * nonslash^1-- s dn = slash, dirname
+-- local dirnamepatt = C(sdn^1 * sdn) -- TODO find out why this doesn’t work.
 
 local testdir = match(dirnamepatt, abspath)
 
