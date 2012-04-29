@@ -47,6 +47,7 @@ for _, basename in ipairs(basenames) do
     os.execute("xelatex " .. testdir .. '/' .. tex)
     os.execute("pdftotext -enc UTF-8 " .. outdir .. '/' .. basename ..  '.pdf' .. ' >/dev/null')
     local retvalue = os.execute("diff " .. testdir .. '/ref/' .. basename .. '.txt ' ..  testdir .. '/out/' .. basename .. '.txt')
+    -- TODO Instead of outputting that mid-run, collect all the results and print a summary at the end.
     if(retvalue == 0) then
       print('Test file ' .. tex .. ' OK.')
     else
