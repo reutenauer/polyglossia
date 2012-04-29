@@ -61,13 +61,13 @@
     \else%
         \show\if@xpg@hebrew@marcheshvan
         \show\if@xpg@hebrewcal@marcheshvan
-        \showthe#1
+        \showthe#1%
         \ifcase#1%
            % nothing for 0
            \or תשרי%
            % \or חשון%
            % \or \if@hebrew@marcheshvan אבחשון\elseחשון\fi%
-           \or \if@xpg@hebrewcal@marcheshvan\message{I’m at 1} מרחשון\else\if@xpg@hebrew@marcheshvan\message{I’m at 2} מרחשון\else\message{I’m at 3} חשון\fi\fi%
+           \or\if@xpg@hebrewcal@marcheshvan\message{I’m at 1}מרחשון\else\if@xpg@hebrew@marcheshvan\message{I’m at 2}מרחשון\else\message{I’m at 3}חשון\fi\fi%
            \or כסלו%
            \or טבת%
            \or שבט%
