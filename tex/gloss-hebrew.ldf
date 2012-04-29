@@ -2,6 +2,8 @@
 \RequirePackage{bidi}
 \RequirePackage{hebrewcal}
 
+\providebool{@hebrew@marcheshvan}
+
 \PolyglossiaSetup{hebrew}{
   script=Hebrew,
   direction=RL,
@@ -15,12 +17,24 @@
 \newif\if@calendar@hebrew
 \def\tmp@hebrew{hebrew}
 \define@key{hebrew}{calendar}[gregorian]{%
+	\message{Setting \string\if@calendar@hebrew}
 	\def\@tmpa{#1}%
 	\ifx\@tmpa\tmp@hebrew%
     \@calendar@hebrewtrue%
 	\else%
     \@calendar@hebrewfalse%
 	\fi}
+
+\define@boolkey{hebrew}[@xpg@hebrew@]{marcheshvan}[false]{%
+  \def\@tmpa{#1}%
+  \def\@tmptrue{true}%
+  \ifx\@tmpa\@tmptrue
+    \@xpg@hebrew@marcheshvantrue
+  \else
+    \@xpg@hebrew@marcheshvanfalse
+  \fi}
+
+\setkeys{hebrew}{marcheshvan}
 
 % hebrewcal.sty also defines the boolean key fullyear (default=false)
 
@@ -116,4 +130,5 @@
 \def\noextras@hebrew{%
    \let\MakeUppercase\@@MakeUppercase%
    }
+
 \endinput
