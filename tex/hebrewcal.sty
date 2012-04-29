@@ -4,6 +4,9 @@
 \RequirePackage{xkeyval}
 \RequirePackage{bidi}
 
+\newif\if@xpg@hebrewcal@marcheshvan
+\DeclareOption{marcheshvan}{\@xpg@hebrewcal@marcheshvantrue}
+
 %% TODO rewrite this on the basis of Reingold & Dershowitz 
 %%      on the model of hijrical (using calc)
 
@@ -60,6 +63,8 @@
            % nothing for 0
            \or תשרי%
            \or חשון%
+           % \or \if@hebrew@marcheshvan אבחשון\elseחשון\fi%
+           \or \if@xpg@hebrewcal@marcheshvan מרחשון\else חשון\fi%
            \or כסלו%
            \or טבת%
            \or שבט%
@@ -84,7 +89,7 @@
         \ifcase #1%
             % nothing for 0
             \or Tishrei%
-            \or Heshvan%
+            \or \if@xpg@hebrewcal@marcheshvan Marcheshvan\else Heshvan\fi%
             \or Kislev%
             \or Tebeth%
             \or Shebat%
@@ -333,4 +338,5 @@
         \repeat%
         \global\advance #5 by -1%
         \global\advance #4 by -\tmpy}}
+\ProcessOptions*
 \endinput
