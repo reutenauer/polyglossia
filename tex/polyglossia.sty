@@ -8,10 +8,11 @@
 % fontspec now uses LaTeX3 packages such as expl3, so we need this:
 \ExplSyntaxOn
 
-\ifcsundef{newXeTeXintercharclass}{%
+% TODO I’d like to do something with a ‘\or’ ... Arthur, 2012-08-01.
+\ifcsundef{newXeTeXintercharclass}{\ifcsundef{directlua}{%
   \xpg@error{Your~ xelatex~ format~ appears~ to~ be~ outdated!^^J
 ~~~~Please~ update~ your~ system~ and~ recreate~ it~ with~ fmtutil.}
-  }{}
+  }{}}{}
 
 %% This is for compatibility with Babel-aware package:
 \cslet{ver@babel.sty}{\@empty} % this "fakes" babel
@@ -433,8 +434,11 @@
 }
 \setkeys{polyglossia}{localmarks=false}
 
+% Easy way out – Arthur, 2012-08-01
+\ifcsdef{newXeTeXintercharclass}{%
 % to reset the intercharclass of a character to "normal"
 \newXeTeXintercharclass\xpg@normalclass %TODO
+}{}
 
 %% when no patterns are available, we use \l@nohyphenation, assigned to 255
 %%  (suggestion by Enrico Gregorio)
