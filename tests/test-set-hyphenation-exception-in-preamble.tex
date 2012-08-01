@@ -1,0 +1,26 @@
+\documentclass{minimal}
+
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setotherlanguage{italian}
+
+\usepackage{xltxtra}
+
+{\selectlanguage{italian}
+\hyphenation{n-e-l m-e-z-z-o d-e-l c-a-m-m-i-n d-i n-o-s-t-r-a v-i-t-a}}
+
+\begin{document}
+
+\begin{minipage}{1sp}
+Nel mezzo del cammin di nostra vita
+\end{minipage}
+
+\selectlanguage{italian}
+\lefthyphenmin=1
+\righthyphenmin=1
+
+\begin{minipage}{1sp}
+Nel mezzo del cammin di nostra vita
+\end{minipage}
+
+\end{document}
