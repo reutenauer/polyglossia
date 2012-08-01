@@ -45,7 +45,7 @@ for _, basename in ipairs(basenames) do
   local tex = basename .. '.tex'
   if match(dottex, tex) then
     os.execute("xelatex " .. testdir .. '/' .. tex)
-    os.execute("pdftotext -enc UTF-8 " .. outdir .. '/' .. basename ..  '.pdf' .. ' >/dev/null')
+    os.execute("pdftotext -layout -enc UTF-8 " .. outdir .. '/' .. basename ..  '.pdf' .. ' >/dev/null')
     local retvalue = os.execute("diff " .. testdir .. '/ref/' .. basename .. '.txt ' ..  testdir .. '/out/' .. basename .. '.txt')
     if(retvalue == 0) then
       errors[tex] = false
