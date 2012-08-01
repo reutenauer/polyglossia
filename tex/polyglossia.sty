@@ -4,17 +4,10 @@
 \RequirePackage{etoolbox}
 \RequirePackage{makecmds}
 \RequirePackage{xkeyval}[2008/08/13]
+% Will raise error if used with anything else than XeTeX or LuaTeX
 \RequirePackage{fontspec}[2010/06/08]% v2.0
 % fontspec now uses LaTeX3 packages such as expl3, so we need this:
 \ExplSyntaxOn
-
-% Using etoolbox syntax to keep in line with the rest of the code, but
-% honestly this is ugly as hell.
-\unlessboolexpr{ test {\ifcsdef{newXeTeXintercharclass}}%
-    or test {\ifcsdef{directlua}} }{%
-  \xpg@error{Your~ xelatex~ or~ luatex~ format~ appears~ to~ be~ outdated!^^J
-~~~~Please~ update~ your~ system~ and~ recreate~ it~ with~ fmtutil.}
-  }{}
 
 %% This is for compatibility with Babel-aware package:
 \cslet{ver@babel.sty}{\@empty} % this "fakes" babel
