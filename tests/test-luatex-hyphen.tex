@@ -1,5 +1,6 @@
 \documentclass{minimal}
 \directlua{dofile(kpse.find_file('luatex-hyphen.lua'))}
+\directlua{dofile('test-luatex-hyphen.lua')}
 
 \usepackage{polyglossia}
 \setmainlanguage{english}
@@ -20,7 +21,7 @@ Hello, world!
 \gnaeherr
 
 \begin{german}
-\directlua{tex.sprint('\string\\string\the\string\\string\language')}
+\directlua{thelanguage()}
 \directlua{luatexhyphen.loadlanguage('german', 29)}
 Hallo, Welt!
 
