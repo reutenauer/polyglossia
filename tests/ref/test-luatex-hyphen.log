@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.70.1-2011062107 (rev 4277)  (format=lualatex 2011.9.30)  3 AUG 2012 14:02
+This is LuaTeX, Version beta-0.70.1-2011062107 (rev 4277)  (format=lualatex 2011.9.30)  3 AUG 2012 14:46
  restricted \write18 enabled.
 **test-luatex-hyphen.tex
 (./test-luatex-hyphen.tex
@@ -7,7 +7,9 @@ LuaTeX adaptation of babel <v3.8l-luatex-1.4> and hyphenation patterns for engl
 ish, dumylang, nohyphenation, loaded.
 (/usr/local/texlive/2011/texmf-dist/tex/latex/base/minimal.cls
 Document Class: minimal 2001/05/25 Standard LaTeX minimal class
-) (/Users/arthur/polyglossia/tex/polyglossia.sty
+)
+luatex-hyphen: using data file: /usr/local/texlive/2011/texmf-var/tex/generic/c
+onfig/language.dat.lua (/Users/arthur/polyglossia/tex/polyglossia.sty
 Package: polyglossia 2012/04/29 v1.2.1 Babel replacement for XeLaTeX
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/etoolbox/etoolbox.sty
@@ -648,12 +650,6 @@ File: babelsh.def 2009/05/07 Babel common definitions for shorthands
 )
 Package babel Info: Making " an active character on input line 59.
 )
-(/Users/arthur/polyglossia/tex/gloss-armenian.ldf
-File: gloss-armenian.ldf polyglossia: module for armenian
-)
-(/Users/arthur/polyglossia/tex/gloss-basque.ldf
-File: gloss-basque.ldf polyglossia: module for basque
-)
 luaotfload | Font names database loaded: /Users/arthur/.texlive2011/texmf-var/l
 uatex-cache/generic/names/otfl-names.lua
 luaotfload | load font: font family='mshtakan', subfamily='regular' found: /Lib
@@ -709,30 +705,28 @@ Library/Fonts/MshtakanBoldOblique.ttf
 . * 'bold italic' with NFSS spec.:
 . <->"name:Mshtakan/BI:mode=node;"
 .................................................
- (./test-luatex-hyphen.aux
-luaotfload | load font: font family='mshtakan', subfamily='regular' found: /Lib
-rary/Fonts/MshtakanRegular.ttf)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for EU2/lmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 17.
-LaTeX Font Info:    Try loading font information for T3+cmr on input line 17.
+ (./test-luatex-hyphen.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for EU2/lmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 18.
+LaTeX Font Info:    Try loading font information for T3+cmr on input line 18.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/tipa/t3cmr.fd
 File: t3cmr.fd 2001/12/31 TIPA font definitions
 )
-LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    ... okay on input line 18.
 
 (/usr/local/texlive/2011/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -781,73 +775,78 @@ e
 .................................................
 \symlegacymaths=\mathgroup4
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 17.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 17.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 17.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 17.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 17.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 17.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 17.
-LaTeX Font Info:    Redeclaring math accent \check on input line 17.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 17.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 17.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 17.
-LaTeX Font Info:    Redeclaring math symbol \colon on input line 17.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 17.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 17.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 17.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 17.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 17.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 17.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 17.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 17.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 17.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 17.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 17.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 17.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 17.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 18.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 18.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 18.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 18.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 18.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 18.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 18.
+LaTeX Font Info:    Redeclaring math accent \check on input line 18.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 18.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 18.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \colon on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 18.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 18.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 18.
 LaTeX Font Info:    Encoding `OT1' has changed to `EU2' for symbol font
-(Font)              `operators' in the math version `normal' on input line 17.
+(Font)              `operators' in the math version `normal' on input line 18.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> EU2/lmr/m/n on input line 17.
+(Font)                  OT1/cmr/m/n --> EU2/lmr/m/n on input line 18.
 LaTeX Font Info:    Encoding `OT1' has changed to `EU2' for symbol font
-(Font)              `operators' in the math version `bold' on input line 17.
+(Font)              `operators' in the math version `bold' on input line 18.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> EU2/lmr/m/n on input line 17.
+(Font)                  OT1/cmr/bx/n --> EU2/lmr/m/n on input line 18.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  EU2/lmr/m/n --> EU2/lmr/m/n on input line 17.
+(Font)                  EU2/lmr/m/n --> EU2/lmr/m/n on input line 18.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  EU2/lmr/m/n --> EU2/lmr/m/n on input line 17.
+(Font)                  EU2/lmr/m/n --> EU2/lmr/m/n on input line 18.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> EU2/lmr/m/it on input line 17.
+(Font)                  OT1/cmr/m/it --> EU2/lmr/m/it on input line 18.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> EU2/lmr/bx/n on input line 17.
+(Font)                  OT1/cmr/bx/n --> EU2/lmr/bx/n on input line 18.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> EU2/lmss/m/n on input line 17.
+(Font)                  OT1/cmss/m/n --> EU2/lmss/m/n on input line 18.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> EU2/lmtt/m/n on input line 17.
+(Font)                  OT1/cmtt/m/n --> EU2/lmtt/m/n on input line 18.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  EU2/lmr/m/n --> EU2/lmr/bx/n on input line 17.
+(Font)                  EU2/lmr/m/n --> EU2/lmr/bx/n on input line 18.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  EU2/lmr/m/n --> EU2/lmr/bx/n on input line 17.
+(Font)                  EU2/lmr/m/n --> EU2/lmr/bx/n on input line 18.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> EU2/lmr/bx/it on input line 17.
+(Font)                  OT1/cmr/bx/it --> EU2/lmr/bx/it on input line 18.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> EU2/lmss/bx/n on input line 17.
+(Font)                  OT1/cmss/bx/n --> EU2/lmss/bx/n on input line 18.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> EU2/lmtt/bx/n on input line 17.
+(Font)                  OT1/cmtt/m/n --> EU2/lmtt/bx/n on input line 18.
 
-Overfull \hbox (35.07999pt too wide) in paragraph at lines 21--21
-[][]\EU2/lmr/m/n/10 Gnädig-
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+[][]
  []
 
 
-Overfull \hbox (16.18999pt too wide) in paragraph at lines 21--21
+Overfull \hbox (35.07997pt too wide) in paragraph at lines 22--22
+\EU2/lmr/m/n/10 Gnädig-
+ []
+
+
+Overfull \hbox (16.18997pt too wide) in paragraph at lines 22--22
 \EU2/lmr/m/n/10 ster
  []
 
 
-Overfull \hbox (19.77998pt too wide) in paragraph at lines 21--21
+Overfull \hbox (19.77997pt too wide) in paragraph at lines 22--22
 \EU2/lmr/m/n/10 Herr 
  []
 
@@ -858,60 +857,98 @@ luaotfload | load font: auto-selecting default features for script: dflt (was l
 atn)(load: /Users/arthur/.texlive2011/texmf-var/luatex-cache/generic/fonts/otf/
 temp-lmroman5-regular.lua)
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 21.
+(Font)              <7> on input line 22.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 21.
-
-> 0.
-l.23 \showthe\language
-                      
-? 
-
-Overfull \hbox (47.93999pt too wide) in paragraph at lines 28--28
-[][]\EU2/lmr/m/n/10 Gnädigster
+(Font)              <5> on input line 22.
+luatex-hyphen: loading patterns and exceptions for: german (\language29)
+luatex-hyphen: info: no hyphenation exceptions for this language
+Underfull \hbox (badness 10000) in paragraph at lines 28--28
+[][]
  []
 
 
-Overfull \hbox (19.77998pt too wide) in paragraph at lines 28--28
+Overfull \hbox (21.73997pt too wide) in paragraph at lines 28--28
+\EU2/lmr/m/n/10 Gnä-
+ []
+
+
+Overfull \hbox (16.66997pt too wide) in paragraph at lines 28--28
+\EU2/lmr/m/n/10 dig-
+ []
+
+
+Overfull \hbox (16.18997pt too wide) in paragraph at lines 28--28
+\EU2/lmr/m/n/10 ster
+ []
+
+
+Overfull \hbox (19.77997pt too wide) in paragraph at lines 28--28
 \EU2/lmr/m/n/10 Herr 
  []
 
-> 29.
-l.31 \showthe\language
-                      
-? 
 
-Overfull \hbox (68.98999pt too wide) in paragraph at lines 32--33
-[][]\EU2/lmr/m/n/10 Neuschwanstein 
+Underfull \hbox (badness 10000) in paragraph at lines 31--32
+[][]
  []
 
-> 9.
-l.41 \showthe\language
-                      
-? 
-> 10.
-l.46 \showthe\language
+
+Overfull \hbox (20.82997pt too wide) in paragraph at lines 31--32
+\EU2/lmr/m/n/10 Neu-
+ []
+
+
+Overfull \hbox (34.20998pt too wide) in paragraph at lines 31--32
+\EU2/lmr/m/n/10 schwan-
+ []
+
+
+Overfull \hbox (28.93997pt too wide) in paragraph at lines 31--32
+\EU2/lmr/m/n/10 steina-
+ []
+
+
+Overfull \hbox (13.88997pt too wide) in paragraph at lines 31--32
+\EU2/lmr/m/n/10 ba-
+ []
+
+
+Overfull \hbox (13.88997pt too wide) in paragraph at lines 31--32
+\EU2/lmr/m/n/10 ba-
+ []
+
+
+Overfull \hbox (13.88997pt too wide) in paragraph at lines 31--32
+\EU2/lmr/m/n/10 ba-
+ []
+
+
+Overfull \hbox (10.55997pt too wide) in paragraph at lines 31--32
+\EU2/lmr/m/n/10 ba 
+ []
+
+> 29.
+l.33 \showthe\language
                       
 ? 
 [1{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 (./test-luatex-hyphen.aux) )
 
 Here is how much of LuaTeX's memory you used:
- 15304 strings out of 494987
+ 15188 strings out of 494987
  100000,383344 words of node,token memory allocated
- 272 words of node memory still in use:
+ 270 words of node memory still in use:
    3 hlist, 1 vlist, 1 rule, 2 glue, 3 attribute, 35 glue_spec, 3 attribute_lis
 t, 1 write nodes
-   avail lists: 2:343,3:49,4:73,5:5,6:91,7:3,9:32,10:1
- 18337 multiletter control sequences out of 65536+200000
- 37 fonts using 1586591 bytes
- 54i,5n,39p,833b,198s stack positions out of 5000i,500n,10000p,200000b,50000s
-</Library/Fonts/MshtakanRegular.ttf></usr/local/texlive/2011/texmf-dist/fonts/o
-pentype/public/lm/lmroman10-regular.otf>
-Output written on test-luatex-hyphen.pdf (1 page, 9678 bytes).
+   avail lists: 2:320,3:34,4:92,5:5,6:99,7:8,9:39,10:11
+ 18240 multiletter control sequences out of 65536+200000
+ 36 fonts using 1567127 bytes
+ 54i,5n,37p,833b,195s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/texlive/2011/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.
+otf>
+Output written on test-luatex-hyphen.pdf (1 page, 5229 bytes).
 
-PDF statistics: 22 PDF objects out of 1000 (max. 8388607)
- 12 compressed objects within 1 object stream
+PDF statistics: 15 PDF objects out of 1000 (max. 8388607)
+ 8 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

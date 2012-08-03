@@ -1,16 +1,17 @@
 \documentclass{minimal}
+\directlua{dofile(kpse.find_file('luatex-hyphen.lua'))}
 
 \usepackage{polyglossia}
 \setmainlanguage{english}
-\setotherlanguages{german,armenian,basque}
+\setotherlanguage{german}
 
 \usepackage{fontspec}
 \newfontfamily\mshtakan{Mshtakan}
 \newcommand\armenianfont\mshtakan
 
 \def\gnaeherr{%
-\begin{minipage}{1sp}
-Gnädigster Herr
+\begin{minipage}{2sp}
+\hskip 1sp Gnädigster Herr
 \end{minipage}%
 }
 
@@ -20,31 +21,17 @@ Hello, world!
 
 \gnaeherr
 
-\showthe\language
 \begin{german}
-% \selectlanguage{german}
+\directlua{luatexhyphen.loadlanguage('german', 29)}
 Hallo, Welt!
 
 \gnaeherr
 
-\begin{minipage}{1sp}
+\begin{minipage}{2sp}
+\hskip 1sp Neuschwansteinababababa
+
 \showthe\language
-Neuschwanstein
 \end{minipage}
 \end{german}
-
-% \begin{georgian} % Oops
-% ღ
-% \end{georgian}
-
-\begin{armenian}
-\showthe\language
-փ
-\end{armenian}
-
-\begin{basque}
-\showthe\language
-Euskara
-\end{basque}
 
 \end{document}
