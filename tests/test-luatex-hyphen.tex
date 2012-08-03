@@ -1,6 +1,5 @@
 \documentclass{minimal}
 \directlua{dofile(kpse.find_file('luatex-hyphen.lua'))}
-\directlua{dofile('test-luatex-hyphen.lua')}
 
 \usepackage{polyglossia}
 \setmainlanguage{english}
@@ -21,8 +20,11 @@ Hello, world!
 \gnaeherr
 
 \begin{german}
-\directlua{thelanguage()}
-\directlua{luatexhyphen.loadlanguage('german', 29)}
+% Work around to use tex.count
+\countdef\lang=42
+\lang=\language
+\directlua{texio.write_nl('term and log', 'lang counter: ' ..  tex.count.lang)}
+\directlua{luatexhyphen.loadlanguage('german', tex.count.lang)}
 Hallo, Welt!
 
 \gnaeherr
