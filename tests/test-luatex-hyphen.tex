@@ -1,0 +1,50 @@
+\documentclass{minimal}
+
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setotherlanguages{german,armenian,basque}
+
+\usepackage{fontspec}
+\newfontfamily\mshtakan{Mshtakan}
+\newcommand\armenianfont\mshtakan
+
+\def\gnaeherr{%
+\begin{minipage}{1sp}
+Gnädigster Herr
+\end{minipage}%
+}
+
+\begin{document}
+
+Hello, world!
+
+\gnaeherr
+
+\showthe\language
+\begin{german}
+\selectlanguage{german}
+Hallo, Welt!
+
+\gnaeherr
+
+\begin{minipage}{1sp}
+\showthe\language
+Neuschwanstein
+\end{minipage}
+\end{german}
+
+% \begin{georgian} % Oops
+% ღ
+% \end{georgian}
+
+\begin{armenian}
+\showthe\language
+փ
+\end{armenian}
+
+\begin{basque}
+\showthe\language
+Euskara
+\end{basque}
+
+\end{document}
