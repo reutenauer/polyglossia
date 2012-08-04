@@ -1,0 +1,16 @@
+\documentclass{minimal}
+
+\usepackage{polyglossia}
+
+\begin{document}
+
+
+\fontspec{XB Zar}
+۰۹
+\directlua{%
+  dofile('/Users/arthur/TeX/ConTeXt/tree/tex/context/base/l-table.lua')
+  local f = font.fonts[font.current()]
+  texio.write_nl(table.serialize(f.characters[0x06F0]))
+}
+
+\end{document}
