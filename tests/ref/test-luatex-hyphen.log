@@ -1,6 +1,6 @@
-This is LuaTeX, Version beta-0.70.1-2011062107 (rev 4277)  (format=lualatex 2011.9.30)  4 AUG 2012 15:20
+This is LuaTeX, Version beta-0.70.1-2011062107 (rev 4277)  (format=lualatex 2011.9.30)  4 AUG 2012 22:53
  restricted \write18 enabled.
-**test-luatex-hyphen.tex
+**test-luatex-hyphen
 (./test-luatex-hyphen.tex
 LaTeX2e <2011/06/27>
 LuaTeX adaptation of babel <v3.8l-luatex-1.4> and hyphenation patterns for engl
@@ -832,113 +832,25 @@ Overfull \hbox (19.77997pt too wide) in paragraph at lines 30--30
 \EU2/lmr/m/n/10 Herr 
  []
 
-luaotfload | Font names database loaded: /Users/arthur/.texlive2011/texmf-var/l
-uatex-cache/generic/names/otfl-names.lua
-luaotfload | load font: font family='xbzar', subfamily='regular' found: /Users/
-arthur/Library/Fonts/XB Zar.ttf(load: /Users/arthur/.texlive2011/texmf-var/luat
-ex-cache/generic/fonts/otf/temp-xb-zar.lua)
-luaotfload | load otf: loading: /Users/arthur/Library/Fonts/XB Zar.ttf (hash: x
-b-zar)
-luaotfload | load otf: font loaded okay
-luaotfload | load otf: file size: 1397344
-luaotfload | load otf: enhancing ...
-luaotfload | load otf: saving in cache: /Users/arthur/Library/Fonts/XB Zar.ttf(
-save: /Users/arthur/.texlive2011/texmf-var/luatex-cache/generic/fonts/otf/temp-
-xb-zar.lua)
-luaotfload | load font: font family='xbzar', subfamily='regular' found: /Users/
-arthur/Library/Fonts/XB Zar.ttf
-fontspec: script 'latn' exists in font 'XB Zar'
-fontspec: script 'latn' exists in font 'XB Zar'
-\g_fontspec_family_XB Zar_int=\count372
-luaotfload | load font: font family='xbzar', subfamily='regular' found: /Users/
-arthur/Library/Fonts/XB Zar.ttf
-luaotfload | load font: font family='xbzar', subfamily='regular' found: /Users/
-arthur/Library/Fonts/XB Zar.ttf
-luaotfload | load font: font family='xbzar', subfamily='bold' found: /Users/art
-hur/Library/Fonts/XB Zar Bd.ttf(load: /Users/arthur/.texlive2011/texmf-var/luat
-ex-cache/generic/fonts/otf/temp-xb-zar-bd.lua)
-luaotfload | load otf: loading: /Users/arthur/Library/Fonts/XB Zar Bd.ttf (hash
-: xb-zar-bd)
-luaotfload | load otf: font loaded okay
-luaotfload | load otf: file size: 1389604
-luaotfload | load otf: enhancing ...
-luaotfload | load otf: saving in cache: /Users/arthur/Library/Fonts/XB Zar Bd.t
-tf(save: /Users/arthur/.texlive2011/texmf-var/luatex-cache/generic/fonts/otf/te
-mp-xb-zar-bd.lua)
-luaotfload | load font: font family='xbzar', subfamily='bold' found: /Users/art
-hur/Library/Fonts/XB Zar Bd.ttf
-luaotfload | load font: font family='xbzar', subfamily='regular' found: /Users/
-arthur/Library/Fonts/XB Zar.ttf
-luaotfload | load font: font family='xbzar', subfamily='italic' found: /Users/a
-rthur/Library/Fonts/XB Zar It.ttf(load: /Users/arthur/.texlive2011/texmf-var/lu
-atex-cache/generic/fonts/otf/temp-xb-zar-it.lua)
-luaotfload | load otf: loading: /Users/arthur/Library/Fonts/XB Zar It.ttf (hash
-: xb-zar-it)
-luaotfload | load otf: font loaded okay
-luaotfload | load otf: file size: 1361556
-luaotfload | load otf: enhancing ...
-luaotfload | load otf: saving in cache: /Users/arthur/Library/Fonts/XB Zar It.t
-tf(save: /Users/arthur/.texlive2011/texmf-var/luatex-cache/generic/fonts/otf/te
-mp-xb-zar-it.lua)
-luaotfload | load font: font family='xbzar', subfamily='italic' found: /Users/a
-rthur/Library/Fonts/XB Zar It.ttf
-luaotfload | load font: font family='xbzar', subfamily='regular' found: /Users/
-arthur/Library/Fonts/XB Zar.ttf
-luaotfload | load font: font family='xbzar', subfamily='bolditalic' found: /Use
-rs/arthur/Library/Fonts/XB Zar BdIt.ttf(load: /Users/arthur/.texlive2011/texmf-
-var/luatex-cache/generic/fonts/otf/temp-xb-zar-bdit.lua)
-luaotfload | load otf: loading: /Users/arthur/Library/Fonts/XB Zar BdIt.ttf (ha
-sh: xb-zar-bdit)
-luaotfload | load otf: font loaded okay
-luaotfload | load otf: file size: 1366148
-luaotfload | load otf: enhancing ...
-luaotfload | load otf: saving in cache: /Users/arthur/Library/Fonts/XB Zar BdIt
-.ttf(save: /Users/arthur/.texlive2011/texmf-var/luatex-cache/generic/fonts/otf/
-temp-xb-zar-bdit.lua)
-luaotfload | load font: font family='xbzar', subfamily='bolditalic' found: /Use
-rs/arthur/Library/Fonts/XB Zar BdIt.ttf
-.................................................
-. fontspec info: "defining-font"
-. 
-. Font family 'XBZar(0)' created for font 'XB Zar' with options [].
-. 
-. This font family consists of the following shapes:
-. 
-. * 'normal' with NFSS spec.:
-. <->"name:XBZar:mode=node;script=latn;language=DFLT;"
-. 
-. * 'bold' with NFSS spec.:
-. <->"name:XBZar/B:mode=node;script=latn;language=DFLT;"
-. 
-. * 'italic' with NFSS spec.:
-. <->"name:XBZar/I:mode=node;script=latn;language=DFLT;"
-. 
-. * 'bold italic' with NFSS spec.:
-. <->"name:XBZar/BI:mode=node;script=latn;language=DFLT;"
-.................................................
-luaotfload | load font: auto-selecting default features for script: dflt (was l
-atn)
-luaotfload | load font: font family='xbzar', subfamily='regular' found: /Users/
-arthur/Library/Fonts/XB Zar.ttf [1{/usr/local/texlive/2011/texmf-var/fonts/map/
-pdftex/updmap/pdftex.map}]
+[1{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 (./test-luatex-hyphen.aux) )
 
 Here is how much of LuaTeX's memory you used:
- 15188 strings out of 494987
+ 15138 strings out of 494987
  100000,383344 words of node,token memory allocated
- 270 words of node memory still in use:
+ 269 words of node memory still in use:
    3 hlist, 1 vlist, 1 rule, 2 glue, 3 attribute, 35 glue_spec, 3 attribute_lis
 t, 1 write nodes
-   avail lists: 2:230,3:26,4:67,5:2,6:71,7:5,9:29,10:5
- 18239 multiletter control sequences out of 65536+200000
- 37 fonts using 2055311 bytes
- 54i,5n,37p,833b,198s stack positions out of 5000i,500n,10000p,200000b,50000s
-</Users/arthur/Library/Fonts/XB Zar.ttf></usr/local/texlive/2011/texmf-dist/fon
-ts/opentype/public/lm/lmroman10-regular.otf>
-Output written on test-luatex-hyphen.pdf (1 page, 13715 bytes).
+   avail lists: 2:222,3:25,4:62,5:2,6:68,7:5,9:27,10:5
+ 18215 multiletter control sequences out of 65536+200000
+ 32 fonts using 1487415 bytes
+ 54i,5n,37p,829b,198s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/texlive/2011/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.
+otf>
+Output written on test-luatex-hyphen.pdf (1 page, 4720 bytes).
 
-PDF statistics: 22 PDF objects out of 1000 (max. 8388607)
- 12 compressed objects within 1 object stream
+PDF statistics: 15 PDF objects out of 1000 (max. 8388607)
+ 8 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
