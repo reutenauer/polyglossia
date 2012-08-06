@@ -665,7 +665,9 @@
 }
 
 % FIXME That’s horrible – Arthur, 2012-08-06.
-\directlua{dofile(kpse.find_file('luatex-hyphen.lua'))}%
+\ifluatex
+  \directlua{dofile(kpse.find_file('luatex-hyphen.lua'))}%
+\fi
 \countdef\pglang=153
 \newcommand\xpg@set@language@luatex[1]{%
   \ifnum\language>0%
