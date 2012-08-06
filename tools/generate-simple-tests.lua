@@ -25,6 +25,7 @@ local glosspatt = P'gloss-' * C(alnum^0) * P'.ldf' * -1
 local excludes = {
 -- Temporary
 'catalan',
+'french', 'breton', 'turkish',
 -- RTL problem, temporary
 'arabic', 'farsi', 'urdu',
 -- Indic scripts not supported by luaotfload
