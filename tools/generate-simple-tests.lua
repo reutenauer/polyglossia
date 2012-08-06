@@ -1,6 +1,6 @@
 -- Generate (very) simple tests for gloss files.
 
--- TODO Make that into a module
+-- TODO Make that into a module (see test/run.lua)
 
 local P, C, S, R, match = lpeg.P, lpeg.C, lpeg.S, lpeg.R, lpeg.match
 

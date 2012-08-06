@@ -1,6 +1,8 @@
 require 'lfs'
 require 'lpeg'
 
+-- TODO Make that into a module.
+
 local P, C, match = lpeg.P, lpeg.C, lpeg.match
 
 local slash = P'/'
