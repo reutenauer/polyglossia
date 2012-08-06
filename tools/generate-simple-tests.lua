@@ -29,7 +29,8 @@ local excludes = {
 'arabic', 'farsi', 'urdu',
 -- Indic scripts not supported by luaotfload
 'bengali', 'hindi', 'kannada', 'lao', 'malayalam',
-'marathi', 'syriac', 'tamil', 'telugu', 'thai' }
+'marathi', 'syriac', 'tamil', 'telugu', 'thai',
+'sanskrit' }
 
 local testdoc = [[
 \documentclass{minimal}
