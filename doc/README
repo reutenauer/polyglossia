@@ -1,14 +1,15 @@
 
    ¦----------------------------------------------¦
    ¦                                              ¦
-   ¦       THE POLYGLOSSIA PACKAGE v1.2.1         ¦
+   ¦       THE POLYGLOSSIA PACKAGE v1.30MM        ¦
    ¦                                              ¦
    ¦ Modern multilingual typesetting with XeLaTeX ¦
    ¦                                              ¦
    ¦----------------------------------------------¦
 
-This package for provides a complete Babel replacement for users of XeLaTeX.
-This version includes support for 68 different languages.
+This package for provides a complete Babel replacement for users of
+XeLaTeX and (at a very experimental stage) LuaLaTeX.  This version
+includes support for 71 different languages.
 
 Polyglossia makes it possible to automate the following tasks:
 
@@ -50,6 +51,10 @@ http://github.com/reutenauer/polyglossia/issues
 
 
 CHANGES
+
+1.30MM (06-08-2012)
+  * Added support for LuaTeX.  Many languages don’t work yet.  Please be
+    patient.
 
 1.2.0e (28-04-2012)
   * Fixed a number of outstanding and not very interesting bugs.
