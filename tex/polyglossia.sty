@@ -668,8 +668,10 @@
 \directlua{dofile(kpse.find_file('luatex-hyphen.lua'))}%
 \countdef\pglang=153
 \newcommand\xpg@set@language@luatex[1]{%
-  \pglang=\language
-  \directlua{luatexhyphen.loadlanguage('#1', tex.count.pglang)}%
+  \ifnum\language>0%
+    \pglang=\language
+    \directlua{luatexhyphen.loadlanguage('#1', tex.count.pglang)}%
+  \fi
 }
 
 \newcommand{\xpg@set@language}[1]{%
