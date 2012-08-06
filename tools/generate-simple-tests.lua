@@ -31,7 +31,8 @@ local excludes = {
 -- Indic scripts not supported by luaotfload
 'bengali', 'hindi', 'kannada', 'lao', 'malayalam',
 'marathi', 'syriac', 'tamil', 'telugu', 'thai',
-'sanskrit' }
+'sanskrit',
+'hebrew' }
 
 local excluded_languages = { }
 for _, lang in ipairs(excludes) do
