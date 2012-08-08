@@ -42,7 +42,7 @@
          I~ will~ use~ \string\language=\string\l@ #1\space instead}%
    \expandafter\adddialect\csname l@#2\expandafter\endcsname\csname l@#1\endcsname\relax}
 
-   \providecommand*{\xpg@nopatterns}[1]{%
+\providecommand*{\xpg@nopatterns}[1]{%
    \xpg@warning{No~ hyphenation~ patterns~ were~ loaded~ for~ `#1'\MessageBreak
          I~ will~ use~ \string\language=\string\l@nohyphenation\space instead}%
    %%TODO? \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax
