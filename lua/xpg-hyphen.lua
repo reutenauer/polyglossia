@@ -1,8 +1,5 @@
 local dofile = dofile
 local kpse, texio = kpse, texio
-texio.write_nl('')
-texio.write_nl('FOO')
-texio.write_nl('')
 dofile(kpse.find_file('luatex-hyphen.lua'))
 local luatexhyphen = luatexhyphen
 
@@ -13,9 +10,6 @@ local language_dat_filename = kpse.find_file('language.dat.lua')
 local language_dat
 
 if language_dat_filename then
-  texio.write_nl('')
-  texio.write_nl('BAR')
-  texio.write_nl('')
   language_dat = dofile(language_dat_filename)
 else
   language_dat = { }

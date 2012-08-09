@@ -204,7 +204,6 @@
     % if l@#1 does not yet exist,
     % we assign it to nohyphenation
     % we do this here in case the hyphennames key was omitted
-    \message{HELLO\space I'M\space HERE^^JArg:\space #1;\space l@language\space \the\csname l@#1\endcsname}
     \ifluatex\xpg@tryhyphen{#1}{\the\csname l@#1\endcsname}\fi
     \ifcsundef{l@#1}%
       {\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
@@ -680,7 +679,6 @@
 }
 
 \newcommand\xpg@tryhyphen[2]{%
-  \message{HELLO\string I’M\string THERE\string arg=#1\relax}
   \ifnum\language>0%
     \directlua{
       xpg_hyphen.loadlang('#1', #2)
