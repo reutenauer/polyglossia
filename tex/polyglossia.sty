@@ -166,7 +166,7 @@
     \ifcsdef{l@#1}{}{%
       \ifstrequal{#1}{##1}{}%
       {\ifcsdef{l@##1}%
-        {\csletcs{l@#1}{l@##1}\gdef\xpg@hyphlang{##1}\listbreak}%
+        {\csletcs{l@#1}{l@##1}\xpg@set@language@luatex@ii{##1}\listbreak}%
         {}%
       }%
     }%
@@ -204,7 +204,6 @@
     \message{HELLO\space I'M\space HERE^^JArg:\space #1;\space l@language\space \the\csname l@#1\endcsname}
     % \message{HELLO\space HELLO\space l@list=\csname l@##1\endcsname;\space l@lang=\csname l@#1\endcsname}
     \message{HELLO\space HELLO}
-    \show\xpg@hyphlang
     % \expandafter\show\csname l@##1\endcsname
     % \expandafter\show\csname l@#1\endcsname
     \ifluatex\xpg@tryhyphen{#1}{\the\csname l@#1\endcsname}\fi
@@ -682,6 +681,10 @@
 
 \newcommand\xpg@set@language@luatex[1]{%
   \directlua{xpg_hyphen.loadlang('#1', \the\language)}
+}
+
+\newcommand\xpg@set@language@luatex@ii[1]{%
+  \directlua{xpg_hyphen.loadlang('#1', \the\csname l@#1\endcsname)}
 }
 
 \newcommand\xpg@tryhyphen[2]{%
