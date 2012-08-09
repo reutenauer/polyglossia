@@ -42,6 +42,7 @@ end
 
 local errors = { }
 
+-- TODO TODO TODO Test with LuaTeX as well, now!
 -- Designed for Lua 5.1 (see _VERSION).  os.execute returns only the command’s return value.
 for _, basename in ipairs(basenames) do
   local tex = basename .. '.tex'
