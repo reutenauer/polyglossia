@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.4-0.9998 (TeX Live 2012) (format=xelatex 2012.8.10)  10 AUG 2012 22:03
+This is XeTeX, Version 3.1415926-2.4-0.9998 (TeX Live 2012) (format=xelatex 2012.8.10)  10 AUG 2012 22:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -431,180 +431,79 @@ File: babelsh.def 2009/05/07 Babel common definitions for shorthands
 Package babel Info: Making " an active character on input line 41.
 )
 Package polyglossia Info: Default language is russian.
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O scale = 0.9998654857733506.
-.................................................
 \g_fontspec_family_Linux Libertine O_int=\count124
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O scale = 0.9998654857733506.
-.................................................
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O scale = 0.9998654857733506.
-.................................................
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O/B scale = 0.9883965063546274.
-.................................................
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O/B scale = 0.9883965063546274.
-.................................................
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O/I scale = 0.9816432776584579.
-.................................................
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O/I scale = 0.9816432776584579.
-.................................................
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O/BI scale = 0.9816432776584579.
-.................................................
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O/BI scale = 0.9816432776584579.
-.................................................
 .................................................
 . fontspec info: "defining-font"
 . 
 . Font family 'LinuxLibertineO(0)' created for font 'Linux Libertine O' with
-. options [Scale=MatchLowercase,].
+. options [].
 . 
 . This font family consists of the following shapes:
 . 
 . * 'normal' with NFSS spec.:
-. <->s*[0.9998654857733506]"Linux Libertine O/ICU:script=latn;language=DFLT;"
+. <->"Linux Libertine O/ICU:script=latn;language=DFLT;"
 . 
 . * 'small caps' with NFSS spec.:
-. <->s*[0.9998654857733506]"Linux Libertine
-. O/ICU:script=latn;language=DFLT;+smcp;"
+. <->"Linux Libertine O/ICU:script=latn;language=DFLT;+smcp;"
 . 
 . * 'bold' with NFSS spec.:
-. <->s*[0.9883965063546274]"Linux Libertine
-. O/B/ICU:script=latn;language=DFLT;"
+. <->"Linux Libertine O/B/ICU:script=latn;language=DFLT;"
 . 
 . * 'bold small caps' with NFSS spec.:
-. <->s*[0.9883965063546274]"Linux Libertine
-. O/B/ICU:script=latn;language=DFLT;+smcp;"
+. <->"Linux Libertine O/B/ICU:script=latn;language=DFLT;+smcp;"
 . 
 . * 'italic' with NFSS spec.:
-. <->s*[0.9816432776584579]"Linux Libertine
-. O/I/ICU:script=latn;language=DFLT;"
+. <->"Linux Libertine O/I/ICU:script=latn;language=DFLT;"
 . 
 . * 'italic small caps' with NFSS spec.:
-. <->s*[0.9816432776584579]"Linux Libertine
-. O/I/ICU:script=latn;language=DFLT;+smcp;"
+. <->"Linux Libertine O/I/ICU:script=latn;language=DFLT;+smcp;"
 . 
 . * 'bold italic' with NFSS spec.:
-. <->s*[0.9816432776584579]"Linux Libertine
-. O/BI/ICU:script=latn;language=DFLT;"
+. <->"Linux Libertine O/BI/ICU:script=latn;language=DFLT;"
 . 
 . * 'bold italic small caps' with NFSS spec.:
-. <->s*[0.9816432776584579]"Linux Libertine
-. O/BI/ICU:script=latn;language=DFLT;+smcp;"
+. <->"Linux Libertine O/BI/ICU:script=latn;language=DFLT;+smcp;"
 .................................................
-LaTeX Font Info:    Font shape `EU1/LinuxLibertineO(0)/m/n' will be
-(Font)              scaled to size 9.99863pt on input line 9.
  (./bug-infinite-loop.aux
-HELLOI’MHERE
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O scale = 1.
-.................................................
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O scale = 1.
-.................................................
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O scale = 1.
-.................................................
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O/B scale = 0.9885294776328313.
-.................................................
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O/B scale = 0.9885294776328313.
-.................................................
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O/I scale = 0.9817753404091165.
-.................................................
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O/I scale = 0.9817753404091165.
-.................................................
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O/BI scale = 0.9817753404091165.
-.................................................
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O/BI scale = 0.9817753404091165.
-.................................................
+> \f@family=macro:
+->LinuxLibertineO(0).
+\addfontfeature ...ily \endcsname \show \f@family 
+                                                  \group_begin: \tl_clear:N ...
+l.3 \select@language {russian}
+                              
+? 
 .................................................
 . fontspec info: "defining-font"
 . 
 . Font family 'LinuxLibertineO(1)' created for font 'Linux Libertine O' with
-. options [Scale=MatchLowercase,,Script=Cyrillic].
+. options [,Script=Cyrillic].
 . 
 . This font family consists of the following shapes:
 . 
 . * 'normal' with NFSS spec.:
-. <->s*[1]"Linux Libertine O/ICU:script=cyrl;language=DFLT;"
+. <->"Linux Libertine O/ICU:script=cyrl;language=DFLT;"
 . 
 . * 'small caps' with NFSS spec.:
-. <->s*[1]"Linux Libertine O/ICU:script=cyrl;language=DFLT;+smcp;"
+. <->"Linux Libertine O/ICU:script=cyrl;language=DFLT;+smcp;"
 . 
 . * 'bold' with NFSS spec.:
-. <->s*[0.9885294776328313]"Linux Libertine
-. O/B/ICU:script=cyrl;language=DFLT;"
+. <->"Linux Libertine O/B/ICU:script=cyrl;language=DFLT;"
 . 
 . * 'bold small caps' with NFSS spec.:
-. <->s*[0.9885294776328313]"Linux Libertine
-. O/B/ICU:script=cyrl;language=DFLT;+smcp;"
+. <->"Linux Libertine O/B/ICU:script=cyrl;language=DFLT;+smcp;"
 . 
 . * 'italic' with NFSS spec.:
-. <->s*[0.9817753404091165]"Linux Libertine
-. O/I/ICU:script=cyrl;language=DFLT;"
+. <->"Linux Libertine O/I/ICU:script=cyrl;language=DFLT;"
 . 
 . * 'italic small caps' with NFSS spec.:
-. <->s*[0.9817753404091165]"Linux Libertine
-. O/I/ICU:script=cyrl;language=DFLT;+smcp;"
+. <->"Linux Libertine O/I/ICU:script=cyrl;language=DFLT;+smcp;"
 . 
 . * 'bold italic' with NFSS spec.:
-. <->s*[0.9817753404091165]"Linux Libertine
-. O/BI/ICU:script=cyrl;language=DFLT;"
+. <->"Linux Libertine O/BI/ICU:script=cyrl;language=DFLT;"
 . 
 . * 'bold italic small caps' with NFSS spec.:
-. <->s*[0.9817753404091165]"Linux Libertine
-. O/BI/ICU:script=cyrl;language=DFLT;+smcp;"
+. <->"Linux Libertine O/BI/ICU:script=cyrl;language=DFLT;+smcp;"
 .................................................
-LaTeX Font Info:    Font shape `EU1/LinuxLibertineO(1)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 3.
 )
 \openout1 = `bug-infinite-loop.aux'.
 
@@ -628,8 +527,6 @@ LaTeX Font Info:    Try loading font information for T3+cmr on input line 13.
 File: t3cmr.fd 2001/12/31 TIPA font definitions
 )
 LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Font shape `EU1/LinuxLibertineO(0)/m/n' will be
-(Font)              scaled to size 11.99835pt on input line 13.
 .................................................
 . fontspec info: "setup-math"
 . 
@@ -702,148 +599,77 @@ LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> EU1/lmtt/bx/n on input line 13.
 
-HELLOI’MHERE
-.................................................
-. fontspec info: "set-scale"
-. 
-. Linux Libertine O scale = 1.
-.................................................
+> \f@family=macro:
+->LinuxLibertineO(0).
+\addfontfeature ...ily \endcsname \show \f@family 
+                                                  \group_begin: \tl_clear:N ...
+l.13 \begin{document}
+                     
+? 
 .................................................
 . fontspec info: "defining-font"
 . 
 . Font family 'LinuxLibertineO(1)' created for font 'Linux Libertine O' with
-. options [Scale=MatchLowercase,,Script=Cyrillic].
+. options [,Script=Cyrillic].
 . 
 . This font family consists of the following shapes:
 .................................................
-LaTeX Font Info:    Font shape `EU1/LinuxLibertineO(1)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 13.
- HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE HELLOI’MHERE
-! TeX capacity exceeded, sorry [input stack size=5000].
-<to be read again> 
-                   \use_i:nn 
+> \f@family=macro:
+->LinuxLibertineO(0).
+\addfontfeature ...ily \endcsname \show \f@family 
+                                                  \group_begin: \tl_clear:N ...
 l.15 \end{document}
                    
-If you really absolutely need more capacity,
-you can ask a wizard to enlarge me.
+? 
+.................................................
+. fontspec info: "defining-font"
+. 
+. Font family 'LinuxLibertineO(1)' created for font 'Linux Libertine O' with
+. options [,Script=Cyrillic].
+. 
+. This font family consists of the following shapes:
+.................................................
+> \f@family=macro:
+->LinuxLibertineO(0).
+\addfontfeature ...ily \endcsname \show \f@family 
+                                                  \group_begin: \tl_clear:N ...
+l.15 \end{document}
+                   
+? 
+.................................................
+. fontspec info: "defining-font"
+. 
+. Font family 'LinuxLibertineO(1)' created for font 'Linux Libertine O' with
+. options [,Script=Cyrillic].
+. 
+. This font family consists of the following shapes:
+.................................................
+[1
 
- 
+] (./bug-infinite-loop.aux
+> \f@family=macro:
+->LinuxLibertineO(0).
+\addfontfeature ...ily \endcsname \show \f@family 
+                                                  \group_begin: \tl_clear:N ...
+l.3 \select@language {russian}
+                              
+? 
+.................................................
+. fontspec info: "defining-font"
+. 
+. Font family 'LinuxLibertineO(1)' created for font 'Linux Libertine O' with
+. options [,Script=Cyrillic].
+. 
+. This font family consists of the following shapes:
+.................................................
+) ) 
 Here is how much of TeX's memory you used:
- 15680 strings out of 494004
- 350270 string characters out of 3150890
- 874119 words of memory out of 3000000
- 18832 multiletter control sequences out of 15000+200000
- 4587 words of font info for 32 fonts, out of 3000000 for 9000
+ 14578 strings out of 494004
+ 316911 string characters out of 3150890
+ 320803 words of memory out of 3000000
+ 17729 multiletter control sequences out of 15000+200000
+ 4457 words of font info for 30 fonts, out of 3000000 for 9000
  1144 hyphenation exceptions out of 8191
- 5000i,1n,7763p,832b,46550s stack positions out of 5000i,500n,10000p,200000b,50000s
-No pages of output.
+ 53i,4n,47p,832b,305s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on bug-infinite-loop.pdf (1 page).

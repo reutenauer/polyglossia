@@ -91,8 +91,8 @@
 }
 \DeclareDocumentCommand \addfontfeatures {m} {
   \ifcsname zf@family@fontdef\f@family\endcsname
+  \show\f@family
     \group_begin:
-      \message{HELLO I’M HERE}
       \tl_clear:N \g_fontspec_default_fontopts_tl
       \use:x {
         \exp_not:N\fontspec_select:nn
