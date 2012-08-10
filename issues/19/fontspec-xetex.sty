@@ -105,7 +105,8 @@
   \fi
   \ignorespaces
 }
-\cs_set_eq:NN \addfontfeature \addfontfeatures
+% \cs_set_eq:NN \addfontfeature \addfontfeatures
+\def\addfontfeature#1{}
 \DeclareDocumentCommand \newfontfeature {mm}
   {
     \keys_define:nn { fontspec }
