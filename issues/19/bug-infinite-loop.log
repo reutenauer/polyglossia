@@ -1,8 +1,8 @@
-This is XeTeX, Version 3.1415926-2.4-0.9998 (TeX Live 2012) (format=xelatex 2012.8.10)  10 AUG 2012 16:35
+This is XeTeX, Version 3.1415926-2.4-0.9998 (TeX Live 2012) (format=xelatex 2012.8.10)  10 AUG 2012 21:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**bug-infinite-loop.tex
+**bug-infinite-loop
 (./bug-infinite-loop.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, ge
@@ -33,8 +33,9 @@ File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(/usr/local/texlive/2012/texmf-dist/tex/xelatex/polyglossia/polyglossia.sty
-Package: polyglossia 2012/04/29 v1.2.1 Babel replacement for XeLaTeX
+(/Users/arthur/perso/polyglossia/tex/polyglossia.sty
+Package: polyglossia 2012/08/06 v1.30MM Babel replacement for XeLaTeX and LuaTe
+X
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2011/01/03 v2.1 e-TeX tools for LaTeX
@@ -58,7 +59,7 @@ Package: xkeyval 2008/08/13 v2.6a package option processing (HA)
 File: xkeyval.tex 2008/08/13 v2.6a key=value parser (HA)
 
 (/usr/local/texlive/2012/texmf-dist/tex/generic/xkeyval/keyval.tex)))
-(/usr/local/texlive/2012/texmf-dist/tex/latex/fontspec/fontspec.sty
+(./fontspec.sty
 Package: fontspec 2012/05/06 v2.2b Advanced font selection for XeLaTeX/LuaLaTeX
 
 
@@ -248,7 +249,7 @@ LaTeX Info: Redefining \- on input line 32.
 . 
 . Defining document command \liningnums with arg. spec. 'm' on line 111.
 .................................................
-) (/usr/local/texlive/2012/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+) (./fontspec-xetex.sty
 Package: fontspec-xetex 2012/05/06 v2.2b Advanced font selection for XeLaTeX/Lu
 aLaTeX
 
@@ -414,12 +415,16 @@ LaTeX Info: Redefining \scshape on input line 1901.
 LaTeX Info: Redefining \upshape on input line 1905.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/fontspec/fontspec.cfg)))
+(/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
 \xpg@normalclass=\XeTeXintercharclass4
 )
-(/usr/local/texlive/2012/texmf-dist/tex/xelatex/polyglossia/gloss-russian.ldf
+(/Users/arthur/perso/polyglossia/tex/gloss-russian.ldf
 File: gloss-russian.ldf polyglossia: module for russian
 
-(/usr/local/texlive/2012/texmf-dist/tex/xelatex/polyglossia/babelsh.def
+(/Users/arthur/perso/polyglossia/tex/babelsh.def
 File: babelsh.def 2009/05/07 Babel common definitions for shorthands
  Taken verbatim from babel.def (2008/07/06 v3.8l)
 )
@@ -513,8 +518,7 @@ Package polyglossia Info: Default language is russian.
 .................................................
 LaTeX Font Info:    Font shape `EU1/LinuxLibertineO(0)/m/n' will be
 (Font)              scaled to size 9.99863pt on input line 9.
-
-No file bug-infinite-loop.aux.
+ (./bug-infinite-loop.aux)
 \openout1 = `bug-infinite-loop.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
@@ -533,6 +537,7 @@ LaTeX Font Info:    Checking defaults for EU1/lmr/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
 LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 13.
 LaTeX Font Info:    Try loading font information for T3+cmr on input line 13.
+
 (/usr/local/texlive/2012/texmf-dist/tex/latex/tipa/t3cmr.fd
 File: t3cmr.fd 2001/12/31 TIPA font definitions
 )
@@ -706,11 +711,11 @@ you can ask a wizard to enlarge me.
 
  
 Here is how much of TeX's memory you used:
- 15666 strings out of 494004
- 350247 string characters out of 3150890
- 873819 words of memory out of 3000000
- 18823 multiletter control sequences out of 15000+200000
+ 15680 strings out of 494004
+ 350240 string characters out of 3150890
+ 874121 words of memory out of 3000000
+ 18831 multiletter control sequences out of 15000+200000
  4481 words of font info for 33 fonts, out of 3000000 for 9000
  1144 hyphenation exceptions out of 8191
- 5000i,1n,7763p,836b,46550s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 5000i,1n,7763p,832b,46550s stack positions out of 5000i,500n,10000p,200000b,50000s
 No pages of output.
