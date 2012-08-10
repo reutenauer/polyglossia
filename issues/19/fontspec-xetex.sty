@@ -92,6 +92,7 @@
 \DeclareDocumentCommand \addfontfeatures {m} {
   \ifcsname zf@family@fontdef\f@family\endcsname
     \group_begin:
+      \message{HELLO I’M HERE}
       \tl_clear:N \g_fontspec_default_fontopts_tl
       \use:x {
         \exp_not:N\fontspec_select:nn
@@ -105,8 +106,7 @@
   \fi
   \ignorespaces
 }
-% \cs_set_eq:NN \addfontfeature \addfontfeatures
-\def\addfontfeature#1{}
+\cs_set_eq:NN \addfontfeature \addfontfeatures
 \DeclareDocumentCommand \newfontfeature {mm}
   {
     \keys_define:nn { fontspec }
