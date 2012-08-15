@@ -1,4 +1,7 @@
 * Hyphenation – in progress, 2012-08-15
+  - Finding out which “languages” (i. e., hyphenation pattern sets) are
+    dumped in the format.
+  - Check patterns are loaded only once for each language.
 * Writing direction
 * Disabled languages:
   - Bengali
@@ -12,5 +15,3 @@
   - Telugu
   - Thai
 * Inter-char tokens / nodes (for French, etc.)
-* Finding out which “languages” (i. e., hyphenation pattern sets) are
-  dumpted in the format.
