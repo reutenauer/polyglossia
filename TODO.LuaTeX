@@ -1,4 +1,4 @@
-* Hyphenation
+* Hyphenation – in progress, 2012-08-15
 * Writing direction
 * Disabled languages:
   - Bengali
@@ -11,3 +11,6 @@
   - Tamil
   - Telugu
   - Thai
+* Inter-char tokens / nodes (for French, etc.)
+* Finding out which “languages” (i. e., hyphenation pattern sets) are
+  dumpted in the format.
