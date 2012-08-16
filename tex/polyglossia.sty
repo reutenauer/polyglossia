@@ -669,7 +669,7 @@
       \aftergroup\xpg@pop@language%
       \setkeys{#2}{#1}%
       \xpg@set@language{#2}%
-      \ifluatex\xpg@set@language@luatex{#2}\fi
+      \ifluatex\message{FOO arg 1 = '#1'}\xpg@set@language@luatex{#2}\fi
      }%
 }
 
@@ -684,14 +684,6 @@
 
 \newcommand\xpg@set@language@luatex@ii[1]{%
   \directlua{xpg_hyphen.loadlang('#1', \the\csname l@#1\endcsname)}
-}
-
-\newcommand\xpg@tryhyphen[2]{%
-  \ifnum\language>0%
-    \directlua{
-      xpg_hyphen.loadlang('#1', #2)
-    }%
-  \fi
 }
 
 \newcommand{\xpg@set@language}[1]{%

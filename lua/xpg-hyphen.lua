@@ -20,6 +20,7 @@ function findlang(lang)
 end
 
 function loadlang(lang, id)
+  texio.write_nl('term and log', 'DEBUG: lang = ' .. lang .. ', id = ' .. id)
   if id == 0 then
     texio.write_nl('term and log', 'Not loading patterns for language 0; it should be dumped in the format')
   else
