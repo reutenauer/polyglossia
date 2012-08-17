@@ -94,6 +94,7 @@ for _, format in ipairs(formats) do
   errors[format] = { }
 end
 
+-- TODO Use join a little bit all over the place
 -- Designed for Lua 5.1 (see _VERSION).  os.execute returns only the command’s return value.
 if #files > 0 then
   -- TODO (in relation with the “does not yet work” above)
