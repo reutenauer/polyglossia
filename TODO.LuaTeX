@@ -1,4 +1,4 @@
-* Hyphenation – in progress, 2012-08-15
+* Hyphenation – in progress, 2012-08-17
   - Finding out which “languages” (i. e., hyphenation pattern sets) are
     dumped in the format.
   - Check patterns are loaded only once for each language.
@@ -15,3 +15,4 @@
   - Telugu
   - Thai
 * Inter-char tokens / nodes (for French, etc.)
+* Geminated l in Catalan (uses \XeTeXcharglyph)
