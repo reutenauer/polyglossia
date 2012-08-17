@@ -68,8 +68,6 @@ end
 local dirnamepatt = Cf(C(slash) * (C(nonslash^1) * slash)^0, join)
 
 local testdir, a, b, c = match(dirnamepatt, abspath)
-print(testdir)
-error()
 
 -- TODO I don’t like that at all ...
 local alnum = lpeg.S'-_' + lpeg.R'az' + lpeg.R'AZ' + lpeg.R'09'
