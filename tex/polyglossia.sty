@@ -166,7 +166,7 @@
     \ifcsdef{l@#1}{}{%
       \ifstrequal{#1}{##1}{}%
       {\ifcsdef{l@##1}%
-        {\csletcs{l@#1}{l@##1}\ifluatex\xpg@set@language@luatex@ii{##1}\fi\listbreak}%
+        {\csletcs{l@#1}{l@##1}\xpg@set@language@luatex@ii{##1}\listbreak}%
         {}%
       }%
     }%
@@ -679,11 +679,13 @@
 \fi
 
 \newcommand\xpg@set@language@luatex[1]{%
-  \directlua{xpg_hyphen.loadlang('#1', \the\language)}
+  \directlua{xpg_hyphen.loadlang('#1', \the\language)}%
 }
 
 \newcommand\xpg@set@language@luatex@ii[1]{%
-  \directlua{xpg_hyphen.loadlang('#1', \the\csname l@#1\endcsname)}
+  \ifluatex
+    \directlua{xpg_hyphen.loadlang('#1', \the\csname l@#1\endcsname)}%
+  \fi
 }
 
 \newcommand{\xpg@set@language}[1]{%
