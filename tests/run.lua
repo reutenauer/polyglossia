@@ -75,7 +75,7 @@ local dottex = alnum^0 * P'.tex' * -1
 
 -- lfs.chdir(testdir + 'out')
 
-local outdir = testdir .. 'out'
+local outdir = join(testdir, 'out')
 lfs.mkdir(outdir) -- returns nil and string 'File exists' if it exists already.
 lfs.chdir(outdir)
 
