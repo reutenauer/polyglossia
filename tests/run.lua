@@ -3,7 +3,7 @@ require 'lpeg'
 
 -- TODO Make that into a module.
 
-local P, C, match = lpeg.P, lpeg.C, lpeg.match
+local P, C, Cf, match = lpeg.P, lpeg.C, lpeg.Cf, lpeg.match
 
 local slash = P'/'
 local nonslash = 1 - slash
@@ -60,12 +60,16 @@ elseif #arg > 0 then -- arg is a list of files
   end
 end
 
--- TODO no idea why it doesn’t work the other way round: C((slash * nonslash^1)^1) * slash
-local dirnamepatt = C(slash * (nonslash^1 * slash)^0)
--- local sdn = slash * nonslash^1-- s dn = slash, dirname
--- local dirnamepatt = C(sdn^1 * sdn) -- TODO find out why this doesn’t work.
+local function join(a, b)
+  local aa = match(C((slash * nonslash^1)^0), a)
+  return aa .. '/' .. b
+end
 
-local testdir = match(dirnamepatt, abspath)
+local dirnamepatt = Cf(C(slash) * (C(nonslash^1) * slash)^0, join)
+
+local testdir, a, b, c = match(dirnamepatt, abspath)
+print(testdir)
+error()
 
 -- TODO I don’t like that at all ...
 local alnum = lpeg.S'-_' + lpeg.R'az' + lpeg.R'AZ' + lpeg.R'09'
