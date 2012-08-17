@@ -16,3 +16,5 @@
   - Thai
 * Inter-char tokens / nodes (for French, etc.)
 * Geminated l in Catalan (uses \XeTeXcharglyph)
+* Languages for which there are no patterns at all (not even fallback
+  ones), e. g., Occitan, Romansh.
