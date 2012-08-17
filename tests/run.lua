@@ -12,7 +12,7 @@ local ego = arg[0]
 local abspath = ego
 
 --[===[
-We may provide a couple of switches on the command line, see usage.
+We provide a couple of switches on the command line, see usage.
 
 TODO: add the possibility to run on a list of directories too.
 ]===]
@@ -32,6 +32,7 @@ Usage:
 ]==]
 
 -- Resolve absolute path of <ego>
+-- TODO collapse stretches of '<dir>/..'
 local currdir = lfs.currentdir()
 if not match(slash, ego) then -- Path is not absolute
   abspath = currdir .. '/' .. ego
@@ -67,7 +68,7 @@ end
 
 local dirnamepatt = Cf(C(slash) * (C(nonslash^1) * slash)^0, join)
 
-local testdir, a, b, c = match(dirnamepatt, abspath)
+local testdir = match(dirnamepatt, abspath)
 
 -- TODO I don’t like that at all ...
 local alnum = lpeg.S'-_' + lpeg.R'az' + lpeg.R'AZ' + lpeg.R'09'
@@ -76,7 +77,8 @@ local dottex = alnum^0 * P'.tex' * -1
 -- lfs.chdir(testdir + 'out')
 
 local outdir = join(testdir, 'out')
-lfs.mkdir(outdir) -- returns nil and string 'File exists' if it exists already.
+-- returns nil and string 'File exists' if it exists already, but doesn’t raise an error.
+lfs.mkdir(outdir)
 lfs.chdir(outdir)
 
 local basenames = { }
@@ -92,7 +94,6 @@ for _, format in ipairs(formats) do
   errors[format] = { }
 end
 
--- TODO TODO TODO Test with LuaTeX as well, now!
 -- Designed for Lua 5.1 (see _VERSION).  os.execute returns only the command’s return value.
 if #files > 0 then
   -- TODO (in relation with the “does not yet work” above)
