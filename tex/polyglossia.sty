@@ -201,7 +201,9 @@
     \csgdef{xpg@langtag@#1}{##1}}%
   \define@key[xpg@setup]{#1}{hyphennames}[{#1}]{%
     \docsvlist{##1}%
-    \message{HELLO\space I'M\space HERE^^JArg:\space #1;\space l@language\space \the\csname l@#1\endcsname}
+    \ifcsdef{l@#1}{%
+      \message{HELLO\space I'M\space HERE^^JArg:\space #1;\space l@language\space \the\csname l@#1\endcsname}
+    }{}
     % \message{HELLO\space HELLO\space l@list=\csname l@##1\endcsname;\space l@lang=\csname l@#1\endcsname}
     \message{HELLO\space HELLO}
     % \expandafter\show\csname l@##1\endcsname
