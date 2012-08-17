@@ -166,7 +166,7 @@
     \ifcsdef{l@#1}{}{%
       \ifstrequal{#1}{##1}{}%
       {\ifcsdef{l@##1}%
-        {\csletcs{l@#1}{l@##1}\xpg@set@language@luatex@ii{##1}\listbreak}%
+        {\csletcs{l@#1}{l@##1}\ifluatex\xpg@set@language@luatex@ii{##1}\fi\listbreak}%
         {}%
       }%
     }%
