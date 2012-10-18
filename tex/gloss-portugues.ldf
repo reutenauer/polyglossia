@@ -1,11 +1,11 @@
-\ProvidesFile{gloss-portuges.ldf}[polyglossia: module for portuguese]
-\PolyglossiaSetup{portuges}{
-  hyphennames={portuges,portuguese},
+\ProvidesFile{gloss-portugues.ldf}[polyglossia: module for portuguese]
+\PolyglossiaSetup{portugues}{
+  hyphennames={portugues,portuguese},
   hyphenmins={2,3},
   fontsetup=true,
 }
 
-\def\captionsportuges{%
+\def\captionsportugues{%
   \def\refname{Referências}%
   \def\abstractname{Resumo}%
   \def\bibname{Bibliografia}%
@@ -30,7 +30,7 @@
   \def\glossaryname{Glossário}%
   }
 
-\def\dateportuges{%   
+\def\dateportugues{%   
   \def\today{\number\day\space de\space\ifcase\month\or
     Janeiro\or Fevereiro\or Março\or Abril\or Maio\or Junho\or
     Julho\or Agosto\or Setembro\or Outubro\or Novembro\or Dezembro\fi

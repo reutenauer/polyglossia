@@ -1,7 +1,7 @@
 \ProvidesFile{gloss-brazil.ldf}[polyglossia: module for portuguese]
 \PolyglossiaSetup{brazil}{
   language=Brazilian Portuguese,
-  hyphennames={brazil,portuguese,portuges},
+  hyphennames={brazil,portuguese,portugues},
   hyphenmins={2,3},
   fontsetup=true,
 }
