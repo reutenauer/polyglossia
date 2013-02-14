@@ -1,0 +1,115 @@
+% !TEX encoding = UTF-8 Unicode
+\ProvidesFile{gloss-piedmontese.ldf}[2013/02/12 v1.0 polyglossia: module for piedmontese]
+\makeatletter
+\PolyglossiaSetup{piedmontese}{
+  hyphennames={piedmontese},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  fontsetup=true,
+}
+
+
+\define@boolkey{piedmontese}[piedmontese@]{babelshorthands}[true]{}
+
+\ifsystem@babelshorthands
+  \setkeys{piedmontese}{babelshorthands=true}
+\else
+  \setkeys{piedmontese}{babelshorthands=false}
+\fi
+
+\ifcsundef{initiate@active@char}{%
+\input{babelsh.def}%
+\initiate@active@char{"}%
+}{}
+
+\def\piedmontese@shorthands{%
+  \bbl@activate{"}%
+  \def\language@group{piedmontese}%
+  \declare@shorthand{piedmontese}{"}{%
+    \relax\ifmmode
+      \def\xpgpms@next{''}%
+    \else
+      \def\xpgpms@next{\futurelet\xpgpms@temp\xpgpms@cwm}%
+    \fi
+  \xpgpms@next}%
+}
+
+\def\xpgpms@@cwm{\nobreak\discretionary{-}{}{}\nobreak\hskip\z@skip}
+\def\xpgpms@cwm{\let\xpgpms@@next\relax
+\ifcat\noexpand\xpgpms@temp a%
+    \def\xpgpms@@next{\pms@@cwm}%
+\else
+    \ifx\xpgpms@temp/%
+        \def\xpgpms@@next{\bbl@allowhyphens/\bbl@allowhyphens\@gobble}%
+    \else
+        \ifx\xpgpms@temp-%
+           \def\xpgpms@@next{\bbl@allowhyphens-\bbl@allowhyphens\@gobble}%
+        \else
+            \ifx\xpgpms@temp"%
+                \def\xpgpms@@next{``\expandafter\@gobble\string}%
+            \fi
+        \fi
+    \fi
+\xpgpms@@next}
+
+\def\nopiedmontese@shorthands{%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+\@namedef{captions\CurrentOption}{%
+    \def\prefacename{Prefassion}%
+    \def\refname{Riferiment}%
+    \def\abstractname{Somari}%
+    \def\bibname{Bibliografìa}%
+    \def\chaptername{Capìtol}%
+    \def\appendixname{Gionta}%
+    \def\contentsname{Tàula}%
+    \def\listfigurename{Lista dle figure}%
+    \def\listtablename{Lista dle tabele}%
+    \def\indexname{Tàula analìtica}%
+    \def\figurename{Figura}%
+    \def\tablename{Tabela}%
+    \def\partname{Part}%
+    \def\enclname{Gionta/e}%
+    \def\ccname{Con còpia a}%
+    \def\headtoname{Për}%
+    \def\pagename{Pàgina}%
+    \def\seename{vëd}%
+    \def\alsoname{vëd anche}%
+    \def\proofname{Dimostrassion}%
+    \def\glossaryname{Glossari}%
+}
+\@namedef{date\CurrentOption}{%
+    \def\today{\number\day\space\ifcase\month\or
+      ëd gené\or ëd fevré\or ëd mars\or d'avril\or ëd maj\or ëd giugn\or
+      ëd luj\or d'agost\or dë stèmber\or d'otóber\or ëd novèmber\or dë dzèmber%
+      \fi\space dal\space\number\year}}
+      
+\AtEndPreamble{% 
+  \edef\xpgpms@savedvalues{%
+    \clubpenalty=\the\clubpenalty\space
+    \@clubpenalty=\the\@clubpenalty\space
+    \widowpenalty=\the\widowpenalty\space
+    \finalhyphendemerits=\the\finalhyphendemerits}
+}
+
+
+\def\noextras@piedmontese{%
+   \lccode\string"2019=\z@
+   \nopiedmontese@shorthands
+   \xpgpms@savedvalues
+}
+
+\def\blockextras@piedmontese{%
+   \lccode\string"2019=\string"2019
+   \clubpenalty=3000 \@clubpenalty=3000 \widowpenalty=3000
+   \finalhyphendemerits=50000000
+   \ifpiedmontese@babelshorthands\piedmontese@shorthands\fi
+}
+
+\def\inlineextras@piedmontese{%
+   \lccode\string"2019=\string"2019
+   \ifpiedmontese@babelshorthands\piedmontese@shorthands\fi
+}
+%%% CHANGES END %%%
+\endinput
+
