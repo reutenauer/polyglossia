@@ -19,6 +19,10 @@
 \AtEndPreamble{\let\bbl@set@language\xpg@set@language} %for biblatex
 \AtEndPreamble{\let\bbl@main@language\xpg@main@language} %for biblatex
 
+\ifluatex
+  \directlua{require('xpg-hyphen')}
+\fi
+
 %% for \docvslist (etoolbox)
 \providecommand*{\do}[1]{}%
 
@@ -672,22 +676,7 @@
       \aftergroup\xpg@pop@language%
       \setkeys{#2}{#1}%
       \xpg@set@language{#2}%
-      \ifluatex\message{FOO arg 1 = '#1'}\xpg@set@language@luatex{#2}\fi
      }%
-}
-
-\ifluatex
-  \directlua{require('luatex-hyphen')}%
-\fi
-
-\newcommand\xpg@set@language@luatex[1]{%
-  \directlua{xpg_hyphen.loadlang('#1', \the\language)}%
-}
-
-\newcommand\xpg@set@language@luatex@ii[1]{%
-  \ifluatex
-    \directlua{xpg_hyphen.loadlang('#1', \the\csname l@#1\endcsname)}%
-  \fi
 }
 
 \newcommand{\xpg@set@language}[1]{%
@@ -701,6 +690,17 @@
 }
 
 \def\select@language#1{%
+   % inspired from luababel.def
+   \ifx\directlua\relax\else
+     \ifcsname lu@texhyphen@loaded@\the\language\endcsname \else
+       \global\@namedef{lu@texhyphen@loaded@\the\language}{}%
+       \directlua{
+         xpg_hyphen.loadlang('\luatexluaescapestring{\string#1}', 
+           '\the\language')}%
+       \global\@namedef{lu@texhyphen@loaded@\the\language}{}
+     \fi
+   \fi
+   % end of copy/paste                                          
    \xpg@initial@setup%
    \select@@language{#1}%
    \ifcsundef{setRL}{}%
