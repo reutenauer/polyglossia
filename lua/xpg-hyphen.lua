@@ -2,13 +2,24 @@ require('luatex-hyphen')
 
 local luatexhyphen = luatexhyphen
 
+local module = {
+    name          = "xpg-hyphen",
+    version       = 0.2,
+    date          = "2013/04/23",
+    description   = "Companion to Polyglossia",
+    author        = "Elie Roux",
+    copyright     = "Elie Roux",
+    license       = "CC0"
+}
+
+local error, warning, info, log =
+    luatexbase.provides_module(module)
+
 xpg_hyphen = xpg_hyphen or {}
 
 local function loadlang(lang, id)
-  texio.write_nl("id: "..id.."\nlang: "..lang)
-  if (id) and not luatexhyphen.lookupname(lang) then
+  if id and luatexhyphen.lookupname(lang) then
     luatexhyphen.loadlanguage(lang, id) 
-    texio.write_nl()
   end
 end
 

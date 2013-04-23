@@ -20,7 +20,8 @@
 \AtEndPreamble{\let\bbl@main@language\xpg@main@language} %for biblatex
 
 \ifluatex
-  \directlua{require('xpg-hyphen')}
+  \RequirePackage{luatexbase} % already included by fontspec, but needed here
+  \RequireLuaModule{xpg-hyphen}
 \fi
 
 %% for \docvslist (etoolbox)
