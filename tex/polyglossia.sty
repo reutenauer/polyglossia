@@ -134,6 +134,7 @@
 %% options currently available:
 %% language : the name of the language (as understood by fontspec)
 %% hyphennames : the different hyphenation patterns to try (comma separated list)
+%%% TODO: what if a language has no hyphenation possible? ex: tibetan
 %%%   TODO: if pattern is prefixed by !, then it should be loaded as a fallback, with \xpg@nopatterns@fallback - i.e. with a warning: e.g. sanskrit for hindi, or catalan for asturian.
 %% script : the name of the script (as understood by fontspec) – default is Latin
 %% direction : the direction of the script: LR or RL
@@ -676,8 +677,7 @@
 }
 
 \ifluatex
-  \directlua{dofile(kpse.find_file('luatex-hyphen.lua'))}%
-  \directlua{dofile(kpse.find_file('xpg-hyphen.lua'))}%
+  \directlua{require('luatex-hyphen')}%
 \fi
 
 \newcommand\xpg@set@language@luatex[1]{%
