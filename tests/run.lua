@@ -1,6 +1,10 @@
 require 'lfs'
 require 'lpeg'
 
+-- TODO Un-hardcode that.
+package.path = package.path .. ';/usr/local/texlive/2012/texmf-dist/tex/context/base/?.lua'
+require 'l-table'
+
 -- TODO Make that into a module.
 
 local P, C, Cf, match = lpeg.P, lpeg.C, lpeg.Cf, lpeg.match
@@ -54,8 +58,10 @@ elseif arg1 == '-l' then
   formats = { 'lualatex' }
 elseif #arg > 0 then -- arg is a list of files
   -- TODO does not yet work.
+  -- print(table.serialize(arg))
   if not match(slash, ego) then -- Path is not absolute
     for _, f in ipairs(arg) do
+      print(f)
       table.insert(files, currdir .. '/' .. f)
     end
   end
@@ -81,24 +87,39 @@ local outdir = join(testdir, 'out')
 lfs.mkdir(outdir)
 lfs.chdir(outdir)
 
-local basenames = { }
-for tex in lfs.dir(testdir) do
-  if match(dottex, tex) then
-    local basename = match(C(alnum^0), tex)
-    table.insert(basenames, basename)
-  end
-end
-
 local errors = { }
 for _, format in ipairs(formats) do
   errors[format] = { }
 end
 
+local basenames = { }
+
 -- TODO Use join a little bit all over the place
 -- Designed for Lua 5.1 (see _VERSION).  os.execute returns only the command’s return value.
 if #files > 0 then
+  print(table.serialize(files, "files"))
+  for _, f in ipairs(files) do
+    local dt = P'.tex'
+    local basename = match(C((1 - dt)^1) * dt * -1, f)
+    if basename then
+      print("matches")
+      dirname, basename = match(dirnamepatt * C(nonslash^1), basename)
+      table.insert(basenames, basename)
+    end
+  end
   -- TODO (in relation with the “does not yet work” above)
 else
+  for tex in lfs.dir(testdir) do
+    if match(dottex, tex) then
+      local basename = match(C(alnum^0), tex)
+      table.insert(basenames, basename)
+    end
+  end
+end
+
+print(table.serialize(basenames, "basenames"))
+print(table.serialize(formats, "formats"))
+
   for _, format in ipairs(formats) do
     for _, basename in ipairs(basenames) do
       local tex = basename .. '.tex'
@@ -116,7 +137,6 @@ else
       end
     end
   end
-end
 
 local success = true
 for form, formerrs in pairs(errors) do
