@@ -127,17 +127,15 @@ print(table.serialize(formats, "formats"))
 for _, format in ipairs(formats) do
   for _, basename in ipairs(basenames) do
     local tex = basename .. '.tex'
-    if match(dottex, tex) then
-      os.execute(format .. " " .. testdir .. '/' .. tex)
-      os.execute("pdftotext -layout -enc UTF-8 " .. outdir .. '/' .. basename ..  '.pdf' .. ' >/dev/null')
-      local retvalue = os.execute("diff " .. testdir .. '/ref/' .. basename .. '.txt ' ..  testdir .. '/out/' .. basename .. '.txt')
-      if(retvalue == 0) then
-        errors[format][tex] = false
-        print('Test file ' .. tex .. ' OK.')
-      else
-        errors[format][tex] = true
-        print('Something went wrong with ' .. tex)
-      end
+    os.execute(format .. " " .. testdir .. '/' .. tex)
+    os.execute("pdftotext -layout -enc UTF-8 " .. outdir .. '/' .. basename ..  '.pdf' .. ' >/dev/null')
+    local retvalue = os.execute("diff " .. testdir .. '/ref/' .. basename .. '.txt ' ..  testdir .. '/out/' .. basename .. '.txt')
+    if(retvalue == 0) then
+      errors[format][tex] = false
+      print('Test file ' .. tex .. ' OK.')
+    else
+      errors[format][tex] = true
+      print('Something went wrong with ' .. tex)
     end
   end
 end
