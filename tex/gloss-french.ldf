@@ -9,59 +9,84 @@
   hyphenmins={2,2},
   fontsetup=true}
 
-\newXeTeXintercharclass\french@punctthin % ! ? ; et autres
-\newXeTeXintercharclass\french@punctthick % :
-\newXeTeXintercharclass\french@punctguillstart % « ‹
-\newXeTeXintercharclass\french@punctguillend % » ›
+\ifluatex
+  \RequireLuaModule{xpg-frpt}
+  \newcount\xpg@interchartokenstate %
+  \newtoks\xpg@lu@toks@one %
+  \newtoks\xpg@lu@toks@two %
+  \newtoks\xpg@lu@toks@three %
+  \newtoks\xpg@lu@toks@four %
+  \newtoks\xpg@lu@toks@five %
+\else
+  \newXeTeXintercharclass\french@punctthin % ! ? ; et autres
+  \newXeTeXintercharclass\french@punctthick % :
+  \newXeTeXintercharclass\french@punctguillstart % « ‹
+  \newXeTeXintercharclass\french@punctguillend % » ›
+\fi
 
 \def\xpg@unskip{\ifhmode\ifdim\lastskip>\z@\unskip\fi\fi}
 \def\xpg@nospace#1{#1}
 
 \def\french@punctuation{%
     \lccode"2019="2019
-    \XeTeXinterchartokenstate=1
-    \XeTeXcharclass `\! \french@punctthin
-    \XeTeXcharclass `\? \french@punctthin
-    \XeTeXcharclass `\‼ \french@punctthin
-    \XeTeXcharclass `\⁇ \french@punctthin
-    \XeTeXcharclass `\⁈ \french@punctthin
-    \XeTeXcharclass `\⁉ \french@punctthin
-    \XeTeXcharclass `\; \french@punctthin
-    \XeTeXcharclass `\: \french@punctthick
-    \XeTeXcharclass `\« \french@punctguillstart
-    \XeTeXcharclass `\» \french@punctguillend
-    \XeTeXcharclass `\‹ \french@punctguillstart
-    \XeTeXcharclass `\› \french@punctguillend
-    \XeTeXinterchartoks \z@ \french@punctthin = {\nobreak\thinspace}%
-    \XeTeXinterchartoks \z@ \french@punctthick = {\nobreakspace}%
-    \XeTeXinterchartoks 255 \french@punctthin = {\xpg@unskip\nobreak\thinspace}%
-    \XeTeXinterchartoks 255 \french@punctthick = {\xpg@unskip\nobreakspace}%
-    \XeTeXinterchartoks \french@punctguillstart \z@ = {\nobreakspace}% "«a" -> "« a"
-%   \XeTeXinterchartoks \z@ \french@punctguillstart = {\nobreakspace}% "a«" unchanged?
-%   \XeTeXinterchartoks \french@punctguillend \z@ = {\nobreakspace}% "»a" unchanged?
-    \XeTeXinterchartoks \z@ \french@punctguillend = {\nobreakspace}% "a»" -> "a »"
-    \XeTeXinterchartoks \french@punctguillstart 255 = {\nobreakspace\xpg@nospace}% "«  " -> "«~"
-    \XeTeXinterchartoks 255 \french@punctguillend = {\xpg@unskip\nobreakspace}% "  »" -> "~»"
-    \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\nobreak\thinspace}% "»;" -> "» ;"
-    \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace}% "»:" -> "» :"
-    \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\nobreakspace}% "?»" -> "? »"
+    \ifluatex
+      \xpg@interchartokenstate=1
+      \directlua{xpg_frpt.activate()}
+      \xpg@lu@toks@one = {\nobreak\thinspace}%
+      \xpg@lu@toks@two = {\nobreakspace}%
+      \xpg@lu@toks@three={\xpg@unskip\nobreak\thinspace}%
+      \xpg@lu@toks@four= {\xpg@unskip\nobreakspace}%
+      \xpg@lu@toks@five= {\nobreakspace\xpg@nospace}%
+    \else
+      \XeTeXinterchartokenstate=1
+      \XeTeXcharclass `\! \french@punctthin
+      \XeTeXcharclass `\? \french@punctthin
+      \XeTeXcharclass `\‼ \french@punctthin
+      \XeTeXcharclass `\⁇ \french@punctthin
+      \XeTeXcharclass `\⁈ \french@punctthin
+      \XeTeXcharclass `\⁉ \french@punctthin
+      \XeTeXcharclass `\; \french@punctthin
+      \XeTeXcharclass `\: \french@punctthick
+      \XeTeXcharclass `\« \french@punctguillstart
+      \XeTeXcharclass `\» \french@punctguillend
+      \XeTeXcharclass `\‹ \french@punctguillstart
+      \XeTeXcharclass `\› \french@punctguillend
+      \XeTeXinterchartoks \z@ \french@punctthin = {\nobreak\thinspace}%
+      \XeTeXinterchartoks \z@ \french@punctthick = {\nobreakspace}%
+      \XeTeXinterchartoks 255 \french@punctthin = {\xpg@unskip\nobreak\thinspace}%
+      \XeTeXinterchartoks 255 \french@punctthick = {\xpg@unskip\nobreakspace}%
+      \XeTeXinterchartoks \french@punctguillstart \z@ = {\nobreakspace}% "«a" -> "« a"
+  %   \XeTeXinterchartoks \z@ \french@punctguillstart = {\nobreakspace}% "a«" unchanged?
+  %   \XeTeXinterchartoks \french@punctguillend \z@ = {\nobreakspace}% "»a" unchanged?
+      \XeTeXinterchartoks \z@ \french@punctguillend = {\nobreakspace}% "a»" -> "a »"
+      \XeTeXinterchartoks \french@punctguillstart 255 = {\nobreakspace\xpg@nospace}% "«  " -> "«~"
+      \XeTeXinterchartoks 255 \french@punctguillend = {\xpg@unskip\nobreakspace}% "  »" -> "~»"
+      \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\nobreak\thinspace}% "»;" -> "» ;"
+      \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace}% "»:" -> "» :"
+      \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\nobreakspace}% "?»" -> "? »"
+    \fi
     }
 
 \def\nofrench@punctuation{%
     \lccode"2019=\z@
-    \XeTeXcharclass `\! \z@
-    \XeTeXcharclass `\? \z@
-    \XeTeXcharclass `\‼ \z@
-    \XeTeXcharclass `\⁇ \z@
-    \XeTeXcharclass `\⁈ \z@
-    \XeTeXcharclass `\⁉ \z@
-    \XeTeXcharclass `\; \z@
-    \XeTeXcharclass `\: \z@
-    \XeTeXcharclass `\« \z@
-    \XeTeXcharclass `\» \z@
-    \XeTeXcharclass `\‹ \z@
-    \XeTeXcharclass `\› \z@
-    \XeTeXinterchartokenstate=0
+    \ifluatex
+      \xpg@interchartokenstate=0
+      \directlua{xpg_frpt.desactivate()}
+    \else
+      \XeTeXcharclass `\! \z@
+      \XeTeXcharclass `\? \z@
+      \XeTeXcharclass `\‼ \z@
+      \XeTeXcharclass `\⁇ \z@
+      \XeTeXcharclass `\⁈ \z@
+      \XeTeXcharclass `\⁉ \z@
+      \XeTeXcharclass `\; \z@
+      \XeTeXcharclass `\: \z@
+      \XeTeXcharclass `\« \z@
+      \XeTeXcharclass `\» \z@
+      \XeTeXcharclass `\‹ \z@
+      \XeTeXcharclass `\› \z@
+      \XeTeXinterchartokenstate=0
+    \fi
     }
 
 \def\captionsfrench{%
