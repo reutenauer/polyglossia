@@ -54,9 +54,13 @@ if arg1 == '-h' then
   return
 elseif arg1 == '-x' then
   formats = { 'xelatex' }
+  table.remove(arg, 1)
 elseif arg1 == '-l' then
   formats = { 'lualatex' }
-elseif #arg > 0 then -- arg is a list of files
+  table.remove(arg, 1)
+end
+
+if #arg > 0 then -- arg is a list of files
   -- TODO does not yet work.
   -- print(table.serialize(arg))
   if not match(slash, ego) then -- Path is not absolute
