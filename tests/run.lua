@@ -64,6 +64,7 @@ elseif #arg > 0 then -- arg is a list of files
       print(f)
       table.insert(files, currdir .. '/' .. f)
     end
+  else -- Path is absolute TODO
   end
 end
 
@@ -72,13 +73,12 @@ local function join(a, b)
   return aa .. '/' .. b
 end
 
-local dirnamepatt = Cf(C(slash) * (C(nonslash^1) * slash)^0, join)
+local dirnamepatt = Cf(C(slash) * (C(nonslash^1) * slash)^0, join) * C(nonslash^1)
 
 local testdir = match(dirnamepatt, abspath)
 
--- TODO I don’t like that at all ...
-local alnum = lpeg.S'-_' + lpeg.R'az' + lpeg.R'AZ' + lpeg.R'09'
-local dottex = alnum^0 * P'.tex' * -1
+local dt = P'.tex'
+local dottex = C((1 - dt)^1) * dt * -1
 
 -- lfs.chdir(testdir + 'out')
 
@@ -100,18 +100,18 @@ if #files > 0 then
   print(table.serialize(files, "files"))
   for _, f in ipairs(files) do
     local dt = P'.tex'
-    local basename = match(C((1 - dt)^1) * dt * -1, f)
-    if basename then
+    local texfile = match(dottex, f)
+    if texfile then
       print("matches")
-      dirname, basename = match(dirnamepatt * C(nonslash^1), basename)
+      dirname, basename = match(dirnamepatt, texfile)
       table.insert(basenames, basename)
     end
   end
   -- TODO (in relation with the “does not yet work” above)
 else
   for tex in lfs.dir(testdir) do
-    if match(dottex, tex) then
-      local basename = match(C(alnum^0), tex)
+    local basename = match(dottex, tex) 
+    if basename then
       table.insert(basenames, basename)
     end
   end
@@ -120,23 +120,23 @@ end
 print(table.serialize(basenames, "basenames"))
 print(table.serialize(formats, "formats"))
 
-  for _, format in ipairs(formats) do
-    for _, basename in ipairs(basenames) do
-      local tex = basename .. '.tex'
-      if match(dottex, tex) then
-        os.execute(format .. " " .. testdir .. '/' .. tex)
-        os.execute("pdftotext -layout -enc UTF-8 " .. outdir .. '/' .. basename ..  '.pdf' .. ' >/dev/null')
-        local retvalue = os.execute("diff " .. testdir .. '/ref/' .. basename .. '.txt ' ..  testdir .. '/out/' .. basename .. '.txt')
-        if(retvalue == 0) then
-          errors[format][tex] = false
-          print('Test file ' .. tex .. ' OK.')
-        else
-          errors[format][tex] = true
-          print('Something went wrong with ' .. tex)
-        end
+for _, format in ipairs(formats) do
+  for _, basename in ipairs(basenames) do
+    local tex = basename .. '.tex'
+    if match(dottex, tex) then
+      os.execute(format .. " " .. testdir .. '/' .. tex)
+      os.execute("pdftotext -layout -enc UTF-8 " .. outdir .. '/' .. basename ..  '.pdf' .. ' >/dev/null')
+      local retvalue = os.execute("diff " .. testdir .. '/ref/' .. basename .. '.txt ' ..  testdir .. '/out/' .. basename .. '.txt')
+      if(retvalue == 0) then
+        errors[format][tex] = false
+        print('Test file ' .. tex .. ' OK.')
+      else
+        errors[format][tex] = true
+        print('Something went wrong with ' .. tex)
       end
     end
   end
+end
 
 local success = true
 for form, formerrs in pairs(errors) do
