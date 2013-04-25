@@ -140,24 +140,28 @@ for _, format in ipairs(formats) do
   end
 end
 
-local success = true
+local success = { }
+local succ = true
 for form, formerrs in pairs(errors) do
+  success[form] = true
   for _, err in pairs(formerrs) do
-    if err then success = false; break end
+    if err then success[form] = false; succ = false; break end
   end
 end
 
 print()
 
-if success then
+if succ then
   print('All tests passed.')
 else
   print('Some tests are failing.  There were problems with the following files: ')
   for form, formerrs in pairs(errors) do
-    print('---- ' .. form)
-    for tex, err in pairs(formerrs) do
-      if err then
-        print(tex)
+    if not success[form] then
+      print('---- ' .. form)
+      for tex, err in pairs(formerrs) do
+        if err then
+          print(tex)
+        end
       end
     end
   end
