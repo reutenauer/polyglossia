@@ -59,7 +59,6 @@ end
 if #arg > 0 then -- arg is a list of files
   if not match(slash, ego) then -- Path is not absolute
     for _, f in ipairs(arg) do
-      print(f)
       table.insert(files, currdir .. '/' .. f)
     end
   else -- Path is absolute TODO
