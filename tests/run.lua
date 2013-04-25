@@ -99,7 +99,6 @@ if #files > 0 then
     local dt = P'.tex'
     local texfile = match(dottex, f)
     if texfile then
-      print("matches")
       dirname, basename = match(dirnamepatt, texfile)
       table.insert(basenames, basename)
     end
