@@ -1,10 +1,6 @@
 require 'lfs'
 require 'lpeg'
 
--- TODO Un-hardcode that.
-package.path = package.path .. ';/usr/local/texlive/2012/texmf-dist/tex/context/base/?.lua'
-require 'l-table'
-
 -- TODO Make that into a module.
 
 local P, C, Cf, match = lpeg.P, lpeg.C, lpeg.Cf, lpeg.match
@@ -61,8 +57,6 @@ elseif arg1 == '-l' then
 end
 
 if #arg > 0 then -- arg is a list of files
-  -- TODO does not yet work.
-  -- print(table.serialize(arg))
   if not match(slash, ego) then -- Path is not absolute
     for _, f in ipairs(arg) do
       print(f)
@@ -101,7 +95,6 @@ local basenames = { }
 -- TODO Use join a little bit all over the place
 -- Designed for Lua 5.1 (see _VERSION).  os.execute returns only the command’s return value.
 if #files > 0 then
-  print(table.serialize(files, "files"))
   for _, f in ipairs(files) do
     local dt = P'.tex'
     local texfile = match(dottex, f)
@@ -120,9 +113,6 @@ else
     end
   end
 end
-
-print(table.serialize(basenames, "basenames"))
-print(table.serialize(formats, "formats"))
 
 for _, format in ipairs(formats) do
   for _, basename in ipairs(basenames) do
