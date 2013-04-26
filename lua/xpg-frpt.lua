@@ -7,6 +7,7 @@ local tokenis_expandable = token.is_expandable
 local tokenis_activechar = token.is_activechar
 local tokenget_next = token.get_next
 local texcount = tex.count
+local tokencommand_name = token.command_name
 
 local module = {
     name          = "xpg-frpt",
@@ -40,10 +41,10 @@ xpg_frpt = xpg_frpt or {}
 
 local charclasses = {
   [string.byte(':')] = 4,
-  [string.byte('?')] = 5, [string.byte('!')] = 5, [59] = 5, [string.byte('‼')] = 5, 
+  [string.byte('?')] = 5, [string.byte('!')] = 5, [string.byte(';')] = 5, [string.byte('‼')] = 5, 
   [string.byte('⁇')] = 5, [string.byte('⁈')] = 5, [string.byte('⁉')] = 5,
-  [string.byte('«')] = 6, --[string.byte('<')] = 6, poses many problems
-  [string.byte('»')] = 7, --[string.byte('>')] = 7, idem
+  [string.byte('«')] = 6, [string.byte('<')] = 6, --poses many problems
+  [string.byte('»')] = 7, [string.byte('>')] = 7, --idem
   -- naive approach, we also put in this category anything with catcode != 11 or 12
   [string.byte(' ')] = 255, [string.byte(' ')] = 255,
   }
@@ -105,44 +106,49 @@ function do_intertoks ()
   local tok = tokenget_next() 
   local newcharclass -- the char class of the current token
   -- an additional security, not sure if it's useful
+  local commandname = tokencommand_name(tok)
   if texcount['xpg@interchartokenstate'] == 1 then 
       if tokenis_expandable(tok) or tokenis_activechar(tok) then
-        previous_charclass = 255
-        return tok
-      end
+      --  previous_charclass = 254 -- we consider it's "invalid"
+      --  return tok
+      --end
       if tok[1] == 11 or  tok[1] == 12 then
         -- if catcode is letter or other, then fine
         newcharclass = charclasses[tok[2]] or 0
+        if commandname == 'spacer' then
+          newcharclass = 255
+        end
       else 
         -- else we consider we're at a boundary of a text string
         newcharclass = 255
       end
+      --texio.write_nl(unicode.utf8.char(tok[2])..' '..commandname)
+      --texio.write_nl("previous_charclass: "..previous_charclass.."\nnewcharclass: "..newcharclass)
       local toks_to_insert = intercharclasses_toksnumbers[previous_charclass] and 
          intercharclasses_toksnumbers[previous_charclass][newcharclass]
       if toks_to_insert then
           local h = mathfloor(toks_to_insert / 100)
           local d = mathfloor((toks_to_insert - h*100) / 10)
           local u = toks_to_insert % 10
+          --texio.write_nl(token.command_name(tok))
           tok = {
             -- \xpg@interchartokenstate=0 \the\toks<n> \xpg@interchartokenstate=1 tok
-            -- I have commented the xpg@intechartokenstate unsetting then setting
-            -- as it won't be useful for polyglossia.
-            --token.create('xpg@interchartokenstate'),
-            --token.create(string.byte('='),12),
-            --token.create(string.byte(' '),10),
-            --token.create(string.byte('0'),12),
-            --token.create('relax'),
-              tokencreate('the'),
-              tokencreate('toks'),
-              h and tokencreate(string.byte(h),12),
-              d and tokencreate(string.byte(d),12),
-              tokencreate(string.byte(u),12),
-              tokencreate(string.byte(' '),10),
-            --token.create('xpg@interchartokenstate'),
-            --token.create(string.byte('='),12),
-            --token.create(string.byte(' '),10),
-            --token.create(string.byte('0'),12),
-            --token.create('relax'),
+            token.create('xpg@interchartokenstate'),
+            token.create(string.byte('='),12),
+            token.create(string.byte(' '),10),
+            token.create(string.byte('0'),12),
+            token.create('relax'),
+            tokencreate('the'),
+            tokencreate('toks'),
+            h and tokencreate(string.byte(h),12),
+            d and tokencreate(string.byte(d),12),
+            tokencreate(string.byte(u),12),
+            tokencreate(string.byte(' '),10),
+            token.create('xpg@interchartokenstate'),
+            token.create(string.byte('='),12),
+            token.create(string.byte(' '),10),
+            token.create(string.byte('1'),12),
+            token.create('relax'),
               {tok[1], tok[2], tok[3]}}               
       end
       previous_charclass = newcharclass
