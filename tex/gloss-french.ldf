@@ -10,13 +10,17 @@
   fontsetup=true}
 
 \ifluatex
-  \RequireLuaModule{xpg-frpt}
-  \newcount\xpg@interchartokenstate %
-  \newtoks\xpg@lu@toks@one %
-  \newtoks\xpg@lu@toks@two %
-  \newtoks\xpg@lu@toks@three %
-  \newtoks\xpg@lu@toks@four %
-  \newtoks\xpg@lu@toks@five %
+  \RequireLuaModule{xpg-frpt}%
+  \global\newcount\xpg@interchartokenstate %
+  \def\xpg@newtoks#1#2{\newtoks#1\directlua{
+    xpg_frpt.map_toks_number(\the\allocationnumber, \number#2)
+    }}%
+  \xpg@newtoks{\xpg@lu@toks@one}{1}%
+  \xpg@newtoks{\xpg@lu@toks@two}{2}%
+  \xpg@newtoks{\xpg@lu@toks@three}{3}%
+  \xpg@newtoks{\xpg@lu@toks@four}{4}%
+  \xpg@newtoks{\xpg@lu@toks@five}{5}%
+  \directlua{xpg_frpt.create_intercharclasses_toksnumbers()}%
 \else
   \newXeTeXintercharclass\french@punctthin % ! ? ; et autres
   \newXeTeXintercharclass\french@punctthick % :
@@ -30,13 +34,13 @@
 \def\french@punctuation{%
     \lccode"2019="2019
     \ifluatex
-      \xpg@interchartokenstate=1
-      \directlua{xpg_frpt.activate()}
-      \xpg@lu@toks@one = {\nobreak\thinspace}%
-      \xpg@lu@toks@two = {\nobreakspace}%
-      \xpg@lu@toks@three={\xpg@unskip\nobreak\thinspace}%
-      \xpg@lu@toks@four= {\xpg@unskip\nobreakspace}%
-      \xpg@lu@toks@five= {\nobreakspace\xpg@nospace}%
+      \global\xpg@interchartokenstate 1\relax %
+      \directlua{xpg_frpt.activate()}%
+      \xpg@lu@toks@one = {\nobreak\thinspace }%
+      \xpg@lu@toks@two = {\nobreakspace }%
+      \xpg@lu@toks@three={\xpg@unskip\nobreak\thinspace }%
+      \xpg@lu@toks@four= {\xpg@unskip\nobreakspace }%
+      \xpg@lu@toks@five= {\nobreakspace\xpg@nospace }%
     \else
       \XeTeXinterchartokenstate=1
       \XeTeXcharclass `\! \french@punctthin
@@ -70,8 +74,8 @@
 \def\nofrench@punctuation{%
     \lccode"2019=\z@
     \ifluatex
-      \xpg@interchartokenstate=0
-      \directlua{xpg_frpt.desactivate()}
+      \global\xpg@interchartokenstate 0\relax %
+      \directlua{xpg_frpt.desactivate()}%
     \else
       \XeTeXcharclass `\! \z@
       \XeTeXcharclass `\? \z@
@@ -139,5 +143,9 @@
 \def\inlineextras@french{%
    \french@punctuation%
    }
+   
+\AtEndDocument{\nofrench@punctuation}% not sure it's useful, but token filter
+% can be very destructive, it's better not to mix it with too many macros...
+% It's called again with the .aux file (after \EndDocument) anyway.
 
 \endinput
