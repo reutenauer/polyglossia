@@ -1,0 +1,124 @@
+\ProvidesFile{gloss-tibetan.ldf}[polyglossia: module for tibetan]
+%% Copyright 2013 Elie Roux
+%% Under the CC0 license <http://creativecommons.org/publicdomain/zero/1.0/>
+
+\PolyglossiaSetup{tibetan}{
+  script=Tibetan,
+  scripttag=tibt,
+  hyphennames={nohyphenation},
+  fontsetup=true
+  %TODO localalph={xxx@alph,xxx@Alph}
+  %TODO localdigits=tibetannumber
+}
+
+\newif\if@tibetan@numerals
+\def\tmp@tibetan{tibetan}
+\define@key{tibetan}{numerals}[arabic]{%
+	\def\@tmpa{#1}%
+	\ifx\@tmpa\tmp@tibetan\@tibetan@numeralstrue\else
+	  \@tibetan@numeralsfalse\fi
+}
+
+\setkeys{tibetan}{numerals}
+
+% some are known, but very few
+% a few come from "Standardizing Tibetan Terms of Information Technology"
+% from the China Tibetology Research Center
+\def\captionstibetan{%
+   %\def\refname{}%
+   \def\abstractname{གནད་བསྡུས།}%
+   %\def\bibname{}%
+   %\def\prefacename{}%
+   \def\chaptername{ལེའུ་}%
+   %\def\appendixname{}%
+   %\def\contentsname{}%
+   %\def\listfigurename{}%
+   %\def\listtablename{}%
+   \def\indexname{གསུལ་བྱང་།}%
+   %\def\figurename{}%
+   %\def\tablename{}%
+   %\def\thepart{}%
+   \def\partname{ཆ་ཤས་}%
+   \def\pagename{ཤོག་}%
+   %\def\seename{}%
+   %\def\alsoname{}%
+   %\def\enclname{}%
+   \def\ccname{འདྲ་བཤུས་ལེན་མཁན་}%
+   %\def\headtoname{}%
+   \def\proofname{བདེན་དཔང་།}% not sure about this one...
+   %\def\glossaryname{}%
+}
+\def\datetibetan{%   
+   \def\tibetan@month{%
+     \ifcase\month\or
+       ཟླ་དང་པོ་\or ཟླ་གཉིས་པ་\or ཟླ་གསུམ་པ་%
+      \or ཟླ་བཞི་པ་\or ཟླ་ལྔ་པ་\or ཟླ་དྲུག་པ་\or ཟླ་བདུན་པ་%
+      \or ཟླ་བརྒྱད་པ་\or ཟླ་དགུ་པ་\or ཟླ་བཆུ་པ་\or ཟླ་བཆུ་གཅིག་པ་\or ཟླ་བཆུ་གཉིས་པ་\fi}%
+   \newcount\tibetan@year%
+   \tibetan@year=\year%
+   \advance\tibetan@year by 127% this is bod rgyal lo, the most common, but there are others...
+   \def\today{\tibetannumber\day \space \tibetan@month\space พ.ศ.~\tibetannumber\tibetan@year}%
+}
+
+\def\tibetandigits#1{\expandafter\@tibetan@digits #1@}
+\def\@tibetan@digits#1{%
+  \ifx @#1% then terminate
+  \else
+    \ifx0#1༠\else\ifx1#1༡\else\ifx2#1༢\else\ifx3#1༣\else\ifx4#1༤\else\ifx5#1༥\else\ifx6#1༦\else\ifx7#1༧\else\ifx8#1༨\else\ifx9#1༩\else#1\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+    \expandafter\@tibetan@digits
+  \fi
+}
+
+\def\tibetannumber#1{%
+  \if@tibetan@numerals
+    \tibetandigits{\number#1}%
+    %%{\protect\addfontfeature{Mapping=tibetandigits}\protect\number#1}
+  \else
+    \number#1%
+    %%{\protect\reset@font\number#1}
+  \fi}
+
+\def\@tibetanalph#1{%
+  \ifcase#1\or ཀ\or ཁ\or ག\or ང\or ཅ\or ཆ\or ཇ\or ཉ\or ཏ\or ཐ\or ད\or ན\or པ\or 
+  ཕ\or བ\or མ\or ཙ\or ཚ\or ཛ\or ཝ\or ཞ\or ཟ\or འ\or ཡ\or ར\or ལ\or ཤ\or ས\or ཧ\or ཨ
+ \else\xpg@ill@value{#1}{@tibetanalph}\fi}
+\def\tibetanAlph#1{\expandafter\@tibetanAlph\csname c@#1\endcsname}
+\def\@tibetanAlph#1{%
+  \ifcase#1\or ཀ\or ཁ\or ག\or ང\or ཅ\or ཆ\or ཇ\or ཉ\or ཏ\or ཐ\or ད\or ན\or པ\or 
+  ཕ\or བ\or མ\or ཙ\or ཚ\or ཛ\or ཝ\or ཞ\or ཟ\or འ\or ཡ\or ར\or ལ\or ཤ\or ས\or ཧ\or ཨ
+ \else\xpg@ill@value{#1}{@tibetanalph}\fi}
+     
+\def\tibetan@numbers{%
+   \let\@latinalph\@alph%
+   \let\@latinAlph\@Alph%
+   \if@tibetan@numerals
+     \let\@alph\@tibetanalph%
+     \let\@Alph\@tibetanAlph%
+   \fi
+}
+\def\notibetan@numbers{%
+  \let\@alph\@latinalph%
+  \let\@Alph\@latinAlph%
+}
+
+\def\tibetan@globalnumbers{%
+   \let\orig@arabic\@arabic%
+   \let\@arabic\tibetannumber%
+   \renewcommand{\thefootnote}{\protect\tibetannumber{\c@footnote}}%
+}
+\def\notibetan@globalnumbers{%
+   \let\@arabic\orig@arabic%
+   \renewcommand\thefootnote{\protect\number{\c@footnote}}%
+}
+
+% copied from Thai, not tested
+
+\def\blockextras@tibetan{%
+   \let\orig@baselinestrech\baselinestretch%
+   \renewcommand{\baselinestretch}{1.2}%
+}
+\def\noblockextras@tibetan{%
+   \let\baselinestrech\orig@baselinestretch%
+}
+
+\endinput
