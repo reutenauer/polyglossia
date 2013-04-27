@@ -10,6 +10,7 @@
   fontsetup=true}
 
 \ifluatex
+  \newluatexattribute\xpg@frpt %
   \RequireLuaModule{xpg-frpt}%
   \global\newcount\xpg@interchartokenstate %
   \def\xpg@newtoks#1#2{\newtoks#1\directlua{
@@ -34,10 +35,12 @@
 \def\french@punctuation{%
     \lccode"2019="2019
     \ifluatex
+      \global\xpg@frpt=1\relax %
       \global\xpg@interchartokenstate 1\relax %
-      \directlua{xpg_frpt.activate()}%
+      %\directlua{xpg_frpt.activate()}%
       \xpg@lu@toks@one = {\nobreak\thinspace }%
-      \xpg@lu@toks@two = {\nobreakspace }%
+      %\xpg@lu@toks@two = {\nobreakspace }%
+      \xpg@lu@toks@two = {toto}%
       \xpg@lu@toks@three={\xpg@unskip\nobreak\thinspace }%
       \xpg@lu@toks@four= {\xpg@unskip\nobreakspace }%
       \xpg@lu@toks@five= {\nobreakspace\xpg@nospace }%
@@ -74,6 +77,7 @@
 \def\nofrench@punctuation{%
     \lccode"2019=\z@
     \ifluatex
+      \global\xpg@frpt=0\relax %
       \global\xpg@interchartokenstate 0\relax %
       \directlua{xpg_frpt.desactivate()}%
     \else
