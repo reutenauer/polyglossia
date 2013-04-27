@@ -27,16 +27,16 @@
 \def\captionstibetan{%
    %\def\refname{}%
    \def\abstractname{གནད་བསྡུས།}%
-   %\def\bibname{}%
-   %\def\prefacename{}%
+   \def\bibname{དཔེ་ཆའི་ཐོ་གཞུང་།}% or dpe deb kyi re'u mig?
+   \def\prefacename{དཔེ་དེབ་ཀྱི་གླེང་བརྗོད།}% or gleng brjod 'god pa or ngo sprod?
    \def\chaptername{ལེའུ་}%
-   %\def\appendixname{}%
-   %\def\contentsname{}%
+   \def\appendixname{ཞར་བྱཨུང་།}%
+   \def\contentsname{དཀར་ཆག།}%
    %\def\listfigurename{}%
    %\def\listtablename{}%
    \def\indexname{གསུལ་བྱང་།}%
-   %\def\figurename{}%
-   %\def\tablename{}%
+   \def\figurename{པར་རིས་}% or dpe ris?
+   \def\tablename{རེའུ་མིག་}%
    %\def\thepart{}%
    \def\partname{ཆ་ཤས་}%
    \def\pagename{ཤོག་}%
@@ -46,7 +46,7 @@
    \def\ccname{འདྲ་བཤུས་ལེན་མཁན་}%
    %\def\headtoname{}%
    \def\proofname{བདེན་དཔང་།}% not sure about this one...
-   %\def\glossaryname{}%
+   \def\glossaryname{མིང་ཚིག་རེའུ་མིག།}%
 }
 \def\datetibetan{%   
    \def\tibetan@month{%
