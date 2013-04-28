@@ -110,7 +110,8 @@ local left=1
 local right=2
 local byte = unicode.utf8.byte
 
-local spacing = 0.16 -- \thinspace is 1/6 of em
+local thinspace  = 0.16 -- \thinspace is 1/6 of em
+--local thickspace =  TODO...
 
 local mappings =  {
  [byte(':')] = {left, 0.16},
