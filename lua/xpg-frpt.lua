@@ -104,36 +104,46 @@ local function somepenalty(n,value)
 end
 
 local xpgfrptattr = luatexbase.attributes['xpg@frpt']
---texio.write_nl(xpgfrptattr)
 
 local left=1
 local right=2
 local byte = unicode.utf8.byte
 
-local thinspace  = 0.16 -- \thinspace is 1/6 of em
---local thickspace =  TODO...
+-- Now there is a good question: how do we now, in lua, what a \thinspace is?
+-- In the LaTeX source (ltspace.dtx) it is defined as:
+-- \def\thinspace{\kern .16667em }. I see no way of seeing if it has been
+-- overriden or not... So we stick to this value.
+local thinspace  = 0.16667 
+-- thickspace is defined in amsmath.sty as:
+-- \renewcommand{\;}{\mspace+\thickmuskip{.2777em}}. Same problem as above, we
+-- stick to this fixed value.
+local thickspace = 0.2777 -- 5/18
 
 local mappings =  {
- [byte(':')] = {left, 0.16},
- [byte('!')] = {left, 0.16},
- [byte('?')] = {left, 0.16},
- [byte(';')] = {left, 0.16},
- [byte('‼')] = {left, 0.16},
- [byte('⁇')] = {left, 0.16},
- [byte('⁈')] = {left, 0.16},
- [byte('⁉')] = {left, 0.16},
- [byte('»')] = {left, 0.16},
- [byte('>')] = {left, 0.16},
- [byte('«')] = {right, 0.16}, 
- [byte('‹')] = {right, 0.16}, 
+ [byte(':')] = {left,  thickspace}, --really?
+ [byte('!')] = {left,  thinspace},
+ [byte('?')] = {left,  thinspace},
+ [byte(';')] = {left,  thinspace},
+ [byte('‼')] = {left,  thinspace},
+ [byte('⁇')] = {left,  thinspace},
+ [byte('⁈')] = {left,  thinspace},
+ [byte('⁉')] = {left,  thinspace},
+ [byte('»')] = {left,  thinspace},
+ [byte('>')] = {left,  thinspace},
+ [byte('«')] = {right, thinspace}, 
+ [byte('‹')] = {right, thinspace}, 
  }
 
-local function set_spacing(ems) -- em size
-  if ems == spacing then return end
-  spacing = ems
+local function set_spacings(thinsp, thicksp)
   for _, m in pairs(mappings) do
-    m[2] = ems
+    if m[2] == thinspace then
+      m[2] = thinsp
+    elseif m[2] == thickspace then
+      m[2] = thicksp
+    end
   end
+  thickspace = thicksp
+  thinspace = thinsp
 end
 
 -- from typo-spa.lua
@@ -156,6 +166,7 @@ local function process(head)
                     if map[1] == left and prev then
                         local prevprev = prev.prev
                         local somespace = somespace(prev,true)
+                        -- TODO: there is a question here: do we override a preceding space or not?...
                         if somespace then
                             local somepenalty = somepenalty(prevprev,10000)
                             if somepenalty then
@@ -203,19 +214,22 @@ local function process(head)
     return head, done
 end
 
+local callback_name = "pre_linebreak_filter"
+
 local function activate()
-  if not priority_in_callback ("pre_linebreak_filter", "xpg-frpt.process") then
-    add_to_callback("pre_linebreak_filter", process, "xpg-frpt.process")
+  if not priority_in_callback (callback_name, "xpg-frpt.process") then
+    add_to_callback(callback_name, process, "xpg-frpt.process", 1)
   end
 end
 
 local function desactivate()
-  if priority_in_callback ("pre_linebreak_filter", "xpg-frpt.process") then
-    remove_from_callback("pre_linebreak_filter", "xpg-frpt.process")
+  if priority_in_callback (callback_name, "xpg-frpt.process") then
+    remove_from_callback(callback_name, "xpg-frpt.process")
   end
 end
 
-xpg_frpt.activate    = activate
-xpg_frpt.desactivate = desactivate
-xpg_frpt.set_spacing = set_spacing
-xpg_frpt.spacing     = spacing
+xpg_frpt.activate      = activate
+xpg_frpt.desactivate   = desactivate
+xpg_frpt.set_spacings  = set_spacings
+xpg_frpt.thinspace     = thinspace
+xpg_frpt.thickspace    = thinckpace

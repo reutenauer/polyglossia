@@ -62,7 +62,8 @@
     \lccode"2019=\z@
     \ifluatex
       \global\xpg@frpt=0\relax %
-      \directlua{xpg_frpt.desactivate()}%
+      % do not uncomment, otherwise the last line won't be taken into account in some cases
+      %\directlua{xpg_frpt.desactivate()}
     \else
       \XeTeXcharclass `\! \z@
       \XeTeXcharclass `\? \z@
