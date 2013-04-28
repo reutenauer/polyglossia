@@ -131,9 +131,5 @@
 \def\inlineextras@french{%
    \french@punctuation%
    }
-   
-\AtEndDocument{\nofrench@punctuation}% not sure it's useful, but token filter
-% can be very destructive, it's better not to mix it with too many macros...
-% It's called again with the .aux file (after \EndDocument) anyway.
 
 \endinput

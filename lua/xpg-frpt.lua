@@ -13,13 +13,11 @@ local error, warning, info, log =
 
 xpg_frpt = xpg_frpt or {}
 
-
 local add_to_callback = luatexbase.add_to_callback
 local remove_from_callback = luatexbase.remove_from_callback
 local priority_in_callback = luatexbase.priority_in_callback
 
 local next, type = next, type
-local utfchar = utf.char
 
 local nodes, fonts, node = nodes, fonts, node
 
@@ -28,16 +26,6 @@ local insert_node_after  = node.insert_after
 local remove_node        = nodes.remove
 local end_of_math        = node.end_of_math
 local has_attribute      = node.has_attribute
-
-local texattribute       = tex.attribute
-
-
-local nodepool           = nodes.pool
-local tasks              = nodes.tasks
-
-local new_penalty        = nodepool.penalty
-local new_glue           = nodepool.glue
-
 
 -- node types as of April 2013
 local glue_code     = 10
