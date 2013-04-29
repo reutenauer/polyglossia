@@ -51,13 +51,24 @@
 \def\datetibetan{%   
    \def\tibetan@month{%
      \ifcase\month\or
-       ཟླ་དང་པོ་\or ཟླ་གཉིས་པ་\or ཟླ་གསུམ་པ་%
-      \or ཟླ་བཞི་པ་\or ཟླ་ལྔ་པ་\or ཟླ་དྲུག་པ་\or ཟླ་བདུན་པ་%
-      \or ཟླ་བརྒྱད་པ་\or ཟླ་དགུ་པ་\or ཟླ་བཆུ་པ་\or ཟླ་བཆུ་གཅིག་པ་\or ཟླ་བཆུ་གཉིས་པ་\fi}%
-   \newcount\tibetan@year%
-   \tibetan@year=\year%
-   \advance\tibetan@year by 127% this is bod rgyal lo, the most common, but there are others...
-   \def\today{\tibetannumber\day \space \tibetan@month\space พ.ศ.~\tibetannumber\tibetan@year}%
+       ཟླ་དང་པོ\or ཟླ་གཉིས་པ\or ཟླ་གསུམ་པ%
+      \or ཟླ་བཞི་པ\or ཟླ་ལྔ་པ\or ཟླ་དྲུག་པ\or ཟླ་བདུན་པ%
+      \or ཟླ་བརྒྱད་པ\or ཟླ་དགུ་པ\or ཟླ་བཆུ་པ\or ཟླ་བཆུ་གཅིག་པ\or ཟླ་བཆུ་གཉིས་པ\fi}%      
+   \def\tibetan@daynum{%
+     \ifcase\day\or དང་པོ\or གཉིས་པ\or གསུམ་པ \or བཞི་པ\or ལྔ་པ\or དྲུག་པ\or བདུན་པ\or བརྒྱད་པ\or དགུ་པ\or བཆུ་པ%
+ \or བཆུ་གཅིག་པ\or བཆུ་གཉིས་པ\or བཆུ་གསུམ་པ\or བཆུ་བཞི་པ\or བཆུ་ལྔ་པ\or བཆུ་དྲུག་པ\or བཆུ་བདུན་པ\or བཆུ་བརྒྱད་པ\or བཆུ་དགུ་པ\or ཉི་བཆུ་པ%
+ 
+ \or ཉིས་རྩ་གཅིག་པ\or ཉིས་རྩ་གཉིས་པ\or ཉིས་རྩ་གསུམ་པ\or ཉིས་རྩ་བཞི་པ\or ཉིས་རྩ་ལྔ་པ\or ཉིས་རྩ་དྲུག་པ\or ཉིས་རྩ་བདུན་པ\or ཉིས་རྩ་བརྒྱད་པ\or ཉིས་རྩ་དགུ་པ\or སུམ་བཆུ་པ%
+ \or སུམ་སོ་གཅིག་པ\fi}%      
+   % As we use gregorian calendar, it's better to stick with spyi lo
+   %\newcount\tibetan@year%
+   %\tibetan@year=\year%
+   %\advance\tibetan@year by 127% this is bod rgyal lo, the most common, but there are others...
+   % I'm not sure the / character is in most tibetan fonts
+   %\def\today{\tibetannumber\day /\tibetannumber\day /\tibetannumber\year}%
+   \def\today{\tibetannumber\day །\tibetannumber\day །\tibetannumber\year}%
+   % this is more litterate, but longer
+   %\def\today{སྤྱི་ལོ་\tibetannumber\year ་སྤྱི་\tibetan@month{}་ད་རེས་\tibetan@daynum{}།}%  
 }
 
 \def\tibetandigits#1{\expandafter\@tibetan@digits #1@}
