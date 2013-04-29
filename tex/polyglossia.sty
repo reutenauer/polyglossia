@@ -21,7 +21,7 @@
 
 \ifluatex
   \RequirePackage{luatexbase} % already included by fontspec, but needed here
-  \RequireLuaModule{xpg-hyphen}
+  \RequireLuaModule{polyglossia}
 \fi
 
 %% for \docvslist (etoolbox)
@@ -474,6 +474,9 @@
      {\xpg@input{gloss-#2.ldf}%
      \xpg@info{Default~ language~ is~ #2}%
      \def\languagename{#2}%
+     \ifluatex %
+     \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
+     \fi %
       % This is needed because \arabic is a built-in LaTeX command:
       % so now we have \begin{Arabic}... instead of \begin{arabic}...
       \ifstrequal{#2}{arabic}%
@@ -685,13 +688,19 @@
    \fi
 }
 
+\newcommand\xpg@set@language@luatex@ii[1]{%
+  \ifluatex
+    \directlua{polyglossia.loadlang('\luatexluaescapestring{\string#1}', '\the\csname l@#1\endcsname')}%
+  \fi
+}
+
 \def\select@language#1{%
    % inspired from luababel.def
    \ifx\directlua\relax\else
      \ifcsname lu@texhyphen@loaded@\the\language\endcsname \else
        \global\@namedef{lu@texhyphen@loaded@\the\language}{}%
        \directlua{
-         xpg_hyphen.loadlang('\luatexluaescapestring{\string#1}', 
+         polyglossia.loadlang('\luatexluaescapestring{\string#1}', 
            '\the\language')}%
        \global\@namedef{lu@texhyphen@loaded@\the\language}{}
      \fi
