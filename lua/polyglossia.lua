@@ -35,8 +35,20 @@ local function set_default_language(lang, id)
   default_language = lang
 end
 
+local ids = fonts.identifiers or fonts.ids or fonts.hashes.identifiers
+
+local function check_char(char) -- always in current font
+    local otfdata = ids[font.current()].characters
+    if otfdata and otfdata[char] then
+        tex.print('1')
+    else
+        tex.print('0')
+    end
+end
+
 polyglossia.loadlang = loadlang
 polyglossia.select_language = select_language
 polyglossia.set_default_language = set_default_language
 polyglossia.current_language = current_language
 polyglossia.default_language = default_language
+polyglossia.check_char = check_char
