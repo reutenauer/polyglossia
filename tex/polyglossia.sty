@@ -690,6 +690,7 @@
 
 \newcommand\xpg@set@language@luatex@ii[1]{%
    \ifluatex %
+     % here we use lu@texhyphen@loaded@\the\language, the same as in babel
      \ifcsname lu@texhyphen@loaded@\the\language\endcsname \else %
        \global\@namedef{lu@texhyphen@loaded@\the\language}{}%
        \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', '\the\language')}%
