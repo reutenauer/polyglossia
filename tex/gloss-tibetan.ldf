@@ -1,6 +1,9 @@
 \ProvidesFile{gloss-tibetan.ldf}[polyglossia: module for tibetan]
 %% Copyright 2013 Elie Roux
 %% Under the CC0 license <http://creativecommons.org/publicdomain/zero/1.0/>
+%%
+%% A good font to make tests is \newfontfamily\tibetanfont{Tibetan Machine Uni}
+%%
 
 \PolyglossiaSetup{tibetan}{
   script=Tibetan,
