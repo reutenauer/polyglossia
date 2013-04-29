@@ -1,17 +1,4 @@
-local module = {
-    name = "xpg-frpt",
-    version = 0.2,
-    date = "2013/04/23",
-    description = "Companion to Polyglossia for french punctuation",
-    author = "Elie Roux",
-    copyright = "Elie Roux",
-    license = "CC0"
-}
-
-local error, warning, info, log =
-    luatexbase.provides_module(module)
-
-xpg_frpt = xpg_frpt or {}
+require('polyglossia') -- just in case...
 
 local add_to_callback = luatexbase.add_to_callback
 local remove_from_callback = luatexbase.remove_from_callback
@@ -216,8 +203,8 @@ local function desactivate()
   end
 end
 
-xpg_frpt.activate      = activate
-xpg_frpt.desactivate   = desactivate
-xpg_frpt.set_spacings  = set_spacings
-xpg_frpt.thinspace     = thinspace
-xpg_frpt.thickspace    = thinckpace
+polyglossia.activate_frpt    = activate
+polyglossia.desactivate_frpt = desactivate
+polyglossia.set_spacings     = set_spacings
+polyglossia.thinspace        = thinspace
+polyglossia.thickspace       = thickpace

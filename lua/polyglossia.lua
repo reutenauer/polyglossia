@@ -28,11 +28,11 @@ end
 
 local function select_language(lang, id)
   loadlang(lang, id)
-  current_language = lang
+  polyglossia.current_language = lang
 end
 
 local function set_default_language(lang, id)
-  default_language = lang
+  polyglossia.default_language = lang
 end
 
 local ids = fonts.identifiers or fonts.ids or fonts.hashes.identifiers
@@ -46,9 +46,14 @@ local function check_char(char) -- always in current font
     end
 end
 
+local function load_frpt()
+    require('polyglossia-frpt')
+end
+
 polyglossia.loadlang = loadlang
 polyglossia.select_language = select_language
 polyglossia.set_default_language = set_default_language
-polyglossia.current_language = current_language
+polyglossia.current_language = current_language -- doesn't seem to be working well :-(
 polyglossia.default_language = default_language
 polyglossia.check_char = check_char
+polyglossia.load_frpt = load_frpt

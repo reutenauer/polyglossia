@@ -11,7 +11,7 @@
 
 \ifluatex
   \newluatexattribute\xpg@frpt %
-  \RequireLuaModule{xpg-frpt}%
+  \directlua{polyglossia.load_frpt()}%
   \global\newcount\xpg@interchartokenstate %
 \else
   \newXeTeXintercharclass\french@punctthin % ! ? ; et autres
@@ -27,7 +27,7 @@
     \lccode"2019="2019
     \ifluatex
       \global\xpg@frpt=1\relax %
-      \directlua{xpg_frpt.activate()}%
+      \directlua{polyglossia.activate_frpt()}%
     \else
       \XeTeXinterchartokenstate=1
       \XeTeXcharclass `\! \french@punctthin
@@ -68,7 +68,7 @@
       % the language to something else, and thus call the following line. This means
       % that, at then end of the paragraph, the function won't be in the callback,
       % so the beginning of the paragraph won't be processed by it.
-      %\directlua{xpg_frpt.desactivate()}
+      %\directlua{polyglossia.desactivate_frpt()}
     \else
       \XeTeXcharclass `\! \z@
       \XeTeXcharclass `\? \z@

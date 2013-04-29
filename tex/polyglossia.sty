@@ -700,7 +700,7 @@
      \ifcsname lu@texhyphen@loaded@\the\language\endcsname \else
        \global\@namedef{lu@texhyphen@loaded@\the\language}{}%
        \directlua{
-         polyglossia.loadlang('\luatexluaescapestring{\string#1}', 
+         polyglossia.select_language('\luatexluaescapestring{\string#1}', 
            '\the\language')}%
        \global\@namedef{lu@texhyphen@loaded@\the\language}{}
      \fi
