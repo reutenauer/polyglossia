@@ -1,9 +1,5 @@
-* Hyphenation – in progress, 2012-08-17
-  - Finding out which “languages” (i. e., hyphenation pattern sets) are
-    dumped in the format.
-  - Check patterns are loaded only once for each language.
-* Writing direction
-* Disabled languages:
+* Writing direction << what has to be done?
+* Disabled languages: << what does this mean?
   - Bengali
   - Hindi
   - Kannada
@@ -14,9 +10,9 @@
   - Tamil
   - Telugu
   - Thai
-* Inter-char tokens / nodes (for French, etc.)
-* Geminated l in Catalan (uses \XeTeXcharglyph)
 * Languages for which there are no patterns at all (not even fallback
   ones), e. g., Occitan, Romansh [the latter has been added recently,
   but it might not exist on every installation; and generally this
-  should be take care of]
+  should be take care of] << well, I don't understand, if there is no pattern
+  to load, it outputs an error, luatex-hyphen outputs an error... what can we
+  do about it?
