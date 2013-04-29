@@ -689,23 +689,21 @@
 }
 
 \newcommand\xpg@set@language@luatex@ii[1]{%
-  \ifluatex
-    \directlua{polyglossia.loadlang('\luatexluaescapestring{\string#1}', '\the\csname l@#1\endcsname')}%
-  \fi
+   \ifluatex %
+     \ifcsname lu@texhyphen@loaded@\the\language\endcsname \else %
+       \global\@namedef{lu@texhyphen@loaded@\the\language}{}%
+       \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', '\the\language')}%
+     \fi %
+   \fi % 
 }
 
 \def\select@language#1{%
-   % inspired from luababel.def
-   \ifx\directlua\relax\else
-     \ifcsname lu@texhyphen@loaded@\the\language\endcsname \else
+   \ifluatex %
+     \ifcsname lu@texhyphen@loaded@\the\language\endcsname \else %
        \global\@namedef{lu@texhyphen@loaded@\the\language}{}%
-       \directlua{
-         polyglossia.select_language('\luatexluaescapestring{\string#1}', 
-           '\the\language')}%
-       \global\@namedef{lu@texhyphen@loaded@\the\language}{}
-     \fi
-   \fi
-   % end of copy/paste                                          
+       \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', '\the\language')}%
+     \fi %
+   \fi %                                          
    \xpg@initial@setup%
    \select@@language{#1}%
    \ifcsundef{setRL}{}%
