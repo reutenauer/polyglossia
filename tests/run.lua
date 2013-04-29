@@ -50,14 +50,18 @@ if arg1 == '-h' then
   return
 elseif arg1 == '-x' then
   formats = { 'xelatex' }
+  table.remove(arg, 1)
 elseif arg1 == '-l' then
   formats = { 'lualatex' }
-elseif #arg > 0 then -- arg is a list of files
-  -- TODO does not yet work.
+  table.remove(arg, 1)
+end
+
+if #arg > 0 then -- arg is a list of files
   if not match(slash, ego) then -- Path is not absolute
     for _, f in ipairs(arg) do
       table.insert(files, currdir .. '/' .. f)
     end
+  else -- Path is absolute TODO
   end
 end
 
@@ -66,13 +70,12 @@ local function join(a, b)
   return aa .. '/' .. b
 end
 
-local dirnamepatt = Cf(C(slash) * (C(nonslash^1) * slash)^0, join)
+local dirnamepatt = Cf(C(slash) * (C(nonslash^1) * slash)^0, join) * C(nonslash^1)
 
 local testdir = match(dirnamepatt, abspath)
 
--- TODO I don’t like that at all ...
-local alnum = lpeg.S'-_' + lpeg.R'az' + lpeg.R'AZ' + lpeg.R'09'
-local dottex = alnum^0 * P'.tex' * -1
+local dt = P'.tex'
+local dottex = C((1 - dt)^1) * dt * -1
 
 -- lfs.chdir(testdir + 'out')
 
@@ -81,60 +84,72 @@ local outdir = join(testdir, 'out')
 lfs.mkdir(outdir)
 lfs.chdir(outdir)
 
-local basenames = { }
-for tex in lfs.dir(testdir) do
-  if match(dottex, tex) then
-    local basename = match(C(alnum^0), tex)
-    table.insert(basenames, basename)
-  end
-end
-
 local errors = { }
 for _, format in ipairs(formats) do
   errors[format] = { }
 end
 
+local basenames = { }
+
+-- TODO Use join a little bit all over the place
 -- Designed for Lua 5.1 (see _VERSION).  os.execute returns only the command’s return value.
 if #files > 0 then
+  for _, f in ipairs(files) do
+    local dt = P'.tex'
+    local texfile = match(dottex, f)
+    if texfile then
+      dirname, basename = match(dirnamepatt, texfile)
+      table.insert(basenames, basename)
+    end
+  end
   -- TODO (in relation with the “does not yet work” above)
 else
-  for _, format in ipairs(formats) do
-    for _, basename in ipairs(basenames) do
-      local tex = basename .. '.tex'
-      if match(dottex, tex) then
-        os.execute(format .. " " .. testdir .. '/' .. tex)
-        os.execute("pdftotext -layout -enc UTF-8 " .. outdir .. '/' .. basename ..  '.pdf' .. ' >/dev/null')
-        local retvalue = os.execute("diff " .. testdir .. '/ref/' .. basename .. '.txt ' ..  testdir .. '/out/' .. basename .. '.txt')
-        if(retvalue == 0) then
-          errors[format][tex] = false
-          print('Test file ' .. tex .. ' OK.')
-        else
-          errors[format][tex] = true
-          print('Something went wrong with ' .. tex)
-        end
-      end
+  for tex in lfs.dir(testdir) do
+    local basename = match(dottex, tex) 
+    if basename then
+      table.insert(basenames, basename)
     end
   end
 end
 
-local success = true
+for _, format in ipairs(formats) do
+  for _, basename in ipairs(basenames) do
+    local tex = basename .. '.tex'
+    os.execute(format .. " " .. testdir .. '/' .. tex)
+    os.execute("pdftotext -layout -enc UTF-8 " .. outdir .. '/' .. basename ..  '.pdf' .. ' >/dev/null')
+    local retvalue = os.execute("diff " .. testdir .. '/ref/' .. basename .. '.txt ' ..  testdir .. '/out/' .. basename .. '.txt')
+    if(retvalue == 0) then
+      errors[format][tex] = false
+      print('Test file ' .. tex .. ' OK.')
+    else
+      errors[format][tex] = true
+      print('Something went wrong with ' .. tex)
+    end
+  end
+end
+
+local success = { }
+local succ = true
 for form, formerrs in pairs(errors) do
+  success[form] = true
   for _, err in pairs(formerrs) do
-    if err then success = false; break end
+    if err then success[form] = false; succ = false; break end
   end
 end
 
 print()
 
-if success then
+if succ then
   print('All tests passed.')
 else
   print('Some tests are failing.  There were problems with the following files: ')
   for form, formerrs in pairs(errors) do
-    print('---- ' .. form)
-    for tex, err in pairs(formerrs) do
-      if err then
-        print(tex)
+    if not success[form] then
+      print('---- ' .. form)
+      for tex, err in pairs(formerrs) do
+        if err then
+          print(tex)
+        end
       end
     end
   end

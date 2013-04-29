@@ -1,0 +1,5 @@
+run.lua: Main test routine.
+
+  Usage: either of
+  1. texlua /path/to/run.lua -- runs each file matching *.tex under /path/to
+  2. texlua /path/to/run.lua file1.tex file2.tex file3.tex -- runs file1.tex etc.
