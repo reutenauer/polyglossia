@@ -30,7 +30,7 @@
    \def\bibname{དཔེ་ཆའི་ཐོ་གཞུང་།}% or dpe deb kyi re'u mig?
    \def\prefacename{དཔེ་དེབ་ཀྱི་གླེང་བརྗོད།}% or gleng brjod 'god pa or ngo sprod?
    \def\chaptername{ལེའུ་}%
-   \def\appendixname{ཞར་བྱཨུང་།}%
+   \def\appendixname{ཞར་བྱུང་།}%
    \def\contentsname{དཀར་ཆག།}%
    %\def\listfigurename{}%
    %\def\listtablename{}%
