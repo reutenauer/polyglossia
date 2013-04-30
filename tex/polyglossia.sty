@@ -282,9 +282,9 @@
   \edef\tmp@@scriptparam{Script=#2}%
   \expandafter\expandafter\expandafter\fontspec_if_script:nTF \expandafter{#1}%
     {\expandafter\expandafter\expandafter\addfontfeature\expandafter{\tmp@@scriptparam}}%
-    {\xpg@error{^^J
-  The~ current~ roman~ font~ does~ not~ contain~ the~ \expandafter\noexpand#2 ~ script!^^J
-  Please~ define~ \expandafter\string\csname \xpg@lowercasefirst{#2}font\endcsname\space with~ \string\newfontfamily}}%
+    {\xpg@error{The~ current~ roman~ font~ does~ not~ contain\MessageBreak 
+    the~ \expandafter\noexpand#2 ~ script!\MessageBreak
+    Please~ define~ \expandafter\string\csname \xpg@lowercasefirst{#2}font\endcsname\space with~ \string\newfontfamily}}%
 }
 
 \def\xpg@fontsetup@latin#1{%
