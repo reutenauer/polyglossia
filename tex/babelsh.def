@@ -3,197 +3,233 @@
   \bbl@afterfi\endinput
 \fi
 \ProvidesFile{babelsh.def}
-         [2009/05/07 %
+         [2013/04/30 %
          Babel common definitions for shorthands^^J
-         Taken verbatim from babel.def (2008/07/06 v3.8l)]
-\def\bbl@add@special#1{\begingroup
+         Taken verbatim from babel.def (2013/04/15 v3.9e)]
+%
+% ------------------------------------------------------------------------------
+%
+% XXX: from babel.sty
+%
+% ------------------------------------------------------------------------------
+%
+  \def\bbl@ifshorthand#1{%
+    \@expandtwoargs\in@{\string#1}{\bbl@opt@shorthands}%
+    \ifin@
+      \expandafter\@firstoftwo
+    \else
+      \expandafter\@secondoftwo
+    \fi}
+\let\bbl@opt@shorthands\@nnil
+%
+% ------------------------------------------------------------------------------
+%
+% XXX: from switch.def
+%
+% ------------------------------------------------------------------------------
+%
+\ifx\PackageError\@undefined
+  \def\bbl@error#1#2{%
+    \begingroup
+      \newlinechar=`\^^J
+      \def\\{^^J(babel) }%
+      \errhelp{#2}\errmessage{\\#1}%
+    \endgroup}
+  \def\bbl@warning#1{%
+    \begingroup
+      \newlinechar=`\^^J
+      \def\\{^^J(polyglossia) }%
+      \message{\\#1}%
+    \endgroup}
+  \def\bbl@info#1{%
+    \begingroup
+      \newlinechar=`\^^J
+      \def\\{^^J}%
+      \wlog{#1}%
+    \endgroup}
+\else
+  \def\bbl@error#1#2{%
+    \begingroup
+      \def\\{\MessageBreak}%
+      \PackageError{babel}{#1}{#2}%
+    \endgroup}
+  \def\bbl@warning#1{%
+    \begingroup
+      \def\\{\MessageBreak}%
+      \PackageWarning{babel}{#1}%
+    \endgroup}
+  \def\bbl@info#1{%
+    \begingroup
+      \def\\{\MessageBreak}%
+      \PackageInfo{babel}{#1}%
+    \endgroup}
+%
+% ------------------------------------------------------------------------------
+%
+% XXX: from babel.def
+%
+% ------------------------------------------------------------------------------
+%
+\def\bbl@csarg#1#2{\expandafter#1\csname bbl@#2\endcsname}%
+\def\bbl@withactive#1#2{%
+  \begingroup
+    \lccode`~=`#2\relax
+    \lowercase{\endgroup#1~}}
+%
+% ------------------------------------------------------------------------------
+%
+% XXX: a bit further in babel.def
+%
+% ------------------------------------------------------------------------------
+%
+\def\bbl@add@special#1{%
+  \begingroup
     \def\do{\noexpand\do\noexpand}%
     \def\@makeother{\noexpand\@makeother\noexpand}%
-    \edef\x{\endgroup
-      \def\noexpand\dospecials{\dospecials\do#1}%
-      \expandafter\ifx\csname @sanitize\endcsname\relax \else
-        \def\noexpand\@sanitize{\@sanitize\@makeother#1}%
-      \fi}%
+  \edef\x{\endgroup
+    \def\noexpand\dospecials{\dospecials\do#1}%
+    \expandafter\ifx\csname @sanitize\endcsname\relax \else
+      \def\noexpand\@sanitize{\@sanitize\@makeother#1}%
+    \fi}%
   \x}
-\def\bbl@remove@special#1{\begingroup
+\def\bbl@remove@special#1{%
+  \begingroup
     \def\x##1##2{\ifnum`#1=`##2\noexpand\@empty
                  \else\noexpand##1\noexpand##2\fi}%
     \def\do{\x\do}%
     \def\@makeother{\x\@makeother}%
-    \edef\x{\endgroup
-      \def\noexpand\dospecials{\dospecials}%
-      \expandafter\ifx\csname @sanitize\endcsname\relax \else
-        \def\noexpand\@sanitize{\@sanitize}%
-      \fi}%
+  \edef\x{\endgroup
+    \def\noexpand\dospecials{\dospecials}%
+    \expandafter\ifx\csname @sanitize\endcsname\relax \else
+      \def\noexpand\@sanitize{\@sanitize}%
+    \fi}%
   \x}
-\long\def\bbl@afterelse#1\else#2\fi{\fi#1}
-\long\def\bbl@afterfi#1\fi{\fi#1}
+\def\bbl@active@def#1#2#3#4{%
+  \@namedef{#3#1}{%
+    \expandafter\ifx\csname#2@sh@#1@\endcsname\relax
+      \bbl@afterelse\bbl@sh@select#2#1{#3@arg#1}{#4#1}%
+    \else
+      \bbl@afterfi\csname#2@sh@#1@\endcsname
+    \fi}%
+  \long\@namedef{#3@arg#1}##1{%
+    \expandafter\ifx\csname#2@sh@#1@\string##1@\endcsname\relax
+      \bbl@afterelse\csname#4#1\endcsname##1%
+    \else
+      \bbl@afterfi\csname#2@sh@#1@\string##1@\endcsname
+    \fi}}%
 \def\initiate@active@char#1{%
-  \expandafter\ifx\csname active@char\string##1\endcsname\relax
-    \bbl@afterfi{\@initiate@active@char{#1}}%
+  \expandafter\ifx\csname active@char\string#1\endcsname\relax
+    \bbl@withactive
+      {\expandafter\@initiate@active@char\expandafter}#1\string#1#1%
   \fi}
-\begingroup
-  \catcode`\~\active
-  \def\x{\endgroup
-    \def\@initiate@active@char##1{%
-      \ifcat\noexpand##1\noexpand~\relax
-        \@ifundefined{normal@char\string##1}{%
-          \expandafter\let\csname normal@char\string##1\endcsname##1%
-          \expandafter\gdef
-            \expandafter##1%
-            \expandafter{%
-              \expandafter\active@prefix\expandafter##1%
-              \csname normal@char\string##1\endcsname}}{}%
-      \else
-        \@activated{##1}%
-        \@namedef{normal@char\string##1}{##1}%
-        \ifx##1'%
-          \let\prim@s\bbl@prim@s
-          \@namedef{normal@char\string##1}{%
-            \textormath{##1}{^\bgroup\prim@s}}%
-        \fi
-        \ifx##1^%
-          \gdef\bbl@act@caret{%
-            \ifmmode
-              \csname normal@char\string^\endcsname
-            \else
-              \bbl@afterfi
-              {\if@safe@actives
-                \bbl@afterelse\csname normal@char\string##1\endcsname
-               \else
-                \bbl@afterfi\csname user@active\string##1\endcsname
-               \fi}%
-            \fi}
-        \fi
-        %%\@ifpackagewith{babel}{KeepShorthandsActive}{}{%
-          \edef\bbl@tempa{\catcode`\noexpand##1\the\catcode`##1}%
-          \expandafter\AtEndOfPackage\expandafter{\bbl@tempa}%
-        %%}%
-        \@tempcnta=\lccode`\~
-        \lccode`~=`##1%
-        \lowercase{%
-          \catcode`~\active
-          \expandafter\bbl@add@special
-            \csname \string##1\endcsname
-            \AtBeginDocument{%
-              \catcode`##1\active
-              \if@filesw
-                \immediate\write\@mainaux{%
-                  \string\catcode`##1\string\active}%
-              \fi}%
-          \expandafter\gdef
-            \expandafter~%
-            \expandafter{%
-            \expandafter\active@prefix\expandafter##1%
-            \csname normal@char\string##1\endcsname}}%
-        \lccode`\~\@tempcnta
-      \fi
-      \ifx##1^%
-        \@namedef{active@char\string##1}{\bbl@act@caret}%
-      \else
-        \@namedef{active@char\string##1}{%
-          \if@safe@actives
-            \bbl@afterelse\csname normal@char\string##1\endcsname
-          \else
-            \bbl@afterfi\csname user@active\string##1\endcsname
-          \fi}%
-      \fi
-      \@namedef{user@active\string##1}{%
-        \expandafter\ifx
-        \csname \user@group @sh@\string##1@\endcsname
-        \relax
-          \bbl@afterelse\bbl@sh@select\user@group##1%
-        {user@active@arg\string##1}{language@active\string##1}%
-        \else
-          \bbl@afterfi\csname \user@group @sh@\string##1@\endcsname
-        \fi}%
-      \long\@namedef{user@active@arg\string##1}####1{%
-        \expandafter\ifx
-        \csname \user@group @sh@\string##1@\string####1@\endcsname
-        \relax
-          \bbl@afterelse
-          \csname language@active\string##1\endcsname####1%
-        \else
-          \bbl@afterfi
-          \csname \user@group @sh@\string##1@\string####1@%
-          \endcsname
-        \fi}%
-      \@namedef{\user@group @sh@\string##1@@}{%
-        \csname normal@char\string##1\endcsname}
-      \@namedef{language@active\string##1}{%
-        \expandafter\ifx
-        \csname \language@group @sh@\string##1@\endcsname
-        \relax
-          \bbl@afterelse\bbl@sh@select\language@group##1%
-          {language@active@arg\string##1}{system@active\string##1}%
-        \else
-          \bbl@afterfi
-          \csname \language@group @sh@\string##1@\endcsname
-        \fi}%
-      \long\@namedef{language@active@arg\string##1}####1{%
-        \expandafter\ifx
-        \csname \language@group @sh@\string##1@\string####1@\endcsname
-        \relax
-          \bbl@afterelse
-          \csname system@active\string##1\endcsname####1%
-        \else
-          \bbl@afterfi
-          \csname \language@group @sh@\string##1@\string####1@%
-          \endcsname
-        \fi}%
-      \@namedef{system@active\string##1}{%
-        \expandafter\ifx
-        \csname \system@group @sh@\string##1@\endcsname
-        \relax
-          \bbl@afterelse\bbl@sh@select\system@group##1%
-          {system@active@arg\string##1}{normal@char\string##1}%
-        \else
-          \bbl@afterfi\csname \system@group @sh@\string##1@\endcsname
-        \fi}%
-      \long\@namedef{system@active@arg\string##1}####1{%
-        \expandafter\ifx
-        \csname \system@group @sh@\string##1@\string####1@\endcsname
-        \relax
-          \bbl@afterelse\csname normal@char\string##1\endcsname####1%
-        \else
-          \bbl@afterfi
-          \csname \system@group @sh@\string##1@\string####1@\endcsname
-        \fi}%
-      \@namedef{user@sh@\string##1@\string\protect@}{%
-        \csname user@active\string##1\endcsname}%
-      }%
-    }\x
+\def\@initiate@active@char#1#2#3{%
+  \expandafter\edef\csname bbl@oricat@#2\endcsname{%
+    \catcode`#2=\the\catcode`#2\relax}%
+  \ifx#1\@undefined
+    \expandafter\edef\csname bbl@oridef@#2\endcsname{%
+      \let\noexpand#1\noexpand\@undefined}%
+  \else
+    \expandafter\let\csname bbl@oridef@@#2\endcsname#1%
+    \expandafter\edef\csname bbl@oridef@#2\endcsname{%
+      \let\noexpand#1%
+      \expandafter\noexpand\csname bbl@oridef@@#2\endcsname}%
+  \fi
+  \ifx#1#3\relax
+    \expandafter\let\csname normal@char#2\endcsname#3%
+  \else
+    \bbl@info{Making #2 an active character}%
+    \ifnum\mathcode`#2="8000
+      \@namedef{normal@char#2}{%
+        \textormath{#3}{\csname bbl@oridef@@#2\endcsname}}%
+    \else
+      \@namedef{normal@char#2}{#3}%
+    \fi
+    \bbl@restoreactive{#2}%
+    \AtBeginDocument{%
+      \catcode`#2\active
+      \if@filesw
+        \immediate\write\@mainaux{\catcode`\string#2\active}%
+      \fi}%
+    \expandafter\bbl@add@special\csname#2\endcsname
+    \catcode`#2\active
+  \fi
+  \let\bbl@tempa\@firstoftwo
+  \if\string^#2%
+    \def\bbl@tempa{\noexpand\textormath}%
+  \else
+    \ifx\bbl@mathnormal\@undefined\else
+      \let\bbl@tempa\bbl@mathnormal
+    \fi
+  \fi
+  \expandafter\edef\csname active@char#2\endcsname{%
+    \bbl@tempa
+      {\noexpand\if@safe@actives
+         \noexpand\expandafter
+         \expandafter\noexpand\csname normal@char#2\endcsname
+       \noexpand\else
+         \noexpand\expandafter
+         \expandafter\noexpand\csname user@active#2\endcsname
+       \noexpand\fi}%
+     {\expandafter\noexpand\csname normal@char#2\endcsname}}%
+  \bbl@csarg\edef{active@#2}{%
+    \noexpand\active@prefix\noexpand#1%
+    \expandafter\noexpand\csname active@char#2\endcsname}%
+  \bbl@csarg\edef{normal@#2}{%
+    \noexpand\active@prefix\noexpand#1%
+    \expandafter\noexpand\csname normal@char#2\endcsname}%
+  \expandafter\let\expandafter#1\csname bbl@normal@#2\endcsname
+  \bbl@active@def#2\user@group{user@active}{language@active}%
+  \bbl@active@def#2\language@group{language@active}{system@active}%
+  \bbl@active@def#2\system@group{system@active}{normal@char}%
+  \expandafter\edef\csname\user@group @sh@#2@@\endcsname
+    {\expandafter\noexpand\csname normal@char#2\endcsname}%
+  \expandafter\edef\csname\user@group @sh@#2@\string\protect@\endcsname
+    {\expandafter\noexpand\csname user@active#2\endcsname}%
+  \if\string'#2%
+    \let\prim@s\bbl@prim@s
+    \let\active@math@prime#1%
+  \fi}
+\@ifpackagewith{babel}{KeepShorthandsActive}%
+  {\let\bbl@restoreactive\@gobble}%
+  {\def\bbl@restoreactive#1{%
+     \edef\bbl@tempa{%
+%
+% ------------------------------------------------------------------------------
+%
+% XXX: WARNING: this has been commented in babelsh.def
+%
+% ------------------------------------------------------------------------------
+%
+%       \noexpand\AfterBabelLanguage\noexpand\CurrentOption
+%         {\catcode`#1=\the\catcode`#1\relax}%
+       \noexpand\AtEndOfPackage{\catcode`#1=\the\catcode`#1\relax}}%
+     \bbl@tempa}%
+   \AtEndOfPackage{\let\bbl@restoreactive\@gobble}}
 \def\bbl@sh@select#1#2{%
-  \expandafter\ifx\csname#1@sh@\string#2@sel\endcsname\relax
+  \expandafter\ifx\csname#1@sh@#2@sel\endcsname\relax
     \bbl@afterelse\bbl@scndcs
   \else
-    \bbl@afterfi\csname#1@sh@\string#2@sel\endcsname
-  \fi
-}
+    \bbl@afterfi\csname#1@sh@#2@sel\endcsname
+  \fi}
 \def\active@prefix#1{%
   \ifx\protect\@typeset@protect
   \else
     \ifx\protect\@unexpandable@protect
-      \bbl@afterelse\bbl@afterfi\noexpand#1\@gobble
+      \noexpand#1%
     \else
-      \bbl@afterfi\bbl@afterfi\protect#1\@gobble
+      \protect#1%
     \fi
+    \expandafter\@gobble
   \fi}
 \newif\if@safe@actives
 \@safe@activesfalse
 \def\bbl@restore@actives{\if@safe@actives\@safe@activesfalse\fi}
 \def\bbl@activate#1{%
-  \expandafter\def
-  \expandafter#1\expandafter{%
-    \expandafter\active@prefix
-    \expandafter#1\csname active@char\string#1\endcsname}%
-}
+  \bbl@withactive{\expandafter\let\expandafter}#1%
+    \csname bbl@active@\string#1\endcsname}
 \def\bbl@deactivate#1{%
-  \expandafter\def
-  \expandafter#1\expandafter{%
-    \expandafter\active@prefix
-    \expandafter#1\csname normal@char\string#1\endcsname}%
-}
+  \bbl@withactive{\expandafter\let\expandafter}#1%
+    \csname bbl@normal@\string#1\endcsname}
 \def\bbl@firstcs#1#2{\csname#1\endcsname}
 \def\bbl@scndcs#1#2{\csname#2\endcsname}
 \def\declare@shorthand#1#2{\@decl@short{#1}#2\@nil}
@@ -201,108 +237,174 @@
   \def\bbl@tempa{#3}%
   \ifx\bbl@tempa\@empty
     \expandafter\let\csname #1@sh@\string#2@sel\endcsname\bbl@scndcs
+    \@ifundefined{#1@sh@\string#2@}{}%
+      {\def\bbl@tempa{#4}%
+       \expandafter\ifx\csname#1@sh@\string#2@\endcsname\bbl@tempa
+       \else
+         \bbl@info
+           {Redefining #1 shorthand \string#2\\%
+            in language \CurrentOption}%
+       \fi}%
     \@namedef{#1@sh@\string#2@}{#4}%
   \else
     \expandafter\let\csname #1@sh@\string#2@sel\endcsname\bbl@firstcs
+    \@ifundefined{#1@sh@\string#2@\string#3@}{}%
+      {\def\bbl@tempa{#4}%
+       \expandafter\ifx\csname#1@sh@\string#2@\string#3@\endcsname\bbl@tempa
+       \else
+         \bbl@info
+           {Redefining #1 shorthand \string#2\string#3\\%
+            in language \CurrentOption}%
+       \fi}%
     \@namedef{#1@sh@\string#2@\string#3@}{#4}%
   \fi}
-\def\textormath#1#2{%
+\def\textormath{%
   \ifmmode
-    \bbl@afterelse#2%
+    \expandafter\@secondoftwo
   \else
-    \bbl@afterfi#1%
+    \expandafter\@firstoftwo
   \fi}
 \def\user@group{user}
 \def\language@group{english}
 \def\system@group{system}
-\def\useshorthands#1{%
-  \def\user@group{user}%
-  \initiate@active@char{#1}%
-  \@tempcnta\lccode`\~
-  \lccode`~=`#1%
-  \lowercase{\catcode`~\active\bbl@activate{~}}%
-  \lccode`\~\@tempcnta}
-\def\defineshorthand{\declare@shorthand{user}}
+\def\useshorthands{%
+  \@ifstar\bbl@usesh@s{\bbl@usesh@x{}}}
+\def\bbl@usesh@s#1{%
+  \bbl@usesh@x
+    {\AddBabelHook{babel-sh-\string#1}{afterextras}{\bbl@activate{#1}}}%
+    {#1}}
+\def\bbl@usesh@x#1#2{%
+  \bbl@ifshorthand{#2}%
+    {\def\user@group{user}%
+     \initiate@active@char{#2}%
+     #1%
+     \bbl@activate{#2}}%
+    {\bbl@error
+       {Cannot declare a shorthand turned off (\string#2)}
+       {Sorry, but you cannot use shorthands which have been\\%
+        turned off in the package options}}}
+\def\user@language@group{user@\language@group}
+\def\bbl@set@user@generic#1#2{%
+  \@ifundefined{user@generic@active#1}%
+    {\bbl@active@def#1\user@language@group{user@active}{user@generic@active}%
+     \bbl@active@def#1\user@group{user@generic@active}{language@active}%
+     \expandafter\edef\csname#2@sh@#1@@\endcsname{%
+       \expandafter\noexpand\csname normal@char#1\endcsname}%
+     \expandafter\edef\csname#2@sh@#1@\string\protect@\endcsname{%
+       \expandafter\noexpand\csname user@active#1\endcsname}}%
+  \@empty}
+\newcommand\defineshorthand[3][user]{%
+  \edef\bbl@tempa{\zap@space#1 \@empty}%
+  \bbl@for\bbl@tempb\bbl@tempa{%
+    \if*\expandafter\@car\bbl@tempb\@nil
+      \edef\bbl@tempb{user@\expandafter\@gobble\bbl@tempb}%
+      \@expandtwoargs
+        \bbl@set@user@generic{\expandafter\string\@car#2\@nil}\bbl@tempb
+    \fi
+    \declare@shorthand{\bbl@tempb}{#2}{#3}}}
 \def\languageshorthands#1{\def\language@group{#1}}
 \def\aliasshorthand#1#2{%
-  \expandafter\ifx\csname active@char\string#2\endcsname\relax
-     \ifx\document\@notprerr
-       \@notshorthand{#2}
-     \else
-       \initiate@active@char{#2}%
-       \@tempcnta\lccode`\~
-       \lccode`~=`#2%
-       \lowercase{\let~#1}%
-       \lccode`\~\@tempcnta
-     \fi
-   \fi
-}
+  \bbl@ifshorthand{#2}%
+    {\expandafter\ifx\csname active@char\string#2\endcsname\relax
+       \ifx\document\@notprerr
+         \@notshorthand{#2}%
+       \else
+         \initiate@active@char{#2}%
+         \expandafter\let\csname active@char\string#2\expandafter\endcsname
+           \csname active@char\string#1\endcsname
+         \expandafter\let\csname normal@char\string#2\expandafter\endcsname
+           \csname normal@char\string#1\endcsname
+         \bbl@activate{#2}%
+       \fi
+     \fi}%
+    {\bbl@error
+       {Cannot declare a shorthand turned off (\string#2)}
+       {Sorry, but you cannot use shorthands which have been\\%
+        turned off in the package options}}}
 \def\@notshorthand#1{%
-       \PackageError{polyglossia}{%
-         The character `\string #1' should be made
-         a shorthand character;\MessageBreak
-         add the command \string\useshorthands\string{#1\string} to
-         the preamble.\MessageBreak
-         I will ignore your instruction}{}%
-   }
-\newcommand*\shorthandon[1]{\bbl@switch@sh{on}#1\@nil}
-\newcommand*\shorthandoff[1]{\bbl@switch@sh{off}#1\@nil}
-\def\bbl@switch@sh#1#2#3\@nil{%
-  \@ifundefined{active@char\string#2}{%
-    \PackageError{polyglossia}{%
-      The character '\string #2' is not a shorthand character
-      in \languagename}{%
-      Maybe you made a typing mistake?\MessageBreak
-      I will ignore your instruction}}{%
-    \csname bbl@switch@sh@#1\endcsname#2}%
-  \ifx#3\@empty\else
-    \bbl@afterfi\bbl@switch@sh{#1}#3\@nil
+  \bbl@error{%
+    The character `\string #1' should be made a shorthand character;\\%
+    add the command \string\useshorthands\string{#1\string} to
+    the preamble.\\%
+    I will ignore your instruction}{}}
+\newcommand*\shorthandon[1]{\bbl@switch@sh\@ne#1\@nnil}
+\DeclareRobustCommand*\shorthandoff{%
+  \@ifstar{\bbl@shorthandoff\tw@}{\bbl@shorthandoff\z@}}
+\def\bbl@shorthandoff#1#2{\bbl@switch@sh#1#2\@nnil}
+\def\bbl@switch@sh#1#2{%
+  \ifx#2\@nnil\else
+    \@ifundefined{bbl@active@\string#2}%
+      {\bbl@error
+         {I cannot switch `\string#2' on or off--not a shorthand}%
+         {This character is not a shorthand. Maybe you made\\%
+          a typing mistake? I will ignore your instruction}}%
+      {\ifcase#1%
+         \catcode`#212\relax
+       \or
+         \catcode`#2\active
+       \or
+         \csname bbl@oricat@\string#2\endcsname
+         \csname bbl@oridef@\string#2\endcsname
+       \fi}%
+    \bbl@afterfi\bbl@switch@sh#1%
   \fi}
-\def\bbl@switch@sh@off#1{\catcode`#112\relax}
-\begingroup
-  \catcode`\~\active
-  \def\x{\endgroup
-    \def\bbl@switch@sh@on##1{%
-      \begingroup
-      \lccode`~=`##1%
-      \lowercase{\endgroup
-        \catcode`~\active
-        }%
-      }%
-    }
-\x
-\declare@shorthand{system}{"}{\csname normal@char\string"\endcsname}
-\declare@shorthand{system}{'}{%
-  \textormath{\csname normal@char\string'\endcsname}%
-             {\sp\bgroup\prim@s}}
-\declare@shorthand{system}{`}{\csname normal@char\string`\endcsname}
+\def\babelshorthand{\active@prefix\babelshorthand\bbl@putsh}
+\def\bbl@putsh#1{%
+   \@ifundefined{bbl@active@\string#1}%
+      {\bbl@putsh@i#1\@empty\@nnil}%
+      {\csname bbl@active@\string#1\endcsname}}
+\def\bbl@putsh@i#1#2\@nnil{%
+  \csname\languagename @sh@\string#1@%
+    \ifx\@empty#2\else\string#2@\fi\endcsname}
+\ifx\bbl@opt@shorthands\@nnil\else
+  \let\bbl@s@initiate@active@char\initiate@active@char
+  \def\initiate@active@char#1{%
+    \bbl@ifshorthand{#1}{\bbl@s@initiate@active@char{#1}}{}}
+  \let\bbl@s@switch@sh\bbl@switch@sh
+  \def\bbl@switch@sh#1#2{%
+    \ifx#2\@nnil\else
+      \bbl@afterfi
+      \bbl@ifshorthand{#2}{\bbl@s@switch@sh#1{#2}}{\bbl@switch@sh#1}%
+    \fi}
+  \let\bbl@s@activate\bbl@activate
+  \def\bbl@activate#1{%
+    \bbl@ifshorthand{#1}{\bbl@s@activate{#1}}{}}
+  \let\bbl@s@deactivate\bbl@deactivate
+  \def\bbl@deactivate#1{%
+    \bbl@ifshorthand{#1}{\bbl@s@deactivate{#1}}{}}
+\fi
 \def\bbl@prim@s{%
   \prime\futurelet\@let@token\bbl@pr@m@s}
+\def\bbl@if@primes#1#2{%
+  \ifx#1\@let@token
+    \expandafter\@firstoftwo
+  \else\ifx#2\@let@token
+    \bbl@afterelse\expandafter\@firstoftwo
+  \else
+    \bbl@afterfi\expandafter\@secondoftwo
+  \fi\fi}
 \begingroup
-  \catcode`\'\active\let'\relax
-  \def\x{\endgroup
-    \def\bbl@pr@m@s{%
-      \ifx'\@let@token
-        \expandafter\pr@@@s
-      \else
-        \ifx^\@let@token
-          \expandafter\expandafter\expandafter\pr@@@t
-        \else
-          \egroup
-        \fi
-      \fi}%
-    }
-\x
+  \catcode`\^=7  \catcode`\*=\active  \lccode`\*=`\^
+  \catcode`\'=12 \catcode`\"=\active  \lccode`\"=`\'
+  \lowercase{%
+    \gdef\bbl@pr@m@s{%
+      \bbl@if@primes"'%
+        \pr@@@s
+        {\bbl@if@primes*^\pr@@@t\egroup}}}
+\endgroup
 \initiate@active@char{~}
 \declare@shorthand{system}{~}{\leavevmode\nobreak\ }
 \bbl@activate{~}
-\def\bbl@disc#1#2{%
-  \nobreak\discretionary{#2-}{}{#1}\allowhyphens}
+\def\bbl@disc#1#2{\nobreak\discretionary{#2-}{}{#1}\bbl@allowhyphens}
 \def\bbl@t@one{T1}
-\def\allowhyphens{%
-  \ifx\cf@encoding\bbl@t@one\else\bbl@allowhyphens\fi}
-\def\bbl@allowhyphens{\nobreak\hskip\z@skip}
-%HERE ENDS THE CODE COPIED FROM babel.def -------------------- 
+\def\allowhyphens{\ifx\cf@encoding\bbl@t@one\else\bbl@allowhyphens\fi}
+%
+% ------------------------------------------------------------------------------
+%
+% XXX: end of the code copied from babel files
+%
+% ------------------------------------------------------------------------------
+%
 \def\bbl@disc@german#1#2{%
   \nobreak\discretionary{#2-}{}{#1}}
 \endinput
