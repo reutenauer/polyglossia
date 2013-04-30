@@ -51,17 +51,17 @@
   \def\bbl@error#1#2{%
     \begingroup
       \def\\{\MessageBreak}%
-      \PackageError{babel}{#1}{#2}%
+      \PackageError{polyglossia}{#1}{#2}%
     \endgroup}
   \def\bbl@warning#1{%
     \begingroup
       \def\\{\MessageBreak}%
-      \PackageWarning{babel}{#1}%
+      \PackageWarning{polyglossia}{#1}%
     \endgroup}
   \def\bbl@info#1{%
     \begingroup
       \def\\{\MessageBreak}%
-      \PackageInfo{babel}{#1}%
+      \PackageInfo{polyglossia}{#1}%
     \endgroup}
 %
 % ------------------------------------------------------------------------------
