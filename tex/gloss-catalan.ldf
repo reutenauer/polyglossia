@@ -21,15 +21,32 @@
 %%% adapted from Babel's catalan.ldf
 \newdimen\leftllkern \newdimen\rightllkern \newdimen\raiselldim
 % we check if char · exists, and use it instead of raised dot:
-\def\xpg@raiseddot{\ifnum\XeTeXcharglyph"00B7 > 0\hbox{\char"00B7}%
-  \else\raise\raiselldim\hbox{.}\fi}
+\def\xpg@raiseddot{%
+  \ifluatex %
+    \expandafter\ifnum\directlua{polyglossia.check_char(183)} > 0\hbox{\char"00B7}%
+    \else\raise\raiselldim\hbox{.}%
+    \fi %
+  \else %
+    \ifnum\XeTeXcharglyph"00B7 > 0\hbox{\char"00B7}% why a hbox here?
+      \else\raise\raiselldim\hbox{.}%
+    \fi %
+  \fi %
+  }
 \def\lgem{%
   \ifmmode
     \csname normal@char\string"\endcsname l%
   \else
     \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
     \setbox0\hbox{l}\setbox1\hbox{l\/}%
-    \ifnum\XeTeXcharglyph"00B7 > 0\setbox2\hbox{\char"00B7}\else\setbox2\hbox{.}\fi
+    \ifluatex %
+      \expandafter\ifnum\directlua{polyglossia.check_char(183)} > 0\setbox2\hbox{\char"00B7}%
+      \else\setbox2\hbox{.}%
+      \fi %
+    \else %
+      \ifnum\XeTeXcharglyph"00B7 > 0\setbox2\hbox{\char"00B7}%
+        \else\setbox2\hbox{.}%
+      \fi %
+    \fi %
     \advance\raiselldim by \the\fontdimen5\the\font
     \advance\raiselldim by -\ht2%
     \leftllkern=-.25\wd0%
@@ -49,7 +66,15 @@
   \else
     \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
     \setbox0\hbox{L}\setbox1\hbox{L\/}%
-    \ifnum\XeTeXcharglyph"00B7 > 0\setbox2\hbox{\char"00B7}\else\setbox2\hbox{.}\fi
+    \ifluatex %
+      \expandafter\ifnum\directlua{polyglossia.check_char(183)} > 0\setbox2\hbox{\char"00B7}%
+      \else\setbox2\hbox{.}%
+      \fi %
+    \else %
+      \ifnum\XeTeXcharglyph"00B7 > 0\setbox2\hbox{\char"00B7}%
+        \else\setbox2\hbox{.}%
+      \fi %
+    \fi %
     \advance\raiselldim by .5\ht0%
     \advance\raiselldim by -.5\ht2%
     \leftllkern=-.125\wd0%
