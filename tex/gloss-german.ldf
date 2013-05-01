@@ -159,7 +159,8 @@
 }
 
 \def\german@language{\language=%
-  \csname l@\if@german@oldspelling\else n\fi german\ifgerman@latesthyphen -x-latest\fi\endcsname}
+  \csname l@\if@german@oldspelling\else n\fi german\ifgerman@latesthyphen -x-latest\fi\endcsname
+  \xpg@set@language@luatex@ii{german}}
 
 \def\noextras@german{%
   \nogerman@shorthands%
