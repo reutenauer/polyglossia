@@ -28,7 +28,7 @@
    \def\ccname{Kopije}%
    \def\headtoname{Prejme}%
    \def\proofname{Dokaz}%
-   \def\glossaryname{Glosar}% <-- CHECK!
+   \def\glossaryname{Slovar}%
    }
 
 \def\dateslovenian{%   
