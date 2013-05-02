@@ -41,11 +41,6 @@
    {#1\@gobble}%
 } %% the \@gobble is to prevent displaying the line nr
 
-\providecommand*{\xpg@err@lu@rtl}[1]{%
-\xpg@error{Sorry, you cannot use language\MessageBreak 
-#1 in polyglossia: there is currently no support for right-to-left languages in LuaLaTeX. If you feel this error shouldn't happen, please report to polyglossia maintainers.}
-}
-
 %TODO change all instances of \xpg@nopatterns in gloss-*.ldf files
 \providecommand*{\xpg@nopatterns@fallback}[2][nohyphenation]{%
    \xpg@warning{No~ hyphenation~ patterns~ were~ loaded~ for~ `#2'\MessageBreak
