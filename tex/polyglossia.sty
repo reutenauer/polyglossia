@@ -41,6 +41,11 @@
    {#1\@gobble}%
 } %% the \@gobble is to prevent displaying the line nr
 
+\providecommand*{\xpg@err@lu@rtl}[1]{%
+\xpg@error{Sorry, you cannot use language\MessageBreak 
+#1 in polyglossia: there is currently no support for right-to-left languages in LuaLaTeX. If you feel this error shouldn't happen, please report to polyglossia maintainers.}
+}
+
 %TODO change all instances of \xpg@nopatterns in gloss-*.ldf files
 \providecommand*{\xpg@nopatterns@fallback}[2][nohyphenation]{%
    \xpg@warning{No~ hyphenation~ patterns~ were~ loaded~ for~ `#2'\MessageBreak
@@ -475,7 +480,7 @@
      \xpg@info{Default~ language~ is~ #2}%
      \def\languagename{#2}%
      \ifluatex %
-     \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
+       \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
      \fi %
       % This is needed because \arabic is a built-in LaTeX command:
       % so now we have \begin{Arabic}... instead of \begin{arabic}...
@@ -691,7 +696,7 @@
 \newcommand\xpg@set@language@luatex@ii[1]{%
    \ifluatex %
      % here we use lu@texhyphen@loaded@\the\language, the same as in babel
-     \ifcsname lu@texhyphen@loaded@\the\language\endcsname \else %
+     \expandafter\ifcsname lu@texhyphen@loaded@\the\csname l@#1\endcsname\endcsname \else %
        \global\@namedef{lu@texhyphen@loaded@\the\language}{}%
        \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', '\the\language')}%
      \fi %
