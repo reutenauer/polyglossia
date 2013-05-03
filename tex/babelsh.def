@@ -70,6 +70,13 @@
 %
 % ------------------------------------------------------------------------------
 %
+\def\bbl@for#1#2#3{\@for#1:=#2\do{\ifx#1\@empty\else#3\fi}}
+\def\bbl@add#1#2{%
+  \@ifundefined{\expandafter\@gobble\string#1}%
+    {\def#1{#2}}%
+    {\expandafter\def\expandafter#1\expandafter{#1#2}}}
+\long\def\bbl@afterelse#1\else#2\fi{\fi#1}
+\long\def\bbl@afterfi#1\fi{\fi#1}
 \def\bbl@csarg#1#2{\expandafter#1\csname bbl@#2\endcsname}%
 \def\bbl@withactive#1#2{%
   \begingroup
@@ -397,7 +404,52 @@
 \bbl@activate{~}
 \def\bbl@disc#1#2{\nobreak\discretionary{#2-}{}{#1}\bbl@allowhyphens}
 \def\bbl@t@one{T1}
+\def\bbl@allowhyphens{\nobreak\hskip\z@skip}
+\def\bbl@t@one{T1}
+%
+% ------------------------------------------------------------------------------
+%
+% XXX: later in babel.def
+%
+% ------------------------------------------------------------------------------
+%
 \def\allowhyphens{\ifx\cf@encoding\bbl@t@one\else\bbl@allowhyphens\fi}
+\newcommand\babelnullhyphen{\char\hyphenchar\font}
+\def\babelhyphen{\active@prefix\babelhyphen\bbl@hyphen}
+\def\bbl@hyphen{%
+  \@ifstar{\bbl@hyphen@i @}{\bbl@hyphen@i\@empty}}
+\def\bbl@hyphen@i#1#2{%
+  \@ifundefined{bbl@hy@#1#2\@empty}%
+    {\csname bbl@#1usehyphen\endcsname{\discretionary{#2}{}{#2}}}%
+    {\csname bbl@hy@#1#2\@empty\endcsname}}
+\def\bbl@usehyphen#1{%
+  \leavevmode
+  \ifdim\lastskip>\z@\mbox{#1}\nobreak\else\nobreak#1\fi
+  \hskip\z@skip}
+\def\bbl@@usehyphen#1{%
+  \leavevmode\ifdim\lastskip>\z@\mbox{#1}\else#1\fi}
+\def\bbl@hyphenchar{%
+  \ifnum\hyphenchar\font=\m@ne
+    \babelnullhyphen
+  \else
+    \char\hyphenchar\font
+  \fi}
+\def\bbl@hy@soft{\bbl@usehyphen{\discretionary{\bbl@hyphenchar}{}{}}}
+\def\bbl@hy@@soft{\bbl@@usehyphen{\discretionary{\bbl@hyphenchar}{}{}}}
+\def\bbl@hy@hard{\bbl@usehyphen\bbl@hyphenchar}
+\def\bbl@hy@@hard{\bbl@@usehyphen\bbl@hyphenchar}
+\def\bbl@hy@nobreak{\bbl@usehyphen{\mbox{\bbl@hyphenchar}\nobreak}}
+\def\bbl@hy@@nobreak{\mbox{\bbl@hyphenchar}}
+\def\bbl@hy@repeat{%
+  \bbl@usehyphen{%
+    \discretionary{\bbl@hyphenchar}{\bbl@hyphenchar}{\bbl@hyphenchar}%
+    \nobreak}}
+\def\bbl@hy@@repeat{%
+  \bbl@@usehyphen{%
+    \discretionary{\bbl@hyphenchar}{\bbl@hyphenchar}{\bbl@hyphenchar}}}
+\def\bbl@hy@empty{\hskip\z@skip}
+\def\bbl@hy@@empty{\discretionary{}{}{}}
+\def\bbl@disc#1#2{\nobreak\discretionary{#2-}{}{#1}\bbl@allowhyphens}
 %
 % ------------------------------------------------------------------------------
 %
