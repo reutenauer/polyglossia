@@ -1,8 +1,9 @@
 require('luatex-hyphen')
 
 local luatexhyphen = luatexhyphen
+local byte = unicode.utf8.byte
 
-local module = {
+local polyglossia_module = {
     name          = "polyglossia",
     version       = 0.2,
     date          = "2013/04/23",
@@ -13,9 +14,10 @@ local module = {
 }
 
 local error, warning, info, log =
-    luatexbase.provides_module(module)
+    luatexbase.provides_module(polyglossia_module)
 
 polyglossia = polyglossia or {}
+local polyglossia = polyglossia
 
 local current_language
 local default_language
@@ -35,15 +37,31 @@ local function set_default_language(lang, id)
   polyglossia.default_language = lang
 end
 
-local ids = fonts.identifiers or fonts.ids or fonts.hashes.identifiers
+local check_char
 
-local function check_char(char) -- always in current font
-    local otfdata = ids[font.current()].characters
-    if otfdata and otfdata[char] then
-        tex.print('1')
+if luaotfload and luaotfload.aux and luaotfload.aux.font_has_glyph then
+  local font_has_glyph = luaotfload.aux.font_has_glyph
+  function check_char(chr)
+    local codepoint = tonumber(chr)
+    if not codepoint then codepoint = byte(chr) end
+    if font_has_glyph(font.current(), codepoint) then
+      tex.sprint('1')
     else
-        tex.print('0')
+      tex.sprint('0')
     end
+  end
+else
+  local ids = fonts.identifiers or fonts.ids or fonts.hashes.identifiers
+  function check_char(chr) -- always in current font
+      local otfdata = ids[font.current()].characters
+      local codepoint = tonumber(chr)
+      if not codepoint then codepoint = byte(chr) end
+      if otfdata and otfdata[codepoint] then
+          tex.print('1')
+      else
+          tex.print('0')
+      end
+  end
 end
 
 local function load_frpt()
