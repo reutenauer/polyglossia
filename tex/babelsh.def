@@ -70,6 +70,13 @@
 %
 % ------------------------------------------------------------------------------
 %
+\def\bbl@for#1#2#3{\@for#1:=#2\do{\ifx#1\@empty\else#3\fi}}
+\def\bbl@add#1#2{%
+  \@ifundefined{\expandafter\@gobble\string#1}%
+    {\def#1{#2}}%
+    {\expandafter\def\expandafter#1\expandafter{#1#2}}}
+\long\def\bbl@afterelse#1\else#2\fi{\fi#1}
+\long\def\bbl@afterfi#1\fi{\fi#1}
 \def\bbl@csarg#1#2{\expandafter#1\csname bbl@#2\endcsname}%
 \def\bbl@withactive#1#2{%
   \begingroup
