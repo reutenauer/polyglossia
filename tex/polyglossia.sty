@@ -693,7 +693,7 @@
      % here we use lu@texhyphen@loaded@\the\language, the same as in babel
      \expandafter\ifcsname lu@texhyphen@loaded@\the\csname l@#1\endcsname\endcsname \else %
        \global\@namedef{lu@texhyphen@loaded@\the\language}{}%
-       \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', '\the\language')}%
+       \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', '\the\csname l@#1\endcsname')}%
      \fi %
    \fi % 
 }
