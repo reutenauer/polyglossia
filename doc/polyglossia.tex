@@ -1,6 +1,9 @@
 \documentclass[11pt]{ltxdoc}
+\usepackage{ifluatex}
+\ifluatex\else
 \usepackage[dvipdfm]{color}
 \usepackage{xltxtra}
+\fi
 \usepackage{xspace,fancyvrb}
 \usepackage[neverdecrease]{paralist}
 \definecolor{myblue}{rgb}{0.02,0.04,0.48}
@@ -17,14 +20,15 @@
     citecolor=myblue,
     hyperindex=false,
     hyperfootnotes=false,
-    pdftitle={Polyglossia: A Babel replacement for XeLaTeX},
-    pdfauthor={F Charette <firmicus · gmx · net>},
-    pdfkeywords={xetex, xelatex, multilingual, babel, hyphenation}
+    pdftitle={Polyglossia: A Babel replacement for XeLaTeX and LuaLaTeX},
+    pdfauthor={F Charette, A Reutenauer},
+    pdfkeywords={xetex, xelatex, luatex, lualatex, multilingual, babel, hyphenation}
     ]{hyperref}
 \usepackage[babelshorthands]{polyglossia}
 %\usepackage{farsical} <<< needs to be disabled otherwise we have too many counters!
 \setmainlanguage[variant=british,ordinalmonthday=false]{english}
 \setotherlanguages{arabic,hebrew,syriac,greek,russian,catalan}
+\usepackage{metalogo}
 \newcommand*\Cmd[1]{\cmd{#1}\DescribeMacro{#1}\xspace}
 \newcommand*\pkg[1]{\textsf{\color{myblue}#1}}
 \newcommand*\file[1]{\texttt{\color{myblue}#1}}
@@ -111,7 +115,7 @@
 \section{Introduction}
 
 Polyglossia is a package for facilitating multilingual typesetting with
-\XeLaTeX and (at a very experimental stage) Lua\LaTeX.  Basically, it
+\XeLaTeX and (at an early stage) Lua\LaTeX.  Basically, it
 can be used as a replacement of \Babel for performing the following
 tasks automatically:
 
@@ -263,15 +267,15 @@ albanian     & croatian       & \TX{hebrew}   & norsk        & swedish       \\
 amharic      & czech          & \TX{hindi}    & nynorsk      & \TX{syriac}   \\
 \TX{arabic}  & danish         & icelandic     & occitan      & tamil         \\
 armenian     & divehi         & interlingua   & polish       & telugu        \\
-asturian     & \TX{dutch}     & irish         & portuges     & \TX{thai}     \\
-bahasai      & \TX{english}   & \TX{italian}  & romanian     & turkish       \\
-bahasam      & \TX{esperanto} & \TX{lao}      & \TX{russian} & turkmen       \\
-basque       & estonian       & latin         & samin        & ukrainian     \\
-\TX{bengali} & \TX{farsi}     & latvian       & \TX{sanskrit}& urdu          \\
-brazil[ian]  & finnish        & lithuanian    & scottish     & \TX{usorbian} \\
-breton       & french         & \TX{lsorbian} & \TX{serbian} & vietnamese    \\
-bulgarian    & galician       & \TX{magyar}   & slovak       & welsh         \\
-\TX{catalan} & \TX{german}    & malayalam     & slovenian    &               \\
+asturian     & \TX{dutch}     & irish         & portuges     & tibetan       \\
+bahasai      & \TX{english}   & \TX{italian}  & romanian     & \TX{thai}     \\
+bahasam      & \TX{esperanto} & \TX{lao}      & \TX{russian} & turkish       \\
+basque       & estonian       & latin         & samin        & turkmen       \\
+\TX{bengali} & \TX{farsi}     & latvian       & \TX{sanskrit}& ukrainian     \\
+brazil[ian]  & finnish        & lithuanian    & scottish     & urdu          \\
+breton       & french         & \TX{lsorbian} & \TX{serbian} & \TX{usorbian} \\
+bulgarian    & galician       & \TX{magyar}   & slovak       & vietnamese    \\
+\TX{catalan} & \TX{german}    & malayalam     & slovenian    & welsh         \\
 coptic       & \TX{greek}     & marathi       & spanish      &               \\
 \hline
 \end{tabular}
@@ -374,21 +378,14 @@ ought to be mentioned here.
 	and \Cmd\ttfamilylatin.
 
 \item Some macros defined in \Babel’s \file{hyphen.cfg} (and thus usually
-	compiled into the xelatex format) are redefined, but keep a similar
+	compiled into the \XeLaTeX\ and Lua\LaTeX\ format) are redefined, but keep a similar
 	behaviour, namely \Cmd\selectlanguage, \Cmd\foreignlanguage,
 	and the environment ¦otherlanguage¦\DescribeEnv{otherlanguage}.
 \end{itemize}
 %
-Since the \XeLaTeX\ format incorporates \Babel’s \file{hyphen.cfg},
+Since the \XeLaTeX\ and Lua\LaTeX\ format incorporate \Babel’s \file{hyphen.cfg},
 the low-level commands for hyphenation and language switching
 defined there are also accessible.
-%%\footnote{ %
-%%	The file \file{hyphen\_cfg} (available on the
-%%	\href{http://scripts.sil.org/svn-view/xetex/TRUNK/texmf/tex/xelatex/polyglossia/hyphen\_cfg}{\XeTeX\ subversion repository})
-%%	is meant to eventually replace \Babel’s \file{hyphen.cfg}. If you want
-%%	to experiment with it, rename it into \file{hyphen.cfg}, copy it to
-%%	\texttt{…/tex/xelatex/polyglossia/} and rebuild the xelatex format.}
-
 
 \section{Font setup}
 

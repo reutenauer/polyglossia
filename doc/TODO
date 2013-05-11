@@ -117,6 +117,9 @@ gloss-{l,u}sorbian.ldf
 
 gloss-ukrainian.ldf and others
 	* add stuff from Babel ? (operators etc)
+	
+gloss-tibetan.ldf
+	* add support for different hyphenation algorithm
 
 hijrical.sty
 	* \def\CYearsFromHijri#1{%yields the corr julian or gregorian years
