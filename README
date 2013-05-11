@@ -1,4 +1,4 @@
-Polyglossia provides a complete Babel replacement for users of XeLaTeX. 
-The current version includes support for 71 different languages.
+Polyglossia provides a complete Babel replacement for users of XeLaTeX and LuaTeX. 
+The current version includes support for 74 different languages.
 
 See http://www.ctan.org/pkg/polyglossia
