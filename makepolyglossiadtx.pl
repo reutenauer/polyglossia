@@ -15,7 +15,7 @@
 # <basename> : create <basename>.dtx and <basename>.ins
 
 #BEGIN {
-#  system("rm *.{dtx,sty,def,ldf,map,txt,tex,glo,log,ins,out,idx,aux}");
+#  system("rm *.{dtx,sty,def,ldf,map,txt,tex,glo,log,ins,out,idx,aux,lua}");
 #};
 
 
@@ -51,7 +51,8 @@ my $preamble        = <<_END
 
   The polyglossia package         
   (C) 2008–2010 François Charette    
-  (C) $year Arthur Reutenauer
+  (C) 2010-$year Arthur Reutenauer
+  (C) 2013 Elie Roux
   License information appended
 
 _END
@@ -78,7 +79,7 @@ my $stopeventually  = "";
 my $prefinale       = "";
 my $codetitle       = "Implementation";
 
-my @source = qw/(polyglossia\.sty)=>$1 (.+cal\.sty)=>$1 (.+\.def)=>$1 (gloss-.+\.ldf$)=>$1/;
+my @source = qw/(polyglossia\.sty)=>$1 (.+cal\.sty)=>$1 (.+\.lua)=>&1 (.+\.def)=>$1 (gloss-.+\.ldf$)=>$1/;
 
 my $basename = "polyglossia";
 
@@ -92,7 +93,7 @@ if ($verbose)
 
 # work out the derived files
 
-my @srcdirfile = glob("$srcdir/*.{sty,ldf,def}");
+my @srcdirfile = glob("$srcdir/*.{sty,ldf,def,lua}");
 
 my @derivedfiles = ();
 
@@ -527,7 +528,7 @@ print DTX <<_END
 % \\typeout{*************************************************************}
 % \\typeout{*}
 % \\typeout{* To finish the installation you have to move the following}
-% \\typeout{* file into a directory searched by XeTeX:}
+% \\typeout{* file into a directory searched by TeX:}
 % \\typeout{*}
 % \\typeout{* \\space\\space\\space all *.sty, *.def and *.ldf files}
 % \\typeout{*}

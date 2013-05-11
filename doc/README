@@ -1,15 +1,16 @@
 
    ¦----------------------------------------------¦
    ¦                                              ¦
-   ¦       THE POLYGLOSSIA PACKAGE v1.30MM        ¦
+   ¦       THE POLYGLOSSIA PACKAGE v1.3           ¦
    ¦                                              ¦
-   ¦ Modern multilingual typesetting with XeLaTeX ¦
+   ¦     Modern multilingual typesetting          ¦
+   ¦        with XeLaTeX and LuaLaTeX             ¦
    ¦                                              ¦
    ¦----------------------------------------------¦
 
-This package for provides a complete Babel replacement for users of
-XeLaTeX and (at a very experimental stage) LuaLaTeX.  This version
-includes support for 71 different languages.
+This package provides a complete Babel replacement for users of XeLaTeX and 
+(at an early stage) LuaLaTeX. This version includes support for 74 different
+languages.
 
 Polyglossia makes it possible to automate the following tasks:
 
@@ -31,7 +32,8 @@ Polyglossia makes it possible to automate the following tasks:
 
 Several features of Babel that do not make sense in the XeTeX world (like font
 encodings, shorthands, etc) are not supported. For German however, several
-shorthands do make sense and can be activated with the language option babelshorthands=true.
+shorthands do make sense and can be activated with the language option
+babelshorthands=true.
 
 Polyglossia is distributed in the traditional way with *.dtx and *.ins files,
 and also comes with a TDS-conformant ready-to-unpack zip file.
@@ -52,9 +54,11 @@ http://github.com/reutenauer/polyglossia/issues
 
 CHANGES
 
-1.30MM (06-08-2012)
-  * Added support for LuaTeX.  Many languages don’t work yet.  Please be
-    patient.
+1.3 (11-05-2013)
+  * Several bugfixes.
+  * Sync with Babel 3.9.
+  * Added support for LuaTeX.
+  * Added support for Tibetan (end of lines are experimental).
 
 1.2.0e (28-04-2012)
   * Fixed a number of outstanding and not very interesting bugs.
@@ -208,13 +212,3 @@ CHANGES
 
 1.0
    * Initial release on CTAN
-
-
-  ------------------------------
-   Arthur Reutenauer, April 2012
-     <arthur 'dot' reutenauer 'at' normalesup 'dot' org>
-
-   Original author:
-   François Charette
-     <firmicus ατ gmx δοτ net>
-  ------------------------------
