@@ -1,18 +1,1 @@
-* Writing direction << what has to be done?
-* Disabled languages: << what does this mean?
-  - Bengali
-  - Hindi
-  - Kannada
-  - Lao
-  - Malayalam
-  - Marathi
-  - Syriac
-  - Tamil
-  - Telugu
-  - Thai
-* Languages for which there are no patterns at all (not even fallback
-  ones), e. g., Occitan, Romansh [the latter has been added recently,
-  but it might not exist on every installation; and generally this
-  should be take care of] << well, I don't understand, if there is no pattern
-  to load, it outputs an error, luatex-hyphen outputs an error... what can we
-  do about it?
+* Handling the absence of patterns for a language (?)
