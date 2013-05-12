@@ -1,8 +1,11 @@
 \documentclass[11pt]{ltxdoc}
 \usepackage{ifluatex}
-\ifluatex\else
+\ifluatex
+\usepackage[pdftex]{color}
+\else
 \usepackage{bidi}
 \usepackage[dvipdfm]{color}
+\usepackage{graphicx}
 \usepackage{xltxtra}
 \fi
 \usepackage{xspace,fancyvrb}
@@ -30,6 +33,7 @@
 \setmainlanguage[variant=british,ordinalmonthday=false]{english}
 \setotherlanguages{arabic,hebrew,syriac,greek,russian,catalan}
 \usepackage{metalogo}
+\usepackage{bidi}
 \newcommand*\Cmd[1]{\cmd{#1}\DescribeMacro{#1}\xspace}
 \newcommand*\pkg[1]{\textsf{\color{myblue}#1}}
 \newcommand*\file[1]{\texttt{\color{myblue}#1}}
@@ -96,7 +100,7 @@
 \title{\textcolor{lightblue}{\huge
 \fontspec{GFS Ambrosia}
 Π$\;\,$ο$\;\,$λ$\;\,$υ$\;\,$γ$\;\,$λ$\;\,$ω$\;\,$σ$\;\,$σ$\;\,$ι$\;\,$α}\\[16pt]
-\color{myblue}Polyglossia: A Babel Replacement for \XeLaTeX}
+\color{myblue}Polyglossia: A Babel Replacement for \XeLaTeX\ and Lua\LaTeX}
 \author{\scshape\color{myblue}François Charette\\\color{myblue}Current maintainer: \scshape Arthur Reutenauer}
 \date{\filedate \qquad \fileversion\\
 \footnotesize (\textsc{pdf} file generated on \today)}
@@ -150,7 +154,7 @@ reach this objective.
 
 \paragraph{Requirements:} The current version of \pkg{polyglossia} makes use of some convenient
 macros defined in the \pkg{etoolbox} package by Philipp Lehmann. Being designed
-specifically for \XeLaTeX, it obviously also relies on \pkg{fontspec} by Will
+for \XeLaTeX\ and Lua\LaTeX , it obviously also relies on \pkg{fontspec} by Will
 Robertson. For languages written from right to left, it needs the package \pkg{bidi}
 by Vafa Khalighi (\textarabic{وفا خليقي}). Polyglossia also bundles three packages for calendaric
 computations (\pkg{hebrewcal}, \pkg{hijrical}, and \pkg{farsical}).
@@ -342,25 +346,6 @@ of Homer’s \textit{Iliad}:
 Note that for Arabic one cannot use the environment ¦arabic¦,
 as \cmd\arabic\ is defined internally by \LaTeX. In this case
 we need to use the environment ¦Arabic¦ instead\DescribeEnv{Arabic}.
-This is the beginning of Ibn Khaldūn’s \textit{Muqaddima}:
-
-% TODO: convince XeTeX to typeset right-to-left, even in verbatim.
-% The individual words are set correctly, but the whole paragraph is
-% left-to-right!
-\begin{Verbatim}[formatcom={\color{myblue}\addfontfeature{Script=Arabic}}]
-\begin{Arabic}
-اعلم أنّ فنّ التاريخ فنّ عزيز المذهب، جمّ الفوائد، شريف الغاية؛ إذ هو
-يوقفنا على أحوال الماضين من الأمم في أخلاقهم، والأنبياء في سيرهم، والملوك
-في دولهم وسياستهم؛ حتّى تتمّ فائدة الإقتداء في ذلك لمن يرومه في أحوال
-الدين والدنيا.
-\end{Arabic}
-\end{Verbatim}
-
-\begin{Arabic}
-اعلم أنّ فنّ التاريخ فنّ عزيز المذهب، جمّ الفوائد، شريف الغاية؛ إذ هو يوقفنا على
-أحوال الماضين من الأمم في أخلاقهم، والأنبياء في سيرهم، والملوك في دولهم
-وسياستهم؛ حتّى تتمّ فائدة الإقتداء في ذلك لمن يرومه في أحوال الدين والدنيا.
-\end{Arabic}
 
 \subsection{Other commands}
 The following commands are probably of lesser interest to the end user, but
@@ -681,7 +666,7 @@ you can do this:
 
 Several scripts have their own versions of the decimal digits commonly called
 ‘Arabic numerals’.  With the appropriate language option set, \pkg{polyglossia}
-will automatically convert the output of internal LaTeX counters to their
+will automatically convert the output of internal \LaTeX counters\ to their
 localized forms, for instance to display page, chapter and section numbers.
 
 In previous versions this conversion was achieved my means of TECKit fontmappings.
