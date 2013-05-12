@@ -17,6 +17,10 @@ polyglossia.sty:
 	  ""   to produce an invisible ‘breakpoint’.
 	  \-   like the old \-, but allowing hyphenation in the rest of the word.
 
+LuaTeX:
+  * Handling the absence of patterns for a language (?)
+  * Handling the different hyphenchar behaviour (see section 6.2 and 6.4 of the
+    manual)
 
 See file etc/SHORTHANDS_TO_ADD.txt
 
