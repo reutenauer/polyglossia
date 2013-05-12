@@ -79,7 +79,7 @@ my $stopeventually  = "";
 my $prefinale       = "";
 my $codetitle       = "Implementation";
 
-my @source = qw/(polyglossia\.sty)=>$1 (.+cal\.sty)=>$1 (.+\.lua)=>&1 (.+\.def)=>$1 (gloss-.+\.ldf$)=>$1/;
+my @source = qw/(polyglossia\.sty)=>$1 (.+cal\.sty)=>$1 (.+\.lua)=>$1 (.+\.def)=>$1 (gloss-.+\.ldf$)=>$1/;
 
 my $basename = "polyglossia";
 
@@ -93,11 +93,17 @@ if ($verbose)
 
 # work out the derived files
 
-my @srcdirfile = glob("$srcdir/*.{sty,ldf,def,lua}");
+my @srcdirfile = glob("$srcdir/*.{sty,ldf,def}");
+
+my @srcdirluafile = glob("$srcdir/*.{lua}");
 
 my @derivedfiles = ();
 
 my @outputfiles = ();
+
+my @derivedluafiles = ();
+
+my @outputluafiles = ();
 
 my @deriveddocfiles = ();
 
@@ -145,6 +151,31 @@ foreach my $source (@source)
          $numoutput++;
       }
    }
+   
+   $numoutput = 0;
+   
+   foreach my $srcdirluafile (@srcdirluafile)
+   {
+      my $fileexp = $srcdir . "/" . $infile;
+
+      $_ = $srcdirluafile;
+
+      my $expr = "s$patternop$fileexp$patternop$outfile$patternop";
+
+      if (eval($expr))
+      {
+         my $thisoutfile = $_;
+
+         my $thisinfile  = $srcdirluafile;
+
+         $derivedluafiles[$numoutput]{'in'} = $thisinfile;
+         $derivedluafiles[$numoutput]{'out'} = $thisoutfile;
+         $outputluafiles[$numoutput] = $thisoutfile;
+
+         $numoutput++;
+      }
+   }
+   
 }
 
 foreach my $docfile (@docsrcfiles) {
@@ -167,7 +198,9 @@ print DTX "\%\\iffalse\n";
 print DTX "\% $basename.dtx generated using mkpolyglossiadtx.pl\n";
 print DTX "\% (derived from makedtx.pl version $version (c) Nicola Talbot)\n";
 print DTX "\% \n"; 
-print DTX "\% Created on $year/", $mon+1, "/$mday $hour:", $min<10?"0$min" : $min,"\n";
+print DTX "\% To extract the files, use xetex polyglossia.dtx or luatex polyglossia.dtx\n";
+print DTX "\% \n";
+
 print DTX <<_END
 %<*internal>
 \\iffalse
@@ -192,12 +225,14 @@ print DTX <<_END
 %<*batchfile>
 \\input docstrip.tex
 \\keepsilent
+\\let\\MetaPrefix\\relax
 \\preamble
 $preamble
 \\endpreamble
 \\postamble
 $postamble
 \\endpostamble
+\\let\\MetaPrefix\\DoubleperCent
 \\askforoverwritefalse
 _END
 ;
@@ -207,6 +242,16 @@ for (my $idx = 0; $idx <= $#derivedfiles; $idx++) {
 }
 
 print DTX <<_END
+\\def\\MetaPrefix{-- }
+_END
+;
+for (my $idx = 0; $idx <= $#derivedluafiles; $idx++) {
+    my $outfile = $derivedluafiles[$idx]{'out'};
+    print DTX "\\generate{\\file{$outfile}{\\from{polyglossia.dtx}{$outfile}}}\n"
+}
+
+print DTX <<_END
+\\let\\MetaPrefix\\DoubleperCent
 %</batchfile>
 %<batchfile>\\endbatchfile
 %<*internal>
@@ -426,6 +471,8 @@ if ($stopfound==0)
 
 print DTX "\% \\section{$codetitle}\n";
 
+@derivedfiles = (@derivedfiles,@derivedluafiles);
+
 for (my $idx = 0; $idx <= $#derivedfiles; $idx++)
 {
    my $thisinfile = $derivedfiles[$idx]{'in'};
@@ -530,7 +577,7 @@ print DTX <<_END
 % \\typeout{* To finish the installation you have to move the following}
 % \\typeout{* file into a directory searched by TeX:}
 % \\typeout{*}
-% \\typeout{* \\space\\space\\space all *.sty, *.def and *.ldf files}
+% \\typeout{* \\space\\space\\space all *.sty, *.lua, *.def and *.ldf files}
 % \\typeout{*}
 % \\typeout{* You also need to compile the *.map files with teckit_compile}
 % \\typeout{* and place the resulting *.tec files under}
