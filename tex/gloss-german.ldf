@@ -160,7 +160,10 @@
 
 \def\german@language{\language=%
   \csname l@\if@german@oldspelling\else n\fi german\ifgerman@latesthyphen -x-latest\fi\endcsname
-  \xpg@set@language@luatex@ii{ngerman}}
+  % LuaTeX
+  % \let\pattname{\if@german@oldspelling\else n\fi german\ifgerman@latesthyphen -x-latest\fi}
+  % \xpg@set@language@luatex@ii{\pattname}}
+  \if@german@oldspelling\xpg@set@language@luatex@ii{german}\else\xpg@set@language@luatex@ii{ngerman}\fi}
 
 \def\noextras@german{%
   \nogerman@shorthands%
