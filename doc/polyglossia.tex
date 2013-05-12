@@ -1,21 +1,10 @@
 \documentclass[11pt]{ltxdoc}
-\usepackage{ifluatex}
-\ifluatex
-\usepackage[pdftex]{color}
-\else
-\usepackage{bidi}
-\usepackage[dvipdfm]{color}
-\usepackage{graphicx}
-\usepackage{xltxtra}
-\fi
+\usepackage{color}
 \usepackage{xspace,fancyvrb}
 \usepackage[neverdecrease]{paralist}
 \definecolor{myblue}{rgb}{0.02,0.04,0.48}
 \definecolor{lightblue}{rgb}{0.61,.8,.8}
 \definecolor{myred}{rgb}{0.65,0.04,0.07}
-\definecolor{darkgray}{gray}{0.3}
-\definecolor{lightgray}{gray}{0.6}
-\definecolor{mygreen}{rgb}{0,.43,0}
 \usepackage[
     bookmarks=true,
     colorlinks=true,
@@ -29,11 +18,11 @@
     pdfkeywords={xetex, xelatex, luatex, lualatex, multilingual, babel, hyphenation}
     ]{hyperref}
 \usepackage[babelshorthands]{polyglossia}
-%\usepackage{farsical} <<< needs to be disabled otherwise we have too many counters!
+\usepackage{farsical}
 \setmainlanguage[variant=british,ordinalmonthday=false]{english}
 \setotherlanguages{arabic,hebrew,syriac,greek,russian,catalan}
 \usepackage{metalogo}
-\usepackage{bidi}
+\usepackage[protrusion]{microtype}
 \newcommand*\Cmd[1]{\cmd{#1}\DescribeMacro{#1}\xspace}
 \newcommand*\pkg[1]{\textsf{\color{myblue}#1}}
 \newcommand*\file[1]{\texttt{\color{myblue}#1}}
@@ -49,43 +38,26 @@
 \def\etc{\@ifnextchar.{\textit{etc}}{\textit{etc.}\@\xspace}}
 
 %% Sidenotes  << copied from fontspec.dtx
-\newcommand\warn[2]{%
-  \edef\thisversion{#1}%
-  \ifhmode\unskip~\fi{\ifx\thisversion\fileversion\color{red}\fi
-  $\leftarrow$}%
-  \marginpar{\raggedleft
-    \small%
-    \ifx\thisversion\fileversion\color{red}\fi
-    \notefont #1:~#2}}
-
 \newcommand\new[1]{%
   \edef\thisversion{#1}%
   \ifhmode\unskip~\fi{\ifx\thisversion\fileversion\color{blue}\else\color[gray]{0.5}\fi
   $\leftarrow$}%
   \marginpar{\centering
     \small\ifx\thisversion\fileversion\color{blue}\else\color[gray]{0.5}\fi
-    \notefont #1}}
+    \textsf{#1}}}
 \newcommand\displaycmd[2]{%
   \\\DescribeMacro{#2}\centerline{\cmd{#1}}}
 \renewenvironment{itemize}{\begin{compactitem}[\char"2023]}%[{\fontspec{DejaVu Sans}\char"25BB}]}%
 		{\end{compactitem}}
 \renewenvironment{enumerate}{\begin{compactenum}}{\end{compactenum}}
 
-%% Sidenote font
-\newfontfamily\notefont[Scale=MatchLowercase]{Lucida Sans Unicode}
-%%%
-
 %% fontspec declarations:
-\setromanfont[Mapping=tex-text]{Linux Libertine O}
-\defaultfontfeatures{Scale=MatchLowercase}
-\setmonofont{DejaVu Sans Mono}
-\setsansfont{Lucida Sans Unicode}
-\newfontfamily\arabicfont[Script=Arabic]{Scheherazade}
-\newfontfamily\farsifont[Script=Arabic]{Farsi Simple Bold}
+\setmainfont{Linux Libertine O}
+\setsansfont{Linux Biolinum O}
+\setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}
+\newfontfamily\arabicfont[Script=Arabic]{Amiri}
 \newfontfamily\syriacfont[Script=Syriac]{Serto Jerusalem}
-\newfontfamily\hebrewfont[Script=Hebrew]{SBL Hebrew}
-
-\newcommand\Babel{\pkg{Babel}\xspace}
+\newfontfamily\hebrewfont[Script=Hebrew]{Ezra SIL}
 
 \linespread{1.05}
 \frenchspacing
@@ -97,10 +69,9 @@
 \begin{document}
 \GetFileInfo{polyglossia.sty}
 
-\title{\textcolor{lightblue}{\huge
-\fontspec{GFS Ambrosia}
-Π$\;\,$ο$\;\,$λ$\;\,$υ$\;\,$γ$\;\,$λ$\;\,$ω$\;\,$σ$\;\,$σ$\;\,$ι$\;\,$α}\\[16pt]
-\color{myblue}Polyglossia: A Babel Replacement for \XeLaTeX\ and Lua\LaTeX}
+\title{\textcolor{lightblue}{\Huge\fontspec[LetterSpace=40]{GFS Ambrosia} Πολυγλωσσια}
+\\[16pt]
+\color{myblue}Polyglossia: A Babel Replacement for \XeLaTeX\ and \LuaLaTeX}
 \author{\scshape\color{myblue}François Charette\\\color{myblue}Current maintainer: \scshape Arthur Reutenauer}
 \date{\filedate \qquad \fileversion\\
 \footnotesize (\textsc{pdf} file generated on \today)}
@@ -120,8 +91,8 @@
 \section{Introduction}
 
 Polyglossia is a package for facilitating multilingual typesetting with
-\XeLaTeX and (at an early stage) Lua\LaTeX.  Basically, it
-can be used as a replacement of \Babel for performing the following
+\XeLaTeX\ and (at an early stage) \LuaLaTeX.  Basically, it
+can be used as a replacement of \pkg{babel} for performing the following
 tasks automatically:
 
 \begin{enumerate}
@@ -145,16 +116,16 @@ tasks automatically:
       available separately).
 \end{enumerate}
 
-Several features of \Babel that do not make sense in the \XeTeX\ world (like font
+Several features of \pkg{babel} that do not make sense in the \XeTeX\ world (like font
 encodings, shorthands, etc.) are not supported.
 Generally speaking, \pkg{polyglossia} aims to remain as compatible as possible
-with the fundamental features of \Babel while being cleaner, light-weight,
+with the fundamental features of \pkg{babel} while being cleaner, light-weight,
 and modern. The package \pkg{antomega} has been very beneficial in our attempt to
 reach this objective.
 
 \paragraph{Requirements:} The current version of \pkg{polyglossia} makes use of some convenient
 macros defined in the \pkg{etoolbox} package by Philipp Lehmann. Being designed
-for \XeLaTeX\ and Lua\LaTeX , it obviously also relies on \pkg{fontspec} by Will
+for \XeLaTeX\ and \LuaLaTeX, it obviously also relies on \pkg{fontspec} by Will
 Robertson. For languages written from right to left, it needs the package \pkg{bidi}
 by Vafa Khalighi (\textarabic{وفا خليقي}). Polyglossia also bundles three packages for calendaric
 computations (\pkg{hebrewcal}, \pkg{hijrical}, and \pkg{farsical}).
@@ -166,26 +137,26 @@ You can determine the default language by means of the command:
 	\displaycmd{\setdefaultlanguage[⟨options⟩]\{lang\}}{\setdefaultlanguage}
 (or equivalently \Cmd\setmainlanguage).
 Secondary languages can be loaded with
-	\displaycmd{\setotherlanguage[⟨options⟩]\{lang\}}{\setotherlanguage}.
+	\displaycmd{\setotherlanguage[⟨options⟩]\{lang\}.}{\setotherlanguage}
 These commands have the advantage of being explicit and of allowing you to set
 language-specific options.\footnote{ %
 	More on language-specific options below.}
 It is also possible to load a series of secondary languages at once using
-	\displaycmd{\setotherlanguages\{lang1,lang2,lang3,…\}}{\setotherlanguages}.
+	\displaycmd{\setotherlanguages\{lang1,lang2,lang3,…\}.}{\setotherlanguages}
 Language-specific options can be set or changed at any time by means of
-	\displaycmd{\setkeys\{⟨lang⟩\}\{opt1=value1,opt2=value2,…\}}{\setkeys}.
+	\displaycmd{\setkeys\{⟨lang⟩\}\{opt1=value1,opt2=value2,…\}.}{\setkeys}
 
 
 \subsection{The “Babel way”}
 \new{v1.2.0}
 {\color{red}\bfseries Warning}: \pkg{polyglossia} no longer supports loading
 language definition files as package options!
-%As with \Babel, \pkg{polyglossia} also allows you to load language definition files
+%As with \pkg{babel}, \pkg{polyglossia} also allows you to load language definition files
 %as package options. In most cases, option \texttt{⟨lang⟩} will load the file
 %\file{gloss-⟨lang⟩.ldf}. Note however that the \textit{first} language listed in \\
 %\centerline{\cmd{\usepackage[lang1,lang2,…]{polyglossia}}}
 %will be the default language for the document, which
-%is the opposite convention of \Babel.
+%is the opposite convention of \pkg{babel}.
 %Note also that this method may not work in some cases, and should be
 %considered deprecated.
 
@@ -300,7 +271,7 @@ Lao, Malayalam, Marathi, Tamil, Telugu, and Turkmen.\footnote{ %
 
 
 Polyglossia can also be loaded with the option
-‘babelshorthands’\new{v1.1.1}, which globally activates \Babel
+‘babelshorthands’\new{v1.1.1}, which globally activates \pkg{babel}
 shorthands whenever available. Currently shorthands are implemented for
 Catalan, Dutch, German, Italian, and Russian: see these respective
 languages for details.
@@ -359,17 +330,17 @@ ought to be mentioned here.
 	to another one in the middle of a document: \textit{this may have adverse effects}!
 
 \item \Cmd\normalfontlatin: in an environment where \cmd\normalfont\ has been redefined
-	to a non-latin script, this will call the font defined with \cmd\setromanfont\ etc.
+	to a non-latin script, this will call the font defined with \cmd\setmainfont\ etc.
 	Likewise it is possible to use \Cmd\rmfamilylatin, \Cmd\sffamilylatin,
 	and \Cmd\ttfamilylatin.
 
-\item Some macros defined in \Babel’s \file{hyphen.cfg} (and thus usually
-	compiled into the \XeLaTeX\ and Lua\LaTeX\ format) are redefined, but keep a similar
+\item Some macros defined in \pkg{babel}’s \file{hyphen.cfg} (and thus usually
+	compiled into the \XeLaTeX\ and \LuaLaTeX\ format) are redefined, but keep a similar
 	behaviour, namely \Cmd\selectlanguage, \Cmd\foreignlanguage,
 	and the environment ¦otherlanguage¦\DescribeEnv{otherlanguage}.
 \end{itemize}
 %
-Since the \XeLaTeX\ and Lua\LaTeX\ format incorporate \Babel’s \file{hyphen.cfg},
+Since the \XeLaTeX\ and \LuaLaTeX\ format incorporate \pkg{babel}’s \file{hyphen.cfg},
 the low-level commands for hyphenation and language switching
 defined there are also accessible.
 
@@ -378,7 +349,7 @@ defined there are also accessible.
 With polyglossia it is possible to associate a specific font with any script or language
 that occurs in the document. That font should always be defined as
 ¦\⟨script⟩font¦\ or ¦\⟨language⟩font¦.
-For instance, if the default roman font defined by \cmd\setromanfont\
+For instance, if the default font defined by \cmd\setmainfont\
 does not support Greek, then one can define the font used to display Greek with:\\
 \centerline{ \cmd\newfontfamily\cmd{\greekfont[Script=Greek,⟨…⟩]\{⟨font⟩\}}. }
 Note that polyglossia will use the font thus defined as is.
@@ -419,13 +390,13 @@ The default value of each option is given in italic.
 	\item \TB{numerals} = \textit{mashriq} or maghrib
 		(the latter is the default when locale = algeria, tunisia or morocco)
   \item \TB{abjadjimnotail} = \textit{false} or true. \new{v1.0.3}
-    Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍}\ – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
+    Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
 	\end{itemize}
 \textbf{Commands}:
 	\begin{itemize}
 	\item \Cmd\abjad and \Cmd\abjadmaghribi (see section \ref{abjad})
-  \item \Cmd\aemph to emphasize Arabic text with ¦\overline¦:\new{v1.2.0}
-    ¦\textarabic{مثال: \aemph{اب}}¦ yields \textarabic{مثال: \aemph{اب}}.
+  \item \Cmd\aemph to emphasize text with ¦\overline¦.\new{v1.2.0}
+    ¦\textarabic{\aemph{اب}}¦ yields \textarabic{\aemph{اب}}.
     This command is also available for Farsi, Urdu, etc.
 	\end{itemize}
 
@@ -443,7 +414,7 @@ The default value of each option is given in italic.
 \end{itemize}
 \textbf{Commands}:
 \begin{itemize}
-  \item \Cmd{\l.l} and \Cmd{\L.L} behave as in \Babel to type a geminated l, as in \textit{co\l.laborar}. \new{v1.1.1}
+  \item \Cmd{\l.l} and \Cmd{\L.L} behave as in \pkg{babel} to type a geminated l, as in \textit{co\l.laborar}. \new{v1.1.1}
     In polyglossia the same can also be achieved with \Cmd{\l·l} and \Cmd{\L·L}.\footnote{ %
         NB: · is the glyph U+00B7 MIDDLE DOT.}
 \end{itemize}
@@ -452,7 +423,7 @@ The default value of each option is given in italic.
 \textbf{Options:}
 \begin{itemize}
   \item \TB{babelshorthands} = \textit{false} or true. \new{v1.1.1}
-		if this is turned on, all shorthands defined in \Babel
+		if this is turned on, all shorthands defined in \pkg{babel}
 		for fine-tuning the hyphenation of Dutch words are activated.
 		\begin{itemize}
 		\item ¦"-¦ for an explicit hyphen sign, allowing hyphenation in the rest of the word
@@ -475,7 +446,7 @@ The default value of each option is given in italic.
 \subsection{esperanto}\label{esperanto}
 \textbf{Commands}:
 	\begin{itemize}
-	\item \Cmd\hodiau\ and \Cmd\hodiaun are special forms of \cmd\today\ (see the \Babel documentation)
+	\item \Cmd\hodiau\ and \Cmd\hodiaun are special forms of \cmd\today\ (see the \pkg{babel} documentation)
 	\end{itemize}
 
 \subsection{farsi}\label{farsi}
@@ -511,7 +482,7 @@ The default value of each option is given in italic.
 		will be loaded instead of ‘german’ or ‘ngerman’. NB: This is based on
 		the file \texttt{language.dat} that comes with \TeX Live 2008 and later.
 	\item\TB{babelshorthands} = \textit{false} or true: \new{v1.0.3}
-		if this is turned on, all shorthands defined in \Babel
+		if this is turned on, all shorthands defined in \pkg{babel}
 		for fine-tuning the hyphenation of German words are activated.
 		\begin{itemize}
 		\item  ¦"ck¦ for ¦ck¦ to be hyphenated as ¦k-k¦
@@ -595,14 +566,14 @@ The default value of each option is given in italic.
 \subsection{lsorbian and usorbian}\label{lsorbian}\label{usorbian}
 \textbf{Commands}:
 	\begin{itemize}
-	\item \Cmd\oldtoday : see the \Babel documentation.
+	\item \Cmd\oldtoday : see the \pkg{babel} documentation.
 	\end{itemize}
 
 \subsection{magyar}\label{magyar}
 \textbf{Commands}:
 	\begin{itemize}
 	\item \Cmd\ontoday\ (= \Cmd\ondatemagyar): special forms of \cmd\today\
-		(see the \Babel documentation).
+		(see the \pkg{babel} documentation).
 	\end{itemize}
 
 
@@ -655,7 +626,7 @@ that comes with this package.
 \section{Modifying or extending captions and date formats}
 
 To redefine internal macros, you can use the command ¦\gappto¦ from the package
-\pkg{etoolbox}. For compatibility with \Babel the command ¦\addto¦ is also available
+\pkg{etoolbox}. For compatibility with \pkg{babel} the command ¦\addto¦ is also available
 with the same effect. For instance, to change the ¦\chaptername¦ for language ¦lingua¦,
 you can do this:
 \begin{verbatim}
@@ -666,12 +637,12 @@ you can do this:
 
 Several scripts have their own versions of the decimal digits commonly called
 ‘Arabic numerals’.  With the appropriate language option set, \pkg{polyglossia}
-will automatically convert the output of internal \LaTeX counters\ to their
+will automatically convert the output of internal \LaTeX\ counters to their
 localized forms, for instance to display page, chapter and section numbers.
 
 In previous versions this conversion was achieved my means of TECKit fontmappings.
-If needed they can be activated with the fontspec option
-¦Mapping=arabicdigits¦ (or ¦farsidigits¦ or ¦thaidigits¦).
+If needed they can be activated with the fontspec ¦Mapping¦ option,
+using ¦arabicdigits¦, ¦farsidigits¦ or ¦thaidigits¦.
 For instance if \cmd\arabicfont\ is defined with the option ¦Mapping=arabicdigits¦,
 then by typing ¦\textarabic{2010}¦ one will obtain \textarabic{٢٠١٠}.
 
@@ -698,34 +669,34 @@ The Greek numerals are obtained with \Cmd\greeknumeral (or \Cmd\Greeknumeral\ in
 Example: ¦\greeknumeral{1863}¦ yields \textgreek{\greeknumeral{1863}}.
 
 The Arabic \textit{abjad} numbers can be generated with the command \Cmd\abjad.
-Example: ¦\abjad{1863}¦ yields {\arabicfont\abjad{1863}}.
+Example: ¦\abjad{1863}¦ yields \textarabic{\abjad{1863}}.
 In the Maghrib the conventions are somewhat different, and the maghribi forms
 of the \textit{abjad} numerals are obtained with the \Cmd\abjadmaghribi\ command.
-Example: ¦\abjadmaghribi{1863}¦ yields {\arabicfont\abjadmaghribi{1863}}.
+Example: ¦\abjadmaghribi{1863}¦ yields \textarabic{\abjadmaghribi{1863}}.
 
 The code for Hebrew numerals, which was incorrect in previous versions, was
-ported from the implementation in \Babel with v1.1.1\new{v1.1.1}, and the
-user interface is identical to the one in \Babel.
+ported from the implementation in \pkg{babel} with v1.1.1\new{v1.1.1}, and the
+user interface is identical to the one in \pkg{babel}.
 The commands \Cmd\hebrewnumeral, \Cmd\Hebrewnumeral and \Cmd\Hebrewnumeralfinal\ behave exactly
-as they do in \Babel: the second command prints the number with \textit{gereshayim} before
+as they do in \pkg{babel}: the second command prints the number with \textit{gereshayim} before
 the last letter, and the latter uses in addition the final forms of Hebrew letters.
 Examples:
-¦\hebrewnumeral{1750}¦ yields {\hebrewfont\hebrewnumeral{1750}}.
-¦\Hebrewnumeral{1750}¦ yields {\hebrewfont\Hebrewnumeral{1750}}.
-¦\Hebrewnumeralfinal{1750}¦ yields {\hebrewfont\Hebrewnumeralfinal{1750}}.
+¦\hebrewnumeral{1750}¦ yields \texthebrew{\hebrewnumeral{1750}},
+¦\Hebrewnumeral{1750}¦ yields \texthebrew{\Hebrewnumeral{1750}},
+and ¦\Hebrewnumeralfinal{1750}¦ yields \texthebrew{\Hebrewnumeralfinal{1750}}.
 
 
 Support is also provided for Syriac abjad numerals, which can be generated
 with \Cmd\abjadsyriac.\footnote{ %
 A fine guide to numerals in Syriac can be found at \link{http://www.garzo.co.uk/documents/syriac-numerals.pdf}.}
-Example: ¦\abjadsyriac{463}¦ yields {\syriacfont\abjadsyriac{463}}.
+Example: ¦\abjadsyriac{463}¦ yields \textsyriac{\abjadsyriac{463}}.
 
 
 \section{Calendars}
 
 \subsection{Hebrew calendar (hebrewcal.sty)}
 The package \file{hebrewcal.sty} is almost a verbatim copy of \file{hebcal.sty}
-that comes with \Babel.
+that comes with \pkg{babel}.
 The command \Cmd\Hebrewtoday\ formats the current date in the Hebrew calendar
 (depending of the current writing direction this will automatically set either
 in Hebrew script or in roman transliteration).
@@ -747,7 +718,7 @@ provide a localized version of ¦\Hijritoday¦.
 If the formatting macro for the current language is undefined, the Hijri date will be formatted
 in Arabic or in roman transliteration, depending of the current writing direction.
 You can define a new format or redefine one with the command
-  \displaycmd{\DefineHijriDateFormat\{<lang>\}\{<code>\}}{\DefineHijriDateFormat}.
+  \displaycmd{\DefineHijriDateFormat\{<lang>\}\{<code>\}.}{\DefineHijriDateFormat}
 
 The command ¦\Hijritoday¦ also accepts an optional argument to add or subtract a correction
 (in days) to the date computed by the arithmetical algorithm.\footnote{ %
@@ -767,7 +738,7 @@ itself a slight modification of ¦ftoday.sty¦ in Farsi\TeX.\footnote{ %
 	Reingold \& Gershowitz (ref.~n.~\ref{reingold}).}
 Here we have renamed the command \cmd\ftoday\ to
 \Cmd\Jalalitoday.
-%Example: today is \Jalalitoday.
+Example: today is \Jalalitoday.
 
 
 %\section{Varia}
@@ -777,7 +748,7 @@ Here we have renamed the command \cmd\ftoday\ to
 \pkg{Polyglossia} is notable for being a recycle box of previous contributions
 by other people. I take this opportunity to thank the following individuals,
 whose splendid work has made my task almost trivial in comparision: Johannes
-Braams and the numerous contributors to the \Babel{} package (in particular
+Braams and the numerous contributors to the \pkg{babel}{} package (in particular
 Boris Lavva and others for its Hebrew support), Alexej Kryukov (\pkg{antomega}), Will
 Robertson (\pkg{fontspec}), Apostolos Syropoulos (\pkg{xgreek}), Youssef Jabri
 (\pkg{arabi}), and Vafa Khalighi (\pkg{xepersian} and \pkg{bidi}).
