@@ -11,7 +11,7 @@ if [ "$first_char" != '/' ]; then
 fi
 
 builddir="$root/build"
-mkdir -p $bulddir
+mkdir -p $builddir
 
 pdf="$root/doc/polyglossia.pdf"
 pdfsrc="$root/doc/polyglossia.tex"
