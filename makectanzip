@@ -2,7 +2,8 @@
 
 # root="$HOME/dev/polyglossia"
 # root="$HOME/perso/TeX/Polyglossia/polyglossia"
-root="$HOME/polyglossia"
+#root="$HOME/polyglossia"
+root="."
 builddir="$root/build"
 
 pdf="$root/doc/polyglossia.pdf"
@@ -62,9 +63,9 @@ rm makeins.*
 #rm *.{sty,def,ldf,map,txt,tex,glo,log,out,idx,aux,toc} 2&> /dev/null
 
 echo "Create TDS tree ..."
-TDS_src="$builddir/source/xelatex/polyglossia"
-TDS_tex="$builddir/tex/xelatex/polyglossia"
-TDS_doc="$builddir/doc/xelatex/polyglossia"
+TDS_src="$builddir/source/latex/polyglossia"
+TDS_tex="$builddir/tex/latex/polyglossia"
+TDS_doc="$builddir/doc/latex/polyglossia"
 TDS_map="$builddir/fonts/misc/xetex/fontmapping/polyglossia"
 mkdir -p $TDS_src
 mkdir -p $TDS_tex
@@ -84,11 +85,11 @@ done
 echo "Make TDS tarball ..."
 cd $builddir
 tarball="polyglossia.tds.zip"
-zip $tarball tex/xelatex/polyglossia/*.{ldf,def,sty} || exit 1
+zip $tarball tex/latex/polyglossia/*.{ldf,def,sty,lua} || exit 1
 zip $tarball fonts/misc/xetex/fontmapping/polyglossia/* || exit 1
-zip $tarball source/xelatex/polyglossia/polyglossia.dtx || exit 1
-zip $tarball doc/xelatex/polyglossia/*.{tex,pdf} || exit 1
-zip $tarball doc/xelatex/polyglossia/README || exit 1
+zip $tarball source/latex/polyglossia/polyglossia.dtx || exit 1
+zip $tarball doc/latex/polyglossia/*.{tex,pdf} || exit 1
+zip $tarball doc/latex/polyglossia/README || exit 1
 
 echo "Make CTAN zip ..."
 ctanzip="polyglossia.zip"
