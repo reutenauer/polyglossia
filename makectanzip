@@ -4,6 +4,7 @@
 
 root=`dirname $0`
 builddir="$root/build"
+mkdir -p $bulddir
 
 first_char=`echo $root | /usr/bin/sed -e 's/^\(.\).*$/\1/'`
 
