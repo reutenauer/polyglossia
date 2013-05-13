@@ -57,7 +57,7 @@
       {\xpg@warning{No hyphenation patterns were loaded for British English\MessageBreak
          I will use the patterns for US English instead}%
        \adddialect\l@ukenglish\l@english\relax}{}%
-    \gdef\english@language{\language=\l@ukenglish}%
+    \gdef\english@language{\language=\l@ukenglish\xpg@set@language@luatex@ii{ukenglish}}%
   \fi
   % and we reset \do to its previous definition here:
   \renewcommand*{\do}[1]{\setotherlanguage{#1}}%
