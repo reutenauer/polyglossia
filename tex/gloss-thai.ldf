@@ -19,7 +19,7 @@
 
 \newif\if@thai@numerals
 \def\tmp@thai{thai}
-\define@key{thai}{numerals}[thai]{%
+\define@key{thai}{numerals}[arabic]{%
 	\def\@tmpa{#1}%
 	\ifx\@tmpa\tmp@thai\@thai@numeralstrue\else
 	  \@thai@numeralsfalse\fi

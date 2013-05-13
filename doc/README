@@ -3,13 +3,14 @@
    ¦                                              ¦
    ¦       THE POLYGLOSSIA PACKAGE v1.31          ¦
    ¦                                              ¦
-   ¦ Modern multilingual typesetting with XeLaTeX ¦
+   ¦     Modern multilingual typesetting          ¦
+   ¦        with XeLaTeX and LuaLaTeX             ¦
    ¦                                              ¦
    ¦----------------------------------------------¦
 
-This package for provides a complete Babel replacement for users of
-XeLaTeX and (at a very experimental stage) LuaLaTeX.  This version
-includes support for 73 different languages.
+This package provides a complete Babel replacement for users of XeLaTeX and 
+(at an early stage) LuaLaTeX. This version includes support for 73 different
+languages.
 
 Polyglossia makes it possible to automate the following tasks:
 
@@ -31,7 +32,8 @@ Polyglossia makes it possible to automate the following tasks:
 
 Several features of Babel that do not make sense in the XeTeX world (like font
 encodings, shorthands, etc) are not supported. For German however, several
-shorthands do make sense and can be activated with the language option babelshorthands=true.
+shorthands do make sense and can be activated with the language option
+babelshorthands=true.
 
 Polyglossia is distributed in the traditional way with *.dtx and *.ins files,
 and also comes with a TDS-conformant ready-to-unpack zip file.
@@ -53,10 +55,11 @@ http://github.com/reutenauer/polyglossia/issues
 CHANGES
 
 1.31 (10-05-2013)
+  * Several bugfixes.  
+  * Sync with Babel 3.9.
   * Consolidated LuaTeX support for all languages but the ones using
     South and South-East Asian scripts, and languages writting from
     right to left.  Many thanks to Élie Roux for his help.
-
   * Added support for Tibetan, contributed by Élie Roux.
 
 1.30MM (06-08-2012)
@@ -215,13 +218,3 @@ CHANGES
 
 1.0
    * Initial release on CTAN
-
-
-  ------------------------------
-   Arthur Reutenauer, April 2012
-     <arthur 'dot' reutenauer 'at' normalesup 'dot' org>
-
-   Original author:
-   François Charette
-     <firmicus ατ gmx δοτ net>
-  ------------------------------

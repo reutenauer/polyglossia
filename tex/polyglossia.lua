@@ -5,8 +5,8 @@ local byte = unicode.utf8.byte
 
 local polyglossia_module = {
     name          = "polyglossia",
-    version       = 0.2,
-    date          = "2013/04/23",
+    version       = 1.3,
+    date          = "2013/05/11",
     description   = "Polyglossia",
     author        = "Elie Roux",
     copyright     = "Elie Roux",
