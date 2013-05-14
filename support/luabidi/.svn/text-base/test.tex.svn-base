@@ -1,0 +1,13 @@
+\documentclass[12pt]{article}
+\usepackage[arabmaths]{luabidi}
+\begin{document}
+\setRTLmain
+\section{ghesmate 1}
+
+in yek ghesmat ast ke an ra dar inja minevisam
+
+\begin{equation}
+1+2=3
+\end{equation}
+in ham dobare masalei ast ke man minevisam va shoma an ra mibinid.
+\end{document}
