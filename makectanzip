@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TODO Test zip and DTX file thus produced!
+
 # root="$HOME/dev/polyglossia"
 # root="$HOME/perso/TeX/Polyglossia/polyglossia"
 #root="$HOME/polyglossia"
