@@ -5,16 +5,11 @@
 
 % Setups
 
-\message{LOADING SOME LUA FILES.}
-
 \directlua{dofile(kpse.find_file('lualibs-basic-merged.lua'))}
-\message{LOADING ONE.}
 \directlua{dofile(kpse.find_file('lualibs-extended-merged.lua'))}
 % \directlua{dofile(kpse.find_file('lualibs-util-prs.lua'))}
 \directlua{dofile(kpse.find_file('char-def.lua'))}
 \directlua{dofile(kpse.find_file('uax9.lua'))}
-
-\message{LOADED ALL.}
 
 \directlua{
 local function log(...)
