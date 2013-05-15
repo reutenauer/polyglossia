@@ -5,8 +5,8 @@
 
 % Setups
 
-\directlua{dofile(kpse.find_file('lualibs-basic-merged.lua'))}
-\directlua{dofile(kpse.find_file('lualibs-extended-merged.lua'))}
+% \directlua{dofile(kpse.find_file('lualibs-basic-merged.lua'))}
+% \directlua{dofile(kpse.find_file('lualibs-extended-merged.lua'))}
 % \directlua{dofile(kpse.find_file('lualibs-util-prs.lua'))}
 \directlua{dofile(kpse.find_file('char-def.lua'))}
 \directlua{dofile(kpse.find_file('uax9.lua'))}
@@ -25,7 +25,7 @@ end
 function bidi.setup(str)
     local settings = { }
 
-    utilities.parsers.settings_to_hash(str, settings)
+    % utilities.parsers.settings_to_hash(str, settings)
 
     for k,v in next, settings do
         if k == "main" then
