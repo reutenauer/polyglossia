@@ -8,8 +8,8 @@
 % \directlua{dofile(kpse.find_file('lualibs-basic-merged.lua'))}
 % \directlua{dofile(kpse.find_file('lualibs-extended-merged.lua'))}
 % \directlua{dofile(kpse.find_file('lualibs-util-prs.lua'))}
-\directlua{dofile(kpse.find_file('char-def.lua'))}
-\directlua{dofile(kpse.find_file('uax9.lua'))}
+\RequireLuaModule{char-def.lua}
+\RequireLuaModule{uax9.lua}
 
 \directlua{
 local function log(...)
