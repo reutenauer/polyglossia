@@ -26,6 +26,9 @@ LuaTeX:
   * Equivalent of TECkit mappings for automatic replacement digits and
     other things
 
+Miscellanea:
+  * Equivalent of luababel.def for luatex-hyphen.
+
 
 ******************
 
