@@ -1,0 +1,80 @@
+"I suppose the days and the years are supposed to be displayed in Arabic numbers?"
+No, it is not the case. N'ko numbers :
+0 ߀
+1 ߁
+2 ߂
+3 ߃
+4 ߄
+5 ߅
+6 ߆
+7 ߇
+8 ߈
+9 ߉
+In n'ko, this is an example of date :
+߂߀߁߃ ߞߏ߲ߞߏߜߍ ߕߟߋ߬ ߁߈ (RTL)
+( 18 February 2013 )
+The word "ߕߟߋ߬" is mandatory between month name and day number.
+
+"I’ll need the names of the twelve months too" ... "here is the list in English:"
+I will send you as soon as possible the complete translated list.
+ckairaba commented 14 days ago
+
+Hi Arthur
+Here are the list of words you need. However, I did not translate "encl" because I need more explanations.
+Regards
+
+January "ߓߌ߲ߠߊߥߎߟߋ߲"
+Februay "ߞߏ߲ߞߏߜߍ"
+March "ߕߙߊߓߊ"
+April "ߞߏ߲ߞߏߘߌ߬ߓߌ"
+May "ߘߓߊ߬ߕߊ"
+June "ߥߊ߬ߛߌߥߊ߬ߙߊ"
+July "ߞߊ߬ߙߌߝߐ߭"
+August "ߘߓߊ߬ߓߌߟߊ"
+September "ߕߎߟߊߝߌ߲"
+October "ߞߏ߲ߓߌߕߌ߮"
+November "ߣߍߣߍߓߊ"
+December "ߞߏ߬ߟߌ߲߬ߞߏߟߌ߲"
+
+Preface "ߢߍߛߓߍ"
+
+References "ߞߐߡߊߛߙߋ"
+
+Abstract "ߓߊߕߐߡߐ߲"
+
+Bibliography "ߟߍߙߊߥߙߍߟߐ߲߲"
+
+Chapter "ߛߌ߰ߘߊ"
+
+Appendix "ߘߋ߬ߙߋ"
+
+Contents "ߞߣߐߘߐ"
+
+List of Figures "ߢߊ ߟߎ߬ ߛߙߍߘߍ"
+
+List of Tables "ߦߌ߬ߘߊ߬ߥߟߊ ߟߎ߬ ߛߙߍߘߍ"
+
+Index "ߛߙߍߘߍ"
+
+Figure "ߢߊ"
+
+Table "ߦߌ߬ߘߊ߬ߥߟߊ"
+
+Part "ߛߌ߰ߘߊ߬ߙߋ߲"
+
+encl [abbreviation of “enclosed”] "will come soon" (I need more explanations)
+
+cc [abbreviation of “carbon copy”, “copy to”] "ߓߊ ߘߏ߫ ߘߌ߫"
+
+To "ߞߊߕߙߍ߬"
+
+Page "ߞߐߜߍ"
+
+see "ߡߊߝߟߍ߫"
+
+see also "ߝߟߍߡߊߛߊ߬ߦߌ߬"
+
+Proof "ߦߌ߬ߘߊ߬ߞߏ"
+
+Glossary "ߞߘߐߝߐߟߊ߲"
+
