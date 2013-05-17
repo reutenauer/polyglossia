@@ -163,7 +163,9 @@
   % LuaTeX
   % \let\pattname{\if@german@oldspelling\else n\fi german\ifgerman@latesthyphen -x-latest\fi}
   % \xpg@set@language@luatex@ii{\pattname}}
-  \if@german@oldspelling\xpg@set@language@luatex@ii{german}\else\xpg@set@language@luatex@ii{ngerman}\fi}
+  \ifgerman@latesthyphen
+    \if@german@oldspelling\xpg@set@language@luatex@ii{german-x-latest}\else\xpg@set@language@luatex@ii{ngerman-x-latest}\fi
+    \else\if@german@oldspelling\xpg@set@language@luatex@ii{german}\else\xpg@set@language@luatex@ii{ngerman}\fi\fi}
 
 \def\noextras@german{%
   \nogerman@shorthands%
