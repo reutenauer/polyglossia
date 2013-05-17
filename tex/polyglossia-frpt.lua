@@ -129,7 +129,7 @@ local function process(head)
     -- penalty followed by glue
     while start do
         local id = start.id
-        if id == glyph_code then -- 37 is glyph as of 2013/04
+        if id == glyph_code then
             local attr = has_attribute(start, xpgfrptattr)
             if attr and attr > 0 then
                 local char = start.char
