@@ -68,6 +68,10 @@ local function load_frpt()
     require('polyglossia-frpt')
 end
 
+local function load_tibt_eol()
+    require('polyglossia-tibt')
+end
+
 polyglossia.loadlang = loadlang
 polyglossia.select_language = select_language
 polyglossia.set_default_language = set_default_language
@@ -75,3 +79,4 @@ polyglossia.current_language = current_language -- doesn't seem to be working we
 polyglossia.default_language = default_language
 polyglossia.check_char = check_char
 polyglossia.load_frpt = load_frpt
+polyglossia.load_tibt_eol = load_tibt_eol

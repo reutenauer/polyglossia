@@ -4,6 +4,8 @@ local add_to_callback = luatexbase.add_to_callback
 local remove_from_callback = luatexbase.remove_from_callback
 local priority_in_callback = luatexbase.priority_in_callback
 
+local get_quad = luaotfload.aux.get_quad -- needs luaotfload > 20130516
+
 local next, type = next, type
 
 local nodes, fonts, node = nodes, fonts, node
@@ -13,6 +15,7 @@ local insert_node_after  = node.insert_after
 local remove_node        = nodes.remove
 local end_of_math        = node.end_of_math
 local has_attribute      = node.has_attribute
+local node_copy          = node.copy
 
 -- node types as of April 2013
 local glue_code     = 10
@@ -26,15 +29,20 @@ local penalty_node  = node.new(penalty_code)
 penalty_node.penalty = 10000
 
 local function get_penalty_node()
-  return node.copy(penalty_node)
+  return node_copy(penalty_node)
 end
 
 -- same for glue node
-local glue_node  = node.new(glue_code)
-glue_node.spec = node.new(glue_spec_code)
+local glue_node       = node.new(glue_code)
+local glue_spec_node  = node.new(glue_spec_code)
+glue_spec_node.stretch       = 0
+glue_spec_node.shrink        = 0
+glue_spec_node.shrink_order  = 0
+glue_spec_node.stretch_order = 0
 
 local function get_glue_node(dim)
-  local n = node.copy(glue_node)
+  local n = node_copy(glue_node)
+  n.spec = node_copy(glue_spec_node)
   n.spec.width = dim
   return n
 end
@@ -129,14 +137,14 @@ local function process(head)
     -- penalty followed by glue
     while start do
         local id = start.id
-        if id == glyph_code then -- 37 is glyph as of 2013/04
+        if id == glyph_code then
             local attr = has_attribute(start, xpgfrptattr)
             if attr and attr > 0 then
                 local char = start.char
                 local map = mappings[char]
                 --node.unset_attribute(start, xpgfrptattr) -- needed?
                 if map then
-                    local quad = font.fonts[start.font].parameters.quad -- might be optimized
+                    local quad = get_quad(start.font) -- might be optimized
                     local prev = start.prev
                     if map[1] == left and prev then
                         local prevprev = prev.prev
@@ -158,7 +166,6 @@ local function process(head)
                     local next = start.next
                     if map[1] == right and next then
                         local nextnext = next.next
-
                         local somepenalty = somepenalty(next,10000)
                         if somepenalty then
                             local somespace = somespace(nextnext,true)
@@ -172,7 +179,7 @@ local function process(head)
                                 head = remove_node(head,next,true)
                             end
                         end
-                        insert_node_after(head,start,get_glue_node(right*quad))
+                        insert_node_after(head,start,get_glue_node(map[2]*quad))
                         insert_node_after(head,start,get_penalty_node())
                         done = true
                     end
@@ -192,14 +199,14 @@ end
 local callback_name = "pre_linebreak_filter"
 
 local function activate()
-  if not priority_in_callback (callback_name, "xpg-frpt.process") then
-    add_to_callback(callback_name, process, "xpg-frpt.process", 1)
+  if not priority_in_callback (callback_name, "polyglossia-frpt.process") then
+    add_to_callback(callback_name, process, "polyglossia-frpt.process", 1)
   end
 end
 
 local function desactivate()
-  if priority_in_callback (callback_name, "xpg-frpt.process") then
-    remove_from_callback(callback_name, "xpg-frpt.process")
+  if priority_in_callback (callback_name, "polyglossia-frpt.process") then
+    remove_from_callback(callback_name, "polyglossia-frpt.process")
   end
 end
 
