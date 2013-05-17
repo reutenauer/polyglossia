@@ -4,6 +4,8 @@ local add_to_callback = luatexbase.add_to_callback
 local remove_from_callback = luatexbase.remove_from_callback
 local priority_in_callback = luatexbase.priority_in_callback
 
+local get_quad = luaotfload.aux.get_quad -- needs luaotfload > 20130516
+
 local next, type = next, type
 
 local nodes, fonts, node = nodes, fonts, node
@@ -136,7 +138,7 @@ local function process(head)
                 local map = mappings[char]
                 --node.unset_attribute(start, xpgfrptattr) -- needed?
                 if map then
-                    local quad = font.fonts[start.font].parameters.quad -- might be optimized
+                    local quad = get_quad(start.font) -- might be optimized
                     local prev = start.prev
                     if map[1] == left and prev then
                         local prevprev = prev.prev
@@ -171,7 +173,7 @@ local function process(head)
                                 head = remove_node(head,next,true)
                             end
                         end
-                        insert_node_after(head,start,get_glue_node(right*quad))
+                        insert_node_after(head,start,get_glue_node(map[2]*quad))
                         insert_node_after(head,start,get_penalty_node())
                         done = true
                     end
