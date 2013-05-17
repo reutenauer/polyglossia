@@ -25,59 +25,10 @@ local kern_code     = 11
 
 -- we make a new node, so that we can copy it later on
 local penalty_node  = node.new(penalty_code)
-penalty_node.penalty = -2000
+penalty_node.penalty = -2000 -- rather arbitrary... if someone has a better idea...?
 
 local function get_penalty_node()
   return node.copy(penalty_node)
-end
-
--- same for glue node
-local glue_node  = node.new(glue_code)
-glue_node.spec = node.new(glue_spec_code)
-
-local function get_glue_node(dim)
-  local n = node.copy(glue_node)
-  n.spec.width = dim
-  return n
-end
-
--- we have here all possible space characters, referenced by their
--- unicode slot number, taken from char-def.lua
-local space_chars = {[20]=1, [160]=1, [5760]=1, [6158]=1, [8192]=1, [8193]=1, [8194]=1, [8195]=1, 
-  [8196]=1, [8197]=1, [8198]=1, [8199]=1, [8200]=1, [8201]=1, [8202]=1, [8239]=1, [8287]=1, [12288]=1}
-
--- from nodes-tst.lua, adapted
-local function somespace(n,all)
-    if n then
-        local id = n.id
-        if id == glue_code then
-            return (all or (n.spec.width ~= 0)) and glue_code
-        elseif id == kern_code then
-            return (all or (n.kern ~= 0)) and kern_code
-        elseif id == glyph_code then
-            if space_chars[n.char] then
-                return true
-            else
-                return false
-            end
-        end
-    end
-    return false
-end
-
--- idem
-local function somepenalty(n,value)
-    if n then
-        local id = n.id
-        if id == penalty_code then
-            if value then
-                return n.penalty == value
-            else
-                return true
-            end
-        end
-    end
-    return false
 end
 
 local xpgtibtattr = luatexbase.attributes['xpg@tibteol']
