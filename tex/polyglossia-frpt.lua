@@ -33,17 +33,11 @@ local function get_penalty_node()
 end
 
 -- same for glue node
-local glue_node       = node.new(glue_code)
-local glue_spec_node  = node.new(glue_spec_code)
-glue_spec_node.stretch       = 0
-glue_spec_node.shrink        = 0
-glue_spec_node.shrink_order  = 0
-glue_spec_node.stretch_order = 0
+local kern_node       = node.new(kern_code)
 
-local function get_glue_node(dim)
-  local n = node_copy(glue_node)
-  n.spec = node_copy(glue_spec_node)
-  n.spec.width = dim
+local function get_kern_node(dim)
+  local n = node_copy(kern_node)
+  n.kern = dim
   return n
 end
 
@@ -160,7 +154,7 @@ local function process(head)
                             end
                         end
                         insert_node_before(head,start,get_penalty_node())
-                        insert_node_before(head,start,get_glue_node(map[2]*quad))
+                        insert_node_before(head,start,get_kern_node(map[2]*quad))
                         done = true
                     end
                     local next = start.next
@@ -179,7 +173,7 @@ local function process(head)
                                 head = remove_node(head,next,true)
                             end
                         end
-                        insert_node_after(head,start,get_glue_node(map[2]*quad))
+                        insert_node_after(head,start,get_kern_node(map[2]*quad))
                         insert_node_after(head,start,get_penalty_node())
                         done = true
                     end
