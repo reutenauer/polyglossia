@@ -33,23 +33,17 @@ local function get_penalty_node()
 end
 
 -- same for glue node
-local glue_node       = node.new(glue_code)
-local glue_spec_node  = node.new(glue_spec_code)
-glue_spec_node.stretch       = 0
-glue_spec_node.shrink        = 0
-glue_spec_node.shrink_order  = 0
-glue_spec_node.stretch_order = 0
+local kern_node       = node.new(kern_code)
 
-local function get_glue_node(dim)
-  local n = node_copy(glue_node)
-  n.spec = node_copy(glue_spec_node)
-  n.spec.width = dim
+local function get_kern_node(dim)
+  local n = node_copy(kern_node)
+  n.kern = dim
   return n
 end
 
 -- we have here all possible space characters, referenced by their
 -- unicode slot number, taken from char-def.lua
-local space_chars = {[20]=1, [160]=1, [5760]=1, [6158]=1, [8192]=1, [8193]=1, [8194]=1, [8195]=1, 
+local space_chars = {[32]=1, [160]=1, [5760]=1, [6158]=1, [8192]=1, [8193]=1, [8194]=1, [8195]=1, 
   [8196]=1, [8197]=1, [8198]=1, [8199]=1, [8200]=1, [8201]=1, [8202]=1, [8239]=1, [8287]=1, [12288]=1}
 
 -- from nodes-tst.lua, adapted
@@ -160,7 +154,7 @@ local function process(head)
                             end
                         end
                         insert_node_before(head,start,get_penalty_node())
-                        insert_node_before(head,start,get_glue_node(map[2]*quad))
+                        insert_node_before(head,start,get_kern_node(map[2]*quad))
                         done = true
                     end
                     local next = start.next
@@ -179,7 +173,7 @@ local function process(head)
                                 head = remove_node(head,next,true)
                             end
                         end
-                        insert_node_after(head,start,get_glue_node(map[2]*quad))
+                        insert_node_after(head,start,get_kern_node(map[2]*quad))
                         insert_node_after(head,start,get_penalty_node())
                         done = true
                     end
