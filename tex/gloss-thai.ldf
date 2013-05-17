@@ -9,7 +9,7 @@
 %%%%              http://linux.thai.net/
 %%%%
 \ifluatex
-  \xpg@warning{Thai not supported with Lua\TeX.  Use at your own risks.}
+  \xpg@warning{Thai is not supported with LuaTeX.^^JThe compilation will continue, but the output is not guaranteed to be correct^^Jand may look very wrong.}
 \fi
 \PolyglossiaSetup{thai}{
   script=Thai,
