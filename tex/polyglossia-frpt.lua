@@ -158,7 +158,6 @@ local function process(head)
                     local next = start.next
                     if map[1] == right and next then
                         local nextnext = next.next
-
                         local somepenalty = somepenalty(next,10000)
                         if somepenalty then
                             local somespace = somespace(nextnext,true)
@@ -192,14 +191,14 @@ end
 local callback_name = "pre_linebreak_filter"
 
 local function activate()
-  if not priority_in_callback (callback_name, "xpg-frpt.process") then
-    add_to_callback(callback_name, process, "xpg-frpt.process", 1)
+  if not priority_in_callback (callback_name, "polyglossia-frpt.process") then
+    add_to_callback(callback_name, process, "polyglossia-frpt.process", 1)
   end
 end
 
 local function desactivate()
-  if priority_in_callback (callback_name, "xpg-frpt.process") then
-    remove_from_callback(callback_name, "xpg-frpt.process")
+  if priority_in_callback (callback_name, "polyglossia-frpt.process") then
+    remove_from_callback(callback_name, "polyglossia-frpt.process")
   end
 end
 
