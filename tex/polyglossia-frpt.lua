@@ -15,6 +15,7 @@ local insert_node_after  = node.insert_after
 local remove_node        = nodes.remove
 local end_of_math        = node.end_of_math
 local has_attribute      = node.has_attribute
+local node_copy          = node.copy
 
 -- node types as of April 2013
 local glue_code     = 10
@@ -28,15 +29,20 @@ local penalty_node  = node.new(penalty_code)
 penalty_node.penalty = 10000
 
 local function get_penalty_node()
-  return node.copy(penalty_node)
+  return node_copy(penalty_node)
 end
 
 -- same for glue node
-local glue_node  = node.new(glue_code)
-glue_node.spec = node.new(glue_spec_code)
+local glue_node       = node.new(glue_code)
+local glue_spec_node  = node.new(glue_spec_code)
+glue_spec_node.stretch       = 0
+glue_spec_node.shrink        = 0
+glue_spec_node.shrink_order  = 0
+glue_spec_node.stretch_order = 0
 
 local function get_glue_node(dim)
-  local n = node.copy(glue_node)
+  local n = node_copy(glue_node)
+  n.spec = node_copy(glue_spec_node)
   n.spec.width = dim
   return n
 end
@@ -154,11 +160,13 @@ local function process(head)
                             end
                         end
                         insert_node_before(head,start,get_penalty_node())
+--                        insert_node_before(head,start,get_glue_node(map[2]*quad))
                         insert_node_before(head,start,get_glue_node(map[2]*quad))
                         done = true
                     end
                     local next = start.next
                     if map[1] == right and next then
+                        texio.write_nl("aaaaaaah")
                         local nextnext = next.next
                         local somepenalty = somepenalty(next,10000)
                         if somepenalty then
