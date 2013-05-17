@@ -11,31 +11,34 @@ local nodes, fonts, node = nodes, fonts, node
 local insert_node_before = node.insert_before
 local insert_node_after  = node.insert_after
 local remove_node        = nodes.remove
+local copy_node          = node.copy
 local end_of_math        = node.end_of_math
 local has_attribute      = node.has_attribute
 local utf8_char          = unicode.utf8.char
 local utf8_byte          = unicode.utf8.byte
 
+local nodecodes = nodes.nodecodes --- <= preloaded node.types()
+
 -- node types as of April 2013
-local glue_code     = 10
-local glue_spec_code= 47
-local glyph_code    = 37
-local penalty_code  = 12
-local kern_code     = 11
+local glue_code          = nodecodes.glue
+local glue_spec_code     = nodecodes.glue_spec
+local glyph_code         = nodecodes.glyph
+local penalty_code       = nodecodes.penalty
+local kern_code          = nodecodes.kern
 
 -- we make a new node, so that we can copy it later on
 local penalty_node  = node.new(penalty_code)
 penalty_node.penalty = -2000 -- rather arbitrary... if someone has a better idea...?
 
 local function get_penalty_node()
-  return node.copy(penalty_node)
+  return copy_node(penalty_node)
 end
 
 local xpgtibtattr = luatexbase.attributes['xpg@tibteol']
 
 local tsheg = utf8_byte('་')
 
-texio.write_nl(tsheg)
+--texio.write_nl(tsheg)
 
 -- from typo-spa.lua
 local function process(head)
@@ -53,7 +56,6 @@ local function process(head)
                         insert_node_after(head,start,get_penalty_node())
                     end
                 end
-                local next = start.next
             end
         elseif id == math_code then
             -- warning: this is a feature of luatex > 0.76
