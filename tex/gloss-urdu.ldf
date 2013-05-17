@@ -1,5 +1,8 @@
 %%% Adapted from a file contributed by Kamal Abdali
 \ProvidesFile{gloss-urdu.ldf}[polyglossia: module for Urdu]
+\ifluatex
+  \xpg@warning{Urdu is not supported with LuaTeX.^^JI will proceed with the compilation, but the output is not guaranteed to be correct^^Jand may look very wrong.}
+\fi
 \RequirePackage{bidi}
 \RequirePackage{arabicnumbers}
 \RequirePackage{hijrical}

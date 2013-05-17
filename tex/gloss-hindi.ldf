@@ -3,6 +3,9 @@
 % Velthuis Devanagari project: http://devnag.sarovar.org.
 
 \ProvidesFile{gloss-hindi.ldf}[polyglossia: module for hindi]
+\ifluatex
+  \xpg@warning{Hindi is not supported with LuaTeX.^^JI will proceed with the compilation, but the output is not guaranteed to be correct^^Jand may look very wrong.}
+\fi
 \RequirePackage{devanagaridigits}
 \PolyglossiaSetup{hindi}{
   script=Devanagari,

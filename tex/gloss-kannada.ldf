@@ -17,6 +17,9 @@
 %
 % This work consists of the file gloss-kannada.ldf
 \ProvidesFile{gloss-kannada.ldf}[polyglossia: module for kannada]
+\ifluatex
+  \xpg@warning{Kannada is not supported with LuaTeX.^^JI will proceed with the compilation, but the output is not guaranteed to be correct^^Jand may look very wrong.}
+\fi
 \PolyglossiaSetup{kannada}{
   script=Kannada,
   scripttag=knda,

@@ -1,4 +1,7 @@
 \ProvidesFile{gloss-divehi.ldf}[polyglossia: module for divehi]
+\ifluatex
+  \xpg@warning{Divehi is not supported with LuaTeX.^^JI will proceed with the compilation, but the output is not guaranteed to be correct^^Jand may look very wrong.}
+\fi
 \RequirePackage{bidi}
 \PolyglossiaSetup{divehi}{
   script=Thaana,

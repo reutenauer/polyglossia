@@ -2,6 +2,9 @@
 % TODO implement Hindu calendar (not used in day-to-day practice)
 
 \ProvidesFile{gloss-marathi.ldf}[polyglossia: module for marathi]
+\ifluatex
+  \xpg@warning{Marathi is not supported with LuaTeX.^^JI will proceed with the compilation, but the output is not guaranteed to be correct^^Jand may look very wrong.}
+\fi
 \RequirePackage{devanagaridigits}
 
 \PolyglossiaSetup{marathi}{

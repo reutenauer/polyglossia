@@ -1,4 +1,7 @@
 \ProvidesFile{gloss-hebrew.ldf}[polyglossia: module for hebrew]
+\ifluatex
+  \xpg@warning{Hebrew is not supported with LuaTeX.^^JI will proceed with the compilation, but the output is not guaranteed to be correct^^Jand may look very wrong.}
+\fi
 \RequirePackage{bidi}
 \RequirePackage{hebrewcal}
 
