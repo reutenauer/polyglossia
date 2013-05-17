@@ -22,6 +22,25 @@
 	  \@tibetan@numeralsfalse\fi
 }
 
+\ifluatex
+  \newluatexattribute\xpg@tibteol %
+  \directlua{polyglossia.load_tibt_eol()}%
+\fi
+
+\def\tibetan@eol{%
+  \ifluatex %
+    \xpg@tibteol=1\relax %
+    \directlua{polyglossia.activate_tibt_eol()}%
+  \fi %
+}
+
+\def\notibetan@eol{%
+  \ifluatex %
+    \xpg@tibteol=0\relax %
+    %\directlua{polyglossia.activate_tibt_eol()}%
+  \fi %
+}
+
 \setkeys{tibetan}{numerals}
 
 % some are known, but very few
@@ -120,18 +139,38 @@
    \let\@arabic\tibetannumber%
    \renewcommand{\thefootnote}{\protect\tibetannumber{\c@footnote}}%
 }
+
 \def\notibetan@globalnumbers{%
    \let\@arabic\orig@arabic%
    \renewcommand\thefootnote{\protect\number{\c@footnote}}%
 }
 
-% copied from Thai, not tested
+\def\noextras@tibetan{%
+   \notibetan@eol%
+   \let\baselinestrech\orig@baselinestretch%
+   }
+
+\def\blockextras@tibetan{%
+   % copied from Thai, not tested
+   \let\orig@baselinestrech\baselinestretch%
+   \renewcommand{\baselinestretch}{1.2}%
+   \tibetan@eol%
+   }
+
+\def\inlineextras@tibetan{%
+   \let\orig@baselinestrech\baselinestretch%
+   \renewcommand{\baselinestretch}{1.2}%
+   \tibetan@eol%
+   }
 
 \def\blockextras@tibetan{%
    \let\orig@baselinestrech\baselinestretch%
    \renewcommand{\baselinestretch}{1.2}%
+   \tibetan@eol%
 }
+
 \def\noblockextras@tibetan{%
+   \notibetan@eol%
    \let\baselinestrech\orig@baselinestretch%
 }
 

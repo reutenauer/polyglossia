@@ -12,7 +12,6 @@
 \ifluatex
   \newluatexattribute\xpg@frpt %
   \directlua{polyglossia.load_frpt()}%
-  \global\newcount\xpg@interchartokenstate %
 \else
   \newXeTeXintercharclass\french@punctthin % ! ? ; et autres
   \newXeTeXintercharclass\french@punctthick % :
