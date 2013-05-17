@@ -160,13 +160,11 @@ local function process(head)
                             end
                         end
                         insert_node_before(head,start,get_penalty_node())
---                        insert_node_before(head,start,get_glue_node(map[2]*quad))
                         insert_node_before(head,start,get_glue_node(map[2]*quad))
                         done = true
                     end
                     local next = start.next
                     if map[1] == right and next then
-                        texio.write_nl("aaaaaaah")
                         local nextnext = next.next
                         local somepenalty = somepenalty(next,10000)
                         if somepenalty then
