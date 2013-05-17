@@ -43,7 +43,7 @@ end
 
 -- we have here all possible space characters, referenced by their
 -- unicode slot number, taken from char-def.lua
-local space_chars = {[20]=1, [160]=1, [5760]=1, [6158]=1, [8192]=1, [8193]=1, [8194]=1, [8195]=1, 
+local space_chars = {[32]=1, [160]=1, [5760]=1, [6158]=1, [8192]=1, [8193]=1, [8194]=1, [8195]=1, 
   [8196]=1, [8197]=1, [8198]=1, [8199]=1, [8200]=1, [8201]=1, [8202]=1, [8239]=1, [8287]=1, [12288]=1}
 
 -- from nodes-tst.lua, adapted
