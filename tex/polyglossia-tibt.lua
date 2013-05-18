@@ -14,14 +14,10 @@ local remove_node        = nodes.remove
 local copy_node          = node.copy
 local end_of_math        = node.end_of_math
 local has_attribute      = node.has_attribute
-local utf8_char          = unicode.utf8.char
-local utf8_byte          = unicode.utf8.byte
 
 local nodecodes = nodes.nodecodes --- <= preloaded node.types()
 
 -- node types as of April 2013
-local glue_code          = nodecodes.glue
-local glue_spec_code     = nodecodes.glue_spec
 local glyph_code         = nodecodes.glyph
 local penalty_code       = nodecodes.penalty
 local kern_code          = nodecodes.kern
@@ -36,9 +32,7 @@ end
 
 local xpgtibtattr = luatexbase.attributes['xpg@tibteol']
 
-local tsheg = utf8_byte('་')
-
---texio.write_nl(tsheg)
+local tsheg = unicode.utf8.byte('་')
 
 -- from typo-spa.lua
 local function process(head)
@@ -50,8 +44,7 @@ local function process(head)
         if id == glyph_code then 
             local attr = has_attribute(start, xpgtibtattr)
             if attr and attr > 0 then
-                local char = start.char
-                if char == tsheg then
+                if start.char == tsheg then
                     if start.next then
                         insert_node_after(head,start,get_penalty_node())
                     end
