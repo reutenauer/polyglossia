@@ -215,7 +215,7 @@
     \ifcsundef{l@#1}%
       {\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
        \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}{}%
-    \csdef{#1@language}{\language=\csname l@#1\endcsname\ifluatex\directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', '\the\csname l@#1\endcsname')}\fi}%
+    \csdef{#1@language}{\language=\csname l@#1\endcsname\ifluatex\directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', \the\csname l@#1\endcsname)}\fi}%
     }%
   \define@choicekey+[xpg@setup]{#1}{direction}[\val\nr]{LR,RL}[LR]%
     {\ifcase\nr\relax
@@ -693,7 +693,7 @@
      % here we use lu@texhyphen@loaded@\the\language, the same as in babel
      \expandafter\ifcsname lu@texhyphen@loaded@\the\csname l@#1\endcsname\endcsname \else %
        \global\@namedef{lu@texhyphen@loaded@\the\language}{}%
-       \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', '\the\csname l@#1\endcsname')}%
+       \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', \the\csname l@#1\endcsname)}%
      \fi %
    \fi % 
 }
@@ -702,7 +702,7 @@
    \ifluatex %
      \ifcsname lu@texhyphen@loaded@\the\language\endcsname \else %
        \global\@namedef{lu@texhyphen@loaded@\the\language}{}%
-       \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', '\the\csname l@#1\endcsname')}%
+       \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', \the\csname l@#1\endcsname)}%
      \fi %
    \fi %                                          
    \xpg@initial@setup%

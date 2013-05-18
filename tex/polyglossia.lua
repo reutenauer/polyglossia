@@ -23,7 +23,7 @@ local current_language
 local default_language
 
 local function loadlang(lang, id)
-  if id ~= '0' and luatexhyphen.lookupname(lang) then
+  if luatexhyphen.lookupname(lang) then
     luatexhyphen.loadlanguage(lang, id) 
   end
 end
