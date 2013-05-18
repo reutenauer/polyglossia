@@ -24,7 +24,7 @@ local kern_code          = nodecodes.kern
 
 -- we make a new node, so that we can copy it later on
 local penalty_node  = node.new(penalty_code)
-penalty_node.penalty = -2000 -- rather arbitrary... if someone has a better idea...?
+penalty_node.penalty = 50 -- corresponds to the penalty LaTeX sets at explicit hyphens
 
 local function get_penalty_node()
   return copy_node(penalty_node)
