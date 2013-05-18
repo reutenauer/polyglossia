@@ -10,22 +10,35 @@ local next, type = next, type
 
 local nodes, fonts, node = nodes, fonts, node
 
+local nodecodes          = nodes.nodecodes
+
 local insert_node_before = node.insert_before
 local insert_node_after  = node.insert_after
 local remove_node        = nodes.remove
-local end_of_math        = node.end_of_math
 local has_attribute      = node.has_attribute
 local node_copy          = node.copy
+local new_node           = node.new
 
--- node types as of April 2013
-local glue_code     = 10
-local glue_spec_code= 47
-local glyph_code    = 37
-local penalty_code  = 12
-local kern_code     = 11
+local end_of_math        = node.end_of_math
+if not end_of_math then -- luatex < .76
+  local traverse_nodes = node.traverse_id
+  local math_code      = nodecodes.math
+  local end_of_math = function (n)
+    for n in traverse_nodes(math_code, n.next) do
+      return n
+    end
+  end
+end
+
+-- node types according to node.types()
+local glue_code         = nodecodes.glue
+local glue_spec_code    = nodecodes.glue_spec
+local glyph_code        = nodecodes.glyph
+local penalty_code      = nodecodes.penalty
+local kern_code         = nodecodes.kern
 
 -- we make a new node, so that we can copy it later on
-local penalty_node  = node.new(penalty_code)
+local penalty_node   = new_node(penalty_code)
 penalty_node.penalty = 10000
 
 local function get_penalty_node()
@@ -33,7 +46,7 @@ local function get_penalty_node()
 end
 
 -- same for glue node
-local kern_node       = node.new(kern_code)
+local kern_node       = new_node(kern_code)
 
 local function get_kern_node(dim)
   local n = node_copy(kern_node)
