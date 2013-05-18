@@ -1,4 +1,7 @@
 \ProvidesFile{gloss-nko.ldf}[Polyglossia: module for N’Ko]
+\PolyglossiaSetup{nko}{%
+  direction=RL
+}
 
 % Numbers
 % 0 ߀
