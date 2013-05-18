@@ -3,7 +3,10 @@
 
 \ProvidesFile{gloss-bengali.ldf}[polyglossia: module for bengali]
 \ifluatex
-  \xpg@warning{Bengali is not supported with LuaTeX.^^JI will proceed with the compilation, but the output is not guaranteed to be correct^^Jand may look very wrong.}
+  \xpg@warning{Bengali is not supported with LuaTeX.\MessageBreak
+I will proceed with the compilation, but\MessageBreak
+the output is not guaranteed to be correct\MessageBreak
+and may look very wrong.}
 \fi
 \RequirePackage{devanagaridigits}
 
