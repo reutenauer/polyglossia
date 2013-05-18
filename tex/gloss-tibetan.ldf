@@ -31,6 +31,8 @@
   \ifluatex %
     \xpg@tibteol=1\relax %
     \directlua{polyglossia.activate_tibt_eol()}%
+  \else %
+    \XeTeXlinebreaklocale "dz"%
   \fi %
 }
 
@@ -38,6 +40,8 @@
   \ifluatex %
     \xpg@tibteol=0\relax %
     %\directlua{polyglossia.activate_tibt_eol()}%
+  \else %
+    \XeTeXlinebreaklocale "en"% en? really?
   \fi %
 }
 
