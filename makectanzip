@@ -1,10 +1,17 @@
 #!/bin/bash
 
-# root="$HOME/dev/polyglossia"
-# root="$HOME/perso/TeX/Polyglossia/polyglossia"
-#root="$HOME/polyglossia"
-root="."
+# TODO Test zip and DTX file thus produced!
+
+root=`dirname $0`
+
+first_char=`echo $root | /usr/bin/sed -e 's/^\(.\).*$/\1/'`
+
+if [ "$first_char" != '/' ]; then
+  root="`pwd`/$root"
+fi
+
 builddir="$root/build"
+mkdir -p $builddir
 
 pdf="$root/doc/polyglossia.pdf"
 pdfsrc="$root/doc/polyglossia.tex"
@@ -58,8 +65,10 @@ cat <<'EOF'
 \bye
 EOF
 ) > makeins.tex
-xetex makeins.tex 2&> /dev/null
-rm makeins.*
+# xetex makeins.tex 2&> /dev/nul
+rm -f polyglossia.ins # Otherwise docstrip expects interactive input
+xetex makeins.tex
+# rm makeins.*
 #rm *.{sty,def,ldf,map,txt,tex,glo,log,out,idx,aux,toc} 2&> /dev/null
 
 echo "Create TDS tree ..."

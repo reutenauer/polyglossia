@@ -8,6 +8,9 @@
 %%%%              Thai Linux Working Group
 %%%%              http://linux.thai.net/
 %%%%
+\ifluatex
+  \xpg@warning{Thai is not supported with LuaTeX.^^JThe compilation will continue, but the output is not guaranteed to be correct^^Jand may look very wrong.}
+\fi
 \PolyglossiaSetup{thai}{
   script=Thai,
   scripttag=thai,

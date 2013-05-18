@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{polyglossia}[2013/05/10 v1.31
+\ProvidesPackage{polyglossia}[2013/05/15 v1.32.0
   Babel replacement for XeLaTeX and LuaTeX]
 \RequirePackage{etoolbox}
 \RequirePackage{makecmds}
@@ -222,7 +222,7 @@
         \togglefalse{#1@RL}%
       \or
         \toggletrue{#1@RL}%
-        \ifcsundef{RTL}{\RequirePackage{bidi}}{}%
+        \ifcsundef{RTL}{\ifluatex\RequirePackage{luabidi}\else\RequirePackage{bidi}\fi}{}%
     \fi}%
     {\xpg@warning{#1: Invalid value \val\space for key "direction"}}%
   \define@key[xpg@setup]{#1}{hyphenmins}[{2,3}]%
