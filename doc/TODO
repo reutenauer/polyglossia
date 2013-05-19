@@ -30,6 +30,7 @@ Miscellanea:
   * N’Ko
   * Georgian (see tex.tsu.ge)
   * Equivalent of luababel.def for luatex-hyphen.
+  * \disablehyphenation and \enablehyphenation
 
 
 ******************
