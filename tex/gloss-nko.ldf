@@ -42,11 +42,11 @@
   \def\enclname{ߝߍ߬ߕߊ}%
   \def\ccname{ߓߊ ߘߏ߫ ߘߌ߫}%
   \def\headtoname{ߞߊߕߙߍ߬}%
-  \def\pagename{ߞߐߜߍ}
-  \def\seename{ߡߊߝߟߍ߫}
-  \def\alsoname{ߝߟߍߡߊߛߊ߬ߦߌ߬}
-  \def\proofname{ߦߌ߬ߘߊ߬ߞߏ}
-  \def\glossaryname{ߞߘߐߝߐߟߊ߲}
+  \def\pagename{ߞߐߜߍ}%
+  \def\seename{ߡߊߝߟߍ߫}%
+  \def\alsoname{ߝߟߍߡߊߛߊ߬ߦߌ߬}%
+  \def\proofname{ߦߌ߬ߘߊ߬ߞߏ}%
+  \def\glossaryname{ߞߘߐߝߐߟߊ߲}%
 }%
 
 \endinput
