@@ -21,7 +21,7 @@
   \def\indexname{ߛߙߍߘߍ}%
   \def\figurename{ߢߊ}%
   \def\tablename{ߦߌ߬ߘߊ߬ߥߟߊ}%
-  \def\part{ߛߌ߰ߘߊ߬ߙߋ߲}%
+  \def\partname{ߛߌ߰ߘߊ߬ߙߋ߲}%
   \def\enclname{ߝߍ߬ߕߊ}%
   \def\ccname{ߓߊ ߘߏ߫ ߘߌ߫}%
   \def\headtoname{ߞߊߕߙߍ߬}%
