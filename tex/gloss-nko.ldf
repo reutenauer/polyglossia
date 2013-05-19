@@ -34,6 +34,7 @@
 % November "ߣߍߣߍߓߊ"
 % December "ߞߏ߬ߟߌ߲߬ߞߏߟߌ߲"
 
+\def\captionsnko{%
 % Preface "ߢߍߛߓߍ"
 % 
 % References "ߞߐߡߊߛߙߋ"
@@ -56,7 +57,7 @@
 % 
 % Figure "ߢߊ"
 % 
-% Table "ߦߌ߬ߘߊ߬ߥߟߊ"
+  \def\tablename{ߦߌ߬ߘߊ߬ߥߟߊ}%
 % 
 % Part "ߛߌ߰ߘߊ߬ߙߋ߲"
 % 
@@ -75,6 +76,7 @@
 % Proof "ߦߌ߬ߘߊ߬ߞߏ"
 % 
 % Glossary "ߞߘߐߝߐߟߊ߲"
+}
 
 % ߝߍ߬ߕߊ
 
