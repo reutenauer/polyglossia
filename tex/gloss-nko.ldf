@@ -41,9 +41,7 @@
   \def\part{ߛߌ߰ߘߊ߬ߙߋ߲}%
   \def\enclname{ߝߍ߬ߕߊ}%
   \def\ccname{ߓߊ ߘߏ߫ ߘߌ߫}%
-% 
-% To "ߞߊߕߙߍ߬"
-% 
+  \def\headtoname{ߞߊߕߙߍ߬}%
   \def\pagename{ߞߐߜߍ}
   \def\seename{ߡߊߝߟߍ߫}
   \def\alsoname{ߝߟߍߡߊߛߊ߬ߦߌ߬}
