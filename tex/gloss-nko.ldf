@@ -7,24 +7,6 @@
   direction=RL
 }
 
-% In n'ko, this is an example of date :
-% ߂߀߁߃ ߞߏ߲ߞߏߜߍ ߕߟߋ߬ ߁߈ (RTL)
-% ( 18 February 2013 )
-% The word "ߕߟߋ߬" is mandatory between month name and day number.
-
-% January "ߓߌ߲ߠߊߥߎߟߋ߲"
-% Februay "ߞߏ߲ߞߏߜߍ"
-% March "ߕߙߊߓߊ"
-% April "ߞߏ߲ߞߏߘߌ߬ߓߌ"
-% May "ߘߓߊ߬ߕߊ"
-% June "ߥߊ߬ߛߌߥߊ߬ߙߊ"
-% July "ߞߊ߬ߙߌߝߐ߭"
-% August "ߘߓߊ߬ߓߌߟߊ"
-% September "ߕߎߟߊߝߌ߲"
-% October "ߞߏ߲ߓߌߕߌ߮"
-% November "ߣߍߣߍߓߊ"
-% December "ߞߏ߬ߟߌ߲߬ߞߏߟߌ߲"
-
 \def\captionsnko{%
   \def\prefacename{ߢߍߛߓߍ}%
   \def\refname{ߞߐߡߊߛߙߋ}%
@@ -48,5 +30,28 @@
   \def\proofname{ߦߌ߬ߘߊ߬ߞߏ}%
   \def\glossaryname{ߞߘߐߝߐߟߊ߲}%
 }%
+
+% In n'ko, this is an example of date :
+% ߂߀߁߃ ߞߏ߲ߞߏߜߍ ߕߟߋ߬ ߁߈ (RTL)
+% ( 18 February 2013 )
+% The word "ߕߟߋ߬" is mandatory between month name and day number.
+
+\def\datenko{%
+  \def\today{\nkonumber\day\spaceߕߟߋ߬\space\ifcase\month\or
+ߓߌ߲ߠߊߥߎߟߋ߲\or
+ߞߏ߲ߞߏߜߍ\or
+ߕߙߊߓߊ\or
+ߞߏ߲ߞߏߘߌ߬ߓߌ\or
+ߘߓߊ߬ߕߊ\or
+ߥߊ߬ߛߌߥߊ߬ߙߊ\or
+ߞߊ߬ߙߌߝߐ߭\or
+ߘߓߊ߬ߓߌߟߊ\or
+ߕߎߟߊߝߌ߲\or
+ߞߏ߲ߓߌߕߌ߮\or
+ߣߍߣߍߓߊ\or
+ߞߏ߬ߟߌ߲߬ߞߏߟߌ߲\fi
+\space\nkonumber\year
+  }
+}
 
 \endinput
