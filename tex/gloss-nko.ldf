@@ -38,49 +38,29 @@
 % December "ߞߏ߬ߟߌ߲߬ߞߏߟߌ߲"
 
 \def\captionsnko{%
-% Preface "ߢߍߛߓߍ"
-% 
-% References "ߞߐߡߊߛߙߋ"
-% 
-% Abstract "ߓߊߕߐߡߐ߲"
-% 
-% Bibliography "ߟߍߙߊߥߙߍߟߐ߲߲"
-% 
-% Chapter "ߛߌ߰ߘߊ"
-% 
-% Appendix "ߘߋ߬ߙߋ"
-% 
-% Contents "ߞߣߐߘߐ"
-% 
-% List of Figures "ߢߊ ߟߎ߬ ߛߙߍߘߍ"
-% 
-% List of Tables "ߦߌ߬ߘߊ߬ߥߟߊ ߟߎ߬ ߛߙߍߘߍ"
-% 
-% Index "ߛߙߍߘߍ"
-% 
-% Figure "ߢߊ"
-% 
+  \def\prefacename{ߢߍߛߓߍ}%
+  \def\refname{ߞߐߡߊߛߙߋ}%
+  \def\abstractname{ߓߊߕߐߡߐ߲}%
+  \def\bibname{ߟߍߙߊߥߙߍߟߐ߲߲}%
+  \def\chaptername{ߛߌ߰ߘߊ}%
+  \def\appendixname{ߘߋ߬ߙߋ}%
+  \def\contentsname{ߞߣߐߘߐ}%
+  \def\listfigurename{ߢߊ ߟߎ߬ ߛߙߍߘߍ}%
+  \def\listtablename{ߦߌ߬ߘߊ߬ߥߟߊ ߟߎ߬ ߛߙߍߘߍ}%
+  \def\indexname{ߛߙߍߘߍ}%
+  \def\figurename{ߢߊ}%
   \def\tablename{ߦߌ߬ߘߊ߬ߥߟߊ}%
-% 
-% Part "ߛߌ߰ߘߊ߬ߙߋ߲"
-% 
-% encl [abbreviation of “enclosed”] "will come soon" (I need more explanations)
-% 
-% cc [abbreviation of “carbon copy”, “copy to”] "ߓߊ ߘߏ߫ ߘߌ߫"
+  \def\part{ߛߌ߰ߘߊ߬ߙߋ߲}%
+  \def\enclname{ߝߍ߬ߕߊ}%
+  \def\ccname{ߓߊ ߘߏ߫ ߘߌ߫}%
 % 
 % To "ߞߊߕߙߍ߬"
 % 
-% Page "ߞߐߜߍ"
-% 
-% see "ߡߊߝߟߍ߫"
-% 
-% see also "ߝߟߍߡߊߛߊ߬ߦߌ߬"
-% 
-% Proof "ߦߌ߬ߘߊ߬ߞߏ"
-% 
-% Glossary "ߞߘߐߝߐߟߊ߲"
-}
-
-% ߝߍ߬ߕߊ
+  \def\pagename{ߞߐߜߍ}
+  \def\seename{ߡߊߝߟߍ߫}
+  \def\alsoname{ߝߟߍߡߊߛߊ߬ߦߌ߬}
+  \def\proofname{ߦߌ߬ߘߊ߬ߞߏ}
+  \def\glossaryname{ߞߘߐߝߐߟߊ߲}
+}%
 
 \endinput
