@@ -1,4 +1,4 @@
-\ProvidesFile{gloss-nko.ldf}[Polyglossia: module for N’Ko]
+\ProvidesFile{gloss-nko.ldf}[Polyglossia: module for N’Ko v0.1 2013/05/19]
 \PolyglossiaSetup{nko}{%
   script=N'ko,
   scripttag=nko~,
