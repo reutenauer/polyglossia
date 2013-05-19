@@ -3,7 +3,7 @@
   script=N'ko,
   scripttag=nko~,
   fontsetup=true,
-  hyphennames={nohyphenation}
+  hyphennames={nohyphenation},
   direction=RL
 }
 \RequirePackage{nkonumbers}%
