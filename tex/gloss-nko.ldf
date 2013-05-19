@@ -6,6 +6,7 @@
   hyphennames={nohyphenation}
   direction=RL
 }
+\RequirePackage{nkonumbers}%
 
 \def\captionsnko{%
   \def\prefacename{ߢߍߛߓߍ}%
