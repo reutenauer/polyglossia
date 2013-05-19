@@ -38,7 +38,7 @@
 % The word "ߕߟߋ߬" is mandatory between month name and day number.
 
 \def\datenko{%
-  \def\today{\nkonumber{\day}\spaceߕߟߋ߬\space\ifcase\month\or
+  \def\today{\nkonumber{\day}\space ߕߟߋ߬\space\ifcase\month\or
 ߓߌ߲ߠߊߥߎߟߋ߲\or
 ߞߏ߲ߞߏߜߍ\or
 ߕߙߊߓߊ\or
