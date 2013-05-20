@@ -19,15 +19,3 @@
 
 \ExplSyntaxOn
 \RequirePackage{fixltx2e}[2006/03/24]
-\DeclareRobustCommand{\-}
- {
-  \discretionary
-   {
-    \char\ifnum\hyphenchar\font<\z@
-           \xlx@defaulthyphenchar
-         \else
-           \hyphenchar\font
-         \fi
-   }{}{}
- }
-\def\xlx@defaulthyphenchar{`\-}
