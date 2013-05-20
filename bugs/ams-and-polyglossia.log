@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.5.15)  20 MAY 2013 18:56
+This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.5.15)  20 MAY 2013 18:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -419,10 +419,10 @@ l.435 \newenvironment{proof}[1][\proofname]{\par
 ? x
  
 Here is how much of TeX's memory you used:
- 14076 strings out of 493945
- 311249 string characters out of 6146117
+ 14056 strings out of 493945
+ 310964 string characters out of 6146117
  303794 words of memory out of 5000000
- 17305 multiletter control sequences out of 15000+600000
+ 17285 multiletter control sequences out of 15000+600000
  3680 words of font info for 19 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
  53i,0n,32p,829b,95s stack positions out of 5000i,500n,10000p,200000b,80000s
