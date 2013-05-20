@@ -31,10 +31,10 @@ l.435 \newenvironment{proof}[1][\proofname]{\par
 ? x
  
 Here is how much of TeX's memory you used:
- 124 strings out of 493397
- 1629 string characters out of 6135803
+ 115 strings out of 493397
+ 1577 string characters out of 6135803
  52089 words of memory out of 5000000
- 3591 multiletter control sequences out of 15000+600000
+ 3582 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  14i,0n,10p,142b,8s stack positions out of 5000i,500n,10000p,200000b,80000s
