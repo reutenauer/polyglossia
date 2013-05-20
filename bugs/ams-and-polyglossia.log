@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.5.15)  20 MAY 2013 18:43
+This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.5.15)  20 MAY 2013 18:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -399,18 +399,7 @@ Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
 \xpg@normalclass=\XeTeXintercharclass4
-) (/Users/arthur/polyglossia/tex/gloss-german.ldf
-File: gloss-german.ldf polyglossia: module for german
-
-(/Users/arthur/polyglossia/tex/babelsh.def
-File: babelsh.def 2013/04/30 Babel common definitions for shorthands
- Taken verbatim from babel.def (2013/04/15 v3.9e)
-)
-Package polyglossia Info: Making " an active character on input line 59.
-)
-Package polyglossia Info: Default language is german.
-
-(/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/amscls/amsthm.sty
+) (/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2004/08/06 v2.20
 \thm@style=\toks18
 \thm@bodyfont=\toks19
@@ -432,11 +421,11 @@ l.435 \newenvironment{proof}[1][\proofname]{\par
 ? x
  
 Here is how much of TeX's memory you used:
- 14400 strings out of 493945
- 316603 string characters out of 6146117
- 316036 words of memory out of 5000000
- 17619 multiletter control sequences out of 15000+600000
+ 14184 strings out of 493945
+ 313113 string characters out of 6146117
+ 308793 words of memory out of 5000000
+ 17410 multiletter control sequences out of 15000+600000
  3680 words of font info for 19 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 53i,0n,35p,834b,95s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 53i,0n,32p,829b,95s stack positions out of 5000i,500n,10000p,200000b,80000s
 No pages of output.
