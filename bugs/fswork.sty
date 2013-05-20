@@ -251,22 +251,6 @@
   *~ a~ six-digit~ hex~ colour~ RRGGBB\\
   *~ an~ eight-digit~ hex~ colour~ RRGGBBTT~ with~ opacity
  }
-\DeclareOption{cm-default}
- { \fontspec_warning:n {cm-default-obsolete} }
-\DeclareOption{math}{\bool_set_true:N \g_fontspec_math_bool}
-\DeclareOption{no-math}{\bool_set_false:N \g_fontspec_math_bool}
-\DeclareOption{config}{\bool_set_true:N \g_fontspec_cfg_bool}
-\DeclareOption{no-config}{\bool_set_false:N \g_fontspec_cfg_bool}
-\DeclareOption{quiet}
- {
-  \msg_redirect_module:nnn { fontspec } { warning } { info }
-  \msg_redirect_module:nnn { fontspec } { info } { none }
- }
-\DeclareOption{silent}
- {
-  \msg_redirect_module:nnn { fontspec } { warning } { none }
-  \msg_redirect_module:nnn { fontspec } { info } { none }
- }
 \ExecuteOptions{config,math}
 \ProcessOptions*
 \RequirePackage{fontspec-patches}
