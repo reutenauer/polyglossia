@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.5.15)  20 MAY 2013 19:22
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.15)  20 MAY 2013 19:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -31,11 +31,16 @@ l.435 \newenvironment{proof}[1][\proofname]{\par
 ? x
  
 Here is how much of TeX's memory you used:
- 123 strings out of 493945
- 1545 string characters out of 6146117
- 51800 words of memory out of 5000000
- 3514 multiletter control sequences out of 15000+600000
+ 124 strings out of 493397
+ 1629 string characters out of 6135803
+ 52089 words of memory out of 5000000
+ 3591 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
- 1144 hyphenation exceptions out of 8191
+ 957 hyphenation exceptions out of 8191
  14i,0n,10p,142b,8s stack positions out of 5000i,500n,10000p,200000b,80000s
 No pages of output.
+PDF statistics:
+ 0 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
