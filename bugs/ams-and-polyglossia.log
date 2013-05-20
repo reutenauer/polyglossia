@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.5.15)  20 MAY 2013 18:58
+This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.5.15)  20 MAY 2013 18:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8,16 +8,12 @@ LaTeX2e <2011/06/27>
 Babel <3.9e> and hyphenation patterns for 77 languages loaded.
 (/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/base/minimal.cls
 Document Class: minimal 2001/05/25 Standard LaTeX minimal class
-) (./pgwork.sty
+) (./fswork.sty
 
-LaTeX Warning: You have requested package `pgwork',
-               but the package provides `polyglossia'.
+LaTeX Warning: You have requested package `fswork',
+               but the package provides `fontspec'.
 
-Package: polyglossia 2013/05/20 v1.33.0 Babel replacement for XeLaTeX and LuaTe
-X
-(/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/fontspec/fontspec.sty
 Package: fontspec 2013/03/16 v2.3a Font selection for XeLaTeX and LuaLaTeX
-
 (/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/l3kernel/expl3.sty
 (/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/l3kernel/l3names.sty
 (/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/l3kernel/l3bootstrap.sty
@@ -382,7 +378,7 @@ LaTeX Info: Redefining \itshape on input line 2091.
 LaTeX Info: Redefining \slshape on input line 2096.
 LaTeX Info: Redefining \scshape on input line 2101.
 LaTeX Info: Redefining \upshape on input line 2106.
-(/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/fontspec/fontspec.cfg))))
+(/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/fontspec/fontspec.cfg)))
 (/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2004/08/06 v2.20
 \thm@style=\toks17
@@ -405,11 +401,11 @@ l.435 \newenvironment{proof}[1][\proofname]{\par
 ? x
  
 Here is how much of TeX's memory you used:
- 13543 strings out of 493945
- 304259 string characters out of 6146117
- 292310 words of memory out of 5000000
- 16787 multiletter control sequences out of 15000+600000
+ 13537 strings out of 493945
+ 304054 string characters out of 6146117
+ 291272 words of memory out of 5000000
+ 16784 multiletter control sequences out of 15000+600000
  3680 words of font info for 19 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 52i,0n,32p,634b,95s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 46i,0n,30p,590b,95s stack positions out of 5000i,500n,10000p,200000b,80000s
 No pages of output.
