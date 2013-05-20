@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.5.15)  20 MAY 2013 18:44
+This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.5.15)  20 MAY 2013 18:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8,10 +8,13 @@ LaTeX2e <2011/06/27>
 Babel <3.9e> and hyphenation patterns for 77 languages loaded.
 (/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/base/minimal.cls
 Document Class: minimal 2001/05/25 Standard LaTeX minimal class
-) (/Users/arthur/polyglossia/tex/polyglossia.sty
+) (./pgwork.sty
+
+LaTeX Warning: You have requested package `pgwork',
+               but the package provides `polyglossia'.
+
 Package: polyglossia 2013/05/20 v1.33.0 Babel replacement for XeLaTeX and LuaTe
 X
-
 (/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2011/01/03 v2.1 e-TeX tools for LaTeX
 
@@ -421,9 +424,9 @@ l.435 \newenvironment{proof}[1][\proofname]{\par
 ? x
  
 Here is how much of TeX's memory you used:
- 14184 strings out of 493945
- 313113 string characters out of 6146117
- 308793 words of memory out of 5000000
+ 14183 strings out of 493945
+ 312995 string characters out of 6146117
+ 308788 words of memory out of 5000000
  17410 multiletter control sequences out of 15000+600000
  3680 words of font info for 19 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
