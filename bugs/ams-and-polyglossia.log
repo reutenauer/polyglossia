@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.5.15)  20 MAY 2013 19:07
+This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.5.15)  20 MAY 2013 19:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -187,7 +187,32 @@ Package: xparse 2013/03/12 v4467 L3 Experimental document command parser
 \l_fontspec_tmpb_dim=\dimen134
 \l_fontspec_tmpc_dim=\dimen135
 Variant \tl_gset:cV already defined; not changing it on line 50
+ (./fpwork.sty
 
+LaTeX Warning: You have requested package `fpwork',
+               but the package provides `fontspec-patches'.
+
+Package: fontspec-patches 2013/03/16 v2.3a Font selection for XeLaTeX and LuaLa
+TeX
+(/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/base/fixltx2e.sty
+Package: fixltx2e 2006/09/13 v1.1m fixes to LaTeX
+LaTeX Info: Redefining \em on input line 420.
+)
+LaTeX Info: Redefining \em on input line 22.
+LaTeX Info: Redefining \emph on input line 30.
+LaTeX Info: Redefining \- on input line 33.
+
+*************************************************
+* LaTeX warning: "xparse/redefine-command"
+* 
+* Redefining document command \oldstylenums with arg. spec. 'm' on line 128.
+*************************************************
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \liningnums with arg. spec. 'm' on line 132.
+.................................................
+)
 (/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/fontspec/fontspec-xetex.s
 ty
 Package: fontspec-xetex 2013/03/16 v2.3a Font selection for XeLaTeX and LuaLaTe
@@ -366,40 +391,22 @@ Package: amsthm 2004/08/06 v2.20
 \thm@postskip=\skip48
 \thm@headsep=\skip49
 \dth@everypar=\toks22
-)
-(./ams-and-polyglossia.aux)
-\openout1 = `ams-and-polyglossia.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for EU1/lmr/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 4.
-LaTeX Font Info:    Try loading font information for T3+cmr on input line 4.
-
-(/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/tipa/t3cmr.fd
-File: t3cmr.fd 2001/12/31 TIPA font definitions
-)
-LaTeX Font Info:    ... okay on input line 4.
- [1]
-(./ams-and-polyglossia.aux) ) 
+Runaway argument?
+\x@protect \[\protect \[  \@nil  \@ifpackageloaded {amstex}{\def \@tempa \ETC.
+! Paragraph ended before \@tempa was complete.
+<to be read again> 
+                   \par 
+l.435 \newenvironment{proof}[1][\proofname]{\par
+                                                
+? x
+ 
 Here is how much of TeX's memory you used:
- 13460 strings out of 493945
- 301253 string characters out of 6146117
- 287325 words of memory out of 5000000
- 16707 multiletter control sequences out of 15000+600000
+ 13459 strings out of 493945
+ 300985 string characters out of 6146117
+ 288227 words of memory out of 5000000
+ 16708 multiletter control sequences out of 15000+600000
  3680 words of font info for 19 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 46i,4n,30p,590b,98s stack positions out of 5000i,500n,10000p,200000b,80000s
-
-Output written on ams-and-polyglossia.pdf (1 page).
+ 46i,0n,30p,590b,95s stack positions out of 5000i,500n,10000p,200000b,80000s
+No pages of output.
