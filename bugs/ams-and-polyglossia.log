@@ -1,15 +1,14 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.15)  20 MAY 2013 19:23
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.15)  21 MAY 2013 14:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**ams-and-polyglossia.tex
+**ams-and-polyglossia
 (./ams-and-polyglossia.tex
 LaTeX2e <2011/06/27>
 Babel <3.9e> and hyphenation patterns for 77 languages loaded.
 (/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/base/minimal.cls
 Document Class: minimal 2001/05/25 Standard LaTeX minimal class
-) (./flwork.sty)
-(/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/amscls/amsthm.sty
+) (/usr/local/texlive/2013-pretest/texmf-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2004/08/06 v2.20
 \thm@style=\toks14
 \thm@bodyfont=\toks15
@@ -20,27 +19,39 @@ Package: amsthm 2004/08/06 v2.20
 \thm@postskip=\skip42
 \thm@headsep=\skip43
 \dth@everypar=\toks19
+)
+(./flwork.sty) (./ams-and-polyglossia.aux)
+\openout1 = `ams-and-polyglossia.aux'.
 
-Runaway argument?
-\x@protect \[\protect \[  \@nil  \@ifpackageloaded {amstex}{\def \@tempa \ETC.
-! Paragraph ended before \@tempa was complete.
-<to be read again> 
-                   \par 
-l.435 \newenvironment{proof}[1][\proofname]{\par
-                                                
-? x
- 
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+ [1{/usr/local/texlive/2013-pretest/texmf-var/fonts/map/pdftex/updmap/pdftex.ma
+p}] (./ams-and-polyglossia.aux) ) 
 Here is how much of TeX's memory you used:
- 115 strings out of 493397
- 1577 string characters out of 6135803
+ 129 strings out of 493397
+ 1775 string characters out of 6135803
  52089 words of memory out of 5000000
- 3582 multiletter control sequences out of 15000+600000
- 3640 words of font info for 14 fonts, out of 8000000 for 9000
+ 3589 multiletter control sequences out of 15000+600000
+ 3986 words of font info for 15 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 14i,0n,10p,142b,8s stack positions out of 5000i,500n,10000p,200000b,80000s
-No pages of output.
+ 18i,4n,14p,138b,92s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2013-pretest/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2013-pretest/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on ams-and-polyglossia.pdf (1 page, 20719 bytes).
 PDF statistics:
- 0 PDF objects out of 1000 (max. 8388607)
+ 16 PDF objects out of 1000 (max. 8388607)
+ 10 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
