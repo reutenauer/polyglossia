@@ -1,4 +1,10 @@
 \ProvidesFile{gloss-farsi.ldf}[polyglossia: module for farsi]
+\ifluatex
+  \xpg@warning{Farsi is not supported with LuaTeX.\MessageBreak
+I will proceed with the compilation, but\MessageBreak
+the output is not guaranteed to be correct\MessageBreak
+and may look very wrong.}
+\fi
 \RequirePackage{bidi}
 \RequirePackage{arabicnumbers}
 \RequirePackage{farsical}

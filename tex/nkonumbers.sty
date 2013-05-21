@@ -1,0 +1,13 @@
+\ProvidesPackage{nkonumbers}
+  [2013/05/19 v0.1%
+   Formatting of N’Ko numbers]
+
+\def\nkodigits#1{\expandafter\@nko@digits #1@}
+\def\@nko@digits#1{%
+  \ifx @#1%
+  \else
+    \ifx0#1߀\else\ifx1#1߁\else\ifx2#1߂\else\ifx3#1߃\else\ifx4#1߄\else\ifx5#1߅\else\ifx6#1߆\else\ifx7#1߇\else\ifx8#1߈\else\ifx9#1߉\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+    \expandafter\@nko@digits
+  \fi}
+\def\nkonumber#1{\nkodigits{\number#1}}
+\endinput

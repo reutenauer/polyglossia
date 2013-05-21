@@ -32,7 +32,7 @@
     \xpg@tibteol=1\relax %
     \directlua{polyglossia.activate_tibt_eol()}%
   \else %
-    \XeTeXlinebreaklocale "dz"%
+    \XeTeXlinebreaklocale "bo"%
     \XeTeXlinebreakskip=0pt plus 0.1em% doesn't do much, but doesn't harm I guess...
   \fi %
 }
