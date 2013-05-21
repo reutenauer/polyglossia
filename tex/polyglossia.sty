@@ -139,7 +139,6 @@
 %% options currently available:
 %% language : the name of the language (as understood by fontspec)
 %% hyphennames : the different hyphenation patterns to try (comma separated list)
-%%% TODO: what if a language has no hyphenation possible? ex: tibetan
 %%%   TODO: if pattern is prefixed by !, then it should be loaded as a fallback, with \xpg@nopatterns@fallback - i.e. with a warning: e.g. sanskrit for hindi, or catalan for asturian.
 %% script : the name of the script (as understood by fontspec) – default is Latin
 %% direction : the direction of the script: LR or RL
@@ -248,6 +247,36 @@
   %}%
   %TODO same thing with localdigits
 }
+
+\def\xpg@lastlanguage{0}%
+
+\providebool{xpg@hyphenation@disabled}%
+\boolfalse{xpg@hyphenation@disabled}
+
+\def\xpg@disablehyphenation{%
+  \ifbool{xpg@hyphenation@disabled}{}{%
+    \booltrue{xpg@hyphenation@disabled}%
+    \xdef\xpg@lastlanguage{\the\language}%
+    \xpg@set@language@luatex@ii{nohyphenation}
+    \language=\l@nohyphenation%
+    \ifluatex %
+      \directlua{polyglossia.disable_hyphenation()}%
+    \fi %
+  }%
+}
+
+\def\xpg@enablehyphenation{%
+  \ifbool{xpg@hyphenation@disabled}{%
+    \boolfalse{xpg@hyphenation@disabled}%
+    \language=\csname xpg@lastlanguage\endcsname%
+    \ifluatex %
+      \directlua{polyglossia.enable_hyphenation()}%
+    \fi %
+  }{}%
+}
+
+\let\disablehyphenation\xpg@disablehyphenation
+\let\enablehyphenation\xpg@enablehyphenation
 
 %\def\xpg@fontsetup#1{\xpg@csifdef@warn{xpg@fontsetup@#1}}
 %\def\xpg@fontsetup@none#1{\csgdef{#1@font}{\ifcsdef{#1font}{\csname #1font\endcsname}{}}} %<-- simplistic
