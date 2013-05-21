@@ -1,0 +1,1 @@
+perl -pi -e 's/is not supported with LuaTeX\.\^\^JI will proceed with the compilation, but the output is not guaranteed to be correct\^\^Jand may look very wrong./is not supported with LuaTeX.\\MessageBreak\nI will proceed with the compilation, but\\MessageBreak\nthe output is not guaranteed to be correct\\MessageBreak\nand may look very wrong./' tex/*

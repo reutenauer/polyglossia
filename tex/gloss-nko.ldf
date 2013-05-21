@@ -1,0 +1,58 @@
+\ProvidesFile{gloss-nko.ldf}[Polyglossia: module for N’Ko v0.1 2013/05/19]
+\PolyglossiaSetup{nko}{%
+  script=N'ko,
+  scripttag=nko~,
+  fontsetup=true,
+  hyphennames={nohyphenation},
+  direction=RL
+}
+\RequirePackage{nkonumbers}%
+
+\def\captionsnko{%
+  \def\prefacename{ߢߍߛߓߍ}%
+  \def\refname{ߞߐߡߊߛߙߋ}%
+  \def\abstractname{ߓߊߕߐߡߐ߲}%
+  \def\bibname{ߟߍߙߊߥߙߍߟߐ߲߲}%
+  \def\chaptername{ߛߌ߰ߘߊ}%
+  \def\appendixname{ߘߋ߬ߙߋ}%
+  \def\contentsname{ߞߣߐߘߐ}%
+  \def\listfigurename{ߢߊ ߟߎ߬ ߛߙߍߘߍ}%
+  \def\listtablename{ߦߌ߬ߘߊ߬ߥߟߊ ߟߎ߬ ߛߙߍߘߍ}%
+  \def\indexname{ߛߙߍߘߍ}%
+  \def\figurename{ߢߊ}%
+  \def\tablename{ߦߌ߬ߘߊ߬ߥߟߊ}%
+  \def\partname{ߛߌ߰ߘߊ߬ߙߋ߲}%
+  \def\enclname{ߝߍ߬ߕߊ}%
+  \def\ccname{ߓߊ ߘߏ߫ ߘߌ߫}%
+  \def\headtoname{ߞߊߕߙߍ߬}%
+  \def\pagename{ߞߐߜߍ}%
+  \def\seename{ߡߊߝߟߍ߫}%
+  \def\alsoname{ߝߟߍߡߊߛߊ߬ߦߌ߬}%
+  \def\proofname{ߦߌ߬ߘߊ߬ߞߏ}%
+  \def\glossaryname{ߞߘߐߝߐߟߊ߲}%
+}%
+
+% In n'ko, this is an example of date :
+% ߂߀߁߃ ߞߏ߲ߞߏߜߍ ߕߟߋ߬ ߁߈ (RTL)
+% ( 18 February 2013 )
+% The word "ߕߟߋ߬" is mandatory between month name and day number.
+
+\def\datenko{%
+  \def\today{\nkonumber{\day}\space ߕߟߋ߬\space\ifcase\month\or
+ߓߌ߲ߠߊߥߎߟߋ߲\or
+ߞߏ߲ߞߏߜߍ\or
+ߕߙߊߓߊ\or
+ߞߏ߲ߞߏߘߌ߬ߓߌ\or
+ߘߓߊ߬ߕߊ\or
+ߥߊ߬ߛߌߥߊ߬ߙߊ\or
+ߞߊ߬ߙߌߝߐ߭\or
+ߘߓߊ߬ߓߌߟߊ\or
+ߕߎߟߊߝߌ߲\or
+ߞߏ߲ߓߌߕߌ߮\or
+ߣߍߣߍߓߊ\or
+ߞߏ߬ߟߌ߲߬ߞߏߟߌ߲\fi
+\space\nkonumber{\year}
+  }%
+}%
+
+\endinput

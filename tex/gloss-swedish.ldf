@@ -38,7 +38,7 @@
     januari\or februari\or mars\or april\or maj\or juni\or
     juli\or augusti\or september\or oktober\or november\or
     december\fi
-    \space\number\year}
+    \space\number\year}%
     \def\datesymd{%
       \def\today{\number\year-\two@digits\month-\two@digits\day}}%
     \def\datesdmy{%

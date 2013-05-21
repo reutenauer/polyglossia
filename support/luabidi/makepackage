@@ -1,0 +1,3 @@
+#!/bin/sh
+
+./makedtx.pl -dir tex -doc doc/test.tex -src 'arabmaths\.tex=>arabmaths.tex' -src 'autofootnoterule\.tex=>autofootnoterule.tex' -src 'luabidi\.sty=>luabidi.sty' -src 'textwidthfootnoterule\.tex=>textwidthfootnoterule.tex' luabidi 
