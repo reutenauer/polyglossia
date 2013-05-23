@@ -1,0 +1,5 @@
+Known bugs
+
+Compilation will fail on a document that loads Polyglossia, and later
+amsthm.  The recommended workaround for users is to load amsthm after
+Polyglossia, and I’m working a more reliable solution.
