@@ -1,0 +1,4 @@
+Luabidi is an attempt to offer the same functionality for LuaTeX as bidi
+does for XeTeX.
+
+Copyright (c) Vafa Khalighi 2009, and Arthur Reutenauer 2013
