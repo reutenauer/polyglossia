@@ -1,3 +1,7 @@
+1.33.1 (23-05-2013)
+  * Editorial changes to the documentation
+  * Hunted and documented bugs
+
 1.33.0 (20-05-2013)
   * Added support for N’Ko.
   * Bugfixes for LuaTeX
