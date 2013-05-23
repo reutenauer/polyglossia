@@ -5,10 +5,19 @@
 tempdir=`mktemp -d`
 srcdir=`pwd`
 cd $tempdir
+mkdir TDS
+cd TDS
+mkdir -p tex/lualatex/luabidi
+mkdir -p doc/lualatex/luabidi
+cp $srcdir/tex/*.tex tex/lualatex/luabidi
+cp $srcdir/doc/*.tex doc/lualatex/luabidi
+cd ..
+zip -ry luabidi.tds.zip TDS/*
 mkdir luabidi
 cp $srcdir/luabidi.dtx luabidi
 cp $srcdir/luabidi.ins luabidi
 cp $srcdir/README luabidi
+cp luabidi.tds.zip luabidi
 zip -ry luabidi.zip luabidi
 cd $srcdir
 
