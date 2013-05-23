@@ -30,23 +30,9 @@ Polyglossia makes it possible to automate the following tasks:
 * Ensuring the proper directionality if the document contains languages
   written from right to left (via the package bidi, available separately).
 
-Several features of Babel that do not make sense in the XeTeX world (like font
-encodings, shorthands, etc) are not supported. For German however, several
-shorthands do make sense and can be activated with the language option
-babelshorthands=true.
-
-Polyglossia is distributed in the traditional way with *.dtx and *.ins files,
-and also comes with a TDS-conformant ready-to-unpack zip file.
-
-To install from source (i.e. using polyglossia.dtx), run
-	xelatex polyglossia.dtx
-which will generate all files and produce the pdf documentation all at once.
-Alternatively if you have the file polyglossia.ins run
-	xetex polyglossia.ins
-and follow the instructions displayed.
-
-
 BUGS
 
-Users are encouraged to report bugs on the github tracker:
+Polyglossia has no bug, of course.
+
+Hum, sorry, wishful thinking.  Please report any bugs, problems or requests on:
 http://github.com/reutenauer/polyglossia/issues
