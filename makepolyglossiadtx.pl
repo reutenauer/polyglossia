@@ -51,7 +51,7 @@ my $preamble        = <<_END
 
   The polyglossia package         
   (C) 2008–2010 François Charette    
-  (C) 2010-$year Arthur Reutenauer
+  (C) 2011-$year Arthur Reutenauer
   (C) 2013 Elie Roux
   License information appended
 
