@@ -83,6 +83,7 @@ mkdir -p $TDS_map
 cp polyglossia.dtx $TDS_src/ || exit 1
 cp $root/tex/* $TDS_tex/ || exit 1
 cp $root/doc/* $TDS_doc/ || exit 1
+cp $root/README $TDS_doc/ || exit 1
 cp $root/fontmapping/* $TDS_map/ || exit 1
 
 echo "Update TECkit mappings ..."
@@ -106,7 +107,7 @@ mkdir -p $builddir/tmp/polyglossia
 cd $builddir/tmp
 mv $builddir/$tarball polyglossia/ || exit 1
 mv $builddir/polyglossia.{dtx,ins} polyglossia/ || exit 1
-cp $root/doc/{polyglossia.pdf,README} polyglossia/ || exit 1
+cp $root/{doc/polyglossia.pdf,README} polyglossia/ || exit 1
 zip -9 $ctanzip polyglossia/* || exit 1
 mv $ctanzip $root/ || exit 1
 cd $root

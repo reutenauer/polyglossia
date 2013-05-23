@@ -29,8 +29,9 @@ my $srcdir          = "$basedir/tex";
 my $docsrcdir       = "$basedir/doc";
 my $fontmapsrcdir   = "$basedir/fontmapping";
 my $docsrc          = "$docsrcdir/polyglossia.tex";
-my $readme          = "$docsrcdir/README";
-my @docsrcfiles     = qw(README
+my $readme          = "$basedir/README";
+my @docsrcfiles     = qw(../README
+                          Changelog
                           examples.tex
                           example-arabic.tex
                           example-thai.tex);
