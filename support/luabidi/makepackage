@@ -22,3 +22,5 @@ zip -ry luabidi.zip luabidi
 cd $srcdir
 
 mv -f $tempdir/luabidi.zip .
+
+echo "luabidi.zip is ready for upload to CTAN."
