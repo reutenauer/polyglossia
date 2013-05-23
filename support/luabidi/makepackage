@@ -1,3 +1,15 @@
 #!/bin/sh
 
 ./makedtx.pl -dir tex -doc doc/test.tex -src 'arabmaths\.tex=>arabmaths.tex' -src 'autofootnoterule\.tex=>autofootnoterule.tex' -src 'luabidi\.sty=>luabidi.sty' -src 'textwidthfootnoterule\.tex=>textwidthfootnoterule.tex' luabidi 
+
+tempdir=`mktemp -d`
+srcdir=`pwd`
+cd $tempdir
+mkdir luabidi
+cp $srcdir/luabidi.dtx luabidi
+cp $srcdir/luabidi.ins luabidi
+cp $srcdir/README luabidi
+zip -ry luabidi.zip luabidi
+cd $srcdir
+
+mv -i $tempdir/luabidi.zip .
