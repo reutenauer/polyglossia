@@ -21,4 +21,4 @@ cp luabidi.tds.zip luabidi
 zip -ry luabidi.zip luabidi
 cd $srcdir
 
-mv -i $tempdir/luabidi.zip .
+mv -f $tempdir/luabidi.zip .
