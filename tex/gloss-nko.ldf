@@ -38,20 +38,42 @@
 % The word "ߕߟߋ߬" is mandatory between month name and day number.
 
 \def\datenko{%
-  \def\today{\nkonumber{\day}\space ߕߟߋ߬\space\ifcase\month\or
-ߓߌ߲ߠߊߥߎߟߋ߲\or
-ߞߏ߲ߞߏߜߍ\or
-ߕߙߊߓߊ\or
-ߞߏ߲ߞߏߘߌ߬ߓߌ\or
-ߘߓߊ߬ߕߊ\or
-ߥߊ߬ߛߌߥߊ߬ߙߊ\or
-ߞߊ߬ߙߌߝߐ߭\or
-ߘߓߊ߬ߓߌߟߊ\or
-ߕߎߟߊߝߌ߲\or
-ߞߏ߲ߓߌߕߌ߮\or
-ߣߍߣߍߓߊ\or
-ߞߏ߬ߟߌ߲߬ߞߏߟߌ߲\fi
-\space\nkonumber{\year}
+  \def\today{%
+    \nkonumber{\year}\space
+    \ifcase\month
+    \orߓߌ߲ߠߊߥߎߟߋ߲%
+    \orߞߏ߲ߞߏߜߍ%
+    \orߕߙߊߓߊ
+    \orߞߏ߲ߞߏߘߌ߬ߓߌ%
+    \orߘߓߊ߬ߕߊ%
+    \orߥߊ߬ߛߌߥߊ߬ߙߊ%
+    \orߞߊ߬ߙߌߝߐ߭%
+    \orߘߓߊ߬ߓߌߟߊ%
+    \orߕߎߟߊߝߌ߲%
+    \orߞߏ߲ߓߌߕߌ߮%
+    \orߣߍߣߍߓߊ%
+    \orߞߏ߬ߟߌ߲߬ߞߏߟߌ߲\fi
+    \spaceߕߟߋ߬
+    \space\nkonumber{\day}
+  }%
+
+  \def\today{%
+    \nkonumber{\year}\space
+    \ifcase\month
+    \or ߓߌ߲ߠߊߥߎߟߋ߲%
+    \or ߞߏ߲ߞߏߜߍ%
+    \or ߕߙߊߓߊ%
+    \or ߞߏ߲ߞߏߘߌ߬ߓߌ%
+    \or ߘߓߊ߬ߕߊ%
+    \or ߥߊ߬ߛߌߥߊ߬ߙߊ%
+    \or ߞߊ߬ߙߌߝߐ߭%
+    \or ߘߓߊ߬ߓߌߟߊ%
+    \or ߕߎߟߊߝߌ߲%
+    \or ߞߏ߲ߓߌߕߌ߮%
+    \or ߣߍߣߍߓߊ%
+    \or ߞߏ߬ߟߌ߲߬ߞߏߟߌ߲\fi
+    \space ߕߟߋ߬
+    \space\nkonumber{\day}
   }%
 }%
 
