@@ -90,8 +90,8 @@
 \def\cosec{\mathop{\operator@font cosec}\nolimits}
 \def\Prob{\mathop{\kern\z@\mathsf{P}}\nolimits}
 \def\Variance{\mathop{\kern\z@\mathsf{D}}\nolimits}
-\def\nsd{\mathop{\mathrm{н.х.д.}}\nolimits}
-\def\nsk{\mathop{\mathrm{н.х.к.}}\nolimits}
+\def\nsd{\mathop{\mathrm{н.с.д.}}\nolimits}
+\def\nsk{\mathop{\mathrm{н.с.к.}}\nolimits}
 \def\NSD{\mathop{\mathrm{НСД}}\nolimits}
 \def\NSK{\mathop{\mathrm{НСК}}\nolimits}
 \def\nod{\mathop{\mathrm{н.о.д.}}\nolimits}    % ??????
