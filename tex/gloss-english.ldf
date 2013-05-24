@@ -16,7 +16,7 @@
 %% we need to handle it differently
 \define@key{english}{variant}{%
   %needs to be reset for loop over hyphennames below:
-  \renewcommand*{\do}[1]{%
+  \def\do##1{%
       \ifcsdef{l@#1}%
         {\csletcs{l@english}{l@#1}\listbreak}%
         {}%
@@ -60,7 +60,7 @@
     \gdef\english@language{\language=\l@ukenglish\xpg@set@language@luatex@ii{ukenglish}}%
   \fi
   % and we reset \do to its previous definition here:
-  \renewcommand*{\do}[1]{\setotherlanguage{#1}}%
+  \def\do##1{\setotherlanguage{#1}}%
 }
 
 \def\captionsenglish{%

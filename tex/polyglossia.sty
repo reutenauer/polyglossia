@@ -24,9 +24,6 @@
   \RequireLuaModule{polyglossia}
 \fi
 
-%% for \docvslist (etoolbox)
-\providecommand*{\do}[1]{}%
-
 %% custom message macros
 \providecommand*{\xpg@error}[1]{%
    \PackageError{polyglossia}{#1}{}%
@@ -167,7 +164,7 @@
   \csgdef{init@noextras@#1}{}% we don't use this yet: remove?
   \csgdef{xpg@langname@#1}{\xpg@uppercasefirst{#1}}%
   %needed for docvslist with hyphennames key:
-  \renewcommand*{\do}[1]{%
+  \def\do##1{%
     \ifcsdef{l@#1}{}{%
       \ifstrequal{#1}{##1}{}%
       {\ifcsdef{l@##1}%
@@ -185,7 +182,7 @@
     {\xpg@info{Skipping~ automatic~ font~ setup~ for~ language~ #1}}%
   %% TODO? \toggletrue{#1@setup@done}%
   % reinit \do
-  \renewcommand*{\do}[1]{\setotherlanguage{##1}}%
+  \def\do##1{\setotherlanguage{##1}}%
 }
 
 \def\xpg@first#1,#2{#1}
@@ -646,7 +643,7 @@
 }
 
 \newcommand\setotherlanguages[1]{%
-  \renewcommand*{\do}[1]{\setotherlanguage{##1}}%
+  \def\do##1{\setotherlanguage{##1}}%
    \docsvlist{#1}}%
 
 \def\common@language{% FIXME is this really needed???
