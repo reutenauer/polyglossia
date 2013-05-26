@@ -25,6 +25,8 @@ mv -f $tempdir/luabidi.zip .
 
 echo "luabidi.zip is ready for upload to CTAN."
 
+echo
+echo "Checking structure ..."
 cd $tempdir
 mkdir check
 cd check
@@ -33,10 +35,12 @@ mkdir work
 cd work
 TEXINPUTS=../luabidi:
 export TEXINPUTS
-lualatex luabidi.ins
-echo "Files produced"
+echo
+lualatex luabidi.ins &>/dev/null
+echo "Files produced by DTX:"
 ls
 cd ..
+echo
 echo "Content of TDS zip:"
 zipinfo luabidi/luabidi.tds.zip
 cd $srcdir
