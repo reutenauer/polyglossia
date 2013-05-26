@@ -1,3 +1,10 @@
+1.33.2 (26-05-2013)
+  * Added \disablehyphenation and \enablehyphenation, contributed by
+    Élie Roux.
+  * Fixed bug related to package inclusion.  Polyglossia would break if
+    we loaded breqn.sty, and then called \setmainlanguage{english}, this
+    is no longer the case.
+
 1.33.1 (23-05-2013)
   * Editorial changes to the documentation
   * Hunted and documented bugs
