@@ -8,14 +8,24 @@ local next, type = next, type
 
 local nodes, fonts, node = nodes, fonts, node
 
+local nodecodes          = nodes.nodecodes --- <= preloaded node.types()
+
 local insert_node_before = node.insert_before
 local insert_node_after  = node.insert_after
 local remove_node        = nodes.remove
 local copy_node          = node.copy
-local end_of_math        = node.end_of_math
 local has_attribute      = node.has_attribute
 
-local nodecodes = nodes.nodecodes --- <= preloaded node.types()
+local end_of_math        = node.end_of_math
+if not end_of_math then -- luatex < .76
+  local traverse_nodes = node.traverse_id
+  local math_code      = nodecodes.math
+  local end_of_math = function (n)
+    for n in traverse_nodes(math_code, n.next) do
+      return n
+    end
+  end
+end
 
 -- node types as of April 2013
 local glyph_code         = nodecodes.glyph
@@ -24,7 +34,7 @@ local kern_code          = nodecodes.kern
 
 -- we make a new node, so that we can copy it later on
 local penalty_node  = node.new(penalty_code)
-penalty_node.penalty = -2000 -- rather arbitrary... if someone has a better idea...?
+penalty_node.penalty = 50 -- corresponds to the penalty LaTeX sets at explicit hyphens
 
 local function get_penalty_node()
   return copy_node(penalty_node)

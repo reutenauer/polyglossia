@@ -20,6 +20,7 @@ polyglossia = polyglossia or {}
 local polyglossia = polyglossia
 
 local current_language
+local last_language
 local default_language
 
 local function loadlang(lang, id)
@@ -30,11 +31,24 @@ end
 
 local function select_language(lang, id)
   loadlang(lang, id)
-  polyglossia.current_language = lang
+  current_language = lang
+  last_language = lang
 end
 
 local function set_default_language(lang, id)
   polyglossia.default_language = lang
+end
+
+local function falsefun()
+  return false
+end
+
+local function disable_hyphenation()
+  luatexbase.add_to_callback("hyphenate", falsefun, "polyglossia.disable_hyphenation")
+end
+
+local function enable_hyphenation()
+  luatexbase.remove_from_callback("hyphenate", "polyglossia.disable_hyphenation")
 end
 
 local check_char
@@ -80,3 +94,5 @@ polyglossia.default_language = default_language
 polyglossia.check_char = check_char
 polyglossia.load_frpt = load_frpt
 polyglossia.load_tibt_eol = load_tibt_eol
+polyglossia.disable_hyphenation = disable_hyphenation
+polyglossia.enable_hyphenation = enable_hyphenation
