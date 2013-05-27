@@ -11,6 +11,7 @@ mkdir -p tex/lualatex/luabidi
 mkdir -p doc/lualatex/luabidi
 cp $srcdir/tex/* tex/lualatex/luabidi
 cp $srcdir/doc/* doc/lualatex/luabidi
+cp $srcdir/README doc/lualatex/luabidi
 zip -ry luabidi.tds.zip *
 cd ..
 mkdir luabidi
@@ -37,6 +38,7 @@ TEXINPUTS=../luabidi:
 export TEXINPUTS
 echo
 lualatex luabidi.ins &>/dev/null
+lualatex luabidi.dtx
 echo "Files produced by DTX:"
 ls
 cd ..
