@@ -4,6 +4,7 @@
   * Fixed bug related to package inclusion.  Polyglossia would break if
     we loaded breqn.sty, and then called \setmainlanguage{english}, this
     is no longer the case.
+  * Removed spurious space introduced by \captionswedish.
 
 1.33.1 (23-05-2013)
   * Editorial changes to the documentation
