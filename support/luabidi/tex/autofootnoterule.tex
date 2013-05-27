@@ -15,7 +15,7 @@
 
 \def\l@fn{%
   \hbox to \columnwidth
-  {\pagedir TLT\vbox{\kern -3\p@
+  {\luatexpagedir TLT\vbox{\kern -3\p@
    \hrule width .4\columnwidth \kern2.6\p@}\hfil}}
 \def\r@fn{%
    \hrule width .4\columnwidth\kern 2.6\p@}
@@ -111,6 +111,6 @@
 \begingroup
 \footnotemarkLR%
 \renewcommand{\thefootnote}{\@arabic\c@footnote}%
-\pardir TLT \textdir TLT\footnotetext{#1}%
+\luatexpardir TLT \luatextextdir TLT\footnotetext{#1}%
 \endgroup
 }
