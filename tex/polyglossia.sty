@@ -214,8 +214,17 @@
     \ifcsundef{l@#1}%
       {\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
        \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}{}%
-    \csdef{#1@language}{\language=\csname l@#1\endcsname\ifluatex\directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', \the\csname l@#1\endcsname)}\fi}%
+    \csdef{#1@language}{%
+      \ifbool{xpg@hyphenation@disabled}{%
+        \xdef\xpg@lastlanguage{\the\csname l@#1\endcsname}%
+      }{%
+        \ifluatex%
+          \xpg@set@language@luatex@ii{#1}%
+        \fi%
+        \language=\csname l@#1\endcsname%
+      }%
     }%
+  }%
   \define@choicekey+[xpg@setup]{#1}{direction}[\val\nr]{LR,RL}[LR]%
     {\ifcase\nr\relax
         \togglefalse{#1@RL}%
@@ -650,9 +659,13 @@
    \docsvlist{#1}}%
 
 \def\common@language{% FIXME is this really needed???
-   \language=\z@
-   \lefthyphenmin=\tw@
-   \righthyphenmin=\thr@@}
+  \ifbool{xpg@hyphenation@disabled}{%
+    \xdef\xpg@lastlanguage{\z@}%
+  }{%
+    \language=\z@
+  }%
+  \lefthyphenmin=\tw@
+  \righthyphenmin=\thr@@}
 
 \def\noextrascurrent#1{\csuse{noextras@#1}}
 
@@ -733,7 +746,7 @@
        \global\@namedef{lu@texhyphen@loaded@\the\language}{}%
        \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', \the\csname l@#1\endcsname)}%
      \fi %
-   \fi %                                          
+   \fi %
    \xpg@initial@setup%
    \select@@language{#1}%
    \ifcsundef{setRL}{}%
