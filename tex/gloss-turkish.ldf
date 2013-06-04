@@ -30,6 +30,17 @@
    \XeTeXinterchartokenstate=0%
 }
 
+\def\turkish@casing{%
+  \message{\string\turkish@casing\space called.}
+  \lccode`\I=`\ı
+  \uccode`\i=`\İ
+}
+
+\def\noturkish@casing{%
+  \lccode`\I=`\i
+  \uccode`\i=`\I
+}
+
 \def\captionsturkish{%
   \def\prefacename{Önsöz}%
   \def\refname{Kaynaklar}%
@@ -69,14 +80,17 @@
 
 \def\noextras@turkish{%
    \noturkish@punctuation%
+   \noturkish@casing%
 }
 
 \def\blockextras@turkish{%
    \turkish@punctuation%
+   \turkish@casing%
 }
 
 \def\inlineextras@turkish{%
    \turkish@punctuation%
+   \turkish@casing%
 }
 
 \endinput
