@@ -7,13 +7,20 @@
   fontsetup=true,
 }
 
-\newXeTeXintercharclass\breton@punctthin % ! ? ;
-\newXeTeXintercharclass\breton@punctthick % :
+\ifluatex
+  % TODO
+\else
+  \newXeTeXintercharclass\breton@punctthin % ! ? ;
+  \newXeTeXintercharclass\breton@punctthick % :
+\fi
 
 \def\breton@punctthinspace{{\unskip\thinspace}}
 \def\breton@punctthickspace{{\unskip\nobreakspace}}
 
 \def\breton@punctuation{%
+  \ifluatex
+    % TODO
+  \else
     \XeTeXinterchartokenstate=1%
     \XeTeXcharclass `\! \breton@punctthin
     \XeTeXcharclass `\? \breton@punctthin
@@ -21,14 +28,19 @@
     \XeTeXcharclass `\: \breton@punctthick
     \XeTeXinterchartoks \z@ \breton@punctthin = \breton@punctthinspace
     \XeTeXinterchartoks \z@ \breton@punctthick = \breton@punctthickspace
+  \fi
 }
 
 \def\nobreton@punctuation{%
+  \ifluatex
+    % TODO
+  \else
     \XeTeXcharclass `\! \z@
     \XeTeXcharclass `\? \z@
     \XeTeXcharclass `\; \z@
     \XeTeXcharclass `\: \z@
     \XeTeXinterchartokenstate=0%
+  \fi
 }
 
 
