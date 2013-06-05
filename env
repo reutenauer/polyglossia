@@ -1,0 +1,8 @@
+#!/bin/sh
+
+root=`python realpath.py`
+
+TEXINPUTS=$root/tex:$root/support/luabidi/tex: 
+LUAINPUTS=$root/tex:   
+export TEXINPUTS
+export LUAINPUTS
