@@ -1,3 +1,6 @@
+1.33.4 (27-06-2013)
+  * Emergency release for a bug introduced in babelsh.def
+
 1.33.3 (28-05-2013)
   * Changed formatting of some error messages (emergency fixes for TeX Live 2013)
 
