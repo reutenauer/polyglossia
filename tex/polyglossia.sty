@@ -10,6 +10,8 @@
 % LuaTeX, but it's not if we run XeTeX, and we need it to know which of
 % the two engines it is!  Hence we include it here.
 \RequirePackage{ifluatex}
+% For symmetry with ifluatex
+\RequirePackage{ifxetex}
 % fontspec now uses LaTeX3 packages such as expl3, so we need this:
 \ExplSyntaxOn
 
