@@ -8,30 +8,36 @@
   fontsetup=true
   }
 
+% TODO Add \ifluatex branch everywhere
+\ifxetex
 \newXeTeXintercharclass\turkish@punctthin % ! :
 \newXeTeXintercharclass\turkish@punctthick % =
+\fi
 
 \def\turkish@punctthinspace{{\ifdim\lastskip>\z@\unskip\penalty\@M\thinspace\fi}}
 \def\turkish@punctthickspace{{\unskip\nobreakspace}}
 
 \def\turkish@punctuation{%
+   \ifxetex
    \XeTeXinterchartokenstate=1%
    \XeTeXcharclass `\! \turkish@punctthin
    \XeTeXcharclass `\: \turkish@punctthin
    \XeTeXcharclass `\= \turkish@punctthick
    \XeTeXinterchartoks \z@ \turkish@punctthin = \turkish@punctthinspace
    \XeTeXinterchartoks \z@ \turkish@punctthick = \turkish@punctthickspace
+   \fi
 }
 
 \def\noturkish@punctuation{%
+   \ifxetex
    \XeTeXcharclass `\! \z@
    \XeTeXcharclass `\: \z@
    \XeTeXcharclass `\= \z@
    \XeTeXinterchartokenstate=0%
+   \fi
 }
 
 \def\turkish@casing{%
-  \message{\string\turkish@casing\space called.}
   \lccode`\I=`\ı
   \uccode`\i=`\İ
 }
