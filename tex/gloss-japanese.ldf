@@ -1,2 +1,5 @@
 \PolyglossiaSetup{japanese}{%
 }
+\xpg@error{Unsupported!\MessageBreak
+  This gloss file is not supported by Polyglossia yet.\MessageBreak
+  Do not yet unless you know exactly what you are doing.}
