@@ -16,23 +16,23 @@
    \def\contentsname{Sadržaj}%
    \def\listfigurename{Popis slika}%
    \def\listtablename{Popis tablica}%
-   \def\indexname{Indeks}%
+   \def\indexname{Kazalo}%
    \def\figurename{Slika}%
    \def\tablename{Tablica}%
    \def\partname{Dio}%
    \def\pagename{Stranica}%
    \def\seename{Vidjeti}%
-   \def\alsoname{Vidjeti i}%
+   \def\alsoname{Također vidjeti}%
    \def\enclname{Prilozi}%
-   \def\ccname{Kopije}%
+   \def\ccname{Kopija}%
    \def\headtoname{Prima}%
    \def\proofname{Dokaz}%
-   \def\glossaryname{Kazalo}%
+   \def\glossaryname{Pojmovnik}%
    }
 \def\datecroatian{%
    \def\today{\number\day.~\ifcase\month\or
     siječnja\or veljače\or ožujka\or travnja\or svibnja\or
-    lipnja\or srpnja\or kolovoza\or rujna\or listopada\or studenog\or
+    lipnja\or srpnja\or kolovoza\or rujna\or listopada\or studenoga\or
     prosinca\fi \space \number\year.}}
 
 \endinput
