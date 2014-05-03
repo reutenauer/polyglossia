@@ -15,10 +15,10 @@
   \def\appendixname{Dodatek}%
   \def\contentsname{Spis treści}%
   \def\listfigurename{Spis rysunków}%
-  \def\listtablename{Spis tablic}%
+  \def\listtablename{Spis tabel}%
   \def\indexname{Indeks}%
   \def\figurename{Rysunek}%
-  \def\tablename{Tablica}%
+  \def\tablename{Tabela}%
   \def\partname{Część}%
   \def\enclname{Załącznik}%
   \def\ccname{Kopie:}%
