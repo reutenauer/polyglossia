@@ -24,8 +24,8 @@
   \def\ccname{Kopie:}%
   \def\headtoname{Do}%
   \def\pagename{Strona}%
-  \def\seename{Porównaj}%
-  \def\alsoname{Porównaj także}%
+  \def\seename{Zobacz}%
+  \def\alsoname{Zobacz też}%
   \def\proofname{Dowód}%
   \def\glossaryname{Glossary}% <-- Needs translation
   }
