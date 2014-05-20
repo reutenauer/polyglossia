@@ -4,7 +4,7 @@
 
 root=`dirname $0`
 
-first_char=`echo $root | /usr/bin/sed -e 's/^\(.\).*$/\1/'`
+first_char=`echo $root | sed -e 's/^\(.\).*$/\1/'`
 
 if [ "$first_char" != '/' ]; then
   root="`pwd`/$root"
