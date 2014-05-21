@@ -373,6 +373,15 @@ the font, by means of \pkg{fontspec}’s \cmd\addfontfeature. If the current fon
 does not appear to support the script of that language, an error message is
 displayed.
 
+\section{Hyphenation disabling}
+
+In some very specific contexts (such as music score creation), \TeX{} hyphenation
+is something to avoid as it may cause troubles. \pkg{polyglossia} provides two
+functions: \cmd\disablehyphenation and \cmd\enablehyphenation . Note that when
+you select a new language, hyphenation will be in the same state (enabled or
+disabled) as before. When you reenable it, it will take the last selected
+language.
+
 \section{Language-specific options and commands}\label{specific}
 
 This section gives a list of all languages for which options and end-user commands are defined.
