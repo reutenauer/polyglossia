@@ -1,6 +1,13 @@
 04-06-2014
   * Enhanced Latin support by Claudio Beccari
 
+1.33.5 (21-05-2014)
+    * Option to disable hyphenation entirely, by Élie Roux
+    * Fix spurious spaces in gloss-russian.ldf, by Oleg Domanov
+    * Support for the Austrian variant of German, by Jürgen Spitzmüller
+    * Changes to the Croatian translations, by Ivan Kokan
+    * Correction to the Lithuanian translations, by Ignas Anikevičius
+
 1.33.4 (27-06-2013)
   * Emergency release for a bug introduced in babelsh.def
 
