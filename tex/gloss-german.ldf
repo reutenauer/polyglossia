@@ -33,6 +33,15 @@
   \fi
 }
 
+\newif\if@austrian@locale
+\@austrian@localefalse
+\def\tmp@austrian{austrian}
+\define@key{german}{variant}[german]{%
+	\def\@tmpa{#1}%
+	\ifx\@tmpa\tmp@austrian\@austrian@localetrue\else
+	  \@austrian@localefalse%
+	\fi}
+
 \newif\if@german@fraktur
 \def\tmp@fraktur{fraktur}
 \define@key{german}{script}[latin]{%
@@ -125,11 +134,15 @@
 }
 \def\date@german{%   
   \def\today{\number\day.%
-    \space \ifcase\month%TODO add option for Austrian forms (Jänner etc)
-    \or Januar\or Februar\or März\or April\or Mai\or Juni\or%
-    Juli\or August\or September\or Oktober\or November\or%
-    Dezember\fi
+    \space \ifcase\month%
+    \or\if@austrian@locale Jänner\else Januar\fi\or Februar\or März\or%
+    April\or Mai\or Juni\or Juli\or August\or September\or Oktober\or%
+    November\or Dezember\fi
     \space \number\year}%
+}
+
+\def\captions@german@austrian{%
+  \def\enclname{Beilage(n)}%
 }
 
 %%Strings for Fraktur contributed by Gerrit <z0idberg . gmx . de>
@@ -143,15 +156,16 @@
 
 \def\date@german@fraktur{%
   \def\today{\number\day.%
-    \space \ifcase\month%TODO add option for Austrian forms (Jänner etc)
-    \or Januar\or Februar\or März\or April\or Mai\or Juni\or%
-    Juli\or Auguſt\or September\or Oktober\or November\or%
-    Dezember\fi
+    \space \ifcase\month%
+    \or\if@austrian@locale Jänner\else Januar\fi\or Februar\or März\or%
+    April\or Mai\or Juni\or Juli\or Auguſt\or September\or Oktober\or%
+    November\or Dezember\fi
     \space \number\year}%
 }
 
 \def\captionsgerman{%
   \if@german@fraktur\captions@german@fraktur\else\captions@german\fi
+  \if@austrian@locale\captions@german@austrian\fi
 }
 
 \def\dategerman{%

@@ -373,6 +373,15 @@ the font, by means of \pkg{fontspec}’s \cmd\addfontfeature. If the current fon
 does not appear to support the script of that language, an error message is
 displayed.
 
+\section{Hyphenation disabling}
+
+In some very specific contexts (such as music score creation), \TeX{} hyphenation
+is something to avoid as it may cause troubles. \pkg{polyglossia} provides two
+functions: \cmd\disablehyphenation and \cmd\enablehyphenation . Note that when
+you select a new language, hyphenation will be in the same state (enabled or
+disabled) as before. When you reenable it, it will take the last selected
+language.
+
 \section{Language-specific options and commands}\label{specific}
 
 This section gives a list of all languages for which options and end-user commands are defined.
@@ -478,6 +487,8 @@ The default value of each option is given in italic.
 \subsection{german}\label{german}
 \textbf{Options}:
 	\begin{itemize}
+	\item\TB{variant} = \textit{german} or austrian.\new{v1.33.4}
+		Setting variant=austrian uses some austrian lexical variants.
 	\item \TB{spelling} = \textit{new} (= 1996) or old (= 1901):
 		indicates whether hyphenation patterns for traditional (1901) or reformed
 		(1996) orthography should be used. The latter is the default.
@@ -507,8 +518,8 @@ The default value of each option is given in italic.
 		\item  ¦"<¦ for French left double quotes («)
 		\item  ¦">¦ for French right double quotes (»).
 		\end{itemize}
-  \item\TB{script} = \textit{latin} or fraktur.\new{v1.2.0}
-    Setting script=fraktur modifies the captions for typesetting German in Fraktur.
+	\item\TB{script} = \textit{latin} or fraktur.\new{v1.2.0}
+		Setting script=fraktur modifies the captions for typesetting German in Fraktur.
 	\end{itemize}
 
 \subsection{greek}\label{greek}
