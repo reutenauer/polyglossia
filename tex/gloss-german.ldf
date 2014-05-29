@@ -35,11 +35,22 @@
 
 \newif\if@austrian@locale
 \@austrian@localefalse
+\newif\if@swiss@locale
+\@swiss@localefalse
 \def\tmp@austrian{austrian}
+\def\tmp@swiss{swiss}
 \define@key{german}{variant}[german]{%
 	\def\@tmpa{#1}%
 	\ifx\@tmpa\tmp@austrian\@austrian@localetrue\else
 	  \@austrian@localefalse%
+	\fi
+	\ifx\@tmpa\tmp@swiss\@swiss@localetrue
+	  \ifcsundef{l@swissgerman}%
+	    {\xpg@warning{No hyphenation patterns were loaded for "Swiss German (Old Spelling)"\MessageBreak
+	      I will use the standard patterns for German (old spelling) instead}%
+	    \adddialect\l@swissgerman\l@german\relax}{}%
+	\else
+	  \@swiss@localefalse%
 	\fi}
 
 \newif\if@german@fraktur
@@ -54,7 +65,7 @@
 
 \define@boolkey{german}[german@]{babelshorthands}[true]{}
 
-\setkeys{german}{spelling,latesthyphen,script}
+\setkeys{german}{spelling,latesthyphen,script,variant}
 
 \ifsystem@babelshorthands
   \setkeys{german}{babelshorthands=true}
@@ -145,6 +156,10 @@
   \def\enclname{Beilage(n)}%
 }
 
+\def\captions@german@swiss{%
+  \def\enclname{Beilage(n)}%
+}
+
 %%Strings for Fraktur contributed by Gerrit <z0idberg . gmx . de>
 \def\captions@german@fraktur{%
   \captions@german%
@@ -166,6 +181,7 @@
 \def\captionsgerman{%
   \if@german@fraktur\captions@german@fraktur\else\captions@german\fi
   \if@austrian@locale\captions@german@austrian\fi
+  \if@swiss@locale\captions@german@swiss\fi
 }
 
 \def\dategerman{%
@@ -173,13 +189,43 @@
 }
 
 \def\german@language{\language=%
-  \csname l@\if@german@oldspelling\else n\fi german\ifgerman@latesthyphen -x-latest\fi\endcsname
+  \csname l@%
+    \if@swiss@locale
+       \if@german@oldspelling
+           swissgerman%
+       \else
+            ngerman%
+            \ifgerman@latesthyphen
+                -x-latest
+            \fi
+        \fi
+    \else% (german, austrian)
+      \if@german@oldspelling\else n\fi german\ifgerman@latesthyphen -x-latest\fi
+    \fi
+  \endcsname
   % LuaTeX
-  % \let\pattname{\if@german@oldspelling\else n\fi german\ifgerman@latesthyphen -x-latest\fi}
-  % \xpg@set@language@luatex@ii{\pattname}}
   \ifgerman@latesthyphen
-    \if@german@oldspelling\xpg@set@language@luatex@ii{german-x-latest}\else\xpg@set@language@luatex@ii{ngerman-x-latest}\fi
-    \else\if@german@oldspelling\xpg@set@language@luatex@ii{german}\else\xpg@set@language@luatex@ii{ngerman}\fi\fi}
+    \if@german@oldspelling
+        \if@swiss@locale
+            \xpg@set@language@luatex@ii{swissgerman}
+        \else
+            \xpg@set@language@luatex@ii{german-x-latest}
+        \fi
+    \else
+        \xpg@set@language@luatex@ii{ngerman-x-latest}
+    \fi
+  \else% (latesthyphen=false)
+    \if@german@oldspelling
+        \if@swiss@locale
+            \xpg@set@language@luatex@ii{swissgerman}
+        \else
+            \xpg@set@language@luatex@ii{german}
+        \fi
+    \else
+        \xpg@set@language@luatex@ii{ngerman}
+    \fi
+  \fi
+}
 
 \def\noextras@german{%
   \nogerman@shorthands%
