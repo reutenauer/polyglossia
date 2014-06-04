@@ -1,12 +1,109 @@
+% !TEX encoding = UTF-8 Unicode
 \ProvidesFile{gloss-latin.ldf}[polyglossia: module for latin]
 \PolyglossiaSetup{latin}{
-  hyphennames={latin},
-  hyphenmins={2,2},
+%  hyphennames={latin},
+%  hyphenmins={2,2},
   frenchspacing=true,
   fontsetup=true,
 }
 
-\def\captionslatin{%
+
+\define@boolkey{latin}[latin@]{babelshorthands}[true]{}
+
+
+\ifsystem@babelshorthands
+  \setkeys{latin}{babelshorthands=true}
+\else
+  \setkeys{latin}{babelshorthands=false}
+\fi
+
+
+\ifcsundef{initiate@active@char}{%
+\input{babelsh.def}%
+}{}\initiate@active@char{"}%
+
+
+
+\def\latin@shorthands{%
+  \bbl@activate{"}%
+  \def\language@group{latin}%
+  \declare@shorthand{latin}{"}{%
+    \relax\ifmmode
+      \def\xpgla@next{''}%
+    \else
+      \def\xpgla@next{\futurelet\xpgla@temp\xpgla@cwm}%
+    \fi
+  \xpgla@next}%
+}
+
+
+\def\xpgla@allowhyphens{\bbl@allowhyphens\discretionary{-}{}{}\bbl@allowhyphens}
+\newcommand*{\xpgla@cwm}{\let\xpgla@@next\relax
+  \ifcat\noexpand\xpgla@temp a%
+    \let\xpgla@@next\xpgla@allowhyphens
+  \else
+    \ifx\xpgla@temp\ae
+        \let\xpgla@@next\xpgla@allowhyphens
+    \else
+        \ifx\xpgla@temp\oe
+           \let\xpgla@@next\xpgla@allowhyphens
+        \else
+           \if\noexpand\xpgla@temp\string|%
+              \def\xpgla@@next{\xpgla@allowhyphens\@gobble}%
+           \fi
+        \fi
+    \fi
+  \fi
+  \xpgla@@next}%
+
+\def\nolatin@shorthands{%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+
+
+% set modern as default
+\def\latin@variant{\l@latin}%
+\def\captionslatin{\modernlatincaptions}%
+\def\datelatin{\modernlatindate}%
+\def\classicuclccodes{\lccode`\V=`\u \uccode`\u=`\V}
+
+\def\tmp@modern{modern}
+\def\tmp@medieval{medieval}
+\def\tmp@classic{classic}
+
+\define@key{latin}{variant}[modern]{%
+\def\@tempa{#1}%
+\ifx\@tempa\tmp@medieval
+  \def\latin@variant{\l@latin}%
+  \def\captionslatin{\medievallatincaptions}%
+  \def\datelatin{\classiclatindate}% 
+  \classicuclccodes
+  \xpg@info{Option: Medieval Latin}%
+\else
+  \ifx\@tempa\tmp@classic
+    \ifx\l@classiclatin\undefined
+       \xpg@nopatterns{Classic Latin}%
+       \adddialect\l@classiclatin\l@latin
+       \def\latin@variant{\l@latin}%
+    \else
+      \def\latin@variant{\l@classiclatin}%
+    \fi
+    \def\captionslatin{\modernlatincaptions}%
+    \def\datelatin{\classiclatindate}%
+    \classicuclccodes
+    \xpg@info{Option: Classic Latin}%
+  \else
+    \def\latin@variant{\l@latin}%
+    \def\captionslatin{\modernlatincaptions}%
+    \def\datelatin{\modernlatindate}%
+    \xpg@info{Option: Modern Latin}%
+  \fi
+\fi
+}
+
+\def\latin@language{\language=\latin@variant}%
+
+\def\modernlatincaptions{%
    \def\prefacename{Praefatio}%
    \def\refname{Conspectus librorum}%
    \def\abstractname{Summarium}%
@@ -23,18 +120,79 @@
    \def\enclname{Additur}%
    \def\ccname{Exemplar}%
    \def\headtoname{\ignorespaces}%
-   \def\pagename{pagina}%
+   \def\pagename{charta}%
    \def\seename{cfr.}%
    \def\alsoname{cfr.}%
    \def\proofname{Demonstratio}%
    \def\glossaryname{Glossarium}%
    }
-\def\datelatin{%   
+      
+\def\medievallatincaptions{%
+   \def\prefacename{Præfatio}%
+   \def\refname{Conspectus librorum}%
+   \def\abstractname{Summarium}%
+   \def\bibname{Conspectus librorum}%
+   \def\chaptername{Caput}%
+   \def\appendixname{Additamentum}%
+   \def\contentsname{Index}%
+   \def\listfigurename{Conspectus descriptionum}%
+   \def\listtablename{Conspectus tabularum}%
+   \def\indexname{Index rerum notabilium}%
+   \def\figurename{Descriptio}%
+   \def\tablename{Tabula}%
+   \def\partname{Pars}%
+   \def\enclname{Additur}%
+   \def\ccname{Exemplar}%
+   \def\headtoname{\ignorespaces}%
+   \def\pagename{charta}%
+   \def\seename{cfr.}%
+   \def\alsoname{cfr.}%
+   \def\proofname{Demonstratio}%
+   \def\glossaryname{Glossarium}%
+   }
+
+\def\modernlatindate{%   
    \def\today{\uppercase\expandafter{\romannumeral\day}%
       \space \ifcase\month%
       \or Januarii\or Februarii\or Martii\or Aprilis\or Maji\or Junii\or%
       Julii\or Augusti\or Septembris\or Octobris\or Novembris\or%
       Decembris\fi%
       \space \uppercase\expandafter{\romannumeral\year}}}
+
+\def\classiclatindate{%   
+   \def\today{\uppercase\expandafter{\romannumeral\day}%
+      \space \ifcase\month
+      \or Januarii\or Februarii\or Martii\or Aprilis\or Maii\or Junii\or
+      Julii\or Augusti\or Septembris\or Octobris\or Nouembris\or
+      Decembris\fi
+      \space \uppercase\expandafter{\romannumeral\year}}}
+      
+\let\xpgla@savedvalues\empty
+\AtEndPreamble{% the user or the class might define different values
+  \edef\xpgla@savedvalues{%
+    \clubpenalty=\the\clubpenalty\space
+    \@clubpenalty=\the\@clubpenalty\space
+    \widowpenalty=\the\widowpenalty\space
+    \finalhyphendemerits=\the\finalhyphendemerits}
+}
+
+
+\def\noextras@latin{%
+   \lccode\string"2019=\z@
+   \nolatin@shorthands
+   \xpgla@savedvalues
+}
+
+\def\blockextras@latin{%
+   \lccode\string"2019=\string"2019
+   \clubpenalty=3000 \@clubpenalty=3000 \widowpenalty=3000
+   \finalhyphendemerits=50000000
+   \iflatin@babelshorthands\latin@shorthands\fi
+}
+
+\def\inlineextras@latin{%
+   \lccode\string"2019=\string"2019
+   \iflatin@babelshorthands\latin@shorthands\fi
+}
 
 \endinput
