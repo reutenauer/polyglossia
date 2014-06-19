@@ -54,11 +54,13 @@
     грудня\fi%
     \space\number\year~р.}}
 
+\def\Asbuk#1{\expandafter\ukrainian@Alph\csname c@#1\endcsname}
 \def\ukrainian@Alph#1{\ifcase#1\or
    А\or Б\or В\or г\or д\or Е\or Є\or Ж\or
    З\or И\or І\or Ї\or Й\or К\or Л\or М\or Н\or О\or
    П\or Р\or С\or Т\or У\or Ф\or Х\or
    Ц\or Ч\or Ш\or Щ\or Ю\or Я\else\xpg@ill@value{#1}{ukrainian@Alph}\fi}
+\def\asbuk#1{\expandafter\ukrainian@alph\csname c@#1\endcsname}
 \def\ukrainian@alph#1{\ifcase#1\or
    а\or б\or в\or г\or д\or е\or є\or ж\or
    з\or и\or і\or ї\or й\or к\or л\or м\or н\or о\or
