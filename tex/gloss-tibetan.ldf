@@ -153,24 +153,19 @@
 
 \def\noextras@tibetan{%
    \notibetan@eol%
-   \let\baselinestretch\orig@baselinestretch%
+   \ifcsname orig@baselinestretch\endcsname\renewcommand{\baselinestretch}{\orig@baselinestretch}\fi %
    }
 
 \def\inlineextras@tibetan{%
-   \let\orig@baselinestretch\baselinestretch%
+   \xdef\orig@baselinestretch{\ifcsname baselinestretch\endcsname \baselinestretch \else 1\fi}%
    \renewcommand{\baselinestretch}{1.2}%
    \tibetan@eol%
    }
 
 \def\blockextras@tibetan{%
-   \let\orig@baselinestretch\baselinestretch%
+   \xdef\orig@baselinestretch{\ifcsname baselinestretch\endcsname \baselinestretch \else 1\fi}%
    \renewcommand{\baselinestretch}{1.2}%
    \tibetan@eol%
-}
-
-\def\noblockextras@tibetan{%
-   \notibetan@eol%
-   \let\baselinestretch\orig@baselinestretch%
 }
 
 \endinput
