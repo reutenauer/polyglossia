@@ -153,31 +153,31 @@
 
 \def\noextras@tibetan{%
    \notibetan@eol%
-   \let\baselinestrech\orig@baselinestretch%
+   \let\baselinestretch\orig@baselinestretch%
    }
 
 \def\blockextras@tibetan{%
    % copied from Thai, not tested
-   \let\orig@baselinestrech\baselinestretch%
+   \let\orig@baselinestretch\baselinestretch%
    \renewcommand{\baselinestretch}{1.2}%
    \tibetan@eol%
    }
 
 \def\inlineextras@tibetan{%
-   \let\orig@baselinestrech\baselinestretch%
+   \let\orig@baselinestretch\baselinestretch%
    \renewcommand{\baselinestretch}{1.2}%
    \tibetan@eol%
    }
 
 \def\blockextras@tibetan{%
-   \let\orig@baselinestrech\baselinestretch%
+   \let\orig@baselinestretch\baselinestretch%
    \renewcommand{\baselinestretch}{1.2}%
    \tibetan@eol%
 }
 
 \def\noblockextras@tibetan{%
    \notibetan@eol%
-   \let\baselinestrech\orig@baselinestretch%
+   \let\baselinestretch\orig@baselinestretch%
 }
 
 \endinput
