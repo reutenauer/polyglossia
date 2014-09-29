@@ -141,29 +141,29 @@
 }
 
 \def\tibetan@globalnumbers{%
-   \let\orig@arabic\@arabic%
+   \let\xpg@orig@arabic\@arabic%
    \let\@arabic\tibetannumber%
    \renewcommand{\thefootnote}{\protect\tibetannumber{\c@footnote}}%
 }
 
 \def\notibetan@globalnumbers{%
-   \let\@arabic\orig@arabic%
+   \let\@arabic\xpg@orig@arabic%
    \renewcommand\thefootnote{\protect\number{\c@footnote}}%
 }
 
 \def\noextras@tibetan{%
    \notibetan@eol%
-   \ifcsname orig@baselinestretch\endcsname\renewcommand{\baselinestretch}{\orig@baselinestretch}\fi %
+   \ifcsname xpg@orig@baselinestretch\endcsname\renewcommand{\baselinestretch}{\xpg@orig@baselinestretch}\fi %
    }
 
 \def\inlineextras@tibetan{%
-   \xdef\orig@baselinestretch{\ifcsname baselinestretch\endcsname \baselinestretch \else 1\fi}%
+   \xdef\xpg@orig@baselinestretch{\ifcsname baselinestretch\endcsname \baselinestretch \else 1\fi}%
    \renewcommand{\baselinestretch}{1.2}%
    \tibetan@eol%
    }
 
 \def\blockextras@tibetan{%
-   \xdef\orig@baselinestretch{\ifcsname baselinestretch\endcsname \baselinestretch \else 1\fi}%
+   \xdef\xpg@orig@baselinestretch{\ifcsname baselinestretch\endcsname \baselinestretch \else 1\fi}%
    \renewcommand{\baselinestretch}{1.2}%
    \tibetan@eol%
 }
