@@ -15,17 +15,17 @@
   \def\appendixname{Dodatek}%
   \def\contentsname{Spis treści}%
   \def\listfigurename{Spis rysunków}%
-  \def\listtablename{Spis tablic}%
+  \def\listtablename{Spis tabel}%
   \def\indexname{Indeks}%
   \def\figurename{Rysunek}%
-  \def\tablename{Tablica}%
+  \def\tablename{Tabela}%
   \def\partname{Część}%
   \def\enclname{Załącznik}%
   \def\ccname{Kopie:}%
   \def\headtoname{Do}%
   \def\pagename{Strona}%
-  \def\seename{Porównaj}%
-  \def\alsoname{Porównaj także}%
+  \def\seename{Zobacz}%
+  \def\alsoname{Zobacz też}%
   \def\proofname{Dowód}%
   \def\glossaryname{Glossary}% <-- Needs translation
   }

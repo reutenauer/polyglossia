@@ -13,7 +13,7 @@
    \def\abstractname{Santrauka}%
    \def\bibname{Literatūra}%
    \def\prefacename{Pratarmė}%
-   \def\chaptername{skyrius}%
+   \def\chaptername{Skyrius}%
    \def\appendixname{Priedas}%
    \def\contentsname{Turinys}%
    \def\listfigurename{Iliustracijų sąrašas}%
