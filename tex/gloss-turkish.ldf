@@ -76,7 +76,7 @@
     Ocak\or Şubat\or Mart\or Nisan\or Mayıs\or Haziran\or
     Temmuz\or Ağustos\or Eylül\or Ekim\or Kasım\or
     Aralık\fi
-    \space\number\year}
+    \space\number\year}%
 }
 \def\hijrimonthturkish#1{\ifcase#1%
 \or Muharrem\or Safer\or Rebiülevvel\or Rebiülahir\or Cemaziyelevvel\or Cemaziyelahir\or Recep\or Şaban\or Ramazan\or Şevval\or Zilkade\or Zilhicce\fi}
