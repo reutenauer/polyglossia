@@ -1,5 +1,5 @@
 \ProvidesPackage{hebrewcal}
-        [2012/04/29 v2.5 %
+        [2015/04/17 v2.6 %
          Hebrew calendar for polyglossia (adapted from hebcal.sty in Babel)]
 \RequirePackage{xkeyval}
 \RequirePackage{bidi}
@@ -38,20 +38,20 @@
 \def\HebrewYearName#1{{%
    \@tempcnta=#1\divide\@tempcnta by 1000\multiply\@tempcnta by 1000
    \ifnum#1=\@tempcnta\relax % divisible by 1000: disambiguate
-     \hebrewnumeral{#1}\ (לפ"ג)%
+     \Hebrewnumeral{#1}\ (לפ"ג)%
    \else % not divisible by 1000
      \ifnum#1<1000\relax     % first millennium: disambiguate
-       \hebrewnumeral{#1}\ (לפ"ג)%
+       \Hebrewnumeral{#1}\ (לפ"ג)%
      \else 
        \ifnum#1<5000
-         \hebrewnumeral{#1}%
+         \Hebrewnumeral{#1}%
        \else
          \ifnum#1<6000 % current millenium, print without thousands
            \@tempcnta=#1\relax
            \if@hebrew@fullyear\else\advance\@tempcnta by -5000\fi
-           \hebrewnumeral{\@tempcnta}%
+           \Hebrewnumeral{\@tempcnta}%
          \else % #1>6000
-           \hebrewnumeral{#1}%
+           \Hebrewnumeral{#1}%
          \fi
        \fi
      \fi
@@ -81,7 +81,7 @@
         \fi%
     \fi}
 \def\@FormatForHebrew#1#2#3{%
-  \hebrewnumeral{#1}~ב\HebrewMonthName{#2}{#3}~%
+  \Hebrewnumeral{#1}~ב\HebrewMonthName{#2}{#3}~%
   \HebrewYearName{#3}}
 \def\HebrewMonthNameInEnglish#1#2{%
     \ifnum #1 = 7%
