@@ -5,14 +5,7 @@ I will proceed with the compilation, but\MessageBreak
 the output is not guaranteed to be correct\MessageBreak
 and may look very wrong.}
 \fi
-\ifxetex
-  \RequirePackage{bidi}
-\else\ifluatex
-  \RequirePackage{luabidi}
-\else
-  \xpg@warning{You’re running a TeX engine that is not LuaTeX or XeTeX.\MessageBreak
-That is almost guaranteed to cause problems.}
-\fi\fi
+\RequireBidi
 \RequirePackage{arabicnumbers}
 \RequirePackage{hijrical}
 
