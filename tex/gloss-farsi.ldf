@@ -5,7 +5,7 @@ I will proceed with the compilation, but\MessageBreak
 the output is not guaranteed to be correct\MessageBreak
 and may look very wrong.}
 \fi
-\RequirePackage{bidi}
+\RequireBidi
 \RequirePackage{arabicnumbers}
 \RequirePackage{farsical}
 \RequirePackage{hijrical}
