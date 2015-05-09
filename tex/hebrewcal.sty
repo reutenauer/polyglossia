@@ -2,7 +2,7 @@
         [2012/04/29 v2.5 %
          Hebrew calendar for polyglossia (adapted from hebcal.sty in Babel)]
 \RequirePackage{xkeyval}
-\RequirePackage{bidi}
+\ifluatex\RequirePackage{luabidi}\else\RequirePackage{bidi}\fi
 
 \newif\if@xpg@hebrewcal@marcheshvan
 \DeclareOption{marcheshvan}{\@xpg@hebrewcal@marcheshvantrue}
