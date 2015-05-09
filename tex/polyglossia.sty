@@ -64,6 +64,17 @@
 \def\@@ensure@dir#1{\ifcsundef{@ensure@dir}{#1}{\@ensure@dir{#1}}}
 \def\@@ensure@maindir#1{\ifcsundef{@ensure@maindir}{#1}{\@ensure@maindir{#1}}}
 
+%% Used by the language definitions files for right-to-left languages
+\def\RequireBidi{%
+  \ifxetex
+    \RequirePackage{bidi}
+  \else\ifluatex
+    \RequirePackage{luabidi}
+  \else
+    \xpg@warning{You’re running a TeX engine that is not LuaTeX or XeTeX.\MessageBreak
+That is almost guaranteed to cause problems.}
+  \fi\fi}
+
 %% compatibility with babel
 \let\addto\gappto% gappto is defined in etoolbox
 
