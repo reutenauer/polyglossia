@@ -1,7 +1,8 @@
 \ProvidesPackage{farsical}
         [2008/07/02 v0.1 %
          Farsi (jalali) calendar]
-\RequirePackage{bidi,calc,arabicnumbers}
+\ifluatex\RequirePackage{luabidi}\else\RequirePackage{bidi}\fi
+\RequirePackage{calc,arabicnumbers}
 
 %TODO - rewrite completely using calc 
 %%    - use Reingold & Dershowitz ME
