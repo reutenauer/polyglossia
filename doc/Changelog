@@ -1,6 +1,10 @@
 10-05-2015
   * Added support for Swiss German (pull request #75)
   * Added commands \Asbuk and \asbuk for Ukrainian (pull request #76), similar to Russian
+  * Documented changes to Latin from last year.
+
+09-05-2015
+  * Be friendlier to right-to-left languages with LuaTeX
 
 04-06-2014
   * Enhanced Latin support by Claudio Beccari
