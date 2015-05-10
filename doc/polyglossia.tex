@@ -13,7 +13,7 @@
     citecolor=myblue,
     hyperindex=false,
     hyperfootnotes=false,
-    pdftitle={Polyglossia: A Babel replacement for XeLaTeX and LuaLaTeX},
+    pdftitle={Polyglossia: An alternative to Babel for XeLaTeX and LuaLaTeX},
     pdfauthor={F Charette, A Reutenauer},
     pdfkeywords={xetex, xelatex, luatex, lualatex, multilingual, babel, hyphenation}
     ]{hyperref}
@@ -72,7 +72,7 @@
 
 \title{\textcolor{lightblue}{\Huge\fontspec[LetterSpace=40]{GFS Ambrosia} Πολυγλωσσια}
 \\[16pt]
-\color{myblue}Polyglossia: A Babel Replacement for \XeLaTeX\ and \LuaLaTeX}
+\color{myblue}Polyglossia: An Alternative to Babel for \XeLaTeX\ and \LuaLaTeX}
 \author{\scshape\color{myblue}François Charette\\\color{myblue}Current maintainer: \scshape Arthur Reutenauer}
 \date{\filedate \qquad \fileversion\\
 \footnotesize (\textsc{pdf} file generated on \today)}
@@ -93,7 +93,7 @@
 
 Polyglossia is a package for facilitating multilingual typesetting with
 \XeLaTeX\ and (at an early stage) \LuaLaTeX.  Basically, it
-can be used as a replacement of \pkg{babel} for performing the following
+can be used as an alternative to \pkg{babel} for performing the following
 tasks automatically:
 
 \begin{enumerate}
@@ -148,7 +148,7 @@ Language-specific options can be set or changed at any time by means of
 	\displaycmd{\setkeys\{⟨lang⟩\}\{opt1=value1,opt2=value2,…\}.}{\setkeys}
 
 
-\subsection{The “Babel way”}
+\subsection{The “Babel way” – obsolete}
 \new{v1.2.0}
 {\color{red}\bfseries Warning}: \pkg{polyglossia} no longer supports loading
 language definition files as package options!
@@ -242,21 +242,21 @@ that are explained in section \ref{specific} below.
 % painstakingly edited by hand because I failed to see the note above :-P -- Arthur
 \begin{tabular}{lllll}
 \hline
-albanian     & czech          & \TX{hindi}    & norsk        & spanish       \\
-amharic      & danish         & icelandic     & nynorsk      & swedish       \\
-\TX{arabic}  & divehi         & interlingua   & occitan      & \TX{syriac}   \\
-armenian     & \TX{dutch}     & irish         & piedmontese  & tamil         \\
-asturian     & \TX{english}   & \TX{italian}  & polish       & telugu        \\
-bahasai      & \TX{esperanto} & kannada       & portuges     & tibetan       \\
-bahasam      & estonian       & \TX{lao}      & romanian     & \TX{thai}     \\
-basque       & \TX{farsi}     & latin         & romansh      & turkish       \\
-\TX{bengali} & finnish        & latvian       & \TX{russian} & turkmen       \\
-brazil[ian]  & french         & lithuanian    & samin        & ukrainian     \\
-breton       & friulan        & \TX{lsorbian} & \TX{sanskrit}& urdu          \\
-bulgarian    & galician       & \TX{magyar}   & scottish     & \TX{usorbian} \\
-\TX{catalan} & \TX{german}    & malayalam     & \TX{serbian} & vietnamese    \\
-coptic       & \TX{greek}     & marathi       & slovak       & welsh         \\
-croatian     & \TX{hebrew}    & nko           & slovenian    &               \\
+albanian     & czech          & \TX{hindi}    & norsk        & spanish        \\
+amharic      & danish         & icelandic     & nynorsk      & swedish        \\
+\TX{arabic}  & divehi         & interlingua   & occitan      & \TX{syriac}    \\
+armenian     & \TX{dutch}     & irish         & piedmontese  & tamil          \\
+asturian     & \TX{english}   & \TX{italian}  & polish       & telugu         \\
+bahasai      & \TX{esperanto} & kannada       & portuges     & tibetan        \\
+bahasam      & estonian       & \TX{lao}      & romanian     & \TX{thai}      \\
+basque       & \TX{farsi}     & latin         & romansh      & turkish        \\
+\TX{bengali} & finnish        & latvian       & \TX{russian} & turkmen        \\
+brazil[ian]  & french         & lithuanian    & samin        & \TX{ukrainian} \\
+breton       & friulan        & \TX{lsorbian} & \TX{sanskrit}& urdu           \\
+bulgarian    & galician       & \TX{magyar}   & scottish     & \TX{usorbian}  \\
+\TX{catalan} & \TX{german}    & malayalam     & \TX{serbian} & vietnamese     \\
+coptic       & \TX{greek}     & marathi       & slovak       & welsh          \\
+croatian     & \TX{hebrew}    & nko           & slovenian    &                \\
 \hline
 \end{tabular}
 \caption{Languages currently supported in \pkg{polyglossia}}
@@ -647,6 +647,14 @@ To insert the word breaks, you need to use an external processor.
 See the documentation to \pkg{thai-latex} and the file \file{testthai.tex}
 that comes with this package.
 
+\subsection{ukrainian}\label{russian}
+\textbf{Commands}:
+	\begin{itemize}
+	\item \Cmd\Asbuk: produces the uppercase Ukrainian alphabet, for
+	environments such as ¦enumerate¦
+	\item \Cmd\asbuk: same in lowercase
+	\end{itemize}
+
 \section{Modifying or extending captions and date formats}
 
 To redefine internal macros, you can use the command ¦\gappto¦ from the package
@@ -792,5 +800,14 @@ document in dozens of different languages!
 Support for Lao was also added thanks to Brian Wilson.
 I also thank Alan Munn for kindly proof-reading the penultimate version of this documentation.
 And of course my gratitude also goes to Jonathan Kew, the formidable author of \XeTeX!
+
+\section{More acknowledgements (by Arthur Reutenauer)}
+Many thanks to all the people who have contributed bugfixes and new features to
+Polyglossia since I took over.  Most of them can be identified from the version
+control log on \href{https://github.com}{GitHub} and I won’t try to name them
+all (maybe, one day ...); among the ones who sent contributions directly to me
+I would like to especially thank Claudio Beccari, the indefatigable champion of
+Romance languages, and beyond!
+
 \end{document}
 
