@@ -802,7 +802,7 @@ That is almost guaranteed to cause problems.}
 
 \define@boolkey{polyglossia}[system@]{babelshorthands}[false]{}
 
-\AtEndPreamble{\@ifpackageloaded{bidi}{\newcommand*{\aemph}[1]{$\overline{\hboxR{#1}}$}}{}}
+\AtEndPreamble{\@ifpackageloaded{bidi}{\providecommand*{\aemph}[1]{$\overline{\hboxR{#1}}$}}{}}
 
 %% Package Options %%
 \DeclareOption{nolocalmarks}{\setkeys{polyglossia}{localmarks=false}}
