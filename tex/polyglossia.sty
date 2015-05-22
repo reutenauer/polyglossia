@@ -579,9 +579,9 @@ That is almost guaranteed to cause problems.}
 \fi\fi
 % This robustifies the redefinitions of \<xx>family (suggestion by Enrico Gregorio)
 % e.g. to prevent expansion of the \familytype redefinition in auxiliary files
-\csgappto{rmfamily }{\def\familytype{rm}}
-\csgappto{sffamily }{\def\familytype{sf}}
-\csgappto{ttfamily }{\def\familytype{tt}}
+\csgappto{rmfamily~}{\def\familytype{rm}}
+\csgappto{sffamily~}{\def\familytype{sf}}
+\csgappto{ttfamily~}{\def\familytype{tt}}
 % This saves the normalfont for the latin script since we may change normalfont in other scripts
 \let\normalfontlatin=\normalfont%
 \let\rmfamilylatin=\rmfamily%
