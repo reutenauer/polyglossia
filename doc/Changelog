@@ -6,6 +6,8 @@
 
 11-05-2015
   * Merged fix for Hebrew date format, by Guy Rutenberg (pull request #94)
+  * Merged fix for spurious space, by Caleb McKennan (pull request #91)
+  * Merged pull request #84 by Élie Roux for Tibetan
 
 10-05-2015
   * Added support for Swiss German (pull request #75)
