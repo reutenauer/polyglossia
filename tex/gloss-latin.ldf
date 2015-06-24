@@ -87,6 +87,7 @@
        \def\latin@variant{\l@latin}%
     \else
       \def\latin@variant{\l@classiclatin}%
+      \xpg@set@language@luatex@ii{classiclatin}%
     \fi
     \def\captionslatin{\modernlatincaptions}%
     \def\datelatin{\classiclatindate}%
