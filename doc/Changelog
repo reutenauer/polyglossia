@@ -1,6 +1,12 @@
 24-06-2015
   * Fix for Classic Latin: load patterns for LuaTeX
 
+23-05-2015
+  * Made \rmfamily, \sffamiliy and \ttfamily robust again
+
+11-05-2015
+  * Merged fix for Hebrew date format, by Guy Rutenberg (pull request #94)
+
 10-05-2015
   * Added support for Swiss German (pull request #75)
   * Added commands \Asbuk and \asbuk for Ukrainian (pull request #76), similar to Russian
