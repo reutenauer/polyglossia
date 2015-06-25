@@ -56,7 +56,7 @@
 
 \def\Asbuk#1{\expandafter\ukrainian@Alph\csname c@#1\endcsname}
 \def\ukrainian@Alph#1{\ifcase#1\or
-   А\or Б\or В\or г\or д\or Е\or Є\or Ж\or
+   А\or Б\or В\or Г\or Д\or Е\or Є\or Ж\or
    З\or И\or І\or Ї\or Й\or К\or Л\or М\or Н\or О\or
    П\or Р\or С\or Т\or У\or Ф\or Х\or
    Ц\or Ч\or Ш\or Щ\or Ю\or Я\else\xpg@ill@value{#1}{ukrainian@Alph}\fi}
