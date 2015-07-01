@@ -207,22 +207,22 @@
   \ifgerman@latesthyphen
     \if@german@oldspelling
         \if@swiss@locale
-            \xpg@set@language@luatex@ii{swissgerman}
+            \xpg@set@language@luatex@ii{swissgerman}%
         \else
-            \xpg@set@language@luatex@ii{german-x-latest}
+            \xpg@set@language@luatex@ii{german-x-latest}%
         \fi
     \else
-        \xpg@set@language@luatex@ii{ngerman-x-latest}
+        \xpg@set@language@luatex@ii{ngerman-x-latest}%
     \fi
   \else% (latesthyphen=false)
     \if@german@oldspelling
         \if@swiss@locale
-            \xpg@set@language@luatex@ii{swissgerman}
+            \xpg@set@language@luatex@ii{swissgerman}%
         \else
-            \xpg@set@language@luatex@ii{german}
+            \xpg@set@language@luatex@ii{german}%
         \fi
     \else
-        \xpg@set@language@luatex@ii{ngerman}
+        \xpg@set@language@luatex@ii{ngerman}%
     \fi
   \fi
 }
