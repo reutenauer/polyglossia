@@ -1,3 +1,7 @@
+03-07-2015
+  * Fixed extraneous space in code for Swiss German (pull request #101)
+  * Fixed a typo in Ukrainian alphabet, for \Asbuk (pull request #99)
+
 24-06-2015
   * Fix for Classic Latin: load patterns for LuaTeX
 
