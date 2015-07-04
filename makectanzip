@@ -2,14 +2,20 @@
 
 # TODO Test zip and DTX file thus produced!
 
-root=`dirname $0`
+pgroot=`dirname $0`
 
-first_char=`echo $root | sed -e 's/^\(.\).*$/\1/'`
+first_char=`echo $pgroot | sed -e 's/^\(.\).*$/\1/'`
 
 if [ "$first_char" != '/' ]; then
-  root="`pwd`/$root"
+  pgroot="`pwd`/$pgroot"
 fi
 
+origdir=`pwd`
+tmpdir=`mktemp -d`
+root=$tmpdir/polyglossia
+
+cd $tmpdir
+git clone https://github.com/reutenauer/polyglossia
 builddir="$root/build"
 mkdir -p $builddir
 
@@ -18,6 +24,7 @@ pdfsrc="$root/doc/polyglossia.tex"
 pdfbasename=${pdf%.pdf}
 
 cd $root
+source ./env
 
 # Overrides the default 79.  This makes for overly long lines in TeX’s
 # output, but at least it’s easy to see what’s on the same line and
@@ -115,4 +122,6 @@ mv -f $root/doc/*.pdf $root/generated || exit 1
 rm -rf $builddir
 
 echo "$ctanzip is ready to upload"
+mv -f $ctanzip $pgroot/
+cd $origdir
 exit 0
