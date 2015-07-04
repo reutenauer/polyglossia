@@ -105,7 +105,7 @@ echo "Make CTAN zip ..."
 ctanzip="polyglossia.zip"
 mkdir -p $builddir/tmp/polyglossia
 cd $builddir/tmp
-mv $builddir/$tarball polyglossia/ || exit 1
+mv $builddir/$tarball . || exit 1
 mv $builddir/polyglossia.{dtx,ins} polyglossia/ || exit 1
 cp $root/{doc/polyglossia.pdf,README} polyglossia/ || exit 1
 zip -9 $ctanzip polyglossia/* || exit 1
