@@ -108,7 +108,7 @@ cd $builddir/tmp
 mv $builddir/$tarball . || exit 1
 mv $builddir/polyglossia.{dtx,ins} polyglossia/ || exit 1
 cp $root/{doc/polyglossia.pdf,README} polyglossia/ || exit 1
-zip -9 $ctanzip polyglossia/* || exit 1
+zip -9 $ctanzip polyglossia/* polyglossia.tds.zip || exit 1
 mv $ctanzip $root/ || exit 1
 cd $root
 mv -f $root/doc/*.pdf $root/generated || exit 1
