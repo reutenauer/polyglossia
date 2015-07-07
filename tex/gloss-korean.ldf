@@ -1,0 +1,190 @@
+\ProvidesFile{gloss-korean.ldf}[polyglossia: module for Korean]
+
+\PolyglossiaSetup{korean}{
+    script=Hangul,
+    scripttag=hang,
+    language=Korean,
+    langtag=KOR,
+    hyphennames={english,american,usenglish,USenglish},
+    hyphenmins={2,3},
+    frenchspacing=true,
+    fontsetup=true
+}
+
+\def\captionskorean{%
+    \def\partname##1##2{제##1##2 편}%
+    \def\chaptername{장}%
+    \def\refname{참고문헌}%
+    \def\abstractname{요약}%
+    \def\bibname{참고문헌}%
+    \def\prefacename{서문}%
+    \def\appendixname{부록}%
+    \def\contentsname{차례}%
+    \def\listfigurename{그림 차례}%
+    \def\listtablename{표 차례}%
+    \def\indexname{찾아보기}%
+    \def\figurename{그림}%
+    \def\tablename{표}%
+    \def\pagename{페이지}%
+    \def\seename{$rightarrow$}%
+    \def\alsoname{$Rightarrow$}%
+    \def\enclname{동봉}%
+    \def\proofname{증명}%
+}
+\def\xpg@korean@language{korean}
+\AtBeginDocument{
+    \ifx\xpg@main@language\xpg@korean@language
+        \@ifclassloaded{book}{\def\@chapapp#1#2{제#1#2#1\chaptername}}{
+            \@ifclassloaded{report}{\def\@chapapp#1#2{제#1#2#1\chaptername}}{}
+        }
+    \fi
+}
+
+\def\datekorean{%
+    \def\today{\the\year 년 \the\month 월 \the\day 일}%
+}
+
+\ifluatex
+\directlua{
+local nobreak_after = {
+    [0x28] = true, [0x3C] = true, [0x5B] = true, [0x60] = true, [0x7B] = true,
+    [0x2018] = true, [0x201C] = true, [0x3008] = true, [0x300A] = true,
+    [0x300C] = true, [0x300E] = true, [0x3010] = true, [0x3014] = true,
+    [0xFF08] = true, [0xFF1C] = true, [0xFF3B] = true, [0xFF5B] = true,
+}
+local nobreak_before = {
+    [0x21] = true, [0x22] = true, [0x27] = true, [0x29] = true, [0x2C] = true,
+    [0x2D] = true, [0x2E] = true, [0x2F] = true, [0x3A] = true, [0x3B] = true,
+    [0x3E] = true, [0x3F] = true, [0x5D] = true, [0x7D] = true, [0xB7] = true,
+    [0x2013] = true, [0x2014] = true, [0x2015] = true, [0x2019] = true,
+    [0x201D] = true, [0x2025] = true, [0x2026] = true, [0x3001] = true,
+    [0x3002] = true, [0x3009] = true, [0x300B] = true, [0x300D] = true,
+    [0x300F] = true, [0x3011] = true, [0x3015] = true, [0xFF01] = true,
+    [0xFF09] = true, [0xFF0C] = true, [0xFF0E] = true, [0xFF1A] = true,
+    [0xFF1B] = true, [0xFF1F] = true, [0xFF3D] = true, [0xFF5D] = true,
+    [0x3041] = true, [0x3043] = true, [0x3045] = true, [0x3047] = true,
+    [0x3049] = true, [0x3063] = true, [0x3083] = true, [0x3085] = true,
+    [0x3087] = true, [0x308E] = true, [0x3095] = true, [0x3096] = true, 
+    [0x3099] = true, [0x309A] = true, [0x309B] = true, [0x309C] = true,
+    [0x309D] = true, [0x309E] = true, [0x30A0] = true, [0x30A1] = true,
+    [0x30A3] = true, [0x30A5] = true, [0x30A7] = true, [0x30A9] = true,
+    [0x30C3] = true, [0x30E3] = true, [0x30E5] = true, [0x30E7] = true,
+    [0x30EE] = true, [0x30F5] = true, [0x30F6] = true, [0x30FB] = true,
+    [0x30FC] = true, [0x30FD] = true, [0x30FE] = true,
+}
+for i=0x1160, 0x11FF do nobreak_before[i] = true end
+for i=0xD7B0, 0xD7FB do nobreak_before[i] = true end
+for i=0x302E, 0x302F do nobreak_before[i] = true end
+for i=0x31F0, 0x31FF do nobreak_before[i] = true end
+local is_cjk = function (c)
+    return  (c >= 0xAC00  and c <= 0xD7A3)
+    or      (c >= 0x1100  and c <= 0x115F)
+    or      (c >= 0xA960  and c <= 0xA97C)
+    or      (c >= 0x3400  and c <= 0x9FFF)
+    or      (c >= 0xF900  and c <= 0xFAFF)
+    or      (c >= 0x2E80  and c <= 0x2FFF)
+    or      (c >= 0x3040  and c <= 0x30FF)
+    or      (c >= 0x20000 and c <= 0x2CEAF)
+    or      (c >= 0x2F800 and c <= 0x2FA1F)
+    or      (nobreak_after[c]  and c > 0xFF)
+    or      (nobreak_before[c] and c > 0xFF)
+end
+local insert_penalty_glue = function (head, curr)
+    local penalty = node.new("penalty")
+    penalty.penalty = 50
+    local glue = node.new("glue")
+    local spec = node.new("glue_spec")
+    local size = fonts.hashes.identifiers[curr.font] or font.fonts[curr.font]
+    size = size and size.size or 655360
+    spec.width   = 0
+    spec.stretch = size/10
+    spec.shrink  = size/25
+    glue.spec = spec
+    head, curr = node.insert_after(head, curr, penalty)
+    head, curr = node.insert_after(head, curr, glue)
+    return head, curr
+end
+local korean_break = function (head)
+    local curr = head
+    while curr do
+        if curr.id == 37 then
+            local next = curr.next
+            if next and next.id == 37 then
+                local c, n = curr.char, next.char
+                if (is_cjk(c) or is_cjk(n)) and not nobreak_before[n] and not nobreak_after[c] then
+                    head, curr = insert_penalty_glue(head, curr)
+                end
+            end
+        end
+        curr = curr.next
+    end
+    return head
+end
+local reorder_tm = function (head)
+    local tone
+    local curr = node.tail(head)
+    while curr do
+        if curr.id == 37 then
+            local c, wd = curr.char, curr.width 
+            if (c == 0x302E or c == 0x302F) and wd and wd > 0 then
+                tone = curr
+            elseif tone and not nobreak_before[c] then
+                head = node.remove(head, tone)
+                tone.next, tone.prev = nil, nil
+                head, curr = node.insert_before(head, curr, tone)
+                tone = nil
+            end
+        end
+        curr = curr.prev
+    end
+    return head
+end
+local loaded 
+polyglossia.add_korean_break = function ()
+    if not loaded then
+        luatexbase.add_to_callback ("pre_linebreak_filter", reorder_tm, "polyglossia.reorder_korean_tm", 1)
+        luatexbase.add_to_callback ("pre_linebreak_filter", korean_break, "polyglossia.korean_break", 1)
+        luatexbase.add_to_callback ("hpack_filter", reorder_tm, "polyglossia.reorder_korean_tm", 1)
+        loaded = true
+    end
+end
+polyglossia.remove_korean_break = function ()
+    if loaded then
+        luatexbase.remove_from_callback ("hpack_filter", "polyglossia.reorder_korean_tm")
+        luatexbase.remove_from_callback ("pre_linebreak_filter", "polyglossia.korean_break")
+        luatexbase.remove_from_callback ("pre_linebreak_filter", "polyglossia.reorder_korean_tm")
+        loaded = false
+    end
+end
+}
+\fi
+
+\def\noextras@korean{%
+    \ifxetex
+        \XeTeXlinebreaklocale ""
+    \else
+        \directlua{polyglossia.remove_korean_break()}%
+    \fi
+    \ifdefined\xpg@orig@baselinestretch \xpg@orig@baselinestretch \fi
+    \ifdefined\xpg@orig@footnotesep     \xpg@orig@footnotesep     \fi
+}
+
+\def\inlineextras@korean{%
+    \ifxetex
+        \XeTeXlinebreaklocale "ko"
+        \XeTeXlinebreakpenalty 50
+        \XeTeXlinebreakskip 0pt plus.1em minus .04em
+    \else
+        \directlua{polyglossia.add_korean_break()}%
+    \fi
+}
+
+\def\blockextras@korean{%
+    \inlineextras@korean
+    \xdef\xpg@orig@baselinestretch{\def\noexpand\baselinestretch{\ifdefined\baselinestretch\baselinestretch\else 1\fi}}%
+    \def\baselinestretch{1.3888}\selectfont
+    \xdef\xpg@orig@footnotesep{\noexpand\footnotesep=\ifdefined\footnotesep\the\footnotesep\else 0pt\fi}%
+    \footnotesep=1.3888\footnotesep
+}
+
+% vim:tw=72:sw=4:ts=4:expandtab
