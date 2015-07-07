@@ -30,6 +30,8 @@
     \def\alsoname{$Rightarrow$}%
     \def\enclname{동봉}%
     \def\proofname{증명}%
+    \def\headtoname{수신:}%
+    \def\ccname{사본}%
 }
 \def\xpg@korean@language{korean}
 \AtBeginDocument{
