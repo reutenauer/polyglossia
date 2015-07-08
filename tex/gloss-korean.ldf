@@ -47,7 +47,9 @@
 }
 
 \ifluatex
+\newluatexattribute\xpg@attr@korean
 \directlua{
+local attr_korean = luatexbase.attributes["xpg@attr@korean"]
 local nobreak_after = {
     [0x28] = true, [0x3C] = true, [0x5B] = true, [0x60] = true, [0x7B] = true,
     [0x2018] = true, [0x201C] = true, [0x3008] = true, [0x300A] = true,
@@ -109,7 +111,7 @@ end
 local korean_break = function (head)
     local curr = head
     while curr do
-        if curr.id == 37 then
+        if curr.id == 37 and node.has_attribute(curr, attr_korean) then
             local next = curr.next
             if next and next.id == 37 then
                 local c, n = curr.char, next.char
@@ -126,7 +128,7 @@ local reorder_tm = function (head)
     local tone
     local curr = node.tail(head)
     while curr do
-        if curr.id == 37 then
+        if curr.id == 37 and node.has_attribute(curr, attr_korean) then
             local c, wd = curr.char, curr.width 
             if (c == 0x302E or c == 0x302F) and wd and wd > 0 then
                 tone = curr
@@ -141,23 +143,9 @@ local reorder_tm = function (head)
     end
     return head
 end
-local loaded 
-polyglossia.add_korean_break = function ()
-    if not loaded then
-        luatexbase.add_to_callback ("pre_linebreak_filter", reorder_tm, "polyglossia.reorder_korean_tm", 1)
-        luatexbase.add_to_callback ("pre_linebreak_filter", korean_break, "polyglossia.korean_break", 1)
-        luatexbase.add_to_callback ("hpack_filter", reorder_tm, "polyglossia.reorder_korean_tm", 1)
-        loaded = true
-    end
-end
-polyglossia.remove_korean_break = function ()
-    if loaded then
-        luatexbase.remove_from_callback ("hpack_filter", "polyglossia.reorder_korean_tm")
-        luatexbase.remove_from_callback ("pre_linebreak_filter", "polyglossia.korean_break")
-        luatexbase.remove_from_callback ("pre_linebreak_filter", "polyglossia.reorder_korean_tm")
-        loaded = false
-    end
-end
+luatexbase.add_to_callback ("pre_linebreak_filter", reorder_tm, "polyglossia.reorder_korean_tm", 1)
+luatexbase.add_to_callback ("pre_linebreak_filter", korean_break, "polyglossia.korean_break", 1)
+luatexbase.add_to_callback ("hpack_filter", reorder_tm, "polyglossia.reorder_korean_tm", 1)
 }
 \fi
 
@@ -165,7 +153,7 @@ end
     \ifxetex
         \XeTeXlinebreaklocale ""
     \else
-        \directlua{polyglossia.remove_korean_break()}%
+        \unsetluatexattribute\xpg@attr@korean
     \fi
     \ifdefined\xpg@orig@baselinestretch \xpg@orig@baselinestretch \fi
     \ifdefined\xpg@orig@footnotesep     \xpg@orig@footnotesep     \fi
@@ -177,7 +165,7 @@ end
         \XeTeXlinebreakpenalty 50
         \XeTeXlinebreakskip 0pt plus.1em minus .04em
     \else
-        \directlua{polyglossia.add_korean_break()}%
+        \xpg@attr@korean=1
     \fi
 }
 
