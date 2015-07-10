@@ -46,6 +46,30 @@
     \def\today{\the\year 년 \the\month 월 \the\day 일}%
 }
 
+\def\koreanAlph#1{\expandafter\@koreanAlph\csname c@#1\endcsname}
+\def\@koreanAlph#1{%
+    \ifcase#1\or 가\or 나\or 다\or 라\or 마\or 바\or 사\or 아\or 자\or
+    차\or 카\or 타\or 파\or 하\else\xpg@ill@value{#1}{@koreanAlph}\fi
+}
+
+\def\koreanalph#1{\expandafter\@koreanalph\csname c@#1\endcsname}
+\def\@koreanalph#1{%
+    \ifcase#1\or ㄱ\or ㄴ\or ㄷ\or ㄹ\or ㅁ\or ㅂ\or ㅅ\or ㅇ\or ㅈ\or
+    ㅊ\or ㅋ\or ㅌ\or ㅍ\or ㅎ\else\xpg@ill@value{#1}{@koreanalph}\fi
+}
+
+\def\korean@numbers{%
+    \let\@orig@alph\@alph
+    \let\@orig@Alph\@Alph
+    \let\@alph\@koreanalph
+    \let\@Alph\@koreanAlph
+}
+\def\nokorean@numbers{%
+    \let\@alph\@orig@alph
+    \let\@Alph\@orig@Alph
+}
+\let\nokorean@globalnumbers\nokorean@numbers
+
 \ifluatex
 \newluatexattribute\xpg@attr@korean
 \directlua{
