@@ -73,6 +73,7 @@
 \ifluatex
 \newluatexattribute\xpg@attr@korean
 \directlua{
+local glyph_id = node.id("glyph")
 local attr_korean = luatexbase.attributes["xpg@attr@korean"]
 local nobreak_after = {
     [0x28] = true, [0x3C] = true, [0x5B] = true, [0x60] = true, [0x7B] = true,
@@ -135,9 +136,9 @@ end
 local korean_break = function (head)
     local curr = head
     while curr do
-        if curr.id == 37 and node.has_attribute(curr, attr_korean) then
+        if curr.id == glyph_id and node.has_attribute(curr, attr_korean) then
             local next = curr.next
-            if next and next.id == 37 then
+            if next and next.id == glyph_id then
                 local c, n = curr.char, next.char
                 if (is_cjk(c) or is_cjk(n)) and not nobreak_before[n] and not nobreak_after[c] then
                     head, curr = insert_penalty_glue(head, curr)
@@ -152,7 +153,7 @@ local reorder_tm = function (head)
     local tone
     local curr = node.tail(head)
     while curr do
-        if curr.id == 37 and node.has_attribute(curr, attr_korean) then
+        if curr.id == glyph_id and node.has_attribute(curr, attr_korean) then
             local c, wd = curr.char, curr.width 
             if (c == 0x302E or c == 0x302F) and wd and wd > 0 then
                 tone = curr
