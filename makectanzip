@@ -51,6 +51,7 @@ if [[ ! -f $pdf || $pdf -ot $pdfsrc  ]] ; then
     xelatex $doc.tex || exit 1
     xelatex $doc.tex
     rm -f $doc.{log,aux,toc}
+    cp -f $doc.pdf $pgroot/generated
     cd $root
   done
 fi
