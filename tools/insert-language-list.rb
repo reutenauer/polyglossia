@@ -7,6 +7,7 @@ def make_table
 \\hline
   __EOPreamble__
   postamble = <<-__EOPostamble__
+
 \\hline
 \\end{tabular}
   __EOPostamble__
