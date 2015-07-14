@@ -1,3 +1,9 @@
+1.40.1 (14-07-2015)
+  * Bugfix for Korean, by Kim Dohyun (pull request #103)
+
+1.40.0 (07-07-2015)
+  * gloss-korean.ldf contributed by Kim Dohyun (pull request #102)
+
 1.33.7 (04-07-2015)
   * Release to CTAN, no code change
 
