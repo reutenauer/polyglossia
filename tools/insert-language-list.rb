@@ -25,14 +25,8 @@ end
 f.close
 
 nrow = (languages.count.to_f / 5).ceil
-puts nrow
 0.upto(nrow - 1) do |row|
-  a = 0.upto(4).map do |col|
+  tablecontent = 0.upto(4).map do |col|
     languages[row + col * nrow]
-  end
-  puts a.inspect
-  puts a.join(' & ')
-end
-languages.each do |language|
-  # puts language
+  end.join(' & ')
 end
