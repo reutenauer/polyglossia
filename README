@@ -1,7 +1,7 @@
 
    ¦----------------------------------------------¦
    ¦                                              ¦
-   ¦       THE POLYGLOSSIA PACKAGE v1.40.0        ¦
+   ¦       THE POLYGLOSSIA PACKAGE v1.40.1        ¦
    ¦                                              ¦
    ¦     Modern multilingual typesetting          ¦
    ¦        with XeLaTeX and LuaLaTeX             ¦
@@ -10,7 +10,7 @@
 
 This package provides an alternative to Babel for users of XeLaTeX and LuaLaTeX
 (with a few languages incompletely supported for the latter). This version
-includes support for 74 different languages.
+includes support for 75 different languages.
 
 Polyglossia makes it possible to automate the following tasks:
 
