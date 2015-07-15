@@ -39,6 +39,7 @@ if [[ ! -f $pdf || $pdf -ot $pdfsrc  ]] ; then
 	cd $root/doc 
 	xelatex $pdfsrc || exit 1
 	xelatex $pdfsrc 
+        cp -f $pdf $pgroot/generated
   rm -f $pdfbasename.{aux,toc,lof,lot,lop,log,out,nav,bbl,blg,ind,idx,glo,ilg,dvi}
   for doc in example-arabic example-thai example-korean examples; do
     echo "COMPILING doc '$doc'"
