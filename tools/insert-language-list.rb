@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'csv'
+require 'byebug'
 
 def make_table
   preamble = <<-__EOPreamble__
@@ -34,20 +35,17 @@ def make_table
     0.upto(nrow - 1) do |row|
       puts "#{row} #{col}"
       next if row == nrow - 1 && col >= remainder
-      language = languages[n] || ""
+      language = languages[n]
       n += 1
       table[[row, col]] = language + ' ' * (14 - language.length)
     end
   end
 
-  formatted_table = ''
-  0.upto(nrow - 1) do |row|
-    formatted_table += (0..4).map do |col|
+  preamble +  0.upto(nrow - 1).inject('') do |form, row|
+    form + (0..4).map do |col|
       table[[row, col]]
     end.compact.join(' & ') + "\\\\\n"
-  end
-
-  preamble + formatted_table + postamble
+  end + postamble
 end
 
 puts make_table
