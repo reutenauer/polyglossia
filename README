@@ -30,6 +30,13 @@ Polyglossia makes it possible to automate the following tasks:
 * Ensuring the proper directionality if the document contains languages
   written from right to left (via the package bidi, available separately).
 
+LICENSE
+
+Polyglossia is placed under the terms of the LaTeX Project Public Licence
+(LPPL), either version 1.3, or, at your option, any later version.  See
+LICENCE.txt for the text of the LPPL v1.3c, or
+http://www.latex-project.org/lppl.txt for the latest version.
+
 BUGS
 
 Polyglossia has no bug, of course.
