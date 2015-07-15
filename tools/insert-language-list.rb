@@ -34,7 +34,7 @@ def make_table
   (0..4).each do |col|
     0.upto(nrow - 1) do |row|
       puts "#{row} #{col}"
-      next if row == nrow - 1 && col >= remainder
+      next unless row < nrow - 1 || col < remainder
       language = languages[n]
       n += 1
       table[[row, col]] = language + ' ' * (14 - language.length)
