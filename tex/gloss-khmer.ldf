@@ -2,7 +2,7 @@
 \PolyglossiaSetup{khmer}{
 	script=Khmer,%
 	scripttag=khmr,%
-	langtag=kh,%
+	langtag=KHM,%
 	hyphennames={nohyphenation},%
 	fontsetup=true%
 }
