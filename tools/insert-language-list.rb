@@ -29,7 +29,7 @@ def make_table
   nrow = (languages.count.to_f / 5).ceil
   preamble + 0.upto(nrow - 1).inject([]) do |table, row|
     table << 0.upto(4).map do |col|
-      language = languages[row + col * nrow]
+      language = languages[row + col * nrow] || ''
       language + ' ' * (14 - language.length)
     end.join(' & ') + '\\\\'
   end.join("\n") + postamble
