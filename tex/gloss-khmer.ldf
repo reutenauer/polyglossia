@@ -1,0 +1,157 @@
+\ProvidesFile{gloss-khmer.ldf}[polyglossia: module for Khmer]
+\PolyglossiaSetup{khmer}{
+	script=Khmer,%
+	scripttag=khmr,%
+	langtag=kh,%
+	hyphennames={nohyphenation},%
+	fontsetup=true%
+}
+\newif\if@khmer@numerals
+\def\tmp@khmer{khmer}
+\define@key{khmer}{numerals}[arabic]{%
+	\def\@tmpa{#1}%
+	\ifx\@tmpa\tmp@khmer\@khmer@numeralstrue%
+	\else\@khmer@numeralsfalse\fi%
+}
+\setkeys{khmer}{numerals}
+\def\captionskhmer{%
+	\def\prefacename{អារម្ភកថា}%
+	\def\refname{ឯកសារយោង}%
+	\def\abstractname{សង្ខេប}%
+	\def\bibname{គន្ថនិទ្ទេស}%
+	\def\chaptername{ជំពូក}%
+	\def\appendixname{សេចក្ដីបន្ថែម}%
+	\def\contentsname{មាតិការ}%
+	\def\listfigurename{បញ្ជីរូបភាព}%
+	\def\listtablename{បញ្ជីតារាង}%
+	\def\indexname{សន្ទស្សន៍}%
+	\def\figurename{រូប}%
+	\def\tablename{តារាង}%
+	\def\partname{ផ្នែក}%
+	\def\pagename{ទំព័រ}%
+	\def\seename{មើល}%
+	\def\alsoname{មើលបន្ថែម}%
+	\def\enclname{ឯកសារភ្ជាប់}%
+	\def\ccname{ចម្លងជួន}%
+	\def\headtoname{ផ្ញើរទៅ}%
+	\def\proofname{សម្រាយ}%
+	\def\glossaryname{សទានុក្រម}%
+}
+\def\datekhmer{%
+	\def\khmer@month{%
+		\ifcase\month\or%
+		មករា\or%
+		កុម្ភៈ\or%
+		មិនា\or%
+		មេសា\or%
+		ឧសភា\or%
+		មិថុនា\or%
+		កក្កដា\or%
+		សីហា\or%
+		កញ្ញា\or%
+		តុលា\or%
+		វិច្ឆិកា\or%
+		ធ្នូ\fi}%
+	\def\today{\khmernumber\day\space\khmer@month\space\khmernumber\year}%
+}
+\def\khmerdigits#1{\expandafter\@khmer@digits #1@}
+\def\@khmer@digits#1{%
+	\ifx @#1% then terminate
+	\else\ifx0#1០%
+	\else\ifx1#1១%
+	\else\ifx2#1២%
+	\else\ifx3#1៣%
+	\else\ifx4#1៤%
+	\else\ifx5#1៥%
+	\else\ifx6#1៦%
+	\else\ifx7#1៧%
+	\else\ifx8#1៨%
+	\else\ifx9#1៩%
+	\else#1\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+    \expandafter\@khmer@digits%
+    \fi
+}
+\def\khmernumber#1{%
+	\if@khmer@numerals%
+		\khmerdigits{\number#1}%
+	\else%
+		\number#1%
+	\fi}
+\def\khmer@globalnumbers{%
+	\let\orig@arabic\@arabic%
+	\let\@arabic\khmernumber%
+	\renewcommand{\thefootnote}{\protect\khmernumber{\c@footnote}}%
+}
+\def\nokhmer@globalnumbers{%
+	\let\@arabic\orig@arabic%
+	\renewcommand\thefootnote{\protect\number{\c@footnote}}%
+}
+\def\thepart{\arabic{part}}
+\def\@khmeralph#1{%
+\ifcase#1%
+\or ក\or ខ\or គ\or ឃ\or ង%
+\or ច\or ឆ\or ជ\or ឈ\or ញ%
+\or ដ\or ឋ\or ឌ\or ឍ\or ណ%
+\or ត\or ថ\or ទ\or ធ\or ន%
+\or ប\or ផ\or ព\or ភ\or ម%
+\or យ\or រ\or ល\or វ\or ស\or ហ\or ឡ\or អ%
+\else\xpg@ill@value{#1}{@khmeralph}\fi}
+\def\khmerAlph#1{\expandafter\@khmerAlph\csname c@#1\endcsname}
+\def\@khmerAlph#1{%
+\ifcase#1%
+\or ក\or ខ\or គ\or ឃ\or ង%
+\or ច\or ឆ\or ជ\or ឈ\or ញ%
+\or ដ\or ឋ\or ឌ\or ឍ\or ណ%
+\or ត\or ថ\or ទ\or ធ\or ន%
+\or ប\or ផ\or ព\or ភ\or ម%
+\or យ\or រ\or ល\or វ\or ស\or ហ\or ឡ\or អ%
+\else\xpg@ill@value{#1}{@khmeralph}\fi}
+\def\khmer@numbers{%
+	\let\@latinalph\@alph%
+	\let\@latinAlph\@Alph%
+	\if@khmer@numerals
+		\let\@alph\@khmeralph%
+		\let\@Alph\@khmerAlph%
+	\fi%
+}
+\def\nokhmer@numbers{%
+	\let\@alph\@latinalph%
+	\let\@Alph\@latinAlph%
+}
+\def\blockextras@khmer{%
+	\XeTeXlinebreaklocale "kh" % 
+	\XeTeXlinebreakskip = 0pt plus 1pt minus 1pt
+%	\let\orig@baselinestretch\baselinestretch%
+%	\renewcommand{\baselinestretch}{1.2}% not work
+}
+\def\noblockextras@khmer{% 
+	\XeTeXlinebreaklocale "en"%
+%	\let\baselinestretch\orig@baselinestretch%
+}
+\@ifclassloaded{beamer}{%
+	\usefonttheme{professionalfonts}%
+	\def\factname{ស្វ័យសត្យ}%
+	\def\lemmaname{បទគន្លិះ}%
+	\def\theoremname{ទ្រឹស្ដីបទ}%
+	\def\corollaryname{អនុសាធ្យ}%
+	\def\problemname{ចំណោទ}%
+	\def\solutionname{ដំណោះស្រាយ}%
+	\def\definitionname{និយមន័យ}%
+	\def\examplename{ឧទាហរណ៏}%
+	\uselanguage{khmer}%
+	\languagepath{khmer}%
+	\deftranslation[to=khmer]{Fact}{\factname}%
+	\deftranslation[to=khmer]{Lemma}{\lemmaname}%
+	\deftranslation[to=khmer]{Theorem}{\theoremname}%
+	\deftranslation[to=khmer]{Corollary}{\corollaryname}%
+	\deftranslation[to=khmer]{Problem}{\problemname}%
+	\deftranslation[to=khmer]{Solution}{\solutionname}%
+	\deftranslation[to=khmer]{Definition}{\definitionname}%
+	\deftranslation[to=khmer]{Definitions}{\definitionname}%
+	\deftranslation[to=khmer]{Example}{\examplename}%
+	\deftranslation[to=khmer]{Examples}{\examplename}%
+	\AtEndDocument{\immediate\write\@auxout{\string\@writefile{nav}%
+		{\noexpand\headcommand{\noexpand\def\noexpand%
+		\inserttotalframenumber{\khmernumber{\the\c@framenumber}}}}}}%
+}{}
+\endinput
