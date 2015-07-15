@@ -30,10 +30,8 @@ def make_table
   nrow = (languages.count.to_f / 5).ceil
   table = { }
   n = 0
-  puts "nrow = #{nrow}, remainder = #{remainder}"
   (0..4).each do |col|
     0.upto(nrow - 1) do |row|
-      puts "#{row} #{col}"
       next unless row < nrow - 1 || col < remainder
       language = languages[n]
       n += 1
