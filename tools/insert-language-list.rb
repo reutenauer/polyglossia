@@ -7,7 +7,6 @@ def make_table
 \\hline
   __EOPreamble__
   postamble = <<-__EOPostamble__
-
 \\hline
 \\end{tabular}
   __EOPostamble__
@@ -26,13 +25,29 @@ def make_table
   end
   f.close
 
+  remainder = languages.count % 5
   nrow = (languages.count.to_f / 5).ceil
-  preamble + 0.upto(nrow - 1).inject([]) do |table, row|
-    table << 0.upto(4).map do |col|
-      language = languages[row + col * nrow] || ''
-      language + ' ' * (14 - language.length)
-    end.join(' & ') + '\\\\'
-  end.join("\n") + postamble
+  table = { }
+  n = 0
+  puts "nrow = #{nrow}, remainder = #{remainder}"
+  (0..4).each do |col|
+    0.upto(nrow - 1) do |row|
+      puts "#{row} #{col}"
+      next if row == nrow - 1 && col >= remainder
+      language = languages[n] || ""
+      n += 1
+      table[[row, col]] = language + ' ' * (14 - language.length)
+    end
+  end
+
+  formatted_table = ''
+  0.upto(nrow - 1) do |row|
+    formatted_table += (0..4).map do |col|
+      table[[row, col]]
+    end.compact.join(' & ') + "\\\\\n"
+  end
+
+  preamble + formatted_table + postamble
 end
 
 puts make_table
