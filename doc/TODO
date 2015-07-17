@@ -133,6 +133,9 @@ gloss-ukrainian.ldf and others
 gloss-tibetan.ldf
 	* add support for different hyphenation algorithm
 
+gloss-khmer.ldf
+	* fix for LuaTeX
+
 hijrical.sty
 	* \def\CYearsFromHijri#1{%yields the corr julian or gregorian years
 
