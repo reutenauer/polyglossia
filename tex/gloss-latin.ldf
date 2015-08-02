@@ -63,6 +63,7 @@
 
 % set modern as default
 \def\latin@variant{\l@latin}%
+\ifluatex\xpg@set@language@luatex@ii{latin}\fi
 \def\captionslatin{\modernlatincaptions}%
 \def\datelatin{\modernlatindate}%
 \def\classicuclccodes{\lccode`\V=`\u \uccode`\u=`\V}
@@ -96,6 +97,7 @@
     \xpg@info{Option: Classic Latin}%
   \else
     \def\latin@variant{\l@latin}%
+    \xpg@set@language@luatex@ii{latin}
     \def\captionslatin{\modernlatincaptions}%
     \def\datelatin{\modernlatindate}%
     \xpg@info{Option: Modern Latin}%
