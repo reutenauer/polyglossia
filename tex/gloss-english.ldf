@@ -35,7 +35,7 @@
             \xpg@info{Option: english variant=american}}%
             {\ifstrequal{#1}{usmax}%
               {\@british@hyphenfalse\english@ordinalmonthdayfalse
-                \setkeys[xpg@setup]{english}{hyphennames={usenglishmax}}%
+                \ifluatex\else\setkeys[xpg@setup]{english}{hyphennames={usenglishmax}}\fi
                 \xpg@info{Option: english variant=american (with additional patterns)}%
                 \ifcsundef{l@usenglishmax}%
                   {\xpg@warning{No hyphenation patterns were loaded for "US English Max"\MessageBreak
@@ -52,7 +52,7 @@
   }}}}}}%
   \if@british@locale\@british@hyphentrue\english@ordinalmonthdaytrue\fi
   \if@british@hyphen
-    \setkeys[xpg@setup]{english}{hyphennames={ukenglish,british,UKenglish}}%
+    \ifluatex\else\setkeys[xpg@setup]{english}{hyphennames={ukenglish,british,UKenglish}}\f:
     \ifcsundef{l@ukenglish}%
       {\xpg@warning{No hyphenation patterns were loaded for British English\MessageBreak
          I will use the patterns for US English instead}%
