@@ -75,6 +75,7 @@
 \def\@tempa{#1}%
 \ifx\@tempa\tmp@medieval
   \def\latin@variant{\l@latin}%
+  \xpg@set@language@luatex@ii{latin}
   \def\captionslatin{\medievallatincaptions}%
   \def\datelatin{\classiclatindate}% 
   \classicuclccodes
