@@ -52,7 +52,7 @@
   }}}}}}%
   \if@british@locale\@british@hyphentrue\english@ordinalmonthdaytrue\fi
   \if@british@hyphen
-    \ifluatex\else\setkeys[xpg@setup]{english}{hyphennames={ukenglish,british,UKenglish}}\f:
+    \ifluatex\else\setkeys[xpg@setup]{english}{hyphennames={ukenglish,british,UKenglish}}\fi
     \ifcsundef{l@ukenglish}%
       {\xpg@warning{No hyphenation patterns were loaded for British English\MessageBreak
          I will use the patterns for US English instead}%
