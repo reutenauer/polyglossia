@@ -32,8 +32,10 @@
   }
 
 \def\datewelsh{%   
-  \def\today{\ifnum\day=1\relax 1\/\textsuperscript{añ}\else
-    \number\day\fi\space\ifcase\month\or
+  \def\today{\ifcase\day\or 1af\or 2ail\or 3ydd\or 4ydd\or 5ed\or 6ed%
+    \or 7fed\or 8fed\or 9fed\or 10fed\or 11eg\or 12fed\or 13eg\or
+    14eg\or 15fed\or 16eg\or 17eg\or 18fed\or 19eg\or
+    20fed\else\number\day ain\fi\space\ifcase\month\or
     Ionawr\or Chwefror\or Mawrth\or Ebrill\or
     Mai\or Mehefin\or Gorffennaf\or Awst\or
     Medi\or Hydref\or Tachwedd\or Rhagfyr\fi%
