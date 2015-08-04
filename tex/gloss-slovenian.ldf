@@ -38,4 +38,9 @@
     \space \number\year}%
   }
 
+\def\slovenian@alph#1{%
+  \ifcase#1\or a\or b\or c\or č\or d\else#1\fi
+}
+\def\alfabet#1{\expandafter\slovenian@alph\csname c@#1\endcsname}
+
 \endinput
