@@ -1,0 +1,14 @@
+\documentclass{article}
+
+\usepackage{polyglossia}
+\setmainlanguage{welsh}
+\setotherlanguage[variant=british,ordinalmonthday=false]{english}
+
+\begin{document}
+
+\day=0
+\month=8
+\year=2015
+\loop\today\space\ifnum\day<32\advance\day by1\repeat
+
+\end{document}
