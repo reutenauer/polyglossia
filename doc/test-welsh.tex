@@ -3,12 +3,17 @@
 \usepackage{polyglossia}
 \setmainlanguage{welsh}
 \setotherlanguage[variant=british,ordinalmonthday=false]{english}
+\usepackage{xinttools}
 
 \begin{document}
 
-\day=0
 \month=8
 \year=2015
-\loop\today\space\ifnum\day<32\advance\day by1\repeat
+\begin{tabular}{lll}
+\xintFor* #1 in {\xintSeq{1}{31}}
+\do
+{ \day=#1\today & \day=#1\formaltoday & \day=#1\textenglish{\today} \\ }
+
+\end{tabular}
 
 \end{document}
