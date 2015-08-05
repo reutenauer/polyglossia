@@ -43,7 +43,7 @@
 
 \def\datewelsh{%   
   \def\today{\ifwelsh@formaldate\formaltoday\else\standardtoday\fi}
-  \def\standardtoday{
+  \def\standardtoday{%
     \ifcase\day\or 1af\or 2ail\or 3ydd\or 4ydd\or 5ed\or 6ed%
     \or 7fed\or 8fed\or 9fed\or 10fed\or 11eg\or 12fed\or 13eg\or
     14eg\or 15fed\or 16eg\or 17eg\or 18fed\or 19eg\or
