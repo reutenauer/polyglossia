@@ -6,6 +6,28 @@
   fontsetup=true,
 }
 
+\providebool{slovenian@localalph}
+\define@boolkey{slovenian}[slovenian@]{localalph}[false]{%
+  \def\@tmpa{#1}%
+  % \show\@tmpa
+  \def\@tmptrue{true}%
+  % \show\@tmptrue
+  \ifx\@tmpa\@tmptrue
+    \slovenian@localalphtrue
+  \fi
+  % \slovenian@localalphtrue
+  \message{HELLO I’M HERE}
+  \ifslovenian@localalph\message{true}\else\message{false}\fi
+  \setlocalalph
+}
+
+% \setkeys{slovenian}{localalph}
+
+% \slovenian@localalphtrue
+% \show\ifslovenian@localalph
+\message{HELLO I’M THERE}
+\ifslovenian@localalph\message{true}\else\message{false}\fi
+
 \def\captionsslovenian{%
    \def\refname{Literatura}%
    \def\abstractname{Povzetek}%
@@ -47,5 +69,8 @@
   M\or N\or O\or P\or R\or S\or Š\or T\or U\or V\or Z\or Ž\else#1\fi}
 \def\abeceda#1{\expandafter\slovenian@alph\csname c@#1\endcsname}
 \def\Abeceda#1{\expandafter\slovenian@Alph\csname c@#1\endcsname}
+
+% \ifslovenian@localalph\message{HELLO I’M THERE}\renewcommand\theenumi{\abeceda{enumi}}\fi
+\def\setlocalalph{\renewcommand\theenumi{\abeceda{enumi}}}
 
 \endinput
