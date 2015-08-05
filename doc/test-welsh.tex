@@ -4,16 +4,17 @@
 \setmainlanguage{welsh}
 \setotherlanguage[variant=british,ordinalmonthday=false]{english}
 \usepackage{xinttools}
+\usepackage{longtable}
 
 \begin{document}
 
 \month=8
 \year=2015
-\begin{tabular}{lll}
-\xintFor* #1 in {\xintSeq{1}{31}}
-\do
-{ \day=#1\today & \day=#1\formaltoday & \day=#1\textenglish{\today} \\ }
+\begin{longtable}{lll}
+\xintFor* #1 in {\xintSeq{7}{9}}\do
+  {\xintFor* ##1 in {\xintSeq{1}{31}}\do
+    {\day=##1\month=#1\relax\today & \day=##1\month=#1\relax\formaltoday & \day=##1\month=#1\relax\textenglish{\today} \\ }}
 
-\end{tabular}
+\end{longtable}
 
 \end{document}
