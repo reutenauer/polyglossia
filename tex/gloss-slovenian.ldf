@@ -39,8 +39,13 @@
   }
 
 \def\slovenian@alph#1{%
-  \ifcase#1\or a\or b\or c\or č\or d\else#1\fi
+  \ifcase#1\or a\or b\or c\or č\or d\or e\or f\or g\or h\or i\or j\or k\or l\or
+  m\or n\or o\or p\or r\or s\or š\or t\or u\or v\or z\or ž\else#1\fi
 }
-\def\alfabet#1{\expandafter\slovenian@alph\csname c@#1\endcsname}
+\def\slovenian@Alph#1{%
+  \ifcase#1\or A\or B\or C\or Č\or D\or E\or F\or G\or H\or I\or J\or K\or L\or
+  M\or N\or O\or P\or R\or S\or Š\or T\or U\or V\or Z\or Ž\else#1\fi}
+\def\abeceda#1{\expandafter\slovenian@alph\csname c@#1\endcsname}
+\def\Abeceda#1{\expandafter\slovenian@Alph\csname c@#1\endcsname}
 
 \endinput
