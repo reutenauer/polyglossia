@@ -172,7 +172,7 @@ that are explained in section \ref{specific} below.
 % Produced with tools/insert-language-list.rb -- AR, 2015-07-14
 \begin{tabular}{lllll}
 \hline
-albanian       & danish         & icelandic      & nko            & slovenian     \\
+albanian       & danish         & icelandic      & nko            & \TX{slovenian \\
 amharic        & divehi         & interlingua    & norsk          & spanish       \\
 \TX{arabic}    & \TX{dutch}     & irish          & nynorsk        & swedish       \\
 armenian       & \TX{english}   & \TX{italian}   & occitan        & \TX{syriac}   \\
@@ -186,7 +186,7 @@ breton         & galician       & lithuanian     & samin          & \TX{ukrainia
 bulgarian      & \TX{german}    & \TX{lsorbian}  & \TX{sanskrit}  & urdu          \\
 \TX{catalan}   & \TX{greek}     & \TX{magyar}    & scottish       & \TX{usorbian} \\
 coptic         & \TX{hebrew}    & malayalam      & \TX{serbian}   & vietnamese    \\
-croatian       & \TX{hindi}     & marathi        & slovak         & welsh         \\
+croatian       & \TX{hindi}     & marathi        & slovak         & \TX{welsh}    \\
 czech         \\
 \hline
 \end{tabular}
@@ -347,7 +347,8 @@ The default value of each option is given in italic.
 \subsection{bengali}\label{bengali}\new{v1.2.0}
 \textbf{Options}:
 	\begin{itemize}
-    \item \TB{numerals} = Western or \textit{Devanagari}
+    \item \TB{numerals} = Western, Bengali or \textit{Devanagari}
+    \item \TB{changecounternumbering} = true or \textit{false}
 	\end{itemize}
 
 \subsection{catalan}\label{catalan}
@@ -565,6 +566,12 @@ enable hyphenation when writing English within Korean text.
 	\item \TB{script} = \textit{cyrillic} or latin
 	\end{itemize}
 
+\subsection{slovenian}\label{slovenian}
+\textbf{Options}:
+	\begin{itemize}
+	\item \TB{localaph} = true \textit{false}
+	\end{itemize}
+
 \subsection{syriac}\label{syriac}
 \textbf{Options}:
 	\begin{itemize}
@@ -594,6 +601,12 @@ that comes with this package.
 	\item \Cmd\Asbuk: produces the uppercase Ukrainian alphabet, for
 	environments such as ¦enumerate¦
 	\item \Cmd\asbuk: same in lowercase
+	\end{itemize}
+
+\subsection{welsh}\label{welsh}
+\textbf{Options}:
+	\begin{itemize}
+	\item \TB{date} = long or \textit{short}
 	\end{itemize}
 
 \section{Modifying or extending captions and date formats}
