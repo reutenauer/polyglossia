@@ -47,14 +47,27 @@ and may look very wrong.}
   \def\@tmptrue{true}
   \ifx\@tmpa\@tmptrue
     \def\extras@bengali{%
+      % FIXME Tied to the article class!  And horrible coding style
       \let\savethepage\thepage
       \let\savethesection\thesection
+      \let\savethesubsection\thesubsection
+      \let\savethesubsubsection\thesubsubsection
+      \let\savetheparagraph\theparagraph
+      \let\savethesubparagraph\thesubparagraph
       \def\thepage{\bengalinumeral{page}}
       \def\thesection{\bengalinumeral{section}}
+      \def\thesubsection{\bengalinumeral{subsection}}
+      \def\thesubsubsection{\bengalinumeral{subsubsection}}
+      \def\theparagraph{\bengalinumeral{paragraph}}
+      \def\thesubparagraph{\bengalinumeral{subparagraph}}
     }
     \def\noextras@bengali{%
       \let\thepage\savethepage
       \let\thesection\savethesection
+      \let\thesubsection\savethesubsection
+      \let\thesubsubsection\savethesubsubsection
+      \let\theparagraph\savetheparagraph
+      \let\thesubparagraph\savethesubparagraph
     }
   \fi
 }
