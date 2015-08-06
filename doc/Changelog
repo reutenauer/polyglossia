@@ -1,3 +1,19 @@
+06-08-2015
+  * Add Bengali digits package, and option to reset all numbering functions
+
+05-08-2015
+  * Add “long” option for Welsh date
+  * Add local alphabet in Slovenian, for enumerations and such
+
+04-08-2015
+  * Fix long-standing bug with Welsh: date should use ordinals
+
+03-08-2015
+  * Fix for Latin with LuaTeX: all variants had same problems as Classic
+
+02-08-2015
+  * Fixed error with British variant of English and LuaTeX (issue #86)
+
 1.41.0 (16-07-2015)
   * Added support for Khmer, by Say Ol (private email)
 
