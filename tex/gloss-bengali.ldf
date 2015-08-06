@@ -9,6 +9,7 @@ the output is not guaranteed to be correct\MessageBreak
 and may look very wrong.}
 \fi
 \RequirePackage{devanagaridigits}
+\RequirePackage{bengalidigits}
 
 \PolyglossiaSetup{bengali}{
   script=Bengali,
@@ -24,12 +25,39 @@ and may look very wrong.}
 \def\tmp@western{Western}
 \newif\ifbengali@devanagari@numerals
 \bengali@devanagari@numeralstrue
+\def\tmp@bengali{Bengali}
+\newif\ifbengali@bengali@numerals
+\bengali@bengali@numeralsfalse % Implied, but you never know
+
 
 \define@key{bengali}{numerals}[Devanagari]{%
   \def\@tmpa{#1}%
   \ifx\@tmpa\tmp@western
     \bengali@devanagari@numeralsfalse
+  \else\ifx\@tmpa\tmp@bengali
+    \bengali@devanagari@numeralsfalse
+    \bengali@bengali@numeralstrue\fi
   \fi}
+
+\def\extras@bengali{}
+\def\noextras@bengali{}
+
+\define@boolkey{bengali}[bengali@]{changecounternumbering}{
+  \def\@tmpa{#1}
+  \def\@tmptrue{true}
+  \ifx\@tmpa\@tmptrue
+    \def\extras@bengali{%
+      \let\savethepage\thepage
+      \let\savethesection\thesection
+      \def\thepage{\bengalinumeral{page}}
+      \def\thesection{\bengalinumeral{section}}
+    }
+    \def\noextras@bengali{%
+      \let\thepage\savethepage
+      \let\thesection\savethesection
+    }
+  \fi
+}
 
 \def\captionsbengali{%
   \def\refname{তথ্যসুত্রসমূহ}%
@@ -77,7 +105,17 @@ and may look very wrong.}
   \ifbengali@devanagari@numerals
     \devanagaridigits{\number#1}%
   \else
-    \number#1%
+    \ifbengali@bengali@numerals
+      \bengalidigits{\number#1}%
+    \else % Assumed Western
+      \number#1%
+    \fi
   \fi}
+
+\def\bengalinumber#1{\bengalidigits{\number#1}}% Takes number
+\def\bengalinumeral#1{\bengalinumber{\csname c@#1\endcsname}}% Takes counter
+
+\def\blockextras@bengali{\extras@bengali}
+\def\inlineextras@bengali{\extras@bengali}
 
 \endinput
