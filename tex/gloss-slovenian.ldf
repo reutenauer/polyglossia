@@ -59,6 +59,6 @@
 \def\abeceda#1{\expandafter\slovenian@alph\csname c@#1\endcsname}
 \def\Abeceda#1{\expandafter\slovenian@Alph\csname c@#1\endcsname}
 
-\def\setlocalalph{\renewcommand\theenumi{\abeceda{enumi}}}
+\def\setlocalalph{\let\alph\abeceda}
 
 \endinput
