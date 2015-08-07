@@ -41,6 +41,17 @@
   \def\glossaryname{Rhestr termau}%
   }
 
+\newif\ifwelsh@first
+\def\welsh@article#1{\welsh@firsttrue y\expandafter\welsh@article@do#1}
+\def\welsh@article@do#1{\ifwelsh@first\welsh@isvowel#1\ifwelsh@vowel r\space\welsh@vowelfalse\else\space\fi#1\welsh@firstfalse\fi}
+\newif\ifwelsh@vowel
+\def\welsh@isvowel#1{\ifx#1a\welsh@voweltrue\else\ifx#1u\welsh@voweltrue\else\ifx#1w\welsh@voweltrue\fi\fi\fi}% FIXME Add the other vowels, just for good measure
+
+\def\welsh@ordinal@long#1{%
+  \ifcase#1\or cyntaf\or ail\or trydydd\or pedwerydd\or
+  pumed\or chweched\or seithfed\or wythfed\or nawfed\or degfed\or unfed ar ddeg\or deuddegfed\or trydydd ar ddeg\or pedwerydd ar ddeg\or pymthegfed\or unfed ar bymtheg\or ail ar bymtheg\or deunawfed\or pedwerydd ar bymtheg\or ugeinfed\or unfed ar hugain\or ail ar hugain\or trydydd ar hugain\or pedwerydd ar hugain\or pumed ar hugain\or chweched ar hugain\or seithfed ar hugain\or wythfed ar hugain\or nawfed ar hugain\or degfed ar hugain\or unfed ar ddeg ar hugain\fi
+}
+
 \def\datewelsh{%   
   \def\today{\ifwelsh@formaldate\formaltoday\else\standardtoday\fi}
   \def\standardtoday{%
@@ -54,8 +65,7 @@
     \space\number\year}%
 
   \def\formaltoday{%
-    \space\ifcase\day\or y\space cyntaf\or yr\space ail\or y\space trydydd\or y\space pedwerydd\or
-  y\space pumed\or y\space chweched\or y\space seithfed\or yr\space wythfed\or y\space nawfed\or y\space degfed\or yr\space unfed ar ddeg\or y\space deuddegfed\or y\space trydydd ar ddeg\or y\space pedwerydd ar ddeg\or y\space pymthegfed\or yr\space unfed ar bymtheg\or yr\space ail ar bymtheg\or y\space deunawfed\or y\space pedwerydd ar bymtheg\or yr\space ugeinfed\or yr\space unfed ar hugain\or yr\space ail ar hugain\or y\space trydydd ar hugain\or y\space pedwerydd ar hugain\or y\space pumed ar hugain\or y\space chweched ar hugain\or y\space seithfed ar hugain\or yr\space wythfed ar hugain\or y\space nawfed ar hugain\or y\space degfed ar hugain\or yr\space unfed ar ddeg ar hugain\fi\space o\space\ifcase\month\or Ionawr\or Chwefror\or Fawrth\or Ebrill\or Fai\or Fehefin\or Orffenaf\or Awst\or Fedi\or Hydref\or Dachwedd\or Ragfyr\fi
+    \expandafter\welsh@article\welsh@ordinal@long\day\space o\space\ifcase\month\or Ionawr\or Chwefror\or Fawrth\or Ebrill\or Fai\or Fehefin\or Orffenaf\or Awst\or Fedi\or Hydref\or Dachwedd\or Ragfyr\fi
     \space\number\year}%
   }
 
