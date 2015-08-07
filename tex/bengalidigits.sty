@@ -6,7 +6,7 @@
 \def\@bengali@digits#1{%
   \ifx @#1% terminate
   \else
-    \ifx0#1০\else\ifx1#1১\else\ifx2#1২\else\ifx3#1৩\else\ifx4#1৪\else\ifx5#1৫\else\ifx6#1৬\else\ifx7#1৭\else\ifx8#1৮\else\ifx9#1৯\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+    \ifcase#1০\or১\or২\or৩\or৪\or৫\or৬\or৭\or৮\or৯\fi
     \expandafter\@bengali@digits
   \fi
 }
