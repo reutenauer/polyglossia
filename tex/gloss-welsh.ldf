@@ -49,8 +49,13 @@
 
 \def\welsh@ordinal@long#1{%
   \ifcase#1\or cyntaf\or ail\or trydydd\or pedwerydd\or
-  pumed\or chweched\or seithfed\or wythfed\or nawfed\or degfed\or unfed ar ddeg\or deuddegfed\or trydydd ar ddeg\or pedwerydd ar ddeg\or pymthegfed\or unfed ar bymtheg\or ail ar bymtheg\or deunawfed\or pedwerydd ar bymtheg\or ugeinfed\or unfed ar hugain\or ail ar hugain\or trydydd ar hugain\or pedwerydd ar hugain\or pumed ar hugain\or chweched ar hugain\or seithfed ar hugain\or wythfed ar hugain\or nawfed ar hugain\or degfed ar hugain\or unfed ar ddeg ar hugain\fi
+  pumed\or chweched\or seithfed\or wythfed\or nawfed\or degfed\or unfed ar ddeg\or deuddegfed\or trydydd ar ddeg\or pedwerydd ar ddeg\or pymthegfed\or unfed ar bymtheg\or ail ar bymtheg\or deunawfed\or pedwerydd ar bymtheg\or ugeinfed\else\expandafter\welsh@ordinalplusxx@long#1\fi}
+
+\def\welsh@ordinalplusxx@long#1{%
+  \let\dday=#1\advance\dday by -20\relax\welsh@ordinal@long\dday\space ar hugain%
 }
+
+% \def\xxxith{\welsh@ordinal@long{31}}\message{HELLO \xxxith BYE}
 
 \def\datewelsh{%   
   \def\today{\ifwelsh@formaldate\formaltoday\else\standardtoday\fi}
