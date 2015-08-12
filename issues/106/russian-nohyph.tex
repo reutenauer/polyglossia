@@ -1,0 +1,18 @@
+\documentclass[a4paper]{report}
+\usepackage{polyglossia}
+\setmainlanguage{russian}
+\newfontfamily\cyrillicfont{Linux Libertine O}
+
+\begin{document}
+    \def\text{\fbox{\parbox{1.55cm}{%
+    EXAMPLE HYPHENATION%
+    }}\qquad\qquad\null\par\bigskip}
+
+    \fontspec{Linux Libertine O}
+    \addfontfeature{HyphenChar=None}
+    \text
+    \addfontfeature{HyphenChar={+}}
+    \text
+    \addfontfeature{HyphenChar={"002D}}
+    \text
+\end{document}
