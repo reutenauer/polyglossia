@@ -1,5 +1,17 @@
 #!/bin/bash
 
+line=`git status | fgrep 'Your branch is ahead' | wc -l`
+if [ "$line" = 1 ]; then
+  warn_and_exit=true
+elif [ `git status -s | cut -c 2 | fgrep -c M` -gt 0 ]; then
+  warn_and_exit=true
+fi
+
+if $warn_and_exit; then
+  echo "Please commit and push your changes to GitHub!"
+  exit -1
+fi
+
 # TODO Test zip and DTX file thus produced!
 
 pgroot=`dirname $0`
