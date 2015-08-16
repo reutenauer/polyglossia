@@ -72,8 +72,9 @@ fi
 cd $root
 echo "Making polyglossia.{dtx,ins}"
 test -d $builddir || mkdir $builddir
-perl makepolyglossiadtx.pl || exit 1
-mv polyglossia.dtx $builddir || exit 1
+echo $builddir
+# perl makepolyglossiadtx.pl || exit 1
+# mv polyglossia.dtx $builddir || exit 1
 cd $builddir
 (
 cat <<'EOF'
