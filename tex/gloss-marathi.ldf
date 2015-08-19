@@ -46,9 +46,9 @@ and may look very wrong.}
    \def\chaptername{प्रकरण}%
    \def\appendixname{परिशिष्ट}%
    \def\contentsname{अनुक्रमणिका}%
-   \def\listfigurename{आक्रुत्यांची यादी}%
+   \def\listfigurename{आकृत्यांची यादी}%
    \def\listtablename{कॊष्टकांची यादी}%
-   \def\indexname{सुची}%
+   \def\indexname{सूची}%
    \def\figurename{आक्रुती}%
    \def\tablename{कोष्टक}%
    %\def\thepart{}% TODO
@@ -59,8 +59,8 @@ and may look very wrong.}
    \def\enclname{समाविष्ट}%
    \def\ccname{सि.सि.}%
    \def\headtoname{प्रति}%
-   \def\proofname{कसोटी}%
-   \def\glossaryname{स्पष्टीकरणकोश}%
+   \def\proofname{सिद्धता}%
+   \def\glossaryname{स्पष्टीकरणांची यादी}%
 }
 \def\datemarathi{%
    \def\marathimonth{%
@@ -70,11 +70,11 @@ and may look very wrong.}
        मार्च\or
        एप्रिल\or
        मे\or
-       जुन\or
-       जुलॆ\or
-       ओगस्ट\or
+       जून\or
+       जुलै\or
+       ऑगस्ट\or
        सप्टेंबर\or
-       ओक्टोबर\or
+       ऑक्टोबर\or
        नोव्हेंबर\or
        डिसेंबर\fi
    }%
