@@ -99,12 +99,12 @@ and may look very wrong.}
 
 \def\captionsarabic{%
   \def\prefacename{\@ensure@RTL{مدخل}}%
-  \def\refname{\@ensure@RTL{المراجع}}
+  \def\refname{\@ensure@RTL{المراجع}}%
   \def\abstractname{\@ensure@RTL{ملخص}}%
   \def\bibname{\@ensure@RTL{المصادر}}%
   \def\chaptername{\@ensure@RTL{باب}}%
   \def\appendixname{\@ensure@RTL{الملاحق}}%
-  \def\contentsname{\@ensure@RTL{المحتويات}}
+  \def\contentsname{\@ensure@RTL{المحتويات}}%
   %\def\contentsname{\@ensure@RTL{الفهرس}}%
   \def\listfigurename{\@ensure@RTL{قائمة الأشكال}}%
   \def\listtablename{\@ensure@RTL{قائمة الجداول}}%
