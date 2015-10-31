@@ -154,5 +154,6 @@
 \def\mr{M.\space}
 \def\mrs{MM.\space}
 
+\renewcommand\@makefntext[1]{\quad\@thefnmark.\space #1}
 
 \endinput
