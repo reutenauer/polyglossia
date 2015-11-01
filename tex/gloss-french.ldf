@@ -49,8 +49,8 @@
   %   \XeTeXinterchartoks \z@ \french@punctguillstart = {\nobreakspace}% "a«" unchanged?
   %   \XeTeXinterchartoks \french@punctguillend \z@ = {\nobreakspace}% "»a" unchanged?
       \XeTeXinterchartoks \z@ \french@punctguillend = {\nobreakspace}% "a»" -> "a »"
-      \XeTeXinterchartoks \french@punctguillstart 255 = {\nobreakspace\xpg@nospace}% "«  " -> "«~"
-      \XeTeXinterchartoks 255 \french@punctguillend = {\xpg@unskip\nobreakspace}% "  »" -> "~»"
+  %   \XeTeXinterchartoks \french@punctguillstart 255 = {\nobreakspace\xpg@nospace}% "«  " -> "«~"
+  %   \XeTeXinterchartoks 255 \french@punctguillend = {\xpg@unskip\nobreakspace}% "  »" -> "~»"
       \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\nobreak\thinspace}% "»;" -> "» ;"
       \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace}% "»:" -> "» :"
       \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\nobreakspace}% "?»" -> "? »"
@@ -135,5 +135,27 @@
 \def\inlineextras@french{%
    \french@punctuation%
    }
+   
+\def\ier{\textsuperscript{er}}
+\def\iers{\textsuperscript{ers}}
+\def\iere{\textsuperscript{re}}
+\def\ieres{\textsuperscript{res}}
+\def\ieme{\textsuperscript{e}}
+\def\iemes{\textsuperscript{es}}
+\def\nd{\textsuperscript{nd}}
+\def\nds{\textsuperscript{nds}}
+\def\nde{\textsuperscript{nde}}
+\def\ndes{\textsuperscript{ndes}}
+\def\no{\textsuperscript{o}}
+\def\nos{\textsuperscript{os}}
+
+\def\mme{M\textsuperscript{me}\space}
+\def\mmes{M\textsuperscript{mes}\space}
+\def\mr{M.\space}
+\def\mrs{MM.\space}
+
+\ifx\@makefntext\undefined\else
+\renewcommand\@makefntext[1]{\quad\@thefnmark.\space #1}
+\fi
 
 \endinput
