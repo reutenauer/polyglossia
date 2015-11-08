@@ -135,7 +135,7 @@
 \def\inlineextras@french{%
    \french@punctuation%
    }
-   
+
 \def\ier{\textsuperscript{er}}
 \def\iers{\textsuperscript{ers}}
 \def\iere{\textsuperscript{re}}
