@@ -26,6 +26,9 @@
   \RequireLuaModule{polyglossia}
 \fi
 
+% Compat for identical babel macro. Very useful for getting list of loaded languages
+\let\bbl@loaded\@empty
+
 %% custom message macros
 \providecommand*{\xpg@error}[1]{%
    \PackageError{polyglossia}{#1}{}%
@@ -516,6 +519,7 @@ That is almost guaranteed to cause problems.}
   \input{#1}\catcode`\@=\xpg@atcatcode}
 
 \newcommand{\setdefaultlanguage}[2][]{%
+  \edef\bbl@loaded{#2\ifx\bbl@loaded\@empty\else,\bbl@loaded\fi}%
    \IfFileExists{gloss-#2.ldf}%
    {\ifcsundef{#2@loaded}%
      {\xpg@input{gloss-#2.ldf}%
@@ -630,6 +634,7 @@ That is almost guaranteed to cause problems.}
     }
 
 \newcommand{\setotherlanguage}[2][]{%
+  \edef\bbl@loaded{#2\ifx\bbl@loaded\@empty\else,\bbl@loaded\fi}%
    \IfFileExists{gloss-#2.ldf}%
    {\ifcsundef{#2@loaded}%
      {\xpg@input{gloss-#2.ldf}%
