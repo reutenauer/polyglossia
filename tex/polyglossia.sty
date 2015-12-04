@@ -26,8 +26,9 @@
   \RequireLuaModule{polyglossia}
 \fi
 
-% Compat for identical babel macro. Very useful for getting list of loaded languages
-\let\bbl@loaded\@empty
+% Useful for getting list of loaded languages and variants. Like babel's bbl@loaded
+\let\xpg@loaded\@empty
+\let\xpg@vloaded\@empty
 
 %% custom message macros
 \providecommand*{\xpg@error}[1]{%
@@ -519,7 +520,7 @@ That is almost guaranteed to cause problems.}
   \input{#1}\catcode`\@=\xpg@atcatcode}
 
 \newcommand{\setdefaultlanguage}[2][]{%
-  \edef\bbl@loaded{#2\ifx\bbl@loaded\@empty\else,\bbl@loaded\fi}%
+  \edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
    \IfFileExists{gloss-#2.ldf}%
    {\ifcsundef{#2@loaded}%
      {\xpg@input{gloss-#2.ldf}%
@@ -634,7 +635,7 @@ That is almost guaranteed to cause problems.}
     }
 
 \newcommand{\setotherlanguage}[2][]{%
-  \edef\bbl@loaded{#2\ifx\bbl@loaded\@empty\else,\bbl@loaded\fi}%
+  \edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
    \IfFileExists{gloss-#2.ldf}%
    {\ifcsundef{#2@loaded}%
      {\xpg@input{gloss-#2.ldf}%
@@ -729,10 +730,15 @@ That is almost guaranteed to cause problems.}
          \xpg@hook@setlanguage%
          \let\emp@langname\@undefined}%
       \aftergroup\xpg@pop@language%
+      \setkeys{xpg@langvariant}{#1}%
       \setkeys{#2}{#1}%
       \xpg@set@language{#2}%
      }%
 }
+
+% Save any variant in csv list of variants
+\define@key{xpg@langvariant}{variant}{%
+  \edef\xpg@vloaded{#1\ifx\xpg@vloaded\@empty\else,\xpg@vloaded\fi}}
 
 \newcommand{\xpg@set@language}[1]{%
    \select@language{#1}%
