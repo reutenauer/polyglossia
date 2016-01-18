@@ -119,7 +119,7 @@ local mappings =  {
  [byte('⁈')] = {left,  thinspace},
  [byte('⁉')] = {left,  thinspace},
  [byte('»')] = {left,  thinspace},
- [byte('>')] = {left,  thinspace},
+ [byte('›')] = {left,  thinspace},
  [byte('«')] = {right, thinspace}, 
  [byte('‹')] = {right, thinspace}, 
  }
