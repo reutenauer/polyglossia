@@ -5,13 +5,33 @@
     scripttag=hang,
     language=Korean,
     langtag=KOR,
-    hyphennames={english,american,usenglish,USenglish},
+    hyphennames={english,USenglish},
     hyphenmins={2,3},
     frenchspacing=true,
     fontsetup=true
 }
 
+% variant : plain (0), classic (1), or modern (2)
+\define@choicekey{korean}{variant}[\val\nr]{plain,classic,modern}[plain]{%
+    \let\xpg@korean@variant\nr
+}
+% captions : hangul (0) or hanja (1)
+\define@choicekey{korean}{captions}[\val\nr]{hangul,hanja}[hangul]{%
+    \let\xpg@korean@captions\nr
+}
+\setkeys{korean}{variant,captions}
+
 \def\captionskorean{%
+    \ifcase\xpg@korean@captions\relax
+        \captions@korean@hangul
+    \else
+        \captions@korean@hanja
+    \fi
+    \def\seename{$rightarrow$}%
+    \def\alsoname{$Rightarrow$}%
+}
+\def\captions@korean@hangul{%
+    \def\koreanTHEname{제}%
     \def\partname##1##2{제##1##2 편}%
     \def\chaptername{장}%
     \def\refname{참고문헌}%
@@ -26,24 +46,39 @@
     \def\figurename{그림}%
     \def\tablename{표}%
     \def\pagename{페이지}%
-    \def\seename{$rightarrow$}%
-    \def\alsoname{$Rightarrow$}%
     \def\enclname{동봉}%
     \def\proofname{증명}%
     \def\headtoname{수신:}%
     \def\ccname{사본}%
 }
-\def\xpg@korean@language{korean}
-\AtBeginDocument{
-    \ifx\xpg@main@language\xpg@korean@language
-        \@ifclassloaded{book}{\def\@chapapp#1#2{제#1#2#1\chaptername}}{
-            \@ifclassloaded{report}{\def\@chapapp#1#2{제#1#2#1\chaptername}}{}
-        }
-    \fi
+\def\captions@korean@hanja{%
+    \def\koreanTHEname{第}%
+    \def\partname##1##2{第##1##2 篇}%
+    \def\chaptername{章}%
+    \def\refname{參考文獻}%
+    \def\abstractname{要約}%
+    \def\bibname{參考文獻}%
+    \def\prefacename{序文}%
+    \def\appendixname{附錄}%
+    \def\contentsname{目次}%
+    \def\listfigurename{圖版 目次}%
+    \def\listtablename{表 目次}%
+    \def\indexname{索引}%
+    \def\figurename{圖版}%
+    \def\tablename{表}%
+    \def\pagename{面}%
+    \def\enclname{同封}%
+    \def\proofname{證明}%
+    \def\headtoname{受信:}%
+    \def\ccname{寫本}%
 }
 
 \def\datekorean{%
-    \def\today{\the\year 년 \the\month 월 \the\day 일}%
+    \ifcase\xpg@korean@captions\relax
+        \def\today{\the\year 년 \the\month 월 \the\day 일}%
+    \else
+        \def\today{\the\year 年 \the\month 月 \the\day 日}%
+    \fi
 }
 
 \def\koreanAlph#1{\expandafter\@koreanAlph\csname c@#1\endcsname}
@@ -70,42 +105,587 @@
 }
 \let\nokorean@globalnumbers\nokorean@numbers
 
-\ifluatex
-\newluatexattribute\xpg@attr@korean
+\ifxetex
+    \def\inlineextras@korean{%
+        \setplainkoreaninterchartoks
+        \setplainkoreancharclasses
+        \ifcase\xpg@korean@variant\relax
+            \unsetvariantkoreanintercharmacros
+            \XeTeXlinebreakpenalty 50
+        \or
+            \setvariantkoreaninterchartoks
+            \setvariantkoreancharclasses
+            \setvariantkoreanintercharmacros
+            \def\XPGKOhalfdim{\dimexpr.5em\relax}%
+            \XeTeXlinebreakpenalty \z@
+        \else
+            \setvariantkoreaninterchartoks
+            \setvariantkoreancharclasses
+            \setvariantkoreanintercharmacros
+            \def\XPGKOhalfdim{\dimexpr.5\fontdimen\tw@\font\relax}%
+            \XeTeXlinebreakpenalty 50
+        \fi
+        \XeTeXlinebreakskip 0pt plus.1em minus .01em
+        \XeTeXlinebreaklocale "ko"
+        \XeTeXinterchartokenstate\@ne
+    }
+    \def\noextras@korean{%
+        \ifcase\xpg@korean@variant\relax
+        \else
+            \unsetvariantkoreanintercharmacros
+            \unsetvariantkoreaninterchartoks
+            \unsetvariantkoreancharclasses
+        \fi
+        \unsetplainkoreaninterchartoks
+        \unsetplainkoreancharclasses
+        \XeTeXlinebreakpenalty\z@
+        \XeTeXlinebreakskip\z@skip
+        \XeTeXlinebreaklocale ""
+        \XeTeXinterchartokenstate\z@
+        \noextras@korean@common
+    }
+\else % luatex
+    \def\inlineextras@korean{\xpg@attr@korean\xpg@korean@variant\relax}
+    \def\noextras@korean{%
+        \unsetattribute\xpg@attr@korean
+        \noextras@korean@common
+    }
+\fi
+
+\def\blockextras@korean{%
+    \inlineextras@korean
+    \ifdefined\@chapapp
+        \long\def\@tmpa{\chaptername}\def\@tmpb{\chaptername}%
+        \ifnum0\ifx\@chapapp\@tmpa1\else\ifx\@chapapp\@tmpb1\fi\fi>\z@
+            \let\xpg@orig@@chapapp\@chapapp
+            \def\@chapapp##1##2{\koreanTHEname ##1##2##1\chaptername}%
+        \fi
+    \fi
+    \ifdefined\baselinestretch
+        \let\xpg@orig@linestretch\baselinestretch
+        \def\baselinestretch{1.3888}\selectfont
+    \fi
+    \ifdefined\footnotesep
+        \edef\xpg@orig@footnotesep{\noexpand\footnotesep=\the\footnotesep\relax}%
+        \footnotesep=1.3888\footnotesep
+    \fi
+}
+
+\def\noextras@korean@common{%
+    \ifdefined\xpg@orig@footnotesep \xpg@orig@footnotesep \fi
+    \ifdefined\xpg@orig@linestretch \let\baselinestretch\xpg@orig@linestretch \fi
+    \ifdefined\xpg@orig@@chapapp    \let\@chapapp\xpg@orig@@chapapp \fi
+}
+
+\ifxetex % XeTeX
+% user commands for Josa
+% Josa : particles in Korean grammar that immediately follow a noun or pronoun.
+%        Josa might vary depending on previous character.
+\protected\def\jong {\global\let\XPGKO@let@josa=0}\jong
+\protected\def\rieul{\global\let\XPGKO@let@josa=1}
+\protected\def\jung {\global\let\XPGKO@let@josa=2}
+\protected\def\가{\xpg@make@josa 가이}
+\protected\def\이{\futurelet\@let@token\xpg@make@josa@I}
+\protected\def\은{\xpg@make@josa 는은} \let\는\은
+\protected\def\을{\xpg@make@josa 를을} \let\를\을
+\protected\def\와{\xpg@make@josa 와과} \let\과\와
+\protected\def\으{\xpg@make@josa \empty 으}
+\protected\def\로{\으 로}
+\protected\def\라{\xpg@make@josa 라{이라}}
+\def\xpg@make@josa@I{%
+    \ifx\@let@token 라%
+        \expandafter\xpg@make@josa\expandafter\relax\expandafter 이%
+    \else
+        \expandafter\가
+    \fi
+}
+\def\xpg@make@josa#1#2{%
+    \ifcat\xpg@catcode@letter\XPGKO@let@josa
+        \expandafter\expandafter\expandafter\count@\expandafter
+        \xpg@letter@to@num\meaning\XPGKO@let@josa\relax
+    \else\ifcat\xpg@catcode@other\XPGKO@let@josa
+        \expandafter\expandafter\expandafter\count@\expandafter
+        \xpg@character@to@num\meaning\XPGKO@let@josa\relax
+    \fi\fi
+    \ifnum\count@<"3260
+    \else\ifnum\count@<"3280 \advance\count@-"60
+    \else\ifnum\count@<"AC00
+    \else\ifnum\count@<"D7A4 % Hangul syllables
+        \advance\count@-"AC00
+        \@tempcnta\count@ \divide\@tempcnta28 \multiply\@tempcnta28
+        \advance\count@-\@tempcnta \advance\count@"11A7
+    \else\ifnum\count@<"FF00
+    \else\ifnum\count@<"FF5B \advance\count@-"FEE0
+    \fi\fi\fi\fi\fi \fi
+    \ifnum\count@<"11A8
+        \ifnum      "30=\count@ \count@\z@  % 0
+        \else\ifnum "31=\count@ \count@\@ne % 1
+        \else\ifnum "33=\count@ \count@\z@  % 3
+        \else\ifnum "36=\count@ \count@\z@  % 6
+        \else\ifnum "37=\count@ \count@\@ne % 7
+        \else\ifnum "38=\count@ \count@\@ne % 8
+        \else\ifnum "4C=\count@ \count@\@ne % L
+        \else\ifnum "4D=\count@ \count@\z@  % M
+        \else\ifnum "4E=\count@ \count@\z@  % N
+        \else\ifnum "6C=\count@ \count@\@ne % l
+        \else\ifnum "6D=\count@ \count@\z@  % m
+        \else\ifnum "6E=\count@ \count@\z@  % n
+        \fi\fi\fi\fi\fi \fi\fi\fi\fi\fi \fi\fi
+    \else\ifnum\count@<"1200
+        \ifnum\count@="11AF \count@\@ne \else \count@\z@ \fi
+    \else\ifnum\count@<"3131
+    \else\ifnum\count@<"318F
+        \ifnum     \count@="3139 \count@\@ne
+        \else\ifnum\count@<"314F \count@\z@
+        \else\ifnum\count@>"3164
+             \ifnum\count@<"3187 \count@\z@ \fi
+        \fi\fi\fi
+    \else\ifnum\count@<"3200
+    \else\ifnum\count@<"321F
+        \ifnum     \count@="3203 \count@\@ne
+        \else\ifnum\count@<"320E \count@\z@
+        \fi\fi
+    \else\ifnum\count@<"D7CB
+    \else\ifnum\count@<"D7FC \count@\z@
+    \fi\fi\fi\fi\fi \fi\fi\fi
+    \ifcase\count@ #2% jong
+    \or \ifx#1\empty\else#2\fi% rieul
+    \else #1% jung
+    \fi
+}
+\expandafter\def\expandafter\xpg@character@to@num\detokenize{the character} #1#2\relax{`#1\relax}
+\expandafter\def\expandafter\xpg@letter@to@num\detokenize{the letter} #1#2\relax{`#1\relax}
+\begingroup
+\catcode`A=11 \catcode`0=12
+\global\let\xpg@catcode@letter=A \global\let\xpg@catcode@other=0
+\endgroup
+% macros for plain interchartoks (Josa selection)
+\def\XPGKOstartID {\global\futurelet\XPGKO@let@josa\XPGKO@skip@ID}
+\def\XPGKOstartAA {\global\futurelet\XPGKO@let@josa\XPGKO@skip@AA}
+\def\XPGKO@skip@ID{\XeTeXinterchartoks\XeTeXcharclassBoundary\XeTeXcharclassID{\empty}}
+\def\XPGKO@skip@AA{\XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassAA{\empty}}
+\def\XPGKOstopID  {\XeTeXinterchartoks\XeTeXcharclassBoundary\XeTeXcharclassID{\XPGKOstartID}}
+\def\XPGKOstopAA  {\XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassAA{\XPGKOstartAA}}
+% macros for variant interchartoks (CJK punctuations)
+\def\setvariantkoreanintercharmacros{%
+    \def\XPGKOstartOP{\leavevmode\hbox to.5em\bgroup\hss}%
+    \def\XPGKOstopOP {\egroup}%
+    \def\XPGKOstartCL{\leavevmode\hbox to.5em\bgroup}%
+    \def\XPGKOstopCL {\hss\egroup}%
+    \let\XPGKOstartFS\XPGKOstartCL \let\XPGKOstopFS\XPGKOstopCL
+    \let\XPGKOstartMD\XPGKOstartOP \let\XPGKOstopMD\XPGKOstopCL
+    \let\XPGKOnobreak          \nobreak
+    \def\XPGKOhalfdim          {\dimexpr.5em\relax}%
+    \def\XPGKOhalfzero         {\hskip   \XPGKOhalfdim \relax}%
+    \def\XPGKOhalfhalf         {\hskip   \XPGKOhalfdim minus  \XPGKOhalfdim \relax}%
+    \def\XPGKOhalfquarter      {\hskip   \XPGKOhalfdim minus.5\XPGKOhalfdim \relax}%
+    \def\XPGKOquarterquarter   {\hskip .5\XPGKOhalfdim minus.5\XPGKOhalfdim \relax}%
+    \def\XPGKOiiiquarterquarter{\hskip1.5\XPGKOhalfdim minus.5\XPGKOhalfdim \relax}%
+    \def\XPGKOlatincjk         {\hskip .5\XPGKOhalfdim plus.25\XPGKOhalfdim minus.125\XPGKOhalfdim}%
+}
+\def\unsetvariantkoreanintercharmacros{%
+    \let\XPGKOstartOP\empty \let\XPGKOstopOP\empty
+    \let\XPGKOstartCL\empty \let\XPGKOstopCL\empty
+    \let\XPGKOstartFS\empty \let\XPGKOstopFS\empty
+    \let\XPGKOstartMD\empty \let\XPGKOstopMD\empty
+    \let\XPGKOnobreak          \empty
+    \let\XPGKOhalfdim          \empty
+    \let\XPGKOhalfzero         \empty
+    \let\XPGKOhalfhalf         \empty
+    \let\XPGKOhalfquarter      \empty
+    \let\XPGKOquarterquarter   \empty
+    \let\XPGKOiiiquarterquarter\empty
+    \let\XPGKOlatincjk         \empty
+}
+% user macro to force zero skip
+\let\inhibitglue\relax
+% initialize interchartoks and classes
+\let\XeTeXcharclassIgnore  \@cclvi
+\let\XeTeXcharclassBoundary\@cclv
+\ifdefined\XeTeXcharclassID\else
+    \ifdefined\xtxHanGlue
+        \let\XeTeXcharclassID\@ne
+        \let\XeTeXcharclassOP\tw@
+        \let\XeTeXcharclassCL\thr@@
+    \else % email from JW
+        \newXeTeXintercharclass\XeTeXcharclassID
+        \newXeTeXintercharclass\XeTeXcharclassOP
+        \newXeTeXintercharclass\XeTeXcharclassCL
+        \global\let\XeTeXcharclassEX\XeTeXcharclassCL
+        \global\let\XeTeXcharclassIS\XeTeXcharclassCL
+        \global\let\XeTeXcharclassNS\XeTeXcharclassCL
+        \global\let\XeTeXcharclassCM\XeTeXcharclassIgnore
+        \input load-unicode-xetex-classes %
+    \fi
+\fi
+% assign Hangul
+\count@="AC00 \loop
+    \XeTeXcharclass\count@\XeTeXcharclassID
+    \ifnum\count@<"D7A3
+    \advance\count@\@ne
+    \repeat
+\count@="1100 \loop
+    \XeTeXcharclass\count@\XeTeXcharclassID
+    \ifnum\count@<"11FF
+    \advance\count@\@ne
+    \repeat
+\count@="A960 \loop
+    \XeTeXcharclass\count@\XeTeXcharclassID
+    \ifnum\count@<"A97C
+    \advance\count@\@ne
+    \repeat
+\count@="D7B0 \loop
+    \XeTeXcharclass\count@\XeTeXcharclassID
+    \ifnum\count@<"D7FB
+    \advance\count@\@ne
+    \repeat
+% more classes
+\newXeTeXintercharclass\XPGKOcharclassMD % ・ ： ；
+\newXeTeXintercharclass\XPGKOcharclassFS % 。 ．
+\newXeTeXintercharclass\XPGKOcharclassLD % ― … ‥
+\newXeTeXintercharclass\XPGKOcharclassEX % ？ ！
+\newXeTeXintercharclass\XPGKOcharclassAO % ascii (
+\newXeTeXintercharclass\XPGKOcharclassAC % ascii )
+\newXeTeXintercharclass\XPGKOcharclassAA % ascii letters/numbers
+% latest class number
+\chardef\XPGKOlastcharclassnumber\allocationnumber
+% interchartoks for plain variant
+\def\setplainkoreaninterchartoks{}
+\def\unsetplainkoreaninterchartoks{}
+\def\@tmpa#1,#2=#3{%
+    \edef\setplainkoreaninterchartoks{%
+        \unexpanded\expandafter{\setplainkoreaninterchartoks
+            \XeTeXinterchartoks#1 #2={#3}}}%
+    \edef\unsetplainkoreaninterchartoks{%
+        \noexpand\XeTeXinterchartoks#1 #2={}%
+        \unexpanded\expandafter{\unsetplainkoreaninterchartoks}}%
+}
+\count@\XeTeXcharclassBoundary \loop
+    \ifnum\count@=\XeTeXcharclassID\else
+    \ifnum\count@=\XPGKOcharclassAA\else
+        \expandafter\@tmpa\the\count@,\XeTeXcharclassID={\XPGKOstartID}
+        \expandafter\@tmpa\the\count@,\XPGKOcharclassAA={\XPGKOstartAA}
+        \expandafter\@tmpa\expandafter\XeTeXcharclassID\expandafter,\the\count@={\XPGKOstopID}
+        \expandafter\@tmpa\expandafter\XPGKOcharclassAA\expandafter,\the\count@={\XPGKOstopAA}
+    \fi\fi
+    \ifnum\count@=\XeTeXcharclassBoundary \count@\m@ne \fi
+    \ifnum\count@<\XPGKOlastcharclassnumber
+    \advance\count@\@ne
+    \repeat
+\@tmpa\XPGKOcharclassAA,\XeTeXcharclassID={\XPGKOstartID}
+\@tmpa\XPGKOcharclassAA,\XPGKOcharclassAA={\XPGKOstartAA}
+\@tmpa\XeTeXcharclassID,\XeTeXcharclassID={\XPGKOstartID}
+\@tmpa\XeTeXcharclassID,\XPGKOcharclassAA={\XPGKOstartAA}
+% interchartoks for classic/modern variants
+\def\setvariantkoreaninterchartoks  {}
+\def\unsetvariantkoreaninterchartoks{}
+\def\@tmpa#1,#2=#3{%
+    \edef\setvariantkoreaninterchartoks{%
+        \unexpanded\expandafter{\setvariantkoreaninterchartoks
+            \XeTeXinterchartoks#1 #2={#3}}}%
+    \edef\unsetvariantkoreaninterchartoks{%
+        \noexpand\XeTeXinterchartoks#1 #2={}%
+        \unexpanded\expandafter{\unsetvariantkoreaninterchartoks}}%
+}
+\count@\XeTeXcharclassBoundary \loop
+    \ifnum\count@=\XeTeXcharclassID\else
+    \ifnum\count@=\XeTeXcharclassOP\else
+    \ifnum\count@=\XeTeXcharclassCL\else
+    \ifnum\count@=\XPGKOcharclassMD\else
+    \ifnum\count@=\XPGKOcharclassFS\else
+    \ifnum\count@=\XPGKOcharclassAA\else
+        \expandafter\@tmpa\the\count@,\XeTeXcharclassOP={\XPGKOstartOP}
+        \expandafter\@tmpa\the\count@,\XeTeXcharclassCL={\XPGKOstartCL}
+        \expandafter\@tmpa\the\count@,\XPGKOcharclassMD={\XPGKOstartMD}
+        \expandafter\@tmpa\the\count@,\XPGKOcharclassFS={\XPGKOstartFS}
+        \expandafter\@tmpa\expandafter\XeTeXcharclassOP\expandafter,\the\count@={\XPGKOstopOP}
+        \expandafter\@tmpa\expandafter\XeTeXcharclassCL\expandafter,\the\count@={\XPGKOstopCL}
+        \expandafter\@tmpa\expandafter\XPGKOcharclassMD\expandafter,\the\count@={\XPGKOstopMD}
+        \expandafter\@tmpa\expandafter\XPGKOcharclassFS\expandafter,\the\count@={\XPGKOstopFS}
+    \fi\fi\fi\fi\fi\fi
+    \ifnum\count@=\XeTeXcharclassBoundary \count@\m@ne \fi
+    \ifnum\count@<\XPGKOlastcharclassnumber
+    \advance\count@\@ne
+    \repeat
+%
+\@tmpa\XPGKOcharclassAA,\XeTeXcharclassOP={\XPGKOstopAA\XPGKOstartOP}
+\@tmpa\XPGKOcharclassAA,\XeTeXcharclassCL={\XPGKOstopAA\XPGKOstartCL}
+\@tmpa\XPGKOcharclassAA,\XPGKOcharclassMD={\XPGKOstopAA\XPGKOstartMD}
+\@tmpa\XPGKOcharclassAA,\XPGKOcharclassFS={\XPGKOstopAA\XPGKOstartFS}
+%
+\@tmpa\XeTeXcharclassID,\XeTeXcharclassOP={\XPGKOstopID\XPGKOhalfhalf\XPGKOstartOP}
+\@tmpa\XeTeXcharclassID,\XeTeXcharclassCL={\XPGKOstopID\XPGKOstartCL}
+\@tmpa\XeTeXcharclassID,\XPGKOcharclassMD={\XPGKOstopID\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}
+\@tmpa\XeTeXcharclassID,\XPGKOcharclassFS={\XPGKOstopID\XPGKOstartFS}
+\@tmpa\XeTeXcharclassID,\XPGKOcharclassAO={\XPGKOstopID\XPGKOlatincjk}
+%
+\@tmpa\XeTeXcharclassOP,\XeTeXcharclassID={\XPGKOstopOP\XPGKOstartID}
+\@tmpa\XeTeXcharclassOP,\XeTeXcharclassOP={\XPGKOstopOP\XPGKOstartOP}
+\@tmpa\XeTeXcharclassOP,\XeTeXcharclassCL={\XPGKOstopOP\XPGKOstartCL}
+\@tmpa\XeTeXcharclassOP,\XPGKOcharclassMD={\XPGKOstopOP\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}
+\@tmpa\XeTeXcharclassOP,\XPGKOcharclassFS={\XPGKOstopOP\XPGKOstartFS}
+\@tmpa\XeTeXcharclassOP,\XPGKOcharclassAA={\XPGKOstopOP\XPGKOstartAA}
+%
+\@tmpa\XeTeXcharclassCL,\XeTeXcharclassID={\XPGKOstopCL\XPGKOhalfhalf\XPGKOstartID}
+\@tmpa\XeTeXcharclassCL,\XeTeXcharclassOP={\XPGKOstopCL\XPGKOhalfhalf\XPGKOstartOP}
+\@tmpa\XeTeXcharclassCL,\XeTeXcharclassCL={\XPGKOstopCL\XPGKOstartCL}
+\@tmpa\XeTeXcharclassCL,\XPGKOcharclassMD={\XPGKOstopCL\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}
+\@tmpa\XeTeXcharclassCL,\XPGKOcharclassFS={\XPGKOstopCL\XPGKOstartFS}
+\@tmpa\XeTeXcharclassCL,\XPGKOcharclassLD={\XPGKOstopCL\XPGKOnobreak\XPGKOhalfhalf}
+\@tmpa\XeTeXcharclassCL,\XPGKOcharclassEX={\XPGKOstopCL\XPGKOnobreak\XPGKOhalfhalf}
+\@tmpa\XeTeXcharclassCL,\XPGKOcharclassAO={\XPGKOstopCL\XPGKOhalfhalf}
+\@tmpa\XeTeXcharclassCL,\XPGKOcharclassAC={\XPGKOstopCL\XPGKOnobreak\XPGKOhalfhalf}
+\@tmpa\XeTeXcharclassCL,\XPGKOcharclassAA={\XPGKOstopCL\XPGKOstartAA}
+%
+\@tmpa\XPGKOcharclassMD,\XeTeXcharclassID={\XPGKOstopMD\XPGKOquarterquarter\XPGKOstartID}
+\@tmpa\XPGKOcharclassMD,\XeTeXcharclassOP={\XPGKOstopMD\XPGKOquarterquarter\XPGKOstartOP}
+\@tmpa\XPGKOcharclassMD,\XeTeXcharclassCL={\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartCL}
+\@tmpa\XPGKOcharclassMD,\XPGKOcharclassMD={\XPGKOstopMD\XPGKOnobreak\XPGKOhalfquarter\XPGKOstartMD}
+\@tmpa\XPGKOcharclassMD,\XPGKOcharclassFS={\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartFS}
+\@tmpa\XPGKOcharclassMD,\XPGKOcharclassLD={\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter}
+\@tmpa\XPGKOcharclassMD,\XPGKOcharclassEX={\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter}
+\@tmpa\XPGKOcharclassMD,\XPGKOcharclassAO={\XPGKOstopMD\XPGKOquarterquarter}
+\@tmpa\XPGKOcharclassMD,\XPGKOcharclassAC={\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter}
+\@tmpa\XPGKOcharclassMD,\XPGKOcharclassAA={\XPGKOstopMD\XPGKOstartAA}
+%
+\@tmpa\XPGKOcharclassFS,\XeTeXcharclassID={\XPGKOstopFS\XPGKOhalfzero\XPGKOstartID}
+\@tmpa\XPGKOcharclassFS,\XeTeXcharclassOP={\XPGKOstopFS\XPGKOhalfzero\XPGKOstartOP}
+\@tmpa\XPGKOcharclassFS,\XeTeXcharclassCL={\XPGKOstopFS\XPGKOstartCL}
+\@tmpa\XPGKOcharclassFS,\XPGKOcharclassMD={\XPGKOstopFS\XPGKOnobreak\XPGKOiiiquarterquarter\XPGKOstartMD}
+\@tmpa\XPGKOcharclassFS,\XPGKOcharclassFS={\XPGKOstopFS\XPGKOstartFS}
+\@tmpa\XPGKOcharclassFS,\XPGKOcharclassLD={\XPGKOstopFS\XPGKOnobreak\XPGKOhalfzero}
+\@tmpa\XPGKOcharclassFS,\XPGKOcharclassEX={\XPGKOstopFS\XPGKOnobreak\XPGKOhalfzero}
+\@tmpa\XPGKOcharclassFS,\XPGKOcharclassAO={\XPGKOstopFS\XPGKOhalfzero}
+\@tmpa\XPGKOcharclassFS,\XPGKOcharclassAC={\XPGKOstopFS\XPGKOnobreak\XPGKOhalfzero}
+\@tmpa\XPGKOcharclassFS,\XPGKOcharclassAA={\XPGKOstopFS\XPGKOstartAA}
+%
+\@tmpa\XPGKOcharclassLD,\XeTeXcharclassOP={\XPGKOhalfhalf\XPGKOstartOP}
+\@tmpa\XPGKOcharclassLD,\XPGKOcharclassMD={\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}
+%
+\@tmpa\XPGKOcharclassEX,\XeTeXcharclassID={\XPGKOhalfhalf\XPGKOstartID}
+\@tmpa\XPGKOcharclassEX,\XeTeXcharclassOP={\XPGKOhalfhalf\XPGKOstartOP}
+\@tmpa\XPGKOcharclassEX,\XPGKOcharclassMD={\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}
+\@tmpa\XPGKOcharclassEX,\XPGKOcharclassAO={\XPGKOhalfhalf}
+\@tmpa\XPGKOcharclassEX,\XPGKOcharclassAC={\XPGKOnobreak\XPGKOhalfhalf}
+%
+\@tmpa\XPGKOcharclassAO,\XeTeXcharclassOP={\XPGKOnobreak\XPGKOhalfhalf\XPGKOstartOP}
+\@tmpa\XPGKOcharclassAO,\XPGKOcharclassMD={\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}
+%
+\@tmpa\XPGKOcharclassAC,\XeTeXcharclassID={\XPGKOlatincjk\XPGKOstartID}
+\@tmpa\XPGKOcharclassAC,\XeTeXcharclassOP={\XPGKOhalfhalf\XPGKOstartOP}
+\@tmpa\XPGKOcharclassAC,\XPGKOcharclassMD={\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}
+% char classes for plain variant
+\def\setplainkoreancharclasses{}
+\def\unsetplainkoreancharclasses{}
+\def\@tmpa#1=#2{%
+    \edef\setplainkoreancharclasses{%
+        \unexpanded\expandafter{\setplainkoreancharclasses
+            \XeTeXcharclass#1=#2}}%
+    \edef\unsetplainkoreancharclasses{%
+        \noexpand\XeTeXcharclass#1=\the\XeTeXcharclass#1\relax
+        \unexpanded\expandafter{\unsetplainkoreancharclasses}}%
+}
+\count@"30 \loop % 0 .. 9
+    \expandafter\@tmpa\the\count@=\XPGKOcharclassAA
+    \ifnum\count@<"39
+    \advance\count@\@ne
+    \repeat
+\count@"41 \loop % A .. Z
+    \expandafter\@tmpa\the\count@=\XPGKOcharclassAA
+    \ifnum\count@<"5A
+    \advance\count@\@ne
+    \repeat
+\count@"61 \loop % a .. z
+    \expandafter\@tmpa\the\count@=\XPGKOcharclassAA
+    \ifnum\count@<"7A
+    \advance\count@\@ne
+    \repeat
+% NS
+\@tmpa "3005=\XeTeXcharclassID % 々 IDEOGRAPHIC ITERATION MARK
+\@tmpa "301C=\XeTeXcharclassID % 〜 WAVE DASH
+\@tmpa "303B=\XeTeXcharclassID % 〻 VERTICAL IDEOGRAPHIC ITERATION MARK
+\@tmpa "303C=\XeTeXcharclassID % 〼 MASU MARK
+\@tmpa "309B=\XeTeXcharclassID % ゛ KATAKANA-HIRAGANA VOICED SOUND MARK
+\@tmpa "309C=\XeTeXcharclassID % ゜ KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
+\@tmpa "309D=\XeTeXcharclassID % ゝ HIRAGANA ITERATION MARK
+\@tmpa "309E=\XeTeXcharclassID % ゞ HIRAGANA VOICED ITERATION MARK
+\@tmpa "30A0=\XeTeXcharclassID % ゠ KATAKANA-HIRAGANA DOUBLE HYPHEN
+\@tmpa "30FD=\XeTeXcharclassID % ヽ KATAKANA ITERATION MARK
+\@tmpa "30FE=\XeTeXcharclassID % ヾ KATAKANA VOICED ITERATION MARK
+\@tmpa "A015=\XeTeXcharclassID % ꀕ YI SYLLABLE ITERATION MARK
+\@tmpa "FF9E=\XeTeXcharclassID % ﾞ HALFWIDTH KATAKANA VOICED SOUND MARK
+\@tmpa "FF9F=\XeTeXcharclassID % ﾟ HALFWIDTH KATAKANA SEMI-VOICED SOUND MARK
+% IS
+\@tmpa "FE13=\XeTeXcharclassID % ︓ PRESENTATION FORM FOR VERTICAL COLON
+\@tmpa "FE14=\XeTeXcharclassID % ︔ PRESENTATION FORM FOR VERTICAL SEMICOLON
+% CJ
+\@tmpa "3041=\XeTeXcharclassID
+\@tmpa "3043=\XeTeXcharclassID
+\@tmpa "3045=\XeTeXcharclassID
+\@tmpa "3047=\XeTeXcharclassID
+\@tmpa "3049=\XeTeXcharclassID
+\@tmpa "3063=\XeTeXcharclassID
+\@tmpa "3083=\XeTeXcharclassID
+\@tmpa "3085=\XeTeXcharclassID
+\@tmpa "3087=\XeTeXcharclassID
+\@tmpa "308E=\XeTeXcharclassID
+\@tmpa "3095=\XeTeXcharclassID
+\@tmpa "3096=\XeTeXcharclassID
+\@tmpa "30A1=\XeTeXcharclassID
+\@tmpa "30A3=\XeTeXcharclassID
+\@tmpa "30A5=\XeTeXcharclassID
+\@tmpa "30A7=\XeTeXcharclassID
+\@tmpa "30A9=\XeTeXcharclassID
+\@tmpa "30C3=\XeTeXcharclassID
+\@tmpa "30E3=\XeTeXcharclassID
+\@tmpa "30E5=\XeTeXcharclassID
+\@tmpa "30E7=\XeTeXcharclassID
+\@tmpa "30EE=\XeTeXcharclassID
+\@tmpa "30F5=\XeTeXcharclassID
+\@tmpa "30F6=\XeTeXcharclassID
+\@tmpa "30FC=\XeTeXcharclassID
+\count@"31F0 \loop
+    \expandafter\@tmpa\the\count@=\XeTeXcharclassID
+    \ifnum\count@<"31FF
+    \advance\count@\@ne
+    \repeat
+\count@"FF67 \loop
+    \expandafter\@tmpa\the\count@=\XeTeXcharclassID
+    \ifnum\count@<"FF70
+    \advance\count@\@ne
+    \repeat
+% char classes for classic/modern variants
+\def\setvariantkoreancharclasses  {}
+\def\unsetvariantkoreancharclasses{}
+\def\@tmpa#1=#2{%
+    \edef\setvariantkoreancharclasses{%
+        \unexpanded\expandafter{\setvariantkoreancharclasses
+            \XeTeXcharclass#1=#2}}%
+    \edef\unsetvariantkoreancharclasses{%
+        \noexpand\XeTeXcharclass#1=\the\XeTeXcharclass#1\relax
+        \unexpanded\expandafter{\unsetvariantkoreancharclasses}}%
+}
+\@tmpa "28=\XPGKOcharclassAO % (
+\@tmpa "5B=\XPGKOcharclassAO % [
+\@tmpa "60=\XPGKOcharclassAO % `
+\@tmpa "7B=\XPGKOcharclassAO % {
+%
+\@tmpa "21=\XPGKOcharclassAC % !
+\@tmpa "27=\XPGKOcharclassAC % '
+\@tmpa "29=\XPGKOcharclassAC % )
+\@tmpa "2C=\XPGKOcharclassAC % ,
+\@tmpa "2E=\XPGKOcharclassAC % .
+\@tmpa "3B=\XPGKOcharclassAC % ;
+\@tmpa "3F=\XPGKOcharclassAC % ?
+\@tmpa "5D=\XPGKOcharclassAC % ]
+\@tmpa "7D=\XPGKOcharclassAC % }
+%
+\@tmpa "2018=\XeTeXcharclassOP % ‘ LEFT SINGLE QUOTATION MARK
+\@tmpa "201C=\XeTeXcharclassOP % “ LEFT DOUBLE QUOTATION MARK
+%
+\@tmpa "2019=\XeTeXcharclassCL % ’ RIGHT SINGLE QUOTATION MARK
+\@tmpa "201D=\XeTeXcharclassCL % ” RIGHT DOUBLE QUOTATION MARK
+\@tmpa "FE10=\XeTeXcharclassCL % ︐ PRESENTATION FORM FOR VERTICAL COMMA
+% NS
+\@tmpa "00B7=\XPGKOcharclassMD % · MIDDLE DOT
+\@tmpa "30FB=\XPGKOcharclassMD % ・ KATAKANA MIDDLE DOT
+\@tmpa "FE54=\XPGKOcharclassMD % ﹔ SMALL SEMICOLON
+\@tmpa "FE55=\XPGKOcharclassMD % ﹕ SMALL COLON
+\@tmpa "FF1A=\XPGKOcharclassMD % ： FULLWIDTH COLON
+\@tmpa "FF1B=\XPGKOcharclassMD % ； FULLWIDTH SEMICOLON
+\@tmpa "FF65=\XPGKOcharclassMD % ･ HALFWIDTH KATAKANA MIDDLE DOT
+%
+\@tmpa "3002=\XPGKOcharclassFS % 。 IDEOGRAPHIC FULL STOP
+\@tmpa "FE12=\XPGKOcharclassFS % ︒ PRESENTATION FORM FOR VERTICAL IDEOGRAPHIC FULL STOP
+\@tmpa "FE52=\XPGKOcharclassFS % ﹒ SMALL FULL STOP
+\@tmpa "FF0E=\XPGKOcharclassFS % ． FULLWIDTH FULL STOP
+\@tmpa "FF61=\XPGKOcharclassFS % ｡ HALFWIDTH IDEOGRAPHIC FULL STOP
+%
+\@tmpa "2014=\XPGKOcharclassLD % — EM DASH
+\@tmpa "2015=\XPGKOcharclassLD % ― HORIZONTAL BAR
+\@tmpa "2025=\XPGKOcharclassLD % ‥ TWO DOT LEADER
+\@tmpa "2026=\XPGKOcharclassLD % … HORIZONTAL ELLIPSIS
+% EX
+\@tmpa "FE15=\XPGKOcharclassEX % ︕ PRESENTATION FORM FOR VERTICAL EXCLAMATION MARK
+\@tmpa "FE16=\XPGKOcharclassEX % ︖ PRESENTATION FORM FOR VERTICAL QUESTION MARK
+\@tmpa "FE56=\XPGKOcharclassEX % ﹖ SMALL QUESTION MARK
+\@tmpa "FE57=\XPGKOcharclassEX % ﹗ SMALL EXCLAMATION MARK
+\@tmpa "FF01=\XPGKOcharclassEX % ！ FULLWIDTH EXCLAMATION MARK
+\@tmpa "FF1F=\XPGKOcharclassEX % ？ FULLWIDTH QUESTION MARK
+
+\endinput\fi % end of XeTeX
+
+% luatex
+\protected\def\inhibitglue{\hskip\z@skip}
+\ifdefined\newattribute\else
+    \let\newattribute\newluatexattribute
+    \let\unsetattribute\unsetluatexattribute
+\fi
+\newattribute\xpg@attr@korean
+\newattribute\xpg@attr@autojosa
+\protected\def\rieul{\global\chardef\xpg@josa@zwang\@ne}
+\protected\def\jung {\global\chardef\xpg@josa@zwang\tw@}
+\protected\def\jong {\global\chardef\xpg@josa@zwang\thr@@}
+\protected\def\은{\begingroup\xpg@attr@autojosa\xpg@josa@zwang 은\endgroup\xpg@reset@josa}
+\let\는\은
+\protected\def\을{\begingroup\xpg@attr@autojosa\xpg@josa@zwang 을\endgroup\xpg@reset@josa}
+\let\를\을
+\protected\def\와{\begingroup\xpg@attr@autojosa\xpg@josa@zwang 와\endgroup\xpg@reset@josa}
+\let\과\와
+\protected\def\가{\begingroup\xpg@attr@autojosa\xpg@josa@zwang 가\endgroup\xpg@reset@josa}
+\protected\def\이{\begingroup\xpg@attr@autojosa\xpg@josa@zwang 이\endgroup\xpg@reset@josa}
+\protected\def\라{\이 라}
+\protected\def\으{\begingroup\xpg@attr@autojosa\xpg@josa@zwang 으\endgroup\xpg@reset@josa}
+\protected\def\로{\으 로}
+\def\xpg@reset@josa {\global\chardef\xpg@josa@zwang\z@}\xpg@reset@josa
 \directlua{
 local glyph_id = node.id("glyph")
+local hbox_id  = node.id("hlist")
+local vbox_id  = node.id("vlist")
 local attr_korean = luatexbase.attributes["xpg@attr@korean"]
-local nobreak_after = {
-    [0x28] = true, [0x3C] = true, [0x5B] = true, [0x60] = true, [0x7B] = true,
-    [0x2018] = true, [0x201C] = true, [0x3008] = true, [0x300A] = true,
-    [0x300C] = true, [0x300E] = true, [0x3010] = true, [0x3014] = true,
-    [0xFF08] = true, [0xFF1C] = true, [0xFF3B] = true, [0xFF5B] = true,
+local attr_josa   = luatexbase.attributes["xpg@attr@autojosa"]
+local nobr_after = {
+    [0x28] = 1, [0x2D] = 1, [0x2F] = 1, [0x3C] = 1, [0x5B] = 1,
+    [0x5C] = 1, [0x60] = 1, [0x7B] = 1, [0x7E] = 1, [0x2013] = 1,
+    [0x2018] = 1, [0x201C] = 1, [0x2329] = 1, [0x3008] = 1,
+    [0x300A] = 1, [0x300C] = 1, [0x300E] = 1, [0x3010] = 1,
+    [0x3014] = 1, [0x3016] = 1, [0x3018] = 1, [0x301A] = 1,
+    [0x301D] = 1, [0xFF08] = 1, [0xFF1C] = 1, [0xFF3B] = 1,
+    [0xFF5B] = 1, [0xFF5F] = 1, [0xFF62] = 1,
 }
-local nobreak_before = {
-    [0x21] = true, [0x22] = true, [0x27] = true, [0x29] = true, [0x2C] = true,
-    [0x2D] = true, [0x2E] = true, [0x2F] = true, [0x3A] = true, [0x3B] = true,
-    [0x3E] = true, [0x3F] = true, [0x5D] = true, [0x7D] = true, [0xB7] = true,
-    [0x2013] = true, [0x2014] = true, [0x2015] = true, [0x2019] = true,
-    [0x201D] = true, [0x2025] = true, [0x2026] = true, [0x3001] = true,
-    [0x3002] = true, [0x3009] = true, [0x300B] = true, [0x300D] = true,
-    [0x300F] = true, [0x3011] = true, [0x3015] = true, [0xFF01] = true,
-    [0xFF09] = true, [0xFF0C] = true, [0xFF0E] = true, [0xFF1A] = true,
-    [0xFF1B] = true, [0xFF1F] = true, [0xFF3D] = true, [0xFF5D] = true,
-    [0x3041] = true, [0x3043] = true, [0x3045] = true, [0x3047] = true,
-    [0x3049] = true, [0x3063] = true, [0x3083] = true, [0x3085] = true,
-    [0x3087] = true, [0x308E] = true, [0x3095] = true, [0x3096] = true, 
-    [0x3099] = true, [0x309A] = true, [0x309B] = true, [0x309C] = true,
-    [0x309D] = true, [0x309E] = true, [0x30A0] = true, [0x30A1] = true,
-    [0x30A3] = true, [0x30A5] = true, [0x30A7] = true, [0x30A9] = true,
-    [0x30C3] = true, [0x30E3] = true, [0x30E5] = true, [0x30E7] = true,
-    [0x30EE] = true, [0x30F5] = true, [0x30F6] = true, [0x30FB] = true,
-    [0x30FC] = true, [0x30FD] = true, [0x30FE] = true,
+local nobr_before = {
+    [0x21] = 1, [0x22] = 1, [0x27] = 1, [0x29] = 1, [0x2C] = 1,
+    [0x2D] = 1, [0x2E] = 1, [0x2F] = 1, [0x3A] = 1, [0x3B] = 1,
+    [0x3E] = 1, [0x3F] = 1, [0x5C] = 1, [0x5D] = 1, [0x7D] = 1,
+    [0x7E] = 1, [0xB7] = 1, [0x2013] = 1, [0x2014] = 1, [0x2015] = 1,
+    [0x2019] = 1, [0x201D] = 1, [0x2025] = 1, [0x2026] = 1,
+    [0x232A] = 1, [0x3001] = 1, [0x3002] = 1, [0x3005] = 1,
+    [0x3009] = 1, [0x300B] = 1, [0x300D] = 1, [0x300F] = 1,
+    [0x3011] = 1, [0x3015] = 1, [0x3017] = 1, [0x3019] = 1,
+    [0x301B] = 1, [0x301C] = 1, [0x301E] = 1, [0x301F] = 1,
+    [0x3035] = 1, [0x303B] = 1, [0x303C] = 1, [0x3041] = 2,
+    [0x3043] = 2, [0x3045] = 2, [0x3047] = 2, [0x3049] = 2,
+    [0x3063] = 2, [0x3083] = 2, [0x3085] = 2, [0x3087] = 2,
+    [0x308E] = 2, [0x3095] = 2, [0x3096] = 2, [0x3099] = 1,
+    [0x309A] = 1, [0x309B] = 1, [0x309C] = 1, [0x309D] = 1,
+    [0x309E] = 1, [0x30A0] = 1, [0x30A1] = 2, [0x30A3] = 2,
+    [0x30A5] = 2, [0x30A7] = 2, [0x30A9] = 2, [0x30C3] = 2,
+    [0x30E3] = 2, [0x30E5] = 2, [0x30E7] = 2, [0x30EE] = 2,
+    [0x30F5] = 2, [0x30F6] = 2, [0x30FB] = 1, [0x30FC] = 1,
+    [0x30FD] = 1, [0x30FE] = 1, [0x31F0] = 2, [0x31F1] = 2,
+    [0x31F2] = 2, [0x31F3] = 2, [0x31F4] = 2, [0x31F5] = 2,
+    [0x31F6] = 2, [0x31F7] = 2, [0x31F8] = 2, [0x31F9] = 2,
+    [0x31FA] = 2, [0x31FB] = 1, [0x31FC] = 1, [0x31FD] = 1,
+    [0x31FE] = 1, [0x31FF] = 1, [0xFF01] = 1, [0xFF09] = 1,
+    [0xFF0C] = 1, [0xFF0E] = 1, [0xFF1A] = 1, [0xFF1B] = 1,
+    [0xFF1F] = 1, [0xFF3D] = 1, [0xFF5D] = 1, [0xFF60] = 1,
+    [0xFF61] = 1, [0xFF63] = 1, [0xFF64] = 1, [0xFF65] = 1,
+    [0xFF9E] = 1, [0xFF9F] = 1,
 }
-for i=0x1160, 0x11FF do nobreak_before[i] = true end
-for i=0xD7B0, 0xD7FB do nobreak_before[i] = true end
-for i=0x302E, 0x302F do nobreak_before[i] = true end
-for i=0x31F0, 0x31FF do nobreak_before[i] = true end
-local is_cjk = function (c)
+for i=0x1160, 0x11FF do nobr_before[i] = 2 end
+for i=0xD7B0, 0xD7FB do nobr_before[i] = 2 end
+for i=0x302A, 0x302F do nobr_before[i] = 1 end
+local function is_cjk (c)
     return  (c >= 0xAC00  and c <= 0xD7A3)
     or      (c >= 0x1100  and c <= 0x115F)
     or      (c >= 0xA960  and c <= 0xA97C)
@@ -115,33 +695,130 @@ local is_cjk = function (c)
     or      (c >= 0x3040  and c <= 0x30FF)
     or      (c >= 0x20000 and c <= 0x2CEAF)
     or      (c >= 0x2F800 and c <= 0x2FA1F)
-    or      (nobreak_after[c]  and c > 0xFF)
-    or      (nobreak_before[c] and c > 0xFF)
+    or      (nobr_after[c]  and c > 0xFF)
+    or      (nobr_before[c] and c > 0xFF)
 end
-local insert_penalty_glue = function (head, curr)
+local charclass = setmetatable({
+    [0x2018] = 1, [0x201C] = 1, [0x2329] = 1, [0x3008] = 1,
+    [0x300A] = 1, [0x300C] = 1, [0x300E] = 1, [0x3010] = 1,
+    [0x3014] = 1, [0x3016] = 1, [0x3018] = 1, [0x301A] = 1,
+    [0x301D] = 1, [0xFF08] = 1, [0xFF3B] = 1, [0xFF5B] = 1,
+    [0xFF5F] = 1, [0xFF62] = 1, [0x2019] = 2, [0x201D] = 2,
+    [0x232A] = 2, [0x3001] = 2, [0x3009] = 2, [0x300B] = 2,
+    [0x300D] = 2, [0x300F] = 2, [0x3011] = 2, [0x3015] = 2,
+    [0x3017] = 2, [0x3019] = 2, [0x301B] = 2, [0x301E] = 2,
+    [0x301F] = 2, [0xFF09] = 2, [0xFF0C] = 2, [0xFF3D] = 2,
+    [0xFF5D] = 2, [0xFF60] = 2, [0xFF63] = 2, [0xFF64] = 2,
+    [0x00B7] = 3, [0x30FB] = 3, [0xFF1A] = 3, [0xFF1B] = 3,
+    [0xFF65] = 3, [0x3002] = 4, [0xFF0E] = 4, [0xFF61] = 4,
+    [0x2015] = 5, [0x2025] = 5, [0x2026] = 5, [0xFF01] = 6,
+    [0xFF1F] = 6,
+}, { __index = function() return 0 end })
+local intercharclass = { [0] =
+    { [0] = nil,    {1,1},  nil,    {.5,.5} },
+    { [0] = nil,    nil,    nil,    {.5,.5} },
+    { [0] = {1,1},  {1,1},  nil,    {.5,.5}, nil,    {1,1},  {1,1} },
+    { [0] = {.5,.5},{.5,.5},{.5,.5},{1,.5},  {.5,.5},{.5,.5},{.5,.5} },
+    { [0] = {1,0},  {1,0},  nil,    {1.5,.5},nil,    {1,0},  {1,0} },
+    { [0] = nil,    {1,1},  nil,    {.5,.5} },
+    { [0] = {1,1},  {1,1},  nil,    {.5,.5} },
+}
+local function get_new_penalty (p)
     local penalty = node.new("penalty")
-    penalty.penalty = 50
+    penalty.penalty = p
+    return penalty
+end
+local function get_new_glue (wd, st, sh)
     local glue = node.new("glue")
     local spec = node.new("glue_spec")
-    local size = fonts.hashes.identifiers[curr.font] or font.fonts[curr.font]
-    size = size and size.size or 655360
-    spec.width   = 0
-    spec.stretch = size/10
-    spec.shrink  = size/25
+    spec.width   = wd
+    spec.stretch = st
+    spec.shrink  = sh
     glue.spec = spec
-    head, curr = node.insert_after(head, curr, penalty)
+    return glue
+end
+local function get_font_size (fid, space)
+    local f = fonts.hashes.identifiers[fid] or font.fonts[fid]
+    local size = f and f.parameters
+    if space then
+        size = size and size.space or 196608
+    else
+        size = size and size.quad  or 655360
+    end
+    return size/2
+end
+local function glyph_to_box (head, curr, class)
+    local g, h = curr
+    local size = get_font_size(g.font)
+    head, curr = node.remove(head, curr)
+    g.next, g.prev = nil, nil
+    local hss = get_new_glue(0, 65536, 65536)
+    hss.spec.stretch_order = 2
+    hss.spec.shrink_order  = 2
+    if class == 1 then
+        h, hss.next, g.prev = hss, g, hss
+    elseif class == 2 or class == 4 then
+        h, g.next, hss.prev = g, hss, g
+    else
+        local hss2 = node.copy(hss)
+        h, hss.next, g.prev, g.next, hss2.prev = hss, g, hss, hss2, g
+    end
+    local box = node.hpack(h, size, "exactly")
+    head, curr = node.insert_before(head, curr, box)
+    return head, curr
+end
+local function insert_cjk_penalty_glue (head, curr, f, var, cc, nc, nobr)
+    if nobr or cc == 1 or nc > 1 then
+        local penalty = get_new_penalty(10000)
+        head, curr = node.insert_after(head, curr, penalty)
+    end
+    local factor = get_font_size(f, var == 2)
+    local t = intercharclass[cc][nc]
+    local glue = get_new_glue(t[1]*factor, nil, t[2]*factor)
     head, curr = node.insert_after(head, curr, glue)
     return head, curr
 end
-local korean_break = function (head)
+local function insert_penalty_glue (head, curr, f, var, x)
+    if var == 1 then
+    else
+        local penalty = get_new_penalty(50)
+        head, curr = node.insert_after(head, curr, penalty)
+    end
+    local size, glue = get_font_size(f, x and var == 2)
+    if x then
+        glue = get_new_glue(size/2, size/4, size/8)
+    else
+        glue = get_new_glue(0, size/5, size/50)
+    end
+    head, curr = node.insert_after(head, curr, glue)
+    return head, curr
+end
+local function korean_break (head, lb)
     local curr = head
     while curr do
-        if curr.id == glyph_id and node.has_attribute(curr, attr_korean) then
-            local next = curr.next
-            if next and next.id == glyph_id then
-                local c, n = curr.char, next.char
-                if (is_cjk(c) or is_cjk(n)) and not nobreak_before[n] and not nobreak_after[c] then
-                    head, curr = insert_penalty_glue(head, curr)
+        if curr.id == glyph_id then
+            local var = node.has_attribute(curr, attr_korean)
+            if var then
+                local c, f = curr.char, curr.font
+                local cc = charclass[c]
+                if var > 0 and cc > 0 and cc < 5 then
+                    head, curr = glyph_to_box(head, curr, cc)
+                end
+                local next = curr.next
+                if next and next.id == glyph_id then
+                    local n = next.char
+                    local nc = charclass[n]
+                    local nobr = nobr_before[n] or nobr_after[c]
+                    if var > 0 and intercharclass[cc][nc] then
+                        head, curr = insert_cjk_penalty_glue(head, curr, f, var, cc, nc, nobr)
+                    elseif not nobr then
+                        local cjkc, cjkn = is_cjk(c), is_cjk(n)
+                        if var > 0 and (cjkc or cjkn) and not (cjkc and cjkn) then
+                            head, curr = insert_penalty_glue(head, curr, f, var, true)
+                        elseif lb and (cjkc or cjkn) then
+                            head, curr = insert_penalty_glue(head, curr, f, var)
+                        end
+                    end
                 end
             end
         end
@@ -149,15 +826,119 @@ local korean_break = function (head)
     end
     return head
 end
-local reorder_tm = function (head)
-    local tone
-    local curr = node.tail(head)
+local josa_table = {
+    %           리을,   중성,   종성
+    [0xAC00] = {0xC774, 0xAC00, 0xC774}, % 가 = 이, 가, 이
+    [0xC740] = {0xC740, 0xB294, 0xC740}, % 은 = 은, 는, 은
+    [0xC744] = {0xC744, 0xB97C, 0xC744}, % 을 = 을, 를, 을
+    [0xC640] = {0xACFC, 0xC640, 0xACFC}, % 와 = 과, 와, 과
+    [0xC73C] = {nil,    nil,    0xC73C}, % 으(로) =   ,  , 으
+    [0xC774] = {0xC774, nil,    0xC774}, % 이(라) = 이,  , 이
+}
+local function josa_char_num (t, c)
+    c = c - math.floor(c/10)*10 + 0x30
+    return t[c] or 2
+end
+local josa_code = setmetatable({
+    [0x30] = 3, [0x31] = 1, [0x33] = 3, [0x36] = 3, [0x37] = 1,
+    [0x38] = 1, [0x4C] = 1, [0x4D] = 3, [0x4E] = 3, [0x6C] = 1,
+    [0x6D] = 3, [0x6E] = 3, [0xFB02] = 1, [0xFB04] = 1,
+},{ __index = function(t,c)
+        if c >= 0xAC00 and c <= 0xD7A3 then
+            c = c - 0xAC00
+            c = c - math.floor(c/28)*28 + 0x11A7
+        end
+        if c >= 0x11A8 and c <= 0x11FF then
+            if c == 0x11AF then return 1 end
+            return 3
+        end
+        if c >= 0xD7CB and c <= 0xD7FB then return 3 end
+        if c >= 0x2170 and c <= 0x217F then c = c - 0x10 end
+        if c >= 0x2160 and c <= 0x216F then
+            if c >= 0x216C then return 3 end
+            return josa_char_num(t, c - 0x215F)
+        end
+        if c >= 0x2460 and c <= 0x2473 then return josa_char_num(t, c - 0x245F) end
+        if c >= 0x2474 and c <= 0x2487 then return josa_char_num(t, c - 0x2473) end
+        if c >= 0x2488 and c <= 0x249B then return josa_char_num(t, c - 0x2487) end
+        if c >= 0x249C and c <= 0x24B5 then return t[c - 0x249C + 0x61] or 2 end
+        if c >= 0x24B6 and c <= 0x24CF then return t[c - 0x24B6 + 0x61] or 2 end
+        if c >= 0x24D0 and c <= 0x24E9 then return t[c - 0x24D0 + 0x61] or 2 end
+        if c >= 0x3131 and c <= 0x318E then
+            if c == 0x3139 then return 1 end
+            if c >= 0x314F and c <= 0x3163 or c >= 0x3187 then return 2 end
+            return 3
+        end
+        if c >= 0x3260 and c <= 0x327E then c = c - 0x60 end
+        if c >= 0x3200 and c <= 0x321E then
+            if c == 0x3203 then return 1 end
+            if c >= 0x320E then return 2 end
+            return 3
+        end
+        if c >= 0xFF10 and c <= 0xFF19 then return josa_char_num(t, c - 0xFF10) end
+        if c >= 0xFF21 and c <= 0xFF3A then return t[c - 0xFF21 + 0x61] or 2 end
+        if c >= 0xFF41 and c <= 0xFF5A then return t[c - 0xFF41 + 0x61] or 2 end
+        return 2
+    end })
+local function get_prev_char (p)
+    while p do
+        if p.id == glyph_id then
+            local pc = p.char
+            if not nobr_after[pc] then
+                if not nobr_before[pc] or nobr_before[pc] == 2 then
+                    return pc
+                end
+            end
+        elseif p.id == hbox_id or p.id == vbox_id then
+            local pc = get_prev_char(node.tail(p.head))
+            if pc then return pc end
+        end
+        p = p.prev
+    end
+end
+local function auto_josa (head)
+    local curr, tofree = head, {}
+    while curr do
+        if curr.id == glyph_id then
+            local josa = node.has_attribute(curr, attr_josa)
+            if josa then
+                local cc = curr.char
+                if josa == 0 then
+                    josa = josa_code[get_prev_char(curr.prev) or 0x30]
+                end
+                if cc == 0xC774 then
+                    local n = curr.next
+                    if n and n.id == glyph_id and n.char == 0xB77C then
+                    else
+                        cc = 0xAC00
+                    end
+                end
+                local new = josa_table[cc]
+                if new then
+                    cc = new[josa]
+                    if cc then
+                        curr.char = cc
+                    else
+                        head = node.remove(head, curr)
+                        table.insert(tofree, curr)
+                    end
+                end
+                node.unset_attribute(curr, attr_josa)
+            end
+        end
+        curr = curr.next
+    end
+    for _,v in ipairs(tofree) do node.free(v) end
+    return head
+end
+local function reorder_tm (head)
+    local curr, tone = node.tail(head)
     while curr do
         if curr.id == glyph_id and node.has_attribute(curr, attr_korean) then
-            local c, wd = curr.char, curr.width 
+            local c, wd = curr.char, curr.width
             if (c == 0x302E or c == 0x302F) and wd and wd > 0 then
                 tone = curr
-            elseif tone and not nobreak_before[c] then
+            elseif tone and not nobr_before[c] then
                 head = node.remove(head, tone)
                 tone.next, tone.prev = nil, nil
                 head, curr = node.insert_before(head, curr, tone)
@@ -168,38 +949,38 @@ local reorder_tm = function (head)
     end
     return head
 end
-luatexbase.add_to_callback ("pre_linebreak_filter", reorder_tm, "polyglossia.reorder_korean_tm", 1)
-luatexbase.add_to_callback ("pre_linebreak_filter", korean_break, "polyglossia.korean_break", 1)
-luatexbase.add_to_callback ("hpack_filter", reorder_tm, "polyglossia.reorder_korean_tm", 1)
+local prepend_to_callback
+if luatexbase.callbacktypes then
+    prepend_to_callback = function(name, func, desc)
+        local t = { {func, desc} }
+        for _,v in ipairs(luatexbase.callback_descriptions(name)) do
+            table.insert(t, {luatexbase.remove_from_callback(name, v)})
+        end
+        for _,v in ipairs(t) do
+            luatexbase.add_to_callback(name, v[1], v[2])
+        end
+    end
+else
+    prepend_to_callback = function(name, func, desc)
+        luatexbase.add_to_callback(name, func, desc, 1)
+    end
+end
+prepend_to_callback ("pre_linebreak_filter",
+    function(head)
+        head = auto_josa(head)
+        head = korean_break(head, true)
+        head = reorder_tm(head)
+        return head
+    end,
+    "polyglossia.lang_korean")
+prepend_to_callback ("hpack_filter",
+    function(head)
+        head = auto_josa(head)
+        head = korean_break(head)
+        head = reorder_tm(head)
+        return head
+    end,
+    "polyglossia.lang_korean")
 }
-\fi
 
-\def\noextras@korean{%
-    \ifxetex
-        \XeTeXlinebreaklocale ""
-    \else
-        \unsetluatexattribute\xpg@attr@korean
-    \fi
-    \ifdefined\xpg@orig@baselinestretch \xpg@orig@baselinestretch \fi
-    \ifdefined\xpg@orig@footnotesep     \xpg@orig@footnotesep     \fi
-}
-
-\def\inlineextras@korean{%
-    \ifxetex
-        \XeTeXlinebreaklocale "ko"
-        \XeTeXlinebreakpenalty 50
-        \XeTeXlinebreakskip 0pt plus.1em minus .04em
-    \else
-        \xpg@attr@korean=1
-    \fi
-}
-
-\def\blockextras@korean{%
-    \inlineextras@korean
-    \xdef\xpg@orig@baselinestretch{\def\noexpand\baselinestretch{\ifdefined\baselinestretch\baselinestretch\else 1\fi}}%
-    \def\baselinestretch{1.3888}\selectfont
-    \xdef\xpg@orig@footnotesep{\noexpand\footnotesep=\ifdefined\footnotesep\the\footnotesep\else 0pt\fi}%
-    \footnotesep=1.3888\footnotesep
-}
-
-% vim:tw=72:sw=4:ts=4:expandtab
+% vim:ft=tex:tw=0:sw=4:ts=4:expandtab
