@@ -107,41 +107,35 @@
 
 \ifxetex
     \def\inlineextras@korean{%
-        \setplainkoreaninterchartoks
-        \setplainkoreancharclasses
         \ifcase\xpg@korean@variant\relax
-            \unsetvariantkoreanintercharmacros
+            \XeTeXinterchartokenstate\z@
             \XeTeXlinebreakpenalty 50
         \or
             \setvariantkoreaninterchartoks
             \setvariantkoreancharclasses
-            \setvariantkoreanintercharmacros
             \def\XPGKOhalfdim{\dimexpr.5em\relax}%
+            \XeTeXinterchartokenstate\@ne
             \XeTeXlinebreakpenalty \z@
         \else
             \setvariantkoreaninterchartoks
             \setvariantkoreancharclasses
-            \setvariantkoreanintercharmacros
             \def\XPGKOhalfdim{\dimexpr.5\fontdimen\tw@\font\relax}%
+            \XeTeXinterchartokenstate\@ne
             \XeTeXlinebreakpenalty 50
         \fi
         \XeTeXlinebreakskip 0pt plus.1em minus .01em
         \XeTeXlinebreaklocale "ko"
-        \XeTeXinterchartokenstate\@ne
     }
     \def\noextras@korean{%
         \ifcase\xpg@korean@variant\relax
         \else
-            \unsetvariantkoreanintercharmacros
             \unsetvariantkoreaninterchartoks
             \unsetvariantkoreancharclasses
         \fi
-        \unsetplainkoreaninterchartoks
-        \unsetplainkoreancharclasses
+        \XeTeXinterchartokenstate\z@
         \XeTeXlinebreakpenalty\z@
         \XeTeXlinebreakskip\z@skip
         \XeTeXlinebreaklocale ""
-        \XeTeXinterchartokenstate\z@
         \noextras@korean@common
     }
 \else % luatex
@@ -259,44 +253,27 @@
 \catcode`A=11 \catcode`0=12
 \global\let\xpg@catcode@letter=A \global\let\xpg@catcode@other=0
 \endgroup
-% macros for plain interchartoks (Josa selection)
-\def\XPGKOstartID {\global\futurelet\XPGKO@let@josa\XPGKO@skip@ID}
-\def\XPGKOstartAA {\global\futurelet\XPGKO@let@josa\XPGKO@skip@AA}
-\def\XPGKO@skip@ID{\XeTeXinterchartoks\XeTeXcharclassBoundary\XeTeXcharclassID{\empty}}
-\def\XPGKO@skip@AA{\XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassAA{\empty}}
-\def\XPGKOstopID  {\XeTeXinterchartoks\XeTeXcharclassBoundary\XeTeXcharclassID{\XPGKOstartID}}
-\def\XPGKOstopAA  {\XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassAA{\XPGKOstartAA}}
-% macros for variant interchartoks (CJK punctuations)
-\def\setvariantkoreanintercharmacros{%
-    \def\XPGKOstartOP{\leavevmode\hbox to.5em\bgroup\hss}%
-    \def\XPGKOstopOP {\egroup}%
-    \def\XPGKOstartCL{\leavevmode\hbox to.5em\bgroup}%
-    \def\XPGKOstopCL {\hss\egroup}%
-    \let\XPGKOstartFS\XPGKOstartCL \let\XPGKOstopFS\XPGKOstopCL
-    \let\XPGKOstartMD\XPGKOstartOP \let\XPGKOstopMD\XPGKOstopCL
-    \let\XPGKOnobreak          \nobreak
-    \def\XPGKOhalfdim          {\dimexpr.5em\relax}%
-    \def\XPGKOhalfzero         {\hskip   \XPGKOhalfdim \relax}%
-    \def\XPGKOhalfhalf         {\hskip   \XPGKOhalfdim minus  \XPGKOhalfdim \relax}%
-    \def\XPGKOhalfquarter      {\hskip   \XPGKOhalfdim minus.5\XPGKOhalfdim \relax}%
-    \def\XPGKOquarterquarter   {\hskip .5\XPGKOhalfdim minus.5\XPGKOhalfdim \relax}%
-    \def\XPGKOiiiquarterquarter{\hskip1.5\XPGKOhalfdim minus.5\XPGKOhalfdim \relax}%
-    \def\XPGKOlatincjk         {\hskip .5\XPGKOhalfdim plus.25\XPGKOhalfdim minus.125\XPGKOhalfdim}%
-}
-\def\unsetvariantkoreanintercharmacros{%
-    \let\XPGKOstartOP\empty \let\XPGKOstopOP\empty
-    \let\XPGKOstartCL\empty \let\XPGKOstopCL\empty
-    \let\XPGKOstartFS\empty \let\XPGKOstopFS\empty
-    \let\XPGKOstartMD\empty \let\XPGKOstopMD\empty
-    \let\XPGKOnobreak          \empty
-    \let\XPGKOhalfdim          \empty
-    \let\XPGKOhalfzero         \empty
-    \let\XPGKOhalfhalf         \empty
-    \let\XPGKOhalfquarter      \empty
-    \let\XPGKOquarterquarter   \empty
-    \let\XPGKOiiiquarterquarter\empty
-    \let\XPGKOlatincjk         \empty
-}
+% macros for interchartoks (Josa selection)
+\def\XPGKOstartID{\global\futurelet\XPGKO@let@josa\XPGKO@skipID}
+\def\XPGKOstartAA{\global\futurelet\XPGKO@let@josa\XPGKO@skipAA}
+\def\XPGKO@skipID{\XeTeXinterchartoks\XeTeXcharclassBoundary\XeTeXcharclassID{\empty}}
+\def\XPGKO@skipAA{\XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassAA{\empty}}
+\def\XPGKOstopID {\XeTeXinterchartoks\XeTeXcharclassBoundary\XeTeXcharclassID{\XPGKOstartID}}
+\def\XPGKOstopAA {\XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassAA{\XPGKOstartAA}}
+% macros for interchartoks (CJK punctuations)
+\def\XPGKOstartOP{\leavevmode\hbox to.5em\bgroup\hss}%
+\def\XPGKOstopOP {\egroup}%
+\def\XPGKOstartCL{\leavevmode\hbox to.5em\bgroup}%
+\def\XPGKOstopCL {\hss\egroup}%
+\let\XPGKOstartFS\XPGKOstartCL \let\XPGKOstopFS\XPGKOstopCL
+\let\XPGKOstartMD\XPGKOstartOP \let\XPGKOstopMD\XPGKOstopCL
+\let\XPGKOnobreak          \nobreak
+\def\XPGKOhalfzero         {\hskip   \XPGKOhalfdim \relax}%
+\def\XPGKOhalfhalf         {\hskip   \XPGKOhalfdim minus  \XPGKOhalfdim \relax}%
+\def\XPGKOhalfquarter      {\hskip   \XPGKOhalfdim minus.5\XPGKOhalfdim \relax}%
+\def\XPGKOquarterquarter   {\hskip .5\XPGKOhalfdim minus.5\XPGKOhalfdim \relax}%
+\def\XPGKOiiiquarterquarter{\hskip1.5\XPGKOhalfdim minus.5\XPGKOhalfdim \relax}%
+\def\XPGKOlatincjk         {\hskip .5\XPGKOhalfdim plus.25\XPGKOhalfdim minus.125\XPGKOhalfdim}%
 % user macro to force zero skip
 \let\inhibitglue\relax
 % initialize interchartoks and classes
@@ -347,143 +324,127 @@
 \newXeTeXintercharclass\XPGKOcharclassAO % ascii (
 \newXeTeXintercharclass\XPGKOcharclassAC % ascii )
 \newXeTeXintercharclass\XPGKOcharclassAA % ascii letters/numbers
-% latest class number
-\chardef\XPGKOlastcharclassnumber\allocationnumber
-% interchartoks for plain variant
-\def\setplainkoreaninterchartoks{}
-\def\unsetplainkoreaninterchartoks{}
-\def\@tmpa#1,#2=#3{%
-    \edef\setplainkoreaninterchartoks{%
-        \unexpanded\expandafter{\setplainkoreaninterchartoks
-            \XeTeXinterchartoks#1 #2={#3}}}%
-    \edef\unsetplainkoreaninterchartoks{%
-        \noexpand\XeTeXinterchartoks#1 #2={}%
-        \unexpanded\expandafter{\unsetplainkoreaninterchartoks}}%
+% unset all interchartoks
+\def\unsetvariantkoreaninterchartoks{%
+    \@tfor\@tmpa :=\XeTeXcharclassID\XeTeXcharclassOP\XeTeXcharclassCL\XPGKOcharclassMD\XPGKOcharclassFS
+                   \XPGKOcharclassLD\XPGKOcharclassEX\XPGKOcharclassAO\XPGKOcharclassAC\XPGKOcharclassAA
+    \do{\count@\XeTeXcharclassBoundary \loop
+            \XeTeXinterchartoks\@tmpa\count@{}%
+            \XeTeXinterchartoks\count@\@tmpa{}%
+            \ifnum\count@=\XeTeXcharclassBoundary \count@\m@ne \fi
+            \ifnum\count@<\xe@alloc@intercharclass
+            \advance\count@\@ne
+            \repeat
+    }%
 }
-\count@\XeTeXcharclassBoundary \loop
-    \ifnum\count@=\XeTeXcharclassID\else
-    \ifnum\count@=\XPGKOcharclassAA\else
-        \expandafter\@tmpa\the\count@,\XeTeXcharclassID={\XPGKOstartID}
-        \expandafter\@tmpa\the\count@,\XPGKOcharclassAA={\XPGKOstartAA}
-        \expandafter\@tmpa\expandafter\XeTeXcharclassID\expandafter,\the\count@={\XPGKOstopID}
-        \expandafter\@tmpa\expandafter\XPGKOcharclassAA\expandafter,\the\count@={\XPGKOstopAA}
-    \fi\fi
-    \ifnum\count@=\XeTeXcharclassBoundary \count@\m@ne \fi
-    \ifnum\count@<\XPGKOlastcharclassnumber
-    \advance\count@\@ne
-    \repeat
-\@tmpa\XPGKOcharclassAA,\XeTeXcharclassID={\XPGKOstartID}
-\@tmpa\XPGKOcharclassAA,\XPGKOcharclassAA={\XPGKOstartAA}
-\@tmpa\XeTeXcharclassID,\XeTeXcharclassID={\XPGKOstartID}
-\@tmpa\XeTeXcharclassID,\XPGKOcharclassAA={\XPGKOstartAA}
 % interchartoks for classic/modern variants
-\def\setvariantkoreaninterchartoks  {}
-\def\unsetvariantkoreaninterchartoks{}
-\def\@tmpa#1,#2=#3{%
-    \edef\setvariantkoreaninterchartoks{%
-        \unexpanded\expandafter{\setvariantkoreaninterchartoks
-            \XeTeXinterchartoks#1 #2={#3}}}%
-    \edef\unsetvariantkoreaninterchartoks{%
-        \noexpand\XeTeXinterchartoks#1 #2={}%
-        \unexpanded\expandafter{\unsetvariantkoreaninterchartoks}}%
+\def\setvariantkoreaninterchartoks{%
+    \count@\XeTeXcharclassBoundary \loop
+        \ifnum\count@=\XeTeXcharclassID\else
+        \ifnum\count@=\XeTeXcharclassOP\else
+        \ifnum\count@=\XeTeXcharclassCL\else
+        \ifnum\count@=\XPGKOcharclassMD\else
+        \ifnum\count@=\XPGKOcharclassFS\else
+        \ifnum\count@=\XPGKOcharclassAA\else
+            \XeTeXinterchartoks\count@\XeTeXcharclassID{\XPGKOstartID}%
+            \XeTeXinterchartoks\count@\XeTeXcharclassOP{\XPGKOstartOP}%
+            \XeTeXinterchartoks\count@\XeTeXcharclassCL{\XPGKOstartCL}%
+            \XeTeXinterchartoks\count@\XPGKOcharclassMD{\XPGKOstartMD}%
+            \XeTeXinterchartoks\count@\XPGKOcharclassFS{\XPGKOstartFS}%
+            \XeTeXinterchartoks\count@\XPGKOcharclassAA{\XPGKOstartAA}%
+            \XeTeXinterchartoks\XeTeXcharclassID\count@{\XPGKOstopID}%
+            \XeTeXinterchartoks\XeTeXcharclassOP\count@{\XPGKOstopOP}%
+            \XeTeXinterchartoks\XeTeXcharclassCL\count@{\XPGKOstopCL}%
+            \XeTeXinterchartoks\XPGKOcharclassMD\count@{\XPGKOstopMD}%
+            \XeTeXinterchartoks\XPGKOcharclassFS\count@{\XPGKOstopFS}%
+            \XeTeXinterchartoks\XPGKOcharclassAA\count@{\XPGKOstopAA}%
+        \fi\fi\fi\fi\fi\fi
+        \ifnum\count@=\XeTeXcharclassBoundary \count@\m@ne \fi
+        \ifnum\count@<\xe@alloc@intercharclass
+        \advance\count@\@ne
+        \repeat
+    %
+    \XeTeXinterchartoks\XPGKOcharclassAA\XeTeXcharclassID{\XPGKOstartID}%
+    \XeTeXinterchartoks\XPGKOcharclassAA\XeTeXcharclassOP{\XPGKOstopAA\XPGKOstartOP}%
+    \XeTeXinterchartoks\XPGKOcharclassAA\XeTeXcharclassCL{\XPGKOstopAA\XPGKOstartCL}%
+    \XeTeXinterchartoks\XPGKOcharclassAA\XPGKOcharclassMD{\XPGKOstopAA\XPGKOstartMD}%
+    \XeTeXinterchartoks\XPGKOcharclassAA\XPGKOcharclassFS{\XPGKOstopAA\XPGKOstartFS}%
+    \XeTeXinterchartoks\XPGKOcharclassAA\XPGKOcharclassAA{\XPGKOstartAA}%
+    %
+    \XeTeXinterchartoks\XeTeXcharclassID\XeTeXcharclassID{\XPGKOstartID}%
+    \XeTeXinterchartoks\XeTeXcharclassID\XeTeXcharclassOP{\XPGKOstopID\XPGKOhalfhalf\XPGKOstartOP}%
+    \XeTeXinterchartoks\XeTeXcharclassID\XeTeXcharclassCL{\XPGKOstopID\XPGKOstartCL}%
+    \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassMD{\XPGKOstopID\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
+    \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassFS{\XPGKOstopID\XPGKOstartFS}%
+    \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassAO{\XPGKOstopID\XPGKOlatincjk}%
+    \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassAA{\XPGKOstartAA}%
+    %
+    \XeTeXinterchartoks\XeTeXcharclassOP\XeTeXcharclassID{\XPGKOstopOP\XPGKOstartID}%
+    \XeTeXinterchartoks\XeTeXcharclassOP\XeTeXcharclassOP{\XPGKOstopOP\XPGKOstartOP}%
+    \XeTeXinterchartoks\XeTeXcharclassOP\XeTeXcharclassCL{\XPGKOstopOP\XPGKOstartCL}%
+    \XeTeXinterchartoks\XeTeXcharclassOP\XPGKOcharclassMD{\XPGKOstopOP\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
+    \XeTeXinterchartoks\XeTeXcharclassOP\XPGKOcharclassFS{\XPGKOstopOP\XPGKOstartFS}%
+    \XeTeXinterchartoks\XeTeXcharclassOP\XPGKOcharclassAA{\XPGKOstopOP\XPGKOstartAA}%
+    %
+    \XeTeXinterchartoks\XeTeXcharclassCL\XeTeXcharclassID{\XPGKOstopCL\XPGKOhalfhalf\XPGKOstartID}%
+    \XeTeXinterchartoks\XeTeXcharclassCL\XeTeXcharclassOP{\XPGKOstopCL\XPGKOhalfhalf\XPGKOstartOP}%
+    \XeTeXinterchartoks\XeTeXcharclassCL\XeTeXcharclassCL{\XPGKOstopCL\XPGKOstartCL}%
+    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassMD{\XPGKOstopCL\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
+    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassFS{\XPGKOstopCL\XPGKOstartFS}%
+    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassLD{\XPGKOstopCL\XPGKOnobreak\XPGKOhalfhalf}%
+    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassEX{\XPGKOstopCL\XPGKOnobreak\XPGKOhalfhalf}%
+    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassAO{\XPGKOstopCL\XPGKOhalfhalf}%
+    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassAC{\XPGKOstopCL\XPGKOnobreak\XPGKOhalfhalf}%
+    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassAA{\XPGKOstopCL\XPGKOstartAA}%
+    %
+    \XeTeXinterchartoks\XPGKOcharclassMD\XeTeXcharclassID{\XPGKOstopMD\XPGKOquarterquarter\XPGKOstartID}%
+    \XeTeXinterchartoks\XPGKOcharclassMD\XeTeXcharclassOP{\XPGKOstopMD\XPGKOquarterquarter\XPGKOstartOP}%
+    \XeTeXinterchartoks\XPGKOcharclassMD\XeTeXcharclassCL{\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartCL}%
+    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassMD{\XPGKOstopMD\XPGKOnobreak\XPGKOhalfquarter\XPGKOstartMD}%
+    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassFS{\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartFS}%
+    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassLD{\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter}%
+    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassEX{\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter}%
+    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassAO{\XPGKOstopMD\XPGKOquarterquarter}%
+    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassAC{\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter}%
+    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassAA{\XPGKOstopMD\XPGKOstartAA}%
+    %
+    \XeTeXinterchartoks\XPGKOcharclassFS\XeTeXcharclassID{\XPGKOstopFS\XPGKOhalfzero\XPGKOstartID}%
+    \XeTeXinterchartoks\XPGKOcharclassFS\XeTeXcharclassOP{\XPGKOstopFS\XPGKOhalfzero\XPGKOstartOP}%
+    \XeTeXinterchartoks\XPGKOcharclassFS\XeTeXcharclassCL{\XPGKOstopFS\XPGKOstartCL}%
+    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassMD{\XPGKOstopFS\XPGKOnobreak\XPGKOiiiquarterquarter\XPGKOstartMD}%
+    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassFS{\XPGKOstopFS\XPGKOstartFS}%
+    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassLD{\XPGKOstopFS\XPGKOnobreak\XPGKOhalfzero}%
+    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassEX{\XPGKOstopFS\XPGKOnobreak\XPGKOhalfzero}%
+    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassAO{\XPGKOstopFS\XPGKOhalfzero}%
+    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassAC{\XPGKOstopFS\XPGKOnobreak\XPGKOhalfzero}%
+    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassAA{\XPGKOstopFS\XPGKOstartAA}%
+    %
+    \XeTeXinterchartoks\XPGKOcharclassLD\XeTeXcharclassOP{\XPGKOhalfhalf\XPGKOstartOP}%
+    \XeTeXinterchartoks\XPGKOcharclassLD\XPGKOcharclassMD{\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
+    %
+    \XeTeXinterchartoks\XPGKOcharclassEX\XeTeXcharclassID{\XPGKOhalfhalf\XPGKOstartID}%
+    \XeTeXinterchartoks\XPGKOcharclassEX\XeTeXcharclassOP{\XPGKOhalfhalf\XPGKOstartOP}%
+    \XeTeXinterchartoks\XPGKOcharclassEX\XPGKOcharclassMD{\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
+    \XeTeXinterchartoks\XPGKOcharclassEX\XPGKOcharclassAO{\XPGKOhalfhalf}%
+    \XeTeXinterchartoks\XPGKOcharclassEX\XPGKOcharclassAC{\XPGKOnobreak\XPGKOhalfhalf}%
+    %
+    \XeTeXinterchartoks\XPGKOcharclassAO\XeTeXcharclassOP{\XPGKOnobreak\XPGKOhalfhalf\XPGKOstartOP}%
+    \XeTeXinterchartoks\XPGKOcharclassAO\XPGKOcharclassMD{\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
+    %
+    \XeTeXinterchartoks\XPGKOcharclassAC\XeTeXcharclassID{\XPGKOlatincjk\XPGKOstartID}%
+    \XeTeXinterchartoks\XPGKOcharclassAC\XeTeXcharclassOP{\XPGKOhalfhalf\XPGKOstartOP}%
+    \XeTeXinterchartoks\XPGKOcharclassAC\XPGKOcharclassMD{\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
 }
-\count@\XeTeXcharclassBoundary \loop
-    \ifnum\count@=\XeTeXcharclassID\else
-    \ifnum\count@=\XeTeXcharclassOP\else
-    \ifnum\count@=\XeTeXcharclassCL\else
-    \ifnum\count@=\XPGKOcharclassMD\else
-    \ifnum\count@=\XPGKOcharclassFS\else
-    \ifnum\count@=\XPGKOcharclassAA\else
-        \expandafter\@tmpa\the\count@,\XeTeXcharclassOP={\XPGKOstartOP}
-        \expandafter\@tmpa\the\count@,\XeTeXcharclassCL={\XPGKOstartCL}
-        \expandafter\@tmpa\the\count@,\XPGKOcharclassMD={\XPGKOstartMD}
-        \expandafter\@tmpa\the\count@,\XPGKOcharclassFS={\XPGKOstartFS}
-        \expandafter\@tmpa\expandafter\XeTeXcharclassOP\expandafter,\the\count@={\XPGKOstopOP}
-        \expandafter\@tmpa\expandafter\XeTeXcharclassCL\expandafter,\the\count@={\XPGKOstopCL}
-        \expandafter\@tmpa\expandafter\XPGKOcharclassMD\expandafter,\the\count@={\XPGKOstopMD}
-        \expandafter\@tmpa\expandafter\XPGKOcharclassFS\expandafter,\the\count@={\XPGKOstopFS}
-    \fi\fi\fi\fi\fi\fi
-    \ifnum\count@=\XeTeXcharclassBoundary \count@\m@ne \fi
-    \ifnum\count@<\XPGKOlastcharclassnumber
-    \advance\count@\@ne
-    \repeat
-%
-\@tmpa\XPGKOcharclassAA,\XeTeXcharclassOP={\XPGKOstopAA\XPGKOstartOP}
-\@tmpa\XPGKOcharclassAA,\XeTeXcharclassCL={\XPGKOstopAA\XPGKOstartCL}
-\@tmpa\XPGKOcharclassAA,\XPGKOcharclassMD={\XPGKOstopAA\XPGKOstartMD}
-\@tmpa\XPGKOcharclassAA,\XPGKOcharclassFS={\XPGKOstopAA\XPGKOstartFS}
-%
-\@tmpa\XeTeXcharclassID,\XeTeXcharclassOP={\XPGKOstopID\XPGKOhalfhalf\XPGKOstartOP}
-\@tmpa\XeTeXcharclassID,\XeTeXcharclassCL={\XPGKOstopID\XPGKOstartCL}
-\@tmpa\XeTeXcharclassID,\XPGKOcharclassMD={\XPGKOstopID\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}
-\@tmpa\XeTeXcharclassID,\XPGKOcharclassFS={\XPGKOstopID\XPGKOstartFS}
-\@tmpa\XeTeXcharclassID,\XPGKOcharclassAO={\XPGKOstopID\XPGKOlatincjk}
-%
-\@tmpa\XeTeXcharclassOP,\XeTeXcharclassID={\XPGKOstopOP\XPGKOstartID}
-\@tmpa\XeTeXcharclassOP,\XeTeXcharclassOP={\XPGKOstopOP\XPGKOstartOP}
-\@tmpa\XeTeXcharclassOP,\XeTeXcharclassCL={\XPGKOstopOP\XPGKOstartCL}
-\@tmpa\XeTeXcharclassOP,\XPGKOcharclassMD={\XPGKOstopOP\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}
-\@tmpa\XeTeXcharclassOP,\XPGKOcharclassFS={\XPGKOstopOP\XPGKOstartFS}
-\@tmpa\XeTeXcharclassOP,\XPGKOcharclassAA={\XPGKOstopOP\XPGKOstartAA}
-%
-\@tmpa\XeTeXcharclassCL,\XeTeXcharclassID={\XPGKOstopCL\XPGKOhalfhalf\XPGKOstartID}
-\@tmpa\XeTeXcharclassCL,\XeTeXcharclassOP={\XPGKOstopCL\XPGKOhalfhalf\XPGKOstartOP}
-\@tmpa\XeTeXcharclassCL,\XeTeXcharclassCL={\XPGKOstopCL\XPGKOstartCL}
-\@tmpa\XeTeXcharclassCL,\XPGKOcharclassMD={\XPGKOstopCL\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}
-\@tmpa\XeTeXcharclassCL,\XPGKOcharclassFS={\XPGKOstopCL\XPGKOstartFS}
-\@tmpa\XeTeXcharclassCL,\XPGKOcharclassLD={\XPGKOstopCL\XPGKOnobreak\XPGKOhalfhalf}
-\@tmpa\XeTeXcharclassCL,\XPGKOcharclassEX={\XPGKOstopCL\XPGKOnobreak\XPGKOhalfhalf}
-\@tmpa\XeTeXcharclassCL,\XPGKOcharclassAO={\XPGKOstopCL\XPGKOhalfhalf}
-\@tmpa\XeTeXcharclassCL,\XPGKOcharclassAC={\XPGKOstopCL\XPGKOnobreak\XPGKOhalfhalf}
-\@tmpa\XeTeXcharclassCL,\XPGKOcharclassAA={\XPGKOstopCL\XPGKOstartAA}
-%
-\@tmpa\XPGKOcharclassMD,\XeTeXcharclassID={\XPGKOstopMD\XPGKOquarterquarter\XPGKOstartID}
-\@tmpa\XPGKOcharclassMD,\XeTeXcharclassOP={\XPGKOstopMD\XPGKOquarterquarter\XPGKOstartOP}
-\@tmpa\XPGKOcharclassMD,\XeTeXcharclassCL={\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartCL}
-\@tmpa\XPGKOcharclassMD,\XPGKOcharclassMD={\XPGKOstopMD\XPGKOnobreak\XPGKOhalfquarter\XPGKOstartMD}
-\@tmpa\XPGKOcharclassMD,\XPGKOcharclassFS={\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartFS}
-\@tmpa\XPGKOcharclassMD,\XPGKOcharclassLD={\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter}
-\@tmpa\XPGKOcharclassMD,\XPGKOcharclassEX={\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter}
-\@tmpa\XPGKOcharclassMD,\XPGKOcharclassAO={\XPGKOstopMD\XPGKOquarterquarter}
-\@tmpa\XPGKOcharclassMD,\XPGKOcharclassAC={\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter}
-\@tmpa\XPGKOcharclassMD,\XPGKOcharclassAA={\XPGKOstopMD\XPGKOstartAA}
-%
-\@tmpa\XPGKOcharclassFS,\XeTeXcharclassID={\XPGKOstopFS\XPGKOhalfzero\XPGKOstartID}
-\@tmpa\XPGKOcharclassFS,\XeTeXcharclassOP={\XPGKOstopFS\XPGKOhalfzero\XPGKOstartOP}
-\@tmpa\XPGKOcharclassFS,\XeTeXcharclassCL={\XPGKOstopFS\XPGKOstartCL}
-\@tmpa\XPGKOcharclassFS,\XPGKOcharclassMD={\XPGKOstopFS\XPGKOnobreak\XPGKOiiiquarterquarter\XPGKOstartMD}
-\@tmpa\XPGKOcharclassFS,\XPGKOcharclassFS={\XPGKOstopFS\XPGKOstartFS}
-\@tmpa\XPGKOcharclassFS,\XPGKOcharclassLD={\XPGKOstopFS\XPGKOnobreak\XPGKOhalfzero}
-\@tmpa\XPGKOcharclassFS,\XPGKOcharclassEX={\XPGKOstopFS\XPGKOnobreak\XPGKOhalfzero}
-\@tmpa\XPGKOcharclassFS,\XPGKOcharclassAO={\XPGKOstopFS\XPGKOhalfzero}
-\@tmpa\XPGKOcharclassFS,\XPGKOcharclassAC={\XPGKOstopFS\XPGKOnobreak\XPGKOhalfzero}
-\@tmpa\XPGKOcharclassFS,\XPGKOcharclassAA={\XPGKOstopFS\XPGKOstartAA}
-%
-\@tmpa\XPGKOcharclassLD,\XeTeXcharclassOP={\XPGKOhalfhalf\XPGKOstartOP}
-\@tmpa\XPGKOcharclassLD,\XPGKOcharclassMD={\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}
-%
-\@tmpa\XPGKOcharclassEX,\XeTeXcharclassID={\XPGKOhalfhalf\XPGKOstartID}
-\@tmpa\XPGKOcharclassEX,\XeTeXcharclassOP={\XPGKOhalfhalf\XPGKOstartOP}
-\@tmpa\XPGKOcharclassEX,\XPGKOcharclassMD={\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}
-\@tmpa\XPGKOcharclassEX,\XPGKOcharclassAO={\XPGKOhalfhalf}
-\@tmpa\XPGKOcharclassEX,\XPGKOcharclassAC={\XPGKOnobreak\XPGKOhalfhalf}
-%
-\@tmpa\XPGKOcharclassAO,\XeTeXcharclassOP={\XPGKOnobreak\XPGKOhalfhalf\XPGKOstartOP}
-\@tmpa\XPGKOcharclassAO,\XPGKOcharclassMD={\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}
-%
-\@tmpa\XPGKOcharclassAC,\XeTeXcharclassID={\XPGKOlatincjk\XPGKOstartID}
-\@tmpa\XPGKOcharclassAC,\XeTeXcharclassOP={\XPGKOhalfhalf\XPGKOstartOP}
-\@tmpa\XPGKOcharclassAC,\XPGKOcharclassMD={\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}
-% char classes for plain variant
-\def\setplainkoreancharclasses{}
-\def\unsetplainkoreancharclasses{}
+% char classes for classic/modern variants
+\def\setvariantkoreancharclasses{}
+\def\unsetvariantkoreancharclasses{}
 \def\@tmpa#1=#2{%
-    \edef\setplainkoreancharclasses{%
-        \unexpanded\expandafter{\setplainkoreancharclasses
+    \edef\setvariantkoreancharclasses{%
+        \unexpanded\expandafter{\setvariantkoreancharclasses
             \XeTeXcharclass#1=#2}}%
-    \edef\unsetplainkoreancharclasses{%
+    \edef\unsetvariantkoreancharclasses{%
         \noexpand\XeTeXcharclass#1=\the\XeTeXcharclass#1\relax
-        \unexpanded\expandafter{\unsetplainkoreancharclasses}}%
+        \unexpanded\expandafter{\unsetvariantkoreancharclasses}}%
 }
 \count@"30 \loop % 0 .. 9
     \expandafter\@tmpa\the\count@=\XPGKOcharclassAA
@@ -554,17 +515,7 @@
     \ifnum\count@<"FF70
     \advance\count@\@ne
     \repeat
-% char classes for classic/modern variants
-\def\setvariantkoreancharclasses  {}
-\def\unsetvariantkoreancharclasses{}
-\def\@tmpa#1=#2{%
-    \edef\setvariantkoreancharclasses{%
-        \unexpanded\expandafter{\setvariantkoreancharclasses
-            \XeTeXcharclass#1=#2}}%
-    \edef\unsetvariantkoreancharclasses{%
-        \noexpand\XeTeXcharclass#1=\the\XeTeXcharclass#1\relax
-        \unexpanded\expandafter{\unsetvariantkoreancharclasses}}%
-}
+%
 \@tmpa "28=\XPGKOcharclassAO % (
 \@tmpa "5B=\XPGKOcharclassAO % [
 \@tmpa "60=\XPGKOcharclassAO % `
@@ -623,9 +574,9 @@
 \fi
 \newattribute\xpg@attr@korean
 \newattribute\xpg@attr@autojosa
-\protected\def\rieul{\global\chardef\xpg@josa@zwang\@ne}
-\protected\def\jung {\global\chardef\xpg@josa@zwang\tw@}
-\protected\def\jong {\global\chardef\xpg@josa@zwang\thr@@}
+\protected\def\rieul{\global\let\xpg@josa@zwang\@ne}
+\protected\def\jung {\global\let\xpg@josa@zwang\tw@}
+\protected\def\jong {\global\let\xpg@josa@zwang\thr@@}
 \protected\def\은{\begingroup\xpg@attr@autojosa\xpg@josa@zwang 은\endgroup\xpg@reset@josa}
 \let\는\은
 \protected\def\을{\begingroup\xpg@attr@autojosa\xpg@josa@zwang 을\endgroup\xpg@reset@josa}
@@ -637,7 +588,7 @@
 \protected\def\라{\이 라}
 \protected\def\으{\begingroup\xpg@attr@autojosa\xpg@josa@zwang 으\endgroup\xpg@reset@josa}
 \protected\def\로{\으 로}
-\def\xpg@reset@josa {\global\chardef\xpg@josa@zwang\z@}\xpg@reset@josa
+\def\xpg@reset@josa {\global\let\xpg@josa@zwang\z@}\xpg@reset@josa
 \directlua{
 local glyph_id = node.id("glyph")
 local hbox_id  = node.id("hlist")
