@@ -1,3 +1,20 @@
+08-02-2016
+  * Updated gloss-occitan from CTAN
+
+03-12-2015
+  * Merged pull request #117 for more French guillemet spacing
+  * Merged pull request #121 to add \bbl@loaded; fixes issue #120
+  * Merged pull request #122 that build on #121
+
+08-11-2015
+  * Merged pull request #116 for French (spacing around guillemets)
+
+22-10-2015
+  * Fixed issue #115 (spurious spaces in Arabic)
+
+19-08-2015
+  * Fixed issue #107 for Marathi (labels and month names)
+
 1.42.0 (06-08-2015)
   * Add Bengali digits package, and option to reset all numbering functions
 

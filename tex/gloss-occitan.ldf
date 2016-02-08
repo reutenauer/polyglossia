@@ -1,6 +1,22 @@
-% Translated by Cédric Valmary <cvalmary@yahoo.fr> of Tot en òc <http://www.totenoc.org/>
-\ProvidesFile{gloss-occitan.ldf}[polyglossia: module for occitan]
-
+%%
+%% This is file `gloss-occitan.ldf',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% gloss-occitan.dtx  (with options: `ldf')
+%%   ------------------------------------------------------------------
+%%   The gloss-occitan module for polyglossia
+%%   Copyright (C) 2016 Cédric Valmary
+%%   All rights reserved
+%% 
+%%   Licence information appended
+%% 
+%%   Created by Cédric Valmary: cvalmary at yahoo dot fr
+%%   of Tot en òc <http://www.totenoc.eu/>
+%% 
+\ProvidesFile{gloss-occitan.ldf}[2016/02/04 v0.3 polyglossia:
+     module for Occitan]
 \PolyglossiaSetup{occitan}{
   hyphennames={occitan},
   hyphenmins={2,2},
@@ -8,12 +24,64 @@
   indentfirst=true,
   fontsetup=true,
 }
+\define@boolkey{occitan}[occitan@]{babelshorthands}[true]{}
 
+\ifsystem@babelshorthands
+  \setkeys{occitan}{babelshorthands=true}
+\else
+  \setkeys{occitan}{babelshorthands=false}
+\fi
+\ifcsundef{initiate@active@char}{%
+\input{babelsh.def}%
+\initiate@active@char{"}%
+}{}
+\def\occitan@shorthands{%
+  \bbl@activate{"}%
+  \def\language@group{occitan}%
+  \declare@shorthand{occitan}{"}{%
+    \relax\ifmmode
+      \def\xpgoc@next{''}%
+    \else
+      \def\xpgoc@next{\futurelet\xpgoc@temp\xpgoc@cwm}%
+    \fi
+  \xpgoc@next}%
+}
+\def\xpgoc@@cwm{\nobreak\discretionary{-}{}{}\nobreak\hskip\z@skip}
+\def\xpgoc@ponchinterior{%
+      \nobreak\discretionary{-}{}{\mbox{$\cdot$}}\nobreak\hskip\z@skip}
+\def\xpgoc@cwm{\let\xpgoc@@next\relax
+  \ifcat\noexpand\xpgoc@temp a%
+                         \def\xpgoc@@next{\xpgoc@@cwm}%
+  \else
+    \if\noexpand\xpgoc@temp \string|%
+      \def\xpgoc@@next##1{\xpgoc@@cwm}%
+    \else
+      \if\noexpand\xpgoc@temp \string<%
+        \def\xpgoc@@next##1{«\ignorespaces}%
+      \else
+        \if\noexpand\xpgoc@temp \string>%
+          \def\xpgoc@@next##1{\unskip»}%
+        \else
+          \if\noexpand\xpgoc@temp\string/%
+            \def\xpgoc@@next##1{\slash}%
+          \else
+            \if\noexpand\xpgoc@temp\string.%
+              \def\xpgoc@@next##1{\xpgoc@ponchinterior}%
+            \fi
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+  \xpgoc@@next}
+\def\nooccitan@shorthands{%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
 \def\captionsoccitan{%
    \def\refname{Referéncias}%
    \def\abstractname{Resumit}%
    \def\bibname{Bibliografia}%
-   \def\prefacename{Prefàcia}%
+   \def\prefacename{Prefaci}%
    \def\chaptername{Capítol}%
    \def\appendixname{Annèx}%
    \def\contentsname{Ensenhador}%
@@ -52,7 +120,38 @@
       1èr\else% primièr
       \number\day\fi% all other numbers
    }%
-   \def\today{\occitanday \occitanmonth\space de~\number\year}%
+   \def\today{\occitanday\space \occitanmonth\space de~\number\year}%
+}
+\let\xpgoc@savedvalues\empty
+\AtEndPreamble{% the user or the class might define different values
+  \edef\xpgoc@savedvalues{%
+    \clubpenalty=\the\clubpenalty\space
+    \@clubpenalty=\the\@clubpenalty\space
+    \widowpenalty=\the\widowpenalty\space
+    \finalhyphendemerits=\the\finalhyphendemerits}
+}
+\def\noextras@occitan{%
+   \lccode\string"2019=\z@
+   \nooccitan@shorthands
+   \xpgoc@savedvalues
+}
+\def\blockextras@occitan{%
+   \lccode\string"2019=\string"2019
+   \clubpenalty=3000 \@clubpenalty=3000 \widowpenalty=3000
+   \finalhyphendemerits=50000000
+   \ifoccitan@babelshorthands\occitan@shorthands\fi
 }
 
-\endinput
+\def\inlineextras@occitan{%
+   \lccode\string"2019=\string"2019
+   \ifoccitan@babelshorthands\occitan@shorthands\fi
+}
+%% Distributable under the LaTeX Project Public License,
+%% version 1.3c or higher (your choice). The latest version of
+%% this license is at: http://www.latex-project.org/lppl.txt
+%% 
+%% This work is "author-maintained"
+%% The maintainer is Cédric Valmary
+%% 
+%%
+%% End of file `gloss-occitan.ldf'.

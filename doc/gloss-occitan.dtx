@@ -1,0 +1,437 @@
+% \iffalse
+% !TEX encoding = UTF-8 Unicode
+% !TEX TS-program = XeLaTeX
+%<*internal>
+\begingroup
+\input docstrip.tex
+\keepsilent
+
+\preamble
+  ------------------------------------------------------------------
+  The gloss-occitan module for polyglossia
+  Copyright (C) 2016 Cédric Valmary
+  All rights reserved
+  
+  Licence information appended
+
+  Created by Cédric Valmary: cvalmary at yahoo dot fr 
+  of Tot en òc <http://www.totenoc.eu/>
+
+\endpreamble
+\postamble
+Distributable under the LaTeX Project Public License,
+version 1.3c or higher (your choice). The latest version of
+this license is at: http://www.latex-project.org/lppl.txt
+
+This work is "author-maintained"
+The maintainer is Cédric Valmary
+
+\endpostamble
+
+\askforoverwritefalse
+
+\generate{\file{gloss-occitan.ldf}{\from{gloss-occitan.dtx}{ldf}}}
+
+\def\tmpa{plain}
+\ifx\tmpa\fmtname\endgroup\expandafter\bye\fi
+\endgroup
+%</internal>
+%
+%<*driver>
+\documentclass{ltxdoc}
+\ProvidesFile{gloss-occitan.dtx}[2016/02/04 v.0.1 Documented Occitan module for polyglossia]
+\usepackage[utf8]{inputenc}
+\usepackage[LGR,T1]{fontenc}
+\usepackage{lmodern}
+\GetFileInfo{gloss-occitan.dtx} 
+\title{The Occitan language module for polyglossia}
+\date{\fileversion\space--- \filedate}
+\author{Cédric Valmary --- \texttt{cvalmary at yahoo dot fr}}
+\usepackage{metalogo,multicol,array,booktabs,graphicx}
+\def\prog#1{\textsf{#1}}
+\def\pack#1{\textsf{\slshape#1}}
+\begin{document}\errorcontextlines=9
+\maketitle
+\begin{multicols}{2}
+\tableofcontents
+\end{multicols}
+\setlength\hfuzz{20pt}
+\DocInput{gloss-occitan.dtx}
+\end{document}
+%</driver>
+%\fi
+%
+% \CheckSum{237}
+%
+%    \begin{abstract}
+%     This file describes the Occitan language module for \pack{polyglossia}.
+%     It describes also the options that may be specified and their 
+%     functionalities.
+%    \end{abstract}
+%
+%    \section{Usage}
+%    When selecting the Occitan language with \pack{polyglossia} you have
+%    to use either
+%    \begin{flushleft}
+%    \cs{setmainlanguage}\texttt{[babelshorthands]\{occitan\}}\\
+%    or\\
+%    \cs{setotherlanguage}\texttt{[babelshorthands]\{occitan\}}
+%    \end{flushleft}
+%    depending on the fact that Occitan is the main or a secondary document
+%    language. The option |babelshorhands| is, in facts, optional; if
+%    specified it defines the active double quote functionalities.
+%    See table~\ref{tab:activedq}.
+%    \begin{table}\centering
+%    \begin{tabular}{>{\ttfamily}lp{0.7\textwidth}}
+%    \toprule
+%    |"|	& Followed by a single letter token inserts a compound 
+%          word mark with the necessary discretionary break command and
+%          allows hyphenation of both strings that precede and follow
+%          this mark.\tabularnewline
+%    \string"\string| & Behaves as |"| when the vertical bar is followed
+%          by a complex token (a control sequence) or anything different
+%          from a letter. \tabularnewline
+%    |"<|	& Inserts open guillemets and eliminates space 
+%          after «\tabularnewline
+%    |">|	& Inserts closed guillemets and eliminates space 
+%          before »\tabularnewline
+%    |"/|	& Inserts a slash that allows hyphenation of both the preceding
+%          and the following word.\tabularnewline
+%    |".|	& Inserts a centerd dot (\emph{ponch interior}) with 
+%          a discretionary break that allows hyphenation of both word 
+%          fragments.\tabularnewline
+%    \bottomrule
+%    \end{tabular}
+%    \caption{Occitan module shorthands}
+%    \label{tab:activedq}
+%    \end{table}
+%A few words are in order.
+%\begin{itemize}
+%\item[|"|] This compound work marker is very useful. The hyphenation 
+%    patterns developed for the Occitan language have been modelled on the 
+%    French or Spanish ones especially for what concerns the separation 
+%    between an `s' followed by another consonant. Nevertheless the 
+%    \emph{Conselh de la lenga occitana} takes care of a common spelling 
+%    for all the Occitan varieties, but leaves every speaker free to pronounce the 
+%    way s/he likes best according to his/her dialect. Even if local 
+%    pronunciations are allowed, the spelling varies a little between the 
+%    Occitan varieties Auvernhat, Gascon, Lemosin, Lengadocian, Niçard, 
+%    Provençal, and Vivaroalpenc. May be some particular spelling requires 
+%    some manual intervention for a correct hyphenation. The hyphenation 
+%    patterns have been developed taking into account some peculiarities 
+%    of the Gascon and the Vivaroalpenc varieties, but better patterns 
+%    will be created as long as suggestions/corrections arrive 
+%    from the community of \LaTeX\ users.
+%
+%\item[\texttt{\string"\string|}] This shorthand should be useless 
+%    within a \texttt{.tex} source file to be processed by UTF-8 
+%    aware engines as \XeLaTeX\ and \LuaLaTeX. Nevertheless it might be 
+%    necessary to insert a discretionary break in a strange word that 
+%    requires a real macro within it; in this case the \verb+"|+ shorthand 
+%    comes handy. The situation is different with 8-bit aware typesetting 
+%    engines, because the \texttt{utf8} specified to the \pack{inputenc} 
+%    package changes every non-\textsc{ascii} character into a LICR (LaTeX 
+%    Internal Character Representation) which is substantially a macro; 
+%    as such it is not recognised as a character by |"|, and this second 
+%    compound word marker must be used.
+%
+%\item[|"<|] and |">| are used to set the guillemets with the proper 
+%    spacing; French users generally leave in the source |.tex| file at
+%    least one space after the open ones and another space before the
+%    closed ones. This is supposed to be a bad practice  for what concerns
+%    Occitan typesetting, therefore such commands take care of eliminating
+%    these unwanted spaces, while simplifying the keying.
+%    
+%\item[|".|] This is a very special shorthand; it is intended to distinguish,
+%    for example, `sh' from `s$\cdot$h' (and similarly for other such groups). 
+%    For example \emph{dis$\cdot$har} is pronounced with a minimal pause 
+%    between the sound of `s' and the aspired sound of `h'; without the centered 
+%    dot (\emph{ponch interior}) the `sh' is a digraph that is pronounced as 
+%    the IPA phoneme /\scalebox{0.8}{$\int$}/. When \emph{dis$\cdot$har}
+%    (|dis".har| in the source file) gets hyphenated, it becomes
+%    \mbox{\itshape dis-har}.
+%\end{itemize}
+%
+% This ends the few peculiarities of the |gloss-occitan| language description file.
+%
+%^^A    \section*{Acknowledgements}
+%^^A    When this file originated was very basic; Claudio Beccari added the
+%^^A    double quote active features after the hyphenation patterns
+%^^A    became available.
+%
+% \StopEventually{}
+%
+%    \section{Documented code}
+%\iffalse
+%<*ldf>
+%\fi
+%\subsection{Initial settings}
+% First we have to identify this file, and we start with the initial code
+% written by Cédric Valmary.
+%    \begin{macrocode}
+%************************************************* By Cédric Valmary
+\ProvidesFile{gloss-occitan.ldf}[2016/02/04 v0.3 polyglossia: 
+     module for Occitan]
+%    \end{macrocode}
+% Then we have ti set up \pack{polyglossia} in order to let the package 
+% know what language is is handling; what is the name of the hyphenation
+% pattern set; what are the minimum word fragment lengths of the first 
+% and respectively the last word fragment before or after a line break; the
+% specific setting for punctuation spacing, the indentation of the first 
+%paragraph of a section; if \pack{polyglossia} should use a special font
+% family |\occitanfont| in case the user defined such a family.
+%    \begin{macrocode}
+\PolyglossiaSetup{occitan}{
+  hyphennames={occitan},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  indentfirst=true,
+  fontsetup=true,
+}
+%************************************************
+%    \end{macrocode}
+%
+% \subsection{Option definitions}
+% We now document the contributed extension required to create the optional 
+% functionality obtained from the double quote active character.
+%
+% We set up the necessary machinery for the module option
+% |babelshorthands|. we set it as a boolean key thet does not require
+% the explicit value |true| when it is specified to the module.
+% The option must be tied to the Occitan language, so we also 
+% define its prefix |occitan@|. We simultaneously use the switch
+% |\ifsystem@baabelshorthands| in order to set the boolean key to |true|
+% or |false|.
+%    \begin{macrocode}
+\define@boolkey{occitan}[occitan@]{babelshorthands}[true]{}
+
+\ifsystem@babelshorthands
+  \setkeys{occitan}{babelshorthands=true}
+\else
+  \setkeys{occitan}{babelshorthands=false}
+\fi
+%    \end{macrocode}
+%
+% At this point, in order to use the \pack{babel} machinery to define
+% active characters, we test it if it was already loaded by testing
+% the definiteness of a specific macro. If the module |babelsh.def|
+% was not loaded, we load it, then start preparing the ground to
+% define the double quote |"| as an active character.
+%....\begin{macrocode}
+\ifcsundef{initiate@active@char}{%
+\input{babelsh.def}%
+\initiate@active@char{"}%
+}{}
+%    \end{macrocode}
+%
+% Now we are ready to assign a definition to the double quote |"| active
+% character. The |"| active char is supposed to
+% do a certain small collection of actions, different in math mode
+% compared to text mode; therefore we define a service macro |\xpgoc@next| with a
+% different meaning depending on the typesetting mode. Notice that in
+% text mode the definition assigns to a token the meaning of the token
+% that upon expansion of the macro follows directly |\xpgoc@cwm|.
+% The assignment with |\futurelet| is executed before |\xpgoc@cwm|
+% therefore it can pick up also the first space token that possibly
+% follows the expansion of |"|; a macro would ignore such space.
+%    \begin{macrocode}
+\def\occitan@shorthands{%
+  \bbl@activate{"}%
+  \def\language@group{occitan}%
+  \declare@shorthand{occitan}{"}{%
+    \relax\ifmmode
+      \def\xpgoc@next{''}%
+    \else
+      \def\xpgoc@next{\futurelet\xpgoc@temp\xpgoc@cwm}%
+    \fi
+  \xpgoc@next}%
+}
+%    \end{macrocode}
+%
+% \subsection{The double quote active character}
+%
+% We now define a couple of service macros; |\xpgoc@@cwm| expands to
+% an absolute |nobreak| macro that forbids any line break; then a
+% normal discretionary (the long definition with three arguments,
+% is made through a primitive command, but if we used the standard
+% |\-| control character, we would get the same performance); finally
+% we put another |\nobreak| command and a zero width glob of glue;
+% this zero-width, zero-stretch, zero-shrink glob of glue does not
+% interfere with typesetting but is the actual trick that lets the
+% typesetting engine understand that the incoming string of letters
+% has to be treated as a word, so that the hyphenation algorithm
+% continues working after the discretionary break.
+% 
+% Similarly the macro |\xpgoc@ponchinterior| works in the same way,
+% but the discretionary break contains a non empty third argument
+% that contains a box which in turn contains the centered dot.
+%    \begin{macrocode}
+\def\xpgoc@@cwm{\nobreak\discretionary{-}{}{}\nobreak\hskip\z@skip}
+\def\xpgoc@ponchinterior{%
+      \nobreak\discretionary{-}{}{\mbox{$\cdot$}}\nobreak\hskip\z@skip}
+%    \end{macrocode}
+%
+% Eventually we can make a chain of conditional statements that check
+% what the |\xpgoc@temp| let token actually represents. We define
+% another service macro |\xpgoc@@next| macro with different definitions
+% depending on the status of the various tests. We first let it to a
+% |\relax| no-op, in case that none of the tests is true; eventually
+% we use its expansion that will do different actions depending on the
+% tests. Notice that all the used conditionals expand their arguments;
+% therefore it is necessary to use |\noexpand| in order to maintain the
+% integrity of the tokens to be compared. Notice also that the service
+% macro is sometimes defined as an argument-less macro, and sometimes
+% as a macro with one compulsory argument; in this latter case, since
+% we are making definitions within another definition we have to double
+% the hash sign. In the latter case it will ignore any spaces following
+% it and get the first non blank token; in most cases it will gobble the
+% first non blank token and discard it.
+%    \begin{macrocode}
+\def\xpgoc@cwm{\let\xpgoc@@next\relax
+  \ifcat\noexpand\xpgoc@temp a%
+                         \def\xpgoc@@next{\xpgoc@@cwm}%
+  \else
+    \if\noexpand\xpgoc@temp \string|%
+      \def\xpgoc@@next##1{\xpgoc@@cwm}%
+    \else
+      \if\noexpand\xpgoc@temp \string<%
+        \def\xpgoc@@next##1{«\ignorespaces}%
+      \else
+        \if\noexpand\xpgoc@temp \string>%
+          \def\xpgoc@@next##1{\unskip»}%
+        \else
+          \if\noexpand\xpgoc@temp\string/%
+            \def\xpgoc@@next##1{\slash}%
+          \else
+            \if\noexpand\xpgoc@temp\string.%
+              \def\xpgoc@@next##1{\xpgoc@ponchinterior}%
+            \fi
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+  \xpgoc@@next}
+%    \end{macrocode}
+%
+% Before going on we have to define what to delete when leaving the Occitan
+% typesetting, so that another language may start working without any
+% residue of the Occitan settings. In particular the double quote |"| active
+% char must be deactivated.
+%    \begin{macrocode}
+\def\nooccitan@shorthands{%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+%    \end{macrocode}
+%
+% \subsection{Occitan infix words}
+% We can resume the original code for defining the infix Occitan
+% words and to typeset the date.
+%    \begin{macrocode}
+%*********************************************** By Cédric Valmary
+\def\captionsoccitan{%
+   \def\refname{Referéncias}%
+   \def\abstractname{Resumit}%
+   \def\bibname{Bibliografia}%
+   \def\prefacename{Prefaci}%
+   \def\chaptername{Capítol}%
+   \def\appendixname{Annèx}%
+   \def\contentsname{Ensenhador}%
+   \def\listfigurename{Taula de las figuras}%
+   \def\listtablename{Taula dels tablèus}%
+   \def\indexname{Indèx}%
+   \def\figurename{Figura}%
+   \def\tablename{Tablèu}%
+   %\def\thepart{}%
+   \def\partname{Partida}%
+   \def\pagename{Pagina}%
+   \def\seename{vejatz}%
+   \def\alsoname{vejatz tanben}%
+   \def\enclname{Pèça junta}%
+   \def\ccname{còpia a}%
+   \def\headtoname{A}%
+   \def\proofname{Demostracion}%
+   \def\glossaryname{Glossari}%
+}
+\def\dateoccitan{%
+   \def\occitanmonth{\ifcase\month\or
+      de~genièr\or
+      de~febrièr\or
+      de~març\or
+      d'abril\or
+      de~mai\or
+      de~junh\or
+      de~julhet\or
+      d'agost\or
+      de~setembre\or
+      d'octobre\or
+      de~novembre\or
+      de~decembre\fi
+   }%
+   \def\occitanday{\ifcase\day\or
+      1èr\else% primièr
+      \number\day\fi% all other numbers
+   }%
+   \def\today{\occitanday\space \occitanmonth\space de~\number\year}%
+}
+%*************************************************
+%    \end{macrocode}
+%
+% \subsection{Final clean-up}
+% \pack{polyglossia} requires that  at |\begin{document}| time certain
+% values are saved. Actually this is a prudential action: the user might
+% have changed the normal values, so before setting the values valid
+% for Occitan typesetting, its better to save the general values.
+% The actual values that require saving are the club and widow penalties,
+% together with the final demerits; the latter ones are the demerits in
+% hyphenating the penultimate line of a paragraph so as not to terminate
+% with a last line composed with a single syllable. The internal value
+% |\@clubpenalty| must be saved, because sometimes it does not equal
+% that of |\clubpenalty|
+%    \begin{macrocode}
+\let\xpgoc@savedvalues\empty
+\AtEndPreamble{% the user or the class might define different values
+  \edef\xpgoc@savedvalues{%
+    \clubpenalty=\the\clubpenalty\space
+    \@clubpenalty=\the\@clubpenalty\space
+    \widowpenalty=\the\widowpenalty\space
+    \finalhyphendemerits=\the\finalhyphendemerits}
+}
+%    \end{macrocode}
+%
+% Eventually we define the definitive |\noextras@occitan| macro to
+% undo everything that was done for setting up the typesetting of
+% the Occitan language.
+%    \begin{macrocode}
+\def\noextras@occitan{%
+   \lccode\string"2019=\z@
+   \nooccitan@shorthands
+   \xpgoc@savedvalues
+}
+%    \end{macrocode}
+%
+% For setting up Occitan typesetting \pack{polyglossia} requires two different
+% settings: the general ones and the specific settings for typesetting in line.
+%    \begin{macrocode}
+\def\blockextras@occitan{%
+   \lccode\string"2019=\string"2019
+   \clubpenalty=3000 \@clubpenalty=3000 \widowpenalty=3000
+   \finalhyphendemerits=50000000
+   \ifoccitan@babelshorthands\occitan@shorthands\fi
+}
+
+\def\inlineextras@occitan{%
+   \lccode\string"2019=\string"2019
+   \ifoccitan@babelshorthands\occitan@shorthands\fi
+}
+%    \end{macrocode}
+%
+% This ends the documentation of the Occitan language module for
+% \pack{polyglossia}.
+%\iffalse
+%</ldf>
+%\fi
+%
+% \Finale
+% \endinput
+%
