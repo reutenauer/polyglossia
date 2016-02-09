@@ -759,22 +759,23 @@ That is almost guaranteed to cause problems.}
    \fi
 }
 
+\def\xpg@set@language@luatex@iii#1#2{%
+    \ifcsname #3\endcsname\else
+        \global\@namedef{lu@texhyphen@loaded@#2}{}%
+        \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', \the\csname l@#1\endcsname)}%
+    \fi
+}
+
 \newcommand\xpg@set@language@luatex@ii[1]{%
    \ifluatex %
      % here we use lu@texhyphen@loaded@\the\language, the same as in babel
-     \expandafter\ifcsname lu@texhyphen@loaded@\the\csname l@#1\endcsname\endcsname \else %
-       \global\@namedef{lu@texhyphen@loaded@\the\language}{}%
-       \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', \the\csname l@#1\endcsname)}%
-     \fi %
+     \xpg@set@language@luatex@iii{#1}{\the\language}{lu@texhyphen@loaded@\expandafter\the\csname l@#1\endcsname}
    \fi % 
 }
 
 \def\select@language#1{%
    \ifluatex %
-     \ifcsname lu@texhyphen@loaded@\the\language\endcsname \else %
-       \global\@namedef{lu@texhyphen@loaded@\the\language}{}%
-       \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', \the\csname l@#1\endcsname)}%
-     \fi %
+      \xpg@set@language@luatex@iii{#1}{\the\language}{lu@texhyphen@loaded@\the\language}
    \fi %
    \xpg@initial@setup%
    \select@@language{#1}%
