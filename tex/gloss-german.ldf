@@ -6,6 +6,12 @@
   fontsetup=true,
 }
 
+\ifxetex
+    \def\xpg@ifdefined{#1}{\expandafter\ifx\csname l@#1\@undefined}
+\else\ifluatex
+    \def\xpg@ifdefined#1{\directlua{polyglossia.newloader_ifdefined('#1')}}
+\fi\fi
+
 \def\tmp@old{old}
 \def\tmp@oldyr{1901}
 \newif\if@german@oldspelling
