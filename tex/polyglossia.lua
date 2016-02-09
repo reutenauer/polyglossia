@@ -107,9 +107,6 @@ local function newloader(langentry)
     end
 end
 
-local function newloader_ifdefined(langentry)
-end
-
 polyglossia.loadlang = loadlang
 polyglossia.select_language = select_language
 polyglossia.set_default_language = set_default_language
@@ -121,4 +118,3 @@ polyglossia.load_tibt_eol = load_tibt_eol
 polyglossia.disable_hyphenation = disable_hyphenation
 polyglossia.enable_hyphenation = enable_hyphenation
 polyglossia.newloader = newloader
-polyglossia.newloader_ifdefined = newloader_ifdefined
