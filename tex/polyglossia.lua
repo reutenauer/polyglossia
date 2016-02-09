@@ -23,6 +23,10 @@ local current_language
 local last_language
 local default_language
 
+polyglossia.newloader_loaded_languages = { }
+polyglossia.newloader_max_langid = 0
+local newloader_available_languages = dofile(kpse.find_file('language.dat.lua'))
+
 local function loadlang(lang, id)
   if luatexhyphen.lookupname(lang) then
     luatexhyphen.loadlanguage(lang, id) 
@@ -86,6 +90,55 @@ local function load_tibt_eol()
     require('polyglossia-tibt')
 end
 
+-- New hyphenation pattern loader: use language.dat.lua directly and the language identifiers
+local function newloader(langentry)
+    loaded_language = polyglossia.newloader_loaded_languages[langentry]
+    if loaded_language then
+        texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded; id is ' .. lang.id(loaded_language))
+        -- texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded with patterns ' .. tostring(loaded_language) .. '; id is ' .. lang.id(loaded_language))
+        -- texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded with patterns ' .. loaded_language['patterns'] .. '; id is ' .. lang.id(loaded_language))
+        return lang.id(loaded_language)
+    else
+        langdata = newloader_available_languages[langentry]
+        if langdata and langdata['special'] == 'language0' then return 0 end
+
+        if langdata then
+            print("Language data for " .. langentry)
+            for k, v in pairs(langdata) do
+                print(k, tostring(v))
+            end
+            polyglossia.newloader_max_langid = polyglossia.newloader_max_langid + 1
+            -- langobject = lang.new(newloader_max_langid)
+            lang.new(); lang.new(); lang.new()
+            langobject = lang.new()
+            texio.write_nl('term and log', langdata.patterns)
+            if langdata.patterns and langdata.patterns ~= '' then
+                pattfilepath = kpse.find_file(langdata.patterns)
+                if pattfilepath then
+                    pattfile = io.open(pattfilepath)
+                    lang.patterns(langobject, pattfile:read('*all'))
+                    pattfile:close()
+                end
+            end
+            if langdata.hyphenation and langdata.hyphenation ~= '' then
+                hyphfilepath = kpse.find_file(langdata.hyphenation)
+                if hyphfilepath then
+                    hyphfile = io.open(hyphfilepath)
+                    lang.hyphenation(langobject, hyphfile:read('*all'))
+                    hyphfile:close()
+                end
+            end
+            polyglossia.newloader_loaded_languages[langentry] = langobject
+
+            texio.write_nl('term and log', 'Language ' .. langentry .. ' was not yet loaded; created with id ' .. lang.id(langobject))
+            return lang.id(langobject)
+        else
+            texio.write_nl('term and log', 'Language ' .. langentry .. ' not found in language.dat.lua')
+            return 255
+        end
+    end
+end
+
 polyglossia.loadlang = loadlang
 polyglossia.select_language = select_language
 polyglossia.set_default_language = set_default_language
@@ -96,3 +149,4 @@ polyglossia.load_frpt = load_frpt
 polyglossia.load_tibt_eol = load_tibt_eol
 polyglossia.disable_hyphenation = disable_hyphenation
 polyglossia.enable_hyphenation = enable_hyphenation
+polyglossia.newloader = newloader
