@@ -1,0 +1,17 @@
+\directlua{
+    function log(text)
+        texio.write_nl('term and log', text)
+    end
+}
+
+\def\test{%
+    Creating 3 langs
+    \directlua{lang.new(); lang.new(); lang.new()}
+
+    New lang: \directlua{lg = lang.new(); log(lang.id(lg))}
+}%
+
+\test
+Again
+\test
+\bye
