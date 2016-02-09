@@ -769,8 +769,10 @@ That is almost guaranteed to cause problems.}
 
 \newcommand\xpg@set@language@luatex@iv[1]{%
     \expandafter\chardef\csname l@#1\endcsname=\directlua{tex.sprint(polyglossia.newloader('#1'))}%
+    \directlua{texio.write_nl('term\space and\space log', 'From Lua: ' .. tostring(polyglossia.newloader('#1')))}%
     \language\directlua{tex.sprint(polyglossia.newloader('#1'))}
     \message{HELLO\space I’M\space HERE!\space Language\space #1\space is}\expandafter\showthe\csname l@#1\endcsname
+    \showthe\l@italian
 }
 
 \newcommand\xpg@set@language@luatex@ii[1]{%
