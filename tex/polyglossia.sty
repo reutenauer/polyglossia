@@ -730,7 +730,31 @@ That is almost guaranteed to cause problems.}
          \xpg@hook@setlanguage%
          \let\emp@langname\@undefined}%
       \aftergroup\xpg@pop@language%
-      \setkeys{xpg@langvariant}{#1}%
+      % \define@key{xpg@langvariant}{#1}{}
+      % \define@key{xpg@langvariant}{babelshorthands}{}
+      % \define@key{xpg@langvariant}{ordinalmonthday}{}
+      \message{TEST\space TEST\space TEST[#1]TEST\space TEST^^J}
+      \def\do##1{%
+          \message{##1^^J}%
+          \def\xpg@parsekeyvalue####1=####2{%
+              \message{####1^^J}%
+              \key@ifundefined{xpg@langvariant}{####1}{%
+                  \message{key\space ####1\space is\space not\space defined^^J}
+              }{%
+                  \message{key\space ####1\space is\space defined^^J}
+              }
+              \def\@tmpa{####1}
+              \def\@tmpb{variant}
+              \ifx\@tmpa\@tmpb
+              % \ifcsdef{xpg@langvariant}{#1}{%
+                  \setkeys{xpg@langvariant}{##1}%
+              % }
+              \fi
+          }%
+          \xpg@parsekeyvalue##1
+          \message{^^J}
+      }%
+      \docsvlist{#1}
       \setkeys{#2}{#1}%
       \xpg@set@language{#2}%
      }%

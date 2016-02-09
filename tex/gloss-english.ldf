@@ -14,6 +14,7 @@
 
 %% English is a special case in that \l@english is reserved for US English, so
 %% we need to handle it differently
+% \define@key{xpg@langvariant}{ordinalmonthday}{}
 \define@key{english}{variant}{%
   %needs to be reset for loop over hyphennames below:
   \def\do##1{%
