@@ -730,7 +730,7 @@ That is almost guaranteed to cause problems.}
          \xpg@hook@setlanguage%
          \let\emp@langname\@undefined}%
       \aftergroup\xpg@pop@language%
-      % Look in the optional argument for a variant=<value> setting
+      % If the optional argument sets a value for the key “variant”, copy it to xpg@langvariant
       \def\do##1{%
           \def\xpg@parsekeyvalue####1=####2{%
               \def\@tmpa{####1}
