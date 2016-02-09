@@ -761,10 +761,10 @@ That is almost guaranteed to cause problems.}
 
 \def\xpg@set@language@luatex@iii#1#2{%
     % here we use lu@texhyphen@loaded@\the\language, the same as in babel
-    \@ifundefined{bbl@hyphendata@#2}%
+    \ifcsdef{bbl@hyphendata@#2}{}{%
         \global\@namedef{bbl@hyphendata@\the\language}{}%
         \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', \the\csname l@#1\endcsname)}%
-    \fi
+    }
 }
 
 \newcommand\xpg@set@language@luatex@ii[1]{%
