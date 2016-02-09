@@ -767,6 +767,10 @@ That is almost guaranteed to cause problems.}
     }
 }
 
+\newcommand\xpg@set@language@luatex@iv[1]{%
+    \language\directlua{tex.sprint(polyglossia.newloader('#1'))}
+}
+
 \newcommand\xpg@set@language@luatex@ii[1]{%
    \ifluatex %
      \xpg@set@language@luatex@iii{#1}{\expandafter\the\csname l@#1\endcsname}

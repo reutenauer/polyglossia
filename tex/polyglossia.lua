@@ -90,11 +90,16 @@ local function load_tibt_eol()
 end
 
 -- New hyphenation pattern loader: use language.dat.lua directly and the language identifiers
-local function newloader(lang)
-    if not newloader_loaded_languages[lang] then
-        langdata = newloader_available_languages[lang] 
+local function newloader(langentry)
+    -- TODO Bail if \language0
+    if not newloader_loaded_languages[langentry] then
+        langdata = newloader_available_languages[langentry]
         if langdata then
             langobject = lang.new()
+            lang.patterns(langobject, langdata.patterns)
+            lang.hyphenation(langobject, langdata.hyphenation)
+
+            return lang.id(langobject)
         end
     end
 end
