@@ -1,3 +1,6 @@
+\input luatexbase.sty
+\input luaotfload.sty
+\directlua{require'luatex-hyphen'}
 \directlua{
     function log(text)
         texio.write_nl('term and log', text)
@@ -8,10 +11,22 @@
     Creating 3 langs
     \directlua{lang.new(); lang.new(); lang.new()}
 
-    New lang: \directlua{lg = lang.new(); log(lang.id(lg))}
+    \newlang
 }%
+
+\def\newlang{%
+    New lang: \directlua{lg = lang.new(); log(lang.id(lg))}
+}
 
 \test
 Again
 \test
+
+\directlua{dofile(kpse.find_file('polyglossia.lua'))}
+
+New lang \newlang
+\directlua{polyglossia.newloader('spanish')}\newlang
+\directlua{polyglossia.newloader('italian')}\newlang
+\directlua{polyglossia.newloader('german')}\newlang
+\directlua{polyglossia.newloader('turkish')}\newlang
 \bye
