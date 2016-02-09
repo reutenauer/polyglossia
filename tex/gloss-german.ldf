@@ -6,14 +6,13 @@
   fontsetup=true,
 }
 
-\ifxetex
-    \newcommand\xpg@ifdefined[3]{\expandafter\ifx\csname l@#1\@undefined#3\else#2\fi}%
-\else\ifluatex
-    \newcommand\xpg@ifdefined[3]{%
+\newcommand\xpg@ifdefined[3]{%
+    \ifluatex
         \xpg@set@language@luatex@iv{#1}%
-        \ifx\directlua{polyglossia.newloader('#1')}\empty#3\else#2\fi
-    }%
-\fi\fi
+    \fi
+    \message{HELLO\space HERE\space is\space l@#1:\space \csname l@#1\endcsname^^J}
+    \expandafter\ifx\csname l@#1\endcsname\@undefined#3\else#2\fi
+}%
 
 \def\tmp@old{old}
 \def\tmp@oldyr{1901}
