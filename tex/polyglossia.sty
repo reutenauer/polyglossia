@@ -731,13 +731,15 @@ That is almost guaranteed to cause problems.}
          \let\emp@langname\@undefined}%
       \aftergroup\xpg@pop@language%
       % If the optional argument sets a value for the key “variant”, copy it to xpg@langvariant
+      \message{Option\space is\space #1^^J}
       \def\do##1{%
-          \def\xpg@parsekeyvalue####1=####2{%
+          \def\xpg@parsekeyvalue####1=####2\relax{%
+              \message{key\space ####1\space is\space ####2^^J}
               \def\@tmpa{####1}
               \def\@tmpb{variant}
               \ifx\@tmpa\@tmpb\setkeys{xpg@langvariant}{##1}\fi
           }%
-          \xpg@parsekeyvalue##1
+          \xpg@parsekeyvalue##1\relax
       }%
       \docsvlist{#1}
       \setkeys{#2}{#1}%
