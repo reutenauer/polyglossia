@@ -23,8 +23,8 @@ local current_language
 local last_language
 local default_language
 
-local newloader_loaded_languages = { }
-local newloader_max_langid = 0
+newloader_loaded_languages = { }
+newloader_max_langid = 0
 local newloader_available_languages = dofile(kpse.find_file('language.dat.lua'))
 
 local function loadlang(lang, id)
@@ -125,5 +125,3 @@ polyglossia.load_tibt_eol = load_tibt_eol
 polyglossia.disable_hyphenation = disable_hyphenation
 polyglossia.enable_hyphenation = enable_hyphenation
 polyglossia.newloader = newloader
-polyglossia.newloader_loaded_languages = newloader_loaded_languages
-polyglossia.newloader_max_langid = newloader_max_langid
