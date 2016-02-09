@@ -1,9 +1,10 @@
 #!/bin/bash
 
+warn_and_exit=false
 line=`git status | fgrep 'Your branch is ahead' | wc -l`
 if [ "$line" = 1 ]; then
   warn_and_exit=true
-elif [ `git status -s | cut -c 2 | fgrep -c M` -gt 0 ]; then
+elif [ `git status -s | cut -c -2 | egrep -c 'M|A'` -gt 0 ]; then
   warn_and_exit=true
 fi
 
