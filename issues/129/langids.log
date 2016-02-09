@@ -1,0 +1,82 @@
+This is LuaTeX, Version beta-0.80.0 (TeX Live 2015) (rev 5238)  (format=luatex 2016.2.9)  9 FEB 2016 23:15
+ restricted \write18 enabled.
+**langids
+(./langids.tex
+(/home/arthur/perso/TeX/live/dev/texmf-dist/tex/luatex/luatexbase/luatexbase.st
+y
+Package: luatexbase 2015/10/04 v1.3 luatexbase interface to LuaTeX 
+
+(/home/arthur/perso/TeX/live/dev/texmf-dist/tex/luatex/ctablestack/ctablestack.
+sty
+Package: ctablestack 2015/10/01 v1.0 Catcode table stable support
+ (/home/arthur/perso/TeX/live/dev/texmf-dist/tex/latex/base/ltluatex.tex
+File: ltluatex.tex 2015/12/18 v1.0l LuaTeX support for plain TeX (core) 
+\e@alloc@attribute@count=\count277
+\e@alloc@ccodetable@count=\count278
+\e@alloc@luafunction@count=\count279
+\e@alloc@whatsit@count=\count280
+\e@alloc@bytecode@count=\count281
+\e@alloc@luachunk@count=\count282
+\catcodetable@initex=\catcodetable1
+\catcodetable@string=\catcodetable2
+\catcodetable@latex=\catcodetable3
+\catcodetable@atletter=\catcodetable4
+)
+\@catcodetablestackcnt=\count283
+)
+\CatcodeTableOther=\catcodetable5
+\CatcodeTableExpl=\catcodetable6
+)
+(/home/arthur/perso/TeX/live/dev/texmf-dist/tex/luatex/luaotfload/luaotfload.st
+y
+Lua module: luaotfload-main 2015/12/09 2.60001 OpenType layout system.
+Lua module: lualibs 2015-12-02 2.3 ConTeXt Lua standard libraries.
+Lua module: lualibs-extended 2015-12-02 2.3 ConTeXt Lua libraries -- extended co
+llection.(using cache: /home/arthur/perso/TeX/live/dev/texmf-var/luatex-cache/ge
+neric)
+luaotfload | conf : Root cache directory is /home/arthur/perso/TeX/live/dev/texm
+f-var/luatex-cache/generic/names.
+luaotfload | init : Loading fontloader “fontloader-2016-01-22.lua” from kpse
+-resolved path “/home/arthur/perso/TeX/live/dev/texmf-dist/tex/luatex/luaotflo
+ad/fontloader-2016-01-22.lua”.
+Lua-only attribute luaotfload@state = 1
+Lua-only attribute luaotfload@cursbase = 2
+Lua-only attribute luaotfload@noligature = 3
+luaotfload | init : Context OpenType loader version “2.82”
+Inserting `luaotfload.node_processor' at position 1 in `pre_linebreak_filter'.
+Inserting `luaotfload.node_processor' at position 1 in `hpack_filter'.
+Inserting `luaotfload.define_font' at position 1 in `define_font'.
+Lua-only attribute luaotfload_color_attribute = 4
+luaotfload | conf : Root cache directory is /home/arthur/perso/TeX/live/dev/texm
+f-var/luatex-cache/generic/names.
+Inserting `luaotfload.aux.set_sscale_dimens' at position 1 in `luaotfload.patch_
+font'.
+Inserting `luaotfload.aux.patch_cambria_domh' at position 2 in `luaotfload.patch
+_font'.
+Inserting `luaotfload.aux.fixup_fontdata' at position 1 in `luaotfload.patch_fon
+t_unsafe'.
+Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
+'.
+Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
+.
+luaotfload | main : initialization completed in 0.057 seconds)
+luatex-hyphen: using data file: /home/arthur/perso/TeX/live/dev/texmf-var/tex/ge
+neric/config/language.dat.lua
+4
+8
+Lua module: polyglossia 2013/05/11 1.3 Polyglossia
+9
+10
+11
+Language german was not yet loaded; created with id 15
+16
+17 [1{/home/arthur/perso/TeX/live/dev/texmf-var/fonts/map/pdftex/updmap/pdftex.m
+ap}])<</home/arthur/perso/TeX/live/dev/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr10.pfb>
+Output written on langids.pdf (1 page, 13398 bytes).
+
+PDF statistics: 12 PDF objects out of 1000 (max. 8388607)
+ 7 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 131072)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

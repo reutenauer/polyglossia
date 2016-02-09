@@ -153,7 +153,7 @@ That is almost guaranteed to cause problems.}
 %% options currently available:
 %% language : the name of the language (as understood by fontspec)
 %% hyphennames : the different hyphenation patterns to try (comma separated list)
-%%%   TODO: if pattern is prefixed by !, then it should be loaded as a fallback, with \xpg@nopatterns@fallback - i.e. with a warning: e.g. sanskrit for hindi, or catalan for asturian.
+%%%   TODO: if pattern is prefixed by !, then it should be loaded as a fallback, with \xpg@nopatterns@fallback - i.e. with a warning: e.g. sanskrit for hindi, or catalan for asturian. – Also for languages with variants!  (English and German, etc.)
 %% script : the name of the script (as understood by fontspec) – default is Latin
 %% direction : the direction of the script: LR or RL
 %% scripttag : the OpenType tag for the script
@@ -167,6 +167,7 @@ That is almost guaranteed to cause problems.}
 %% TODO: localnumber = <csname>
 %%       or even better localdigits = {0123456789} for fully automatic setup
 
+\newif\if@xpg@language@really@defined@
 \newcommand*\PolyglossiaSetup[2]{%
   %define booleans etoolbox style and set defaults
   %% TODO ? \providetoggle{#1@setup@done}%
@@ -180,26 +181,40 @@ That is almost guaranteed to cause problems.}
   \csgdef{init@extras@#1}{}%
   \csgdef{init@noextras@#1}{}% we don't use this yet: remove?
   \csgdef{xpg@langname@#1}{\xpg@uppercasefirst{#1}}%
-  %needed for docvslist with hyphennames key:
+  %needed for docsvlist with hyphennames key:
   \def\do##1{%
-    \ifcsdef{l@#1}{}{%
+    \message{TESTING\space ##1^^J}
+    \xpg@check@ifdefined{#1}
+    \if@xpg@language@really@defined@\else
       \ifstrequal{#1}{##1}{}%
-      {\ifcsdef{l@##1}%
-        {\csletcs{l@#1}{l@##1}\xpg@set@language@luatex@ii{##1}\listbreak}%
-        {}%
+      {\xpg@ifdefined{##1}%
+        {\expandafter\ifx\csname l@##1\endcsname\l@nohyphenation\else\csletcs{l@#1}{l@##1}\message{I’M\space WHERE\space I’M\space SUPPOSED\space TO\space BE\space arg=##1^^J}\xpg@set@language@luatex@iv{##1}\fi}%
+        {\csdef{l@##1}{l@nohyphenation}}%
       }%
-    }%
+    \fi
   }%
+  \message{FOO\space 1^^J}
   %define all keys:
   \xpg@define@keys{#1}%
+  \message{FOO\space 2^^J}
+  % \show\l@asturian
+  % \show#1
+  % \show#2
+  \def\@tmpa{#1}
+  % \show\@tmpa
+  \def\@tmpb{#2}
+  % \show\@tmpb
   \setkeys[xpg@setup]{#1}{#2}%
+  \message{FOO\space 3^^J}
   % here we do the fontsetup:
   \ifbool{#1@fontsetup}%
     {\xpg@fontsetup@auto{#1}}%
     {\xpg@info{Skipping~ automatic~ font~ setup~ for~ language~ #1}}%
   %% TODO? \toggletrue{#1@setup@done}%
   % reinit \do
+  \message{FOO\space 4^^J}
   \def\do##1{\setotherlanguage{##1}}%
+  \message{FOO\space 5^^J}
 }
 
 \def\xpg@first#1,#2{#1}
@@ -219,25 +234,33 @@ That is almost guaranteed to cause problems.}
   \define@key[xpg@setup]{#1}{langtag}{%
     \csgdef{xpg@langtag@#1}{##1}}%
   \define@key[xpg@setup]{#1}{hyphennames}[{#1}]{%
+    \message{DOING\space CSV\space LIST^^J}%
     \docsvlist{##1}%
+    \message{CSV\space LIST\space DONE^^J}%
     % \expandafter\show\csname l@##1\endcsname
     % \expandafter\show\csname l@#1\endcsname
     % if l@#1 does not yet exist,
     % we assign it to nohyphenation
     % we do this here in case the hyphennames key was omitted
-    \ifcsundef{l@#1}%
+    \xpg@ifdefined{#1}{}%
+    % \xpg@ifdefined{#1}{\message{^^JDEFINED!^^J}\expandafter\show\csname l@#1\endcsname}%
       {\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
-       \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}{}%
+      % {^^J\message{NOT~ DEFINED!^^J}\expandafter\showthe\csname xpg@langname@#1\endcsname\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
+       \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}%
     \csdef{#1@language}{%
       \ifbool{xpg@hyphenation@disabled}{%
         \xdef\xpg@lastlanguage{\the\csname l@#1\endcsname}%
       }{%
         \ifluatex%
-          \xpg@set@language@luatex@ii{#1}%
+          \xpg@set@language@luatex@iv{#1}%
         \fi%
         \language=\csname l@#1\endcsname%
       }%
     }%
+    % \showthe\l@asturian
+    % \showthe\l@catalan
+    % \showthe\l@spanish
+    \message{Exiting\space hyphennames^^J}
   }%
   \define@choicekey+[xpg@setup]{#1}{direction}[\val\nr]{LR,RL}[LR]%
     {\ifcase\nr\relax
@@ -269,6 +292,7 @@ That is almost guaranteed to cause problems.}
   %  \cslet{xpg@localAlph@#1}{\expandafter\csname\xpg@second##1\endcsname}%
   %}%
   %TODO same thing with localdigits
+  \message{NOW\space I’M\space HERE^^J}%
 }
 
 \def\xpg@lastlanguage{0}%
@@ -280,7 +304,7 @@ That is almost guaranteed to cause problems.}
   \ifbool{xpg@hyphenation@disabled}{}{%
     \booltrue{xpg@hyphenation@disabled}%
     \xdef\xpg@lastlanguage{\the\language}%
-    \xpg@set@language@luatex@ii{nohyphenation}
+    \xpg@set@language@luatex@iv{nohyphenation}
     \language=\l@nohyphenation%
     \ifluatex %
       \directlua{polyglossia.disable_hyphenation()}%
@@ -759,22 +783,59 @@ That is almost guaranteed to cause problems.}
    \fi
 }
 
+\def\xpg@set@language@luatex@iii#1#2{%
+    % here we use lu@texhyphen@loaded@\the\language, the same as in babel
+    \ifcsdef{bbl@hyphendata@#2}{}{%
+        \global\@namedef{bbl@hyphendata@\the\language}{}%
+        \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', \the\csname l@#1\endcsname)}%
+    }
+}
+
+\newcommand\xpg@check@ifdefined[1]{%
+    \expandafter\ifx\csname l@#1\endcsname\relax\@xpg@language@really@defined@false\else
+        \ifx\csname l@#1\endcsname\l@nohyphenation\@xpg@language@really@defined@false\else
+            \@xpg@language@really@defined@true
+        \fi
+    \fi
+}
+
+\newcommand\xpg@ifdefined[3]{%
+    % \expandafter\showthe\csname l@#1\endcsname
+    \ifluatex
+        \xpg@set@language@luatex@iv{#1}%
+    \fi
+    % \chardef\l@asturian"FF
+    % \def\@tmpa{#1}
+    % \show\@tmpa
+    % \expandafter\show\csname l@#1\endcsname
+    % \expandafter\ifx\csname l@#1\endcsname\relax#3\else#2\fi
+    \xpg@check@ifdefined{#1}
+    \if@xpg@language@really@defined@#2\else#3\fi
+    % \let\l@asturian\l@catalan
+    % \ifcsdef{l@#1}{#2}{#3}
+    % #2%
+    \def\@tmpa{\csname l@#1\endcsname}
+    % \ifx\@tmpa\relax\bgroup#3\egroup\else\bgroup#2\egroup\fi
+    \message{DONE^^J}%
+    % #2
+}%
+
+\newcommand\xpg@set@language@luatex@iv[1]{%
+    \ifluatex
+        \expandafter\chardef\csname l@#1\endcsname=\directlua{tex.sprint(polyglossia.newloader('#1'))}%
+        \language\directlua{tex.sprint(polyglossia.newloader('#1'))}%
+    \fi
+}
+
 \newcommand\xpg@set@language@luatex@ii[1]{%
    \ifluatex %
-     % here we use lu@texhyphen@loaded@\the\language, the same as in babel
-     \expandafter\ifcsname lu@texhyphen@loaded@\the\csname l@#1\endcsname\endcsname \else %
-       \global\@namedef{lu@texhyphen@loaded@\the\language}{}%
-       \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', \the\csname l@#1\endcsname)}%
-     \fi %
+     \xpg@set@language@luatex@iii{#1}{\expandafter\the\csname l@#1\endcsname}
    \fi % 
 }
 
 \def\select@language#1{%
    \ifluatex %
-     \ifcsname lu@texhyphen@loaded@\the\language\endcsname \else %
-       \global\@namedef{lu@texhyphen@loaded@\the\language}{}%
-       \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', \the\csname l@#1\endcsname)}%
-     \fi %
+      \xpg@set@language@luatex@iii{#1}{\the\language}
    \fi %
    \xpg@initial@setup%
    \select@@language{#1}%
@@ -806,15 +867,15 @@ That is almost guaranteed to cause problems.}
    {}
 
 \newcommand{\setlocalhyphenmins}[3]{%
-   \expandafter\ifx\csname l@#1\endcsname\relax%
-     \xpg@warning{\string\setlocalhyphenmin\space~ useless~ for~ unknown~ language~ #1}%
-   \else
+   \xpg@ifdefined{#1}{%
       \expandafter\ifx\csname l@#1\endcsname\l@nohyphenation%
         \xpg@warning{\string\setlocalhyphenmin\space~ useless~ for~ unhyphenated~ language~ #1}%
       \else
       \providehyphenmins{#1}{#2#3}%
       \fi
-   \fi}
+   }{%
+     \xpg@warning{\string\setlocalhyphenmin\space~ useless~ for~ unknown~ language~ #1}%
+   }}%
 
 \def\use@localhyphenmins#1{%
    \ifcsundef{#1hyphenmins}{}%

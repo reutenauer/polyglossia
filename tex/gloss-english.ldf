@@ -17,7 +17,7 @@
 \define@key{english}{variant}{%
   %needs to be reset for loop over hyphennames below:
   \def\do##1{%
-      \ifcsdef{l@#1}%
+      \xpg@ifdefined{#1}%
         {\csletcs{l@english}{l@#1}\listbreak}%
         {}%
   }%
@@ -37,10 +37,10 @@
               {\@british@hyphenfalse\english@ordinalmonthdayfalse
                 \ifluatex\else\setkeys[xpg@setup]{english}{hyphennames={usenglishmax}}\fi
                 \xpg@info{Option: english variant=american (with additional patterns)}%
-                \ifcsundef{l@usenglishmax}%
+                \xpg@ifdefined{usenglishmax}{}%
                   {\xpg@warning{No hyphenation patterns were loaded for "US English Max"\MessageBreak
                     I will use the standard patterns for US English instead}%
-                  \adddialect\l@usenglishmax\l@english\relax}{}%
+                  \adddialect\l@usenglishmax\l@english\relax}%
                 \gdef\english@language{\language=\l@usenglishmax}}%
                 {\ifstrequal{#1}{australian}%
                   {\@british@hyphentrue\english@ordinalmonthdayfalse
@@ -53,10 +53,10 @@
   \if@british@locale\@british@hyphentrue\english@ordinalmonthdaytrue\fi
   \if@british@hyphen
     \ifluatex\else\setkeys[xpg@setup]{english}{hyphennames={ukenglish,british,UKenglish}}\fi
-    \ifcsundef{l@ukenglish}%
+    \xpg@ifdefined{ukenglish}{}%
       {\xpg@warning{No hyphenation patterns were loaded for British English\MessageBreak
          I will use the patterns for US English instead}%
-       \adddialect\l@ukenglish\l@english\relax}{}%
+       \adddialect\l@ukenglish\l@english\relax}%
     \gdef\english@language{\language=\l@ukenglish\xpg@set@language@luatex@ii{ukenglish}}%
   \fi
   % and we reset \do to its previous definition here:

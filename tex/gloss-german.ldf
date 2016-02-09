@@ -13,23 +13,23 @@
   \def\@tmpa{#1}%
   \ifx\@tmpa\tmp@oldyr\def\@tmpa{old}\fi
   \ifx\@tmpa\tmp@old
-    \ifx\l@german\@undefined
+    \xpg@ifdefined{german}{}{%
       \xpg@nopatterns{german}%
       \adddialect\l@german\l@nohyphenation
-    \fi
+    }
     \@german@oldspellingtrue
-  \else %try ngerman
-    \ifx\l@ngerman\@undefined
-      \ifx\l@german\@undefined
-        \xpg@nopatterns{ngerman}%
-        \adddialect\l@ngerman\l@nohyphenation
-      \else
+  \else % try ngerman
+    \xpg@ifdefined{ngerman}{%
+      \@german@oldspellingfalse
+    }{% fall back to german
+      \xpg@ifdefined{german}{%
         \xpg@warning{You asked for `ngerman' but only `german' hyphenation is available!}%
         \@german@oldspellingtrue
-      \fi
-    \else %we use ngerman
-      \@german@oldspellingfalse
-    \fi
+      }{%
+        \xpg@nopatterns{ngerman}%
+        \adddialect\l@ngerman\l@nohyphenation
+      }%
+    }%
   \fi
 }
 
