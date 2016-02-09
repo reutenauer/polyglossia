@@ -761,9 +761,8 @@ That is almost guaranteed to cause problems.}
 
 \newcommand\xpg@set@language@luatex@ii[1]{%
    \ifluatex %
-     \message{USING\space \string\lu@texhyphen@loaded@,\space line\space a.^^J}
      % here we use lu@texhyphen@loaded@\the\language, the same as in babel
-     \expandafter\ifcsname lu@texhyphen@loaded@\the\csname l@#1\endcsname\endcsname\message{A1^^J}\else\message{A2^^J}%
+     \expandafter\ifcsname lu@texhyphen@loaded@\the\csname l@#1\endcsname\endcsname \else %
        \global\@namedef{lu@texhyphen@loaded@\the\language}{}%
        \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', \the\csname l@#1\endcsname)}%
      \fi %
@@ -772,8 +771,7 @@ That is almost guaranteed to cause problems.}
 
 \def\select@language#1{%
    \ifluatex %
-     \message{USING\space \string\lu@texhyphen@loaded@,\space line\space b.^^J}
-     \ifcsname lu@texhyphen@loaded@\the\language\endcsname\message{B1^^J}\else\message{B2^^J}%
+     \ifcsname lu@texhyphen@loaded@\the\language\endcsname \else %
        \global\@namedef{lu@texhyphen@loaded@\the\language}{}%
        \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', \the\csname l@#1\endcsname)}%
      \fi %
