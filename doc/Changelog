@@ -1,5 +1,6 @@
 09-02-2016
   * Fixed side effect of pull request #122 (see commit d2a34ff)
+  * Added automatic Josa selection, variant, and captions options to Korean, by Dohyun Kim (pull request #128)
 
 08-02-2016
   * Updated gloss-occitan from CTAN
