@@ -23,6 +23,9 @@ local current_language
 local last_language
 local default_language
 
+local newloader_loaded_languages = { }
+local newloader_available_languages = dofile(kpse.find_file('language.dat.lua'))
+
 local function loadlang(lang, id)
   if luatexhyphen.lookupname(lang) then
     luatexhyphen.loadlanguage(lang, id) 
@@ -84,6 +87,16 @@ end
 
 local function load_tibt_eol()
     require('polyglossia-tibt')
+end
+
+-- New hyphenation pattern loader: use language.dat.lua directly and the language identifiers
+local function newloader(lang)
+    if not newloader_loaded_languages[lang] then
+        langdata = newloader_available_languages[lang] 
+        if langdata then
+            langobject = lang.new()
+        end
+    end
 end
 
 polyglossia.loadlang = loadlang
