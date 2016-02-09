@@ -768,9 +768,9 @@ That is almost guaranteed to cause problems.}
 }
 
 \newcommand\xpg@set@language@luatex@iv[1]{%
-    \message{HELLO\space I’M\space HERE!^^J}
     \expandafter\chardef\csname l@#1\endcsname=\directlua{tex.sprint(polyglossia.newloader('#1'))}%
     \language\directlua{tex.sprint(polyglossia.newloader('#1'))}
+    \message{HELLO\space I’M\space HERE!\space Language\space #1\space is}\expandafter\showthe\csname l@#1\endcsname
 }
 
 \newcommand\xpg@set@language@luatex@ii[1]{%

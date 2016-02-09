@@ -94,6 +94,7 @@ local function newloader(langentry)
     -- TODO Bail if \language0
     loaded_language = newloader_loaded_languages[langentry]
     if loaded_language then
+        print ('Language ' .. langentry .. ' already loaded with patterns ' .. loaded_language['patterns'] .. '; id is ' .. lang.id(loaded_language))
         return lang.id(loaded_language)
     else
         langdata = newloader_available_languages[langentry]
