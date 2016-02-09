@@ -112,6 +112,8 @@ local function newloader(langentry)
 
             texio.write_nl('term and log', 'Language ' .. langentry .. ' was not yet loaded; created with id ' .. lang.id(langobject))
             return lang.id(langobject)
+        else
+            texio.write_nl('term and log', 'Language ' .. langentry .. ' not found in language.dat.lua')
         end
     end
 end
