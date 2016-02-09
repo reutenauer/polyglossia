@@ -23,8 +23,8 @@ local current_language
 local last_language
 local default_language
 
-newloader_loaded_languages = { }
-newloader_max_langid = 0
+polyglossia.newloader_loaded_languages = { }
+polyglossia.newloader_max_langid = 0
 local newloader_available_languages = dofile(kpse.find_file('language.dat.lua'))
 
 local function loadlang(lang, id)
@@ -93,7 +93,7 @@ end
 -- New hyphenation pattern loader: use language.dat.lua directly and the language identifiers
 local function newloader(langentry)
     -- TODO Bail if \language0
-    loaded_language = newloader_loaded_languages[langentry]
+    loaded_language = polyglossia.newloader_loaded_languages[langentry]
     if loaded_language then
         texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded; id is ' .. lang.id(loaded_language))
         -- texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded with patterns ' .. tostring(loaded_language) .. '; id is ' .. lang.id(loaded_language))
@@ -102,13 +102,15 @@ local function newloader(langentry)
     else
         langdata = newloader_available_languages[langentry]
         if langdata then
-            newloader_max_langid = newloader_max_langid + 1
+            polyglossia.newloader_max_langid = polyglossia.newloader_max_langid + 1
             -- langobject = lang.new(newloader_max_langid)
+            lang.new(); lang.new(); lang.new()
             langobject = lang.new()
             lang.patterns(langobject, langdata.patterns)
             lang.hyphenation(langobject, langdata.hyphenation)
-            newloader_loaded_languages[langentry] = langobject
+            polyglossia.newloader_loaded_languages[langentry] = langobject
 
+            texio.write_nl('term and log', 'Language ' .. langentry .. ' was not yet loaded; created with id ' .. lang.id(langobject))
             return lang.id(langobject)
         end
     end
