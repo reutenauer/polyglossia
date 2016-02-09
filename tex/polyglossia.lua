@@ -24,6 +24,7 @@ local last_language
 local default_language
 
 local newloader_loaded_languages = { }
+local newloader_max_langid = 0
 local newloader_available_languages = dofile(kpse.find_file('language.dat.lua'))
 
 local function loadlang(lang, id)
@@ -94,14 +95,19 @@ local function newloader(langentry)
     -- TODO Bail if \language0
     loaded_language = newloader_loaded_languages[langentry]
     if loaded_language then
-        print ('Language ' .. langentry .. ' already loaded with patterns ' .. loaded_language['patterns'] .. '; id is ' .. lang.id(loaded_language))
+        texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded; id is ' .. lang.id(loaded_language))
+        -- texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded with patterns ' .. tostring(loaded_language) .. '; id is ' .. lang.id(loaded_language))
+        -- texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded with patterns ' .. loaded_language['patterns'] .. '; id is ' .. lang.id(loaded_language))
         return lang.id(loaded_language)
     else
         langdata = newloader_available_languages[langentry]
         if langdata then
+            newloader_max_langid = newloader_max_langid + 1
+            -- langobject = lang.new(newloader_max_langid)
             langobject = lang.new()
             lang.patterns(langobject, langdata.patterns)
             lang.hyphenation(langobject, langdata.hyphenation)
+            newloader_loaded_languages[langentry] = langobject
 
             return lang.id(langobject)
         end
@@ -119,3 +125,5 @@ polyglossia.load_tibt_eol = load_tibt_eol
 polyglossia.disable_hyphenation = disable_hyphenation
 polyglossia.enable_hyphenation = enable_hyphenation
 polyglossia.newloader = newloader
+polyglossia.newloader_loaded_languages = newloader_loaded_languages
+polyglossia.newloader_max_langid = newloader_max_langid
