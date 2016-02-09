@@ -185,7 +185,7 @@ That is almost guaranteed to cause problems.}
     \ifcsdef{l@#1}{}{%
       \ifstrequal{#1}{##1}{}%
       {\ifcsdef{l@##1}%
-        {\csletcs{l@#1}{l@##1}\xpg@set@language@luatex@ii{##1}\listbreak}%
+        {\csletcs{l@#1}{l@##1}\xpg@set@language@luatex@iv{##1}\listbreak}%
         {}%
       }%
     }%
@@ -233,7 +233,7 @@ That is almost guaranteed to cause problems.}
         \xdef\xpg@lastlanguage{\the\csname l@#1\endcsname}%
       }{%
         \ifluatex%
-          \xpg@set@language@luatex@ii{#1}%
+          \xpg@set@language@luatex@iv{#1}%
         \fi%
         \language=\csname l@#1\endcsname%
       }%
@@ -280,7 +280,7 @@ That is almost guaranteed to cause problems.}
   \ifbool{xpg@hyphenation@disabled}{}{%
     \booltrue{xpg@hyphenation@disabled}%
     \xdef\xpg@lastlanguage{\the\language}%
-    \xpg@set@language@luatex@ii{nohyphenation}
+    \xpg@set@language@luatex@iv{nohyphenation}
     \language=\l@nohyphenation%
     \ifluatex %
       \directlua{polyglossia.disable_hyphenation()}%
@@ -768,6 +768,8 @@ That is almost guaranteed to cause problems.}
 }
 
 \newcommand\xpg@set@language@luatex@iv[1]{%
+    \message{HELLO\space I’M\space HERE!^^J}
+    \csdef{l@#1}{tex.sprint(polyglossia.newloader('#1'))}
     \language\directlua{tex.sprint(polyglossia.newloader('#1'))}
 }
 

@@ -1,5 +1,6 @@
 \ProvidesFile{gloss-german.ldf}[polyglossia: module for german]
 \PolyglossiaSetup{german}{
+  hyphennames={ngerman,german},
   hyphenmins={2,2},
   frenchspacing=true,
   fontsetup=true,

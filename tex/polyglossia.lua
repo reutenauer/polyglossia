@@ -92,7 +92,10 @@ end
 -- New hyphenation pattern loader: use language.dat.lua directly and the language identifiers
 local function newloader(langentry)
     -- TODO Bail if \language0
-    if not newloader_loaded_languages[langentry] then
+    loaded_language = newloader_loaded_languages[langentry]
+    if loaded_language then
+        return lang.id(loaded_language)
+    else
         langdata = newloader_available_languages[langentry]
         if langdata then
             langobject = lang.new()
