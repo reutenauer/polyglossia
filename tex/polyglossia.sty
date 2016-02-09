@@ -759,6 +759,15 @@ That is almost guaranteed to cause problems.}
    \fi
 }
 
+\directlua{
+    languages = dofile(kpse.find_file('language.dat.lua'))
+    print('--- Languages ---')
+    print(languages['german']['patterns'])
+    print(languages['german']['hyphenation'])
+}
+
+% \input babel.def
+\usepackage{babel}
 \def\xpg@set@language@luatex@iii#1#2{%
     % here we use lu@texhyphen@loaded@\the\language, the same as in babel
     \ifcsdef{bbl@hyphendata@#2}{}{%
