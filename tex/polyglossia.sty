@@ -775,8 +775,10 @@ That is almost guaranteed to cause problems.}
 }%
 
 \newcommand\xpg@set@language@luatex@iv[1]{%
-    \expandafter\chardef\csname l@#1\endcsname=\directlua{tex.sprint(polyglossia.newloader('#1'))}%
-    \language\directlua{tex.sprint(polyglossia.newloader('#1'))}%
+    \ifluatex
+        \expandafter\chardef\csname l@#1\endcsname=\directlua{tex.sprint(polyglossia.newloader('#1'))}%
+        \language\directlua{tex.sprint(polyglossia.newloader('#1'))}%
+    \fi
 }
 
 \newcommand\xpg@set@language@luatex@ii[1]{%
