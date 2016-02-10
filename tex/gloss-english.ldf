@@ -17,7 +17,7 @@
 \define@key{english}{variant}{%
   %needs to be reset for loop over hyphennames below:
   \def\do##1{%
-      \ifcsdef{l@#1}%
+      \xpg@ifavailable{#1}%
         {\csletcs{l@english}{l@#1}\listbreak}%
         {}%
   }%
