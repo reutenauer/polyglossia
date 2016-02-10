@@ -1,7 +1,7 @@
 % !TEX encoding = UTF-8 Unicode
 \ProvidesFile{gloss-latin.ldf}[polyglossia: module for latin]
 \PolyglossiaSetup{latin}{
-%  hyphennames={latin},
+hyphennames={latin},
 %  hyphenmins={2,2},
   frenchspacing=true,
   fontsetup=true,
