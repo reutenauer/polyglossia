@@ -63,7 +63,7 @@
 
 % set modern as default
 \def\latin@variant{\l@latin}%
-\ifluatex\xpg@set@language@luatex@ii{latin}\fi
+\ifluatex\xpg@set@language@luatex@iv{latin}\fi
 \def\captionslatin{\modernlatincaptions}%
 \def\datelatin{\modernlatindate}%
 \def\classicuclccodes{\lccode`\V=`\u \uccode`\u=`\V}
@@ -76,28 +76,28 @@
 \def\@tempa{#1}%
 \ifx\@tempa\tmp@medieval
   \def\latin@variant{\l@latin}%
-  \xpg@set@language@luatex@ii{latin}
+  \xpg@set@language@luatex@iv{latin}
   \def\captionslatin{\medievallatincaptions}%
   \def\datelatin{\classiclatindate}% 
   \classicuclccodes
   \xpg@info{Option: Medieval Latin}%
 \else
   \ifx\@tempa\tmp@classic
-    \ifx\l@classiclatin\undefined
+    \xpg@ifdefined{classiclatin}{%
+      \def\latin@variant{\l@classiclatin}%
+      \xpg@set@language@luatex@iv{classiclatin}%
+    }{%
        \xpg@nopatterns{Classic Latin}%
        \adddialect\l@classiclatin\l@latin
        \def\latin@variant{\l@latin}%
-    \else
-      \def\latin@variant{\l@classiclatin}%
-      \xpg@set@language@luatex@ii{classiclatin}%
-    \fi
+    }%
     \def\captionslatin{\modernlatincaptions}%
     \def\datelatin{\classiclatindate}%
     \classicuclccodes
     \xpg@info{Option: Classic Latin}%
   \else
     \def\latin@variant{\l@latin}%
-    \xpg@set@language@luatex@ii{latin}
+    \xpg@set@language@luatex@iv{latin}
     \def\captionslatin{\modernlatincaptions}%
     \def\datelatin{\modernlatindate}%
     \xpg@info{Option: Modern Latin}%
