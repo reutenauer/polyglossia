@@ -5,6 +5,9 @@
 08-02-2016
   * Updated gloss-occitan from CTAN
 
+18-01-2016
+  * Fixed issue #124 (minor typo in polyglossia-frpt.lua)
+
 03-12-2015
   * Merged pull request #117 for more French guillemet spacing
   * Merged pull request #121 to add \bbl@loaded; fixes issue #120
