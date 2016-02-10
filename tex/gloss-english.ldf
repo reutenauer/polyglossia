@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-english.ldf}[polyglossia: module for english]
 \PolyglossiaSetup{english}{
-  hyphennames={english,american,usenglish,USenglish,british},
+  hyphennames={english,american,usenglish,USenglish,british,ukenglish},
   hyphenmins={2,3},
   fontsetup=true,
 }
