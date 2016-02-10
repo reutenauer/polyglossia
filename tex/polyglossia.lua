@@ -92,7 +92,6 @@ end
 
 -- New hyphenation pattern loader: use language.dat.lua directly and the language identifiers
 local function newloader(langentry)
-    -- TODO Bail if \language0
     loaded_language = polyglossia.newloader_loaded_languages[langentry]
     if loaded_language then
         texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded; id is ' .. lang.id(loaded_language))
@@ -101,6 +100,8 @@ local function newloader(langentry)
         return lang.id(loaded_language)
     else
         langdata = newloader_available_languages[langentry]
+        if langdata['special'] == 'language0' then return 0 end
+
         if langdata then
             print("Language data for " .. langentry)
             for k, v in pairs(langdata) do
