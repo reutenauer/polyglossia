@@ -102,12 +102,16 @@ local function newloader(langentry)
     else
         langdata = newloader_available_languages[langentry]
         if langdata then
+            print("Language data for " .. langentry)
+            for k, v in pairs(langdata) do
+                print(k, tostring(v))
+            end
             polyglossia.newloader_max_langid = polyglossia.newloader_max_langid + 1
             -- langobject = lang.new(newloader_max_langid)
             lang.new(); lang.new(); lang.new()
             langobject = lang.new()
-            lang.patterns(langobject, langdata.patterns)
-            lang.hyphenation(langobject, langdata.hyphenation)
+            lang.patterns(langobject, dofile(kpse.find_file(langdata.patterns)))
+            lang.hyphenation(langobject, dofile(kpse.find_file(langdata.hyphenation)))
             polyglossia.newloader_loaded_languages[langentry] = langobject
 
             texio.write_nl('term and log', 'Language ' .. langentry .. ' was not yet loaded; created with id ' .. lang.id(langobject))
