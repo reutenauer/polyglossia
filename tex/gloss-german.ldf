@@ -6,13 +6,6 @@
   fontsetup=true,
 }
 
-\newcommand\xpg@ifdefined[3]{%
-    \ifluatex
-        \xpg@set@language@luatex@iv{#1}%
-    \fi
-    \expandafter\ifx\csname l@#1\endcsname\@undefined#3\else#2\fi
-}%
-
 \def\tmp@old{old}
 \def\tmp@oldyr{1901}
 \newif\if@german@oldspelling
