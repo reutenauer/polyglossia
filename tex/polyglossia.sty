@@ -771,7 +771,7 @@ That is almost guaranteed to cause problems.}
     \ifluatex
         \xpg@set@language@luatex@iv{#1}%
     \fi
-    \expandafter\ifx\csname l@#1\endcsname\@undefined#3\else#2\fi
+    \expandafter\ifx\csname l@#1\endcsname\relax#3\else#2\fi
 }%
 
 \newcommand\xpg@set@language@luatex@iv[1]{%

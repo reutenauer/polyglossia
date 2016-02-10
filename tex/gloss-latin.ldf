@@ -83,14 +83,18 @@
   \xpg@info{Option: Medieval Latin}%
 \else
   \ifx\@tempa\tmp@classic
+    \message{TRYING~ CLASSICAL~ LATIN}\show4
     \xpg@ifdefined{classiclatin}{%
+      \message{DEFINED}\show5
       \def\latin@variant{\l@classiclatin}%
       \xpg@set@language@luatex@iv{classiclatin}%
     }{%
+       \message{NOT~ DEFINED}\show6
        \xpg@nopatterns{Classic Latin}%
        \adddialect\l@classiclatin\l@latin
        \def\latin@variant{\l@latin}%
     }%
+    \message{END~ OF~ TRY^^J}\show7
     \def\captionslatin{\modernlatincaptions}%
     \def\datelatin{\classiclatindate}%
     \classicuclccodes
