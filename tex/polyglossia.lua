@@ -120,10 +120,6 @@ local function newloader(langentry)
                     pattfile:close()
                 end
             end
-            print('---')
-            print(tostring(langdata.hyphenation))
-            print('---')
-            dofile()
             if langdata.hyphenation and langdata.hyphenation ~= '' then
                 hyphfilepath = kpse.find_file(langdata.hyphenation)
                 if hyphfilepath then
