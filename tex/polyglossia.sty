@@ -15,7 +15,6 @@
 % fontspec now uses LaTeX3 packages such as expl3, so we need this:
 \ExplSyntaxOn
 
-\showthe\l@british
 %% This is for compatibility with Babel-aware package:
 \cslet{ver@babel.sty}{\@empty} % this "fakes" babel
 \def\languageshorthands#1{\relax} %this is for scrlttr2 class
@@ -226,9 +225,10 @@ That is almost guaranteed to cause problems.}
     % if l@#1 does not yet exist,
     % we assign it to nohyphenation
     % we do this here in case the hyphennames key was omitted
-    \xpg@ifdefined{#1}{\message{^^JDEFINED!^^J}\expandafter\show\csname l@#1\endcsname}%
-      % {\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
-      {^^J\message{NOT~ DEFINED!^^J}\expandafter\showthe\csname xpg@langname@#1\endcsname\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
+    \xpg@ifdefined{#1}{}%
+    % \xpg@ifdefined{#1}{\message{^^JDEFINED!^^J}\expandafter\show\csname l@#1\endcsname}%
+      {\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
+      % {^^J\message{NOT~ DEFINED!^^J}\expandafter\showthe\csname xpg@langname@#1\endcsname\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
        \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}%
     \csdef{#1@language}{%
       \ifbool{xpg@hyphenation@disabled}{%
@@ -770,7 +770,7 @@ That is almost guaranteed to cause problems.}
 }
 
 \newcommand\xpg@ifdefined[3]{%
-    \expandafter\showthe\csname l@#1\endcsname
+    % \expandafter\showthe\csname l@#1\endcsname
     \ifluatex
         \xpg@set@language@luatex@iv{#1}%
     \fi
