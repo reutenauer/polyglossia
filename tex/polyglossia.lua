@@ -100,7 +100,7 @@ local function newloader(langentry)
         return lang.id(loaded_language)
     else
         langdata = newloader_available_languages[langentry]
-        if langdata['special'] == 'language0' then return 0 end
+        if langdata and langdata['special'] == 'language0' then return 0 end
 
         if langdata then
             print("Language data for " .. langentry)
