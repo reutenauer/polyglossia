@@ -10,7 +10,6 @@
     \ifluatex
         \xpg@set@language@luatex@iv{#1}%
     \fi
-    \message{HELLO\space HERE\space is\space l@#1:}\expandafter\showthe\csname l@#1\endcsname
     \expandafter\ifx\csname l@#1\endcsname\@undefined#3\else#2\fi
 }%
 
