@@ -112,7 +112,7 @@ local function newloader(langentry)
             lang.new(); lang.new(); lang.new()
             langobject = lang.new()
             texio.write_nl('term and log', langdata.patterns)
-            if langdata.patterns then
+            if langdata.patterns and langdata.patterns ~= '' then
                 pattfilepath = kpse.find_file(langdata.patterns)
                 if pattfilepath then
                     pattfile = io.open(pattfilepath)
@@ -120,7 +120,11 @@ local function newloader(langentry)
                     pattfile:close()
                 end
             end
-            if langdata.hyphenation then
+            print('---')
+            print(tostring(langdata.hyphenation))
+            print('---')
+            dofile()
+            if langdata.hyphenation and langdata.hyphenation ~= '' then
                 hyphfilepath = kpse.find_file(langdata.hyphenation)
                 if hyphfilepath then
                     hyphfile = io.open(hyphfilepath)
