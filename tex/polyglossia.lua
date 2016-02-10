@@ -114,7 +114,7 @@ local function newloader(langentry)
             return lang.id(langobject)
         else
             texio.write_nl('term and log', 'Language ' .. langentry .. ' not found in language.dat.lua')
-            return nil
+            return 255
         end
     end
 end
