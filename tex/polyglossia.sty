@@ -244,7 +244,7 @@ That is almost guaranteed to cause problems.}
         \togglefalse{#1@RL}%
       \or
         \toggletrue{#1@RL}%
-        \ifcsundef{RTL}{\ifluatex\RequirePackage{luabidi}\else\RequirePackage{bidi}\fi}{}%
+        \ifcsundef{RTL}{\ifluatex\RequirePackage{luabidi}\else\RequirePackage{bidi}\fi}{}% FIXME Use \RequireBidi and remove calls in individual gloss files.
     \fi}%
     {\xpg@warning{#1: Invalid value \val\space for key "direction"}}%
   \define@key[xpg@setup]{#1}{hyphenmins}[{2,3}]%
@@ -822,7 +822,7 @@ That is almost guaranteed to cause problems.}
 
 \define@boolkey{polyglossia}[system@]{babelshorthands}[false]{}
 
-\AtEndPreamble{\@ifpackageloaded{bidi}{\providecommand*{\aemph}[1]{$\overline{\hboxR{#1}}$}}{}}
+\AtEndPreamble{\@ifpackageloaded{bidi}{\providecommand*{\aemph}[1]{$\overline{\hboxR{#1}}$}}{}}% TODO Make that work for luabidi too.
 
 %% Package Options %%
 \DeclareOption{nolocalmarks}{\setkeys{polyglossia}{localmarks=false}}
