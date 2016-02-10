@@ -182,9 +182,9 @@ That is almost guaranteed to cause problems.}
   \csgdef{xpg@langname@#1}{\xpg@uppercasefirst{#1}}%
   %needed for docsvlist with hyphennames key:
   \def\do##1{%
-    \ifcsdef{l@#1}{}{%
+    \xpg@ifdefined{#1}{}{%
       \ifstrequal{#1}{##1}{}%
-      {\ifcsdef{l@##1}%
+      {\xpg@ifdefined{##1}%
         {\csletcs{l@#1}{l@##1}\xpg@set@language@luatex@iv{##1}\listbreak}%
         {}%
       }%
@@ -225,9 +225,9 @@ That is almost guaranteed to cause problems.}
     % if l@#1 does not yet exist,
     % we assign it to nohyphenation
     % we do this here in case the hyphennames key was omitted
-    \ifcsundef{l@#1}%
+    \xpg@ifdefined{#1}{}%
       {\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
-       \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}{}%
+       \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}%
     \csdef{#1@language}{%
       \ifbool{xpg@hyphenation@disabled}{%
         \xdef\xpg@lastlanguage{\the\csname l@#1\endcsname}%
@@ -819,15 +819,15 @@ That is almost guaranteed to cause problems.}
    {}
 
 \newcommand{\setlocalhyphenmins}[3]{%
-   \expandafter\ifx\csname l@#1\endcsname\relax%
-     \xpg@warning{\string\setlocalhyphenmin\space~ useless~ for~ unknown~ language~ #1}%
-   \else
+   \xpg@ifdefined{#1}{%
       \expandafter\ifx\csname l@#1\endcsname\l@nohyphenation%
         \xpg@warning{\string\setlocalhyphenmin\space~ useless~ for~ unhyphenated~ language~ #1}%
       \else
       \providehyphenmins{#1}{#2#3}%
       \fi
-   \fi}
+   }{%
+     \xpg@warning{\string\setlocalhyphenmin\space~ useless~ for~ unknown~ language~ #1}%
+   }}%
 
 \def\use@localhyphenmins#1{%
    \ifcsundef{#1hyphenmins}{}%
