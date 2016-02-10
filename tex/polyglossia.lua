@@ -112,9 +112,22 @@ local function newloader(langentry)
             lang.new(); lang.new(); lang.new()
             langobject = lang.new()
             texio.write_nl('term and log', langdata.patterns)
-            f = io.open(kpse.find_file(langdata.patterns))
-            lang.patterns(langobject, f:read('*all'))
-            -- lang.hyphenation(langobject, io.read(kpse.find_file(langdata.hyphenation), '*all'))
+            if langdata.patterns then
+                pattfilepath = kpse.find_file(langdata.patterns)
+                if pattfilepath then
+                    pattfile = io.open(pattfilepath)
+                    lang.patterns(langobject, pattfile:read('*all'))
+                    pattfile:close()
+                end
+            end
+            if langdata.hyphenation then
+                hyphfilepath = kpse.find_file(langdata.hyphenation)
+                if hyphfilepath then
+                    hyphfile = io.open(hyphfilepath)
+                    lang.hyphenation(langobject, hyphfile:read('*all'))
+                    hyphfile:close()
+                end
+            end
             polyglossia.newloader_loaded_languages[langentry] = langobject
 
             texio.write_nl('term and log', 'Language ' .. langentry .. ' was not yet loaded; created with id ' .. lang.id(langobject))
