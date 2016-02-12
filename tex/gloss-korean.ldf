@@ -277,8 +277,13 @@
 % user macro to force zero skip
 \let\inhibitglue\relax
 % initialize interchartoks and classes
-\let\XeTeXcharclassIgnore  \@cclvi
-\let\XeTeXcharclassBoundary\@cclv
+\ifdim\the\XeTeXversion\XeTeXrevision pt<0.99994pt
+    \let\XeTeXcharclassIgnore  \@cclvi
+    \let\XeTeXcharclassBoundary\@cclv
+\else
+    \chardef\XeTeXcharclassIgnore  =4096
+    \chardef\XeTeXcharclassBoundary=4095
+\fi
 \ifdefined\XeTeXcharclassID\else
     \ifdefined\xtxHanGlue
         \let\XeTeXcharclassID\@ne
@@ -604,7 +609,7 @@ local nobr_after = {
     [0x301D] = 1, [0xFF08] = 1, [0xFF1C] = 1, [0xFF3B] = 1,
     [0xFF5B] = 1, [0xFF5F] = 1, [0xFF62] = 1,
 }
-local nobr_before = {
+local nobr_before = setmetatable({
     [0x21] = 1, [0x22] = 1, [0x27] = 1, [0x29] = 1, [0x2C] = 1,
     [0x2D] = 1, [0x2E] = 1, [0x2F] = 1, [0x3A] = 1, [0x3B] = 1,
     [0x3E] = 1, [0x3F] = 1, [0x5C] = 1, [0x5D] = 1, [0x7D] = 1,
@@ -632,20 +637,22 @@ local nobr_before = {
     [0xFF1F] = 1, [0xFF3D] = 1, [0xFF5D] = 1, [0xFF60] = 1,
     [0xFF61] = 1, [0xFF63] = 1, [0xFF64] = 1, [0xFF65] = 1,
     [0xFF9E] = 1, [0xFF9F] = 1,
-}
-for i=0x1160, 0x11FF do nobr_before[i] = 2 end
-for i=0xD7B0, 0xD7FB do nobr_before[i] = 2 end
-for i=0x302A, 0x302F do nobr_before[i] = 1 end
+}, { __index = function(_,c)
+        if c >= 0x1160  and c <= 0x11FF  then return 2 end
+        if c >= 0xD7B0  and c <= 0xD7FB  then return 2 end
+        if c >= 0x302A  and c <= 0x302F  then return 1 end
+        if c >= 0xFE00  and c <= 0xFE0F  then return 1 end
+        if c >= 0xE0100 and c <= 0xE01EF then return 1 end
+    end
+})
 local function is_cjk (c)
     return  (c >= 0xAC00  and c <= 0xD7A3)
     or      (c >= 0x1100  and c <= 0x115F)
     or      (c >= 0xA960  and c <= 0xA97C)
-    or      (c >= 0x3400  and c <= 0x9FFF)
+    or      (c >= 0x2E80  and c <= 0x9FFF)
     or      (c >= 0xF900  and c <= 0xFAFF)
-    or      (c >= 0x2E80  and c <= 0x2FFF)
-    or      (c >= 0x3040  and c <= 0x30FF)
-    or      (c >= 0x20000 and c <= 0x2CEAF)
-    or      (c >= 0x2F800 and c <= 0x2FA1F)
+    or      (c >= 0xFF00  and c <= 0xFFEF)
+    or      (c >= 0x20000 and c <= 0x2FA1F)
     or      (nobr_after[c]  and c > 0xFF)
     or      (nobr_before[c] and c > 0xFF)
 end
