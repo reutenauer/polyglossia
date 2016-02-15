@@ -485,31 +485,31 @@
 \@tmpa "FE13=\XeTeXcharclassID % ︓ PRESENTATION FORM FOR VERTICAL COLON
 \@tmpa "FE14=\XeTeXcharclassID % ︔ PRESENTATION FORM FOR VERTICAL SEMICOLON
 % CJ
-\@tmpa "3041=\XeTeXcharclassID
-\@tmpa "3043=\XeTeXcharclassID
-\@tmpa "3045=\XeTeXcharclassID
-\@tmpa "3047=\XeTeXcharclassID
-\@tmpa "3049=\XeTeXcharclassID
-\@tmpa "3063=\XeTeXcharclassID
-\@tmpa "3083=\XeTeXcharclassID
-\@tmpa "3085=\XeTeXcharclassID
-\@tmpa "3087=\XeTeXcharclassID
-\@tmpa "308E=\XeTeXcharclassID
-\@tmpa "3095=\XeTeXcharclassID
-\@tmpa "3096=\XeTeXcharclassID
-\@tmpa "30A1=\XeTeXcharclassID
-\@tmpa "30A3=\XeTeXcharclassID
-\@tmpa "30A5=\XeTeXcharclassID
-\@tmpa "30A7=\XeTeXcharclassID
-\@tmpa "30A9=\XeTeXcharclassID
-\@tmpa "30C3=\XeTeXcharclassID
-\@tmpa "30E3=\XeTeXcharclassID
-\@tmpa "30E5=\XeTeXcharclassID
-\@tmpa "30E7=\XeTeXcharclassID
-\@tmpa "30EE=\XeTeXcharclassID
-\@tmpa "30F5=\XeTeXcharclassID
-\@tmpa "30F6=\XeTeXcharclassID
-\@tmpa "30FC=\XeTeXcharclassID
+\@tmpa "3041=\XeTeXcharclassID % ぁ HIRAGANA LETTER SMALL A
+\@tmpa "3043=\XeTeXcharclassID % ぃ HIRAGANA LETTER SMALL I
+\@tmpa "3045=\XeTeXcharclassID % ぅ HIRAGANA LETTER SMALL U
+\@tmpa "3047=\XeTeXcharclassID % ぇ HIRAGANA LETTER SMALL E
+\@tmpa "3049=\XeTeXcharclassID % ぉ HIRAGANA LETTER SMALL O
+\@tmpa "3063=\XeTeXcharclassID % っ HIRAGANA LETTER SMALL TU
+\@tmpa "3083=\XeTeXcharclassID % ゃ HIRAGANA LETTER SMALL YA
+\@tmpa "3085=\XeTeXcharclassID % ゅ HIRAGANA LETTER SMALL YU
+\@tmpa "3087=\XeTeXcharclassID % ょ HIRAGANA LETTER SMALL YO
+\@tmpa "308E=\XeTeXcharclassID % ゎ HIRAGANA LETTER SMALL WA
+\@tmpa "3095=\XeTeXcharclassID % ゕ HIRAGANA LETTER SMALL KA
+\@tmpa "3096=\XeTeXcharclassID % ゖ HIRAGANA LETTER SMALL KE
+\@tmpa "30A1=\XeTeXcharclassID % ァ KATAKANA LETTER SMALL A
+\@tmpa "30A3=\XeTeXcharclassID % ィ KATAKANA LETTER SMALL I
+\@tmpa "30A5=\XeTeXcharclassID % ゥ KATAKANA LETTER SMALL U
+\@tmpa "30A7=\XeTeXcharclassID % ェ KATAKANA LETTER SMALL E
+\@tmpa "30A9=\XeTeXcharclassID % ォ KATAKANA LETTER SMALL O
+\@tmpa "30C3=\XeTeXcharclassID % ッ KATAKANA LETTER SMALL TU
+\@tmpa "30E3=\XeTeXcharclassID % ャ KATAKANA LETTER SMALL YA
+\@tmpa "30E5=\XeTeXcharclassID % ュ KATAKANA LETTER SMALL YU
+\@tmpa "30E7=\XeTeXcharclassID % ョ KATAKANA LETTER SMALL YO
+\@tmpa "30EE=\XeTeXcharclassID % ヮ KATAKANA LETTER SMALL WA
+\@tmpa "30F5=\XeTeXcharclassID % ヵ KATAKANA LETTER SMALL KA
+\@tmpa "30F6=\XeTeXcharclassID % ヶ KATAKANA LETTER SMALL KE
+\@tmpa "30FC=\XeTeXcharclassID % ー KATAKANA-HIRAGANA PROLONGED SOUND MARK
 \count@"31F0 \loop
     \expandafter\@tmpa\the\count@=\XeTeXcharclassID
     \ifnum\count@<"31FF
@@ -521,20 +521,22 @@
     \advance\count@\@ne
     \repeat
 %
-\@tmpa "28=\XPGKOcharclassAO % (
-\@tmpa "5B=\XPGKOcharclassAO % [
-\@tmpa "60=\XPGKOcharclassAO % `
-\@tmpa "7B=\XPGKOcharclassAO % {
+\@tmpa "28=\XPGKOcharclassAO % ( LEFT PARENTHESIS
+\@tmpa "5B=\XPGKOcharclassAO % [ LEFT SQUARE BRACKET
+\@tmpa "60=\XPGKOcharclassAO % ` GRAVE ACCENT
+\@tmpa "7B=\XPGKOcharclassAO % { LEFT CURLY BRACKET
+\@tmpa "AB=\XPGKOcharclassAO % « LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
 %
-\@tmpa "21=\XPGKOcharclassAC % !
-\@tmpa "27=\XPGKOcharclassAC % '
-\@tmpa "29=\XPGKOcharclassAC % )
-\@tmpa "2C=\XPGKOcharclassAC % ,
-\@tmpa "2E=\XPGKOcharclassAC % .
-\@tmpa "3B=\XPGKOcharclassAC % ;
-\@tmpa "3F=\XPGKOcharclassAC % ?
-\@tmpa "5D=\XPGKOcharclassAC % ]
-\@tmpa "7D=\XPGKOcharclassAC % }
+\@tmpa "21=\XPGKOcharclassAC % ! EXCLAMATION MARK
+\@tmpa "27=\XPGKOcharclassAC % ' APOSTROPHE
+\@tmpa "29=\XPGKOcharclassAC % ) RIGHT PARENTHESIS
+\@tmpa "2C=\XPGKOcharclassAC % , COMMA
+\@tmpa "2E=\XPGKOcharclassAC % . FULL STOP
+\@tmpa "3B=\XPGKOcharclassAC % ; SEMICOLON
+\@tmpa "3F=\XPGKOcharclassAC % ? QUESTION MARK
+\@tmpa "5D=\XPGKOcharclassAC % ] RIGHT SQUARE BRACKET
+\@tmpa "7D=\XPGKOcharclassAC % } RIGHT CURLY BRACKET
+\@tmpa "BB=\XPGKOcharclassAC % » RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
 %
 \@tmpa "2018=\XeTeXcharclassOP % ‘ LEFT SINGLE QUOTATION MARK
 \@tmpa "201C=\XeTeXcharclassOP % “ LEFT DOUBLE QUOTATION MARK
@@ -601,46 +603,141 @@ local vbox_id  = node.id("vlist")
 local attr_korean = luatexbase.attributes["xpg@attr@korean"]
 local attr_josa   = luatexbase.attributes["xpg@attr@autojosa"]
 local nobr_after = {
-    [0x28] = 1, [0x2D] = 1, [0x2F] = 1, [0x3C] = 1, [0x5B] = 1,
-    [0x5C] = 1, [0x60] = 1, [0x7B] = 1, [0x7E] = 1, [0x2013] = 1,
-    [0x2018] = 1, [0x201C] = 1, [0x2329] = 1, [0x3008] = 1,
-    [0x300A] = 1, [0x300C] = 1, [0x300E] = 1, [0x3010] = 1,
-    [0x3014] = 1, [0x3016] = 1, [0x3018] = 1, [0x301A] = 1,
-    [0x301D] = 1, [0xFF08] = 1, [0xFF1C] = 1, [0xFF3B] = 1,
-    [0xFF5B] = 1, [0xFF5F] = 1, [0xFF62] = 1,
+    [0x28] = 1, % ( LEFT PARENTHESIS
+    [0x2D] = 1, % - HYPHEN-MINUS
+    [0x2F] = 1, % / SOLIDUS
+    [0x3A] = 1, % : COLON
+    [0x3C] = 1, % < LESS-THAN SIGN
+    [0x5B] = 1, % [ LEFT SQUARE BRACKET
+    [0x5C] = 1, % \ REVERSE SOLIDUS
+    [0x60] = 1, % ` GRAVE ACCENT
+    [0x7B] = 1, % { LEFT CURLY BRACKET
+    [0x7E] = 1, % ~ TILDE
+    [0xAB] = 1, % « LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+    [0x2013] = 1, % – EN DASH
+    [0x2018] = 1, % ‘ LEFT SINGLE QUOTATION MARK
+    [0x201C] = 1, % “ LEFT DOUBLE QUOTATION MARK
+    [0x2329] = 1, % 〈 LEFT-POINTING ANGLE BRACKET
+    [0x3008] = 1, % 〈 LEFT ANGLE BRACKET
+    [0x300A] = 1, % 《 LEFT DOUBLE ANGLE BRACKET
+    [0x300C] = 1, % 「 LEFT CORNER BRACKET
+    [0x300E] = 1, % 『 LEFT WHITE CORNER BRACKET
+    [0x3010] = 1, % 【 LEFT BLACK LENTICULAR BRACKET
+    [0x3014] = 1, % 〔 LEFT TORTOISE SHELL BRACKET
+    [0x3016] = 1, % 〖 LEFT WHITE LENTICULAR BRACKET
+    [0x3018] = 1, % 〘 LEFT WHITE TORTOISE SHELL BRACKET
+    [0x301A] = 1, % 〚 LEFT WHITE SQUARE BRACKET
+    [0x301D] = 1, % 〝 REVERSED DOUBLE PRIME QUOTATION MARK
+    [0xFF08] = 1, % （ FULLWIDTH LEFT PARENTHESIS
+    [0xFF1C] = 1, % ＜ FULLWIDTH LESS-THAN SIGN
+    [0xFF3B] = 1, % ［ FULLWIDTH LEFT SQUARE BRACKET
+    [0xFF5B] = 1, % ｛ FULLWIDTH LEFT CURLY BRACKET
+    [0xFF5F] = 1, % ｟ FULLWIDTH LEFT WHITE PARENTHESIS
+    [0xFF62] = 1, % ｢ HALFWIDTH LEFT CORNER BRACKET
 }
 local nobr_before = setmetatable({
-    [0x21] = 1, [0x22] = 1, [0x27] = 1, [0x29] = 1, [0x2C] = 1,
-    [0x2D] = 1, [0x2E] = 1, [0x2F] = 1, [0x3A] = 1, [0x3B] = 1,
-    [0x3E] = 1, [0x3F] = 1, [0x5C] = 1, [0x5D] = 1, [0x7D] = 1,
-    [0x7E] = 1, [0xB7] = 1, [0x2013] = 1, [0x2014] = 1, [0x2015] = 1,
-    [0x2019] = 1, [0x201D] = 1, [0x2025] = 1, [0x2026] = 1,
-    [0x232A] = 1, [0x3001] = 1, [0x3002] = 1, [0x3005] = 1,
-    [0x3009] = 1, [0x300B] = 1, [0x300D] = 1, [0x300F] = 1,
-    [0x3011] = 1, [0x3015] = 1, [0x3017] = 1, [0x3019] = 1,
-    [0x301B] = 1, [0x301C] = 1, [0x301E] = 1, [0x301F] = 1,
-    [0x3035] = 1, [0x303B] = 1, [0x303C] = 1, [0x3041] = 2,
-    [0x3043] = 2, [0x3045] = 2, [0x3047] = 2, [0x3049] = 2,
-    [0x3063] = 2, [0x3083] = 2, [0x3085] = 2, [0x3087] = 2,
-    [0x308E] = 2, [0x3095] = 2, [0x3096] = 2, [0x3099] = 1,
-    [0x309A] = 1, [0x309B] = 1, [0x309C] = 1, [0x309D] = 1,
-    [0x309E] = 1, [0x30A0] = 1, [0x30A1] = 2, [0x30A3] = 2,
-    [0x30A5] = 2, [0x30A7] = 2, [0x30A9] = 2, [0x30C3] = 2,
-    [0x30E3] = 2, [0x30E5] = 2, [0x30E7] = 2, [0x30EE] = 2,
-    [0x30F5] = 2, [0x30F6] = 2, [0x30FB] = 1, [0x30FC] = 1,
-    [0x30FD] = 1, [0x30FE] = 1, [0x31F0] = 2, [0x31F1] = 2,
-    [0x31F2] = 2, [0x31F3] = 2, [0x31F4] = 2, [0x31F5] = 2,
-    [0x31F6] = 2, [0x31F7] = 2, [0x31F8] = 2, [0x31F9] = 2,
-    [0x31FA] = 2, [0x31FB] = 1, [0x31FC] = 1, [0x31FD] = 1,
-    [0x31FE] = 1, [0x31FF] = 1, [0xFF01] = 1, [0xFF09] = 1,
-    [0xFF0C] = 1, [0xFF0E] = 1, [0xFF1A] = 1, [0xFF1B] = 1,
-    [0xFF1F] = 1, [0xFF3D] = 1, [0xFF5D] = 1, [0xFF60] = 1,
-    [0xFF61] = 1, [0xFF63] = 1, [0xFF64] = 1, [0xFF65] = 1,
-    [0xFF9E] = 1, [0xFF9F] = 1,
+    [0x21] = 1, % ! EXCLAMATION MARK
+    [0x22] = 1, % " QUOTATION MARK
+    [0x27] = 1, % ' APOSTROPHE
+    [0x29] = 1, % ) RIGHT PARENTHESIS
+    [0x2C] = 1, % , COMMA
+    [0x2D] = 1, % - HYPHEN-MINUS
+    [0x2E] = 1, % . FULL STOP
+    [0x2F] = 1, % / SOLIDUS
+    [0x3A] = 1, % : COLON
+    [0x3B] = 1, % ; SEMICOLON
+    [0x3E] = 1, % > GREATER-THAN SIGN
+    [0x3F] = 1, % ? QUESTION MARK
+    [0x5C] = 1, % \ REVERSE SOLIDUS
+    [0x5D] = 1, % ] RIGHT SQUARE BRACKET
+    [0x7D] = 1, % } RIGHT CURLY BRACKET
+    [0x7E] = 1, % ~ TILDE
+    [0xB7] = 1, % · MIDDLE DOT
+    [0xBB] = 1, % » RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+    [0x2013] = 1, % – EN DASH
+    [0x2014] = 1, % — EM DASH
+    [0x2015] = 1, % ― HORIZONTAL BAR
+    [0x2019] = 1, % ’ RIGHT SINGLE QUOTATION MARK
+    [0x201D] = 1, % ” RIGHT DOUBLE QUOTATION MARK
+    [0x2025] = 1, % ‥ TWO DOT LEADER
+    [0x2026] = 1, % … HORIZONTAL ELLIPSIS
+    [0x232A] = 1, % 〉 RIGHT-POINTING ANGLE BRACKET
+    [0x3001] = 1, % 、 IDEOGRAPHIC COMMA
+    [0x3002] = 1, % 。 IDEOGRAPHIC FULL STOP
+    [0x3005] = 1, % 々 IDEOGRAPHIC ITERATION MARK
+    [0x3009] = 1, % 〉 RIGHT ANGLE BRACKET
+    [0x300B] = 1, % 》 RIGHT DOUBLE ANGLE BRACKET
+    [0x300D] = 1, % 」 RIGHT CORNER BRACKET
+    [0x300F] = 1, % 』 RIGHT WHITE CORNER BRACKET
+    [0x3011] = 1, % 】 RIGHT BLACK LENTICULAR BRACKET
+    [0x3015] = 1, % 〕 RIGHT TORTOISE SHELL BRACKET
+    [0x3017] = 1, % 〗 RIGHT WHITE LENTICULAR BRACKET
+    [0x3019] = 1, % 〙 RIGHT WHITE TORTOISE SHELL BRACKET
+    [0x301B] = 1, % 〛 RIGHT WHITE SQUARE BRACKET
+    [0x301C] = 1, % 〜 WAVE DASH
+    [0x301E] = 1, % 〞 DOUBLE PRIME QUOTATION MARK
+    [0x301F] = 1, % 〟 LOW DOUBLE PRIME QUOTATION MARK
+    [0x3035] = 1, % 〵 VERTICAL KANA REPEAT MARK LOWER HALF
+    [0x303B] = 1, % 〻 VERTICAL IDEOGRAPHIC ITERATION MARK
+    [0x303C] = 1, % 〼 MASU MARK
+    [0x3041] = 2, % ぁ HIRAGANA LETTER SMALL A
+    [0x3043] = 2, % ぃ HIRAGANA LETTER SMALL I
+    [0x3045] = 2, % ぅ HIRAGANA LETTER SMALL U
+    [0x3047] = 2, % ぇ HIRAGANA LETTER SMALL E
+    [0x3049] = 2, % ぉ HIRAGANA LETTER SMALL O
+    [0x3063] = 2, % っ HIRAGANA LETTER SMALL TU
+    [0x3083] = 2, % ゃ HIRAGANA LETTER SMALL YA
+    [0x3085] = 2, % ゅ HIRAGANA LETTER SMALL YU
+    [0x3087] = 2, % ょ HIRAGANA LETTER SMALL YO
+    [0x308E] = 2, % ゎ HIRAGANA LETTER SMALL WA
+    [0x3095] = 2, % ゕ HIRAGANA LETTER SMALL KA
+    [0x3096] = 2, % ゖ HIRAGANA LETTER SMALL KE
+    [0x3099] = 1, %  COMBINING KATAKANA-HIRAGANA VOICED SOUND MARK
+    [0x309A] = 1, %  COMBINING KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
+    [0x309B] = 1, % ゛ KATAKANA-HIRAGANA VOICED SOUND MARK
+    [0x309C] = 1, % ゜ KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
+    [0x309D] = 1, % ゝ HIRAGANA ITERATION MARK
+    [0x309E] = 1, % ゞ HIRAGANA VOICED ITERATION MARK
+    [0x30A0] = 1, % ゠ KATAKANA-HIRAGANA DOUBLE HYPHEN
+    [0x30A1] = 2, % ァ KATAKANA LETTER SMALL A
+    [0x30A3] = 2, % ィ KATAKANA LETTER SMALL I
+    [0x30A5] = 2, % ゥ KATAKANA LETTER SMALL U
+    [0x30A7] = 2, % ェ KATAKANA LETTER SMALL E
+    [0x30A9] = 2, % ォ KATAKANA LETTER SMALL O
+    [0x30C3] = 2, % ッ KATAKANA LETTER SMALL TU
+    [0x30E3] = 2, % ャ KATAKANA LETTER SMALL YA
+    [0x30E5] = 2, % ュ KATAKANA LETTER SMALL YU
+    [0x30E7] = 2, % ョ KATAKANA LETTER SMALL YO
+    [0x30EE] = 2, % ヮ KATAKANA LETTER SMALL WA
+    [0x30F5] = 2, % ヵ KATAKANA LETTER SMALL KA
+    [0x30F6] = 2, % ヶ KATAKANA LETTER SMALL KE
+    [0x30FB] = 1, % ・ KATAKANA MIDDLE DOT
+    [0x30FC] = 1, % ー KATAKANA-HIRAGANA PROLONGED SOUND MARK
+    [0x30FD] = 1, % ヽ KATAKANA ITERATION MARK
+    [0x30FE] = 1, % ヾ KATAKANA VOICED ITERATION MARK
+    [0xFF01] = 1, % ！ FULLWIDTH EXCLAMATION MARK
+    [0xFF09] = 1, % ） FULLWIDTH RIGHT PARENTHESIS
+    [0xFF0C] = 1, % ， FULLWIDTH COMMA
+    [0xFF0E] = 1, % ． FULLWIDTH FULL STOP
+    [0xFF1A] = 1, % ： FULLWIDTH COLON
+    [0xFF1B] = 1, % ； FULLWIDTH SEMICOLON
+    [0xFF1E] = 1, % ＞ FULLWIDTH GREATER-THAN SIGN
+    [0xFF1F] = 1, % ？ FULLWIDTH QUESTION MARK
+    [0xFF3D] = 1, % ］ FULLWIDTH RIGHT SQUARE BRACKET
+    [0xFF5D] = 1, % ｝ FULLWIDTH RIGHT CURLY BRACKET
+    [0xFF60] = 1, % ｠ FULLWIDTH RIGHT WHITE PARENTHESIS
+    [0xFF61] = 1, % ｡ HALFWIDTH IDEOGRAPHIC FULL STOP
+    [0xFF63] = 1, % ｣ HALFWIDTH RIGHT CORNER BRACKET
+    [0xFF64] = 1, % ､ HALFWIDTH IDEOGRAPHIC COMMA
+    [0xFF65] = 1, % ･ HALFWIDTH KATAKANA MIDDLE DOT
+    [0xFF9E] = 1, % ﾞ HALFWIDTH KATAKANA VOICED SOUND MARK
+    [0xFF9F] = 1, % ﾟ HALFWIDTH KATAKANA SEMI-VOICED SOUND MARK
 }, { __index = function(_,c)
         if c >= 0x1160  and c <= 0x11FF  then return 2 end
         if c >= 0xD7B0  and c <= 0xD7FB  then return 2 end
         if c >= 0x302A  and c <= 0x302F  then return 1 end
+        if c >= 0x31F0  and c <= 0x31FF  then return 2 end
+        if c >= 0xFF67  and c <= 0xFF70  then return 2 end
         if c >= 0xFE00  and c <= 0xFE0F  then return 1 end
         if c >= 0xE0100 and c <= 0xE01EF then return 1 end
     end
