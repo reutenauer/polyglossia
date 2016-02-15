@@ -600,6 +600,8 @@
 local glyph_id = node.id("glyph")
 local hbox_id  = node.id("hlist")
 local vbox_id  = node.id("vlist")
+local glue_id  = node.id("glue")
+local penalty_id = node.id("penalty")
 local attr_korean = luatexbase.attributes["xpg@attr@korean"]
 local attr_josa   = luatexbase.attributes["xpg@attr@autojosa"]
 local nobr_after = {
@@ -680,18 +682,18 @@ local nobr_before = setmetatable({
     [0x3035] = 1, % 〵 VERTICAL KANA REPEAT MARK LOWER HALF
     [0x303B] = 1, % 〻 VERTICAL IDEOGRAPHIC ITERATION MARK
     [0x303C] = 1, % 〼 MASU MARK
-    [0x3041] = 2, % ぁ HIRAGANA LETTER SMALL A
-    [0x3043] = 2, % ぃ HIRAGANA LETTER SMALL I
-    [0x3045] = 2, % ぅ HIRAGANA LETTER SMALL U
-    [0x3047] = 2, % ぇ HIRAGANA LETTER SMALL E
-    [0x3049] = 2, % ぉ HIRAGANA LETTER SMALL O
-    [0x3063] = 2, % っ HIRAGANA LETTER SMALL TU
-    [0x3083] = 2, % ゃ HIRAGANA LETTER SMALL YA
-    [0x3085] = 2, % ゅ HIRAGANA LETTER SMALL YU
-    [0x3087] = 2, % ょ HIRAGANA LETTER SMALL YO
-    [0x308E] = 2, % ゎ HIRAGANA LETTER SMALL WA
-    [0x3095] = 2, % ゕ HIRAGANA LETTER SMALL KA
-    [0x3096] = 2, % ゖ HIRAGANA LETTER SMALL KE
+    [0x3041] = 3, % ぁ HIRAGANA LETTER SMALL A
+    [0x3043] = 3, % ぃ HIRAGANA LETTER SMALL I
+    [0x3045] = 3, % ぅ HIRAGANA LETTER SMALL U
+    [0x3047] = 3, % ぇ HIRAGANA LETTER SMALL E
+    [0x3049] = 3, % ぉ HIRAGANA LETTER SMALL O
+    [0x3063] = 3, % っ HIRAGANA LETTER SMALL TU
+    [0x3083] = 3, % ゃ HIRAGANA LETTER SMALL YA
+    [0x3085] = 3, % ゅ HIRAGANA LETTER SMALL YU
+    [0x3087] = 3, % ょ HIRAGANA LETTER SMALL YO
+    [0x308E] = 3, % ゎ HIRAGANA LETTER SMALL WA
+    [0x3095] = 3, % ゕ HIRAGANA LETTER SMALL KA
+    [0x3096] = 3, % ゖ HIRAGANA LETTER SMALL KE
     [0x3099] = 1, %  COMBINING KATAKANA-HIRAGANA VOICED SOUND MARK
     [0x309A] = 1, %  COMBINING KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
     [0x309B] = 1, % ゛ KATAKANA-HIRAGANA VOICED SOUND MARK
@@ -699,18 +701,18 @@ local nobr_before = setmetatable({
     [0x309D] = 1, % ゝ HIRAGANA ITERATION MARK
     [0x309E] = 1, % ゞ HIRAGANA VOICED ITERATION MARK
     [0x30A0] = 1, % ゠ KATAKANA-HIRAGANA DOUBLE HYPHEN
-    [0x30A1] = 2, % ァ KATAKANA LETTER SMALL A
-    [0x30A3] = 2, % ィ KATAKANA LETTER SMALL I
-    [0x30A5] = 2, % ゥ KATAKANA LETTER SMALL U
-    [0x30A7] = 2, % ェ KATAKANA LETTER SMALL E
-    [0x30A9] = 2, % ォ KATAKANA LETTER SMALL O
-    [0x30C3] = 2, % ッ KATAKANA LETTER SMALL TU
-    [0x30E3] = 2, % ャ KATAKANA LETTER SMALL YA
-    [0x30E5] = 2, % ュ KATAKANA LETTER SMALL YU
-    [0x30E7] = 2, % ョ KATAKANA LETTER SMALL YO
-    [0x30EE] = 2, % ヮ KATAKANA LETTER SMALL WA
-    [0x30F5] = 2, % ヵ KATAKANA LETTER SMALL KA
-    [0x30F6] = 2, % ヶ KATAKANA LETTER SMALL KE
+    [0x30A1] = 3, % ァ KATAKANA LETTER SMALL A
+    [0x30A3] = 3, % ィ KATAKANA LETTER SMALL I
+    [0x30A5] = 3, % ゥ KATAKANA LETTER SMALL U
+    [0x30A7] = 3, % ェ KATAKANA LETTER SMALL E
+    [0x30A9] = 3, % ォ KATAKANA LETTER SMALL O
+    [0x30C3] = 3, % ッ KATAKANA LETTER SMALL TU
+    [0x30E3] = 3, % ャ KATAKANA LETTER SMALL YA
+    [0x30E5] = 3, % ュ KATAKANA LETTER SMALL YU
+    [0x30E7] = 3, % ョ KATAKANA LETTER SMALL YO
+    [0x30EE] = 3, % ヮ KATAKANA LETTER SMALL WA
+    [0x30F5] = 3, % ヵ KATAKANA LETTER SMALL KA
+    [0x30F6] = 3, % ヶ KATAKANA LETTER SMALL KE
     [0x30FB] = 1, % ・ KATAKANA MIDDLE DOT
     [0x30FC] = 1, % ー KATAKANA-HIRAGANA PROLONGED SOUND MARK
     [0x30FD] = 1, % ヽ KATAKANA ITERATION MARK
@@ -736,8 +738,8 @@ local nobr_before = setmetatable({
         if c >= 0x1160  and c <= 0x11FF  then return 2 end
         if c >= 0xD7B0  and c <= 0xD7FB  then return 2 end
         if c >= 0x302A  and c <= 0x302F  then return 1 end
-        if c >= 0x31F0  and c <= 0x31FF  then return 2 end
-        if c >= 0xFF67  and c <= 0xFF70  then return 2 end
+        if c >= 0x31F0  and c <= 0x31FF  then return 3 end
+        if c >= 0xFF67  and c <= 0xFF70  then return 3 end
         if c >= 0xFE00  and c <= 0xFE0F  then return 1 end
         if c >= 0xE0100 and c <= 0xE01EF then return 1 end
     end
@@ -848,30 +850,59 @@ local function insert_penalty_glue (head, curr, f, var, x)
     head, curr = node.insert_after(head, curr, glue)
     return head, curr
 end
+local function avoid_widow_char (head)
+    local curr = node.tail(head)
+    while curr do
+        if curr.id == glyph_id then
+            local c = curr.char or 0
+            if not nobr_before[c] or nobr_before[c] == 3 then
+                local var = node.has_attribute(curr, attr_korean)
+                if var and is_cjk(c) then
+                    curr = curr.prev
+                    if curr and curr.id == glue_id then
+                        curr = curr.prev
+                        if curr then
+                            local pv = var == 1 and 500 or 1000
+                            if curr.id == penalty_id then
+                                if curr.penalty < pv then curr.penalty = pv end
+                            else
+                                node.insert_after(head, curr, get_new_penalty(pv))
+                            end
+                        end
+                    end
+                end
+                break
+            end
+        end
+        curr = curr.prev
+    end
+end
 local function korean_break (head, lb)
     local curr = head
     while curr do
         if curr.id == glyph_id then
             local var = node.has_attribute(curr, attr_korean)
             if var then
-                local c, f = curr.char, curr.font
+                local c, f = curr.char or 0, curr.font or 0
                 local cc = charclass[c]
                 if var > 0 and cc > 0 and cc < 5 then
                     head, curr = glyph_to_box(head, curr, cc)
                 end
                 local next = curr.next
                 if next and next.id == glyph_id then
-                    local n = next.char
+                    local n = next.char or 0
                     local nc = charclass[n]
                     local nobr = nobr_before[n] or nobr_after[c]
                     if var > 0 and intercharclass[cc][nc] then
                         head, curr = insert_cjk_penalty_glue(head, curr, f, var, cc, nc, nobr)
                     elseif not nobr then
                         local cjkc, cjkn = is_cjk(c), is_cjk(n)
-                        if var > 0 and (cjkc or cjkn) and not (cjkc and cjkn) then
-                            head, curr = insert_penalty_glue(head, curr, f, var, true)
-                        elseif lb and (cjkc or cjkn) then
-                            head, curr = insert_penalty_glue(head, curr, f, var)
+                        if cjkc or cjkn then
+                            if var > 0 and not (cjkc and cjkn) then
+                                head, curr = insert_penalty_glue(head, curr, f, var, true)
+                            elseif lb then
+                                head, curr = insert_penalty_glue(head, curr, f, var)
+                            end
                         end
                     end
                 end
@@ -879,6 +910,7 @@ local function korean_break (head, lb)
         end
         curr = curr.next
     end
+    if lb then avoid_widow_char(head) end
     return head
 end
 local josa_table = {
@@ -938,9 +970,9 @@ local josa_code = setmetatable({
 local function get_prev_char (p)
     while p do
         if p.id == glyph_id then
-            local pc = p.char
+            local pc = p.char or 0
             if not nobr_after[pc] then
-                if not nobr_before[pc] or nobr_before[pc] == 2 then
+                if not nobr_before[pc] or nobr_before[pc] >= 2 then
                     return pc
                 end
             end
@@ -957,7 +989,7 @@ local function auto_josa (head)
         if curr.id == glyph_id then
             local josa = node.has_attribute(curr, attr_josa)
             if josa then
-                local cc = curr.char
+                local cc = curr.char or 0
                 if josa == 0 then
                     josa = josa_code[get_prev_char(curr.prev) or 0x30]
                 end
@@ -990,8 +1022,8 @@ local function reorder_tm (head)
     local curr, tone = node.tail(head)
     while curr do
         if curr.id == glyph_id and node.has_attribute(curr, attr_korean) then
-            local c, wd = curr.char, curr.width
-            if (c == 0x302E or c == 0x302F) and wd and wd > 0 then
+            local c, wd = curr.char or 0, curr.width or 0
+            if (c == 0x302E or c == 0x302F) and wd > 0 then
                 tone = curr
             elseif tone and not nobr_before[c] then
                 head = node.remove(head, tone)
