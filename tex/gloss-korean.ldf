@@ -293,6 +293,7 @@
         \newXeTeXintercharclass\XeTeXcharclassID
         \newXeTeXintercharclass\XeTeXcharclassOP
         \newXeTeXintercharclass\XeTeXcharclassCL
+        \global\let\XeTeXcharclassCJ\XeTeXcharclassID
         \global\let\XeTeXcharclassEX\XeTeXcharclassCL
         \global\let\XeTeXcharclassIS\XeTeXcharclassCL
         \global\let\XeTeXcharclassNS\XeTeXcharclassCL
@@ -485,41 +486,43 @@
 \@tmpa "FE13=\XeTeXcharclassID % ︓ PRESENTATION FORM FOR VERTICAL COLON
 \@tmpa "FE14=\XeTeXcharclassID % ︔ PRESENTATION FORM FOR VERTICAL SEMICOLON
 % CJ
-\@tmpa "3041=\XeTeXcharclassID % ぁ HIRAGANA LETTER SMALL A
-\@tmpa "3043=\XeTeXcharclassID % ぃ HIRAGANA LETTER SMALL I
-\@tmpa "3045=\XeTeXcharclassID % ぅ HIRAGANA LETTER SMALL U
-\@tmpa "3047=\XeTeXcharclassID % ぇ HIRAGANA LETTER SMALL E
-\@tmpa "3049=\XeTeXcharclassID % ぉ HIRAGANA LETTER SMALL O
-\@tmpa "3063=\XeTeXcharclassID % っ HIRAGANA LETTER SMALL TU
-\@tmpa "3083=\XeTeXcharclassID % ゃ HIRAGANA LETTER SMALL YA
-\@tmpa "3085=\XeTeXcharclassID % ゅ HIRAGANA LETTER SMALL YU
-\@tmpa "3087=\XeTeXcharclassID % ょ HIRAGANA LETTER SMALL YO
-\@tmpa "308E=\XeTeXcharclassID % ゎ HIRAGANA LETTER SMALL WA
-\@tmpa "3095=\XeTeXcharclassID % ゕ HIRAGANA LETTER SMALL KA
-\@tmpa "3096=\XeTeXcharclassID % ゖ HIRAGANA LETTER SMALL KE
-\@tmpa "30A1=\XeTeXcharclassID % ァ KATAKANA LETTER SMALL A
-\@tmpa "30A3=\XeTeXcharclassID % ィ KATAKANA LETTER SMALL I
-\@tmpa "30A5=\XeTeXcharclassID % ゥ KATAKANA LETTER SMALL U
-\@tmpa "30A7=\XeTeXcharclassID % ェ KATAKANA LETTER SMALL E
-\@tmpa "30A9=\XeTeXcharclassID % ォ KATAKANA LETTER SMALL O
-\@tmpa "30C3=\XeTeXcharclassID % ッ KATAKANA LETTER SMALL TU
-\@tmpa "30E3=\XeTeXcharclassID % ャ KATAKANA LETTER SMALL YA
-\@tmpa "30E5=\XeTeXcharclassID % ュ KATAKANA LETTER SMALL YU
-\@tmpa "30E7=\XeTeXcharclassID % ョ KATAKANA LETTER SMALL YO
-\@tmpa "30EE=\XeTeXcharclassID % ヮ KATAKANA LETTER SMALL WA
-\@tmpa "30F5=\XeTeXcharclassID % ヵ KATAKANA LETTER SMALL KA
-\@tmpa "30F6=\XeTeXcharclassID % ヶ KATAKANA LETTER SMALL KE
-\@tmpa "30FC=\XeTeXcharclassID % ー KATAKANA-HIRAGANA PROLONGED SOUND MARK
-\count@"31F0 \loop
-    \expandafter\@tmpa\the\count@=\XeTeXcharclassID
-    \ifnum\count@<"31FF
-    \advance\count@\@ne
-    \repeat
-\count@"FF67 \loop
-    \expandafter\@tmpa\the\count@=\XeTeXcharclassID
-    \ifnum\count@<"FF70
-    \advance\count@\@ne
-    \repeat
+\ifnum\the\XeTeXcharclass"3041=\z@
+    \@tmpa "3041=\XeTeXcharclassID % ぁ HIRAGANA LETTER SMALL A
+    \@tmpa "3043=\XeTeXcharclassID % ぃ HIRAGANA LETTER SMALL I
+    \@tmpa "3045=\XeTeXcharclassID % ぅ HIRAGANA LETTER SMALL U
+    \@tmpa "3047=\XeTeXcharclassID % ぇ HIRAGANA LETTER SMALL E
+    \@tmpa "3049=\XeTeXcharclassID % ぉ HIRAGANA LETTER SMALL O
+    \@tmpa "3063=\XeTeXcharclassID % っ HIRAGANA LETTER SMALL TU
+    \@tmpa "3083=\XeTeXcharclassID % ゃ HIRAGANA LETTER SMALL YA
+    \@tmpa "3085=\XeTeXcharclassID % ゅ HIRAGANA LETTER SMALL YU
+    \@tmpa "3087=\XeTeXcharclassID % ょ HIRAGANA LETTER SMALL YO
+    \@tmpa "308E=\XeTeXcharclassID % ゎ HIRAGANA LETTER SMALL WA
+    \@tmpa "3095=\XeTeXcharclassID % ゕ HIRAGANA LETTER SMALL KA
+    \@tmpa "3096=\XeTeXcharclassID % ゖ HIRAGANA LETTER SMALL KE
+    \@tmpa "30A1=\XeTeXcharclassID % ァ KATAKANA LETTER SMALL A
+    \@tmpa "30A3=\XeTeXcharclassID % ィ KATAKANA LETTER SMALL I
+    \@tmpa "30A5=\XeTeXcharclassID % ゥ KATAKANA LETTER SMALL U
+    \@tmpa "30A7=\XeTeXcharclassID % ェ KATAKANA LETTER SMALL E
+    \@tmpa "30A9=\XeTeXcharclassID % ォ KATAKANA LETTER SMALL O
+    \@tmpa "30C3=\XeTeXcharclassID % ッ KATAKANA LETTER SMALL TU
+    \@tmpa "30E3=\XeTeXcharclassID % ャ KATAKANA LETTER SMALL YA
+    \@tmpa "30E5=\XeTeXcharclassID % ュ KATAKANA LETTER SMALL YU
+    \@tmpa "30E7=\XeTeXcharclassID % ョ KATAKANA LETTER SMALL YO
+    \@tmpa "30EE=\XeTeXcharclassID % ヮ KATAKANA LETTER SMALL WA
+    \@tmpa "30F5=\XeTeXcharclassID % ヵ KATAKANA LETTER SMALL KA
+    \@tmpa "30F6=\XeTeXcharclassID % ヶ KATAKANA LETTER SMALL KE
+    \@tmpa "30FC=\XeTeXcharclassID % ー KATAKANA-HIRAGANA PROLONGED SOUND MARK
+    \count@"31F0 \loop
+        \expandafter\@tmpa\the\count@=\XeTeXcharclassID
+        \ifnum\count@<"31FF
+        \advance\count@\@ne
+        \repeat
+    \count@"FF67 \loop
+        \expandafter\@tmpa\the\count@=\XeTeXcharclassID
+        \ifnum\count@<"FF70
+        \advance\count@\@ne
+        \repeat
+\fi
 %
 \@tmpa "28=\XPGKOcharclassAO % ( LEFT PARENTHESIS
 \@tmpa "5B=\XPGKOcharclassAO % [ LEFT SQUARE BRACKET
@@ -543,7 +546,6 @@
 %
 \@tmpa "2019=\XeTeXcharclassCL % ’ RIGHT SINGLE QUOTATION MARK
 \@tmpa "201D=\XeTeXcharclassCL % ” RIGHT DOUBLE QUOTATION MARK
-\@tmpa "FE10=\XeTeXcharclassCL % ︐ PRESENTATION FORM FOR VERTICAL COMMA
 % NS
 \@tmpa "00B7=\XPGKOcharclassMD % · MIDDLE DOT
 \@tmpa "30FB=\XPGKOcharclassMD % ・ KATAKANA MIDDLE DOT
