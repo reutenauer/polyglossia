@@ -186,9 +186,16 @@
 \protected\def\으{\xpg@make@josa \empty 으}
 \protected\def\로{\으 로}
 \protected\def\라{\xpg@make@josa 라{이라}}
+\def\xpg@make@josa@II{\xpg@make@josa\relax 이}
 \def\xpg@make@josa@I{%
-    \ifx\@let@token 라%
-        \expandafter\xpg@make@josa\expandafter\relax\expandafter 이%
+    \ifcat\@let@token\xpg@catcode@letter
+        \expandafter\expandafter\expandafter\count@\expandafter
+        \xpg@letter@to@num\meaning\@let@token\relax
+        \ifnum 0\ifnum\count@>"ABFF \ifnum\count@<"D7A4 1\fi\fi>\z@
+            \expandafter\expandafter\expandafter\xpg@make@josa@II
+        \else
+            \expandafter\expandafter\expandafter\가
+        \fi
     \else
         \expandafter\가
     \fi
@@ -370,7 +377,7 @@
         \advance\count@\@ne
         \repeat
     %
-    \XeTeXinterchartoks\XPGKOcharclassAA\XeTeXcharclassID{\XPGKOstartID}%
+    \XeTeXinterchartoks\XPGKOcharclassAA\XeTeXcharclassID{\XPGKOstopAA\XPGKOstartID}%
     \XeTeXinterchartoks\XPGKOcharclassAA\XeTeXcharclassOP{\XPGKOstopAA\XPGKOstartOP}%
     \XeTeXinterchartoks\XPGKOcharclassAA\XeTeXcharclassCL{\XPGKOstopAA\XPGKOstartCL}%
     \XeTeXinterchartoks\XPGKOcharclassAA\XPGKOcharclassMD{\XPGKOstopAA\XPGKOstartMD}%
@@ -383,7 +390,7 @@
     \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassMD{\XPGKOstopID\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
     \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassFS{\XPGKOstopID\XPGKOstartFS}%
     \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassAO{\XPGKOstopID\XPGKOlatincjk}%
-    \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassAA{\XPGKOstartAA}%
+    \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassAA{\XPGKOstopID\XPGKOstartAA}%
     %
     \XeTeXinterchartoks\XeTeXcharclassOP\XeTeXcharclassID{\XPGKOstopOP\XPGKOstartID}%
     \XeTeXinterchartoks\XeTeXcharclassOP\XeTeXcharclassOP{\XPGKOstopOP\XPGKOstartOP}%
@@ -486,7 +493,7 @@
 \@tmpa "FE13=\XeTeXcharclassID % ︓ PRESENTATION FORM FOR VERTICAL COLON
 \@tmpa "FE14=\XeTeXcharclassID % ︔ PRESENTATION FORM FOR VERTICAL SEMICOLON
 % CJ
-\ifnum\the\XeTeXcharclass"3041=\z@
+\ifnum\the\XeTeXcharclass"3041=\XeTeXcharclassID \else
     \@tmpa "3041=\XeTeXcharclassID % ぁ HIRAGANA LETTER SMALL A
     \@tmpa "3043=\XeTeXcharclassID % ぃ HIRAGANA LETTER SMALL I
     \@tmpa "3045=\XeTeXcharclassID % ぅ HIRAGANA LETTER SMALL U
@@ -632,8 +639,20 @@ local nobr_after = {
     [0x3018] = 1, % 〘 LEFT WHITE TORTOISE SHELL BRACKET
     [0x301A] = 1, % 〚 LEFT WHITE SQUARE BRACKET
     [0x301D] = 1, % 〝 REVERSED DOUBLE PRIME QUOTATION MARK
+    [0xFE17] = 1, % ︗ PRESENTATION FORM FOR VERTICAL LEFT WHITE LENTICULAR BRACKET
+    [0xFE35] = 1, % ︵ PRESENTATION FORM FOR VERTICAL LEFT PARENTHESIS
+    [0xFE37] = 1, % ︷ PRESENTATION FORM FOR VERTICAL LEFT CURLY BRACKET
+    [0xFE39] = 1, % ︹ PRESENTATION FORM FOR VERTICAL LEFT TORTOISE SHELL BRACKET
+    [0xFE3B] = 1, % ︻ PRESENTATION FORM FOR VERTICAL LEFT BLACK LENTICULAR BRACKET
+    [0xFE3D] = 1, % ︽ PRESENTATION FORM FOR VERTICAL LEFT DOUBLE ANGLE BRACKET
+    [0xFE3F] = 1, % ︿ PRESENTATION FORM FOR VERTICAL LEFT ANGLE BRACKET
+    [0xFE41] = 1, % ﹁ PRESENTATION FORM FOR VERTICAL LEFT CORNER BRACKET
+    [0xFE43] = 1, % ﹃ PRESENTATION FORM FOR VERTICAL LEFT WHITE CORNER BRACKET
+    [0xFE47] = 1, % ﹇ PRESENTATION FORM FOR VERTICAL LEFT SQUARE BRACKET
+    [0xFE59] = 1, % ﹙ SMALL LEFT PARENTHESIS
+    [0xFE5B] = 1, % ﹛ SMALL LEFT CURLY BRACKET
+    [0xFE5D] = 1, % ﹝ SMALL LEFT TORTOISE SHELL BRACKET
     [0xFF08] = 1, % （ FULLWIDTH LEFT PARENTHESIS
-    [0xFF1C] = 1, % ＜ FULLWIDTH LESS-THAN SIGN
     [0xFF3B] = 1, % ［ FULLWIDTH LEFT SQUARE BRACKET
     [0xFF5B] = 1, % ｛ FULLWIDTH LEFT CURLY BRACKET
     [0xFF5F] = 1, % ｟ FULLWIDTH LEFT WHITE PARENTHESIS
@@ -719,13 +738,27 @@ local nobr_before = setmetatable({
     [0x30FC] = 1, % ー KATAKANA-HIRAGANA PROLONGED SOUND MARK
     [0x30FD] = 1, % ヽ KATAKANA ITERATION MARK
     [0x30FE] = 1, % ヾ KATAKANA VOICED ITERATION MARK
+    [0xFE30] = 1, % ︰ PRESENTATION FORM FOR VERTICAL TWO DOT LEADER
+    [0xFE31] = 1, % ︱ PRESENTATION FORM FOR VERTICAL EM DASH
+    [0xFE32] = 1, % ︲ PRESENTATION FORM FOR VERTICAL EN DASH
+    [0xFE36] = 1, % ︶ PRESENTATION FORM FOR VERTICAL RIGHT PARENTHESIS
+    [0xFE38] = 1, % ︸ PRESENTATION FORM FOR VERTICAL RIGHT CURLY BRACKET
+    [0xFE3A] = 1, % ︺ PRESENTATION FORM FOR VERTICAL RIGHT TORTOISE SHELL BRACKET
+    [0xFE3C] = 1, % ︼ PRESENTATION FORM FOR VERTICAL RIGHT BLACK LENTICULAR BRACKET
+    [0xFE3E] = 1, % ︾ PRESENTATION FORM FOR VERTICAL RIGHT DOUBLE ANGLE BRACKET
+    [0xFE40] = 1, % ﹀ PRESENTATION FORM FOR VERTICAL RIGHT ANGLE BRACKET
+    [0xFE42] = 1, % ﹂ PRESENTATION FORM FOR VERTICAL RIGHT CORNER BRACKET
+    [0xFE44] = 1, % ﹄ PRESENTATION FORM FOR VERTICAL RIGHT WHITE CORNER BRACKET
+    [0xFE48] = 1, % ﹈ PRESENTATION FORM FOR VERTICAL RIGHT SQUARE BRACKET
+    [0xFE5A] = 1, % ﹚ SMALL RIGHT PARENTHESIS
+    [0xFE5C] = 1, % ﹜ SMALL RIGHT CURLY BRACKET
+    [0xFE5E] = 1, % ﹞ SMALL RIGHT TORTOISE SHELL BRACKET
     [0xFF01] = 1, % ！ FULLWIDTH EXCLAMATION MARK
     [0xFF09] = 1, % ） FULLWIDTH RIGHT PARENTHESIS
     [0xFF0C] = 1, % ， FULLWIDTH COMMA
     [0xFF0E] = 1, % ． FULLWIDTH FULL STOP
     [0xFF1A] = 1, % ： FULLWIDTH COLON
     [0xFF1B] = 1, % ； FULLWIDTH SEMICOLON
-    [0xFF1E] = 1, % ＞ FULLWIDTH GREATER-THAN SIGN
     [0xFF1F] = 1, % ？ FULLWIDTH QUESTION MARK
     [0xFF3D] = 1, % ］ FULLWIDTH RIGHT SQUARE BRACKET
     [0xFF5D] = 1, % ｝ FULLWIDTH RIGHT CURLY BRACKET
@@ -738,21 +771,26 @@ local nobr_before = setmetatable({
     [0xFF9F] = 1, % ﾟ HALFWIDTH KATAKANA SEMI-VOICED SOUND MARK
 }, { __index = function(_,c)
         if c >= 0x1160  and c <= 0x11FF  then return 2 end
-        if c >= 0xD7B0  and c <= 0xD7FB  then return 2 end
+        if c >= 0xD7B0  and c <= 0xD7FF  then return 2 end
         if c >= 0x302A  and c <= 0x302F  then return 1 end
         if c >= 0x31F0  and c <= 0x31FF  then return 3 end
         if c >= 0xFF67  and c <= 0xFF70  then return 3 end
         if c >= 0xFE00  and c <= 0xFE0F  then return 1 end
+        if c >= 0xFE10  and c <= 0xFE19 and not (c == 0xFE17) then return 1 end
+        if c >= 0xFE50  and c <= 0xFE58  then return 1 end
         if c >= 0xE0100 and c <= 0xE01EF then return 1 end
     end
 })
 local function is_cjk (c)
-    return  (c >= 0xAC00  and c <= 0xD7A3)
-    or      (c >= 0x1100  and c <= 0x115F)
-    or      (c >= 0xA960  and c <= 0xA97C)
+    return  (c >= 0xAC00  and c <= 0xD7FF)
+    or      (c >= 0x1100  and c <= 0x11FF)
+    or      (c >= 0xA960  and c <= 0xA97F)
     or      (c >= 0x2E80  and c <= 0x9FFF)
     or      (c >= 0xF900  and c <= 0xFAFF)
+    or      (c >= 0xFE10  and c <= 0xFE1F)
+    or      (c >= 0xFE30  and c <= 0xFE6F)
     or      (c >= 0xFF00  and c <= 0xFFEF)
+    or      (c >= 0x1F100 and c <= 0x1F2FF)
     or      (c >= 0x20000 and c <= 0x2FA1F)
     or      (nobr_after[c]  and c > 0xFF)
     or      (nobr_before[c] and c > 0xFF)
@@ -761,16 +799,23 @@ local charclass = setmetatable({
     [0x2018] = 1, [0x201C] = 1, [0x2329] = 1, [0x3008] = 1,
     [0x300A] = 1, [0x300C] = 1, [0x300E] = 1, [0x3010] = 1,
     [0x3014] = 1, [0x3016] = 1, [0x3018] = 1, [0x301A] = 1,
-    [0x301D] = 1, [0xFF08] = 1, [0xFF3B] = 1, [0xFF5B] = 1,
-    [0xFF5F] = 1, [0xFF62] = 1, [0x2019] = 2, [0x201D] = 2,
-    [0x232A] = 2, [0x3001] = 2, [0x3009] = 2, [0x300B] = 2,
-    [0x300D] = 2, [0x300F] = 2, [0x3011] = 2, [0x3015] = 2,
-    [0x3017] = 2, [0x3019] = 2, [0x301B] = 2, [0x301E] = 2,
-    [0x301F] = 2, [0xFF09] = 2, [0xFF0C] = 2, [0xFF3D] = 2,
-    [0xFF5D] = 2, [0xFF60] = 2, [0xFF63] = 2, [0xFF64] = 2,
-    [0x00B7] = 3, [0x30FB] = 3, [0xFF1A] = 3, [0xFF1B] = 3,
-    [0xFF65] = 3, [0x3002] = 4, [0xFF0E] = 4, [0xFF61] = 4,
-    [0x2015] = 5, [0x2025] = 5, [0x2026] = 5, [0xFF01] = 6,
+    [0x301D] = 1, [0xFE17] = 1, [0xFE35] = 1, [0xFE37] = 1,
+    [0xFE39] = 1, [0xFE3B] = 1, [0xFE3D] = 1, [0xFE3F] = 1,
+    [0xFE41] = 1, [0xFE43] = 1, [0xFE47] = 1, [0xFF08] = 1,
+    [0xFF3B] = 1, [0xFF5B] = 1, [0xFF5F] = 1, [0xFF62] = 1,
+    [0x2019] = 2, [0x201D] = 2, [0x232A] = 2, [0x3001] = 2,
+    [0x3009] = 2, [0x300B] = 2, [0x300D] = 2, [0x300F] = 2,
+    [0x3011] = 2, [0x3015] = 2, [0x3017] = 2, [0x3019] = 2,
+    [0x301B] = 2, [0x301E] = 2, [0x301F] = 2, [0xFE10] = 2,
+    [0xFE11] = 2, [0xFE18] = 2, [0xFE36] = 2, [0xFE38] = 2,
+    [0xFE3A] = 2, [0xFE3C] = 2, [0xFE3E] = 2, [0xFE40] = 2,
+    [0xFE42] = 2, [0xFE44] = 2, [0xFE48] = 2, [0xFF09] = 2,
+    [0xFF0C] = 2, [0xFF3D] = 2, [0xFF5D] = 2, [0xFF60] = 2,
+    [0xFF63] = 2, [0xFF64] = 2, [0x00B7] = 3, [0x30FB] = 3,
+    [0xFF1A] = 3, [0xFF1B] = 3, [0xFF65] = 3, [0x3002] = 4,
+    [0xFE12] = 4, [0xFF0E] = 4, [0xFF61] = 4, [0x2015] = 5,
+    [0x2025] = 5, [0x2026] = 5, [0xFE19] = 5, [0xFE30] = 5,
+    [0xFE31] = 5, [0xFE15] = 6, [0xFE16] = 6, [0xFF01] = 6,
     [0xFF1F] = 6,
 }, { __index = function() return 0 end })
 local intercharclass = { [0] =
@@ -997,7 +1042,7 @@ local function auto_josa (head)
                 end
                 if cc == 0xC774 then
                     local n = curr.next
-                    if n and n.id == glyph_id and n.char == 0xB77C then
+                    if n and n.char and n.char >= 0xAC00 and n.char <= 0xD7A3 then
                     else
                         cc = 0xAC00
                     end
