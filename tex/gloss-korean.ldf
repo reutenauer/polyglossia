@@ -867,6 +867,7 @@ local function glyph_to_box (head, curr, class)
         local hss2 = node.copy(hss)
         h, hss.next, g.prev, g.next, hss2.prev = hss, g, hss, hss2, g
     end
+    h = nodes.simple_font_handler(h)
     local box = node.hpack(h, size, "exactly")
     head, curr = node.insert_before(head, curr, box)
     return head, curr
