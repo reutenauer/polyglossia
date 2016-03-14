@@ -377,10 +377,10 @@
         \advance\count@\@ne
         \repeat
     %
-    \XeTeXinterchartoks\XPGKOcharclassAA\XeTeXcharclassID{\XPGKOstopAA\XPGKOstartID}%
-    \XeTeXinterchartoks\XPGKOcharclassAA\XeTeXcharclassOP{\XPGKOstopAA\XPGKOstartOP}%
+    \XeTeXinterchartoks\XPGKOcharclassAA\XeTeXcharclassID{\XPGKOstopAA\XPGKOlatincjk\XPGKOstartID}%
+    \XeTeXinterchartoks\XPGKOcharclassAA\XeTeXcharclassOP{\XPGKOstopAA\XPGKOhalfhalf\XPGKOstartOP}%
     \XeTeXinterchartoks\XPGKOcharclassAA\XeTeXcharclassCL{\XPGKOstopAA\XPGKOstartCL}%
-    \XeTeXinterchartoks\XPGKOcharclassAA\XPGKOcharclassMD{\XPGKOstopAA\XPGKOstartMD}%
+    \XeTeXinterchartoks\XPGKOcharclassAA\XPGKOcharclassMD{\XPGKOstopAA\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
     \XeTeXinterchartoks\XPGKOcharclassAA\XPGKOcharclassFS{\XPGKOstopAA\XPGKOstartFS}%
     \XeTeXinterchartoks\XPGKOcharclassAA\XPGKOcharclassAA{\XPGKOstartAA}%
     %
@@ -390,7 +390,7 @@
     \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassMD{\XPGKOstopID\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
     \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassFS{\XPGKOstopID\XPGKOstartFS}%
     \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassAO{\XPGKOstopID\XPGKOlatincjk}%
-    \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassAA{\XPGKOstopID\XPGKOstartAA}%
+    \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassAA{\XPGKOstopID\XPGKOlatincjk\XPGKOstartAA}%
     %
     \XeTeXinterchartoks\XeTeXcharclassOP\XeTeXcharclassID{\XPGKOstopOP\XPGKOstartID}%
     \XeTeXinterchartoks\XeTeXcharclassOP\XeTeXcharclassOP{\XPGKOstopOP\XPGKOstartOP}%
@@ -408,7 +408,7 @@
     \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassEX{\XPGKOstopCL\XPGKOnobreak\XPGKOhalfhalf}%
     \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassAO{\XPGKOstopCL\XPGKOhalfhalf}%
     \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassAC{\XPGKOstopCL\XPGKOnobreak\XPGKOhalfhalf}%
-    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassAA{\XPGKOstopCL\XPGKOstartAA}%
+    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassAA{\XPGKOstopCL\XPGKOhalfhalf\XPGKOstartAA}%
     %
     \XeTeXinterchartoks\XPGKOcharclassMD\XeTeXcharclassID{\XPGKOstopMD\XPGKOquarterquarter\XPGKOstartID}%
     \XeTeXinterchartoks\XPGKOcharclassMD\XeTeXcharclassOP{\XPGKOstopMD\XPGKOquarterquarter\XPGKOstartOP}%
@@ -419,7 +419,7 @@
     \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassEX{\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter}%
     \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassAO{\XPGKOstopMD\XPGKOquarterquarter}%
     \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassAC{\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter}%
-    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassAA{\XPGKOstopMD\XPGKOstartAA}%
+    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassAA{\XPGKOstopMD\XPGKOquarterquarter\XPGKOstartAA}%
     %
     \XeTeXinterchartoks\XPGKOcharclassFS\XeTeXcharclassID{\XPGKOstopFS\XPGKOhalfzero\XPGKOstartID}%
     \XeTeXinterchartoks\XPGKOcharclassFS\XeTeXcharclassOP{\XPGKOstopFS\XPGKOhalfzero\XPGKOstartOP}%
@@ -430,7 +430,7 @@
     \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassEX{\XPGKOstopFS\XPGKOnobreak\XPGKOhalfzero}%
     \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassAO{\XPGKOstopFS\XPGKOhalfzero}%
     \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassAC{\XPGKOstopFS\XPGKOnobreak\XPGKOhalfzero}%
-    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassAA{\XPGKOstopFS\XPGKOstartAA}%
+    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassAA{\XPGKOstopFS\XPGKOhalfzero\XPGKOstartAA}%
     %
     \XeTeXinterchartoks\XPGKOcharclassLD\XeTeXcharclassOP{\XPGKOhalfhalf\XPGKOstartOP}%
     \XeTeXinterchartoks\XPGKOcharclassLD\XPGKOcharclassMD{\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
@@ -440,6 +440,7 @@
     \XeTeXinterchartoks\XPGKOcharclassEX\XPGKOcharclassMD{\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
     \XeTeXinterchartoks\XPGKOcharclassEX\XPGKOcharclassAO{\XPGKOhalfhalf}%
     \XeTeXinterchartoks\XPGKOcharclassEX\XPGKOcharclassAC{\XPGKOnobreak\XPGKOhalfhalf}%
+    \XeTeXinterchartoks\XPGKOcharclassEX\XPGKOcharclassAA{\XPGKOhalfhalf\XPGKOstartAA}%
     %
     \XeTeXinterchartoks\XPGKOcharclassAO\XeTeXcharclassOP{\XPGKOnobreak\XPGKOhalfhalf\XPGKOstartOP}%
     \XeTeXinterchartoks\XPGKOcharclassAO\XPGKOcharclassMD{\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
@@ -611,21 +612,16 @@ local hbox_id  = node.id("hlist")
 local vbox_id  = node.id("vlist")
 local glue_id  = node.id("glue")
 local penalty_id = node.id("penalty")
+local disc_id  = node.id("disc")
 local attr_korean = luatexbase.attributes["xpg@attr@korean"]
 local attr_josa   = luatexbase.attributes["xpg@attr@autojosa"]
 local nobr_after = {
     [0x28] = 1, % ( LEFT PARENTHESIS
-    [0x2D] = 1, % - HYPHEN-MINUS
-    [0x2F] = 1, % / SOLIDUS
-    [0x3A] = 1, % : COLON
     [0x3C] = 1, % < LESS-THAN SIGN
     [0x5B] = 1, % [ LEFT SQUARE BRACKET
-    [0x5C] = 1, % \ REVERSE SOLIDUS
     [0x60] = 1, % ` GRAVE ACCENT
     [0x7B] = 1, % { LEFT CURLY BRACKET
-    [0x7E] = 1, % ~ TILDE
     [0xAB] = 1, % « LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
-    [0x2013] = 1, % – EN DASH
     [0x2018] = 1, % ‘ LEFT SINGLE QUOTATION MARK
     [0x201C] = 1, % “ LEFT DOUBLE QUOTATION MARK
     [0x2329] = 1, % 〈 LEFT-POINTING ANGLE BRACKET
@@ -664,21 +660,21 @@ local nobr_before = setmetatable({
     [0x27] = 1, % ' APOSTROPHE
     [0x29] = 1, % ) RIGHT PARENTHESIS
     [0x2C] = 1, % , COMMA
-    [0x2D] = 1, % - HYPHEN-MINUS
+    [0x2D] = 0, % - HYPHEN-MINUS
     [0x2E] = 1, % . FULL STOP
-    [0x2F] = 1, % / SOLIDUS
-    [0x3A] = 1, % : COLON
+    [0x2F] = 0, % / SOLIDUS
+    [0x3A] = 0, % : COLON
     [0x3B] = 1, % ; SEMICOLON
     [0x3E] = 1, % > GREATER-THAN SIGN
     [0x3F] = 1, % ? QUESTION MARK
-    [0x5C] = 1, % \ REVERSE SOLIDUS
+    [0x5C] = 0, % \ REVERSE SOLIDUS
     [0x5D] = 1, % ] RIGHT SQUARE BRACKET
     [0x7D] = 1, % } RIGHT CURLY BRACKET
-    [0x7E] = 1, % ~ TILDE
+    [0x7E] = 0, % ~ TILDE
     [0xB7] = 1, % · MIDDLE DOT
     [0xBB] = 1, % » RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
-    [0x2013] = 1, % – EN DASH
-    [0x2014] = 1, % — EM DASH
+    [0x2013] = 0, % – EN DASH
+    [0x2014] = 0, % — EM DASH
     [0x2015] = 1, % ― HORIZONTAL BAR
     [0x2019] = 1, % ’ RIGHT SINGLE QUOTATION MARK
     [0x201D] = 1, % ” RIGHT DOUBLE QUOTATION MARK
@@ -792,8 +788,8 @@ local function is_cjk (c)
     or      (c >= 0xFF00  and c <= 0xFFEF)
     or      (c >= 0x1F100 and c <= 0x1F2FF)
     or      (c >= 0x20000 and c <= 0x2FA1F)
-    or      (nobr_after[c]  and c > 0xFF)
-    or      (nobr_before[c] and c > 0xFF)
+    or      (nobr_after[c]  and c > 0x2014)
+    or      (nobr_before[c] and c > 0x2014)
 end
 local charclass = setmetatable({
     [0x2018] = 1, [0x201C] = 1, [0x2329] = 1, [0x3008] = 1,
@@ -932,11 +928,16 @@ local function korean_break (head, lb)
             local var = node.has_attribute(curr, attr_korean)
             if var then
                 local c, f = curr.char or 0, curr.font or 0
-                local cc = charclass[c]
+                local cc, cjkc = charclass[c], is_cjk(c)
                 if var > 0 and cc > 0 and cc < 5 then
                     head, curr = glyph_to_box(head, curr, cc)
                 end
                 local next = curr.next
+                if cjkc and next and next.id == disc_id and next.subtype == 3 then
+                    node.remove(head,next)
+                    node.free(next)
+                    next = curr.next
+                end
                 if next and next.id == glyph_id then
                     local n = next.char or 0
                     local nc = charclass[n]
@@ -944,9 +945,9 @@ local function korean_break (head, lb)
                     if var > 0 and intercharclass[cc][nc] then
                         head, curr = insert_cjk_penalty_glue(head, curr, f, var, cc, nc, nobr)
                     elseif not nobr then
-                        local cjkc, cjkn = is_cjk(c), is_cjk(n)
+                        local cjkn = is_cjk(n)
                         if cjkc or cjkn then
-                            if var > 0 and not (cjkc and cjkn) then
+                            if var > 0 and not (cjkc and cjkn) and not (nobr_before[c] == 0) then
                                 head, curr = insert_penalty_glue(head, curr, f, var, true)
                             elseif lb then
                                 head, curr = insert_penalty_glue(head, curr, f, var)
