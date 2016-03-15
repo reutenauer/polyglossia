@@ -933,11 +933,6 @@ local function korean_break (head, lb)
                     head, curr = glyph_to_box(head, curr, cc)
                 end
                 local next = curr.next
-                if cjkc and next and next.id == disc_id and next.subtype == 3 then
-                    node.remove(head,next)
-                    node.free(next)
-                    next = curr.next
-                end
                 if next and next.id == glyph_id then
                     local n = next.char or 0
                     local nc = charclass[n]
@@ -1101,6 +1096,24 @@ else
         luatexbase.add_to_callback(name, func, desc, 1)
     end
 end
+prepend_to_callback ("hyphenate",
+    function(head)
+        local in_callback = luatexbase.in_callback or luatexbase.priority_in_callback
+        if in_callback("hyphenate", "polyglossia.disable_hyphenation") then
+            return false
+        end
+        local curr = head
+        while curr do
+            if curr.id == glyph_id and node.has_attribute(curr, attr_korean) and is_cjk(curr.char or 0) then
+                if curr.subtype == 1 then
+                    curr.subtype = 0
+                end
+            end
+            curr = curr.next
+        end
+        lang.hyphenate(head)
+    end,
+    "polyglossia.lang_korean")
 prepend_to_callback ("pre_linebreak_filter",
     function(head)
         head = auto_josa(head)
