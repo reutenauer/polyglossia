@@ -185,7 +185,7 @@ That is almost guaranteed to cause problems.}
     \xpg@ifdefined{#1}{}{%
       \ifstrequal{#1}{##1}{}%
       {\xpg@ifdefined{##1}%
-        {\csletcs{l@#1}{l@##1}\xpg@set@language@luatex@iv{##1}\listbreak}%
+        {\expandafter\ifx\csname l@##1\endcsname\l@nohyphenation\else\csletcs{l@#1}{l@##1}\xpg@set@language@luatex@iv{##1}\listbreak\fi}%
         {}%
       }%
     }%
@@ -237,10 +237,10 @@ That is almost guaranteed to cause problems.}
     % if l@#1 does not yet exist,
     % we assign it to nohyphenation
     % we do this here in case the hyphennames key was omitted
-    % \xpg@ifdefined{#1}{}%
-    \xpg@ifdefined{#1}{\message{^^JDEFINED!^^J}\expandafter\show\csname l@#1\endcsname}%
-      % {\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
-      {^^J\message{NOT~ DEFINED!^^J}\expandafter\showthe\csname xpg@langname@#1\endcsname\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
+    \xpg@ifdefined{#1}{}%
+    % \xpg@ifdefined{#1}{\message{^^JDEFINED!^^J}\expandafter\show\csname l@#1\endcsname}%
+      {\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
+      % {^^J\message{NOT~ DEFINED!^^J}\expandafter\showthe\csname xpg@langname@#1\endcsname\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
        \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}%
     \csdef{#1@language}{%
       \ifbool{xpg@hyphenation@disabled}{%
@@ -790,7 +790,8 @@ That is almost guaranteed to cause problems.}
     \ifluatex
         \xpg@set@language@luatex@iv{#1}%
     \fi
-    \expandafter\ifx\csname l@#1\endcsname\relax#3\else#2\fi
+    \chardef\l@asturian"FF
+    \expandafter\ifx\csname l@#1\endcsname\l@nohyphenation#3\else#2\fi
 }%
 
 \newcommand\xpg@set@language@luatex@iv[1]{%
