@@ -190,16 +190,28 @@ That is almost guaranteed to cause problems.}
       }%
     }%
   }%
+  \message{FOO\space 1^^J}
   %define all keys:
   \xpg@define@keys{#1}%
+  \message{FOO\space 2^^J}
+  % \show\l@asturian
+  % \show#1
+  % \show#2
+  \def\@tmpa{#1}
+  \show\@tmpa
+  \def\@tmpb{#2}
+  \show\@tmpb
   \setkeys[xpg@setup]{#1}{#2}%
+  \message{FOO\space 3^^J}
   % here we do the fontsetup:
   \ifbool{#1@fontsetup}%
     {\xpg@fontsetup@auto{#1}}%
     {\xpg@info{Skipping~ automatic~ font~ setup~ for~ language~ #1}}%
   %% TODO? \toggletrue{#1@setup@done}%
   % reinit \do
+  \message{FOO\space 4^^J}
   \def\do##1{\setotherlanguage{##1}}%
+  \message{FOO\space 5^^J}
 }
 
 \def\xpg@first#1,#2{#1}
@@ -225,10 +237,10 @@ That is almost guaranteed to cause problems.}
     % if l@#1 does not yet exist,
     % we assign it to nohyphenation
     % we do this here in case the hyphennames key was omitted
-    \xpg@ifdefined{#1}{}%
-    % \xpg@ifdefined{#1}{\message{^^JDEFINED!^^J}\expandafter\show\csname l@#1\endcsname}%
-      {\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
-      % {^^J\message{NOT~ DEFINED!^^J}\expandafter\showthe\csname xpg@langname@#1\endcsname\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
+    % \xpg@ifdefined{#1}{}%
+    \xpg@ifdefined{#1}{\message{^^JDEFINED!^^J}\expandafter\show\csname l@#1\endcsname}%
+      % {\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
+      {^^J\message{NOT~ DEFINED!^^J}\expandafter\showthe\csname xpg@langname@#1\endcsname\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
        \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}%
     \csdef{#1@language}{%
       \ifbool{xpg@hyphenation@disabled}{%
@@ -240,6 +252,10 @@ That is almost guaranteed to cause problems.}
         \language=\csname l@#1\endcsname%
       }%
     }%
+    \showthe\l@asturian
+    \showthe\l@catalan
+    \showthe\l@spanish
+    \message{Exiting\space hyphennames^^J}
   }%
   \define@choicekey+[xpg@setup]{#1}{direction}[\val\nr]{LR,RL}[LR]%
     {\ifcase\nr\relax
