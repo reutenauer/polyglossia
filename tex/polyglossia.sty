@@ -182,11 +182,12 @@ That is almost guaranteed to cause problems.}
   \csgdef{xpg@langname@#1}{\xpg@uppercasefirst{#1}}%
   %needed for docsvlist with hyphennames key:
   \def\do##1{%
+    \message{TESTING\space ##1^^J}
     \xpg@ifdefined{#1}{}{%
       \ifstrequal{#1}{##1}{}%
       {\xpg@ifdefined{##1}%
-        {\expandafter\ifx\csname l@##1\endcsname\l@nohyphenation\else\csletcs{l@#1}{l@##1}\xpg@set@language@luatex@iv{##1}\listbreak\fi}%
-        {}%
+        {\expandafter\ifx\csname l@##1\endcsname\l@nohyphenation\else\csletcs{l@#1}{l@##1}\message{I’M\space WHERE\space I’M\space SUPPOSED\space TO\space BE\space arg=##1^^J}\xpg@set@language@luatex@iv{##1}\listbreak\fi}%
+        {\csdef{l@##1}{l@nohyphenation}}%
       }%
     }%
   }%
@@ -252,7 +253,7 @@ That is almost guaranteed to cause problems.}
         \language=\csname l@#1\endcsname%
       }%
     }%
-    \showthe\l@asturian
+    % \showthe\l@asturian
     \showthe\l@catalan
     \showthe\l@spanish
     \message{Exiting\space hyphennames^^J}
@@ -790,7 +791,7 @@ That is almost guaranteed to cause problems.}
     \ifluatex
         \xpg@set@language@luatex@iv{#1}%
     \fi
-    \chardef\l@asturian"FF
+    % \chardef\l@asturian"FF
     \expandafter\ifx\csname l@#1\endcsname\l@nohyphenation#3\else#2\fi
 }%
 
