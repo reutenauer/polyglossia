@@ -792,7 +792,7 @@ That is almost guaranteed to cause problems.}
         \xpg@set@language@luatex@iv{#1}%
     \fi
     % \chardef\l@asturian"FF
-    \expandafter\ifx\csname l@#1\endcsname\l@nohyphenation#3\else#2\fi
+    \expandafter\ifx\csname l@#1\endcsname\relax#3\else#2\fi
 }%
 
 \newcommand\xpg@set@language@luatex@iv[1]{%
