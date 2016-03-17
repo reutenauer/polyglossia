@@ -797,8 +797,8 @@ That is almost guaranteed to cause problems.}
     \def\@tmpa{#1}
     \show\@tmpa
     \expandafter\show\csname l@#1\endcsname
-    % \expandafter\ifx\csname l@#1\endcsname\relax#3\else#2\fi
-    #2%
+    \expandafter\ifx\csname l@#1\endcsname\relax#3\else#2\fi
+    % #2%
     \message{DONE^^J}%
     % #2
 }%
