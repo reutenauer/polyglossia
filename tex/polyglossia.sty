@@ -167,6 +167,7 @@ That is almost guaranteed to cause problems.}
 %% TODO: localnumber = <csname>
 %%       or even better localdigits = {0123456789} for fully automatic setup
 
+\newif\if@xpg@language@really@defined@
 \newcommand*\PolyglossiaSetup[2]{%
   %define booleans etoolbox style and set defaults
   %% TODO ? \providetoggle{#1@setup@done}%
@@ -183,13 +184,14 @@ That is almost guaranteed to cause problems.}
   %needed for docsvlist with hyphennames key:
   \def\do##1{%
     \message{TESTING\space ##1^^J}
-    \xpg@ifdefined{#1}{}{%
+    \xpg@check@ifdefined{#1}
+    \if@xpg@language@really@defined@\else
       \ifstrequal{#1}{##1}{}%
       {\xpg@ifdefined{##1}%
         {\expandafter\ifx\csname l@##1\endcsname\l@nohyphenation\else\csletcs{l@#1}{l@##1}\message{I’M\space WHERE\space I’M\space SUPPOSED\space TO\space BE\space arg=##1^^J}\xpg@set@language@luatex@iv{##1}\fi}%
         {\csdef{l@##1}{l@nohyphenation}}%
       }%
-    }%
+    \fi
   }%
   \message{FOO\space 1^^J}
   %define all keys:
@@ -789,6 +791,14 @@ That is almost guaranteed to cause problems.}
     }
 }
 
+\newcommand\xpg@check@ifdefined[1]{%
+    \expandafter\ifx\csname l@#1\endcsname\relax\@xpg@language@really@defined@false\else
+        \ifx\csname l@#1\endcsname\l@nohyphenation\@xpg@language@really@defined@false\else
+            \@xpg@language@really@defined@true
+        \fi
+    \fi
+}
+
 \newcommand\xpg@ifdefined[3]{%
     % \expandafter\showthe\csname l@#1\endcsname
     \ifluatex
@@ -798,7 +808,9 @@ That is almost guaranteed to cause problems.}
     % \def\@tmpa{#1}
     % \show\@tmpa
     % \expandafter\show\csname l@#1\endcsname
-    \expandafter\ifx\csname l@#1\endcsname\relax#3\else#2\fi
+    % \expandafter\ifx\csname l@#1\endcsname\relax#3\else#2\fi
+    \xpg@check@ifdefined{#1}
+    \if@xpg@language@really@defined@#2\else#3\fi
     % \let\l@asturian\l@catalan
     % \ifcsdef{l@#1}{#2}{#3}
     % #2%
