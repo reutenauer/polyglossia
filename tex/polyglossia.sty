@@ -240,8 +240,8 @@ That is almost guaranteed to cause problems.}
     % if l@#1 does not yet exist,
     % we assign it to nohyphenation
     % we do this here in case the hyphennames key was omitted
-    % \xpg@ifdefined{#1}{}%
-    \xpg@ifdefined{#1}{\message{^^JDEFINED!^^J}\expandafter\show\csname l@#1\endcsname}%
+    \xpg@ifdefined{#1}{}%
+    % \xpg@ifdefined{#1}{\message{^^JDEFINED!^^J}\expandafter\show\csname l@#1\endcsname}%
       {\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
       % {^^J\message{NOT~ DEFINED!^^J}\expandafter\showthe\csname xpg@langname@#1\endcsname\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
        \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}%
@@ -797,13 +797,13 @@ That is almost guaranteed to cause problems.}
     % \chardef\l@asturian"FF
     % \def\@tmpa{#1}
     % \show\@tmpa
-    \expandafter\show\csname l@#1\endcsname
+    % \expandafter\show\csname l@#1\endcsname
     \expandafter\ifx\csname l@#1\endcsname\relax#3\else#2\fi
     % \let\l@asturian\l@catalan
     % \ifcsdef{l@#1}{#2}{#3}
     % #2%
     \def\@tmpa{\csname l@#1\endcsname}
-    \ifx\@tmpa\relax\bgroup#3\egroup\else\bgroup#2\egroup\fi
+    % \ifx\@tmpa\relax\bgroup#3\egroup\else\bgroup#2\egroup\fi
     \message{DONE^^J}%
     % #2
 }%
