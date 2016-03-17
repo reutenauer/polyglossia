@@ -187,9 +187,9 @@ That is almost guaranteed to cause problems.}
     \xpg@check@ifdefined{#1}
     \if@xpg@language@really@defined@\else
       \ifstrequal{#1}{##1}{}%
-      {\xpg@ifdefined{##1}%
-        {\expandafter\ifx\csname l@##1\endcsname\l@nohyphenation\else\csletcs{l@#1}{l@##1}\message{I’M\space WHERE\space I’M\space SUPPOSED\space TO\space BE\space arg=##1^^J}\xpg@set@language@luatex@iv{##1}\fi}%
-        {\csdef{l@##1}{l@nohyphenation}}%
+      {\xpg@check@ifdefined{##1}\if@xpg@language@really@defined@
+        \expandafter\ifx\csname l@##1\endcsname\l@nohyphenation\else\csletcs{l@#1}{l@##1}\message{I’M\space WHERE\space I’M\space SUPPOSED\space TO\space BE\space arg=##1^^J}\xpg@set@language@luatex@iv{##1}\fi
+        \else\csdef{l@##1}{l@nohyphenation}\fi
       }%
     \fi
   }%
@@ -821,9 +821,13 @@ That is almost guaranteed to cause problems.}
 }%
 
 \newcommand\xpg@set@language@luatex@iv[1]{%
+    \xpg@check@ifdefined{#1}
+    \expandafter\show\csname l@#1\endcsname
+    \if@xpg@language@really@defined@\else
     \ifluatex
         \expandafter\chardef\csname l@#1\endcsname=\directlua{tex.sprint(polyglossia.newloader('#1'))}%
         \language\directlua{tex.sprint(polyglossia.newloader('#1'))}%
+    \fi
     \fi
 }
 

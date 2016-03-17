@@ -92,6 +92,7 @@ end
 
 -- New hyphenation pattern loader: use language.dat.lua directly and the language identifiers
 local function newloader(langentry)
+    texio.write_nl('term and log', 'HELLO I’M HERE')
     loaded_language = polyglossia.newloader_loaded_languages[langentry]
     if loaded_language then
         texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded; id is ' .. lang.id(loaded_language))
