@@ -183,38 +183,25 @@ That is almost guaranteed to cause problems.}
   \csgdef{xpg@langname@#1}{\xpg@uppercasefirst{#1}}%
   %needed for docsvlist with hyphennames key:
   \def\do##1{%
-    \message{TESTING\space ##1^^J}
     \xpg@check@ifdefined{#1}
     \if@xpg@language@really@defined@\else
       \ifstrequal{#1}{##1}{}%
       {\xpg@ifdefined{##1}%
-        {\expandafter\ifx\csname l@##1\endcsname\l@nohyphenation\else\csletcs{l@#1}{l@##1}\message{I’M\space WHERE\space I’M\space SUPPOSED\space TO\space BE\space arg=##1^^J}\xpg@set@language@luatex@iv{##1}\fi}%
+        {\expandafter\ifx\csname l@##1\endcsname\l@nohyphenation\else\csletcs{l@#1}{l@##1}\xpg@set@language@luatex@iv{##1}\fi}%
         {\csdef{l@##1}{l@nohyphenation}}%
       }%
     \fi
   }%
-  \message{FOO\space 1^^J}
   %define all keys:
   \xpg@define@keys{#1}%
-  \message{FOO\space 2^^J}
-  % \show\l@asturian
-  % \show#1
-  % \show#2
-  \def\@tmpa{#1}
-  % \show\@tmpa
-  \def\@tmpb{#2}
-  % \show\@tmpb
   \setkeys[xpg@setup]{#1}{#2}%
-  \message{FOO\space 3^^J}
   % here we do the fontsetup:
   \ifbool{#1@fontsetup}%
     {\xpg@fontsetup@auto{#1}}%
     {\xpg@info{Skipping~ automatic~ font~ setup~ for~ language~ #1}}%
   %% TODO? \toggletrue{#1@setup@done}%
   % reinit \do
-  \message{FOO\space 4^^J}
   \def\do##1{\setotherlanguage{##1}}%
-  \message{FOO\space 5^^J}
 }
 
 \def\xpg@first#1,#2{#1}
@@ -234,18 +221,12 @@ That is almost guaranteed to cause problems.}
   \define@key[xpg@setup]{#1}{langtag}{%
     \csgdef{xpg@langtag@#1}{##1}}%
   \define@key[xpg@setup]{#1}{hyphennames}[{#1}]{%
-    \message{DOING\space CSV\space LIST^^J}%
     \docsvlist{##1}%
-    \message{CSV\space LIST\space DONE^^J}%
-    % \expandafter\show\csname l@##1\endcsname
-    % \expandafter\show\csname l@#1\endcsname
     % if l@#1 does not yet exist,
     % we assign it to nohyphenation
     % we do this here in case the hyphennames key was omitted
     \xpg@ifdefined{#1}{}%
-    % \xpg@ifdefined{#1}{\message{^^JDEFINED!^^J}\expandafter\show\csname l@#1\endcsname}%
       {\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
-      % {^^J\message{NOT~ DEFINED!^^J}\expandafter\showthe\csname xpg@langname@#1\endcsname\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
        \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}%
     \csdef{#1@language}{%
       \ifbool{xpg@hyphenation@disabled}{%
@@ -257,10 +238,6 @@ That is almost guaranteed to cause problems.}
         \language=\csname l@#1\endcsname%
       }%
     }%
-    % \showthe\l@asturian
-    % \showthe\l@catalan
-    % \showthe\l@spanish
-    \message{Exiting\space hyphennames^^J}
   }%
   \define@choicekey+[xpg@setup]{#1}{direction}[\val\nr]{LR,RL}[LR]%
     {\ifcase\nr\relax
@@ -292,7 +269,6 @@ That is almost guaranteed to cause problems.}
   %  \cslet{xpg@localAlph@#1}{\expandafter\csname\xpg@second##1\endcsname}%
   %}%
   %TODO same thing with localdigits
-  \message{NOW\space I’M\space HERE^^J}%
 }
 
 \def\xpg@lastlanguage{0}%
@@ -800,24 +776,11 @@ That is almost guaranteed to cause problems.}
 }
 
 \newcommand\xpg@ifdefined[3]{%
-    % \expandafter\showthe\csname l@#1\endcsname
     \ifluatex
         \xpg@set@language@luatex@iv{#1}%
     \fi
-    % \chardef\l@asturian"FF
-    % \def\@tmpa{#1}
-    % \show\@tmpa
-    % \expandafter\show\csname l@#1\endcsname
-    % \expandafter\ifx\csname l@#1\endcsname\relax#3\else#2\fi
     \xpg@check@ifdefined{#1}
     \if@xpg@language@really@defined@#2\else#3\fi
-    % \let\l@asturian\l@catalan
-    % \ifcsdef{l@#1}{#2}{#3}
-    % #2%
-    \def\@tmpa{\csname l@#1\endcsname}
-    % \ifx\@tmpa\relax\bgroup#3\egroup\else\bgroup#2\egroup\fi
-    \message{DONE^^J}%
-    % #2
 }%
 
 \newcommand\xpg@set@language@luatex@iv[1]{%
