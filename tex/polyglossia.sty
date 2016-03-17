@@ -186,7 +186,7 @@ That is almost guaranteed to cause problems.}
     \xpg@ifdefined{#1}{}{%
       \ifstrequal{#1}{##1}{}%
       {\xpg@ifdefined{##1}%
-        {\expandafter\ifx\csname l@##1\endcsname\l@nohyphenation\else\csletcs{l@#1}{l@##1}\message{I’M\space WHERE\space I’M\space SUPPOSED\space TO\space BE\space arg=##1^^J}\xpg@set@language@luatex@iv{##1}\fi\listbreak}%
+        {\expandafter\ifx\csname l@##1\endcsname\l@nohyphenation\else\csletcs{l@#1}{l@##1}\message{I’M\space WHERE\space I’M\space SUPPOSED\space TO\space BE\space arg=##1^^J}\xpg@set@language@luatex@iv{##1}\fi}%
         {\csdef{l@##1}{l@nohyphenation}}%
       }%
     }%
