@@ -12,13 +12,50 @@
 \RequirePackage{ifluatex}
 % For symmetry with ifluatex
 \RequirePackage{ifxetex}
-% fontspec now uses LaTeX3 packages such as expl3, so we need this:
-\ExplSyntaxOn
 
 % Trying something quick and dirty to fix the hyphenation data issue.
 \ifluatex
+  \def\AddBabelHook#1#2#3{}
   \input luababel.def
+
+  \def\bbl@add#1#2{%
+    \@ifundefined{\expandafter\@gobble\string#1}%
+      {\def#1{#2}}%
+      {\expandafter\def\expandafter#1\expandafter{#1#2}}}
+  \def\bbl@csarg#1#2{\expandafter#1\csname bbl@#2\endcsname}%
+  \long\def\bbl@afterelse#1\else#2\fi{\fi#1}
+  \long\def\bbl@afterfi#1\fi{\fi#1}
+  \def\bbl@loop#1#2#3{\bbl@@loop#1{#3}#2,\@nnil,}
+  \def\bbl@loopx#1#2{\expandafter\bbl@loop\expandafter#1\expandafter{#2}}
+  \def\bbl@@loop#1#2#3,{%
+    \ifx\@nnil#3\relax\else
+      \def#1{#3}#2\bbl@afterfi\bbl@@loop#1{#2}%
+    \fi}
+  \def\bbl@for#1#2#3{\bbl@loopx#1{#2}{\ifx#1\@empty\else#3\fi}}
+  \def\AfterBabelLanguage#1{%
+    \global\expandafter\bbl@add\csname#1.ldf-h@@k\endcsname}%
+  \ifx\bbl@languages\@undefined\else
+    \begingroup
+      \catcode`\^^I=12
+      \@ifpackagewith{babel}{showlanguages}{%
+        \begingroup
+          \def\bbl@elt#1#2#3#4{\wlog{#2^^I#1^^I#3^^I#4}}%
+          \wlog{<*languages>}%
+          \bbl@languages
+          \wlog{</languages>}%
+        \endgroup}{}
+    \endgroup
+    \def\bbl@elt#1#2#3#4{%
+      \ifnum#2=\z@
+        \gdef\bbl@nulllanguage{#1}%
+        \def\bbl@elt##1##2##3##4{}%
+      \fi}%
+    \bbl@languages
+  \fi
 \fi
+
+% fontspec now uses LaTeX3 packages such as expl3, so we need this:
+\ExplSyntaxOn
 
 %% This is for compatibility with Babel-aware package:
 \cslet{ver@babel.sty}{\@empty} % this "fakes" babel
