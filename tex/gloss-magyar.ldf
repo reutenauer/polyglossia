@@ -5,6 +5,8 @@
   fontsetup=true,
 }
 
+\frenchspacing
+
 % change 'táblázat x.x' to 'x.x. táblázat'
 \def\@@magyar@fnum@table{\thetable.~\tablename}
 \let\fnum@table\@@magyar@fnum@table
