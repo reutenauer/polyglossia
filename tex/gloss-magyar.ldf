@@ -5,6 +5,14 @@
   fontsetup=true,
 }
 
+% change 'táblázat x.x' to 'x.x. táblázat'
+\def\@@magyar@fnum@table{\thetable.~\tablename}
+\let\fnum@table\@@magyar@fnum@table
+
+% change 'ábra x.x' to 'x.x. ábra'
+\def\@@magyar@fnum@figure{\thefigure.~\figurename}
+\let\fnum@figure\@@magyar@fnum@figure
+
 \def\captionsmagyar{%
    \def\refname{Hivatkozások}%
    \def\abstractname{Kivonat}%
