@@ -45,10 +45,10 @@
 	  \@austrian@localefalse%
 	\fi
 	\ifx\@tmpa\tmp@swiss\@swiss@localetrue
-	  \ifcsundef{l@swissgerman}%
+	  \xpg@ifdefined{l@swissgerman}{}%
 	    {\xpg@warning{No hyphenation patterns were loaded for "Swiss German (Old Spelling)"\MessageBreak
 	      I will use the standard patterns for German (old spelling) instead}%
-	    \adddialect\l@swissgerman\l@german\relax}{}%
+	    \adddialect\l@swissgerman\l@german\relax}%
 	\else
 	  \@swiss@localefalse%
 	\fi}
