@@ -188,7 +188,7 @@
   \if@german@fraktur\date@german@fraktur\else\date@german\fi
 }
 
-\def\german@language{\language=%
+\def\german@language{\ifxetex\language=%
   \csname l@%
     \if@swiss@locale
        \if@german@oldspelling
@@ -202,29 +202,29 @@
     \else% (german, austrian)
       \if@german@oldspelling\else n\fi german\ifgerman@latesthyphen -x-latest\fi
     \fi
-  \endcsname
+  \endcsname\else\ifluatex
   % LuaTeX
   \ifgerman@latesthyphen
     \if@german@oldspelling
         \if@swiss@locale
-            \xpg@set@language@luatex@ii{swissgerman}%
+            \xpg@set@language@luatex@iv{swissgerman}%
         \else
-            \xpg@set@language@luatex@ii{german-x-latest}%
+            \xpg@set@language@luatex@iv{german-x-latest}%
         \fi
     \else
-        \xpg@set@language@luatex@ii{ngerman-x-latest}%
+        \xpg@set@language@luatex@iv{ngerman-x-latest}%
     \fi
   \else% (latesthyphen=false)
     \if@german@oldspelling
         \if@swiss@locale
-            \xpg@set@language@luatex@ii{swissgerman}%
+            \xpg@set@language@luatex@iv{swissgerman}%
         \else
-            \xpg@set@language@luatex@ii{german}%
+            \xpg@set@language@luatex@iv{german}%
         \fi
     \else
-        \xpg@set@language@luatex@ii{ngerman}%
+        \xpg@set@language@luatex@iv{ngerman}%
     \fi
-  \fi
+  \fi\fi\fi
 }
 
 \def\noextras@german{%
