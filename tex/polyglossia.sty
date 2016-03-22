@@ -760,11 +760,15 @@ That is almost guaranteed to cause problems.}
 }
 
 \def\xpg@set@language@luatex@iii#1#2{%
+    % \showthe\language
     % here we use lu@texhyphen@loaded@\the\language, the same as in babel
-    \ifcsdef{bbl@hyphendata@#2}{}{%
-        \global\@namedef{bbl@hyphendata@\the\language}{}%
-        \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', \the\csname l@#1\endcsname)}%
-    }
+    %%% \ifcsdef{bbl@hyphendata@#2}{}{%
+    %%%     \global\@namedef{bbl@hyphendata@\the\language}{}%
+    %%%     \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', \the\csname l@#1\endcsname)}%
+    \show\l@classiclatin
+    % \chardef\l@classiclatin=10
+    % \xpg@set@language@luatex@iv{classiclatin}
+    %%% }
 }
 
 \newcommand\xpg@check@ifdefined[1]{%
@@ -787,9 +791,11 @@ That is almost guaranteed to cause problems.}
     \ifluatex
         \xpg@check@ifdefined{#1}%
         \if@xpg@language@really@defined@\else
-            \expandafter\chardef\csname l@#1\endcsname=\directlua{tex.sprint(polyglossia.newloader('#1'))}%
+            \expandafter\chardef\csname l@#1\endcsname=\directlua{tex.sprint(polyglossia.newloader('#1'))}\relax%
+            % \expandafter\show\csname l@#1\endcsname
         \fi
-        \language\directlua{tex.sprint(polyglossia.newloader('#1'))}%
+        \language\directlua{tex.sprint(polyglossia.newloader('#1'))}\relax%
+        % \showthe\language
     \fi
 }
 
@@ -868,4 +874,5 @@ That is almost guaranteed to cause problems.}
     [#1]{#2}}
 \ExplSyntaxOff
 \ProcessOptions*
+% \showthe\language
 \endinput

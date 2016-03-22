@@ -106,6 +106,9 @@ local function newloader(langentry)
             print("Language data for " .. langentry)
             for k, v in pairs(langdata) do
                 print(k, tostring(v))
+                if k == 'patterns' then
+                    print(kpse.find_file(v))
+                end
             end
             polyglossia.newloader_max_langid = polyglossia.newloader_max_langid + 1
             -- langobject = lang.new(newloader_max_langid)
@@ -116,7 +119,9 @@ local function newloader(langentry)
                 pattfilepath = kpse.find_file(langdata.patterns)
                 if pattfilepath then
                     pattfile = io.open(pattfilepath)
-                    lang.patterns(langobject, pattfile:read('*all'))
+                    patterns = pattfile:read('*all')
+                    lang.patterns(langobject, patterns)
+                    print(patterns)
                     pattfile:close()
                 end
             end

@@ -83,14 +83,20 @@ hyphennames={latin},
   \xpg@info{Option: Medieval Latin}%
 \else
   \ifx\@tempa\tmp@classic
+    \message{HELLO\space I’M\space HERE\MessageBreak}
     \xpg@ifdefined{classiclatin}{%
+      \message{FOO\MessageBreak}
       \def\latin@variant{\l@classiclatin}%
-      \xpg@set@language@luatex@iv{classiclatin}%
+      \xpg@set@language@luatex@iv{classiclatin}\relax%
+      % \showthe\language
+      % \ExplSyntaxOff\parbox{1sp}{instigare}
     }{%
+       \message{BAR\MessageBreak}
        \xpg@nopatterns{Classic Latin}%
        \adddialect\l@classiclatin\l@latin
        \def\latin@variant{\l@latin}%
     }%
+    \message{GOODBYE\space I WAS\space THERE\MessageBreak}
     \def\captionslatin{\modernlatincaptions}%
     \def\datelatin{\classiclatindate}%
     \classicuclccodes
@@ -199,4 +205,5 @@ hyphennames={latin},
    \iflatin@babelshorthands\latin@shorthands\fi
 }
 
+% \showthe\language
 \endinput
