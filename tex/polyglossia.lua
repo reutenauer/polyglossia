@@ -26,6 +26,15 @@ local default_language
 polyglossia.newloader_loaded_languages = { }
 polyglossia.newloader_max_langid = 0
 local newloader_available_languages = dofile(kpse.find_file('language.dat.lua'))
+-- Suggestion by Dohyun Kim on #129
+local t = { }
+for k, v in pairs(newloader_available_languages) do
+    t[k] = v
+    for _, vv in pairs(v.synonyms) do
+        t[vv] = v
+    end
+end
+newloader_available_languages = t
 
 local function loadlang(lang, id)
   if luatexhyphen.lookupname(lang) then
