@@ -737,7 +737,7 @@ That is almost guaranteed to cause problems.}
               \def\@tmpb{variant}
               \ifx\@tmpa\@tmpb\setkeys{xpg@langvariant}{##1}\fi
           }%
-          \xpg@parsekeyvalue##1\relax
+          \xpg@parsekeyvalue##1=\relax
       }%
       \docsvlist{#1}
       \setkeys{#2}{#1}%
