@@ -1,3 +1,6 @@
+1.42.4 (February, March 2016)
+  * Remedial actions for the Babel changes
+
 09-02-2016
   * Fixed side effect of pull request #122 (see commit d2a34ff)
   * Added automatic Josa selection, variant, and captions options to Korean, by Dohyun Kim (pull request #128)
