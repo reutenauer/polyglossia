@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ z"$1" = z ]; then
+    branch=master
+else
+    branch="$1"
+fi
+
 warn_and_exit=false
 line=`git status | fgrep 'Your branch is ahead' | wc -l`
 if [ "$line" = 1 ]; then
@@ -28,7 +34,7 @@ tmpdir=`mktemp -d`
 root=$tmpdir/polyglossia
 
 cd $tmpdir
-git clone https://github.com/reutenauer/polyglossia
+git clone https://github.com/reutenauer/polyglossia $branch
 builddir="$root/build"
 mkdir -p $builddir
 
