@@ -36,7 +36,7 @@ tmpdir=`mktemp -d`
 root=$tmpdir/polyglossia
 
 cd $tmpdir
-git clone https://github.com/reutenauer/polyglossia $branch
+git clone --branch $branch https://github.com/reutenauer/polyglossia
 builddir="$root/build"
 mkdir -p $builddir
 
