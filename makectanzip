@@ -6,6 +6,7 @@ else
     branch="$1"
 fi
 
+# TODO Check branch
 warn_and_exit=false
 line=`git status | fgrep 'Your branch is ahead' | wc -l`
 if [ "$line" = 1 ]; then
