@@ -828,13 +828,13 @@ local function get_new_penalty (p)
     penalty.penalty = p
     return penalty
 end
-local function get_new_glue (wd, st, sh)
+local function get_new_glue (wd, st, sh, sto, sho)
     local glue = node.new("glue")
-    local spec = node.new("glue_spec")
-    spec.width   = wd
-    spec.stretch = st
-    spec.shrink  = sh
-    glue.spec = spec
+    glue.width   = wd or 0
+    glue.stretch = st or 0
+    glue.shrink  = sh or 0
+    glue.stretch_order = sto or 0
+    glue.shrink_order  = sho or 0
     return glue
 end
 local function get_font_size (fid, space)
@@ -852,9 +852,7 @@ local function glyph_to_box (head, curr, class)
     local size = get_font_size(g.font)
     head, curr = node.remove(head, curr)
     g.next, g.prev = nil, nil
-    local hss = get_new_glue(0, 65536, 65536)
-    hss.spec.stretch_order = 2
-    hss.spec.shrink_order  = 2
+    local hss = get_new_glue(0, 65536, 65536, 2, 2)
     if class == 1 then
         h, hss.next, g.prev = hss, g, hss
     elseif class == 2 or class == 4 then
