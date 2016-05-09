@@ -13,6 +13,70 @@
   %TODO localalph
 }
 
+\newif\ifcyrillic@numerals
+\define@key{ukrainian}{numerals}[latin]{%
+\ifstrequal{#1}{cyrillic}%
+{\cyrillic@numeralstrue}
+{\cyrillic@numeralsfalse}%
+}
+
+\define@boolkey{ukrainian}[ukrainian@]{babelshorthands}[false]{}
+
+\setkeys{ukrainian}{numerals}
+
+\ifsystem@babelshorthands
+\setkeys{ukrainian}{babelshorthands=true}
+\else
+\setkeys{ukrainian}{babelshorthands=false}
+\fi
+
+\ifcsundef{initiate@active@char}{%
+\input{babelsh.def}%
+\initiate@active@char{"}%
+}{}
+
+\def\ukrainian@shorthands{%
+\bbl@activate{"}%
+\def\language@group{ukrainian}%
+%  \declare@shorthand{ukrainian}{"`}{„}%
+%  \declare@shorthand{ukrainian}{"'}{“}%
+%  \declare@shorthand{ukrainian}{"<}{«}%
+%  \declare@shorthand{ukrainian}{">}{»}%
+\declare@shorthand{ukrainian}{""}{\hskip\z@skip}%
+\declare@shorthand{ukrainian}{"~}{\textormath{\leavevmode\hbox{-}}{-}}%
+\declare@shorthand{ukrainian}{"=}{\nobreak-\hskip\z@skip}%
+\declare@shorthand{ukrainian}{"|}{\textormath{\nobreak\discretionary{-}{}{\kern.03em}\allowhyphens}{}}%
+\declare@shorthand{ukrainian}{"-}{%
+\def\ukrainian@sh@tmp{%
+\if\ukrainian@sh@next-\expandafter\ukrainian@sh@emdash
+\else\expandafter\ukrainian@sh@hyphen\fi
+}%
+\futurelet\ukrainian@sh@next\ukrainian@sh@tmp}%
+\def\ukrainian@sh@hyphen{%
+\nobreak\-\bbl@allowhyphens}%
+\def\ukrainian@sh@emdash##1##2{\cdash-##1##2}%
+\def\cdash##1##2##3{\def\tempx@{##3}%
+\def\tempa@{-}\def\tempb@{~}\def\tempc@{*}%
+\ifx\tempx@\tempa@\@Acdash\else
+\ifx\tempx@\tempb@\@Bcdash\else
+\ifx\tempx@\tempc@\@Ccdash\else
+\errmessage{Wrong usage of cdash}\fi\fi\fi}%
+\def\@Acdash{\ifdim\lastskip>\z@\unskip\nobreak\hskip.2em\fi
+\cyrdash\hskip.2em\ignorespaces}%
+\def\@Bcdash{\leavevmode\ifdim\lastskip>\z@\unskip\fi
+\nobreak\cyrdash\penalty\exhyphenpenalty\hskip\z@skip\ignorespaces}%
+\def\@Ccdash{\leavevmode
+\nobreak\cyrdash\nobreak\hskip.35em\ignorespaces}%
+\ifx\cyrdash\undefined
+\def\cyrdash{\hbox to.8em{--\hss--}}
+\fi
+\declare@shorthand{ukrainian}{",}{\nobreak\hskip.2em\ignorespaces}%
+}
+
+\def\noukrainian@shorthands{%
+\@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+
 \def\captionsukrainian{%
    \def\refname{Література}%
    \def\abstractname{Анотація}%
@@ -54,6 +118,25 @@
     грудня\fi%
     \space\number\year~р.}}
 
+% The following is based on some ideas from ruscor.sty
+\def\ukrainian@capsformat{%
+\def\@seccntformat##1{\csname pre##1\endcsname%
+\csname the##1\endcsname%
+\csname post##1\endcsname}%
+\def\@aftersepkern{\hspace{0.5em}}%
+\def\postchapter{.\@aftersepkern}%
+\def\postsection{.\@aftersepkern}%
+\def\postsubsection{.\@aftersepkern}%
+\def\postsubsubsection{.\@aftersepkern}%
+\def\postparagraph{.\@aftersepkern}%
+\def\postsubparagraph{.\@aftersepkern}%
+\def\prechapter{}%
+\def\presection{}%
+\def\presubsection{}%
+\def\presubsubsection{}%
+\def\preparagraph{}%
+\def\presubparagraph{}}
+
 \def\Asbuk#1{\expandafter\ukrainian@Alph\csname c@#1\endcsname}
 \def\ukrainian@Alph#1{\ifcase#1\or
    А\or Б\or В\or Г\or Д\or Е\or Є\or Ж\or
@@ -79,9 +162,24 @@
    \let\@alph\latin@alph%
 }
 
-\endinput
+\def\noextras@ukrainian{%
+\def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
+\ifcyrillic@numerals\noukrainian@numbers\fi
+\noukrainian@shorthands%
+}
 
-%TODO? stuff from Babel
+\def\blockextras@ukrainian{%
+\ukrainian@capsformat%
+\ifcyrillic@numerals\ukrainian@numbers\fi
+\ifukrainian@babelshorthands\ukrainian@shorthands\fi
+}
+
+\def\inlineextras@ukrainian{%
+\ifukrainian@babelshorthands\ukrainian@shorthands\fi%
+}
+
+%%% stuff from Babel
+% make it optional?
 \def\sh{\mathop{\operator@font sh}\nolimits}
 \def\ch{\mathop{\operator@font ch}\nolimits}
 \def\tg{\mathop{\operator@font tg}\nolimits}
@@ -96,8 +194,10 @@
 \def\nsk{\mathop{\mathrm{н.с.к.}}\nolimits}
 \def\NSD{\mathop{\mathrm{НСД}}\nolimits}
 \def\NSK{\mathop{\mathrm{НСК}}\nolimits}
-\def\nod{\mathop{\mathrm{н.о.д.}}\nolimits}    % ??????
-\def\nok{\mathop{\mathrm{н.о.к.}}\nolimits}    % ??????
-\def\NOD{\mathop{\mathrm{НОД}}\nolimits}       % ??????
-\def\NOK{\mathop{\mathrm{НОК}}\nolimits}       % ??????
+\def\nod{\mathop{\mathrm{н.о.д.}}\nolimits}
+\def\nok{\mathop{\mathrm{н.о.к.}}\nolimits}
+\def\NOD{\mathop{\mathrm{НОД}}\nolimits}
+\def\NOK{\mathop{\mathrm{НОК}}\nolimits}
 \def\Proj{\mathop{\mathrm{пр}}\nolimits}
+
+\endinput
