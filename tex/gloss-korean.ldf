@@ -123,7 +123,7 @@
             \XeTeXinterchartokenstate\@ne
             \XeTeXlinebreakpenalty 50
         \fi
-        \XeTeXlinebreakskip 0pt plus.1em minus .01em
+        \XeTeXlinebreakskip 0pt plus.05em minus .01em
         \XeTeXlinebreaklocale "ko"
     }
     \def\noextras@korean{%
@@ -887,7 +887,7 @@ local function insert_penalty_glue (head, curr, f, var, x)
     if x then
         glue = get_new_glue(size/2, size/4, size/8)
     else
-        glue = get_new_glue(0, size/5, size/50)
+        glue = get_new_glue(0, size/10, size/50)
     end
     head, curr = node.insert_after(head, curr, glue)
     return head, curr
