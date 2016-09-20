@@ -18,10 +18,10 @@
   \def\appendixname{Phụ lục}%
   \def\contentsname{Mục lục}%
   \def\listfigurename{Danh sách hình vẽ}%
-  \def\listtablename{Danh sách bẳng}%
+  \def\listtablename{Danh sách bảng}%
   \def\indexname{Chỉ mục}%
   \def\figurename{Hình}%
-  \def\tablename{Bẳng}%
+  \def\tablename{Bảng}%
   \def\partname{Phần}%
   \def\pagename{Trang}%
   \def\seename{Xem}%
