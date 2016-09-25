@@ -1,0 +1,216 @@
+\ProvidesFile{gloss-japanese.ldf}[polyglossia: module for japanese]
+\PolyglossiaSetup{japanese}{
+	script=CJK,
+	language=Japanese,
+	langtag=JAN,
+	hyphennames={nohyphenation},
+	frenchspacing=false,
+	fontsetup=true
+}
+
+\def\japanese@capsformat{%
+	\def\@seccntformat##1{%
+		\csname pre##1\endcsname%
+		\csname the##1\endcsname%
+		\csname post##1\endcsname%
+	}
+	\def\postsection{節\space}%
+	\def\postsubsection{節\space}%
+	\def\postsubsubsection{節\space}%
+	\def\presection{第}%
+	\def\presubsection{第}%
+	\def\presubsubsection{第}%
+}
+
+\def\captionsjapanese{%
+	\def\refname{参考文献}%
+	\def\abstractname{概要}%
+	\def\bibname{文献目録}%
+	\def\prefacename{端書き}%
+	\def\chaptername##1##2{第##1##2 章}%
+	\def\appendixname{付録}%
+	\def\contentsname{目次}%
+	\def\listfigurename{図目次}%
+	\def\listtablename{表目次}%
+	\def\indexname{索引}%
+	\def\figurename{図}%
+	\def\tablename{表}%
+	\def\partname##1##2{第##1##2 部}%
+	\def\pagename##1##2{第##1##2 頁}%
+	\def\seename{参照}%
+	\def\alsoname{参照}%
+	\def\enclname{添付}%
+	\def\ccname{同報}%
+	\def\headtoname{宛先}%
+	\def\proofname{証明}%
+	\def\glossaryname{用語集}%
+ }
+
+\newif\if@WameiReki \@WameiRekifalse%
+\newif\if@WameiTosi \@WameiTosifalse%
+\newif\if@WameiTuki \@WameiTukifalse%
+\newif\if@WameiHi \@WameiHifalse%
+\newif\if@IzumoTuki \@IzumoTukifalse%
+\newcount\c@TempJNum%
+
+\def\@JapaneseDigit#1{
+	\ifcase#1\or 一\or 二\or 三\or 四\or 五\or
+		六\or 七\or 八\or 九\or 十\or
+		十一\or 十二\or 十三\or 十四\or 十五\or
+		十六\or 十七\or 十八\or 十九\or 廿\or
+		廿一\or 廿二\or 廿三\or 廿四\or 廿五\or
+		廿六\or 廿七\or 廿八\or 廿九\or 丗\or
+		丗一\or 丗二\or 丗三\or 丗四\or 丗五\or
+		丗六\or 丗七\or 丗八\or 丗九\or 四十\or
+		四十一\or 四十二\or 四十三\or 四十四\or 四十五\or
+		四十六\or 四十七\or 四十八\or 四十九\or 五十\or
+		五十一\or 五十二\or 五十三\or 五十四\or 五十五\or
+		五十六\or 五十七\or 五十八\or 五十九\or 六十\or
+		六十一\or 六十二\or 六十三\or 六十四\or 六十五\or
+		六十六\or 六十七\or 六十八\or 六十九\or 七十\or
+		七十一\or 七十二\or 七十三\or 七十四\or 七十五\or
+		七十六\or 七十七\or 七十八\or 七十九\or 八十\or
+		八十一\or 八十二\or 八十三\or 八十四\or 八十五\or
+		八十六\or 八十七\or 八十八\or 八十九\or 九十\or
+		九十一\or 九十二\or 九十三\or 九十四\or 九十五\or
+		九十六\or 九十七\or 九十八\or 九十九
+	\else
+		\@ctrerr
+	\fi\relax
+}
+
+\def\@JapaneseNum#1{
+	\c@TempJNum=#1\divide\c@TempJNum by 1000\relax%
+	\ifnum\c@TempJNum=\z@\c@TempJNum=#1%
+		\divide\c@TempJNum by 100\relax%
+		\ifnum\c@TempJNum=\z@\@JapaneseDigit{#1}\relax%
+		\else
+			\ifcase\c@TempJNum\or 百\or 二百\or 三百\or 四百\or 五百\or
+				六百\or 七百\or 八百\or 九百%
+			\fi
+			\c@TempJNum=#1\divide\c@TempJNum by 100\multiply\c@TempJNum by -100\advance\c@TempJNum#1\@JapaneseDigit\c@TempJNum\relax%
+		\fi
+	\else
+		\ifcase\c@TempJNum\or 千\or 二千\or 三千\or 四千\or 五千\or
+			六千\or 七千\or 八千\or 九千%
+		\fi
+		\c@TempJNum=#1\divide\c@TempJNum by 1000\multiply\c@TempJNum by -1000\advance\c@TempJNum#1\divide\c@TempJNum by 100\relax%
+		\ifnum\c@TempJNum=\z@\c@TempJNum=#1%
+			\divide\c@TempJNum by 100\multiply\c@TempJNum by -100\advance\c@TempJNum#1\@JapaneseDigit\c@TempJNum\relax%
+		\else
+			\ifcase\c@TempJNum\or 百\or 二百\or 三百\or 四百\or 五百\or
+				六百\or 七百\or 八百\or 九百%
+			\fi
+			\c@TempJNum=#1\divide\c@TempJNum by 100\multiply\c@TempJNum by -100\advance\c@TempJNum#1\@JapaneseDigit\c@TempJNum\relax%
+		\fi
+	\fi
+}
+
+\def\@japanesenumber#1{
+	\@tempcnta=#1%
+	\ifnum\@tempcnta=\z@{〇}%
+	\else
+		\ifnum\@tempcnta<\z@{負}%
+			\multiply\@tempcnta by -1%
+		\fi
+		\@tempcntb=\@tempcnta\divide\@tempcntb by 10000\relax%
+		\ifnum\@tempcntb=\z@\@JapaneseNum%
+			\@tempcnta%
+		\else
+			\@tempcntb=\@tempcnta\divide\@tempcntb by 100000000\relax%
+			\ifnum\@tempcntb=\z@\@tempcntb=\@tempcnta%
+				\divide\@tempcntb by 10000%
+				\@JapaneseNum\@tempcntb{万}\@tempcntb=\@tempcnta%
+				\divide\@tempcntb by 10000\multiply\@tempcntb by -10000%
+				\advance\@tempcntb\@tempcnta\relax\@JapaneseNum\@tempcntb%
+			\else
+				\@JapaneseNum\@tempcntb{億}\@tempcntb=\@tempcnta%
+				\divide\@tempcntb by 100000000\multiply\@tempcntb by -100000000%
+				\advance\@tempcntb\@tempcnta\divide\@tempcntb by 10000\relax%
+				\ifnum\@tempcntb=\z@%
+				\else
+					\@JapaneseNum\@tempcntb{万}%
+				\fi
+				\@tempcntb=\@tempcnta\divide\@tempcntb by 10000%
+				\multiply\@tempcntb by -10000\advance\@tempcntb\@tempcnta%
+				\@JapaneseNum\@tempcntb%
+			\fi
+		\fi
+	\fi
+}
+
+\def\japanesenumber#1{
+	\expandafter\@japanesenumber\csname c@#1\endcsname%
+}
+
+\def\datejapanese{
+	{
+		\ifnum\year<1868%
+			\xdef\the@WarekiCur{}%
+		\else
+			\ifnum\year<1912%
+				\xdef\the@WarekiCur{明治}\advance\year-1867\relax%
+			\else
+				\ifnum\year<1926%
+					\xdef\the@WarekiCur{大正}\advance\year-1911\relax%
+  				\else
+					\ifnum\year<1989%
+						\xdef\the@WarekiCur{昭和}\advance\year-1925\relax%
+  					\else
+						\xdef\the@WarekiCur{平成}\advance\year-1988\relax%
+					\fi
+				\fi
+			\fi
+		\fi
+		\xdef\the@WameiTosi{\the\year}%
+	}
+	\def\西暦{\@WameiRekifalse \@WameiTukifalse \@WameiHifalse}%
+	\def\和暦{\@WameiRekitrue \@WameiTosifalse \@WameiTukifalse \@WameiHifalse}%
+	\def\和名暦{\@WameiTositrue \@WameiTukitrue \@WameiHitrue}%
+	\def\数字暦{\@WameiTosifalse \@WameiTukifalse \@WameiHifalse}%
+	\def\出雲月{\@IzumoTukitrue}%
+	\def\大和月{\@IzumoTukifalse}%
+	\def\today{
+		\if@WameiReki%
+			\the@WarekiCur%
+			\if@WameiTosi%
+				\@JapaneseNum\the@WameiTosi%
+			\else
+				\,\the@WameiTosi%
+			\fi
+		\else
+			\number\year\,%
+		\fi
+		{年}%
+		\if@WameiTuki%
+			\ifcase\month\or 睦月\or 如月\or 弥生\or 卯月\or 皐月\or
+				水無月\or 文月\or 葉月\or 長月\or
+				\if@IzumoTuki 神在月\else 神無月\fi
+				\or 霜月\or 師走%
+			\fi
+		\else
+			\,\number\month\,%
+		{月}%
+		\fi
+		\if@WameiHi%
+			\@JapaneseNum\day%
+		\else
+			\,\number\day\,%
+		\fi
+		{日}
+	}
+}
+
+\def\noextras@japanese{%
+	\japanese@capsformat%
+}
+
+\def\blockextras@japanese{%
+	\japanese@capsformat%
+}
+
+\def\inlineextras@japanese{%
+	\japanese@capsformat%
+}
+% Based on contributions of Toru Inagaki, Norio Iwase, François Charette
+
