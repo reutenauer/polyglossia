@@ -22,6 +22,21 @@
 \def\xpg@unskip{\ifhmode\ifdim\lastskip>\z@\unskip\fi\fi}
 \def\xpg@nospace#1{#1}
 
+\ifx\@makefntext\undefined\else
+  \let\nofrench@makefntext\@makefntext
+  \long\def\french@makefntext#1{\parindent1em \noindent\quad\ifx\@thefnmark\empty\else\@thefnmark.\space\fi #1}
+  \let\@makefntext\french@makefntext
+  \define@boolkey{french}[french@]{frenchfootnote}[true]{%
+  	\def\@tmpa{#1}
+    \def\@tmptrue{true}
+    \ifx\@tmpa\@tmptrue
+    	\let\@makefntext\french@makefntext
+		\else 
+			\let\@makefntext\nofrench@makefntext
+    \fi
+  }
+\fi
+
 \def\french@punctuation{%
     \lccode"2019="2019
     \ifluatex
@@ -154,8 +169,9 @@
 \def\mr{M.\space}
 \def\mrs{MM.\space}
 
-\ifx\@makefntext\undefined\else
-\renewcommand\@makefntext[1]{\quad\ifx\@thefnmark\empty\else\@thefnmark.\space\fi #1}
-\fi
+
+
+
+
 
 \endinput
