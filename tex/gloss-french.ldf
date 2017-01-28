@@ -155,7 +155,7 @@
 \def\mrs{MM.\space}
 
 \ifx\@makefntext\undefined\else
-\renewcommand\@makefntext[1]{\quad\ifx\@thefnmark\empty\else\@thefnmark.\space\fi #1}
+\renewcommand\@makefntext[1]{\parindent1em \noindent\quad\ifx\@thefnmark\empty\else\@thefnmark.\space\fi #1}
 \fi
 
 \endinput
