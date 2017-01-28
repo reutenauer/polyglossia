@@ -13,6 +13,7 @@
   \newluatexattribute\xpg@frpt %
   \directlua{polyglossia.load_frpt()}%
 \else
+  \newXeTeXintercharclass \french@brackets % () [] {}
   \newXeTeXintercharclass\french@punctthin % ! ? ; et autres
   \newXeTeXintercharclass\french@punctthick % :
   \newXeTeXintercharclass\french@punctguillstart % « ‹
@@ -43,6 +44,7 @@
       \global\xpg@frpt=1\relax %
       \directlua{polyglossia.activate_frpt()}%
     \else
+      
       \XeTeXinterchartokenstate=1
       \XeTeXcharclass `\! \french@punctthin
       \XeTeXcharclass `\? \french@punctthin
@@ -56,6 +58,12 @@
       \XeTeXcharclass `\» \french@punctguillend
       \XeTeXcharclass `\‹ \french@punctguillstart
       \XeTeXcharclass `\› \french@punctguillend
+      \XeTeXcharclass `\( \french@brackets
+      \XeTeXcharclass `\) \french@brackets
+      \XeTeXcharclass `\] \french@brackets
+      \XeTeXcharclass `\[ \french@brackets
+      \XeTeXcharclass `\{ \french@brackets
+      \XeTeXcharclass `\} \french@brackets
       \XeTeXinterchartoks \z@ \french@punctthin = {\nobreak\thinspace}%
       \XeTeXinterchartoks \z@ \french@punctthick = {\nobreakspace}%
       \XeTeXinterchartoks \xpg@boundaryclass \french@punctthin = {\xpg@unskip\nobreak\thinspace}%
@@ -69,6 +77,12 @@
       \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\nobreak\thinspace}% "»;" -> "» ;"
       \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace}% "»:" -> "» :"
       \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\nobreakspace}% "?»" -> "? »"
+
+     \XeTeXinterchartoks \french@brackets \french@punctthin = {\xpg@unskip}% "(?" -> "(?" and not "( ?"      
+     \XeTeXinterchartoks \french@punctthin \french@brackets = {\xpg@unskip}% "?)" -> "?)" (code not need, just for symetry with previous one)
+
+
+
     \fi
     }
 
