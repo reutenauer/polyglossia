@@ -43,8 +43,7 @@
     \ifluatex
       \global\xpg@frpt=1\relax %
       \directlua{polyglossia.activate_frpt()}%
-    \else
-      
+    \else     
       \XeTeXinterchartokenstate=1
       \XeTeXcharclass `\! \french@punctthin
       \XeTeXcharclass `\? \french@punctthin
@@ -77,12 +76,8 @@
       \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\nobreak\thinspace}% "»;" -> "» ;"
       \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace}% "»:" -> "» :"
       \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\nobreakspace}% "?»" -> "? »"
-
      \XeTeXinterchartoks \french@brackets \french@punctthin = {\xpg@unskip}% "(?" -> "(?" and not "( ?"      
      \XeTeXinterchartoks \french@punctthin \french@brackets = {\xpg@unskip}% "?)" -> "?)" (code not need, just for symetry with previous one)
-
-
-
     \fi
     }
 
