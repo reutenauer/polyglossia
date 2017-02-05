@@ -64,6 +64,7 @@
       \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\nobreakspace}% "?»" -> "? »"
      \XeTeXinterchartoks \french@openbrackets \french@punctthin = {\xpg@unskip}% "(?" -> "(?" and not "( ?"      
      \XeTeXinterchartoks \french@punctthin \french@closebrackets = {\xpg@unskip}% "?)" -> "?)" (code not need, just for symetry with previous one)
+     \XeTeXinterchartoks \french@closebrackets \french@punctthin = {\nobreak\thinspace}% ")?" -> ") ?"
     \fi
     }
 
