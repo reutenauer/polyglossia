@@ -128,7 +128,7 @@
    Douzième\or Treizième\or Quatorzième\or Quinzième\or
    Seizième\or Dix-septième\or Dix-huitième\or Dix-neuvième\or
    Vingtième\fi\space}%
-   \def\thepart{\protect\@Fpt partie}%
+   \def\thepart{\@Fpt partie}%
    \def\partname{}%
    \def\pagename{page}%
    \def\seename{\emph{voir}}%
