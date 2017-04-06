@@ -53,7 +53,7 @@
     \ifluatex
       \global\xpg@frpt=1\relax %
       \directlua{polyglossia.activate_frpt()}%
-    \else     
+    \else
       \XeTeXinterchartokenstate=1
       \XeTeXcharclass `\! \french@punctthin
       \XeTeXcharclass `\? \french@punctthin
@@ -191,10 +191,5 @@
 \def\mmes{M\textsuperscript{mes}\space}
 \def\mr{M.\space}
 \def\mrs{MM.\space}
-
-
-
-
-
 
 \endinput
