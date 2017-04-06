@@ -39,6 +39,15 @@
   }
 \fi
 
+
+\newif\iffrench@automaticspacesaroundguillemets
+\define@boolkey{french}[french@]{automaticspacesaroundguillemets}[true]{%
+  %\def\tmp@true{true}%
+  %\def\@tmpa{#1}%
+  %\ifx\@tmpa\tmp@true
+}
+\french@automaticspacesaroundguillemetstrue
+
 \def\french@punctuation{%
     \lccode"2019="2019
     \ifluatex
@@ -72,8 +81,10 @@
   %   \XeTeXinterchartoks \z@ \french@punctguillstart = {\nobreakspace}% "a«" unchanged?
   %   \XeTeXinterchartoks \french@punctguillend \z@ = {\nobreakspace}% "»a" unchanged?
       \XeTeXinterchartoks \z@ \french@punctguillend = {\nobreakspace}% "a»" -> "a »"
-  %   \XeTeXinterchartoks \french@punctguillstart \xpg@boundaryclass = {\nobreakspace\xpg@nospace}% "«  " -> "«~"
-  %   \XeTeXinterchartoks \xpg@boundaryclass \french@punctguillend = {\xpg@unskip\nobreakspace}% "  »" -> "~»"
+      \iffrench@automaticspacesaroundguillemets
+        \XeTeXinterchartoks \french@punctguillstart \xpg@boundaryclass = {\nobreakspace\xpg@nospace\relax}% "«  " -> "«~"
+        \XeTeXinterchartoks \xpg@boundaryclass \french@punctguillend = {\xpg@unskip\nobreakspace}% "  »" -> "~»"
+      \fi
       \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\nobreak\thinspace}% "»;" -> "» ;"
       \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace}% "»:" -> "» :"
       \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\nobreakspace}% "?»" -> "? »"
