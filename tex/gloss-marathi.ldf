@@ -11,7 +11,7 @@ and may look very wrong.}
 \RequirePackage{devanagaridigits}
 
 \PolyglossiaSetup{marathi}{
-  script=Devaganari,
+  script=Devanagari,
   scripttag=deva,
   langtag=MAR,
   hyphennames={marathi},
