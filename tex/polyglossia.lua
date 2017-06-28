@@ -3,8 +3,9 @@ require('luatex-hyphen')
 local luatexhyphen = luatexhyphen
 local byte = unicode.utf8.byte
 
+local module_name = "polyglossia"
 local polyglossia_module = {
-    name          = "polyglossia",
+    name          = module_name,
     version       = 1.3,
     date          = "2013/05/11",
     description   = "Polyglossia",
@@ -13,8 +14,14 @@ local polyglossia_module = {
     license       = "CC0"
 }
 
-local error, warning, info, log =
-    luatexbase.provides_module(polyglossia_module)
+luatexbase.provides_module(polyglossia_module)
+
+local log_info = function(message)
+	luatexbase.module_info(module_name, message)
+end
+local log_warning = function(message)
+	luatexbase.module_warning(module_name, message)
+end
 
 polyglossia = polyglossia or {}
 local polyglossia = polyglossia
