@@ -110,7 +110,7 @@ end
 local function newloader(langentry)
     loaded_language = polyglossia.newloader_loaded_languages[langentry]
     if loaded_language then
-        texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded; id is ' .. lang.id(loaded_language))
+        log_info('Language ' .. langentry .. ' already loaded; id is ' .. lang.id(loaded_language))
         -- texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded with patterns ' .. tostring(loaded_language) .. '; id is ' .. lang.id(loaded_language))
         -- texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded with patterns ' .. loaded_language['patterns'] .. '; id is ' .. lang.id(loaded_language))
         return lang.id(loaded_language)
@@ -119,15 +119,16 @@ local function newloader(langentry)
         if langdata and langdata['special'] == 'language0' then return 0 end
 
         if langdata then
-            print("Language data for " .. langentry)
+            local s = "Language data for " .. langentry
             for k, v in pairs(langdata) do
-                print(k, tostring(v))
+				s = s .. "\n" .. k .. "\t" .. tostring(v)
             end
             polyglossia.newloader_max_langid = polyglossia.newloader_max_langid + 1
             -- langobject = lang.new(newloader_max_langid)
             lang.new(); lang.new(); lang.new()
             langobject = lang.new()
-            texio.write_nl('term and log', langdata.patterns)
+			s = s .. "\npatterns: " .. langdata.patterns
+			log_info(s)
             if langdata.patterns and langdata.patterns ~= '' then
                 pattfilepath = kpse.find_file(langdata.patterns)
                 if pattfilepath then
@@ -146,10 +147,10 @@ local function newloader(langentry)
             end
             polyglossia.newloader_loaded_languages[langentry] = langobject
 
-            texio.write_nl('term and log', 'Language ' .. langentry .. ' was not yet loaded; created with id ' .. lang.id(langobject))
+            log_info('Language ' .. langentry .. ' was not yet loaded; created with id ' .. lang.id(langobject))
             return lang.id(langobject)
         else
-            texio.write_nl('term and log', 'Language ' .. langentry .. ' not found in language.dat.lua')
+            log_warning('Language ' .. langentry .. ' not found in language.dat.lua')
             return 255
         end
     end
