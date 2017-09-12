@@ -408,14 +408,12 @@ The default value of each option is given in italic.
   \item \Cmd\aemph (see section \ref{arabic}).
 	\end{itemize}
 
-%\subsection{french}\label{french}
-%\textbf{Options}:
-%	\begin{itemize}
-%    \item \TB{espacedeuxpoints} = thick or half \new{v1.2.x} ???
-%  \footnote{ %
-%    Can be customized by redefining \french@colonspace }
-%	\end{itemize}
-%
+\subsection{french}\label{french}\new{v1.5.0}
+\textbf{Options}:
+	\begin{itemize}
+		\item \TB{automaticspacesaroundguillemets} = true or \textit{false} (default value = true. Adds space after the opening guillemets and before the closing guillemets. Such space is usually not typed in source code, and you should let polyglossia add it. However, if your source code contains such space, you can set this option to false.)
+		\item \TB{frenchfootnote} = true or \textit{false} (default value = true. Determines whether the footnote mark starting the footnote is normal script followed by a dot (default) or superscript without a dot.)
+	\end{itemize}
 
 \subsection{german}\label{german}
 \textbf{Options}:

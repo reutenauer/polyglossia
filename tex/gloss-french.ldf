@@ -13,6 +13,8 @@
   \newluatexattribute\xpg@frpt %
   \directlua{polyglossia.load_frpt()}%
 \else
+  \newXeTeXintercharclass\french@openbrackets % ( ] {
+  \newXeTeXintercharclass\french@closebrackets % ( ] {
   \newXeTeXintercharclass\french@punctthin % ! ? ; et autres
   \newXeTeXintercharclass\french@punctthick % :
   \newXeTeXintercharclass\french@punctguillstart % « ‹
@@ -21,6 +23,30 @@
 
 \def\xpg@unskip{\ifhmode\ifdim\lastskip>\z@\unskip\fi\fi}
 \def\xpg@nospace#1{#1}
+
+\ifx\@makefntext\undefined\else
+  \let\nofrench@makefntext\@makefntext
+  \long\def\french@makefntext#1{\parindent1em \noindent\quad\ifx\@thefnmark\empty\else\@thefnmark.\space\fi #1}
+  \let\@makefntext\french@makefntext
+  \define@boolkey{french}[french@]{frenchfootnote}[true]{%
+  	\def\@tmpa{#1}
+    \def\@tmptrue{true}
+    \ifx\@tmpa\@tmptrue
+    	\let\@makefntext\french@makefntext
+		\else 
+			\let\@makefntext\nofrench@makefntext
+    \fi
+  }
+\fi
+
+
+\newif\iffrench@automaticspacesaroundguillemets
+\define@boolkey{french}[french@]{automaticspacesaroundguillemets}[true]{%
+  %\def\tmp@true{true}%
+  %\def\@tmpa{#1}%
+  %\ifx\@tmpa\tmp@true
+}
+\french@automaticspacesaroundguillemetstrue
 
 \def\french@punctuation{%
     \lccode"2019="2019
@@ -41,19 +67,31 @@
       \XeTeXcharclass `\» \french@punctguillend
       \XeTeXcharclass `\‹ \french@punctguillstart
       \XeTeXcharclass `\› \french@punctguillend
+      \XeTeXcharclass `\( \french@openbrackets
+      \XeTeXcharclass `\) \french@closebrackets
+      \XeTeXcharclass `\] \french@openbrackets
+      \XeTeXcharclass `\[ \french@closebrackets
+      \XeTeXcharclass `\{ \french@openbrackets
+      \XeTeXcharclass `\} \french@closebrackets
       \XeTeXinterchartoks \z@ \french@punctthin = {\nobreak\thinspace}%
       \XeTeXinterchartoks \z@ \french@punctthick = {\nobreakspace}%
-      \XeTeXinterchartoks 255 \french@punctthin = {\xpg@unskip\nobreak\thinspace}%
-      \XeTeXinterchartoks 255 \french@punctthick = {\xpg@unskip\nobreakspace}%
+      \XeTeXinterchartoks \xpg@boundaryclass \french@punctthin = {\xpg@unskip\nobreak\thinspace}%
+      \XeTeXinterchartoks \xpg@boundaryclass \french@punctthick = {\xpg@unskip\nobreakspace}%
       \XeTeXinterchartoks \french@punctguillstart \z@ = {\nobreakspace}% "«a" -> "« a"
   %   \XeTeXinterchartoks \z@ \french@punctguillstart = {\nobreakspace}% "a«" unchanged?
   %   \XeTeXinterchartoks \french@punctguillend \z@ = {\nobreakspace}% "»a" unchanged?
       \XeTeXinterchartoks \z@ \french@punctguillend = {\nobreakspace}% "a»" -> "a »"
-  %   \XeTeXinterchartoks \french@punctguillstart 255 = {\nobreakspace\xpg@nospace}% "«  " -> "«~"
-  %   \XeTeXinterchartoks 255 \french@punctguillend = {\xpg@unskip\nobreakspace}% "  »" -> "~»"
+      \iffrench@automaticspacesaroundguillemets
+        \XeTeXinterchartoks \french@punctguillstart \xpg@boundaryclass = {\nobreakspace\xpg@nospace\relax}% "«  " -> "«~"
+        \XeTeXinterchartoks \xpg@boundaryclass \french@punctguillend = {\xpg@unskip\nobreakspace}% "  »" -> "~»"
+      \fi
       \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\nobreak\thinspace}% "»;" -> "» ;"
       \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace}% "»:" -> "» :"
       \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\nobreakspace}% "?»" -> "? »"
+     \XeTeXinterchartoks \french@openbrackets \french@punctthin = {\xpg@unskip}% "(?" -> "(?" and not "( ?"      
+     \XeTeXinterchartoks \french@punctthin \french@closebrackets = {\xpg@unskip}% "?)" -> "?)" (code not need, just for symetry with previous one)
+     \XeTeXinterchartoks \french@closebrackets \french@punctthin = {\nobreak\thinspace}% ")?" -> ") ?"
+     \XeTeXinterchartoks \french@closebrackets \french@punctthick = {\nobreakspace}% "):" -> ") :"
     \fi
     }
 
@@ -104,8 +142,8 @@
    Douzième\or Treizième\or Quatorzième\or Quinzième\or
    Seizième\or Dix-septième\or Dix-huitième\or Dix-neuvième\or
    Vingtième\fi\space}%
-   \def\thepart{}%
-   \def\partname{\protect\@Fpt partie}%
+   \def\thepart{\@Fpt partie}%
+   \def\partname{}%
    \def\pagename{page}%
    \def\seename{\emph{voir}}%
    \def\alsoname{\emph{voir aussi}}%
@@ -153,9 +191,5 @@
 \def\mmes{M\textsuperscript{mes}\space}
 \def\mr{M.\space}
 \def\mrs{MM.\space}
-
-\ifx\@makefntext\undefined\else
-\renewcommand\@makefntext[1]{\quad\ifx\@thefnmark\empty\else\@thefnmark.\space\fi #1}
-\fi
 
 \endinput

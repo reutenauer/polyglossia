@@ -26,6 +26,11 @@
   \RequireLuaModule{polyglossia}
 \fi
 
+% Which version of XeTeX do we use? What is the boudary class? 4095 or 255
+\@ifundefined{e@alloc@intercharclass@top}
+  {\chardef\xpg@boundaryclass=\@cclv}
+  {\let\xpg@boundaryclass=\e@alloc@intercharclass@top}
+
 % Useful for getting list of loaded languages and variants. Like babel's bbl@loaded
 \let\xpg@loaded\@empty
 \let\xpg@vloaded\@empty
