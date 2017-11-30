@@ -7,10 +7,10 @@
 }
 
 \def\captionscroatian{%
+  \def\prefacename{Predgovor}%
   \def\refname{Literatura}%
   \def\abstractname{Sažetak}%
   \def\bibname{Bibliografija}%
-  \def\prefacename{Predgovor}%
   \def\chaptername{Poglavlje}%
   \def\appendixname{Dodatak}%
   \def\contentsname{Sadržaj}%
@@ -20,12 +20,12 @@
   \def\figurename{Slika}%
   \def\tablename{Tablica}%
   \def\partname{Dio}%
-  \def\pagename{Stranica}%
-  \def\seename{Vidjeti}%
-  \def\alsoname{Također vidjeti}%
   \def\enclname{Prilozi}%
   \def\ccname{Kopija}%
   \def\headtoname{Prima}%
+  \def\pagename{Stranica}%
+  \def\seename{Vidjeti}%
+  \def\alsoname{Također vidjeti}%
   \def\proofname{Dokaz}%
   \def\glossaryname{Pojmovnik}%
 }
