@@ -1,7 +1,7 @@
 \ProvidesFile{gloss-croatian.ldf}[polyglossia: module for croatian]
 \PolyglossiaSetup{croatian}{
   hyphennames={croatian},
-  hyphenmins={2,3}, % see https://hrvatska-tipografija.com/dijeljenje-rijeci/
+  hyphenmins={2,2}, % aligned with https://ctan.org/pkg/hrhyph patterns and http://lebesgue.math.hr/~nenad/Diplomski/Maja_Ribaric_2011.pdf
   indentfirst=false, % recommendation from Damir Bralić
   fontsetup=true
 }
