@@ -123,7 +123,7 @@
             \XeTeXinterchartokenstate\@ne
             \XeTeXlinebreakpenalty 50
         \fi
-        \XeTeXlinebreakskip 0pt plus.1em minus .01em
+        \XeTeXlinebreakskip 0pt plus.05em minus .01em
         \XeTeXlinebreaklocale "ko"
     }
     \def\noextras@korean{%
@@ -186,9 +186,16 @@
 \protected\def\으{\xpg@make@josa \empty 으}
 \protected\def\로{\으 로}
 \protected\def\라{\xpg@make@josa 라{이라}}
+\def\xpg@make@josa@II{\xpg@make@josa\relax 이}
 \def\xpg@make@josa@I{%
-    \ifx\@let@token 라%
-        \expandafter\xpg@make@josa\expandafter\relax\expandafter 이%
+    \ifcat\@let@token\xpg@catcode@letter
+        \expandafter\expandafter\expandafter\count@\expandafter
+        \xpg@letter@to@num\meaning\@let@token\relax
+        \ifnum 0\ifnum\count@>"ABFF \ifnum\count@<"D7A4 1\fi\fi>\z@
+            \expandafter\expandafter\expandafter\xpg@make@josa@II
+        \else
+            \expandafter\expandafter\expandafter\가
+        \fi
     \else
         \expandafter\가
     \fi
@@ -277,8 +284,13 @@
 % user macro to force zero skip
 \let\inhibitglue\relax
 % initialize interchartoks and classes
-\let\XeTeXcharclassIgnore  \@cclvi
-\let\XeTeXcharclassBoundary\@cclv
+\ifdim\the\XeTeXversion\XeTeXrevision pt<0.99994pt
+    \let\XeTeXcharclassIgnore  \@cclvi
+    \let\XeTeXcharclassBoundary\@cclv
+\else
+    \chardef\XeTeXcharclassIgnore  =4096
+    \chardef\XeTeXcharclassBoundary=4095
+\fi
 \ifdefined\XeTeXcharclassID\else
     \ifdefined\xtxHanGlue
         \let\XeTeXcharclassID\@ne
@@ -288,6 +300,7 @@
         \newXeTeXintercharclass\XeTeXcharclassID
         \newXeTeXintercharclass\XeTeXcharclassOP
         \newXeTeXintercharclass\XeTeXcharclassCL
+        \global\let\XeTeXcharclassCJ\XeTeXcharclassID
         \global\let\XeTeXcharclassEX\XeTeXcharclassCL
         \global\let\XeTeXcharclassIS\XeTeXcharclassCL
         \global\let\XeTeXcharclassNS\XeTeXcharclassCL
@@ -364,10 +377,10 @@
         \advance\count@\@ne
         \repeat
     %
-    \XeTeXinterchartoks\XPGKOcharclassAA\XeTeXcharclassID{\XPGKOstartID}%
-    \XeTeXinterchartoks\XPGKOcharclassAA\XeTeXcharclassOP{\XPGKOstopAA\XPGKOstartOP}%
+    \XeTeXinterchartoks\XPGKOcharclassAA\XeTeXcharclassID{\XPGKOstopAA\XPGKOlatincjk\XPGKOstartID}%
+    \XeTeXinterchartoks\XPGKOcharclassAA\XeTeXcharclassOP{\XPGKOstopAA\XPGKOhalfhalf\XPGKOstartOP}%
     \XeTeXinterchartoks\XPGKOcharclassAA\XeTeXcharclassCL{\XPGKOstopAA\XPGKOstartCL}%
-    \XeTeXinterchartoks\XPGKOcharclassAA\XPGKOcharclassMD{\XPGKOstopAA\XPGKOstartMD}%
+    \XeTeXinterchartoks\XPGKOcharclassAA\XPGKOcharclassMD{\XPGKOstopAA\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
     \XeTeXinterchartoks\XPGKOcharclassAA\XPGKOcharclassFS{\XPGKOstopAA\XPGKOstartFS}%
     \XeTeXinterchartoks\XPGKOcharclassAA\XPGKOcharclassAA{\XPGKOstartAA}%
     %
@@ -377,7 +390,7 @@
     \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassMD{\XPGKOstopID\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
     \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassFS{\XPGKOstopID\XPGKOstartFS}%
     \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassAO{\XPGKOstopID\XPGKOlatincjk}%
-    \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassAA{\XPGKOstartAA}%
+    \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassAA{\XPGKOstopID\XPGKOlatincjk\XPGKOstartAA}%
     %
     \XeTeXinterchartoks\XeTeXcharclassOP\XeTeXcharclassID{\XPGKOstopOP\XPGKOstartID}%
     \XeTeXinterchartoks\XeTeXcharclassOP\XeTeXcharclassOP{\XPGKOstopOP\XPGKOstartOP}%
@@ -395,7 +408,7 @@
     \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassEX{\XPGKOstopCL\XPGKOnobreak\XPGKOhalfhalf}%
     \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassAO{\XPGKOstopCL\XPGKOhalfhalf}%
     \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassAC{\XPGKOstopCL\XPGKOnobreak\XPGKOhalfhalf}%
-    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassAA{\XPGKOstopCL\XPGKOstartAA}%
+    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassAA{\XPGKOstopCL\XPGKOhalfhalf\XPGKOstartAA}%
     %
     \XeTeXinterchartoks\XPGKOcharclassMD\XeTeXcharclassID{\XPGKOstopMD\XPGKOquarterquarter\XPGKOstartID}%
     \XeTeXinterchartoks\XPGKOcharclassMD\XeTeXcharclassOP{\XPGKOstopMD\XPGKOquarterquarter\XPGKOstartOP}%
@@ -406,7 +419,7 @@
     \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassEX{\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter}%
     \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassAO{\XPGKOstopMD\XPGKOquarterquarter}%
     \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassAC{\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter}%
-    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassAA{\XPGKOstopMD\XPGKOstartAA}%
+    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassAA{\XPGKOstopMD\XPGKOquarterquarter\XPGKOstartAA}%
     %
     \XeTeXinterchartoks\XPGKOcharclassFS\XeTeXcharclassID{\XPGKOstopFS\XPGKOhalfzero\XPGKOstartID}%
     \XeTeXinterchartoks\XPGKOcharclassFS\XeTeXcharclassOP{\XPGKOstopFS\XPGKOhalfzero\XPGKOstartOP}%
@@ -417,7 +430,7 @@
     \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassEX{\XPGKOstopFS\XPGKOnobreak\XPGKOhalfzero}%
     \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassAO{\XPGKOstopFS\XPGKOhalfzero}%
     \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassAC{\XPGKOstopFS\XPGKOnobreak\XPGKOhalfzero}%
-    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassAA{\XPGKOstopFS\XPGKOstartAA}%
+    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassAA{\XPGKOstopFS\XPGKOhalfzero\XPGKOstartAA}%
     %
     \XeTeXinterchartoks\XPGKOcharclassLD\XeTeXcharclassOP{\XPGKOhalfhalf\XPGKOstartOP}%
     \XeTeXinterchartoks\XPGKOcharclassLD\XPGKOcharclassMD{\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
@@ -427,6 +440,7 @@
     \XeTeXinterchartoks\XPGKOcharclassEX\XPGKOcharclassMD{\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
     \XeTeXinterchartoks\XPGKOcharclassEX\XPGKOcharclassAO{\XPGKOhalfhalf}%
     \XeTeXinterchartoks\XPGKOcharclassEX\XPGKOcharclassAC{\XPGKOnobreak\XPGKOhalfhalf}%
+    \XeTeXinterchartoks\XPGKOcharclassEX\XPGKOcharclassAA{\XPGKOhalfhalf\XPGKOstartAA}%
     %
     \XeTeXinterchartoks\XPGKOcharclassAO\XeTeXcharclassOP{\XPGKOnobreak\XPGKOhalfhalf\XPGKOstartOP}%
     \XeTeXinterchartoks\XPGKOcharclassAO\XPGKOcharclassMD{\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
@@ -480,63 +494,66 @@
 \@tmpa "FE13=\XeTeXcharclassID % ︓ PRESENTATION FORM FOR VERTICAL COLON
 \@tmpa "FE14=\XeTeXcharclassID % ︔ PRESENTATION FORM FOR VERTICAL SEMICOLON
 % CJ
-\@tmpa "3041=\XeTeXcharclassID
-\@tmpa "3043=\XeTeXcharclassID
-\@tmpa "3045=\XeTeXcharclassID
-\@tmpa "3047=\XeTeXcharclassID
-\@tmpa "3049=\XeTeXcharclassID
-\@tmpa "3063=\XeTeXcharclassID
-\@tmpa "3083=\XeTeXcharclassID
-\@tmpa "3085=\XeTeXcharclassID
-\@tmpa "3087=\XeTeXcharclassID
-\@tmpa "308E=\XeTeXcharclassID
-\@tmpa "3095=\XeTeXcharclassID
-\@tmpa "3096=\XeTeXcharclassID
-\@tmpa "30A1=\XeTeXcharclassID
-\@tmpa "30A3=\XeTeXcharclassID
-\@tmpa "30A5=\XeTeXcharclassID
-\@tmpa "30A7=\XeTeXcharclassID
-\@tmpa "30A9=\XeTeXcharclassID
-\@tmpa "30C3=\XeTeXcharclassID
-\@tmpa "30E3=\XeTeXcharclassID
-\@tmpa "30E5=\XeTeXcharclassID
-\@tmpa "30E7=\XeTeXcharclassID
-\@tmpa "30EE=\XeTeXcharclassID
-\@tmpa "30F5=\XeTeXcharclassID
-\@tmpa "30F6=\XeTeXcharclassID
-\@tmpa "30FC=\XeTeXcharclassID
-\count@"31F0 \loop
-    \expandafter\@tmpa\the\count@=\XeTeXcharclassID
-    \ifnum\count@<"31FF
-    \advance\count@\@ne
-    \repeat
-\count@"FF67 \loop
-    \expandafter\@tmpa\the\count@=\XeTeXcharclassID
-    \ifnum\count@<"FF70
-    \advance\count@\@ne
-    \repeat
+\ifnum\the\XeTeXcharclass"3041=\XeTeXcharclassID \else
+    \@tmpa "3041=\XeTeXcharclassID % ぁ HIRAGANA LETTER SMALL A
+    \@tmpa "3043=\XeTeXcharclassID % ぃ HIRAGANA LETTER SMALL I
+    \@tmpa "3045=\XeTeXcharclassID % ぅ HIRAGANA LETTER SMALL U
+    \@tmpa "3047=\XeTeXcharclassID % ぇ HIRAGANA LETTER SMALL E
+    \@tmpa "3049=\XeTeXcharclassID % ぉ HIRAGANA LETTER SMALL O
+    \@tmpa "3063=\XeTeXcharclassID % っ HIRAGANA LETTER SMALL TU
+    \@tmpa "3083=\XeTeXcharclassID % ゃ HIRAGANA LETTER SMALL YA
+    \@tmpa "3085=\XeTeXcharclassID % ゅ HIRAGANA LETTER SMALL YU
+    \@tmpa "3087=\XeTeXcharclassID % ょ HIRAGANA LETTER SMALL YO
+    \@tmpa "308E=\XeTeXcharclassID % ゎ HIRAGANA LETTER SMALL WA
+    \@tmpa "3095=\XeTeXcharclassID % ゕ HIRAGANA LETTER SMALL KA
+    \@tmpa "3096=\XeTeXcharclassID % ゖ HIRAGANA LETTER SMALL KE
+    \@tmpa "30A1=\XeTeXcharclassID % ァ KATAKANA LETTER SMALL A
+    \@tmpa "30A3=\XeTeXcharclassID % ィ KATAKANA LETTER SMALL I
+    \@tmpa "30A5=\XeTeXcharclassID % ゥ KATAKANA LETTER SMALL U
+    \@tmpa "30A7=\XeTeXcharclassID % ェ KATAKANA LETTER SMALL E
+    \@tmpa "30A9=\XeTeXcharclassID % ォ KATAKANA LETTER SMALL O
+    \@tmpa "30C3=\XeTeXcharclassID % ッ KATAKANA LETTER SMALL TU
+    \@tmpa "30E3=\XeTeXcharclassID % ャ KATAKANA LETTER SMALL YA
+    \@tmpa "30E5=\XeTeXcharclassID % ュ KATAKANA LETTER SMALL YU
+    \@tmpa "30E7=\XeTeXcharclassID % ョ KATAKANA LETTER SMALL YO
+    \@tmpa "30EE=\XeTeXcharclassID % ヮ KATAKANA LETTER SMALL WA
+    \@tmpa "30F5=\XeTeXcharclassID % ヵ KATAKANA LETTER SMALL KA
+    \@tmpa "30F6=\XeTeXcharclassID % ヶ KATAKANA LETTER SMALL KE
+    \@tmpa "30FC=\XeTeXcharclassID % ー KATAKANA-HIRAGANA PROLONGED SOUND MARK
+    \count@"31F0 \loop
+        \expandafter\@tmpa\the\count@=\XeTeXcharclassID
+        \ifnum\count@<"31FF
+        \advance\count@\@ne
+        \repeat
+    \count@"FF67 \loop
+        \expandafter\@tmpa\the\count@=\XeTeXcharclassID
+        \ifnum\count@<"FF70
+        \advance\count@\@ne
+        \repeat
+\fi
 %
-\@tmpa "28=\XPGKOcharclassAO % (
-\@tmpa "5B=\XPGKOcharclassAO % [
-\@tmpa "60=\XPGKOcharclassAO % `
-\@tmpa "7B=\XPGKOcharclassAO % {
+\@tmpa "28=\XPGKOcharclassAO % ( LEFT PARENTHESIS
+\@tmpa "5B=\XPGKOcharclassAO % [ LEFT SQUARE BRACKET
+\@tmpa "60=\XPGKOcharclassAO % ` GRAVE ACCENT
+\@tmpa "7B=\XPGKOcharclassAO % { LEFT CURLY BRACKET
+\@tmpa "AB=\XPGKOcharclassAO % « LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
 %
-\@tmpa "21=\XPGKOcharclassAC % !
-\@tmpa "27=\XPGKOcharclassAC % '
-\@tmpa "29=\XPGKOcharclassAC % )
-\@tmpa "2C=\XPGKOcharclassAC % ,
-\@tmpa "2E=\XPGKOcharclassAC % .
-\@tmpa "3B=\XPGKOcharclassAC % ;
-\@tmpa "3F=\XPGKOcharclassAC % ?
-\@tmpa "5D=\XPGKOcharclassAC % ]
-\@tmpa "7D=\XPGKOcharclassAC % }
+\@tmpa "21=\XPGKOcharclassAC % ! EXCLAMATION MARK
+\@tmpa "27=\XPGKOcharclassAC % ' APOSTROPHE
+\@tmpa "29=\XPGKOcharclassAC % ) RIGHT PARENTHESIS
+\@tmpa "2C=\XPGKOcharclassAC % , COMMA
+\@tmpa "2E=\XPGKOcharclassAC % . FULL STOP
+\@tmpa "3B=\XPGKOcharclassAC % ; SEMICOLON
+\@tmpa "3F=\XPGKOcharclassAC % ? QUESTION MARK
+\@tmpa "5D=\XPGKOcharclassAC % ] RIGHT SQUARE BRACKET
+\@tmpa "7D=\XPGKOcharclassAC % } RIGHT CURLY BRACKET
+\@tmpa "BB=\XPGKOcharclassAC % » RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
 %
 \@tmpa "2018=\XeTeXcharclassOP % ‘ LEFT SINGLE QUOTATION MARK
 \@tmpa "201C=\XeTeXcharclassOP % “ LEFT DOUBLE QUOTATION MARK
 %
 \@tmpa "2019=\XeTeXcharclassCL % ’ RIGHT SINGLE QUOTATION MARK
 \@tmpa "201D=\XeTeXcharclassCL % ” RIGHT DOUBLE QUOTATION MARK
-\@tmpa "FE10=\XeTeXcharclassCL % ︐ PRESENTATION FORM FOR VERTICAL COMMA
 % NS
 \@tmpa "00B7=\XPGKOcharclassMD % · MIDDLE DOT
 \@tmpa "30FB=\XPGKOcharclassMD % ・ KATAKANA MIDDLE DOT
@@ -593,76 +610,208 @@
 local glyph_id = node.id("glyph")
 local hbox_id  = node.id("hlist")
 local vbox_id  = node.id("vlist")
+local glue_id  = node.id("glue")
+local penalty_id = node.id("penalty")
+local disc_id  = node.id("disc")
 local attr_korean = luatexbase.attributes["xpg@attr@korean"]
 local attr_josa   = luatexbase.attributes["xpg@attr@autojosa"]
 local nobr_after = {
-    [0x28] = 1, [0x2D] = 1, [0x2F] = 1, [0x3C] = 1, [0x5B] = 1,
-    [0x5C] = 1, [0x60] = 1, [0x7B] = 1, [0x7E] = 1, [0x2013] = 1,
-    [0x2018] = 1, [0x201C] = 1, [0x2329] = 1, [0x3008] = 1,
-    [0x300A] = 1, [0x300C] = 1, [0x300E] = 1, [0x3010] = 1,
-    [0x3014] = 1, [0x3016] = 1, [0x3018] = 1, [0x301A] = 1,
-    [0x301D] = 1, [0xFF08] = 1, [0xFF1C] = 1, [0xFF3B] = 1,
-    [0xFF5B] = 1, [0xFF5F] = 1, [0xFF62] = 1,
+    [0x28] = 1, % ( LEFT PARENTHESIS
+    [0x3C] = 1, % < LESS-THAN SIGN
+    [0x5B] = 1, % [ LEFT SQUARE BRACKET
+    [0x60] = 1, % ` GRAVE ACCENT
+    [0x7B] = 1, % { LEFT CURLY BRACKET
+    [0xAB] = 1, % « LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+    [0x2018] = 1, % ‘ LEFT SINGLE QUOTATION MARK
+    [0x201C] = 1, % “ LEFT DOUBLE QUOTATION MARK
+    [0x2329] = 1, % 〈 LEFT-POINTING ANGLE BRACKET
+    [0x3008] = 1, % 〈 LEFT ANGLE BRACKET
+    [0x300A] = 1, % 《 LEFT DOUBLE ANGLE BRACKET
+    [0x300C] = 1, % 「 LEFT CORNER BRACKET
+    [0x300E] = 1, % 『 LEFT WHITE CORNER BRACKET
+    [0x3010] = 1, % 【 LEFT BLACK LENTICULAR BRACKET
+    [0x3014] = 1, % 〔 LEFT TORTOISE SHELL BRACKET
+    [0x3016] = 1, % 〖 LEFT WHITE LENTICULAR BRACKET
+    [0x3018] = 1, % 〘 LEFT WHITE TORTOISE SHELL BRACKET
+    [0x301A] = 1, % 〚 LEFT WHITE SQUARE BRACKET
+    [0x301D] = 1, % 〝 REVERSED DOUBLE PRIME QUOTATION MARK
+    [0xFE17] = 1, % ︗ PRESENTATION FORM FOR VERTICAL LEFT WHITE LENTICULAR BRACKET
+    [0xFE35] = 1, % ︵ PRESENTATION FORM FOR VERTICAL LEFT PARENTHESIS
+    [0xFE37] = 1, % ︷ PRESENTATION FORM FOR VERTICAL LEFT CURLY BRACKET
+    [0xFE39] = 1, % ︹ PRESENTATION FORM FOR VERTICAL LEFT TORTOISE SHELL BRACKET
+    [0xFE3B] = 1, % ︻ PRESENTATION FORM FOR VERTICAL LEFT BLACK LENTICULAR BRACKET
+    [0xFE3D] = 1, % ︽ PRESENTATION FORM FOR VERTICAL LEFT DOUBLE ANGLE BRACKET
+    [0xFE3F] = 1, % ︿ PRESENTATION FORM FOR VERTICAL LEFT ANGLE BRACKET
+    [0xFE41] = 1, % ﹁ PRESENTATION FORM FOR VERTICAL LEFT CORNER BRACKET
+    [0xFE43] = 1, % ﹃ PRESENTATION FORM FOR VERTICAL LEFT WHITE CORNER BRACKET
+    [0xFE47] = 1, % ﹇ PRESENTATION FORM FOR VERTICAL LEFT SQUARE BRACKET
+    [0xFE59] = 1, % ﹙ SMALL LEFT PARENTHESIS
+    [0xFE5B] = 1, % ﹛ SMALL LEFT CURLY BRACKET
+    [0xFE5D] = 1, % ﹝ SMALL LEFT TORTOISE SHELL BRACKET
+    [0xFF08] = 1, % （ FULLWIDTH LEFT PARENTHESIS
+    [0xFF3B] = 1, % ［ FULLWIDTH LEFT SQUARE BRACKET
+    [0xFF5B] = 1, % ｛ FULLWIDTH LEFT CURLY BRACKET
+    [0xFF5F] = 1, % ｟ FULLWIDTH LEFT WHITE PARENTHESIS
+    [0xFF62] = 1, % ｢ HALFWIDTH LEFT CORNER BRACKET
 }
-local nobr_before = {
-    [0x21] = 1, [0x22] = 1, [0x27] = 1, [0x29] = 1, [0x2C] = 1,
-    [0x2D] = 1, [0x2E] = 1, [0x2F] = 1, [0x3A] = 1, [0x3B] = 1,
-    [0x3E] = 1, [0x3F] = 1, [0x5C] = 1, [0x5D] = 1, [0x7D] = 1,
-    [0x7E] = 1, [0xB7] = 1, [0x2013] = 1, [0x2014] = 1, [0x2015] = 1,
-    [0x2019] = 1, [0x201D] = 1, [0x2025] = 1, [0x2026] = 1,
-    [0x232A] = 1, [0x3001] = 1, [0x3002] = 1, [0x3005] = 1,
-    [0x3009] = 1, [0x300B] = 1, [0x300D] = 1, [0x300F] = 1,
-    [0x3011] = 1, [0x3015] = 1, [0x3017] = 1, [0x3019] = 1,
-    [0x301B] = 1, [0x301C] = 1, [0x301E] = 1, [0x301F] = 1,
-    [0x3035] = 1, [0x303B] = 1, [0x303C] = 1, [0x3041] = 2,
-    [0x3043] = 2, [0x3045] = 2, [0x3047] = 2, [0x3049] = 2,
-    [0x3063] = 2, [0x3083] = 2, [0x3085] = 2, [0x3087] = 2,
-    [0x308E] = 2, [0x3095] = 2, [0x3096] = 2, [0x3099] = 1,
-    [0x309A] = 1, [0x309B] = 1, [0x309C] = 1, [0x309D] = 1,
-    [0x309E] = 1, [0x30A0] = 1, [0x30A1] = 2, [0x30A3] = 2,
-    [0x30A5] = 2, [0x30A7] = 2, [0x30A9] = 2, [0x30C3] = 2,
-    [0x30E3] = 2, [0x30E5] = 2, [0x30E7] = 2, [0x30EE] = 2,
-    [0x30F5] = 2, [0x30F6] = 2, [0x30FB] = 1, [0x30FC] = 1,
-    [0x30FD] = 1, [0x30FE] = 1, [0x31F0] = 2, [0x31F1] = 2,
-    [0x31F2] = 2, [0x31F3] = 2, [0x31F4] = 2, [0x31F5] = 2,
-    [0x31F6] = 2, [0x31F7] = 2, [0x31F8] = 2, [0x31F9] = 2,
-    [0x31FA] = 2, [0x31FB] = 1, [0x31FC] = 1, [0x31FD] = 1,
-    [0x31FE] = 1, [0x31FF] = 1, [0xFF01] = 1, [0xFF09] = 1,
-    [0xFF0C] = 1, [0xFF0E] = 1, [0xFF1A] = 1, [0xFF1B] = 1,
-    [0xFF1F] = 1, [0xFF3D] = 1, [0xFF5D] = 1, [0xFF60] = 1,
-    [0xFF61] = 1, [0xFF63] = 1, [0xFF64] = 1, [0xFF65] = 1,
-    [0xFF9E] = 1, [0xFF9F] = 1,
-}
-for i=0x1160, 0x11FF do nobr_before[i] = 2 end
-for i=0xD7B0, 0xD7FB do nobr_before[i] = 2 end
-for i=0x302A, 0x302F do nobr_before[i] = 1 end
+local nobr_before = setmetatable({
+    [0x21] = 1, % ! EXCLAMATION MARK
+    [0x22] = 1, % " QUOTATION MARK
+    [0x27] = 1, % ' APOSTROPHE
+    [0x29] = 1, % ) RIGHT PARENTHESIS
+    [0x2C] = 1, % , COMMA
+    [0x2D] = 0, % - HYPHEN-MINUS
+    [0x2E] = 1, % . FULL STOP
+    [0x2F] = 0, % / SOLIDUS
+    [0x3A] = 0, % : COLON
+    [0x3B] = 1, % ; SEMICOLON
+    [0x3E] = 1, % > GREATER-THAN SIGN
+    [0x3F] = 1, % ? QUESTION MARK
+    [0x5C] = 0, % \ REVERSE SOLIDUS
+    [0x5D] = 1, % ] RIGHT SQUARE BRACKET
+    [0x7D] = 1, % } RIGHT CURLY BRACKET
+    [0x7E] = 0, % ~ TILDE
+    [0xB7] = 1, % · MIDDLE DOT
+    [0xBB] = 1, % » RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+    [0x2013] = 0, % – EN DASH
+    [0x2014] = 0, % — EM DASH
+    [0x2015] = 1, % ― HORIZONTAL BAR
+    [0x2019] = 1, % ’ RIGHT SINGLE QUOTATION MARK
+    [0x201D] = 1, % ” RIGHT DOUBLE QUOTATION MARK
+    [0x2025] = 1, % ‥ TWO DOT LEADER
+    [0x2026] = 1, % … HORIZONTAL ELLIPSIS
+    [0x232A] = 1, % 〉 RIGHT-POINTING ANGLE BRACKET
+    [0x3001] = 1, % 、 IDEOGRAPHIC COMMA
+    [0x3002] = 1, % 。 IDEOGRAPHIC FULL STOP
+    [0x3005] = 1, % 々 IDEOGRAPHIC ITERATION MARK
+    [0x3009] = 1, % 〉 RIGHT ANGLE BRACKET
+    [0x300B] = 1, % 》 RIGHT DOUBLE ANGLE BRACKET
+    [0x300D] = 1, % 」 RIGHT CORNER BRACKET
+    [0x300F] = 1, % 』 RIGHT WHITE CORNER BRACKET
+    [0x3011] = 1, % 】 RIGHT BLACK LENTICULAR BRACKET
+    [0x3015] = 1, % 〕 RIGHT TORTOISE SHELL BRACKET
+    [0x3017] = 1, % 〗 RIGHT WHITE LENTICULAR BRACKET
+    [0x3019] = 1, % 〙 RIGHT WHITE TORTOISE SHELL BRACKET
+    [0x301B] = 1, % 〛 RIGHT WHITE SQUARE BRACKET
+    [0x301C] = 1, % 〜 WAVE DASH
+    [0x301E] = 1, % 〞 DOUBLE PRIME QUOTATION MARK
+    [0x301F] = 1, % 〟 LOW DOUBLE PRIME QUOTATION MARK
+    [0x3035] = 1, % 〵 VERTICAL KANA REPEAT MARK LOWER HALF
+    [0x303B] = 1, % 〻 VERTICAL IDEOGRAPHIC ITERATION MARK
+    [0x303C] = 1, % 〼 MASU MARK
+    [0x3041] = 3, % ぁ HIRAGANA LETTER SMALL A
+    [0x3043] = 3, % ぃ HIRAGANA LETTER SMALL I
+    [0x3045] = 3, % ぅ HIRAGANA LETTER SMALL U
+    [0x3047] = 3, % ぇ HIRAGANA LETTER SMALL E
+    [0x3049] = 3, % ぉ HIRAGANA LETTER SMALL O
+    [0x3063] = 3, % っ HIRAGANA LETTER SMALL TU
+    [0x3083] = 3, % ゃ HIRAGANA LETTER SMALL YA
+    [0x3085] = 3, % ゅ HIRAGANA LETTER SMALL YU
+    [0x3087] = 3, % ょ HIRAGANA LETTER SMALL YO
+    [0x308E] = 3, % ゎ HIRAGANA LETTER SMALL WA
+    [0x3095] = 3, % ゕ HIRAGANA LETTER SMALL KA
+    [0x3096] = 3, % ゖ HIRAGANA LETTER SMALL KE
+    [0x3099] = 1, %  COMBINING KATAKANA-HIRAGANA VOICED SOUND MARK
+    [0x309A] = 1, %  COMBINING KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
+    [0x309B] = 1, % ゛ KATAKANA-HIRAGANA VOICED SOUND MARK
+    [0x309C] = 1, % ゜ KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
+    [0x309D] = 1, % ゝ HIRAGANA ITERATION MARK
+    [0x309E] = 1, % ゞ HIRAGANA VOICED ITERATION MARK
+    [0x30A0] = 1, % ゠ KATAKANA-HIRAGANA DOUBLE HYPHEN
+    [0x30A1] = 3, % ァ KATAKANA LETTER SMALL A
+    [0x30A3] = 3, % ィ KATAKANA LETTER SMALL I
+    [0x30A5] = 3, % ゥ KATAKANA LETTER SMALL U
+    [0x30A7] = 3, % ェ KATAKANA LETTER SMALL E
+    [0x30A9] = 3, % ォ KATAKANA LETTER SMALL O
+    [0x30C3] = 3, % ッ KATAKANA LETTER SMALL TU
+    [0x30E3] = 3, % ャ KATAKANA LETTER SMALL YA
+    [0x30E5] = 3, % ュ KATAKANA LETTER SMALL YU
+    [0x30E7] = 3, % ョ KATAKANA LETTER SMALL YO
+    [0x30EE] = 3, % ヮ KATAKANA LETTER SMALL WA
+    [0x30F5] = 3, % ヵ KATAKANA LETTER SMALL KA
+    [0x30F6] = 3, % ヶ KATAKANA LETTER SMALL KE
+    [0x30FB] = 1, % ・ KATAKANA MIDDLE DOT
+    [0x30FC] = 1, % ー KATAKANA-HIRAGANA PROLONGED SOUND MARK
+    [0x30FD] = 1, % ヽ KATAKANA ITERATION MARK
+    [0x30FE] = 1, % ヾ KATAKANA VOICED ITERATION MARK
+    [0xFE30] = 1, % ︰ PRESENTATION FORM FOR VERTICAL TWO DOT LEADER
+    [0xFE31] = 1, % ︱ PRESENTATION FORM FOR VERTICAL EM DASH
+    [0xFE32] = 1, % ︲ PRESENTATION FORM FOR VERTICAL EN DASH
+    [0xFE36] = 1, % ︶ PRESENTATION FORM FOR VERTICAL RIGHT PARENTHESIS
+    [0xFE38] = 1, % ︸ PRESENTATION FORM FOR VERTICAL RIGHT CURLY BRACKET
+    [0xFE3A] = 1, % ︺ PRESENTATION FORM FOR VERTICAL RIGHT TORTOISE SHELL BRACKET
+    [0xFE3C] = 1, % ︼ PRESENTATION FORM FOR VERTICAL RIGHT BLACK LENTICULAR BRACKET
+    [0xFE3E] = 1, % ︾ PRESENTATION FORM FOR VERTICAL RIGHT DOUBLE ANGLE BRACKET
+    [0xFE40] = 1, % ﹀ PRESENTATION FORM FOR VERTICAL RIGHT ANGLE BRACKET
+    [0xFE42] = 1, % ﹂ PRESENTATION FORM FOR VERTICAL RIGHT CORNER BRACKET
+    [0xFE44] = 1, % ﹄ PRESENTATION FORM FOR VERTICAL RIGHT WHITE CORNER BRACKET
+    [0xFE48] = 1, % ﹈ PRESENTATION FORM FOR VERTICAL RIGHT SQUARE BRACKET
+    [0xFE5A] = 1, % ﹚ SMALL RIGHT PARENTHESIS
+    [0xFE5C] = 1, % ﹜ SMALL RIGHT CURLY BRACKET
+    [0xFE5E] = 1, % ﹞ SMALL RIGHT TORTOISE SHELL BRACKET
+    [0xFF01] = 1, % ！ FULLWIDTH EXCLAMATION MARK
+    [0xFF09] = 1, % ） FULLWIDTH RIGHT PARENTHESIS
+    [0xFF0C] = 1, % ， FULLWIDTH COMMA
+    [0xFF0E] = 1, % ． FULLWIDTH FULL STOP
+    [0xFF1A] = 1, % ： FULLWIDTH COLON
+    [0xFF1B] = 1, % ； FULLWIDTH SEMICOLON
+    [0xFF1F] = 1, % ？ FULLWIDTH QUESTION MARK
+    [0xFF3D] = 1, % ］ FULLWIDTH RIGHT SQUARE BRACKET
+    [0xFF5D] = 1, % ｝ FULLWIDTH RIGHT CURLY BRACKET
+    [0xFF60] = 1, % ｠ FULLWIDTH RIGHT WHITE PARENTHESIS
+    [0xFF61] = 1, % ｡ HALFWIDTH IDEOGRAPHIC FULL STOP
+    [0xFF63] = 1, % ｣ HALFWIDTH RIGHT CORNER BRACKET
+    [0xFF64] = 1, % ､ HALFWIDTH IDEOGRAPHIC COMMA
+    [0xFF65] = 1, % ･ HALFWIDTH KATAKANA MIDDLE DOT
+    [0xFF9E] = 1, % ﾞ HALFWIDTH KATAKANA VOICED SOUND MARK
+    [0xFF9F] = 1, % ﾟ HALFWIDTH KATAKANA SEMI-VOICED SOUND MARK
+}, { __index = function(_,c)
+        if c >= 0x1160  and c <= 0x11FF  then return 2 end
+        if c >= 0xD7B0  and c <= 0xD7FF  then return 2 end
+        if c >= 0x302A  and c <= 0x302F  then return 1 end
+        if c >= 0x31F0  and c <= 0x31FF  then return 3 end
+        if c >= 0xFF67  and c <= 0xFF70  then return 3 end
+        if c >= 0xFE00  and c <= 0xFE0F  then return 1 end
+        if c >= 0xFE10  and c <= 0xFE19 and not (c == 0xFE17) then return 1 end
+        if c >= 0xFE50  and c <= 0xFE58  then return 1 end
+        if c >= 0xE0100 and c <= 0xE01EF then return 1 end
+    end
+})
 local function is_cjk (c)
-    return  (c >= 0xAC00  and c <= 0xD7A3)
-    or      (c >= 0x1100  and c <= 0x115F)
-    or      (c >= 0xA960  and c <= 0xA97C)
-    or      (c >= 0x3400  and c <= 0x9FFF)
+    return  (c >= 0xAC00  and c <= 0xD7FF)
+    or      (c >= 0x1100  and c <= 0x11FF)
+    or      (c >= 0xA960  and c <= 0xA97F)
+    or      (c >= 0x2E80  and c <= 0x9FFF)
     or      (c >= 0xF900  and c <= 0xFAFF)
-    or      (c >= 0x2E80  and c <= 0x2FFF)
-    or      (c >= 0x3040  and c <= 0x30FF)
-    or      (c >= 0x20000 and c <= 0x2CEAF)
-    or      (c >= 0x2F800 and c <= 0x2FA1F)
-    or      (nobr_after[c]  and c > 0xFF)
-    or      (nobr_before[c] and c > 0xFF)
+    or      (c >= 0xFE10  and c <= 0xFE1F)
+    or      (c >= 0xFE30  and c <= 0xFE6F)
+    or      (c >= 0xFF00  and c <= 0xFFEF)
+    or      (c >= 0x1F100 and c <= 0x1F2FF)
+    or      (c >= 0x20000 and c <= 0x2FA1F)
+    or      (nobr_after[c]  and c > 0x2014)
+    or      (nobr_before[c] and c > 0x2014)
 end
 local charclass = setmetatable({
     [0x2018] = 1, [0x201C] = 1, [0x2329] = 1, [0x3008] = 1,
     [0x300A] = 1, [0x300C] = 1, [0x300E] = 1, [0x3010] = 1,
     [0x3014] = 1, [0x3016] = 1, [0x3018] = 1, [0x301A] = 1,
-    [0x301D] = 1, [0xFF08] = 1, [0xFF3B] = 1, [0xFF5B] = 1,
-    [0xFF5F] = 1, [0xFF62] = 1, [0x2019] = 2, [0x201D] = 2,
-    [0x232A] = 2, [0x3001] = 2, [0x3009] = 2, [0x300B] = 2,
-    [0x300D] = 2, [0x300F] = 2, [0x3011] = 2, [0x3015] = 2,
-    [0x3017] = 2, [0x3019] = 2, [0x301B] = 2, [0x301E] = 2,
-    [0x301F] = 2, [0xFF09] = 2, [0xFF0C] = 2, [0xFF3D] = 2,
-    [0xFF5D] = 2, [0xFF60] = 2, [0xFF63] = 2, [0xFF64] = 2,
-    [0x00B7] = 3, [0x30FB] = 3, [0xFF1A] = 3, [0xFF1B] = 3,
-    [0xFF65] = 3, [0x3002] = 4, [0xFF0E] = 4, [0xFF61] = 4,
-    [0x2015] = 5, [0x2025] = 5, [0x2026] = 5, [0xFF01] = 6,
+    [0x301D] = 1, [0xFE17] = 1, [0xFE35] = 1, [0xFE37] = 1,
+    [0xFE39] = 1, [0xFE3B] = 1, [0xFE3D] = 1, [0xFE3F] = 1,
+    [0xFE41] = 1, [0xFE43] = 1, [0xFE47] = 1, [0xFF08] = 1,
+    [0xFF3B] = 1, [0xFF5B] = 1, [0xFF5F] = 1, [0xFF62] = 1,
+    [0x2019] = 2, [0x201D] = 2, [0x232A] = 2, [0x3001] = 2,
+    [0x3009] = 2, [0x300B] = 2, [0x300D] = 2, [0x300F] = 2,
+    [0x3011] = 2, [0x3015] = 2, [0x3017] = 2, [0x3019] = 2,
+    [0x301B] = 2, [0x301E] = 2, [0x301F] = 2, [0xFE10] = 2,
+    [0xFE11] = 2, [0xFE18] = 2, [0xFE36] = 2, [0xFE38] = 2,
+    [0xFE3A] = 2, [0xFE3C] = 2, [0xFE3E] = 2, [0xFE40] = 2,
+    [0xFE42] = 2, [0xFE44] = 2, [0xFE48] = 2, [0xFF09] = 2,
+    [0xFF0C] = 2, [0xFF3D] = 2, [0xFF5D] = 2, [0xFF60] = 2,
+    [0xFF63] = 2, [0xFF64] = 2, [0x00B7] = 3, [0x30FB] = 3,
+    [0xFF1A] = 3, [0xFF1B] = 3, [0xFF65] = 3, [0x3002] = 4,
+    [0xFE12] = 4, [0xFF0E] = 4, [0xFF61] = 4, [0x2015] = 5,
+    [0x2025] = 5, [0x2026] = 5, [0xFE19] = 5, [0xFE30] = 5,
+    [0xFE31] = 5, [0xFE15] = 6, [0xFE16] = 6, [0xFF01] = 6,
     [0xFF1F] = 6,
 }, { __index = function() return 0 end })
 local intercharclass = { [0] =
@@ -679,13 +828,13 @@ local function get_new_penalty (p)
     penalty.penalty = p
     return penalty
 end
-local function get_new_glue (wd, st, sh)
+local function get_new_glue (wd, st, sh, sto, sho)
     local glue = node.new("glue")
-    local spec = node.new("glue_spec")
-    spec.width   = wd
-    spec.stretch = st
-    spec.shrink  = sh
-    glue.spec = spec
+    glue.width   = wd or 0
+    glue.stretch = st or 0
+    glue.shrink  = sh or 0
+    glue.stretch_order = sto or 0
+    glue.shrink_order  = sho or 0
     return glue
 end
 local function get_font_size (fid, space)
@@ -703,9 +852,7 @@ local function glyph_to_box (head, curr, class)
     local size = get_font_size(g.font)
     head, curr = node.remove(head, curr)
     g.next, g.prev = nil, nil
-    local hss = get_new_glue(0, 65536, 65536)
-    hss.spec.stretch_order = 2
-    hss.spec.shrink_order  = 2
+    local hss = get_new_glue(0, 65536, 65536, 2, 2)
     if class == 1 then
         h, hss.next, g.prev = hss, g, hss
     elseif class == 2 or class == 4 then
@@ -714,6 +861,7 @@ local function glyph_to_box (head, curr, class)
         local hss2 = node.copy(hss)
         h, hss.next, g.prev, g.next, hss2.prev = hss, g, hss, hss2, g
     end
+    h = nodes.simple_font_handler(h)
     local box = node.hpack(h, size, "exactly")
     head, curr = node.insert_before(head, curr, box)
     return head, curr
@@ -739,10 +887,37 @@ local function insert_penalty_glue (head, curr, f, var, x)
     if x then
         glue = get_new_glue(size/2, size/4, size/8)
     else
-        glue = get_new_glue(0, size/5, size/50)
+        glue = get_new_glue(0, size/10, size/50)
     end
     head, curr = node.insert_after(head, curr, glue)
     return head, curr
+end
+local function avoid_widow_char (head)
+    local curr = node.tail(head)
+    while curr do
+        if curr.id == glyph_id then
+            local c = curr.char or 0
+            if not nobr_before[c] or nobr_before[c] == 3 then
+                local var = node.has_attribute(curr, attr_korean)
+                if var and is_cjk(c) then
+                    curr = curr.prev
+                    if curr and curr.id == glue_id then
+                        curr = curr.prev
+                        if curr then
+                            local pv = var == 1 and 500 or 1000
+                            if curr.id == penalty_id then
+                                if curr.penalty < pv then curr.penalty = pv end
+                            else
+                                node.insert_after(head, curr, get_new_penalty(pv))
+                            end
+                        end
+                    end
+                end
+                break
+            end
+        end
+        curr = curr.prev
+    end
 end
 local function korean_break (head, lb)
     local curr = head
@@ -750,24 +925,26 @@ local function korean_break (head, lb)
         if curr.id == glyph_id then
             local var = node.has_attribute(curr, attr_korean)
             if var then
-                local c, f = curr.char, curr.font
-                local cc = charclass[c]
+                local c, f = curr.char or 0, curr.font or 0
+                local cc, cjkc = charclass[c], is_cjk(c)
                 if var > 0 and cc > 0 and cc < 5 then
                     head, curr = glyph_to_box(head, curr, cc)
                 end
                 local next = curr.next
                 if next and next.id == glyph_id then
-                    local n = next.char
+                    local n = next.char or 0
                     local nc = charclass[n]
                     local nobr = nobr_before[n] or nobr_after[c]
                     if var > 0 and intercharclass[cc][nc] then
                         head, curr = insert_cjk_penalty_glue(head, curr, f, var, cc, nc, nobr)
                     elseif not nobr then
-                        local cjkc, cjkn = is_cjk(c), is_cjk(n)
-                        if var > 0 and (cjkc or cjkn) and not (cjkc and cjkn) then
-                            head, curr = insert_penalty_glue(head, curr, f, var, true)
-                        elseif lb and (cjkc or cjkn) then
-                            head, curr = insert_penalty_glue(head, curr, f, var)
+                        local cjkn = is_cjk(n)
+                        if cjkc or cjkn then
+                            if var > 0 and not (cjkc and cjkn) and not (nobr_before[c] == 0) then
+                                head, curr = insert_penalty_glue(head, curr, f, var, true)
+                            elseif lb then
+                                head, curr = insert_penalty_glue(head, curr, f, var)
+                            end
                         end
                     end
                 end
@@ -775,6 +952,7 @@ local function korean_break (head, lb)
         end
         curr = curr.next
     end
+    if lb then avoid_widow_char(head) end
     return head
 end
 local josa_table = {
@@ -834,9 +1012,9 @@ local josa_code = setmetatable({
 local function get_prev_char (p)
     while p do
         if p.id == glyph_id then
-            local pc = p.char
+            local pc = p.char or 0
             if not nobr_after[pc] then
-                if not nobr_before[pc] or nobr_before[pc] == 2 then
+                if not nobr_before[pc] or nobr_before[pc] >= 2 then
                     return pc
                 end
             end
@@ -853,13 +1031,13 @@ local function auto_josa (head)
         if curr.id == glyph_id then
             local josa = node.has_attribute(curr, attr_josa)
             if josa then
-                local cc = curr.char
+                local cc = curr.char or 0
                 if josa == 0 then
                     josa = josa_code[get_prev_char(curr.prev) or 0x30]
                 end
                 if cc == 0xC774 then
                     local n = curr.next
-                    if n and n.id == glyph_id and n.char == 0xB77C then
+                    if n and n.char and n.char >= 0xAC00 and n.char <= 0xD7A3 then
                     else
                         cc = 0xAC00
                     end
@@ -886,8 +1064,8 @@ local function reorder_tm (head)
     local curr, tone = node.tail(head)
     while curr do
         if curr.id == glyph_id and node.has_attribute(curr, attr_korean) then
-            local c, wd = curr.char, curr.width
-            if (c == 0x302E or c == 0x302F) and wd and wd > 0 then
+            local c, wd = curr.char or 0, curr.width or 0
+            if (c == 0x302E or c == 0x302F) and wd > 0 then
                 tone = curr
             elseif tone and not nobr_before[c] then
                 head = node.remove(head, tone)
@@ -916,6 +1094,24 @@ else
         luatexbase.add_to_callback(name, func, desc, 1)
     end
 end
+prepend_to_callback ("hyphenate",
+    function(head)
+        local in_callback = luatexbase.in_callback or luatexbase.priority_in_callback
+        if in_callback("hyphenate", "polyglossia.disable_hyphenation") then
+            return false
+        end
+        local curr = head
+        while curr do
+            if curr.id == glyph_id and node.has_attribute(curr, attr_korean) and is_cjk(curr.char or 0) then
+                if curr.subtype == 1 then
+                    curr.subtype = 0
+                end
+            end
+            curr = curr.next
+        end
+        lang.hyphenate(head)
+    end,
+    "polyglossia.lang_korean")
 prepend_to_callback ("pre_linebreak_filter",
     function(head)
         head = auto_josa(head)
