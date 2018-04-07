@@ -1,190 +1,273 @@
-% !TEX encoding = UTF-8 Unicode
-\ProvidesFile{gloss-latin.ldf}[polyglossia: module for latin]
-\PolyglossiaSetup{latin}{
-hyphennames={latin},
-%  hyphenmins={2,2},
-  frenchspacing=true,
-  fontsetup=true,
+%%
+%% This is file `gloss-latin.ldf',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% gloss-latin.dtx  (with options: `lamodern')
+%%   ------------------------------------------------------------------
+%%   Latin module for polyglossia
+%%   Copyright (C) Claudio Beccari 2013-2016
+%%   Copyright (C) Élie Roux 2016
+%%   This work is distributed under the MIT License.
+%% 
+%%   See the postamble.
+%%   ------------------------------------------------------------------
+\ProvidesFile{gloss-latin.ldf}
+        [2016/09/10 v.1.03 Latin support from polyglossia]
+%%
+
+
+\PolyglossiaSetup{latin}{%
+      hyphennames={latin},
+      hyphenmins={2,2},
+      frenchspacing=true,
+      fontsetup=true,
+}
+\def\classicuclccodes{\lccode`\V=`\u \uccode`\u=`\V}
+\def\noclassicuclccodes{\lccode`\V=`\v \uccode`\u=`\U}
+\def\tmp@modern{modern}
+\def\tmp@medieval{medieval}
+\unless\ifluatex
+  \def\tmp@classic{classic}
+  \def\tmp@liturgical{liturgical}
+\fi
+\newif\ifmedieval\medievalfalse
+\newif\ifclassic\classicfalse
+\define@boolkey{latin}[latin@]{ecclesiastic}[true]{}
+
+\let\latin@variant\l@latin
+\ifluatex
+  \ifcsname l@latin\endcsname\xpg@set@language@luatex@ii{latin}\fi
+\fi
+\def\captionslatin{\latincaptions}%
+\def\datelatin{\latindate}%
+\define@key{latin}{variant}[modern]{%
+\def\@tempa{#1}%
+\ifx\@tempa\tmp@medieval
+  \ifluatex
+    \ifcsname l@latin\endcsname\xpg@set@language@luatex@ii{latin}\fi
+  \fi
+  \let\latin@variant\l@latin
+  \xpg@set@language@luatex@ii{latin}
+  \medievaltrue \classictrue
+  \classicuclccodes
+  \xpg@info{Option: Medieval Latin}%
+\else
+  \ifx\@tempa\tmp@classic
+    \unless\ifluatex
+      \unless\ifcsname l@classiclatin\endcsname
+         \xpg@nopatterns{Classic Latin}%
+         \adddialect\l@classiclatin\l@latin
+         \let\latin@variant\l@latin
+      \else
+         \let\latin@variant\l@classiclatin
+      \fi
+    \fi
+    \medievalfalse\classictrue\classicuclccodes
+    \xpg@info{Option: Classic Latin}%
+  \else
+   \ifx\@tempa\tmp@liturgical\unless\ifluatex
+      \unless\ifcsname l@liturgicallatin\endcsname
+         \xpg@nopatterns{Liturgical Latin}%
+         \adddialect\l@liturgicallatin\l@latin
+         \def\latin@variant{\l@latin}%
+      \else
+         \let\latin@variant\l@liturgicallatin
+      \fi
+        \medievaltrue\classicfalse
+        \xpg@info{Option: Liturgical Latin}\fi
+   \else
+      \ifx\@tempa\tmp@modern
+        \let\latin@variant\l@latin
+        \ifluatex\xpg@set@language@luatex@ii{latin}\fi
+        \xpg@info{Option: Modern Latin}%
+      \else
+        \def\latin@variant{\l@nohyphenation}%
+        \PackageWarning{polyglossia}{%
+          *******************\MessageBreak
+          No hyphenation set for \@tempa
+          *******************\MessageBreak
+        }{}%
+      \fi
+    \fi
+  \fi
+\fi
 }
 
+\def\latin@language{\language=\latin@variant}%
+\ifluatex
+       \PackageWarning{polyglossia}{\MessageBreak\MessageBreak
+       *****************\MessageBreak
+       The ecclesiastic option is not active\MessageBreak
+       when typesetting with LuaLaTeX\MessageBreak
+       *****************\MessageBreak
+       \MessageBreak}{}
+  \else
+   \def\ecclesiasticlatin@punctuation{%
+      \def\xpg@unskip{\ifhmode\ifdim\lastskip>\z@\unskip\fi\fi}
+      \lccode\string"2019=\string"2019
+      \newXeTeXintercharclass\ecclesiasticlatin@punctthin
+      \newXeTeXintercharclass\ecclesiasticlatin@punctguillstart
+      \newXeTeXintercharclass\ecclesiasticlatin@punctguillend
+      \XeTeXinterchartokenstate=1
+      \XeTeXcharclass `\! \ecclesiasticlatin@punctthin
+      \XeTeXcharclass `\? \ecclesiasticlatin@punctthin
+      \XeTeXcharclass `\; \ecclesiasticlatin@punctthin
+      \XeTeXcharclass `\: \ecclesiasticlatin@punctthin
+      \XeTeXcharclass `\« \ecclesiasticlatin@punctguillstart
+      \XeTeXcharclass `\» \ecclesiasticlatin@punctguillend
+      \XeTeXinterchartoks \z@ \ecclesiasticlatin@punctthin = {\penalty\@M
+      \hskip.2\fontdimen2\font \@plus\z@\@minus\z@}%
+      \XeTeXinterchartoks 255 \ecclesiasticlatin@punctthin = {\xpg@unskip}
+      \XeTeXinterchartoks \ecclesiasticlatin@punctguillstart \z@ = {\penalty\@M
+      \hskip.2\fontdimen2\font \@plus\z@\@minus\z@\ignorespaces}
+      \XeTeXinterchartoks \z@ \ecclesiasticlatin@punctguillend = {\xpg@unskip
+      \penalty\@M\hskip.2\fontdimen2\font \@plus\z@\@minus\z@}
+    }
+
+   \def\noecclesiasticlatin@punctuation{%
+      \lccode\string"2019=\z@
+        \XeTeXcharclass `\! \z@
+        \XeTeXcharclass `\? \z@
+        \XeTeXcharclass `\; \z@
+        \XeTeXcharclass `\: \z@
+        \XeTeXcharclass `\« \z@
+        \XeTeXcharclass `\» \z@
+        \XeTeXinterchartokenstate=0
+      }
+    \let\latin@original@makefntext\@makefntext
+    \newcommand\latin@ecclesiastic@makefntext[1]{%
+        \parindent 1em \noindent
+        \latin@Makefnmark{\enspace #1}}
+    \newcommand\latin@Makefnmark{\hbox{\normalfont\@thefnmark.}}
+\fi
+\setkeys{latin}{variant,ecclesiastic=false}
+\def\latincaptions{%
+   \def\prefacename{\ifmedieval Præfatio\else Praefatio\fi}%
+   \def\refname{Conspectus librorum}%
+   \def\abstractname{Summarium}%
+   \def\bibname{Conspectus librorum}%
+   \def\chaptername{Caput}%
+   \def\appendixname{Additamentum}%
+   \def\contentsname{Index}%
+   \def\listfigurename{Conspectus descriptionum}%
+   \def\listtablename{Conspectus tabularum}%
+   \def\indexname{Index rerum notabilium}%
+   \def\figurename{Descriptio}%
+   \def\tablename{Tabula}%
+   \def\partname{Pars}%
+   \def\enclname{Additur}%
+   \def\ccname{Exemplar}%
+   \def\headtoname{\ignorespaces}%
+   \def\pagename{charta}%
+   \def\seename{cfr.}%
+   \def\alsoname{cfr.}%
+   \def\proofname{Demonstratio}%
+   \def\glossaryname{Glossarium}%
+   }
+
+\def\latindate{%
+   \def\today{\uppercase\expandafter{\romannumeral\day}%
+      \space \ifcase\month%
+      \or Januarii\or Februarii\or Martii\or Aprilis\or Maji\or
+      Junii\or Julii\or Augusti\or Septembris\or Octobris\or
+        \ifclassic Nouembris\else Novembris\fi
+      \or Decembris\fi%
+      \space \uppercase\expandafter{\romannumeral\year}}}
+%%%%%%%%% Latin shorthands
 
 \define@boolkey{latin}[latin@]{babelshorthands}[true]{}
-
 
 \ifsystem@babelshorthands
   \setkeys{latin}{babelshorthands=true}
 \else
   \setkeys{latin}{babelshorthands=false}
 \fi
-
-
 \ifcsundef{initiate@active@char}{%
 \input{babelsh.def}%
-}{}\initiate@active@char{"}%
-
-
-
+\initiate@active@char{"}%
+\initiate@active@char{'}%
+}{}
 \def\latin@shorthands{%
-  \bbl@activate{"}%
   \def\language@group{latin}%
-  \declare@shorthand{latin}{"}{%
-    \relax\ifmmode
-      \def\xpgla@next{''}%
+  \bbl@activate{"}%
+  \declare@shorthand{latin}{"}{\relax
+    \ifmmode
+      \def\xpgla@nextdq{''}%
     \else
-      \def\xpgla@next{\futurelet\xpgla@temp\xpgla@cwm}%
+      \def\xpgla@nextdq{\futurelet\xpgla@temp\xpgla@cwm}%
     \fi
-  \xpgla@next}%
+  \xpgla@nextdq}%
+  \bbl@activate{'}%
+  \declare@shorthand{latin}{'}{\relax
+    \ifmmode
+      \def\xpgla@nextsq{'}%
+    \else
+      \def\xpgla@nextsq{\futurelet\xpgla@temp@A\xpgla@putacute}%
+    \fi
+  \xpgla@nextsq}%
 }
-
-
-\def\xpgla@allowhyphens{\bbl@allowhyphens\discretionary{-}{}{}\bbl@allowhyphens}
-\newcommand*{\xpgla@cwm}{\let\xpgla@@next\relax
+\def\xpgla@allowhyphens{\bbl@allowhyphens
+        \discretionary{-}{}{}\bbl@allowhyphens}
+\newcommand*{\xpgla@cwm}{\let\xpgla@@nextdq\relax
   \ifcat\noexpand\xpgla@temp a%
-    \let\xpgla@@next\xpgla@allowhyphens
+    \let\xpgla@@nextdq\xpgla@allowhyphens
   \else
     \ifx\xpgla@temp\ae
-        \let\xpgla@@next\xpgla@allowhyphens
+        \let\xpgla@@nextdq\xpgla@allowhyphens
     \else
         \ifx\xpgla@temp\oe
-           \let\xpgla@@next\xpgla@allowhyphens
+           \let\xpgla@@nextdq\xpgla@allowhyphens
         \else
            \if\noexpand\xpgla@temp\string|%
-              \def\xpgla@@next{\xpgla@allowhyphens\@gobble}%
+              \def\xpgla@@nextdq{\xpgla@allowhyphens\@gobble}%
            \fi
         \fi
     \fi
   \fi
-  \xpgla@@next}%
+  \xpgla@@nextdq}%
+\def\xpgla@putacute#1{\let\xpgla@nextsq\relax%
+\if a\xpgla@temp@A
+  æ\kern-0.175em^^^^0301\kern0.175em\xpgla@allowhyphens
+\else
+\if o\xpgla@temp@A
+  œ\kern-0.175em^^^^0301\kern0.175em\xpgla@allowhyphens
+\else
+  \if æ\xpgla@temp@A
+    æ^^^^0301%
+  \else
+    \if œ\xpgla@temp@A
+      œ^^^^0301%
+    \else
+      \string'%
+    \fi
+  \fi
+\fi
+\fi}%
 
 \def\nolatin@shorthands{%
   \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{'}}%
 }
 
-
-% set modern as default
-\def\latin@variant{\l@latin}%
-\ifluatex\xpg@set@language@luatex@iv{latin}\fi
-\def\captionslatin{\modernlatincaptions}%
-\def\datelatin{\modernlatindate}%
-\def\classicuclccodes{\lccode`\V=`\u \uccode`\u=`\V}
-
-\def\tmp@modern{modern}
-\def\tmp@medieval{medieval}
-\def\tmp@classic{classic}
-
-\define@key{latin}{variant}[modern]{%
-\def\@tempa{#1}%
-\ifx\@tempa\tmp@medieval
-  \def\latin@variant{\l@latin}%
-  \xpg@set@language@luatex@iv{latin}
-  \def\captionslatin{\medievallatincaptions}%
-  \def\datelatin{\classiclatindate}% 
-  \classicuclccodes
-  \xpg@info{Option: Medieval Latin}%
-\else
-  \ifx\@tempa\tmp@classic
-    \xpg@ifdefined{classiclatin}{%
-      \def\latin@variant{\l@classiclatin}%
-      \xpg@set@language@luatex@iv{classiclatin}%
-    }{%
-       \xpg@nopatterns{Classic Latin}%
-       \adddialect\l@classiclatin\l@latin
-       \def\latin@variant{\l@latin}%
-    }%
-    \def\captionslatin{\modernlatincaptions}%
-    \def\datelatin{\classiclatindate}%
-    \classicuclccodes
-    \xpg@info{Option: Classic Latin}%
-  \else
-    \def\latin@variant{\l@latin}%
-    \xpg@set@language@luatex@iv{latin}
-    \def\captionslatin{\modernlatincaptions}%
-    \def\datelatin{\modernlatindate}%
-    \xpg@info{Option: Modern Latin}%
-  \fi
-\fi
-}
-
-\def\latin@language{\language=\latin@variant}%
-
-\def\modernlatincaptions{%
-   \def\prefacename{Praefatio}%
-   \def\refname{Conspectus librorum}%
-   \def\abstractname{Summarium}%
-   \def\bibname{Conspectus librorum}%
-   \def\chaptername{Caput}%
-   \def\appendixname{Additamentum}%
-   \def\contentsname{Index}%
-   \def\listfigurename{Conspectus descriptionum}%
-   \def\listtablename{Conspectus tabularum}%
-   \def\indexname{Index rerum notabilium}%
-   \def\figurename{Descriptio}%
-   \def\tablename{Tabula}%
-   \def\partname{Pars}%
-   \def\enclname{Additur}%
-   \def\ccname{Exemplar}%
-   \def\headtoname{\ignorespaces}%
-   \def\pagename{charta}%
-   \def\seename{cfr.}%
-   \def\alsoname{cfr.}%
-   \def\proofname{Demonstratio}%
-   \def\glossaryname{Glossarium}%
-   }
-      
-\def\medievallatincaptions{%
-   \def\prefacename{Præfatio}%
-   \def\refname{Conspectus librorum}%
-   \def\abstractname{Summarium}%
-   \def\bibname{Conspectus librorum}%
-   \def\chaptername{Caput}%
-   \def\appendixname{Additamentum}%
-   \def\contentsname{Index}%
-   \def\listfigurename{Conspectus descriptionum}%
-   \def\listtablename{Conspectus tabularum}%
-   \def\indexname{Index rerum notabilium}%
-   \def\figurename{Descriptio}%
-   \def\tablename{Tabula}%
-   \def\partname{Pars}%
-   \def\enclname{Additur}%
-   \def\ccname{Exemplar}%
-   \def\headtoname{\ignorespaces}%
-   \def\pagename{charta}%
-   \def\seename{cfr.}%
-   \def\alsoname{cfr.}%
-   \def\proofname{Demonstratio}%
-   \def\glossaryname{Glossarium}%
-   }
-
-\def\modernlatindate{%   
-   \def\today{\uppercase\expandafter{\romannumeral\day}%
-      \space \ifcase\month%
-      \or Januarii\or Februarii\or Martii\or Aprilis\or Maji\or Junii\or%
-      Julii\or Augusti\or Septembris\or Octobris\or Novembris\or%
-      Decembris\fi%
-      \space \uppercase\expandafter{\romannumeral\year}}}
-
-\def\classiclatindate{%   
-   \def\today{\uppercase\expandafter{\romannumeral\day}%
-      \space \ifcase\month
-      \or Januarii\or Februarii\or Martii\or Aprilis\or Maii\or Junii\or
-      Julii\or Augusti\or Septembris\or Octobris\or Nouembris\or
-      Decembris\fi
-      \space \uppercase\expandafter{\romannumeral\year}}}
-      
 \let\xpgla@savedvalues\empty
-\AtEndPreamble{% the user or the class might define different values
+\AtEndPreamble{%
   \edef\xpgla@savedvalues{%
     \clubpenalty=\the\clubpenalty\space
     \@clubpenalty=\the\@clubpenalty\space
     \widowpenalty=\the\widowpenalty\space
     \finalhyphendemerits=\the\finalhyphendemerits}
 }
-
-
 \def\noextras@latin{%
    \lccode\string"2019=\z@
    \nolatin@shorthands
    \xpgla@savedvalues
+   \noclassicuclccodes
+  \iflatin@ecclesiastic
+    \unless\ifluatex\noecclesiasticlatin@punctuation
+    \let\@makefntext\latin@original@makefntext\fi
+  \fi
 }
 
 \def\blockextras@latin{%
@@ -192,11 +275,39 @@ hyphennames={latin},
    \clubpenalty=3000 \@clubpenalty=3000 \widowpenalty=3000
    \finalhyphendemerits=50000000
    \iflatin@babelshorthands\latin@shorthands\fi
+   \iflatin@ecclesiastic\unless\ifluatex\ecclesiasticlatin@punctuation
+   \let\@makefntext\latin@ecclesiastic@makefntext\fi
+   \fi
 }
 
 \def\inlineextras@latin{%
    \lccode\string"2019=\string"2019
    \iflatin@babelshorthands\latin@shorthands\fi
+   \iflatin@ecclesiastic
+      \unless\ifluatex\ecclesiasticlatin@punctuation
+      \let\@makefntext\latin@ecclesiastic@makefntext\fi
+   \fi
 }
-
-\endinput
+%%   Copyright (C) Claudio Beccari 2013-2016
+%%   Copyright (C) Élie Roux 2016
+%% 
+%%   Permission is hereby granted, free of charge, to any person obtaining
+%%   a copy of this software and associated documentation files
+%%   (the "Software"), to deal in the Software without restriction, including
+%%   without limitation the rights to use, copy, modify, merge, publish,
+%%   distribute, sublicense, and/or sell copies of the Software, and to permit
+%%   persons to whom the Software is furnished to do so, subject to the following
+%%   conditions:
+%% 
+%%   The above copyright notice and this permission notice shall be included in
+%%   all copies or substantial portions of the Software.
+%% 
+%%   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+%%   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%%   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+%%   THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%%   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+%%   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+%%   IN THE SOFTWARE.
+%%
+%% End of file `gloss-latin.ldf'.

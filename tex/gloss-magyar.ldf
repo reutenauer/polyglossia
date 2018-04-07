@@ -5,6 +5,16 @@
   fontsetup=true,
 }
 
+\frenchspacing
+
+% change 'táblázat x.x' to 'x.x. táblázat'
+\newcommand{\@magyar@fnum@table}{\thetable.~\tablename}
+\let\fnum@table\@magyar@fnum@table
+
+% change 'ábra x.x' to 'x.x. ábra'
+\newcommand{\@magyar@fnum@figure}{\thefigure.~\figurename}
+\let\fnum@figure\@magyar@fnum@figure
+
 \def\captionsmagyar{%
    \def\refname{Hivatkozások}%
    \def\abstractname{Kivonat}%

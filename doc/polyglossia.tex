@@ -444,6 +444,7 @@ The default value of each option is given in italic.
 		\item ¦"~¦ for a compound word mark without a breakpoint
 		\item ¦"=¦ for a compound word mark with a breakpoint,
 			allowing hyphenation in the composing words.
+		\item ¦"/¦ a slash that allows for a line break and maintains hyphenation points.
 		\end{itemize}
 
 		There are also four shorthands for quotation signs:
@@ -558,9 +559,13 @@ enable hyphenation when writing English within Korean text.
 	The value is passed to \pkg{fontspec} in cases where ¦\sanskritfont¦ or
 	¦\devanagarifont¦ are not defined. This can be useful if you typeset
 	Sanskrit texts in scripts other than Devanagari.
-  %TODO \item Numerals <<<<
+	  %TODO \item Numerals <<<<
 	\end{itemize}
-
+  \pkg{polyglossia} currently supports the typesetting of Sanskrit in the
+  following writing systems: Devanagari, Gujarati, Malayalam, Bengali, Kannada,
+  Telugu, and Latin.  Use the ¦Script=¦ option to select the writing system 
+  you want, and enter your input in that script.
+ 
 \subsection{serbian}\label{serbian}
 \textbf{Options}:
 	\begin{itemize}

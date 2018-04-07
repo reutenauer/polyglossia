@@ -1,5 +1,6 @@
 bidi            = bidi or { }
 
+local LUATEX_PRE_0_85 = tex.luatexversion < 85
 local MAX_STACK = 60
 
 local format, upper, max = string.format, string.upper, math.max
@@ -390,10 +391,20 @@ local glue    = node.id("glue")
 local hlist   = node.id("hlist")
 local vlist   = node.id("vlist")
 local math    = node.id("math")
-local whatsit = node.id("whatsit")
 
-local dir_node  = node.subtype("dir")
-local local_par = node.subtype("local_par")
+local dir_node
+local local_par_node
+local whatsit_node
+
+if LUATEX_PRE_0_85 then
+    whatsit_node = node.id("whatsit")
+    dir_node = node.subtype("dir")
+    local_par = node.subtype("local_par")
+else
+    dir_node = node.id("dir")
+    local_par = node.id("local_par")
+end
+
 local obj_code  = 0xFFFC -- object replacement character
 local parfillskip = 15
 
@@ -418,7 +429,9 @@ local function node_to_table(head)
             c = n.char
         elseif n.id == glue then
             c = 0x0020 -- space
-        elseif n.id == whatsit and n.subtype == dir_node then
+        elseif LUATEX_PRE_0_85 and n.id == whatsit_node and n.subtype == dir_node
+            or n.id == dir_node
+        then
             -- XXX handle all supported directions
             if n.dir == "+TLT" then
                 c = 0x202A -- lre
@@ -474,10 +487,20 @@ local function insert_dir_points(line)
     return line
 end
 
-local function new_dir_node(dir)
-    local n = node.new("whatsit", "dir")
-    n.dir = dir
-    return n
+local new_dir_node
+
+if LUATEX_PRE_0_85 then
+    function new_dir_node(dir)
+        local n = node.new("whatsit", "dir")
+        n.dir = dir
+        return n
+    end
+else
+    function new_dir_node(dir)
+        local n = node.new("dir")
+        n.dir = dir
+        return n
+    end
 end
 
 local function process(head, group)
@@ -545,7 +568,9 @@ local function process(head, group)
         local enddir = c.enddir
 
         if begindir then
-            if n.id == whatsit and n.subtype == local_par then
+            if LUATEX_PRE_0_85 and n.id == whatsit_node and n.subtype == local_par_node
+              or n.id == local_par_node
+            then
                 -- local_par should always be the 1st node
                 head, n = node.insert_after(head, n, new_dir_node("+"..begindir))
             else
