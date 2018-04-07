@@ -169,9 +169,18 @@
 
 % The following is based on some ideas from ruscor.sty
 \def\russian@capsformat{%
-   \def\@seccntformat##1{\csname pre##1\endcsname%
-      \csname the##1\endcsname%
-      \csname post##1\endcsname}%
+   \ifdef{\KOMAScript}{%
+      \renewcommand{\chapterformat}{\prechapter\thechapter\postchapter}%
+      \renewcommand{\sectionformat}{\presection\thesection\postsection}%
+      \renewcommand{\subsectionformat}{\presubsection\thesubsection\postsubsection}%
+      \renewcommand{\subsubsectionformat}{\presubsubsection\thesubsubsection\postsubsubsection}%
+      \renewcommand{\paragraphformat}{\preparagraph\theparagraph\postparagraph}%
+      \renewcommand{\subparagraphformat}{\presubparagraph\thesubparagraph\postsubparagraph}%
+   }{%
+      \def\@seccntformat##1{\csname pre##1\endcsname%
+         \csname the##1\endcsname%
+         \csname post##1\endcsname}%
+   }%
    \def\@aftersepkern{\hspace{0.5em}}%
    \def\postchapter{.\@aftersepkern}%
    \def\postsection{.\@aftersepkern}%
@@ -214,7 +223,16 @@
 }
 
 \def\noextras@russian{%
-   \def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
+   \ifdef{\KOMAScript}{%
+      \renewcommand{\chapterformat}{\thechapter\autodot\enskip}%
+      \renewcommand{\sectionformat}{\thesection\autodot\enskip}%
+      \renewcommand{\subsectionformat}{\thesubsection\autodot\enskip}%
+      \renewcommand{\subsubsectionformat}{\thesubsubsection\autodot\enskip}%
+      \renewcommand{\paragraphformat}{\theparagraph\autodot\enskip}%
+      \renewcommand{\subparagraphformat}{\thesubparagraph\autodot\enskip}%
+   }{%
+      \def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
+   }%
    \ifcyrillic@numerals\norussian@numbers\fi
    \norussian@shorthands%
 }
