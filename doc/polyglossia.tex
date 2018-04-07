@@ -17,11 +17,13 @@
     pdfauthor={F Charette, A Reutenauer},
     pdfkeywords={xetex, xelatex, luatex, lualatex, multilingual, babel, hyphenation}
     ]{hyperref}
+\usepackage{metalogo}
+\let\XeTeX\undefined
+\let\XeLaTeX\undefined
 \usepackage[babelshorthands]{polyglossia}
 \usepackage{farsical}
 \setmainlanguage[variant=british,ordinalmonthday=false]{english}
 \setotherlanguages{arabic,hebrew,syriac,greek,russian,catalan}
-\usepackage{metalogo}
 \usepackage[protrusion]{microtype}
 \newcommand*\Cmd[1]{\cmd{#1}\DescribeMacro{#1}\xspace}
 \newcommand*\pkg[1]{\textsf{\color{myblue}#1}}
