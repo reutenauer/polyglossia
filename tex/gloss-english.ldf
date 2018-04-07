@@ -104,7 +104,7 @@
     \if@british@locale
       \english@day\space\english@month\space\number\year
     \else
-      \english@month\space\english@day, \number\year
+      \english@month\space\english@day,\space\number\year
     \fi}%
 }
 
