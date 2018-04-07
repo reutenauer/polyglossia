@@ -36,8 +36,7 @@ tmpdir=`mktemp -d`
 root=$tmpdir/polyglossia
 
 cd $tmpdir
-# git clone --branch $branch https://github.com/reutenauer/polyglossia
-rsync -av --progress $HOME/polyglossia .
+git clone --branch $branch https://github.com/reutenauer/polyglossia
 builddir="$root/build"
 mkdir -p $builddir
 
