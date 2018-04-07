@@ -1,36 +1,36 @@
 \ProvidesFile{gloss-croatian.ldf}[polyglossia: module for croatian]
 \PolyglossiaSetup{croatian}{
   hyphennames={croatian},
-  hyphenmins={2,2},
-  indentfirst=true,
-  fontsetup=true,
+  hyphenmins={2,2}, % aligned with https://ctan.org/pkg/hrhyph patterns and http://lebesgue.math.hr/~nenad/Diplomski/Maja_Ribaric_2011.pdf
+  indentfirst=false, % recommendation from Damir Bralić
+  fontsetup=true
 }
 
 \def\captionscroatian{%
-   \def\refname{Literatura}%
-   \def\abstractname{Sažetak}%
-   \def\bibname{Bibliografija}%
-   \def\prefacename{Predgovor}%
-   \def\chaptername{Poglavlje}%
-   \def\appendixname{Dodatak}%
-   \def\contentsname{Sadržaj}%
-   \def\listfigurename{Popis slika}%
-   \def\listtablename{Popis tablica}%
-   \def\indexname{Kazalo}%
-   \def\figurename{Slika}%
-   \def\tablename{Tablica}%
-   \def\partname{Dio}%
-   \def\pagename{Stranica}%
-   \def\seename{Vidjeti}%
-   \def\alsoname{Također vidjeti}%
-   \def\enclname{Prilozi}%
-   \def\ccname{Kopija}%
-   \def\headtoname{Prima}%
-   \def\proofname{Dokaz}%
-   \def\glossaryname{Pojmovnik}%
-   }
+  \def\prefacename{Predgovor}%
+  \def\refname{Literatura}%
+  \def\abstractname{Sažetak}%
+  \def\bibname{Bibliografija}%
+  \def\chaptername{Poglavlje}%
+  \def\appendixname{Dodatak}%
+  \def\contentsname{Sadržaj}%
+  \def\listfigurename{Popis slika}%
+  \def\listtablename{Popis tablica}%
+  \def\indexname{Kazalo}%
+  \def\figurename{Slika}%
+  \def\tablename{Tablica}%
+  \def\partname{Dio}%
+  \def\enclname{Prilozi}%
+  \def\ccname{Kopija}%
+  \def\headtoname{Prima}%
+  \def\pagename{Stranica}%
+  \def\seename{Vidjeti}%
+  \def\alsoname{Također vidjeti}%
+  \def\proofname{Dokaz}%
+  \def\glossaryname{Pojmovnik}%
+}
 \def\datecroatian{%
-   \def\today{\number\day.~\ifcase\month\or
+  \def\today{\number\day.~\ifcase\month\or
     siječnja\or veljače\or ožujka\or travnja\or svibnja\or
     lipnja\or srpnja\or kolovoza\or rujna\or listopada\or studenoga\or
     prosinca\fi \space \number\year.}}
