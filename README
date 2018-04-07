@@ -43,7 +43,9 @@ This work has the LPPL maintenance status ‘maintained’.  The current maintai
 
 BUGS
 
-Polyglossia has is full of bugs.  If you run into one, or suspect you do,
-please report it on the GitHub issue tracker:
+Polyglossia is full of bugs.  If you run into one, or suspect you do, or you
+have a request or comment, please use the GitHub issue tracker:
 http://github.com/reutenauer/polyglossia/issues
-This is more efficient than contacting me by email as it allows me to track the issues and follow progress.
+
+This is more efficient than contacting me by email as it allows me to track the
+issues and follow progress.
