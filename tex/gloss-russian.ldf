@@ -170,7 +170,8 @@
 % The following is based on some ideas from ruscor.sty
 \def\russian@capsformat{%
    \ifdef{\KOMAScript}{%
-      \renewcommand{\chapterformat}{\prechapter\thechapter\postchapter}%
+      \ifdef{\chapterformat}{%
+        \renewcommand{\chapterformat}{\prechapter\thechapter\postchapter}}{}%
       \renewcommand{\sectionformat}{\presection\thesection\postsection}%
       \renewcommand{\subsectionformat}{\presubsection\thesubsection\postsubsection}%
       \renewcommand{\subsubsectionformat}{\presubsubsection\thesubsubsection\postsubsubsection}%
@@ -224,7 +225,8 @@
 
 \def\noextras@russian{%
    \ifdef{\KOMAScript}{%
-      \renewcommand{\chapterformat}{\thechapter\autodot\enskip}%
+      \ifdef{\chapterformat}{%
+        \renewcommand{\chapterformat}{\thechapter\autodot\enskip}}{}%
       \renewcommand{\sectionformat}{\thesection\autodot\enskip}%
       \renewcommand{\subsectionformat}{\thesubsection\autodot\enskip}%
       \renewcommand{\subsubsectionformat}{\thesubsubsection\autodot\enskip}%
