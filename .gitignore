@@ -7,3 +7,8 @@ localupdate
 etc/*
 doc/REQUESTS
 tests/out
+*.glo
+*.idx
+*.out
+*.toc
+hidden

@@ -113,6 +113,8 @@
   \declare@shorthand{german}{""}{\hskip\z@skip}%
   \declare@shorthand{german}{"~}{\textormath{\leavevmode\hbox{-}}{-}}%
   \declare@shorthand{german}{"=}{\penalty\@M-\hskip\z@skip}%
+  \declare@shorthand{german}{"/}{\textormath
+    {\bbl@allowhyphens\discretionary{/}{}{/}\bbl@allowhyphens}{}}%
   \def\ck{\allowhyphens\discretionary{k-}{k}{ck}\allowhyphens}%
 }
 

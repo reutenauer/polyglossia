@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{polyglossia}[2016/03/25 v1.42.4
+\ProvidesPackage{polyglossia}[2018/04/07 v1.43
   Alternative to Babel for XeLaTeX and LuaLaTeX]
 \RequirePackage{etoolbox}
 \RequirePackage{makecmds}
@@ -75,14 +75,15 @@
 
 %% Used by the language definitions files for right-to-left languages
 \def\RequireBidi{%
-  \ifxetex
-    \RequirePackage{bidi}
-  \else\ifluatex
-    \RequirePackage{luabidi}
-  \else
-    \xpg@warning{You’re running a TeX engine that is not LuaTeX or XeTeX.\MessageBreak
-That is almost guaranteed to cause problems.}
-  \fi\fi}
+  \AtBeginDocument{%
+    \ifxetex
+      \RequirePackage{bidi}
+    \else\ifluatex
+      \RequirePackage{luabidi}
+    \else
+      \xpg@warning{You’re running a TeX engine that is not LuaTeX or XeTeX.\MessageBreak
+  That is almost guaranteed to cause problems.}
+    \fi\fi}}
 
 %% compatibility with babel
 \let\addto\gappto% gappto is defined in etoolbox

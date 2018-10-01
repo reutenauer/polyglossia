@@ -1,11 +1,10 @@
 % Translated by Paulius Sladkevičius <komsas@gmail.com>
-% See also http://github.com/fc7/polyglossia/issues#issue/6
 
 \ProvidesFile{gloss-lithuanian.ldf}[polyglossia: module for lithuanian]
 \PolyglossiaSetup{lithuanian}{
   hyphennames={lithuanian},
   hyphenmins={2,2},
-  fontsetup=true,
+  fontsetup=true
 }
 
 \def\captionslithuanian{%
@@ -21,7 +20,6 @@
    \def\indexname{Rodyklė}%
    \def\figurename{pav.}%
    \def\tablename{lentelė}%
-   %\def\thepart{}% Roman numerals are fine
    \def\partname{Dalis}%
    \def\pagename{puslapis}%
    \def\seename{žiūrėk}%
@@ -32,6 +30,7 @@
    \def\proofname{Įrodymas}%
    \def\glossaryname{Terminų žodynas}%
 }
+
 \def\datelithuanian{%
    \def\lithuanianmonth{\ifcase\month\or
       sausio\or
@@ -45,18 +44,18 @@
       rugsėjo\or
       spalio\or
       lapkričio\or
-      gruodžio\fi}
+      gruodžio\fi}%
    \def\today{\number\year~m.~\lithuanianmonth~\number\day~d.}%
 }
 
 \def\blockextras@lithuanian{%
   \let\fnum@figure@orig\fnum@figure
-  \let\fnum@table@orig\fnum@table
   \def\fnum@figure{\thefigure\nobreakspace\figurename}%
+  \let\fnum@table@orig\fnum@table
   \def\fnum@table{\thetable\nobreakspace\tablename}%
 }
 
-\def\noblockextras@lithuanian{%
+\def\noextras@lithuanian{%
   \let\fnum@figure\fnum@figure@orig
   \let\fnum@table\fnum@table@orig
 }

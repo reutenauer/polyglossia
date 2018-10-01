@@ -1,7 +1,7 @@
 
    ¦----------------------------------------------¦
    ¦                                              ¦
-   ¦       THE POLYGLOSSIA PACKAGE v1.42.5        ¦
+   ¦       THE POLYGLOSSIA PACKAGE v1.43          ¦
    ¦                                              ¦
    ¦     Modern multilingual typesetting          ¦
    ¦        with XeLaTeX and LuaLaTeX             ¦
@@ -10,7 +10,7 @@
 
 This package provides an alternative to Babel for users of XeLaTeX and LuaLaTeX
 (with a few languages incompletely supported for the latter). This version
-includes support for 76 different languages.
+includes support for 77 different languages.
 
 Polyglossia makes it possible to automate the following tasks:
 
@@ -32,7 +32,7 @@ Polyglossia makes it possible to automate the following tasks:
 
 LICENSE
 
-Copyright (c) 2008-2010 François Charette, 2013 Élie Roux, 2011-2017 Arthur Reutenauer
+Copyright (c) 2008-2010 François Charette, 2013 Élie Roux, 2011-2018 Arthur Reutenauer
 
 Polyglossia is placed under the terms of the LaTeX Project Public Licence
 (LPPL), either version 1.3, or, at your option, any later version.  See
@@ -43,7 +43,9 @@ This work has the LPPL maintenance status ‘maintained’.  The current maintai
 
 BUGS
 
-Polyglossia has no bug, of course.
-
-Hum, sorry, wishful thinking.  Please report any bugs, problems or requests on:
+Polyglossia is full of bugs.  If you run into one, or suspect you do, or you
+have a request or comment, please use the GitHub issue tracker:
 http://github.com/reutenauer/polyglossia/issues
+
+This is more efficient than contacting me by email as it allows me to track the
+issues and follow progress.

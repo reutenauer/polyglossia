@@ -36,6 +36,11 @@
 \def\fontsetup@sanskrit@Telugu{%
   \def\xpg@scripttag@sanskrit{telu}%
   \xpg@fontsetup@nonlatin{sanskrit}}
+%% DW
+\def\fontsetup@sanskrit@Latin{%
+    \def\xpg@scripttag@sanskrit{latn}%
+    \xpg@fontsetup@latin{sanskrit}}
+%% DW
 
 \setkeys{sanskrit}{Script} %sets the default for Devanagari
 

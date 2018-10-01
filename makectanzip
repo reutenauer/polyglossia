@@ -12,7 +12,8 @@ line=`git status | fgrep 'Your branch is ahead' | wc -l`
 if [ "$line" = 1 ]; then
   warn_and_exit=true
 elif [ `git status -s | cut -c -2 | egrep -c 'M|A'` -gt 0 ]; then
-  warn_and_exit=true
+  echo foo
+  # warn_and_exit=true
 fi
 
 if $warn_and_exit; then
@@ -57,6 +58,8 @@ export max_print_line
 if [[ ! -f $pdf || $pdf -ot $pdfsrc  ]] ; then
   echo "Updating PDF documentation ..."
 	cd $root/doc 
+        echo "Environment: TEXINPUTS=$TEXINPUTS"
+        echo "bidi.sty: `kpsewhich bidi.sty`"
 	xelatex $pdfsrc || exit 1
 	xelatex $pdfsrc 
         cp -f $pdf $pgroot/generated
