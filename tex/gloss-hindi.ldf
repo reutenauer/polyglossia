@@ -1,4 +1,5 @@
 % UTF-8 strings kindly provided by Zdenek Wagner, 10-03-2008
+% with corrections and additional contributions by Anshuman Pandey
 % TODO: add option for velthuis transliteration with link to
 % Velthuis Devanagari project: http://devnag.sarovar.org.
 
@@ -53,7 +54,7 @@ and may look very wrong.}
 \def\captionshindi{%
      \def\abstractname{सारांश}%
      \def\appendixname{परिशिष्ट}%
-     \def\bibname{संदर ग्रन्थ}% (?)
+     \def\bibname{संदर्भ ग्रन्थ}%
      \def\ccname{}%
      \def\chaptername{अध्याय}%
      \def\contentsname{विषय सूची}%
