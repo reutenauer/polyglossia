@@ -1,7 +1,7 @@
 % UTF-8 strings kindly provided by Zdenek Wagner, 10-03-2008
 % with corrections and additional contributions by Anshuman Pandey
 % TODO: add option for velthuis transliteration with link to
-% Velthuis Devanagari project: http://devnag.sarovar.org.
+% Velthuis Devanagari project.
 
 \ProvidesFile{gloss-hindi.ldf}[polyglossia: module for hindi]
 \ifluatex
