@@ -1,25 +1,25 @@
 %% This file is luabidi.sty
 %%
-%% Copyright © 2009 Vafa Khalighi, 2013 Arthur Reutenauer
+%% Copyright © 2009 Vafa Khalighi, 2013--2019 Arthur Reutenauer
 %%
 %%%% It may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3c
 %% of this license or (at your option) any later version.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{luabidi}[2013/05/27 v0.2
+\ProvidesPackage{luabidi}[2019/07/10 v0.3
 	Bidirectional typesetting in LuaTeX]
 \newif\if@RTL
 \newif\if@RTLmain
-\def\setRTLmain{\luatexpagedir TRT \luatexbodydir TRT \luatexpardir TRT \luatextextdir TRT}
-\def\setRTL{\@RTLtrue\luatexpardir TRT \luatextextdir TRT}
+\def\setRTLmain{\pagedir TRT \bodydir TRT \pardir TRT \textdir TRT}
+\def\setRTL{\@RTLtrue\pardir TRT \textdir TRT}
 \let\setRL=\setRTL
-\def\setLTR{\@RTLfalse\luatexpardir TLT \luatextextdir TLT}
+\def\setLTR{\@RTLfalse\pardir TLT \textdir TLT}
 \let\setLR=\setLTR
 \let\unsetRTL=\setLTR
 \let\unsetLTR=\setRTL
-\def\RTL{\@RTLtrue\trivlist \luatexpardir TRT \luatextextdir TRT\item\relax}
+\def\RTL{\@RTLtrue\trivlist \pardir TRT \textdir TRT\item\relax}
 \def\endRTL{\@RTLfalse\endtrivlist}
-\def\LTR{\trivlist \luatexpardir TLT \luatextextdir TLT\item\relax}
+\def\LTR{\trivlist \pardir TLT \textdir TLT\item\relax}
 \def\endLTR{\endtrivlist}
 \def\@ensure@RTL#1{\if@RTL#1\else\RLE{#1}\fi}
 \def\@ensure@LTR#1{\if@RTL#1\else\LRE{#1}\fi}
@@ -44,7 +44,7 @@
 \begingroup
 \footnotemark
 \renewcommand{\thefootnote}{\@arabic\c@footnote}%
-\luatexpardir TLT \luatextextdir TLT\footnotetext{#1}%
+\pardir TLT \textdir TLT\footnotetext{#1}%
 \endgroup
 }
 
