@@ -194,8 +194,8 @@
   \def\ccname{Κοινοποίησις}%
   \def\headtoname{Πρὸς}%
   \def\pagename{Σελὶς}%
-  \def\seename{ὃρα}%
-  \def\alsoname{ὃρα ὡσαύτως}%
+  \def\seename{ὅρα}%
+  \def\alsoname{ὅρα ὡσαύτως}%
   \def\proofname{Ἀπόδειξις}%
   \def\glossaryname{Γλωσσάριον}%
   \def\refname{Ἀναφοραὶ}%
