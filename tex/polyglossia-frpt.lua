@@ -14,7 +14,7 @@ local nodecodes          = nodes.nodecodes
 
 local insert_node_before = node.insert_before
 local insert_node_after  = node.insert_after
-local remove_node        = nodes.remove
+local remove_node        = node.remove
 local has_attribute      = node.has_attribute
 local node_copy          = node.copy
 local new_node           = node.new
