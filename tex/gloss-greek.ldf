@@ -228,14 +228,15 @@
       Δεκεμβρίου\fi}}
 
 % the code for alphabetic numbers and attic numerals 
-% is copied verbatim from xgreek.sty
-\DeclareRobustCommand\anw@false{%
-  \DeclareRobustCommand\anw@print{}}
-\DeclareRobustCommand\anw@true{%
-  \DeclareRobustCommand\anw@print{ʹ}}
+\newrobustcmd\anw@print{}
+\newrobustcmd\anw@false{%
+  \renewrobustcmd\anw@print{}}
+\newrobustcmd\anw@true{%
+   \renewrobustcmd\anw@print{ʹ}}
 \anw@true
 
-\def\greeknumber#1{%
+\protected\def\greeknumber#1{\expandafter\@greeknumber\expandafter{\number#1}}
+\def\@greeknumber#1{%
   \ifnum#1<\@ne\space\gr@ill@value{#1}%
   \else
     \ifnum#1<10\expandafter\gr@num@i\number#1%
@@ -259,8 +260,31 @@
     \fi
   \fi
 }
-\def\Greeknumber#1{%
-  \expandafter\MakeUppercase\expandafter{\greeknumber{#1}}}
+\protected\def\Greeknumber#1{\expandafter\@Greeknumber\expandafter{\number#1}}
+\def\@Greeknumber#1{%
+  \ifnum#1<\@ne\space\gr@ill@value{#1}%
+  \else
+    \ifnum#1<10\expandafter\gr@Num@i\number#1%
+    \else
+      \ifnum#1<100\expandafter\gr@Num@ii\number#1%
+      \else
+        \ifnum#1<\@m\expandafter\gr@Num@iii\number#1%
+        \else
+          \ifnum#1<\@M\expandafter\gr@Num@iv\number#1%
+          \else
+            \ifnum#1<100000\expandafter\gr@Num@v\number#1%
+            \else
+              \ifnum#1<1000000\expandafter\gr@Num@vi\number#1%
+              \else
+                \space\gr@ill@value{#1}%
+              \fi
+            \fi
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+}
 \let\greeknumeral=\greeknumber
 \let\Greeknumeral=\Greeknumber
 \def\gr@num@i#1{%
@@ -283,6 +307,27 @@
 \def\gr@num@vi#1{%
   ͵\ifcase#1\or ρ\or σ\or τ\or υ\or φ\or χ\or ψ\or ω\or ϡ\fi
   \gr@num@v}
+\def\gr@Num@i#1{%
+  \ifcase#1 \or Α\or Β\or Γ\or Δ\or Ε\or \MakeUppercase{Ϛ}\or Ζ\or Η\or θ\fi
+  \ifnum#1=\z@\else\anw@true\fi\anw@print}
+\def\gr@Num@ii#1{%
+  \ifcase#1 \or Ι\or Κ\or Λ\or Μ\or Ν\or Ξ\or Ο\or Π\or \MakeUppercase{ϟ}\fi
+  \ifnum#1=\z@\else\anw@true\fi\gr@Num@i}
+\def\gr@Num@iii#1{%
+  \ifcase#1 \or Ρ\or Σ\or Τ\or Υ\or Φ\or Χ\or Ψ\or Ω\or \MakeUppercase{ϡ}\fi
+  \ifnum#1=\z@\anw@false\else\anw@true\fi\gr@Num@ii}
+\def\gr@Num@iv#1{%
+  \ifnum#1=\z@\else ͵\fi
+  \ifcase#1 \or Α\or Β\or Γ\or Δ\or Ε\or \MakeUppercase{Ϛ}\or Ζ\or Η\or θ\fi
+  \gr@Num@iii}
+\def\gr@Num@v#1{%
+  \ifnum#1=\z@\else ͵\fi
+  \ifcase#1 \or Ι\or Κ\or Λ\or Μ\or Ν\or Ξ\or Ο\or Π\or \MakeUppercase{ϟ}\fi
+\gr@Num@iv}
+  \def\gr@Num@vi#1{%
+͵ \ifcase#1 \or Ρ\or Σ\or Τ\or Υ\or Φ\or Χ\or Ψ\or Ω\or \MakeUppercase{ϡ}\fi
+  \gr@Num@v}
+\def\gr@ill@value#1{\xpg@warning{Illegal value (#1) for Greek numeral}[$#1$]}
 
 %%%% Attic numerals (no longer optional)
 \newcount\@attic@num
