@@ -34,8 +34,8 @@
 \def\datenorsk{%   
    \def\today{\number\day.~\ifcase\month\or
     januar\or februar\or mars\or april\or mai\or juni\or
-    juli\or august\or september\or oktober\or november\or desember
-    \fi\space\number\year}%
+    juli\or august\or september\or oktober\or november\or
+    desember\fi\space\number\year}%
     }
 
 \endinput
