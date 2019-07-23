@@ -160,10 +160,10 @@ local function process(head)
                         if somespace then
                             local somepenalty = somepenalty(prevprev,10000)
                             if somepenalty then
-                                head = remove_node(head,prev,true)
-                                head = remove_node(head,prevprev,true)
+                                head = remove_node(head,prev)
+                                head = remove_node(head,prevprev)
                             else
-                                head = remove_node(head,prev,true)
+                                head = remove_node(head,prev)
                             end
                         end
                         insert_node_before(head,start,get_penalty_node())
@@ -177,13 +177,13 @@ local function process(head)
                         if somepenalty then
                             local somespace = somespace(nextnext,true)
                             if somespace then
-                                head = remove_node(head,next,true)
-                                head = remove_node(head,nextnext,true)
+                                head = remove_node(head,next)
+                                head = remove_node(head,nextnext)
                             end
                         else
                             local somespace = somespace(next,true)
                             if somespace then
-                                head = remove_node(head,next,true)
+                                head = remove_node(head,next)
                             end
                         end
                         insert_node_after(head,start,get_kern_node(map[2]*quad))
