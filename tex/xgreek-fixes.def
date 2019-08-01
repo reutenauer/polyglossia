@@ -1,4 +1,17 @@
 % the following fixes are taken verbatim from xgreek.sty:
+% \message{Package `xgreek' version 3.0.1 by Apostolos Syropoulos}
+\global\lccode"0370="0371 \global\uccode"0370="0370
+\global\lccode"0371="0371 \global\uccode"0371="0370
+\global\lccode"0372="0373 \global\uccode"0372="0372
+\global\lccode"0373="0373 \global\uccode"0373="0372
+\global\lccode"0376="0377 \global\uccode"0376="0376
+\global\lccode"0377="0377 \global\uccode"0377="0376
+\global\lccode"03FD="037B \global\uccode"03FD="03FD
+\global\lccode"037B="037B \global\uccode"037B="03FD
+\global\lccode"03FE="037C \global\uccode"03FE="03FE
+\global\lccode"037C="037C \global\uccode"037C="03FE
+\global\lccode"03FF="037D \global\uccode"03FF="03FF
+\global\lccode"037D="037D \global\uccode"037D="03FF
 \global\lccode"0386="03AC \global\uccode"0386="0391
 \global\lccode"0388="03AD \global\uccode"0388="0395
 \global\lccode"0389="03AC \global\uccode"0389="0397
@@ -81,8 +94,8 @@
 \global\lccode"03DD="03DD \global\uccode"03DD="03DC
 \global\lccode"03DE="03DF \global\uccode"03DE="03DE
 \global\lccode"03DF="03DF \global\uccode"03DF="03DE
-\global\lccode"03E0="03E1 \global\uccode"03E0="039A
-\global\lccode"03E0="03E1 \global\uccode"03E1="03A1
+\global\lccode"03E0="03E1 \global\uccode"03E0="03E0
+\global\lccode"03E1="03E1 \global\uccode"03E1="03E0
 \global\lccode"03F0="03BA \global\uccode"03F0="039A
 \global\lccode"03F1="03C1 \global\uccode"03F1="03A1
 \global\lccode"03F2="03F2 \global\uccode"03F2="03F9
@@ -287,7 +300,7 @@
 \global\lccode"1FE2="1FE2 \global\uccode"1FE2="03AB
 \global\lccode"1FE3="1FE3 \global\uccode"1FE3="03AB
 \global\lccode"1FE4="1FE4 \global\uccode"1FE4="03A1
-\global\lccode"1FE5="1FE5 \global\uccode"1FE5="1FEC
+\global\lccode"1FE5="1FE5 \global\uccode"1FE5="03A1
 \global\lccode"1FE6="1FE6 \global\uccode"1FE6="03A5
 \global\lccode"1FE7="1FE7 \global\uccode"1FE7="03AB
 \global\lccode"1FE8="1FE0 \global\uccode"1FE8="1FE8

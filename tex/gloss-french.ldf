@@ -48,6 +48,28 @@
 }
 \french@automaticspacesaroundguillemetstrue
 
+% name is for compatibility with babel
+\let\french@ttfamilyORI\ttfamily
+\let\french@rmfamilyORI\rmfamily
+\let\french@sffamilyORI\sffamily
+\DeclareRobustCommand\french@ttfamilyFB{\nofrench@punctuation\french@ttfamilyORI}
+\DeclareRobustCommand\french@rmfamilyFB{\french@punctuation\french@rmfamilyORI}
+\DeclareRobustCommand\french@sffamilyFB{\french@punctuation\french@sffamilyORI}
+\define@boolkey{french}[french@]{OriginalTypewriter}[true]{
+  \def\@tmpfalse{false}%
+  \def\@tmpa{#1}%
+  \ifx\@tmpa\@tmpfalse
+    \let\ttfamily\french@ttfamilyFB
+    \let\rmfamily\french@rmfamilyFB
+    \let\sffamily\french@sffamilyFB
+  \else
+    \let\ttfamily\french@ttfamilyORI
+    \let\rmfamily\french@rmfamilyORI
+    \let\sffamily\french@sffamilyORI
+  \fi
+}
+\setkeys{french}{OriginalTypewriter=false}
+
 \def\french@punctuation{%
     \lccode"2019="2019
     \ifluatex

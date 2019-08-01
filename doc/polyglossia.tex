@@ -172,24 +172,25 @@ that are explained in section \ref{specific} below.
 \begin{table}[h]\centering
 \label{tab:lang}
 % Produced with tools/insert-language-list.rb -- AR, 2015-07-14
+% Edited by hand -- AR 2019-04-04
 \begin{tabular}{lllll}
 \hline
-albanian       & danish         & icelandic      & nko            & \TX{slovenian}\\
-amharic        & divehi         & interlingua    & norsk          & spanish       \\
-\TX{arabic}    & \TX{dutch}     & irish          & nynorsk        & swedish       \\
-armenian       & \TX{english}   & \TX{italian}   & occitan        & \TX{syriac}   \\
-asturian       & \TX{esperanto} & kannada        & piedmontese    & tamil         \\
-bahasai        & estonian       & khmer          & polish         & telugu        \\
-bahasam        & \TX{farsi}     & \TX{korean}    & portuges       & \TX{thai}     \\
-basque         & finnish        & \TX{lao}       & romanian       & tibetan       \\
-\TX{bengali}   & french         & \TX{latin}     & romansh        & turkish       \\
-brazil[ian]    & friulan        & latvian        & \TX{russian}   & turkmen       \\
-breton         & galician       & lithuanian     & samin          & \TX{ukrainian}\\
-bulgarian      & \TX{german}    & \TX{lsorbian}  & \TX{sanskrit}  & urdu          \\
-\TX{catalan}   & \TX{greek}     & \TX{magyar}    & scottish       & \TX{usorbian} \\
+albanian       & danish         & interlingua    & nko            & \TX{slovenian}\\
+amharic        & divehi         & irish          & norsk          & spanish       \\
+\TX{arabic}    & \TX{dutch}     & \TX{italian}   & nynorsk        & swedish       \\
+armenian       & \TX{english}   & kannada        & occitan        & \TX{syriac}   \\
+asturian       & \TX{esperanto} & khmer          & piedmontese    & tamil         \\
+bahasai        & estonian       & \TX{korean}    & polish         & telugu        \\
+bahasam        & \TX{farsi}     & \TX{lao}       & portuges       & \TX{thai}     \\
+basque         & finnish        & \TX{latin}     & romanian       & tibetan       \\
+\TX{bengali}   & french         & latvian        & romansh        & turkish       \\
+brazil[ian]    & friulan        & lithuanian     & \TX{russian}   & turkmen       \\
+breton         & galician       & \TX{lsorbian}  & samin          & \TX{ukrainian}\\
+bulgarian      & \TX{german}    & \TX{magyar}    & \TX{sanskrit}  & urdu          \\
+\TX{catalan}   & \TX{greek}     & macedonian     & scottish       & \TX{usorbian} \\
 coptic         & \TX{hebrew}    & malayalam      & \TX{serbian}   & vietnamese    \\
 croatian       & \TX{hindi}     & marathi        & slovak         & \TX{welsh}    \\
-czech         \\
+czech          & icelandic      \\
 \hline
 \end{tabular}
 \caption{Languages currently supported in \pkg{polyglossia}}
@@ -415,6 +416,7 @@ The default value of each option is given in italic.
 	\begin{itemize}
 		\item \TB{automaticspacesaroundguillemets} = true or \textit{false} (default value = true. Adds space after the opening guillemets and before the closing guillemets. Such space is usually not typed in source code, and you should let polyglossia add it. However, if your source code contains such space, you can set this option to false.)
 		\item \TB{frenchfootnote} = true or \textit{false} (default value = true. Determines whether the footnote mark starting the footnote is normal script followed by a dot (default) or superscript without a dot.)
+		\item \TB{OriginalTypewriter} = true or \textit{false} (default value = false. Prevents any customisation of |\ttfamily| and |\texttt{}| in French. This option should only be used to ensure backward compatibility. The current default behaviour is to switch off.)
 	\end{itemize}
 
 \subsection{german}\label{german}

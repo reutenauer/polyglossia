@@ -1,0 +1,86 @@
+\ProvidesFile{gloss-macedonian.ldf}[polyglossia: module for macedonian]
+\PolyglossiaSetup{macedonian}{
+  script=Cyrillic,
+  scripttag=cyrl,
+  langtag=MKD,
+  hyphennames={macedonian},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  fontsetup
+}
+
+\def\macedonian@Alph#1{%
+   \ifcase#1\or
+   А\or Б\or В\or Г\or Д\or Ѓ\or Е\or
+   Ж\or З\or Ѕ\or И\or Ј\or К\or Л\or 
+   Љ\or М\or Н\or Њ\or О\or П\or Р\or
+   С\or Т\or Ќ\or У\or Ф\or Х\or Ц\or
+   Ч\or Џ\or Ш\else
+   \xpg@ill@value{#1}{macedonian@Alph}\fi}%
+
+\def\macedonian@alph#1{%
+   \ifcase#1\or
+   а\or б\or в\or г\or д\or ѓ\or е\or
+   ж\or з\or ѕ\or и\or ј\or к\or л\or
+   љ\or м\or н\or њ\or о\or п\or р\or
+   с\or т\or ќ\or у\or ф\or х\or ц\or
+   ч\or џ\or ш\else
+   \xpg@ill@value{#1}{macedonian@alph}\fi}%
+
+\def\macedonian@numbers{%
+   \let\latin@Alph\@Alph%
+   \let\latin@alph\@alph%
+   \let\@Alph\macedonian@Alph%
+   \let\@alph\macedonian@alph%
+ }
+
+\def\nomacedonian@numbers{%
+   \let\@Alph\latin@Alph%
+   \let\@alph\latin@alph%
+}
+
+\def\captionsmacedonian{%
+   \def\refname{Литература}%
+   \def\abstractname{Апстракт}%
+   \def\bibname{Библиографија}%
+   \def\prefacename{Предговор}%
+   \def\chaptername{Глава}%
+   \def\appendixname{Прилог}%
+   \def\contentsname{Содржина}%
+   \def\listfigurename{Листа на слики}%
+   \def\listtablename{Листа на табели}%
+   \def\indexname{Индекс}%
+   \def\figurename{Слика}%
+   \def\tablename{Табела}%
+   %\def\thepart{}%
+   \def\partname{Поглавје}%
+   \def\pagename{стр.}%
+   \def\seename{види}%
+   \def\alsoname{види исто така}%
+   \def\enclname{Прилог}%
+   %\def\ccname{cc}%
+   %\def\headtoname{}%
+   \def\proofname{Доказ}%
+   \def\glossaryname{Терминолошки речник}%
+   }
+\def\datemacedonian{%
+   \def\today{\number\day~\ifcase\month\or
+       јануари\or
+       февруари\or
+       март\or
+       април\or
+       мај\or
+       јуни\or
+       јули\or
+       август\or
+       септември\or
+       октомври\or
+       ноември\or
+       декември\fi%
+       \ \number\year~г.}%
+    \def\month@Roman{\expandafter\@Roman\month}%
+    \def\todayRoman{\number\day.\,\month@Roman.\,\number\year~г.}%
+    }
+
+\endinput
+
