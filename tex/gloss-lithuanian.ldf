@@ -4,31 +4,32 @@
 \PolyglossiaSetup{lithuanian}{
   hyphennames={lithuanian},
   hyphenmins={2,2},
+  indentfirst=true, % TODO Dokumentų rengimo taisyklių, patvirtintų Lietuvos vyriausiojo archyvaro 2011 m. liepos 4 d. įsakymu Nr. V-117, 29.1 punktą
   fontsetup=true
 }
 
 \def\captionslithuanian{%
+   \def\prefacename{Pratarmė}%
    \def\refname{Literatūra}%
    \def\abstractname{Santrauka}%
    \def\bibname{Literatūra}%
-   \def\prefacename{Pratarmė}%
-   \def\chaptername{Skyrius}%
+   \def\chaptername{Skyrius}% TODO letter case
    \def\appendixname{Priedas}%
    \def\contentsname{Turinys}%
    \def\listfigurename{Iliustracijų sąrašas}%
    \def\listtablename{Lentelių sąrašas}%
    \def\indexname{Rodyklė}%
    \def\figurename{pav.}%
-   \def\tablename{lentelė}%
+   \def\tablename{lentelė}% TODO any special reason for \protect in babel?
    \def\partname{Dalis}%
-   \def\pagename{puslapis}%
-   \def\seename{žiūrėk}%
-   \def\alsoname{taip pat}%
    \def\enclname{Įdėta}%
    \def\ccname{Kopijos}%
-   \def\headtoname{Kam}%
+   \def\headtoname{Kam}% TODO empty in babel?
+   \def\pagename{puslapis}%
+   \def\seename{žiūrėk}%
+   \def\alsoname{taip pat}% TODO some other variants are considered in babel?
    \def\proofname{Įrodymas}%
-   \def\glossaryname{Terminų žodynas}%
+   \def\glossaryname{Terminų žodynas}% TODO some other variants are considered in babel?
 }
 
 \def\datelithuanian{%
