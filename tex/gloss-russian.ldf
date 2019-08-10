@@ -210,8 +210,6 @@
    ц\or ч\or ш\or щ\or э\or ю\or я\else\xpg@ill@value{#1}{russian@alph}\fi}
 
 \def\russian@numbers{%
-   \let\latin@alph\@alph%
-   \let\latin@Alph\@Alph%
    \ifcyrillic@numerals
      \let\@alph\russian@alph%
      \let\@Alph\russian@Alph%

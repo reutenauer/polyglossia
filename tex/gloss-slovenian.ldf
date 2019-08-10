@@ -60,10 +60,10 @@
 \def\Abeceda#1{\expandafter\slovenian@Alph\csname c@#1\endcsname}
 
 \def\setlocalalph{%
-  \def\extras@slovenian{\let\savealph\alph\let\saveAlph\Alph\let\alph\abeceda\let\Alph\Abeceda}
+  \def\extras@slovenian{\let\alph\abeceda\let\Alph\Abeceda}
   \def\blockextras@slovenian{\extras@slovenian}
   \def\inlineextras@slovenian{\extras@slovenian}
-  \def\noextras@slovenian{\let\alph\savealph\let\Alph\saveAlph}
+  \def\noextras@slovenian{\let\alph\latinalph\let\Alph\latinAlph}
 }
 
 \endinput

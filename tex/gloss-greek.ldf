@@ -371,8 +371,6 @@
 \let\atticnum=\atticnumeral
 
 \def\greek@numbers{%
-   \let\latin@alph\@alph%
-   \let\latin@Alph\@Alph%
    \if@greek@numerals
       \def\greek@alph##1{\protect\greeknumber{##1}}%
       \def\greek@Alph##1{\protect\Greeknumber{##1}}%

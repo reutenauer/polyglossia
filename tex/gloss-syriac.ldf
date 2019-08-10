@@ -134,14 +134,12 @@ and may look very wrong.}
    \fi}
 
 \def\syriac@numbers{%
-   \let\@latinalph\@alph%
-   \let\@latinAlph\@Alph%
    \let\@alph\abjadsyriac%
    \let\@Alph\abjadsyriac%
 }
 \def\nosyriac@numbers{%
-  \let\@alph\@latinalph%
-  \let\@Alph\@latinAlph%
+  \let\@alph\latin@alph%
+  \let\@Alph\latin@Alph%
   }
 \def\syriac@globalnumbers{%
   \let\orig@arabic\@arabic%

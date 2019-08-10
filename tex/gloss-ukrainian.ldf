@@ -151,8 +151,6 @@
    ц\or ч\or ш\or щ\or ю\or я\else\xpg@ill@value{#1}{ukrainian@alph}\fi}
 
 \def\ukrainian@numbers{%
-   \let\latin@Alph\@Alph%
-   \let\latin@alph\@alph%
    \let\@Alph\ukrainian@Alph%
    \let\@alph\ukrainian@alph%
 }

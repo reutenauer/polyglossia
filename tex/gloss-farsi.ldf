@@ -99,15 +99,13 @@ and may look very wrong.}
 %\def\farsialph#1{\expandafter\@farsialph\csname c@#1\endcsname}
 
 \def\farsi@numbers{%
-   \let\@latinalph\@alph%
-   \let\@latinAlph\@Alph%
    \let\@alph\abjad%
    \let\@Alph\abjad%
 }
 \def\nofarsi@numbers{%
   \let\@alph\@latinalph%
   \let\@Alph\@latinAlph%
-  }
+}
 
 \def\farsi@globalnumbers{%
    \let\orig@arabic\@arabic%

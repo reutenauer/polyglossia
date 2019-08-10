@@ -106,16 +106,14 @@ and may look very wrong.}
      ศ\or ษ\or ส\or ห\or ฬ\or อ\or ฮ\else\xpg@ill@value{#1}{@thaialph}\fi}
      
 \def\thai@numbers{%
-   \let\@latinalph\@alph%
-   \let\@latinAlph\@Alph%
    \if@thai@numerals
      \let\@alph\@thaialph%
      \let\@Alph\@thaiAlph%
    \fi
 }
 \def\nothai@numbers{%
-  \let\@alph\@latinalph%
-  \let\@Alph\@latinAlph%
+  \let\@alph\latin@alph%
+  \let\@Alph\latin@Alph%
 }
 
 \def\thai@globalnumbers{%

@@ -128,16 +128,14 @@
  \else\xpg@ill@value{#1}{@tibetanalph}\fi}
      
 \def\tibetan@numbers{%
-   \let\@latinalph\@alph%
-   \let\@latinAlph\@Alph%
    \if@tibetan@numerals
      \let\@alph\@tibetanalph%
      \let\@Alph\@tibetanAlph%
    \fi
 }
 \def\notibetan@numbers{%
-  \let\@alph\@latinalph%
-  \let\@Alph\@latinAlph%
+  \let\@alph\latin@alph%
+  \let\@Alph\latin@Alph%
 }
 
 \def\tibetan@globalnumbers{%

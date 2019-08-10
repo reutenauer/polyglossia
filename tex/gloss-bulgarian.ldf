@@ -29,8 +29,6 @@
    \xpg@ill@value{#1}{bulgarian@alph}\fi}%
 
 \def\bulgarian@numbers{%
-   \let\latin@Alph\@Alph%
-   \let\latin@alph\@alph%
    \let\@Alph\bulgarian@Alph%
    \let\@alph\bulgarian@alph%
  }

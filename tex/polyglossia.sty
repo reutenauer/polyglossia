@@ -35,6 +35,13 @@
 \let\xpg@loaded\@empty
 \let\xpg@vloaded\@empty
 
+% counter in latin
+\let\latin@alph\@alph
+\let\latin@Alph\@Alph
+\def\latinalph#1{\expandafter\latin@alph\csname c@#1\endcsname}
+\def\latinAlph#1{\expandafter\latin@Alph\csname c@#1\endcsname}
+
+
 %% custom message macros
 \providecommand*{\xpg@error}[1]{%
    \PackageError{polyglossia}{#1}{}%

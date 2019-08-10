@@ -94,14 +94,12 @@
 }
 
 \def\korean@numbers{%
-    \let\@orig@alph\@alph
-    \let\@orig@Alph\@Alph
     \let\@alph\@koreanalph
     \let\@Alph\@koreanAlph
 }
 \def\nokorean@numbers{%
-    \let\@alph\@orig@alph
-    \let\@Alph\@orig@Alph
+    \let\@alph\latin@alph
+    \let\@Alph\latin@Alph
 }
 \let\nokorean@globalnumbers\nokorean@numbers
 

@@ -107,16 +107,14 @@
 \or យ\or រ\or ល\or វ\or ស\or ហ\or ឡ\or អ%
 \else\xpg@ill@value{#1}{@khmeralph}\fi}
 \def\khmer@numbers{%
-	\let\@latinalph\@alph%
-	\let\@latinAlph\@Alph%
 	\if@khmer@numerals
 		\let\@alph\@khmeralph%
 		\let\@Alph\@khmerAlph%
 	\fi%
 }
 \def\nokhmer@numbers{%
-	\let\@alph\@latinalph%
-	\let\@Alph\@latinAlph%
+	\let\@alph\latin@alph%
+	\let\@Alph\latin@Alph%
 }
 \def\blockextras@khmer{%
 	\XeTeXlinebreaklocale "kh" % 

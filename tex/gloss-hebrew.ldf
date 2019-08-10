@@ -109,14 +109,12 @@ and may look very wrong.}
 }
 
 \def\hebrew@numbers{%
-   \let\@origalph\@alph%
-   \let\@origAlph\@Alph%
    \let\@alph\hebrewnumeral%
    \let\@Alph\Hebrewnumeral%
 }
 \def\nohebrew@numbers{%
-  \let\@alph\@origalph%
-  \let\@Alph\@origAlph%
+  \let\@alph\latin@alph%
+  \let\@Alph\latin@Alph%
 }
 
 \def\hebrew@globalnumbers{%
