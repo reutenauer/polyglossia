@@ -85,15 +85,73 @@
 
 %% Used by the language definitions files for right-to-left languages
 \def\RequireBidi{%
-  \AtBeginDocument{%
     \ifxetex
       \RequirePackage{bidi}
     \else\ifluatex
       \RequirePackage{luabidi}
     \else
       \xpg@warning{You’re running a TeX engine that is not LuaTeX or XeTeX.\MessageBreak
-  That is almost guaranteed to cause problems.}
-    \fi\fi}}
+  That is almost guaranteed to cause problems.}\fi\fi
+}
+
+% overwritten with correct package
+\RequirePackage{filehook}
+\cs_new:Nn{\polyglossia@ensure@direction:nn}{%
+  \str_case_e:nnTF{#1}{%
+       {LR}{#2}%
+       {RL}{\xpg@error{right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}}%
+     }%
+     {}%
+     {\xpg@error{Unknown~ language~ direction~ #1 ~(base~ wrapper)}}%
+}%
+\cs_new_nopar:Nn{\polyglossia@setdir:n}{%
+  \str_case_e:nnTF{#1}{%
+       {LR}{\relax}%
+       {RL}{\xpg@error{right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}}%
+     }%
+     {}%
+     {\xpg@error{Unknown~ language~ direction~ #1 ~(base~ wrapper)}}%
+}
+\AtEndOfPackageFile*{bidi}{%
+  \ExplSyntaxOn%
+  \cs_gset:Nn{\polyglossia@ensure@direction:nn}{%
+    \str_case_e:nnF{#1}{%
+        {LR}{\@ensure@LTR{#2}}%
+        {RL}{\@ensure@RTL{#2}}%
+      }%
+      {\xpg@error{Unknown~ language~ direction~ #1 ~(bidi~ wrapper)}%
+    }%
+  }
+  \cs_gset_nopar:Nn{\polyglossia@setdir:n}{%
+    \str_case_e:nnTF{#1}{%
+        {LR}{\setLR}%
+        {RL}{\setRL}%
+      }%
+      {}%
+      {\xpg@error{Unknown~ language~ direction~ #1 ~(bidi~ wrapper)}}%
+  }%
+  \ExplSyntaxOff%
+}
+\AtEndOfPackageFile*{luabidi}{%
+  \ExplSyntaxOn%
+  \cs_gset:Nn{\polyglossia@ensure@direction:nn}{%
+    \str_case_e:nnTF{#1}{%
+        {LR}{\@ensure@LTR{#2}}%
+        {RL}{\@ensure@RTL{#2}}%
+      }%
+      {}%
+      {\xpg@error{Unknown~ language~ direction~ #1 ~(luabidi~ wrapper)}}%
+  }%
+  \cs_gset_nopar:Nn{\polyglossia@setdir:n}{%
+    \str_case_e:nnTF{#1}{%
+        {LR}{\setLR}%
+        {RL}{\setRL}%
+      }
+      {}%
+      {\xpg@error{Unknown~ language~ direction~ #1 ~(luabidi~ wrapper)}}%
+  }%
+  \ExplSyntaxOff%
+}
 
 %% compatibility with babel
 \let\addto\gappto% gappto is defined in etoolbox
@@ -171,7 +229,6 @@
 %% hyphennames : the different hyphenation patterns to try (comma separated list)
 %%%   TODO: if pattern is prefixed by !, then it should be loaded as a fallback, with \xpg@nopatterns@fallback - i.e. with a warning: e.g. sanskrit for hindi, or catalan for asturian. – Also for languages with variants!  (English and German, etc.)
 %% script : the name of the script (as understood by fontspec) – default is Latin
-%% direction : the direction of the script: LR or RL
 %% scripttag : the OpenType tag for the script
 %% langtag : the OpenType tag for the language
 %% hyphenmins : the hyphenmins for this language (comma-sep list of two integers)
@@ -189,7 +246,6 @@
   \keys_set:nn { polyglossia / #1 } { #2 }%
   %define booleans etoolbox style and set defaults
   %% TODO ? \providetoggle{#1@setup@done}%
-  \providetoggle{#1@RL}%
   \providetoggle{#1@scriptlangequal}% whether lang and script names are same: e.g. Hebrew, Arabic
   \providebool{#1@fontsetup}%
   \providebool{#1@indentfirst}%
@@ -254,13 +310,8 @@
     }%
   }%
   \define@choicekey+[xpg@setup]{#1}{direction}[\val\nr]{LR,RL}[LR]%
-    {\ifcase\nr\relax
-        \togglefalse{#1@RL}%
-      \or
-        \toggletrue{#1@RL}%
-        \ifcsundef{RTL}{\ifluatex\RequirePackage{luabidi}\else\RequirePackage{bidi}\fi}{}% FIXME Use \RequireBidi and remove calls in individual gloss files.
-    \fi}%
-    {\xpg@warning{#1: Invalid value \val\space for key "direction"}}%
+    {}%
+    {}%
   \define@key[xpg@setup]{#1}{hyphenmins}[{2,3}]%
     {\begingroup\edef\x{\endgroup
        \noexpand\setlocalhyphenmins{#1}{\xpg@first##1}{\xpg@second##1}}\x}
@@ -335,7 +386,14 @@
       .initial:x = {\c_empty_clist},
     % direction
     #1 / direction
-      .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/direction}{##1}},
+    .  code:n = {
+           \str_case_e:nnTF{##1}{
+             {LR}{}
+             {RL}{\RequireBidi}
+           }
+           {\prop_gput:Nnn{\polyglossia@langsetup}{#1/direction}{##1}}
+           {\xpg@error{Unknown~ direction~ ##1~ for~ language~ #1}}
+       },
     #1 / direction
       .value_required:n = true,
     #1 / direction
@@ -368,7 +426,7 @@
       .default:n = true,
     #1 / fontsetup
       .initial:n = false,
-  }
+    }
 }
 
 \AtEndDocument{\prop_log:N{\polyglossia@langsetup}}
@@ -635,23 +693,17 @@
       {\newenvironment{#2}[1][]{\begin{otherlanguage}[####1]{#2}}%
         {\end{otherlanguage}}}%
       \expandafter\newcommand\csname text#2\endcsname[2][]{%
-        \ifcsdef{RTL}%
-          {\iftoggle{#2@RL}%
-            {\@ensure@RTL{\foreignlanguage[####1]{#2}{####2}}}%
-            {\@ensure@LTR{\foreignlanguage[####1]{#2}{####2}}}%
-          }% else bidi not loaded
-          {\iftoggle{#2@RL}%
-            {\xpg@error{Language~ #2~ is~ right-to-left,~ but~ bidi~ package~ was~ not~ loaded!}}%
-            {\foreignlanguage[####1]{#2}{####2}}%
-          }%
+        \polyglossia@ensure@direction:nn{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}
+                {\foreignlanguage[####1]{#2}{####2}}
       }%
       \csletcs{local#2}{text#2}%
       \csgdef{#2@loaded}{}%
       \gdef\xpg@main@language{#2}%
       }%
       {\xpg@warning{gloss-#2.ldf~ is~ already~ loaded!}}%:
-      %% The following settings are for the default language and script:
-      \iftoggle{#2@RL}{\@RTLmaintrue}{}% this tells bidi.sty that the document is RTL
+      %% The following settings are for the default language and script
+      % this tells bidi.sty that the document is RTL
+      \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{\@RTLmaintrue}{}%
       \AtBeginDocument{%
       \selectlanguage[#1]{#2}%
       \selectbackgroundlanguage{#2}}%
@@ -669,7 +721,7 @@
     \csuse{noextras@\xpg@main@language}%
     \csuse{init@noextras@\xpg@main@language}%
     \def\languagename{#2}%
-    \iftoggle{#2@RL}{\@rlmaintrue\@rl@footnotetrue}{}%
+    \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{\@rlmaintrue\@rl@footnotetrue}{}%
     \selectlanguage[#1]{#2}%
     \selectbackgroundlanguage{#2}}}
 
@@ -747,16 +799,9 @@
          {\end{otherlanguage}}%
       \fi
       \expandafter\newcommand\csname text#2\endcsname[2][]{%
-        \ifcsdef{RTL}%
-          {\iftoggle{#2@RL}%
-            {\@ensure@RTL{\foreignlanguage[####1]{#2}{####2}}}%
-            {\@ensure@LTR{\foreignlanguage[####1]{#2}{####2}}}%
-          }% else bidi not loaded
-          {\iftoggle{#2@RL}%
-            {\xpg@error{Language~ #2~ is~ right-to-left,~ but~ bidi~ package~ was~ not~ loaded!}}%
-            {\foreignlanguage[####1]{#2}{####2}}%
-          }%
-        }%
+        \polyglossia@ensure@direction:nn{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}%
+              {\foreignlanguage[####1]{#2}{####2}}
+      }%
      \csletcs{local#2}{text#2}%
      \csgdef{#2@loaded}{}%
      }%
@@ -849,12 +894,12 @@
   \edef\xpg@vloaded{#1\ifx\xpg@vloaded\@empty\else,\xpg@vloaded\fi}}
 
 \newcommand{\xpg@set@language}[1]{%
-   \select@language{#1}%
+   \@select@language{#1}%
    \if@filesw%
-      \protected@write\@auxout{}{\protect\select@language{#1}}%
-      \addtocontents{toc}{\protect\select@language{#1}}%
-      \addtocontents{lof}{\protect\select@language{#1}}%
-      \addtocontents{lot}{\protect\select@language{#1}}%
+      \protected@write\@auxout{}{\protect\@select@language{#1}}%
+      \addtocontents{toc}{\protect\@select@language{#1}}%
+      \addtocontents{lof}{\protect\@select@language{#1}}%
+      \addtocontents{lot}{\protect\@select@language{#1}}%
    \fi
 }
 
@@ -898,19 +943,25 @@
    \fi % 
 }
 
-\def\select@language#1{%
-   \ifluatex %
+
+\def\@select@language#1{
+  % hook for compatibility with biblatex
+  \select@language{#1}
+  \ifluatex %
       \xpg@set@language@luatex@iii{#1}{\the\language}
    \fi %
    \xpg@initial@setup%
    \select@@language{#1}%
-   \ifcsundef{setRL}{}%
-   {\iftoggle{#1@RL}{\setRL}{\setLR}}%
+   % do not choke biblatex use a macro
+   \polyglossia@setdir:n{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}
    \csuse{captions#1}%
    \local@marks{#1}%
    \csuse{init@extras@#1}%
    \csuse{blockextras@#1}%
-}
+ }
+
+% hook for compatibility with biblatex
+\def\select@language#1{}
 
 % Common code for `\select@language' and `\foreignlanguage'.
 \newcommand{\select@@language}[1]{%
