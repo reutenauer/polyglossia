@@ -12,6 +12,8 @@
 \RequirePackage{ifluatex}
 % For symmetry with ifluatex
 \RequirePackage{ifxetex}
+\RequireExpPackage{l3keys}
+
 % fontspec now uses LaTeX3 packages such as expl3, so we need this:
 \ExplSyntaxOn
 
@@ -471,9 +473,9 @@
 
 %% ensure localization of \markright and \markboth commands
 %%% THIS IS NOW DISABLED BY DEFAULT
-\define@boolkey{polyglossia}[xpg@]{localmarks}[false]{%
-   \ifbool{xpg@localmarks}{%
-      \xpg@info{Option:~ localmarks}%
+\newcommand{\local@marks}[1]{}
+\def\enable@local@marks{
+  \xpg@info{Option:~ localmarks}%
       \def\local@marks##1{%
          \def\markboth####1####2{%
             \begingroup
@@ -499,9 +501,11 @@
             \def\@markright####1####2####3{\@temptokena{\protect\@@ensure@maindir{####1}}%
                \unrestored@protected@xdef\@themark{{\the\@temptokena}%
                {\protect\@@ensure@maindir{####3}}}}}%
-    }{% else
-      \def\local@marks##1{}%
-    }%
+}
+
+\define@boolkey{polyglossia}[xpg@]{localmarks}[false]{%
+   \ifbool{xpg@localmarks}{\enable@local@marks}%
+      {}
 }
 \setkeys{polyglossia}{localmarks=false}
 
