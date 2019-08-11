@@ -12,7 +12,8 @@
 \RequirePackage{ifluatex}
 % For symmetry with ifluatex
 \RequirePackage{ifxetex}
-\RequireExpPackage{l3keys}
+\RequirePackage{expl3}
+\RequirePackage{l3keys2e}
 
 % fontspec now uses LaTeX3 packages such as expl3, so we need this:
 \ExplSyntaxOn
@@ -475,7 +476,7 @@
 %%% THIS IS NOW DISABLED BY DEFAULT
 \newcommand{\local@marks}[1]{}
 \def\enable@local@marks{
-  \xpg@info{Option:~ localmarks}%
+      \xpg@info{Option:~ localmarks}%
       \def\local@marks##1{%
          \def\markboth####1####2{%
             \begingroup
@@ -503,11 +504,6 @@
                {\protect\@@ensure@maindir{####3}}}}}%
 }
 
-\define@boolkey{polyglossia}[xpg@]{localmarks}[false]{%
-   \ifbool{xpg@localmarks}{\enable@local@marks}%
-      {}
-}
-\setkeys{polyglossia}{localmarks=false}
 
 % Easy way out – Arthur, 2012-08-01
 \ifcsdef{newXeTeXintercharclass}{%
@@ -864,25 +860,68 @@
    \ifcsundef{#1hyphenmins}{}%
    {\expandafter\expandafter\expandafter\set@hyphenmins\csname #1hyphenmins\endcsname\relax}}
 
-\define@boolkey{polyglossia}[system@]{babelshorthands}[false]{}
 
 \AtEndPreamble{\@ifpackageloaded{bidi}{\providecommand*{\aemph}[1]{$\overline{\hboxR{#1}}$}}{}}% TODO Make that work for luabidi too.
 
-%% Package Options %%
-\DeclareOption{nolocalmarks}{\setkeys{polyglossia}{localmarks=false}}
-\DeclareOption{localmarks}{\setkeys{polyglossia}{localmarks=true}}
-\DeclareOption{babelshorthands}{\setkeys{polyglossia}{babelshorthands=true}}
-\DeclareOption{quiet}{%
+
+% keys for main package
+\keys_define:nn { polyglossia } {
+  verbose
+     .bool_set:N = \l_polyglossia_verbose_bool,
+  verbose
+     .default:n = true,
+  % compatibility
+  quiet
+     .meta:n =  { verbose = false },
+
+  localmarks
+     .bool_set:N = \l_polyglossia_localmarks_bool,
+  localmarks
+     .default:n = false,
+  % compatibility
+  nolocalmarks
+     .meta:n = { localmark = false },
+   
+  babelshorthands
+     .bool_set:N = \l_polyglossia_babelshorthands_bool,
+  babelshorthands
+     .default:n = true,
+}
+
+\keys_set:nn { polyglossia } {
+  localmarks = false,
+  verbose = true,
+  babelshorthands = false,
+}
+
+
+\ProcessKeysOptions{polyglossia}
+
+\bool_if:nTF \l_polyglossia_verbose_bool {} {
    \gdef\@latex@info#1{\relax}% no latex info
    \gdef\@font@info#1{\relax}% no latex font info
    \gdef\@font@warning#1{\relax}% no latex font warnings
    \gdef\zf@PackageInfo#1{\relax}% no fontspec info
-   \gdef\xpg@info#1{\relax}}% no polyglossia info
+   \gdef\xpg@info#1{\relax}% no polyglossia info
+}
+
+\bool_if:nTF \l_polyglossia_localmarks_bool {} {
+  \enable@local@marks{}
+}{}
+
+% compatibility
+\newif\ifsystem@babelshorthands
+\bool_if:nTF \l_polyglossia_babelshorthands_bool {
+  \system@babelshorthandstrue
+}{
+  \system@babelshorthandsfalse
+}
+
+
 %
 % FIXME these should also be loaded \AtEndOfPackage !!!
 \def\xpg@option#1#2{%
   \ifcsundef{xpg@main@language}{\setdefaultlanguage}{\setotherlanguage}%
     [#1]{#2}}
 \ExplSyntaxOff
-\ProcessOptions*
 \endinput
