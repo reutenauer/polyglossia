@@ -190,7 +190,6 @@
   %define booleans etoolbox style and set defaults
   %% TODO ? \providetoggle{#1@setup@done}%
   \providetoggle{#1@RL}%
-  \providetoggle{#1@latin}\toggletrue{#1@latin}%
   \providetoggle{#1@scriptlangequal}% whether lang and script names are same: e.g. Hebrew, Arabic
   \providebool{#1@fontsetup}%
   \providebool{#1@indentfirst}%
@@ -227,9 +226,6 @@
 
 \def\xpg@define@keys#1{%
   \define@key[xpg@setup]{#1}{script}{%
-    \ifstrequal{##1}{Latin}%
-      {\toggletrue{#1@latin}}%
-      {\togglefalse{#1@latin}}%
     \csgdef{xpg@scriptname@#1}{##1}%
     \csgdef{xpg@scriptname@#1@lc}{\xpg@lowercasefirst{##1}}}%
   \define@key[xpg@setup]{#1}{scripttag}{%
@@ -401,9 +397,9 @@
 %\def\xpg@fontsetup@none#1{\csgdef{#1@font}{\ifcsdef{#1font}{\csname #1font\endcsname}{}}} %<-- simplistic
 %\def\xpg@fontsetup@custom#1{\csuse{#1@font}}
 
-\def\xpg@fontsetup@auto#1{\iftoggle{#1@latin}%
-  {\xpg@fontsetup@latin{#1}}%
-  {\xpg@fontsetup@nonlatin{#1}}%
+\def\xpg@fontsetup@auto#1{%
+  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{latin}%
+              {\xpg@fontsetup@latin{#1}}{\xpg@fontsetup@nonlatin{#1}}%
 }
 
 \def\xpg@addfontfeature@lang#1#2{% #1 is langtag, #2 is langname
@@ -721,11 +717,10 @@
                         \@afterindenttrue}
 \def\nofrench@indent{\let\@afterindentfalse\@@fterindentfalse
                           \@afterindentfalse}
-
 \newcommand{\selectbackgroundlanguage}[1]{%
-    \iftoggle{#1@latin}{}{\xpg@set@normalfont{#1}}%
-    \csuse{#1@globalnumbers}%
-    }
+  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{latin}{}{\xpg@set@normalfont{#1}}%
+  \csuse{#1@globalnumbers}%
+}
 
 \newcommand{\setotherlanguage}[2][]{%
   \edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
