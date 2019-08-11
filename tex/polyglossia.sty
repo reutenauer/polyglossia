@@ -185,6 +185,8 @@
 
 \newif\if@xpg@language@really@defined@
 \newcommand*\PolyglossiaSetup[2]{%
+  \polyglossia@keys_define_lang:n{#1}%
+  \keys_set:nn { polyglossia / #1 } { #2 }%
   %define booleans etoolbox style and set defaults
   %% TODO ? \providetoggle{#1@setup@done}%
   \providetoggle{#1@RL}%
@@ -287,6 +289,84 @@
   %TODO same thing with localdigits
 }
 
+\prop_new:N \polyglossia@langsetup
+
+\cs_new_protected:Npn \polyglossia@keys_define_lang:n #1 {
+  \keys_define:nn {polyglossia}{
+    % the script font
+    #1 / script
+       .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/script}{##1}},
+    #1 / script
+       .value_required:n = true,
+    #1 / script
+       .initial:n = latin,
+    % the opentype script tag
+    #1 / scripttag
+       .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/scripttag}{##1}},
+    #1 / scripttag
+       .default:n = {},
+    #1 / scripttag
+      .initial:n = {},
+    % the language full name
+    #1 / language
+       .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/language}{##1}},
+    #1 / language
+       .value_required:n = true,
+    #1 / language
+        .initial:x = \xpg@uppercasefirst{#1},
+    % the language tag
+    #1 / langtag
+       .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/langtag}{##1}},
+    #1 / langtag
+       .value_required:n = true,
+    #1 / langtag
+       .initial:n = {},
+    % hyphennames
+    #1 / hyphennames
+       .code:n = {\clist_set:Nn{\l_tmpa_clist}{##1} \prop_gput:Nnn{\polyglossia@langsetup}{#1/hyphennames}{##1}},
+    #1 / hyphennames
+       .value_required:n = true,
+    #1 / hyphennames
+      .initial:x = {\c_empty_clist},
+    % direction
+    #1 / direction
+      .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/direction}{##1}},
+    #1 / direction
+      .value_required:n = true,
+    #1 / direction
+      .initial:n = {LR},
+    % minimal left and right hyphenation minima using
+    #1 / hyphenmins
+     .code:n = {\clist_set:Nn{\l_tmpa_clist}{##1} \prop_gput:Nnn{\polyglossia@langsetup}{#1/hypenmins}{##1}},
+    #1 / hyphenmins
+      .value_required:n = true,
+    #1 / hyphenmins
+     .initial:n = {2,3},
+    % frenchspacing
+    #1 / frenchspacing
+      .code:n = {\clist_set:Nn{\l_tmpa_bool}{##1} \prop_gput:Nnn{\polyglossia@langsetup}{#1/frenchspacing}{##1}},
+    #1 / frenchspacing
+      .default:n = true,
+    #1 / frenchspacing
+      .initial:n = false,
+    % indent first line
+    #1 / indentfirst
+      .code:n = {\clist_set:Nn{\l_tmpa_bool}{##1} \prop_gput:Nnn{\polyglossia@langsetup}{#1/indentfirst}{##1}},
+    #1 / indentfirst
+      .default:n = true,
+    #1 indentfirst
+      .initial:n = false,
+    % fontsetup
+    #1 / fontsetup
+      .code:n = {\clist_set:Nn{\l_tmpa_bool}{##1} \prop_gput:Nnn{\polyglossia@langsetup}{#1/fontsetup}{##1}},
+    #1 / fontsetup
+      .default:n = true,
+    #1 / fontsetup
+      .initial:n = false,
+  }
+}
+
+\AtEndDocument{\prop_log:N{\polyglossia@langsetup}}
 \def\xpg@lastlanguage{0}%
 
 \providebool{xpg@hyphenation@disabled}%
@@ -924,4 +1004,5 @@
   \ifcsundef{xpg@main@language}{\setdefaultlanguage}{\setotherlanguage}%
     [#1]{#2}}
 \ExplSyntaxOff
+
 \endinput
