@@ -386,7 +386,7 @@
     #1 / language
        .value_required:n = true,
     #1 / language
-        .initial:x = \xpg@uppercasefirst{#1},
+        .initial:x = {\str_upper_case:n#1},
     % the language tag
     #1 / langtag
        .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/langtag}{##1}},
