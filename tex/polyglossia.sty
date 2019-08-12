@@ -248,7 +248,7 @@
   %% TODO ? \providetoggle{#1@setup@done}%
   \providetoggle{#1@scriptlangequal}% whether lang and script names are same: e.g. Hebrew, Arabic
   \providebool{#1@fontsetup}%
-  \providebool{#1@indentfirst}%
+  %\providebool{#1@indentfirst}%
   %\providebool{#1@frenchspacing}%
   % we initialize these so that we can use \gappto below
   \csgdef{init@extras@#1}{}%
@@ -259,7 +259,7 @@
     % check if language hyphenname is defined 
     \polyglossia@check@ifdefined:NF{#1}{
       % if false check if current hypenname is egal of language hyphenname
-      \if_str_eq:nnF{#1}{##1}{
+      \str_if_eq:nnF{#1}{##1}{
         {
           % if language is different of hypenname then test if hypennation is defined
           \xpg@ifdefined{##1}{
@@ -279,6 +279,13 @@
   %define all keys:
   \xpg@define@keys{#1}%
   \setkeys[xpg@setup]{#1}{#2}%
+  % ugly but for factorisation
+  \str_if_eq:nnTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}
+      {\prop_item:Nn{\polyglossia@langsetup}{#1/lang}}
+      {\prop_gput:Nnn{\polyglossia@langsetup}{#1/scriptlangequal}{true}}
+      {\prop_gput:Nnn{\polyglossia@langsetup}{#1/scriptlangequal}{false}}
+  \str_if_eq:nnTF{\prop_item:Nn{\polyglossia@langsetup}{#1/scriptlangequal}}{true}
+               {\toggletrue{#1@scriptlangequal}}{\togglefalse{#1@scriptlangequal}}
   % here we do the fontsetup:
   \ifbool{#1@fontsetup}%
     {\xpg@fontsetup@auto{#1}}%
@@ -357,7 +364,10 @@
   \keys_define:nn {polyglossia}{
     % the script font
     #1 / script
-       .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/script}{##1}},
+    .code:n = {
+      \prop_gput:Nnn{\polyglossia@langsetup}{#1/script}{##1}
+      \prop_gput:Nnn{\polyglossia@langsetup}{#1/lcscript}{\xpg@lowercasefirst{##1}}
+    },
     #1 / script
        .value_required:n = true,
     #1 / script
@@ -553,6 +563,7 @@
     Please~ define~ \expandafter\string\csname \xpg@lowercasefirst{#2}font\endcsname\space with~ \string\newfontfamily}}%
 }
 
+
 \def\xpg@fontsetup@latin#1{%
   \begingroup
   \csgdef{#1@font@rm}{%
@@ -588,12 +599,6 @@
 \def\xpg@fontsetup@nonlatin#1{%
   \begingroup
   \edef\tmp@langname@lc{#1}% eg ukrainian
-  \edef\tmp@scriptname@lc{\csuse{xpg@scriptname@#1@lc}}% eg cyrillic
-  \ifx\tmp@scriptname@lc\tmp@langname@lc
-    \toggletrue{#1@scriptlangequal}%
-  \else
-    \togglefalse{#1@scriptlangequal}%
-  \fi
   \csgdef{#1@font@rm}{%
     \ifcsdef{#1font}%
       {\@nameuse{#1font}}%
