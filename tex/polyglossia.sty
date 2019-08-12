@@ -104,7 +104,7 @@
      {}%
      {\xpg@error{Unknown~ language~ direction~ #1 ~(base~ wrapper)}}%
 }%
-\cs_new_nopar:Nn{\polyglossia@setdir:n}{%
+\cs_new_nopar:Nn{\polyglossia@setdirection:n}{%
   \str_case_e:nnTF{#1}{%
        {LR}{\relax}%
        {RL}{\xpg@error{right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}}%
@@ -122,7 +122,7 @@
       {\xpg@error{Unknown~ language~ direction~ #1 ~(bidi~ wrapper)}%
     }%
   }
-  \cs_gset_nopar:Nn{\polyglossia@setdir:n}{%
+  \cs_gset_nopar:Nn{\polyglossia@setdirection:n}{%
     \str_case_e:nnTF{#1}{%
         {LR}{\setLR}%
         {RL}{\setRL}%
@@ -142,7 +142,7 @@
       {}%
       {\xpg@error{Unknown~ language~ direction~ #1 ~(luabidi~ wrapper)}}%
   }%
-  \cs_gset_nopar:Nn{\polyglossia@setdir:n}{%
+  \cs_gset_nopar:Nn{\polyglossia@setdirection:n}{%
     \str_case_e:nnTF{#1}{%
         {LR}{\setLR}%
         {RL}{\setRL}%
@@ -477,7 +477,7 @@
 }
 
 \cs_new_nopar:Nn{\polyglossia@lang@frenchspacing:n}{
-  \prop_get:NnNTF{\polyglossia@langsetup}{#1/frenchspacing}{\l_tmpa_tl}
+  \prop_get:NnNTF \polyglossia@langsetup {#1/frenchspacing} \l_tmpa_tl
       {
         \str_case_e:nnF{\l_tmpa_tl}{
           {true}{\frenchspacing}
@@ -485,18 +485,48 @@
         }
         {\xpg@error{frenchspacing~should~be~true~or~false. Is~"\l_tmpa_ttl"~ for~ language~ "#1"}}
       }
-      {\xpg@error{Could~ not~ retrieve~ key~ frenchspacing~ for~ language~ "#1"}}
+      {
+        \xpg@error{Could~ not~ retrieve~ key~ frenchspacing~ for~ language~ "#1"}
+        \prop_show:N{\polyglossia@langsetup}
+      }
 }
 
-\cs_new_nopar:Nn{\polyglossia@french@indent:n}{
-  \str_case_e:nnTF{#1}{
+\cs_new_nopar:Nn{\polyglossia@lang@indentfirst:n}{
+  \prop_get:NnNTF \polyglossia@langsetup {#1/indentfirst} \l_tmpa_tl
+      {
+        \str_case_e:nnF{\l_tmpa_tl}{
           {true}{\french@indent}
           {false}{\nofrench@indent}
-       }
-       {}
-       {\xpg@error{frenchindent~should~be~true~or~false. Is~"#1"}}
+        }
+        {\xpg@error{indentfirst~should~be~true~or~false. Is~"\l_tmpa_ttl"~ for~ language~ "#1"}}
+      }
+      {
+        \xpg@error{Could~ not~ retrieve~ key~ indentfirst~ for~ language~ "#1"}
+        \prop_show:N{\polyglossia@langsetup}
+      }
 }
 
+\cs_new:Nn{\polyglossia@lang@ensuredirection:nn}{
+  \prop_get:NnNTF \polyglossia@langsetup {#1/direction} \l_tmpa_tl
+      {
+        \polyglossia@ensure@direction:nn{\l_tmpa_tl}{#2}
+      }
+      {
+        \xpg@error{Could~ not~ retrieve~ key~ direction~ for~ language~ "#1"}
+        \prop_show:N{\polyglossia@langsetup}
+      }
+}
+
+\cs_new:Nn{\polyglossia@lang@setdirection:n}{
+  \prop_get:NnNTF \polyglossia@langsetup {#1/direction} \l_tmpa_tl
+      {
+        \polyglossia@setdirection:n{\l_tmpa_tl}
+      }
+      {
+        \xpg@error{Could~ not~ retrieve~ key~ direction~ for~ language~ "#1"}
+        \prop_show:N{\polyglossia@langsetup}
+      }
+}
 
 \AtEndDocument{\prop_log:N{\polyglossia@langsetup}}
 \def\xpg@lastlanguage{0}%
@@ -757,7 +787,7 @@
       {\newenvironment{#2}[1][]{\begin{otherlanguage}[####1]{#2}}%
         {\end{otherlanguage}}}%
       \expandafter\newcommand\csname text#2\endcsname[2][]{%
-        \polyglossia@ensure@direction:nn{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}
+        \polyglossia@lang@ensuredirection:nn{#2/direction}
                 {\foreignlanguage[####1]{#2}{####2}}
       }%
       \csletcs{local#2}{text#2}%
@@ -863,7 +893,7 @@
          {\end{otherlanguage}}%
       \fi
       \expandafter\newcommand\csname text#2\endcsname[2][]{%
-        \polyglossia@ensure@direction:nn{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}%
+        \polyglossia@lang@ensuredirection:nn{#2}%
               {\foreignlanguage[####1]{#2}{####2}}
       }%
      \csletcs{local#2}{text#2}%
@@ -953,6 +983,7 @@
      }%
 }
 
+
 % Save any variant in csv list of variants
 \define@key{xpg@langvariant}{variant}{%
   \edef\xpg@vloaded{#1\ifx\xpg@vloaded\@empty\else,\xpg@vloaded\fi}}
@@ -1014,13 +1045,11 @@
    \fi %
    \xpg@initial@setup%
    \select@@language{#1}%
-   % do not choke biblatex use a macro
-   %\prop_show:N{\polyglossia@langsetup}
-   \polyglossia@setdir:n{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}
+   \polyglossia@lang@setdirection:n{#1}
    \csuse{captions#1}%
    \local@marks{#1}%
    \csuse{init@extras@#1}%
-   \polyglossia@french@indent:n{\prop_item:Nn{\polyglossia@langsetup}{#1/indentfirst}}
+   \polyglossia@lang@indentfirst:n{#1}
    \polyglossia@lang@frenchspacing:n{#1}
    \csuse{blockextras@#1}%
  }
