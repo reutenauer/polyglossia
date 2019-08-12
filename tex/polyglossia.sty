@@ -313,8 +313,7 @@
     {}%
     {}%
   \define@key[xpg@setup]{#1}{hyphenmins}[{2,3}]%
-    {\begingroup\edef\x{\endgroup
-       \noexpand\setlocalhyphenmins{#1}{\xpg@first##1}{\xpg@second##1}}\x}
+    {}
   \define@boolkey[xpg@setup]{#1}[#1@]{frenchspacing}[true]{%
   }%
   \define@boolkey[xpg@setup]{#1}[#1@]{indentfirst}[true]{%
@@ -396,7 +395,19 @@
       .initial:n = {LR},
     % minimal left and right hyphenation minima using
     #1 / hyphenmins
-     .code:n = {\clist_set:Nn{\l_tmpa_clist}{##1} \prop_gput:Nnn{\polyglossia@langsetup}{#1/hypenmins}{##1}},
+    .code:n = {
+      % check syntax
+      \clist_set:Nn{\l_tmpa_clist}{##1}
+      \int_compare:nNnTF{\clist_count:N{\l_tmpa_clist}}{=}{2}
+         {}
+         {\xpg@error{hypenmins~should~be~a~list~of~two~entries}}
+      \int_set:Nn{\l_tmpa_int}{\clist_item:Nn{\l_tmpa_clist}{1}}
+      \int_set:Nn{\l_tmpb_int}{\clist_item:Nn{\l_tmpa_clist}{2}}
+      % set prop
+      \prop_gput:Nnn{\polyglossia@langsetup}{#1/hypenmins}{##1}
+      % create hyphenmins for language (will be overwritten later)
+      \setlocalhyphenmins{#1}{\l_tmpa_int}{\l_tmpb_int}
+    },
     #1 / hyphenmins
       .value_required:n = true,
     #1 / hyphenmins
@@ -409,7 +420,7 @@
             {false}{}
           }
           {}
-          {\xpg@error{frenchspacing~should~be~true~or~false}}
+          {\xpg@error{frenchspacing~should~be~true~or~false. Is "##1" for language "#1"}}
         \prop_gput:Nnn{\polyglossia@langsetup}{#1/frenchspacing}{##1}
     },
     #1 / frenchspacing
@@ -424,7 +435,7 @@
             {false}{}
           }
           {}
-          {\xpg@error{indentfirst~should~be~true~or~false}}
+          {\xpg@error{indentfirst~should~be~true~or~false. Is "##1" for language "#1"}}
       \prop_gput:Nnn{\polyglossia@langsetup}{#1/indentfirst}{##1}
     },
     #1 / indentfirst
@@ -447,7 +458,7 @@
           {false}{\nonfrenchspacing}
        }
        {}
-       {\xpg@error{frenchspacing~should~be~true~or~false}}
+       {\xpg@error{frenchspacing~should~be~true~or~false. Is~"#1"}}
 }
 
 \cs_new_nopar:Nn{\polyglossia@french@indent:n}{
@@ -456,7 +467,7 @@
           {false}{\nofrench@indent}
        }
        {}
-       {\xpg@error{frenchindent~should~be~true~or~false}}
+       {\xpg@error{frenchindent~should~be~true~or~false. Is~"#1"}}
 }
 
 
