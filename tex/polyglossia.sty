@@ -249,7 +249,7 @@
   \providetoggle{#1@scriptlangequal}% whether lang and script names are same: e.g. Hebrew, Arabic
   \providebool{#1@fontsetup}%
   \providebool{#1@indentfirst}%
-  \providebool{#1@frenchspacing}%
+  %\providebool{#1@frenchspacing}%
   % we initialize these so that we can use \gappto below
   \csgdef{init@extras@#1}{}%
   \csgdef{init@noextras@#1}{}% we don't use this yet: remove?
@@ -316,9 +316,7 @@
     {\begingroup\edef\x{\endgroup
        \noexpand\setlocalhyphenmins{#1}{\xpg@first##1}{\xpg@second##1}}\x}
   \define@boolkey[xpg@setup]{#1}[#1@]{frenchspacing}[true]{%
-    \ifbool{#1@frenchspacing}%
-      {\csgappto{init@extras@#1}{\frenchspacing}}%
-      {\csgappto{init@extras@#1}{\nonfrenchspacing}}}%
+  }%
   \define@boolkey[xpg@setup]{#1}[#1@]{indentfirst}[true]{%
     \ifbool{#1@indentfirst}%
       {\csgappto{init@extras@#1}{\french@indent}}%
@@ -407,7 +405,15 @@
      .initial:n = {2,3},
     % frenchspacing
     #1 / frenchspacing
-      .code:n = {\clist_set:Nn{\l_tmpa_bool}{##1} \prop_gput:Nnn{\polyglossia@langsetup}{#1/frenchspacing}{##1}},
+    .code:n = {
+        \str_case_e:nnTF{##1}{
+            {true}{}
+            {false}{}
+          }
+          {}
+          {\xpg@error{frenchspacing~should~be~true~or~false}}
+        \prop_gput:Nnn{\polyglossia@langsetup}{#1/frenchspacing}{##1}
+    },
     #1 / frenchspacing
       .default:n = true,
     #1 / frenchspacing
@@ -428,6 +434,16 @@
       .initial:n = false,
     }
 }
+
+\cs_new_nopar:Nn{\polyglossia@frenchspacingcond:n}{
+  \str_case_e:nnTF{#1}{
+          {true}{\frenchspacing}
+          {false}{\nonfrenchspacing}
+       }
+       {}
+       {\xpg@error{frenchspacing~should~be~true~or~false}}
+}
+
 
 \AtEndDocument{\prop_log:N{\polyglossia@langsetup}}
 \def\xpg@lastlanguage{0}%
@@ -840,7 +856,7 @@
      {{\select@@language{#2}%
       \setkeys{#2}{#1}%
       \use@localhyphenmins{#2}%
-      \ifbool{#2@frenchspacing}{\frenchspacing}{\nonfrenchspacing}%
+      \polyglossia@frenchspacingcond:n{\prop_item:Nn{\polyglossia@langsetup}{#2/frenchspacing}}
       \csuse{inlineextras@#2}%
       #3}%
      }%
@@ -854,7 +870,7 @@
      {\select@@language{#2}%
       \setkeys{#2}{#1}%
       \use@localhyphenmins{#2}%
-      \ifbool{#2@frenchspacing}{\frenchspacing}{\nonfrenchspacing}%
+      \polyglossia@frenchspacingcond:n{\prop_item:Nn{\polyglossia@langsetup}{#2/frenchspacing}}
       \csuse{inlineextras@#2}\csuse{date#2}%
      }%
 }{}
@@ -957,6 +973,7 @@
    \csuse{captions#1}%
    \local@marks{#1}%
    \csuse{init@extras@#1}%
+   \polyglossia@frenchspacingcond:n{\prop_item:Nn{\polyglossia@langsetup}{#1/frenchspacing}}
    \csuse{blockextras@#1}%
  }
 
