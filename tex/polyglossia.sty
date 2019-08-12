@@ -256,14 +256,13 @@
   \csgdef{xpg@langname@#1}{\xpg@uppercasefirst{#1}}%
   %needed for docsvlist with hyphennames key:
   \def\do##1{%
-    \xpg@check@ifdefined{#1}
-    \if@xpg@language@really@defined@\else
+    \polyglossia@check@ifdefined:NF{#1}{
       \ifstrequal{#1}{##1}{}%
       {\xpg@ifdefined{##1}%
         {\expandafter\ifx\csname l@##1\endcsname\l@nohyphenation\else\csletcs{l@#1}{l@##1}\xpg@set@language@luatex@iv{##1}\fi}%
         {\csletcs{l@##1}{l@nohyphenation}}%
       }%
-    \fi
+    }
   }%
   %define all keys:
   \xpg@define@keys{#1}%
@@ -374,7 +373,10 @@
        .initial:n = {},
     % hyphennames
     #1 / hyphennames
-       .code:n = {\clist_set:Nn{\l_tmpa_clist}{##1} \prop_gput:Nnn{\polyglossia@langsetup}{#1/hyphennames}{##1}},
+    .code:n = {
+      \clist_set:Nn{\l_tmpa_clist}{##1}
+      \prop_gput:Nnn{\polyglossia@langsetup}{#1/hyphennames}{##1}
+    },
     #1 / hyphennames
        .value_required:n = true,
     #1 / hyphennames
@@ -953,28 +955,26 @@
     }
 }
 
-\newcommand\xpg@check@ifdefined[1]{%
-    \expandafter\ifx\csname l@#1\endcsname\relax\@xpg@language@really@defined@false\else
-        \ifx\csname l@#1\endcsname\l@nohyphenation\@xpg@language@really@defined@false\else
-            \@xpg@language@really@defined@true
-        \fi
-    \fi
+\prg_set_conditional:Npnn \polyglossia@check@ifdefined:N #1 { p , T , F , TF }{
+  \cs_if_exist:cTF{l@#1}{
+    \cs_if_eq:cNTF{l@#1}{\l@nohyphenation}{\prg_return_false:}{\prg_return_true:}
+  }{
+    \prg_return_false:
+  }
 }
 
 \newcommand\xpg@ifdefined[3]{%
     \ifluatex
         \xpg@set@language@luatex@iv{#1}%
     \fi
-    \xpg@check@ifdefined{#1}
-    \if@xpg@language@really@defined@#2\else#3\fi
+    \polyglossia@check@ifdefined:NTF{#1}{#2}{#3}
 }%
 
 \newcommand\xpg@set@language@luatex@iv[1]{%
     \ifluatex
-        \xpg@check@ifdefined{#1}%
-        \if@xpg@language@really@defined@\else
+        \polyglossia@check@ifdefined:NF{#1}{
             \expandafter\chardef\csname l@#1\endcsname=\directlua{tex.sprint(polyglossia.newloader('#1'))}%
-        \fi
+        }
         \language\directlua{tex.sprint(polyglossia.newloader('#1'))}%
     \fi
 }
