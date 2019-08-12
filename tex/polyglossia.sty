@@ -318,9 +318,7 @@
   \define@boolkey[xpg@setup]{#1}[#1@]{frenchspacing}[true]{%
   }%
   \define@boolkey[xpg@setup]{#1}[#1@]{indentfirst}[true]{%
-    \ifbool{#1@indentfirst}%
-      {\csgappto{init@extras@#1}{\french@indent}}%
-      {\csgappto{init@extras@#1}{\nofrench@indent}}}%
+  }%
 %  \define@choicekey*+[xpg@setup]{#1}{fontsetup}[\val\nr]{none,custom,auto}[none]%
 %    %{\csgdef{#1@fontsetup}{\val}}%
 %    {\xpg@fontsetup{\val}{#1}}%
@@ -420,10 +418,18 @@
       .initial:n = false,
     % indent first line
     #1 / indentfirst
-      .code:n = {\clist_set:Nn{\l_tmpa_bool}{##1} \prop_gput:Nnn{\polyglossia@langsetup}{#1/indentfirst}{##1}},
+    .code:n = {
+      \str_case_e:nnTF{##1}{
+            {true}{}
+            {false}{}
+          }
+          {}
+          {\xpg@error{indentfirst~should~be~true~or~false}}
+      \prop_gput:Nnn{\polyglossia@langsetup}{#1/indentfirst}{##1}
+    },
     #1 / indentfirst
       .default:n = true,
-    #1 indentfirst
+    #1 / indentfirst
       .initial:n = false,
     % fontsetup
     #1 / fontsetup
@@ -442,6 +448,15 @@
        }
        {}
        {\xpg@error{frenchspacing~should~be~true~or~false}}
+}
+
+\cs_new_nopar:Nn{\polyglossia@french@indent:n}{
+  \str_case_e:nnTF{#1}{
+          {true}{\french@indent}
+          {false}{\nofrench@indent}
+       }
+       {}
+       {\xpg@error{frenchindent~should~be~true~or~false}}
 }
 
 
@@ -973,6 +988,7 @@
    \csuse{captions#1}%
    \local@marks{#1}%
    \csuse{init@extras@#1}%
+   \polyglossia@french@indent:n{\prop_item:Nn{\polyglossia@langsetup}{#1/indentfirst}}
    \polyglossia@frenchspacingcond:n{\prop_item:Nn{\polyglossia@langsetup}{#1/frenchspacing}}
    \csuse{blockextras@#1}%
  }
