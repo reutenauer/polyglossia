@@ -256,14 +256,26 @@
   \csgdef{xpg@langname@#1}{\xpg@uppercasefirst{#1}}%
   %needed for docsvlist with hyphennames key:
   \def\do##1{%
+    % check if language hyphenname is defined 
     \polyglossia@check@ifdefined:NF{#1}{
-      \ifstrequal{#1}{##1}{}%
-      {\xpg@ifdefined{##1}%
-        {\expandafter\ifx\csname l@##1\endcsname\l@nohyphenation\else\csletcs{l@#1}{l@##1}\xpg@set@language@luatex@iv{##1}\fi}%
-        {\csletcs{l@##1}{l@nohyphenation}}%
-      }%
-    }
-  }%
+      % if false check if current hypenname is egal of language hyphenname
+      \if_str_eq:nnF{#1}{##1}{
+        {
+          % if language is different of hypenname then test if hypennation is defined
+          \xpg@ifdefined{##1}{
+            % test if language hyphennnation is nohyphenation
+            \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{
+              % if false define language to hyphennation and load
+              \csletcs{l@#1}{l##1}
+              \xpg@set@language@luatex@iv{##1}
+            }
+          }
+          % else define hyphenation to nohypenation
+          {\csletcs{l@##1}{l@nohyphenation}}%
+        }%
+      }
+    }%
+  }
   %define all keys:
   \xpg@define@keys{#1}%
   \setkeys[xpg@setup]{#1}{#2}%
