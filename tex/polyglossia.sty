@@ -599,44 +599,51 @@
   \fi
 }
 
-\def\xpg@addfontfeature@script#1#2{% #1 is scripttag, #2 is scriptname
-  \edef\tmp@@scriptparam{Script=#2}%
-  \expandafter\expandafter\expandafter\fontspec_if_script:nTF \expandafter{#1}%
-    {\expandafter\expandafter\expandafter\addfontfeature\expandafter{\tmp@@scriptparam}}%
-    {\xpg@error{The~ current~ roman~ font~ does~ not~ contain~ the~ \expandafter\noexpand#2 ~ script!\MessageBreak
-    Please~ define~ \expandafter\string\csname \xpg@lowercasefirst{#2}font\endcsname\space with~ \string\newfontfamily}}%
+% add fontfeature Script=#2 to scripttag #1 to familly #3
+% do nothing if #1 or #2 is empty
+\cs_new:Nn \polyglossia@addfontfeature@script:nn {
+  \bool_if:nTF{\tl_if_empty_p:n{#1} || \tl_if_empty_p:n{#2}}
+  {
+    % maybe an error ?
+    \xpg@warning{Asking~ to~ add~ empty~ feature~to~ latin~ font
+                 (Script="#2"~ to~ scriptag~ "#1")}
+  }
+  {
+    \fontspec_if_script:nTF{#1}
+       {\addfontfeature{Script=#2}}
+       {\xpg@error{
+          The~ current~ latin ~ font~ does~ not~ contain~ the~"#2"~ script!\MessageBreak
+          Please~ define~string\~\tl_if_empty:nF{#2}{\str_lower_case:n#2}font~
+          with~ \string\ newfontfamily command
+          }
+        }
+  }
 }
-
+\cs_generate_variant:Nn  \polyglossia@addfontfeature@script:nn { on , no, oo , Vn, nV, VV , xn, nx, xx}
 
 \def\xpg@fontsetup@latin#1{%
   \begingroup
   \csgdef{#1@font@rm}{%
     \ifcsdef{#1font}{\csname #1font\endcsname}%
-      {\edef\tmp@langtag{\csuse{xpg@langtag@#1}}%
-       \edef\tmp@langname{\csuse{xpg@langname@#1}}%
-       \rmfamilylatin%
-        \ifcsvoid{xpg@langtag@#1}{}{%
-          \ifcsvoid{xpg@langname@#1}{}{%
-           \xpg@addfontfeature@lang{\tmp@langtag}{\tmp@langname}}%
-      }}}%
+    {%
+       \rmfamilylatin
+       \polyglossia@addfontfeature@script:xx{\cs_if_exist_use:c{xpg@langtag@#1}}{\cs_if_exist_use:c{xpg@langname@#1}}
+     }
+   }%
   \csgdef{#1@font@sf}{%
     \ifcsdef{#1fontsf}{\csname #1fontsf\endcsname}%
-      {\edef\tmp@langtag{\csuse{xpg@langtag@#1}}%
-       \edef\tmp@langname{\csuse{xpg@langname@#1}}%
-       \sffamilylatin%
-      \ifcsvoid{xpg@langtag@#1}{}{%
-        \ifcsvoid{xpg@langname@#1}{}{%
-           \xpg@addfontfeature@lang{\tmp@langtag}{\tmp@langname}}%
-      }}}%
+    {%
+      \sffamillylatin
+      \polyglossia@addfontfeature@script:xx{\cs_if_exist_use:c{xpg@langtag@#1}}{\cs_if_exist_use:c{xpg@langname@#1}}%
+    }%
+  }%
   \csgdef{#1@font@tt}{%
     \ifcsdef{#1fonttt}{\csname #1fonttt\endcsname}%
-      {\edef\tmp@langtag{\csuse{xpg@langtag@#1}}%
-       \edef\tmp@langname{\csuse{xpg@langname@#1}}%
-       \ttfamilylatin%
-      \ifcsvoid{xpg@langtag@#1}{}{%
-        \ifcsvoid{xpg@langname@#1}{}{%
-           \xpg@addfontfeature@lang{\tmp@langtag}{\tmp@langname}}%
-      }}}%
+    {%
+      \ttfamillylatin
+      \polyglossia@addfontfeature@script:xx{\cs_if_exist_use:c{xpg@langtag@#1}}{\cs_if_exist_use:c{xpg@langname@#1}}%
+    }%
+  }%
   \endgroup
 }
 
@@ -660,9 +667,8 @@
            \rmfamilylatin
          \fi}
        \iftoggle{#1@use@script@font}{}{%
-         \ifcsvoid{xpg@scripttag@#1}{}{%
-           \ifcsvoid{xpg@scriptname@#1}{}{%
-             \xpg@addfontfeature@script{\tmp@scripttag}{\tmp@scriptname}}}}%
+         \polyglossia@addfontfeature@script:xx{\tmp@scripttag}{\tmp@scriptname}
+       }%
        \ifcsvoid{xpg@langtag@#1}{}{%
          \ifcsvoid{xpg@langname@#1}{}{%
          \xpg@addfontfeature@lang{\tmp@langtag}{\tmp@langname}}}%
@@ -684,9 +690,8 @@
            \sffamilylatin
          \fi}
        \iftoggle{#1@use@script@fontsf}{}{%
-         \ifcsvoid{xpg@scripttag@#1}{}{%
-           \ifcsvoid{xpg@scriptname@#1}{}{%
-             \xpg@addfontfeature@script{\tmp@scripttag}{\tmp@scriptname}}}}%
+             \polyglossia@addfontfeature@script:xx{\tmp@scripttag}{\tmp@scriptname}
+       }%
        \ifcsvoid{xpg@langtag@#1}{}{%
          \ifcsvoid{xpg@langname@#1}{}{%
          \xpg@addfontfeature@lang{\tmp@langtag}{\tmp@langname}}}%
@@ -708,9 +713,8 @@
            \ttfamilylatin
          \fi}
        \iftoggle{#1@use@script@fonttt}{}{%
-         \ifcsvoid{xpg@scripttag@#1}{}{%
-           \ifcsvoid{xpg@scriptname@#1}{}{%
-             \xpg@addfontfeature@script{\tmp@scripttag}{\tmp@scriptname}}}}%
+         \polyglossia@addfontfeature@script:xx{\tmp@scripttag}{\tmp@scriptname}
+       }%
        \ifcsvoid{xpg@langtag@#1}{}{%
          \ifcsvoid{xpg@langname@#1}{}{%
          \xpg@addfontfeature@lang{\tmp@langtag}{\tmp@langname}}}%
