@@ -648,8 +648,7 @@
   \begingroup
   \edef\tmp@langname@lc{#1}% eg ukrainian
   \csgdef{#1@font@rm}{%
-    \ifcsdef{#1font}%
-      {\@nameuse{#1font}}%
+    \cs_if_exist_use:cF{#1font}
       {\edef\tmp@scripttag{\csuse{xpg@scripttag@#1}}% eg cyrl
        \edef\tmp@scriptname{\csuse{xpg@scriptname@#1}}% eg Cyrillic
        \edef\tmp@langtag{\csuse{xpg@langtag@#1}}% eg UKR
@@ -671,8 +670,7 @@
          \xpg@addfontfeature@lang{\tmp@langtag}{\tmp@langname}}}%
       }}%
   \csgdef{#1@font@sf}{%
-    \ifcsdef{#1fontsf}%
-      {\@nameuse{#1fontsf}}%
+    \cs_if_exist_use:cF{#1fontsf}%
       {\edef\tmp@scripttag{\csuse{xpg@scripttag@#1}}% eg cyrl
        \edef\tmp@scriptname{\csuse{xpg@scriptname@#1}}% eg Cyrillic
        \edef\tmp@langtag{\csuse{xpg@langtag@#1}}% eg UKR
@@ -694,7 +692,7 @@
          \xpg@addfontfeature@lang{\tmp@langtag}{\tmp@langname}}}%
       }}%
   \csgdef{#1@font@tt}{%
-    \ifcsdef{#1fonttt}%
+    \cs_if_exist_use:cF{#1fonttt}%
       {\@nameuse{#1fonttt}}%
       {\edef\tmp@scripttag{\csuse{xpg@scripttag@#1}}% eg cyrl
        \edef\tmp@scriptname{\csuse{xpg@scriptname@#1}}% eg Cyrillic
