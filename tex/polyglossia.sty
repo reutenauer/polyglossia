@@ -664,8 +664,6 @@
     \cs_if_exist_use:cF{#1font}
       {\edef\tmp@scripttag{\csuse{xpg@scripttag@#1}}% eg cyrl
        \edef\tmp@scriptname{\csuse{xpg@scriptname@#1}}% eg Cyrillic
-       \edef\tmp@langtag{\csuse{xpg@langtag@#1}}% eg UKR
-       \edef\tmp@langname{\csuse{xpg@langname@#1}}% eg Ukrainian
        \providetoggle{#1@use@script@font}%
        \iftoggle{#1@scriptlangequal}%
         {\rmfamilylatin}%
@@ -678,14 +676,12 @@
        \iftoggle{#1@use@script@font}{}{%
          \polyglossia@addfontfeature@script:xx{\tmp@scripttag}{\tmp@scriptname}
        }%
-       \polyglossia@addfontfeature@language:xx{\tmp@langtag}{\tmp@langname}
+       \polyglossia@addfontfeature@language:xx{\cs_if_exist_use:c{xpg@langtag@#1}}{\cs_if_exist_use:c{xpg@langname@#1}}
       }}%
   \csgdef{#1@font@sf}{%
     \cs_if_exist_use:cF{#1fontsf}%
       {\edef\tmp@scripttag{\csuse{xpg@scripttag@#1}}% eg cyrl
        \edef\tmp@scriptname{\csuse{xpg@scriptname@#1}}% eg Cyrillic
-       \edef\tmp@langtag{\csuse{xpg@langtag@#1}}% eg UKR
-       \edef\tmp@langname{\csuse{xpg@langname@#1}}% eg Ukrainian
        \providetoggle{#1@use@script@fontsf}%
        \iftoggle{#1@scriptlangequal}%
         {\sffamilylatin}%
@@ -698,15 +694,13 @@
        \iftoggle{#1@use@script@fontsf}{}{%
              \polyglossia@addfontfeature@script:xx{\tmp@scripttag}{\tmp@scriptname}
        }%
-       \polyglossia@addfontfeature@language:xx{\tmp@langtag}{\tmp@langname}
+        \polyglossia@addfontfeature@language:xx{\cs_if_exist_use:c{xpg@langtag@#1}}{\cs_if_exist_use:c{xpg@langname@#1}}   
       }}%
   \csgdef{#1@font@tt}{%
     \cs_if_exist_use:cF{#1fonttt}%
       {\@nameuse{#1fonttt}}%
       {\edef\tmp@scripttag{\csuse{xpg@scripttag@#1}}% eg cyrl
        \edef\tmp@scriptname{\csuse{xpg@scriptname@#1}}% eg Cyrillic
-       \edef\tmp@langtag{\csuse{xpg@langtag@#1}}% eg UKR
-       \edef\tmp@langname{\csuse{xpg@langname@#1}}% eg Ukrainian
        \providetoggle{#1@use@script@fonttt}%
        \iftoggle{#1@scriptlangequal}%
         {\ttfamilylatin}%
@@ -719,7 +713,7 @@
        \iftoggle{#1@use@script@fonttt}{}{%
          \polyglossia@addfontfeature@script:xx{\tmp@scripttag}{\tmp@scriptname}
        }%
-       \polyglossia@addfontfeature@language:xx{\tmp@langtag}{\tmp@langname}
+       \polyglossia@addfontfeature@language:xx{\cs_if_exist_use:c{xpg@langtag@#1}}{\cs_if_exist_use:c{xpg@langname@#1}}
       }}%
   \endgroup
 }
