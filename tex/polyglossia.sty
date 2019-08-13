@@ -247,9 +247,6 @@
   %define booleans etoolbox style and set defaults
   %% TODO ? \providetoggle{#1@setup@done}%
   \providetoggle{#1@scriptlangequal}% whether lang and script names are same: e.g. Hebrew, Arabic
-  \providebool{#1@fontsetup}%
-  %\providebool{#1@indentfirst}%
-  %\providebool{#1@frenchspacing}%
   % we initialize these so that we can use \gappto below
   \csgdef{init@extras@#1}{}%
   \csgdef{init@noextras@#1}{}% we don't use this yet: remove?
@@ -287,9 +284,7 @@
   \str_if_eq:nnTF{\prop_item:Nn{\polyglossia@langsetup}{#1/scriptlangequal}}{true}
                {\toggletrue{#1@scriptlangequal}}{\togglefalse{#1@scriptlangequal}}
   % here we do the fontsetup:
-  \ifbool{#1@fontsetup}%
-    {\xpg@fontsetup@auto{#1}}%
-    {\xpg@info{Skipping~ automatic~ font~ setup~ for~ language~ #1}}%
+  \polyglossia@lang@autosetupfont:n{#1}
   %% TODO? \toggletrue{#1@setup@done}%
   % reinit \do
   \def\do##1{\setotherlanguage{##1}}%
@@ -412,7 +407,7 @@
              {RL}{\RequireBidi}
            }
            {\prop_gput:Nnn{\polyglossia@langsetup}{#1/direction}{##1}}
-           {\xpg@error{Unknown~ direction~ ##1~ for~ language~ #1}}
+           {\xpg@error{Unknown~ direction~ "##1"~ for~ language~ "#1"}}
        },
     #1 / direction
       .value_required:n = true,
@@ -425,7 +420,7 @@
       \clist_set:Nn{\l_tmpa_clist}{##1}
       \int_compare:nNnTF{\clist_count:N{\l_tmpa_clist}}{=}{2}
          {}
-         {\xpg@error{hypenmins~should~be~a~list~of~two~entries}}
+         {\xpg@error{hypenmins~should~be~a~list~of~two~entries~get~"##1"}}
       \int_set:Nn{\l_tmpa_int}{\clist_item:Nn{\l_tmpa_clist}{1}}
       \int_set:Nn{\l_tmpb_int}{\clist_item:Nn{\l_tmpa_clist}{2}}
       % set prop
@@ -445,7 +440,7 @@
             {false}{}
           }
           {}
-          {\xpg@error{frenchspacing~should~be~true~or~false. Is "##1" for language "#1"}}
+          {\xpg@error{frenchspacing~should~be~true~or~false. Is~ "##1"~ for~ language~ "#1"}}
         \prop_gput:Nnn{\polyglossia@langsetup}{#1/frenchspacing}{##1}
     },
     #1 / frenchspacing
@@ -460,7 +455,7 @@
             {false}{}
           }
           {}
-          {\xpg@error{indentfirst~should~be~true~or~false. Is "##1" for language "#1"}}
+          {\xpg@error{indentfirst~should~be~true~or~false. Is~ "##1"~ for~ language "#1"}}
       \prop_gput:Nnn{\polyglossia@langsetup}{#1/indentfirst}{##1}
     },
     #1 / indentfirst
@@ -469,7 +464,15 @@
       .initial:n = false,
     % fontsetup
     #1 / fontsetup
-      .code:n = {\clist_set:Nn{\l_tmpa_bool}{##1} \prop_gput:Nnn{\polyglossia@langsetup}{#1/fontsetup}{##1}},
+    .code:n = {
+       \str_case_e:nnTF{##1}{
+            {true}{}
+            {false}{}
+          }
+          {}
+          {\xpg@error{fontsetup~should~be~true~or~false. Is "##1"~ for~ language~ "#1"}}
+       \prop_gput:Nnn{\polyglossia@langsetup}{#1/fontsetup}{##1}
+    },
     #1 / fontsetup
       .default:n = true,
     #1 / fontsetup
@@ -564,9 +567,16 @@
 %\def\xpg@fontsetup@none#1{\csgdef{#1@font}{\ifcsdef{#1font}{\csname #1font\endcsname}{}}} %<-- simplistic
 %\def\xpg@fontsetup@custom#1{\csuse{#1@font}}
 
-\def\xpg@fontsetup@auto#1{%
-  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{latin}%
-              {\xpg@fontsetup@latin{#1}}{\xpg@fontsetup@nonlatin{#1}}%
+\cs_new:Nn \polyglossia@lang@autosetupfont:n {
+  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/fontsetup}}{true}
+  {
+    \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{latin}%
+         {\xpg@fontsetup@latin{#1}}
+         {\xpg@fontsetup@nonlatin{#1}}
+  }
+  {
+    \xpg@info{Skipping~ automatic~ font~ setup~ for~ language~ #1}
+  }
 }
 
 \def\xpg@addfontfeature@lang#1#2{% #1 is langtag, #2 is langname
