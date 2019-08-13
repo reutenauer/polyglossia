@@ -579,27 +579,40 @@
   }
 }
 
-\def\xpg@addfontfeature@lang#1#2{% #1 is langtag, #2 is langname
-  % Turkish is a special case: tag can be TRK or TUR
-  \edef\tmp@Turkish{Turkish}%
-  \edef\tmp@@langname{#2}%
-  %  \ifstrequal{#2}{Turkish}%
-  \ifx\tmp@@langname\tmp@Turkish
-    \fontspec_if_language:nTF {TRK}%
-      {\addfontfeature{Language=Turkish}}%
-      {\fontspec_if_language:nTF {TUR}%
-        {\addfontfeature{Language=Turkish}}%
-        {}}%
-    % else not Turkish
-  \else
-     \edef\tmp@@langparam{Language=#2}%
-     \expandafter\expandafter\expandafter\fontspec_if_language:nTF \expandafter{#1}%
-      {\expandafter\expandafter\expandafter\addfontfeature\expandafter{\tmp@@langparam}}%
-      {}%
-  \fi
-}
 
-% add fontfeature Script=#2 to scripttag #1 to familly #3
+% add fontfeature Language=#2 to langtag #1
+% do nothing if #1 or #2 is empty
+\cs_new:Nn \polyglossia@addfontfeature@language:nn {
+  \bool_if:nTF{\tl_if_empty_p:n{#1} || \tl_if_empty_p:n{#2}}
+  {
+    % maybe an error ?
+    \xpg@warning{Asking~ to~ add~ empty~ feature~to~ latin~ font
+      (Language="#2"~ to~ langtag~ "#1")}
+  }
+  {
+    \str_if_eq:nnTF{#2}{Turkish}{
+      \fontspec_if_language:nTF {TRK}%
+      {
+        \addfontfeature{Language=Turkish}
+      }
+      {
+        \fontspec_if_language:nTF {TUR}%
+        {
+          \addfontfeature{Language=Turkish}
+        }{}
+      }
+    }{
+      \fontspec_if_language:nTF{#1}
+      {
+        \addfontfeature{Language=#2}
+      }
+      {}
+    }
+  }
+}
+\cs_generate_variant:Nn  \polyglossia@addfontfeature@language:nn { on , no, oo , Vn, nV, VV , xn, nx, xx}
+
+% add fontfeature Script=#2 to scripttag #1
 % do nothing if #1 or #2 is empty
 \cs_new:Nn \polyglossia@addfontfeature@script:nn {
   \bool_if:nTF{\tl_if_empty_p:n{#1} || \tl_if_empty_p:n{#2}}
@@ -665,9 +678,7 @@
        \iftoggle{#1@use@script@font}{}{%
          \polyglossia@addfontfeature@script:xx{\tmp@scripttag}{\tmp@scriptname}
        }%
-       \ifcsvoid{xpg@langtag@#1}{}{%
-         \ifcsvoid{xpg@langname@#1}{}{%
-         \xpg@addfontfeature@lang{\tmp@langtag}{\tmp@langname}}}%
+       \polyglossia@addfontfeature@language:xx{\tmp@langtag}{\tmp@langname}
       }}%
   \csgdef{#1@font@sf}{%
     \cs_if_exist_use:cF{#1fontsf}%
@@ -687,9 +698,7 @@
        \iftoggle{#1@use@script@fontsf}{}{%
              \polyglossia@addfontfeature@script:xx{\tmp@scripttag}{\tmp@scriptname}
        }%
-       \ifcsvoid{xpg@langtag@#1}{}{%
-         \ifcsvoid{xpg@langname@#1}{}{%
-         \xpg@addfontfeature@lang{\tmp@langtag}{\tmp@langname}}}%
+       \polyglossia@addfontfeature@language:xx{\tmp@langtag}{\tmp@langname}
       }}%
   \csgdef{#1@font@tt}{%
     \cs_if_exist_use:cF{#1fonttt}%
@@ -710,9 +719,7 @@
        \iftoggle{#1@use@script@fonttt}{}{%
          \polyglossia@addfontfeature@script:xx{\tmp@scripttag}{\tmp@scriptname}
        }%
-       \ifcsvoid{xpg@langtag@#1}{}{%
-         \ifcsvoid{xpg@langname@#1}{}{%
-         \xpg@addfontfeature@lang{\tmp@langtag}{\tmp@langname}}}%
+       \polyglossia@addfontfeature@language:xx{\tmp@langtag}{\tmp@langname}
       }}%
   \endgroup
 }
