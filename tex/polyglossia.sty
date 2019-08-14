@@ -809,14 +809,16 @@
 %(for instance biblatex):
 \newcommand*{\xpg@hook@setlanguage}{}
 
+\def\xpg@pop@language@i#1{%
+         \xpg@set@language{#1}%
+         \xpg@hook@setlanguage%
+         \let\emp@langname\@undefined}%
+
 \providecommand{\selectlanguage}{}
 \renewcommand{\selectlanguage}[2][]{%
    \ifcsundef{#2@loaded}%
      {\xpg@nogloss{#2}}%
-     {\def\xpg@pop@language{%
-         \xpg@set@language{\languagename}%
-         \xpg@hook@setlanguage%
-         \let\emp@langname\@undefined}%
+     {\expandafter\def\expandafter\xpg@pop@language@i\expandafter\languagename
       \aftergroup\xpg@pop@language%
       % If the optional argument sets a value for the key “variant”, copy it to xpg@langvariant
       \def\do##1{%
