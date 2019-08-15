@@ -20,24 +20,31 @@
 
 \def\fontsetup@sanskrit@Devanagari{%
   \def\xpg@scripttag@sanskrit{deva}%
+  \polyglossia@buggykeyssetlanguage{sanskrit}{script=deva}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Gujarati{%
+  \polyglossia@buggykeyssetlanguage{sanskrit}{script=gujr}
   \def\xpg@scripttag@sanskrit{gujr}%
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Malayalam{%
+  \polyglossia@buggykeyssetlanguage{sanskrit}{script=mlym}
   \def\xpg@scripttag@sanskrit{mlym}%
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Bengali{%
   \def\xpg@scripttag@sanskrit{beng}%
+  \polyglossia@buggykeyssetlanguage{sanskrit}{script=beng}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Kannada{%
   \def\xpg@scripttag@sanskrit{knda}%
+  \polyglossia@buggykeyssetlanguage{sanskrit}{script=knda}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Telugu{%
   \def\xpg@scripttag@sanskrit{telu}%
+  \polyglossia@buggykeyssetlanguage{sanskrit}{script=telu}
   \xpg@fontsetup@nonlatin{sanskrit}}
 %% DW
 \def\fontsetup@sanskrit@Latin{%
+    \polyglossia@buggykeyssetlanguage{sanskrit}{script=latn}
     \def\xpg@scripttag@sanskrit{latn}%
     \xpg@fontsetup@latin{sanskrit}}
 %% DW
