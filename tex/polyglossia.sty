@@ -85,13 +85,14 @@
 
 %% Used by the language definitions files for right-to-left languages
 \def\RequireBidi{%
-    \ifxetex
-      \RequirePackage{bidi}
-    \else\ifluatex
-      \RequirePackage{luabidi}
-    \else
-      \xpg@warning{You’re running a TeX engine that is not LuaTeX or XeTeX.\MessageBreak
-  That is almost guaranteed to cause problems.}\fi\fi
+  \str_case_e:nnF{\c_sys_engine_str}{
+    {luatex}{\RequirePackage{luabidi}}
+    {xetex}{\RequirePackage{bidi}}
+  }
+  {
+    \xpg@warning{You’re running a TeX engine that is not LuaTeX or XeTeX.\MessageBreak
+      That is almost guaranteed to cause problems.}
+  }
 }
 
 % overwritten with correct package
