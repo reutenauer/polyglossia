@@ -37,7 +37,6 @@
               {\@british@hyphenfalse\english@ordinalmonthdayfalse
                 \ifluatex\else%
                       \polyglossia@buggykeyssetlanguage{english}{hyphennames={usenglishmax}}%
-                      \setkeys[xpg@setup]{english}{hyphennames={usenglishmax}}%
                  \fi
                 \xpg@info{Option: english variant=american (with additional patterns)}%
                 \xpg@ifdefined{usenglishmax}{}%
@@ -56,8 +55,7 @@
   \if@british@locale\@british@hyphentrue\english@ordinalmonthdaytrue\fi
   \if@british@hyphen
     \ifluatex\else
-        \polyglossia@buggykeyssetlanguage{english}{hyphennames={ukenglish,british,UKenglish}}
-        \setkeys[xpg@setup]{english}{hyphennames={ukenglish,british,UKenglish}}\fi
+        \polyglossia@buggykeyssetlanguage{english}{hyphennames={ukenglish,british,UKenglish}}\fi
     \xpg@ifdefined{ukenglish}{}%
       {\xpg@warning{No hyphenation patterns were loaded for British English\MessageBreak
          I will use the patterns for US English instead}%

@@ -157,73 +157,6 @@
 %% compatibility with babel
 \let\addto\gappto% gappto is defined in etoolbox
 
-%% == Utility macros ==
-%%   They are needed because \MakeUppercase and \MakeLowercase are protected,
-%%   but we need to change case while defining csnames when setting up fonts for
-%%   non-Latin scripts. For instance with "Script=Arabic" we need to lowercase
-%%   "Arabic" to create \arabicfont.
-\def\xpg@uppercasefirst#1{\expandafter\xpg@@uppercasefirst #1}
-\def\xpg@@uppercasefirst#1{%
-       \if a#1A\else
-       \if b#1B\else
-       \if c#1C\else
-       \if d#1D\else
-       \if e#1E\else
-       \if f#1F\else
-       \if g#1G\else
-       \if h#1H\else
-       \if i#1I\else
-       \if j#1J\else
-       \if k#1K\else
-       \if l#1L\else
-       \if m#1M\else
-       \if n#1N\else
-       \if o#1O\else
-       \if p#1P\else
-       \if q#1Q\else
-       \if r#1R\else
-       \if s#1S\else
-       \if t#1T\else
-       \if u#1U\else
-       \if v#1V\else
-       \if w#1W\else
-       \if x#1X\else
-       \if y#1Y\else
-       \if z#1Z\else
-       \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
-}
-
-\def\xpg@lowercasefirst#1{\expandafter\xpg@@lowercasefirst #1}
-\def\xpg@@lowercasefirst#1{%
-       \if A#1a\else
-       \if B#1b\else
-       \if C#1c\else
-       \if D#1d\else
-       \if E#1e\else
-       \if F#1f\else
-       \if G#1g\else
-       \if H#1h\else
-       \if I#1i\else
-       \if J#1j\else
-       \if K#1k\else
-       \if L#1l\else
-       \if M#1m\else
-       \if N#1n\else
-       \if O#1o\else
-       \if P#1p\else
-       \if Q#1q\else
-       \if R#1r\else
-       \if S#1s\else
-       \if T#1t\else
-       \if U#1u\else
-       \if V#1v\else
-       \if W#1w\else
-       \if X#1x\else
-       \if Y#1y\else
-       \if Z#1z\else
-       \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
-}
-
 %% NEW EXPERIMENTAL SETUP INTERFACE FOR GLOSS FILES
 %% options currently available:
 %% language : the name of the language (as understood by fontspec)
@@ -250,54 +183,12 @@
   % we initialize these so that we can use \gappto below
   \csgdef{init@extras@#1}{}%
   \csgdef{init@noextras@#1}{}% we don't use this yet: remove?
-  \csgdef{xpg@langname@#1}{\xpg@uppercasefirst{#1}}%
-  %define all keys:
-  \xpg@define@keys{#1}%
-  \setkeys[xpg@setup]{#1}{#2}%
   % here we do the fontsetup:
   \polyglossia@lang@autosetupfont:n{#1}
   %% TODO? \toggletrue{#1@setup@done}%
   % reinit \do
   \def\do##1{\setotherlanguage{##1}}%
 }
-
-\def\xpg@first#1,#2{#1}
-\def\xpg@second#1,#2{#2}
-
-\def\xpg@define@keys#1{%
-  \define@key[xpg@setup]{#1}{script}{%
-    \csgdef{xpg@scriptname@#1}{##1}%
-    \csgdef{xpg@scriptname@#1@lc}{\xpg@lowercasefirst{##1}}}%
-  \define@key[xpg@setup]{#1}{scripttag}{%
-    \csgdef{xpg@scripttag@#1}{##1}}%
-  \define@key[xpg@setup]{#1}{language}{%
-    \csgdef{xpg@langname@#1}{##1}}%
-  \define@key[xpg@setup]{#1}{langtag}{%
-    \csgdef{xpg@langtag@#1}{##1}}%
-  \define@key[xpg@setup]{#1}{hyphennames}[{#1}]{%
-  }%
-  \define@choicekey+[xpg@setup]{#1}{direction}[\val\nr]{LR,RL}[LR]%
-    {}%
-    {}%
-  \define@key[xpg@setup]{#1}{hyphenmins}[{2,3}]%
-    {}
-  \define@boolkey[xpg@setup]{#1}[#1@]{frenchspacing}[true]{%
-  }%
-  \define@boolkey[xpg@setup]{#1}[#1@]{indentfirst}[true]{%
-  }%
-%  \define@choicekey*+[xpg@setup]{#1}{fontsetup}[\val\nr]{none,custom,auto}[none]%
-%    %{\csgdef{#1@fontsetup}{\val}}%
-%    {\xpg@fontsetup{\val}{#1}}%
-%    {\xpg@warning{Invalid value \val\space for key "fontsetup" in module "#1"}}%
-  \define@boolkey[xpg@setup]{#1}[#1@]{fontsetup}[true]{}%
-  %TODO assign csnames corr. to localized alph and Alph
-  %  \define@key[xpg@setup]{#1}{localalph}[{#1@alph,#1@Alph}]{%
-  %  \cslet{xpg@localalph@#1}{\expandafter\csname\xpg@first##1\endcsname}%
-  %  \cslet{xpg@localAlph@#1}{\expandafter\csname\xpg@second##1\endcsname}%
-  %}%
-  %TODO same thing with localdigits
-}
-
 
 % this an ugly command that will be drop in the future, it serve to document that
 % using this we loose tracking and thus are not immune to bug #205 #208

@@ -18,15 +18,12 @@
 \define@key{serbian}{Script}[Cyrillic]{% TODO FIXDOC: keyname is CHANGED: script -> Script !!!
   \ifstrequal{#1}{Cyrillic}%
     {\@serbian@cyrtrue
-     \setkeys[xpg@setup]{serbian}{script=Cyrillic}%
-     \def\xpg@scripttag@serbian{cyrl}%
      \polyglossia@buggykeyssetlanguage{serbian}{script=Cyrillic}
      \xpg@fontsetup@nonlatin{serbian}%
     }%
     {\ifstrequal{#1}{Latin}%
       {
       \@serbian@cyrfalse
-      \def\xpg@scripttag@serbian{latin}%
       \polyglossia@buggykeyssetlanguage{serbian}{script=Cyrillic}
       \xpg@fontsetup@latin{serbian}%
       %TODO \def\serbian@language{\language=\l@serbianlat}%
