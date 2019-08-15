@@ -476,13 +476,16 @@
     }
 }
 
-\cs_new_nopar:Nn{\polyglossia@frenchspacingcond:n}{
-  \str_case_e:nnTF{#1}{
+\cs_new_nopar:Nn{\polyglossia@lang@frenchspacing:n}{
+  \prop_get:NnNTF{\polyglossia@langsetup}{#1/frenchspacing}{\l_tmpa_tl}
+      {
+        \str_case_e:nnF{\l_tmpa_tl}{
           {true}{\frenchspacing}
           {false}{\nonfrenchspacing}
-       }
-       {}
-       {\xpg@error{frenchspacing~should~be~true~or~false. Is~"#1"}}
+        }
+        {\xpg@error{frenchspacing~should~be~true~or~false. Is~"\l_tmpa_ttl"~ for~ language~ "#1"}}
+      }
+      {\xpg@error{Could~ not~ retrieve~ key~ frenchspacing~ for~ language~ "#1"}}
 }
 
 \cs_new_nopar:Nn{\polyglossia@french@indent:n}{
@@ -901,7 +904,7 @@
      {{\select@@language{#2}%
       \setkeys{#2}{#1}%
       \use@localhyphenmins{#2}%
-      \polyglossia@frenchspacingcond:n{\prop_item:Nn{\polyglossia@langsetup}{#2/frenchspacing}}
+      \polyglossia@lang@frenchspacing:n{#2}
       \csuse{inlineextras@#2}%
       #3}%
      }%
@@ -915,7 +918,7 @@
      {\select@@language{#2}%
       \setkeys{#2}{#1}%
       \use@localhyphenmins{#2}%
-      \polyglossia@frenchspacingcond:n{\prop_item:Nn{\polyglossia@langsetup}{#2/frenchspacing}}
+      \polyglossia@lang@frenchspacing:n{#2}
       \csuse{inlineextras@#2}\csuse{date#2}%
      }%
 }{}
@@ -1012,12 +1015,13 @@
    \xpg@initial@setup%
    \select@@language{#1}%
    % do not choke biblatex use a macro
+   %\prop_show:N{\polyglossia@langsetup}
    \polyglossia@setdir:n{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}
    \csuse{captions#1}%
    \local@marks{#1}%
    \csuse{init@extras@#1}%
    \polyglossia@french@indent:n{\prop_item:Nn{\polyglossia@langsetup}{#1/indentfirst}}
-   \polyglossia@frenchspacingcond:n{\prop_item:Nn{\polyglossia@langsetup}{#1/frenchspacing}}
+   \polyglossia@lang@frenchspacing:n{#1}
    \csuse{blockextras@#1}%
  }
 
