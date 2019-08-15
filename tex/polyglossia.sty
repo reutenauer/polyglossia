@@ -587,7 +587,7 @@
   \bool_if:nTF{\tl_if_empty_p:n{#1} || \tl_if_empty_p:n{#2}}
   {
     % maybe an error ?
-    \xpg@warning{Asking~ to~ add~ empty~ feature~to~ latin~ font
+    \xpg@warning{Asking~ to~ add~ empty~ feature~to~ latin~ font~
       (Language="#2"~ to~ langtag~ "#1")}
   }
   {
@@ -677,7 +677,8 @@
        \iftoggle{#1@use@script@font}{}{%
          \polyglossia@addfontfeature@script:xx{\tmp@scripttag}{\tmp@scriptname}
        }%
-       \polyglossia@addfontfeature@language:xx{\cs_if_exist_use:c{xpg@langtag@#1}}{\cs_if_exist_use:c{xpg@langname@#1}}
+       \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
+                                              {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
       }}%
   \csgdef{#1@font@sf}{%
     \cs_if_exist_use:cF{#1fontsf}%
@@ -695,7 +696,8 @@
        \iftoggle{#1@use@script@fontsf}{}{%
              \polyglossia@addfontfeature@script:xx{\tmp@scripttag}{\tmp@scriptname}
        }%
-        \polyglossia@addfontfeature@language:xx{\cs_if_exist_use:c{xpg@langtag@#1}}{\cs_if_exist_use:c{xpg@langname@#1}}   
+       \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
+                                              {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
       }}%
   \csgdef{#1@font@tt}{%
     \cs_if_exist_use:cF{#1fonttt}%
@@ -714,7 +716,8 @@
        \iftoggle{#1@use@script@fonttt}{}{%
          \polyglossia@addfontfeature@script:xx{\tmp@scripttag}{\tmp@scriptname}
        }%
-       \polyglossia@addfontfeature@language:xx{\cs_if_exist_use:c{xpg@langtag@#1}}{\cs_if_exist_use:c{xpg@langname@#1}}
+       \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
+                                              {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
       }}%
   \endgroup
 }
