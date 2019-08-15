@@ -261,7 +261,7 @@
       \ifstrequal{#1}{##1}{}%
       {\xpg@ifdefined{##1}%
         {\expandafter\ifx\csname l@##1\endcsname\l@nohyphenation\else\csletcs{l@#1}{l@##1}\xpg@set@language@luatex@iv{##1}\fi}%
-        {\csdef{l@##1}{l@nohyphenation}}%
+        {\csletcs{l@##1}{l@nohyphenation}}%
       }%
     \fi
   }%
