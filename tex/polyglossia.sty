@@ -247,7 +247,6 @@
   \keys_set:nn { polyglossia / #1 } { #2 }%
   %define booleans etoolbox style and set defaults
   %% TODO ? \providetoggle{#1@setup@done}%
-  \providetoggle{#1@scriptlangequal}% whether lang and script names are same: e.g. Hebrew, Arabic
   % we initialize these so that we can use \gappto below
   \csgdef{init@extras@#1}{}%
   \csgdef{init@noextras@#1}{}% we don't use this yet: remove?
@@ -277,13 +276,6 @@
   %define all keys:
   \xpg@define@keys{#1}%
   \setkeys[xpg@setup]{#1}{#2}%
-  % ugly but for factorisation
-  \str_if_eq:nnTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}
-      {\prop_item:Nn{\polyglossia@langsetup}{#1/lang}}
-      {\prop_gput:Nnn{\polyglossia@langsetup}{#1/scriptlangequal}{true}}
-      {\prop_gput:Nnn{\polyglossia@langsetup}{#1/scriptlangequal}{false}}
-  \str_if_eq:nnTF{\prop_item:Nn{\polyglossia@langsetup}{#1/scriptlangequal}}{true}
-               {\toggletrue{#1@scriptlangequal}}{\togglefalse{#1@scriptlangequal}}
   % here we do the fontsetup:
   \polyglossia@lang@autosetupfont:n{#1}
   %% TODO? \toggletrue{#1@setup@done}%
@@ -660,13 +652,12 @@
 
 \def\xpg@fontsetup@nonlatin#1{%
   \begingroup
-  \edef\tmp@langname@lc{#1}% eg ukrainian
   \csgdef{#1@font@rm}{%
     \cs_if_exist_use:cF{#1font}
       {\edef\tmp@scripttag{\csuse{xpg@scripttag@#1}}% eg cyrl
        \edef\tmp@scriptname{\csuse{xpg@scriptname@#1}}% eg Cyrillic
        \providetoggle{#1@use@script@font}%
-       \iftoggle{#1@scriptlangequal}%
+       \str_if_eq:nnTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
         {\rmfamilylatin}%
         {\expandafter\ifcsname\csuse{xpg@scriptname@#1@lc} font\endcsname% eg \cyrillicfont
            \toggletrue{#1@use@script@font}%
@@ -685,7 +676,7 @@
       {\edef\tmp@scripttag{\csuse{xpg@scripttag@#1}}% eg cyrl
        \edef\tmp@scriptname{\csuse{xpg@scriptname@#1}}% eg Cyrillic
        \providetoggle{#1@use@script@fontsf}%
-       \iftoggle{#1@scriptlangequal}%
+       \str_if_eq:nnTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
         {\sffamilylatin}%
         {\expandafter\ifcsname\csuse{xpg@scriptname@#1@lc} fontsf\endcsname% eg \cyrillicfontsf
            \toggletrue{#1@use@script@fontsf}%
@@ -701,11 +692,10 @@
       }}%
   \csgdef{#1@font@tt}{%
     \cs_if_exist_use:cF{#1fonttt}%
-      {\@nameuse{#1fonttt}}%
       {\edef\tmp@scripttag{\csuse{xpg@scripttag@#1}}% eg cyrl
        \edef\tmp@scriptname{\csuse{xpg@scriptname@#1}}% eg Cyrillic
        \providetoggle{#1@use@script@fonttt}%
-       \iftoggle{#1@scriptlangequal}%
+       \str_if_eq:nnTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
         {\ttfamilylatin}%
         {\expandafter\ifcsname\csuse{xpg@scriptname@#1@lc} fonttt\endcsname% eg \cyrillicfonttt
            \toggletrue{#1@use@script@fonttt}%
