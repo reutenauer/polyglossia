@@ -666,7 +666,8 @@
            \rmfamilylatin
          \fi}
        \iftoggle{#1@use@script@font}{}{%
-         \polyglossia@addfontfeature@script:xx{\tmp@scripttag}{\tmp@scriptname}
+         \polyglossia@addfontfeature@script:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
+                                              {\prop_item:Nn{\polyglossia@langsetup}{#1/script}}
        }%
        \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
                                               {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
@@ -685,7 +686,8 @@
            \sffamilylatin
          \fi}
        \iftoggle{#1@use@script@fontsf}{}{%
-             \polyglossia@addfontfeature@script:xx{\tmp@scripttag}{\tmp@scriptname}
+          \polyglossia@addfontfeature@script:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
+                                              {\prop_item:Nn{\polyglossia@langsetup}{#1/script}}
        }%
        \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
                                               {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
@@ -704,7 +706,8 @@
            \ttfamilylatin
          \fi}
        \iftoggle{#1@use@script@fonttt}{}{%
-         \polyglossia@addfontfeature@script:xx{\tmp@scripttag}{\tmp@scriptname}
+         \polyglossia@addfontfeature@script:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
+                                              {\prop_item:Nn{\polyglossia@langsetup}{#1/script}}
        }%
        \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
                                               {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
