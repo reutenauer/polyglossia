@@ -285,6 +285,15 @@
   %TODO same thing with localdigits
 }
 
+
+% this an ugly command that will be drop in the future, it serve to document that
+% using this we loose tracking and thus are not immune to bug #205 #208
+\def\polyglossia@buggykeyssetlanguage#1#2 {
+  \ExplSyntaxOn
+  \keys_set:nn { polyglossia / #1 } { #2 }
+  \ExplSyntaxOff
+}
+
 \prop_new:N \polyglossia@langsetup
 
 \cs_new_protected:Npn \polyglossia@keys_define_lang:n #1 {
