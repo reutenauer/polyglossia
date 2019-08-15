@@ -251,28 +251,6 @@
   \csgdef{init@extras@#1}{}%
   \csgdef{init@noextras@#1}{}% we don't use this yet: remove?
   \csgdef{xpg@langname@#1}{\xpg@uppercasefirst{#1}}%
-  %needed for docsvlist with hyphennames key:
-  \def\do##1{%
-    % check if language hyphenname is defined 
-    \polyglossia@check@ifdefined:NF{#1}{
-      % if false check if current hypenname is egal of language hyphenname
-      \str_if_eq:nnF{#1}{##1}{
-        {
-          % if language is different of hypenname then test if hypennation is defined
-          \xpg@ifdefined{##1}{
-            % test if language hyphennnation is nohyphenation
-            \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{
-              % if false define language to hyphennation and load
-              \csletcs{l@#1}{l##1}
-              \xpg@set@language@luatex@iv{##1}
-            }
-          }
-          % else define hyphenation to nohypenation
-          {\csletcs{l@##1}{l@nohyphenation}}%
-        }%
-      }
-    }%
-  }
   %define all keys:
   \xpg@define@keys{#1}%
   \setkeys[xpg@setup]{#1}{#2}%
@@ -297,23 +275,6 @@
   \define@key[xpg@setup]{#1}{langtag}{%
     \csgdef{xpg@langtag@#1}{##1}}%
   \define@key[xpg@setup]{#1}{hyphennames}[{#1}]{%
-    \docsvlist{##1}%
-    % if l@#1 does not yet exist,
-    % we assign it to nohyphenation
-    % we do this here in case the hyphennames key was omitted
-    \xpg@ifdefined{#1}{}%
-      {\xpg@nopatterns{\csname xpg@langname@#1\endcsname}%
-       \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}%
-    \csdef{#1@language}{%
-      \ifbool{xpg@hyphenation@disabled}{%
-        \xdef\xpg@lastlanguage{\the\csname l@#1\endcsname}%
-      }{%
-        \ifluatex%
-          \xpg@set@language@luatex@iv{#1}%
-        \fi%
-        \language=\csname l@#1\endcsname%
-      }%
-    }%
   }%
   \define@choicekey+[xpg@setup]{#1}{direction}[\val\nr]{LR,RL}[LR]%
     {}%
@@ -344,6 +305,55 @@
   \ExplSyntaxOn
   \keys_set:nn { polyglossia / #1 } { #2 }
   \ExplSyntaxOff
+}
+
+
+% setup hyphennames from a str list of hyphen
+\cs_new:Nn \polyglossia@setup@hyphenames:nn {
+  \clist_set:Nn{\l_tmpa_clist}{#2}
+  % for each hyphen except for #1 aka language in the set
+  \clist_map_inline:Nn \l_tmpa_clist {
+    % check if language hyphenname is defined
+    \polyglossia@check@ifdefined:NF{#1}{
+      % if false check if current hypenname is egal of language hyphenname
+      \str_if_eq:nnF{#1}{#2}{
+        {
+          % if language is different of hypenname then test if hypennation is defined
+          \xpg@ifdefined{#2}{
+            % test if language hyphennnation is nohyphenation
+            \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{
+              % if false define language to hyphennation and load
+              \cs_gset_eq:cc{l@#1}{l#2}
+              \xpg@set@language@luatex@iv{#2}
+            }
+          }
+          % else define hyphenation to nohypenation
+          {
+            \cs_gset_eq:cc{l@#2}{l@nohyphenation}
+          }%
+        }
+      }%
+    }
+  }
+  % if l@#1 does not yet exist,
+  % we assign it to nohyphenation
+  % we do this here in case the hyphennames key was omitted
+  \xpg@ifdefined{#1}{}%
+  {
+    \xpg@nopatterns{#1}
+    \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax
+  }%
+  \csdef{#1@language}{%
+    \ifbool{xpg@hyphenation@disabled}{%
+      \xdef\xpg@lastlanguage{\the\csname l@#1\endcsname}%
+    }{%
+      \ifluatex%
+      \xpg@set@language@luatex@iv{#1}%
+      \fi%
+      \language=\csname l@#1\endcsname%
+    }%
+  }%
+  \prop_gput:Nnn{\polyglossia@langsetup}{#1/hyphennames}{#2}
 }
 
 \prop_new:N \polyglossia@langsetup
@@ -385,8 +395,7 @@
     % hyphennames
     #1 / hyphennames
     .code:n = {
-      \clist_set:Nn{\l_tmpa_clist}{##1}
-      \prop_gput:Nnn{\polyglossia@langsetup}{#1/hyphennames}{##1}
+      \polyglossia@setup@hyphenames:nn{#1}{##1}
     },
     #1 / hyphennames
        .value_required:n = true,
