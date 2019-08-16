@@ -689,7 +689,7 @@
       {\newenvironment{#2}[1][]{\begin{otherlanguage}[####1]{#2}}%
         {\end{otherlanguage}}}%
       \expandafter\newcommand\csname text#2\endcsname[2][]{%
-        \polyglossia@lang@ensuredirection:nn{#2/direction}
+        \polyglossia@lang@ensuredirection:nn{#2}
                 {\foreignlanguage[####1]{#2}{####2}}
       }%
       \csletcs{local#2}{text#2}%
