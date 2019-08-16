@@ -689,8 +689,7 @@
       {\newenvironment{#2}[1][]{\begin{otherlanguage}[####1]{#2}}%
         {\end{otherlanguage}}}%
       \expandafter\newcommand\csname text#2\endcsname[2][]{%
-        \polyglossia@lang@ensuredirection:nn{#2}
-                {\foreignlanguage[####1]{#2}{####2}}
+                \foreignlanguage[####1]{#2}{####2}
       }%
       \csletcs{local#2}{text#2}%
       \csgdef{#2@loaded}{}%
@@ -795,8 +794,7 @@
          {\end{otherlanguage}}%
       \fi
       \expandafter\newcommand\csname text#2\endcsname[2][]{%
-        \polyglossia@lang@ensuredirection:nn{#2}%
-              {\foreignlanguage[####1]{#2}{####2}}
+              \foreignlanguage[####1]{#2}{####2}
       }%
      \csletcs{local#2}{text#2}%
      \csgdef{#2@loaded}{}%
@@ -830,30 +828,48 @@
 
 \providecommand{\foreignlanguage}{}
 
-\renewcommand{\foreignlanguage}[3][]{%
-   \ifcsundef{#2@loaded}%
-     {\xpg@nogloss{#2}}%
-     {{\select@@language{#2}%
-      \setkeys{#2}{#1}%
-      \use@localhyphenmins{#2}%
-      \polyglossia@lang@frenchspacing:n{#2}
+% wrapper for foreignlanguage and otherlanguage*
+\cs_new:Nn \polyglossia@setforeignlanguage:n {
+  \leavevmode
+  \select@@language{#1}
+}
+
+\renewcommand{\foreignlanguage}[3][]
+{%
+  \ifcsundef{#2@loaded}%
+  {
+    % BUGGY not cancelled
+    \xpg@nogloss{#2}
+  }%
+  {
+    \setkeys{#2}{#1}%
+    {
+      \polyglossia@setforeignlanguage:n{#2}
+      % BUG this one is not undo
       \csuse{inlineextras@#2}%
-      #3}%
-     }%
+      #3
+      \leavevmode
+    }%
+  }%
 }
 
 % otherlanguage* is the environment equivalent of \foreignlanguage
 \expandafter\providecommand\csname otherlanguage*\endcsname{}
-\renewenvironment{otherlanguage*}[2][]{%
-   \ifcsundef{#2@loaded}%
-     {\xpg@nogloss{#2}}%
-     {\select@@language{#2}%
-      \setkeys{#2}{#1}%
-      \use@localhyphenmins{#2}%
-      \polyglossia@lang@frenchspacing:n{#2}
-      \csuse{inlineextras@#2}\csuse{date#2}%
-     }%
-}{}
+
+\renewenvironment{otherlanguage*}[2][]
+{%
+  \ifcsundef{#2@loaded}%
+  {
+    % buggy not canceled
+    \xpg@nogloss{#2}}%
+  {
+    \setkeys{#2}{#1}%
+    \polyglossia@setforeignlanguage:n{#2}
+    % buggy restoration heure
+    \csuse{inlineextras@#2}
+  }%
+}
+{}
 
 %Hook that other package authors can use
 %(for instance biblatex):
@@ -868,7 +884,7 @@
 \renewcommand{\selectlanguage}[2][]{%
    \ifcsundef{#2@loaded}%
      {\xpg@nogloss{#2}}%
-     {\expandafter\def\expandafter\xpg@pop@language@i\expandafter\languagename
+     {\expandafter\def\expandafter\xpg@pop@language\expandafter{\expandafter\xpg@pop@language@i\expandafter{\languagename}}
       \aftergroup\xpg@pop@language%
       % If the optional argument sets a value for the key “variant”, copy it to xpg@langvariant
       \def\do##1{%
@@ -947,12 +963,10 @@
    \fi %
    \xpg@initial@setup%
    \select@@language{#1}%
-   \polyglossia@lang@setdirection:n{#1}
    \csuse{captions#1}%
    \local@marks{#1}%
    \csuse{init@extras@#1}%
    \polyglossia@lang@indentfirst:n{#1}
-   \polyglossia@lang@frenchspacing:n{#1}
    \csuse{blockextras@#1}%
  }
 
@@ -967,6 +981,8 @@
   \csuse{date#1}%
   \csuse{#1@numbers}%
   \use@localhyphenmins{#1}%
+  \polyglossia@lang@frenchspacing:n{#1}
+  \polyglossia@lang@setdirection:n{#1}
 }
 
 
