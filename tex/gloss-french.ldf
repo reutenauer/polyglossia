@@ -72,7 +72,7 @@
 \def\french@punctuation{%
     \lccode"2019="2019
     \ifluatex
-      \global\xpg@frpt=1\relax %
+      \xpg@frpt=1\relax %
       \directlua{polyglossia.activate_frpt()}%
     \else
       \XeTeXinterchartokenstate=1
@@ -119,7 +119,7 @@
 \def\nofrench@punctuation{%
     \lccode"2019=\z@
     \ifluatex
-      \global\xpg@frpt=0\relax %
+      \xpg@frpt=0\relax %
       % Though it would make compilation slightly faster, it is not possible to
       % safely uncomment the following line. Imagine the following case: you start
       % a paragraph by some french text, then, in the same paragraph, you change
