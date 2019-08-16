@@ -97,14 +97,6 @@
 
 % overwritten with correct package
 \RequirePackage{filehook}
-\cs_new:Nn{\polyglossia@ensure@direction:nn}{%
-  \str_case_e:nnTF{#1}{%
-       {LR}{#2}%
-       {RL}{\xpg@error{right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}}%
-     }%
-     {}%
-     {\xpg@error{Unknown~ language~ direction~ #1 ~(base~ wrapper)}}%
-}%
 \cs_new_nopar:Nn{\polyglossia@setdirection:n}{%
   \str_case_e:nnTF{#1}{%
        {LR}{\relax}%
@@ -115,14 +107,6 @@
 }
 \AtEndOfPackageFile*{bidi}{%
   \ExplSyntaxOn%
-  \cs_gset:Nn{\polyglossia@ensure@direction:nn}{%
-    \str_case_e:nnF{#1}{%
-        {LR}{\@ensure@LTR{#2}}%
-        {RL}{\@ensure@RTL{#2}}%
-      }%
-      {\xpg@error{Unknown~ language~ direction~ #1 ~(bidi~ wrapper)}%
-    }%
-  }
   \cs_gset_nopar:Nn{\polyglossia@setdirection:n}{%
     \str_case_e:nnTF{#1}{%
         {LR}{\setLR}%
@@ -135,14 +119,6 @@
 }
 \AtEndOfPackageFile*{luabidi}{%
   \ExplSyntaxOn%
-  \cs_gset:Nn{\polyglossia@ensure@direction:nn}{%
-    \str_case_e:nnTF{#1}{%
-        {LR}{\@ensure@LTR{#2}}%
-        {RL}{\@ensure@RTL{#2}}%
-      }%
-      {}%
-      {\xpg@error{Unknown~ language~ direction~ #1 ~(luabidi~ wrapper)}}%
-  }%
   \cs_gset_nopar:Nn{\polyglossia@setdirection:n}{%
     \str_case_e:nnTF{#1}{%
         {LR}{\setLR}%
@@ -403,16 +379,6 @@
       }
 }
 
-\cs_new:Nn{\polyglossia@lang@ensuredirection:nn}{
-  \prop_get:NnNTF \polyglossia@langsetup {#1/direction} \l_tmpa_tl
-      {
-        \polyglossia@ensure@direction:nn{\l_tmpa_tl}{#2}
-      }
-      {
-        \xpg@error{Could~ not~ retrieve~ key~ direction~ for~ language~ "#1"}
-        \prop_show:N{\polyglossia@langsetup}
-      }
-}
 
 \cs_new:Nn{\polyglossia@lang@setdirection:n}{
   \prop_get:NnNTF \polyglossia@langsetup {#1/direction} \l_tmpa_tl
@@ -991,8 +957,12 @@
 \provideenvironment{otherlanguage}{}{}
 
 \renewenvironment{otherlanguage}[2][]
-   {\selectlanguage[#1]{#2}}
-   {}
+{
+  % in order to get correct aligment of paragraph
+  \leavevmode
+  \selectlanguage[#1]{#2}
+}
+{}
 
 \newcommand{\setlocalhyphenmins}[3]{%
    \xpg@ifdefined{#1}{%
