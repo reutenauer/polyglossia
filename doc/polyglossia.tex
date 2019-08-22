@@ -229,9 +229,18 @@ Whenever a language definition file \file{gloss-⟨lang⟩.ldf} is loaded,
 the command \cmd{\text⟨lang⟩[⟨options⟩]\{…\}} \DescribeMacro{\text⟨lang⟩}
 becomes available for short insertions of text in that language.
 For example ¦\textrussian{\today}¦ yields \textrussian{\today}
-Longer passages are better put between the environment ¦⟨lang⟩¦
-(again with the possibility of setting language options locally.
-\DescribeEnv{⟨lang⟩}
+This command switches to the correct hyphenation patterns, it activates
+some extra features for the selected language (such as extra spacing before
+punctuation in French), and it translates the date when using ¦\today¦.
+It does not, however, translate so-called \textit{caption strings}, i.\,e.
+``chapter'', ``figure'' etc., to the local language (these remain in the main
+language).
+
+The\DescribeEnv{⟨lang⟩}\ environment ¦⟨lang⟩¦, which is meant for longer passages of text,
+behaves slightly different. It does everything the \cmd{\text⟨lang⟩\{…\}} does,
+but additionally, the caption strings are translated as well, and the language is also
+passed to auxiliary files, the table of contents and the lists of figures/tables.
+Like the command, the environment provides the possibility of setting language options locally.
 For instance the following allows us to quote the beginning
 of Homer’s \textit{Iliad}:
 
@@ -252,9 +261,9 @@ of Homer’s \textit{Iliad}:
 \end{greek}
 \bigskip
 
-Note that for Arabic one cannot use the environment ¦arabic¦,
+\noindent\DescribeEnv{Arabic} Note that for Arabic one cannot use the environment ¦arabic¦,
 as \cmd\arabic\ is defined internally by \LaTeX. In this case
-we need to use the environment ¦Arabic¦ instead\DescribeEnv{Arabic}.
+we need to use the environment ¦Arabic¦ instead.
 
 \subsection{Other commands}
 The following commands are probably of lesser interest to the end user, but
@@ -279,7 +288,14 @@ ought to be mentioned here.
 \item Some macros defined in \pkg{babel}’s \file{hyphen.cfg} (and thus usually
 	compiled into the \XeLaTeX\ and \LuaLaTeX\ format) are redefined, but keep a similar
 	behaviour, namely \Cmd\selectlanguage, \Cmd\foreignlanguage,
-	and the environment ¦otherlanguage¦\DescribeEnv{otherlanguage}.
+	and the environments ¦otherlanguage¦ and ¦otherlanguage*¦\DescribeEnv{otherlanguage}
+	\DescribeEnv{otherlanguage*}.
+
+	¦\selectlanguage{⟨lang⟩}¦ and the ¦otherlanguage¦ environment are identical with the
+	use of the ¦⟨lang⟩¦ environment (with the only difference that ¦\selectlanguage{⟨lang⟩}¦
+	does not need to be explicitly closed). ¦\foreinlanguage{⟨lang⟩}{...}¦ and the ¦otherlanguage*¦
+	environment are identical with the use of the ¦\text⟨lang⟩¦ command, with the one
+	notable exception that they do not translate the date with ¦\today¦. 
 \end{itemize}
 %
 Since the \XeLaTeX\ and \LuaLaTeX\ format incorporate \pkg{babel}’s \file{hyphen.cfg},
