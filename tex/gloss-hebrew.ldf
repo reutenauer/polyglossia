@@ -127,12 +127,16 @@ and may look very wrong.}
   \renewcommand\thefootnote{\protect\number{\c@footnote}}%
 }
 
+% Save original \MakeUppercase definition
+\let\xpg@save@MakeUppercase\MakeUppercase
+
 \def\blockextras@hebrew{%
-   \let\@@MakeUppercase\MakeUppercase%
    \def\MakeUppercase##1{##1}%
-   }
+}
+
 \def\noextras@hebrew{%
-   \let\MakeUppercase\@@MakeUppercase%
-   }
+   % restore original \MakeUppercase definition
+   \let\MakeUppercase\xpg@save@MakeUppercase%
+}
 
 \endinput
