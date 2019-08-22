@@ -658,33 +658,36 @@
 
 \newcommand{\setdefaultlanguage}[2][]{%
   \edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
-   \IfFileExists{gloss-#2.ldf}%
-   {
-     \ifcsundef{#2@loaded}%
-     {
-       \xpg@input{gloss-#2.ldf}%
-       \xpg@info{Default~ language~ is~ #2}%
-       \def\languagename{#2}%
-       \ifluatex %
-       \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
-       \fi %
-       % define environment and command
-       \polyglossia@define@language@cmd:nn{#1}{#2}
-       \csgdef{#2@loaded}{}%
-       \gdef\xpg@main@language{#2}%
-     }%
-     {\xpg@warning{gloss-#2.ldf~ is~ already~ loaded!}}%:
-     %% The following settings are for the default language and script
-     % this tells bidi.sty that the document is RTL
-     \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{\@RTLmaintrue}{}%
-     \AtBeginDocument{%
-       \selectlanguage[#1]{#2}%
-       \selectbackgroundlanguage{#2}}%
-   }%
-   % ELSE
-   {
-     \xpg@nogloss{#2}
-   }%
+  \ifcsundef{#2@loaded}%
+  {
+    \IfFileExists{gloss-#2.ldf}
+    {
+      \xpg@input{gloss-#2.ldf}%
+    }
+    {
+      \xpg@nogloss{#2}
+    }
+    \xpg@info{Default~ language~ is~ #2}%
+    \def\languagename{#2}%
+    \ifluatex %
+    \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
+    \fi %
+    % define environment and command
+    \polyglossia@define@language@cmd:nn{#1}{#2}
+    \csgdef{#2@loaded}{}%
+    \gdef\xpg@main@language{#2}%
+    %% The following settings are for the default language and script
+    % this tells bidi.sty that the document is RTL
+    \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{\@RTLmaintrue}{}%
+    \AtBeginDocument
+    {%
+      \selectlanguage[#1]{#2}%
+      \selectbackgroundlanguage{#2}
+    }%
+  }
+  {
+    \xpg@warning{gloss-#2.ldf~ is~ already~ loaded!}%:
+  }
 }
 
 \let\setmainlanguage=\setdefaultlanguage
@@ -760,18 +763,23 @@
 
 \newcommand{\setotherlanguage}[2][]{%
   \edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
-   \IfFileExists{gloss-#2.ldf}%
-   {\ifcsundef{#2@loaded}%
-     {\xpg@input{gloss-#2.ldf}%
+  \ifcsundef{#2@loaded}
+  {
+    \IfFileExists{gloss-#2.ldf}
+    {
+      \xpg@input{gloss-#2.ldf}%
       \setkeys{#2}{#1}%
-      % define environment and command
-      \polyglossia@define@language@cmd:nn{#1}{#2}
-      \csgdef{#2@loaded}{}%
-     }%
-     {\xpg@warning{gloss-#2.ldf~ is~ already~ loaded!}}%
-   }%
-   %ELSE
-   {\xpg@nogloss{#2}}%
+    }
+    {
+      \xpg@nogloss{#2}
+    }
+    % define environment and command
+    \polyglossia@define@language@cmd:nn{#1}{#2}
+    \csgdef{#2@loaded}{}%
+  }
+  {
+    \xpg@warning{gloss-#2.ldf~ is~ already~ loaded!}
+  }
 }
 
 \newcommand\setotherlanguages[1]{%
