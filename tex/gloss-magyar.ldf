@@ -7,14 +7,6 @@
 
 \frenchspacing
 
-% change 'táblázat x.x' to 'x.x. táblázat'
-\newcommand{\@magyar@fnum@table}{\thetable.~\tablename}
-\let\fnum@table\@magyar@fnum@table
-
-% change 'ábra x.x' to 'x.x. ábra'
-\newcommand{\@magyar@fnum@figure}{\thefigure.~\figurename}
-\let\fnum@figure\@magyar@fnum@figure
-
 \def\captionsmagyar{%
    \def\refname{Hivatkozások}%
    \def\abstractname{Kivonat}%
@@ -63,7 +55,22 @@
      31-én\fi}%
    \let\ontoday\ondatemagyar}
 
+% change 'táblázat x.x' to 'x.x. táblázat'
+\def\xpg@magyar@fnum@table{\thetable.~\tablename}
+\let\xpg@save@fnum@table\fnum@table
+
+% change 'ábra x.x' to 'x.x. ábra'
+\def\xpg@magyar@fnum@figure{\thefigure.~\figurename}
+\let\xpg@save@fnum@figure\fnum@figure
+
+\def\blockextras@magyar{%
+   \let\fnum@table\xpg@magyar@fnum@table
+   \let\fnum@figure\xpg@magyar@fnum@figure
+}
+
 \def\noextras@magyar{%
+   \let\fnum@table\xpg@save@fnum@table
+   \let\fnum@figure\xpg@save@fnum@figure
    \let\ontoday\@undefined
 }
 
