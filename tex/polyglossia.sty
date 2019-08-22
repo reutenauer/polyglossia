@@ -655,7 +655,7 @@
       {\newenvironment{#2}[1][]{\begin{otherlanguage}[####1]{#2}}%
         {\end{otherlanguage}}}%
       \expandafter\newcommand\csname text#2\endcsname[2][]{%
-                \foreignlanguage[####1]{#2}{####2}
+                \xpg@textlanguage[####1]{#2}{####2}%
       }%
       \csletcs{local#2}{text#2}%
       \csgdef{#2@loaded}{}%
@@ -760,7 +760,7 @@
          {\end{otherlanguage}}%
       \fi
       \expandafter\newcommand\csname text#2\endcsname[2][]{%
-              \foreignlanguage[####1]{#2}{####2}
+              \xpg@textlanguage[####1]{#2}{####2}
       }%
      \csletcs{local#2}{text#2}%
      \csgdef{#2@loaded}{}%
@@ -800,29 +800,9 @@
   \select@@language{#1}
 }
 
-\renewcommand{\foreignlanguage}[3][]
-{%
-  \ifcsundef{#2@loaded}%
-  {
-    % BUGGY not cancelled
-    \xpg@nogloss{#2}
-  }%
-  {
-    \setkeys{#2}{#1}%
-    {
-      \polyglossia@setforeignlanguage:n{#2}
-      % BUG this one is not undo
-      \csuse{inlineextras@#2}%
-      #3
-      \leavevmode
-    }%
-  }%
-}
-
-% otherlanguage* is the environment equivalent of \foreignlanguage
-\expandafter\providecommand\csname otherlanguage*\endcsname{}
-
-\renewenvironment{otherlanguage*}[2][]
+% joint code of \foreignlanguage, otherlanguage*
+% and \text<lang>
+\newcommand{\xpg@otherlanguage}[2][]
 {%
   \ifcsundef{#2@loaded}%
   {
@@ -835,7 +815,44 @@
     \csuse{inlineextras@#2}
   }%
 }
+
+\renewcommand{\foreignlanguage}[3][]
+{%
+  \ifcsundef{#2@loaded}%
+  {}%
+  {%
+   \bgroup
+   \xpg@otherlanguage[#1]{#2}%
+   #3
+   \leavevmode
+   \egroup
+  }%
+}
+
+% otherlanguage* is the environment equivalent of \foreignlanguage
+\expandafter\providecommand\csname otherlanguage*\endcsname{}
+
+\renewenvironment{otherlanguage*}[2][]
+{%
+  \xpg@otherlanguage[#1]{#2}%
+}
 {}
+
+% use by \text<lang>. Equivalent to \foreignlanguage,
+% except that dates are localized.
+\newcommand*\xpg@textlanguage[3][]{%
+  \ifcsundef{#2@loaded}%
+  {}%
+  {%
+   \bgroup
+   \xpg@otherlanguage[#1]{#2}%
+   \csuse{date#2}%
+   #3
+   \leavevmode
+   \egroup
+  }%
+}
+
 
 %Hook that other package authors can use
 %(for instance biblatex):
@@ -930,6 +947,7 @@
    \xpg@initial@setup%
    \select@@language{#1}%
    \csuse{captions#1}%
+   \csuse{date#1}%
    \local@marks{#1}%
    \csuse{init@extras@#1}%
    \polyglossia@lang@indentfirst:n{#1}
@@ -949,7 +967,6 @@
   \edef\languagename{#1}%
   \xpg@select@fontfamily{#1}%
   \csuse@warn{#1@language}%
-  \csuse{date#1}%
   \csuse{#1@numbers}%
   \use@localhyphenmins{#1}%
   \polyglossia@lang@frenchspacing:n{#1}
