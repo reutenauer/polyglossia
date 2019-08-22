@@ -941,8 +941,11 @@
 
 % Common code for `\select@language' and `\foreignlanguage'.
 \newcommand{\select@@language}[1]{%
-  % disable the extras of the previous language
-  \ifcsundef{languagename}{}{\noextrascurrent{\languagename}}
+  % disable the extras and number settings of the previous language
+  \ifcsundef{languagename}{}{%
+     \noextrascurrent{\languagename}%
+     \csuse{no\languagename @numbers}%
+  }
   \edef\languagename{#1}%
   \xpg@select@fontfamily{#1}%
   \csuse@warn{#1@language}%
