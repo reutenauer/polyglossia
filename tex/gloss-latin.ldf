@@ -51,7 +51,6 @@
   \let\latin@variant\l@latin
   \xpg@set@language@luatex@ii{latin}
   \medievaltrue \classictrue
-  \classicuclccodes
   \xpg@info{Option: Medieval Latin}%
 \else
   \ifx\@tempa\tmp@classic
@@ -64,7 +63,7 @@
          \let\latin@variant\l@classiclatin
       \fi
     \fi
-    \medievalfalse\classictrue\classicuclccodes
+    \medievalfalse\classictrue
     \xpg@info{Option: Classic Latin}%
   \else
    \ifx\@tempa\tmp@liturgical\unless\ifluatex
@@ -274,6 +273,7 @@
    \lccode\string"2019=\string"2019
    \clubpenalty=3000 \@clubpenalty=3000 \widowpenalty=3000
    \finalhyphendemerits=50000000
+   \ifclassic\classicuclccodes\fi
    \iflatin@babelshorthands\latin@shorthands\fi
    \iflatin@ecclesiastic\unless\ifluatex\ecclesiasticlatin@punctuation
    \let\@makefntext\latin@ecclesiastic@makefntext\fi
@@ -282,6 +282,7 @@
 
 \def\inlineextras@latin{%
    \lccode\string"2019=\string"2019
+   \ifclassic\classicuclccodes\fi
    \iflatin@babelshorthands\latin@shorthands\fi
    \iflatin@ecclesiastic
       \unless\ifluatex\ecclesiasticlatin@punctuation
