@@ -760,7 +760,9 @@
   \letcs{\rmfamily}{#1@font@rm}%
   \letcs{\sffamily}{#1@font@sf}%
   \letcs{\ttfamily}{#1@font@tt}%
-  \gdef\normalfont{\protect\xpg@select@fontfamily{#1}}%
+  \gdef\normalfont{\protect\xpg@select@fontfamily{#1}%
+                     \fontseries{\seriesdefault}\selectfont%
+                     \fontshape{\shapedefault}\selectfont}%
   \gdef\reset@font{\protect\normalfont}%
 }
 
