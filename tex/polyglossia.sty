@@ -333,20 +333,27 @@
       .initial:n = false,
     % fontsetup
     #1 / fontsetup
-    .code:n = {
-       \str_case_e:nnTF{##1}{
+      .code:n = {
+         \str_case_e:nnTF{##1}{
             {true}{}
             {false}{}
           }
           {}
           {\xpg@error{fontsetup~should~be~true~or~false. Is "##1"~ for~ language~ "#1"}}
        \prop_gput:Nnn{\polyglossia@langsetup}{#1/fontsetup}{##1}
-    },
+       },
     #1 / fontsetup
       .default:n = true,
     #1 / fontsetup
       .initial:n = false,
-    }
+    % environement name
+    #1 / envname
+       .code:n = {
+           \prop_gput:Nnn{\polyglossia@langsetup}{#1/envname}{##1}
+       },
+    #1/ envname.value_required:n = true,
+    #1/ envname.initial:n = {#1}
+  }
 }
 
 \cs_new_nopar:Nn{\polyglossia@lang@frenchspacing:n}{
@@ -637,40 +644,47 @@
   \makeatletter
   \input{#1}\catcode`\@=\xpg@atcatcode}
 
+
+% define environment and command
+\cs_new:Nn \polyglossia@define@language@cmd:nn {
+  \exp_args:Ne \newenvironment {\prop_item:Nn{\polyglossia@langsetup}{#2/envname}} [1][]
+        {\begin{otherlanguage}[####1]{#2}}%
+        {\end{otherlanguage}}%
+  \exp_args:Nc \newcommand {text#2} [2][]{%
+         \xpg@textlanguage[####1]{#2}{####2}%
+  }%
+  \csletcs{local#2}{text#2}%
+}
+
 \newcommand{\setdefaultlanguage}[2][]{%
   \edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
    \IfFileExists{gloss-#2.ldf}%
-   {\ifcsundef{#2@loaded}%
-     {\xpg@input{gloss-#2.ldf}%
-     \xpg@info{Default~ language~ is~ #2}%
-     \def\languagename{#2}%
-     \ifluatex %
+   {
+     \ifcsundef{#2@loaded}%
+     {
+       \xpg@input{gloss-#2.ldf}%
+       \xpg@info{Default~ language~ is~ #2}%
+       \def\languagename{#2}%
+       \ifluatex %
        \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
-     \fi %
-      % This is needed because \arabic is a built-in LaTeX command:
-      % so now we have \begin{Arabic}... instead of \begin{arabic}...
-      \ifstrequal{#2}{arabic}%
-      {\newenvironment{Arabic}[1][]{\begin{otherlanguage}[####1]{arabic}}%
-        {\end{otherlanguage}}}%
-      {\newenvironment{#2}[1][]{\begin{otherlanguage}[####1]{#2}}%
-        {\end{otherlanguage}}}%
-      \expandafter\newcommand\csname text#2\endcsname[2][]{%
-                \xpg@textlanguage[####1]{#2}{####2}%
-      }%
-      \csletcs{local#2}{text#2}%
-      \csgdef{#2@loaded}{}%
-      \gdef\xpg@main@language{#2}%
-      }%
-      {\xpg@warning{gloss-#2.ldf~ is~ already~ loaded!}}%:
-      %% The following settings are for the default language and script
-      % this tells bidi.sty that the document is RTL
-      \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{\@RTLmaintrue}{}%
-      \AtBeginDocument{%
-      \selectlanguage[#1]{#2}%
-      \selectbackgroundlanguage{#2}}%
+       \fi %
+       % define environment and command
+       \polyglossia@define@language@cmd:nn{#1}{#2}
+       \csgdef{#2@loaded}{}%
+       \gdef\xpg@main@language{#2}%
+     }%
+     {\xpg@warning{gloss-#2.ldf~ is~ already~ loaded!}}%:
+     %% The following settings are for the default language and script
+     % this tells bidi.sty that the document is RTL
+     \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{\@RTLmaintrue}{}%
+     \AtBeginDocument{%
+       \selectlanguage[#1]{#2}%
+       \selectbackgroundlanguage{#2}}%
    }%
-   %ELSE
-   {\xpg@nogloss{#2}}%
+   % ELSE
+   {
+     \xpg@nogloss{#2}
+   }%
 }
 
 \let\setmainlanguage=\setdefaultlanguage
@@ -750,20 +764,9 @@
    {\ifcsundef{#2@loaded}%
      {\xpg@input{gloss-#2.ldf}%
       \setkeys{#2}{#1}%
-      \edef\@tmpa{arabic}%
-      \edef\@tmpb{#2}%
-      \ifx\@tmpb\@tmpa%
-      \newenvironment{Arabic}[1][]{\begin{otherlanguage}[####1]{arabic}}%
-         {\end{otherlanguage}}%
-      \else
-      \newenvironment{#2}[1][]{\begin{otherlanguage}[####1]{#2}}%
-         {\end{otherlanguage}}%
-      \fi
-      \expandafter\newcommand\csname text#2\endcsname[2][]{%
-              \xpg@textlanguage[####1]{#2}{####2}
-      }%
-     \csletcs{local#2}{text#2}%
-     \csgdef{#2@loaded}{}%
+      % define environment and command
+      \polyglossia@define@language@cmd:nn{#1}{#2}
+      \csgdef{#2@loaded}{}%
      }%
      {\xpg@warning{gloss-#2.ldf~ is~ already~ loaded!}}%
    }%

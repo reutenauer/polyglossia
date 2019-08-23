@@ -15,7 +15,8 @@ and may look very wrong.}
   langtag=ARA,
   scripttag=arab,
   hyphennames={nohyphenation},
-  fontsetup=true
+  fontsetup=true,
+  envname=Arabic
   %TODO localalph={abjad,abjad}
   %TODO localnumber=arabicnumber
 }
