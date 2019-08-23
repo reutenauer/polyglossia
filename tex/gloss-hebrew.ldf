@@ -102,7 +102,7 @@ and may look very wrong.}
 
 \def\hebrewnumber#1{%
    \if@hebrew@numerals
-     \protect\hebrewnumeral{#1}%
+     \hebrewnumeral{#1}%
    \else
      \number#1%
    \fi
@@ -120,11 +120,11 @@ and may look very wrong.}
 \def\hebrew@globalnumbers{%
    \let\orig@arabic\@arabic%
    \let\@arabic\hebrewnumber%
-   \renewcommand\thefootnote{\protect\hebrewnumber{\c@footnote}}%
+   \renewcommand\thefootnote{\hebrewnumber{\c@footnote}}%
 }
 \def\nohebrew@globalnumbers{%
   \let\@arabic\orig@arabic%
-  \renewcommand\thefootnote{\protect\number{\c@footnote}}%
+  \renewcommand\thefootnote{\@arabic\c@footnote}%
 }
 
 % Save original \MakeUppercase definition

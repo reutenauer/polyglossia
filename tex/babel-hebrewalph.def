@@ -4,13 +4,22 @@
          Adapted from hebrew.ldf (2005/03/30 v2.3h)]
 \newif\if@gim@apost  % whether we print apostrophes (gereshayim)
 \newif\if@gim@final  % whether we use final or initial letters
-\newrobustcmd*{\hebrewnumeral}[1]      % no apostrophe, no final letters
- {{\@gim@finalfalse\@gim@apostfalse\@hebrew@numeral{#1}}}
-\newrobustcmd*{\Hebrewnumeral}[1]      % apostrophe, no final letters
- {{\@gim@finalfalse\@gim@aposttrue\@hebrew@numeral{#1}}}
-\newrobustcmd*{\Hebrewnumeralfinal}[1] % apostrophe, final letters
- {{\@gim@finaltrue\@gim@aposttrue\@hebrew@numeral{#1}}}
-\newcommand*{\@hebrew@numeral}[1]{%
+\newcommand*\hebrewnumeral[1]{%
+  \expandafter\@hebrew@numeral\expandafter{\the\numexpr#1}%
+}
+\newcommand*\Hebrewnumeral[1]{%
+  \expandafter\@Hebrew@numeral\expandafter{\the\numexpr#1}%
+}
+\newcommand*\Hebrewnumeralfinal[1]{%
+  \expandafter\@Hebrew@numeralfinal\expandafter{\the\numexpr#1}%
+}
+\newrobustcmd*{\@hebrew@numeral}[1]      % no apostrophe, no final letters
+ {{\@gim@finalfalse\@gim@apostfalse\@hebrew@@numeral{#1}}}
+\newrobustcmd*{\@Hebrew@numeral}[1]      % apostrophe, no final letters
+ {{\@gim@finalfalse\@gim@aposttrue\@hebrew@@numeral{#1}}}
+\newrobustcmd*{\@Hebrew@numeralfinal}[1] % apostrophe, final letters
+ {{\@gim@finaltrue\@gim@aposttrue\@hebrew@@numeral{#1}}}
+\newcommand*{\@hebrew@@numeral}[1]{%
   \ifnum#1<\z@\space\xpg@warning{Illegal value (#1) for Hebrew numeral}%
   \else
     \@tempcnta=#1\@tempcntb=#1\relax
@@ -75,5 +84,5 @@
      \else#2\if@gim@apost ׳\fi\fi%
   \else{\@gim@finalfalse#2}\@gim@prevtrue\fi}
 \def\Alphfinal#1{\expandafter\@Alphfinal\csname c@#1\endcsname}%
-\providecommand*{\@Alphfinal}[1]{\protect\Hebrewnumeralfinal{\number#1}}
+\providecommand*{\@Alphfinal}[1]{\Hebrewnumeralfinal{#1}}
 \endinput
