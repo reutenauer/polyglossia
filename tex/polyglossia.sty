@@ -74,6 +74,15 @@
 \def\xpg@ill@value#1#2{%
   \xpg@warning{Illegal~ value~ (#1)~ for~ #2}}
 
+% error out if lang is not loaded
+\cs_new_nopar:Nn \polyglossia@error@iflangnotloaded:n
+{
+  \cs_if_exist:cF{#1@loaded}
+  {
+    \xpg@error{language~ #2~ is~ not~ loaded.~ Please~ load~ it~ before~ using.}
+  }
+}
+
 %% use macro if defined, else warn that it is not
 \def\csuse@warn#1{%
    \ifcsundef{#1}{\xpg@warning{ \expandafter\string\csname #1\endcsname\space is~ not~ defined}}%
@@ -693,15 +702,15 @@
 \let\setmainlanguage=\setdefaultlanguage
 
 \newcommand{\resetdefaultlanguage}[2][]{%
-    \ifcsundef{#2@loaded}{%
-     \xpg@error{gloss-#2.ldf~ is~ not~ loaded!}}%
-    {\csuse{no\xpg@main@language @globalnumbers}% disable globalnumbers of previously defined default language
+  \polyglossia@error@iflangnotloaded:n{#1}
+  % disable globalnumbers of previously defined default language
+  \csuse{no\xpg@main@language @globalnumbers}
     \csuse{noextras@\xpg@main@language}%
     \csuse{init@noextras@\xpg@main@language}%
     \def\languagename{#2}%
     \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{\@rlmaintrue\@rl@footnotetrue}{}%
     \selectlanguage[#1]{#2}%
-    \selectbackgroundlanguage{#2}}}
+    \selectbackgroundlanguage{#2}}
 
 \expandafter\ifx\familydefault\sfdefault
   \def\familytype{sf}
@@ -815,29 +824,21 @@
 % and \text<lang>
 \newcommand{\xpg@otherlanguage}[2][]
 {%
-  \ifcsundef{#2@loaded}%
-  {
-    % buggy not canceled
-    \xpg@nogloss{#2}}%
-  {
+  \polyglossia@error@iflangnotloaded:n{#2}
     \setkeys{#2}{#1}%
     \polyglossia@setforeignlanguage:n{#2}
     % buggy restoration heure
     \csuse{inlineextras@#2}
-  }%
 }
 
 \renewcommand{\foreignlanguage}[3][]
 {%
-  \ifcsundef{#2@loaded}%
-  {}%
-  {%
+  \polyglossia@error@iflangnotloaded:n{#2}
    \bgroup
    \xpg@otherlanguage[#1]{#2}%
    #3
    \leavevmode
    \egroup
-  }%
 }
 
 % otherlanguage* is the environment equivalent of \foreignlanguage
@@ -852,16 +853,13 @@
 % use by \text<lang>. Equivalent to \foreignlanguage,
 % except that dates are localized.
 \newcommand*\xpg@textlanguage[3][]{%
-  \ifcsundef{#2@loaded}%
-  {}%
-  {%
+  \polyglossia@error@iflangnotloaded:n{#2}
    \bgroup
    \xpg@otherlanguage[#1]{#2}%
    \csuse{date#2}%
    #3
    \leavevmode
    \egroup
-  }%
 }
 
 
@@ -876,9 +874,8 @@
 
 \providecommand{\selectlanguage}{}
 \renewcommand{\selectlanguage}[2][]{%
-   \ifcsundef{#2@loaded}%
-     {\xpg@nogloss{#2}}%
-     {\expandafter\def\expandafter\xpg@pop@language\expandafter{\expandafter\xpg@pop@language@i\expandafter{\languagename}}
+  \polyglossia@error@iflangnotloaded:n{#2}
+  \expandafter\def\expandafter\xpg@pop@language\expandafter{\expandafter\xpg@pop@language@i\expandafter{\languagename}}
       \aftergroup\xpg@pop@language%
       % If the optional argument sets a value for the key “variant”, copy it to xpg@langvariant
       \def\do##1{%
@@ -892,7 +889,6 @@
       \docsvlist{#1}
       \setkeys{#2}{#1}%
       \xpg@set@language{#2}%
-     }%
 }
 
 
