@@ -653,16 +653,20 @@
   \makeatletter
   \input{#1}\catcode`\@=\xpg@atcatcode}
 
-
 % define environment and command
-\cs_new:Nn \polyglossia@define@language@cmd:nn {
-  \exp_args:Ne \newenvironment {\prop_item:Nn{\polyglossia@langsetup}{#2/envname}} [1][]
-        {\begin{otherlanguage}[####1]{#2}}%
-        {\end{otherlanguage}}%
-  \exp_args:Nc \newcommand {text#2} [2][]{%
-         \xpg@textlanguage[####1]{#2}{####2}%
+\cs_new:Nn \polyglossia@define@language@cmd:n {
+  \exp_args:Ne
+  \newenvironment {\prop_item:Nn{\polyglossia@langsetup}{#1/envname}} [1] []
+  {
+    \begin{otherlanguage}[##1]{#1}
   }%
-  \csletcs{local#2}{text#2}%
+  {
+    \end{otherlanguage}
+  }%
+  \exp_args:Nc \newcommand {text#1} [2][]
+  {%
+    \xpg@textlanguage[##1]{#1}{##2}%
+  }%
 }
 
 \newcommand{\setdefaultlanguage}[2][]{%
@@ -682,7 +686,7 @@
     \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
     \fi %
     % define environment and command
-    \polyglossia@define@language@cmd:nn{#1}{#2}
+    \polyglossia@define@language@cmd:n{#2}
     \csgdef{#2@loaded}{}%
     \gdef\xpg@main@language{#2}%
     %% The following settings are for the default language and script
@@ -783,7 +787,7 @@
       \xpg@nogloss{#2}
     }
     % define environment and command
-    \polyglossia@define@language@cmd:nn{#1}{#2}
+    \polyglossia@define@language@cmd:n{#2}
     \csgdef{#2@loaded}{}%
   }
   {
