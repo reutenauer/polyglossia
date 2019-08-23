@@ -186,29 +186,36 @@ and may look very wrong.}
    \let\@alph\abjad%
    \let\@Alph\abjad%
 }
+
 \def\noarabic@numbers{%
   \let\@alph\latin@alph%
   \let\@Alph\latin@Alph%
-  }
+}
+
+% Store original definition
+\let\xpg@save@arabic\@arabic
 
 \def\arabic@globalnumbers{%
-  \let\orig@arabic\@arabic%
   \let\@arabic\arabicnumber%
   \renewcommand\thefootnote{\protect\arabicnumber{\c@footnote}}%
-  }
+}
 
 \def\noarabic@globalnumbers{
-   \let\@arabic\orig@arabic%
+   \let\@arabic\xpg@save@arabic%
    \renewcommand\thefootnote{\protect\number{\c@footnote}}%
-   }
+}
+
+% Save original \MakeUppercase definition
+\let\xpg@save@MakeUppercase\MakeUppercase
 
 \def\blockextras@arabic{%
-   \let\orig@MakeUppercase\MakeUppercase%
    \def\MakeUppercase##1{##1}%
    % TODO disable \@Roman and \@roman ?
-   }
+}
+
 \def\noextras@arabic{%
-   \let\MakeUppercase\orig@MakeUppercase%
-   }
+   % restore original \MakeUppercase definition
+   \let\MakeUppercase\xpg@save@MakeUppercase
+}
 
 \endinput

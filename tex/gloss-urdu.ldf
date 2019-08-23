@@ -110,33 +110,38 @@ and may look very wrong.}
 \def\urdu@numbers{%
   \let\@alph\abjad%
   \let\@Alph\abjad%
-  }
+}
 
 \def\nourdu@numbers{%
   \let\@alph\latin@alph%
   \let\@Alph\latin@Alph%
-  }
+}
+
+% Store original definition
+\let\xpg@save@arabic\@arabic
 
 \def\urdu@globalnumbers{%
-  \let\orig@arabic\@arabic%
   \let\@arabic\urdunumber%
   % For some reason \thefootnote needs to be set separately:
   \renewcommand\thefootnote{\protect\urdunumber{\c@footnote}}%
-  }
+}
 
 \def\nourdu@globalnumbers{
-  \let\@arabic\orig@arabic%
+  \let\@arabic\xpg@save@arabic%
   \renewcommand\thefootnote{\protect\number{\c@footnote}}%
-  }
+}
+
+% Save original \MakeUppercase definition
+\let\xpg@save@MakeUppercase\MakeUppercase
 
 \def\blockextras@urdu{%
-  \let\@@MakeUppercase\MakeUppercase%
   \def\MakeUppercase##1{##1}%
-  }
+}
 
 \def\noextras@urdu{%
-  \let\MakeUppercase\@@MakeUppercase%
-  }
+   % restore original \MakeUppercase definition
+   \let\MakeUppercase\xpg@save@MakeUppercase%
+}
 
 \endinput
 

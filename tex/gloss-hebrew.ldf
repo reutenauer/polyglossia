@@ -112,18 +112,22 @@ and may look very wrong.}
    \let\@alph\hebrewnumeral%
    \let\@Alph\Hebrewnumeral%
 }
+
 \def\nohebrew@numbers{%
   \let\@alph\latin@alph%
   \let\@Alph\latin@Alph%
 }
 
 \def\hebrew@globalnumbers{%
-   \let\orig@arabic\@arabic%
    \let\@arabic\hebrewnumber%
    \renewcommand\thefootnote{\hebrewnumber{\c@footnote}}%
 }
+
+% Store original definition
+\let\xpg@save@arabic\@arabic
+
 \def\nohebrew@globalnumbers{%
-  \let\@arabic\orig@arabic%
+  \let\@arabic\xpg@save@arabic%
   \renewcommand\thefootnote{\@arabic\c@footnote}%
 }
 
