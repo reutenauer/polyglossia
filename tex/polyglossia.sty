@@ -39,11 +39,25 @@
 \let\xpg@vloaded\@empty
 
 % counter in latin
-\let\latin@alph\@alph
-\let\latin@Alph\@Alph
 \def\latinalph#1{\expandafter\latin@alph\csname c@#1\endcsname}
 \def\latinAlph#1{\expandafter\latin@Alph\csname c@#1\endcsname}
 
+% select language hook
+\cs_new_nopar:Nn \polyglossia@AtBeginDocument@selectlanguage: {}
+
+% hook to be executed at begin of document
+\cs_new_nopar:Nn \polyglossia@AtBeginDocument: {
+  % save various command
+  \let\latin@alph\@alph   % TODO rename when we have the C locale
+  \let\latin@Alph\@Alph   % TODO rename when we have the C locale
+
+  % now we have the C locale definition: select the language
+  \polyglossia@AtBeginDocument@selectlanguage:
+  \xpg@initial@setup
+}
+\AtBeginDocument{
+  \polyglossia@AtBeginDocument:
+}
 
 %% custom message macros
 \providecommand*{\xpg@error}[1]{%
@@ -692,11 +706,10 @@
     %% The following settings are for the default language and script
     % this tells bidi.sty that the document is RTL
     \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{\@RTLmaintrue}{}%
-    \AtBeginDocument
-    {%
+    \cs_gset_nopar:Nn \polyglossia@AtBeginDocument@selectlanguage: {
       \selectlanguage[#1]{#2}%
       \selectbackgroundlanguage{#2}
-    }%
+    }
   }
   {
     \xpg@warning{gloss-#2.ldf~ is~ already~ loaded!}%:
@@ -813,8 +826,6 @@
 \def\xpg@initial@setup{\ifcsundef{languagename}{}%
    {\noextrascurrent{\languagename}}%
    \common@language}
-
-\AtBeginDocument{\xpg@initial@setup}
 
 \providecommand{\foreignlanguage}{}
 
