@@ -10,13 +10,20 @@
   %TODO localalph={russian@alph,russian@Alph}
 }
 
+\newif\if@russian@modern
 \define@key{russian}{spelling}[modern]{%
   \ifstrequal{#1}{old}%
-    {\def\captionsrussian{\captionsrussian@old}%
-     \def\daterussian{\daterussian@old}}%
-    {\def\captionsrussian{\captionsrussian@modern}%
-     \def\daterussian{\daterussian@modern}}%
+    {\@russian@modernfalse}%
+    {\@russian@moderntrue}%
 }
+
+\def\captionsrussian{%
+   \if@russian@modern\captionsrussian@modern\else\captionsrussian@old\fi
+}%
+
+\def\daterussian{%
+   \if@russian@modern\daterussian@modern\else\daterussian@old\fi
+}%
 
 \newif\ifcyrillic@numerals
 \define@key{russian}{numerals}[latin]{%
