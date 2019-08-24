@@ -125,8 +125,20 @@ and may look very wrong.}
     \fi
   \fi}
 
-\def\bengalinumber#1{\bengalidigits{\number#1}}% Takes number
-\def\bengalinumeral#1{\bengalinumber{\csname c@#1\endcsname}}% Takes counter
+\def\bengalinumeral#1{\expandafter\bengalinumber\expandafter{\the##1}}% Takes counter
+
+\def\bengali@globalnumbers{%
+   \let\@arabic\bengalinumber%
+   \renewcommand\thefootnote{\bengalinumber{\c@footnote}}%
+}
+
+% Store original definition
+\let\xpg@save@arabic\@arabic
+
+\def\nobengali@globalnumbers{%
+  \let\@arabic\xpg@save@arabic%
+  \renewcommand\thefootnote{\@arabic\c@footnote}%
+}
 
 \def\blockextras@bengali{\extras@bengali}
 \def\inlineextras@bengali{\extras@bengali}
