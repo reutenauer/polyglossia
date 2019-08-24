@@ -73,7 +73,7 @@ and may look very wrong.}
 }
 
 \def\captionsbengali{%
-  \def\refname{তথ্যসুত্রসমূহ}%
+  \def\refname{তথ্যসূত্রসমূহ}%
   \def\abstractname{সারসংক্ষেপ}%
   \def\bibname{তথ্যবিবরণ}%
   \def\prefacename{পূর্বকথা}%
@@ -83,8 +83,8 @@ and may look very wrong.}
   \def\listfigurename{ছবি/নকশা সমূহের তালিকা}%
   \def\listtablename{তালিকাসারণী}%
   \def\indexname{সূচক/নির্দেশক}%
-  \def\figurename{ছবি/নকশা}%
-  \def\tablename{সারনী}%
+  \def\figurename{চিত্র}%
+  \def\tablename{সারণী}%
   %\def\thepart{}% TODO
   \def\partname{খন্ড}%
   \def\pagename{পৃষ্ঠা}%
@@ -99,14 +99,14 @@ and may look very wrong.}
 \def\datebengali{%
   \def\bengalimonth{%
     \ifcase\month\or
-      জানুয়ারী\or
-      ফেব্রুয়ারী\or
+      জানুয়ারি\or
+      ফেব্রুয়ারি\or
       মার্চ\or
       এপ্রিল\or
       মে\or
       জুন\or
       জুলাই\or
-      আগষ্ট\or
+      আগস্ট\or
       সেপ্টেম্বর\or
       অক্টোবর\or
       নভেম্বর\or
