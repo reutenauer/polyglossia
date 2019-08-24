@@ -989,6 +989,8 @@
      \csuse{no\languagename @numbers}%
   }
   \edef\languagename{#1}%
+  % Set the language's/script's font families
+  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{latin}{}{\xpg@set@normalfont{#1}}%
   \xpg@select@fontfamily{#1}%
   \csuse@warn{#1@language}%
   \csuse{#1@numbers}%
