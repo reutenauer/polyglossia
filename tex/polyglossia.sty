@@ -534,14 +534,14 @@
   }
   \csgdef{#1@font@sf}{%
     \cs_if_exist_use:cF{#1fontsf}{
-      \sffamillylatin
+      \sffamilylatin
       \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
                                               {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
     }%
   }%
   \csgdef{#1@font@tt}{%
     \cs_if_exist_use:cF{#1fonttt}{
-      \ttfamillylatin
+      \ttfamilylatin
       \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
                                               {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
     }%
