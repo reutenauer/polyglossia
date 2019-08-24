@@ -833,7 +833,6 @@
 
 % wrapper for foreignlanguage and otherlanguage*
 \cs_new:Nn \polyglossia@setforeignlanguage:n {
-  \leavevmode
   \select@@language{#1}
 }
 
@@ -854,7 +853,6 @@
    \bgroup
    \xpg@otherlanguage[#1]{#2}%
    #3
-   \leavevmode
    \egroup
 }
 
@@ -875,7 +873,6 @@
    \xpg@otherlanguage[#1]{#2}%
    \csuse{date#2}%
    #3
-   \leavevmode
    \egroup
 }
 
@@ -1006,8 +1003,6 @@
 
 \renewenvironment{otherlanguage}[2][]
 {
-  % in order to get correct aligment of paragraph
-  \leavevmode
   \selectlanguage[#1]{#2}
 }
 {}
