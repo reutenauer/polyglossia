@@ -153,20 +153,10 @@
             \def\@chapapp##1##2{\koreanTHEname ##1##2##1\chaptername}%
         \fi
     \fi
-    \ifdefined\baselinestretch
-        \let\xpg@orig@linestretch\baselinestretch
-        \def\baselinestretch{1.3888}\selectfont
-    \fi
-    \ifdefined\footnotesep
-        \edef\xpg@orig@footnotesep{\noexpand\footnotesep=\the\footnotesep\relax}%
-        \footnotesep=1.3888\footnotesep
-    \fi
 }
 
 \def\noextras@korean@common{%
-    \ifdefined\xpg@orig@footnotesep \xpg@orig@footnotesep \fi
-    \ifdefined\xpg@orig@linestretch \let\baselinestretch\xpg@orig@linestretch \fi
-    \ifdefined\xpg@orig@@chapapp    \let\@chapapp\xpg@orig@@chapapp \fi
+    \ifdefined\xpg@orig@@chapapp \let\@chapapp\xpg@orig@@chapapp \fi
 }
 
 \ifxetex % XeTeX
@@ -891,7 +881,7 @@ local function insert_penalty_glue (head, curr, f, var, x)
     return head, curr
 end
 local function avoid_widow_char (head)
-    local curr = node.tail(head)
+    local curr = node.slide(head)
     while curr do
         if curr.id == glyph_id then
             local c = curr.char or 0
@@ -1017,7 +1007,7 @@ local function get_prev_char (p)
                 end
             end
         elseif p.id == hbox_id or p.id == vbox_id then
-            local pc = get_prev_char(node.tail(p.head))
+            local pc = get_prev_char(node.slide(p.head))
             if pc then return pc end
         end
         p = p.prev
@@ -1059,7 +1049,7 @@ local function auto_josa (head)
     return head
 end
 local function reorder_tm (head)
-    local curr, tone = node.tail(head)
+    local curr, tone = node.slide(head)
     while curr do
         if curr.id == glyph_id and node.has_attribute(curr, attr_korean) then
             local c, wd = curr.char or 0, curr.width or 0
