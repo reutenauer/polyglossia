@@ -16,31 +16,6 @@
 % this file imported from xgreek fixes the \lccode and \uccode of Greek letters:
 \input{xgreek-fixes.def}
 
-%TODO: set these in \define@key instead:
-\ifx\l@greek\@undefined
-  \ifx\l@polygreek\@undefined
-    \xpg@nopatterns{Greek}%
-    \adddialect\l@greek\l@nohyphenation
-  \else
-    \let\l@greek\l@polygreek
-  \fi
-\fi
-\ifx\l@monogreek\@undefined
-  \xpg@warning{No hyphenation patterns were loaded for Monotonic Greek\MessageBreak
-         I will use the patterns loaded for \string\l@greek instead}
-  \adddialect\l@monogreek\l@greek
-\fi
-\ifx\l@ancientgreek\@undefined
-  \xpg@warning{No hyphenation patterns were loaded for Ancient Greek\MessageBreak
-         I will use the patterns loaded for \string\l@greek instead}
-  \adddialect\l@ancientgreek\l@greek
-\fi
-
-%set monotonic as default
-\def\greek@variant{\l@monogreek}% monotonic
-\def\captionsgreek{\monogreekcaptions}%
-\def\dategreek{\datemonogreek}%
-
 \def\tmp@mono{mono}
 \def\tmp@monotonic{monotonic}
 \def\tmp@poly{poly}
@@ -50,37 +25,62 @@
 
 \define@key{greek}{variant}[monotonic]{%
   \def\@tmpa{#1}%
+  \xpg@ifdefined{greek}{}{%
+      \xpg@nopatterns{greek}%
+      \adddialect\l@greek\l@nohyphenation
+  }
   \ifx\@tmpa\tmp@poly\def\@tmpa{polytonic}\fi
   \ifx\@tmpa\tmp@ancientgreek\def\@tmpa{ancient}\fi
   \ifx\@tmpa\tmp@polytonic%
-    \def\greek@variant{\l@polygreek}%
+    \xpg@ifdefined{polygreek}{}%
+      {\xpg@warning{No hyphenation patterns were loaded for Polytonic Greek\MessageBreak
+	            I will use the patterns loaded for \string\l@greek instead}%
+      \adddialect\l@polygreek\l@greek\relax}%
+    \def\greek@variant{polygreek}%
     \def\captionsgreek{\polygreekcaptions}%
     \def\dategreek{\datepolygreek}%
     \xpg@info{Option: Polytonic Greek}%
   \else
     \ifx\@tmpa\tmp@ancient
-      \def\greek@variant{\l@ancientgreek}%
+      \xpg@ifdefined{ancientgreek}{}%
+        {\xpg@warning{No hyphenation patterns were loaded for Ancient Greek\MessageBreak
+	              I will use the patterns loaded for \string\l@greek instead}%
+         \adddialect\l@ancientgreek\l@greek\relax}%
+      \def\greek@variant{ancientgreek}%
       \def\captionsgreek{\ancientgreekcaptions}%
       \def\dategreek{\dateancientgreek}%
       \xpg@info{Option: Ancient Greek}%
     \else %monotonic
-      \def\greek@variant{\l@monogreek}% monotonic
+      \xpg@ifdefined{monogreek}{}%
+        {\xpg@warning{No hyphenation patterns were loaded for Monotonic Greek\MessageBreak
+	              I will use the patterns loaded for \string\l@greek instead}%
+         \adddialect\l@monogreek\l@greek\relax}%
+      \def\greek@variant{monogreek}% monotonic
       \def\captionsgreek{\monogreekcaptions}%
       \def\dategreek{\datemonogreek}%
       \xpg@info{Option: Monotonic Greek}%
     \fi
   \fi}
 
-\def\greek@language{\language=\greek@variant}
+\def\greek@language{%
+  \ifxetex% XeTeX
+     \language=\csname l@\greek@variant\endcsname
+  \fi%
+  \ifluatex% LuaTeX
+     \xpg@set@language@luatex@iv{\greek@variant}
+  \fi
+}
+
 
 \newif\if@greek@numerals
 \define@key{greek}{numerals}[greek]{%
-\ifstrequal{#1}{arabic}{\@greek@numeralsfalse}{\@greek@numeralstrue}}
+  \ifstrequal{#1}{arabic}{\@greek@numeralsfalse}{\@greek@numeralstrue}%
+}
 
 \define@boolkey{greek}{attic}[true]{\xpg@warning{Greek option `attic' is no longer required.}}
 
 % This sets the defaults
-\setkeys{greek}{numerals}
+\setkeys{greek}{numerals,variant}
 
 \def\monogreekcaptions{%
    \def\refname{Αναφορές}%
