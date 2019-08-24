@@ -707,8 +707,8 @@
     % this tells bidi.sty that the document is RTL
     \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{\@RTLmaintrue}{}%
     \cs_gset_nopar:Nn \polyglossia@AtBeginDocument@selectlanguage: {
-      \selectlanguage[#1]{#2}%
       \selectbackgroundlanguage{#2}
+      \selectlanguage[#1]{#2}%
     }
   }
   {
