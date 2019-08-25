@@ -14,6 +14,7 @@
 \RequirePackage{ifxetex}
 \RequirePackage{expl3}
 \RequirePackage{l3keys2e}
+\RequirePackage{xparse}
 
 % fontspec now uses LaTeX3 packages such as expl3, so we need this:
 \ExplSyntaxOn
@@ -50,7 +51,10 @@
   % save various command
   \let\latin@alph\@alph   % TODO rename when we have the C locale
   \let\latin@Alph\@Alph   % TODO rename when we have the C locale
-
+  % push to C language gloss
+  \let\polyglossia@Clang@@arabic\@arabic
+  \let\polyglossia@Clang@arabic\arabic
+  
   \xpg@initial@setup
   % now we have the C locale definition: select the language
   \polyglossia@AtBeginDocument@selectlanguage:
@@ -375,9 +379,78 @@
            \prop_gput:Nnn{\polyglossia@langsetup}{#1/envname}{##1}
        },
     #1/ envname.value_required:n = true,
-    #1/ envname.initial:n = {#1}
+    #1/ envname.initial:n = {#1},
+    % default numerals
+    #1 / localnumber
+         . code:n =  {
+            \prop_gput:Nnn{\polyglossia@langsetup}{#1/localnumber}{##1}
+         },
+    #1 / localnumber.value_required:n = true,
+    #1 / localnumber.initial:n = {polyglossia@C@localnumber}
   }
 }
+
+% TODO move to C module
+\newcommand*{\polyglossia@C@localnumber}[2]{
+   \polyglossia@Clang@@arabic{#2}
+}
+
+% internal helper protected (use Npn because .toc writer use space after :)
+% #1 is the numeral to print
+% #2 is the mainlanguage (should be expanded)
+% #3 is the current language (should be expanded)
+% #4 is the option list (should be expanded)
+\cs_new_protected:Npn \polyglossia@@@localnumber #1#2#3#4
+{
+  \keys_define:nn {polyglossia_localnumber_key} {
+    lang .code:n = {
+      \str_case:nnF{##1}{
+        {*}    {\tl_gset:Nx \g_tmpa_tl {#2}}
+        {main} {\tl_gset:Nx \g_tmpa_tl {#2}}
+        {local}{\tl_gset:Nx \g_tmpa_tl {#3}}
+      }
+      {
+        \polyglossia@error@iflangnotloaded:n{##1}
+        \prop_get:NoN \polyglossia@langsetup {##1/localnumber} \g_tmpa_tl
+      }
+    },
+    lang .default:n = {#3},
+    lang .initial:n = {#2}
+  }
+  \keys_set:nn {polyglossia_localnumber_key} {#4}
+  \use:c {\g_tmpa_tl} {#4} {#1}
+}
+
+% internal helper useful for oeee and onnn
+\cs_new:Nn \polyglossia_ii_localnumber:nnnn {
+  \polyglossia@@@localnumber{#1}{#2}{#3}{#4}
+}
+\cs_generate_variant:Nn \polyglossia_ii_localnumber:nnnn {
+  oeee
+}
+
+% convert the counter to value
+\cs_new:Nn \polyglossia_i_localnumber:nnnn
+{
+  \polyglossia_ii_localnumber:oeee {\int_value:w #1} {#2} {#3} {#4}
+}
+
+% print number usage numerals*[option like variant]{numeral}
+% \numeral[]{numeral} use main language
+% use with number
+\NewExpandableDocumentCommand{\Localnumber}{om}
+{
+  \polyglossia_ii_localnumber:oeee {\int_eval:n{#2}}
+      {\mainlanguagename} {\languagename} {\IfNoValueTF {#1}{lang=\languagename}{#1}}
+}
+
+% equivalent use with counter
+\NewExpandableDocumentCommand{\localnumber}{om}
+{
+  \exp_args:Nc \polyglossia_i_localnumber:nnnn {c@#2}
+      {\mainlanguagename} {\languagename} {\IfNoValueTF {#1}{lang=\languagename}{#1}}
+}
+
 
 \cs_new_nopar:Nn{\polyglossia@lang@frenchspacing:n}{
   \prop_get:NnNTF \polyglossia@langsetup {#1/frenchspacing} \l_tmpa_tl
@@ -696,6 +769,7 @@
     }
     \xpg@info{Default~ language~ is~ #2}%
     \def\languagename{#2}%
+    \def\mainlanguagename{#2}
     \ifluatex %
     \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
     \fi %
