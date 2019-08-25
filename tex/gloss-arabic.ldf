@@ -16,7 +16,8 @@ and may look very wrong.}
   scripttag=arab,
   hyphennames={nohyphenation},
   fontsetup=true,
-  envname=Arabic
+  envname=Arabic,
+  localnumber=arabicnumerals
   %TODO localalph={abjad,abjad}
   %TODO localnumber=arabicnumber
 }
@@ -137,6 +138,9 @@ and may look very wrong.}
        \space\number\day,\space\number\year}%
     \fi%
  \fi}}
+
+
+\newcommand{\arabicnumerals}[2]{\arabicdigits{#2}}
 
 \def\arabicnumber#1{%
   \ifeastern@numerals
