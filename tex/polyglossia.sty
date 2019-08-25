@@ -887,19 +887,24 @@
          \let\emp@langname\@undefined}%
 
 
-\DeclareDocumentCommand \selectlanguage {O{} m}
+\DeclareDocumentCommand \selectlanguage {s O{} m}
 {%
-  \polyglossia@error@iflangnotloaded:n{#2}
+  \polyglossia@error@iflangnotloaded:n{#3}
   \expandafter\def\expandafter\xpg@pop@language\expandafter{\expandafter\xpg@pop@language@i\expandafter{\languagename}}
       \aftergroup\xpg@pop@language%
-  \tl_if_blank:nTF {#1}{}{%
+  \tl_if_blank:nTF {#2}{}{%
      % If the optional argument sets a value for the key “variant”, copy it to xpg@langvariant
-    \clist_map_inline:nn { #1 } {%
+    \clist_map_inline:nn { #2 } {%
          \xpg@parsevariantkeyvalue##1=\relax
      }%
-     \setkeys{#2}{#1}%
+     \setkeys{#3}{#2}%
    }%
-   \xpg@set@language@aux{#2}%
+   % The starred variant does not write to the aux
+   \IfBooleanTF#1{%
+     \xpg@set@language@nonaux{#3}%
+   }{%
+     \xpg@set@language@aux{#3}%
+   }
 }
 
 % Helper to get and register "variant" keyval
