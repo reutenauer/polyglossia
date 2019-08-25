@@ -882,7 +882,7 @@
 \newcommand*{\xpg@hook@setlanguage}{}
 
 \def\xpg@pop@language@i#1{%
-         \xpg@set@language{#1}%
+         \xpg@set@language@nonaux{#1}%
          \xpg@hook@setlanguage%
          \let\emp@langname\@undefined}%
 
@@ -900,7 +900,11 @@
      \setkeys{#3}{#2}%
    }%
    % The starred variant does not write to the aux
-   \IfBooleanTF#1{\xpg@set@language*[#2]{#3}}{\xpg@set@language[#2]{#3}}
+   \IfBooleanTF#1{%
+     \xpg@set@language@nonaux[#2]{#3}%
+   }{%
+     \xpg@set@language@aux[#2]{#3}%
+   }
 }
 
 % Helper to get and register "variant" keyval
@@ -915,9 +919,6 @@
 \define@key{xpg@langvariant}{variant}{%
   \edef\xpg@vloaded{#1\ifx\xpg@vloaded\@empty\else,\xpg@vloaded\fi}%
 }
-
-
-\newcommand*\xpg@set@language{\@ifstar{\xpg@set@language@nonaux}{\xpg@set@language@aux}}
 
 
 \newcommand*{\xpg@set@language@nonaux}[2][]{%
