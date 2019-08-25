@@ -901,9 +901,9 @@
    }%
    % The starred variant does not write to the aux
    \IfBooleanTF#1{%
-     \xpg@set@language@nonaux{#3}%
+     \xpg@set@language@nonaux[#2]{#3}%
    }{%
-     \xpg@set@language@aux{#3}%
+     \xpg@set@language@aux[#2]{#3}%
    }
 }
 
@@ -921,19 +921,26 @@
 }
 
 
-\newcommand*{\xpg@set@language@nonaux}[1]{%
-   \@select@language{#1}%
+\newcommand*{\xpg@set@language@nonaux}[2][]{%
+   \@select@language{#2}%
 }
 
 
-\newcommand*{\xpg@set@language@aux}[1]{%
-   \@select@language{#1}%
+\newcommand*{\xpg@set@language@aux}[2][]{%
+   \@select@language{#2}%
     % Write to the aux
    \if@filesw%
-      \protected@write\@auxout{}{\protect\@select@language{#1}}%
-      \addtocontents{toc}{\protect\@select@language{#1}}%
-      \addtocontents{lof}{\protect\@select@language{#1}}%
-      \addtocontents{lot}{\protect\@select@language{#1}}%
+      \ifx#1\\\\%
+          \protected@write\@auxout{}{\protect\selectlanguage*{#2}}%
+          \addtocontents{toc}{\protect\selectlanguage*{#2}}%
+          \addtocontents{lof}{\protect\selectlanguage*{#2}}%
+          \addtocontents{lot}{\protect\selectlanguage*{#2}}%
+       \else
+          \protected@write\@auxout{}{\protect\selectlanguage[#1]{#2}}%
+          \addtocontents{toc}{\protect\selectlanguage*[#1]{#2}}%
+          \addtocontents{lof}{\protect\selectlanguage*[#1]{#2}}%
+          \addtocontents{lot}{\protect\selectlanguage*[#1]{#2}}%
+       \fi
    \fi
 }
 
