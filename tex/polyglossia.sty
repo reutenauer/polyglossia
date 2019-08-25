@@ -882,7 +882,7 @@
 \newcommand*{\xpg@hook@setlanguage}{}
 
 \def\xpg@pop@language@i#1{%
-         \xpg@set@language{#1}%
+         \xpg@set@language@nonaux{#1}%
          \xpg@hook@setlanguage%
          \let\emp@langname\@undefined}%
 
@@ -899,7 +899,7 @@
      }%
      \setkeys{#2}{#1}%
    }%
-   \xpg@set@language{#2}%
+   \xpg@set@language@aux{#2}%
 }
 
 % Helper to get and register "variant" keyval
@@ -915,8 +915,15 @@
   \edef\xpg@vloaded{#1\ifx\xpg@vloaded\@empty\else,\xpg@vloaded\fi}%
 }
 
-\newcommand{\xpg@set@language}[1]{%
+
+\newcommand*{\xpg@set@language@nonaux}[1]{%
    \@select@language{#1}%
+}
+
+
+\newcommand*{\xpg@set@language@aux}[1]{%
+   \@select@language{#1}%
+    % Write to the aux
    \if@filesw%
       \protected@write\@auxout{}{\protect\@select@language{#1}}%
       \addtocontents{toc}{\protect\@select@language{#1}}%
