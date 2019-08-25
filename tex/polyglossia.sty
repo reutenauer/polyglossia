@@ -887,7 +887,14 @@
          \let\emp@langname\@undefined}%
 
 \providecommand{\selectlanguage}{}
-\renewcommand{\selectlanguage}[2][]{%
+% The starred variant does not write to the aux
+\renewcommand{\selectlanguage}{%
+  \@ifstar{\xpg@selectlanguage@nonaux}{\xpg@selectlanguage@aux}%
+}
+
+
+% Common code of starred and unstarred \selectlanguage
+\newcommand\@@selectlanguage[2][]{%
   \polyglossia@error@iflangnotloaded:n{#2}
   \expandafter\def\expandafter\xpg@pop@language\expandafter{\expandafter\xpg@pop@language@i\expandafter{\languagename}}
       \aftergroup\xpg@pop@language%
@@ -902,7 +909,18 @@
       }%
       \docsvlist{#1}
       \setkeys{#2}{#1}%
-      \xpg@set@language{#2}%
+}
+
+
+\newcommand\xpg@selectlanguage@nonaux[2][]{%
+  \@@selectlanguage[#1]{#2}%
+  \xpg@set@language*[#1]{#2}%
+}
+
+
+\newcommand\xpg@selectlanguage@aux[2][]{%
+  \@@selectlanguage[#1]{#2}%
+  \xpg@set@language[#1]{#2}%
 }
 
 
@@ -910,14 +928,27 @@
 \define@key{xpg@langvariant}{variant}{%
   \edef\xpg@vloaded{#1\ifx\xpg@vloaded\@empty\else,\xpg@vloaded\fi}}
 
-\newcommand{\xpg@set@language}[1]{%
-   \@select@language{#1}%
-   \if@filesw%
-      \protected@write\@auxout{}{\protect\@select@language{#1}}%
-      \addtocontents{toc}{\protect\@select@language{#1}}%
-      \addtocontents{lof}{\protect\@select@language{#1}}%
-      \addtocontents{lot}{\protect\@select@language{#1}}%
-   \fi
+
+\NewDocumentCommand \xpg@set@language {s O{} m}
+{
+   \@select@language{#3}%
+   % The starred variant does not write to the aux
+   \IfBooleanTF#1{}{%
+     \if@filesw%
+      \tl_if_blank:nTF {#2}
+        {%
+          \protected@write\@auxout{}{\protect\selectlanguage*{#3}}%
+          \addtocontents{toc}{\protect\selectlanguage*{#3}}%
+          \addtocontents{lof}{\protect\selectlanguage*{#3}}%
+          \addtocontents{lot}{\protect\selectlanguage*{#3}}%
+        }{%
+          \protected@write\@auxout{}{\protect\selectlanguage[#2]{#3}}%
+          \addtocontents{toc}{\protect\selectlanguage*[#2]{#3}}%
+          \addtocontents{lof}{\protect\selectlanguage*[#2]{#3}}%
+          \addtocontents{lot}{\protect\selectlanguage*[#2]{#3}}%
+        }%
+     \fi
+   }%
 }
 
 \def\xpg@set@language@luatex@iii#1#2{%
