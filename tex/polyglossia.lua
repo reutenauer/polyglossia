@@ -26,10 +26,6 @@ end
 polyglossia = polyglossia or {}
 local polyglossia = polyglossia
 
-local current_language
-local last_language
-local default_language
-
 polyglossia.newloader_loaded_languages = { }
 polyglossia.newloader_max_langid = 0
 local newloader_available_languages = dofile(kpse.find_file('language.dat.lua'))
@@ -51,8 +47,7 @@ end
 
 local function select_language(lang, id)
   loadlang(lang, id)
-  current_language = lang
-  last_language = lang
+  polyglossia.current_language = lang
 end
 
 local function set_default_language(lang, id)
@@ -159,11 +154,12 @@ end
 polyglossia.loadlang = loadlang
 polyglossia.select_language = select_language
 polyglossia.set_default_language = set_default_language
-polyglossia.current_language = current_language -- doesn't seem to be working well :-(
-polyglossia.default_language = default_language
 polyglossia.check_char = check_char
 polyglossia.load_frpt = load_frpt
 polyglossia.load_tibt_eol = load_tibt_eol
 polyglossia.disable_hyphenation = disable_hyphenation
 polyglossia.enable_hyphenation = enable_hyphenation
 polyglossia.newloader = newloader
+-- global variables:
+-- polyglossia.default_language
+-- polyglossia.current_language
