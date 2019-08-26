@@ -146,9 +146,9 @@ language-specific options.\footnote{ %
 	More on language-specific options below.}
 It is also possible to load a series of secondary languages at once using
 	\displaycmd{\setotherlanguages\{lang1,lang2,lang3,…\}.}{\setotherlanguages}
-Language-specific options can be set or changed at any time by means of
-	\displaycmd{\setkeys\{⟨lang⟩\}\{opt1=value1,opt2=value2,…\}.}{\setkeys}
 
+Global language-specific options can be modified by means of the
+language-switching commands described in section \ref{languageswitching}.
 
 \subsection{The “Babel way” – obsolete}
 \new{v1.2.0}
@@ -223,8 +223,9 @@ the opposite option ‘nolocalmarks’ is still available.
 There is also the option ‘quiet’ which turns off most info messages and some of the warnings
 issued by \LaTeX, \pkg{fontspec} and \pkg{polyglossia}.
 
-\section{Language-switching commands}
+\section{Language-switching commands}\label{languageswitching}
 
+\subsection{Recommended commands}
 Whenever a language definition file \file{gloss-⟨lang⟩.ldf} is loaded,
 the command \cmd{\text⟨lang⟩[⟨options⟩]\{…\}} \DescribeMacro{\text⟨lang⟩}
 becomes available for short insertions of text in that language.
@@ -265,6 +266,27 @@ of Homer’s \textit{Iliad}:
 as \cmd\arabic\ is defined internally by \LaTeX. In this case
 we need to use the environment ¦Arabic¦ instead.
 
+\subsection{Babel commands}
+Some macros defined in \pkg{babel}’s \file{hyphen.cfg} (and thus usually
+compiled into the \XeLaTeX\ and \LuaLaTeX\ format) are redefined, but keep a
+similar behaviour.
+\begin{itemize}
+\item \DescribeMacro{\selectlanguage}\cmd{\selectlanguage[⟨options⟩]\{⟨lang⟩\}}
+\item \DescribeMacro{\foreignlanguage}\cmd{\foreignlanguage[⟨options⟩]\{⟨lang⟩\}\{…\}}
+\item \DescribeEnv{otherlanguage}\cmd{\begin\{otherlanguage\}[⟨options⟩]\{⟨lang⟩\}} \dots{} \cmd{\end\{otherlanguage\}}
+\item \DescribeEnv{otherlanguage*}\cmd{\begin\{otherlanguage*\}[⟨options⟩]\{⟨lang⟩\}} \dots{} \cmd{\end\{otherlanguage*\}}
+\end{itemize}
+
+	¦\selectlanguage{⟨lang⟩}¦ and the ¦otherlanguage¦ environment are identical with the
+	use of the ¦⟨lang⟩¦ environment (with the only difference that ¦\selectlanguage{⟨lang⟩}¦
+	does not need to be explicitly closed). ¦\foreinlanguage{⟨lang⟩}{…}¦ and the ¦otherlanguage*¦
+	environment are identical with the use of the ¦\text⟨lang⟩¦ command, with the one
+	notable exception that they do not translate the date with ¦\today¦.
+
+Since the \XeLaTeX\ and \LuaLaTeX\ format incorporate \pkg{babel}’s \file{hyphen.cfg},
+the low-level commands for hyphenation and language switching
+defined there are also accessible.
+
 \subsection{Other commands}
 The following commands are probably of lesser interest to the end user, but
 ought to be mentioned here.
@@ -284,23 +306,7 @@ ought to be mentioned here.
 \item \Cmd\latinalph: Representation of counter as a lower-case letter:  1 = a, 2 = b, etc.
 
 \item \Cmd\latinAlph: Representation of counter as a uper-case letter:  1 = A, 2 = B, etc.
-
-\item Some macros defined in \pkg{babel}’s \file{hyphen.cfg} (and thus usually
-	compiled into the \XeLaTeX\ and \LuaLaTeX\ format) are redefined, but keep a similar
-	behaviour, namely \Cmd\selectlanguage, \Cmd\foreignlanguage,
-	and the environments ¦otherlanguage¦ and ¦otherlanguage*¦\DescribeEnv{otherlanguage}
-	\DescribeEnv{otherlanguage*}.
-
-	¦\selectlanguage{⟨lang⟩}¦ and the ¦otherlanguage¦ environment are identical with the
-	use of the ¦⟨lang⟩¦ environment (with the only difference that ¦\selectlanguage{⟨lang⟩}¦
-	does not need to be explicitly closed). ¦\foreinlanguage{⟨lang⟩}{...}¦ and the ¦otherlanguage*¦
-	environment are identical with the use of the ¦\text⟨lang⟩¦ command, with the one
-	notable exception that they do not translate the date with ¦\today¦. 
 \end{itemize}
-%
-Since the \XeLaTeX\ and \LuaLaTeX\ format incorporate \pkg{babel}’s \file{hyphen.cfg},
-the low-level commands for hyphenation and language switching
-defined there are also accessible.
 
 \section{Font setup}
 
