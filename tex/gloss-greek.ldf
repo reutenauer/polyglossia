@@ -23,6 +23,8 @@
 \def\tmp@ancient{ancient}
 \def\tmp@ancientgreek{ancientgreek}
 
+\def\greek@variant{monogreek}
+
 \define@key{greek}{variant}[monotonic]{%
   \def\@tmpa{#1}%
   \xpg@ifdefined{greek}{}{%
@@ -36,7 +38,7 @@
       {\xpg@warning{No hyphenation patterns were loaded for Polytonic Greek\MessageBreak
 	            I will use the patterns loaded for \string\l@greek instead}%
       \adddialect\l@polygreek\l@greek\relax}%
-    \def\greek@variant{polygreek}%
+    \gdef\greek@variant{polygreek}%
     \def\captionsgreek{\polygreekcaptions}%
     \def\dategreek{\datepolygreek}%
     \xpg@info{Option: Polytonic Greek}%
@@ -46,7 +48,7 @@
         {\xpg@warning{No hyphenation patterns were loaded for Ancient Greek\MessageBreak
 	              I will use the patterns loaded for \string\l@greek instead}%
          \adddialect\l@ancientgreek\l@greek\relax}%
-      \def\greek@variant{ancientgreek}%
+      \gdef\greek@variant{ancientgreek}%
       \def\captionsgreek{\ancientgreekcaptions}%
       \def\dategreek{\dateancientgreek}%
       \xpg@info{Option: Ancient Greek}%
@@ -55,7 +57,7 @@
         {\xpg@warning{No hyphenation patterns were loaded for Monotonic Greek\MessageBreak
 	              I will use the patterns loaded for \string\l@greek instead}%
          \adddialect\l@monogreek\l@greek\relax}%
-      \def\greek@variant{monogreek}% monotonic
+      \gdef\greek@variant{monogreek}% monotonic
       \def\captionsgreek{\monogreekcaptions}%
       \def\dategreek{\datemonogreek}%
       \xpg@info{Option: Monotonic Greek}%
