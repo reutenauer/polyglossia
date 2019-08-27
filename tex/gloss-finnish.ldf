@@ -6,6 +6,34 @@
   fontsetup=true,
 }
 
+\define@boolkey{finnish}[finnish@]{babelshorthands}[true]{}
+  \ifsystem@babelshorthands
+    \setkeys{finnish}{babelshorthands=true}
+  \else
+    \setkeys{finnish}{babelshorthands=false}
+  \fi
+  \ifcsundef{initiate@active@char}{%
+    \input{babelsh.def}%
+    \initiate@active@char{"}%
+  }%
+}{}
+
+\def\finnish@shorthands{%
+  \bbl@activate{"}%
+  \def\language@group{finnish}%
+  \declare@shorthand{finnish}{"-}{\nobreak-\bbl@allowhyphens}
+  \declare@shorthand{finnish}{"|}{\textormath{\penalty@M\discretionary{-}{}{\kern.03em}}{}}%
+  \declare@shorthand{finnish}{""}{\hskip\z@skip}%
+  \declare@shorthand{finnish}{"~}{\textormath{\leavevmode\hbox{-}}{-}}%
+  \declare@shorthand{finnish}{"=}{\penalty@M-\hskip\z@skip}%
+  \declare@shorthand{finnish}{"/}{\textormath
+    {\bbl@allowhyphens\discretionary{/}{}{/}\bbl@allowhyphens}{}}%
+}
+
+\def\nofinnish@shorthands{%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+
 \def\captionsfinnish{%
    \def\refname{Viitteet}%
    \def\abstractname{Tiivistelmä}%
@@ -29,13 +57,25 @@
    \def\headtoname{Vastaanottaja}%
    \def\proofname{Todistus}%
    \def\glossaryname{Sanasto}%
-   }
+}
 \def\datefinnish{%
    \def\today{\number\day.~\ifcase\month\or
     tammikuuta\or helmikuuta\or maaliskuuta\or huhtikuuta\or
     toukokuuta\or kesäkuuta\or heinäkuuta\or elokuuta\or
     syyskuuta\or lokakuuta\or marraskuuta\or joulukuuta\fi
     \space\number\year}}
+
+\def\noextras@finnish{%
+  \nofinnish@shorthands%
+}
+
+\def\blockextras@finnish{%
+  \iffinnish@babelshorthands\finnish@shorthands\fi%
+}
+
+\def\inlineextras@finnish{%
+  \iffinnish@babelshorthands\finnish@shorthands\fi%
+}
 
 \endinput
 
@@ -45,4 +85,4 @@
   \babel@savevariable\exhyphenpenalty\exhyphenpenalty=30%
   \babel@savevariable\doublehyphendemerits\doublehyphendemerits=5000%
   \babel@savevariable\finalhyphendemerits\finalhyphendemerits=5000%
-  }
+}
