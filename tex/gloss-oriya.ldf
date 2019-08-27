@@ -32,8 +32,8 @@
 \makeatletter
 \PolyglossiaSetup{oriya}{
   script=Oriya,
-  scripttag=or,
-  langtag=OR,
+  scripttag=orya,
+  langtag=ORI,
   hyphennames={oriya},
   hyphenmins={2,2}, %FIXME
   fontsetup=true
