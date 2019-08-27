@@ -45,6 +45,8 @@
 
 % select language hook
 \cs_new_nopar:Nn \polyglossia@AtBeginDocument@selectlanguage: {}
+% \disablehyphenation hook
+\cs_new_nopar:Nn \polyglossia@AtBeginDocument@hyphenation: {}
 
 % hook to be executed at begin of document
 \cs_new_nopar:Nn \polyglossia@AtBeginDocument: {
@@ -58,6 +60,8 @@
   \xpg@initial@setup
   % now we have the C locale definition: select the language
   \polyglossia@AtBeginDocument@selectlanguage:
+  % If hyphenation disabling has been requested in preamble, do it now
+  \polyglossia@AtBeginDocument@hyphenation:
 }
 \AtBeginDocument{
   \polyglossia@AtBeginDocument:
@@ -501,6 +505,18 @@
 \boolfalse{xpg@hyphenation@disabled}
 
 \def\xpg@disablehyphenation{%
+  \ifx\@onlypreamble\@notprerr%
+     \xpg@@disablehyphenation%
+  \else%
+     % if this is used in the preamble, we have to postpone
+     % the execution until the main language has been set (#125).
+     \cs_gset_nopar:Nn \polyglossia@AtBeginDocument@hyphenation: {
+        \xpg@@disablehyphenation%
+     }%
+  \fi%
+}
+
+\def\xpg@@disablehyphenation{%
   \ifbool{xpg@hyphenation@disabled}{}{%
     \booltrue{xpg@hyphenation@disabled}%
     \xdef\xpg@lastlanguage{\the\language}%
