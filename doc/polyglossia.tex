@@ -1,3 +1,4 @@
+% !TeX TS-program = xelatex
 \documentclass[11pt]{ltxdoc}
 \usepackage{color}
 \usepackage{xspace,fancyvrb}
@@ -178,33 +179,35 @@ that are explained in section \ref{specific} below.
 albanian       & danish         & interlingua    & nko            & \TX{slovenian}\\
 amharic        & divehi         & irish          & norsk          & spanish       \\
 \TX{arabic}    & \TX{dutch}     & \TX{italian}   & nynorsk        & swedish       \\
-armenian       & \TX{english}   & kannada        & occitan        & \TX{syriac}   \\
-asturian       & \TX{esperanto} & khmer          & piedmontese    & tamil         \\
-bahasai        & estonian       & \TX{korean}    & polish         & telugu        \\
-bahasam        & \TX{farsi}     & \TX{lao}       & portuges       & \TX{thai}     \\
-basque         & \TX{finnish}   & \TX{latin}     & romanian       & \TX{tibetan}  \\
-\TX{bengali}   & \TX{french}    & latvian        & romansh        & turkish       \\
-brazil[ian]    & friulan        & lithuanian     & \TX{russian}   & turkmen       \\
-breton         & galician       & \TX{lsorbian}  & samin          & \TX{ukrainian}\\
-bulgarian      & \TX{german}    & \TX{magyar}    & \TX{sanskrit}  & urdu          \\
-\TX{catalan}   & \TX{greek}     & macedonian     & scottish       & \TX{usorbian} \\
-coptic         & \TX{hebrew}    & malayalam      & \TX{serbian}   & vietnamese    \\
-croatian       & \TX{hindi}     & marathi        & slovak         & \TX{welsh}    \\
-czech          & icelandic      \\
+armenian       & \TX{english}   & japanese       & occitan        & \TX{syriac}   \\
+asturian       & \TX{esperanto} & kannada        & piedmontese    & tamil         \\
+bahasai        & estonian       & khmer          & polish         & telugu        \\
+bahasam        & \TX{farsi}     & \TX{korean}    & portuges       & \TX{thai}     \\
+basque         & \TX{finnish}   & \TX{lao}       & romanian       & \TX{tibetan}  \\
+\TX{bengali}   & \TX{french}    & \TX{latin}     & romansh        & turkish       \\
+brazil[ian]    & friulan        & latvian        & \TX{russian}   & turkmen       \\
+breton         & galician       & lithuanian     & samin          & \TX{ukrainian}\\
+bulgarian      & \TX{german}    & \TX{lsorbian}  & \TX{sanskrit}  & urdu          \\
+\TX{catalan}   & \TX{greek}     & \TX{magyar}    & scottish       & \TX{usorbian} \\
+coptic         & \TX{hebrew}    & macedonian     & \TX{serbian}   & vietnamese    \\
+croatian       & \TX{hindi}     & malayalam      & slovak         & \TX{welsh}    \\
+czech          & icelandic      & marathi         \\
 \hline
 \end{tabular}
 \caption{Languages currently supported in \pkg{polyglossia}}
 \end{table}
 
 \textit{NB:} The support for Amharic\new{v1.0.1} should be considered an experimental attempt to
-port the package \pkg{ethiop}.\footnote{ Feedback is welcome.}
+port the package \pkg{ethiop}.\footnote{Feedback is welcome.}
 Version 1.1.1\new{v1.1.1} added support for Asturian, %\footnote{ Provided by Kevin Godby and Xuacu Saturio.}, 
 Lithuanian, %\footnote{ Provided by Kevin Godby and Paulius Sladkevičius.},
 and Urdu. %\footnote{ Provided by Kamal Abdali.}
 %
 Version 1.2\new{v1.2.0} adds support for Armenian, Occitan, Bengali,
-Lao, Malayalam, Marathi, Tamil, Telugu, and Turkmen.\footnote{ %
+Lao, Malayalam, Marathi, Tamil, Telugu, and Turkmen.\footnote{%
   See acknowledgements at the end for due credit to the various contributors.}
+Version 1.43\new{v1.43} silently introduced basic support for Japanese. This
+is considered experimental, and feedback is appreciated.
 
 
 
