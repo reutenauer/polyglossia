@@ -1,111 +1,140 @@
 
-%  INCOMPLETE: see other Indian languages
+% Following gloss-oriyav2.ldf
 
-% UTF-8 strings kindly provided by Zdenek Wagner, 10-03-2008
-% TODO: add option for velthuis transliteration with link to
-% Velthuis Devanagari project: http://devnag.sarovar.org.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% -*- mode: latex -*-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% gloss-oriyav2.ldf  consists of the file gloss-oriyav2.ldf written by
+%    following   gloss-kannada.ldf that was  created by Aravinda VK
+%    and Shankar Prasad.
+% 
+%   gloss-kannada.ldf has
+% Copyright 2011, 2012 - Aravinda VK <hallimanearavind AT gmail.com>,
+%                        Shankar Prasad <prasad.mvs AT gmail.com>
+%   In the following this means gloss-kannada.ldf.
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% %%%This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is Aravinda VK <hallimanearavind AT gmail.com> for gloss-kannada.ldf.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This work consists of the file gloss-oriyav2.ldf
 
-\ProvidesFile{gloss-oriya.ldf}[polyglossia: module for oriya]
-\RequirePackage{devanagaridigits}
+\ProvidesFile{gloss-oriyav2.ldf}[polyglossia: module for oriya]
 \makeatletter
 \PolyglossiaSetup{oriya}{
   script=Oriya,
   scripttag=or,
   langtag=OR,
-%%  hyphennames={oriya}, TODO: implement fallback patterns (with ! prefix)
+  hyphennames={oriya},
+  hyphenmins={2,2}, %FIXME
   fontsetup=true
-  %TODO nouppercase=true,
-  %TODO localnumber=oriyanumber
 }
 
-\ifx\l@oriya\@undefined%
-  \ifx\l@sanskrit\@undefined%
-    \xpg@nopatterns{Oriya}%
-    \adddialect\l@oriya\l@nohyphenation%
+%% Defining Oriya digits equivalents to english
+\def\oriyadigits#1{\expandafter\@oriya@digits #1@}
+\def\@oriya@digits#1{%
+  \ifx @#1% then terminate
   \else
-    \xpg@warning{No hyphenation patterns were loaded for Oriya\MessageBreak
-    I will use the patterns for Sanskrit instead}
-    \adddialect\l@oriya\l@sanskrit%
+    \ifx0#1୦\else\ifx1#1୧\else\ifx2#1୨\else\ifx3#1୩\else\ifx4#1୪\else\ifx5#1୫\else\ifx6#1୬\else\ifx7#1୭\else\ifx8#1୮\else\ifx9#1୯\else#1\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+    \expandafter\@oriya@digits
   \fi
-\fi
-
-\def\oriya@language{\language=\l@oriya}
-
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% \oriya@numerals variable will be set to true or false depending on the option provided in \setmainlanguage
+%% \oriya@numerals true by default or when we set \setmainlanguage[numerals=Oriya]{oriya}
+%% \oriya@numerals false when we set \setmainlanguage[numerals=Western]{oriya}
 \def\tmp@western{Western}
-\newif\iforiya@devanagari@numerals
-\oriya@devanagari@numeralstrue
+\newif\iforiya@numerals
+\oriya@numeralstrue
 
-\define@key{oriya}{numerals}[Devanagari]{%
+\define@key{oriya}{numerals}[Oriya]{%
   \def\@tmpa{#1}%
   \ifx\@tmpa\tmp@western
-    \oriya@devanagari@numeralsfalse
+    \oriya@numeralsfalse
   \fi}
 
-\def\oriyanumber#1{%
-  \iforiya@devanagari@numerals
-    \devanagaridigits{\number#1}%
-  \else
-    \number#1%
-  \fi}
-
+  
 \def\captionsoriya{%
-     \def\abstractname{ସାରାଂଶ}%
-     \def\appendixname{ପରିଶିଷ୍ଟ}%
-     \def\bibname{ଗ୍ରନ୍ଥ ସୂଚୀ}% (?)
-      % ସନ୍ଦର୍ଭ
-     \def\ccname{}%
-     \def\chaptername{ଅଧ୍ଯାୟ}%
-     % ପରିଚ୍ଛେଦ
+  \def\prefacename{ମୁଖବନ୍ଧ}% ଅବତରଣିକା
+  \def\refname{ଉତ୍ସ}% ସନ୍ଦର୍ଭ
+  \def\abstractname{ସାରାଂଶ}%
+  \def\bibname{ଗ୍ରନ୍ଥ ସୂଚୀ}%  ସନ୍ଦର୍ଭ
+  \def\chaptername{ଅଧ୍ଯାୟ}%  ପରିଚ୍ଛେଦ
      %  ଭାଗ 
      % ଖଣ୍ଡ
-     \def\conclusionname{ଉପସଂହାର}
-     \def\contentsname{ସୂଚୀ ପତ୍ର}%
-     \def\enclname{}%
-     \def\errataname{ଶୁଦ୍ଧି ପତ୍ର}%
-     \def\figurename{ଚିତ୍ର}% 
-      \def\glossaryname{ନିଘଣ୍ଟୁ}
-     \def\headpagename{ପୃଷ୍ଠା}%
-     \def\headtoname{}%
-     \def\indexname{ବର୍ଣ୍ଣାନୁକ୍ରମିକ ସୂଚୀ}%
-     %   ସୂତ୍ରିତ ସୂଚୀ           
-     %   ଅନୁକ୍ରମଣିକା           
-     %   ଅନୁକ୍ରମଣୀ          
-     \def\listfigurename{ଚିତ୍ର ସୂଚୀ}%
-     \def\listtablename{ ତାଲିକା ସୂଚୀ}%
-     \def\pagename{ପୃଷ୍ଠା}%
-     \def\partname{ଭାଗ}%
-     \def\prefacename{ମୁଖବନ୍ଧ}% ଅବତରଣିକା
-      \def\proofname{ପ୍ରମାଣ}%
-     \def\refname{ଉତ୍ସ}%
-     % ସନ୍ଦର୍ଭ
-     \def\tablename{ତାଲିକା}%
-     \def\seename{ଦ୍ରଷ୍ଟବ୍ଯ}%
-     \def\alsoname{ଅନ୍ଯ ଦ୍ରଷ୍ଟବ୍ଯ}%
-     \def\alsoseename{ଅଧିକନ୍ତୁ ଦ୍ରଷ୍ଟବ୍ଯ}%
-}
-\def\dateoriya{%
-  \def\today{\oriyanumber\day\space\ifcase\month\or
-    ଜାନୁଆରୀ\or
-    ଫେବ୍ରୁଆରୀ\or
-    ମାର୍ଚ\or
-    ଏପ୍ରିଲ\or
-    ମେ\or
-    ଜୁନ\or
-    ଜୁଲାଇ\or
-    ଅଗଷ୍ଟ\or
-    ସେପ୍ଟେମ୍ବର\or
-    ଅକ୍ଟୋବର\or
-    ନଭେମ୍ବର\or
-    ଡିସେମ୍ବର\fi
-    \space\oriyanumber\year}%
+  \def\appendixname{ପରିଶିଷ୍ଟ}%
+  \def\conclusionname{ଉପସଂହାର}
+  \def\contentsname{ସୂଚୀ ପତ୍ର}%
+  \def\errataname{ଶୁଦ୍ଧି ପତ୍ର}%
+  \def\listfigurename{ଚିତ୍ର ସୂଚୀ}%
+  \def\listtablename{ତାଲିକା ସୂଚୀ}%
+  \def\indexname{ବର୍ଣ୍ଣାନୁକ୍ରମିକ ସୂଚୀ}%
+  \def\figurename{ଚିତ୍ର}%
+  \def\glossaryname{ନିଘଣ୍ଟୁ}
+  \def\tablename{ତାଲିକା}% ସାରଣୀ
+  \def\partname{ଭାଗ}%
+  \def\enclname{ସନ୍ନିବନ୍ଧ}%
+  \def\ccname{ପ୍ରତିଲିପି}% ନକଲ
+  \def\headpagename{ଶିରୋନାମା}%
+  \def\headtoname{ସମୀପେଷୁ}%
+  \def\pagename{ପୃଷ୍ଠା}%
+  \def\seename{ଦ୍ରଷ୍ଟବ୍ଯ}%
+  \def\alsoname{ଅନ୍ଯ ଦ୍ରଷ୍ଟବ୍ଯ}%
+  \def\proofname{ପ୍ରମାଣ}%
+  \def\alsoseename{ଅଧିକନ୍ତୁ ଦ୍ରଷ୍ଟବ୍ଯ}%
 }
 
-\def\blockextras@oriya{%
-  \let\@@MakeUppercase\MakeUppercase%
-  \def\MakeUppercase##1{##1}%
+\def\dateoriya{%
+  \def\oriyamonth{%
+    \ifcase\month\or
+     ଜାନୁଆରୀ\or
+     ଫେବ୍ରୁଆରୀ\or
+     ମାର୍ଚ\or
+     ଏପ୍ରିଲ\or
+     ମେ\or
+     ଜୁନ\or
+     ଜୁଲାଇ\or
+     ଅଗଷ୍ଟ\or
+     ସେପ୍ଟେମ୍ବର\or
+     ଅକ୍ଟୋବର\or
+     ନଭେମ୍ବର\or
+     ଡିସେମ୍ବର\fi}%
+  \def\today{\oriyanumber\day\space\oriyamonth\space\oriyanumber\year}%
 }
-\def\noextras@oriya{%
-  \let\MakeUppercase\@@MakeUppercase%
+
+%% Based on the settings displays rrespective numbers
+\def\oriyanumber#1{%
+  \iforiya@numerals
+  \oriyadigits{\number#1}%
+  \else
+  \number#1%
+  \fi
 }
 
 \endinput
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Unicode
+
+0x0B66	2918	ORIYA DIGIT ZERO	୦
+0x0B67	2919	ORIYA DIGIT ONE	        ୧
+0x0B68	2920	ORIYA DIGIT TWO 	୨
+0x0B69	2921	ORIYA DIGIT THREE	୩
+0x0B6A	2922	ORIYA DIGIT FOUR	୪
+0x0B6B	2923	ORIYA DIGIT FIVE	୫
+0x0B6C	2924	ORIYA DIGIT SIX 	୬
+0x0B6D	2925	ORIYA DIGIT SEVEN	୭
+0x0B6E	2926	ORIYA DIGIT EIGHT	୮
+0x0B6F	2927	ORIYA DIGIT NINE	୯
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
