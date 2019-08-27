@@ -414,7 +414,8 @@ The default value of each option is given in italic.
 \subsection{english}\label{english}
 \textbf{Options}:
 	\begin{itemize}
-	\item \TB{variant} = \textit{american} (= us), usmax (same as ‘american’ but with additional hyphenation patterns), british (= uk), australian or newzealand
+	\item \TB{variant} = \textit{american} (= us), usmax (same as ‘american’ but with additional hyphenation patterns),
+	british (= uk), australian, canadian\new{v1.45} or newzealand
 	\item \TB{ordinalmonthday} = true/\textit{false} (true by default only when variant = british)
 	\end{itemize}
 
@@ -440,6 +441,8 @@ The default value of each option is given in italic.
 \subsection{french}\label{french}\new{v1.5.0}
 \textbf{Options}:
 	\begin{itemize}
+		\item\TB{variant} = \textit{french} or canadian (=~acadian).\new{v1.45}
+		Currently, the three variants do not differ; they are supported for compatibility with \pkg{babel} (where they do not differ either).
 		\item \TB{automaticspacesaroundguillemets} = true or \textit{false} (default value = true. Adds space after the opening guillemets and before the closing guillemets. Such space is usually not typed in source code, and you should let polyglossia add it. However, if your source code contains such space, you can set this option to false.)
 		\item \TB{frenchfootnote} = true or \textit{false} (default value = true. Determines whether the footnote mark starting the footnote is normal script followed by a dot (default) or superscript without a dot.)
 		\item \TB{OriginalTypewriter} = true or \textit{false} (default value = false. Prevents any customisation of |\ttfamily| and |\texttt{}| in French. This option should only be used to ensure backward compatibility. The current default behaviour is to switch off.)
