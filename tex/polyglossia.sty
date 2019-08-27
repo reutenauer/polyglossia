@@ -58,6 +58,8 @@
   \let\polyglossia@Clang@arabic\arabic
   
   \xpg@initial@setup
+  % apply \familydefault changes
+  \xpg@set@familydefault
   % now we have the C locale definition: select the language
   \polyglossia@AtBeginDocument@selectlanguage:
   % If hyphenation disabling has been requested in preamble, do it now
@@ -819,23 +821,36 @@
     \selectlanguage[#1]{#2}%
     \selectbackgroundlanguage{#2}}
 
-\expandafter\ifx\familydefault\sfdefault
-  \def\familytype{sf}
-\else\expandafter\ifx\familydefault\ttdefault
-  \def\familytype{tt}
-\else
-  \def\familytype{rm}
-\fi\fi
-% This robustifies the redefinitions of \<xx>family (suggestion by Enrico Gregorio)
-% e.g. to prevent expansion of the \familytype redefinition in auxiliary files
-\csgappto{rmfamily~}{\def\familytype{rm}}
-\csgappto{sffamily~}{\def\familytype{sf}}
-\csgappto{ttfamily~}{\def\familytype{tt}}
 % This saves the normalfont for the latin script since we may change normalfont in other scripts
 \let\normalfontlatin=\normalfont%
 \let\rmfamilylatin=\rmfamily%
 \let\sffamilylatin=\sffamily%
 \let\ttfamilylatin=\ttfamily%
+
+\def\xpg@set@familydefault{%
+  % We need the \edef route here in order
+  % to detect both \renewcommand and \let
+  % changes.
+  \edef\tempa{\familydefault}%
+  \edef\tempb{\sfdefault}%
+  \ifcsequal{tempa}{tempb}%
+     {\def\familytype{sf}}
+     {\edef\tempb{\ttdefault}%
+      \ifcsequal{tempa}{tempb}%
+         {\def\familytype{tt}}
+         {\def\familytype{rm}}}
+  % This robustifies the redefinitions of \<xx>family (suggestion by Enrico Gregorio)
+  % e.g. to prevent expansion of the \familytype redefinition in auxiliary files
+  \csgappto{rmfamily~}{\def\familytype{rm}}
+  \csgappto{sffamily~}{\def\familytype{sf}}
+  \csgappto{ttfamily~}{\def\familytype{tt}}
+  % This (re-)saves the normalfont for the latin script since we may
+  % change normalfont in other scripts
+  \let\normalfontlatin=\normalfont%
+  \let\rmfamilylatin=\rmfamily%
+  \let\sffamilylatin=\sffamily%
+  \let\ttfamilylatin=\ttfamily%
+}
 
 \def\resetfontlatin{%
    \let\rmfamily=\rmfamilylatin%
