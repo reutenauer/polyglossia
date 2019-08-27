@@ -19,7 +19,7 @@
 % Option ordinalmonthday
 \define@boolkey{english}[english@]{ordinalmonthday}[true]{}
 
-\define@choicekey*+{english}{variant}[\val\nr]{uk,british,us,american,usmax,australian,newzealand}{%
+\define@choicekey*+{english}{variant}[\val\nr]{uk,british,us,american,usmax,australian,newzealand,canadian}{%
    \ifcase\nr\relax
       % uk:
       \british@hyphentrue
@@ -72,6 +72,13 @@
       \british@dateformattrue
       \english@ordinalmonthdayfalse
       \xpg@info{Option: English, variant=newzealand}%
+   \or
+      % canadian:
+      % This is currently equivalent to usenglish (as in babel)
+      \british@hyphenfalse
+      \british@dateformatfalse
+      \english@ordinalmonthdayfalse
+      \xpg@info{Option: English, variant=american}%
    \fi
    \ifbritish@hyphen
       \xpg@ifdefined{ukenglish}{}%

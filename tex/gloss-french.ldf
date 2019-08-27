@@ -9,6 +9,31 @@
   hyphenmins={2,2},
   fontsetup=true}
 
+\def\french@variant{french}
+\define@choicekey*+{french}{variant}[\val\nr]{french,canadian,acadian}{%
+   \ifcase\nr\relax
+      % french:
+      \gdef\french@variant{french}%
+   \or
+      % canadian:
+      \gdef\french@variant{canadian}%
+   \or
+      % acadian:
+      \gdef\french@variant{canadian}%
+   \fi
+   \xpg@info{Option: French, variant=\val}%
+}{\xpg@warning{Unknown French variant `#1'}}
+
+
+\def\french@language{%
+   \ifxetex
+      \language=\csname l@\french@variant\endcsname
+   \fi
+   \ifluatex
+      \xpg@set@language@luatex@iv{\french@variant}
+   \fi
+}%
+
 \ifluatex
   \newluatexattribute\xpg@frpt %
   \directlua{polyglossia.load_frpt()}%
@@ -173,6 +198,7 @@
    \def\headtoname{}%
    \def\proofname{Démonstration}%
    }
+
 \def\datefrench{%
    \def\today{\ifx\ier\undefined\def\ier{er}\fi
       \ifnum\day=1\relax 1\ier%
