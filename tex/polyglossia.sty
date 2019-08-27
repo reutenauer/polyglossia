@@ -401,60 +401,101 @@
    \polyglossia@Clang@@arabic{#2}
 }
 
+% print using main language
+% #2 is the numeral to print
+% #3 is the mainlanguage (should be expanded)
+% #4 is the current language (should be expanded)
+% #1 is the option list (should be expanded)
+\cs_new:Nn \polyglossia_localnumber_mainlang:nnnn {
+  \use:c {\prop_item:Nn \polyglossia@langsetup  {#2/localnumber}} {#1} {#2}
+}
+
+% print using local language
+% #2 is the numeral to print
+% #3 is the mainlanguage (should be expanded)
+% #4 is the current language (should be expanded)
+% #1 is the option list (should be expanded)
+\cs_new:Nn \polyglossia_localnumber_locallang:nnnn {
+  \use:c {\prop_item:Nn \polyglossia@langsetup  {#3/localnumber}} {#1} {#2}
+}
+
 % internal helper protected (use Npn because .toc writer use space after :)
-% #1 is the numeral to print
-% #2 is the mainlanguage (should be expanded)
-% #3 is the current language (should be expanded)
-% #4 is the option list (should be expanded)
+% #2 is the numeral to print
+% #3 is the mainlanguage (should be expanded)
+% #4 is the current language (should be expanded)
+% #1 is the option list (should be expanded)
 \cs_new_protected:Npn \polyglossia@@@localnumber #1#2#3#4
 {
   \keys_define:nn {polyglossia_localnumber_key} {
     lang .code:n = {
-      \str_case:nnF{##1}{
-        {*}    {\tl_gset:Nx \g_tmpa_tl {#2}}
-        {main} {\tl_gset:Nx \g_tmpa_tl {#2}}
-        {local}{\tl_gset:Nx \g_tmpa_tl {#3}}
+      \tl_gset:Nn \g_tmpa_tl {##1}
+    },
+    lang .default:n = {local},
+    lang .initial:n = {*}
+  }
+  \keys_set:nn {polyglossia_localnumber_key} {#1}
+  \exp_args:Ne \str_case:nnF{\g_tmpa_tl}{
+        {*}      {\polyglossia_localnumber_mainlang:nnnn  {#1} {#2} {#3} {#4}}
+        {main}   {\polyglossia_localnumber_mainlang:nnnn  {#1} {#2} {#3} {#4}}
+        {local}  {\polyglossia_localnumber_locallang:nnnn {#1} {#2} {#3} {#4}}
+        {default}{\polyglossia_localnumber_locallang:nnnn {#1} {#2} {#3} {#4}}
       }
       {
-        \polyglossia@error@iflangnotloaded:n{##1}
-        \prop_get:NoN \polyglossia@langsetup {##1/localnumber} \g_tmpa_tl
+        \polyglossia@error@iflangnotloaded:n{\g_tmpa_tl}
+        \use:c {\prop_item:Nn \polyglossia@langsetup  {\g_tmpa_tl /localnumber}} {#1} {#2}
       }
-    },
-    lang .default:n = {#3},
-    lang .initial:n = {#2}
+}
+
+
+
+% treat option is empty and option is lang=local
+%
+\cs_new:Nn \polyglossia_iii_localnumber:nnnn {
+  \str_case:nnF{#1}{
+    % empty => main
+    {}          {\polyglossia_localnumber_mainlang:nnnn  {#1} {#2} {#3} {#4}}
+    {lang=local}{\polyglossia_localnumber_locallang:nnnn {#1} {#2} {#3} {#4}}
+    {lang}      {\polyglossia_localnumber_locallang:nnnn {#1} {#2} {#3} {#4}}
+    {lang=*}    {\polyglossia_localnumber_mainlang:nnnn  {#1} {#2} {#3} {#4}}
   }
-  \keys_set:nn {polyglossia_localnumber_key} {#4}
-  \use:c {\g_tmpa_tl} {#4} {#1}
+  {\polyglossia@@@localnumber {#1} {#2} {#3} {#4}}
 }
 
 % internal helper useful for oeee and onnn
+% strip space to option
 \cs_new:Nn \polyglossia_ii_localnumber:nnnn {
-  \polyglossia@@@localnumber{#1}{#2}{#3}{#4}
+  \tl_trim_spaces_apply:nN {#4} \polyglossia_iii_localnumber:nnnn {#1}{#2}{#3}
 }
 \cs_generate_variant:Nn \polyglossia_ii_localnumber:nnnn {
   oeee
 }
 
 % convert the counter to value
+% #1 counter
+% #2 mainlanguage
+% #3 locallanguage
+% #4 option
 \cs_new:Nn \polyglossia_i_localnumber:nnnn
 {
   \polyglossia_ii_localnumber:oeee {\int_value:w #1} {#2} {#3} {#4}
 }
 
-% print number usage numerals*[option like variant]{numeral}
-% \numeral[]{numeral} use main language
-% use with number
+% print number usage Localnumber[option]{numeral}
+% \Localnumber[]{numeral} use main language
+% \localnumber{numeral} use local language
 \NewExpandableDocumentCommand{\Localnumber}{om}
 {
   \polyglossia_ii_localnumber:oeee {\int_eval:n{#2}}
-      {\mainlanguagename} {\languagename} {\IfNoValueTF {#1}{lang=\languagename}{#1}}
+      {\mainlanguagename} {\languagename} {\IfNoValueTF {#1}{lang=local}{#1}}
 }
 
-% equivalent use with counter
+% print number usage Localnumber[option]{counter}
+% \Localnumber[]{numeral} use main language
+% \localnumber{numeral} use local language
 \NewExpandableDocumentCommand{\localnumber}{om}
 {
   \exp_args:Nc \polyglossia_i_localnumber:nnnn {c@#2}
-      {\mainlanguagename} {\languagename} {\IfNoValueTF {#1}{lang=\languagename}{#1}}
+      {\mainlanguagename} {\languagename} {\IfNoValueTF {#1}{lang=local}{#1}}
 }
 
 
