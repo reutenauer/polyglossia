@@ -1,0 +1,111 @@
+
+%  INCOMPLETE: see other Indian languages
+
+% UTF-8 strings kindly provided by Zdenek Wagner, 10-03-2008
+% TODO: add option for velthuis transliteration with link to
+% Velthuis Devanagari project: http://devnag.sarovar.org.
+
+\ProvidesFile{gloss-oriya.ldf}[polyglossia: module for oriya]
+\RequirePackage{devanagaridigits}
+\makeatletter
+\PolyglossiaSetup{oriya}{
+  script=Oriya,
+  scripttag=or,
+  langtag=OR,
+%%  hyphennames={oriya}, TODO: implement fallback patterns (with ! prefix)
+  fontsetup=true
+  %TODO nouppercase=true,
+  %TODO localnumber=oriyanumber
+}
+
+\ifx\l@oriya\@undefined%
+  \ifx\l@sanskrit\@undefined%
+    \xpg@nopatterns{Oriya}%
+    \adddialect\l@oriya\l@nohyphenation%
+  \else
+    \xpg@warning{No hyphenation patterns were loaded for Oriya\MessageBreak
+    I will use the patterns for Sanskrit instead}
+    \adddialect\l@oriya\l@sanskrit%
+  \fi
+\fi
+
+\def\oriya@language{\language=\l@oriya}
+
+\def\tmp@western{Western}
+\newif\iforiya@devanagari@numerals
+\oriya@devanagari@numeralstrue
+
+\define@key{oriya}{numerals}[Devanagari]{%
+  \def\@tmpa{#1}%
+  \ifx\@tmpa\tmp@western
+    \oriya@devanagari@numeralsfalse
+  \fi}
+
+\def\oriyanumber#1{%
+  \iforiya@devanagari@numerals
+    \devanagaridigits{\number#1}%
+  \else
+    \number#1%
+  \fi}
+
+\def\captionsoriya{%
+     \def\abstractname{ସାରାଂଶ}%
+     \def\appendixname{ପରିଶିଷ୍ଟ}%
+     \def\bibname{ଗ୍ରନ୍ଥ ସୂଚୀ}% (?)
+      % ସନ୍ଦର୍ଭ
+     \def\ccname{}%
+     \def\chaptername{ଅଧ୍ଯାୟ}%
+     % ପରିଚ୍ଛେଦ
+     %  ଭାଗ 
+     % ଖଣ୍ଡ
+     \def\conclusionname{ଉପସଂହାର}
+     \def\contentsname{ସୂଚୀ ପତ୍ର}%
+     \def\enclname{}%
+     \def\errataname{ଶୁଦ୍ଧି ପତ୍ର}%
+     \def\figurename{ଚିତ୍ର}% 
+      \def\glossaryname{ନିଘଣ୍ଟୁ}
+     \def\headpagename{ପୃଷ୍ଠା}%
+     \def\headtoname{}%
+     \def\indexname{ବର୍ଣ୍ଣାନୁକ୍ରମିକ ସୂଚୀ}%
+     %   ସୂତ୍ରିତ ସୂଚୀ           
+     %   ଅନୁକ୍ରମଣିକା           
+     %   ଅନୁକ୍ରମଣୀ          
+     \def\listfigurename{ଚିତ୍ର ସୂଚୀ}%
+     \def\listtablename{ ତାଲିକା ସୂଚୀ}%
+     \def\pagename{ପୃଷ୍ଠା}%
+     \def\partname{ଭାଗ}%
+     \def\prefacename{ମୁଖବନ୍ଧ}% ଅବତରଣିକା
+      \def\proofname{ପ୍ରମାଣ}%
+     \def\refname{ଉତ୍ସ}%
+     % ସନ୍ଦର୍ଭ
+     \def\tablename{ତାଲିକା}%
+     \def\seename{ଦ୍ରଷ୍ଟବ୍ଯ}%
+     \def\alsoname{ଅନ୍ଯ ଦ୍ରଷ୍ଟବ୍ଯ}%
+     \def\alsoseename{ଅଧିକନ୍ତୁ ଦ୍ରଷ୍ଟବ୍ଯ}%
+}
+\def\dateoriya{%
+  \def\today{\oriyanumber\day\space\ifcase\month\or
+    ଜାନୁଆରୀ\or
+    ଫେବ୍ରୁଆରୀ\or
+    ମାର୍ଚ\or
+    ଏପ୍ରିଲ\or
+    ମେ\or
+    ଜୁନ\or
+    ଜୁଲାଇ\or
+    ଅଗଷ୍ଟ\or
+    ସେପ୍ଟେମ୍ବର\or
+    ଅକ୍ଟୋବର\or
+    ନଭେମ୍ବର\or
+    ଡିସେମ୍ବର\fi
+    \space\oriyanumber\year}%
+}
+
+\def\blockextras@oriya{%
+  \let\@@MakeUppercase\MakeUppercase%
+  \def\MakeUppercase##1{##1}%
+}
+\def\noextras@oriya{%
+  \let\MakeUppercase\@@MakeUppercase%
+}
+
+\endinput
