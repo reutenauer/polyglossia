@@ -182,8 +182,8 @@ armenian       & \TX{english}   & kannada        & occitan        & \TX{syriac} 
 asturian       & \TX{esperanto} & khmer          & piedmontese    & tamil         \\
 bahasai        & estonian       & \TX{korean}    & polish         & telugu        \\
 bahasam        & \TX{farsi}     & \TX{lao}       & portuges       & \TX{thai}     \\
-basque         & finnish        & \TX{latin}     & romanian       & \TX{tibetan}  \\
-\TX{bengali}   & french         & latvian        & romansh        & turkish       \\
+basque         & \TX{finnish}   & \TX{latin}     & romanian       & \TX{tibetan}  \\
+\TX{bengali}   & \TX{french}    & latvian        & romansh        & turkish       \\
 brazil[ian]    & friulan        & lithuanian     & \TX{russian}   & turkmen       \\
 breton         & galician       & \TX{lsorbian}  & samin          & \TX{ukrainian}\\
 bulgarian      & \TX{german}    & \TX{magyar}    & \TX{sanskrit}  & urdu          \\
@@ -211,7 +211,7 @@ Lao, Malayalam, Marathi, Tamil, Telugu, and Turkmen.\footnote{ %
 Polyglossia can also be loaded with the option
 ‘babelshorthands’\new{v1.1.1}, which globally activates \pkg{babel}
 shorthands whenever available. Currently shorthands are implemented for
-Catalan, Dutch, German, Italian, and Russian: see these respective
+Catalan, Dutch, Finnish, German, Italian, and Russian: see these respective
 languages for details.
 
 Another option (turned off by default) is ‘localmarks’, which
@@ -437,6 +437,22 @@ The default value of each option is given in italic.
 	\item \Cmd\abjad (see section \ref{abjad})
   \item \Cmd\aemph (see section \ref{arabic}).
 	\end{itemize}
+
+\subsection{finnish}\label{finnish}
+\textbf{Options:}
+\begin{itemize}
+  \item \TB{babelshorthands} = \textit{false} or true. \new{v1.45}
+		if this is turned on, the following shorthands for fine-tuning the
+                hyphenation of Finnish words are activated.
+		\begin{itemize}
+		\item ¦"-¦ for an explicit hyphen sign, allowing hyphenation in the rest of the word
+		\item ¦"~¦ for a compound word mark without a breakpoint
+		\item ¦"|¦ disables the ligature at this position
+		\item ¦""¦ is like ¦"-¦, but produces no hyphen sign
+			(for compound words with a hyphen, e.g., ¦foo-""bar¦)
+		\item ¦"/¦ to enable hyphenation in two words written together but separated by a slash.
+		\end{itemize}
+\end{itemize}
 
 \subsection{french}\label{french}\new{v1.5.0}
 \textbf{Options}:
