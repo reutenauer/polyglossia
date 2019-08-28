@@ -477,11 +477,8 @@
 
 % map function 
 \cs_new:Nn \polyglossia_iii_map_csv_localnumber:n {
-  % fast case
-  \str_case:nnF{#1}{
-    {}      {}
-  }
-  % now need to parse
+  % fast case is do nothing is empty 
+  \tl_if_empty:nF{#1}
   {
     \polyglossia_iii_map_csv_field_split_kv_i_localnumber:nw {#1} #1 = \q_nil \q_stop
   }
@@ -500,14 +497,20 @@
     \polyglossia_localnumber_mainlang:nnnn
   }
   {
-    % use postscript like trick push to stack {#1} {#2} {#3} {#4}
-    \polyglossia_localnumber_callshortcutorlong:nF {#1}
-           {
-              % same trick here if found we emit  \use_i:nn 
-              % thus discarding the default choice that is not lang specified thus local
-             \clist_map_function:nN {#1} {\polyglossia_iii_map_csv_localnumber:n}
-             \polyglossia_localnumber_locallang:nnnn
-           }
+    \str_if_eq:nnTF{#1}{lang=local}
+    {
+      \polyglossia_localnumber_locallang:nnnn
+    }
+    {
+      % use postscript like trick push to stack {#1} {#2} {#3} {#4}
+      \polyglossia_localnumber_callshortcutorlong:nF {#1}
+      {
+        % same trick here if found we emit  \use_i:nn
+        % thus discarding the default choice that is not lang specified thus local
+        \clist_map_function:nN {#1} {\polyglossia_iii_map_csv_localnumber:n}
+        \polyglossia_localnumber_locallang:nnnn
+      }
+    }
     {#1} {#2} {#3} {#4}
   }
 }
@@ -522,7 +525,7 @@
   \tl_trim_spaces_apply:nN {#4} \polyglossia_iii_localnumber:nnnn {#1}{#2}{#3}
 }
 \cs_generate_variant:Nn \polyglossia_ii_localnumber:nnnn {
-  oeee, feee, eeee
+  eeen, eeeo
 }
 
 % convert the counter to value
@@ -532,7 +535,7 @@
 % #4 option
 \cs_new:Nn \polyglossia_i_localnumber:nnnn
 {
-  \polyglossia_ii_localnumber:eeee {\int_value:w #1} {#2} {#3} {#4}
+  \polyglossia_ii_localnumber:eeeo {\int_value:w #1} {#2} {#3} {#4}
 }
 
 % print number usage Localnumber[option]{numeral}
@@ -540,7 +543,7 @@
 % \localnumber{numeral} use local language
 \NewExpandableDocumentCommand{\Localnumber}{om}
 {
-  \polyglossia_ii_localnumber:eeee {\int_eval:n{#2}}
+  \polyglossia_ii_localnumber:eeeo {\int_eval:n{#2}}
       {\mainlanguagename} {\languagename} {\IfNoValueTF {#1}{lang=local}{#1}}
 }
 
