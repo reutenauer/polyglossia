@@ -789,7 +789,7 @@
     \def\languagename{#2}%
     \def\mainlanguagename{#2}
     \ifluatex %
-    \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
+      \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
     \fi %
     % define environment and command
     \polyglossia@define@language@cmd:n{#2}
@@ -1009,7 +1009,11 @@
      \xpg@set@language@nonaux[#2]{#3}%
    }{%
      \xpg@set@language@aux[#2]{#3}%
-   }
+   }%
+   \ifluatex%
+     \directlua{polyglossia.select_language('\luatexluaescapestring{\string#3}',
+                     \the\csname l@#3\endcsname)}%
+   \fi%
 }
 
 % Helper to get and register "variant" keyval
@@ -1053,7 +1057,6 @@
     % here we use lu@texhyphen@loaded@\the\language, the same as in babel
     \ifcsdef{bbl@hyphendata@#2}{}{%
         \global\@namedef{bbl@hyphendata@\the\language}{}%
-        \directlua{polyglossia.select_language('\luatexluaescapestring{\string#1}', \the\csname l@#1\endcsname)}%
     }
 }
 
