@@ -420,46 +420,72 @@
 }
 
 % this function try to resolve some simple parameter about lang
-%  call parameter #5 else call #6
-\cs_new:Npn \polyglossia_localnumber_callshortcutorlong:nnnnTF #1#2#3#4#5#6 {
-  \str_case:nnTF{#1}{
-    {lang=local}{\polyglossia_localnumber_locallang:nnnn {#1} {#2} {#3} {#4}}
-    {lang}      {\polyglossia_localnumber_locallang:nnnn {#1} {#2} {#3} {#4}}
-    {lang=}     {\polyglossia_localnumber_locallang:nnnn {#1} {#2} {#3} {#4}}
-    {lang=*}    {\polyglossia_localnumber_mainlang:nnnn  {#1} {#2} {#3} {#4}}
+% call #2 then branching if found
+% call parameter #3 if not found
+% (use curing)
+\cs_new:Npn \polyglossia_localnumber_callshortcutorlong:nF #1#2 {
+  \str_case:nnF{#1}{
+    {lang=local}{\polyglossia_localnumber_locallang:nnnn}
   }
-  {#5}
-  {#6}
+  {#2}
+}
+
+\cs_new:Npn \polyglossia_iii_map_csv_field_split_kv_iii_localnumber:w  #1 = #2 \q_stop {
+  \str_case:nnF{#2}{
+    {local}  {\clist_map_break:n{\use_i:nn \polyglossia_localnumber_locallang:nnnn }}
+    {default}{\clist_map_break:n{\use_i:nn \polyglossia_localnumber_locallang:nnnn }}
+    {*}      {\clist_map_break:n{\use_i:nn\polyglossia_localnumber_mainlang:nnnn   }}
+    {main}   {\clist_map_break:n{\use_i:nn\polyglossia_localnumber_mainlang:nnnn   }}
+  }{
+    \clist_map_break:n{ \use_i_ii:nnn \polyglossia_localnumber_langlang:nnnnn {{#2}} }
+  }
+}
+
+% call the language
+\cs_new:Nn \polyglossia_localnumber_langlang:nnnnn {
+  \use:c {\prop_item:Nn \polyglossia@langsetup  {#1/localnumber}} {#2} {#3}
 }
 
 
-% internal helper protected (use Npn because .toc writer use space after :)
-% #2 is the numeral to print
-% #3 is the mainlanguage (should be expanded)
-% #4 is the current language (should be expanded)
-% #1 is the option list (should be expanded)
-\cs_new_protected:Npn \polyglossia@@@localnumber #1#2#3#4
-{
-  \keys_define:nn {polyglossia_localnumber_key} {
-    lang .code:n = {
-      \tl_gset:Nn \g_tmpa_tl {##1}
-    },
-    lang .default:n = {local},
-    lang .initial:n = {*}
+% check if empty value
+\cs_new:Npn \polyglossia_iii_map_csv_field_split_kv_ii_localnumber:w  #1 #2 = #3 \q_stop {
+  \quark_if_no_value:NTF {#3}
+  {
+    \clist_map_break:n{\use_i:nn \polyglossia_localnumber_locallang:nnnn}
   }
-  \keys_set:nn {polyglossia_localnumber_key} {#1}
-  \exp_args:Ne \str_case:nnF{\g_tmpa_tl}{
-        {*}      {\polyglossia_localnumber_mainlang:nnnn  {#1} {#2} {#3} {#4}}
-        {main}   {\polyglossia_localnumber_mainlang:nnnn  {#1} {#2} {#3} {#4}}
-        {local}  {\polyglossia_localnumber_locallang:nnnn {#1} {#2} {#3} {#4}}
-        {default}{\polyglossia_localnumber_locallang:nnnn {#1} {#2} {#3} {#4}}
-      }
-      {
-        \polyglossia@error@iflangnotloaded:n{\g_tmpa_tl}
-        \use:c {\prop_item:Nn \polyglossia@langsetup  {\g_tmpa_tl /localnumber}} {#1} {#2}
-      }
+  {
+    \polyglossia_iii_map_csv_field_split_kv_iii_localnumber:w #1 \q_stop
+  }
 }
 
+\cs_new:Npn \polyglossia_iii_map_csv_field_split_kv_i_localnumber:nw #1 #2 = #3 \q_stop {
+  % parse only lang tag
+  \tl_trim_spaces_apply:nN {#2} \str_if_eq:nnT {lang}
+  {
+    % if empty value
+    \quark_if_nil:nTF{#3}
+    {
+      \clist_map_break:n{\use_i:nn \polyglossia_localnumber_locallang:nnnn}
+    }
+    {
+      % here we know what we have an equal sign
+      \polyglossia_iii_map_csv_field_split_kv_ii_localnumber:w {#1} #1 \q_no_value \q_stop
+    }
+  }
+}
+
+
+% map function 
+\cs_new:Nn \polyglossia_iii_map_csv_localnumber:n {
+  % fast case
+  \str_case:nnF{#1}{
+    {}      {}
+  }
+  % now need to parse
+  {
+    \polyglossia_iii_map_csv_field_split_kv_i_localnumber:nw {#1} #1 = \q_nil \q_stop
+  }
+}
 
 
 % treat option is empty and option is lang=local
@@ -471,14 +497,19 @@
 \cs_new:Nn \polyglossia_iii_localnumber:nnnn {
   \tl_if_blank:nTF{#1}
   {
-    \polyglossia_localnumber_mainlang:nnnn {#1} {#2} {#3} {#4}
+    \polyglossia_localnumber_mainlang:nnnn
   }
   {
-    \polyglossia_localnumber_callshortcutorlong:nnnnTF {#1} {#2} {#3} {#4}
-    {\use_none:nnnn}
-    {\polyglossia@@@localnumber} {#1} {#2} {#3} {#4}
+    % use postscript like trick push to stack {#1} {#2} {#3} {#4}
+    \polyglossia_localnumber_callshortcutorlong:nF {#1}
+           {
+              % same trick here if found we emit  \use_i:nn 
+              % thus discarding the default choice that is not lang specified thus local
+             \clist_map_function:nN {#1} {\polyglossia_iii_map_csv_localnumber:n}
+             \polyglossia_localnumber_locallang:nnnn
+           }
+    {#1} {#2} {#3} {#4}
   }
-
 }
 
 % internal helper useful for oeee and onnn
