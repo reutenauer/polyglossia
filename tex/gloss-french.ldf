@@ -48,20 +48,15 @@
 
 \def\xpg@unskip{\ifhmode\ifdim\lastskip>\z@\unskip\fi\fi}
 
-\ifx\@makefntext\undefined\else
-  \let\nofrench@makefntext\@makefntext
-  \long\def\french@makefntext#1{\parindent1em \noindent\quad\ifx\@thefnmark\empty\else\@thefnmark.\space\fi #1}
-  \let\@makefntext\french@makefntext
-  \define@boolkey{french}[french@]{frenchfootnote}[true]{%
-  	\def\@tmpa{#1}
-    \def\@tmptrue{true}
-    \ifx\@tmpa\@tmptrue
-    	\let\@makefntext\french@makefntext
-		\else 
-			\let\@makefntext\nofrench@makefntext
-    \fi
-  }
-\fi
+\define@boolkey{french}[french@]{frenchfootnote}[true]{%
+   \iffrench@frenchfootnote
+      \ifx\@makefntext\undefined\else
+          \let\@orig@makefntext\@makefntext
+          \long\def\french@makefntext##1{\parindent1em \noindent\quad\ifx\@thefnmark\empty\else\@thefnmark.\space\fi ##1}
+          \let\@makefntext\french@makefntext
+      \fi
+   \fi
+}
 
 
 \newif\iffrench@automaticspacesaroundguillemets
