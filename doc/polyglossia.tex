@@ -468,7 +468,7 @@ The default value of each option is given in italic.
 		\item \TB{autospaceguillemets}\footnote{Up to version 1.44, the option was called \textit{automaticspacesaroundguillemets}. For backards compatibility reasons, the more verbose old option is still supported.} = true or \textit{false} (default value = true). If you only want to disable the automatic addition of spacing after opening and before closing guillemets (and not at punctuation), set this to \textit{false}. Note
 		that the more general option \textit{autospacing} overrides this.
 		\item \TB{autospacetypewriter}\new{1.45} = true or \textit{false} (default value = true). By default, automatic spacing is disabled in typewriter font. If this is enabled, spacing in typewriter context is the same as with roman and sans serif font, depending on the \textit{autospacing} and \textit{autospaceguillemets} settings (note that this was the default up to v.~1.44).	
-		\item \TB{frenchfootnote} = true or \textit{false} (default value = true. Determines whether the footnote mark starting the footnote is normal script followed by a dot (default) or superscript without a dot.)
+		\item \TB{frenchfootnote} = true or \textit{false} (default value = true). If \textit{true}, footnotes start with a non-superscripted number followed by a dot, as common in French typography. Note that this might interfere with the specific footnote handling of classes or packages.
 	\end{itemize}
 \textbf{Commands}:
 \begin{itemize}
