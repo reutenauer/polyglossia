@@ -58,6 +58,8 @@
    \fi
 }
 
+\define@boolkey{french}[french@]{autospacing}[true]{}
+\french@autospacingtrue
 
 \newif\iffrench@automaticspacesaroundguillemets
 \define@boolkey{french}[french@]{automaticspacesaroundguillemets}[true]{%
@@ -72,8 +74,8 @@
 \let\french@rmfamilyORI\rmfamily
 \let\french@sffamilyORI\sffamily
 \DeclareRobustCommand\french@ttfamilyFB{\nofrench@punctuation\french@ttfamilyORI}
-\DeclareRobustCommand\french@rmfamilyFB{\french@punctuation\french@rmfamilyORI}
-\DeclareRobustCommand\french@sffamilyFB{\french@punctuation\french@sffamilyORI}
+\DeclareRobustCommand\french@rmfamilyFB{\iffrench@autospacing\french@punctuation\fi\french@rmfamilyORI}
+\DeclareRobustCommand\french@sffamilyFB{\iffrench@autospacing\french@punctuation\fi\french@sffamilyORI}
 \define@boolkey{french}[french@]{OriginalTypewriter}[true]{}
 \setkeys{french}{OriginalTypewriter=false}
 
@@ -218,13 +220,25 @@
 }
 
 \def\blockextras@french{%
-   \french@punctuation%
+   \iffrench@autospacing
+      \french@punctuation%
+   \fi
    \french@fontsetup%
 }
 
 \def\inlineextras@french{%
-   \french@punctuation%
+   \iffrench@autospacing
+      \french@punctuation%
+   \fi
    \french@fontsetup%
+}
+
+\def\NoAutoSpacing{%
+  \nofrench@punctuation%
+}
+
+\def\AutoSpacing{%
+  \french@punctuation%
 }
 
 \def\ier{\textsuperscript{er}}
