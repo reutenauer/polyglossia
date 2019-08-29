@@ -465,7 +465,8 @@ The default value of each option is given in italic.
 		\item \TB{autospacing} = true or \textit{false} (default value = true). One of the most distinct features of French typography is the addition
 		of extra spacing around punctuation and quotation marks (guillemets). By default, polyglossia adds these spaces automatically, so you don't need
 		to enter them. This options allows you to switch this feature off globally.
-		\item \TB{automaticspacesaroundguillemets} = true or \textit{false} (default value = true. Adds space after the opening guillemets and before the closing guillemets. Such space is usually not typed in source code, and you should let polyglossia add it. However, if your source code contains such space, you can set this option to false.)
+		\item \TB{autospaceguillemets}\footnote{Up to version 1.44, the option was called \textit{automaticspacesaroundguillemets}. For backards compatibility reasons, the more verbose old option is still supported.} = true or \textit{false} (default value = true). If you only want to disable the automatic addition of spacing after opening and before closing guillemets (and not at punctuation), set this to \textit{false}. Note
+		that the more general option \textit{autospacing} overrides this.
 		\item \TB{frenchfootnote} = true or \textit{false} (default value = true. Determines whether the footnote mark starting the footnote is normal script followed by a dot (default) or superscript without a dot.)
 		\item \TB{OriginalTypewriter} = true or \textit{false} (default value = false. Prevents any customisation of |\ttfamily| and |\texttt{}| in French. This option should only be used to ensure backward compatibility. The current default behaviour is to switch off.)
 	\end{itemize}

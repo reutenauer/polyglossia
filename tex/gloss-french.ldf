@@ -61,13 +61,18 @@
 \define@boolkey{french}[french@]{autospacing}[true]{}
 \french@autospacingtrue
 
-\newif\iffrench@automaticspacesaroundguillemets
+\newif\iffrench@autospaceguillemets
+\define@boolkey{french}[french@]{autospaceguillemets}[true]{}
+\french@autospaceguillemetstrue
+
+% Backwards compatibility
 \define@boolkey{french}[french@]{automaticspacesaroundguillemets}[true]{%
-  %\def\tmp@true{true}%
-  %\def\@tmpa{#1}%
-  %\ifx\@tmpa\tmp@true
+   \iffrench@automaticspacesaroundguillemets
+       \setkeys{french}{autospaceguillemets=true}%
+   \else
+       \setkeys{french}{autospaceguillemets=false}%
+   \fi
 }
-\french@automaticspacesaroundguillemetstrue
 
 % name is for compatibility with babel
 \let\french@ttfamilyORI\ttfamily
