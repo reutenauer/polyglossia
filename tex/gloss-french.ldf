@@ -58,35 +58,44 @@
    \fi
 }
 
+\define@boolkey{french}[french@]{autospacing}[true]{}
+\french@autospacingtrue
 
-\newif\iffrench@automaticspacesaroundguillemets
+\newif\iffrench@autospaceguillemets
+\define@boolkey{french}[french@]{autospaceguillemets}[true]{}
+\french@autospaceguillemetstrue
+
+% Backwards compatibility
 \define@boolkey{french}[french@]{automaticspacesaroundguillemets}[true]{%
-  %\def\tmp@true{true}%
-  %\def\@tmpa{#1}%
-  %\ifx\@tmpa\tmp@true
+   \iffrench@automaticspacesaroundguillemets
+       \setkeys{french}{autospaceguillemets=true}%
+   \else
+       \setkeys{french}{autospaceguillemets=false}%
+   \fi
 }
-\french@automaticspacesaroundguillemetstrue
 
 % name is for compatibility with babel
 \let\french@ttfamilyORI\ttfamily
 \let\french@rmfamilyORI\rmfamily
 \let\french@sffamilyORI\sffamily
 \DeclareRobustCommand\french@ttfamilyFB{\nofrench@punctuation\french@ttfamilyORI}
-\DeclareRobustCommand\french@rmfamilyFB{\french@punctuation\french@rmfamilyORI}
-\DeclareRobustCommand\french@sffamilyFB{\french@punctuation\french@sffamilyORI}
-\define@boolkey{french}[french@]{OriginalTypewriter}[true]{}
-\setkeys{french}{OriginalTypewriter=false}
+\DeclareRobustCommand\french@rmfamilyFB{\iffrench@autospacing\french@punctuation\fi\french@rmfamilyORI}
+\DeclareRobustCommand\french@sffamilyFB{\iffrench@autospacing\french@punctuation\fi\french@sffamilyORI}
+
+% Allow to switch on autospacing in ttfamily context
+\define@boolkey{french}[french@]{autospacetypewriter}[true]{}
+\french@autospacetypewriterfalse
 
 
 \def\french@fontsetup{%
-  \iffrench@OriginalTypewriter
-    \let\ttfamily\french@ttfamilyORI
-    \let\rmfamily\french@rmfamilyORI
-    \let\sffamily\french@sffamilyORI
-  \else
+  \iffrench@autospacetypewriter
     \let\ttfamily\french@ttfamilyFB
     \let\rmfamily\french@rmfamilyFB
     \let\sffamily\french@sffamilyFB
+  \else
+    \let\ttfamily\french@ttfamilyORI
+    \let\rmfamily\french@rmfamilyORI
+    \let\sffamily\french@sffamilyORI
   \fi
 }
 
@@ -126,17 +135,17 @@
       \XeTeXinterchartoks \z@ \french@punctthick = {\nobreakspace}%
       \XeTeXinterchartoks \xpg@boundaryclass \french@punctthin = {\xpg@unskip\nobreak\thinspace}%
       \XeTeXinterchartoks \xpg@boundaryclass \french@punctthick = {\xpg@unskip\nobreakspace}%
-      \XeTeXinterchartoks \french@punctguillstart \z@ = {\thinspace}% "«a" -> "«\,a"
-  %   \XeTeXinterchartoks \z@ \french@punctguillstart = {\nobreakspace}% "a«" unchanged?
-  %   \XeTeXinterchartoks \french@punctguillend \z@ = {\nobreakspace}% "»a" unchanged?
-      \XeTeXinterchartoks \z@ \french@punctguillend = {\thinspace}% "a»" -> "a\,»"
-      \iffrench@automaticspacesaroundguillemets
+      \iffrench@autospaceguillemets
+        \XeTeXinterchartoks \french@punctguillstart \z@ = {\thinspace}% "«a" -> "«\,a"
+  %     \XeTeXinterchartoks \z@ \french@punctguillstart = {\nobreakspace}% "a«" unchanged?
+  %     \XeTeXinterchartoks \french@punctguillend \z@ = {\nobreakspace}% "»a" unchanged?
+        \XeTeXinterchartoks \z@ \french@punctguillend = {\thinspace}% "a»" -> "a\,»"
         \XeTeXinterchartoks \french@punctguillstart \xpg@boundaryclass = {\thinspace\ignorespaces}% "«  " -> "«\,"
         \XeTeXinterchartoks \xpg@boundaryclass \french@punctguillend = {\xpg@unskip\thinspace}% "  »" -> "\,»"
-      \fi
-      \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\nobreak\thinspace}% "»;" -> "» ;"
-      \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace}% "»:" -> "» :"
-      \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\nobreakspace}% "?»" -> "? »"
+     \fi
+     \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\nobreak\thinspace}% "»;" -> "» ;"
+     \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace}% "»:" -> "» :"
+     \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\nobreakspace}% "?»" -> "? »"
      \XeTeXinterchartoks \french@openbrackets \french@punctthin = {\xpg@unskip}% "(?" -> "(?" and not "( ?"      
      \XeTeXinterchartoks \french@punctthin \french@closebrackets = {\xpg@unskip}% "?)" -> "?)" (code not need, just for symetry with previous one)
      \XeTeXinterchartoks \french@closebrackets \french@punctthin = {\nobreak\thinspace}% ")?" -> ") ?"
@@ -218,13 +227,25 @@
 }
 
 \def\blockextras@french{%
-   \french@punctuation%
+   \iffrench@autospacing
+      \french@punctuation%
+   \fi
    \french@fontsetup%
 }
 
 \def\inlineextras@french{%
-   \french@punctuation%
+   \iffrench@autospacing
+      \french@punctuation%
+   \fi
    \french@fontsetup%
+}
+
+\def\NoAutoSpacing{%
+  \nofrench@punctuation%
+}
+
+\def\AutoSpacing{%
+  \french@punctuation%
 }
 
 \def\ier{\textsuperscript{er}}
