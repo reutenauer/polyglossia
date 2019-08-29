@@ -5,11 +5,15 @@
 \ifluatex\RequirePackage{luabidi}\else\RequirePackage{bidi}\fi
 
 \newif\if@xpg@hebrewcal@marcheshvan
+\@xpg@hebrewcal@marcheshvanfalse
+
 \DeclareOption{marcheshvan}{\@xpg@hebrewcal@marcheshvantrue}
-\ifx\if@xpg@hebrew@marcheshvan\undefined
-  \newif\if@xpg@hebrew@marcheshvan
-  \@xpg@hebrew@marcheshvanfalse
-\fi
+
+\@ifundefined{if@xpg@hebrew@marcheshvan}{}{%
+  \if@xpg@hebrew@marcheshvan
+     \@xpg@hebrewcal@marcheshvantrue
+  \fi
+}
 
 %% TODO rewrite this on the basis of Reingold & Dershowitz 
 %%      on the model of hijrical (using calc)
@@ -66,7 +70,7 @@
         \ifcase#1%
            % nothing for 0
            \or תשרי%
-           \or\if@xpg@hebrewcal@marcheshvan מרחשון\else\if@xpg@hebrew@marcheshvan מרחשון\else חשון\fi\fi%
+           \or\if@xpg@hebrewcal@marcheshvan מרחשון\else חשון\fi%
            \or כסלו%
            \or טבת%
            \or שבט%
@@ -91,8 +95,7 @@
         \ifcase #1%
             % nothing for 0
             \or Tishrei%
-            % \or\if@xpg@hebrewcal@marcheshvan Marcheshvan\else\if@xpg@hebrew@marcheshvan Marcheshvan\else Heshvan\fi\fi%
-            \or\if@xpg@hebrewcal@marcheshvan Marcheshvan\else\if@xpg@hebrew@marcheshvan Marcheshvan\else Heshvan\fi\fi%
+            \or\if@xpg@hebrewcal@marcheshvan Marcheshvan\else Heshvan\fi%
             \or Kislev%
             \or Tebeth%
             \or Shebat%
