@@ -214,7 +214,7 @@
 
 \def\noextras@french{%
    \nofrench@punctuation%
-   \french@fontsetup%
+   \nofrench@fontsetup%
 }
 
 \def\blockextras@french{%
