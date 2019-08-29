@@ -76,11 +76,7 @@
 
 % name is for compatibility with babel
 \let\french@ttfamilyORI\ttfamily
-\let\french@rmfamilyORI\rmfamily
-\let\french@sffamilyORI\sffamily
 \DeclareRobustCommand\french@ttfamilyFB{\nofrench@punctuation\french@ttfamilyORI}
-\DeclareRobustCommand\french@rmfamilyFB{\iffrench@autospacing\french@punctuation\fi\french@rmfamilyORI}
-\DeclareRobustCommand\french@sffamilyFB{\iffrench@autospacing\french@punctuation\fi\french@sffamilyORI}
 
 % Allow to switch on autospacing in ttfamily context
 \define@boolkey{french}[french@]{autospacetypewriter}[true]{}
@@ -96,22 +92,14 @@
 }
 
 \def\french@fontsetup{%
-  \iffrench@autospacetypewriter
+  \unless\iffrench@autospacetypewriter
     \let\ttfamily\french@ttfamilyFB
-    \let\rmfamily\french@rmfamilyFB
-    \let\sffamily\french@sffamilyFB
-  \else
-    \let\ttfamily\french@ttfamilyORI
-    \let\rmfamily\french@rmfamilyORI
-    \let\sffamily\french@sffamilyORI
   \fi
 }
 
 
 \def\nofrench@fontsetup{%
   \let\ttfamily\french@ttfamilyORI
-  \let\rmfamily\french@rmfamilyORI
-  \let\sffamily\french@sffamilyORI
 }
 
 \def\french@punctuation{%
