@@ -1,7 +1,7 @@
 \ProvidesFile{gloss-latex.ldf}[polyglossia: module for latex base language]
 \PolyglossiaSetup{latex}{
   hyphennames={english},
-  hyphenmins={2,2},
+  hyphenmins={2,3},
 }
 
 \def\captionslatex{%
