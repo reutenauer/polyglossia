@@ -1255,8 +1255,14 @@
    \ifcsundef{#1hyphenmins}{}%
    {\expandafter\expandafter\expandafter\set@hyphenmins\csname #1hyphenmins\endcsname\relax}}
 
-
-\AtEndPreamble{\@ifpackageloaded{bidi}{\providecommand*{\aemph}[1]{$\overline{\hboxR{#1}}$}}{}}% TODO Make that work for luabidi too.
+\AtEndPreamble{%
+   \@ifpackageloaded{bidi}{%
+      \providecommand*{\aemph}[1]{$\overline{\hboxR{#1}}$}%
+   }{}%
+   \@ifpackageloaded{luabidi}{%
+      \providecommand*{\aemph}[1]{$\overline{\hbox{\RL{#1}}}$}%
+   }{}%
+}
 
 
 % keys for main package
