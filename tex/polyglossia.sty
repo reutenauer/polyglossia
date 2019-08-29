@@ -955,7 +955,7 @@
    \let\rmfamily=\rmfamilylatin%
    \let\sffamily=\sffamilylatin%
    \let\ttfamily=\ttfamilylatin%
-   \let\normalfont=\normalfontlatin}
+   \gdef\normalfont{\normalfontlatin}}
 
 \def\selectfontfamilylatin{%
   \def\tmp@tt{tt}\def\tmp@sf{sf}%
@@ -1078,6 +1078,8 @@
    \csuse{date#2}%
    #3
    \egroup
+  % Reset the language's/script's font families
+  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/script}}{latin}{}{\resetfontlatin}%
 }
 
 
@@ -1218,7 +1220,7 @@
   }
   \edef\languagename{#1}%
   % Set the language's/script's font families
-  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{latin}{}{\xpg@set@normalfont{#1}}%
+  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{latin}{\resetfontlatin}{\xpg@set@normalfont{#1}}%
   \xpg@select@fontfamily{#1}%
   \csuse@warn{#1@language}%
   \csuse{#1@numbers}%
