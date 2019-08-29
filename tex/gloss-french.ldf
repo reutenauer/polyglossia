@@ -86,6 +86,14 @@
 \define@boolkey{french}[french@]{autospacetypewriter}[true]{}
 \french@autospacetypewriterfalse
 
+% This is how babel-french has it
+\define@boolkey{french}[french@]{OriginalTypewriter}[true]{%
+   \iffrench@OriginalTypewriter
+       \setkeys{french}{autospacetypewriter=false}%
+   \else
+       \setkeys{french}{autospacetypewriter=true}%
+   \fi
+}
 
 \def\french@fontsetup{%
   \iffrench@autospacetypewriter
