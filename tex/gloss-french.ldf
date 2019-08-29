@@ -74,20 +74,28 @@
 \DeclareRobustCommand\french@ttfamilyFB{\nofrench@punctuation\french@ttfamilyORI}
 \DeclareRobustCommand\french@rmfamilyFB{\french@punctuation\french@rmfamilyORI}
 \DeclareRobustCommand\french@sffamilyFB{\french@punctuation\french@sffamilyORI}
-\define@boolkey{french}[french@]{OriginalTypewriter}[true]{
-  \def\@tmpfalse{false}%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\@tmpfalse
-    \let\ttfamily\french@ttfamilyFB
-    \let\rmfamily\french@rmfamilyFB
-    \let\sffamily\french@sffamilyFB
-  \else
+\define@boolkey{french}[french@]{OriginalTypewriter}[true]{}
+\setkeys{french}{OriginalTypewriter=false}
+
+
+\def\french@fontsetup{%
+  \iffrench@OriginalTypewriter
     \let\ttfamily\french@ttfamilyORI
     \let\rmfamily\french@rmfamilyORI
     \let\sffamily\french@sffamilyORI
+  \else
+    \let\ttfamily\french@ttfamilyFB
+    \let\rmfamily\french@rmfamilyFB
+    \let\sffamily\french@sffamilyFB
   \fi
 }
-\setkeys{french}{OriginalTypewriter=false}
+
+
+\def\nofrench@fontsetup{%
+  \let\ttfamily\french@ttfamilyORI
+  \let\rmfamily\french@rmfamilyORI
+  \let\sffamily\french@sffamilyORI
+}
 
 \def\french@punctuation{%
     \lccode"2019="2019
@@ -206,15 +214,18 @@
 
 \def\noextras@french{%
    \nofrench@punctuation%
-   }
+   \french@fontsetup%
+}
 
 \def\blockextras@french{%
    \french@punctuation%
-   }
+   \french@fontsetup%
+}
 
 \def\inlineextras@french{%
    \french@punctuation%
-   }
+   \french@fontsetup%
+}
 
 \def\ier{\textsuperscript{er}}
 \def\iers{\textsuperscript{ers}}
