@@ -895,8 +895,13 @@
     \csgdef{#2@loaded}{}%
     \gdef\xpg@main@language{#2}%
     %% The following settings are for the default language and script
-    % this tells bidi.sty that the document is RTL
-    \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{\@RTLmaintrue}{}%
+    % this tells bidi.sty or luabidi.sty that the document is RTL
+    \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{%
+      \str_case_e:nnF{\c_sys_engine_str}{%
+         {luatex}{\setRTLmain}
+         {xetex}{\@RTLmaintrue}
+      }{}%
+    }{}%
     \cs_gset_nopar:Nn \polyglossia@AtBeginDocument@selectlanguage: {
       \selectbackgroundlanguage{#2}
       \selectlanguage[#1]{#2}%
