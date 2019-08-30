@@ -899,7 +899,11 @@
     \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{%
       \str_case_e:nnF{\c_sys_engine_str}{%
          {luatex}{\setRTLmain}
-         {xetex}{\@RTLmaintrue}
+         {xetex}{%
+            \@RTLmaintrue%
+            \autofootnoterule%
+            \RTLdblcol%
+         }
       }{}%
     }{}%
     \cs_gset_nopar:Nn \polyglossia@AtBeginDocument@selectlanguage: {
