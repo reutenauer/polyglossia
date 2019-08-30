@@ -1306,7 +1306,9 @@
   babelshorthands = false,
 }
 
-
+% load by default latex
+\setmainlanguage{latex}
+% then process key in order to overwrite
 \ProcessKeysOptions{polyglossia}
 
 \bool_if:nTF \l_polyglossia_verbose_bool {} {
@@ -1328,7 +1330,6 @@
 }{
   \system@babelshorthandsfalse
 }
-
 
 %
 % FIXME these should also be loaded \AtEndOfPackage !!!
