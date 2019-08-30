@@ -15,6 +15,13 @@
 \RequirePackage{expl3}
 \RequirePackage{l3keys2e}
 \RequirePackage{xparse}
+\RequirePackage{filehook}
+
+% correct a bug in tracklang
+\AtBeginOfPackageFile*{tracklang}{
+  \@ifpackagelater{tracklang}{2019/08/30}{}{\global\def\AddTrackedLangage{\AddTrackedLanguage}}
+}
+
 
 % fontspec now uses LaTeX3 packages such as expl3, so we need this:
 \ExplSyntaxOn
@@ -129,7 +136,6 @@
 }
 
 % overwritten with correct package
-\RequirePackage{filehook}
 \cs_new_nopar:Nn{\polyglossia@setdirection:n}{%
   \str_case_e:nnTF{#1}{%
        {LR}{\relax}%
