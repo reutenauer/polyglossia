@@ -874,9 +874,9 @@
 }
 
 \newcommand{\setdefaultlanguage}[2][]{%
-  \edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
   \ifcsundef{#2@loaded}%
   {
+    \global\edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
     \IfFileExists{gloss-#2.ldf}
     {
       \xpg@input{gloss-#2.ldf}%
@@ -999,9 +999,9 @@
 }
 
 \newcommand{\setotherlanguage}[2][]{%
-  \edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
   \ifcsundef{#2@loaded}
   {
+    \global\edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
     \IfFileExists{gloss-#2.ldf}
     {
       \xpg@input{gloss-#2.ldf}%
