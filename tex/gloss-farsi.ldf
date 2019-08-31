@@ -84,7 +84,17 @@ and may look very wrong.}
   \if@western@numerals
     \number#1%
   \else
-    \ifnum\XeTeXcharglyph"06F0 > 0%
+    \newif\ifpersiandigits
+    \ifxetex
+      \ifnum\XeTeXcharglyph"06F0 > 0\relax
+        \persiandigitstrue
+      \fi
+    \else\ifluatex
+      \expandafter\ifnum\directlua{polyglossia.check_char(0x6F0)} > 0\relax
+        \persiandigitstrue
+      \fi
+    \fi\fi
+    \ifpersiandigits
       \farsidigits{\number#1}%
       %%{\protect\addfontfeature{Mapping=farsidigits}\number#1}%
     \else%
