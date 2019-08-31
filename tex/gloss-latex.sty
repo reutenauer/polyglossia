@@ -1,4 +1,11 @@
-\ProvidesFile{gloss-english.ldf}[polyglossia: module for default language]
+\ProvidesPackage{gloss-english}[2019/04/04 v1.44 polyglossia: module for default language]
+
+\RequirePackage{polyglossia}
+\RequirePackage{expl3}
+\ExplSyntaxOn
+
+\msg_critical:nnn{polyglossia}{directloadgloss}{latex}
+
 \PolyglossiaSetup{latex}{
   hyphennames={english},
   hyphenmins={2,3},
@@ -26,6 +33,7 @@
    \def\seename{see}%
    \def\alsoname{see also}%
    \def\proofname{Proof}%
-}
+ }
 
+\ExplSyntaxOff
 \endinput

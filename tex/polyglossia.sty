@@ -114,6 +114,15 @@
   }
 }
 
+
+% error do not use directly the gloss file
+\msg_new:nnn { polyglossia } { directloadgloss }
+{
+  You~ should~ not~ load~ directly~ the~ gloss~ file~ using~ `\string\usepackage'.
+  You~ must~ use~ `\string\setotherlanguage\{#1\}' or  `\string\setmainlanguage\{#1\}'.
+}
+\msg_redirect_name:nnn { polyglossia } { directloadgloss } { critical }
+
 %% use macro if defined, else warn that it is not
 \def\csuse@warn#1{%
    \ifcsundef{#1}{\xpg@warning{ \expandafter\string\csname #1\endcsname\space is~ not~ defined}}%
@@ -868,7 +877,9 @@
   % new style
   \file_if_exist:nTF{gloss-#2.\@pkgextension}
   {
+    \msg_redirect_name:nnn { polyglossia } { directloadgloss } { none }
     \RequirePackage[#1]{gloss-#2}
+    \msg_redirect_name:nnn { polyglossia } { directloadgloss } { critical }
   }
   {
     % old style
