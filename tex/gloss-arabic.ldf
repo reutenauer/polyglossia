@@ -201,12 +201,11 @@ and may look very wrong.}
 
 \def\arabic@globalnumbers{%
   \let\@arabic\arabicnumber%
-  \renewcommand\thefootnote{\protect\arabicnumber{\c@footnote}}%
+  \renewcommand\thefootnote{\localnumber{footnote}}%
 }
 
-\def\noarabic@globalnumbers{
+\def\noarabic@globalnumbers{%
    \let\@arabic\xpg@save@arabic%
-   \renewcommand\thefootnote{\protect\number{\c@footnote}}%
 }
 
 % Save original \MakeUppercase definition
