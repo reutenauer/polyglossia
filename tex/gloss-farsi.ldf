@@ -15,7 +15,8 @@ and may look very wrong.}
   scripttag=arab,
   langtag=FAR,
   hyphennames={nohyphenation},
-  fontsetup=true
+  fontsetup=true,
+  localnumber=farsinumerals
 }
 
 \newif\if@western@numerals
@@ -79,6 +80,8 @@ and may look very wrong.}
 \def\datefarsi{%
    \def\today{\@ensure@RTL{\farsinumber\day\space\farsigregmonth{\month}\space\farsinumber\year}}%
 }
+
+\newcommand{\farsinumerals}[2]{\farsidigits{#2}}
 
 \newif\ifpersiandigits
 
