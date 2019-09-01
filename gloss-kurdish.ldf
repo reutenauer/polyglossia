@@ -114,7 +114,7 @@ and may look very wrong.}
    \let\orig@arabic\@arabic%
    \let\@arabic\farsinumber%
    % For some reason \thefootnote needs to be set separately:
-   \renewcommand\thefootnote{\protect\kurdishnumber{\c@footnote}}%
+   \renewcommand\thefootnote{\protect\farsinumber{\c@footnote}}%
    }
 
 \def\nofarsi@globalnumbers{
