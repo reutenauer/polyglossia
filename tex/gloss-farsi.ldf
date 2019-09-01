@@ -80,11 +80,12 @@ and may look very wrong.}
    \def\today{\@ensure@RTL{\farsinumber\day\space\farsigregmonth{\month}\space\farsinumber\year}}%
 }
 
+\newif\ifpersiandigits
+
 \def\farsinumber#1{%
   \if@western@numerals
     \number#1%
   \else
-    \newif\ifpersiandigits
     \ifxetex
       \ifnum\XeTeXcharglyph"06F0 > 0\relax
         \persiandigitstrue
