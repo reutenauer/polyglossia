@@ -202,6 +202,7 @@ and may look very wrong.}
 \def\arabic@globalnumbers{%
   \let\@arabic\arabicnumber%
   \renewcommand\thefootnote{\localnumber{footnote}}%
+  \renewcommand\theequation{\localnumber{equation}}%
 }
 
 \def\noarabic@globalnumbers{%
