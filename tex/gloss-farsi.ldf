@@ -124,8 +124,7 @@ and may look very wrong.}
 
 \def\farsi@globalnumbers{%
    \let\@arabic\farsinumber%
-   % For some reason \thefootnote needs to be set separately:
-   \renewcommand\thefootnote{\protect\farsinumber{\c@footnote}}%
+   \renewcommand\thefootnote{\localnumber{footnote}}%
 }
 
 % Store original definition
@@ -133,7 +132,6 @@ and may look very wrong.}
 
 \def\nofarsi@globalnumbers{
    \let\@arabic\xpg@save@arabic%
-   \renewcommand\thefootnote{\protect\number{\c@footnote}}%
 }
 
 % Save original \MakeUppercase definition
