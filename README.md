@@ -23,4 +23,4 @@ The current version is based on the Persian and the Arabic glosses, respectively
 - **Scripts**: Kurdish is a multi-script language too, i.e. there are more than one script for writing a Kurdish text. Two scripts are the most popular ones nowadays, one based on the Arabic-Persian script and the other one based on Latin. The current configuration file only includes the Arabic-Persian script.
 - **Calendars**: There are two calendars which are used in various Kurdish regions which are based on the Gregorian and the Persian calendars. In the current configuration only the Gregorian months are provided.
 
-Therefore, more configurations should be provided to included Kurmanji and Latin script, for both dialects.
+Therefore, more configurations should be provided to include Kurmanji and Latin script, for both dialects.
