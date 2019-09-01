@@ -757,6 +757,45 @@ A fine guide to numerals in Syriac can be found at \link{http://www.garzo.co.uk/
 Example: ¦\abjadsyriac{463}¦ yields \textsyriac{\abjadsyriac{463}}.
 
 
+\section{Footnotes in right-to-left context}
+
+With languages that use right-to-left scripts, footnote apparatuses are usually placed at the right side of the page bottom.
+Consequently, the footnote rule also is to be placed right. Things get more tricky, though, if right-to-left and left-to-right
+scripts are mixed. Then you might want to put the footnotes on some pages left, on some right, or even mix positions on a page.
+Thus, footnote handling in right-to-left context sometimes needs manual intervention. This is described in what follows.
+
+\subsubsection{Horizontal footnote position}
+
+When right-to-left languages are used, the ¦\footnote¦ command becomes sensitive to the text directionality. The footnote is
+always placed on the side that is currently the origin of direction: on the left side of the page in LTR paragraphs and
+on the right in RTL paragraphs.
+
+For cases where this is not desired, two additional footnote commands are provided: \Cmd\RTLfootnote and \Cmd\LTRfootnote.
+¦\LTRfootnote¦ always places the footnote on the left side, notwithstanding the current
+directionality. Likewise, ¦\RTLfootnote¦ always places it on the right side. Like ¦\footnote¦, ¦\RTLfootnote¦
+and ¦\LTRfootnote¦ provide an optional argument to customize the number.
+
+
+\subsubsection{Footnote rule length and position}
+
+The default placement of the footnote rule differs in \XeTeX\ and \LuaTeX\ output (this is due to differences in the \textsf{bidi}
+and \textsf{luabidi} packages). With \XeTeX, footnote rules are always placed left, which is often wrong in RTL context.
+With \LuaTeX, by contrast, the rule is placed always right if the main language is a right-to-left language, and always left
+if the main language is a left-to-right language, which is the right thing in many cases.
+
+In both cases, you can change the default behavior as follows:
+\begin{itemize}
+	\item Put \Cmd\leftfootnoterule in the preamble to have all rules left-aligned.
+	\item Put \Cmd\rightfootnoterule in the preamble to have all rules right-aligned.
+	\item Put \Cmd\autofootnoterule in the preamble to have automatic placement depending on the context (see below for elaboration).
+	\item Put \Cmd\textwidthfootnoterule in the preamble to have a rule that spans the whole text width.
+\end{itemize}
+With ¦\autofootnoterule¦, the first footnote on the current page determines the placement. Note that this automatic can fail with
+footnotes at page boundaries that differ in directionality from the first footnote on the page. You can work around such cases by switching to ¦\rightfootnoterule¦ or ¦\leftfootnoterule¦ on these pages.
+
+Note also that the rule switches might interfere in bad ways with packages or classes that redefine footnotes themselves. This is also the reason
+why ¦\autofootnoterule¦ is not used by default.
+
 \section{Calendars}
 
 \subsection{Hebrew calendar (hebrewcal.sty)}
