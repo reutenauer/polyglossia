@@ -87,7 +87,7 @@ and may look very wrong.}
 
 \def\farsinumber#1{%
   \if@western@numerals
-    \number#1%
+    \@ensure@dir{\number#1}%
   \else
     \ifxetex
       \ifnum\XeTeXcharglyph"06F0 > 0\relax
@@ -105,7 +105,8 @@ and may look very wrong.}
       \arabicdigits{\number#1}%
       %%{\protect\addfontfeature{Mapping=arabicdigits}\number#1}%
     \fi
-  \fi}
+  \fi%
+}
 
 %\def\farsinum#1{\expandafter\farsinumber\csname c@#1\endcsname}
 %\def\farsibracenum#1{(\expandafter\farsinumber\csname c@#1\endcsname)}
