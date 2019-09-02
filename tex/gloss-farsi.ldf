@@ -99,10 +99,10 @@ and may look very wrong.}
       \fi
     \fi\fi
     \ifpersiandigits
-      \@ensure@dir{\farsidigits{\number#1}}%
+      \farsidigits{\number#1}%
       %%{\protect\addfontfeature{Mapping=farsidigits}\number#1}%
     \else%
-      \@ensure@dir{\arabicdigits{\number#1}}%
+      \arabicdigits{\number#1}%
       %%{\protect\addfontfeature{Mapping=arabicdigits}\number#1}%
     \fi
   \fi%

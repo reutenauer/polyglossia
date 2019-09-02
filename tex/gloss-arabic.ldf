@@ -144,7 +144,7 @@ and may look very wrong.}
 
 \def\arabicnumber#1{%
   \ifeastern@numerals
-    \@ensure@dir{\arabicdigits{\number#1}}%
+    \arabicdigits{\number#1}%
   \else
     \@ensure@dir{\number#1}%
   \fi%
