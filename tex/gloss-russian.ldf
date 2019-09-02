@@ -179,11 +179,16 @@
    \ifdef{\KOMAScript}{%
       \ifdef{\chapterformat}{%
         \renewcommand{\chapterformat}{\prechapter\thechapter\postchapter}}{}%
-      \renewcommand{\sectionformat}{\presection\thesection\postsection}%
-      \renewcommand{\subsectionformat}{\presubsection\thesubsection\postsubsection}%
-      \renewcommand{\subsubsectionformat}{\presubsubsection\thesubsubsection\postsubsubsection}%
-      \renewcommand{\paragraphformat}{\preparagraph\theparagraph\postparagraph}%
-      \renewcommand{\subparagraphformat}{\presubparagraph\thesubparagraph\postsubparagraph}%
+      \ifdef{\sectionformat}{%
+        \renewcommand{\sectionformat}{\presection\thesection\postsection}}{}%
+      \ifdef{\subsectionformat}{%
+        \renewcommand{\subsectionformat}{\presubsection\thesubsection\postsubsection}}{}%
+      \ifdef{\subsubsectionformat}{%
+        \renewcommand{\subsubsectionformat}{\presubsubsection\thesubsubsection\postsubsubsection}}{}%
+      \ifdef{\paragraphformat}{%
+        \renewcommand{\paragraphformat}{\preparagraph\theparagraph\postparagraph}}{}%
+      \ifdef{\subparagraphformat}{%
+        \renewcommand{\subparagraphformat}{\presubparagraph\thesubparagraph\postsubparagraph}}{}%
    }{%
       \def\@seccntformat##1{\csname pre##1\endcsname%
          \csname the##1\endcsname%
@@ -232,11 +237,16 @@
    \ifdef{\KOMAScript}{%
       \ifdef{\chapterformat}{%
         \renewcommand{\chapterformat}{\thechapter\autodot\enskip}}{}%
-      \renewcommand{\sectionformat}{\thesection\autodot\enskip}%
-      \renewcommand{\subsectionformat}{\thesubsection\autodot\enskip}%
-      \renewcommand{\subsubsectionformat}{\thesubsubsection\autodot\enskip}%
-      \renewcommand{\paragraphformat}{\theparagraph\autodot\enskip}%
-      \renewcommand{\subparagraphformat}{\thesubparagraph\autodot\enskip}%
+      \ifdef{\sectionformat}{%
+        \renewcommand{\sectionformat}{\thesection\autodot\enskip}}{}%
+      \ifdef{\subsectionformat}{%
+        \renewcommand{\subsectionformat}{\thesubsection\autodot\enskip}}{}%
+      \ifdef{\subsubsectionformat}{%
+        \renewcommand{\subsubsectionformat}{\thesubsubsection\autodot\enskip}}{}%
+      \ifdef{\paragraphformat}{%
+        \renewcommand{\paragraphformat}{\theparagraph\autodot\enskip}}{}%
+      \ifdef{\subparagraphformat}{%
+        \renewcommand{\subparagraphformat}{\thesubparagraph\autodot\enskip}}{}%
    }{%
       \def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
    }%
