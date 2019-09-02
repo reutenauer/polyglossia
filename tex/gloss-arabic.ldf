@@ -146,9 +146,9 @@ and may look very wrong.}
   \ifeastern@numerals
     \arabicdigits{\number#1}%
   \else
-    \@ensure@dir{\number#1}%
-  \fi%
-}
+    %%\RL{\protect\reset@font\number#1}%
+    \number#1%
+  \fi}
 
 \def\@ornatebracearabic#1{\RL{\char"FD3F\@arabic#1\char"FD3E}}
 \def\@ornatebracealph#1{\RL{\char"FD3F\@alph#1\char"FD3E}}
