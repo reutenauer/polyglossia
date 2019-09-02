@@ -636,11 +636,9 @@
   \ifbool{xpg@hyphenation@disabled}{}{%
     \booltrue{xpg@hyphenation@disabled}%
     \xdef\xpg@lastlanguage{\the\language}%
-    \xpg@set@language@luatex@iv{nohyphenation}
+    % We do not call \xpg@set@language@luatex@iv here to avoid a warning message.
+    % "nohyphenation" is not listed in language.dat.lua.
     \language=\l@nohyphenation%
-    \ifluatex %
-      \directlua{polyglossia.disable_hyphenation()}%
-    \fi %
   }%
 }
 
@@ -648,9 +646,6 @@
   \ifbool{xpg@hyphenation@disabled}{%
     \boolfalse{xpg@hyphenation@disabled}%
     \language=\csname xpg@lastlanguage\endcsname%
-    \ifluatex %
-      \directlua{polyglossia.enable_hyphenation()}%
-    \fi %
   }{}%
 }
 
