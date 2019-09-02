@@ -145,8 +145,6 @@ polyglossia.set_default_language = set_default_language
 polyglossia.check_char = check_char
 polyglossia.load_frpt = load_frpt
 polyglossia.load_tibt_eol = load_tibt_eol
-polyglossia.disable_hyphenation = disable_hyphenation
-polyglossia.enable_hyphenation = enable_hyphenation
 polyglossia.newloader = newloader
 -- global variables:
 -- polyglossia.default_language
