@@ -929,7 +929,7 @@
   \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{%
     \str_case_e:nnF{\c_sys_engine_str}{%
       {luatex}{\setRTLmain}
-      {xetex}{\@RTLmaintrue}
+      {xetex}{\@RTLmaintrue\setnonlatin}
     }{}%
   }{}%
   \cs_gset_nopar:Nn \polyglossia@AtBeginDocument@selectlanguage: {
@@ -1246,7 +1246,19 @@
   \ifcsundef{languagename}{}{%
      \noextrascurrent{\languagename}%
      \csuse{no\languagename @numbers}%
-  }
+     \ifxetex
+        \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{\languagename/direction}}{RL}%
+            {%
+               \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}{RL}%
+                  {}% RTL -> RTL
+                  {\setlatin}% RTL -> LTR
+            }{%
+               \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}{RL}%
+                  {\setnonlatin}% LTR -> RTL
+                  {}% LTR -> LTR
+           }%
+     \fi
+  }%
   \edef\languagename{#1}%
   % Set the language's/script's font families
   \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{latin}{\resetfontlatin}{\xpg@set@normalfont{#1}}%
