@@ -26,7 +26,7 @@ and may look very wrong.}
 \PolyglossiaSetup{kannada}{
   script=Kannada,
   scripttag=knda,
-  langtag=KNDA,
+  langtag=KAN,
   hyphennames={kannada},
   hyphenmins={2,2}, 
   fontsetup=true
