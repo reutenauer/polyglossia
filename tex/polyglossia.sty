@@ -226,20 +226,23 @@
 % setup hyphennames from a str list of hyphen
 \cs_new:Nn \polyglossia@setup@hyphenames:nn {
   \clist_set:Nn{\l_tmpa_clist}{#2}
+  \providebool{havehyphen}
+  \boolfalse{havehyphen}
   % for each hyphen except for #1 aka language in the set
   \clist_map_inline:Nn \l_tmpa_clist {
     % check if language hyphenname is defined
-    \polyglossia@check@ifdefined:NF{#1}{
+    \polyglossia@check@ifdefined:NF{#1}{%
       % if false check if current hypenname is egal of language hyphenname
       \str_if_eq:nnF{#1}{#2}{
         {
           % if language is different of hypenname then test if hypennation is defined
-          \xpg@ifdefined{#2}{
+          \xpg@ifdefined{##1}{
             % test if language hyphennnation is nohyphenation
-            \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{
+            \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{}{%
               % if false define language to hyphennation and load
-              \cs_gset_eq:cc{l@#1}{l#2}
-              \xpg@set@language@luatex@iv{#2}
+              \cs_gset_eq:cc{l@#1}{l##1}
+              \xpg@set@language@luatex@iv{##1}
+              \global\booltrue{havehyphen}
             }
           }
           % else define hyphenation to nohypenation
@@ -252,11 +255,13 @@
   }
   % if l@#1 does not yet exist,
   % we assign it to nohyphenation
-  % we do this here in case the hyphennames key was omitted
-  \xpg@ifdefined{#1}{}%
-  {
-    \xpg@nopatterns{#1}
-    \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax
+  % we do this here in case and if the hyphennames key was omitted
+  \ifbool{havehyphen}{}{%
+    \xpg@ifdefined{#1}{}%
+    {
+      \xpg@nopatterns{#1}
+      \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax
+    }%
   }%
   \csdef{#1@language}{%
     \ifbool{xpg@hyphenation@disabled}{%
