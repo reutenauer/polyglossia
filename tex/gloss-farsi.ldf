@@ -81,7 +81,7 @@ and may look very wrong.}
    \def\today{\@ensure@RTL{\farsinumber\day\space\farsigregmonth{\month}\space\farsinumber\year}}%
 }
 
-\newcommand{\farsinumerals}[2]{\farsidigits{#2}}
+\newcommand{\farsinumerals}[2]{\farsinumber{#2}}
 
 \newif\ifpersiandigits
 
@@ -105,7 +105,8 @@ and may look very wrong.}
       \arabicdigits{\number#1}%
       %%{\protect\addfontfeature{Mapping=arabicdigits}\number#1}%
     \fi
-  \fi}
+  \fi
+}
 
 %\def\farsinum#1{\expandafter\farsinumber\csname c@#1\endcsname}
 %\def\farsibracenum#1{(\expandafter\farsinumber\csname c@#1\endcsname)}

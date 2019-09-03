@@ -140,7 +140,7 @@ and may look very wrong.}
  \fi}}
 
 
-\newcommand{\arabicnumerals}[2]{\arabicdigits{#2}}
+\newcommand{\arabicnumerals}[2]{\arabicnumber{#2}}
 
 \def\arabicnumber#1{%
   \ifeastern@numerals
