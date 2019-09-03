@@ -3,6 +3,7 @@
 \PolyglossiaSetup{french}{%
   language=French,
   script=Latin,
+  langtag=FRA,
   hyphennames={french,francais},
   frenchspacing=true,
   indentfirst=true,

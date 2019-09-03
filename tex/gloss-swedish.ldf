@@ -3,6 +3,7 @@
 \PolyglossiaSetup{swedish}{
   hyphennames={swedish},
   hyphenmins={2,2},
+  langtag=SVE,
   frenchspacing=true,
   fontsetup=true,
 }

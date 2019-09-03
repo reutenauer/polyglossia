@@ -2,6 +2,7 @@
 \PolyglossiaSetup{icelandic}{
   hyphennames={icelandic},
   hyphenmins={2,2},
+  langtag=ISL,
   fontsetup=true,
 }
 

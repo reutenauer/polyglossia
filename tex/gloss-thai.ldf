@@ -17,6 +17,7 @@ and may look very wrong.}
 \PolyglossiaSetup{thai}{
   script=Thai,
   scripttag=thai,
+  langtag=THA,
   hyphennames={nohyphenation},
   fontsetup=true
   %TODO localalph={xxx@alph,xxx@Alph}

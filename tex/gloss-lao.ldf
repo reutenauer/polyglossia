@@ -8,6 +8,7 @@ and may look very wrong.}
 \PolyglossiaSetup{lao}{
   script=Lao,
   scripttag=lao,
+  langtag=MKD,
   hyphennames={lao},
   hyphenmins={1,1},
   fontsetup=true,

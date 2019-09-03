@@ -2,6 +2,7 @@
 \PolyglossiaSetup{galician}{
   hyphennames={galician},
   hyphenmins={2,2},
+  langtag=GAL,
   indentfirst=true,
   fontsetup=true,
 }

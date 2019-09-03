@@ -2,6 +2,7 @@
 \PolyglossiaSetup{finnish}{
   hyphennames={finnish},
   hyphenmins={2,2},
+  langtag=FIN,
   frenchspacing=true,
   fontsetup=true,
 }

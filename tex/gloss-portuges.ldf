@@ -2,6 +2,7 @@
 \PolyglossiaSetup{portuges}{
   hyphennames={portuges,portuguese},
   hyphenmins={2,3},
+  langtag=PTG,
   fontsetup=true,
 }
 

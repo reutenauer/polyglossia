@@ -11,6 +11,7 @@ and may look very wrong.}
 \PolyglossiaSetup{syriac}{
   script=Syriac,
   scripttag=syrc,
+  langtag=SYR,
   direction=RL,
   hyphennames={syriac,nohyphenation},
   fontsetup=true,

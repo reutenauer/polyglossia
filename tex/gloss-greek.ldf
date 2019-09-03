@@ -2,6 +2,7 @@
 \PolyglossiaSetup{greek}{
   script=Greek,
   scripttag=grek,
+  langtag=ELL,
   frenchspacing=true,
   indentfirst=true,
   fontsetup=true,

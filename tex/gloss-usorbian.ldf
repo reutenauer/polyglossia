@@ -3,6 +3,7 @@
 \PolyglossiaSetup{usorbian}{
   hyphennames={usorbian,uppersorbian},
   hyphenmins={2,2},
+  langtag=USB,
   fontsetup=true,
 }
 

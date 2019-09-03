@@ -9,6 +9,7 @@ and may look very wrong.}
 \PolyglossiaSetup{divehi}{
   script=Thaana,
   scripttag=thaa,
+  langtag=DIV,
   direction=RL,
   hyphennames={nohyphenation},
   fontsetup=true

@@ -3,6 +3,7 @@
 \PolyglossiaSetup{scottish}{
   hyphennames={scottish},
   hyphenmins={2,2},
+  langtag=GAE,
   fontsetup=true,
 }
 

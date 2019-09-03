@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-magyar.ldf}[polyglossia: module for magyar]
 \PolyglossiaSetup{magyar}{
   hyphennames={magyar,hungarian},
+  langtag=HUN,
   hyphenmins={2,2},
   fontsetup=true,
 }

@@ -4,6 +4,7 @@
 \PolyglossiaSetup{piedmontese}{
   hyphennames={piedmontese},
   hyphenmins={2,2},
+  langtag=PMS,
   frenchspacing=true,
   fontsetup=true,
 }

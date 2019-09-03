@@ -3,6 +3,7 @@
 \PolyglossiaSetup{samin}{
   hyphennames={samin},
   hyphenmins={2,2},
+  langtag=NSM,
   fontsetup=true,
 }
 

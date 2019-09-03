@@ -2,6 +2,7 @@
 \PolyglossiaSetup{basque}{
   hyphennames={basque},
   hyphenmins={2,2},
+  langtag=EUQ,
   indentfirst=true,
   fontsetup=true,
 }

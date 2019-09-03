@@ -5,6 +5,7 @@
 \PolyglossiaSetup{asturian}{
   hyphennames={asturian,catalan},
   hyphenmins={2,2},
+  langtag=AST,
   frenchspacing=true,
   indentfirst=true,
   fontsetup=true,

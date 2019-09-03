@@ -2,6 +2,7 @@
 \PolyglossiaSetup{latvian}{
   hyphennames={latvian},
   hyphenmins={2,2},
+  langtag=LVI,
   fontsetup=true,
 }
 

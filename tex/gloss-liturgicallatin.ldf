@@ -21,6 +21,7 @@
 \PolyglossiaSetup{liturgicallatin}{%
       hyphennames={liturgicallatin},
       hyphenmins={2,2},
+      langtag=LAT,
       frenchspacing=true,
       fontsetup=true,
 }

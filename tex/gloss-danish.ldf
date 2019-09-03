@@ -2,6 +2,7 @@
 \PolyglossiaSetup{danish}{
   hyphennames={danish},
   hyphenmins={2,3},
+  langtag=DAN,
   frenchspacing=true,
   fontsetup=true,
 }

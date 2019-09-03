@@ -4,6 +4,7 @@
 \PolyglossiaSetup{lithuanian}{
   hyphennames={lithuanian},
   hyphenmins={2,2},
+  langtag=LTH,
   indentfirst=true, % TODO Dokumentų rengimo taisyklių, patvirtintų Lietuvos vyriausiojo archyvaro 2011 m. liepos 4 d. įsakymu Nr. V-117, 29.1 punktą
   fontsetup=true
 }

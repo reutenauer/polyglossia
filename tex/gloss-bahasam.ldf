@@ -2,6 +2,7 @@
 \RequirePackage{hijrical}
 \PolyglossiaSetup{bahasam}{%
   language=Bahasa Melayu,
+  langtag=MLY,
   hyphennames={malay,melayu,bahasam,bahasa,bahasai,indonesian,indon},
   hyphenmins={2,2},
   fontsetup=true}

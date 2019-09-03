@@ -2,6 +2,7 @@
 \PolyglossiaSetup{breton}{
   hyphennames={breton},
   hyphenmins={2,2},
+  langtag=BRE,
   frenchspacing=true,
   indentfirst=true,
   fontsetup=true,

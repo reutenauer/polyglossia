@@ -12,6 +12,7 @@ and may look very wrong.}
   script=Hebrew,
   direction=RL,
   scripttag=hebr,
+  langtag=IWR,
   hyphennames={nohyphenation},
   fontsetup=true,
   %TODO localalph={hebrewnumeral,Hebrewnumeral}

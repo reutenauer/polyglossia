@@ -8,6 +8,7 @@
 \PolyglossiaSetup{tibetan}{
   script=Tibetan,
   scripttag=tibt,
+  langtag=TIB,
   hyphennames={nohyphenation},
   fontsetup=true
   %TODO localalph={xxx@alph,xxx@Alph}
