@@ -240,18 +240,19 @@
             {
               \cs_gset_eq:cc{l@#1}{l@##1}
               \global\booltrue{havehyphen}
-            }{}%
-          % then test if hypennation is defined
-          \xpg@ifdefined{##1}{
-            % test if language hyphennnation is nohyphenation
-            \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{\global\booltrue{havehyphen}}{%
-              % if false define language to hyphennation and load
-              \cs_gset_eq:cc{l@#1}{l@##1}
-              \xpg@set@language@luatex@iv{##1}
-              \global\booltrue{havehyphen}
-            }
-          }
-          {}%
+            }{%
+               % then test if hypenation is defined
+               \xpg@ifdefined{##1}{
+                 % test if language hyphenation is nohyphenation
+                 \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{\global\booltrue{havehyphen}}{%
+                   % if false define language to hyphenation and load
+                   \cs_gset_eq:cc{l@#1}{l@##1}
+                   \xpg@set@language@luatex@iv{##1}
+                   \global\booltrue{havehyphen}
+                 }
+              }
+              {}%
+           }
         }
       }%
     }
