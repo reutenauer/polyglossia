@@ -140,12 +140,12 @@
         \XeTeXinterchartoks \french@punctguillstart \xpg@boundaryclass = {\thinspace\ignorespaces}% "«  " -> "«\,"
         \XeTeXinterchartoks \xpg@boundaryclass \french@punctguillend = {\xpg@unskip\thinspace}% "  »" -> "\,»"
      \fi
-     \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\thinspace}% "»;" -> "» ;"
+     \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\thinspace}% "»;" -> "»\,;"
      \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace}% "»:" -> "» :"
      \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\thinspace}% "?»" -> "?\,»"
      \XeTeXinterchartoks \french@openbrackets \french@punctthin = {\xpg@unskip}% "(?" -> "(?" and not "( ?"      
      \XeTeXinterchartoks \french@punctthin \french@closebrackets = {\xpg@unskip}% "?)" -> "?)" (code not need, just for symetry with previous one)
-     \XeTeXinterchartoks \french@closebrackets \french@punctthin = {\thinspace}% ")?" -> ") ?"
+     \XeTeXinterchartoks \french@closebrackets \french@punctthin = {\thinspace}% ")?" -> ")\,?"
      \XeTeXinterchartoks \french@closebrackets \french@punctthick = {\nobreakspace}% "):" -> ") :"
     \fi
     }
