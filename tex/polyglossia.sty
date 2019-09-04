@@ -232,23 +232,26 @@
   \clist_map_inline:Nn \l_tmpa_clist {
     % check if language hyphenname is defined
     \polyglossia@check@ifdefined:NF{#1}{%
-      % if false check if current hypenname is egal of language hyphenname
+      % if false check if current hyphenname is egal of language hyphenname
       \str_if_eq:nnF{#1}{#2}{
         {
-          % if language is different of hypenname then test if hypennation is defined
+          % if language is different of hyphenname, first consider nohyphenation
+          \str_if_eq:nnTF{##1}{nohyphenation}
+            {
+              \cs_gset_eq:cc{l@#1}{l@##1}
+              \global\booltrue{havehyphen}
+            }{}%
+          % then test if hypennation is defined
           \xpg@ifdefined{##1}{
             % test if language hyphennnation is nohyphenation
-            \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{}{%
+            \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{\global\booltrue{havehyphen}}{%
               % if false define language to hyphennation and load
-              \cs_gset_eq:cc{l@#1}{l##1}
+              \cs_gset_eq:cc{l@#1}{l@##1}
               \xpg@set@language@luatex@iv{##1}
               \global\booltrue{havehyphen}
             }
           }
-          % else define hyphenation to nohypenation
-          {
-            \cs_gset_eq:cc{l@#2}{l@nohyphenation}
-          }%
+          {}%
         }
       }%
     }
