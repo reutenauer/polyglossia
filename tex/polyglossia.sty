@@ -242,7 +242,7 @@
               \cs_gset_eq:cc{l@#1}{l@##1}
               \global\booltrue{havehyphen}
             }{%
-               % then test if tion is defined
+               % then test if hyphenation is defined
                \xpg@ifdefined{##1}{
                  % test if language hyphenation is nohyphenation
                  \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{\global\booltrue{havehyphen}}{%
@@ -278,7 +278,7 @@
       \language=\csname l@#1\endcsname%
     }%
   }%
-  % settup hypenmins
+  % setup hypenmins
   \exp_args:Nne \clist_set:Nn{\l_tmpa_clist}{\prop_item:Nn \polyglossia@langsetup {#1 / hyphenmins}}
   \int_set:Nn{\l_tmpa_int}{\clist_item:Nn{\l_tmpa_clist}{1}}
   \int_set:Nn{\l_tmpb_int}{\clist_item:Nn{\l_tmpa_clist}{2}}
