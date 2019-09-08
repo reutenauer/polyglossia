@@ -282,7 +282,9 @@
   \exp_args:Nne \clist_set:Nn{\l_tmpa_clist}{\prop_item:Nn \polyglossia@langsetup {#1 / hyphenmins}}
   \int_set:Nn{\l_tmpa_int}{\clist_item:Nn{\l_tmpa_clist}{1}}
   \int_set:Nn{\l_tmpb_int}{\clist_item:Nn{\l_tmpa_clist}{2}}
-  \setlocalhyphenmins{#1}{\l_tmpa_int}{\l_tmpb_int}
+  \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{%
+    \setlocalhyphenmins{#1}{\l_tmpa_int}{\l_tmpb_int}
+  }%
 }
 
 \prop_new:N \polyglossia@langsetup
