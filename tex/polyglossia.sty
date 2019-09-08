@@ -350,7 +350,7 @@
       \int_set:Nn{\l_tmpa_int}{\clist_item:Nn{\l_tmpa_clist}{1}}
       \int_set:Nn{\l_tmpb_int}{\clist_item:Nn{\l_tmpa_clist}{2}}
       % set prop
-      \prop_gput:Nnn{\polyglossia@langsetup}{#1/hypenmins}{##1}
+      \prop_gput:Nnx{\polyglossia@langsetup}{#1/hypenmins}{\clist_use:Nn \l_tmpa_clist {,}}
       % create hyphenmins for language (will be overwritten later)
       \setlocalhyphenmins{#1}{\l_tmpa_int}{\l_tmpb_int}
     },
