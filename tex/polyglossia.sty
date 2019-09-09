@@ -273,7 +273,9 @@
       \xdef\xpg@lastlanguage{\the\csname l@#1\endcsname}%
     }{%
       \ifluatex%
-      \xpg@set@language@luatex@iv{#1}%
+        \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{%
+          \xpg@set@language@luatex@iv{#1}%
+        }%
       \fi%
       \language=\csname l@#1\endcsname%
     }%
