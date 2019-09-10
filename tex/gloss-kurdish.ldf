@@ -85,14 +85,21 @@ and may look very wrong.}
   \if@western@numerals
     \number#1%
   \else
-    \ifnum\XeTeXcharglyph"06F0 > 0%
-      \farsidigits{\number#1}%
-      %%{\protect\addfontfeature{Mapping=farsidigits}\number#1}%
-    \else%
-      \arabicdigits{\number#1}%
-      %%{\protect\addfontfeature{Mapping=arabicdigits}\number#1}%
-    \fi
-  \fi}
+    \ifxetex
+      \ifnum\XeTeXcharglyph"06F0 > 0\relax
+        \farsidigits{\number#1}%
+      \else%
+         \arabicdigits{\number#1}%
+      \fi
+    \else\ifluatex
+      \expandafter\ifnum\directlua{polyglossia.check_char(0x6F0)} > 0\relax
+        \farsidigits{\number#1}%
+      \else%
+         \arabicdigits{\number#1}%
+      \fi
+    \fi\fi
+  \fi
+}
 
 %\def\farsinum#1{\expandafter\farsinumber\csname c@#1\endcsname}
 %\def\farsibracenum#1{(\expandafter\farsinumber\csname c@#1\endcsname)}
