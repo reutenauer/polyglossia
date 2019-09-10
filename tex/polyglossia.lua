@@ -30,8 +30,8 @@ local polyglossia = polyglossia
 local nohyphid = luatexbase.registernumber'l@nohyphenation' or lang.id(lang.new())
 -- key `nohyphenation` is for .sty file when possibly undefined l@nohyphenation
 polyglossia.newloader_loaded_languages = { nohyphenation = nohyphid }
--- newloader_max_langid will be increased one by one per language
-local newloader_max_langid = nohyphid
+-- newloader_max_langid will be increased by 4 per language
+local newloader_max_langid = 0
 local newloader_available_languages = dofile(kpse.find_file('language.dat.lua'))
 -- Suggestion by Dohyun Kim on #129
 local t = { }
@@ -110,7 +110,7 @@ local function newloader(langentry)
             for k, v in pairs(langdata) do
 				s = s .. "\n" .. k .. "\t" .. tostring(v)
             end
-            newloader_max_langid = newloader_max_langid + 1
+            newloader_max_langid = newloader_max_langid + 4
             langobject = lang.new(newloader_max_langid)
 			s = s .. "\npatterns: " .. langdata.patterns
 			log_info(s)
