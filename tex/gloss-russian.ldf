@@ -6,7 +6,8 @@
   hyphennames={russian},
   hyphenmins={2,2},
   frenchspacing=true,
-  fontsetup
+  fontsetup,
+  localnumber=russiannumerals
   %TODO localalph={russian@alph,russian@Alph}
 }
 
@@ -212,13 +213,37 @@
    \def\presubparagraph{}%
 }
 
+\newcommand{\russiannumerals}[2]{\russiannumber{#2}}
+
+\def\russiannumber#1{%
+  \ifcyrillic@numerals
+    \russian@alph{#1}%
+  \else
+    \number#1%
+  \fi%
+}
+
+\def\Russiannumber#1{%
+  \ifcyrillic@numerals
+    \russian@Alph{#1}%
+  \else
+    \number#1%
+  \fi%
+}
+
+\let\russiannumeral=\russiannumber
+\let\Russiannumeral=\Russiannumber
+
 \def\Asbuk#1{\expandafter\russian@Alph\csname c@#1\endcsname}
+
 \def\russian@Alph#1{\ifcase#1\or
    А\or Б\or В\or Г\or Д\or Е\or Ж\or
    З\or И\or К\or Л\or М\or Н\or О\or
    П\or Р\or С\or Т\or У\or Ф\or Х\or
    Ц\or Ч\or Ш\or Щ\or Э\or Ю\or Я\else\xpg@ill@value{#1}{russian@Alph}\fi}
+
 \def\asbuk#1{\expandafter\russian@alph\csname c@#1\endcsname}
+
 \def\russian@alph#1{\ifcase#1\or
    а\or б\or в\or г\or д\or е\or ж\or
    з\or и\or к\or л\or м\or н\or о\or

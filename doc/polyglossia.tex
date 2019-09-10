@@ -611,12 +611,16 @@ The default value of each option is given in italic.
 	\begin{itemize}
 	\item \TB{babelshorthands} = \textit{false} or true. % TODO check and document!
 	\item \TB{spelling} = \textit{modern} or old (for captions and date only, not for hyphenation)
+	\item \TB{numerals} = \textit{arabic} or cyrillic. Uses either Arabic numerals or Cyrillic
+	alphanumerical numbering.
 	\end{itemize}
 
 \textbf{Commands}:
 	\begin{itemize}
 	\item \Cmd\Asbuk: produces the uppercase Russian alphabet, for
-	environments such as ¦enumerate¦
+	environments such as ¦enumerate¦. The command takes a counter as argument,
+	\eg ¦\textrussian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
+	Note that the value cannot exceed 30 at the moment.
 	\item \Cmd\asbuk: same in lowercase
 	\end{itemize}
 
@@ -804,10 +808,16 @@ The following macros are provided:
 			¦\hebrewnumeral{1750}¦ yields \texthebrew{\hebrewnumeral{1750}},
 			¦\Hebrewnumeral{1750}¦ yields \texthebrew{\Hebrewnumeral{1750}},
 			and ¦\Hebrewnumeralfinal{1750}¦ yields \texthebrew{\Hebrewnumeralfinal{1750}}.
+	
+	\item \Cmd\russiannumeral produces Russian numbering, with uppercased variant (for alphanumerical variant) via \Cmd\Russiannumeral.
+	        Depending on the ¦numerals¦ option in the Russian language selection, this is either Arabic digit or Cyrillic
+	        alphanumercial output (note that the latter is currently only supported up to 30).\\
+	        Example: With ¦numerals=latin¦ ¦\russiannumeral{19}¦ yields \textrussian{\russiannumeral{19}},
+	        with ¦numerals=cyrillic¦ ¦\russiannumeral{19}¦ results in \textrussian[numerals=cyrillic]{\russiannumeral{19}}.
 			
-	\item \Cmd\serbiannumeral produces Serbian alphabetic numbering, with uppercased variant via \Cmd\Serbiannumeral.
+	\item \Cmd\serbiannumeral produces Serbian numbering, with uppercased variant (for alphanumerical variant) via \Cmd\Serbiannumeral.
 		    Depending on the ¦numerals¦ option in the Serbian language selection, this is either Arabic digit or Cyrillic
-		    alphanumercial output (note that the latter is currently only supported up to 30)
+		    alphanumercial output (note that the latter is currently only supported up to 30).\\
 		    Example: With ¦numerals=latin¦ ¦\serbiannumeral{19}¦ yields \textserbian{\serbiannumeral{19}},
 			with ¦numerals=cyrillic¦ ¦\serbiannumeral{19}¦ results in \textserbian[numerals=cyrillic]{\serbiannumeral{19}}.
 \end{itemize}
