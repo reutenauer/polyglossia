@@ -15,6 +15,7 @@ and may look very wrong.}
   direction=RL,
   hyphennames={syriac,nohyphenation},
   fontsetup=true,
+  localnumber=syriacnumerals
   %TODO localalph
 }
 
@@ -144,17 +145,18 @@ and may look very wrong.}
   \let\@Alph\latin@Alph%
 }
 
+\newcommand{\syriacnumerals}[2]{\syriacnumber{#2}}
+
 % Store original definition
 \let\xpg@save@arabic\@arabic
 
 \def\syriac@globalnumbers{%
   \let\@arabic\syriacnumber%
-  \renewcommand\thefootnote{\protect\syriacnumber{\c@footnote}}%
+  \renewcommand\thefootnote{\localnumber{footnote}}%
 }
 
 \def\nosyriac@globalnumbers{%
   \let\@arabic\xpg@save@arabic%
-  \renewcommand\thefootnote{\protect\number{\c@footnote}}%
 }
 
 % Save original \MakeUppercase definition

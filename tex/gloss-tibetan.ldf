@@ -10,9 +10,9 @@
   scripttag=tibt,
   langtag=TIB,
   hyphennames={nohyphenation},
-  fontsetup=true
+  fontsetup=true,
+  localnumber=tibetannumerals
   %TODO localalph={xxx@alph,xxx@Alph}
-  %TODO localdigits=tibetannumber
 }
 
 \newif\if@tibetan@numerals
@@ -127,7 +127,9 @@
   \ifcase#1\or ཀ\or ཁ\or ག\or ང\or ཅ\or ཆ\or ཇ\or ཉ\or ཏ\or ཐ\or ད\or ན\or པ\or 
   ཕ\or བ\or མ\or ཙ\or ཚ\or ཛ\or ཝ\or ཞ\or ཟ\or འ\or ཡ\or ར\or ལ\or ཤ\or ས\or ཧ\or ཨ
  \else\xpg@ill@value{#1}{@tibetanalph}\fi}
-     
+
+\newcommand{\tibetanumerals}[2]{\tibetannumber{#2}}
+
 \def\tibetan@numbers{%
    \if@tibetan@numerals
      \let\@alph\@tibetanalph%
@@ -142,12 +144,11 @@
 \def\tibetan@globalnumbers{%
    \let\xpg@orig@arabic\@arabic%
    \let\@arabic\tibetannumber%
-   \renewcommand{\thefootnote}{\protect\tibetannumber{\c@footnote}}%
+   \renewcommand{\thefootnote}{\localnumber{footnote}}%
 }
 
 \def\notibetan@globalnumbers{%
    \let\@arabic\xpg@orig@arabic%
-   \renewcommand\thefootnote{\protect\number{\c@footnote}}%
 }
 
 \def\noextras@tibetan{%
