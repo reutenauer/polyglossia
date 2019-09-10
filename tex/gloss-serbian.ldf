@@ -169,11 +169,16 @@
    \ifserbian@numerals\noserbian@numbers\fi
 }
 
+\def\Asbuk#1{\expandafter\serbian@Alph\csname c@#1\endcsname}
+
 \def\serbian@Alph#1{\ifcase#1\or
    А\or Б\or В\or Г\or Д\or Ђ\or Е\or Ж\or
    З\or И\or Ј\or К\or Л\or Љ\or М\or Н\or
    Њ\or О\or П\or Р\or С\or Т\or Ћ\or У\or
    Ф\or Х\or Ц\or Ч\or Џ\or Ш\else\xpg@ill@value{#1}{serbian@Alph}\fi}
+
+\def\asbuk#1{\expandafter\serbian@alph\csname c@#1\endcsname}
+
 \def\serbian@alph#1{\ifcase#1\or
    а\or б\or в\or г\or д\or ђ\or е\or ж\or
    з\or и\or ј\or к\or л\or љ\or м\or н\or

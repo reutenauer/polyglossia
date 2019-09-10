@@ -641,6 +641,15 @@ The default value of each option is given in italic.
 	\item \TB{numerals} = \textit{arabic} or cyrillic. Uses either Arabic numerals or Cyrillic
 	      alphanumerical numbering.
 	\end{itemize}
+\textbf{Commands}:
+\begin{itemize}
+	\item \Cmd\Asbuk: produces the uppercase Cyrillic alphabet, for
+	environments such as ¦enumerate¦. The command takes a counter as argument,\\
+	Example: ¦\textserbian[numerals=cyrillic]{\Asbuk{page}}¦ produces \textserbian[numerals=cyrillic]{\Asbuk{page}}.
+	Note that the value cannot exceed 30 at the moment.
+	\item \Cmd\asbuk: same in lowercase
+\end{itemize}
+
 
 \subsection{slovenian}\label{slovenian}
 \textbf{Options}:
@@ -796,11 +805,11 @@ The following macros are provided:
 			¦\Hebrewnumeral{1750}¦ yields \texthebrew{\Hebrewnumeral{1750}},
 			and ¦\Hebrewnumeralfinal{1750}¦ yields \texthebrew{\Hebrewnumeralfinal{1750}}.
 			
-		\item \Cmd\serbiannumeral produces Serbian alphabetic numbering, with uppercased variant via \Cmd\Serbiannumeral.
-		        Depending on the ¦numerals¦ option in the Serbian language selection, this is either Arabic digit or Cyrillic
-		        alphanumercial output (note that the latter is currently only supported up to 30)
-				Example: With ¦numerals=latin¦ ¦\serbiannumeral{19}¦ yields \textserbian{\serbiannumeral{19}},
-				with ¦numerals=cyrillic¦ ¦\serbiannumeral{19}¦ results in \textserbian[numerals=cyrillic]{\serbiannumeral{19}}.
+	\item \Cmd\serbiannumeral produces Serbian alphabetic numbering, with uppercased variant via \Cmd\Serbiannumeral.
+		    Depending on the ¦numerals¦ option in the Serbian language selection, this is either Arabic digit or Cyrillic
+		    alphanumercial output (note that the latter is currently only supported up to 30)
+		    Example: With ¦numerals=latin¦ ¦\serbiannumeral{19}¦ yields \textserbian{\serbiannumeral{19}},
+			with ¦numerals=cyrillic¦ ¦\serbiannumeral{19}¦ results in \textserbian[numerals=cyrillic]{\serbiannumeral{19}}.
 \end{itemize}
 
 
