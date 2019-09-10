@@ -25,7 +25,7 @@
 \usepackage[babelshorthands]{polyglossia}
 \usepackage{farsical}
 \setmainlanguage[variant=british,ordinalmonthday=false]{english}
-\setotherlanguages{arabic,hebrew,syriac,greek,russian,catalan}
+\setotherlanguages{arabic,hebrew,syriac,greek,russian,serbian,catalan}
 \usepackage[protrusion]{microtype}
 \newcommand*\Cmd[1]{\cmd{#1}\DescribeMacro{#1}\xspace}
 \newcommand*\pkg[1]{\textsf{\color{myblue}#1}}
@@ -638,6 +638,8 @@ The default value of each option is given in italic.
 \textbf{Options}:
 	\begin{itemize}
 	\item \TB{Script} = \textit{Cyrillic} or Latin. Will likely go to a variant.
+	\item \TB{numerals} = \textit{arabic} or cyrillic. Uses either Arabic numerals or Cyrillic
+	      alphanumerical numbering.
 	\end{itemize}
 
 \subsection{slovenian}\label{slovenian}
@@ -793,6 +795,12 @@ The following macros are provided:
 			¦\hebrewnumeral{1750}¦ yields \texthebrew{\hebrewnumeral{1750}},
 			¦\Hebrewnumeral{1750}¦ yields \texthebrew{\Hebrewnumeral{1750}},
 			and ¦\Hebrewnumeralfinal{1750}¦ yields \texthebrew{\Hebrewnumeralfinal{1750}}.
+			
+		\item \Cmd\serbiannumeral produces Serbian alphabetic numbering, with uppercased variant via \Cmd\Serbiannumeral.
+		        Depending on the ¦numerals¦ option in the Serbian language selection, this is either Arabic digit or Cyrillic
+		        alphanumercial output (note that the latter is currently only supported up to 30)
+				Example: With ¦numerals=latin¦ ¦\serbiannumeral{19}¦ yields \textserbian{\serbiannumeral{19}},
+				with ¦numerals=cyrillic¦ ¦\serbiannumeral{19}¦ results in \textserbian[numerals=cyrillic]{\serbiannumeral{19}}.
 \end{itemize}
 
 

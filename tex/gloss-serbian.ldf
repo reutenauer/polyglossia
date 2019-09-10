@@ -9,25 +9,25 @@
   hyphennames={serbian},
   hyphenmins={2,2},
   indentfirst=true,
-  fontsetup=false
+  fontsetup=false,
+  localnumber=serbiannumerals
   %TODO localalph
 }
 
 \newif\if@serbian@cyr
 
-\define@key{serbian}{Script}[Cyrillic]{% TODO FIXDOC: keyname is CHANGED: script -> Script !!!
+\define@key{serbian}{Script}[Cyrillic]{%
   \ifstrequal{#1}{Cyrillic}%
     {\@serbian@cyrtrue
      \polyglossia@buggykeyssetlanguage{serbian}{script=Cyrillic}
      \xpg@fontsetup@nonlatin{serbian}%
     }%
     {\ifstrequal{#1}{Latin}%
-      {
-      \@serbian@cyrfalse
-      \polyglossia@buggykeyssetlanguage{serbian}{script=Cyrillic}
-      \xpg@fontsetup@latin{serbian}%
-      %TODO \def\serbian@language{\language=\l@serbianlat}%
-      % or should we use Croatian patterns as a fallback for the time being???
+      {\@serbian@cyrfalse
+       \polyglossia@buggykeyssetlanguage{serbian}{script=Cyrillic}
+       \xpg@fontsetup@latin{serbian}%
+       %TODO \def\serbian@language{\language=\l@serbianlat}%
+       % or should we use Croatian patterns as a fallback for the time being???
       }%
       {\xpg@error{Unknown script `#1' for Serbian language\MessageBreak
       Valid values are "Cyrillic" and "Latin"}}%
@@ -35,15 +35,24 @@
 }
 \define@key{serbian}{script}[Cyrillic]{\setkeys{serbian}{Script=#1}}
 
-\setkeys{serbian}{Script}
+\newif\ifserbian@numerals
+\define@key{serbian}{numerals}[arabic]{%
+   \ifstrequal{#1}{latin}{\serbian@numeralsfalse}{%
+       \ifstrequal{#1}{cyrillic}%
+          {\serbian@numeralstrue}
+          {\serbian@numeralsfalse}%
+   }%
+}
+
+\setkeys{serbian}{Script,numerals}
 
 \def\captionsserbian{%
    \if@serbian@cyr\captionsserbian@cyr\else\captionsserbian@lat\fi
-   }
+}
 
 \def\dateserbian{%
    \if@serbian@cyr\dateserbian@cyr\else\dateserbian@lat\fi
-   }
+}
 
 \def\captionsserbian@lat{%
    \def\refname{Bibliografija}%
@@ -72,13 +81,14 @@
    \def\headtoname{Prima}%
    \def\proofname{Dokaz}%
    \def\glossaryname{Rečnik nepoznatih reči}%
-   }
+}
+
 \def\dateserbian@lat{%
    \def\today{\number\day .~\ifcase\month\or
     januar\or februar\or mart\or april\or maj\or
     jun\or jul\or avgust\or septembar\or oktobar\or novembar\or
     decembar\fi \space \number\year.}%
-    }
+}
 
 \def\captionsserbian@cyr{%
    \def\refname{Библиографија}%
@@ -106,14 +116,70 @@
    \def\headtoname{Прима}%
    \def\proofname{Доказ}%
    \def\glossaryname{Речник непознатих речи}%
-   }
+}
+
 \def\dateserbian@cyr{%
    \def\today{\number\day .~\ifcase\month\or
     јануар\or фебруар\or март\or април\or мај\or
     јун\or јул\or август\or септембар\or октобар\or новембар\or
     децембар\fi \space \number\year.}%
-    }
+}
 
+
+\newcommand{\serbiannumerals}[2]{\serbiannumber{#2}}
+
+\def\serbiannumber#1{%
+  \ifserbian@numerals
+    \serbian@alph{#1}%
+  \else
+    \number#1%
+  \fi
+}
+
+\def\Serbiannumber#1{%
+  \ifserbian@numerals
+    \serbian@Alph{#1}%
+  \else
+    \number#1%
+  \fi
+}
+
+\let\serbiannumeral=\serbiannumber
+\let\Serbiannumeral=\Serbiannumber
+
+\def\serbian@numbers{%
+   \let\latin@alph\@alph
+   \let\latin@Alph\@Alph
+   \ifserbian@numerals
+     \let\@alph\serbian@alph
+     \let\@Alph\serbian@Alph
+   \fi
+}
+
+\def\noserbian@numbers{%
+   \let\@alph\latin@alph
+   \let\@Alph\latin@Alph
+}
+
+\def\blockextras@serbian{%
+   \ifserbian@numerals\serbian@numbers\fi
+}
+ 
+\def\noextras@serbian{%
+   \ifserbian@numerals\noserbian@numbers\fi
+}
+
+\def\serbian@Alph#1{\ifcase#1\or
+   А\or Б\or В\or Г\or Д\or Ђ\or Е\or Ж\or
+   З\or И\or Ј\or К\or Л\or Љ\or М\or Н\or
+   Њ\or О\or П\or Р\or С\or Т\or Ћ\or У\or
+   Ф\or Х\or Ц\or Ч\or Џ\or Ш\else\xpg@ill@value{#1}{serbian@Alph}\fi}
+\def\serbian@alph#1{\ifcase#1\or
+   а\or б\or в\or г\or д\or ђ\or е\or ж\or
+   з\or и\or ј\or к\or л\or љ\or м\or н\or
+   њ\or о\or п\or р\or с\or т\or ћ\or у\or
+   ф\or х\or ц\or ч\or џ\or ш\else\xpg@ill@value{#1}{serbian@alph}\fi}
+ 
 \endinput
 % TODO ? stuff from babel
 
@@ -132,5 +198,4 @@
 \def\Prob{\mathop{\mathsf P\hskip0pt}\nolimits}
 \def\Expect{\mathop{\mathsf E\hskip0pt}\nolimits}
 \def\Variance{\mathop{\mathsf D\hskip0pt}\nolimits}
-
 
