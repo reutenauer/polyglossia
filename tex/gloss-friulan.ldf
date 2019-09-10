@@ -3,6 +3,7 @@
 \PolyglossiaSetup{friulan}{%
   hyphennames={friulan,furlan},
   hyphenmins={2,2},
+  langtag=FRL,
   indentfirst=false,
   fontsetup=true,
   frenchspacing=true,

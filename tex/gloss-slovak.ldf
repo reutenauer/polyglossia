@@ -3,6 +3,7 @@
 \PolyglossiaSetup{slovak}{
   hyphennames={slovak},
   hyphenmins={2,2},
+  langtag=SKY,
   fontsetup=true,
 }
 

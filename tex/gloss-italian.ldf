@@ -3,6 +3,7 @@
 \PolyglossiaSetup{italian}{
   hyphennames={italian},
   hyphenmins={2,2},
+  langtag=ITA,
   frenchspacing=true,
   indentfirst=true,
   fontsetup=true,

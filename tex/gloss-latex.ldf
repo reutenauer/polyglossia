@@ -1,7 +1,9 @@
-\ProvidesFile{gloss-english.ldf}[polyglossia: module for default language]
+\ProvidesFile{gloss-latex.ldf}[polyglossia: module for default language]
+
 \PolyglossiaSetup{latex}{
   hyphennames={english},
   hyphenmins={2,3},
+  langtag=ENG,
   fontsetup=true,
 }
 

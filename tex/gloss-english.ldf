@@ -2,6 +2,7 @@
 \PolyglossiaSetup{english}{
   hyphennames={english,american,usenglish,USenglish},
   hyphenmins={2,3},
+  langtag=ENG,
   fontsetup=true,
 }
 

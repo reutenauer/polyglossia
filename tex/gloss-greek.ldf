@@ -2,9 +2,11 @@
 \PolyglossiaSetup{greek}{
   script=Greek,
   scripttag=grek,
+  langtag=ELL,
   frenchspacing=true,
   indentfirst=true,
   fontsetup=true,
+  localnumber=greeknumerals
   %TODO localalph={greek@alph,greek@Alph}
 }
 
@@ -237,6 +239,8 @@
    \renewrobustcmd\anw@print{ʹ}}
 \anw@true
 
+\newcommand{\greeknumerals}[2]{\greeknumber{#2}}
+
 \protected\def\greeknumber#1{\expandafter\@greeknumber\expandafter{\number#1}}
 \def\@greeknumber#1{%
   \ifnum#1<\@ne\space\gr@ill@value{#1}%
@@ -374,8 +378,8 @@
 
 \def\greek@numbers{%
    \if@greek@numerals
-      \def\greek@alph##1{\expandafter\greeknumeral\expandafter{\the##1}}
-      \def\greek@Alph##1{\expandafter\Greeknumeral\expandafter{\the##1}}
+      \def\greek@alph##1{\expandafter\greeknumeral\expandafter{\the##1}}%
+      \def\greek@Alph##1{\expandafter\Greeknumeral\expandafter{\the##1}}%
       \let\@alph\greek@alph%
       \let\@Alph\greek@Alph%
    \fi}

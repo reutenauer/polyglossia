@@ -2,6 +2,7 @@
 \PolyglossiaSetup{czech}{
   hyphennames={czech},
   hyphenmins={2,2},
+  langtag=CSY,
   frenchspacing=true,
   fontsetup=true,
 }

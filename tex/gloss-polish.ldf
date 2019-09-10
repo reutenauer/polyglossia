@@ -2,6 +2,7 @@
 \PolyglossiaSetup{polish}{
   hyphennames={polish},
   hyphenmins={2,2},
+  langtag=PLK,
   frenchspacing=true,
   fontsetup=true,
 }

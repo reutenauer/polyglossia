@@ -12,8 +12,10 @@ and may look very wrong.}
   script=Hebrew,
   direction=RL,
   scripttag=hebr,
+  langtag=IWR,
   hyphennames={nohyphenation},
   fontsetup=true,
+  localnumber=hebrewnumerals
   %TODO localalph={hebrewnumeral,Hebrewnumeral}
   %digits = hebrewnumber
 }
@@ -92,6 +94,8 @@ and may look very wrong.}
 
 \input{babel-hebrewalph.def}
 
+\newcommand{\hebrewnumerals}[2]{\hebrewnumber{#2}}
+
 \def\hebrewnumber#1{%
    \if@hebrew@numerals
      \hebrewnumeral{#1}%
@@ -112,7 +116,7 @@ and may look very wrong.}
 
 \def\hebrew@globalnumbers{%
    \let\@arabic\hebrewnumber%
-   \renewcommand\thefootnote{\hebrewnumber{\c@footnote}}%
+   \renewcommand\thefootnote{\localnumber{footnote}}%
 }
 
 % Store original definition
@@ -120,7 +124,6 @@ and may look very wrong.}
 
 \def\nohebrew@globalnumbers{%
   \let\@arabic\xpg@save@arabic%
-  \renewcommand\thefootnote{\@arabic\c@footnote}%
 }
 
 % Save original \MakeUppercase definition

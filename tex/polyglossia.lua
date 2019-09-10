@@ -54,18 +54,6 @@ local function set_default_language(lang, id)
   polyglossia.default_language = lang
 end
 
-local function falsefun()
-  return false
-end
-
-local function disable_hyphenation()
-  luatexbase.add_to_callback("hyphenate", falsefun, "polyglossia.disable_hyphenation")
-end
-
-local function enable_hyphenation()
-  luatexbase.remove_from_callback("hyphenate", "polyglossia.disable_hyphenation")
-end
-
 local check_char
 
 if luaotfload and luaotfload.aux and luaotfload.aux.font_has_glyph then
@@ -157,8 +145,6 @@ polyglossia.set_default_language = set_default_language
 polyglossia.check_char = check_char
 polyglossia.load_frpt = load_frpt
 polyglossia.load_tibt_eol = load_tibt_eol
-polyglossia.disable_hyphenation = disable_hyphenation
-polyglossia.enable_hyphenation = enable_hyphenation
 polyglossia.newloader = newloader
 -- global variables:
 -- polyglossia.default_language

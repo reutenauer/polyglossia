@@ -2,6 +2,7 @@
 \PolyglossiaSetup{irish}{
   hyphennames={irish},
   hyphenmins={2,2},
+  langtag=IRI,
   fontsetup=true,
 }
 

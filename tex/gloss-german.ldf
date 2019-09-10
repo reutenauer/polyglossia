@@ -3,6 +3,7 @@
   hyphenmins={2,2},
   frenchspacing=true,
   fontsetup=true,
+  langtag=DEU,
 }
 
 \def\tmp@old{old}

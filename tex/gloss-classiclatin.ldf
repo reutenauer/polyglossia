@@ -21,6 +21,7 @@
 \PolyglossiaSetup{classiclatin}{%
       hyphennames={classiclatin},
       hyphenmins={2,2},
+      langtag=LAT,
       frenchspacing=true,
       fontsetup=true,
 }

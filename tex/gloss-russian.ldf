@@ -6,7 +6,8 @@
   hyphennames={russian},
   hyphenmins={2,2},
   frenchspacing=true,
-  fontsetup
+  fontsetup,
+  localnumber=russiannumerals
   %TODO localalph={russian@alph,russian@Alph}
 }
 
@@ -18,17 +19,17 @@
 }
 
 \def\captionsrussian{%
-   \if@russian@modern\captionsrussian@modern\else\captionsrussian@old\fi
+   \if@russian@modern\captionsrussian@modern\else\captionsrussian@old\fi%
 }%
 
 \def\daterussian{%
-   \if@russian@modern\daterussian@modern\else\daterussian@old\fi
+   \if@russian@modern\daterussian@modern\else\daterussian@old\fi%
 }%
 
 \newif\ifcyrillic@numerals
-\define@key{russian}{numerals}[latin]{%
+\define@key{russian}{numerals}[arabic]{%
    \ifstrequal{#1}{cyrillic}%
-      {\cyrillic@numeralstrue}
+      {\cyrillic@numeralstrue}%
       {\cyrillic@numeralsfalse}%
 }
 
@@ -60,8 +61,8 @@
   \declare@shorthand{russian}{"|}{\textormath{\nobreak\discretionary{-}{}{\kern.03em}\allowhyphens}{}}%
   \declare@shorthand{russian}{"-}{%
     \def\russian@sh@tmp{%
-      \if\russian@sh@next-\expandafter\russian@sh@emdash
-      \else\expandafter\russian@sh@hyphen\fi
+      \if\russian@sh@next-\expandafter\russian@sh@emdash%
+      \else\expandafter\russian@sh@hyphen\fi%
     }%
     \futurelet\russian@sh@next\russian@sh@tmp}%
   \def\russian@sh@hyphen{%
@@ -80,7 +81,7 @@
   \def\@Ccdash{\leavevmode
    \nobreak\cyrdash\nobreak\hskip.35em\ignorespaces}%
   \ifx\cyrdash\undefined
-    \def\cyrdash{\hbox to.8em{--\hss--}}
+    \def\cyrdash{\hbox to.8em{--\hss--}}%
   \fi
   \declare@shorthand{russian}{",}{\nobreak\hskip.2em\ignorespaces}%
 }
@@ -130,7 +131,8 @@
       октября\or
       ноября\or
       декабря\fi%
-      \space \number\year\space г.}}
+      \space \number\year\space г.}%
+}
      
 \def\captionsrussian@old{%
    \def\prefacename{Предисловіе}%
@@ -156,7 +158,8 @@
    \def\seename{см.}%
    \def\alsoname{см.~также}%
    \def\proofname{Доказательство}%
-}  
+}
+
 \def\daterussian@old{%
       \def\today{\number\day%
       \space\ifcase\month\or%
@@ -172,18 +175,24 @@
       октября\or
       ноября\or
       декабря\fi%
-      \space \number\year\space г.}}
+      \space \number\year\space г.}%
+}
 
 % The following is based on some ideas from ruscor.sty
 \def\russian@capsformat{%
    \ifdef{\KOMAScript}{%
       \ifdef{\chapterformat}{%
         \renewcommand{\chapterformat}{\prechapter\thechapter\postchapter}}{}%
-      \renewcommand{\sectionformat}{\presection\thesection\postsection}%
-      \renewcommand{\subsectionformat}{\presubsection\thesubsection\postsubsection}%
-      \renewcommand{\subsubsectionformat}{\presubsubsection\thesubsubsection\postsubsubsection}%
-      \renewcommand{\paragraphformat}{\preparagraph\theparagraph\postparagraph}%
-      \renewcommand{\subparagraphformat}{\presubparagraph\thesubparagraph\postsubparagraph}%
+      \ifdef{\sectionformat}{%
+        \renewcommand{\sectionformat}{\presection\thesection\postsection}}{}%
+      \ifdef{\subsectionformat}{%
+        \renewcommand{\subsectionformat}{\presubsection\thesubsection\postsubsection}}{}%
+      \ifdef{\subsubsectionformat}{%
+        \renewcommand{\subsubsectionformat}{\presubsubsection\thesubsubsection\postsubsubsection}}{}%
+      \ifdef{\paragraphformat}{%
+        \renewcommand{\paragraphformat}{\preparagraph\theparagraph\postparagraph}}{}%
+      \ifdef{\subparagraphformat}{%
+        \renewcommand{\subparagraphformat}{\presubparagraph\thesubparagraph\postsubparagraph}}{}%
    }{%
       \def\@seccntformat##1{\csname pre##1\endcsname%
          \csname the##1\endcsname%
@@ -201,15 +210,40 @@
    \def\presubsection{}%
    \def\presubsubsection{}%
    \def\preparagraph{}%
-   \def\presubparagraph{}}
+   \def\presubparagraph{}%
+}
+
+\newcommand{\russiannumerals}[2]{\russiannumber{#2}}
+
+\def\russiannumber#1{%
+  \ifcyrillic@numerals
+    \russian@alph{#1}%
+  \else
+    \number#1%
+  \fi%
+}
+
+\def\Russiannumber#1{%
+  \ifcyrillic@numerals
+    \russian@Alph{#1}%
+  \else
+    \number#1%
+  \fi%
+}
+
+\let\russiannumeral=\russiannumber
+\let\Russiannumeral=\Russiannumber
 
 \def\Asbuk#1{\expandafter\russian@Alph\csname c@#1\endcsname}
+
 \def\russian@Alph#1{\ifcase#1\or
    А\or Б\or В\or Г\or Д\or Е\or Ж\or
    З\or И\or К\or Л\or М\or Н\or О\or
    П\or Р\or С\or Т\or У\or Ф\or Х\or
    Ц\or Ч\or Ш\or Щ\or Э\or Ю\or Я\else\xpg@ill@value{#1}{russian@Alph}\fi}
+
 \def\asbuk#1{\expandafter\russian@alph\csname c@#1\endcsname}
+
 \def\russian@alph#1{\ifcase#1\or
    а\or б\or в\or г\or д\or е\or ж\or
    з\or и\or к\or л\or м\or н\or о\or
@@ -217,10 +251,10 @@
    ц\or ч\or ш\or щ\or э\or ю\or я\else\xpg@ill@value{#1}{russian@alph}\fi}
 
 \def\russian@numbers{%
-   \ifcyrillic@numerals
+   \ifcyrillic@numerals%
      \let\@alph\russian@alph%
      \let\@Alph\russian@Alph%
-   \fi
+   \fi%
 }
 
 \def\norussian@numbers{%
@@ -232,22 +266,27 @@
    \ifdef{\KOMAScript}{%
       \ifdef{\chapterformat}{%
         \renewcommand{\chapterformat}{\thechapter\autodot\enskip}}{}%
-      \renewcommand{\sectionformat}{\thesection\autodot\enskip}%
-      \renewcommand{\subsectionformat}{\thesubsection\autodot\enskip}%
-      \renewcommand{\subsubsectionformat}{\thesubsubsection\autodot\enskip}%
-      \renewcommand{\paragraphformat}{\theparagraph\autodot\enskip}%
-      \renewcommand{\subparagraphformat}{\thesubparagraph\autodot\enskip}%
+      \ifdef{\sectionformat}{%
+        \renewcommand{\sectionformat}{\thesection\autodot\enskip}}{}%
+      \ifdef{\subsectionformat}{%
+        \renewcommand{\subsectionformat}{\thesubsection\autodot\enskip}}{}%
+      \ifdef{\subsubsectionformat}{%
+        \renewcommand{\subsubsectionformat}{\thesubsubsection\autodot\enskip}}{}%
+      \ifdef{\paragraphformat}{%
+        \renewcommand{\paragraphformat}{\theparagraph\autodot\enskip}}{}%
+      \ifdef{\subparagraphformat}{%
+        \renewcommand{\subparagraphformat}{\thesubparagraph\autodot\enskip}}{}%
    }{%
       \def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
    }%
-   \ifcyrillic@numerals\norussian@numbers\fi
+   \ifcyrillic@numerals\norussian@numbers\fi%
    \norussian@shorthands%
 }
 
 \def\blockextras@russian{%
    \russian@capsformat%
-   \ifcyrillic@numerals\russian@numbers\fi
-   \ifrussian@babelshorthands\russian@shorthands\fi
+   \ifcyrillic@numerals\russian@numbers\fi%
+   \ifrussian@babelshorthands\russian@shorthands\fi%
 }
 
 \def\inlineextras@russian{%

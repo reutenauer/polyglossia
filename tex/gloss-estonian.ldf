@@ -2,6 +2,7 @@
 \PolyglossiaSetup{estonian}{
   hyphennames={estonian},
   hyphenmins={2,2},
+  langtag=ETI,
   frenchspacing=true,
   fontsetup=true,
 }

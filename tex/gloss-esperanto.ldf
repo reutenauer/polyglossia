@@ -2,6 +2,7 @@
 \PolyglossiaSetup{esperanto}{
   hyphennames={esperanto},
   hyphenmins={2,2},
+  langtag=NTO,
   fontsetup=true,
   %TODO localalph={esperanto@alph,esperanto@Alph}
 }

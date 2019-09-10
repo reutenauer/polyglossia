@@ -34,6 +34,8 @@
 %   \def\proofname{}%
 %   \def\glossaryname{}%
 %}
+
+% Western Armenian month names.  See #79 for Eastern Armenian.
 \def\datearmenian{%
    \def\today{\ifcase\month\or
     Յունուար\or

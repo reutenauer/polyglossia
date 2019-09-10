@@ -3,6 +3,7 @@
 \PolyglossiaSetup{romanian}{
   hyphennames={romanian},
   hyphenmins={2,2},
+  langtag=ROM,
   fontsetup=true,
 }
 

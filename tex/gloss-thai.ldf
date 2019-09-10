@@ -17,8 +17,10 @@ and may look very wrong.}
 \PolyglossiaSetup{thai}{
   script=Thai,
   scripttag=thai,
+  langtag=THA,
   hyphennames={nohyphenation},
-  fontsetup=true
+  fontsetup=true,
+  localnumber=thainumerals
   %TODO localalph={xxx@alph,xxx@Alph}
   %TODO localdigits=thainumber
 }
@@ -84,6 +86,8 @@ and may look very wrong.}
   \fi
 }
 
+\newcommand{\thainumerals}[2]{\thainumber{#2}}
+
 \def\thainumber#1{%
   \if@thai@numerals
     \thaidigits{\number#1}%
@@ -119,11 +123,10 @@ and may look very wrong.}
 \def\thai@globalnumbers{%
    \let\orig@arabic\@arabic%
    \let\@arabic\thainumber%
-   \renewcommand{\thefootnote}{\protect\thainumber{\c@footnote}}%
+   \renewcommand{\thefootnote}{\localnumber{footnote}}%
 }
 \def\nothai@globalnumbers{%
    \let\@arabic\orig@arabic%
-   \renewcommand\thefootnote{\protect\number{\c@footnote}}%
 }
 
 \def\blockextras@thai{%
