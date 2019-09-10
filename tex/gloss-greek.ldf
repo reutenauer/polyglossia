@@ -375,8 +375,8 @@
 
 \def\greek@numbers{%
    \if@greek@numerals
-      \def\greek@alph##1{\expandafter\greeknumeral\expandafter{\the##1}}
-      \def\greek@Alph##1{\expandafter\Greeknumeral\expandafter{\the##1}}
+      \def\greek@alph##1{\expandafter\greeknumeral\expandafter{\the##1}}%
+      \def\greek@Alph##1{\expandafter\Greeknumeral\expandafter{\the##1}}%
       \let\@alph\greek@alph%
       \let\@Alph\greek@Alph%
    \fi}
