@@ -863,9 +863,15 @@
 \newXeTeXintercharclass\xpg@normalclass %TODO
 }{}
 
+\ifxetex
 %% when no patterns are available, we use \l@nohyphenation, assigned to 255
 %%  (suggestion by Enrico Gregorio)
-\@ifundefined{l@nohyphenation}{\chardef\l@nohyphenation=255 }{}
+  \@ifundefined{l@nohyphenation}{\chardef\l@nohyphenation=255 }{}
+\else\ifluatex
+  \@ifundefined{l@nohyphenation}{\chardef\l@nohyphenation=\directlua{
+    tex.sprint(polyglossia.newloader_loaded_languages.nohyphenation)}\relax
+  }{}
+\fi\fi
 
 %we call this macro when a gloss file is not found for a given language
 \def\xpg@nogloss#1{%
@@ -1222,7 +1228,7 @@
         \polyglossia@check@ifdefined:NF{#1}{
             \expandafter\chardef\csname l@#1\endcsname=\directlua{tex.sprint(polyglossia.newloader('#1'))}%
         }
-        \language\directlua{tex.sprint(polyglossia.newloader('#1'))}%
+        \language=\csname l@#1\endcsname
     \fi
 }
 
