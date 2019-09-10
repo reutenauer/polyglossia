@@ -125,8 +125,8 @@ and may look very wrong.}
 
 \def\farsi@globalnumbers{%
    \let\@arabic\farsinumber%
-   \renewcommand\thefootnote{\localnumber{footnote}}%
-   \renewcommand\theequation{\localnumber{equation}}%
+   \renewcommand\thefootnote{\localnumber*{footnote}}%
+   \renewcommand\theequation{\localnumber*{equation}}%
 }
 
 % Store original definition

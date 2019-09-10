@@ -424,7 +424,14 @@
             \prop_gput:Nnn{\polyglossia@langsetup}{#1/localnumber}{##1}
          },
     #1 / localnumber.value_required:n = true,
-    #1 / localnumber.initial:n = {polyglossia@C@localnumber}
+    #1 / localnumber.initial:n = {polyglossia@C@localnumber},
+    % uppercased
+    #1 / Localnumber
+         . code:n =  {
+            \prop_gput:Nnn{\polyglossia@langsetup}{#1/Localnumber}{##1}
+         },
+    #1 / Localnumber.value_required:n = true,
+    #1 / Localnumber.initial:n = {polyglossia@C@localnumber}
   }
 }
 
@@ -442,6 +449,10 @@
   \use:c {\prop_item:Nn \polyglossia@langsetup  {#3/localnumber}} {#1} {#2}
 }
 
+\cs_new:Nn \polyglossia_Localnumber_mainlang:nnnn {
+  \use:c {\prop_item:Nn \polyglossia@langsetup  {#3/Localnumber}} {#1} {#2}
+}
+
 % print using local language
 % #2 is the numeral to print
 % #3 is the mainlanguage (should be expanded)
@@ -451,6 +462,10 @@
   \use:c {\prop_item:Nn \polyglossia@langsetup  {#4/localnumber}} {#1} {#2}
 }
 
+\cs_new:Nn \polyglossia_Localnumber_locallang:nnnn {
+  \use:c {\prop_item:Nn \polyglossia@langsetup  {#4/Localnumber}} {#1} {#2}
+}
+
 % this function try to resolve some simple parameter about lang
 % call #2 then branching if found
 % call parameter #3 if not found
@@ -458,6 +473,13 @@
 \cs_new:Npn \polyglossia_localnumber_callshortcutorlong:nF #1#2 {
   \str_case:nnF{#1}{
     {lang=local}{\polyglossia_localnumber_locallang:nnnn}
+  }
+  {#2}
+}
+
+\cs_new:Npn \polyglossia_Localnumber_callshortcutorlong:nF #1#2 {
+  \str_case:nnF{#1}{
+    {lang=local}{\polyglossia_Localnumber_locallang:nnnn}
   }
   {#2}
 }
@@ -473,9 +495,24 @@
   }
 }
 
+\cs_new:Npn \polyglossia_iii_map_csv_field_split_kv_iii_Localnumber:w  #1 = #2 \q_stop {
+  \str_case:nnF{#2}{
+    {local}  {\clist_map_break:n{\use_i:nn \polyglossia_Localnumber_locallang:nnnn }}
+    {default}{\clist_map_break:n{\use_i:nn \polyglossia_Localnumber_locallang:nnnn }}
+    {*}      {\clist_map_break:n{\use_i:nn\polyglossia_Localnumber_mainlang:nnnn   }}
+    {main}   {\clist_map_break:n{\use_i:nn\polyglossia_Localnumber_mainlang:nnnn   }}
+  }{
+    \clist_map_break:n{ \use_i_ii:nnn \polyglossia_Localnumber_langlang:nnnnn {{#2}} }
+  }
+}
+
 % call the language
 \cs_new:Nn \polyglossia_localnumber_langlang:nnnnn {
   \use:c {\prop_item:Nn \polyglossia@langsetup  {#1/localnumber}} {#2} {#3}
+}
+
+\cs_new:Nn \polyglossia_Localnumber_langlang:nnnnn {
+  \use:c {\prop_item:Nn \polyglossia@langsetup  {#1/Localnumber}} {#2} {#3}
 }
 
 
@@ -506,6 +543,32 @@
   }
 }
 
+\cs_new:Npn \polyglossia_iii_map_csv_field_split_kv_ii_Localnumber:w  #1 #2 = #3 \q_stop {
+  \quark_if_no_value:NTF {#3}
+  {
+    \clist_map_break:n{\use_i:nn \polyglossia_Localnumber_locallang:nnnn}
+  }
+  {
+    \polyglossia_iii_map_csv_field_split_kv_iii_Localnumber:w #1 \q_stop
+  }
+}
+
+\cs_new:Npn \polyglossia_iii_map_csv_field_split_kv_i_Localnumber:nw #1 #2 = #3 \q_stop {
+  % parse only lang tag
+  \tl_trim_spaces_apply:nN {#2} \str_if_eq:nnT {lang}
+  {
+    % if empty value
+    \quark_if_nil:nTF{#3}
+    {
+      \clist_map_break:n{\use_i:nn \polyglossia_Localnumber_locallang:nnnn}
+    }
+    {
+      % here we know what we have an equal sign
+      \polyglossia_iii_map_csv_field_split_kv_ii_Localnumber:w {#1} #1 \q_no_value \q_stop
+    }
+  }
+}
+
 
 % map function 
 \cs_new:Nn \polyglossia_iii_map_csv_localnumber:n {
@@ -516,6 +579,13 @@
   }
 }
 
+\cs_new:Nn \polyglossia_iii_map_csv_Localnumber:n {
+  % fast case is do nothing is empty 
+  \tl_if_empty:nF{#1}
+  {
+    \polyglossia_iii_map_csv_field_split_kv_i_Localnumber:nw {#1} #1 = \q_nil \q_stop
+  }
+}
 
 % treat option is empty and option is lang=local
 % #2 number
@@ -547,6 +617,30 @@
   }
 }
 
+\cs_new:Nn \polyglossia_iii_Localnumber:nnnn {
+  \tl_if_blank:nTF{#1}
+  {
+    \polyglossia_Localnumber_mainlang:nnnn
+  }
+  {
+    \str_if_eq:nnTF{#1}{lang=local}
+    {
+      \polyglossia_Localnumber_locallang:nnnn
+    }
+    {
+      % use postscript like trick push to stack {#1} {#2} {#3} {#4}
+      \polyglossia_Localnumber_callshortcutorlong:nF {#1}
+      {
+        % same trick here if found we emit  \use_i:nn
+        % thus discarding the default choice that is not lang specified thus local
+        \clist_map_function:nN {#1} {\polyglossia_iii_map_csv_Localnumber:n}
+        \polyglossia_Localnumber_locallang:nnnn
+      }
+    }
+    {#1} {#2} {#3} {#4}
+  }
+}
+
 % internal helper useful for oeee and onnn
 % #1 number
 % #2 mainlanguage
@@ -560,6 +654,13 @@
   eeen, eeeo
 }
 
+\cs_new:Nn \polyglossia_ii_Localnumber:nnnn {
+  \tl_trim_spaces_apply:nN {#4} \polyglossia_iii_Localnumber:nnnn {#1}{#2}{#3}
+}
+\cs_generate_variant:Nn \polyglossia_ii_Localnumber:nnnn {
+  eeen, eeeo
+}
+
 % convert the counter to value
 % #1 counter
 % #2 mainlanguage
@@ -570,24 +671,42 @@
   \polyglossia_ii_localnumber:eeeo {\int_value:w #1} {#2} {#3} {#4}
 }
 
-% print number usage Localnumber[option]{numeral}
-% \Localnumber[]{numeral} use main language
-% \localnumber{numeral} use local language
-\NewExpandableDocumentCommand{\Localnumber}{om}
+\cs_new:Nn \polyglossia_i_Localnumber:nnnn
 {
-  \polyglossia_ii_localnumber:eeeo {\int_eval:n{#2}}
-      {\mainlanguagename} {\languagename} {\IfNoValueTF {#1}{lang=local}{#1}}
+  \polyglossia_ii_Localnumber:eeeo {\int_value:w #1} {#2} {#3} {#4}
 }
 
-% print number usage Localnumber[option]{counter}
+% print number usage \localnumber[option]{numeral}
+% or \localnumber*[option]{counter}
 % \Localnumber[]{numeral} use main language
 % \localnumber{numeral} use local language
-\NewExpandableDocumentCommand{\localnumber}{om}
+\NewExpandableDocumentCommand{\localnumber}{som}
 {
-  \exp_args:Nc \polyglossia_i_localnumber:nnnn {c@#2}
-      {\mainlanguagename} {\languagename} {\IfNoValueTF {#1}{lang=local}{#1}}
+  \IfBooleanTF{#1}%
+    {% starred: take counter
+      \exp_args:Nc \polyglossia_i_localnumber:nnnn {c@#3}
+         {\mainlanguagename} {\languagename} {\IfNoValueTF {#2}{lang=local}{#2}}
+    }{% unstarred: take number
+      \polyglossia_ii_localnumber:eeeo {\int_eval:n{#3}}
+         {\mainlanguagename} {\languagename} {\IfNoValueTF {#2}{lang=local}{#2}}
+    }
 }
 
+% print number usage \Localnumber[option]{numeral}
+% or \Localnumber*[option]{counter}
+% \Localnumber[]{numeral} use main language
+% \localnumber{numeral} use local language
+\NewExpandableDocumentCommand{\Localnumber}{som}
+{
+  \IfBooleanTF{#1}%
+    {% starred: take counter
+      \exp_args:Nc \polyglossia_i_Localnumber:nnnn {c@#3}
+         {\mainlanguagename} {\languagename} {\IfNoValueTF {#2}{lang=local}{#2}}
+    }{% unstarred: take number
+      \polyglossia_ii_Localnumber:eeeo {\int_eval:n{#3}}
+         {\mainlanguagename} {\languagename} {\IfNoValueTF {#2}{lang=local}{#2}}
+    }
+}
 
 \cs_new_nopar:Nn{\polyglossia@lang@frenchspacing:n}{
   \prop_get:NnNTF \polyglossia@langsetup {#1/frenchspacing} \l_tmpa_tl

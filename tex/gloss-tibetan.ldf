@@ -144,7 +144,7 @@
 \def\tibetan@globalnumbers{%
    \let\xpg@orig@arabic\@arabic%
    \let\@arabic\tibetannumber%
-   \renewcommand{\thefootnote}{\localnumber{footnote}}%
+   \renewcommand{\thefootnote}{\localnumber*{footnote}}%
 }
 
 \def\notibetan@globalnumbers{%
