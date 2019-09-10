@@ -6,6 +6,7 @@
   frenchspacing=true,
   indentfirst=true,
   fontsetup=true,
+  localnumber=greeknumerals
   %TODO localalph={greek@alph,greek@Alph}
 }
 
@@ -237,6 +238,8 @@
 \newrobustcmd\anw@true{%
    \renewrobustcmd\anw@print{ʹ}}
 \anw@true
+
+\newcommand{\greeknumerals}[2]{\greeknumber{#2}}
 
 \protected\def\greeknumber#1{\expandafter\@greeknumber\expandafter{\number#1}}
 \def\@greeknumber#1{%
