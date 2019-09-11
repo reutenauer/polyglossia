@@ -165,7 +165,7 @@ and may look very wrong.}
 
 \def\syriac@globalnumbers{%
   \let\@arabic\syriacnumber%
-  \renewcommand\thefootnote{\localnumber{footnote}}%
+  \renewcommand\thefootnote{\localnumber*{footnote}}%
 }
 
 \def\nosyriac@globalnumbers{%

@@ -131,7 +131,7 @@ and may look very wrong.}
 
 \def\bengali@globalnumbers{%
    \let\@arabic\bengalinumber%
-   \renewcommand\thefootnote{\localnumber{footnote}}%
+   \renewcommand\thefootnote{\localnumber*{footnote}}%
 }
 
 % Store original definition
