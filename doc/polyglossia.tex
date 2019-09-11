@@ -732,16 +732,22 @@ or whatever is appropriate (see sec.~\ref{sec:localnumber}). The possibilities a
 
 \subsection{General localization of numbering}\label{sec:localnumber}
 
-As of 1.45,\new{1.45} \pkg{polyglossia} provides a generic macro \Cmd\Localnumber\ which converts numbers
+As of 1.45,\new{1.45} \pkg{polyglossia} provides a generic macro \Cmd\localnumeral\ which converts numbers
 to the current local form (which might be script-specific decimal digit, an alphabetic numbering or something else).
 For instance in an Arabic environment
-¦\Localnumber{42}¦ yields \textarabic{\Localnumber{42}}, whereas in an Hebrew environment, it
-results in \texthebrew[numerals=hebrew]{\Localnumber{42}} with ¦numerals=hebrew¦, and \texthebrew{\Localnumber{42}}
+¦\localnumeral{42}¦ yields \textarabic{\localnumeral{42}}, whereas in an Hebrew environment, it
+results in \texthebrew[numerals=hebrew]{\localnumeral{42}} with ¦numerals=hebrew¦, and \texthebrew{\localnumeral{42}}
 with ¦numerals=arabic¦. Note that, as opposed to the various ¦digits¦ macros (described in sec.~\ref{sec:decdigit}),
-the argument of ¦\Localnumber¦ must consist of numbers only.
+the argument of ¦\localnumeral¦ must consist of numbers only.
 
-For\new{1.45} the conversion of counters, a generic macro \Cmd\localnumber\ is provided. This takes a counter as argument.
-For instance in an Arabic environment ¦\localnumber{page}¦ yields \textarabic{\localnumber{page}}.
+For\new{1.45} the conversion of counters, the starred version \Cmd{\localnumeral*} is provided. This takes a counter as argument.
+For instance in an Arabic environment ¦\localnumeral*{page}¦ yields \textarabic{\localnumeral*{page}}.
+
+For scripts with alphanumeric numbering, the uppercased variants \Cmd{\Localnumeral} and \Cmd{\Localnumeral*} provide the uppercased 
+versions.
+
+All\DescribeMacro{\localnumber[]}\ these macros return the local numbering for the main language (rather than the locally selected language)
+if an empty optional argument is given, \eg ¦\localnumeral[]{4711}¦.
 
 \subsection{Non-Western decimal digits}\label{sec:decdigit}
 
