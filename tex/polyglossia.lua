@@ -29,7 +29,7 @@ local polyglossia = polyglossia
 -- predefined l@nohyphenation or dummy new language
 local nohyphid = luatexbase.registernumber'l@nohyphenation' or lang.id(lang.new())
 -- key `nohyphenation` is for .sty file when possibly undefined l@nohyphenation
-polyglossia.newloader_loaded_languages = { nohyphenation = nohyphid }
+local newloader_loaded_languages = { nohyphenation = nohyphid }
 
 local newloader_available_languages = dofile(kpse.find_file('language.dat.lua'))
 -- Suggestion by Dohyun Kim on #129
@@ -97,14 +97,14 @@ local lang_register = 19
 
 -- New hyphenation pattern loader: use language.dat.lua directly and the language identifiers
 local function newloader(langentry)
-    loaded_language = polyglossia.newloader_loaded_languages[langentry]
+    local loaded_language = newloader_loaded_languages[langentry]
     if loaded_language then
         log_info('Language ' .. langentry .. ' already loaded; id is ' .. lang.id(loaded_language))
         -- texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded with patterns ' .. tostring(loaded_language) .. '; id is ' .. lang.id(loaded_language))
         -- texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded with patterns ' .. loaded_language['patterns'] .. '; id is ' .. lang.id(loaded_language))
         return lang.id(loaded_language)
     else
-        langdata = newloader_available_languages[langentry]
+        local langdata = newloader_available_languages[langentry]
         if langdata and langdata['special'] == 'language0' then return 0 end
 
         if langdata then
@@ -128,22 +128,22 @@ local function newloader(langentry)
 			s = s .. "\npatterns: " .. langdata.patterns
 			log_info(s)
             if langdata.patterns and langdata.patterns ~= '' then
-                pattfilepath = kpse.find_file(langdata.patterns)
+                local pattfilepath = kpse.find_file(langdata.patterns)
                 if pattfilepath then
-                    pattfile = io.open(pattfilepath)
+                    local pattfile = io.open(pattfilepath)
                     lang.patterns(langobject, pattfile:read('*all'))
                     pattfile:close()
                 end
             end
             if langdata.hyphenation and langdata.hyphenation ~= '' then
-                hyphfilepath = kpse.find_file(langdata.hyphenation)
+                local hyphfilepath = kpse.find_file(langdata.hyphenation)
                 if hyphfilepath then
-                    hyphfile = io.open(hyphfilepath)
+                    local hyphfile = io.open(hyphfilepath)
                     lang.hyphenation(langobject, hyphfile:read('*all'))
                     hyphfile:close()
                 end
             end
-            polyglossia.newloader_loaded_languages[langentry] = langobject
+            newloader_loaded_languages[langentry] = langobject
 
             log_info('Language ' .. langentry .. ' was not yet loaded; created with id ' .. lang.id(langobject))
             return lang.id(langobject)
@@ -161,6 +161,7 @@ polyglossia.check_char = check_char
 polyglossia.load_frpt = load_frpt
 polyglossia.load_tibt_eol = load_tibt_eol
 polyglossia.newloader = newloader
+polyglossia.newloader_loaded_languages = newloader_loaded_languages
 -- global variables:
 -- polyglossia.default_language
 -- polyglossia.current_language
