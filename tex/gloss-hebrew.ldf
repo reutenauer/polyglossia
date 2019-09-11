@@ -15,7 +15,7 @@ and may look very wrong.}
   langtag=IWR,
   hyphennames={nohyphenation},
   fontsetup=true,
-  localnumber=hebrewnumerals
+  localnumeral=hebrewnumerals
   %TODO localalph={hebrewnumeral,Hebrewnumeral}
   %digits = hebrewnumber
 }
@@ -116,7 +116,7 @@ and may look very wrong.}
 
 \def\hebrew@globalnumbers{%
    \let\@arabic\hebrewnumber%
-   \renewcommand\thefootnote{\localnumber*{footnote}}%
+   \renewcommand\thefootnote{\localnumeral*{footnote}}%
 }
 
 % Store original definition

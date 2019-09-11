@@ -7,8 +7,8 @@
   hyphenmins={2,2},
   frenchspacing=true,
   fontsetup,
-  localnumber=russiannumerals,
-  Localnumber=Russiannumerals
+  localnumeral=russiannumerals,
+  Localnumeral=Russiannumerals
   %TODO localalph={russian@alph,russian@Alph}
 }
 

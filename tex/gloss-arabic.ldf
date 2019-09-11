@@ -17,9 +17,8 @@ and may look very wrong.}
   hyphennames={nohyphenation},
   fontsetup=true,
   envname=Arabic,
-  localnumber=arabicnumerals
+  localnumeral=arabicnumerals
   %TODO localalph={abjad,abjad}
-  %TODO localnumber=arabicnumber
 }
 
 \newif\ifeastern@numerals
@@ -201,8 +200,8 @@ and may look very wrong.}
 
 \def\arabic@globalnumbers{%
   \let\@arabic\arabicnumber%
-  \renewcommand\thefootnote{\localnumber*{footnote}}%
-  \renewcommand\theequation{\localnumber*{equation}}%
+  \renewcommand\thefootnote{\localnumeral*{footnote}}%
+  \renewcommand\theequation{\localnumeral*{equation}}%
 }
 
 \def\noarabic@globalnumbers{%

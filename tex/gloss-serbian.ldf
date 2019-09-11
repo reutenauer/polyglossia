@@ -10,8 +10,8 @@
   hyphenmins={2,2},
   indentfirst=true,
   fontsetup=false,
-  localnumber=serbiannumerals,
-  Localnumber=Serbiannumerals
+  localnumeral=serbiannumerals,
+  Localnumeral=Serbiannumerals
   %TODO localalph
 }
 

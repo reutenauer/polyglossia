@@ -17,9 +17,8 @@ and may look very wrong.}
   langtag=URD,
   hyphennames={urdu,nohyphenation},
   fontsetup=true,
-  localnumber=urdunumerals
+  localnumeral=urdunumerals
   %TODO localalph={abjad,abjad}
-  %TODO localnumber=urdunumber
 }
 
 \newif\if@western@numerals
@@ -126,7 +125,7 @@ and may look very wrong.}
 \def\urdu@globalnumbers{%
   \let\@arabic\urdunumber%
   % For some reason \thefootnote needs to be set separately:
-  \renewcommand\thefootnote{\localnumber*{footnote}}%
+  \renewcommand\thefootnote{\localnumeral*{footnote}}%
 }
 
 \def\nourdu@globalnumbers{

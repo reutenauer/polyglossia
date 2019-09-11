@@ -6,8 +6,8 @@
   frenchspacing=true,
   indentfirst=true,
   fontsetup=true,
-  localnumber=greeknumerals,
-  Localnumber=Greeknumerals
+  localnumeral=greeknumerals,
+  Localnumeral=Greeknumerals
   %TODO localalph={greek@alph,greek@Alph}
 }
 

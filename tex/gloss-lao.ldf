@@ -12,7 +12,7 @@ and may look very wrong.}
   hyphennames={lao},
   hyphenmins={1,1},
   fontsetup=true,
-  localnumber=laonumerals
+  localnumeral=laonumerals
   %TODO localalph={xxx@alph,xxx@Alph}
   %TODO localdigits=laonumber
 }
@@ -90,7 +90,7 @@ and may look very wrong.}
 \def\lao@globalnumbers{%
    \let\orig@arabic\@arabic%
    \let\@arabic\laonumber%
-   \renewcommand{\thefootnote}{\localnumber*{footnote}}%
+   \renewcommand{\thefootnote}{\localnumeral*{footnote}}%
 }
 \def\nolao@globalnumbers{%
    \let\@arabic\orig@arabic%
