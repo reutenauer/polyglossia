@@ -5,7 +5,7 @@
 	langtag=KHM,%
 	hyphennames={nohyphenation},%
 	fontsetup=true,%
-	localnumber=khmernumerals%
+	localnumeral=khmernumerals%
 }
 \newif\if@khmer@numerals
 \def\tmp@khmer{khmer}
@@ -84,7 +84,7 @@
 \def\khmer@globalnumbers{%
 	\let\orig@arabic\@arabic%
 	\let\@arabic\khmernumber%
-	\renewcommand{\thefootnote}{\localnumber{footnote}}%
+	\renewcommand{\thefootnote}{\localnumeral*{footnote}}%
 }
 \def\nokhmer@globalnumbers{%
 	\let\@arabic\orig@arabic%
@@ -153,6 +153,6 @@
 	\deftranslation[to=khmer]{Examples}{\examplename}%
 	\AtEndDocument{\immediate\write\@auxout{\string\@writefile{nav}%
 		{\noexpand\headcommand{\noexpand\def\noexpand%
-		\inserttotalframenumber{\localnumber{framenumber}}}}}}%
+		\inserttotalframenumber{\localnumeral*{framenumber}}}}}}%
 }{}
 \endinput

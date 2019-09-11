@@ -25,7 +25,7 @@
 \usepackage[babelshorthands]{polyglossia}
 \usepackage{farsical}
 \setmainlanguage[variant=british,ordinalmonthday=false]{english}
-\setotherlanguages{arabic,hebrew,syriac,greek,russian,catalan}
+\setotherlanguages{arabic,hebrew,syriac,greek,russian,serbian,catalan}
 \usepackage[protrusion]{microtype}
 \newcommand*\Cmd[1]{\cmd{#1}\DescribeMacro{#1}\xspace}
 \newcommand*\pkg[1]{\textsf{\color{myblue}#1}}
@@ -171,7 +171,7 @@ Table~\ref{tab:lang} lists all languages currently supported.
 Those in red have specific options and/or commands
 that are explained in section \ref{specific} below.
 
-\begin{table}[h]\centering
+\begin{table}[ht]\centering
 \label{tab:lang}
 % Produced with tools/insert-language-list.rb -- AR, 2015-07-14
 % Edited by hand -- AR 2019-04-04
@@ -280,12 +280,12 @@ similar behaviour.
 \item \DescribeEnv{otherlanguage}\cmd{\begin\{otherlanguage\}[⟨options⟩]\{⟨lang⟩\}} \dots{} \cmd{\end\{otherlanguage\}}
 \item \DescribeEnv{otherlanguage*}\cmd{\begin\{otherlanguage*\}[⟨options⟩]\{⟨lang⟩\}} \dots{} \cmd{\end\{otherlanguage*\}}
 \end{itemize}
-
-	¦\selectlanguage{⟨lang⟩}¦ and the ¦otherlanguage¦ environment are identical with the
-	use of the ¦⟨lang⟩¦ environment (with the only difference that ¦\selectlanguage{⟨lang⟩}¦
-	does not need to be explicitly closed). ¦\foreinlanguage{⟨lang⟩}{…}¦ and the ¦otherlanguage*¦
-	environment are identical with the use of the ¦\text⟨lang⟩¦ command, with the one
-	notable exception that they do not translate the date with ¦\today¦.
+%
+¦\selectlanguage{⟨lang⟩}¦ and the ¦otherlanguage¦ environment are identical to the
+the ¦⟨lang⟩¦ environment, except that ¦\selectlanguage{⟨lang⟩}¦
+does not need to be explicitly closed. The command ¦\foreinlanguage{⟨lang⟩}{…}¦ and the ¦otherlanguage*¦
+environment are identical with the use of the ¦\text⟨lang⟩¦ command, with the one
+notable exception that they do not translate the date with ¦\today¦.
 
 Since the \XeLaTeX\ and \LuaLaTeX\ format incorporate \pkg{babel}’s \file{hyphen.cfg},
 the low-level commands for hyphenation and language switching
@@ -303,8 +303,8 @@ ought to be mentioned here.
 	to another one in the middle of a document: \textit{this may have adverse effects}!
 
 \item \Cmd\normalfontlatin: in an environment where \cmd\normalfont\ has been redefined
-	to a non-latin script, this will call the font defined with \cmd\setmainfont\ etc.
-	Likewise it is possible to use \Cmd\rmfamilylatin, \Cmd\sffamilylatin,
+	to a non-latin script, this will reset to the font defined with \cmd\setmainfont\ etc.
+	In a similar vein, it is possible to use \Cmd\rmfamilylatin, \Cmd\sffamilylatin,
 	and \Cmd\ttfamilylatin.
 
 \item \Cmd\latinalph: Representation of counter as a lower-case letter:  1 = a, 2 = b, etc.
@@ -611,12 +611,16 @@ The default value of each option is given in italic.
 	\begin{itemize}
 	\item \TB{babelshorthands} = \textit{false} or true. % TODO check and document!
 	\item \TB{spelling} = \textit{modern} or old (for captions and date only, not for hyphenation)
+	\item \TB{numerals} = \textit{arabic} or cyrillic. Uses either Arabic numerals or Cyrillic
+	alphanumerical numbering.
 	\end{itemize}
 
 \textbf{Commands}:
 	\begin{itemize}
 	\item \Cmd\Asbuk: produces the uppercase Russian alphabet, for
-	environments such as ¦enumerate¦
+	environments such as ¦enumerate¦. The command takes a counter as argument,
+	\eg ¦\textrussian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
+	Note that the value cannot exceed 30 at the moment.
 	\item \Cmd\asbuk: same in lowercase
 	\end{itemize}
 
@@ -638,7 +642,18 @@ The default value of each option is given in italic.
 \textbf{Options}:
 	\begin{itemize}
 	\item \TB{Script} = \textit{Cyrillic} or Latin. Will likely go to a variant.
+	\item \TB{numerals} = \textit{arabic} or cyrillic. Uses either Arabic numerals or Cyrillic
+	      alphanumerical numbering.
 	\end{itemize}
+\textbf{Commands}:
+\begin{itemize}
+	\item \Cmd\Asbuk: produces the uppercase Cyrillic alphabet, for
+	environments such as ¦enumerate¦. The command takes a counter as argument,\\
+	Example: ¦\textserbian[numerals=cyrillic]{\Asbuk{page}}¦ produces \textserbian[numerals=cyrillic]{\Asbuk{page}}.
+	Note that the value cannot exceed 30 at the moment.
+	\item \Cmd\asbuk: same in lowercase
+\end{itemize}
+
 
 \subsection{slovenian}\label{slovenian}
 \textbf{Options}:
@@ -699,63 +714,119 @@ you can do this:
 \gappto\captionslingua{\renewcommand{\chaptername}{Caput}}
 \end{verbatim}
 
-\section{Non-Western decimal digits}
+\section{Script-specific numbering}
 
-Several scripts have their own versions of the decimal digits commonly called
-‘Arabic numerals’.  With the appropriate language option set, \pkg{polyglossia}
+Languages and scripts have specific numbering conventions. Some use decimal digits
+(\eg Arabic numerals), some use alphabetic or alphanumerical notation (\eg Roman numbering).
+In some cases, different conventions are available (\eg Mashriq or Maghrib numbering
+in Arabic script, Arabic or Hebrew [=~alphanumeric] numbering in Hebrew).
+
+If the latter is the case, \pkg{polyglossia} provides language options which allow you to select
+or switch to the suitable convention. With the appropriate language option set, \pkg{polyglossia}
 will automatically convert the output of internal \LaTeX\ counters to their
 localized forms, for instance to display page, chapter and section numbers.
 
-In previous versions this conversion was achieved my means of TECKit fontmappings.
-If needed they can be activated with the fontspec ¦Mapping¦ option,
+For manual input of numbers, macros are provided. These convert Arabic numeric input to the respective
+local decimal digit (see sec.~\ref{sec:decdigit}), alphanumeric representation (see sec.~\ref{abjad})
+or whatever is appropriate (see sec.~\ref{sec:localnumber}). The possibilities are described in turn.
+
+\subsection{General localization of numbering}\label{sec:localnumber}
+
+As of 1.45,\new{1.45} \pkg{polyglossia} provides a generic macro \Cmd\localnumeral\ which converts numbers
+to the current local form (which might be script-specific decimal digit, an alphabetic numbering or something else).
+For instance in an Arabic environment
+¦\localnumeral{42}¦ yields \textarabic{\localnumeral{42}}, whereas in an Hebrew environment, it
+results in \texthebrew[numerals=hebrew]{\localnumeral{42}} with ¦numerals=hebrew¦, and \texthebrew{\localnumeral{42}}
+with ¦numerals=arabic¦. Note that, as opposed to the various ¦digits¦ macros (described in sec.~\ref{sec:decdigit}),
+the argument of ¦\localnumeral¦ must consist of numbers only.
+
+For\new{1.45} the conversion of counters, the starred version \Cmd{\localnumeral*} is provided. This takes a counter as argument.
+For instance in an Arabic environment ¦\localnumeral*{page}¦ yields \textarabic{\localnumeral*{page}}.
+
+For scripts with alphanumeric numbering, the uppercased variants \Cmd{\Localnumeral} and \Cmd{\Localnumeral*} provide the uppercased 
+versions.
+
+All\DescribeMacro{\localnumber[]}\ these macros return the local numbering for the main language (rather than the locally selected language)
+if an empty optional argument is given, \eg ¦\localnumeral[]{4711}¦.
+
+\subsection{Non-Western decimal digits}\label{sec:decdigit}
+
+In addition\new{v1.1.1} to the generic macros described above, \pkg{polyglossia} provides language-specific conversion macros
+which can be used if the generic ones do not suit the need.\footnote{%
+A third method are so-called TECKit fontmappings.
+Those can be activated with the \pkg{fontspec} ¦Mapping¦ option,
 using ¦arabicdigits¦, ¦farsidigits¦ or ¦thaidigits¦.
 For instance if \cmd\arabicfont\ is defined with the option ¦Mapping=arabicdigits¦,
-then by typing ¦\textarabic{2010}¦ one will obtain \textarabic{٢٠١٠}.
+typing ¦\textarabic{2010}¦ results in \textarabic{٢٠١٠}. Note that this method has some drawbacks, though,
+for instance when the value of a counter has to be written and read from auxiliary files.
+So please use this with care.}
+The macros have the form ¦\<script>digits¦. They convert Arabic numerical input and leave every other input untouched.
+In an Arabic context, for instance, ¦\arabicdigits{9182/738543-X}¦ yields \textarabic{\arabicdigits{9182/738543-X}}.
 
-With version v1.1.1\new{v1.1.1} the same conversion is achieved directly by
-simple \TeX\ macros. This prevents some problems that occur when the value of a
-counter has to be written and read from auxiliary files.\footnote{ %
-  For instance the package \pkg{lastpage} did not work with \pkg{polyglossia} in situations
-  where the display of counters was redefined to include a font-switching command.}
-These macros (currently \Cmd\arabicdigits, \Cmd\farsidigits\ and \Cmd\thaidigits\ are provided)
-are also available to the users. For instance in an Arabic environment
-¦\arabicdigits{9182/738543-X}¦ yields
-\textarabic{\arabicdigits{9182/738543-X}}.
+Currently, the following macros are provided:
 
-\section{Alphabetic numbering in Greek, Arabic, Hebrew, Syriac and Farsi}\label{abjad}
+\begin{itemize}
+	\item \Cmd\arabicdigits
+	\item \Cmd\bengalidigits
+	\item \Cmd\devanagaridigits
+	\item \Cmd\farsidigits
+	\item \Cmd\kannadadigits
+	\item \Cmd\khmerdigits
+	\item \Cmd\laodigits
+	\item \Cmd\nkodigits
+	\item \Cmd\thaidigits
+	\item \Cmd\tibetandigits
+\end{itemize}
 
-In certain languages, numbers can be represented
-by a special alphanumerical notation.\footnote{ %
-	See, e.g., \url{http://en.wikipedia.org/wiki/Greek_numerals},
+
+\subsection{Non-Latin alphabetic numbering}\label{abjad}
+
+For languages which use special (non-Latin) alphanumerical notation\footnote{%
+	For instance, see \url{http://en.wikipedia.org/wiki/Greek_numerals},
 	\url{http://en.wikipedia.org/wiki/Abjad_numerals},
-	and \url{http://en.wikipedia.org/wiki/Hebrew_numerals}.}
-	%% \url{http://en.wikipedia.org/wiki/Syriac_alphabet}
+	\url{http://en.wikipedia.org/wiki/Hebrew_numerals},
+	and \url{http://en.wikipedia.org/wiki/Syriac_alphabet}.}, dedicated macros are provided.
 
-The Greek numerals are obtained with \Cmd\greeknumeral (or \Cmd\Greeknumeral\ in uppercase).
-Example: ¦\greeknumeral{1863}¦ yields \textgreek{\greeknumeral{1863}}.
+They work in a similar way than the ¦\<script>digits¦ macros described above: They take Arabic numerical input
+and output the respective value in the local alphabetic numbering scheme.
 
-The Arabic \textit{abjad} numbers can be generated with the command \Cmd\abjad.
-Example: ¦\abjad{1863}¦ yields \textarabic{\abjad{1863}}.
-In the Maghrib the conventions are somewhat different, and the maghribi forms
-of the \textit{abjad} numerals are obtained with the \Cmd\abjadmaghribi\ command.
-Example: ¦\abjadmaghribi{1863}¦ yields \textarabic{\abjadmaghribi{1863}}.
+The following macros are provided:
 
-The code for Hebrew numerals, which was incorrect in previous versions, was
-ported from the implementation in \pkg{babel} with v1.1.1\new{v1.1.1}, and the
-user interface is identical to the one in \pkg{babel}.
-The commands \Cmd\hebrewnumeral, \Cmd\Hebrewnumeral and \Cmd\Hebrewnumeralfinal\ behave exactly
-as they do in \pkg{babel}: the second command prints the number with \textit{gereshayim} before
-the last letter, and the latter uses in addition the final forms of Hebrew letters.
-Examples:
-¦\hebrewnumeral{1750}¦ yields \texthebrew{\hebrewnumeral{1750}},
-¦\Hebrewnumeral{1750}¦ yields \texthebrew{\Hebrewnumeral{1750}},
-and ¦\Hebrewnumeralfinal{1750}¦ yields \texthebrew{\Hebrewnumeralfinal{1750}}.
+\begin{itemize}
+    \item \Cmd\abjad outputs Arabic \textit{abjad} numbers according to the Mashriq varieties.
+			Example: ¦\abjad{1863}¦ yields \textarabic{\abjad{1863}}.
+			
+	\item \Cmd\abjadmaghribi outputs Arabic \textit{abjad} numbers according to the Maghrib varieties.
+			Example: ¦\abjadmaghribi{1863}¦ yields \textarabic{\abjadmaghribi{1863}}.
+			
+	\item \Cmd\abjadsyriac outputs Syriac abjad numerals.\footnote{%
+				A fine guide to numerals in Syriac can be found at \link{http://www.garzo.co.uk/documents/syriac-numerals.pdf}.}\\
+			Example: ¦\abjadsyriac{463}¦ yields \textsyriac{\abjadsyriac{463}}.
 
+	\item \Cmd\greeknumeral produces Greek alphabetic numbering, \Cmd\Greeknumeral outputs uppercased variants.
+			Example: ¦\greeknumeral{1863}¦ yields \textgreek{\greeknumeral{1863}},
+			¦\Greeknumeral{1863}¦ results in \textgreek{\Greeknumeral{1863}}.
 
-Support is also provided for Syriac abjad numerals, which can be generated
-with \Cmd\abjadsyriac.\footnote{ %
-A fine guide to numerals in Syriac can be found at \link{http://www.garzo.co.uk/documents/syriac-numerals.pdf}.}
-Example: ¦\abjadsyriac{463}¦ yields \textsyriac{\abjadsyriac{463}}.
+	\item \Cmd\hebrewnumeral, \Cmd\Hebrewnumeral and \Cmd\Hebrewnumeralfinal generate variants of Hebrew alphanumeric numerals.
+			The commands behave exactly as they do in \pkg{babel}: ¦\hebrewnumeral¦ outputs the numbers without any decoration,
+			¦\Hebrewnumeral¦ adds \textit{gereshayim} before the last letter, ¦\Hebrewnumeralfinal¦ uses in addition the final forms of Hebrew letters.
+			Examples:
+			¦\hebrewnumeral{1750}¦ yields \texthebrew{\hebrewnumeral{1750}},
+			¦\Hebrewnumeral{1750}¦ yields \texthebrew{\Hebrewnumeral{1750}},
+			and ¦\Hebrewnumeralfinal{1750}¦ yields \texthebrew{\Hebrewnumeralfinal{1750}}.
+	
+	\item \Cmd\russiannumeral produces Russian numbering, with uppercased variant (for alphanumerical variant) via \Cmd\Russiannumeral.
+	        Depending on the ¦numerals¦ option in the Russian language selection, this is either Arabic digit or Cyrillic
+	        alphanumercial output (note that the latter is currently only supported up to 30).\\
+	        Example: With ¦numerals=latin¦ ¦\russiannumeral{19}¦ yields \textrussian{\russiannumeral{19}},
+	        with ¦numerals=cyrillic¦ ¦\russiannumeral{19}¦ results in \textrussian[numerals=cyrillic]{\russiannumeral{19}}.
+			
+	\item \Cmd\serbiannumeral produces Serbian numbering, with uppercased variant (for alphanumerical variant) via \Cmd\Serbiannumeral.
+		    Depending on the ¦numerals¦ option in the Serbian language selection, this is either Arabic digit or Cyrillic
+		    alphanumercial output (note that the latter is currently only supported up to 30).\\
+		    Example: With ¦numerals=latin¦ ¦\serbiannumeral{19}¦ yields \textserbian{\serbiannumeral{19}},
+			with ¦numerals=cyrillic¦ ¦\serbiannumeral{19}¦ results in \textserbian[numerals=cyrillic]{\serbiannumeral{19}}.
+\end{itemize}
 
 
 \section{Footnotes in right-to-left context}
@@ -765,7 +836,7 @@ Consequently, the footnote rule also is to be placed right. Things get more tric
 scripts are mixed. Then you might want to put the footnotes on some pages left, on some right, or even mix positions on a page.
 Thus, footnote handling in right-to-left context sometimes needs manual intervention. This is described in what follows.
 
-\subsubsection{Horizontal footnote position}
+\subsection{Horizontal footnote position}
 
 When right-to-left languages are used, the ¦\footnote¦ command becomes sensitive to the text directionality. The footnote is
 always placed on the side that is currently the origin of direction: on the left side of the page in LTR paragraphs and
@@ -777,7 +848,7 @@ directionality. Likewise, ¦\RTLfootnote¦ always places it on the right side. L
 and ¦\LTRfootnote¦ provide an optional argument to customize the number.
 
 
-\subsubsection{Footnote rule length and position}
+\subsection{Footnote rule length and position}
 
 The default placement of the footnote rule differs in \XeTeX\ and \LuaTeX\ output (this is due to differences in the \textsf{bidi}
 and \textsf{luabidi} packages). With \XeTeX, footnote rules are always placed left, which is often wrong in RTL context.

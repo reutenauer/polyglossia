@@ -17,8 +17,8 @@ and may look very wrong.}
   hyphennames={marathi},
   hyphenmins={2,2},%CHECK
   fontsetup=true,
+  localnumeral=marathinumerals
   %TODO nouppercase=true,
-  %TODO localnumber=marathinumber
 }
 
 \def\tmp@western{Western}
@@ -30,6 +30,8 @@ and may look very wrong.}
   \ifx\@tmpa\tmp@western
     \marathi@devanagari@numeralsfalse
   \fi}
+
+\newcommand{\marathinumerals}[2]{\marathinumber{#2}}
 
 \def\marathinumber#1{%
   \ifmarathi@devanagari@numerals

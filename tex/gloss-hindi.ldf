@@ -10,9 +10,9 @@
   scripttag=deva,
   langtag=HIN,
 %%  hyphennames={hindi,!sanskrit}, TODO: implement fallback patterns (with ! prefix)
-  fontsetup=true
+  fontsetup=true,
+  localnumeral=hindinumerals
   %TODO nouppercase=true,
-  %TODO localnumber=hindinumber
 }
 
 \ifx\l@hindi\@undefined%
@@ -37,6 +37,8 @@
   \ifx\@tmpa\tmp@western
     \hindi@devanagari@numeralsfalse
   \fi}
+
+\newcommand{\hindinumerals}[2]{\hindinumber{#2}}
 
 \def\hindinumber#1{%
   \ifhindi@devanagari@numerals
