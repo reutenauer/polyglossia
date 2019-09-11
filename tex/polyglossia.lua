@@ -112,6 +112,21 @@ local function newloader(langentry)
             for k, v in pairs(langdata) do
 				s = s .. "\n" .. k .. "\t" .. tostring(v)
             end
+
+            --
+            -- LaTeX's \newlanguage increases language register (count19),
+            -- whereas LuaTeX's lang.new() increases its own language id.
+            -- So when a user has declared, say, \newlanguage\lang@xyz, then
+            -- these two numbers do not match each other. If we do not consider
+            -- this possible situation, our newloader() function will
+            -- unfortunately overwrite the language \lang@xyz.
+            --
+            -- Threfore here we will compare LaTeX's \newlanguage number with
+            -- LuaTeX's lang.new() id and select the bigger one for our new
+            -- language object. Also we will update LaTeX's language register
+            -- by this new id, so that another possible \newlanguage should not
+            -- overwrite our language object.
+            --
             -- get next \newlanguage allocation number
             local langcnt = tex.count[lang_register] + 1
             -- get new lang object
