@@ -570,7 +570,7 @@
   \tl_trim_spaces_apply:nN {#4} \polyglossia_iii_localnumeral:nnnnn {#1}{#2}{#3}{#5}
 }
 \cs_generate_variant:Nn \polyglossia_ii_localnumeral:nnnnn {
-  eeenn, eeeon
+  eeenn, eeeon, eeeen
 }
 
 % convert the counter to value
@@ -580,7 +580,7 @@
 % #4 option
 \cs_new:Nn \polyglossia_i_localnumeral:nnnnn
 {
-  \polyglossia_ii_localnumeral:eeeon {\int_value:w #1} {#2} {#3} {#4} {#5}
+  \polyglossia_ii_localnumeral:eeeen {\int_value:w #1} {#2} {#3} {#4} {#5}
 }
 
 % print number usage \localnumeral[option]{numeral}
@@ -594,7 +594,7 @@
       \exp_args:Nc \polyglossia_i_localnumeral:nnnnn {c@#3}
          {\mainlanguagename} {\languagename} {\IfNoValueTF {#2}{lang=local}{#2}} {localnumeral}
     }{% unstarred: take number
-      \polyglossia_ii_localnumeral:eeeon {\int_eval:n{#3}}
+      \polyglossia_ii_localnumeral:eeeen {\int_eval:n{#3}}
          {\mainlanguagename} {\languagename} {\IfNoValueTF {#2}{lang=local}{#2}} {localnumeral}
     }
 }
