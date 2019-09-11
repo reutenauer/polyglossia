@@ -411,7 +411,7 @@
       .default:n = true,
     #1 / fontsetup
       .initial:n = false,
-    % environement name
+    % environment name
     #1 / envname
        .code:n = {
            \prop_gput:Nnn{\polyglossia@langsetup}{#1/envname}{##1}
@@ -422,6 +422,7 @@
     #1 / localnumeral
          . code:n =  {
             \prop_gput:Nnn{\polyglossia@langsetup}{#1/localnumeral}{##1}
+            \prop_gput:Nnn{\polyglossia@langsetup}{#1/Localnumeral}{##1}
          },
     #1 / localnumeral.value_required:n = true,
     #1 / localnumeral.initial:n = {polyglossia@C@localnumeral},
