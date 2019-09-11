@@ -30,8 +30,7 @@ local polyglossia = polyglossia
 local nohyphid = luatexbase.registernumber'l@nohyphenation' or lang.id(lang.new())
 -- key `nohyphenation` is for .sty file when possibly undefined l@nohyphenation
 polyglossia.newloader_loaded_languages = { nohyphenation = nohyphid }
--- newloader_max_langid will be increased by 4 per language
-local newloader_max_langid = 0
+
 local newloader_available_languages = dofile(kpse.find_file('language.dat.lua'))
 -- Suggestion by Dohyun Kim on #129
 local t = { }
@@ -93,6 +92,9 @@ local function load_tibt_eol()
     require('polyglossia-tibt')
 end
 
+-- LaTeX's language register is \count19
+local lang_register = 19
+
 -- New hyphenation pattern loader: use language.dat.lua directly and the language identifiers
 local function newloader(langentry)
     loaded_language = polyglossia.newloader_loaded_languages[langentry]
@@ -110,8 +112,19 @@ local function newloader(langentry)
             for k, v in pairs(langdata) do
 				s = s .. "\n" .. k .. "\t" .. tostring(v)
             end
-            newloader_max_langid = newloader_max_langid + 4
-            langobject = lang.new(newloader_max_langid)
+            -- get next \newlanguage allocation number
+            local langcnt = tex.count[lang_register] + 1
+            -- get new lang object
+            local langobject = lang.new()
+            local langid = lang.id(langobject)
+            -- get bigger one between \newlanguage and new lang obj id
+            local maxlangid = math.max(langcnt, langid)
+            -- set language register for possible \newlanguage
+            tex.setcount('global', lang_register, maxlangid)
+            -- get new lang object if needeed
+            if langid ~= maxlangid then
+              langobject = lang.new(maxlangid)
+            end
 			s = s .. "\npatterns: " .. langdata.patterns
 			log_info(s)
             if langdata.patterns and langdata.patterns ~= '' then
