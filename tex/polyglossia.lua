@@ -26,8 +26,11 @@ end
 polyglossia = polyglossia or {}
 local polyglossia = polyglossia
 
-polyglossia.newloader_loaded_languages = { }
-polyglossia.newloader_max_langid = 0
+-- predefined l@nohyphenation or dummy new language
+local nohyphid = luatexbase.registernumber'l@nohyphenation' or lang.id(lang.new())
+-- key `nohyphenation` is for .sty file when possibly undefined l@nohyphenation
+local newloader_loaded_languages = { nohyphenation = nohyphid }
+
 local newloader_available_languages = dofile(kpse.find_file('language.dat.lua'))
 -- Suggestion by Dohyun Kim on #129
 local t = { }
@@ -89,16 +92,19 @@ local function load_tibt_eol()
     require('polyglossia-tibt')
 end
 
+-- LaTeX's language register is \count19
+local lang_register = 19
+
 -- New hyphenation pattern loader: use language.dat.lua directly and the language identifiers
 local function newloader(langentry)
-    loaded_language = polyglossia.newloader_loaded_languages[langentry]
+    local loaded_language = newloader_loaded_languages[langentry]
     if loaded_language then
         log_info('Language ' .. langentry .. ' already loaded; id is ' .. lang.id(loaded_language))
         -- texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded with patterns ' .. tostring(loaded_language) .. '; id is ' .. lang.id(loaded_language))
         -- texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded with patterns ' .. loaded_language['patterns'] .. '; id is ' .. lang.id(loaded_language))
         return lang.id(loaded_language)
     else
-        langdata = newloader_available_languages[langentry]
+        local langdata = newloader_available_languages[langentry]
         if langdata and langdata['special'] == 'language0' then return 0 end
 
         if langdata then
@@ -106,35 +112,59 @@ local function newloader(langentry)
             for k, v in pairs(langdata) do
 				s = s .. "\n" .. k .. "\t" .. tostring(v)
             end
-            polyglossia.newloader_max_langid = polyglossia.newloader_max_langid + 1
-            -- langobject = lang.new(newloader_max_langid)
-            lang.new(); lang.new(); lang.new()
-            langobject = lang.new()
+
+            --
+            -- LaTeX's \newlanguage increases language register (count19),
+            -- whereas LuaTeX's lang.new() increases its own language id.
+            -- So when a user has declared, say, \newlanguage\lang@xyz, then
+            -- these two numbers do not match each other. If we do not consider
+            -- this possible situation, our newloader() function will
+            -- unfortunately overwrite the language \lang@xyz.
+            --
+            -- Threfore here we will compare LaTeX's \newlanguage number with
+            -- LuaTeX's lang.new() id and select the bigger one for our new
+            -- language object. Also we will update LaTeX's language register
+            -- by this new id, so that another possible \newlanguage should not
+            -- overwrite our language object.
+            --
+            -- get next \newlanguage allocation number
+            local langcnt = tex.count[lang_register] + 1
+            -- get new lang object
+            local langobject = lang.new()
+            local langid = lang.id(langobject)
+            -- get bigger one between \newlanguage and new lang obj id
+            local maxlangid = math.max(langcnt, langid)
+            -- set language register for possible \newlanguage
+            tex.setcount('global', lang_register, maxlangid)
+            -- get new lang object if needeed
+            if langid ~= maxlangid then
+              langobject = lang.new(maxlangid)
+            end
 			s = s .. "\npatterns: " .. langdata.patterns
 			log_info(s)
             if langdata.patterns and langdata.patterns ~= '' then
-                pattfilepath = kpse.find_file(langdata.patterns)
+                local pattfilepath = kpse.find_file(langdata.patterns)
                 if pattfilepath then
-                    pattfile = io.open(pattfilepath)
+                    local pattfile = io.open(pattfilepath)
                     lang.patterns(langobject, pattfile:read('*all'))
                     pattfile:close()
                 end
             end
             if langdata.hyphenation and langdata.hyphenation ~= '' then
-                hyphfilepath = kpse.find_file(langdata.hyphenation)
+                local hyphfilepath = kpse.find_file(langdata.hyphenation)
                 if hyphfilepath then
-                    hyphfile = io.open(hyphfilepath)
+                    local hyphfile = io.open(hyphfilepath)
                     lang.hyphenation(langobject, hyphfile:read('*all'))
                     hyphfile:close()
                 end
             end
-            polyglossia.newloader_loaded_languages[langentry] = langobject
+            newloader_loaded_languages[langentry] = langobject
 
             log_info('Language ' .. langentry .. ' was not yet loaded; created with id ' .. lang.id(langobject))
             return lang.id(langobject)
         else
             log_warning('Language ' .. langentry .. ' not found in language.dat.lua')
-            return 255
+            return nohyphid
         end
     end
 end
@@ -146,6 +176,7 @@ polyglossia.check_char = check_char
 polyglossia.load_frpt = load_frpt
 polyglossia.load_tibt_eol = load_tibt_eol
 polyglossia.newloader = newloader
+polyglossia.newloader_loaded_languages = newloader_loaded_languages
 -- global variables:
 -- polyglossia.default_language
 -- polyglossia.current_language
