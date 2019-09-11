@@ -1,6 +1,11 @@
 1.45 (????)
 
-  * gloss-russian: check whether command exist before redefining (#280)
+  * Add new macros \localnumeral, \localnumeral*, \Localnumeral and
+    \Localnumeral* that convert Arabic digitals to the local number scheme.
+  * gloss-serbian: add numerals=cyrillic option. Ass \asbuk and \Asbuk.
+  * gloss-russian: 
+    - check whether command exist before redefining (#280)
+    - Fix some whitespace issues.
   * Ensure proper direction with arabic digits in Arabic and Farsi (#213)
   * Add documentation about footnotes in RTL context
   * Fix equation number in arabic and farsi (#7)
