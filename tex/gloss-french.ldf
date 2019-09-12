@@ -11,16 +11,24 @@
   fontsetup=true}
 
 \def\french@variant{french}
-\define@choicekey*+{french}{variant}[\val\nr]{french,canadian,acadian}{%
+\define@choicekey*+{french}{variant}[\val\nr]{french,canadian,acadian}[french]{%
    \ifcase\nr\relax
       % french:
       \gdef\french@variant{french}%
    \or
       % canadian:
-      \gdef\french@variant{canadian}%
+      \gdef\french@variant{canadien}%
+      \xpg@ifdefined{canadien}{}%
+	    {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
+	      I will use the standard patterns for French instead}%
+	    \adddialect\l@canadien\l@french\relax}%
    \or
       % acadian:
-      \gdef\french@variant{canadian}%
+      \gdef\french@variant{acadian}%
+      \xpg@ifdefined{acadian}{}%
+	    {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
+	      I will use the standard patterns for French instead}%
+	    \adddialect\l@acadian\l@french\relax}%
    \fi
    \xpg@info{Option: French, variant=\val}%
 }{\xpg@warning{Unknown French variant `#1'}}
@@ -49,13 +57,21 @@
 
 \def\xpg@unskip{\ifhmode\ifdim\lastskip>\z@\unskip\fi\fi}
 
+% Save original footnote definition
+\let\xpg@orig@makefntext\@makefntext
+
 \define@boolkey{french}[french@]{frenchfootnote}[true]{%
    \iffrench@frenchfootnote
-      \ifx\@makefntext\undefined\else
-          \let\@orig@makefntext\@makefntext
-          \long\def\french@makefntext##1{\parindent1em \noindent\quad\ifx\@thefnmark\empty\else\@thefnmark.\space\fi ##1}
+      \ifx\@makefntext\undefined\else        
+          \long\def\french@makefntext##1{%
+               \parindent1em \noindent\quad%
+               \ifx\@thefnmark\empty\else%
+               \@thefnmark.\space\fi ##1%
+          }
           \let\@makefntext\french@makefntext
       \fi
+   \else
+      \let\@makefntext\xpg@orig@makefntext
    \fi
 }
 

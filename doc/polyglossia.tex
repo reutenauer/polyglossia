@@ -743,11 +743,11 @@ the argument of ¦\localnumeral¦ must consist of numbers only.
 For\new{1.45} the conversion of counters, the starred version \Cmd{\localnumeral*} is provided. This takes a counter as argument.
 For instance in an Arabic environment ¦\localnumeral*{page}¦ yields \textarabic{\localnumeral*{page}}.
 
-For scripts with alphanumeric numbering, the uppercased variants \Cmd{\Localnumeral} and \Cmd{\Localnumeral*} provide the uppercased 
+For scripts with alphanumeric numbering, the variants \Cmd{\Localnumeral} and \Cmd{\Localnumeral*} provide the uppercased 
 versions.
 
-All\DescribeMacro{\localnumber[]}\ these macros return the local numbering for the main language (rather than the locally selected language)
-if an empty optional argument is given, \eg ¦\localnumeral[]{4711}¦.
+All\DescribeMacro{[lang=main]}\ these macros return the local numbering for the main language (rather than the locally selected language)
+if the optional argument ¦lang=main¦ is given, \eg ¦\localnumeral[lang=main]{4711}¦.
 
 \subsection{Non-Western decimal digits}\label{sec:decdigit}
 
@@ -788,7 +788,8 @@ For languages which use special (non-Latin) alphanumerical notation\footnote{%
 	and \url{http://en.wikipedia.org/wiki/Syriac_alphabet}.}, dedicated macros are provided.
 
 They work in a similar way than the ¦\<script>digits¦ macros described above: They take Arabic numerical input
-and output the respective value in the local alphabetic numbering scheme.
+and output the respective value in the local alphabetic numbering scheme (most of these macros are equivalent
+to ¦\localnumeral¦ and ¦\Localnumeral¦ in the respective context).
 
 The following macros are provided:
 
