@@ -20,6 +20,7 @@ Bug fixes:
   * Fix equation number in arabic and farsi (#7).
   * Simplify and document Hebrew marcheshvan option (#16).
   * Fix hyphenation of Greek with LuaTeX (#55).
+  * Fix N'ko date format (#63).
   * Disable the extras of a language when a nested language starts (#66, #169).
   * Properly implement bengali numbers (#69, #184).
   * Fix kerning in math with French (#92).
@@ -53,11 +54,11 @@ Bug fixes:
   * gloss-russian: 
     - check whether command exist before redefining (#280).
     - Fix some whitespace issues.
+  * Fix and simplify frenchfootnote definition (#294).
   * Fix footnote numbering in Farsi.
   * Fix latin footnotes in Arabic documents.
   * Set the correct main direction with luabidi.
   * Fix autospaceguillemets option in French.
-  * Fix and simplify frenchfootnote definition.
   * Fix grouping in gloss-danish.ldf.
   * Properly store \MakeUppercase and \@arabic for later restoration.
 
