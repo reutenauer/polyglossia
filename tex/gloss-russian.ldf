@@ -7,7 +7,8 @@
   hyphenmins={2,2},
   frenchspacing=true,
   fontsetup,
-  localnumber=russiannumerals
+  localnumeral=russiannumerals,
+  Localnumeral=Russiannumerals
   %TODO localalph={russian@alph,russian@Alph}
 }
 
@@ -214,6 +215,7 @@
 }
 
 \newcommand{\russiannumerals}[2]{\russiannumber{#2}}
+\newcommand{\Russiannumerals}[2]{\Russiannumber{#2}}
 
 \def\russiannumber#1{%
   \ifcyrillic@numerals

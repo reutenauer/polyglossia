@@ -11,7 +11,7 @@
   langtag=HIN,
 %%  hyphennames={hindi,!sanskrit}, TODO: implement fallback patterns (with ! prefix)
   fontsetup=true,
-  localnumber=hindinumerals
+  localnumeral=hindinumerals
   %TODO nouppercase=true,
 }
 

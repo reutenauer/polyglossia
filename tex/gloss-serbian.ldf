@@ -10,7 +10,8 @@
   hyphenmins={2,2},
   indentfirst=true,
   fontsetup=false,
-  localnumber=serbiannumerals
+  localnumeral=serbiannumerals,
+  Localnumeral=Serbiannumerals
   %TODO localalph
 }
 
@@ -127,6 +128,7 @@
 
 
 \newcommand{\serbiannumerals}[2]{\serbiannumber{#2}}
+\newcommand{\Serbiannumerals}[2]{\Serbiannumber{#2}}
 
 \def\serbiannumber#1{%
   \ifserbian@numerals

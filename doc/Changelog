@@ -1,57 +1,72 @@
 1.45 (????)
 
-  * gloss-russian: check whether command exist before redefining (#280)
-  * Ensure proper direction with arabic digits in Arabic and Farsi (#213)
-  * Add documentation about footnotes in RTL context
-  * Fix equation number in arabic and farsi (#7)
-  * Fix footnote in farsi  
-  * Correction of the Lua module for French
-  * Fix latin footnotes in Arabic documents
-  * Set the correct main direction with luabidi
-  * Fix typos in Hindi captions (#202)
-  * Support \aemph with lualatex
-  * Simplify and document Hebrew marcheshvan option (#16)
-  * Improve frenchfootnote documentation
-  * Introduce french option option autospacetypewriter
-    alias OriginalTypewriter
-  * Fix autospaceguillemets option
-  * Rename automaticspacesaroundguillemets to autospaceguillemets 
-    The old option is kept for backwards compatibility.
+New features:
+  * Add new macros \localnumeral, \localnumeral*, \Localnumeral and
+    \Localnumeral* that convert Arabic digitals to the local number scheme.
+  * gloss-serbian: add numerals=cyrillic option. Add \asbuk and \Asbuk.
+  * Implement basic support for (French) canadien and (English) canadian (#22)
   * Add french option autospacing and commands \AutoSpacing, \NoAutoSpacing
     This allows to switch off autospacing globally or locally (#113)
-  * Redefine fontfamilies for french only if language loaded (#270)
-  * Fix and simplify frenchfootnote definition
-  * Fix grouping in gloss-danish.ldf
-  * Register current language in polyglossia lua module after selection (#234)
-  * Mention Japanese support in the docs.
-  * Postpone the assignment of defaultfamily to BeginDocument,
-    thus do not overwrite \familydefault redefinitions in the preamble (#127)
-  * Postpone \disablehyphenation in preamble until after setting of
-    document language (#125)
-  * Implement babelshorthands for Finnish (#212)
-  * Implement basic support for (French) canadien and (English) canadian (#22)
-  * Rewrite and fix English variant handling (#208)
-  * Pass language options to the aux files (#205)
-  * Fix hyphenation of Greek with LuaTeX (#55)
-  * Document tibetan numerals option (#109)
-  * When switching language, set the language/script specific font families (#164)
-  * Correct some Bengali captions (#165)
-  * Properly implement bengali numbers (#69, #184)
   * Fixup \normalfont (#203)
-  * Define russian caption before key allocation (#219)
-  * Properly store \MakeUppercase and \@arabic for later restoration
-  * Fix expansion issue in Hebrew (#93)
-  * Fix numbering expansion issue in Greek (#110)
-  * Fix whitespace issue in \datewelsh (#158)
-  * hebrew: Properly store \MakeUppercase for later restoration (#152)
-  * Fix babel language switching commands (#239)
+  * Implement babelshorthands for Finnish (#212)
+  * Implement access to current language via Lua (#243).
+  * Introduce french option option autospacetypewriter
+    alias OriginalTypewriter
+  * Support \aemph with lualatex
+  * Rename automaticspacesaroundguillemets to autospaceguillemets 
+    The old option is kept for backwards compatibility.
+
+Bug fixes:
+  * Fix equation number in arabic and farsi (#7).
+  * Simplify and document Hebrew marcheshvan option (#16).
+  * Fix hyphenation of Greek with LuaTeX (#55).
+  * Fix N'ko date format (#63).
+  * Disable the extras of a language when a nested language starts (#66, #169).
+  * Properly implement bengali numbers (#69, #184).
+  * Fix kerning in math with French (#92).
+  * Fix expansion issue in Hebrew (#93).
+  * Fix numbering expansion issue in Greek (#110).
+  * Postpone \disablehyphenation in preamble until after setting of
+    document language (#125).
+  * Postpone the assignment of defaultfamily to BeginDocument,
+    thus do not overwrite \familydefault redefinitions in the preamble (#127).
+  * Reset number settings when switching language (#133).
+  * hebrew: Properly store \MakeUppercase for later restoration (#152).
+  * Fix whitespace issue in \datewelsh (#158).
+  * When switching language, set the language/script specific font families (#164).
+  * Correct some Bengali captions (#165).
+  * Fix documentation of Serbian (#168).
+  * Reset ucl codes in latin only if the respective variant is used (#172).
+  * Fix \disablehyphenation with LuaTeX (#187).
+  * Fix typos in Hindi captions (#202).
+  * Pass language options to the aux files (#205).
+  * Rewrite and fix English variant handling (#208).
+  * Define magyar caption formats in \blockextras and undef them in \noextras (#209).
+  * Ensure proper direction with arabic digits in Arabic and Farsi (#213).
+  * Fix \linespread with Korean (#218).
+  * Define russian caption before key allocation (#219).
+  * Register current language in polyglossia lua module after selection (#234).
+  * Fix babel language switching commands (#239).
     \foreignlanguage and the starred otherlanguage* environment are not
     supposed to change dates.
-  * Reset number settings when switching language (#133)
-  * Reset ucl codes in latin only if the respective variant is used (#172)
-  * Define magyar caption formats in \blockextras and undef them in \noextras (#209)
-  * Disable the extras of a language when a nested language starts (#66, #169)
-  * Fix documentation of Serbian (#168)
+  * Fix French spacing leaking beyond French (#270).
+  * Redefine fontfamilies for French only if language is loaded (#270).
+  * gloss-russian: 
+    - check whether command exist before redefining (#280).
+    - Fix some whitespace issues.
+  * Fix and simplify frenchfootnote definition (#294).
+  * Fix footnote numbering in Farsi.
+  * Fix latin footnotes in Arabic documents.
+  * Set the correct main direction with luabidi.
+  * Fix autospaceguillemets option in French.
+  * Fix grouping in gloss-danish.ldf.
+  * Properly store \MakeUppercase and \@arabic for later restoration.
+
+Documentation:
+  * Add documentation about footnotes in RTL context
+  * Document tibetan numerals option (#109)
+  * Improve frenchfootnote documentation.
+  * Mention Japanese support in the docs.
 
 1.44 (04-04-2019)
   * Correction to Russian language file, by Maksim Zholudev (commit d2f383e)

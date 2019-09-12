@@ -30,7 +30,7 @@ and may look very wrong.}
   hyphennames={kannada},
   hyphenmins={2,2}, 
   fontsetup=true,
-  localnumber=kannadanumerals
+  localnumeral=kannadanumerals
 }
 
 %% Defining Kannada digits equivalents to english

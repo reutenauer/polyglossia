@@ -7,7 +7,7 @@
   hyphenmins={1,3},
   frenchspacing=true,
   fontsetup=false, % will be done below
-  %TODO localnumber=sanskritnumber
+  %TODO localnumeral=sanskritnumber
 }
 
 \define@key{sanskrit}{Script}[Devanagari]{%

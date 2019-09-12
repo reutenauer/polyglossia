@@ -17,7 +17,7 @@ and may look very wrong.}
   hyphennames={marathi},
   hyphenmins={2,2},%CHECK
   fontsetup=true,
-  localnumber=marathinumerals
+  localnumeral=marathinumerals
   %TODO nouppercase=true,
 }
 

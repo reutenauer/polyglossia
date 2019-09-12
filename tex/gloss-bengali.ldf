@@ -18,7 +18,7 @@ and may look very wrong.}
   hyphennames={bengali},
   hyphenmins={2,2},%CHECK
   fontsetup=true,
-  localnumber=bengalinumerals
+  localnumeral=bengalinumerals
   %TODO nouppercase=true,
 }
 
@@ -131,7 +131,7 @@ and may look very wrong.}
 
 \def\bengali@globalnumbers{%
    \let\@arabic\bengalinumber%
-   \renewcommand\thefootnote{\localnumber{footnote}}%
+   \renewcommand\thefootnote{\localnumeral*{footnote}}%
 }
 
 % Store original definition
