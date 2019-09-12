@@ -49,13 +49,21 @@
 
 \def\xpg@unskip{\ifhmode\ifdim\lastskip>\z@\unskip\fi\fi}
 
+% Save original footnote definition
+\let\xpg@orig@makefntext\@makefntext
+
 \define@boolkey{french}[french@]{frenchfootnote}[true]{%
    \iffrench@frenchfootnote
-      \ifx\@makefntext\undefined\else
-          \let\@orig@makefntext\@makefntext
-          \long\def\french@makefntext##1{\parindent1em \noindent\quad\ifx\@thefnmark\empty\else\@thefnmark.\space\fi ##1}
+      \ifx\@makefntext\undefined\else        
+          \long\def\french@makefntext##1{%
+               \parindent1em \noindent\quad%
+               \ifx\@thefnmark\empty\else%
+               \@thefnmark.\space\fi ##1%
+          }
           \let\@makefntext\french@makefntext
       \fi
+   \else
+      \let\@makefntext\xpg@orig@makefntext
    \fi
 }
 
