@@ -6,7 +6,8 @@
   langtag=HYE,
   hyphennames={armenian},
   hyphenmins={2,2},
-  fontsetup=true
+  fontsetup=true,
+  localnumeral=armeniannumerals
 }
 
 \newif\if@eastern@armenian
@@ -21,6 +22,12 @@
    \fi
    \xpg@info{Option: Armenian, variant=\val}%
 }{\xpg@warning{Unknown Armenian variant `#1'}}
+
+\newif\if@armenian@numerals
+\@armenian@numeralsfalse
+\define@key{armenian}{numerals}[armenian]{%
+  \ifstrequal{#1}{arabic}{\@armenian@numeralsfalse}{\@armenian@numeralstrue}%
+}
 
 % Taken from ArmTeX. Audit!
 \def\captionsarmenian{%
@@ -89,5 +96,74 @@
   \else
      \date@western@armenian%
 }
+
+\newcommand{\armeniannumerals}[2]{%
+  \if@armenian@numerals
+     \armeniannumber{#2}%
+  \else
+     #2%
+  \fi%
+}
+
+\def\armenian@numbers{%
+   \if@armenian@numerals
+      \def\armenian@alph##1{\expandafter\armeniannumeral\expandafter{\the##1}}%
+      \let\@alph\armenian@alph%
+   \fi%
+}
+
+\def\noarmenian@numbers{%
+  \let\@alph\latin@alph%
+  \let\armenian@alph\@undefined%
+}
+
+\def\armenian@globalnumbers{%
+  \if@armenian@numerals
+    \let\@arabic\armeniannumber%
+    \renewcommand\thefootnote{\localnumeral*{footnote}}%
+    \renewcommand\theequation{\localnumeral*{equation}}%
+  \fi
+}
+
+% Store original definition
+\let\xpg@save@arabic\@arabic
+
+\def\noarmenian@globalnumbers{
+   \let\@arabic\xpg@save@arabic%
+}
+
+\protected\def\armeniannumber#1{\expandafter\@armeniannumber\expandafter{\number#1}}
+\def\@armeniannumber#1{%
+  \ifnum#1<\@ne\space\arm@ill@value{#1}%
+  \else
+    \ifnum#1<10\expandafter\arm@num@i\number#1%
+    \else
+      \ifnum#1<100\expandafter\arm@num@ii\number#1%
+      \else
+        \ifnum#1<\@m\expandafter\arm@num@iii\number#1%
+        \else
+          \ifnum#1<\@M\expandafter\arm@num@iv\number#1%
+          \else
+             \space\arm@ill@value{#1}%
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+}
+
+\let\armeniannumeral=\armeniannumber
+\def\arm@num@i#1{%
+  \ifcase#1\or Ա\or Բ\or Գ\or Դ\or Ե\or Զ\or Է\or Ը\or Թ\fi}
+\def\arm@num@ii#1{%
+  \ifcase#1\or Ժ\or Ի\or Լ\or Խ\or Ծ\or Կ\or Հ\or Ձ\or Ղ\fi
+  \arm@num@i}
+\def\arm@num@iii#1{%
+  \ifcase#1\or Ճ\or Մ\or Յ\or Ն\or Շ\or Ո\or Չ\or Պ\or Ջ\fi
+  \arm@num@ii}
+\def\arm@num@iv#1{%
+  \ifcase#1\or Ռ\or Ս\or Վ\or Տ\or Ր\or Ց\or Ւ\or Փ\or Ք\fi
+  \arm@num@iii}
+\def\arm@ill@value#1{\xpg@warning{Illegal value (#1) for Armenian numeral}[$#1$]}
 
 \endinput

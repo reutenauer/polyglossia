@@ -25,7 +25,7 @@
 \usepackage[babelshorthands]{polyglossia}
 \usepackage{farsical}
 \setmainlanguage[variant=british,ordinalmonthday=false]{english}
-\setotherlanguages{arabic,hebrew,syriac,greek,russian,serbian,catalan}
+\setotherlanguages{arabic,armenian,hebrew,syriac,greek,russian,serbian,catalan}
 \usepackage[protrusion]{microtype}
 \newcommand*\Cmd[1]{\cmd{#1}\DescribeMacro{#1}\xspace}
 \newcommand*\pkg[1]{\textsf{\color{myblue}#1}}
@@ -60,6 +60,7 @@
 \setsansfont{Linux Biolinum O}
 \setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}
 \newfontfamily\arabicfont[Script=Arabic]{Amiri}
+\newfontfamily\armenianfont[Script=Armenian]{DejaVu Sans}
 \newfontfamily\syriacfont[Script=Syriac]{Serto Jerusalem}
 \newfontfamily\hebrewfont[Script=Hebrew]{Ezra SIL}
 
@@ -381,6 +382,7 @@ The default value of each option is given in italic.
 \textbf{Options}:
 \begin{itemize}
 	\item \TB{variant}\new{v1.45} = eastern or \textit{western}
+	\item \TB{numerals}\new{v1.45} = armenian or \textit{arabic}
 \end{itemize}
 
 \subsection{bengali}\label{bengali}\new{v1.2.0}
@@ -809,6 +811,9 @@ The following macros are provided:
 	\item \Cmd\abjadsyriac outputs Syriac abjad numerals.\footnote{%
 				A fine guide to numerals in Syriac can be found at \link{http://www.garzo.co.uk/documents/syriac-numerals.pdf}.}\\
 			Example: ¦\abjadsyriac{463}¦ yields \textsyriac{\abjadsyriac{463}}.
+	
+	\item \Cmd\armeniannumeral produces Armenian alphabetic numbering.
+	          Example: ¦\armeniannumeral{1863}¦ yields \textarmenian{\armeniannumeral{1863}}.
 
 	\item \Cmd\greeknumeral produces Greek alphabetic numbering, \Cmd\Greeknumeral outputs uppercased variants.
 			Example: ¦\greeknumeral{1863}¦ yields \textgreek{\greeknumeral{1863}},
