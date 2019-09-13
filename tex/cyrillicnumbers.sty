@@ -15,8 +15,8 @@
 }
 \anw@true
 
-\protected\def\cyr@@alph#1{\expandafter\@cyr@@alph\expandafter{\number#1}}
-\def\@cyr@@alph#1{%
+\protected\def\cyr@alph#1{\expandafter\@cyr@alph\expandafter{\number#1}}
+\def\@cyr@alph#1{%
   \ifnum#1<\@ne\space\cyr@ill@value{#1}%
   \else
     \anw@print
@@ -42,8 +42,8 @@
   \fi
 }
 
-\protected\def\cyr@@Alph#1{\expandafter\@cyr@@Alph\expandafter{\number#1}}
-\def\@cyr@@Alph#1{%
+\protected\def\cyr@Alph#1{\expandafter\@cyr@Alph\expandafter{\number#1}}
+\def\@cyr@Alph#1{%
   \ifnum#1<\@ne\space\cyr@ill@value{#1}%
   \else
     \anw@print

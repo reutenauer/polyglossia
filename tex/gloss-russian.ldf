@@ -221,7 +221,7 @@
 
 \def\russiannumber#1{%
   \ifcyrillic@numerals
-    \cyr@@alph{#1}%
+    \cyr@alph{#1}%
   \else
     \number#1%
   \fi%
@@ -229,7 +229,7 @@
 
 \def\Russiannumber#1{%
   \ifcyrillic@numerals
-    \cyr@@Alph{#1}%
+    \cyr@Alph{#1}%
   \else
     \number#1%
   \fi%
@@ -238,9 +238,9 @@
 \let\russiannumeral=\russiannumber
 \let\Russiannumeral=\Russiannumber
 
-\def\Asbuk#1{\expandafter\cyr@@Alph\csname c@#1\endcsname}
+\def\Asbuk#1{\expandafter\cyr@Alph\csname c@#1\endcsname}
 
-\def\asbuk#1{\expandafter\cyr@@alph\csname c@#1\endcsname}
+\def\asbuk#1{\expandafter\cyr@alph\csname c@#1\endcsname}
 
 % This is a poor man's cyrillic alphanumeric. It just uses the alphabet and
 % thus ends at 30. We now use proper cyrillic numbering.

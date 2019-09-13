@@ -134,7 +134,7 @@
 
 \def\serbiannumber#1{%
   \ifserbian@numerals
-    \cyr@@alph{#1}%
+    \cyr@alph{#1}%
   \else
     \number#1%
   \fi
@@ -142,7 +142,7 @@
 
 \def\Serbiannumber#1{%
   \ifserbian@numerals
-    \cyr@@Alph{#1}%
+    \cyr@Alph{#1}%
   \else
     \number#1%
   \fi
@@ -175,24 +175,24 @@
    \ifserbian@numerals\noserbian@numbers\fi
 }
 
-\def\Asbuk#1{\expandafter\cyr@@Alph\csname c@#1\endcsname}
+\def\Asbuk#1{\expandafter\cyr@Alph\csname c@#1\endcsname}
 
-\def\asbuk#1{\expandafter\cyr@@alph\csname c@#1\endcsname}
+\def\asbuk#1{\expandafter\cyr@alph\csname c@#1\endcsname}
 
 % This is a poor man's cyrillic alphanumeric. It just uses the alphabet and
 % thus ends at 30. We now use proper cyrillic numbering.
 
-%\def\cyr@@Alph#1{\ifcase#1\or
+%\def\cyr@Alph#1{\ifcase#1\or
 %   А\or Б\or В\or Г\or Д\or Ђ\or Е\or Ж\or
 %   З\or И\or Ј\or К\or Л\or Љ\or М\or Н\or
 %   Њ\or О\or П\or Р\or С\or Т\or Ћ\or У\or
-%   Ф\or Х\or Ц\or Ч\or Џ\or Ш\else\xpg@ill@value{#1}{cyr@@Alph}\fi}
+%   Ф\or Х\or Ц\or Ч\or Џ\or Ш\else\xpg@ill@value{#1}{cyr@Alph}\fi}
 
-%\def\cyr@@alph#1{\ifcase#1\or
+%\def\cyr@alph#1{\ifcase#1\or
 %   а\or б\or в\or г\or д\or ђ\or е\or ж\or
 %   з\or и\or ј\or к\or л\or љ\or м\or н\or
 %   њ\or о\or п\or р\or с\or т\or ћ\or у\or
-%   ф\or х\or ц\or ч\or џ\or ш\else\xpg@ill@value{#1}{cyr@@alph}\fi}
+%   ф\or х\or ц\or ч\or џ\or ш\else\xpg@ill@value{#1}{cyr@alph}\fi}
 
  
 \endinput
