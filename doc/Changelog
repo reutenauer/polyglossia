@@ -5,6 +5,9 @@ New features:
     \Localnumeral* that convert Arabic digitals to the local number scheme.
   * gloss-serbian: add numerals=cyrillic option. Add \asbuk and \Asbuk.
   * Implement basic support for (French) canadien and (English) canadian (#22)
+  * Improve support for Armenian (#79): Add Eastern month names (accessible via
+    variant=eastern) and Armenian alphabetic numbering (via numerals=armenian
+    amd \armenicnumeral).
   * Add french option autospacing and commands \AutoSpacing, \NoAutoSpacing
     This allows to switch off autospacing globally or locally (#113)
   * Fixup \normalfont (#203)
