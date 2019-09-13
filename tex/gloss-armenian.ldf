@@ -6,37 +6,57 @@
   langtag=HYE,
   hyphennames={armenian},
   hyphenmins={2,2},
-  fontsetup=true
+  fontsetup=true,
+  localnumeral=armeniannumerals
 }
 
-%\def\captionsarmenian{%
-%   \def\refname{}%
-%   \def\abstractname{}%
-%   \def\bibname{}%
-%   \def\prefacename{}%
-%   \def\chaptername{}%
-%   \def\appendixname{}%
-%   \def\contentsname{}%
-%   \def\listfigurename{}%
-%   \def\listtablename{}%
-%   \def\indexname{}%
-%   \def\authorname{}%
-%   \def\figurename{}%
-%   \def\tablename{}%
-%   %\def\thepart{}%
-%   \def\partname{}%
-%   \def\pagename{}%
-%   \def\seename{}%
-%   \def\alsoname{}%
-%   \def\enclname{}%
-%   \def\ccname{}%
-%   \def\headtoname{}%
-%   \def\proofname{}%
-%   \def\glossaryname{}%
-%}
+\newif\if@eastern@armenian
+\@eastern@armenianfalse
+\define@choicekey*+{armenian}{variant}[\val\nr]{western,eastern}[western]{%
+   \ifcase\nr\relax
+      % western:
+      \@eastern@armenianfalse%
+   \or
+      % eastern:
+      \@eastern@armeniantrue%
+   \fi
+   \xpg@info{Option: Armenian, variant=\val}%
+}{\xpg@warning{Unknown Armenian variant `#1'}}
 
-% Western Armenian month names.  See #79 for Eastern Armenian.
-\def\datearmenian{%
+\newif\if@armenian@numerals
+\@armenian@numeralsfalse
+\define@key{armenian}{numerals}[armenian]{%
+  \ifstrequal{#1}{arabic}{\@armenian@numeralsfalse}{\@armenian@numeralstrue}%
+}
+
+% Taken from ArmTeX. Audit!
+\def\captionsarmenian{%
+   \def\refname{Հղումներ}%
+   \def\abstractname{Սեղմագիր}%
+   \def\bibname{Գրականություն}%
+   \def\prefacename{Նախաբան}%
+   \def\chaptername{Գլուխ}%
+   \def\appendixname{Հավելված}%
+   \def\contentsname{Բովանդակություն}%
+   \def\listfigurename{Նկարների ցանկ}%
+   \def\listtablename{Աղյուսակների ցանկ}%
+   \def\indexname{Առարկայական ցանկ}%
+   \def\figurename{Նկար}%
+   \def\tablename{Աղյուսակ}%
+   \def\partname{Մաս}%
+   \def\pagename{էջ}%
+   \def\seename{տե՛ս}%
+   \def\alsoname{տե՛ս նաեւ}%
+   \def\enclname{Կից՝}%
+   \def\ccname{Կրկնօրինակը՝}%
+% The \headtoname is empty: the typesetter should use the dative (trakan
+% holov) of the recipient's name.
+   \def\headtoname{}%
+   \def\proofname{Ապացույց}%
+   \def\glossaryname{Տերմինների ցանկ}%
+}
+
+\def\date@western@armenian{%
    \def\today{\ifcase\month\or
     Յունուար\or
     Փետրուար\or
@@ -50,5 +70,100 @@
     Հոկտեմբեր\or
     Նոյեմբեր\or
     Դեկտեմբեր\fi
-    \number\day,\space\number\year}}
+    \number\day,\space\number\year}%
+}
+
+\def\date@eastern@armenian{%
+   \def\today{\ifcase\month\or
+    Հունվար\or
+    Փետրվար\or
+    Մարտ\or
+    Ապրիլ\or
+    Մայիս\or
+    Հունիս\or
+    Հուլիս\or
+    Օգոստոս\or
+    Սեպտեմբեր\or
+    Հոկտեմբեր\or
+    Նոյեմբեր\or
+    Դեկտեմբեր\fi
+    \number\day,\space\number\year}%
+}
+
+\def\datearmenian{%
+  \if@eastern@armenian
+     \date@eastern@armenian%
+  \else
+     \date@western@armenian%
+}
+
+\newcommand{\armeniannumerals}[2]{%
+  \if@armenian@numerals
+     \armeniannumber{#2}%
+  \else
+     #2%
+  \fi%
+}
+
+\def\armenian@numbers{%
+   \if@armenian@numerals
+      \def\armenian@alph##1{\expandafter\armeniannumeral\expandafter{\the##1}}%
+      \let\@alph\armenian@alph%
+   \fi%
+}
+
+\def\noarmenian@numbers{%
+  \let\@alph\latin@alph%
+  \let\armenian@alph\@undefined%
+}
+
+\def\armenian@globalnumbers{%
+  \if@armenian@numerals
+    \let\@arabic\armeniannumber%
+    \renewcommand\thefootnote{\localnumeral*{footnote}}%
+    \renewcommand\theequation{\localnumeral*{equation}}%
+  \fi
+}
+
+% Store original definition
+\let\xpg@save@arabic\@arabic
+
+\def\noarmenian@globalnumbers{
+   \let\@arabic\xpg@save@arabic%
+}
+
+\protected\def\armeniannumber#1{\expandafter\@armeniannumber\expandafter{\number#1}}
+\def\@armeniannumber#1{%
+  \ifnum#1<\@ne\space\arm@ill@value{#1}%
+  \else
+    \ifnum#1<10\expandafter\arm@num@i\number#1%
+    \else
+      \ifnum#1<100\expandafter\arm@num@ii\number#1%
+      \else
+        \ifnum#1<\@m\expandafter\arm@num@iii\number#1%
+        \else
+          \ifnum#1<\@M\expandafter\arm@num@iv\number#1%
+          \else
+             \space\arm@ill@value{#1}%
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+}
+
+\let\armeniannumeral=\armeniannumber
+\def\arm@num@i#1{%
+  \ifcase#1\or Ա\or Բ\or Գ\or Դ\or Ե\or Զ\or Է\or Ը\or Թ\fi}
+\def\arm@num@ii#1{%
+  \ifcase#1\or Ժ\or Ի\or Լ\or Խ\or Ծ\or Կ\or Հ\or Ձ\or Ղ\fi
+  \arm@num@i}
+\def\arm@num@iii#1{%
+  \ifcase#1\or Ճ\or Մ\or Յ\or Ն\or Շ\or Ո\or Չ\or Պ\or Ջ\fi
+  \arm@num@ii}
+\def\arm@num@iv#1{%
+  \ifcase#1\or Ռ\or Ս\or Վ\or Տ\or Ր\or Ց\or Ւ\or Փ\or Ք\fi
+  \arm@num@iii}
+\def\arm@ill@value#1{\xpg@warning{Illegal value (#1) for Armenian numeral}[$#1$]}
+
 \endinput

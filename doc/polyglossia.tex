@@ -25,7 +25,7 @@
 \usepackage[babelshorthands]{polyglossia}
 \usepackage{farsical}
 \setmainlanguage[variant=british,ordinalmonthday=false]{english}
-\setotherlanguages{arabic,hebrew,syriac,greek,russian,serbian,catalan}
+\setotherlanguages{arabic,armenian,hebrew,syriac,greek,russian,serbian,catalan}
 \usepackage[protrusion]{microtype}
 \newcommand*\Cmd[1]{\cmd{#1}\DescribeMacro{#1}\xspace}
 \newcommand*\pkg[1]{\textsf{\color{myblue}#1}}
@@ -60,6 +60,7 @@
 \setsansfont{Linux Biolinum O}
 \setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}
 \newfontfamily\arabicfont[Script=Arabic]{Amiri}
+\newfontfamily\armenianfont[Script=Armenian]{DejaVu Sans}
 \newfontfamily\syriacfont[Script=Syriac]{Serto Jerusalem}
 \newfontfamily\hebrewfont[Script=Hebrew]{Ezra SIL}
 
@@ -180,7 +181,7 @@ that are explained in section \ref{specific} below.
 albanian       & danish         & interlingua    & nko            & \TX{slovenian}\\
 amharic        & divehi         & irish          & norsk          & spanish       \\
 \TX{arabic}    & \TX{dutch}     & \TX{italian}   & nynorsk        & swedish       \\
-armenian       & \TX{english}   & japanese       & occitan        & \TX{syriac}   \\
+\TX{armenian}  & \TX{english}   & japanese       & occitan        & \TX{syriac}   \\
 asturian       & \TX{esperanto} & kannada        & piedmontese    & tamil         \\
 bahasai        & estonian       & khmer          & polish         & telugu        \\
 bahasam        & \TX{farsi}     & \TX{korean}    & portuges       & \TX{thai}     \\
@@ -376,6 +377,13 @@ The default value of each option is given in italic.
     ¦\textarabic{\aemph{اب}}¦ yields \textarabic{\aemph{اب}}.
     This command is also available for Farsi, Urdu, etc.
 	\end{itemize}
+
+\subsection{armenian}\label{armenian}
+\textbf{Options}:
+\begin{itemize}
+	\item \TB{variant}\new{v1.45} = eastern or \textit{western}
+	\item \TB{numerals}\new{v1.45} = armenian or \textit{arabic}
+\end{itemize}
 
 \subsection{bengali}\label{bengali}\new{v1.2.0}
 \textbf{Options}:
@@ -617,10 +625,9 @@ The default value of each option is given in italic.
 
 \textbf{Commands}:
 	\begin{itemize}
-	\item \Cmd\Asbuk: produces the uppercase Russian alphabet, for
+	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
 	environments such as ¦enumerate¦. The command takes a counter as argument,
 	\eg ¦\textrussian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
-	Note that the value cannot exceed 30 at the moment.
 	\item \Cmd\asbuk: same in lowercase
 	\end{itemize}
 
@@ -647,10 +654,9 @@ The default value of each option is given in italic.
 	\end{itemize}
 \textbf{Commands}:
 \begin{itemize}
-	\item \Cmd\Asbuk: produces the uppercase Cyrillic alphabet, for
+	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
 	environments such as ¦enumerate¦. The command takes a counter as argument,\\
 	Example: ¦\textserbian[numerals=cyrillic]{\Asbuk{page}}¦ produces \textserbian[numerals=cyrillic]{\Asbuk{page}}.
-	Note that the value cannot exceed 30 at the moment.
 	\item \Cmd\asbuk: same in lowercase
 \end{itemize}
 
@@ -803,6 +809,9 @@ The following macros are provided:
 	\item \Cmd\abjadsyriac outputs Syriac abjad numerals.\footnote{%
 				A fine guide to numerals in Syriac can be found at \link{http://www.garzo.co.uk/documents/syriac-numerals.pdf}.}\\
 			Example: ¦\abjadsyriac{463}¦ yields \textsyriac{\abjadsyriac{463}}.
+	
+	\item \Cmd\armeniannumeral produces Armenian alphabetic numbering.
+	          Example: ¦\armeniannumeral{1863}¦ yields \textarmenian{\armeniannumeral{1863}}.
 
 	\item \Cmd\greeknumeral produces Greek alphabetic numbering, \Cmd\Greeknumeral outputs uppercased variants.
 			Example: ¦\greeknumeral{1863}¦ yields \textgreek{\greeknumeral{1863}},
@@ -818,13 +827,13 @@ The following macros are provided:
 	
 	\item \Cmd\russiannumeral produces Russian numbering, with uppercased variant (for alphanumerical variant) via \Cmd\Russiannumeral.
 	        Depending on the ¦numerals¦ option in the Russian language selection, this is either Arabic digit or Cyrillic
-	        alphanumercial output (note that the latter is currently only supported up to 30).\\
+	        alphanumercial output.\\
 	        Example: With ¦numerals=latin¦ ¦\russiannumeral{19}¦ yields \textrussian{\russiannumeral{19}},
 	        with ¦numerals=cyrillic¦ ¦\russiannumeral{19}¦ results in \textrussian[numerals=cyrillic]{\russiannumeral{19}}.
 			
 	\item \Cmd\serbiannumeral produces Serbian numbering, with uppercased variant (for alphanumerical variant) via \Cmd\Serbiannumeral.
 		    Depending on the ¦numerals¦ option in the Serbian language selection, this is either Arabic digit or Cyrillic
-		    alphanumercial output (note that the latter is currently only supported up to 30).\\
+		    alphanumercial output.\\
 		    Example: With ¦numerals=latin¦ ¦\serbiannumeral{19}¦ yields \textserbian{\serbiannumeral{19}},
 			with ¦numerals=cyrillic¦ ¦\serbiannumeral{19}¦ results in \textserbian[numerals=cyrillic]{\serbiannumeral{19}}.
 \end{itemize}
