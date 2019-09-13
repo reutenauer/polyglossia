@@ -1,0 +1,119 @@
+\ProvidesPackage{cyrillicnumbers}
+        [2019/09/13 v0.1 %
+         Formatting of Cyrillic alphabetic numbers]
+
+%% This follows https://en.wikipedia.org/wiki/Cyrillic_numerals
+
+% Numbers are often distinguished from text by centered dots.
+% The commented code does this. We leave it deactivated until
+% we get some expertise.
+\newrobustcmd\anw@print{}
+\newrobustcmd\anw@false{%
+  \renewrobustcmd\anw@print{}}
+\newrobustcmd\anw@true{%
+%   \renewrobustcmd\anw@print{$\cdot$}%
+}
+\anw@true
+
+\protected\def\cyr@@alph#1{\expandafter\@cyr@@alph\expandafter{\number#1}}
+\def\@cyr@@alph#1{%
+  \ifnum#1<\@ne\space\cyr@ill@value{#1}%
+  \else
+    \anw@print
+    \ifnum#1<10\expandafter\cyr@num@i\number#1%
+    \else
+      \ifnum#1<100\expandafter\cyr@num@ii\number#1%
+      \else
+        \ifnum#1<\@m\expandafter\cyr@num@iii\number#1%
+        \else
+          \ifnum#1<\@M\expandafter\cyr@num@iv\number#1%
+          \else
+            \ifnum#1<100000\expandafter\cyr@num@v\number#1%
+            \else
+              \ifnum#1<1000000\expandafter\cyr@num@vi\number#1%
+              \else
+                \space\cyr@ill@value{#1}%
+              \fi
+            \fi
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+}
+
+\protected\def\cyr@@Alph#1{\expandafter\@cyr@@Alph\expandafter{\number#1}}
+\def\@cyr@@Alph#1{%
+  \ifnum#1<\@ne\space\cyr@ill@value{#1}%
+  \else
+    \anw@print
+    \ifnum#1<10\expandafter\cyr@Num@i\number#1%
+    \else
+      \ifnum#1<100\expandafter\cyr@Num@ii\number#1%
+      \else
+        \ifnum#1<\@m\expandafter\cyr@Num@iii\number#1%
+        \else
+          \ifnum#1<\@M\expandafter\cyr@Num@iv\number#1%
+          \else
+            \ifnum#1<100000\expandafter\cyr@Num@v\number#1%
+            \else
+              \ifnum#1<1000000\expandafter\cyr@Num@vi\number#1%
+              \else
+                \space\cyr@ill@value{#1}%
+              \fi
+            \fi
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+}
+
+% Lowercase
+\def\cyr@num@i#1{%
+  \ifcase#1 \or а\or в\or г\or д\or е\or ѕ\or з\or и\or ѳ\fi
+  \ifnum#1=\z@\else\anw@true\fi\anw@print}
+\def\cyr@num@ii#1{%
+  \ifcase#1 \or і\or к\or л\or м\or н\or ѯ\or о\or п\or ч\fi
+  \ifnum#1=\z@\else\anw@true\fi\cyr@num@i}
+\def\cyr@num@iii#1{%
+  \ifcase#1 \or р\or с\or т\or у\or ф\or х\or ѱ\or ѡ\or ц\fi
+  \ifnum#1=\z@\anw@false\else\anw@true\fi\cyr@num@ii}
+\def\cyr@num@iv#1{%
+  \ifnum#1=\z@\else ҂\fi
+  \ifcase#1 \or а\or в\or г\or д\or е\or ѕ\or з\or и\or ѳ\fi
+  \cyr@num@iii}
+\def\cyr@num@v#1{%
+  \ifnum#1=\z@\else ҂\fi
+  \ifcase#1 \or і\or к\or л\or м\or н\or ѯ\or о\or п\or ч\fi
+  \cyr@num@iv}
+\def\cyr@Num@vi#1{%
+  \ifnum#1=\z@\else ҂\fi
+  \ifcase#1 \or р\or с\or т\or у\or ф\or х\or ѱ\or ѡ\or ц\fi
+  \cyr@num@v}
+
+% Uppercase
+\def\cyr@Num@i#1{%
+  \ifcase#1 \or А\or В\or Г\or Д\or Е\or Ѕ\or З\or И\or Ѳ\fi
+  \ifnum#1=\z@\else\anw@true\fi\anw@print}
+\def\cyr@Num@ii#1{%
+  \ifcase#1 \or І\or К\or Л\or М\or Н\or Ѯ\or О\or П\or Ч\fi
+  \ifnum#1=\z@\else\anw@true\fi\cyr@Num@i}
+\def\cyr@Num@iii#1{%
+  \ifcase#1 \or Р\or С\or Т\or У\or Ф\or Х\or Ѱ\or Ѡ\or Ц\fi
+  \ifnum#1=\z@\anw@false\else\anw@true\fi\cyr@Num@ii}
+\def\cyr@Num@iv#1{%
+  \ifnum#1=\z@\else ҂\fi
+  \ifcase#1 \or А\or В\or Г\or Д\or Е\or Ѕ\or З\or И\or Ѳ\fi
+  \cyr@Num@iii}
+\def\cyr@Num@v#1{%
+  \ifnum#1=\z@\else ҂\fi
+  \ifcase#1 \or І\or К\or Л\or М\or Н\or Ѯ\or О\or П\or Ч\fi
+  \cyr@Num@iv}
+\def\cyr@Num@vi#1{%
+  \ifnum#1=\z@\else ҂\fi
+  \ifcase#1 \or Р\or С\or Т\or У\or Ф\or Х\or Ѱ\or Ѡ\or Ц\fi
+  \cyr@Num@v}
+\def\cyr@ill@value#1{\xpg@warning{Illegal value (#1) for cyr numeral}[$#1$]}
+
+\endinput

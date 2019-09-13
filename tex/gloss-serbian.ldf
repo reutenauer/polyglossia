@@ -4,6 +4,8 @@
 %% same thing for all languages that have a "script" key !
 %% BETTER APPROACH: see gloss-sanskrit!
 
+\RequirePackage{cyrillicnumbers}
+
 \PolyglossiaSetup{serbian}{
   langtag=SRB,
   hyphennames={serbian},
@@ -132,7 +134,7 @@
 
 \def\serbiannumber#1{%
   \ifserbian@numerals
-    \serbian@alph{#1}%
+    \cyr@@alph{#1}%
   \else
     \number#1%
   \fi
@@ -140,7 +142,7 @@
 
 \def\Serbiannumber#1{%
   \ifserbian@numerals
-    \serbian@Alph{#1}%
+    \cyr@@Alph{#1}%
   \else
     \number#1%
   \fi
@@ -153,8 +155,10 @@
    \let\latin@alph\@alph
    \let\latin@Alph\@Alph
    \ifserbian@numerals
-     \let\@alph\serbian@alph
-     \let\@Alph\serbian@Alph
+     \def\serbian@alph##1{\expandafter\serbiannumeral\expandafter{\the##1}}%
+     \def\serbian@Alph##1{\expandafter\Serbiannumeral\expandafter{\the##1}}%
+      \let\@alph\serbian@alph%
+      \let\@Alph\serbian@Alph%
    \fi
 }
 
@@ -171,23 +175,28 @@
    \ifserbian@numerals\noserbian@numbers\fi
 }
 
-\def\Asbuk#1{\expandafter\serbian@Alph\csname c@#1\endcsname}
+\def\Asbuk#1{\expandafter\cyr@@Alph\csname c@#1\endcsname}
 
-\def\serbian@Alph#1{\ifcase#1\or
-   А\or Б\or В\or Г\or Д\or Ђ\or Е\or Ж\or
-   З\or И\or Ј\or К\or Л\or Љ\or М\or Н\or
-   Њ\or О\or П\or Р\or С\or Т\or Ћ\or У\or
-   Ф\or Х\or Ц\or Ч\or Џ\or Ш\else\xpg@ill@value{#1}{serbian@Alph}\fi}
+\def\asbuk#1{\expandafter\cyr@@alph\csname c@#1\endcsname}
 
-\def\asbuk#1{\expandafter\serbian@alph\csname c@#1\endcsname}
+% This is a poor man's cyrillic alphanumeric. It just uses the alphabet and
+% thus ends at 30. We now use proper cyrillic numbering.
 
-\def\serbian@alph#1{\ifcase#1\or
-   а\or б\or в\or г\or д\or ђ\or е\or ж\or
-   з\or и\or ј\or к\or л\or љ\or м\or н\or
-   њ\or о\or п\or р\or с\or т\or ћ\or у\or
-   ф\or х\or ц\or ч\or џ\or ш\else\xpg@ill@value{#1}{serbian@alph}\fi}
+%\def\cyr@@Alph#1{\ifcase#1\or
+%   А\or Б\or В\or Г\or Д\or Ђ\or Е\or Ж\or
+%   З\or И\or Ј\or К\or Л\or Љ\or М\or Н\or
+%   Њ\or О\or П\or Р\or С\or Т\or Ћ\or У\or
+%   Ф\or Х\or Ц\or Ч\or Џ\or Ш\else\xpg@ill@value{#1}{cyr@@Alph}\fi}
+
+%\def\cyr@@alph#1{\ifcase#1\or
+%   а\or б\or в\or г\or д\or ђ\or е\or ж\or
+%   з\or и\or ј\or к\or л\or љ\or м\or н\or
+%   њ\or о\or п\or р\or с\or т\or ћ\or у\or
+%   ф\or х\or ц\or ч\or џ\or ш\else\xpg@ill@value{#1}{cyr@@alph}\fi}
+
  
 \endinput
+
 % TODO ? stuff from babel
 
 \def\sh{\mathop{\operator@font sh}\nolimits} % same as \sinh
