@@ -9,6 +9,19 @@
   fontsetup=true
 }
 
+\newif\if@eastern@armenian
+\@eastern@armenianfalse
+\define@choicekey*+{armenian}{variant}[\val\nr]{western,eastern}[western]{%
+   \ifcase\nr\relax
+      % western:
+      \@eastern@armenianfalse%
+   \or
+      % eastern:
+      \@eastern@armeniantrue%
+   \fi
+   \xpg@info{Option: Armenian, variant=\val}%
+}{\xpg@warning{Unknown Armenian variant `#1'}}
+
 %\def\captionsarmenian{%
 %   \def\refname{}%
 %   \def\abstractname{}%
@@ -35,8 +48,7 @@
 %   \def\glossaryname{}%
 %}
 
-% Western Armenian month names.  See #79 for Eastern Armenian.
-\def\datearmenian{%
+\def\date@western@armenian{%
    \def\today{\ifcase\month\or
     Յունուար\or
     Փետրուար\or
@@ -50,5 +62,31 @@
     Հոկտեմբեր\or
     Նոյեմբեր\or
     Դեկտեմբեր\fi
-    \number\day,\space\number\year}}
+    \number\day,\space\number\year}%
+}
+
+\def\date@eastern@armenian{%
+   \def\today{\ifcase\month\or
+    Հունվար\or
+    Փետրվար\or
+    Մարտ\or
+    Ապրիլ\or
+    Մայիս\or
+    Հունիս\or
+    Հուլիս\or
+    Օգոստոս\or
+    Սեպտեմբեր\or
+    Հոկտեմբեր\or
+    Նոյեմբեր\or
+    Դեկտեմբեր\fi
+    \number\day,\space\number\year}%
+}
+
+\def\datearmenian{%
+  \if@eastern@armenian
+     \date@eastern@armenian%
+  \else
+     \date@western@armenian%
+}
+
 \endinput
