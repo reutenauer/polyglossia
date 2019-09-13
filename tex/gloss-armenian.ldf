@@ -22,31 +22,32 @@
    \xpg@info{Option: Armenian, variant=\val}%
 }{\xpg@warning{Unknown Armenian variant `#1'}}
 
-%\def\captionsarmenian{%
-%   \def\refname{}%
-%   \def\abstractname{}%
-%   \def\bibname{}%
-%   \def\prefacename{}%
-%   \def\chaptername{}%
-%   \def\appendixname{}%
-%   \def\contentsname{}%
-%   \def\listfigurename{}%
-%   \def\listtablename{}%
-%   \def\indexname{}%
-%   \def\authorname{}%
-%   \def\figurename{}%
-%   \def\tablename{}%
-%   %\def\thepart{}%
-%   \def\partname{}%
-%   \def\pagename{}%
-%   \def\seename{}%
-%   \def\alsoname{}%
-%   \def\enclname{}%
-%   \def\ccname{}%
-%   \def\headtoname{}%
-%   \def\proofname{}%
-%   \def\glossaryname{}%
-%}
+% Taken from ArmTeX. Audit!
+\def\captionsarmenian{%
+   \def\refname{Հղումներ}%
+   \def\abstractname{Սեղմագիր}%
+   \def\bibname{Գրականություն}%
+   \def\prefacename{Նախաբան}%
+   \def\chaptername{Գլուխ}%
+   \def\appendixname{Հավելված}%
+   \def\contentsname{Բովանդակություն}%
+   \def\listfigurename{Նկարների ցանկ}%
+   \def\listtablename{Աղյուսակների ցանկ}%
+   \def\indexname{Առարկայական ցանկ}%
+   \def\figurename{Նկար}%
+   \def\tablename{Աղյուսակ}%
+   \def\partname{Մաս}%
+   \def\pagename{էջ}%
+   \def\seename{տե՛ս}%
+   \def\alsoname{տե՛ս նաեւ}%
+   \def\enclname{Կից՝}%
+   \def\ccname{Կրկնօրինակը՝}%
+% The \headtoname is empty: the typesetter should use the dative (trakan
+% holov) of the recipient's name.
+   \def\headtoname{}%
+   \def\proofname{Ապացույց}%
+   \def\glossaryname{Տերմինների ցանկ}%
+}
 
 \def\date@western@armenian{%
    \def\today{\ifcase\month\or
