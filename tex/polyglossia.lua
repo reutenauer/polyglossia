@@ -84,8 +84,8 @@ else
   end
 end
 
-local function load_frpt()
-    require('polyglossia-frpt')
+local function load_punct()
+    require('polyglossia-punct')
 end
 
 local function load_tibt_eol()
@@ -173,7 +173,7 @@ polyglossia.loadlang = loadlang
 polyglossia.select_language = select_language
 polyglossia.set_default_language = set_default_language
 polyglossia.check_char = check_char
-polyglossia.load_frpt = load_frpt
+polyglossia.load_punct = load_punct
 polyglossia.load_tibt_eol = load_tibt_eol
 polyglossia.newloader = newloader
 polyglossia.newloader_loaded_languages = newloader_loaded_languages
