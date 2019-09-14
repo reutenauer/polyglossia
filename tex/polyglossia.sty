@@ -486,8 +486,14 @@
 
 
 % call the language
+% #3 is the numeral to print
+% #4 is the mainlanguage (should be expanded)
+% #5 is the current language (should be expanded)
+% #2 is the option list (should be expanded)
+% #6 is the name of the field to use
+% #1 is the language used
 \cs_new:Nn \polyglossia_localnumeral_langlang:nnnnnn {
-  \use:c {\prop_item:Nn \polyglossia@langsetup  {#1/#5}} {#2} {#3}
+  \use:c {\prop_item:Nn \polyglossia@langsetup  {#1/#6}} {#2} {#3}
 }
 
 
