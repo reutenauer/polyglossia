@@ -1238,38 +1238,49 @@
     \polyglossia@check@ifdefined:NTF{#1}{#2}{#3}
 }%
 
+% Set \bbl@hyphendata@\the\language, which is (lua)babel's
+% hyphenation pattern hook
+% FIXME Clarifiy why/when this is needed.
 \newcommand*\xpg@set@bbl@hyphendata[1]{%
-    % here we use lu@texhyphen@loaded@\the\language, the same as in babel
-    \ifcsdef{bbl@hyphendata@#1}{}{%
-        \global\@namedef{bbl@hyphendata@\the\language}{}%
-    }
+    \ifluatex%
+        \ifcsdef{bbl@hyphendata@#1}{}{%
+            \global\@namedef{bbl@hyphendata@\the\language}{}%
+        }%
+    \fi% 
 }
 
+% Set hyphenation patterns for a given language. This does the right
+% thing both for XeTeX and LuaTeX
 \newcommand\xpg@set@hyphenation@patterns[1]{%
-    \ifluatex
-        \polyglossia@check@ifdefined:NF{#1}{
+    \str_case_e:nnF{\c_sys_engine_str}{%
+      {luatex}{%
+        \polyglossia@check@ifdefined:NF{#1}{%
             \expandafter\chardef\csname l@#1\endcsname=\directlua{tex.sprint(polyglossia.newloader('#1'))}%
-        }
-    \fi
-    \polyglossia@check@ifdefined:NF{#1}{
-        \language=\csname l@#1\endcsname
-    }
+            \language=\csname l@#1\endcsname%
+        }%
+      }%
+      {xetex}{%
+        \polyglossia@check@ifdefined:NF{#1}{%
+           \language=\csname l@#1\endcsname%
+        }%
+      }%
+    }%
+    {
+      \xpg@warning{You’re running a TeX engine that is not LuaTeX or XeTeX.\MessageBreak
+        That is almost guaranteed to cause problems.}%
+    }%
 }
 
 % FIXME: Remove after gloss-latin (last user) has been rewritten)
 \newcommand\xpg@set@language@luatex@ii[1]{%
-   \ifluatex %
      \xpg@set@bbl@hyphendata{\expandafter\the\csname l@#1\endcsname}
-   \fi % 
 }
 
 
 \def\@select@language#1{
    % hook for compatibility with biblatex
    \select@language{#1}
-   \ifluatex %
-      \xpg@set@bbl@hyphendata{\the\language}
-   \fi %
+   \xpg@set@bbl@hyphendata{\the\language}
    \xpg@initial@setup%
    \select@@language{#1}%
    \csuse{captions#1}%
