@@ -110,12 +110,7 @@
 \fi
 
 \def\english@language{%
-   \ifxetex
-      \language=\csname l@\english@variant\endcsname
-   \fi
-   \ifluatex
-      \xpg@set@language@luatex@iv{\english@variant}
-   \fi
+   \xpg@set@hyphenation@patterns{\english@variant}
 }%
 
 \def\captionsenglish{%
