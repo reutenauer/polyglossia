@@ -85,21 +85,23 @@ local function somepenalty(n,value)
     return false
 end
 
-local xpgfrptattr = luatexbase.attributes['xpg@frpt']
+local xpgpunctattr = luatexbase.attributes['xpg@punct']
 
--- Now there is a good question: how do we now, in lua, what a \thinspace is?
--- In the LaTeX source (ltspace.dtx) it is defined as:
--- \def\thinspace{\kern .16667em }. I see no way of seeing if it has been
--- overriden or not... So we stick to this value.
-local thinspace  = 0.16667
--- thickspace is defined in amsmath.sty as:
--- \renewcommand{\;}{\mspace+\thickmuskip{.2777em}}. Same problem as above, we
--- stick to this fixed value.
-local thickspace = 0.2777 -- 5/18
+local left_space = {}
+local right_space = {}
 
-local left_space = {[':'] = thickspace, ['!'] = thinspace, ['?'] = thinspace, [';'] = thinspace, ['‼'] = thinspace,
-  ['⁇'] = thinspace, ['⁈'] = thinspace, ['⁉'] = thinspace, ['»'] = thinspace, ['›'] = thinspace}
-local right_space = {['«'] = thinspace, ['‹'] = thinspace}
+local function add_left_spaced_character(char,kern)
+  left_space[char] = kern -- "kern" is meant as a fraction of a quad
+end
+
+local function add_right_spaced_character(char,kern)
+  right_space[char] = kern -- "kern" is meant as a fraction of a quad
+end
+
+local function clear_spaced_characters()
+  left_space = {}
+  right_space = {}
+end
 
 -- from typo-spa.lua, adapted
 local function process(head)
@@ -110,7 +112,7 @@ local function process(head)
     while start do
         local id = start.id
         if id == glyph_code then
-            local attr = has_attribute(start, xpgfrptattr)
+            local attr = has_attribute(start, xpgpunctattr)
             if attr and attr > 0 then
                 local char = utf8.char(start.char) -- requires Lua 5.3
                 if left_space[char] or right_space[char] then
@@ -162,16 +164,19 @@ end
 local callback_name = "pre_linebreak_filter"
 
 local function activate()
-  if not priority_in_callback (callback_name, "polyglossia-frpt.process") then
-    add_to_callback(callback_name, process, "polyglossia-frpt.process", 1)
+  if not priority_in_callback (callback_name, "polyglossia-punct.process") then
+    add_to_callback(callback_name, process, "polyglossia-punct.process", 1)
   end
 end
 
-local function desactivate()
-  if priority_in_callback (callback_name, "polyglossia-frpt.process") then
-    remove_from_callback(callback_name, "polyglossia-frpt.process")
+local function deactivate()
+  if priority_in_callback (callback_name, "polyglossia-punct.process") then
+    remove_from_callback(callback_name, "polyglossia-punct.process")
   end
 end
 
-polyglossia.activate_frpt    = activate
-polyglossia.desactivate_frpt = desactivate
+polyglossia.activate_punct             = activate
+polyglossia.deactivate_punct           = deactivate
+polyglossia.add_left_spaced_character  = add_left_spaced_character
+polyglossia.add_right_spaced_character = add_right_spaced_character
+polyglossia.clear_spaced_characters    = clear_spaced_characters
