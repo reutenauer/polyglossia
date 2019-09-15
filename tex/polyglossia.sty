@@ -448,7 +448,7 @@
 % #1 is the option list (should be expanded)
 % #5 is the name of the field to use
 \cs_new:Nn \polyglossia_localnumeral_mainlang:nnnnn {
-  \use:c {\prop_item:Nn \polyglossia@langsetup  {#3/#5}} {#1} {#2}
+  \foreignlanguage{#3}{\use:c {\prop_item:Nn \polyglossia@langsetup  {#3/#5}} {#1} {#2}}
 }
 
 
@@ -493,7 +493,7 @@
 % #6 is the name of the field to use
 % #1 is the language used
 \cs_new:Nn \polyglossia_localnumeral_langlang:nnnnnn {
-  \use:c {\prop_item:Nn \polyglossia@langsetup  {#1/#6}} {#2} {#3}
+   \foreignlanguage{#1}{\use:c {\prop_item:Nn \polyglossia@langsetup  {#1/#6}} {#2} {#3}}
 }
 
 
