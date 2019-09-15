@@ -178,22 +178,22 @@ that are explained in section \ref{specific} below.
 % Edited by hand -- AR 2019-04-04
 \begin{tabular}{lllll}
 \hline
-albanian       & danish         & interlingua    & nko            & \TX{slovenian}\\
-amharic        & divehi         & irish          & norsk          & spanish       \\
-\TX{arabic}    & \TX{dutch}     & \TX{italian}   & nynorsk        & swedish       \\
-\TX{armenian}  & \TX{english}   & japanese       & occitan        & \TX{syriac}   \\
-asturian       & \TX{esperanto} & kannada        & piedmontese    & tamil         \\
-bahasai        & estonian       & khmer          & polish         & telugu        \\
-bahasam        & \TX{farsi}     & \TX{korean}    & portuges       & \TX{thai}     \\
-basque         & \TX{finnish}   & \TX{lao}       & romanian       & \TX{tibetan}  \\
-\TX{bengali}   & \TX{french}    & \TX{latin}     & romansh        & turkish       \\
-brazil[ian]    & friulan        & latvian        & \TX{russian}   & turkmen       \\
-breton         & galician       & lithuanian     & samin          & \TX{ukrainian}\\
-bulgarian      & \TX{german}    & \TX{lsorbian}  & \TX{sanskrit}  & urdu          \\
-\TX{catalan}   & \TX{greek}     & \TX{magyar}    & scottish       & \TX{usorbian} \\
-coptic         & \TX{hebrew}    & macedonian     & \TX{serbian}   & vietnamese    \\
-croatian       & \TX{hindi}     & malayalam      & slovak         & \TX{welsh}    \\
-czech          & icelandic      & marathi         \\
+albanian       & danish         & interlingua    & marathi        & \TX{slovenian}\\
+amharic        & divehi         & irish          & nko            & spanish       \\
+\TX{arabic}    & \TX{dutch}     & \TX{italian}   & norsk          & swedish       \\
+\TX{armenian}  & \TX{english}   & japanese       & nynorsk        & \TX{syriac}   \\
+asturian       & \TX{esperanto} & kannada        & occitan        & tamil         \\
+bahasai        & estonian       & khmer          & piedmontese    & telugu        \\
+bahasam        & \TX{farsi}     & \TX{korean}    & polish         & \TX{thai}     \\
+basque         & \TX{finnish}   & \TX{kurdish}   & portuges       & \TX{tibetan}  \\
+\TX{bengali}   & \TX{french}    & \TX{lao}       & romanian       & turkish       \\
+brazil[ian]    & friulan        & \TX{latin}     & romansh        & turkmen       \\
+breton         & galician       & latvian        & \TX{russian}   & \TX{ukrainian}\\
+bulgarian      & \TX{german}    & lithuanian     & samin          & urdu          \\
+\TX{catalan}   & \TX{greek}     & \TX{lsorbian}  & \TX{sanskrit}  & \TX{usorbian} \\
+coptic         & \TX{hebrew}    & \TX{magyar}    & scottish       & vietnamese    \\
+croatian       & \TX{hindi}     & macedonian     & \TX{serbian}   & \TX{welsh}    \\
+czech          & icelandic      & malayalam      & slovak\\
 \hline
 \end{tabular}
 \caption{Languages currently supported in \pkg{polyglossia}}
@@ -588,6 +588,23 @@ The default value of each option is given in italic.
     `modern' for text with interword spaces.
   \item \TB{captions} = \textit{hangul} or hanja
   \end{itemize}
+
+\subsection{kurdish}\label{kurdish}
+Currently\new{v1.45} support for Kurdish is limited to Sorani Kurdish (support for Kurmanji Kurdish is planned).
+
+\noindent\textbf{Options}:
+\begin{itemize}
+	\item \TB{numerals} = western or \textit{eastern}
+	\item \TB{abjadjimnotail} = \textit{false} or true.
+	Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
+	\item \TB{locale} (not yet implemented)
+	\item \TB{calendar} (not yet implemented)
+\end{itemize}
+\textbf{Commands}:
+\begin{itemize}
+	\item \Cmd\abjad (see section \ref{abjad})
+	\item \Cmd\aemph (see section \ref{arabic}).
+\end{itemize}
 
 \subsection{lao}\label{lao}\new{v1.2.0}
 \textbf{Options}:
