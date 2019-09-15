@@ -15,7 +15,7 @@ local thickspace = 0.2777 -- 5/18
 local function activate_french_punct()
   polyglossia.activate_punct()
   polyglossia.clear_spaced_characters()
-	polyglossia.add_left_spaced_character(':',thickspace)
+  polyglossia.add_left_spaced_character(':',thickspace)
   polyglossia.add_left_spaced_character('!',thinspace)
   polyglossia.add_left_spaced_character('?',thinspace)
   polyglossia.add_left_spaced_character(';',thinspace)
@@ -35,8 +35,8 @@ local function deactivate_french_punct()
   -- safely uncomment the following line. Imagine the following case: you start
   -- a paragraph by some french text, then, in the same paragraph, you change
   -- the language to something else, and thus call the following line. This
-	-- means that, at the end of the paragraph, the function won't be in the
-	-- callback, so the beginning of the paragraph won't be processed by it.
+  -- means that, at the end of the paragraph, the function won't be in the
+  -- callback, so the beginning of the paragraph won't be processed by it.
   -- polyglossia.deactivate_punct()
 end
 
