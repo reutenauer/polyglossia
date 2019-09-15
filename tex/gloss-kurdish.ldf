@@ -1,12 +1,6 @@
 % Created on September 1, 2019
 % Sina Ahmadi (https://sinaahmadi.github.io/)
 \ProvidesFile{gloss-kurdish.ldf}[polyglossia: module for Kurdish]
-\ifluatex
-  \xpg@warning{Kurdish is not supported with LuaTeX.\MessageBreak
-I will proceed with the compilation, but\MessageBreak
-the output is not guaranteed to be correct\MessageBreak
-and may look very wrong.}
-\fi
 \RequireBidi
 \RequirePackage{arabicnumbers}
 \RequirePackage{farsical}
@@ -17,7 +11,8 @@ and may look very wrong.}
   scripttag=arab,
   langtag=KUR,
   hyphennames={nohyphenation},
-  fontsetup=true
+  fontsetup=true,
+  localnumeral=kurdishnumerals
 }
 
 \newif\if@western@numerals
@@ -26,7 +21,8 @@ and may look very wrong.}
   \def\@tmpa{#1}%
   \ifx\@tmpa\tmp@western\@western@numeralstrue\else%
     \@western@numeralsfalse%
-  \fi}
+  \fi%
+}
 
 %this is needed for \abjad in arabicnumbers.sty
 \def\tmp@true{true}
@@ -35,7 +31,8 @@ and may look very wrong.}
   \ifx\@tmpa\tmp@true\abjad@jim@notailtrue%
   \else
     \abjad@jim@notailfalse
-  \fi}
+  \fi%
+}
 
 % NOT YET USED
 \define@key{kurdish}{locale}[default]{%
@@ -51,37 +48,43 @@ and may look very wrong.}
   \or کانونی دووەم\or شوبات\or ئازار\or نیسان\or ئایار\or حوزه‌یران\or ته‌ممووز\or ئاب\or ئه‌یلوول\or تشرینی یه‌كه‌م\or تشرینی دووهه‌م\or كانوونی یه‌كه‌م\fi}
 
 %\Hijritoday is now locale-aware and will format the date with this macro:
-\DefineFormatHijriDate{kurdish}{\@ensure@RTL{%
-\farsinumber{\value{Hijriday}}\space\HijriMonthArabic{\value{Hijrimonth}}\space\farsinumber{\value{Hijriyear}}}}
+\DefineFormatHijriDate{kurdish}{%
+  \@ensure@RTL{%
+    \kurdishnumber{\value{Hijriday}}\space\HijriMonthArabic{\value{Hijrimonth}}\space\kurdishnumber{\value{Hijriyear}}%
+  }%
+}
 
 \def\captionskurdish{%
-\def\prefacename{\@ensure@RTL{پێشه‌كی}}%
-\def\refname{\@ensure@RTL{سه‌رچاوه‌کان}}%
-\def\abstractname{\@ensure@RTL{پوخته‌}}%
-\def\bibname{\@ensure@RTL{کتێبنامه‌}}%
-\def\chaptername{\@ensure@RTL{به‌ندی}}%
-\def\appendixname{\@ensure@RTL{پاشکۆ}}%
-\def\contentsname{\@ensure@RTL{نێوه‌ڕۆک}}%
-\def\listfigurename{\@ensure@RTL{لیستی وێنه‌کان}}%
-\def\listtablename{\@ensure@RTL{لیستی خشته‌کان}}%
-\def\indexname{\@ensure@RTL{پێنوێن}}%
-\def\figurename{\@ensure@RTL{وێنه‌}}%
-\def\tablename{\@ensure@RTL{خشتە}}%
-\def\partname{\@ensure@RTL{به‌شی}}%
-\def\enclname{\@ensure@RTL{هاوپێچ}}%
-\def\ccname{\@ensure@RTL{روونووس}}%
-\def\headtoname{\@ensure@RTL{بۆ}}%
-\def\pagename{\@ensure@RTL{لاپه‌ڕه‌}}%
-\def\seename{\@ensure@RTL{چاو لێکه‌ن}}%
-\def\alsoname{\@ensure@RTL{هه‌روه‌ها چاو لێکه‌ن}}%
-\def\proofname{\@ensure@RTL{سەلماندن}}%
-\def\glossaryname{\@ensure@RTL{فه‌رهه‌نگۆک}}%
-}
-\def\datekurdish{%
-   \def\today{\@ensure@RTL{\farsinumber\day{ی}\space\kurdishmonth{\month}{ی}\space\farsinumber\year}}%
+  \def\prefacename{\@ensure@RTL{پێشه‌كی}}%
+  \def\refname{\@ensure@RTL{سه‌رچاوه‌کان}}%
+  \def\abstractname{\@ensure@RTL{پوخته‌}}%
+  \def\bibname{\@ensure@RTL{کتێبنامه‌}}%
+  \def\chaptername{\@ensure@RTL{به‌ندی}}%
+  \def\appendixname{\@ensure@RTL{پاشکۆ}}%
+  \def\contentsname{\@ensure@RTL{نێوه‌ڕۆک}}%
+  \def\listfigurename{\@ensure@RTL{لیستی وێنه‌کان}}%
+  \def\listtablename{\@ensure@RTL{لیستی خشته‌کان}}%
+  \def\indexname{\@ensure@RTL{پێنوێن}}%
+  \def\figurename{\@ensure@RTL{وێنه‌}}%
+  \def\tablename{\@ensure@RTL{خشتە}}%
+  \def\partname{\@ensure@RTL{به‌شی}}%
+  \def\enclname{\@ensure@RTL{هاوپێچ}}%
+  \def\ccname{\@ensure@RTL{روونووس}}%
+  \def\headtoname{\@ensure@RTL{بۆ}}%
+  \def\pagename{\@ensure@RTL{لاپه‌ڕه‌}}%
+  \def\seename{\@ensure@RTL{چاو لێکه‌ن}}%
+  \def\alsoname{\@ensure@RTL{هه‌روه‌ها چاو لێکه‌ن}}%
+  \def\proofname{\@ensure@RTL{سەلماندن}}%
+  \def\glossaryname{\@ensure@RTL{فه‌رهه‌نگۆک}}%
 }
 
-\def\farsinumber#1{%
+\def\datekurdish{%
+   \def\today{\@ensure@RTL{\kurdishnumber\day{ی}\space\kurdishmonth{\month}{ی}\space\kurdishnumber\year}}%
+}
+
+\newcommand{\kurdishnumerals}[2]{\kurdishnumber{#2}}
+
+\def\kurdishnumber#1{%
   \if@western@numerals
     \number#1%
   \else
@@ -101,39 +104,44 @@ and may look very wrong.}
   \fi
 }
 
-%\def\farsinum#1{\expandafter\farsinumber\csname c@#1\endcsname}
-%\def\farsibracenum#1{(\expandafter\farsinumber\csname c@#1\endcsname)}
-%\def\farsiornatebracenum#1{\char"FD3E\expandafter\farsinumber\csname c@#1\endcsname\char"FD3F}
-%\def\farsialph#1{\expandafter\@farsialph\csname c@#1\endcsname}
+%\def\kurdishnum#1{\expandafter\kurdishnumber\csname c@#1\endcsname}
+%\def\kurdishbracenum#1{(\expandafter\kurdishnumber\csname c@#1\endcsname)}
+%\def\kurdishornatebracenum#1{\char"FD3E\expandafter\kurdishnumber\csname c@#1\endcsname\char"FD3F}
+%\def\kurdishalph#1{\expandafter\@farsialph\csname c@#1\endcsname}
 
 \def\kurdish@numbers{%
-   \let\@latinalph\@alph%
-   \let\@latinAlph\@Alph%
    \let\@alph\abjad%
    \let\@Alph\abjad%
 }
+
 \def\nokurdish@numbers{%
   \let\@alph\@latinalph%
   \let\@Alph\@latinAlph%
-  }
+}
 
 \def\kurdish@globalnumbers{%
-   \let\orig@arabic\@arabic%
-   \let\@arabic\farsinumber%
-   % For some reason \thefootnote needs to be set separately:
-   \renewcommand\thefootnote{\protect\farsinumber{\c@footnote}}%
-   }
+   \let\@arabic\kurdishnumber%
+   \renewcommand\thefootnote{\localnumeral*{footnote}}%
+   \renewcommand\theequation{\localnumeral*{equation}}%
+}
 
-\def\nofarsi@globalnumbers{
-   \let\@arabic\orig@arabic%
+% Store original definition
+\let\xpg@save@arabic\@arabic
+
+\def\nokurdish@globalnumbers{
+   \let\@arabic\xpg@save@arabic%
    \renewcommand\thefootnote{\protect\number{\c@footnote}}%
-   }
+}
+
+% Save original \MakeUppercase definition
+\let\xpg@save@MakeUppercase\MakeUppercase
 
 \def\blockextras@kurdish{%
-   \let\@@MakeUppercase\MakeUppercase%
    \def\MakeUppercase##1{##1}%
-   }
+}
+
 \def\noextras@kurdish{%
-   \let\MakeUppercase\@@MakeUppercase%
-   }
+   \let\MakeUppercase\xpg@save@MakeUppercase%
+}
+
 \endinput
