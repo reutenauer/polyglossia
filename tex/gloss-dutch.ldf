@@ -2,6 +2,7 @@
 \PolyglossiaSetup{dutch}{
   hyphennames={dutch},
   hyphenmins={2,2},
+  langtag=NLD,
   frenchspacing=true,
   fontsetup=true,
 }

@@ -2,6 +2,7 @@
 
 \PolyglossiaSetup{albanian}{
   hyphennames={albanian},
+  langtag=SQI,
   hyphenmins={2,2},
   indentfirst=true,
   fontsetup=true,

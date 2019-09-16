@@ -2,11 +2,15 @@
 \PolyglossiaSetup{nko}{%
   script=N'ko,
   scripttag=nko~,
+  langtag=NKO,
   fontsetup=true,
   hyphennames={nohyphenation},
-  direction=RL
+  direction=RL,
+  localnumeral=nkonumerals
 }
 \RequirePackage{nkonumbers}%
+
+\newcommand{\nkonumerals}[2]{\nkonumber{#2}}
 
 \def\captionsnko{%
   \def\prefacename{ߢߍߛߓߍ}%
@@ -36,27 +40,27 @@
 % ߂߀߁߃ ߞߏ߲ߞߏߜߍ ߕߟߋ߬ ߁߈ (RTL)
 % ( 18 February 2013 )
 % The word "ߕߟߋ߬" is mandatory between month name and day number.
+% Replace "ߕߟߋ߬" by "ߕߋ߬ߟߋ߫" if and only if day = 2 or day = 3 or day = 9 
+% or (day >= 20 and day <= 29).
+
+\newcommand*\nkodayprefix[1]{%
+  \ifnum\numexpr#1=2 ߕߋ߬ߟߋ߫\else%
+     \ifnum\numexpr#1=3 ߕߋ߬ߟߋ߫\else%
+        \ifnum\numexpr#1=9 ߕߋ߬ߟߋ߫\else%
+           \ifnum\numexpr#1>19\ifnum\numexpr#1<30 ߕߋ߬ߟߋ߫\else ߕߟߋ߬\fi\else ߕߟߋ߬\fi%
+        \fi%
+     \fi%
+  \fi%
+}
+
+\newcommand*\nkoday[1]{%
+  % If day = 1, put above "߁", NKO_COMBINING_SHORT_RISING_TONE
+  \ifnum\numexpr#1=1 ߁߭\else%
+    \nkonumber{#1}
+  \fi
+}
 
 \def\datenko{%
-  \def\today{%
-    \nkonumber{\year}\space
-    \ifcase\month
-    \orߓߌ߲ߠߊߥߎߟߋ߲%
-    \orߞߏ߲ߞߏߜߍ%
-    \orߕߙߊߓߊ
-    \orߞߏ߲ߞߏߘߌ߬ߓߌ%
-    \orߘߓߊ߬ߕߊ%
-    \orߥߊ߬ߛߌߥߊ߬ߙߊ%
-    \orߞߊ߬ߙߌߝߐ߭%
-    \orߘߓߊ߬ߓߌߟߊ%
-    \orߕߎߟߊߝߌ߲%
-    \orߞߏ߲ߓߌߕߌ߮%
-    \orߣߍߣߍߓߊ%
-    \orߞߏ߬ߟߌ߲߬ߞߏߟߌ߲\fi
-    \spaceߕߟߋ߬
-    \space\nkonumber{\day}
-  }%
-
   \def\today{%
     \nkonumber{\year}\space
     \ifcase\month
@@ -72,8 +76,8 @@
     \or ߞߏ߲ߓߌߕߌ߮%
     \or ߣߍߣߍߓߊ%
     \or ߞߏ߬ߟߌ߲߬ߞߏߟߌ߲\fi
-    \space ߕߟߋ߬
-    \space\nkonumber{\day}
+    \space\nkodayprefix{\number\day}
+    \space\nkoday{\day}
   }%
 }%
 

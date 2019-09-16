@@ -3,11 +3,45 @@
 \PolyglossiaSetup{french}{%
   language=French,
   script=Latin,
+  langtag=FRA,
   hyphennames={french,francais},
   frenchspacing=true,
   indentfirst=true,
   hyphenmins={2,2},
   fontsetup=true}
+
+\def\french@variant{french}
+\define@choicekey*+{french}{variant}[\val\nr]{french,canadian,acadian}[french]{%
+   \ifcase\nr\relax
+      % french:
+      \gdef\french@variant{french}%
+   \or
+      % canadian:
+      \gdef\french@variant{canadien}%
+      \xpg@ifdefined{canadien}{}%
+	    {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
+	      I will use the standard patterns for French instead}%
+	    \adddialect\l@canadien\l@french\relax}%
+   \or
+      % acadian:
+      \gdef\french@variant{acadian}%
+      \xpg@ifdefined{acadian}{}%
+	    {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
+	      I will use the standard patterns for French instead}%
+	    \adddialect\l@acadian\l@french\relax}%
+   \fi
+   \xpg@info{Option: French, variant=\val}%
+}{\xpg@warning{Unknown French variant `#1'}}
+
+
+\def\french@language{%
+   \ifxetex
+      \language=\csname l@\french@variant\endcsname
+   \fi
+   \ifluatex
+      \xpg@set@language@luatex@iv{\french@variant}
+   \fi
+}%
 
 \ifluatex
   \newluatexattribute\xpg@frpt %
@@ -22,58 +56,73 @@
 \fi
 
 \def\xpg@unskip{\ifhmode\ifdim\lastskip>\z@\unskip\fi\fi}
-\def\xpg@nospace#1{#1}
 
-\ifx\@makefntext\undefined\else
-  \let\nofrench@makefntext\@makefntext
-  \long\def\french@makefntext#1{\parindent1em \noindent\quad\ifx\@thefnmark\empty\else\@thefnmark.\space\fi #1}
-  \let\@makefntext\french@makefntext
-  \define@boolkey{french}[french@]{frenchfootnote}[true]{%
-  	\def\@tmpa{#1}
-    \def\@tmptrue{true}
-    \ifx\@tmpa\@tmptrue
-    	\let\@makefntext\french@makefntext
-		\else 
-			\let\@makefntext\nofrench@makefntext
-    \fi
-  }
-\fi
+% Save original footnote definition
+\let\xpg@orig@makefntext\@makefntext
 
-
-\newif\iffrench@automaticspacesaroundguillemets
-\define@boolkey{french}[french@]{automaticspacesaroundguillemets}[true]{%
-  %\def\tmp@true{true}%
-  %\def\@tmpa{#1}%
-  %\ifx\@tmpa\tmp@true
+\define@boolkey{french}[french@]{frenchfootnote}[true]{%
+   \iffrench@frenchfootnote
+      \ifx\@makefntext\undefined\else        
+          \long\def\french@makefntext##1{%
+               \parindent1em \noindent\quad%
+               \ifx\@thefnmark\empty\else%
+               \@thefnmark.\space\fi ##1%
+          }
+          \let\@makefntext\french@makefntext
+      \fi
+   \else
+      \let\@makefntext\xpg@orig@makefntext
+   \fi
 }
-\french@automaticspacesaroundguillemetstrue
+
+\define@boolkey{french}[french@]{autospacing}[true]{}
+\french@autospacingtrue
+
+\newif\iffrench@autospaceguillemets
+\define@boolkey{french}[french@]{autospaceguillemets}[true]{}
+\french@autospaceguillemetstrue
+
+% Backwards compatibility
+\define@boolkey{french}[french@]{automaticspacesaroundguillemets}[true]{%
+   \iffrench@automaticspacesaroundguillemets
+       \setkeys{french}{autospaceguillemets=true}%
+   \else
+       \setkeys{french}{autospaceguillemets=false}%
+   \fi
+}
 
 % name is for compatibility with babel
 \let\french@ttfamilyORI\ttfamily
-\let\french@rmfamilyORI\rmfamily
-\let\french@sffamilyORI\sffamily
 \DeclareRobustCommand\french@ttfamilyFB{\nofrench@punctuation\french@ttfamilyORI}
-\DeclareRobustCommand\french@rmfamilyFB{\french@punctuation\french@rmfamilyORI}
-\DeclareRobustCommand\french@sffamilyFB{\french@punctuation\french@sffamilyORI}
-\define@boolkey{french}[french@]{OriginalTypewriter}[true]{
-  \def\@tmpfalse{false}%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\@tmpfalse
+
+% Allow to switch on autospacing in ttfamily context
+\define@boolkey{french}[french@]{autospacetypewriter}[true]{}
+\french@autospacetypewriterfalse
+
+% This is how babel-french has it
+\define@boolkey{french}[french@]{OriginalTypewriter}[true]{%
+   \iffrench@OriginalTypewriter
+       \setkeys{french}{autospacetypewriter=false}%
+   \else
+       \setkeys{french}{autospacetypewriter=true}%
+   \fi
+}
+
+\def\french@fontsetup{%
+  \unless\iffrench@autospacetypewriter
     \let\ttfamily\french@ttfamilyFB
-    \let\rmfamily\french@rmfamilyFB
-    \let\sffamily\french@sffamilyFB
-  \else
-    \let\ttfamily\french@ttfamilyORI
-    \let\rmfamily\french@rmfamilyORI
-    \let\sffamily\french@sffamilyORI
   \fi
 }
-\setkeys{french}{OriginalTypewriter=false}
+
+
+\def\nofrench@fontsetup{%
+  \let\ttfamily\french@ttfamilyORI
+}
 
 \def\french@punctuation{%
     \lccode"2019="2019
     \ifluatex
-      \global\xpg@frpt=1\relax %
+      \xpg@frpt=1\relax %
       \directlua{polyglossia.activate_frpt()}%
     \else
       \XeTeXinterchartokenstate=1
@@ -95,24 +144,24 @@
       \XeTeXcharclass `\[ \french@closebrackets
       \XeTeXcharclass `\{ \french@openbrackets
       \XeTeXcharclass `\} \french@closebrackets
-      \XeTeXinterchartoks \z@ \french@punctthin = {\nobreak\thinspace}%
+      \XeTeXinterchartoks \z@ \french@punctthin = {\thinspace}%
       \XeTeXinterchartoks \z@ \french@punctthick = {\nobreakspace}%
-      \XeTeXinterchartoks \xpg@boundaryclass \french@punctthin = {\xpg@unskip\nobreak\thinspace}%
+      \XeTeXinterchartoks \xpg@boundaryclass \french@punctthin = {\xpg@unskip\thinspace}%
       \XeTeXinterchartoks \xpg@boundaryclass \french@punctthick = {\xpg@unskip\nobreakspace}%
-      \XeTeXinterchartoks \french@punctguillstart \z@ = {\nobreakspace}% "«a" -> "« a"
-  %   \XeTeXinterchartoks \z@ \french@punctguillstart = {\nobreakspace}% "a«" unchanged?
-  %   \XeTeXinterchartoks \french@punctguillend \z@ = {\nobreakspace}% "»a" unchanged?
-      \XeTeXinterchartoks \z@ \french@punctguillend = {\nobreakspace}% "a»" -> "a »"
-      \iffrench@automaticspacesaroundguillemets
-        \XeTeXinterchartoks \french@punctguillstart \xpg@boundaryclass = {\nobreakspace\xpg@nospace\relax}% "«  " -> "«~"
-        \XeTeXinterchartoks \xpg@boundaryclass \french@punctguillend = {\xpg@unskip\nobreakspace}% "  »" -> "~»"
-      \fi
-      \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\nobreak\thinspace}% "»;" -> "» ;"
-      \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace}% "»:" -> "» :"
-      \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\nobreakspace}% "?»" -> "? »"
+      \iffrench@autospaceguillemets
+        \XeTeXinterchartoks \french@punctguillstart \z@ = {\thinspace}% "«a" -> "«\,a"
+  %     \XeTeXinterchartoks \z@ \french@punctguillstart = {\nobreakspace}% "a«" unchanged?
+  %     \XeTeXinterchartoks \french@punctguillend \z@ = {\nobreakspace}% "»a" unchanged?
+        \XeTeXinterchartoks \z@ \french@punctguillend = {\thinspace}% "a»" -> "a\,»"
+        \XeTeXinterchartoks \french@punctguillstart \xpg@boundaryclass = {\thinspace\ignorespaces}% "«  " -> "«\,"
+        \XeTeXinterchartoks \xpg@boundaryclass \french@punctguillend = {\xpg@unskip\thinspace}% "  »" -> "\,»"
+     \fi
+     \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\thinspace}% "»;" -> "»\,;"
+     \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace}% "»:" -> "» :"
+     \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\thinspace}% "?»" -> "?\,»"
      \XeTeXinterchartoks \french@openbrackets \french@punctthin = {\xpg@unskip}% "(?" -> "(?" and not "( ?"      
      \XeTeXinterchartoks \french@punctthin \french@closebrackets = {\xpg@unskip}% "?)" -> "?)" (code not need, just for symetry with previous one)
-     \XeTeXinterchartoks \french@closebrackets \french@punctthin = {\nobreak\thinspace}% ")?" -> ") ?"
+     \XeTeXinterchartoks \french@closebrackets \french@punctthin = {\thinspace}% ")?" -> ")\,?"
      \XeTeXinterchartoks \french@closebrackets \french@punctthick = {\nobreakspace}% "):" -> ") :"
     \fi
     }
@@ -120,7 +169,7 @@
 \def\nofrench@punctuation{%
     \lccode"2019=\z@
     \ifluatex
-      \global\xpg@frpt=0\relax %
+      \xpg@frpt=0\relax %
       % Though it would make compilation slightly faster, it is not possible to
       % safely uncomment the following line. Imagine the following case: you start
       % a paragraph by some french text, then, in the same paragraph, you change
@@ -174,6 +223,7 @@
    \def\headtoname{}%
    \def\proofname{Démonstration}%
    }
+
 \def\datefrench{%
    \def\today{\ifx\ier\undefined\def\ier{er}\fi
       \ifnum\day=1\relax 1\ier%
@@ -186,15 +236,30 @@
 
 \def\noextras@french{%
    \nofrench@punctuation%
-   }
+   \nofrench@fontsetup%
+}
 
 \def\blockextras@french{%
-   \french@punctuation%
-   }
+   \iffrench@autospacing
+      \french@punctuation%
+   \fi
+   \french@fontsetup%
+}
 
 \def\inlineextras@french{%
-   \french@punctuation%
-   }
+   \iffrench@autospacing
+      \french@punctuation%
+   \fi
+   \french@fontsetup%
+}
+
+\def\NoAutoSpacing{%
+  \nofrench@punctuation%
+}
+
+\def\AutoSpacing{%
+  \french@punctuation%
+}
 
 \def\ier{\textsuperscript{er}}
 \def\iers{\textsuperscript{ers}}

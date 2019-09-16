@@ -28,8 +28,6 @@
    \xpg@ill@value{#1}{macedonian@alph}\fi}%
 
 \def\macedonian@numbers{%
-   \let\latin@Alph\@Alph%
-   \let\latin@alph\@alph%
    \let\@Alph\macedonian@Alph%
    \let\@alph\macedonian@alph%
  }

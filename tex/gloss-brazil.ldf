@@ -1,40 +1,25 @@
-\ProvidesFile{gloss-brazil.ldf}[polyglossia: module for portuguese]
+\ProvidesFile{gloss-brazil.ldf}[polyglossia: module for brazilian portuguese]
+
+% We only provide this gloss for backwards compatibility. The name
+% 'brazil' was selected in accordance with babel.
+% Since brazil is a variety of potuguese, we use 'portuguese' now.
+
+% FIXME: Once we support babel aliases (#112) this gloss can go.
+
+\xpg@warning{The language name 'brazil' is deprectated.\MessageBreak
+             Please use 'portuguese' with variant 'brazilian' instead.}
+
+\input{gloss-portuguese.ldf}
+
 \PolyglossiaSetup{brazil}{
   language=Brazilian Portuguese,
+  langtag=PTG,
   hyphennames={brazil,portuguese,portuges},
   hyphenmins={2,3},
   fontsetup=true,
 }
 
-\def\captionsbrazil{%
-   \def\refname{Referências}%
-   \def\abstractname{Resumo}%
-   \def\bibname{Referências Bibliográficas}%
-   \def\prefacename{Prefácio}%
-   \def\chaptername{Capítulo}%
-   \def\appendixname{Apêndice}%
-   \def\contentsname{Sumário}%
-   \def\listfigurename{Lista de Figuras}%
-   \def\listtablename{Lista de Tabelas}%
-   \def\indexname{Índice Remissivo}%
-   \def\figurename{Figura}%
-   \def\tablename{Tabela}%
-   %\def\thepart{}%
-   \def\partname{Parte}%
-   \def\pagename{Página}%
-   \def\seename{veja}%
-   \def\alsoname{veja também}%
-   \def\enclname{Anexo}%
-   \def\ccname{Cópia para}%
-   \def\headtoname{Para}%
-   \def\proofname{Demonstração}%
-   \def\glossaryname{Glossário}%
-   }
-\def\datebrazil{%   
-   \def\today{\number\day\space de\space\ifcase\month\or
-      janeiro\or fevereiro\or março\or abril\or maio\or junho\or
-      julho\or agosto\or setembro\or outubro\or novembro\or dezembro%
-      \fi\space de\space\number\year}%
-      }
+\let\captionsportuges\captionsportuguese@brazil
+\let\dateportuges\dateportuguese@brazil
      
 \endinput

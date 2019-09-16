@@ -4,21 +4,15 @@
 % Velthuis Devanagari project.
 
 \ProvidesFile{gloss-hindi.ldf}[polyglossia: module for hindi]
-\ifluatex
-  \xpg@warning{Hindi is not supported with LuaTeX.\MessageBreak
-I will proceed with the compilation, but\MessageBreak
-the output is not guaranteed to be correct\MessageBreak
-and may look very wrong.}
-\fi
 \RequirePackage{devanagaridigits}
 \PolyglossiaSetup{hindi}{
   script=Devanagari,
   scripttag=deva,
   langtag=HIN,
 %%  hyphennames={hindi,!sanskrit}, TODO: implement fallback patterns (with ! prefix)
-  fontsetup=true
+  fontsetup=true,
+  localnumeral=hindinumerals
   %TODO nouppercase=true,
-  %TODO localnumber=hindinumber
 }
 
 \ifx\l@hindi\@undefined%
@@ -44,6 +38,8 @@ and may look very wrong.}
     \hindi@devanagari@numeralsfalse
   \fi}
 
+\newcommand{\hindinumerals}[2]{\hindinumber{#2}}
+
 \def\hindinumber#1{%
   \ifhindi@devanagari@numerals
     \devanagaridigits{\number#1}%
@@ -54,13 +50,13 @@ and may look very wrong.}
 \def\captionshindi{%
      \def\abstractname{सारांश}%
      \def\appendixname{परिशिष्ट}%
-     \def\bibname{संदर्भ ग्रन्थ}%
+     \def\bibname{संदर्भ ग्रंथ}%
      \def\ccname{}%
      \def\chaptername{अध्याय}%
      \def\contentsname{विषय सूची}%
      \def\enclname{}%
      \def\figurename{चित्र}% रेखाचित्र
-     \def\headpagename{पृषठ}%
+     \def\headpagename{पृष्ठ}%
      \def\headtoname{}%
      \def\indexname{सूची}%
      %              सूचक
@@ -68,7 +64,7 @@ and may look very wrong.}
      %              अनुक्रमणि
      \def\listfigurename{चित्रों की सूची}%
      \def\listtablename{तालिकाओं की सूची}%
-     \def\pagename{पृषठ}%
+     \def\pagename{पृष्ठ}%
      \def\partname{खणड}%
      \def\prefacename{प्रस्तावना}% प्राक्कथन
      \def\refname{हवाले}%
@@ -94,12 +90,16 @@ and may look very wrong.}
     \space\hindinumber\year}%
 }
 
+% Save original \MakeUppercase definition
+\let\xpg@save@MakeUppercase\MakeUppercase
+
 \def\blockextras@hindi{%
-  \let\@@MakeUppercase\MakeUppercase%
   \def\MakeUppercase##1{##1}%
 }
+
 \def\noextras@hindi{%
-  \let\MakeUppercase\@@MakeUppercase%
+   % restore original \MakeUppercase definition
+   \let\MakeUppercase\xpg@save@MakeUppercase%
 }
 
 \endinput

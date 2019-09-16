@@ -1,3 +1,4 @@
+% !TeX TS-program = xelatex
 \documentclass[11pt]{ltxdoc}
 \usepackage{color}
 \usepackage{xspace,fancyvrb}
@@ -6,6 +7,7 @@
 \definecolor{lightblue}{rgb}{0.61,.8,.8}
 \definecolor{myred}{rgb}{0.65,0.04,0.07}
 \usepackage[
+    unicode=true,
     bookmarks=true,
     colorlinks=true,
     linkcolor=myblue,
@@ -23,7 +25,7 @@
 \usepackage[babelshorthands]{polyglossia}
 \usepackage{farsical}
 \setmainlanguage[variant=british,ordinalmonthday=false]{english}
-\setotherlanguages{arabic,hebrew,syriac,greek,russian,catalan}
+\setotherlanguages{arabic,armenian,hebrew,syriac,greek,russian,serbian,catalan}
 \usepackage[protrusion]{microtype}
 \newcommand*\Cmd[1]{\cmd{#1}\DescribeMacro{#1}\xspace}
 \newcommand*\pkg[1]{\textsf{\color{myblue}#1}}
@@ -58,6 +60,7 @@
 \setsansfont{Linux Biolinum O}
 \setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}
 \newfontfamily\arabicfont[Script=Arabic]{Amiri}
+\newfontfamily\armenianfont[Script=Armenian]{DejaVu Sans}
 \newfontfamily\syriacfont[Script=Syriac]{Serto Jerusalem}
 \newfontfamily\hebrewfont[Script=Hebrew]{Ezra SIL}
 
@@ -146,9 +149,9 @@ language-specific options.\footnote{ %
 	More on language-specific options below.}
 It is also possible to load a series of secondary languages at once using
 	\displaycmd{\setotherlanguages\{lang1,lang2,lang3,…\}.}{\setotherlanguages}
-Language-specific options can be set or changed at any time by means of
-	\displaycmd{\setkeys\{⟨lang⟩\}\{opt1=value1,opt2=value2,…\}.}{\setkeys}
 
+Global language-specific options can be modified by means of the
+language-switching commands described in section \ref{languageswitching}.
 
 \subsection{The “Babel way” – obsolete}
 \new{v1.2.0}
@@ -169,49 +172,51 @@ Table~\ref{tab:lang} lists all languages currently supported.
 Those in red have specific options and/or commands
 that are explained in section \ref{specific} below.
 
-\begin{table}[h]\centering
+\begin{table}[ht]\centering
 \label{tab:lang}
 % Produced with tools/insert-language-list.rb -- AR, 2015-07-14
 % Edited by hand -- AR 2019-04-04
 \begin{tabular}{lllll}
 \hline
-albanian       & danish         & interlingua    & nko            & \TX{slovenian}\\
-amharic        & divehi         & irish          & norsk          & spanish       \\
-\TX{arabic}    & \TX{dutch}     & \TX{italian}   & nynorsk        & swedish       \\
-armenian       & \TX{english}   & kannada        & occitan        & \TX{syriac}   \\
-asturian       & \TX{esperanto} & khmer          & piedmontese    & tamil         \\
-bahasai        & estonian       & \TX{korean}    & polish         & telugu        \\
-bahasam        & \TX{farsi}     & \TX{lao}       & portuges       & \TX{thai}     \\
-basque         & finnish        & \TX{latin}     & romanian       & tibetan       \\
-\TX{bengali}   & french         & latvian        & romansh        & turkish       \\
-brazil[ian]    & friulan        & lithuanian     & \TX{russian}   & turkmen       \\
-breton         & galician       & \TX{lsorbian}  & samin          & \TX{ukrainian}\\
-bulgarian      & \TX{german}    & \TX{magyar}    & \TX{sanskrit}  & urdu          \\
-\TX{catalan}   & \TX{greek}     & macedonian     & scottish       & \TX{usorbian} \\
-coptic         & \TX{hebrew}    & malayalam      & \TX{serbian}   & vietnamese    \\
-croatian       & \TX{hindi}     & marathi        & slovak         & \TX{welsh}    \\
-czech          & icelandic      \\
+               & danish         & interlingua    & marathi        & \TX{slovenian}\\
+albanian       & divehi         & irish          & nko            & spanish       \\
+amharic        & \TX{dutch}     & \TX{italian}   & norsk          & swedish       \\
+\TX{arabic}    & \TX{english}   & japanese       & nynorsk        & \TX{syriac}   \\
+\TX{armenian}  & \TX{esperanto} & kannada        & occitan        & tamil         \\
+asturian       & estonian       & khmer          & piedmontese    & telugu        \\
+bahasai        & \TX{farsi}     & \TX{korean}    & polish         & \TX{thai}     \\
+bahasam        & \TX{finnish}   & \TX{kurdish}   & \TX{portuguese}& \TX{tibetan}  \\
+basque         & \TX{french}    & \TX{lao}       & romanian       & turkish       \\
+\TX{bengali}   & friulan        & \TX{latin}     & romansh        & turkmen       \\
+breton         & galician       & latvian        & \TX{russian}   & \TX{ukrainian}\\
+bulgarian      & \TX{german}    & lithuanian     & samin          & urdu          \\
+\TX{catalan}   & \TX{greek}     & \TX{lsorbian}  & \TX{sanskrit}  & \TX{usorbian} \\
+coptic         & \TX{hebrew}    & \TX{magyar}    & scottish       & vietnamese    \\
+croatian       & \TX{hindi}     & macedonian     & \TX{serbian}   & \TX{welsh}    \\
+czech          & icelandic      & malayalam      & slovak\\
 \hline
 \end{tabular}
 \caption{Languages currently supported in \pkg{polyglossia}}
 \end{table}
 
 \textit{NB:} The support for Amharic\new{v1.0.1} should be considered an experimental attempt to
-port the package \pkg{ethiop}.\footnote{ Feedback is welcome.}
+port the package \pkg{ethiop}.\footnote{Feedback is welcome.}
 Version 1.1.1\new{v1.1.1} added support for Asturian, %\footnote{ Provided by Kevin Godby and Xuacu Saturio.}, 
 Lithuanian, %\footnote{ Provided by Kevin Godby and Paulius Sladkevičius.},
 and Urdu. %\footnote{ Provided by Kamal Abdali.}
 %
 Version 1.2\new{v1.2.0} adds support for Armenian, Occitan, Bengali,
-Lao, Malayalam, Marathi, Tamil, Telugu, and Turkmen.\footnote{ %
+Lao, Malayalam, Marathi, Tamil, Telugu, and Turkmen.\footnote{%
   See acknowledgements at the end for due credit to the various contributors.}
+Version 1.43\new{v1.43} silently introduced basic support for Japanese. This
+is considered experimental, and feedback is appreciated.
 
 
 
 Polyglossia can also be loaded with the option
 ‘babelshorthands’\new{v1.1.1}, which globally activates \pkg{babel}
 shorthands whenever available. Currently shorthands are implemented for
-Catalan, Dutch, German, Italian, and Russian: see these respective
+Catalan, Dutch, Finnish, German, Italian, and Russian: see these respective
 languages for details.
 
 Another option (turned off by default) is ‘localmarks’, which
@@ -223,15 +228,25 @@ the opposite option ‘nolocalmarks’ is still available.
 There is also the option ‘quiet’ which turns off most info messages and some of the warnings
 issued by \LaTeX, \pkg{fontspec} and \pkg{polyglossia}.
 
-\section{Language-switching commands}
+\section{Language-switching commands}\label{languageswitching}
 
+\subsection{Recommended commands}
 Whenever a language definition file \file{gloss-⟨lang⟩.ldf} is loaded,
 the command \cmd{\text⟨lang⟩[⟨options⟩]\{…\}} \DescribeMacro{\text⟨lang⟩}
 becomes available for short insertions of text in that language.
 For example ¦\textrussian{\today}¦ yields \textrussian{\today}
-Longer passages are better put between the environment ¦⟨lang⟩¦
-(again with the possibility of setting language options locally.
-\DescribeEnv{⟨lang⟩}
+This command switches to the correct hyphenation patterns, it activates
+some extra features for the selected language (such as extra spacing before
+punctuation in French), and it translates the date when using ¦\today¦.
+It does not, however, translate so-called \textit{caption strings}, i.\,e.
+``chapter'', ``figure'' etc., to the local language (these remain in the main
+language).
+
+The\DescribeEnv{⟨lang⟩}\ environment ¦⟨lang⟩¦, which is meant for longer passages of text,
+behaves slightly different. It does everything the \cmd{\text⟨lang⟩\{…\}} does,
+but additionally, the caption strings are translated as well, and the language is also
+passed to auxiliary files, the table of contents and the lists of figures/tables.
+Like the command, the environment provides the possibility of setting language options locally.
 For instance the following allows us to quote the beginning
 of Homer’s \textit{Iliad}:
 
@@ -252,9 +267,30 @@ of Homer’s \textit{Iliad}:
 \end{greek}
 \bigskip
 
-Note that for Arabic one cannot use the environment ¦arabic¦,
+\noindent\DescribeEnv{Arabic} Note that for Arabic one cannot use the environment ¦arabic¦,
 as \cmd\arabic\ is defined internally by \LaTeX. In this case
-we need to use the environment ¦Arabic¦ instead\DescribeEnv{Arabic}.
+we need to use the environment ¦Arabic¦ instead.
+
+\subsection{Babel commands}
+Some macros defined in \pkg{babel}’s \file{hyphen.cfg} (and thus usually
+compiled into the \XeLaTeX\ and \LuaLaTeX\ format) are redefined, but keep a
+similar behaviour.
+\begin{itemize}
+\item \DescribeMacro{\selectlanguage}\cmd{\selectlanguage[⟨options⟩]\{⟨lang⟩\}}
+\item \DescribeMacro{\foreignlanguage}\cmd{\foreignlanguage[⟨options⟩]\{⟨lang⟩\}\{…\}}
+\item \DescribeEnv{otherlanguage}\cmd{\begin\{otherlanguage\}[⟨options⟩]\{⟨lang⟩\}} \dots{} \cmd{\end\{otherlanguage\}}
+\item \DescribeEnv{otherlanguage*}\cmd{\begin\{otherlanguage*\}[⟨options⟩]\{⟨lang⟩\}} \dots{} \cmd{\end\{otherlanguage*\}}
+\end{itemize}
+%
+¦\selectlanguage{⟨lang⟩}¦ and the ¦otherlanguage¦ environment are identical to the
+the ¦⟨lang⟩¦ environment, except that ¦\selectlanguage{⟨lang⟩}¦
+does not need to be explicitly closed. The command ¦\foreinlanguage{⟨lang⟩}{…}¦ and the ¦otherlanguage*¦
+environment are identical with the use of the ¦\text⟨lang⟩¦ command, with the one
+notable exception that they do not translate the date with ¦\today¦.
+
+Since the \XeLaTeX\ and \LuaLaTeX\ format incorporate \pkg{babel}’s \file{hyphen.cfg},
+the low-level commands for hyphenation and language switching
+defined there are also accessible.
 
 \subsection{Other commands}
 The following commands are probably of lesser interest to the end user, but
@@ -268,19 +304,14 @@ ought to be mentioned here.
 	to another one in the middle of a document: \textit{this may have adverse effects}!
 
 \item \Cmd\normalfontlatin: in an environment where \cmd\normalfont\ has been redefined
-	to a non-latin script, this will call the font defined with \cmd\setmainfont\ etc.
-	Likewise it is possible to use \Cmd\rmfamilylatin, \Cmd\sffamilylatin,
+	to a non-latin script, this will reset to the font defined with \cmd\setmainfont\ etc.
+	In a similar vein, it is possible to use \Cmd\rmfamilylatin, \Cmd\sffamilylatin,
 	and \Cmd\ttfamilylatin.
 
-\item Some macros defined in \pkg{babel}’s \file{hyphen.cfg} (and thus usually
-	compiled into the \XeLaTeX\ and \LuaLaTeX\ format) are redefined, but keep a similar
-	behaviour, namely \Cmd\selectlanguage, \Cmd\foreignlanguage,
-	and the environment ¦otherlanguage¦\DescribeEnv{otherlanguage}.
+\item \Cmd\latinalph: Representation of counter as a lower-case letter:  1 = a, 2 = b, etc.
+
+\item \Cmd\latinAlph: Representation of counter as a uper-case letter:  1 = A, 2 = B, etc.
 \end{itemize}
-%
-Since the \XeLaTeX\ and \LuaLaTeX\ format incorporate \pkg{babel}’s \file{hyphen.cfg},
-the low-level commands for hyphenation and language switching
-defined there are also accessible.
 
 \section{Font setup}
 
@@ -347,6 +378,13 @@ The default value of each option is given in italic.
     This command is also available for Farsi, Urdu, etc.
 	\end{itemize}
 
+\subsection{armenian}\label{armenian}
+\textbf{Options}:
+\begin{itemize}
+	\item \TB{variant}\new{v1.45} = eastern or \textit{western}
+	\item \TB{numerals}\new{v1.45} = armenian or \textit{arabic}
+\end{itemize}
+
 \subsection{bengali}\label{bengali}\new{v1.2.0}
 \textbf{Options}:
 	\begin{itemize}
@@ -363,9 +401,8 @@ The default value of each option is given in italic.
 \end{itemize}
 \textbf{Commands}:
 \begin{itemize}
-  \item \Cmd{\l.l} and \Cmd{\L.L} behave as in \pkg{babel} to type a geminated l, as in \textit{co\l.laborar}. \new{v1.1.1}
-    In polyglossia the same can also be achieved with \Cmd{\l·l} and \Cmd{\L·L}.\footnote{ %
-        NB: · is the glyph U+00B7 MIDDLE DOT.}
+  \item \Cmd{\l.l} and \Cmd{\L.L}\new{v1.1.1} can be used to type a geminated l, as in \textit{co\l.laborar},
+        similar to \pkg{babel} (the glyph U+00B7 MIDDLE DOT is used as a geminating sign).
 \end{itemize}
 
 \subsection{dutch}\label{dutch}
@@ -388,7 +425,8 @@ The default value of each option is given in italic.
 \subsection{english}\label{english}
 \textbf{Options}:
 	\begin{itemize}
-	\item \TB{variant} = \textit{american} (= us), usmax (same as ‘american’ but with additional hyphenation patterns), british (= uk), australian or newzealand
+	\item \TB{variant} = \textit{american} (= us), usmax (same as ‘american’ but with additional hyphenation patterns),
+	british (= uk), australian, canadian\new{v1.45} or newzealand
 	\item \TB{ordinalmonthday} = true/\textit{false} (true by default only when variant = british)
 	\end{itemize}
 
@@ -402,6 +440,8 @@ The default value of each option is given in italic.
 \textbf{Options}:
 	\begin{itemize}
 	\item \TB{numerals} = western or \textit{eastern}
+	\item \TB{abjadjimnotail} = \textit{false} or true. \new{v1.0.3}
+	Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
 	\item \TB{locale} (not yet implemented)
 	\item \TB{calendar} (not yet implemented)
 	\end{itemize}
@@ -411,13 +451,40 @@ The default value of each option is given in italic.
   \item \Cmd\aemph (see section \ref{arabic}).
 	\end{itemize}
 
-\subsection{french}\label{french}\new{v1.5.0}
+\subsection{finnish}\label{finnish}
+\textbf{Options:}
+\begin{itemize}
+  \item \TB{babelshorthands} = \textit{false} or true. \new{v1.45}
+		if this is turned on, the following shorthands for fine-tuning the
+                hyphenation of Finnish words are activated.
+		\begin{itemize}
+		\item ¦"-¦ for an explicit hyphen sign, allowing hyphenation in the rest of the word
+		\item ¦"~¦ for a compound word mark without a breakpoint
+		\item ¦"|¦ disables the ligature at this position
+		\item ¦""¦ is like ¦"-¦, but produces no hyphen sign
+			(for compound words with a hyphen, e.g., ¦foo-""bar¦)
+		\item ¦"/¦ to enable hyphenation in two words written together but separated by a slash.
+		\end{itemize}
+\end{itemize}
+
+\subsection{french}\label{french}
 \textbf{Options}:
 	\begin{itemize}
-		\item \TB{automaticspacesaroundguillemets} = true or \textit{false} (default value = true. Adds space after the opening guillemets and before the closing guillemets. Such space is usually not typed in source code, and you should let polyglossia add it. However, if your source code contains such space, you can set this option to false.)
-		\item \TB{frenchfootnote} = true or \textit{false} (default value = true. Determines whether the footnote mark starting the footnote is normal script followed by a dot (default) or superscript without a dot.)
-		\item \TB{OriginalTypewriter} = true or \textit{false} (default value = false. Prevents any customisation of |\ttfamily| and |\texttt{}| in French. This option should only be used to ensure backward compatibility. The current default behaviour is to switch off.)
+		\item\TB{variant} = \textit{french} or canadian (=~acadian).\new{v1.45}
+		Currently, the three variants do not differ; they are supported for compatibility with \pkg{babel} (where they do not differ either).
+		\item \TB{autospacing} = true or \textit{false} (default value = true). One of the most distinct features of French typography is the addition
+		of extra spacing around punctuation and quotation marks (guillemets). By default, polyglossia adds these spaces automatically, so you don't need
+		to enter them. This options allows you to switch this feature off globally.
+		\item \TB{autospaceguillemets}\footnote{Up to version 1.44, the option was called \textit{automaticspacesaroundguillemets}. For backards compatibility reasons, the more verbose old option is still supported.} = true or \textit{false} (default value = true). If you only want to disable the automatic addition of spacing after opening and before closing guillemets (and not at punctuation), set this to \textit{false}. Note
+		that the more general option \textit{autospacing} overrides this.
+		\item \TB{autospacetypewriter}\footnote{Babel's syntax \textit{OriginalTypewriter} is also supported.}\new{1.45} = true or \textit{false} (default value = true). By default, automatic spacing is disabled in typewriter font. If this is enabled, spacing in typewriter context is the same as with roman and sans serif font, depending on the \textit{autospacing} and \textit{autospaceguillemets} settings (note that this was the default up to v.~1.44).	
+		\item \TB{frenchfootnote} = true or \textit{false} (default value = true). If \textit{true}, footnotes start with a non-superscripted number followed by a dot, as common in French typography. Note that this might interfere with the specific footnote handling of classes or packages.
 	\end{itemize}
+\textbf{Commands}:
+\begin{itemize}
+	\item \Cmd\NoAutoSpacing\new{v1.45} disables automatic spacing around punctuation and quotation marks in all following text. The command can also be used locally if braces are used for grouping: ¦{\NoAutoSpacing foo:bar}¦
+	\item \Cmd\AutoSpacing\new{v1.45} enables automatic spacing around punctuation and quotation marks in all following text. The command can also be used locally if braces are used for grouping: ¦{\AutoSpacing regarde!}¦
+\end{itemize}
 
 \subsection{german}\label{german}
 \textbf{Options}:
@@ -482,6 +549,8 @@ The default value of each option is given in italic.
 	\begin{itemize}
 	\item \TB{numerals} = hebrew or \textit{arabic}
 	\item \TB{calendar} = hebrew or \textit{gregorian}
+	\item \TB{marcheshvan} = true or \textit{false} (default value = true). If true, the second month of the civil year will be output as \texthebrew{מרחשון} (Marcheshvan)
+	rather than \texthebrew{חשון} (Heshvan), which is the default.
 	\end{itemize}
 \textbf{Commands}:
 	\begin{itemize}
@@ -511,8 +580,31 @@ The default value of each option is given in italic.
 \end{itemize}
 
 \subsection{korean}\label{korean}\new{v1.40.0}
-The language definition file includes U. S. hyphenation patterns in order to
-enable hyphenation when writing English within Korean text.
+\textbf{Options}:
+  \begin{itemize}
+  \item \TB{variant} = \textit{plain}, classic or modern:
+    for spacing before/after CJK punctuations.
+    `classic' is suitable for text with no interword spaces,
+    `modern' for text with interword spaces.
+  \item \TB{captions} = \textit{hangul} or hanja
+  \end{itemize}
+
+\subsection{kurdish}\label{kurdish}
+Currently\new{v1.45} support for Kurdish is limited to Sorani Kurdish (support for Kurmanji Kurdish is planned).
+
+\noindent\textbf{Options}:
+\begin{itemize}
+	\item \TB{numerals} = western or \textit{eastern}
+	\item \TB{abjadjimnotail} = \textit{false} or true.
+	Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
+	\item \TB{locale} (not yet implemented)
+	\item \TB{calendar} (not yet implemented)
+\end{itemize}
+\textbf{Commands}:
+\begin{itemize}
+	\item \Cmd\abjad (see section \ref{abjad})
+	\item \Cmd\aemph (see section \ref{arabic}).
+\end{itemize}
 
 \subsection{lao}\label{lao}\new{v1.2.0}
 \textbf{Options}:
@@ -539,40 +631,54 @@ enable hyphenation when writing English within Korean text.
 		(see the \pkg{babel} documentation).
 	\end{itemize}
 
+\subsection{portuguese}\label{portuguese}
+\textbf{Options}:
+\begin{itemize}
+	\item \TB{variant}\new{v1.45} = brazilian or \textit{portuguese}
+\end{itemize}
 
 \subsection{russian}\label{russian}
 \textbf{Options}:
 	\begin{itemize}
 	\item \TB{babelshorthands} = \textit{false} or true. % TODO check and document!
 	\item \TB{spelling} = \textit{modern} or old (for captions and date only, not for hyphenation)
+	\item \TB{numerals} = \textit{arabic} or cyrillic. Uses either Arabic numerals or Cyrillic
+	alphanumerical numbering.
 	\end{itemize}
 
 \textbf{Commands}:
 	\begin{itemize}
-	\item \Cmd\Asbuk: produces the uppercase Russian alphabet, for
-	environments such as ¦enumerate¦
+	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
+	environments such as ¦enumerate¦. The command takes a counter as argument,
+	\eg ¦\textrussian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
 	\item \Cmd\asbuk: same in lowercase
 	\end{itemize}
 
 \subsection{sanskrit}\label{sanskrit}
 \textbf{Options}:
 	\begin{itemize}
-	\item \TB{Script} (default = Devanagari). \new{v1.0.2}
-	The value is passed to \pkg{fontspec} in cases where ¦\sanskritfont¦ or
-	¦\devanagarifont¦ are not defined. This can be useful if you typeset
-	Sanskrit texts in scripts other than Devanagari.
-	  %TODO \item Numerals <<<<
+	\item \TB{Script} = \textit{Devanagari}\new{v1.0.2}, Gujarati, Malayalam, Bengali, Kannada,
+	Telugu or Latin.
+	The value is passed to \pkg{fontspec} in cases where the respective ¦\<script>font¦ is not defined.
+	This can be useful if you typeset Sanskrit texts in scripts other than Devanagari.
+	\item \TB{Numerals} = \textit{Devanagari}\new{v1.45} or Western
 	\end{itemize}
-  \pkg{polyglossia} currently supports the typesetting of Sanskrit in the
-  following writing systems: Devanagari, Gujarati, Malayalam, Bengali, Kannada,
-  Telugu, and Latin.  Use the ¦Script=¦ option to select the writing system 
-  you want, and enter your input in that script.
  
 \subsection{serbian}\label{serbian}
 \textbf{Options}:
 	\begin{itemize}
-	\item \TB{script} = \textit{cyrillic} or latin
+	\item \TB{Script} = \textit{Cyrillic} or Latin. Will likely go to a variant.
+	\item \TB{numerals} = \textit{arabic} or cyrillic. Uses either Arabic numerals or Cyrillic
+	      alphanumerical numbering.
 	\end{itemize}
+\textbf{Commands}:
+\begin{itemize}
+	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
+	environments such as ¦enumerate¦. The command takes a counter as argument,\\
+	Example: ¦\textserbian[numerals=cyrillic]{\Asbuk{page}}¦ produces \textserbian[numerals=cyrillic]{\Asbuk{page}}.
+	\item \Cmd\asbuk: same in lowercase
+\end{itemize}
+
 
 \subsection{slovenian}\label{slovenian}
 \textbf{Options}:
@@ -603,7 +709,13 @@ To insert the word breaks, you need to use an external processor.
 See the documentation to \pkg{thai-latex} and the file \file{testthai.tex}
 that comes with this package.
 
-\subsection{ukrainian}\label{russian}
+\subsection{tibetan}\label{tibetan}
+\textbf{Options}:
+\begin{itemize}
+	\item \TB{numerals} = tibetan or \textit{arabic}
+\end{itemize}
+
+\subsection{ukrainian}\label{ukrainian}
 \textbf{Commands}:
 	\begin{itemize}
 	\item \Cmd\Asbuk: produces the uppercase Ukrainian alphabet, for
@@ -627,64 +739,168 @@ you can do this:
 \gappto\captionslingua{\renewcommand{\chaptername}{Caput}}
 \end{verbatim}
 
-\section{Non-Western decimal digits}
+\section{Script-specific numbering}
 
-Several scripts have their own versions of the decimal digits commonly called
-‘Arabic numerals’.  With the appropriate language option set, \pkg{polyglossia}
+Languages and scripts have specific numbering conventions. Some use decimal digits
+(\eg Arabic numerals), some use alphabetic or alphanumerical notation (\eg Roman numbering).
+In some cases, different conventions are available (\eg Mashriq or Maghrib numbering
+in Arabic script, Arabic or Hebrew [=~alphanumeric] numbering in Hebrew).
+
+If the latter is the case, \pkg{polyglossia} provides language options which allow you to select
+or switch to the suitable convention. With the appropriate language option set, \pkg{polyglossia}
 will automatically convert the output of internal \LaTeX\ counters to their
 localized forms, for instance to display page, chapter and section numbers.
 
-In previous versions this conversion was achieved my means of TECKit fontmappings.
-If needed they can be activated with the fontspec ¦Mapping¦ option,
+For manual input of numbers, macros are provided. These convert Arabic numeric input to the respective
+local decimal digit (see sec.~\ref{sec:decdigit}), alphanumeric representation (see sec.~\ref{abjad})
+or whatever is appropriate (see sec.~\ref{sec:localnumber}). The possibilities are described in turn.
+
+\subsection{General localization of numbering}\label{sec:localnumber}
+
+As of 1.45,\new{1.45} \pkg{polyglossia} provides a generic macro \Cmd\localnumeral\ which converts numbers
+to the current local form (which might be script-specific decimal digit, an alphabetic numbering or something else).
+For instance in an Arabic environment
+¦\localnumeral{42}¦ yields \textarabic{\localnumeral{42}}, whereas in an Hebrew environment, it
+results in \texthebrew[numerals=hebrew]{\localnumeral{42}} with ¦numerals=hebrew¦, and \texthebrew{\localnumeral{42}}
+with ¦numerals=arabic¦. Note that, as opposed to the various ¦digits¦ macros (described in sec.~\ref{sec:decdigit}),
+the argument of ¦\localnumeral¦ must consist of numbers only.
+
+For\new{1.45} the conversion of counters, the starred version \Cmd{\localnumeral*} is provided. This takes a counter as argument.
+For instance in an Arabic environment ¦\localnumeral*{page}¦ yields \textarabic{\localnumeral*{page}}.
+
+For scripts with alphanumeric numbering, the variants \Cmd{\Localnumeral} and \Cmd{\Localnumeral*} provide the uppercased 
+versions.\medskip
+
+\noindent All these macros provide the following options:
+
+\begin{itemize}
+	\item \TB{lang} =\DescribeMacro{[lang=]}\ \textit{local}, main, or <language>.\\
+	Output number in the local form of the currently active language for ¦local¦, the main language of the document for ¦main¦,
+    and any (loaded) language for ¦<language>¦ (\eg ¦\localnumeral[lang=arabic]{42}}¦).
+\end{itemize}
+
+\subsection{Non-Western decimal digits}\label{sec:decdigit}
+
+In addition\new{v1.1.1} to the generic macros described above, \pkg{polyglossia} provides language-specific conversion macros
+which can be used if the generic ones do not suit the need.\footnote{%
+A third method are so-called TECKit fontmappings.
+Those can be activated with the \pkg{fontspec} ¦Mapping¦ option,
 using ¦arabicdigits¦, ¦farsidigits¦ or ¦thaidigits¦.
 For instance if \cmd\arabicfont\ is defined with the option ¦Mapping=arabicdigits¦,
-then by typing ¦\textarabic{2010}¦ one will obtain \textarabic{٢٠١٠}.
+typing ¦\textarabic{2010}¦ results in \textarabic{٢٠١٠}. Note that this method has some drawbacks, though,
+for instance when the value of a counter has to be written and read from auxiliary files.
+So please use this with care.}
+The macros have the form ¦\<script>digits¦. They convert Arabic numerical input and leave every other input untouched.
+In an Arabic context, for instance, ¦\arabicdigits{9182/738543-X}¦ yields \textarabic{\arabicdigits{9182/738543-X}}.
 
-With version v1.1.1\new{v1.1.1} the same conversion is achieved directly by
-simple \TeX\ macros. This prevents some problems that occur when the value of a
-counter has to be written and read from auxiliary files.\footnote{ %
-  For instance the package \pkg{lastpage} did not work with \pkg{polyglossia} in situations
-  where the display of counters was redefined to include a font-switching command.}
-These macros (currently \Cmd\arabicdigits, \Cmd\farsidigits\ and \Cmd\thaidigits\ are provided)
-are also available to the users. For instance in an Arabic environment
-¦\arabicdigits{9182/738543-X}¦ yields
-\textarabic{\arabicdigits{9182/738543-X}}.
+Currently, the following macros are provided:
 
-\section{Alphabetic numbering in Greek, Arabic, Hebrew, Syriac and Farsi}\label{abjad}
+\begin{itemize}
+	\item \Cmd\arabicdigits
+	\item \Cmd\bengalidigits
+	\item \Cmd\devanagaridigits
+	\item \Cmd\farsidigits
+	\item \Cmd\kannadadigits
+	\item \Cmd\khmerdigits
+	\item \Cmd\laodigits
+	\item \Cmd\nkodigits
+	\item \Cmd\thaidigits
+	\item \Cmd\tibetandigits
+\end{itemize}
 
-In certain languages, numbers can be represented
-by a special alphanumerical notation.\footnote{ %
-	See, e.g., \url{http://en.wikipedia.org/wiki/Greek_numerals},
+
+\subsection{Non-Latin alphabetic numbering}\label{abjad}
+
+For languages which use special (non-Latin) alphanumerical notation\footnote{%
+	For instance, see \url{http://en.wikipedia.org/wiki/Greek_numerals},
 	\url{http://en.wikipedia.org/wiki/Abjad_numerals},
-	and \url{http://en.wikipedia.org/wiki/Hebrew_numerals}.}
-	%% \url{http://en.wikipedia.org/wiki/Syriac_alphabet}
+	\url{http://en.wikipedia.org/wiki/Hebrew_numerals},
+	and \url{http://en.wikipedia.org/wiki/Syriac_alphabet}.}, dedicated macros are provided.
 
-The Greek numerals are obtained with \Cmd\greeknumeral (or \Cmd\Greeknumeral\ in uppercase).
-Example: ¦\greeknumeral{1863}¦ yields \textgreek{\greeknumeral{1863}}.
+They work in a similar way than the ¦\<script>digits¦ macros described above: They take Arabic numerical input
+and output the respective value in the local alphabetic numbering scheme (most of these macros are equivalent
+to ¦\localnumeral¦ and ¦\Localnumeral¦ in the respective context).
 
-The Arabic \textit{abjad} numbers can be generated with the command \Cmd\abjad.
-Example: ¦\abjad{1863}¦ yields \textarabic{\abjad{1863}}.
-In the Maghrib the conventions are somewhat different, and the maghribi forms
-of the \textit{abjad} numerals are obtained with the \Cmd\abjadmaghribi\ command.
-Example: ¦\abjadmaghribi{1863}¦ yields \textarabic{\abjadmaghribi{1863}}.
+The following macros are provided:
 
-The code for Hebrew numerals, which was incorrect in previous versions, was
-ported from the implementation in \pkg{babel} with v1.1.1\new{v1.1.1}, and the
-user interface is identical to the one in \pkg{babel}.
-The commands \Cmd\hebrewnumeral, \Cmd\Hebrewnumeral and \Cmd\Hebrewnumeralfinal\ behave exactly
-as they do in \pkg{babel}: the second command prints the number with \textit{gereshayim} before
-the last letter, and the latter uses in addition the final forms of Hebrew letters.
-Examples:
-¦\hebrewnumeral{1750}¦ yields \texthebrew{\hebrewnumeral{1750}},
-¦\Hebrewnumeral{1750}¦ yields \texthebrew{\Hebrewnumeral{1750}},
-and ¦\Hebrewnumeralfinal{1750}¦ yields \texthebrew{\Hebrewnumeralfinal{1750}}.
+\begin{itemize}
+    \item \Cmd\abjad outputs Arabic \textit{abjad} numbers according to the Mashriq varieties.
+			Example: ¦\abjad{1863}¦ yields \textarabic{\abjad{1863}}.
+			
+	\item \Cmd\abjadmaghribi outputs Arabic \textit{abjad} numbers according to the Maghrib varieties.
+			Example: ¦\abjadmaghribi{1863}¦ yields \textarabic{\abjadmaghribi{1863}}.
+			
+	\item \Cmd\abjadsyriac outputs Syriac abjad numerals.\footnote{%
+				A fine guide to numerals in Syriac can be found at \link{http://www.garzo.co.uk/documents/syriac-numerals.pdf}.}\\
+			Example: ¦\abjadsyriac{463}¦ yields \textsyriac{\abjadsyriac{463}}.
+	
+	\item \Cmd\armeniannumeral produces Armenian alphabetic numbering.
+	          Example: ¦\armeniannumeral{1863}¦ yields \textarmenian{\armeniannumeral{1863}}.
+
+	\item \Cmd\greeknumeral produces Greek alphabetic numbering, \Cmd\Greeknumeral outputs uppercased variants.
+			Example: ¦\greeknumeral{1863}¦ yields \textgreek{\greeknumeral{1863}},
+			¦\Greeknumeral{1863}¦ results in \textgreek{\Greeknumeral{1863}}.
+
+	\item \Cmd\hebrewnumeral, \Cmd\Hebrewnumeral and \Cmd\Hebrewnumeralfinal generate variants of Hebrew alphanumeric numerals.
+			The commands behave exactly as they do in \pkg{babel}: ¦\hebrewnumeral¦ outputs the numbers without any decoration,
+			¦\Hebrewnumeral¦ adds \textit{gereshayim} before the last letter, ¦\Hebrewnumeralfinal¦ uses in addition the final forms of Hebrew letters.
+			Examples:
+			¦\hebrewnumeral{1750}¦ yields \texthebrew{\hebrewnumeral{1750}},
+			¦\Hebrewnumeral{1750}¦ yields \texthebrew{\Hebrewnumeral{1750}},
+			and ¦\Hebrewnumeralfinal{1750}¦ yields \texthebrew{\Hebrewnumeralfinal{1750}}.
+	
+	\item \Cmd\russiannumeral produces Russian numbering, with uppercased variant (for alphanumerical variant) via \Cmd\Russiannumeral.
+	        Depending on the ¦numerals¦ option in the Russian language selection, this is either Arabic digit or Cyrillic
+	        alphanumercial output.\\
+	        Example: With ¦numerals=latin¦ ¦\russiannumeral{19}¦ yields \textrussian{\russiannumeral{19}},
+	        with ¦numerals=cyrillic¦ ¦\russiannumeral{19}¦ results in \textrussian[numerals=cyrillic]{\russiannumeral{19}}.
+			
+	\item \Cmd\serbiannumeral produces Serbian numbering, with uppercased variant (for alphanumerical variant) via \Cmd\Serbiannumeral.
+		    Depending on the ¦numerals¦ option in the Serbian language selection, this is either Arabic digit or Cyrillic
+		    alphanumercial output.\\
+		    Example: With ¦numerals=latin¦ ¦\serbiannumeral{19}¦ yields \textserbian{\serbiannumeral{19}},
+			with ¦numerals=cyrillic¦ ¦\serbiannumeral{19}¦ results in \textserbian[numerals=cyrillic]{\serbiannumeral{19}}.
+\end{itemize}
 
 
-Support is also provided for Syriac abjad numerals, which can be generated
-with \Cmd\abjadsyriac.\footnote{ %
-A fine guide to numerals in Syriac can be found at \link{http://www.garzo.co.uk/documents/syriac-numerals.pdf}.}
-Example: ¦\abjadsyriac{463}¦ yields \textsyriac{\abjadsyriac{463}}.
+\section{Footnotes in right-to-left context}
 
+With languages that use right-to-left scripts, footnote apparatuses are usually placed at the right side of the page bottom.
+Consequently, the footnote rule also is to be placed right. Things get more tricky, though, if right-to-left and left-to-right
+scripts are mixed. Then you might want to put the footnotes on some pages left, on some right, or even mix positions on a page.
+Thus, footnote handling in right-to-left context sometimes needs manual intervention. This is described in what follows.
+
+\subsection{Horizontal footnote position}
+
+When right-to-left languages are used, the ¦\footnote¦ command becomes sensitive to the text directionality. The footnote is
+always placed on the side that is currently the origin of direction: on the left side of the page in LTR paragraphs and
+on the right in RTL paragraphs.
+
+For cases where this is not desired, two additional footnote commands are provided: \Cmd\RTLfootnote and \Cmd\LTRfootnote.
+¦\LTRfootnote¦ always places the footnote on the left side, notwithstanding the current
+directionality. Likewise, ¦\RTLfootnote¦ always places it on the right side. Like ¦\footnote¦, ¦\RTLfootnote¦
+and ¦\LTRfootnote¦ provide an optional argument to customize the number.
+
+
+\subsection{Footnote rule length and position}
+
+The default placement of the footnote rule differs in \XeTeX\ and \LuaTeX\ output (this is due to differences in the \textsf{bidi}
+and \textsf{luabidi} packages). With \XeTeX, footnote rules are always placed left, which is often wrong in RTL context.
+With \LuaTeX, by contrast, the rule is placed always right if the main language is a right-to-left language, and always left
+if the main language is a left-to-right language, which is the right thing in many cases.
+
+In both cases, you can change the default behavior as follows:
+\begin{itemize}
+	\item Put \Cmd\leftfootnoterule in the preamble to have all rules left-aligned.
+	\item Put \Cmd\rightfootnoterule in the preamble to have all rules right-aligned.
+	\item Put \Cmd\autofootnoterule in the preamble to have automatic placement depending on the context (see below for elaboration).
+	\item Put \Cmd\textwidthfootnoterule in the preamble to have a rule that spans the whole text width.
+\end{itemize}
+With ¦\autofootnoterule¦, the first footnote on the current page determines the placement. Note that this automatic can fail with
+footnotes at page boundaries that differ in directionality from the first footnote on the page. You can work around such cases by switching to ¦\rightfootnoterule¦ or ¦\leftfootnoterule¦ on these pages.
+
+Note also that the rule switches might interfere in bad ways with packages or classes that redefine footnotes themselves. This is also the reason
+why ¦\autofootnoterule¦ is not used by default.
 
 \section{Calendars}
 

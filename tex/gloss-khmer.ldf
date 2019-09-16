@@ -4,7 +4,8 @@
 	scripttag=khmr,%
 	langtag=KHM,%
 	hyphennames={nohyphenation},%
-	fontsetup=true%
+	fontsetup=true,%
+	localnumeral=khmernumerals%
 }
 \newif\if@khmer@numerals
 \def\tmp@khmer{khmer}
@@ -71,6 +72,9 @@
     \expandafter\@khmer@digits%
     \fi
 }
+
+\newcommand{\khmernumerals}[2]{\khmernumber{#2}}
+
 \def\khmernumber#1{%
 	\if@khmer@numerals%
 		\khmerdigits{\number#1}%
@@ -80,11 +84,10 @@
 \def\khmer@globalnumbers{%
 	\let\orig@arabic\@arabic%
 	\let\@arabic\khmernumber%
-	\renewcommand{\thefootnote}{\protect\khmernumber{\c@footnote}}%
+	\renewcommand{\thefootnote}{\localnumeral*{footnote}}%
 }
 \def\nokhmer@globalnumbers{%
 	\let\@arabic\orig@arabic%
-	\renewcommand\thefootnote{\protect\number{\c@footnote}}%
 }
 \def\thepart{\arabic{part}}
 \def\@khmeralph#1{%
@@ -107,16 +110,14 @@
 \or យ\or រ\or ល\or វ\or ស\or ហ\or ឡ\or អ%
 \else\xpg@ill@value{#1}{@khmeralph}\fi}
 \def\khmer@numbers{%
-	\let\@latinalph\@alph%
-	\let\@latinAlph\@Alph%
 	\if@khmer@numerals
 		\let\@alph\@khmeralph%
 		\let\@Alph\@khmerAlph%
 	\fi%
 }
 \def\nokhmer@numbers{%
-	\let\@alph\@latinalph%
-	\let\@Alph\@latinAlph%
+	\let\@alph\latin@alph%
+	\let\@Alph\latin@Alph%
 }
 \def\blockextras@khmer{%
 	\XeTeXlinebreaklocale "kh" % 
@@ -152,6 +153,6 @@
 	\deftranslation[to=khmer]{Examples}{\examplename}%
 	\AtEndDocument{\immediate\write\@auxout{\string\@writefile{nav}%
 		{\noexpand\headcommand{\noexpand\def\noexpand%
-		\inserttotalframenumber{\khmernumber{\the\c@framenumber}}}}}}%
+		\inserttotalframenumber{\localnumeral*{framenumber}}}}}}%
 }{}
 \endinput

@@ -1,3 +1,81 @@
+1.45 (????)
+
+New features:
+  * Add new macros \localnumeral, \localnumeral*, \Localnumeral and
+    \Localnumeral* that convert Arabic digitals to the local number scheme.
+  * Add support for (Sorani) Kurdish (#277).
+  * Implement proper Cyrillic (alphanumeric) numbering (#285).
+  * Add new language portuguese with variants portuguese and brazilian.
+    This deprecates brazil and portuges (which are still supported for
+    backwards compatibility).
+  * gloss-serbian: add numerals=cyrillic option. Add \asbuk and \Asbuk (#285).
+  * Implement basic support for (French) canadien and (English) canadian (#22)
+  * Improve support for Armenian (#79): Add captions, Eastern month names
+    (accessible via variant=eastern) and Armenian alphabetic numbering
+    (via numerals=armenian and \armenicnumeral).
+  * Add french option autospacing and commands \AutoSpacing, \NoAutoSpacing
+    This allows to switch off autospacing globally or locally (#113)
+  * Fixup \normalfont (#203)
+  * Implement babelshorthands for Finnish (#212)
+  * Implement access to current language via Lua (#243).
+  * Introduce french option option autospacetypewriter
+    alias OriginalTypewriter
+  * Support \aemph with lualatex
+  * Rename automaticspacesaroundguillemets to autospaceguillemets 
+    The old option is kept for backwards compatibility.
+
+Bug fixes:
+  * Fix equation number in arabic and farsi (#7).
+  * Simplify and document Hebrew marcheshvan option (#16).
+  * Fix hyphenation of Greek with LuaTeX (#55).
+  * Fix N'ko date format (#63).
+  * Disable the extras of a language when a nested language starts (#66, #169).
+  * Properly implement bengali numbers (#69, #184).
+  * Fix kerning in math with French (#92).
+  * Fix expansion issue in Hebrew (#93).
+  * Fix numbering expansion issue in Greek (#110).
+  * Postpone \disablehyphenation in preamble until after setting of
+    document language (#125).
+  * Postpone the assignment of defaultfamily to BeginDocument,
+    thus do not overwrite \familydefault redefinitions in the preamble (#127).
+  * Reset number settings when switching language (#133).
+  * hebrew: Properly store \MakeUppercase for later restoration (#152).
+  * Fix whitespace issue in \datewelsh (#158).
+  * When switching language, set the language/script specific font families (#164).
+  * Correct some Bengali captions (#165).
+  * Fix documentation of Serbian (#168).
+  * Reset ucl codes in latin only if the respective variant is used (#172).
+  * Fix \disablehyphenation with LuaTeX (#187).
+  * Fix typos in Hindi captions (#202).
+  * Pass language options to the aux files (#205).
+  * Rewrite and fix English variant handling (#208).
+  * Define magyar caption formats in \blockextras and undef them in \noextras (#209).
+  * Ensure proper direction with arabic digits in Arabic and Farsi (#213).
+  * Fix \linespread with Korean (#218).
+  * Define russian caption before key allocation (#219).
+  * Register current language in polyglossia lua module after selection (#234).
+  * Fix babel language switching commands (#239).
+    \foreignlanguage and the starred otherlanguage* environment are not
+    supposed to change dates.
+  * Fix French spacing leaking beyond French (#270).
+  * Redefine fontfamilies for French only if language is loaded (#270).
+  * gloss-russian: 
+    - check whether command exist before redefining (#280).
+    - Fix some whitespace issues.
+  * Fix and simplify frenchfootnote definition (#294).
+  * Fix footnote numbering in Farsi.
+  * Fix latin footnotes in Arabic documents.
+  * Set the correct main direction with luabidi.
+  * Fix autospaceguillemets option in French.
+  * Fix grouping in gloss-danish.ldf.
+  * Properly store \MakeUppercase and \@arabic for later restoration.
+
+Documentation:
+  * Add documentation about footnotes in RTL context
+  * Document tibetan numerals option (#109)
+  * Improve frenchfootnote documentation.
+  * Mention Japanese support in the docs.
+
 1.44 (04-04-2019)
   * Correction to Russian language file, by Maksim Zholudev (commit d2f383e)
   * Added Macedonian language file, by Stefan Zlatinov (commit cd379e1)

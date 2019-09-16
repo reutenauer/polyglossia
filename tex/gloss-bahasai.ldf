@@ -3,6 +3,7 @@
 
 \PolyglossiaSetup{bahasai}{%
   language=Bahasa Indonesia,
+  langtag=IND,
   hyphennames={indonesian,indon,bahasai,bahasa,bahasam,malay,melayu},
   hyphenmins={2,2},
   fontsetup=true}

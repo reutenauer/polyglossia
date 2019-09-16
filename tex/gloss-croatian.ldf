@@ -2,6 +2,7 @@
 \PolyglossiaSetup{croatian}{
   hyphennames={croatian},
   hyphenmins={2,2}, % aligned with https://ctan.org/pkg/hrhyph patterns and http://lebesgue.math.hr/~nenad/Diplomski/Maja_Ribaric_2011.pdf
+  langtag=HRV,
   indentfirst=false, % recommendation from Damir Bralić
   fontsetup=true
 }

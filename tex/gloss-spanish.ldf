@@ -2,6 +2,7 @@
 \PolyglossiaSetup{spanish}{
   hyphennames={spanish},
   hyphenmins={2,2},
+  langtag=ESP,
   frenchspacing=true,
   indentfirst=true,
   fontsetup=true,

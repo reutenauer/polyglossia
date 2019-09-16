@@ -9,6 +9,7 @@ and may look very wrong.}
 \PolyglossiaSetup{divehi}{
   script=Thaana,
   scripttag=thaa,
+  langtag=DIV,% TODO Support DHV as well?
   direction=RL,
   hyphennames={nohyphenation},
   fontsetup=true
@@ -40,12 +41,16 @@ and may look very wrong.}
 %   }
 %\def\datedivehi{\def\today{<++>}}
 
+% Save original \MakeUppercase definition
+\let\xpg@save@MakeUppercase\MakeUppercase
+
 \def\blockextras@divehi{%
-   \let\@@MakeUppercase\MakeUppercase%
    \def\MakeUppercase##1{##1}%
-   }
+}
+
 \def\noextras@divehi{%
-   \let\MakeUppercase\@@MakeUppercase%
-   }
+   % restore original \MakeUppercase definition
+   \let\MakeUppercase\xpg@save@MakeUppercase%
+}
 
 \endinput

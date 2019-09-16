@@ -15,7 +15,8 @@ and may look very wrong.}
   scripttag=arab,
   langtag=FAR,
   hyphennames={nohyphenation},
-  fontsetup=true
+  fontsetup=true,
+  localnumeral=farsinumerals
 }
 
 \newif\if@western@numerals
@@ -80,18 +81,32 @@ and may look very wrong.}
    \def\today{\@ensure@RTL{\farsinumber\day\space\farsigregmonth{\month}\space\farsinumber\year}}%
 }
 
+\newcommand{\farsinumerals}[2]{\farsinumber{#2}}
+
+\newif\ifpersiandigits
+
 \def\farsinumber#1{%
   \if@western@numerals
     \number#1%
   \else
-    \ifnum\XeTeXcharglyph"06F0 > 0%
+    \ifxetex
+      \ifnum\XeTeXcharglyph"06F0 > 0\relax
+        \persiandigitstrue
+      \fi
+    \else\ifluatex
+      \expandafter\ifnum\directlua{polyglossia.check_char(0x6F0)} > 0\relax
+        \persiandigitstrue
+      \fi
+    \fi\fi
+    \ifpersiandigits
       \farsidigits{\number#1}%
       %%{\protect\addfontfeature{Mapping=farsidigits}\number#1}%
     \else%
       \arabicdigits{\number#1}%
       %%{\protect\addfontfeature{Mapping=arabicdigits}\number#1}%
     \fi
-  \fi}
+  \fi
+}
 
 %\def\farsinum#1{\expandafter\farsinumber\csname c@#1\endcsname}
 %\def\farsibracenum#1{(\expandafter\farsinumber\csname c@#1\endcsname)}
@@ -99,33 +114,37 @@ and may look very wrong.}
 %\def\farsialph#1{\expandafter\@farsialph\csname c@#1\endcsname}
 
 \def\farsi@numbers{%
-   \let\@latinalph\@alph%
-   \let\@latinAlph\@Alph%
    \let\@alph\abjad%
    \let\@Alph\abjad%
 }
+
 \def\nofarsi@numbers{%
   \let\@alph\@latinalph%
   \let\@Alph\@latinAlph%
-  }
+}
 
 \def\farsi@globalnumbers{%
-   \let\orig@arabic\@arabic%
    \let\@arabic\farsinumber%
-   % For some reason \thefootnote needs to be set separately:
-   \renewcommand\thefootnote{\protect\farsinumber{\c@footnote}}%
-   }
+   \renewcommand\thefootnote{\localnumeral*{footnote}}%
+   \renewcommand\theequation{\localnumeral*{equation}}%
+}
+
+% Store original definition
+\let\xpg@save@arabic\@arabic
 
 \def\nofarsi@globalnumbers{
-   \let\@arabic\orig@arabic%
-   \renewcommand\thefootnote{\protect\number{\c@footnote}}%
-   }
+   \let\@arabic\xpg@save@arabic%
+}
+
+% Save original \MakeUppercase definition
+\let\xpg@save@MakeUppercase\MakeUppercase
 
 \def\blockextras@farsi{%
-   \let\@@MakeUppercase\MakeUppercase%
    \def\MakeUppercase##1{##1}%
-   }
+}
+
 \def\noextras@farsi{%
-   \let\MakeUppercase\@@MakeUppercase%
-   }
+   % restore original \MakeUppercase definition
+   \let\MakeUppercase\xpg@save@MakeUppercase
+}
 \endinput

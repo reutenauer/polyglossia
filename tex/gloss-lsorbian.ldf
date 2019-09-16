@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-lsorbian.ldf}[polyglossia: module for lower sorbian]
 \PolyglossiaSetup{lsorbian}{
   hyphennames={lsorbian,lowersorbian,Lsorbian},
+  langtag=LSB,
   hyphenmins={2,2},
   fontsetup=true,
 }

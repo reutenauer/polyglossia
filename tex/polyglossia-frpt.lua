@@ -19,10 +19,10 @@ local has_attribute      = node.has_attribute
 local node_copy          = node.copy
 local new_node           = node.new
 
+local math_code          = nodecodes.math
 local end_of_math        = node.end_of_math
 if not end_of_math then -- luatex < .76
   local traverse_nodes = node.traverse_id
-  local math_code      = nodecodes.math
   local end_of_math = function (n)
     for n in traverse_nodes(math_code, n.next) do
       return n

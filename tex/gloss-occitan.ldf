@@ -19,6 +19,7 @@
      module for Occitan]
 \PolyglossiaSetup{occitan}{
   hyphennames={occitan},
+  langtag=OCI,
   hyphenmins={2,2},
   frenchspacing=true,
   indentfirst=true,

@@ -2,6 +2,7 @@
 \PolyglossiaSetup{norsk}{
   hyphennames={norsk},
   hyphenmins={2,2},
+  langtag=NOR,
   frenchspacing=true,
   fontsetup=true,
 }

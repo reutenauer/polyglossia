@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-nynorsk.ldf}[polyglossia: module for norwegian (Nynorsk)]
 \PolyglossiaSetup{nynorsk}{
   hyphennames={nynorsk},
+  langtag=NYN,
   hyphenmins={2,2},
   frenchspacing=true,
   fontsetup=true,

@@ -11,9 +11,11 @@ and may look very wrong.}
 \PolyglossiaSetup{syriac}{
   script=Syriac,
   scripttag=syrc,
+  langtag=SYR,
   direction=RL,
   hyphennames={syriac,nohyphenation},
   fontsetup=true,
+  localnumeral=syriacnumerals
   %TODO localalph
 }
 
@@ -115,18 +117,31 @@ and may look very wrong.}
 
 \def\@syriacnumber#1{%
    \if@eastern@numerals
-     \ifnum\XeTeXcharglyph"0661 > 0%
-     %%% we test for the presence of one of ١٢٣٤٥٦٧٨٩٠ in the Syriac font, 
-     %%% else we try \arabicfont if defined (and give a warning), 
-     %%% else we fall back to the Western numerals.
-       %%\protect\addfontfeature{Mapping=arabicdigits}\number#1}%
-       \protect\arabicdigits{\number#1}%
-     \else%
-       \ifcsdef{arabicfont}%
-         {\protect\arabicdigits{\number#1}%
-          \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: I am using \string\arabicfont instead}}%
-         {\number#1%%% <---changed from \RL{\protect\reset@font\protect\number#1}%
-          \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: since \string\arabicfont is not defined, we'll use Western numerals instead}}%
+      %%% we test for the presence of one of ١٢٣٤٥٦٧٨٩٠ in the Syriac font, 
+      %%% else we try \arabicfont if defined (and give a warning), 
+      %%% else we fall back to the Western numerals.
+      \ifxetex
+         \ifnum\XeTeXcharglyph"0661 > 0%
+           %%\protect\addfontfeature{Mapping=arabicdigits}\number#1}%
+           \protect\arabicdigits{\number#1}%
+         \else%
+           \ifcsdef{arabicfont}%
+	     {\protect\arabicdigits{\number#1}%
+	      \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: I am using \string\arabicfont instead}}%
+	     {\number#1%%% <---changed from \RL{\protect\reset@font\protect\number#1}%
+	      \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: since \string\arabicfont is not defined, we'll use Western numerals instead}}%
+         \fi
+     \else% LuaTeX
+         \expandafter\ifnum\directlua{polyglossia.check_char(0x661)} > 0\relax
+           %%\protect\addfontfeature{Mapping=arabicdigits}\number#1}%
+           \protect\arabicdigits{\number#1}%
+         \else%
+           \ifcsdef{arabicfont}%
+	     {\protect\arabicdigits{\number#1}%
+	      \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: I am using \string\arabicfont instead}}%
+	     {\number#1%%% <---changed from \RL{\protect\reset@font\protect\number#1}%
+	      \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: since \string\arabicfont is not defined, we'll use Western numerals instead}}%
+         \fi
      \fi
    \else
      %%\RL{\protect\reset@font\number#1}%
@@ -134,31 +149,39 @@ and may look very wrong.}
    \fi}
 
 \def\syriac@numbers{%
-   \let\@latinalph\@alph%
-   \let\@latinAlph\@Alph%
    \let\@alph\abjadsyriac%
    \let\@Alph\abjadsyriac%
 }
+
 \def\nosyriac@numbers{%
-  \let\@alph\@latinalph%
-  \let\@Alph\@latinAlph%
-  }
-\def\syriac@globalnumbers{%
-  \let\orig@arabic\@arabic%
-  \let\@arabic\syriacnumber%
-  \renewcommand\thefootnote{\protect\syriacnumber{\c@footnote}}%
+  \let\@alph\latin@alph%
+  \let\@Alph\latin@Alph%
 }
+
+\newcommand{\syriacnumerals}[2]{\syriacnumber{#2}}
+
+% Store original definition
+\let\xpg@save@arabic\@arabic
+
+\def\syriac@globalnumbers{%
+  \let\@arabic\syriacnumber%
+  \renewcommand\thefootnote{\localnumeral*{footnote}}%
+}
+
 \def\nosyriac@globalnumbers{%
-  \let\@arabic\orig@arabic%
-  \renewcommand\thefootnote{\protect\number{\c@footnote}}%
-  }
+  \let\@arabic\xpg@save@arabic%
+}
+
+% Save original \MakeUppercase definition
+\let\xpg@save@MakeUppercase\MakeUppercase
 
 \def\blockextras@syriac{%
-   \let\@@MakeUppercase\MakeUppercase%
    \def\MakeUppercase##1{##1}%
-   }
+}
+
 \def\noextras@syriac{%
-   \let\MakeUppercase\@@MakeUppercase%
-   }
+   % restore original \MakeUppercase definition
+   \let\MakeUppercase\xpg@save@MakeUppercase%
+}
 
 \endinput

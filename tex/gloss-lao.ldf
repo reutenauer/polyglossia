@@ -8,9 +8,11 @@ and may look very wrong.}
 \PolyglossiaSetup{lao}{
   script=Lao,
   scripttag=lao,
+  langtag=LAO,
   hyphennames={lao},
   hyphenmins={1,1},
   fontsetup=true,
+  localnumeral=laonumerals
   %TODO localalph={xxx@alph,xxx@Alph}
   %TODO localdigits=laonumber
 }
@@ -76,6 +78,8 @@ and may look very wrong.}
   \fi
 }
 
+\newcommand{\laonumerals}[2]{\laonumber{#2}}
+
 \def\laonumber#1{%
   \if@lao@numerals
     \laodigits{\number#1}%
@@ -86,11 +90,10 @@ and may look very wrong.}
 \def\lao@globalnumbers{%
    \let\orig@arabic\@arabic%
    \let\@arabic\laonumber%
-   \renewcommand{\thefootnote}{\protect\laonumber{\c@footnote}}%
+   \renewcommand{\thefootnote}{\localnumeral*{footnote}}%
 }
 \def\nolao@globalnumbers{%
    \let\@arabic\orig@arabic%
-   \renewcommand\thefootnote{\protect\number{\c@footnote}}%
 }
 
 \endinput

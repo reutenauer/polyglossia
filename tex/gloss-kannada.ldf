@@ -26,10 +26,11 @@ and may look very wrong.}
 \PolyglossiaSetup{kannada}{
   script=Kannada,
   scripttag=knda,
-  langtag=KNDA,
+  langtag=KAN,
   hyphennames={kannada},
   hyphenmins={2,2}, 
-  fontsetup=true
+  fontsetup=true,
+  localnumeral=kannadanumerals
 }
 
 %% Defining Kannada digits equivalents to english
@@ -97,7 +98,9 @@ and may look very wrong.}
   \def\today{\kannadanumber\day\space\kannadamonth\space\kannadanumber\year}%
 }
 
-%% Based on the settings displays rrespective numbers
+\newcommand{\kannadanumerals}[2]{\kannadanumber{#2}}
+
+%% Based on the settings displays respective numbers
 \def\kannadanumber#1{%
   \ifkannada@numerals
   \kannadadigits{\number#1}%

@@ -1,0 +1,33 @@
+\ProvidesFile{gloss-latex.ldf}[polyglossia: module for default language]
+
+\PolyglossiaSetup{latex}{
+  hyphennames={english},
+  hyphenmins={2,3},
+  langtag=ENG,
+  fontsetup=true,
+}
+
+\def\captionslatex{%
+   \def\prefacename{Preface}%
+   \def\refname{References}%
+   \def\abstractname{Abstract}%
+   \def\bibname{Bibliography}%
+   \def\chaptername{Chapter}%
+   \def\appendixname{Appendix}%
+   \def\contentsname{Contents}%
+   \def\listfigurename{List of Figures}%
+   \def\listtablename{List of Tables}%
+   \def\indexname{Index}%
+   \def\figurename{Figure}%
+   \def\tablename{Table}%
+   \def\partname{Part}%
+   \def\enclname{encl}%
+   \def\ccname{cc}%
+   \def\headtoname{To}%
+   \def\pagename{Page}%
+   \def\seename{see}%
+   \def\alsoname{see also}%
+   \def\proofname{Proof}%
+}
+
+\endinput

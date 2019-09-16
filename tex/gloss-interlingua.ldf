@@ -2,6 +2,7 @@
 \PolyglossiaSetup{interlingua}{
   hyphennames={interlingua},
   hyphenmins={2,2},
+  langtag=INA,
   frenchspacing=true,
   indentfirst=true,
   fontsetup=true,

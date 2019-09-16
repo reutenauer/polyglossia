@@ -2,66 +2,121 @@
 \PolyglossiaSetup{english}{
   hyphennames={english,american,usenglish,USenglish},
   hyphenmins={2,3},
+  langtag=ENG,
   fontsetup=true,
 }
 
-\newif\if@british@locale
-\@british@localefalse
-\providebool{@british@hyphen}
+\providebool{british@hyphen}
 \providebool{english@ordinalmonthday}
+\providebool{british@dateformat}
 
+% US English (\l@english) is default
+% Initialize its settings
+\def\english@variant{english}
+\british@hyphenfalse
+\english@ordinalmonthdayfalse
+\british@dateformatfalse
+
+% Option ordinalmonthday
 \define@boolkey{english}[english@]{ordinalmonthday}[true]{}
 
-%% English is a special case in that \l@english is reserved for US English, so
-%% we need to handle it differently
-\define@key{english}{variant}{%
-  %needs to be reset for loop over hyphennames below:
-  \def\do##1{%
-      \xpg@ifdefined{#1}%
-        {\csletcs{l@english}{l@#1}\listbreak}%
-        {}%
-  }%
-  \ifstrequal{#1}{uk}%
-    {\@british@localetrue
-     \xpg@info{Option: english variant=british}}%
-    {\ifstrequal{#1}{british}%
-      {\@british@localetrue
-      \xpg@info{Option: english variant=british}}%
-        {\ifstrequal{#1}{us}% these patterns are the default so we don't need to reset them
-          {\@british@hyphenfalse\english@ordinalmonthdayfalse
-           \xpg@info{Option: english variant=american}}%
-          {\ifstrequal{#1}{american}%
-            {\@british@hyphenfalse\english@ordinalmonthdayfalse
-            \xpg@info{Option: english variant=american}}%
-            {\ifstrequal{#1}{usmax}%
-              {\@british@hyphenfalse\english@ordinalmonthdayfalse
-                \ifluatex\else\setkeys[xpg@setup]{english}{hyphennames={usenglishmax}}\fi
-                \xpg@info{Option: english variant=american (with additional patterns)}%
-                \xpg@ifdefined{usenglishmax}{}%
-                  {\xpg@warning{No hyphenation patterns were loaded for "US English Max"\MessageBreak
-                    I will use the standard patterns for US English instead}%
-                  \adddialect\l@usenglishmax\l@english\relax}%
-                \gdef\english@language{\language=\l@usenglishmax}}%
-                {\ifstrequal{#1}{australian}%
-                  {\@british@hyphentrue\english@ordinalmonthdayfalse
-                  \xpg@info{Option: english variant=australian}}%
-                  {\ifstrequal{#1}{newzealand}%
-                    {\@british@hyphentrue\english@ordinalmonthdayfalse
-                      \xpg@info{Option: english variant=newzealand}}%
-                      {\xpg@warning{Unknown English variant `#1'}}%
-  }}}}}}%
-  \if@british@locale\@british@hyphentrue\english@ordinalmonthdaytrue\fi
-  \if@british@hyphen
-    \ifluatex\else\setkeys[xpg@setup]{english}{hyphennames={ukenglish,british,UKenglish}}\fi
-    \xpg@ifdefined{ukenglish}{}%
-      {\xpg@warning{No hyphenation patterns were loaded for British English\MessageBreak
-         I will use the patterns for US English instead}%
-       \adddialect\l@ukenglish\l@english\relax}%
-    \gdef\english@language{\language=\l@ukenglish\xpg@set@language@luatex@ii{ukenglish}}%
-  \fi
-  % and we reset \do to its previous definition here:
-  \def\do##1{\setotherlanguage{#1}}%
-}
+\define@choicekey*+{english}{variant}[\val\nr]{uk,british,us,american,usmax,australian,newzealand,canadian}{%
+   \ifcase\nr\relax
+      % uk:
+      \british@hyphentrue
+      \british@dateformattrue
+      \english@ordinalmonthdaytrue
+      \xpg@info{Option: English, variant=british}%
+   \or
+      % british:
+      \british@hyphentrue
+      \british@dateformattrue
+      \english@ordinalmonthdaytrue
+      \xpg@info{Option: english variant=british}%
+   \or
+      % us:
+      \british@hyphenfalse
+      \british@dateformatfalse
+      \english@ordinalmonthdayfalse
+      \xpg@info{Option: English, variant=american}%
+   \or
+      % american:
+      \british@hyphenfalse
+      \british@dateformatfalse
+      \english@ordinalmonthdayfalse
+      \xpg@info{Option: English, variant=american}%
+   \or
+      % usmax:
+      \british@hyphenfalse
+      \british@dateformatfalse
+      \english@ordinalmonthdayfalse
+      \xpg@info{Option: english variant=american (with additional patterns)}%
+      \xpg@ifdefined{usenglishmax}{}%
+         {\xpg@warning{No hyphenation patterns were loaded for "US English Max"\MessageBreak
+                       I will use the standard patterns for US English instead}%
+          \adddialect\l@usenglishmax\l@english\relax%
+         }%
+      \gdef\english@variant{usenglishmax}%
+   \or
+      % australian:
+      % These use the british hyphenation patterns
+      % but date formats without ordinals
+      \british@hyphentrue
+      \british@dateformattrue
+      \english@ordinalmonthdayfalse
+      \xpg@info{Option: English, variant=australian}%
+   \or
+      % newzealand:
+      % These use the british hyphenation patterns
+      % but date formats without ordinals
+      \british@hyphentrue
+      \british@dateformattrue
+      \english@ordinalmonthdayfalse
+      \xpg@info{Option: English, variant=newzealand}%
+   \or
+      % canadian:
+      % This is currently equivalent to usenglish (as in babel)
+      \british@hyphenfalse
+      \british@dateformatfalse
+      \english@ordinalmonthdayfalse
+      \xpg@info{Option: English, variant=american}%
+   \fi
+   \ifbritish@hyphen
+      \xpg@ifdefined{ukenglish}{}%
+         {\xpg@warning{No hyphenation patterns were loaded for British English\MessageBreak
+                       I will use the patterns for US English instead}%
+          \adddialect\l@ukenglish\l@english\relax%
+         }%
+      \gdef\english@variant{ukenglish}%
+   \fi
+}{\xpg@warning{Unknown English variant `#1'}}
+
+\ifxetex
+   % Check if \l@english is defined. If not, try to set it to some variety
+   % (specific order as in the csv list below), or null language if everything fails
+   \xpg@ifdefined{english}{}{%
+      \def\do##1{%
+         \xpg@ifdefined{#1}%
+            {\csletcs{l@english}{l@#1}\listbreak}%
+            {%
+               \xpg@warning{No hyphenation patterns for English found"\MessageBreak
+                            I will use the 'null' language instead}%
+               \adddialect\l@english0
+            }%
+      }%
+      \docsvlist{british, american, usenglishmax, australian, newzealand}
+      \xpg@ifdefined{english}{}{}
+   }%
+\fi
+
+\def\english@language{%
+   \ifxetex
+      \language=\csname l@\english@variant\endcsname
+   \fi
+   \ifluatex
+      \xpg@set@language@luatex@iv{\english@variant}
+   \fi
+}%
 
 \def\captionsenglish{%
    \def\prefacename{Preface}%
@@ -101,7 +156,7 @@
       January\or February\or March\or April\or May\or June\or
       July\or August\or September\or October\or November\or December\fi}%
    \def\today{%
-    \if@british@locale
+    \ifbritish@dateformat
       \english@day\space\english@month\space\number\year
     \else
       \english@month\space\english@day,\space\number\year

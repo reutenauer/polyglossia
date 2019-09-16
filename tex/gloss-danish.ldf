@@ -2,6 +2,7 @@
 \PolyglossiaSetup{danish}{
   hyphennames={danish},
   hyphenmins={2,3},
+  langtag=DAN,
   frenchspacing=true,
   fontsetup=true,
 }
@@ -25,7 +26,7 @@
   \def\headtoname{Til}% in letter
   \def\pagename{Side}%
   \def\seename{Se}%
-  \def\alsoname{Se også}}%
+  \def\alsoname{Se også}%
   \def\proofname{Bevis}%
   \def\glossaryname{Gloseliste}%
 }
@@ -34,5 +35,6 @@
     januar\or februar\or marts\or april\or maj\or juni\or
     juli\or august\or september\or oktober\or november\or december\fi
     \space\number\year}
+}
 
 \endinput
