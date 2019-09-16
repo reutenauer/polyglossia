@@ -764,10 +764,15 @@ For\new{1.45} the conversion of counters, the starred version \Cmd{\localnumeral
 For instance in an Arabic environment ¦\localnumeral*{page}¦ yields \textarabic{\localnumeral*{page}}.
 
 For scripts with alphanumeric numbering, the variants \Cmd{\Localnumeral} and \Cmd{\Localnumeral*} provide the uppercased 
-versions.
+versions.\medskip
 
-All\DescribeMacro{[lang=main]}\ these macros return the local numbering for the main language (rather than the locally selected language)
-if the optional argument ¦lang=main¦ is given, \eg ¦\localnumeral[lang=main]{4711}¦.
+\noindent All these macros provide the following options:
+
+\begin{itemize}
+	\item \TB{lang} =\DescribeMacro{[lang=]}\ \textit{local}, main, or <language>.\\
+	Output number in the local form of the currently active language for ¦local¦, the main language of the document for ¦main¦,
+    and any (loaded) language for ¦<language>¦ (\eg ¦\localnumeral[lang=arabic]{42}}¦).
+\end{itemize}
 
 \subsection{Non-Western decimal digits}\label{sec:decdigit}
 
