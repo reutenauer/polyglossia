@@ -1,4 +1,17 @@
-\ProvidesFile{gloss-portuges.ldf}[polyglossia: module for portuguese]
+\ProvidesFile{gloss-portuges.ldf}[polyglossia: module for portuguese (DEPRECATED!)]
+
+% We only provide this gloss for backwards compatibility. The name
+% 'portuges' was selected in accordance with babel (which probably
+% introduced it in 8.3 filename times). Since polyglossia uses full
+% English language names, we use 'portuguese' now.
+
+% FIXME: Once we support babel aliases (#112) this gloss can go.
+
+\xpg@warning{The language name 'portuges' is deprectated.\MessageBreak
+             Please use 'portuguese' instead.}
+
+\input{gloss-portuguese.ldf}
+
 \PolyglossiaSetup{portuges}{
   hyphennames={portuges,portuguese},
   hyphenmins={2,3},
@@ -6,36 +19,7 @@
   fontsetup=true,
 }
 
-\def\captionsportuges{%
-  \def\refname{Referências}%
-  \def\abstractname{Resumo}%
-  \def\bibname{Bibliografia}%
-  \def\prefacename{Prefácio}%
-  \def\chaptername{Capítulo}%
-  \def\appendixname{Apêndice}%
-  \def\contentsname{Conteúdo}%
-  \def\listfigurename{Lista de Figuras}%
-  \def\listtablename{Lista de Tabelas}%
-  \def\indexname{Índice}%
-  \def\figurename{Figura}%
-  \def\tablename{Tabela}%
-  %\def\thepart{}%
-  \def\partname{Parte}%
-  \def\pagename{Página}%
-  \def\seename{ver}%
-  \def\alsoname{ver também}%
-  \def\enclname{Anexo}%
-  \def\ccname{Com cópia a}%
-  \def\headtoname{Para}%
-  \def\proofname{Demonstração}%
-  \def\glossaryname{Glossário}%
-  }
-
-\def\dateportuges{%   
-  \def\today{\number\day\space de\space\ifcase\month\or
-    Janeiro\or Fevereiro\or Março\or Abril\or Maio\or Junho\or
-    Julho\or Agosto\or Setembro\or Outubro\or Novembro\or Dezembro\fi
-    \space de\space\number\year}%
-  }
+\let\captionsportuges\captionsportuguese@portuges
+\let\dateportuges\dateportuguese@portuges
      
 \endinput

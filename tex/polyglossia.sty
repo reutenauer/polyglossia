@@ -445,7 +445,7 @@
 % #1 is the option list (should be expanded)
 % #5 is the name of the field to use
 \cs_new:Nn \polyglossia_localnumeral_mainlang:nnnnn {
-  \use:c {\prop_item:Nn \polyglossia@langsetup  {#3/#5}} {#1} {#2}
+  \foreignlanguage{#3}{\use:c {\prop_item:Nn \polyglossia@langsetup  {#3/#5}} {#1} {#2}}
 }
 
 
@@ -483,8 +483,14 @@
 
 
 % call the language
+% #3 is the numeral to print
+% #4 is the mainlanguage (should be expanded)
+% #5 is the current language (should be expanded)
+% #2 is the option list (should be expanded)
+% #6 is the name of the field to use
+% #1 is the language used
 \cs_new:Nn \polyglossia_localnumeral_langlang:nnnnnn {
-  \use:c {\prop_item:Nn \polyglossia@langsetup  {#1/#5}} {#2} {#3}
+   \foreignlanguage{#1}{\use:c {\prop_item:Nn \polyglossia@langsetup  {#1/#6}} {#2} {#3}}
 }
 
 
@@ -795,51 +801,63 @@
   \csgdef{#1@font@rm}{%
     \cs_if_exist_use:cF{#1font}
       {
+       \providetoggle{#1@use@script@font}%
        \str_if_eq:nnTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
         {\rmfamilylatin}%
         {\cs_if_exist_use:cTF{\prop_item:Nn{\polyglossia@langsetup}{#1/lcscript} font}
           {
-            \polyglossia@addfontfeature@script:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
-                                                 {\prop_item:Nn{\polyglossia@langsetup}{#1/script}}
+             \toggletrue{#1@use@script@font}%
            }
            {
              \rmfamilylatin
            }
        }
+       \iftoggle{#1@use@script@font}{}{%
+           \polyglossia@addfontfeature@script:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
+                                                 {\prop_item:Nn{\polyglossia@langsetup}{#1/script}}
+       }%
        \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
                                               {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
       }}%
   \csgdef{#1@font@sf}{%
     \cs_if_exist_use:cF{#1fontsf}%
       {
+       \providetoggle{#1@use@script@fontsf}%
        \str_if_eq:nnTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
         {\sffamilylatin}%
         {\cs_if_exist_use:cTF{\prop_item:Nn{\polyglossia@langsetup}{#1/lcscript} fontsf}
           {
-            \polyglossia@addfontfeature@script:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
-                                                 {\prop_item:Nn{\polyglossia@langsetup}{#1/script}}
+             \toggletrue{#1@use@script@fontsf}%
            }
            {
              \sffamilylatin
            }
        }
+       \iftoggle{#1@use@script@fontsf}{}{%
+           \polyglossia@addfontfeature@script:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
+                                                 {\prop_item:Nn{\polyglossia@langsetup}{#1/script}}
+       }%
        \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
                                               {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
       }}%
   \csgdef{#1@font@tt}{%
     \cs_if_exist_use:cF{#1fonttt}%
       {
+       \providetoggle{#1@use@script@fonttt}%
        \str_if_eq:nnTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
        {\ttfamilylatin}%
        {\cs_if_exist_use:cTF{\prop_item:Nn{\polyglossia@langsetup}{#1/lcscript} fonttt}
            {
-            \polyglossia@addfontfeature@script:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
-                                                 {\prop_item:Nn{\polyglossia@langsetup}{#1/script}}
+             \toggletrue{#1@use@script@fonttt}%
            }
            {
              \ttfamilylatin
            }
        }
+       \iftoggle{#1@use@script@fonttt}{}{%
+           \polyglossia@addfontfeature@script:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
+                                                 {\prop_item:Nn{\polyglossia@langsetup}{#1/script}}
+       }%
        \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
                                               {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
       }}%
