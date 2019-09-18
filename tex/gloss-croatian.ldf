@@ -3,7 +3,7 @@
   langtag=HRV,
   hyphennames={croatian},
   hyphenmins={2,2}, % aligned with https://ctan.org/pkg/hrhyph patterns and http://lebesgue.math.hr/~nenad/Diplomski/Maja_Ribaric_2011.pdf
-  frenchspacing=true,
+  frenchspacing=true, % recommendation from Damir Bralić
   indentfirst=false, % recommendation from Damir Bralić
   fontsetup=true
 }
