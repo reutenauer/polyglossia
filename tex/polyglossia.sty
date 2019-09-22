@@ -1274,13 +1274,11 @@
       {luatex}{%
         \polyglossia@check@ifdefined:NF{#1}{%
             \expandafter\chardef\csname l@#1\endcsname=\directlua{tex.sprint(polyglossia.newloader('#1'))}%
-            \language=\csname l@#1\endcsname%
         }%
+        \language=\csname l@#1\endcsname%
       }%
       {xetex}{%
-        \polyglossia@check@ifdefined:NF{#1}{%
-           \language=\csname l@#1\endcsname%
-        }%
+        \language=\csname l@#1\endcsname%
       }%
     }%
     {
