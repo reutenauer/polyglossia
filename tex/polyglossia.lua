@@ -1,7 +1,3 @@
-require('luatex-hyphen')
-
-local luatexhyphen = luatexhyphen
-local byte = unicode.utf8.byte
 
 local module_name = "polyglossia"
 local polyglossia_module = {
@@ -16,72 +12,50 @@ local polyglossia_module = {
 
 luatexbase.provides_module(polyglossia_module)
 
-local log_info = function(message)
-	luatexbase.module_info(module_name, message)
+local log_info = function(message, ...)
+    luatexbase.module_info(module_name, message:format(...))
 end
-local log_warning = function(message)
-	luatexbase.module_warning(module_name, message)
+local log_warn = function(message, ...)
+    luatexbase.module_warning(module_name, message:format(...))
 end
 
 polyglossia = polyglossia or {}
 local polyglossia = polyglossia
 
--- predefined l@nohyphenation or dummy new language
-local nohyphid = luatexbase.registernumber'l@nohyphenation' or lang.id(lang.new())
--- key `nohyphenation` is for .sty file when possibly undefined l@nohyphenation
-local newloader_loaded_languages = { nohyphenation = nohyphid }
-
-local newloader_available_languages = dofile(kpse.find_file('language.dat.lua'))
--- Suggestion by Dohyun Kim on #129
-local t = { }
-for k, v in pairs(newloader_available_languages) do
-    t[k] = v
-    for _, vv in pairs(v.synonyms) do
-        t[vv] = v
-    end
-end
-newloader_available_languages = t
-
-local function loadlang(lang, id)
-  if luatexhyphen.lookupname(lang) then
-    luatexhyphen.loadlanguage(lang, id) 
-  end
-end
-
 local function select_language(lang, id)
-  loadlang(lang, id)
-  polyglossia.current_language = lang
+    polyglossia.current_language = lang
 end
 
 local function set_default_language(lang, id)
-  polyglossia.default_language = lang
+    polyglossia.default_language = lang
 end
+
+local byte = utf8.codepoint -- use standard module of lua 5.3
 
 local check_char
 
 if luaotfload and luaotfload.aux and luaotfload.aux.font_has_glyph then
-  local font_has_glyph = luaotfload.aux.font_has_glyph
-  function check_char(chr)
-    local codepoint = tonumber(chr)
-    if not codepoint then codepoint = byte(chr) end
-    if font_has_glyph(font.current(), codepoint) then
-      tex.sprint('1')
-    else
-      tex.sprint('0')
+    local font_has_glyph = luaotfload.aux.font_has_glyph
+    function check_char(chr)
+        local codepoint = tonumber(chr) or byte(chr)
+        if font_has_glyph(font.current(), codepoint) then
+            tex.sprint('1')
+        else
+            tex.sprint('0')
+        end
     end
-  end
 else
-  local ids = fonts.identifiers or fonts.ids or fonts.hashes.identifiers
-  function check_char(chr) -- always in current font
-      local otfdata = ids[font.current()].characters
-      local codepoint = tonumber(chr)
-      if not codepoint then codepoint = byte(chr) end
-      if otfdata and otfdata[codepoint] then
-          tex.print('1')
-      else
-          tex.print('0')
-      end
-  end
+    function check_char(chr) -- always in current font
+        local fontid    = font.current()
+        local fontdata  = font.getfont(fontid) or font.fonts[fontid]
+        local chardata  = fontdata.characters
+        local codepoint = tonumber(chr) or byte(chr)
+        if chardata and chardata[codepoint] then
+            tex.sprint('1')
+        else
+            tex.sprint('0')
+        end
+    end
 end
 
 local function load_frpt()
@@ -92,6 +66,23 @@ local function load_tibt_eol()
     require('polyglossia-tibt')
 end
 
+-- predefined l@nohyphenation or LuaTeX's maximum value for \language
+local nohyphid = luatexbase.registernumber'l@nohyphenation' or 16383
+
+-- key `nohyphenation` is for .sty file when possibly undefined l@nohyphenation
+local newloader_loaded_languages = { nohyphenation = nohyphid }
+
+local newloader_available_languages = require'language.dat.lua'
+-- Suggestion by Dohyun Kim on #129
+local t = { }
+for k, v in pairs(newloader_available_languages) do
+    t[k] = v
+    for _, vv in pairs(v.synonyms) do
+        t[vv] = v
+    end
+end
+newloader_available_languages = t
+
 -- LaTeX's language register is \count19
 local lang_register = 19
 
@@ -99,19 +90,36 @@ local lang_register = 19
 local function newloader(langentry)
     local loaded_language = newloader_loaded_languages[langentry]
     if loaded_language then
-        log_info('Language ' .. langentry .. ' already loaded; id is ' .. lang.id(loaded_language))
-        -- texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded with patterns ' .. tostring(loaded_language) .. '; id is ' .. lang.id(loaded_language))
-        -- texio.write_nl('term and log', 'Language ' .. langentry .. ' already loaded with patterns ' .. loaded_language['patterns'] .. '; id is ' .. lang.id(loaded_language))
-        return lang.id(loaded_language)
+        local langid = lang.id(loaded_language)
+        log_info('Language %s already loaded; id is %i', langentry, langid)
+        return langid
     else
         local langdata = newloader_available_languages[langentry]
-        if langdata and langdata['special'] == 'language0' then return 0 end
-
         if langdata then
-            local s = "Language data for " .. langentry
-            for k, v in pairs(langdata) do
-				s = s .. "\n" .. k .. "\t" .. tostring(v)
+
+            local special = langdata.special
+            if special then
+                -- language0 (USenglish) is already included in the format
+                if special == 'language0' then
+                    return 0
+
+                -- disabled language should not be used for utf-8 text
+                elseif special:find'^disabled:' then
+                    log_warn('Hyphenation of language %s %s', langentry, special)
+                    return nohyphid
+                end
             end
+
+            -- language info will be written into the .log file
+            local s = { "Language data for " .. langentry }
+            for k, v in pairs(langdata) do
+                if type(v) == 'table' then -- for 'synonyms'
+                    s[#s+1] = k .. "\t" .. table.concat(v,',')
+                else
+                    s[#s+1] = k .. "\t" .. tostring(v)
+                end
+            end
+            log_info(table.concat(s,"\n"))
 
             --
             -- LaTeX's \newlanguage increases language register (count19),
@@ -133,43 +141,44 @@ local function newloader(langentry)
             local langobject = lang.new()
             local langid = lang.id(langobject)
             -- get bigger one between \newlanguage and new lang obj id
-            local maxlangid = math.max(langcnt, langid)
+            local newlangid = math.max(langcnt, langid)
             -- set language register for possible \newlanguage
-            tex.setcount('global', lang_register, maxlangid)
+            tex.setcount('global', lang_register, newlangid)
             -- get new lang object if needeed
-            if langid ~= maxlangid then
-              langobject = lang.new(maxlangid)
+            if langid ~= newlangid then
+                langobject = lang.new(newlangid)
             end
-			s = s .. "\npatterns: " .. langdata.patterns
-			log_info(s)
-            if langdata.patterns and langdata.patterns ~= '' then
-                local pattfilepath = kpse.find_file(langdata.patterns)
-                if pattfilepath then
-                    local pattfile = io.open(pattfilepath)
-                    lang.patterns(langobject, pattfile:read('*all'))
-                    pattfile:close()
+
+            -- load hyphenation patterns and exceptions
+            for _,v in ipairs{ 'patterns', 'hyphenation' } do
+                local data = langdata[v]
+                if data and data ~= '' then
+                    -- cope with comma separated list, such as serbian
+                    for _,vv in ipairs(data:explode',+') do
+                        local filepath = kpse.find_file(vv)
+                        if filepath then
+                            local fh = io.open(filepath)
+                            lang[v](langobject, fh:read'a')
+                            fh:close()
+                        else
+                            log_warn('Hyphenation file %s not found', vv)
+                        end
+                    end
                 end
             end
-            if langdata.hyphenation and langdata.hyphenation ~= '' then
-                local hyphfilepath = kpse.find_file(langdata.hyphenation)
-                if hyphfilepath then
-                    local hyphfile = io.open(hyphfilepath)
-                    lang.hyphenation(langobject, hyphfile:read('*all'))
-                    hyphfile:close()
-                end
-            end
+
             newloader_loaded_languages[langentry] = langobject
 
-            log_info('Language ' .. langentry .. ' was not yet loaded; created with id ' .. lang.id(langobject))
-            return lang.id(langobject)
+            log_info('Language %s was not yet loaded; created with id %i',
+                     langentry, newlangid)
+            return newlangid
         else
-            log_warning('Language ' .. langentry .. ' not found in language.dat.lua')
+            log_warn('Language %s not found in language.dat.lua', langentry)
             return nohyphid
         end
     end
 end
 
-polyglossia.loadlang = loadlang
 polyglossia.select_language = select_language
 polyglossia.set_default_language = set_default_language
 polyglossia.check_char = check_char
