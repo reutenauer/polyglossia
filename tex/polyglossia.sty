@@ -272,7 +272,9 @@
     \ifbool{xpg@hyphenation@disabled}{%
       \xdef\xpg@lastlanguage{\the\csname l@#1\endcsname}%
     }{%
-      \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{%
+      \cs_if_eq:cNTF{l@#1}{\l@nohyphenation}{%
+          \language=\l@nohyphenation%
+      }{%
           \xpg@set@hyphenation@patterns{#1}%
       }%
     }%
