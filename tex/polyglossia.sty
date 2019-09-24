@@ -1009,7 +1009,7 @@
 \let\setmainlanguage=\setdefaultlanguage
 
 \newcommand{\resetdefaultlanguage}[2][]{%
-  \polyglossia@error@iflangnotloaded:n{#1}
+  \polyglossia@error@iflangnotloaded:n{#2}
   % disable globalnumbers of previously defined default language
   \csuse{no\xpg@main@language @globalnumbers}
     \csuse{noextras@\xpg@main@language}%
