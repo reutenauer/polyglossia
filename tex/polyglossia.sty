@@ -1118,11 +1118,9 @@
   \lefthyphenmin=\tw@
   \righthyphenmin=\thr@@}
 
-\def\noextrascurrent#1{\csuse{noextras@#1}}
-
-\def\xpg@initial@setup{\ifcsundef{languagename}{}%
-   {\noextrascurrent{\languagename}}%
-   \common@language}
+\def\xpg@initial@setup{%
+  \common@language%
+}
 
 \providecommand{\foreignlanguage}{}
 
@@ -1311,6 +1309,8 @@
 
 % hook for compatibility with biblatex
 \def\select@language#1{}
+
+\def\noextrascurrent#1{\csuse{noextras@#1}}
 
 % Common code for `\select@language' and `\foreignlanguage'.
 \newcommand{\select@@language}[1]{%
