@@ -709,7 +709,7 @@
 \cs_new:Nn \polyglossia@lang@autosetupfont:n {
   \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/fontsetup}}{true}
   {
-    \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{latin}%
+    \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/lcscript}}{latin}%
          {\xpg@fontsetup@latin{#1}}
          {\xpg@fontsetup@nonlatin{#1}}
   }
@@ -1089,7 +1089,7 @@
 \def\nofrench@indent{\let\@afterindentfalse\@@fterindentfalse
                           \@afterindentfalse}
 \newcommand{\selectbackgroundlanguage}[1]{%
-  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{latin}{}{\xpg@set@normalfont{#1}}%
+  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/lcscript}}{latin}{}{\xpg@set@normalfont{#1}}%
   \csuse{#1@globalnumbers}%
 }
 
@@ -1169,7 +1169,7 @@
    #3
    \egroup
   % Reset the language's/script's font families
-  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/script}}{latin}{}{\resetfontlatin}%
+  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/lcscript}}{latin}{}{\resetfontlatin}%
 }
 
 
@@ -1324,7 +1324,7 @@
   }%
   \edef\languagename{#1}%
   % Set the language's/script's font families
-  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{latin}{\resetfontlatin}{\xpg@set@normalfont{#1}}%
+  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/lcscript}}{latin}{\resetfontlatin}{\xpg@set@normalfont{#1}}%
   \xpg@select@fontfamily{#1}%
   \csuse@warn{#1@language}%
   \csuse{#1@numbers}%
