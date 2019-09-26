@@ -765,8 +765,8 @@
        {\addfontfeature{Script=#2}}
        {\xpg@error{
           The~ current~ latin ~ font~ does~ not~ contain~ the~"#2"~ script!\MessageBreak
-          Please~ define~string\~\tl_if_empty:nF{#2}{\str_lower_case:n#2}font~
-          with~ \string\ newfontfamily command
+          Please~ define~\csname\tl_if_empty:nF{#2}{\str_lower_case:n#2}font\endcsname~
+          with~ \string\newfontfamily\space command
           }
         }
   }
