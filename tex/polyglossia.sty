@@ -936,23 +936,13 @@
 
 % try to load a language file
 \cs_new:Nn \polyglossia_load_lang_definition:nn {
-  % new style
-  \file_if_exist:nTF{gloss-#2.\@pkgextension}
+  \file_if_exist:nTF{gloss-#2.ldf}
   {
-    \msg_redirect_name:nnn { polyglossia } { directloadgloss } { none }
-    \RequirePackage[#1]{gloss-#2}
-    \msg_redirect_name:nnn { polyglossia } { directloadgloss } { critical }
+    \xpg@input{gloss-#2.ldf}
+    \setkeys{#2}{#1}
   }
   {
-    % old style
-    \file_if_exist:nTF{gloss-#2.ldf}
-    {
-      \xpg@input{gloss-#2.ldf}
-      \setkeys{#2}{#1}
-    }
-    {
-      \xpg@nogloss{#2}
-    }
+    \xpg@nogloss{#2}
   }
 }
 
