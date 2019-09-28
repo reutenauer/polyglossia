@@ -215,12 +215,11 @@
   \def\do##1{\setotherlanguage{##1}}%
 }
 
-% this an ugly command that will be drop in the future, it serve to document that
-% using this we loose tracking and thus are not immune to bug #205 #208
-\def\polyglossia@buggykeyssetlanguage#1#2 {
-  \ExplSyntaxOn
-  \keys_set:nn { polyglossia / #1 } { #2 }
-  \ExplSyntaxOff
+% Adjust language key setting after initial setup
+% This is needed, e.g., for languages with varying script
+\DeclareDocumentCommand \SetLanguageKeys { m m }
+{
+  \clist_map_inline:nn { #1 } { \keys_set:nn { polyglossia / ##1 } { #2 } }
 }
 
 

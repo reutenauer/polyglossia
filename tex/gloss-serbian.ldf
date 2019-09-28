@@ -22,14 +22,12 @@
 \define@key{serbian}{Script}[Cyrillic]{%
   \ifstrequal{#1}{Cyrillic}%
     {\@serbian@cyrtrue
-     \polyglossia@buggykeyssetlanguage{serbian}{scripttag=cyrl}
-     \polyglossia@buggykeyssetlanguage{serbian}{script=Cyrillic}
+     \SetLanguageKeys{serbian}{scripttag=cyrl,script=Cyrillic}
      \xpg@fontsetup@nonlatin{serbian}%
     }%
     {\ifstrequal{#1}{Latin}%
       {\@serbian@cyrfalse
-       \polyglossia@buggykeyssetlanguage{serbian}{scripttag=latn}
-       \polyglossia@buggykeyssetlanguage{serbian}{script=Latin}
+       \SetLanguageKeys{serbian}{scripttag=latn,script=Latin}
        \xpg@fontsetup@latin{serbian}%
        %TODO \def\serbian@language{\language=\l@serbianlat}%
        % or should we use Croatian patterns as a fallback for the time being???

@@ -25,32 +25,25 @@ and may look very wrong.}
 }
 
 \def\fontsetup@sanskrit@Devanagari{%
-  \polyglossia@buggykeyssetlanguage{sanskrit}{scripttag=deva}
-  \polyglossia@buggykeyssetlanguage{sanskrit}{script=Devanagari}
+  \SetLanguageKeys{sanskrit}{scripttag=deva,script=Devanagari}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Gujarati{%
-  \polyglossia@buggykeyssetlanguage{sanskrit}{scripttag=gujr}
-  \polyglossia@buggykeyssetlanguage{sanskrit}{script=Gujarati}
+  \SetLanguageKeys{sanskrit}{scripttag=gujr,script=Gujarati}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Malayalam{%
-  \polyglossia@buggykeyssetlanguage{sanskrit}{scripttag=mlym}
-  \polyglossia@buggykeyssetlanguage{sanskrit}{script=Malayalam}
+  \SetLanguageKeys{sanskrit}{scripttag=mlym,script=Malayalam}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Bengali{%
-  \polyglossia@buggykeyssetlanguage{sanskrit}{scripttag=beng}
-  \polyglossia@buggykeyssetlanguage{sanskrit}{script=Bengali}
+  \SetLanguageKeys{sanskrit}{scripttag=beng,script=Bengali}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Kannada{%
-  \polyglossia@buggykeyssetlanguage{sanskrit}{scripttag=knda}
-  \polyglossia@buggykeyssetlanguage{sanskrit}{script=Kannada}
+  \SetLanguageKeys{sanskrit}{scripttag=knda,script=Kannada}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Telugu{%
-  \polyglossia@buggykeyssetlanguage{sanskrit}{scripttag=telu}
-  \polyglossia@buggykeyssetlanguage{sanskrit}{script=Telugu}
+  \SetLanguageKeys{sanskrit}{scripttag=telu,script=Telugu}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Latin{%
-  \polyglossia@buggykeyssetlanguage{sanskrit}{scripttag=latn}
-  \polyglossia@buggykeyssetlanguage{sanskrit}{script=Latin}
+  \SetLanguageKeys{sanskrit}{scripttag=latn,script=Latin}
   \xpg@fontsetup@latin{sanskrit}}
 
 \setkeys{sanskrit}{Script} %sets the default for Devanagari
