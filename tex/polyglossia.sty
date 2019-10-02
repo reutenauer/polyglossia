@@ -280,12 +280,17 @@
     }%
   }%
   % setup hypenmins
-  \exp_args:Nne \clist_set:Nn{\l_tmpa_clist}{\prop_item:Nn \polyglossia@langsetup {#1 / hyphenmins}}
-  \int_set:Nn{\l_tmpa_int}{\clist_item:Nn{\l_tmpa_clist}{1}}
-  \int_set:Nn{\l_tmpb_int}{\clist_item:Nn{\l_tmpa_clist}{2}}
-  \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{%
-    \setlocalhyphenmins{#1}{\l_tmpa_int}{\l_tmpb_int}
-  }%
+  \exp_args:NNe \clist_set:Nn \l_tmpa_clist
+    { \prop_item:Nn \polyglossia@langsetup {#1 / hyphenmins} }
+  \cs_if_eq:cNF {l@#1} \l@nohyphenation
+    {
+      \use:x
+        {
+          \exp_not:N \setlocalhyphenmins {#1}
+            { \clist_item:Nn \l_tmpa_clist {1} }
+            { \clist_item:Nn \l_tmpa_clist {2} }
+        }
+    }
 }
 
 \prop_new:N \polyglossia@langsetup
@@ -352,14 +357,10 @@
     #1 / hyphenmins
     .code:n = {
       % check syntax
-      \clist_set:Nn{\l_tmpa_clist}{##1}
-      \int_compare:nNnTF{\clist_count:N{\l_tmpa_clist}}{=}{2}
-         {}
-         {\xpg@error{hypenmins~should~be~a~list~of~two~entries~get~"##1"}}
-      \int_set:Nn{\l_tmpa_int}{\clist_item:Nn{\l_tmpa_clist}{1}}
-      \int_set:Nn{\l_tmpb_int}{\clist_item:Nn{\l_tmpa_clist}{2}}
+      \int_compare:nNnF { \clist_count:n {##1} } = {2}
+        {\xpg@error{hypenmins~should~be~a~list~of~two~entries,~got~"##1"}}
       % set prop
-      \prop_gput:Nnx{\polyglossia@langsetup}{#1/hyphenmins}{\clist_use:Nn \l_tmpa_clist {,}}
+      \prop_gput:Nnn \polyglossia@langsetup {#1/hyphenmins} {##1}
     },
     #1 / hyphenmins
       .value_required:n = true,
