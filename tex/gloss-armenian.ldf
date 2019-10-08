@@ -95,6 +95,7 @@
      \date@eastern@armenian%
   \else
      \date@western@armenian%
+  \fi
 }
 
 \newcommand{\armeniannumerals}[2]{%
