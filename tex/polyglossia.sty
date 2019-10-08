@@ -1167,17 +1167,19 @@
 %(for instance biblatex):
 \newcommand*{\xpg@hook@setlanguage}{}
 
-\def\xpg@pop@language@i#1{%
-         \xpg@set@language@nonaux{#1}%
-         \xpg@hook@setlanguage%
-         \let\emp@langname\@undefined}%
-
+\def\xpg@pop@language@i#1#2{%
+  \xpg@set@language@aux[#1]{#2}%
+  \xpg@hook@setlanguage
+  \let\emp@langname\@undefined}
 
 \DeclareDocumentCommand \selectlanguage {s O{} m}
 {%
   \polyglossia@error@iflangnotloaded:n{#3}
-  \expandafter\def\expandafter\xpg@pop@language\expandafter{\expandafter\xpg@pop@language@i\expandafter{\languagename}}
-      \aftergroup\xpg@pop@language%
+  \IfBooleanF {#1}
+    {
+      \tl_set:Nx \xpg@pop@language { \exp_not:N \xpg@pop@language@i {#2} {#3} }
+      \group_insert_after:N \xpg@pop@language
+    }
   \tl_if_blank:nTF {#2}{}{%
      % If the optional argument sets a value for the key “variant”, copy it to xpg@langvariant
     \clist_map_inline:nn { #2 } {%
