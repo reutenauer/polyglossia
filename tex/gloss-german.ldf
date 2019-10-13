@@ -195,22 +195,22 @@
   \ifgerman@latesthyphen
     \if@german@oldspelling
         \if@swiss@locale
-            \xpg@set@hyphenation@patterns{swissgerman}%
+            \polyglossia@setup@language@patterns{swissgerman}%
         \else
-            \xpg@set@hyphenation@patterns{german-x-latest}%
+            \polyglossia@setup@language@patterns{german-x-latest}%
         \fi
     \else
-        \xpg@set@hyphenation@patterns{ngerman-x-latest}%
+        \polyglossia@setup@language@patterns{ngerman-x-latest}%
     \fi
   \else% (latesthyphen=false)
     \if@german@oldspelling
         \if@swiss@locale
-            \xpg@set@hyphenation@patterns{swissgerman}%
+            \polyglossia@setup@language@patterns{swissgerman}%
         \else
-            \xpg@set@hyphenation@patterns{german}%
+            \polyglossia@setup@language@patterns{german}%
         \fi
     \else
-        \xpg@set@hyphenation@patterns{ngerman}%
+        \polyglossia@setup@language@patterns{ngerman}%
     \fi
   \fi
 }

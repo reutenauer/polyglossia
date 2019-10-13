@@ -26,7 +26,9 @@
   \fi
 \fi
 
-\def\hindi@language{\language=\l@hindi}
+\def\hindi@language{%
+  \polyglossia@setup@language@patterns{hindi}%
+}
 
 \def\tmp@western{Western}
 \newif\ifhindi@devanagari@numerals

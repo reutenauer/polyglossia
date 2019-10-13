@@ -68,7 +68,7 @@
   \fi}
 
 \def\greek@language{%
-  \xpg@set@hyphenation@patterns{\greek@variant}
+  \polyglossia@setup@language@patterns{\greek@variant}
 }
 
 

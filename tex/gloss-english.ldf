@@ -110,7 +110,7 @@
 \fi
 
 \def\english@language{%
-   \xpg@set@hyphenation@patterns{\english@variant}
+   \polyglossia@setup@language@patterns{\english@variant}
 }%
 
 \def\captionsenglish{%

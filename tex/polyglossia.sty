@@ -268,15 +268,7 @@
     }%
   }%
   \csdef{#1@language}{%
-    \ifbool{xpg@hyphenation@disabled}{%
-      \xdef\xpg@lastlanguage{\the\csname l@#1\endcsname}%
-    }{%
-      \cs_if_eq:cNTF{l@#1}{\l@nohyphenation}{%
-          \language=\l@nohyphenation%
-      }{%
-          \xpg@set@hyphenation@patterns{#1}%
-      }%
-    }%
+    \polyglossia@setup@language@patterns{#1}%
   }%
   % setup hypenmins
   \exp_args:NNe \clist_set:Nn \l_tmpa_clist
@@ -290,6 +282,18 @@
             { \clist_item:Nn \l_tmpa_clist {2} }
         }
     }
+}
+
+\newcommand*\polyglossia@setup@language@patterns[1]{%
+  \ifbool{xpg@hyphenation@disabled}{%
+    \xdef\xpg@lastlanguage{\the\csname l@#1\endcsname}%
+  }{%
+    \cs_if_eq:cNTF{l@#1}{\l@nohyphenation}{%
+        \language=\l@nohyphenation%
+    }{%
+        \xpg@set@hyphenation@patterns{#1}%
+    }%
+  }%
 }
 
 \prop_new:N \polyglossia@langsetup

@@ -35,7 +35,7 @@
 
 
 \def\french@language{%
-   \xpg@set@hyphenation@patterns{\french@variant}
+   \polyglossia@setup@language@patterns{\french@variant}
 }%
 
 \ifluatex
