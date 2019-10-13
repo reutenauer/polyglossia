@@ -8,6 +8,11 @@ New features:
   * Add new language portuguese with variants portuguese and brazilian.
     This deprecates brazil and portuges (which are still supported for
     backwards compatibility).
+  * Add new language norwegian with variants nynorsk and bokmal.
+    This deprecates nynorsk and norsk (which are still supported for
+    backwards compatibility).
+  * Add new language sami. Currently only Northern Sami is supported.
+    This deprecates samin (which is still supported for backwards compatibility).
   * gloss-serbian: add numerals=cyrillic option. Add \asbuk and \Asbuk (#285).
   * Implement basic support for (French) canadien and (English) canadian (#22)
   * Improve support for Armenian (#79): Add captions, Eastern month names

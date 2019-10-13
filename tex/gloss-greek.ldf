@@ -68,12 +68,7 @@
   \fi}
 
 \def\greek@language{%
-  \ifxetex% XeTeX
-     \language=\csname l@\greek@variant\endcsname
-  \fi%
-  \ifluatex% LuaTeX
-     \xpg@set@language@luatex@iv{\greek@variant}
-  \fi
+  \polyglossia@setup@language@patterns{\greek@variant}
 }
 
 

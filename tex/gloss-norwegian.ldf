@@ -1,0 +1,104 @@
+\ProvidesFile{gloss-norwegian.ldf}[polyglossia: module for norwegian]
+\PolyglossiaSetup{norwegian}{
+  hyphennames={nynorsk},
+  langtag=NYN,
+  hyphenmins={2,2},
+  frenchspacing=true,
+  fontsetup=false,
+}
+
+\def\norwegian@variant{nynorsk}
+\define@choicekey*+{norwegian}{variant}[\val\nr]{nynorsk,bokmal}[nynorsk]{%
+   \ifcase\nr\relax
+      % nynorsk:
+      \gdef\norwegian@variant{nynorsk}%
+      \SetLanguageKeys{norwegian}{langtag=NYN}%
+      \xpg@fontsetup@latin{norwegian}%
+   \or
+      % bokmal:
+      \gdef\norwegian@variant{norsk}%
+      \SetLanguageKeys{norwegian}{langtag=NOR}%
+      \xpg@fontsetup@latin{norwegian}%
+   \fi
+   \xpg@info{Option: norwegian, variant=\val}%
+}{\xpg@warning{Unknown norwegian variant `#1'}}
+
+
+\def\norwegian@language{%
+   \polyglossia@setup@language@patterns{\norwegian@variant}
+}%
+
+\def\captionsnorwegian@nynorsk{%
+   \def\refname{Referansar}%
+   \def\abstractname{Sammendrag}%
+   \def\bibname{Litteratur}%
+   \def\prefacename{Forord}%
+   \def\chaptername{Kapittel}%
+   \def\appendixname{Tillegg}%
+   \def\contentsname{Innhald}%
+   \def\listfigurename{Figurar}%
+   \def\listtablename{Tabellar}%
+   \def\indexname{Register}%
+   \def\figurename{Figur}%
+   \def\tablename{Tabell}%
+   %\def\thepart{}% <<<
+   \def\partname{Del}%
+   \def\pagename{Side}%
+   \def\seename{Sjå}%
+   \def\alsoname{Sjå òg}%
+   \def\enclname{Vedlegg}%
+   \def\ccname{Kopi til}%
+   \def\headtoname{Til}%
+   \def\proofname{Bevis}%
+   \def\glossaryname{Ordliste}%
+}
+
+\def\captionsnorwegian@norsk{%
+   \def\refname{Referanser}%
+   \def\abstractname{Sammendrag}%
+   \def\bibname{Bibliografi}%
+   \def\prefacename{Forord}%
+   \def\chaptername{Kapittel}%
+   \def\appendixname{Tillegg}%
+   \def\contentsname{Innhold}%
+   \def\listfigurename{Figurer}%
+   \def\listtablename{Tabeller}%
+   \def\indexname{Register}%
+   \def\figurename{Figur}%
+   \def\tablename{Tabell}%
+   %\def\thepart{}% <<<
+   \def\partname{Del}%
+   \def\pagename{Side}%
+   \def\seename{Se}%
+   \def\alsoname{Se også}%
+   \def\enclname{Vedlegg}%
+   \def\ccname{Kopi sendt}%
+   \def\headtoname{Til}%
+   \def\proofname{Bevis}%
+   \def\glossaryname{Ordliste}%
+}
+
+\def\captionsnorwegian{%
+  \csname captionsnorwegian@\norwegian@variant\endcsname%
+}
+
+\def\datenorwegian@nynorsk{%   
+   \def\today{\number\day.~\ifcase\month\or
+    januar\or februar\or mars\or april\or mai\or juni\or
+    juli\or august\or september\or oktober\or november\or desember
+    \fi\space\number\year}%
+}
+
+\def\datenorwegian@norsk{%   
+   \def\today{\number\day.~\ifcase\month\or
+    januar\or februar\or mars\or april\or mai\or juni\or
+    juli\or august\or september\or oktober\or november\or
+    desember\fi\space\number\year}%
+}
+
+\def\datenorwegian{%
+  \csname datenorwegian@\norwegian@variant\endcsname%
+}
+
+\endinput
+

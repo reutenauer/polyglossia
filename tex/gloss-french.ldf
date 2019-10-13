@@ -35,12 +35,7 @@
 
 
 \def\french@language{%
-   \ifxetex
-      \language=\csname l@\french@variant\endcsname
-   \fi
-   \ifluatex
-      \xpg@set@language@luatex@iv{\french@variant}
-   \fi
+   \polyglossia@setup@language@patterns{\french@variant}
 }%
 
 \ifluatex
@@ -61,18 +56,22 @@
 \let\xpg@orig@makefntext\@makefntext
 
 \define@boolkey{french}[french@]{frenchfootnote}[true]{%
-   \iffrench@frenchfootnote
-      \ifx\@makefntext\undefined\else        
-          \long\def\french@makefntext##1{%
-               \parindent1em \noindent\quad%
-               \ifx\@thefnmark\empty\else%
-               \@thefnmark.\space\fi ##1%
-          }
-          \let\@makefntext\french@makefntext
+  \AfterPreamble{%
+    \ifdefstring{\xpg@main@language}{french}{%
+      \iffrench@frenchfootnote
+         \ifx\@makefntext\undefined\else        
+             \long\def\french@makefntext##1{%
+                \parindent1em \noindent\quad%
+                \ifx\@thefnmark\empty\else%
+                \@thefnmark.\space\fi ##1%
+             }
+             \let\@makefntext\french@makefntext
+         \fi
+      \else
+         \let\@makefntext\xpg@orig@makefntext
       \fi
-   \else
-      \let\@makefntext\xpg@orig@makefntext
-   \fi
+    }{\xpg@warning{Option 'frenchfootnote' only supported if French is main language!}}%
+  }%
 }
 
 \define@boolkey{french}[french@]{autospacing}[true]{}
