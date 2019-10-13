@@ -24,12 +24,7 @@
 
 
 \def\portuguese@language{%
-   \ifxetex
-      \language=\csname l@\portuguese@variant\endcsname
-   \fi
-   \ifluatex
-      \xpg@set@language@luatex@iv{\portuguese@variant}
-   \fi
+   \xpg@set@hyphenation@patterns{\portuguese@variant}
 }%
 
 \def\captionsportuguese@portuges{%

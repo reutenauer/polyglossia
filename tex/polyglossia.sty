@@ -247,7 +247,7 @@
                  \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{\global\booltrue{havehyphen}}{%
                    % if false define language to hyphenation and load
                    \cs_gset_eq:cc{l@#1}{l@##1}
-                   \xpg@set@language@luatex@iv{##1}
+                   \xpg@set@hyphenation@patterns{##1}
                    \global\booltrue{havehyphen}
                  }
               }
@@ -271,12 +271,11 @@
     \ifbool{xpg@hyphenation@disabled}{%
       \xdef\xpg@lastlanguage{\the\csname l@#1\endcsname}%
     }{%
-      \ifluatex%
-        \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{%
-          \xpg@set@language@luatex@iv{#1}%
-        }%
-      \fi%
-      \language=\csname l@#1\endcsname%
+      \cs_if_eq:cNTF{l@#1}{\l@nohyphenation}{%
+          \language=\l@nohyphenation%
+      }{%
+          \xpg@set@hyphenation@patterns{#1}%
+      }%
     }%
   }%
   % setup hypenmins
@@ -686,7 +685,7 @@
   \ifbool{xpg@hyphenation@disabled}{}{%
     \booltrue{xpg@hyphenation@disabled}%
     \xdef\xpg@lastlanguage{\the\language}%
-    % We do not call \xpg@set@language@luatex@iv here to avoid a warning message.
+    % We do not call \xpg@set@hyphenation@patterns here to avoid a warning message.
     % "nohyphenation" is not listed in language.dat.lua.
     \language=\l@nohyphenation%
   }%
@@ -1241,13 +1240,6 @@
    \fi
 }
 
-\def\xpg@set@language@luatex@iii#1#2{%
-    % here we use lu@texhyphen@loaded@\the\language, the same as in babel
-    \ifcsdef{bbl@hyphendata@#2}{}{%
-        \global\@namedef{bbl@hyphendata@\the\language}{}%
-    }
-}
-
 \prg_set_conditional:Npnn \polyglossia@check@ifdefined:N #1 { p , T , F , TF }{
   \cs_if_exist:cTF{l@#1}{
     \cs_if_eq:cNTF{l@#1}{\l@nohyphenation}{\prg_return_false:}{\prg_return_true:}
@@ -1257,34 +1249,51 @@
 }
 
 \newcommand\xpg@ifdefined[3]{%
-    \ifluatex
-        \xpg@set@language@luatex@iv{#1}%
-    \fi
+    \xpg@set@hyphenation@patterns{#1}%
     \polyglossia@check@ifdefined:NTF{#1}{#2}{#3}
 }%
 
-\newcommand\xpg@set@language@luatex@iv[1]{%
-    \ifluatex
-        \polyglossia@check@ifdefined:NF{#1}{
-            \expandafter\chardef\csname l@#1\endcsname=\directlua{tex.sprint(polyglossia.newloader('#1'))}%
-        }
-        \language=\csname l@#1\endcsname
-    \fi
+% Set \bbl@hyphendata@\the\language, which is (lua)babel's
+% hyphenation pattern hook
+% FIXME Clarifiy why/when this is needed.
+\newcommand*\xpg@set@bbl@hyphendata[1]{%
+    \ifluatex%
+        \ifcsdef{bbl@hyphendata@#1}{}{%
+            \global\@namedef{bbl@hyphendata@\the\language}{}%
+        }%
+    \fi% 
 }
 
+% Set hyphenation patterns for a given language. This does the right
+% thing both for XeTeX and LuaTeX
+\newcommand\xpg@set@hyphenation@patterns[1]{%
+    \str_case_e:nnF{\c_sys_engine_str}{%
+      {luatex}{%
+        \polyglossia@check@ifdefined:NF{#1}{%
+            \expandafter\chardef\csname l@#1\endcsname=\directlua{tex.sprint(polyglossia.newloader('#1'))}%
+        }%
+        \language=\csname l@#1\endcsname%
+      }%
+      {xetex}{%
+        \language=\csname l@#1\endcsname%
+      }%
+    }%
+    {
+      \xpg@warning{You’re running a TeX engine that is not LuaTeX or XeTeX.\MessageBreak
+        That is almost guaranteed to cause problems.}%
+    }%
+}
+
+% FIXME: Remove after gloss-latin (last user) has been rewritten)
 \newcommand\xpg@set@language@luatex@ii[1]{%
-   \ifluatex %
-     \xpg@set@language@luatex@iii{#1}{\expandafter\the\csname l@#1\endcsname}
-   \fi % 
+     \xpg@set@bbl@hyphendata{\expandafter\the\csname l@#1\endcsname}
 }
 
 
 \def\@select@language#1{
-  % hook for compatibility with biblatex
-  \select@language{#1}
-  \ifluatex %
-      \xpg@set@language@luatex@iii{#1}{\the\language}
-   \fi %
+   % hook for compatibility with biblatex
+   \select@language{#1}
+   \xpg@set@bbl@hyphendata{\the\language}
    \xpg@initial@setup%
    \select@@language{#1}%
    \csuse{captions#1}%
