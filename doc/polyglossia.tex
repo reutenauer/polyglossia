@@ -178,22 +178,22 @@ that are explained in section \ref{specific} below.
 % Edited by hand -- AR 2019-04-04
 \begin{tabular}{lllll}
 \hline
-albanian     & \TX{dutch}     & \TX{italian}  & occitan        & \TX{syriac}    \\
-amharic      & \TX{english}   & japanese      & piedmontese    & tamil          \\
-\TX{arabic}  & \TX{esperanto} & kannada       & polish         & telugu         \\
-\TX{armenian}& estonian       & khmer         & \TX{portuguese}& \TX{thai}      \\
-asturian     & \TX{farsi}     & \TX{korean}   & romanian       & \TX{tibetan}   \\
-\TX{bahasa}  & \TX{finnish}   & \TX{kurdish}  & romansh        & turkish        \\
-basque       & \TX{french}    & \TX{lao}      & \TX{russian}   & turkmen        \\
-\TX{bengali} & friulan        & \TX{latin}    & \TX{sami}      & \TX{ukrainian} \\
-breton       & galician       & latvian       & \TX{sanskrit}  & urdu           \\
-bulgarian    & \TX{german}    & lithuanian    & scottish       & vietnamese     \\
-\TX{catalan} & \TX{greek}     & \TX{magyar}   & \TX{serbian}   & \TX{welsh}     \\
-coptic       & \TX{hebrew}    & macedonian    & slovak         &                \\
-croatian     & \TX{hindi}     & malayalam     & \TX{slovenian} &                \\
-czech        & icelandic      & marathi       & \TX{sorbian}   &                \\
-danish       & interlingua    & nko           & spanish        &                \\
-divehi       & irish          & \TX{norwegian}& swedish \\
+albanian     & \TX{dutch}     & \TX{italian}  & occitan        & tamil          \\
+amharic      & \TX{english}   & japanese      & piedmontese    & telugu         \\
+\TX{arabic}  & \TX{esperanto} & kannada       & polish         & \TX{thai}      \\
+\TX{armenian}& estonian       & khmer         & \TX{portuguese}& \TX{tibetan}   \\
+asturian     & \TX{farsi}     & \TX{korean}   & romanian       & turkish        \\
+\TX{bahasa}  & \TX{finnish}   & \TX{kurdish}  & romansh        & turkmen        \\
+basque       & \TX{french}    & \TX{lao}      & \TX{russian}   & \TX{ukrainian} \\
+\TX{bengali} & friulan        & \TX{latin}    & \TX{sami}      & urdu           \\
+breton       & \TX{gaelic}    & latvian       & \TX{sanskrit}  & vietnamese     \\
+bulgarian    & galician       & lithuanian    & \TX{serbian}   & \TX{welsh}     \\
+\TX{catalan} & \TX{german}    & \TX{magyar}   & slovak         &                \\
+coptic       & \TX{greek}     & macedonian    & \TX{slovenian} &                \\
+croatian     & \TX{hebrew}    & malayalam     & \TX{sorbian}   &                \\
+czech        & \TX{hindi}     & marathi       & spanish        &                \\
+danish       & icelandic      & nko           & swedish        &                \\
+divehi       & interlingua    & \TX{norwegian}& \TX{syriac} \\
 \hline
 \end{tabular}
 \caption{Languages currently supported in \pkg{polyglossia}}
@@ -491,6 +491,12 @@ The default value of each option is given in italic.
 \begin{itemize}
 	\item \Cmd\NoAutoSpacing\new{v1.45} disables automatic spacing around punctuation and quotation marks in all following text. The command can also be used locally if braces are used for grouping: ¦{\NoAutoSpacing foo:bar}¦
 	\item \Cmd\AutoSpacing\new{v1.45} enables automatic spacing around punctuation and quotation marks in all following text. The command can also be used locally if braces are used for grouping: ¦{\AutoSpacing regarde!}¦
+\end{itemize}
+
+\subsection{gaelic}\label{gaelic}
+\textbf{Options}:\new{v1.45}
+\begin{itemize}
+	\item \TB{variant} = \textit{irish} or scottish
 \end{itemize}
 
 \subsection{german}\label{german}
