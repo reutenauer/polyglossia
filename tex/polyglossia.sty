@@ -767,7 +767,7 @@
     \fontspec_if_script:nTF{#1}
        {\addfontfeature{Script=#2}}
        {\xpg@error{
-          The~ current~ latin ~ font~ does~ not~ contain~ the~"#2"~ script!\MessageBreak
+          The~ current~ latin ~ font~ \l_fontspec_family_tl\space does~ not~ contain~ the~"#2"~ script!\MessageBreak
           Please~ define~\csname\tl_if_empty:nF{#2}{\str_lower_case:n#2}font\endcsname~
           with~ \string\newfontfamily\space command
           }
