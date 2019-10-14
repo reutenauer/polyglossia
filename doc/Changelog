@@ -8,6 +8,9 @@ New features:
   * Add new language bahasa with variants indonesian and malay.
     This deprecates bahasai and bahasam (which are still supported for
     backwards compatibility).
+  * Add new language sorbian with variants lower and upper.
+    This deprecates lsorbian and usorbian (which are still supported for
+    backwards compatibility).
   * Add new language portuguese with variants portuguese and brazilian.
     This deprecates brazil and portuges (which are still supported for
     backwards compatibility).

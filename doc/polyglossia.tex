@@ -178,22 +178,22 @@ that are explained in section \ref{specific} below.
 % Edited by hand -- AR 2019-04-04
 \begin{tabular}{lllll}
 \hline
-               & danish         & interlingua    & marathi        & spanish     \\
-albanian       & divehi         & irish          & nko            & swedish     \\
-amharic        & \TX{dutch}     & \TX{italian}   & \TX{norwegian} & \TX{syriac} \\
-\TX{arabic}    & \TX{english}   & japanese       & occitan        & tamil       \\
-\TX{armenian}  & \TX{esperanto} & kannada        & piedmontese    & telugu      \\
-asturian       & estonian       & khmer          & polish         & \TX{thai}   \\
-bahasai        & \TX{farsi}     & \TX{korean}    & \TX{portuguese}& \TX{tibetan}\\
-bahasam        & \TX{finnish}   & \TX{kurdish}   & romanian       & turkish     \\
-basque         & \TX{french}    & \TX{lao}       & romansh        & turkmen     \\
-\TX{bengali}   & friulan        & \TX{latin}     & \TX{russian}   & \TX{ukrainian}\\
-breton         & galician       & latvian        & \TX{sami}      & urdu         \\
-bulgarian      & \TX{german}    & lithuanian     & \TX{sanskrit}  & \TX{usorbian}\\
-\TX{catalan}   & \TX{greek}     & \TX{lsorbian}  & scottish       & vietnamese   \\
-coptic         & \TX{hebrew}    & \TX{magyar}    & \TX{serbian}   & \TX{welsh}    \\
-croatian       & \TX{hindi}     & macedonian     & slovak         &     \\
-czech          & icelandic      & malayalam      & \TX{slovenian}\\
+albanian     & \TX{dutch}     & \TX{italian}  & occitan        & \TX{syriac}    \\
+amharic      & \TX{english}   & japanese      & piedmontese    & tamil          \\
+\TX{arabic}  & \TX{esperanto} & kannada       & polish         & telugu         \\
+\TX{armenian}& estonian       & khmer         & \TX{portuguese}& \TX{thai}      \\
+asturian     & \TX{farsi}     & \TX{korean}   & romanian       & \TX{tibetan}   \\
+\TX{bahasa}  & \TX{finnish}   & \TX{kurdish}  & romansh        & turkish        \\
+basque       & \TX{french}    & \TX{lao}      & \TX{russian}   & turkmen        \\
+\TX{bengali} & friulan        & \TX{latin}    & \TX{sami}      & \TX{ukrainian} \\
+breton       & galician       & latvian       & \TX{sanskrit}  & urdu           \\
+bulgarian    & \TX{german}    & lithuanian    & scottish       & vietnamese     \\
+\TX{catalan} & \TX{greek}     & \TX{magyar}   & \TX{serbian}   & \TX{welsh}     \\
+coptic       & \TX{hebrew}    & macedonian    & slovak         &                \\
+croatian     & \TX{hindi}     & malayalam     & \TX{slovenian} &                \\
+czech        & icelandic      & marathi       & \TX{sorbian}   &                \\
+danish       & interlingua    & nko           & spanish        &                \\
+divehi       & irish          & \TX{norwegian}& swedish \\
 \hline
 \end{tabular}
 \caption{Languages currently supported in \pkg{polyglossia}}
@@ -383,6 +383,12 @@ The default value of each option is given in italic.
 \begin{itemize}
 	\item \TB{variant}\new{v1.45} = eastern or \textit{western}
 	\item \TB{numerals}\new{v1.45} = armenian or \textit{arabic}
+\end{itemize}
+
+\subsection{bahasa}\label{bahasa}
+\textbf{Options}:
+\begin{itemize}
+	\item \TB{variant}\new{v1.45} = \textit{indonesian} (=~indonesia) or malay (=~melayu)
 \end{itemize}
 
 \subsection{bengali}\label{bengali}\new{v1.2.0}
@@ -619,12 +625,6 @@ Currently\new{v1.45} support for Kurdish is limited to Sorani Kurdish (support f
 	\item \TB{variant} = classic, medieval or \textit{modern}
 	\end{itemize}
 
-\subsection{lsorbian and usorbian}\label{lsorbian}\label{usorbian}
-\textbf{Commands}:
-	\begin{itemize}
-	\item \Cmd\oldtoday : see the \pkg{babel} documentation.
-	\end{itemize}
-
 \subsection{magyar}\label{magyar}
 \textbf{Commands}:
 	\begin{itemize}
@@ -693,8 +693,20 @@ Currently\new{v1.45} support for Sami is limited to Northern Sami.
 \subsection{slovenian}\label{slovenian}
 \textbf{Options}:
 	\begin{itemize}
-	\item \TB{localalph} = true \textit{false}
+	\item \TB{localalph} = true or \textit{false}
 	\end{itemize}
+
+\subsection{sorbian}\label{sorbian}
+\textbf{Options}:
+\begin{itemize}
+	\item \TB{variant}\new{v1.45} = lower or \textit{upper}
+	\item \TB{olddate}\new{v1.45} = true or \textit{false} (default value = true). If true, ¦\today¦
+	      will use traditional Sorbian month names (\ie it will be synonymous to ¦\oldtoday¦ below)
+\end{itemize}
+\textbf{Commands}:
+\begin{itemize}
+	\item \Cmd\oldtoday: outputs the current date using traditional Sorbian month names, even if \TB{olddate} is false.
+\end{itemize}
 
 \subsection{syriac}\label{syriac}
 \textbf{Options}:
@@ -933,8 +945,7 @@ sets the counters ¦Hijriday¦, ¦Hijrimonth¦ and ¦Hijriyear¦.
 \Cmd\Hijritoday\ formats the Hijri date for the current day.
 This command is now locale-aware\new{v1.1.1}: its output will differ depending on the
 currently active language. Presently \pkg{polyglossia}’s language definition files
-for Arabic, Farsi, Urdu, Turkish, Bahasa Indonesia and Bahasa Melayu
-provide a localized version of ¦\Hijritoday¦.
+for Arabic, Farsi, Urdu, Turkish and Bahasa provide a localized version of ¦\Hijritoday¦.
 If the formatting macro for the current language is undefined, the Hijri date will be formatted
 in Arabic or in roman transliteration, depending of the current writing direction.
 You can define a new format or redefine one with the command
