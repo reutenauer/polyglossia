@@ -1,21 +1,21 @@
 \ProvidesFile{gloss-bahasai.ldf}[polyglossia: module for bahasa indonesia]
 
 % We only provide this gloss for babel compatibility. Since bahasai is 
-% a bahasa variety, we use 'bahasa' with variant 'indonesia' now.
+% a malay variety, we use 'malay' with variant 'indonesian' now.
 
-\input{gloss-bahasa.ldf}
+\input{gloss-malay.ldf}
 
 \PolyglossiaSetup{bahasai}{%
-  language=Bahasa Indonesia,
+  language=Indonesian,
   langtag=IND,
   hyphennames={indonesian,indon,bahasai,bahasa,bahasam,malay,melayu},
   hyphenmins={2,2},
   fontsetup=true}
 
-\let\captionsbahasai\captionsbahasa@indonesian
-\let\datebahasai\datebahasa@indonesian
+\let\captionsbahasai\captionsmalay@indonesian
+\let\datebahasai\datemalay@indonesian
 
 \DefineFormatHijriDate{bahasai}{%
-  \number\value{Hijriday}\space\hijrimonthbahasa@indonesian{\value{Hijrimonth}}\space\number\value{Hijriyear}}
+  \number\value{Hijriday}\space\hijrimonthmalay@indonesian{\value{Hijrimonth}}\space\number\value{Hijriyear}}
 
 \endinput

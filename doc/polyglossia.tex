@@ -178,22 +178,22 @@ that are explained in section \ref{specific} below.
 % Edited by hand -- AR 2019-04-04
 \begin{tabular}{lllll}
 \hline
-albanian     & \TX{dutch}     & \TX{italian}  & occitan        & tamil          \\
-amharic      & \TX{english}   & japanese      & piedmontese    & telugu         \\
-\TX{arabic}  & \TX{esperanto} & kannada       & polish         & \TX{thai}      \\
-\TX{armenian}& estonian       & khmer         & \TX{portuguese}& \TX{tibetan}   \\
-asturian     & \TX{farsi}     & \TX{korean}   & romanian       & turkish        \\
-\TX{bahasa}  & \TX{finnish}   & \TX{kurdish}  & romansh        & turkmen        \\
-basque       & \TX{french}    & \TX{lao}      & \TX{russian}   & \TX{ukrainian} \\
-\TX{bengali} & friulan        & \TX{latin}    & \TX{sami}      & urdu           \\
-breton       & \TX{gaelic}    & latvian       & \TX{sanskrit}  & vietnamese     \\
-bulgarian    & galician       & lithuanian    & \TX{serbian}   & \TX{welsh}     \\
-\TX{catalan} & \TX{german}    & \TX{magyar}   & slovak         &                \\
-coptic       & \TX{greek}     & macedonian    & \TX{slovenian} &                \\
-croatian     & \TX{hebrew}    & malayalam     & \TX{sorbian}   &                \\
-czech        & \TX{hindi}     & marathi       & spanish        &                \\
-danish       & icelandic      & nko           & swedish        &                \\
-divehi       & interlingua    & \TX{norwegian}& \TX{syriac} \\
+albanian     & \TX{english}    & japanese      & occitan        & tamil          \\
+amharic      & \TX{esperanto}  & kannada       & piedmontese    & telugu         \\
+\TX{arabic}  & estonian        & khmer         & polish         & \TX{thai}      \\
+\TX{armenian}& \TX{farsi}      & \TX{korean}   & \TX{portuguese}& \TX{tibetan}   \\
+asturian     & \TX{finnish}    & \TX{kurdish}  & romanian       & turkish        \\
+basque       & \TX{french}     & \TX{lao}      & romansh        & turkmen        \\
+\TX{bengali} & friulan         & \TX{latin}    & \TX{russian}   & \TX{ukrainian} \\
+breton       & \TX{gaelic}     & latvian       & \TX{sami}      & urdu           \\
+bulgarian    & galician        & lithuanian    & \TX{sanskrit}  & vietnamese     \\
+\TX{catalan} & \TX{german}     & \TX{magyar}   & \TX{serbian}   & \TX{welsh}     \\
+coptic       & \TX{greek}      & macedonian    & slovak         &                \\
+croatian     & \TX{hebrew}     & \TX{malay}    & \TX{slovenian} &                \\
+czech        & \TX{hindi}      & malayalam     & \TX{sorbian}   &                \\
+danish       & icelandic       & marathi       & spanish        &                \\
+divehi       & interlingua     & nko           & swedish        &                \\
+\TX{dutch}   & \TX{italian}    & \TX{norwegian}& \TX{syriac} \\
 \hline
 \end{tabular}
 \caption{Languages currently supported in \pkg{polyglossia}}
@@ -383,12 +383,6 @@ The default value of each option is given in italic.
 \begin{itemize}
 	\item \TB{variant}\new{v1.45} = eastern or \textit{western}
 	\item \TB{numerals}\new{v1.45} = armenian or \textit{arabic}
-\end{itemize}
-
-\subsection{bahasa}\label{bahasa}
-\textbf{Options}:
-\begin{itemize}
-	\item \TB{variant}\new{v1.45} = \textit{indonesian} (=~indonesia) or malay (=~melayu)
 \end{itemize}
 
 \subsection{bengali}\label{bengali}\new{v1.2.0}
@@ -637,6 +631,13 @@ Currently\new{v1.45} support for Kurdish is limited to Sorani Kurdish (support f
 	\item \Cmd\ontoday\ (= \Cmd\ondatemagyar): special forms of \cmd\today\
 		(see the \pkg{babel} documentation).
 	\end{itemize}
+
+\subsection{malay}\label{malay}
+\textbf{Options}:
+\begin{itemize}
+	\item \TB{variant}\new{v1.45} = \textit{indonesian} (=~bahasai in \pkg{babel}) or
+	malaysian (=~bahasam in \pkg{babel})
+\end{itemize}
 
 \subsection{norwegian}\label{norwegian}
 \textbf{Options}:
@@ -951,7 +952,7 @@ sets the counters ¦Hijriday¦, ¦Hijrimonth¦ and ¦Hijriyear¦.
 \Cmd\Hijritoday\ formats the Hijri date for the current day.
 This command is now locale-aware\new{v1.1.1}: its output will differ depending on the
 currently active language. Presently \pkg{polyglossia}’s language definition files
-for Arabic, Farsi, Urdu, Turkish and Bahasa provide a localized version of ¦\Hijritoday¦.
+for Arabic, Farsi, Urdu, Turkish and Malay provide a localized version of ¦\Hijritoday¦.
 If the formatting macro for the current language is undefined, the Hijri date will be formatted
 in Arabic or in roman transliteration, depending of the current writing direction.
 You can define a new format or redefine one with the command
