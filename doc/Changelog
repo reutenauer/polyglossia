@@ -11,6 +11,8 @@ New features:
   * Add new language gaelic with variants irish and scottish.
     This deprecates irish and scottish as own polyglossia languages (which
     are still supported for backwards compatibility).
+  * Add new language hungarian.
+    This deprecates magyar (which is still supported for backwards compatibility).
   * Add new language sorbian with variants lower and upper.
     This deprecates lsorbian and usorbian (which are still supported for
     backwards compatibility).
