@@ -6,61 +6,60 @@
   langtag=DEU,
 }
 
-\def\tmp@old{old}
-\def\tmp@oldyr{1901}
 \newif\if@german@oldspelling
 \@german@oldspellingfalse
-\define@key{german}{spelling}[new]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@oldyr\def\@tmpa{old}\fi
-  \ifx\@tmpa\tmp@old
-    \xpg@ifdefined{german}{}{%
-      \xpg@nopatterns{german}%
-      \adddialect\l@german\l@nohyphenation
-    }
-    \@german@oldspellingtrue
-  \else % try ngerman
-    \xpg@ifdefined{ngerman}{%
+\define@choicekey*+{german}{spelling}[\val\nr]{new,old,1901}[new]{%
+   \ifcase\nr\relax
+      % new:
       \@german@oldspellingfalse
-    }{% fall back to german
-      \xpg@ifdefined{german}{%
-        \xpg@warning{You asked for `ngerman' but only `german' hyphenation is available!}%
-        \@german@oldspellingtrue
-      }{%
-        \xpg@nopatterns{ngerman}%
-        \adddialect\l@ngerman\l@nohyphenation
-      }%
-    }%
-  \fi
-}
+   \or
+      % old:
+      \@german@oldspellingtrue
+   \or
+      % 1901:
+      \@german@oldspellingtrue
+   \fi
+   \xpg@info{Option: German, spelling=\val}%
+}{\xpg@warning{Unknown German spelling `#1'}}
 
 \newif\if@austrian@locale
 \@austrian@localefalse
 \newif\if@swiss@locale
 \@swiss@localefalse
-\def\tmp@austrian{austrian}
-\def\tmp@swiss{swiss}
-\define@key{german}{variant}[german]{%
-	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@austrian\@austrian@localetrue\else
-	  \@austrian@localefalse%
-	\fi
-	\ifx\@tmpa\tmp@swiss\@swiss@localetrue
-	  \xpg@ifdefined{swissgerman}{}%
-	    {\xpg@warning{No hyphenation patterns were loaded for "Swiss German (Old Spelling)"\MessageBreak
-	      I will use the standard patterns for German (old spelling) instead}%
-	    \adddialect\l@swissgerman\l@german\relax}%
-	\else
-	  \@swiss@localefalse%
-	\fi}
+\define@choicekey*+{german}{variant}[\val\nr]{german,austrian,swiss}[german]{%
+   \ifcase\nr\relax
+      % german:
+      \@swiss@localefalse%
+      \@austrian@localefalse%
+   \or
+      % austrian:
+      \@austrian@localetrue%
+      \@swiss@localefalse%
+   \or
+      % swiss:
+      \@swiss@localetrue%
+      \@austrian@localefalse%
+      \xpg@ifdefined{swissgerman}{}%
+	 {%
+           \xpg@warning{No hyphenation patterns were loaded for "Swiss German (Old Spelling)"\MessageBreak
+	                I will use the standard patterns for German (old spelling) instead}%
+	                \adddialect\l@swissgerman\l@german\relax%
+         }%
+   \fi
+   \xpg@info{Option: German, variant=\val}%
+}{\xpg@warning{Unknown German variant `#1'}}
 
 \newif\if@german@fraktur
-\def\tmp@fraktur{fraktur}
-\define@key{german}{script}[latin]{%
-	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@fraktur\@german@frakturtrue\else
-	  \@german@frakturfalse%
-	\fi}
+\define@choicekey*+{german}{script}[\val\nr]{latin,fraktur}[latin]{%
+   \ifcase\nr\relax
+      % latin:
+      \@german@frakturfalse%
+   \or
+      % fraktur:
+      \@german@frakturtrue%
+   \fi
+   \xpg@info{Option: German, script=\val}%
+}{\xpg@warning{Unknown German script `#1'}}
 
 \define@boolkey{german}[german@]{latesthyphen}[false]{}
 
