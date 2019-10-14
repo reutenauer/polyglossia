@@ -5,6 +5,15 @@ New features:
     \Localnumeral* that convert Arabic digitals to the local number scheme.
   * Add support for (Sorani) Kurdish (#277).
   * Implement proper Cyrillic (alphanumeric) numbering (#285).
+  * Add new language malay with variants indonesian and malaysian.
+    This deprecates bahasai and bahasam (which are still supported for
+    backwards compatibility).
+  * Add new language gaelic with variants irish and scottish.
+    This deprecates irish and scottish as own polyglossia languages (which
+    are still supported for backwards compatibility).
+  * Add new language sorbian with variants lower and upper.
+    This deprecates lsorbian and usorbian (which are still supported for
+    backwards compatibility).
   * Add new language portuguese with variants portuguese and brazilian.
     This deprecates brazil and portuges (which are still supported for
     backwards compatibility).

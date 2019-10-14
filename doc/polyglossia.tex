@@ -178,22 +178,22 @@ that are explained in section \ref{specific} below.
 % Edited by hand -- AR 2019-04-04
 \begin{tabular}{lllll}
 \hline
-               & danish         & interlingua    & marathi        & spanish     \\
-albanian       & divehi         & irish          & nko            & swedish     \\
-amharic        & \TX{dutch}     & \TX{italian}   & \TX{norwegian} & \TX{syriac} \\
-\TX{arabic}    & \TX{english}   & japanese       & occitan        & tamil       \\
-\TX{armenian}  & \TX{esperanto} & kannada        & piedmontese    & telugu      \\
-asturian       & estonian       & khmer          & polish         & \TX{thai}   \\
-bahasai        & \TX{farsi}     & \TX{korean}    & \TX{portuguese}& \TX{tibetan}\\
-bahasam        & \TX{finnish}   & \TX{kurdish}   & romanian       & turkish     \\
-basque         & \TX{french}    & \TX{lao}       & romansh        & turkmen     \\
-\TX{bengali}   & friulan        & \TX{latin}     & \TX{russian}   & \TX{ukrainian}\\
-breton         & galician       & latvian        & \TX{sami}      & urdu         \\
-bulgarian      & \TX{german}    & lithuanian     & \TX{sanskrit}  & \TX{usorbian}\\
-\TX{catalan}   & \TX{greek}     & \TX{lsorbian}  & scottish       & vietnamese   \\
-coptic         & \TX{hebrew}    & \TX{magyar}    & \TX{serbian}   & \TX{welsh}    \\
-croatian       & \TX{hindi}     & macedonian     & slovak         &     \\
-czech          & icelandic      & malayalam      & \TX{slovenian}\\
+albanian     & \TX{english}    & japanese      & occitan        & tamil          \\
+amharic      & \TX{esperanto}  & kannada       & piedmontese    & telugu         \\
+\TX{arabic}  & estonian        & khmer         & polish         & \TX{thai}      \\
+\TX{armenian}& \TX{farsi}      & \TX{korean}   & \TX{portuguese}& \TX{tibetan}   \\
+asturian     & \TX{finnish}    & \TX{kurdish}  & romanian       & turkish        \\
+basque       & \TX{french}     & \TX{lao}      & romansh        & turkmen        \\
+\TX{bengali} & friulan         & \TX{latin}    & \TX{russian}   & \TX{ukrainian} \\
+breton       & \TX{gaelic}     & latvian       & \TX{sami}      & urdu           \\
+bulgarian    & galician        & lithuanian    & \TX{sanskrit}  & vietnamese     \\
+\TX{catalan} & \TX{german}     & \TX{magyar}   & \TX{serbian}   & \TX{welsh}     \\
+coptic       & \TX{greek}      & macedonian    & slovak         &                \\
+croatian     & \TX{hebrew}     & \TX{malay}    & \TX{slovenian} &                \\
+czech        & \TX{hindi}      & malayalam     & \TX{sorbian}   &                \\
+danish       & icelandic       & marathi       & spanish        &                \\
+divehi       & interlingua     & nko           & swedish        &                \\
+\TX{dutch}   & \TX{italian}    & \TX{norwegian}& \TX{syriac} \\
 \hline
 \end{tabular}
 \caption{Languages currently supported in \pkg{polyglossia}}
@@ -487,6 +487,12 @@ The default value of each option is given in italic.
 	\item \Cmd\AutoSpacing\new{v1.45} enables automatic spacing around punctuation and quotation marks in all following text. The command can also be used locally if braces are used for grouping: ¦{\AutoSpacing regarde!}¦
 \end{itemize}
 
+\subsection{gaelic}\label{gaelic}
+\textbf{Options}:\new{v1.45}
+\begin{itemize}
+	\item \TB{variant} = \textit{irish} or scottish
+\end{itemize}
+
 \subsection{german}\label{german}
 \textbf{Options}:
 	\begin{itemize}
@@ -619,18 +625,19 @@ Currently\new{v1.45} support for Kurdish is limited to Sorani Kurdish (support f
 	\item \TB{variant} = classic, medieval or \textit{modern}
 	\end{itemize}
 
-\subsection{lsorbian and usorbian}\label{lsorbian}\label{usorbian}
-\textbf{Commands}:
-	\begin{itemize}
-	\item \Cmd\oldtoday : see the \pkg{babel} documentation.
-	\end{itemize}
-
 \subsection{magyar}\label{magyar}
 \textbf{Commands}:
 	\begin{itemize}
 	\item \Cmd\ontoday\ (= \Cmd\ondatemagyar): special forms of \cmd\today\
 		(see the \pkg{babel} documentation).
 	\end{itemize}
+
+\subsection{malay}\label{malay}
+\textbf{Options}:
+\begin{itemize}
+	\item \TB{variant}\new{v1.45} = \textit{indonesian} (=~bahasai in \pkg{babel}) or
+	malaysian (=~bahasam in \pkg{babel})
+\end{itemize}
 
 \subsection{norwegian}\label{norwegian}
 \textbf{Options}:
@@ -693,8 +700,20 @@ Currently\new{v1.45} support for Sami is limited to Northern Sami.
 \subsection{slovenian}\label{slovenian}
 \textbf{Options}:
 	\begin{itemize}
-	\item \TB{localalph} = true \textit{false}
+	\item \TB{localalph} = true or \textit{false}
 	\end{itemize}
+
+\subsection{sorbian}\label{sorbian}
+\textbf{Options}:
+\begin{itemize}
+	\item \TB{variant}\new{v1.45} = lower or \textit{upper}
+	\item \TB{olddate}\new{v1.45} = true or \textit{false} (default value = true). If true, ¦\today¦
+	      will use traditional Sorbian month names (\ie it will be synonymous to ¦\oldtoday¦ below)
+\end{itemize}
+\textbf{Commands}:
+\begin{itemize}
+	\item \Cmd\oldtoday: outputs the current date using traditional Sorbian month names, even if \TB{olddate} is false.
+\end{itemize}
 
 \subsection{syriac}\label{syriac}
 \textbf{Options}:
@@ -933,8 +952,7 @@ sets the counters ¦Hijriday¦, ¦Hijrimonth¦ and ¦Hijriyear¦.
 \Cmd\Hijritoday\ formats the Hijri date for the current day.
 This command is now locale-aware\new{v1.1.1}: its output will differ depending on the
 currently active language. Presently \pkg{polyglossia}’s language definition files
-for Arabic, Farsi, Urdu, Turkish, Bahasa Indonesia and Bahasa Melayu
-provide a localized version of ¦\Hijritoday¦.
+for Arabic, Farsi, Urdu, Turkish and Malay provide a localized version of ¦\Hijritoday¦.
 If the formatting macro for the current language is undefined, the Hijri date will be formatted
 in Arabic or in roman transliteration, depending of the current writing direction.
 You can define a new format or redefine one with the command

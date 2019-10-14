@@ -232,7 +232,7 @@
   \clist_map_inline:Nn \l_tmpa_clist {
     % check if language hyphenname is defined
     \polyglossia@check@ifdefined:NF{#1}{%
-      % if false check if current hyphenname is egal of language hyphenname
+      % if false check if current hyphenname is equal of language hyphenname
       \str_if_eq:nnF{#1}{##1}{
         {
           % if language is different of hyphenname, first consider nohyphenation
@@ -767,7 +767,7 @@
     \fontspec_if_script:nTF{#1}
        {\addfontfeature{Script=#2}}
        {\xpg@error{
-          The~ current~ latin ~ font~ does~ not~ contain~ the~"#2"~ script!\MessageBreak
+          The~ current~ latin ~ font~ \l_fontspec_family_tl\space does~ not~ contain~ the~"#2"~ script!\MessageBreak
           Please~ define~\csname\tl_if_empty:nF{#2}{\str_lower_case:n#2}font\endcsname~
           with~ \string\newfontfamily\space command
           }
@@ -1253,8 +1253,9 @@
 }
 
 \newcommand\xpg@ifdefined[3]{%
-    \xpg@set@hyphenation@patterns{#1}%
-    \polyglossia@check@ifdefined:NTF{#1}{#2}{#3}
+    \polyglossia@check@ifdefined:NTF{#1}%
+       {\xpg@set@hyphenation@patterns{#1}#2}%
+       {#3}%
 }%
 
 % Set \bbl@hyphendata@\the\language, which is (lua)babel's
