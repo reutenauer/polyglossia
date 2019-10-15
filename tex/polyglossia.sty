@@ -233,36 +233,29 @@
     \ifbool{havehyphen}{}{%
        % check if language hyphenname is defined
        \polyglossia@check@ifdefined:NF{#1}{%
-         % if false check if current hyphenname is equal of language hyphenname
-         \str_if_eq:nnTF{#1}{##1}%
-           {%
-              % if language matches hyphenname, set pattern
-              \xpg@set@hyphenation@patterns{##1}%
-              \global\booltrue{havehyphen}%
-           }{%
-              % if language is different of hyphenname, first consider nohyphenation
-              \str_if_eq:nnTF{##1}{nohyphenation}
-                {%
-                   \cs_gset_eq:cc{l@#1}{l@##1}
-                   \global\booltrue{havehyphen}
-                }{%
-                   % then test if hyphenation is defined
-                   % With luatex, we first need to define \l@##1. We only do that if the pattern exists.
-                   \ifluatex%
-                      \expandafter\chardef\csname polyglossia@tmpl@##1\endcsname=%
-                           \directlua{tex.sprint(polyglossia.newloader('##1'))}%
-                      \cs_if_eq:cNF{polyglossia@tmpl@##1}{\l@nohyphenation}{\cs_gset_eq:cc{l@##1}{polyglossia@tmpl@##1}}%
-                   \fi
-                   \xpg@ifdefined{##1}{
-                      % test if language hyphenation is nohyphenation
-                      \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{\global\booltrue{havehyphen}}{%
-                          % if false define language to hyphenation and load
-                          \cs_gset_eq:cc{l@#1}{l@##1}
-                          \xpg@set@hyphenation@patterns{##1}
-                          \global\booltrue{havehyphen}
-                      }%
-                   }{}%
-               }%
+          % if not, first consider nohyphenation
+          \str_if_eq:nnTF{##1}{nohyphenation}
+            {%
+               \cs_gset_eq:cc{l@#1}{l@##1}
+               \global\booltrue{havehyphen}
+            }{%
+               % then test if hyphenation is defined
+               % With luatex, we first need to define \l@##1. We only do that if the pattern exists.
+               \ifluatex%
+                  \expandafter\chardef\csname polyglossia@tmpl@##1\endcsname=%
+                       \directlua{tex.sprint(polyglossia.newloader('##1'))}%
+                  \cs_if_eq:cNF{polyglossia@tmpl@##1}{\l@nohyphenation}{\cs_gset_eq:cc{l@##1}{polyglossia@tmpl@##1}}%
+               \fi
+               \xpg@ifdefined{##1}{
+                  % test if language hyphenation is nohyphenation
+                  \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{\global\booltrue{havehyphen}}{%
+                      % if false define language to hyphenation if it is not equal...
+                      \str_if_eq:nnF{#1}{##1}{\cs_gset_eq:cc{l@#1}{l@##1}}
+                      % ...and load
+                      \xpg@set@hyphenation@patterns{##1}
+                      \global\booltrue{havehyphen}
+                  }%
+               }{}%
            }%
        }%
     }%
