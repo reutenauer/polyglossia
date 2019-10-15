@@ -178,22 +178,22 @@ that are explained in section \ref{specific} below.
 % Edited by hand -- AR 2019-04-04
 \begin{tabular}{lllll}
 \hline
-albanian     & \TX{english}    & \TX{italian}  & occitan        & tamil          \\
-amharic      & \TX{esperanto}  & japanese      & piedmontese    & telugu         \\
-\TX{arabic}  & estonian        & kannada       & polish         & \TX{thai}      \\
-\TX{armenian}& \TX{farsi}      & khmer         & \TX{portuguese}& \TX{tibetan}   \\
-asturian     & \TX{finnish}    & \TX{korean}   & romanian       & turkish        \\
-basque       & \TX{french}     & \TX{kurdish}  & romansh        & turkmen        \\
-\TX{bengali} & friulian         & \TX{lao}      & \TX{russian}   & \TX{ukrainian} \\
-breton       & \TX{gaelic}     & \TX{latin}    & \TX{sami}      & urdu           \\
-bulgarian    & galician        & latvian       & \TX{sanskrit}  & vietnamese     \\
-\TX{catalan} & \TX{german}     & lithuanian    & \TX{serbian}   & \TX{welsh}     \\
-coptic       & \TX{greek}      & macedonian    & slovak         &                \\
-croatian     & \TX{hebrew}     & \TX{malay}    & \TX{slovenian} &                \\
-czech        & \TX{hindi}      & malayalam     & \TX{sorbian}   &                \\
-danish       & hungarian       & marathi       & spanish        &                \\
-divehi       & icelandic       & nko           & swedish        &                \\
-\TX{dutch}   & interlingua     & \TX{norwegian}& \TX{syriac} \\
+albanian     & \TX{english}   & japanese       & \TX{persian}   & tamil          \\
+amharic      & \TX{esperanto} & kannada        & piedmontese    & telugu         \\
+\TX{arabic}  & estonian       & khmer          & polish         & \TX{thai}      \\
+\TX{armenian}& \TX{finnish}   & \TX{korean}    & \TX{portuguese}& \TX{tibetan}   \\
+asturian     & \TX{french}    & \TX{kurdish}   & romanian       & turkish        \\
+basque       & friulian       & \TX{lao}       & romansh        & turkmen        \\
+\TX{bengali} & \TX{gaelic}    & \TX{latin}     & \TX{russian}   & \TX{ukrainian} \\
+breton       & galician       & latvian        & \TX{sami}      & urdu           \\
+bulgarian    & \TX{german}    & lithuanian     & \TX{sanskrit}  & vietnamese     \\
+\TX{catalan} & \TX{greek}     & macedonian     & \TX{serbian}   & \TX{welsh}     \\
+coptic       & \TX{hebrew}    & \TX{malay}     & slovak         &                \\
+croatian     & \TX{hindi}     & malayalam      & \TX{slovenian} &                \\
+czech        & hungarian      & marathi        & \TX{sorbian}   &                \\
+danish       & icelandic      & nko            & spanish        &                \\
+divehi       & interlingua    & \TX{norwegian} & swedish        &                \\
+\TX{dutch}   & \TX{italian}   & occitan        & \TX{syriac} \\
 \hline
 \end{tabular}
 \caption{Languages currently supported in \pkg{polyglossia}}
@@ -436,21 +436,6 @@ The default value of each option is given in italic.
 	\item \Cmd\hodiau\ and \Cmd\hodiaun are special forms of \cmd\today\ (see the \pkg{babel} documentation)
 	\end{itemize}
 
-\subsection{farsi}\label{farsi}
-\textbf{Options}:
-	\begin{itemize}
-	\item \TB{numerals} = western or \textit{eastern}
-	\item \TB{abjadjimnotail} = \textit{false} or true. \new{v1.0.3}
-	Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
-	\item \TB{locale} (not yet implemented)
-	\item \TB{calendar} (not yet implemented)
-	\end{itemize}
-\textbf{Commands}:
-	\begin{itemize}
-	\item \Cmd\abjad (see section \ref{abjad})
-  \item \Cmd\aemph (see section \ref{arabic}).
-	\end{itemize}
-
 \subsection{finnish}\label{finnish}
 \textbf{Options:}
 \begin{itemize}
@@ -643,6 +628,21 @@ Currently\new{v1.45} support for Kurdish is limited to Sorani Kurdish (support f
 \textbf{Options}:
 \begin{itemize}
 	\item \TB{variant}\new{v1.45} = bokmal (=~`norsk' in \pkg{babel}) or \textit{nynorsk}
+\end{itemize}
+
+\subsection{persian}\label{persian}
+\textbf{Options}:
+\begin{itemize}
+	\item \TB{numerals} = western or \textit{eastern}
+	\item \TB{abjadjimnotail} = \textit{false} or true. \new{v1.0.3}
+	Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
+	\item \TB{locale} (not yet implemented)
+	\item \TB{calendar} (not yet implemented)
+\end{itemize}
+\textbf{Commands}:
+\begin{itemize}
+	\item \Cmd\abjad (see section \ref{abjad})
+	\item \Cmd\aemph (see section \ref{arabic}).
 \end{itemize}
 
 \subsection{portuguese}\label{portuguese}

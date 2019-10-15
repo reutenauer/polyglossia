@@ -1,14 +1,10 @@
 \ProvidesFile{gloss-farsi.ldf}[polyglossia: module for farsi]
-\ifluatex
-  \xpg@warning{Farsi is not supported with LuaTeX.\MessageBreak
-I will proceed with the compilation, but\MessageBreak
-the output is not guaranteed to be correct\MessageBreak
-and may look very wrong.}
-\fi
-\RequireBidi
-\RequirePackage{arabicnumbers}
-\RequirePackage{farsical}
-\RequirePackage{hijrical}
+
+% We only provide this gloss for babel compatibility.
+% The proper English language name is Persian.
+
+\input{gloss-persian.ldf}
+
 \PolyglossiaSetup{farsi}{
   script=Arabic,
   direction=RL,
@@ -19,132 +15,28 @@ and may look very wrong.}
   localnumeral=farsinumerals
 }
 
-\newif\if@western@numerals
-\def\tmp@western{western}
 \define@key{farsi}{numerals}[eastern]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@western\@western@numeralstrue\else%
-    \@western@numeralsfalse%
-  \fi}
+  \setkeys{persian}{numerals=#1}}
 
-%this is needed for \abjad in arabicnumbers.sty
-\def\tmp@true{true}
 \define@key{farsi}{abjadjimnotail}[true]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@true\abjad@jim@notailtrue%
-  \else
-    \abjad@jim@notailfalse
-  \fi}
+  \setkeys{persian}{abjadjimnotail=#1}}
 
-% NOT YET USED
 \define@key{farsi}{locale}[default]{%
-  \def\@farsi@locale{#1}}
-
-%TODO add option for CALENDAR
+  \setkeys{persian}{locale=#1}}
 
 \setkeys{farsi}{locale,numerals}
 
-\def\farsigregmonth#1{\ifcase#1%
-  \or ژانویه\or فوریه\or مارس\or آوریل\or مه\or ژوئن\or ژوئیه\or اوت\or سپتامبر\or اکتبر\or نوامبر\or دسامبر\fi}
-\def\farsimonth#1{\ifcase#1%
-  \or کانون ثانی\or شباط\or اذار%%or ادار
-    \or نیسان\or ایار\or حزیران\or تموز\or آب\or ایلول\or تشرین اول\or تشرین ثانی\or کانون اول\fi}
-
 %\Hijritoday is now locale-aware and will format the date with this macro:
 \DefineFormatHijriDate{farsi}{\@ensure@RTL{%
-\farsinumber{\value{Hijriday}}\space\HijriMonthArabic{\value{Hijrimonth}}\space\farsinumber{\value{Hijriyear}}}}
+   \farsinumber{\value{Hijriday}}\space\HijriMonthArabic{\value{Hijrimonth}}\space\farsinumber{\value{Hijriyear}}}}
 
-\def\captionsfarsi{%
-\def\prefacename{\@ensure@RTL{پیشگفتار}}%
-\def\refname{\@ensure@RTL{مراجع}}%
-\def\abstractname{\@ensure@RTL{چکیده}}%
-\def\bibname{\@ensure@RTL{کتاب‌نامه}}%
-\def\chaptername{\@ensure@RTL{فصل}}%
-\def\appendixname{\@ensure@RTL{پیوست}}%
-\def\contentsname{\@ensure@RTL{فهرست مطالب}}%
-\def\listfigurename{\@ensure@RTL{لیست تصاویر}}%
-\def\listtablename{\@ensure@RTL{لیست جداول}}%
-\def\indexname{\@ensure@RTL{نمایه}}%
-\def\figurename{\@ensure@RTL{شكل}}%
-\def\tablename{\@ensure@RTL{جدول}}%
-\def\partname{\@ensure@RTL{بخش}}%
-\def\enclname{\@ensure@RTL{پیوست}}%
-\def\ccname{\@ensure@RTL{رونوشت}}%
-\def\headtoname{\@ensure@RTL{به}}%
-\def\pagename{\@ensure@RTL{صفحة}}%
-\def\seename{\@ensure@RTL{ببینید}}%
-\def\alsoname{\@ensure@RTL{نیز ببینید}}%
-\def\proofname{\@ensure@RTL{برهان}}%
-\def\glossaryname{\@ensure@RTL{دانش‌نامه}}%
-}
-\def\datefarsi{%
-   \def\today{\@ensure@RTL{\farsinumber\day\space\farsigregmonth{\month}\space\farsinumber\year}}%
-}
+\let\captionsfarsi\captionspersian
+\let\datefarsi\datepersian
+\let\farsi@numbers\persian@numbers
+\let\nofarsi@numbers\nopersian@numbers
+\let\farsi@globalnumbers\persian@globalnumbers
+\let\nofarsi@globalnumbers\nopersian@globalnumbers
+\let\blockextras@farsi\blockextras@persian
+\let\noextras@farsi\noextras@persian
 
-\newcommand{\farsinumerals}[2]{\farsinumber{#2}}
-
-\newif\ifpersiandigits
-
-\def\farsinumber#1{%
-  \if@western@numerals
-    \number#1%
-  \else
-    \ifxetex
-      \ifnum\XeTeXcharglyph"06F0 > 0\relax
-        \persiandigitstrue
-      \fi
-    \else\ifluatex
-      \expandafter\ifnum\directlua{polyglossia.check_char(0x6F0)} > 0\relax
-        \persiandigitstrue
-      \fi
-    \fi\fi
-    \ifpersiandigits
-      \farsidigits{\number#1}%
-      %%{\protect\addfontfeature{Mapping=farsidigits}\number#1}%
-    \else%
-      \arabicdigits{\number#1}%
-      %%{\protect\addfontfeature{Mapping=arabicdigits}\number#1}%
-    \fi
-  \fi
-}
-
-%\def\farsinum#1{\expandafter\farsinumber\csname c@#1\endcsname}
-%\def\farsibracenum#1{(\expandafter\farsinumber\csname c@#1\endcsname)}
-%\def\farsiornatebracenum#1{\char"FD3E\expandafter\farsinumber\csname c@#1\endcsname\char"FD3F}
-%\def\farsialph#1{\expandafter\@farsialph\csname c@#1\endcsname}
-
-\def\farsi@numbers{%
-   \let\@alph\abjad%
-   \let\@Alph\abjad%
-}
-
-\def\nofarsi@numbers{%
-  \let\@alph\@latinalph%
-  \let\@Alph\@latinAlph%
-}
-
-\def\farsi@globalnumbers{%
-   \let\@arabic\farsinumber%
-   \renewcommand\thefootnote{\localnumeral*{footnote}}%
-   \renewcommand\theequation{\localnumeral*{equation}}%
-}
-
-% Store original definition
-\let\xpg@save@arabic\@arabic
-
-\def\nofarsi@globalnumbers{
-   \let\@arabic\xpg@save@arabic%
-}
-
-% Save original \MakeUppercase definition
-\let\xpg@save@MakeUppercase\MakeUppercase
-
-\def\blockextras@farsi{%
-   \def\MakeUppercase##1{##1}%
-}
-
-\def\noextras@farsi{%
-   % restore original \MakeUppercase definition
-   \let\MakeUppercase\xpg@save@MakeUppercase
-}
 \endinput

@@ -24,6 +24,8 @@ New features:
   * Add new language norwegian with variants nynorsk and bokmal.
     This deprecates nynorsk and norsk (which are still supported for
     backwards compatibility).
+  * Add new language persian.
+    This deprecates farsi (which is still supported for backwards compatibility).
   * Add new language sami. Currently only Northern Sami is supported.
     This deprecates samin (which is still supported for backwards compatibility).
   * gloss-serbian: add numerals=cyrillic option. Add \asbuk and \Asbuk (#285).
