@@ -1293,6 +1293,18 @@
   \edef\xpg@vloaded{#1\ifx\xpg@vloaded\@empty\else,\xpg@vloaded\fi}%
 }
 
+\prg_set_conditional:Npnn \polyglossia@check@if@lang@loaded:N #1 { p , T , F , TF }{
+  \cs_if_exist:cTF{#1@loaded}{
+     \prg_return_true:
+  }{
+    \prg_return_false:
+  }
+}
+
+% Test if language is loaded
+\newcommand*\iflanguageloaded[3]{%
+  \polyglossia@check@if@lang@loaded:NTF{#1}{#2}{#3}%
+}
 
 \newcommand*{\xpg@set@language@nonaux}[2][]{%
    \@select@language[#1]{#2}%

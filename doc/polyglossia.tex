@@ -1007,6 +1007,10 @@ If you want to have a full list of loaded languages/variants, use the following 
 	\item \Cmd{\xpg@vloaded}\ stores a comma-separated list of all loaded variants
 	\item \Cmd{\xpg@bloaded}\ stores a comma-separated list of \pkg{babel} names of all language variants 
 \end{itemize}
+%
+Finally, you can test whether a language is loaded by
+\displaycmd{\iflanguageloaded\{$\langle$language$\rangle$\}\{$\langle$true$\rangle$\}\{$\langle$false$\rangle$\}}{\iflanguageloaded}
+where \texttt{$\langle$language$\rangle$} can be a \pkg{polyglossia} or \pkg{babel} language name.
 
 \section{Acknowledgements (by François Charette)}
 \pkg{Polyglossia} is notable for being a recycle box of previous contributions
