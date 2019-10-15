@@ -2,6 +2,7 @@
 
 \PolyglossiaSetup{slovenian}{
   hyphennames={slovenian,slovene},
+  babelname=slovene,
   hyphenmins={2,2},
   langtag=SLV,
   fontsetup=true,

@@ -424,6 +424,13 @@
        },
     #1/ envname.value_required:n = true,
     #1/ envname.initial:n = {#1},
+    % babel name
+    #1 / babelname
+       .code:n = {
+           \prop_gput:Nnn{\polyglossia@langsetup}{#1/babelname}{##1}
+       },
+    #1/ babelname.value_required:n = true,
+    #1/ babelname.initial:n = {#1},
     % default numerals
     #1 / localnumeral
          . code:n =  {
@@ -995,6 +1002,8 @@
          \xpg@parsevariantkeyvalue##1@xpg@main@langvariant\relax
      }%
   }%
+  % Store babelname of main language (for external packages such as biblatex)
+  \gdef\mainbabelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
   %% The following settings are for the default language and script
   % this tells bidi.sty or luabidi.sty that the document is RTL
   \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{%
@@ -1017,12 +1026,14 @@
 
 \let\setmainlanguage=\setdefaultlanguage
 
+\def\mainbabelname{}%
 \def\mainlanguagevariant{}%
 % Store main language variant for external packages
 \define@key{xpg@main@langvariant}{variant}{%
   \gdef\mainlanguagevariant{#1}%
 }
 
+\def\babelname{}%
 \def\languagevariant{}%
 % Store current language variant for external packages
 \define@key{xpg@set@langvariant}{variant}{%
@@ -1040,6 +1051,8 @@
          \xpg@parsevariantkeyvalue##1@xpg@set@langvariant\relax
      }%
   }%
+  % Store babelname of current language (for external packages such as biblatex)
+  \gdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
 }
 
 

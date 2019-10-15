@@ -2,6 +2,7 @@
 
 \PolyglossiaSetup{friulian}{%
   language=Friulian,
+  babelname=friulan,
   hyphennames={friulan,furlan},
   hyphenmins={2,2},
   langtag=FRL,

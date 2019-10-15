@@ -26,30 +26,35 @@
       \british@hyphentrue
       \british@dateformattrue
       \english@ordinalmonthdaytrue
+      \SetLanguageKeys{english}{babelname=british}%
       \xpg@info{Option: English, variant=british}%
    \or
       % british:
       \british@hyphentrue
       \british@dateformattrue
       \english@ordinalmonthdaytrue
+      \SetLanguageKeys{english}{babelname=british}%
       \xpg@info{Option: english variant=british}%
    \or
       % us:
       \british@hyphenfalse
       \british@dateformatfalse
       \english@ordinalmonthdayfalse
+      \SetLanguageKeys{english}{babelname=american}%
       \xpg@info{Option: English, variant=american}%
    \or
       % american:
       \british@hyphenfalse
       \british@dateformatfalse
       \english@ordinalmonthdayfalse
+      \SetLanguageKeys{english}{babelname=american}%
       \xpg@info{Option: English, variant=american}%
    \or
       % usmax:
       \british@hyphenfalse
       \british@dateformatfalse
       \english@ordinalmonthdayfalse
+      \SetLanguageKeys{english}{babelname=american}%
       \xpg@info{Option: english variant=american (with additional patterns)}%
       \xpg@ifdefined{usenglishmax}{}%
          {\xpg@warning{No hyphenation patterns were loaded for "US English Max"\MessageBreak
@@ -64,6 +69,7 @@
       \british@hyphentrue
       \british@dateformattrue
       \english@ordinalmonthdayfalse
+      \SetLanguageKeys{english}{babelname=australian}%
       \xpg@info{Option: English, variant=australian}%
    \or
       % newzealand:
@@ -72,6 +78,7 @@
       \british@hyphentrue
       \british@dateformattrue
       \english@ordinalmonthdayfalse
+      \SetLanguageKeys{english}{babelname=newzealand}%
       \xpg@info{Option: English, variant=newzealand}%
    \or
       % canadian:
@@ -79,6 +86,7 @@
       \british@hyphenfalse
       \british@dateformatfalse
       \english@ordinalmonthdayfalse
+      \SetLanguageKeys{english}{babelname=canadian}%
       \xpg@info{Option: English, variant=american}%
    \fi
    \ifbritish@hyphen

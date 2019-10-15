@@ -1,10 +1,11 @@
 \ProvidesFile{gloss-german.ldf}[polyglossia: module for german]
 \PolyglossiaSetup{german}{
-  hyphennames={ngerman,german},
+  hyphennames={ngerman},
   hyphenmins={2,2},
   frenchspacing=true,
   fontsetup=true,
   langtag=DEU,
+  babelname=ngerman
 }
 
 \newif\if@german@oldspelling
@@ -194,6 +195,23 @@
 }
 
 \def\german@language{%
+  \if@german@oldspelling
+     \if@swiss@locale
+         \SetLanguageKeys{german}{babelname=swissgerman}%
+     \else
+     \if@austrian@locale
+         \SetLanguageKeys{german}{babelname=austrian}%
+     \else
+         \SetLanguageKeys{german}{babelname=german}%
+     \fi\fi
+  \else
+     \if@swiss@locale
+         \SetLanguageKeys{german}{babelname=nswissgerman}%
+     \fi
+     \if@austrian@locale
+         \SetLanguageKeys{german}{babelname=naustrian}%
+     \fi
+  \fi
   \ifgerman@latesthyphen
     \if@german@oldspelling
         \if@swiss@locale

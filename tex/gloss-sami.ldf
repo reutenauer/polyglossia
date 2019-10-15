@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-sami.ldf}[polyglossia: module for sami]
 
 \PolyglossiaSetup{sami}{
+  babelname=samin,
   hyphennames={samin},
   hyphenmins={2,2},
   language={Northern Sami},
