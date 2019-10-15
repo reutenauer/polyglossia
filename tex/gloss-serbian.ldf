@@ -22,7 +22,7 @@
 \define@key{serbian}{Script}[Cyrillic]{%
   \ifstrequal{#1}{Cyrillic}%
     {\@serbian@cyrtrue
-     \SetLanguageKeys{serbian}{scripttag=cyrl,script=Cyrillic}
+     \SetLanguageKeys{serbian}{scripttag=cyrl,script=Cyrillic,babelname=serbianc}
      \xpg@fontsetup@nonlatin{serbian}%
     }%
     {\ifstrequal{#1}{Latin}%

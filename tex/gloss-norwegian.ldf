@@ -12,12 +12,12 @@
    \ifcase\nr\relax
       % nynorsk:
       \gdef\norwegian@variant{nynorsk}%
-      \SetLanguageKeys{norwegian}{langtag=NYN}%
+      \SetLanguageKeys{norwegian}{langtag=NYN,babelname=nynorsk}%
       \xpg@fontsetup@latin{norwegian}%
    \or
       % bokmal:
       \gdef\norwegian@variant{norsk}%
-      \SetLanguageKeys{norwegian}{langtag=NOR}%
+      \SetLanguageKeys{norwegian}{langtag=NOR,babelname=norsk}%
       \xpg@fontsetup@latin{norwegian}%
    \fi
    \xpg@info{Option: norwegian, variant=\val}%

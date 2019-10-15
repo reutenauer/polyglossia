@@ -10,6 +10,7 @@ and may look very wrong.}
 \RequirePackage{farsical}
 \RequirePackage{hijrical}
 \PolyglossiaSetup{persian}{
+  babelname=farsi,
   script=Arabic,
   direction=RL,
   scripttag=arab,

@@ -23,7 +23,7 @@
       \malay@melayutrue
    \fi
    \ifmalay@melayu
-      \SetLanguageKeys{malay}{language=Malay,langtag=MLY}%
+      \SetLanguageKeys{malay}{language=Malay,langtag=MLY,babelname=bahasam}%
       \xpg@fontsetup@latin{malay}%
       \ifbool{xpg@hyphenation@disabled}{}{%
            % Check if \l@malay is defined. If not, try to set it to some variety
@@ -43,7 +43,7 @@
           }%
       }%
    \else
-      \SetLanguageKeys{malay}{language=Indonesian,langtag=IND}%
+      \SetLanguageKeys{malay}{language=Indonesian,langtag=IND,babelname=bahasa}%
       \xpg@fontsetup@latin{malay}%
       \ifbool{xpg@hyphenation@disabled}{}{%
            % Check if \l@indonesian is defined. If not, try to set it to some variety

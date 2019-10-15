@@ -2,6 +2,7 @@
 
 \PolyglossiaSetup{gaelic}{
   language=Irish,
+  babelname=irish,
   hyphennames={irish},
   hyphenmins={2,2},
   langtag=IRI,
@@ -13,12 +14,12 @@
    \ifcase\nr\relax
       % irish:
       \gdef\gaelic@variant{irish}%
-      \SetLanguageKeys{gaelic}{language=Irish,langtag=IRI}%
+      \SetLanguageKeys{gaelic}{language=Irish,langtag=IRI,babelname=irish}%
       \xpg@fontsetup@latin{gaelic}%
    \or
       % scottish:
       \gdef\gaelic@variant{scottish}%
-      \SetLanguageKeys{gaelic}{language=Gaelic,langtag=GAE}%
+      \SetLanguageKeys{gaelic}{language=Gaelic,langtag=GAE,babelname=scottish}%
       \xpg@fontsetup@latin{gaelic}%
    \fi
    \xpg@info{Option: gaelic, variant=\val}%

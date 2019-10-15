@@ -18,6 +18,7 @@
    \or
       % canadian:
       \gdef\french@variant{canadien}%
+      \SetLanguageKeys{french}{babelname=canadien}%
       \xpg@ifdefined{canadien}{}%
 	    {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
 	      I will use the standard patterns for French instead}%
@@ -25,6 +26,7 @@
    \or
       % acadian:
       \gdef\french@variant{acadian}%
+      \SetLanguageKeys{french}{babelname=canadien}%
       \xpg@ifdefined{acadian}{}%
 	    {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
 	      I will use the standard patterns for French instead}%

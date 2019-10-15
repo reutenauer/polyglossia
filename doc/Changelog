@@ -1,6 +1,8 @@
 1.45 (????)
 
 New features:
+  * Add new macros \languagevariant, \mainlanguagevariant, \babelname and \mainbabelname
+    for package authors to access language information.
   * Add new macros \localnumeral, \localnumeral*, \Localnumeral and
     \Localnumeral* that convert Arabic digitals to the local number scheme.
   * Add support for (Sorani) Kurdish (#277).

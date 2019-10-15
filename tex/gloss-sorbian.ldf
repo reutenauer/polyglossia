@@ -2,6 +2,7 @@
 
 \PolyglossiaSetup{sorbian}{
   language=Upper Sorbian,
+  babelname=uppersorbian,
   hyphennames={usorbian,uppersorbian},
   langtag=USB,
   hyphenmins={2,2},
@@ -13,7 +14,7 @@
    \ifcase\nr\relax
       % upper:
       \gdef\sorbian@variant{usorbian}%
-      \SetLanguageKeys{sorbian}{language=Lower Sorbian,langtag=LSB}%
+      \SetLanguageKeys{sorbian}{language=Lower Sorbian,langtag=LSB,babelname=uppersorbian}%
       \xpg@fontsetup@latin{sorbian}%
       \ifbool{xpg@hyphenation@disabled}{}{%
            % Check if \l@usorbian is defined. If not, try to set it to some variety
@@ -35,7 +36,7 @@
    \or
       % lower:
       \gdef\sorbian@variant{lsorbian}%
-      \SetLanguageKeys{sorbian}{language=Upper Sorbian,langtag=LSB}%
+      \SetLanguageKeys{sorbian}{language=Upper Sorbian,langtag=LSB,babelname=lowersorbian}%
       \xpg@fontsetup@latin{sorbian}%
       \ifbool{xpg@hyphenation@disabled}{}{%
            % Check if \l@lsorbian is defined. If not, try to set it to some variety
