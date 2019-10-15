@@ -5,12 +5,16 @@ New features:
     \Localnumeral* that convert Arabic digitals to the local number scheme.
   * Add support for (Sorani) Kurdish (#277).
   * Implement proper Cyrillic (alphanumeric) numbering (#285).
+  * Add new language friulian.
+    This deprecates friulan (which is still supported for backwards compatibility).
   * Add new language malay with variants indonesian and malaysian.
     This deprecates bahasai and bahasam (which are still supported for
     backwards compatibility).
   * Add new language gaelic with variants irish and scottish.
     This deprecates irish and scottish as own polyglossia languages (which
     are still supported for backwards compatibility).
+  * Add new language hungarian.
+    This deprecates magyar (which is still supported for backwards compatibility).
   * Add new language sorbian with variants lower and upper.
     This deprecates lsorbian and usorbian (which are still supported for
     backwards compatibility).
@@ -20,6 +24,8 @@ New features:
   * Add new language norwegian with variants nynorsk and bokmal.
     This deprecates nynorsk and norsk (which are still supported for
     backwards compatibility).
+  * Add new language persian.
+    This deprecates farsi (which is still supported for backwards compatibility).
   * Add new language sami. Currently only Northern Sami is supported.
     This deprecates samin (which is still supported for backwards compatibility).
   * gloss-serbian: add numerals=cyrillic option. Add \asbuk and \Asbuk (#285).
