@@ -1135,6 +1135,7 @@
     % define environment and command
     \polyglossia@define@language@cmd:n{#2}
     \csgdef{#2@loaded}{}%
+    % If a variant is set, store it.
     \gdef\otherlanguagevariant{}
     \tl_if_blank:nTF {#1}{}{%
       % If the optional argument sets a value for the key “variant”,
