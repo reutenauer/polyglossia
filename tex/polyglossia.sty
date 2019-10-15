@@ -43,8 +43,9 @@
   {\let\xpg@boundaryclass=\e@alloc@intercharclass@top}
 
 % Useful for getting list of loaded languages and variants. Like babel's bbl@loaded
-\let\xpg@loaded\@empty
-\let\xpg@vloaded\@empty
+\let\xpg@loaded\@empty% list of loaded languages (polyglossia name)
+\let\xpg@vloaded\@empty% list of loaded variants
+\let\xpg@bloaded\@empty% list of loaded languages (babel name)
 
 % counter in latin
 \def\latinalph#1{\expandafter\latin@alph\csname c@#1\endcsname}
@@ -240,12 +241,6 @@
                \global\booltrue{havehyphen}
             }{%
                % then test if hyphenation is defined
-               % With luatex, we first need to define \l@##1. We only do that if the pattern exists.
-               \ifluatex%
-                  \expandafter\chardef\csname polyglossia@tmpl@##1\endcsname=%
-                       \directlua{tex.sprint(polyglossia.newloader('##1'))}%
-                  \cs_if_eq:cNF{polyglossia@tmpl@##1}{\l@nohyphenation}{\cs_gset_eq:cc{l@##1}{polyglossia@tmpl@##1}}%
-               \fi
                \xpg@ifdefined{##1}{
                   % test if language hyphenation is nohyphenation
                   \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{\global\booltrue{havehyphen}}{%
@@ -983,6 +978,8 @@
     % latex is an internal language, so do not record
     \ifstrequal{#2}{latex}{}{%
       \global\edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
+      \global\edef\xpg@bloaded{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}%
+          \ifx\xpg@bloaded\@empty\else,\xpg@bloaded\fi}%
     }%
     \polyglossia_load_lang_definition:nn{#1}{#2}
     % define environment and command (except for internal latex language)
@@ -1267,6 +1264,14 @@
      \directlua{polyglossia.select_language('\luatexluaescapestring{\string#3}',
                      \the\csname l@#3\endcsname)}%
    \fi%
+  \def\xpg@tmp@babelname{\prop_item:Nn{\polyglossia@langsetup}{#3/babelname}}
+  % Store babelname in \xpg@bloaded csv list
+  \ifcsundef{\csname xpg@tmp@babelname\endcsname @loaded}
+  {
+    \global\edef\xpg@bloaded{\xpg@tmp@babelname%
+          \ifx\xpg@bloaded\@empty\else,\xpg@bloaded\fi}%
+    \csgdef{\csname xpg@tmp@babelname\endcsname @loaded}{}%
+  }{}
 }
 
 % Helper to get and register "variant" keyval
@@ -1282,6 +1287,18 @@
   \edef\xpg@vloaded{#1\ifx\xpg@vloaded\@empty\else,\xpg@vloaded\fi}%
 }
 
+\prg_set_conditional:Npnn \polyglossia@check@if@lang@loaded:N #1 { p , T , F , TF }{
+  \cs_if_exist:cTF{#1@loaded}{
+     \prg_return_true:
+  }{
+    \prg_return_false:
+  }
+}
+
+% Test if language is loaded
+\newcommand*\iflanguageloaded[3]{%
+  \polyglossia@check@if@lang@loaded:NTF{#1}{#2}{#3}%
+}
 
 \newcommand*{\xpg@set@language@nonaux}[2][]{%
    \@select@language[#1]{#2}%
@@ -1315,6 +1332,14 @@
 }
 
 \newcommand\xpg@ifdefined[3]{%
+    % With luatex, we first need to define \l@##1. We only do that if the pattern exists.
+    \ifluatex%
+       \ifstrequal{#1}{latex}{}{%
+         \expandafter\chardef\csname polyglossia@tmpl@#1\endcsname=%
+            \directlua{tex.sprint(polyglossia.newloader('#1'))}%
+         \cs_if_eq:cNF{polyglossia@tmpl@#1}{\l@nohyphenation}{\cs_gset_eq:cc{l@#1}{polyglossia@tmpl@#1}}%
+       }%
+    \fi
     \polyglossia@check@ifdefined:NTF{#1}%
        {\xpg@set@hyphenation@patterns{#1}#2}%
        {#3}%
