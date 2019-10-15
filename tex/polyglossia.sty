@@ -228,35 +228,39 @@
   \exp_args:Nne \clist_set:Nn{\l_tmpa_clist}{\prop_item:Nn \polyglossia@langsetup {#1 / hyphennames}}
   \providebool{havehyphen}
   \boolfalse{havehyphen}
-  % for each hyphen except for #1 aka language in the set
+  % for each hyphen in the set until we find one that works
   \clist_map_inline:Nn \l_tmpa_clist {
-    % check if language hyphenname is defined
-    \polyglossia@check@ifdefined:NF{#1}{%
-      % if false check if current hyphenname is equal of language hyphenname
-      \str_if_eq:nnF{#1}{##1}{
-        {
-          % if language is different of hyphenname, first consider nohyphenation
-          \str_if_eq:nnTF{##1}{nohyphenation}
-            {
-              \cs_gset_eq:cc{l@#1}{l@##1}
-              \global\booltrue{havehyphen}
-            }{%
-               % then test if hyphenation is defined
-               \xpg@ifdefined{##1}{
-                 % test if language hyphenation is nohyphenation
-                 \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{\global\booltrue{havehyphen}}{%
-                   % if false define language to hyphenation and load
+    \ifbool{havehyphen}{}{%
+       % check if language hyphenname is defined
+       \polyglossia@check@ifdefined:NF{#1}{%
+         % if false check if current hyphenname is equal of language hyphenname
+         \str_if_eq:nnTF{#1}{##1}%
+           {%
+              % if language matches hyphenname, set pattern
+              \xpg@set@hyphenation@patterns{##1}%
+              \global\booltrue{havehyphen}%
+           }{%
+              % if language is different of hyphenname, first consider nohyphenation
+              \str_if_eq:nnTF{##1}{nohyphenation}
+                {%
                    \cs_gset_eq:cc{l@#1}{l@##1}
-                   \xpg@set@hyphenation@patterns{##1}
                    \global\booltrue{havehyphen}
-                 }
-              }
-              {}%
-           }
-        }
-      }%
-    }
-  }
+                }{%
+                   % then test if hyphenation is defined
+                   \xpg@ifdefined{##1}{
+                      % test if language hyphenation is nohyphenation
+                      \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{\global\booltrue{havehyphen}}{%
+                          % if false define language to hyphenation and load
+                          \cs_gset_eq:cc{l@#1}{l@##1}
+                          \xpg@set@hyphenation@patterns{##1}
+                          \global\booltrue{havehyphen}
+                      }%
+                   }{}%
+               }%
+           }%
+       }%
+    }%
+  }%
   % if l@#1 does not yet exist,
   % we assign it to nohyphenation
   % we do this here in case and if the hyphennames key was omitted
