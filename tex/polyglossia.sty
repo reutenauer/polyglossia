@@ -996,7 +996,7 @@
      % If the optional argument sets a value for the key “variant”,
      % store it in \xpg@main@langvariant
      \clist_map_inline:nn { #1 } {%
-         \xpg@parsevariantkeyvalue##1@xpg@main@langvariant\relax
+         \xpg@parsevariantkeyvalue##1=@xpg@main@langvariant\relax
      }%
   }%
   % Store babelname of main language (for external packages such as biblatex)
@@ -1045,7 +1045,7 @@
      % If the argument sets a value for the key “variant”,
      % store it in \xpg@set@langvariant
      \clist_map_inline:nn { #1 } {%
-         \xpg@parsevariantkeyvalue##1@xpg@set@langvariant\relax
+         \xpg@parsevariantkeyvalue##1=@xpg@set@langvariant\relax
      }%
   }%
   % Store babelname of current language (for external packages such as biblatex)
@@ -1151,7 +1151,7 @@
       % If the optional argument sets a value for the key “variant”,
       % store it in \xpg@main@langvariant
       \clist_map_inline:nn { #1 } {%
-         \xpg@parsevariantkeyvalue##1@xpg@other@langvariant\relax
+         \xpg@parsevariantkeyvalue##1=@xpg@other@langvariant\relax
       }%
     }%
     \csgdef{#2@gvar}{\otherlanguagevariant}%
@@ -1250,7 +1250,7 @@
   \tl_if_blank:nTF {#2}{}{%
      % If the optional argument sets a value for the key “variant”, copy it to xpg@langvariant
     \clist_map_inline:nn { #2 } {%
-         \xpg@parsevariantkeyvalue##1@xpg@langvariant\relax
+         \xpg@parsevariantkeyvalue##1=@xpg@langvariant\relax
      }%
      \setkeys{#3}{#2}%
    }%
