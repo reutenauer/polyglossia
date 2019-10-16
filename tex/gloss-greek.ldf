@@ -44,6 +44,7 @@
     \gdef\greek@variant{polygreek}%
     \def\captionsgreek{\polygreekcaptions}%
     \def\dategreek{\datepolygreek}%
+    \SetLanguageKeys{greek}{babelname=polutonikogreek}%
     \xpg@info{Option: Polytonic Greek}%
   \else
     \ifx\@tmpa\tmp@ancient
@@ -68,7 +69,7 @@
   \fi}
 
 \def\greek@language{%
-  \xpg@set@hyphenation@patterns{\greek@variant}
+  \polyglossia@setup@language@patterns{\greek@variant}
 }
 
 

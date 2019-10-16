@@ -18,6 +18,7 @@
    \or
       % canadian:
       \gdef\french@variant{canadien}%
+      \SetLanguageKeys{french}{babelname=canadien}%
       \xpg@ifdefined{canadien}{}%
 	    {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
 	      I will use the standard patterns for French instead}%
@@ -25,6 +26,7 @@
    \or
       % acadian:
       \gdef\french@variant{acadian}%
+      \SetLanguageKeys{french}{babelname=canadien}%
       \xpg@ifdefined{acadian}{}%
 	    {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
 	      I will use the standard patterns for French instead}%
@@ -35,7 +37,7 @@
 
 
 \def\french@language{%
-   \xpg@set@hyphenation@patterns{\french@variant}
+   \polyglossia@setup@language@patterns{\french@variant}
 }%
 
 \ifluatex
@@ -56,18 +58,22 @@
 \let\xpg@orig@makefntext\@makefntext
 
 \define@boolkey{french}[french@]{frenchfootnote}[true]{%
-   \iffrench@frenchfootnote
-      \ifx\@makefntext\undefined\else        
-          \long\def\french@makefntext##1{%
-               \parindent1em \noindent\quad%
-               \ifx\@thefnmark\empty\else%
-               \@thefnmark.\space\fi ##1%
-          }
-          \let\@makefntext\french@makefntext
+  \AfterPreamble{%
+    \ifdefstring{\xpg@main@language}{french}{%
+      \iffrench@frenchfootnote
+         \ifx\@makefntext\undefined\else        
+             \long\def\french@makefntext##1{%
+                \parindent1em \noindent\quad%
+                \ifx\@thefnmark\empty\else%
+                \@thefnmark.\space\fi ##1%
+             }
+             \let\@makefntext\french@makefntext
+         \fi
+      \else
+         \let\@makefntext\xpg@orig@makefntext
       \fi
-   \else
-      \let\@makefntext\xpg@orig@makefntext
-   \fi
+    }{\xpg@warning{Option 'frenchfootnote' only supported if French is main language!}}%
+  }%
 }
 
 \define@boolkey{french}[french@]{autospacing}[true]{}

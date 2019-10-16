@@ -15,10 +15,12 @@ def make_table
   f = File.open(File.expand_path('../../doc/languages.csv', __FILE__))
 # CSV.open(File.read(File.expand_path('../../doc/languages.csv', __FILE__))) do |csv|
   languages = []
+  offset = 0
   CSV.open(f) do |csv|
     csv.each do |row|
       if row.last == "true"
         languages << "\\TX{#{row.first}}"
+        offset = 4
       else
         languages << row.first
       end
@@ -35,7 +37,7 @@ def make_table
       next unless row < nrow - 1 || col < remainder
       language = languages[n]
       n += 1
-      table[[row, col]] = language + ' ' * (14 - language.length)
+      table[[row, col]] = language + ' ' * (14 - offset - language.length > 0 ? language.length : 0)
     end
   end
 

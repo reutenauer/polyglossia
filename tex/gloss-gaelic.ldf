@@ -1,0 +1,107 @@
+\ProvidesFile{gloss-gaelic.ldf}[polyglossia: module for gaelic]
+
+\PolyglossiaSetup{gaelic}{
+  language=Irish,
+  babelname=irish,
+  hyphennames={irish},
+  hyphenmins={2,2},
+  langtag=IRI,
+  fontsetup=true,
+}
+
+\def\gaelic@variant{irish}
+\define@choicekey*+{gaelic}{variant}[\val\nr]{irish,scottish}[irish]{%
+   \ifcase\nr\relax
+      % irish:
+      \gdef\gaelic@variant{irish}%
+      \SetLanguageKeys{gaelic}{language=Irish,langtag=IRI,babelname=irish}%
+      \xpg@fontsetup@latin{gaelic}%
+   \or
+      % scottish:
+      \gdef\gaelic@variant{scottish}%
+      \SetLanguageKeys{gaelic}{language=Gaelic,langtag=GAE,babelname=scottish}%
+      \xpg@fontsetup@latin{gaelic}%
+   \fi
+   \xpg@info{Option: gaelic, variant=\val}%
+}{\xpg@warning{Unknown gaelic variant `#1'}}
+
+\def\captionsgaelic@irish{%
+   \def\refname{Tagairtí}%
+   \def\abstractname{Achoimre}%
+   \def\bibname{Leabharliosta}%
+   \def\prefacename{Réamhrá}%    <-- also "Brollach"
+   \def\refname{Tagairtí}%
+   \def\chaptername{Tagairtí}%
+   \def\appendixname{Aguisín}%
+   \def\contentsname{Clár Ábhair}%
+   \def\listfigurename{Léaráidí}%
+   \def\listtablename{Táblaí}%
+   \def\indexname{Innéacs}%
+   \def\figurename{Léaráid}%
+   \def\tablename{Tábla}%
+   %\def\thepart{}%
+   \def\partname{Cuid}%
+   \def\pagename{Leathanach}%
+   \def\seename{féach}%
+   \def\alsoname{féach freisin}%
+   \def\enclname{faoi iamh}%
+   \def\ccname{cc}%
+   \def\headtoname{Go}%
+   \def\proofname{Cruthúnas}%
+   \def\glossaryname{Glossary}%
+}
+
+\def\captionsgaelic@scottish{%
+   \def\refname{Iomraidh}%
+   \def\abstractname{Brìgh}%
+   \def\bibname{Leabhraichean}%
+   \def\prefacename{Preface}%    <-- needs translation
+   \def\chaptername{Caibideil}%
+   \def\appendixname{Ath-sgr`ıobhadh}%
+   \def\contentsname{Clàr-obrach}%
+   \def\listfigurename{Liosta Dhealbh}%
+   \def\listtablename{Liosta Chlàr}%
+   \def\indexname{Clàr-innse}%
+   \def\figurename{Dealbh}%
+   \def\tablename{Clàr}%
+   %\def\thepart{}%
+   \def\partname{Cuid}%
+   \def\pagename{t.d.}%
+   \def\seename{see}%    <-- needs translation
+   \def\alsoname{see also}%    <-- needs translation
+   \def\enclname{a-staigh}%
+   \def\ccname{lethbhreac gu}%
+   \def\headtoname{gu}%
+   \def\proofname{Proof}%    <-- needs translation 
+   \def\glossaryname{Glossary}%    <-- needs translation
+}
+
+\def\captionsgaelic{%
+  \csname captionsgaelic@\gaelic@variant\endcsname%
+}
+
+\def\dategaelic@irish{%
+   \def\today{%
+    \number\day\space \ifcase\month\or
+    Eanáir\or Feabhra\or Márta\or Aibreán\or
+    Bealtaine\or Meitheamh\or Iúil\or Lúnasa\or
+    Meán Fómhair\or Deireadh Fómhair\or
+    Mí na Samhna\or Mí na Nollag\fi
+    \space \number\year}%
+}
+
+\def\dategaelic@scottish{%
+   \def\today{%
+    \number\day\space \ifcase\month\or
+    am Faoilteach\or an Gearran\or am Màrt\or an Giblean\or
+    an Cèitean\or an t-Òg mhios\or an t-Iuchar\or
+    Lùnasdal\or an Sultuine\or an Dàmhar\or
+    an t-Samhainn\or an Dubhlachd\fi
+    \space \number\year}%
+}
+
+\def\dategaelic{%
+  \csname dategaelic@\gaelic@variant\endcsname%
+}
+
+\endinput

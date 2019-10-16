@@ -178,22 +178,22 @@ that are explained in section \ref{specific} below.
 % Edited by hand -- AR 2019-04-04
 \begin{tabular}{lllll}
 \hline
-               & danish         & interlingua    & marathi        & \TX{slovenian}\\
-albanian       & divehi         & irish          & nko            & spanish       \\
-amharic        & \TX{dutch}     & \TX{italian}   & norsk          & swedish       \\
-\TX{arabic}    & \TX{english}   & japanese       & nynorsk        & \TX{syriac}   \\
-\TX{armenian}  & \TX{esperanto} & kannada        & occitan        & tamil         \\
-asturian       & estonian       & khmer          & piedmontese    & telugu        \\
-bahasai        & \TX{farsi}     & \TX{korean}    & polish         & \TX{thai}     \\
-bahasam        & \TX{finnish}   & \TX{kurdish}   & \TX{portuguese}& \TX{tibetan}  \\
-basque         & \TX{french}    & \TX{lao}       & romanian       & turkish       \\
-\TX{bengali}   & friulan        & \TX{latin}     & romansh        & turkmen       \\
-breton         & galician       & latvian        & \TX{russian}   & \TX{ukrainian}\\
-bulgarian      & \TX{german}    & lithuanian     & samin          & urdu          \\
-\TX{catalan}   & \TX{greek}     & \TX{lsorbian}  & \TX{sanskrit}  & \TX{usorbian} \\
-coptic         & \TX{hebrew}    & \TX{magyar}    & scottish       & vietnamese    \\
-croatian       & \TX{hindi}     & macedonian     & \TX{serbian}   & \TX{welsh}    \\
-czech          & icelandic      & malayalam      & slovak\\
+albanian     & \TX{english}   & japanese       & \TX{persian}   & tamil          \\
+amharic      & \TX{esperanto} & kannada        & piedmontese    & telugu         \\
+\TX{arabic}  & estonian       & khmer          & polish         & \TX{thai}      \\
+\TX{armenian}& \TX{finnish}   & \TX{korean}    & \TX{portuguese}& \TX{tibetan}   \\
+asturian     & \TX{french}    & \TX{kurdish}   & romanian       & turkish        \\
+basque       & friulian       & \TX{lao}       & romansh        & turkmen        \\
+\TX{bengali} & \TX{gaelic}    & \TX{latin}     & \TX{russian}   & \TX{ukrainian} \\
+breton       & galician       & latvian        & \TX{sami}      & urdu           \\
+bulgarian    & \TX{german}    & lithuanian     & \TX{sanskrit}  & vietnamese     \\
+\TX{catalan} & \TX{greek}     & macedonian     & \TX{serbian}   & \TX{welsh}     \\
+coptic       & \TX{hebrew}    & \TX{malay}     & slovak         &                \\
+croatian     & \TX{hindi}     & malayalam      & \TX{slovenian} &                \\
+czech        & hungarian      & marathi        & \TX{sorbian}   &                \\
+danish       & icelandic      & nko            & spanish        &                \\
+divehi       & interlingua    & \TX{norwegian} & swedish        &                \\
+\TX{dutch}   & \TX{italian}   & occitan        & \TX{syriac} \\
 \hline
 \end{tabular}
 \caption{Languages currently supported in \pkg{polyglossia}}
@@ -342,10 +342,10 @@ displayed.
 
 In some very specific contexts (such as music score creation), \TeX{} hyphenation
 is something to avoid as it may cause troubles. \pkg{polyglossia} provides two
-functions: \cmd\disablehyphenation{} and \cmd\enablehyphenation . Note that when
-you select a new language, hyphenation will be in the same state (enabled or
-disabled) as before. When you reenable it, it will take the last selected
-language.
+functions: \cmd\disablehyphenation\ and \cmd\enablehyphenation. Note that if
+you select a new language while hyphenation is disabled, it will remain disabled.
+If you re-enable it, the hyphenation patterns of the currently selected language
+will be activated.
 
 \section{Language-specific options and commands}\label{specific}
 
@@ -436,21 +436,6 @@ The default value of each option is given in italic.
 	\item \Cmd\hodiau\ and \Cmd\hodiaun are special forms of \cmd\today\ (see the \pkg{babel} documentation)
 	\end{itemize}
 
-\subsection{farsi}\label{farsi}
-\textbf{Options}:
-	\begin{itemize}
-	\item \TB{numerals} = western or \textit{eastern}
-	\item \TB{abjadjimnotail} = \textit{false} or true. \new{v1.0.3}
-	Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
-	\item \TB{locale} (not yet implemented)
-	\item \TB{calendar} (not yet implemented)
-	\end{itemize}
-\textbf{Commands}:
-	\begin{itemize}
-	\item \Cmd\abjad (see section \ref{abjad})
-  \item \Cmd\aemph (see section \ref{arabic}).
-	\end{itemize}
-
 \subsection{finnish}\label{finnish}
 \textbf{Options:}
 \begin{itemize}
@@ -479,11 +464,18 @@ The default value of each option is given in italic.
 		that the more general option \textit{autospacing} overrides this.
 		\item \TB{autospacetypewriter}\footnote{Babel's syntax \textit{OriginalTypewriter} is also supported.}\new{1.45} = true or \textit{false} (default value = true). By default, automatic spacing is disabled in typewriter font. If this is enabled, spacing in typewriter context is the same as with roman and sans serif font, depending on the \textit{autospacing} and \textit{autospaceguillemets} settings (note that this was the default up to v.~1.44).	
 		\item \TB{frenchfootnote} = true or \textit{false} (default value = true). If \textit{true}, footnotes start with a non-superscripted number followed by a dot, as common in French typography. Note that this might interfere with the specific footnote handling of classes or packages.
+		Also note that this option is only functional (by design) if French is the main language.
 	\end{itemize}
 \textbf{Commands}:
 \begin{itemize}
 	\item \Cmd\NoAutoSpacing\new{v1.45} disables automatic spacing around punctuation and quotation marks in all following text. The command can also be used locally if braces are used for grouping: ¦{\NoAutoSpacing foo:bar}¦
 	\item \Cmd\AutoSpacing\new{v1.45} enables automatic spacing around punctuation and quotation marks in all following text. The command can also be used locally if braces are used for grouping: ¦{\AutoSpacing regarde!}¦
+\end{itemize}
+
+\subsection{gaelic}\label{gaelic}
+\textbf{Options}:\new{v1.45}
+\begin{itemize}
+	\item \TB{variant} = \textit{irish} or scottish
 \end{itemize}
 
 \subsection{german}\label{german}
@@ -618,18 +610,40 @@ Currently\new{v1.45} support for Kurdish is limited to Sorani Kurdish (support f
 	\item \TB{variant} = classic, medieval or \textit{modern}
 	\end{itemize}
 
-\subsection{lsorbian and usorbian}\label{lsorbian}\label{usorbian}
-\textbf{Commands}:
-	\begin{itemize}
-	\item \Cmd\oldtoday : see the \pkg{babel} documentation.
-	\end{itemize}
-
 \subsection{magyar}\label{magyar}
 \textbf{Commands}:
 	\begin{itemize}
 	\item \Cmd\ontoday\ (= \Cmd\ondatemagyar): special forms of \cmd\today\
 		(see the \pkg{babel} documentation).
 	\end{itemize}
+
+\subsection{malay}\label{malay}
+\textbf{Options}:
+\begin{itemize}
+	\item \TB{variant}\new{v1.45} = \textit{indonesian} (=~bahasai in \pkg{babel}) or
+	malaysian (=~bahasam in \pkg{babel})
+\end{itemize}
+
+\subsection{norwegian}\label{norwegian}
+\textbf{Options}:
+\begin{itemize}
+	\item \TB{variant}\new{v1.45} = bokmal (=~`norsk' in \pkg{babel}) or \textit{nynorsk}
+\end{itemize}
+
+\subsection{persian}\label{persian}
+\textbf{Options}:
+\begin{itemize}
+	\item \TB{numerals} = western or \textit{eastern}
+	\item \TB{abjadjimnotail} = \textit{false} or true. \new{v1.0.3}
+	Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
+	\item \TB{locale} (not yet implemented)
+	\item \TB{calendar} (not yet implemented)
+\end{itemize}
+\textbf{Commands}:
+\begin{itemize}
+	\item \Cmd\abjad (see section \ref{abjad})
+	\item \Cmd\aemph (see section \ref{arabic}).
+\end{itemize}
 
 \subsection{portuguese}\label{portuguese}
 \textbf{Options}:
@@ -653,6 +667,9 @@ Currently\new{v1.45} support for Kurdish is limited to Sorani Kurdish (support f
 	\eg ¦\textrussian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
 	\item \Cmd\asbuk: same in lowercase
 	\end{itemize}
+
+\subsection{sami}\label{sami}
+Currently\new{v1.45} support for Sami is limited to Northern Sami.
 
 \subsection{sanskrit}\label{sanskrit}
 \textbf{Options}:
@@ -683,8 +700,20 @@ Currently\new{v1.45} support for Kurdish is limited to Sorani Kurdish (support f
 \subsection{slovenian}\label{slovenian}
 \textbf{Options}:
 	\begin{itemize}
-	\item \TB{localalph} = true \textit{false}
+	\item \TB{localalph} = true or \textit{false}
 	\end{itemize}
+
+\subsection{sorbian}\label{sorbian}
+\textbf{Options}:
+\begin{itemize}
+	\item \TB{variant}\new{v1.45} = lower or \textit{upper}
+	\item \TB{olddate}\new{v1.45} = true or \textit{false} (default value = true). If true, ¦\today¦
+	      will use traditional Sorbian month names (\ie it will be synonymous to ¦\oldtoday¦ below)
+\end{itemize}
+\textbf{Commands}:
+\begin{itemize}
+	\item \Cmd\oldtoday: outputs the current date using traditional Sorbian month names, even if \TB{olddate} is false.
+\end{itemize}
 
 \subsection{syriac}\label{syriac}
 \textbf{Options}:
@@ -923,8 +952,7 @@ sets the counters ¦Hijriday¦, ¦Hijrimonth¦ and ¦Hijriyear¦.
 \Cmd\Hijritoday\ formats the Hijri date for the current day.
 This command is now locale-aware\new{v1.1.1}: its output will differ depending on the
 currently active language. Presently \pkg{polyglossia}’s language definition files
-for Arabic, Farsi, Urdu, Turkish, Bahasa Indonesia and Bahasa Melayu
-provide a localized version of ¦\Hijritoday¦.
+for Arabic, Farsi, Urdu, Turkish and Malay provide a localized version of ¦\Hijritoday¦.
 If the formatting macro for the current language is undefined, the Hijri date will be formatted
 in Arabic or in roman transliteration, depending of the current writing direction.
 You can define a new format or redefine one with the command
@@ -953,6 +981,36 @@ Example: today is \Jalalitoday.
 
 %\section{Varia}
 
+\section{Accessing language information}
+
+The following is specifically relevant to package authors who need information about the languages in use.
+
+In order to get such information, \pkg{polyglossia} provides the following macros:
+
+\begin{itemize}
+	\item \Cmd\languagename\ stores the currently active (polyglossia) language name.
+	\item \Cmd\mainlanguagename\ stores the (polyglossia) language name of the main document language.
+	\item \Cmd\languagevariant\ stores the language variant if set. The macro is empty if no variant has been set.
+	\item \Cmd\mainlanguagevariant\ stores the language variant of the main document language if set.
+	       The macro is empty if no variant has been set.
+	\item \Cmd\babelname\ stores the corresponding name of the currently active language (variant) in \pkg{babel}.
+	      This might not only be useful if you want to support both \pkg{babel} and \pkg{polyglossia}, but also
+	      since this name is unique for a given language variety (\eg ngerman, german, swissgerman etc.).
+	      Note that this macro is also defined for languages that are not supported in \pkg{babel}. In that
+	      case, they are equal to the polyglossia language name.
+	\item \Cmd\mainbabelname\ analogously stores the name of document's main language (variant) in \pkg{babel}.
+\end{itemize}
+%
+If you want to have a full list of loaded languages/variants, use the following macros:
+\begin{itemize}
+	\item \Cmd{\xpg@loaded}\ stores a comma-separated list of all loaded languages (polyglossia name)
+	\item \Cmd{\xpg@vloaded}\ stores a comma-separated list of all loaded variants
+	\item \Cmd{\xpg@bloaded}\ stores a comma-separated list of \pkg{babel} names of all language variants 
+\end{itemize}
+%
+Finally, you can test whether a language is loaded by
+\displaycmd{\iflanguageloaded\{$\langle$language$\rangle$\}\{$\langle$true$\rangle$\}\{$\langle$false$\rangle$\}}{\iflanguageloaded}
+where \texttt{$\langle$language$\rangle$} can be a \pkg{polyglossia} or \pkg{babel} language name.
 
 \section{Acknowledgements (by François Charette)}
 \pkg{Polyglossia} is notable for being a recycle box of previous contributions

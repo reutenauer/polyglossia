@@ -1,0 +1,170 @@
+\ProvidesFile{gloss-sorbian.ldf}[polyglossia: module for sorbian]
+
+\PolyglossiaSetup{sorbian}{
+  language=Upper Sorbian,
+  babelname=uppersorbian,
+  hyphennames={usorbian,uppersorbian},
+  langtag=USB,
+  hyphenmins={2,2},
+  fontsetup=true,
+}
+
+\def\sorbian@variant{usorbian}
+\define@choicekey*+{sorbian}{variant}[\val\nr]{upper,lower}[upper]{%
+   \ifcase\nr\relax
+      % upper:
+      \gdef\sorbian@variant{usorbian}%
+      \SetLanguageKeys{sorbian}{language=Lower Sorbian,langtag=LSB,babelname=uppersorbian}%
+      \xpg@fontsetup@latin{sorbian}%
+      \ifbool{xpg@hyphenation@disabled}{}{%
+           % Check if \l@usorbian is defined. If not, try to set it to some variety
+           % (specific order as in the csv list below), or null language if everything fails
+           \xpg@ifdefined{usorbian}{}{%
+             \def\do##1{%
+                 \xpg@ifdefined{##1}%
+                   {\csletcs{l@usorbian}{l@##1}\listbreak}%
+                   {}%
+             }%
+             \docsvlist{uppersorbian}
+             \xpg@ifdefined{usorbian}{}{%
+                      \xpg@warning{No hyphenation patterns for Upper Sorbian found\MessageBreak
+                                   I will use the 'null' language instead}%
+                      \adddialect\l@usorbian0%
+             }
+          }%
+      }%
+   \or
+      % lower:
+      \gdef\sorbian@variant{lsorbian}%
+      \SetLanguageKeys{sorbian}{language=Upper Sorbian,langtag=LSB,babelname=lowersorbian}%
+      \xpg@fontsetup@latin{sorbian}%
+      \ifbool{xpg@hyphenation@disabled}{}{%
+           % Check if \l@lsorbian is defined. If not, try to set it to some variety
+           % (specific order as in the csv list below), or null language if everything fails
+           \xpg@ifdefined{lsorbian}{}{%
+             \def\do##1{%
+                \xpg@ifdefined{##1}%
+                   {\csletcs{l@lsorbian}{l@##1}\listbreak}%
+                   {}%
+             }%
+             \docsvlist{lowersorbian,Lsorbian}
+             \xpg@ifdefined{lsorbian}{}{%
+                      \xpg@warning{No hyphenation patterns for Lower Sorbian found\MessageBreak
+                                   I will use the 'null' language instead}%
+                      \adddialect\l@lsorbian0%
+             }
+          }%
+      }%
+   \fi
+   \xpg@info{Option: sorbian, variant=\val}%
+}{\xpg@warning{Unknown sorbian variant `#1'}}
+
+
+\define@boolkey{sorbian}[sorbian@]{olddate}[true]{}
+
+\setkeys{sorbian}{variant}
+
+
+\def\sorbian@language{%
+   \polyglossia@setup@language@patterns{\sorbian@variant}%
+}%
+
+
+\def\captionssorbian@lsorbian{%
+   \def\refname{Referency}%
+   \def\abstractname{Abstrakt}%
+   \def\bibname{Literatura}%
+   \def\prefacename{Zawod}%
+   \def\chaptername{Kapitl}%
+   \def\appendixname{Dodawki}%
+   \def\contentsname{Wopśimjeśe}%
+   \def\listfigurename{Zapis wobrazow}%
+   \def\listtablename{Zapis tabulkow}%
+   \def\indexname{Indeks}%
+   \def\figurename{Wobraz}%
+   \def\tablename{Tabulka}%
+   %\def\thepart{}%
+   \def\partname{Źěl}%
+   \def\pagename{Strona}%
+   \def\seename{gl.}%
+   \def\alsoname{gl.~teke}%
+   \def\enclname{Pśiłoga}%
+   \def\ccname{CC}%
+   \def\headtoname{Komu}%
+   \def\proofname{Proof}%
+   \def\glossaryname{Glossary}%
+}
+
+\def\captionssorbian@usorbian{%
+   \def\refname{Referency}%
+   \def\abstractname{Abstrakt}%
+   \def\bibname{Literatura}%
+   \def\prefacename{Zawod}%
+   \def\chaptername{Kapitl}%
+   \def\appendixname{Dodawki}%
+   \def\contentsname{Wobsah}%
+   \def\listfigurename{Zapis wobrazow}%
+   \def\listtablename{Zapis tabulkow}%
+   \def\indexname{Indeks}%
+   \def\figurename{Wobraz}%
+   \def\tablename{Tabulka}%
+   %\def\thepart{}%
+   \def\partname{Dźěl}%
+   \def\pagename{Strona}%
+   \def\seename{hl.}%
+   \def\alsoname{hl.~tež}%
+   \def\enclname{Přłoha}%
+   \def\ccname{CC}%
+   \def\headtoname{Komu}%
+   \def\proofname{Proof}% <-- needs translation
+   \def\glossaryname{Glossary}% <-- needs translation
+}%
+
+\def\captionssorbian{%
+  \csname captionssorbian@\sorbian@variant\endcsname%
+}
+
+\def\datesorbian@lsorbian{%
+    \def\oldtoday{%
+      \number\day.~\ifcase\month\or
+      wjelikego rožka\or małego rožka\or nalětnika\or
+      jatšownika\or rožownika\or smažnika\or pražnika\or
+      žnjeńca\or požnjeńca\or winowca\or nazymnika\or 
+      godownika\fi\space \number\year}%
+    \def\today{%
+      \ifsorbian@olddate
+        \oldtoday%
+      \else
+        \number\day.~\ifcase\month\or
+        januara\or februara\or měrca\or apryla\or maja\or
+        junija\or julija\or awgusta\or septembra\or oktobra\or
+        nowembra\or decembra\fi
+        \space \number\year%
+      \fi
+   }%
+}
+
+\def\datesorbian@usorbian{%
+  \def\oldtoday{\number\day.~\ifcase\month\or
+    wulkeho róžka\or małeho róžka\or nalětnika\or
+    jutrownika\or róžownika\or  smažnika\or pražnika\or
+    žnjenca\or požnjenca\or winowca\or nazymnika\or
+    hodownika\fi \space \number\year}%
+  \def\today{%
+    \ifsorbian@olddate
+      \oldtoday%
+    \else
+      \number\day.~\ifcase\month\or
+      januara\or februara\or měrca\or apryla\or meje\or junija\or
+      julija\or awgusta\or septembra\or oktobra\or
+      nowembra\or decembra\fi
+      \space \number\year%
+    \fi
+  }%
+}
+
+\def\datesorbian{%
+  \csname datesorbian@\sorbian@variant\endcsname%
+}
+
+\endinput

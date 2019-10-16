@@ -1,6 +1,11 @@
 \ProvidesFile{gloss-friulan.ldf}[polyglossia: module for friulan]
-\makeatletter
+
+% We only provide this gloss for babel compatibility.
+
+\input{gloss-friulian.ldf}
+
 \PolyglossiaSetup{friulan}{%
+  language=Friulian,
   hyphennames={friulan,furlan},
   hyphenmins={2,2},
   langtag=FRL,
@@ -9,57 +14,9 @@
   frenchspacing=true,
 }
 
-
-\def\captionsfriulan{%
-    \def\prefacename{Prefazion}%
-    \def\refname{Riferiments}%
-    \def\abstractname{Somari}%
-    \def\bibname{Bibliografie}%
-    \def\chaptername{Cjapitul}%
-    \def\appendixname{Zonte}%
-    \def\contentsname{Tabele gjenerâl}%
-    \def\listfigurename{Liste des figuris}%
-    \def\listtablename{Liste des tabelis}%
-    \def\indexname{Tabele analitiche}%
-    \def\figurename{Figure}%
-    \def\tablename{Tabele}%
-    \def\partname{Part}%
-    \def\enclname{Zonte(is)}%
-    \def\ccname{Cun copie a}%
-    \def\headtoname{Par}%
-    \def\pagename{Pagjine}%
-    \def\seename{cjale}%
-    \def\alsoname{cjale ancje}%
-    \def\proofname{Dimostrazion}%
-    \def\glossaryname{Glossari}%
-  }
-  
-\def\datefriulan{%
-  \def\today{\number\day\space di\space\ifcase\month\or
-      Genâr\or Fevrâr\or Març\or Avril\or Mai\or Jugn\or
-      Lui\or Avost\or Setembar\or Otobar\or Novembar\or Dicembar%
-      \fi\space dal\space\number\year}}
-
-\AtEndPreamble{% the user or the class might define different values
-  \edef\xpgfu@savedvalues{%
-    \clubpenalty=\the\clubpenalty\space
-    \@clubpenalty=\the\@clubpenalty\space
-    \widowpenalty=\the\widowpenalty\space
-    \finalhyphendemerits=\the\finalhyphendemerits}
-}
-
-
-\def\noextras@friulan{%
-   \lccode\string"2019=\z@
-}
-
-\def\blockextras@friulan{%
-   \lccode\string"2019=\string"2019
-   \clubpenalty=3000 \@clubpenalty=3000 \widowpenalty=3000
-   \finalhyphendemerits=50000000
-}
-
-\def\inlineextras@friulan{%
-   \lccode\string"2019=\string"2019
-}
+\let\captionsfriulan\captionsfriulian
+\let\datefriulan\datefriulian
+\let\noextras@friulan\noextras@friulian
+\let\blockextras@friulan\blockextras@friulian
+\let\inlineextras@friulan\inlineextras@friulian
 
