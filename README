@@ -10,7 +10,8 @@
 
 This package provides an alternative to Babel for users of XeLaTeX and LuaLaTeX
 (with a few languages incompletely supported for the latter). This version
-includes support for 78 different languages.
+includes support for 74 different languages, some of which in different regional,
+national or scriptal varieties.
 
 Polyglossia makes it possible to automate the following tasks:
 
@@ -28,7 +29,8 @@ Polyglossia makes it possible to automate the following tasks:
 * For languages that have their own numeration system, modifying the formatting
   of numbers appropriately.
 * Ensuring the proper directionality if the document contains languages
-  written from right to left (via the package bidi, available separately).
+  written from right to left (via the packages bidi and luabidi, available
+  separately).
 
 LICENSE
 
@@ -39,13 +41,13 @@ Polyglossia is placed under the terms of the LaTeX Project Public Licence
 LICENCE.txt for the text of the LPPL v1.3c, or
 http://www.latex-project.org/lppl.txt for the latest version.
 
-This work has the LPPL maintenance status ‘maintained’.  The current maintainer is Arthur Reutenauer.
+This work has the LPPL maintenance status ‘maintained’.  The current maintainer is
+Arthur Reutenauer.
 
 BUGS
 
-Polyglossia is full of bugs.  If you run into one, or suspect you do, or you
-have a request or comment, please use the GitHub issue tracker:
-http://github.com/reutenauer/polyglossia/issues
+If you run into a bug, or suspect you do, or you have a request or comment, please
+use the GitHub issue tracker: http://github.com/reutenauer/polyglossia/issues
 
 This is more efficient than contacting me by email as it allows me to track the
 issues and follow progress.
