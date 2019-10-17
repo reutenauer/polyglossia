@@ -55,6 +55,8 @@ Bug fixes:
   * Fix N'ko date format (#63).
   * Disable the extras of a language when a nested language starts (#66, #169).
   * Properly implement bengali numbers (#69, #184).
+  * Fix conflicts with other packages caused by premature shorthand activation
+    in preamble (#81, #200).
   * Fix kerning in math with French (#92).
   * Fix expansion issue in Hebrew (#93).
   * Fix numbering expansion issue in Greek (#110).
