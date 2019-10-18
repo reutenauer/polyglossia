@@ -10,7 +10,7 @@
 
 This package provides an alternative to Babel for users of XeLaTeX and LuaLaTeX
 (with a few languages incompletely supported for the latter). This version
-includes support for 74 different languages, some of which in different regional,
+includes support for 75 different languages, some of which in different regional,
 national or scriptal varieties.
 
 Polyglossia makes it possible to automate the following tasks:
