@@ -136,8 +136,8 @@
 %% Used by the language definitions files for right-to-left languages
 \def\RequireBidi{%
   \str_case_e:nnF{\c_sys_engine_str}{
-    {luatex}{\RequirePackage{luabidi}}
-    {xetex}{\RequirePackage{bidi}}
+    {luatex}{\ifx\@onlypreamble\@notprerr\else\RequirePackage{luabidi}\fi}
+    {xetex}{\ifx\@onlypreamble\@notprerr\else\RequirePackage{bidi}\fi}
   }
   {
     \xpg@warning{You’re running a TeX engine that is not LuaTeX or XeTeX.\MessageBreak
