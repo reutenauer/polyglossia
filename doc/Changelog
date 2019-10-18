@@ -7,6 +7,7 @@ New features:
     can be a \polyglossia or babel language name.
   * Add new macros \localnumeral, \localnumeral*, \Localnumeral and
     \Localnumeral* that convert Arabic digitals to the local number scheme.
+  * Add support form (Khalkha & Cyrillic) Mongolian in line with babel-mongolian (#23).
   * Add support for (Sorani) Kurdish (#277).
   * Implement proper Cyrillic (alphanumeric) numbering (#285).
   * Add new language friulian.

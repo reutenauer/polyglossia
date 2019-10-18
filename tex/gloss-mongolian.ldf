@@ -1,0 +1,194 @@
+\ProvidesFile{gloss-mongolian.ldf}[polyglossia: module for mongolian]
+
+\RequirePackage{cyrillicnumbers}
+
+\PolyglossiaSetup{mongolian}{
+  script=Cyrillic,
+  scripttag=cyrl,
+  langtag=MNG,
+  hyphennames={mongolian},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  fontsetup,
+  localnumeral=mongoliannumerals,
+  Localnumeral=Mongoliannumerals
+}
+
+% This file is derived from mongolian-babel. which
+% provides support for Mongolian (Khalkha variety)
+% with Cyrillic script
+% TODO: Implement script=mongolian and maybe other
+%       variants of Mongolian
+
+\newif\ifcyrillic@numerals
+\define@key{mongolian}{numerals}[arabic]{%
+   \ifstrequal{#1}{cyrillic}%
+      {\cyrillic@numeralstrue}%
+      {\cyrillic@numeralsfalse}%
+}
+
+\define@boolkey{mongolian}[mongolian@]{babelshorthands}[false]{}
+
+\setkeys{mongolian}{numerals}
+
+\ifsystem@babelshorthands
+  \setkeys{mongolian}{babelshorthands=true}
+\else
+  \setkeys{mongolian}{babelshorthands=false}
+\fi
+
+\ifcsundef{initiate@active@char}{%
+  \input{babelsh.def}%
+  \initiate@active@char{"}%
+  \shorthandoff{"}%
+}{}
+
+\def\mongolian@shorthands{%
+  \bbl@activate{"}%
+  \def\language@group{mongolian}%
+  \declare@shorthand{mongolian}{"`}{„}%
+  \declare@shorthand{mongolian}{"'}{“}%
+  \declare@shorthand{mongolian}{"<}{«}%
+  \declare@shorthand{mongolian}{">}{»}%
+  \declare@shorthand{mongolian}{""}{\hskip\z@skip}%
+  \declare@shorthand{mongolian}{"~}{\textormath{\leavevmode\hbox{-}}{-}}%
+  \declare@shorthand{mongolian}{"=}{\nobreak-\hskip\z@skip}%
+  \declare@shorthand{mongolian}{"|}{\textormath{\nobreak\discretionary{-}{}{\kern.03em}\allowhyphens}{}}%
+  \declare@shorthand{mongolian}{"-}{%
+     \def\mongolian@sh@tmp{%
+       \if\mongolian@sh@next-\expandafter\mongolian@sh@emdash%
+       \else\expandafter\mongolian@sh@hyphen\fi%
+     }%
+     \futurelet\mongolian@sh@next\mongolian@sh@tmp%
+  }%
+  \def\mongolian@sh@hyphen{%
+    \nobreak\-\bbl@allowhyphens}%
+  \def\mongolian@sh@emdash##1##2{\cdash-##1##2}%
+  \def\cdash##1##2##3{\def\tempx@{##3}%
+  \def\tempa@{-}\def\tempb@{~}\def\tempc@{*}%
+   \ifx\tempx@\tempa@\@Acdash\else
+    \ifx\tempx@\tempb@\@Bcdash\else
+     \ifx\tempx@\tempc@\@Ccdash\else
+      \errmessage{Wrong usage of cdash}\fi\fi\fi}%
+  \def\@Acdash{\ifdim\lastskip>\z@\unskip\nobreak\hskip.2em\fi
+    \cyrdash\hskip.2em\ignorespaces}%
+  \def\@Bcdash{\leavevmode\ifdim\lastskip>\z@\unskip\fi
+   \nobreak\cyrdash\penalty\exhyphenpenalty\hskip\z@skip\ignorespaces}%
+  \def\@Ccdash{\leavevmode
+   \nobreak\cyrdash\nobreak\hskip.35em\ignorespaces}%
+  \ifx\cyrdash\undefined
+    \def\cyrdash{\hbox to.8em{--\hss--}}%
+  \fi
+  \declare@shorthand{mongolian}{",}{\nobreak\hskip.2em\ignorespaces}%
+}
+
+\def\nomongolian@shorthands{%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+
+% Taken from babel-mongolian
+\def\captionsmongolian{%
+   \def\prefacename{Өмнөх үг}%
+   \def\refname{Ашигласан ном}%
+   \def\abstractname{Удиртгал}%
+   \def\bibname{Номзүй}%
+   \def\chaptername{Бүлэг}%
+   \def\appendixname{Хавсралт}%
+   \ifcsundef{thechapter}%
+     {\def\contentsname{Агуулга}}%
+     {\def\contentsname{Гарчиг}}%
+   \def\listfigurename{Зургийн жагсаалт}%
+   \def\listtablename{Хүснэгтийн жагсаалт}%
+   \def\indexname{Товъёг}%
+   \def\authorname{Нэрийн хэлхээ}%
+   \def\figurename{Зураг}%
+   \def\tablename{Хүснэгт}%
+   \def\partname{Хэсэг}%
+   \def\enclname{Ишлэл}%
+   \def\ccname{э.с.}%
+   \def\headtoname{}%
+   \def\pagename{тал}%
+   \def\seename{талд үз}%
+   \def\alsoname{мөн талд үз}%
+   \def\proofname{Баталгаа}%
+}
+
+\def\datemongolian{%
+  \def\today{\number\year~оны \ifcase\month\or
+  1-р\or 2-р\or 3-р\or 4-р\or 5-р\or 6-р\or
+  7-р\or 8-р\or 9-р\or 10-р\or 11-р\or 12-р\fi
+  ~сарын \number\day}}
+
+\newcommand{\mongoliannumerals}[2]{\mongoliannumber{#2}}
+\newcommand{\Mongoliannumerals}[2]{\Mongoliannumber{#2}}
+
+\def\mongoliannumber#1{%
+  \ifcyrillic@numerals
+    \cyr@alph{#1}%
+  \else
+    \number#1%
+  \fi%
+}
+
+\def\Mongoliannumber#1{%
+  \ifcyrillic@numerals
+    \cyr@Alph{#1}%
+  \else
+    \number#1%
+  \fi%
+}
+
+\let\mongoliannumeral=\mongoliannumber
+\let\Mongoliannumeral=\Mongoliannumber
+
+\def\Asbuk#1{\expandafter\cyr@Alph\csname c@#1\endcsname}
+
+\def\asbuk#1{\expandafter\cyr@alph\csname c@#1\endcsname}
+
+% This is a poor man's cyrillic alphanumeric. It just uses the alphabet and
+% thus ends at 30. We now use proper cyrillic numbering.
+
+%\def\mongolian@Alph#1{\ifcase#1\or
+%   А\or Б\or В\or Г\or Д\or Е\or Ж\or
+%   З\or И\or К\or Л\or М\or Н\or О\or
+%   П\or Р\or С\or Т\or У\or Ф\or Х\or
+%   Ц\or Ч\or Ш\or Щ\or Э\or Ю\or Я\else\xpg@ill@value{#1}{mongolian@Alph}\fi}
+
+%\def\mongolian@alph#1{\ifcase#1\or
+%   а\or б\or в\or г\or д\or е\or ж\or
+%   з\or и\or к\or л\or м\or н\or о\or
+%   п\or р\or с\or т\or у\or ф\or х\or
+%   ц\or ч\or ш\or щ\or э\or ю\or я\else\xpg@ill@value{#1}{mongolian@alph}\fi}
+
+\def\mongolian@numbers{%
+   \let\latin@alph\@alph
+   \let\latin@Alph\@Alph
+   \ifcyrillic@numerals%
+     \def\mongolian@alph##1{\expandafter\mongoliannumeral\expandafter{\the##1}}%
+     \def\mongolian@Alph##1{\expandafter\Mongoliannumeral\expandafter{\the##1}}%
+      \let\@alph\mongolian@alph%
+      \let\@Alph\mongolian@Alph%
+   \fi
+}
+
+\def\nomongolian@numbers{%
+   \let\@alph\latin@alph%
+   \let\@Alph\latin@Alph%
+}
+
+\def\noextras@mongolian{%
+   \ifcyrillic@numerals\nomongolian@numbers\fi%
+   \nomongolian@shorthands%
+}
+
+\def\blockextras@mongolian{%
+   \ifcyrillic@numerals\mongolian@numbers\fi%
+   \ifmongolian@babelshorthands\mongolian@shorthands\fi%
+}
+
+\def\inlineextras@mongolian{%
+   \ifmongolian@babelshorthands\mongolian@shorthands\fi%
+}
+
+\endinput
+

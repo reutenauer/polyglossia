@@ -174,28 +174,27 @@ that are explained in section \ref{specific} below.
 
 \begin{table}[ht]\centering
 \label{tab:lang}
-% Produced with tools/insert-language-list.rb -- AR, 2015-07-14
-% Edited by hand -- AR 2019-04-04
+% Produced with tools/insert-language-list.rb -- JS, 2019-10-18
+% Edited by hand -- JS, 2019-10-18
 \begin{tabular}{lllll}
 \hline
-albanian     & \TX{english}   & japanese       & \TX{persian}   & tamil          \\
-amharic      & \TX{esperanto} & kannada        & piedmontese    & telugu         \\
-\TX{arabic}  & estonian       & khmer          & polish         & \TX{thai}      \\
-\TX{armenian}& \TX{finnish}   & \TX{korean}    & \TX{portuguese}& \TX{tibetan}   \\
-asturian     & \TX{french}    & \TX{kurdish}   & romanian       & turkish        \\
-basque       & friulian       & \TX{lao}       & romansh        & turkmen        \\
-\TX{bengali} & \TX{gaelic}    & \TX{latin}     & \TX{russian}   & \TX{ukrainian} \\
-breton       & galician       & latvian        & \TX{sami}      & urdu           \\
-bulgarian    & \TX{german}    & lithuanian     & \TX{sanskrit}  & vietnamese     \\
-\TX{catalan} & \TX{greek}     & macedonian     & \TX{serbian}   & \TX{welsh}     \\
-coptic       & \TX{hebrew}    & \TX{malay}     & slovak         &                \\
-croatian     & \TX{hindi}     & malayalam      & \TX{slovenian} &                \\
-czech        & hungarian      & marathi        & \TX{sorbian}   &                \\
-danish       & icelandic      & nko            & spanish        &                \\
-divehi       & interlingua    & \TX{norwegian} & swedish        &                \\
-\TX{dutch}   & \TX{italian}   & occitan        & \TX{syriac} \\
+albanian      & divehi         & hungarian    & \TX{malay}      & \TX{sami}      \\
+amharic       & \TX{dutch}     & icelandic    & malayalam       & \TX{sanskrit}  \\
+\TX{arabic}   & \TX{english}   & interlingua  & marathi         & \TX{serbian}   \\
+\TX{armenian} & \TX{esperanto} & \TX{italian} & \TX{mongolian}  & slovak         \\
+asturian      & estonian       & japanese     & nko             & \TX{slovenian} \\
+basque        & \TX{finnish}   & kannada      & \TX{norwegian}  & \TX{sorbian}   \\
+\TX{bengali}  & \TX{french}    & khmer        & occitan         & spanish        \\
+breton        & friulian       & \TX{korean}  & \TX{persian}    & swedish        \\
+bulgarian     & \TX{gaelic}    & \TX{kurdish} & piedmontese     & \TX{syriac}    \\
+\TX{catalan}  & galician       & \TX{lao}     & polish          & tamil          \\
+coptic        & \TX{german}    & \TX{latin}   & \TX{portuguese} & telugu         \\
+croatian      & \TX{greek}     & latvian      & romanian        & \TX{thai}      \\
+czech         & \TX{hebrew}    & lithuanian   & romansh         & \TX{tibetan}   \\
+danish        & \TX{hindi}     & macedonian   & \TX{russian}    & turkish        \\
 \hline
 \end{tabular}
+
 \caption{Languages currently supported in \pkg{polyglossia}}
 \end{table}
 
@@ -560,15 +559,16 @@ The default value of each option is given in italic.
 \textbf{Option:}
 \begin{itemize}
   \item \TB{babelshorthands} = \textit{false} or true. \new{v1.2.0cc}% TODO: check version
-	Activates the ¦"¦ character as a switch to perform etymological
-	hyphenation when followed by a letter, or other tasks when followed by
-	certain analphabetic characters; in particular ¦""¦ is used to enter
-	double raised open quotes (the Italian keyboard misses the backtick),
-	and ¦"<¦  and ¦">¦ to insert open and closed guillemets without any
-	spacing after the open or before the closed sign. ¦"/¦ is made
-	equivalent to \slash allowing a linebreak after the slash without any
-	hyphen sign; ¦"-¦ produces  a short rule/hyphen and a discretional line
-	break alowing line breaks in the second compound word fragment.
+  Activates the ¦"¦ character as a switch to perform etymological
+  hyphenation when followed by a letter. Furthermore, the following shorthands
+  for fine-tuning the hyphenation of Italian words are activated.
+  \begin{itemize}
+  	\item ¦""¦ double raised open quotes (the Italian keyboard misses the backtick)
+  	\item ¦"<¦ open guillemet (looks like <<).
+  	\item ¦">¦ closing guillemet (looks like >>).
+  	\item ¦"/¦ a slash that allows for a line break and maintains hyphenation points.
+  	\item ¦"-¦ for an explicit hyphen sign, allowing hyphenation in the rest of the word
+  \end{itemize}
 \end{itemize}
 
 \subsection{korean}\label{korean}\new{v1.40.0}
@@ -624,6 +624,41 @@ Currently\new{v1.45} support for Kurdish is limited to Sorani Kurdish (support f
 	malaysian (=~bahasam in \pkg{babel})
 \end{itemize}
 
+\subsection{mongolian}\label{mongolian}
+Currently\new{v1.45}, only the Khalkha variety in Cyrillic script is supported.
+
+\noindent\textbf{Options}:
+\begin{itemize}
+	\item \TB{babelshorthands} = \textit{false} or true.
+	If this is turned on, the following shorthands for fine-tuning the
+	hyphenation of Mongolian words are activated.
+	\begin{itemize}
+		\item ¦"-¦ for an explicit hyphen sign, allowing hyphenation in the rest of the word
+		\item ¦"~¦ for a compound word mark without a breakpoint
+		\item ¦"|¦ disables the ligature at this position
+		\item ¦""¦ is like ¦"-¦, but produces no hyphen sign
+		(for compound words with a hyphen, e.g., ¦foo-""bar¦)
+		\item ¦"---¦ Cyrillic emdash in plain text.
+		\item ¦"--~¦ Cyrillic emdash in compound names (surnames).
+		\item ¦"--*¦ Cyrillic emdash for denoting direct speech.
+		\item ¦",¦ thinspace for initials with a breakpoint in following surname.
+		\item ¦"‘¦ for German left double quotes (looks like ,,).
+		\item ¦"’¦ for German right double quotes (looks like “).
+		\item ¦"<¦ for French left double quotes (looks like <<).
+		\item ¦">¦ for French right double quotes (looks like >>).
+	\end{itemize}
+	\item \TB{numerals} = \textit{arabic} or cyrillic. Uses either Arabic numerals or Cyrillic
+	alphanumerical numbering.
+\end{itemize}
+%
+\textbf{Commands}:
+\begin{itemize}
+	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
+	environments such as ¦enumerate¦. The command takes a counter as argument,
+	\eg ¦\textrussian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
+	\item \Cmd\asbuk: same in lowercase
+\end{itemize}
+
 \subsection{norwegian}\label{norwegian}
 \textbf{Options}:
 \begin{itemize}
@@ -654,12 +689,30 @@ Currently\new{v1.45} support for Kurdish is limited to Sorani Kurdish (support f
 \subsection{russian}\label{russian}
 \textbf{Options}:
 	\begin{itemize}
-	\item \TB{babelshorthands} = \textit{false} or true. % TODO check and document!
+	\item \TB{babelshorthands} = \textit{false} or true.
+	If this is turned on, the following shorthands for fine-tuning the
+	hyphenation of Russian words are activated.
+	\begin{itemize}
+		\item ¦"-¦ for an explicit hyphen sign, allowing hyphenation in the rest of the word
+		\item ¦"~¦ for a compound word mark without a breakpoint
+		\item ¦"|¦ disables the ligature at this position
+		\item ¦""¦ is like ¦"-¦, but produces no hyphen sign
+		(for compound words with a hyphen, e.g., ¦foo-""bar¦)
+		\item ¦"---¦ Cyrillic emdash in plain text.
+		\item ¦"--~¦ Cyrillic emdash in compound names (surnames).
+		\item ¦"--*¦ Cyrillic emdash for denoting direct speech.
+% These are commented out in gloss-russian
+%		\item ¦",¦ thinspace for initials with a breakpoint in following surname.
+%		\item ¦"‘¦ for German left double quotes (looks like ,,).
+%		\item ¦"’¦ for German right double quotes (looks like “).
+%		\item ¦"<¦ for French left double quotes (looks like <<).
+%		\item ¦">¦ for French right double quotes (looks like >>).
+	\end{itemize}
 	\item \TB{spelling} = \textit{modern} or old (for captions and date only, not for hyphenation)
 	\item \TB{numerals} = \textit{arabic} or cyrillic. Uses either Arabic numerals or Cyrillic
 	alphanumerical numbering.
 	\end{itemize}
-
+%
 \textbf{Commands}:
 	\begin{itemize}
 	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
