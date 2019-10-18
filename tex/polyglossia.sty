@@ -285,6 +285,7 @@
 \newcommand*\polyglossia@setup@language@patterns[1]{%
   \ifbool{xpg@hyphenation@disabled}{%
     \xdef\xpg@lastlanguage{\the\csname l@#1\endcsname}%
+    \language=\l@nohyphenation%
   }{%
     \cs_if_eq:cNTF{l@#1}{\l@nohyphenation}{%
         \language=\l@nohyphenation%
@@ -1000,7 +1001,7 @@
      }%
   }%
   % Store babelname of main language (for external packages such as biblatex)
-  \gdef\mainbabelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+  \xdef\mainbabelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
   %% The following settings are for the default language and script
   % this tells bidi.sty or luabidi.sty that the document is RTL
   \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{%
@@ -1016,6 +1017,8 @@
   \xpg@info{Default~ language~ is~ #2}%
   \polyglossia@set@language@name[#1]{#2}%
   \def\mainlanguagename{#2}
+  % Store babelname of current language (for external packages such as biblatex)
+  \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
   \ifluatex %
   \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
   \fi %
@@ -1034,13 +1037,13 @@
 \def\languagevariant{}%
 % Store current language variant for external packages
 \define@key{xpg@set@langvariant}{variant}{%
-  \gdef\languagevariant{#1}%
+  \def\languagevariant{#1}%
 }
 
 \newcommand*\polyglossia@set@language@name[2][]{
   \def\languagename{#2}%
   \tl_if_blank:nTF {#1}{%
-     \ifcsundef{#2@gvar}{\gdef\languagevariant{}}{\gdef\languagevariant{\csuse{#2@gvar}}}
+     \ifcsundef{#2@gvar}{\def\languagevariant{}}{\def\languagevariant{\csuse{#2@gvar}}}
    }{%
      % If the argument sets a value for the key “variant”,
      % store it in \xpg@set@langvariant
@@ -1048,8 +1051,6 @@
          \xpg@parsevariantkeyvalue##1=@xpg@set@langvariant\relax
      }%
   }%
-  % Store babelname of current language (for external packages such as biblatex)
-  \gdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
 }
 
 
@@ -1057,12 +1058,15 @@
   \polyglossia@error@iflangnotloaded:n{#2}
   % disable globalnumbers of previously defined default language
   \csuse{no\xpg@main@language @globalnumbers}
-    \csuse{noextras@\xpg@main@language}%
-    \csuse{init@noextras@\xpg@main@language}%
-    \polyglossia@set@language@name[#1]{#2}%
-    \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{\@rlmaintrue\@rl@footnotetrue}{}%
-    \selectlanguage[#1]{#2}%
-    \selectbackgroundlanguage{#2}}
+  \csuse{noextras@\xpg@main@language}%
+  \csuse{init@noextras@\xpg@main@language}%
+  \polyglossia@set@language@name[#1]{#2}%
+  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{\@rlmaintrue\@rl@footnotetrue}{}%
+  \selectlanguage[#1]{#2}%
+  \selectbackgroundlanguage{#2}%
+  % Store babelname of current language (for external packages such as biblatex)
+  \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+}
 
 % This saves the normalfont for the latin script since we may change normalfont in other scripts
 \let\normalfontlatin=\normalfont%
@@ -1185,6 +1189,8 @@
 % wrapper for foreignlanguage and otherlanguage*
 \newcommand*\polyglossia@setforeignlanguage[2][]{
   \select@@language[#1]{#2}
+  % Store babelname of current language (for external packages such as biblatex)
+  \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
 }
 
 % joint code of \foreignlanguage, otherlanguage*
@@ -1307,6 +1313,8 @@
 
 \newcommand*{\xpg@set@language@aux}[2][]{%
    \@select@language[#1]{#2}%
+   % Store babelname of current language (for external packages such as biblatex)
+   \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
     % Write to the aux
    \if@filesw%
       \ifx#1\\\\%

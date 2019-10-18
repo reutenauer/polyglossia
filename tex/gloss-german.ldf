@@ -21,6 +21,7 @@
       % 1901:
       \@german@oldspellingtrue
    \fi
+   \geman@set@babelname%
    \xpg@info{Option: German, spelling=\val}%
 }{\xpg@warning{Unknown German spelling `#1'}}
 
@@ -50,8 +51,29 @@
            }%
       }%
    \fi
+   \geman@set@babelname%
    \xpg@info{Option: German, variant=\val}%
 }{\xpg@warning{Unknown German variant `#1'}}
+
+\def\geman@set@babelname{%
+  \if@german@oldspelling
+     \if@swiss@locale
+         \SetLanguageKeys{german}{babelname=swissgerman}%
+     \else
+     \if@austrian@locale
+         \SetLanguageKeys{german}{babelname=austrian}%
+     \else
+         \SetLanguageKeys{german}{babelname=german}%
+     \fi\fi
+  \else
+     \if@swiss@locale
+         \SetLanguageKeys{german}{babelname=nswissgerman}%
+     \fi
+     \if@austrian@locale
+         \SetLanguageKeys{german}{babelname=naustrian}%
+     \fi
+  \fi
+}
 
 \newif\if@german@fraktur
 \define@choicekey*+{german}{script}[\val\nr]{latin,fraktur}[latin]{%
@@ -196,23 +218,6 @@
 }
 
 \def\german@language{%
-  \if@german@oldspelling
-     \if@swiss@locale
-         \SetLanguageKeys{german}{babelname=swissgerman}%
-     \else
-     \if@austrian@locale
-         \SetLanguageKeys{german}{babelname=austrian}%
-     \else
-         \SetLanguageKeys{german}{babelname=german}%
-     \fi\fi
-  \else
-     \if@swiss@locale
-         \SetLanguageKeys{german}{babelname=nswissgerman}%
-     \fi
-     \if@austrian@locale
-         \SetLanguageKeys{german}{babelname=naustrian}%
-     \fi
-  \fi
   \ifgerman@latesthyphen
     \if@german@oldspelling
         \if@swiss@locale

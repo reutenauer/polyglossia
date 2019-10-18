@@ -41,7 +41,7 @@
       {\xpg@warning{No hyphenation patterns were loaded for Polytonic Greek\MessageBreak
 	            I will use the patterns loaded for \string\l@greek\space instead}%
       \adddialect\l@polygreek\l@greek\relax}%
-    \gdef\greek@variant{polygreek}%
+    \def\greek@variant{polygreek}%
     \def\captionsgreek{\polygreekcaptions}%
     \def\dategreek{\datepolygreek}%
     \SetLanguageKeys{greek}{babelname=polutonikogreek}%
@@ -52,7 +52,7 @@
         {\xpg@warning{No hyphenation patterns were loaded for Ancient Greek\MessageBreak
 	              I will use the patterns loaded for \string\l@greek\space instead}%
          \adddialect\l@ancientgreek\l@greek\relax}%
-      \gdef\greek@variant{ancientgreek}%
+      \def\greek@variant{ancientgreek}%
       \def\captionsgreek{\ancientgreekcaptions}%
       \def\dategreek{\dateancientgreek}%
       \xpg@info{Option: Ancient Greek}%
@@ -61,7 +61,7 @@
         {\xpg@warning{No hyphenation patterns were loaded for Monotonic Greek\MessageBreak
 	              I will use the patterns loaded for \string\l@greek\space instead}%
          \adddialect\l@monogreek\l@greek\relax}%
-      \gdef\greek@variant{monogreek}% monotonic
+      \def\greek@variant{monogreek}% monotonic
       \def\captionsgreek{\monogreekcaptions}%
       \def\dategreek{\datemonogreek}%
       \xpg@info{Option: Monotonic Greek}%

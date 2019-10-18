@@ -14,12 +14,12 @@
 %\define@choicekey*+{sami}{variant}[\val\nr]{northern}[nothern]{%
 %   \ifcase\nr\relax
 %      % northern:
-%      \gdef\sami@variant{samin}%
+%      \def\sami@variant{samin}%
 %      \SetLanguageKeys{sami}{language=Northern Sami,langtag=NSM}%
 %      \xpg@fontsetup@latin{sami}%
 %   \or
 %      % other:
-%      \gdef\sami@variant{}%
+%      \def\sami@variant{}%
 %      \SetLanguageKeys{sami}{language= Sami,langtag=}%
 %      \xpg@fontsetup@latin{sami}%
 %   \fi
