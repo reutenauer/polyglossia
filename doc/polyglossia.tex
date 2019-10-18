@@ -558,7 +558,7 @@ The default value of each option is given in italic.
 \subsection{hungarian}\label{hungarian}
 \textbf{Commands}:
 \begin{itemize}
-	\item \Cmd\ontoday\ (= \Cmd\ondatehungarian): special forms of \cmd\today\ which produces a slightly different
+	\item \Cmd\ontoday\ (= \Cmd\ondatehungarian): special form of \cmd\today\ which produces a slightly different
 	date format as used in prepositional phrases (such as ‘on February 10th’) in Hungarian.
 \end{itemize}
 
@@ -588,11 +588,13 @@ The default value of each option is given in italic.
   \end{itemize}
 
 \subsection{kurdish}\label{kurdish}
-Currently\new{v1.45} support for Kurdish is limited to Sorani Kurdish (support for Kurmanji Kurdish is planned).
+Kurdish\new{v1.45} support includes Sorani Kurdish and Kurmanji Kurdish, both in either Arabic or Latin script.
 
 \noindent\textbf{Options}:
 \begin{itemize}
-	\item \TB{numerals} = western or \textit{eastern}
+	\item \TB{variant} = kurmanji or \textit{sorani}
+	\item \TB{script} = Arabic or Latin. Defaults are ¦Arabic¦ for Sorani and ¦Latin¦ for Kurmanji.
+	\item \TB{numerals} = western or eastern. Defaults are ¦western¦ for Latin and ¦eastern¦ for Arabic script, depending on the selection above.
 	\item \TB{abjadjimnotail} = \textit{false} or true.
 	Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
 	\item \TB{locale} (not yet implemented)
@@ -600,8 +602,10 @@ Currently\new{v1.45} support for Kurdish is limited to Sorani Kurdish (support f
 \end{itemize}
 \textbf{Commands}:
 \begin{itemize}
+	\item \Cmd\ontoday: special form of \cmd\today\ which produces a slightly different
+	date format as used in prepositional phrases (as in ‘on February 10th’). Only available for Latin script.
 	\item \Cmd\abjad (see section \ref{abjad})
-	\item \Cmd\aemph (see section \ref{arabic}).
+	\item \Cmd\aemph (see section \ref{arabic})
 \end{itemize}
 
 \subsection{lao}\label{lao}\new{v1.2.0}
