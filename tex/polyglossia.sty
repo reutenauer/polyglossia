@@ -1034,13 +1034,13 @@
 \def\languagevariant{}%
 % Store current language variant for external packages
 \define@key{xpg@set@langvariant}{variant}{%
-  \gdef\languagevariant{#1}%
+  \def\languagevariant{#1}%
 }
 
 \newcommand*\polyglossia@set@language@name[2][]{
   \def\languagename{#2}%
   \tl_if_blank:nTF {#1}{%
-     \ifcsundef{#2@gvar}{\gdef\languagevariant{}}{\gdef\languagevariant{\csuse{#2@gvar}}}
+     \ifcsundef{#2@gvar}{\def\languagevariant{}}{\def\languagevariant{\csuse{#2@gvar}}}
    }{%
      % If the argument sets a value for the key “variant”,
      % store it in \xpg@set@langvariant
