@@ -11,12 +11,12 @@
 \define@choicekey*+{norwegian}{variant}[\val\nr]{nynorsk,bokmal}[nynorsk]{%
    \ifcase\nr\relax
       % nynorsk:
-      \gdef\norwegian@variant{nynorsk}%
+      \def\norwegian@variant{nynorsk}%
       \SetLanguageKeys{norwegian}{langtag=NYN,babelname=nynorsk}%
       \xpg@fontsetup@latin{norwegian}%
    \or
       % bokmal:
-      \gdef\norwegian@variant{norsk}%
+      \def\norwegian@variant{norsk}%
       \SetLanguageKeys{norwegian}{langtag=NOR,babelname=norsk}%
       \xpg@fontsetup@latin{norwegian}%
    \fi

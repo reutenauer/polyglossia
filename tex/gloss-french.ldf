@@ -14,10 +14,10 @@
 \define@choicekey*+{french}{variant}[\val\nr]{french,canadian,acadian}[french]{%
    \ifcase\nr\relax
       % french:
-      \gdef\french@variant{french}%
+      \def\french@variant{french}%
    \or
       % canadian:
-      \gdef\french@variant{canadien}%
+      \def\french@variant{canadien}%
       \SetLanguageKeys{french}{babelname=canadien}%
       \xpg@ifdefined{canadien}{}%
 	    {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
@@ -25,7 +25,7 @@
 	    \adddialect\l@canadien\l@french\relax}%
    \or
       % acadian:
-      \gdef\french@variant{acadian}%
+      \def\french@variant{acadian}%
       \SetLanguageKeys{french}{babelname=canadien}%
       \xpg@ifdefined{acadian}{}%
 	    {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak

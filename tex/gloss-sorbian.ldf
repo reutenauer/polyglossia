@@ -13,7 +13,7 @@
 \define@choicekey*+{sorbian}{variant}[\val\nr]{upper,lower}[upper]{%
    \ifcase\nr\relax
       % upper:
-      \gdef\sorbian@variant{usorbian}%
+      \def\sorbian@variant{usorbian}%
       \SetLanguageKeys{sorbian}{language=Lower Sorbian,langtag=LSB,babelname=uppersorbian}%
       \xpg@fontsetup@latin{sorbian}%
       \ifbool{xpg@hyphenation@disabled}{}{%
@@ -35,7 +35,7 @@
       }%
    \or
       % lower:
-      \gdef\sorbian@variant{lsorbian}%
+      \def\sorbian@variant{lsorbian}%
       \SetLanguageKeys{sorbian}{language=Upper Sorbian,langtag=LSB,babelname=lowersorbian}%
       \xpg@fontsetup@latin{sorbian}%
       \ifbool{xpg@hyphenation@disabled}{}{%
