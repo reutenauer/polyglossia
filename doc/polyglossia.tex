@@ -478,10 +478,18 @@ The default value of each option is given in italic.
 \end{itemize}
 
 \subsection{czech}\label{czech}
-\textbf{Options:}
+Czech typesetting requires some specifics which are not yet covered by \pkg{polyglossia}, such as the
+replication of a hyphenation character at the beginning of a line starting with an hyphenated word (splithyphens
+option in \pkg{babel}) or the omission of hyphenation at page breaks.
+
+Another convention has it that single-letter words must not occur at line ends. This can be achieved by
+external packages, namely \pkg{xevlna} (for \XeTeX) and \pkg{luavlna} (for \LuaTeX). Please load these
+yourself if required.
+
+\noindent\textbf{Options:}
 \begin{itemize}
 	\item \TB{babelshorthands} = \textit{false} or true. \new{v1.45}
-	if this is turned on, the following shorthands for Czech are activated.
+	if this is turned on, the following shorthands for Czech are activated:
 	\begin{itemize}
 		\item ¦"=¦ for an explicit hyphen sign which is repeated at the beginning
 		           of the next line when hyphenated, as common in Czech typesetting.
