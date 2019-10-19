@@ -1331,6 +1331,27 @@
    \fi
 }
 
+% Open a group in the aux file. This is to keep
+% nested language options local (see #320)
+\newcommand*{\xpg@set@group@aux}{%
+   \if@filesw%
+      \protected@write\@auxout{}{\bgroup}%
+      \addtocontents{toc}{\bgroup}%
+      \addtocontents{lof}{\bgroup}%
+      \addtocontents{lot}{\bgroup}%
+    \fi
+}
+
+% Close the group in the aux file
+\newcommand*{\xpg@unset@group@aux}{%
+   \if@filesw%
+      \protected@write\@auxout{}{\egroup}%
+      \addtocontents{toc}{\egroup}%
+      \addtocontents{lof}{\egroup}%
+      \addtocontents{lot}{\egroup}%
+    \fi
+}
+
 \prg_set_conditional:Npnn \polyglossia@check@ifdefined:N #1 { p , T , F , TF }{
   \cs_if_exist:cTF{l@#1}{
     \cs_if_eq:cNTF{l@#1}{\l@nohyphenation}{\prg_return_false:}{\prg_return_true:}
@@ -1446,9 +1467,10 @@
 
 \renewenvironment{otherlanguage}[2][]
 {
+  \xpg@set@group@aux%
   \selectlanguage[#1]{#2}
 }
-{}
+{\xpg@unset@group@aux}
 
 \newcommand{\setlocalhyphenmins}[3]{%
    \xpg@ifdefined{#1}{%
