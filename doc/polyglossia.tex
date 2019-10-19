@@ -190,7 +190,7 @@ bulgarian     & \TX{gaelic}    & \TX{kurdish}  & piedmontese     & \TX{syriac}  
 \TX{catalan}  & galician       & \TX{lao}      & polish          & tamil          \\
 coptic        & \TX{german}    & \TX{latin}    & \TX{portuguese} & telugu         \\
 croatian      & \TX{greek}     & latvian       & romanian        & \TX{thai}      \\
-czech         & \TX{hebrew}    & lithuanian    & romansh         & \TX{tibetan}   \\
+\TX{czech}    & \TX{hebrew}    & lithuanian    & romansh         & \TX{tibetan}   \\
 danish        & \TX{hindi}     & macedonian    & \TX{russian}    & turkish        \\
 \bottomrule
 \end{tabular}
@@ -287,7 +287,7 @@ uppersorbian    & sorbian    & variant=upper                  \\
 \begin{itemize}
 	\item \TB{babelshorthands}\new{v1.1.1} globally activates \pkg{babel}
           shorthands whenever available. Currently shorthands are implemented for
-          Catalan, Dutch, Finnish, German, Italian, Mongolian, and Russian.
+          Catalan, Czech, Dutch, Finnish, German, Italian, Mongolian, and Russian.
           Please refer to the respective language descriptions (sec.~\ref{specific}) for details.
 
     \item \TB{localmarks} redefines the internal \LaTeX\ macros \cmd\markboth\ and \cmd\markright.
@@ -475,6 +475,21 @@ The default value of each option is given in italic.
 \begin{itemize}
   \item \Cmd{\l.l} and \Cmd{\L.L}\new{v1.1.1} can be used to type a geminated l, as in \textit{co\l.laborar},
         similar to \pkg{babel} (the glyph U+00B7 MIDDLE DOT is used as a geminating sign).
+\end{itemize}
+
+\subsection{czech}\label{czech}
+\textbf{Options:}
+\begin{itemize}
+	\item \TB{babelshorthands} = \textit{false} or true. \new{v1.45}
+	if this is turned on, the following shorthands for Czech are activated.
+	\begin{itemize}
+		\item ¦"=¦ for an explicit hyphen sign which is repeated at the beginning
+		           of the next line when hyphenated, as common in Czech typesetting.
+		\item ¦"‘¦ for Czech left double quotes (looks like ,,).
+		\item ¦"’¦ for Czech right double quotes (looks like “).
+		\item ¦">¦ for Czech left double guillemets (looks like >>).
+		\item ¦"<¦ for Czech right double guillemets (looks like <<).
+	\end{itemize}
 \end{itemize}
 
 \subsection{dutch}\label{dutch}

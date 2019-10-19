@@ -41,7 +41,7 @@ New features:
   * Add french option autospacing and commands \AutoSpacing, \NoAutoSpacing
     This allows to switch off autospacing globally or locally (#113)
   * Fixup \normalfont (#203)
-  * Implement babelshorthands for Finnish (#212)
+  * Implement babelshorthands for Finnish (#212) and Czech.
   * Implement access to current language via Lua (#243).
   * Introduce french option option autospacetypewriter
     alias OriginalTypewriter
