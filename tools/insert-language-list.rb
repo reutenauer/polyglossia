@@ -5,10 +5,10 @@ require 'byebug'
 def make_table
   preamble = <<-__EOPreamble__
 \\begin{tabular}{lllll}
-\\hline
+\\toprule
   __EOPreamble__
   postamble = <<-__EOPostamble__
-\\hline
+\\bottomrule
 \\end{tabular}
   __EOPostamble__
 
