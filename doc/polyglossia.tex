@@ -1,7 +1,7 @@
 % !TeX TS-program = xelatex
 \documentclass[11pt]{ltxdoc}
 \usepackage{color}
-\usepackage{xspace,fancyvrb}
+\usepackage{xspace,fancyvrb,booktabs}
 \usepackage[neverdecrease]{paralist}
 \definecolor{myblue}{rgb}{0.02,0.04,0.48}
 \definecolor{lightblue}{rgb}{0.61,.8,.8}
@@ -177,7 +177,7 @@ that are explained in section \ref{specific} below.
 % Produced with tools/insert-language-list.rb -- JS, 2019-10-18
 % Edited by hand -- JS, 2019-10-18
 \begin{tabular}{lllll}
-\hline
+\toprule
 albanian      & divehi         & \TX{hungarian}& \TX{malay}      & \TX{sami}      \\
 amharic       & \TX{dutch}     & icelandic     & malayalam       & \TX{sanskrit}  \\
 \TX{arabic}   & \TX{english}   & interlingua   & marathi         & \TX{serbian}   \\
@@ -190,15 +190,15 @@ bulgarian     & \TX{gaelic}    & \TX{kurdish}  & piedmontese     & \TX{syriac}  
 \TX{catalan}  & galician       & \TX{lao}      & polish          & tamil          \\
 coptic        & \TX{german}    & \TX{latin}    & \TX{portuguese} & telugu         \\
 croatian      & \TX{greek}     & latvian       & romanian        & \TX{thai}      \\
-czech         & \TX{hebrew}    & lithuanian    & romansh         & \TX{tibetan}   \\
+\TX{czech}    & \TX{hebrew}    & lithuanian    & romansh         & \TX{tibetan}   \\
 danish        & \TX{hindi}     & macedonian    & \TX{russian}    & turkish        \\
-\hline
+\bottomrule
 \end{tabular}
 
 \caption{Languages currently supported in \pkg{polyglossia}}
 \end{table}
 
-\textit{NB:} The support for Amharic\new{v1.0.1} should be considered an experimental attempt to
+\paragraph{Version Notes} The support for Amharic\new{v1.0.1} should be considered an experimental attempt to
 port the package \pkg{ethiop}.\footnote{Feedback is welcome.}
 Version 1.1.1\new{v1.1.1} added support for Asturian, %\footnote{ Provided by Kevin Godby and Xuacu Saturio.}, 
 Lithuanian, %\footnote{ Provided by Kevin Godby and Paulius Sladkevičius.},
@@ -209,23 +209,96 @@ Lao, Malayalam, Marathi, Tamil, Telugu, and Turkmen.\footnote{%
   See acknowledgements at the end for due credit to the various contributors.}
 Version 1.43\new{v1.43} silently introduced basic support for Japanese. This
 is considered experimental, and feedback is appreciated.
+In version 1.45\new{v1.45}, support for Kurdish and Mongolian as well as some new
+variants (Canadian French and English) has been added. Furthermore,  for consistency reasons, some language have
+been renamed (\emph{farsi}\textrightarrow\emph{persian}, \emph{friulan}\textrightarrow\emph{friulian},
+\emph{magyar}\textrightarrow\emph{hungarian}, \emph{portuges}\textrightarrow\emph{portuguese},
+\emph{samin}\textrightarrow\emph{sami}) or merged (\emph{bahasai}\slash\emph{bahasam}\textrightarrow\emph{malay},
+\emph{brazil}\slash\emph{portuges}\textrightarrow\emph{portuguese},
+\emph{lsorbian}\slash\emph{usorbian}\textrightarrow\emph{sorbian},
+\emph{irish}\slash\emph{scottish}\textrightarrow\emph{gaelic},
+\emph{norsk}\slash\emph{nynorsk}\textrightarrow\emph{norwegian}). The old names are still supported for backwards
+compatibility reasons, but they might not give access to newer language features.
 
 
+\subsection{Relation to Babel languages}
 
-Polyglossia can also be loaded with the option
-‘babelshorthands’\new{v1.1.1}, which globally activates \pkg{babel}
-shorthands whenever available. Currently shorthands are implemented for
-Catalan, Dutch, Finnish, German, Italian, and Russian: see these respective
-languages for details.
+If you are familiar with the \pkg{babel} package, you will note that \pkg{polyglossia}'s language naming
+slightly differs. Whereas \pkg{babel} has a unique name for each language variety (\eg\emph{american} and \emph{british}),
+\pkg{polyglossia} differentiates language varieties via language options.
 
-Another option (turned off by default) is ‘localmarks’, which
-redefines the internal \LaTeX\ macros \cmd\markboth\ and \cmd\markright.
-\new{v1.2.0}Note that this was formerly turned on by default, but we
-now realize that it causes more problems than otherwise. For backwards-compatibility
-the opposite option ‘nolocalmarks’ is still available.
+Furthermore, \pkg{babel} uses sometimes abbreviations for language names (\eg\emph{bahasam} for Bahasa Malayu) as well
+as endonyms, \ie language names coming from the designated languages (such as \emph{bahasa}, \emph{canadien} or \emph{magyar}).
+As opposed to this, \pkg{polyglossia} always uses spelled-out (lower-cased) English language names.
 
-There is also the option ‘quiet’ which turns off most info messages and some of the warnings
-issued by \LaTeX, \pkg{fontspec} and \pkg{polyglossia}.
+Table~\ref{tab:bbllang} lists the language names that differ in both packages. \pkg{Babel} names marked in red can also be used
+in \pkg{polyglossia} as an alias.\footnote{This is for historical reasons, since earlier versions of \pkg{polyglossia} used
+	those names as well. Note, however, that you need to use the matching language switching commands, then, as
+well, \eg \texttt{\textbackslash textportuges} with \emph{portuges} (rather than \texttt{\textbackslash textportuguese}).}
+
+\begin{table}
+\label{tab:bbllang}
+\begin{tabular}{lll}
+\toprule 
+\textbf{Babel name} & \textbf{Polyglossia name} & \textbf{Polyglossia options}\tabularnewline
+\midrule
+acadien         & french     & variant=acadien                \\
+american        & english    & \emph{(default)}               \\
+australian      & english    & variant=australian             \\
+austrian        & german     & variant=austrian, spelling=old \\
+bahasa          & malay      & \emph{(default)}               \\
+\TR{bahasam}    & malay      & variant=malaysian              \\
+\TR{brazil}     & portuguese & variant=brazilian              \\
+british         & english    & variant=british                \\
+canadian        & english    & variant=canadian               \\
+canadien        & french     & variant=canadian               \\
+\TR{farsi}      & persian    &                                \\
+\TR{friulan}    & friulian   &                                \\
+german          & german     & spelling=old                   \\
+\TR{irish}      & gaelic     & variant=irish                  \\
+kurmanji        & kurdish    & variant=kurmanji               \\
+lowersorbian    & sorbian    & variant=lower                  \\
+\TR{magyar}     & hungarian  &                                \\
+naustrian       & german     & variant=austrian               \\
+newzealand      & english    & variant=newzealand             \\
+ngerman         & german     & \emph{(default)}               \\
+\TR{norsk}      & norwegian  & variant=bokmal                 \\
+nswissgerman    & german     & variant=swiss                  \\
+\TR{nynorsk}    & norwegian  & \emph{(default)}               \\
+polutonikogreek & greek      & variant=polytonic              \\
+\TR{portuges}   & portuguese & \emph{(default)}               \\
+\TR{samin}      & sami       &                                \\
+\TR{scottish}   & gaelic     & variant=scottish               \\
+serbianc        & serbian    & script=Cyrillic                \\
+slovene         & slovenian  &                                \\
+swissgerman     & german     & variant=swiss, spelling=old    \\
+uppersorbian    & sorbian    & variant=upper                  \\
+\bottomrule
+\end{tabular}
+	
+\caption{Babel-polyglossia language name matching}
+\end{table}
+
+
+\subsection{Global options}
+
+\pkg{Polyglossia} can be loaded with the following global package options:
+
+\begin{itemize}
+	\item \TB{babelshorthands}\new{v1.1.1} globally activates \pkg{babel}
+          shorthands whenever available. Currently shorthands are implemented for
+          Catalan, Czech, Dutch, Finnish, German, Italian, Mongolian, and Russian.
+          Please refer to the respective language descriptions (sec.~\ref{specific}) for details.
+
+    \item \TB{localmarks} redefines the internal \LaTeX\ macros \cmd\markboth\ and \cmd\markright.
+          In earlier versions of \pkg{polyglossia},\new{v1.2.0} this option was set by default, but we
+          now realize that it causes more problems than it helps, so it is now off by default.
+          For backwards-compatibility, the option \TB{nolocalmarks} which used to switch off the previous
+          default, and now does nothing, is still available.
+
+    \item \TB{quiet} turns off most info messages and some of the warnings issued by \LaTeX,
+          \pkg{fontspec} and \pkg{polyglossia}.
+\end{itemize}
 
 \section{Language-switching commands}\label{languageswitching}
 
@@ -404,6 +477,29 @@ The default value of each option is given in italic.
         similar to \pkg{babel} (the glyph U+00B7 MIDDLE DOT is used as a geminating sign).
 \end{itemize}
 
+\subsection{czech}\label{czech}
+Czech typesetting requires some specifics which are not yet covered by \pkg{polyglossia}, such as the
+replication of a hyphenation character at the beginning of a line starting with an hyphenated word (splithyphens
+option in \pkg{babel}) or the omission of hyphenation at page breaks.
+
+Another convention has it that single-letter words must not occur at line ends. This can be achieved by
+external packages, namely \pkg{xevlna} (for \XeTeX) and \pkg{luavlna} (for \LuaTeX). Please load these
+yourself if required.
+
+\noindent\textbf{Options:}
+\begin{itemize}
+	\item \TB{babelshorthands} = \textit{false} or true. \new{v1.45}
+	if this is turned on, the following shorthands for Czech are activated:
+	\begin{itemize}
+		\item ¦"=¦ for an explicit hyphen sign which is repeated at the beginning
+		           of the next line when hyphenated, as common in Czech typesetting.
+		\item ¦"‘¦ for Czech left double quotes (looks like ,,).
+		\item ¦"’¦ for Czech right double quotes (looks like “).
+		\item ¦">¦ for Czech left double guillemets (looks like >>).
+		\item ¦"<¦ for Czech right double guillemets (looks like <<).
+	\end{itemize}
+\end{itemize}
+
 \subsection{dutch}\label{dutch}
 \textbf{Options:}
 \begin{itemize}
@@ -432,7 +528,9 @@ The default value of each option is given in italic.
 \subsection{esperanto}\label{esperanto}
 \textbf{Commands}:
 	\begin{itemize}
-	\item \Cmd\hodiau\ and \Cmd\hodiaun are special forms of \cmd\today\ (see the \pkg{babel} documentation)
+	\item \Cmd\hodiau\ and \Cmd\hodiaun are special forms of \cmd\today. The former produces the date in Esperanto
+	      preceded by the article (\emph{la}), which is the most common date format.
+	      The latter produces the same date format in accusative case.
 	\end{itemize}
 
 \subsection{finnish}\label{finnish}
@@ -1064,7 +1162,9 @@ If you want to have a full list of loaded languages/variants, use the following 
 %
 Finally, you can test whether a language is loaded by
 \displaycmd{\iflanguageloaded\{$\langle$language$\rangle$\}\{$\langle$true$\rangle$\}\{$\langle$false$\rangle$\}}{\iflanguageloaded}
-where \texttt{$\langle$language$\rangle$} can be a \pkg{polyglossia} or \pkg{babel} language name.
+where \texttt{$\langle$language$\rangle$} is a \pkg{polyglossia} language name, or
+\displaycmd{\ifbabellanguageloaded\{$\langle$babelname$\rangle$\}\{$\langle$true$\rangle$\}\{$\langle$false$\rangle$\}}{\ifbabellanguageloaded}
+where \texttt{$\langle$language$\rangle$} is a \pkg{babel} language name.
 
 \section{Acknowledgements (by François Charette)}
 \pkg{Polyglossia} is notable for being a recycle box of previous contributions
