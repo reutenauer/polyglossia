@@ -61,7 +61,7 @@
                        I will use the standard patterns for US English instead}%
           \adddialect\l@usenglishmax\l@english\relax%
          }%
-      \gdef\english@variant{usenglishmax}%
+      \def\english@variant{usenglishmax}%
    \or
       % australian:
       % These use the british hyphenation patterns
@@ -95,7 +95,7 @@
                        I will use the patterns for US English instead}%
           \adddialect\l@ukenglish\l@english\relax%
          }%
-      \gdef\english@variant{ukenglish}%
+      \def\english@variant{ukenglish}%
    \fi
 }{\xpg@warning{Unknown English variant `#1'}}
 

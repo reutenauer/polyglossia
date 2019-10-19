@@ -15,11 +15,11 @@
 \define@choicekey*+{malay}{variant}[\val\nr]{indonesian,malaysian}[malaysian]{%
    \ifcase\nr\relax
       % indonesian:
-      \gdef\malay@variant{indonesian}%
+      \def\malay@variant{indonesian}%
       \malay@melayufalse
    \or
       % malaysian:
-      \gdef\malay@variant{malay}%
+      \def\malay@variant{malay}%
       \malay@melayutrue
    \fi
    \ifmalay@melayu

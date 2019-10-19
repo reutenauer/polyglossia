@@ -13,6 +13,7 @@
 
 \let\captionsmagyar\captionshungarian
 \let\datemagyar\datehungarian
+\let\ondatemagyar\ondatehungarian
 \let\blockextras@magyar\blockextras@hungarian
 \let\noextras@magyar\noextras@hungarian
 

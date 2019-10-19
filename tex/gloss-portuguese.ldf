@@ -11,10 +11,10 @@
 \define@choicekey*+{portuguese}{variant}[\val\nr]{portuguese,brazilian}[portuguese]{%
    \ifcase\nr\relax
       % portuguese:
-      \gdef\portuguese@variant{portuges}%
+      \def\portuguese@variant{portuges}%
    \or
       % brazilian:
-      \gdef\portuguese@variant{brazil}%
+      \def\portuguese@variant{brazil}%
       \SetLanguageKeys{portuguese}{babelname=brazil}%
       \xpg@ifdefined{brazil}{}%
 	    {\xpg@warning{No hyphenation patterns were loaded for "Portuguese (Brazil)"\MessageBreak

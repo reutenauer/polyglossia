@@ -14,9 +14,11 @@
 \else
   \setkeys{catalan}{babelshorthands=false}
 \fi
+
 \ifcsundef{initiate@active@char}{%
-\input{babelsh.def}%
-\initiate@active@char{"}%
+  \input{babelsh.def}%
+  \initiate@active@char{"}%
+  \shorthandoff{"}%
 }{}
 
 %%% adapted from Babel's catalan.ldf

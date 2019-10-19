@@ -27,7 +27,7 @@ LuaTeX:
     other things
 
 Miscellanea:
-  * N’Ko
+  * N’Ko: DONE
   * Georgian (see tex.tsu.ge)
   * Equivalent of luababel.def for luatex-hyphen.
   * \disablehyphenation and \enablehyphenation
@@ -40,6 +40,8 @@ Suggestion from Vafa:
 I think it would be nice if you could in your next release add options for
 controlling footnote rule via bidi footnote interface, i.e. \autoffotnoterule,
 \rightfootnoterule, \leftfootnoterule and \textwidthfootnoterule
+
+=> DONE.
 
 TEST THIS:
 ============================================================================
@@ -105,10 +107,6 @@ gloss-arabic.ldf:
 gloss-english.ldf: 
 	* change format to Day Month Year when dialect is british: DONE
 
-gloss-farsi.ldf:
-	* add option for months 
-	* implement ftoday.sty? DONE
-
 gloss-finnish.ldf:
 	* hyphenpenalty as in Babel?
 
@@ -124,8 +122,12 @@ gloss-hebrew.ldf
 gloss-italian.ldf
 	* \clubpenalty3000\widowpenalty3000\finalhyphendemerits50000000 ?
 	
-gloss-{l,u}sorbian.ldf
-	* implement option date=old
+gloss-persian.ldf:
+	* add option for months 
+	* implement ftoday.sty? DONE
+
+gloss-sorbian.ldf
+	* implement option date=old: DONE
 
 gloss-ukrainian.ldf and others
 	* add stuff from Babel ? (operators etc)
@@ -134,7 +136,7 @@ gloss-tibetan.ldf
 	* add support for different hyphenation algorithm
 
 gloss-khmer.ldf
-	* fix for LuaTeX
+	* fix for LuaTeX: DONE
 
 hijrical.sty
 	* \def\CYearsFromHijri#1{%yields the corr julian or gregorian years

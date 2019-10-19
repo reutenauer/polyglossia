@@ -1,10 +1,46 @@
 \ProvidesFile{gloss-czech.ldf}[polyglossia: module for czech]
+
 \PolyglossiaSetup{czech}{
   hyphennames={czech},
   hyphenmins={2,2},
   langtag=CSY,
   frenchspacing=true,
   fontsetup=true,
+}
+
+\define@boolkey{czech}[czech@]{babelshorthands}[true]{}
+
+\define@boolkey{czech}[czech@]{splithyphens}[true]{}
+
+\ifsystem@babelshorthands
+  \setkeys{czech}{babelshorthands=true}
+\else
+  \setkeys{czech}{babelshorthands=false}
+\fi
+
+\ifcsundef{initiate@active@char}{%
+  \input{babelsh.def}%
+  \initiate@active@char{"}%
+  \shorthandoff{"}%
+}{}
+
+\def\cs@splithyphen{%
+  \kern\z@\discretionary{-}{\char\hyphenchar\the\font}{-}%
+  \nobreak\hskip\z@%
+}
+
+\def\czech@shorthands{%
+  \bbl@activate{"}%
+  \def\language@group{czech}%
+  \declare@shorthand{czech}{"=}{\cs@splithyphen}%
+  \declare@shorthand{czech}{"`}{„}%
+  \declare@shorthand{czech}{"'}{“}%
+  \declare@shorthand{czech}{"<}{«}%
+  \declare@shorthand{czech}{">}{»}%
+}
+
+\def\noczech@shorthands{%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
 }
 
 \def\captionsczech{%
@@ -30,12 +66,26 @@
    \def\headtoname{Komu}%
    \def\proofname{Důkaz}%
    \def\glossaryname{Slovník}%was Glosář
-   }
+}
+
 \def\dateczech{%
    \def\today{\number\day.~\ifcase\month\or
     ledna\or února\or března\or dubna\or května\or
     června\or července\or srpna\or září\or
     října\or listopadu\or prosince\fi
-    \space \number\year}}
+    \space \number\year}%
+}
+
+\def\noextras@czech{%
+  \noczech@shorthands%
+}
+
+\def\blockextras@czech{%
+  \ifczech@babelshorthands\czech@shorthands\fi
+}
+
+\def\inlineextras@czech{%
+  \ifczech@babelshorthands\czech@shorthands\fi
+}
 
 \endinput
