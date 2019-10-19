@@ -1064,7 +1064,9 @@ If you want to have a full list of loaded languages/variants, use the following 
 %
 Finally, you can test whether a language is loaded by
 \displaycmd{\iflanguageloaded\{$\langle$language$\rangle$\}\{$\langle$true$\rangle$\}\{$\langle$false$\rangle$\}}{\iflanguageloaded}
-where \texttt{$\langle$language$\rangle$} can be a \pkg{polyglossia} or \pkg{babel} language name.
+where \texttt{$\langle$language$\rangle$} is a \pkg{polyglossia} language name, or
+\displaycmd{\ifbabellanguageloaded\{$\langle$babelname$\rangle$\}\{$\langle$true$\rangle$\}\{$\langle$false$\rangle$\}}{\ifbabellanguageloaded}
+where \texttt{$\langle$language$\rangle$} is a \pkg{babel} language name.
 
 \section{Acknowledgements (by François Charette)}
 \pkg{Polyglossia} is notable for being a recycle box of previous contributions

@@ -1272,11 +1272,11 @@
    \fi%
   \def\xpg@tmp@babelname{\prop_item:Nn{\polyglossia@langsetup}{#3/babelname}}
   % Store babelname in \xpg@bloaded csv list
-  \ifcsundef{\csname xpg@tmp@babelname\endcsname @loaded}
+  \ifcsundef{\csname xpg@tmp@babelname\endcsname @bbl@loaded}
   {
     \global\edef\xpg@bloaded{\xpg@tmp@babelname%
           \ifx\xpg@bloaded\@empty\else,\xpg@bloaded\fi}%
-    \csgdef{\csname xpg@tmp@babelname\endcsname @loaded}{}%
+    \csgdef{\csname xpg@tmp@babelname\endcsname @bbl@loaded}{}%
   }{}
 }
 
@@ -1294,7 +1294,7 @@
 }
 
 \prg_set_conditional:Npnn \polyglossia@check@if@lang@loaded:N #1 { p , T , F , TF }{
-  \cs_if_exist:cTF{#1@loaded}{
+  \cs_if_exist:cTF{#1}{
      \prg_return_true:
   }{
     \prg_return_false:
@@ -1303,7 +1303,12 @@
 
 % Test if language is loaded
 \newcommand*\iflanguageloaded[3]{%
-  \polyglossia@check@if@lang@loaded:NTF{#1}{#2}{#3}%
+  \polyglossia@check@if@lang@loaded:NTF{#1@loaded}{#2}{#3}%
+}
+
+% Same for babellanguage is loaded
+\newcommand*\ifbabellanguageloaded[3]{%
+  \polyglossia@check@if@lang@loaded:NTF{#1@bbl@loaded}{#2}{#3}%
 }
 
 \newcommand*{\xpg@set@language@nonaux}[2][]{%
