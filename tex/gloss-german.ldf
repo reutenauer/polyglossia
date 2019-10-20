@@ -41,14 +41,12 @@
       % swiss:
       \@swiss@localetrue%
       \@austrian@localefalse%
-      \ifbool{xpg@hyphenation@disabled}{}{%
-        \xpg@ifdefined{swissgerman}{}%
-           {%
-             \xpg@warning{No hyphenation patterns were loaded for "Swiss German (Old Spelling)"\MessageBreak
-	                  I will use the standard patterns for German (old spelling) instead}%
-	                  \adddialect\l@swissgerman\l@german\relax%
-           }%
-      }%
+      \xpg@ifdefined{swissgerman}{}%
+         {%
+           \xpg@warning{No hyphenation patterns were loaded for "Swiss German (Old Spelling)"\MessageBreak
+	                I will use the standard patterns for German (old spelling) instead}%
+	                \adddialect\l@swissgerman\l@german\relax%
+         }%
    \fi
    \german@set@babelname%
    \xpg@info{Option: German, variant=\val}%
