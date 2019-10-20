@@ -140,35 +140,25 @@ the \pkg{bidi-tex GitHub Organisation}.
 Polyglossia also bundles three packages for calendaric computations (\pkg{hebrewcal},
 \pkg{hijrical}, and \pkg{farsical}).
 
-\section{Loading language definition files}
 
-\subsection{The recommended way}
-You can determine the default language by means of the command:
-	\displaycmd{\setdefaultlanguage[⟨options⟩]\{lang\}}{\setdefaultlanguage}
-(or equivalently \Cmd\setmainlanguage).
-Secondary languages can be loaded with
-	\displaycmd{\setotherlanguage[⟨options⟩]\{lang\}.}{\setotherlanguage}
-These commands have the advantage of being explicit and of allowing you to set
-language-specific options.\footnote{ %
-	More on language-specific options below.}
-It is also possible to load a series of secondary languages at once using
-	\displaycmd{\setotherlanguages\{lang1,lang2,lang3,…\}.}{\setotherlanguages}
+\section{Setting up multilingual documents}
 
-Global language-specific options can be modified by means of the
+\subsection{Activating languages}
+
+The default language of a document is specified by means of the command
+	\displaycmd{\setdefaultlanguage[⟨options⟩]\{⟨lang⟩\}}{\setdefaultlanguage}
+(or, equivalently, \Cmd\setmainlanguage).
+Secondary languages can be determined with
+	\displaycmd{\setotherlanguage[⟨options⟩]\{⟨lang⟩\}.}{\setotherlanguage}
+All these commands allow you to set language-specific options.\footnote{%
+	Section~\ref{specific} documents these options for the respective languages.}
+It is also possible to load a series of secondary languages at once (but without options)
+using
+	\displaycmd{\setotherlanguages\{⟨lang1⟩,⟨lang2⟩,⟨lang3⟩,…\}.}{\setotherlanguages}
+
+All language-specific options can be modified locally by means of the
 language-switching commands described in section \ref{languageswitching}.
 
-\subsection{The “Babel way” – obsolete}
-\new{v1.2.0}
-{\color{red}\bfseries Warning}: \pkg{polyglossia} no longer supports loading
-language definition files as package options!
-%As with \pkg{babel}, \pkg{polyglossia} also allows you to load language definition files
-%as package options. In most cases, option \texttt{⟨lang⟩} will load the file
-%\file{gloss-⟨lang⟩.ldf}. Note however that the \textit{first} language listed in \\
-%\centerline{\cmd{\usepackage[lang1,lang2,…]{polyglossia}}}
-%will be the default language for the document, which
-%is the opposite convention of \pkg{babel}.
-%Note also that this method may not work in some cases, and should be
-%considered deprecated.
 
 \subsection{Supported languages}
 
