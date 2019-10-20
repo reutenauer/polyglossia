@@ -1254,6 +1254,17 @@
 }
 
 
+% Define language-specific hyphenation exceptions
+\newcommand\pghyphenation[3][]{
+  \bgroup
+  \polyglossia@error@iflangnotloaded:n{#2}
+  \setkeys{#2}{#1}%
+  \select@@language[#1]{#2}%
+  \hyphenation{#3}%
+  \egroup
+}
+
+
 %Hook that other package authors can use
 %(for instance biblatex):
 \newcommand*{\xpg@hook@setlanguage}{}

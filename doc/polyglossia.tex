@@ -404,11 +404,30 @@ the font, by means of \pkg{fontspec}’s \cmd\addfontfeature. If the current fon
 does not appear to support the script of that language, an error message is
 displayed.
 
-\section{Hyphenation disabling}
+\section{Adapting hyphenation}
+
+\subsection{Hyphenation exceptions}
+
+\TeX\ provides the command ¦\hyphenation¦ to globally define hyphenation exceptions which override
+the hyphenation patterns for specified words, and which is used like this:
+\begin{Verbatim}
+\hyphenation{%
+  po-ly-glos-sia
+  ba-bel
+}
+\end{Verbatim}
+%
+These exceptions, however, apply to all languages. In addition to this, \pkg{polyglossia} provides
+the command\new{v.1.45}
+\displaycmd{\pghyphenation[⟨options⟩]\{⟨lang⟩\}\{⟨exceptions⟩\}}{\pghyphenation}
+which can be used to define exceptions that only apply to a specific language or language variant,
+respectively.
+
+\subsection{Hyphenation disabling}
 
 In some very specific contexts (such as music score creation), \TeX{} hyphenation
 is something to avoid as it may cause troubles. \pkg{polyglossia} provides two
-functions: \cmd\disablehyphenation\ and \cmd\enablehyphenation. Note that if
+functions: \Cmd\disablehyphenation\ and \Cmd\enablehyphenation. Note that if
 you select a new language while hyphenation is disabled, it will remain disabled.
 If you re-enable it, the hyphenation patterns of the currently selected language
 will be activated.
