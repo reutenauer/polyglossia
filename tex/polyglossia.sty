@@ -1068,6 +1068,9 @@
   % disable globalnumbers of previously defined default language
   \csuse{no\xpg@main@language @globalnumbers}
   \csuse{noextras@\xpg@main@language}%
+  % This is a hook for external packages which want to access variants
+  % via babelname (such as biblatex)
+  \cs_if_exist_use:c{noextras@bbl@\mainbabelname}%
   \csuse{init@noextras@\xpg@main@language}%
   \polyglossia@set@language@name[#1]{#2}%
   \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{\@rlmaintrue\@rl@footnotetrue}{}%
@@ -1207,10 +1210,13 @@
 \newcommand{\xpg@otherlanguage}[2][]
 {%
   \polyglossia@error@iflangnotloaded:n{#2}
-    \setkeys{#2}{#1}%
-    \polyglossia@setforeignlanguage[#1]{#2}
-    % buggy restoration heure
-    \csuse{inlineextras@#2}
+  \setkeys{#2}{#1}%
+  \polyglossia@setforeignlanguage[#1]{#2}
+  % buggy restoration heure
+  \csuse{inlineextras@#2}%
+  % This is a hook for external packages which want to access variants
+  % via babelname (such as biblatex)
+  \cs_if_exist_use:c{inlineextras@bbl@\babelname}%
 }
 
 \renewcommand{\foreignlanguage}[3][]
@@ -1238,6 +1244,9 @@
    \bgroup
    \xpg@otherlanguage[#1]{#2}%
    \csuse{date#2}%
+   % This is a hook for external packages which want to access variants
+   % via babelname (such as biblatex)
+   \cs_if_exist_use:c{date@bbl@\babelname}%
    #3
    \egroup
   % Reset the language's/script's font families
@@ -1326,9 +1335,9 @@
 
 
 \newcommand*{\xpg@set@language@aux}[2][]{%
-   \@select@language[#1]{#2}%
    % Store babelname of current language (for external packages such as biblatex)
    \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+   \@select@language[#1]{#2}%
     % Write to the aux
    \if@filesw%
       \ifx#1\\\\%
@@ -1444,16 +1453,28 @@
    \select@@language[#1]{#2}%
    \csuse{captions#2}%
    \csuse{date#2}%
+   % These are hooks for external packages which want to access variants
+   % via babelname (such as biblatex)
+   \cs_if_exist_use:c{captions@bbl@\babelname}%
+   \cs_if_exist_use:c{date@bbl@\babelname}%
    \local@marks{#2}%
    \csuse{init@extras@#2}%
    \polyglossia@lang@indentfirst:n{#2}
    \csuse{blockextras@#2}%
+   % This is a hook for external packages which want to access variants
+   % via babelname (such as biblatex)
+   \cs_if_exist_use:c{blockextras@bbl@\babelname}%
  }
 
 % hook for compatibility with biblatex
 \def\select@language#1{}
 
-\def\noextrascurrent#1{\csuse{noextras@#1}}
+\def\noextrascurrent#1{%
+   \csuse{noextras@#1}%
+   % This is a hook for external packages which want to access variants
+   % via babelname (such as biblatex)
+   \cs_if_exist_use:c{noextras@bbl@\babelname}
+}
 
 % Common code for `\select@language' and `\foreignlanguage'.
 \newcommand{\select@@language}[2][]{%

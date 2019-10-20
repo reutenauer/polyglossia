@@ -1,6 +1,8 @@
 1.45 (????)
 
 New features:
+  * Introduce a framework for external packages to access language variants. This fixes,
+    among other things, long-standing problems in the interaction of biblatex and polyglossia.
   * Add new macros \languagevariant, \mainlanguagevariant, \babelname and \mainbabelname
     for package authors to access language information.
   * Add new test \iflanguageloaded{<language>}{<true>}{<false>}, where <language>
