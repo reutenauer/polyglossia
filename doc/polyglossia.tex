@@ -941,6 +941,30 @@ you can do this:
 Note that this needs to be done after the respective language has been loaded with
 ¦\setmainlanguage¦ or ¦\setotherlanguage¦.
 
+Specifically for package authors, analogous commands are provided which are only executed
+if a specific language \emph{variety} is used. As opposed to the macros above, these refer
+to babel names. Other than that, the function is identical:
+
+\begin{itemize}
+	\item \Cmd{\captions@bbl@⟨babelname⟩} 
+	\item \Cmd{\date@bbl@⟨babelname⟩}
+	\item \Cmd{\blockextras@bbl@⟨babelname⟩}
+	\item \Cmd{\inlineextras@bbl@⟨babelname⟩}
+	\item \Cmd{\noextras@bbl@⟨babelname⟩} 
+\end{itemize}
+%
+By default, these macros are undefined. If they are defined (\eg by an external package),
+they will be executed after their respective ¦⟨lang⟩¦ counterpart and thus can be used to
+overwrite definitions of the former. Again, use ¦\gappto¦ to define\slash modify these macros.
+For instance, to add a new caption ¦\footnotename¦ to the Swiss variety of German (babel name
+¦nswissgerman¦), you can do this:
+\begin{verbatim}
+\gappto\captions@bbl@nswissgerman{\def\footnotename{Fussnote}}
+\end{verbatim}
+%
+If you do this in a document preamble rather than in a package, you need to embrace the redefinition
+by ¦\makeatletter¦ and ¦\makeatother¦ due to the ¦@¦ in the macro names.
+
 \section{Script-specific numbering}
 
 Languages and scripts have specific numbering conventions. Some use decimal digits
