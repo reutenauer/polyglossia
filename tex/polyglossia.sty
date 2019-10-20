@@ -285,14 +285,23 @@
 \newcommand*\polyglossia@setup@language@patterns[1]{%
   \ifbool{xpg@hyphenation@disabled}{%
     \xdef\xpg@lastlanguage{\the\csname l@#1\endcsname}%
-    \language=\l@nohyphenation%
   }{%
-    \cs_if_eq:cNTF{l@#1}{\l@nohyphenation}{%
-        \language=\l@nohyphenation%
-    }{%
-        \xpg@set@hyphenation@patterns{#1}%
-    }%
-  }%
+    % first, test if \l@#1 exists
+    % without that, \csname l@#1\endcsname will be defined as \relax
+    \cs_if_exist:cTF {l@#1}
+      {
+        \cs_if_eq:cNTF {l@#1} \l@nohyphenation
+          {
+            \language=\l@nohyphenation
+          }
+          {
+            \xpg@set@hyphenation@patterns{#1}
+          }
+      }
+      {
+        \xpg@set@hyphenation@patterns{#1}
+      }
+  }
 }
 
 \prop_new:N \polyglossia@langsetup
@@ -1367,25 +1376,40 @@
 }
 
 \prg_set_conditional:Npnn \polyglossia@check@ifdefined:N #1 { p , T , F , TF }{
-  \cs_if_exist:cTF{l@#1}{
-    \cs_if_eq:cNTF{l@#1}{\l@nohyphenation}{\prg_return_false:}{\prg_return_true:}
-  }{
-    \prg_return_false:
-  }
+  \cs_if_exist:cTF {l@#1}
+    {
+      \cs_if_eq:cNTF {l@#1} \l@nohyphenation
+        {
+          \prg_return_false:
+        }
+        {
+          % it's possible that sometimes \csname l@#1\endcsname becomes \relax
+          \cs_if_eq:cNTF {l@#1} \relax
+            { \prg_return_false: }
+            { \prg_return_true: }
+        }
+    }
+    {
+      \prg_return_false:
+    }
+}
+
+\def\polyglossia@luatex@load@lang#1{%
+  % if \l@#1 is not properly defined, call lua function newloader(#1),
+  % and assign the returned number to \l@#1
+  \polyglossia@check@ifdefined:NF {#1}
+    {
+      \expandafter\chardef\csname l@#1\endcsname=
+        \directlua{ tex.sprint(polyglossia.newloader'#1') }\relax
+    }
 }
 
 \newcommand\xpg@ifdefined[3]{%
-    % With luatex, we first need to define \l@##1. We only do that if the pattern exists.
-    \ifluatex%
-       \ifstrequal{#1}{latex}{}{%
-         \expandafter\chardef\csname polyglossia@tmpl@#1\endcsname=%
-            \directlua{tex.sprint(polyglossia.newloader('#1'))}%
-         \cs_if_eq:cNF{polyglossia@tmpl@#1}{\l@nohyphenation}{\cs_gset_eq:cc{l@#1}{polyglossia@tmpl@#1}}%
-       }%
+    % With luatex, we first need to define \l@#1.
+    \ifluatex
+      \polyglossia@luatex@load@lang{#1}%
     \fi
-    \polyglossia@check@ifdefined:NTF{#1}%
-       {\xpg@set@hyphenation@patterns{#1}#2}%
-       {#3}%
+    \polyglossia@check@ifdefined:NTF{#1}{#2}{#3}%
 }%
 
 % Set \bbl@hyphendata@\the\language, which is (lua)babel's
@@ -1401,22 +1425,18 @@
 
 % Set hyphenation patterns for a given language. This does the right
 % thing both for XeTeX and LuaTeX
-\newcommand\xpg@set@hyphenation@patterns[1]{%
-    \str_case_e:nnF{\c_sys_engine_str}{%
-      {luatex}{%
-        \polyglossia@check@ifdefined:NF{#1}{%
-            \expandafter\chardef\csname l@#1\endcsname=\directlua{tex.sprint(polyglossia.newloader('#1'))}%
-        }%
-        \language=\csname l@#1\endcsname%
-      }%
-      {xetex}{%
-        \language=\csname l@#1\endcsname%
-      }%
-    }%
-    {
-      \xpg@warning{You’re running a TeX engine that is not LuaTeX or XeTeX.\MessageBreak
-        That is almost guaranteed to cause problems.}%
-    }%
+\newcommand*\xpg@set@hyphenation@patterns[1]{%
+  \ifluatex
+    \polyglossia@luatex@load@lang{#1}%
+    \language=\csname l@#1\endcsname
+  \else
+    \ifxetex
+      \language=\csname l@#1\endcsname
+    \else
+      \xpg@warning{You’re~running~a~TeX~engine~that~is~not~LuaTeX~or~XeTeX.\MessageBreak
+        That~is~almost~guaranteed~to~cause~problems.}%
+    \fi
+  \fi
 }
 
 % FIXME: Remove after gloss-latin (last user) has been rewritten)
