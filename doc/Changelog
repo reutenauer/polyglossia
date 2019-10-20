@@ -1,12 +1,15 @@
 1.45 (????)
 
 New features:
+  * Introduce a framework for external packages to access language variants. This fixes,
+    among other things, long-standing problems in the interaction of biblatex and polyglossia.
   * Add new macros \languagevariant, \mainlanguagevariant, \babelname and \mainbabelname
     for package authors to access language information.
   * Add new test \iflanguageloaded{<language>}{<true>}{<false>}, where <language>
     can be a \polyglossia or babel language name.
   * Add new macros \localnumeral, \localnumeral*, \Localnumeral and
     \Localnumeral* that convert Arabic digitals to the local number scheme.
+  * Add new macro \pghyphenation to add language-specific hyphenation exceptions (#18).
   * Add support form (Khalkha & Cyrillic) Mongolian in line with babel-mongolian (#23).
   * Add support for Kurdish, both Kurmanji and Sorani (#277).
   * Implement proper Cyrillic (alphanumeric) numbering (#285).

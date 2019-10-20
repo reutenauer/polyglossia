@@ -15,8 +15,8 @@
     citecolor=myblue,
     hyperindex=false,
     hyperfootnotes=false,
-    pdftitle={Polyglossia: An alternative to Babel for XeLaTeX and LuaLaTeX},
-    pdfauthor={F Charette, A Reutenauer},
+    pdftitle={Polyglossia: Modern multilingual typesetting with XeLaTeX and LuaLaTeX},
+    pdfauthor={F Charette, A Reutenauer, B Roucariès, J Spitzmüller},
     pdfkeywords={xetex, xelatex, luatex, lualatex, multilingual, babel, hyphenation}
     ]{hyperref}
 \usepackage{metalogo}
@@ -33,6 +33,7 @@
 \newcommand*\TR[1]{\textcolor{myred}{#1}}
 \newcommand*\TX[1]{\hyperref[#1]{\textcolor{myred}{#1}}}
 \newcommand*\TB[1]{\textcolor{myblue}{\bf #1}}
+\newcommand*\TA[1]{\textsc{\color{myblue}#1}}
 \newcommand*\link[1]{\href{#1}{#1}}
 \def\eg{\textit{e.g.,}\xspace}
 \def\ie{\textit{i.e.,}\xspace}
@@ -77,8 +78,9 @@
 
 \title{\textcolor{lightblue}{\Huge\fontspec[LetterSpace=40]{GFS Ambrosia} Πολυγλωσσια}
 \\[16pt]
-\color{myblue}Polyglossia: An Alternative to Babel for \XeLaTeX\ and \LuaLaTeX}
-\author{\scshape\color{myblue}François Charette\\\color{myblue}Current maintainer: \scshape Arthur Reutenauer}
+\color{myblue}Polyglossia: Modern multilingual typesetting with \XeLaTeX\ and \LuaLaTeX}
+\author{\TA{François Charette} \and \TA{Arthur Reutenauer}\thanks{Current maintainer}
+	    \and \TA{Bastien Roucariès} \and \TA{Jürgen Spitzmüller}}
 \date{\filedate \qquad \fileversion\\
 \footnotesize (\textsc{pdf} file generated on \today)}
 
@@ -130,42 +132,33 @@ and modern. The package \pkg{antomega} has been very beneficial in our attempt t
 reach this objective.
 
 \paragraph{Requirements} The current version of \pkg{polyglossia} makes use of some convenient
-macros defined in the \pkg{etoolbox} package by Philipp Lehmann. Being designed
-for \XeLaTeX\ and \LuaLaTeX, it obviously also relies on \pkg{fontspec} by Will
-Robertson. For languages written from right to left, it needs the package \pkg{bidi}
-by Vafa Khalighi (\textarabic{وفا خليقي}) (for \XeTeX) or  \pkg{luabidi} (for \LuaTeX).
+macros defined in the \pkg{etoolbox} package by \TA{Philipp Lehmann} and \TA{Joseph Wright}.
+Being designed for \XeLaTeX\ and \LuaLaTeX, it obviously also relies on \pkg{fontspec} by
+\TA{Will Robertson}. For languages written from right to left, it needs the package \pkg{bidi}
+(for \XeTeX) or  \pkg{luabidi} (for \LuaTeX) by \TA{Vafa Khalighi} (\textarabic{وفا خليقي}) and
+the \pkg{bidi-tex GitHub Organisation}.
 Polyglossia also bundles three packages for calendaric computations (\pkg{hebrewcal},
 \pkg{hijrical}, and \pkg{farsical}).
 
-\section{Loading language definition files}
 
-\subsection{The recommended way}
-You can determine the default language by means of the command:
-	\displaycmd{\setdefaultlanguage[⟨options⟩]\{lang\}}{\setdefaultlanguage}
-(or equivalently \Cmd\setmainlanguage).
-Secondary languages can be loaded with
-	\displaycmd{\setotherlanguage[⟨options⟩]\{lang\}.}{\setotherlanguage}
-These commands have the advantage of being explicit and of allowing you to set
-language-specific options.\footnote{ %
-	More on language-specific options below.}
-It is also possible to load a series of secondary languages at once using
-	\displaycmd{\setotherlanguages\{lang1,lang2,lang3,…\}.}{\setotherlanguages}
+\section{Setting up multilingual documents}
 
-Global language-specific options can be modified by means of the
+\subsection{Activating languages}
+
+The default language of a document is specified by means of the command
+	\displaycmd{\setdefaultlanguage[⟨options⟩]\{⟨lang⟩\}}{\setdefaultlanguage}
+(or, equivalently, \Cmd\setmainlanguage).
+Secondary languages can be determined with
+	\displaycmd{\setotherlanguage[⟨options⟩]\{⟨lang⟩\}.}{\setotherlanguage}
+All these commands allow you to set language-specific options.\footnote{%
+	Section~\ref{specific} documents these options for the respective languages.}
+It is also possible to load a series of secondary languages at once (but without options)
+using
+	\displaycmd{\setotherlanguages\{⟨lang1⟩,⟨lang2⟩,⟨lang3⟩,…\}.}{\setotherlanguages}
+
+All language-specific options can be modified locally by means of the
 language-switching commands described in section \ref{languageswitching}.
 
-\subsection{The “Babel way” – obsolete}
-\new{v1.2.0}
-{\color{red}\bfseries Warning}: \pkg{polyglossia} no longer supports loading
-language definition files as package options!
-%As with \pkg{babel}, \pkg{polyglossia} also allows you to load language definition files
-%as package options. In most cases, option \texttt{⟨lang⟩} will load the file
-%\file{gloss-⟨lang⟩.ldf}. Note however that the \textit{first} language listed in \\
-%\centerline{\cmd{\usepackage[lang1,lang2,…]{polyglossia}}}
-%will be the default language for the document, which
-%is the opposite convention of \pkg{babel}.
-%Note also that this method may not work in some cases, and should be
-%considered deprecated.
 
 \subsection{Supported languages}
 
@@ -411,11 +404,30 @@ the font, by means of \pkg{fontspec}’s \cmd\addfontfeature. If the current fon
 does not appear to support the script of that language, an error message is
 displayed.
 
-\section{Hyphenation disabling}
+\section{Adapting hyphenation}
+
+\subsection{Hyphenation exceptions}
+
+\TeX\ provides the command ¦\hyphenation¦ to globally define hyphenation exceptions which override
+the hyphenation patterns for specified words, and which is used like this:
+\begin{Verbatim}
+\hyphenation{%
+  po-ly-glos-sia
+  ba-bel
+}
+\end{Verbatim}
+%
+These exceptions, however, apply to all languages. In addition to this, \pkg{polyglossia} provides
+the command\new{v.1.45}
+\displaycmd{\pghyphenation[⟨options⟩]\{⟨lang⟩\}\{⟨exceptions⟩\}}{\pghyphenation}
+which can be used to define exceptions that only apply to a specific language or language variant,
+respectively.
+
+\subsection{Hyphenation disabling}
 
 In some very specific contexts (such as music score creation), \TeX{} hyphenation
 is something to avoid as it may cause troubles. \pkg{polyglossia} provides two
-functions: \cmd\disablehyphenation\ and \cmd\enablehyphenation. Note that if
+functions: \Cmd\disablehyphenation\ and \Cmd\enablehyphenation. Note that if
 you select a new language while hyphenation is disabled, it will remain disabled.
 If you re-enable it, the hyphenation patterns of the currently selected language
 will be activated.
@@ -942,6 +954,30 @@ you can do this:
 Note that this needs to be done after the respective language has been loaded with
 ¦\setmainlanguage¦ or ¦\setotherlanguage¦.
 
+Specifically for package authors, analogous commands are provided which are only executed
+if a specific language \emph{variety} is used. As opposed to the macros above, these refer
+to babel names. Other than that, the function is identical:
+
+\begin{itemize}
+	\item \Cmd{\captions@bbl@⟨babelname⟩} 
+	\item \Cmd{\date@bbl@⟨babelname⟩}
+	\item \Cmd{\blockextras@bbl@⟨babelname⟩}
+	\item \Cmd{\inlineextras@bbl@⟨babelname⟩}
+	\item \Cmd{\noextras@bbl@⟨babelname⟩} 
+\end{itemize}
+%
+By default, these macros are undefined. If they are defined (\eg by an external package),
+they will be executed after their respective ¦⟨lang⟩¦ counterpart and thus can be used to
+overwrite definitions of the former. Again, use ¦\gappto¦ to define\slash modify these macros.
+For instance, to add a new caption ¦\footnotename¦ to the Swiss variety of German (babel name
+¦nswissgerman¦), you can do this:
+\begin{verbatim}
+\gappto\captions@bbl@nswissgerman{\def\footnotename{Fussnote}}
+\end{verbatim}
+%
+If you do this in a document preamble rather than in a package, you need to embrace the redefinition
+by ¦\makeatletter¦ and ¦\makeatother¦ due to the ¦@¦ in the macro names.
+
 \section{Script-specific numbering}
 
 Languages and scripts have specific numbering conventions. Some use decimal digits
@@ -1191,34 +1227,33 @@ where \texttt{⟨lang⟩} is a \pkg{babel} language name.
 \section{Acknowledgements (by François Charette)}
 \pkg{Polyglossia} is notable for being a recycle box of previous contributions
 by other people. I take this opportunity to thank the following individuals,
-whose splendid work has made my task almost trivial in comparision: Johannes
-Braams and the numerous contributors to the \pkg{babel}{} package (in particular
-Boris Lavva and others for its Hebrew support), Alexej Kryukov (\pkg{antomega}), Will
-Robertson (\pkg{fontspec}), Apostolos Syropoulos (\pkg{xgreek}), Youssef Jabri
-(\pkg{arabi}), and Vafa Khalighi (\pkg{xepersian} and \pkg{bidi}).
-The work of Mojca Miklavec and Arthur Reutenauer on hyphenation patterns with their package
+whose splendid work has made my task almost trivial in comparision: \TA{Johannes
+Braams} and the numerous contributors to the \pkg{babel} package (in particular
+\TA{Boris Lavva} and others for its Hebrew support), \TA{Alexej Kryuko}v (\pkg{antomega}),
+\TA{Will Robertson} (\pkg{fontspec}), \TA{Apostolos Syropoulos} (\pkg{xgreek}), \TA{Youssef Jabri}
+(\pkg{arabi}), and \TA{Vafa Khalighi} (\pkg{xepersian} and \pkg{bidi}).
+The work of \TA{Mojca Miklavec} and \TA{Arthur Reutenauer} on hyphenation patterns with their package
 \pkg{hyph-utf8} is of course invaluable. I should also thank other
-individuals for their assistance in supporting specific languages: Yves Codet
-(Sanskrit), Zdenĕk Wagner (Hindi), Mikhal Oren (Hebrew), Sergey Astanin (Russian),
-Khaled Hosny (Arabic), Sertaç Ö. Yıldız (Turkish), Kamal Abdali (Urdu),
-and several other members of the \XeTeX\ user community, notably Enrico Gregorio, who
+individuals for their assistance in supporting specific languages: \TA{Yves Codet}
+(Sanskrit), \TA{Zdenĕk Wagner} (Hindi), \TA{Mikhal Oren} (Hebrew), \TA{Sergey Astanin} (Russian),
+\TA{Khaled Hosny} (Arabic), \TA{Sertaç Ö. Yıldız} (Turkish), \TA{Kamal Abdali} (Urdu),
+and several other members of the \XeTeX\ user community, notably \TA{Enrico Gregorio}, who
 has sent me many useful suggestions and corrections and contributed the ¦\newXeTeXintercharclass¦
 mechanism in xelatex.ini which is now used by polyglossia.
-More recently, Kevin Godby of the \href{http://ubuntu-manual.org}{Ubuntu Manual} project has
+More recently, \TA{Kevin Godby} of the \href{http://ubuntu-manual.org}{Ubuntu Manual} project has
 contributed very useful feedback, bug hunting and, with the help of translators,
 new language definition files for Asturian, Lithuanian, Occitan, Bengali, Malayalam, Marathi, Tamil, and Telugu.
 It is particularly heartening to realize that this package is used to typeset a widely-read
 document in dozens of different languages!
-Support for Lao was also added thanks to Brian Wilson.
-I also thank Alan Munn for kindly proof-reading the penultimate version of this documentation.
-And of course my gratitude also goes to Jonathan Kew, the formidable author of \XeTeX!
+Support for Lao was also added thanks to \TA{Brian Wilson}.
+I also thank \TA{Alan Munn} for kindly proof-reading the penultimate version of this documentation.
+And of course my gratitude also goes to \TA{Jonathan Kew}, the formidable author of \XeTeX!
 
 \section{More acknowledgements (by Arthur Reutenauer)}
 Many thanks to all the people who have contributed bugfixes and new features to
-Polyglossia since I took over.  Most of them can be identified from the version
-control log on \href{https://github.com/reutenauer/polyglossia}{GitHub} and I won’t try to name them
+Polyglossia since I took over.  Most of them can be identified from the contributor statistics on \href{https://github.com/reutenauer/polyglossia/graphs/contributors}{GitHub} and I won’t try to name them
 all (maybe, one day ...); among the ones who sent contributions directly to me
-I would like to especially thank Claudio Beccari, the indefatigable champion of
+I would like to especially thank \TA{Claudio Beccari}, the indefatigable champion of
 Romance languages, and beyond!
 
 \end{document}
