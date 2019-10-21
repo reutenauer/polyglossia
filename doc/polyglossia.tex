@@ -148,7 +148,7 @@ Polyglossia also bundles three packages for calendaric computations (\pkg{hebrew
 The default language of a document is specified by means of the command
 	\displaycmd{\setdefaultlanguage[⟨options⟩]\{⟨lang⟩\}}{\setdefaultlanguage}
 (or, equivalently, \Cmd\setmainlanguage).
-Secondary languages can be determined with
+Secondary languages are specified with
 	\displaycmd{\setotherlanguage[⟨options⟩]\{⟨lang⟩\}.}{\setotherlanguage}
 All these commands allow you to set language-specific options.\footnote{%
 	Section~\ref{specific} documents these options for the respective languages.}
@@ -158,6 +158,10 @@ using
 
 All language-specific options can be modified locally by means of the
 language-switching commands described in section \ref{languageswitching}.
+
+\paragraph{Note} In general, it is advisable to activate the languages \emph{after} all
+packages have been loaded. This is particularly important if you use right-to-left scripts
+or languages with babel shorthands.
 
 
 \subsection{Supported languages}
