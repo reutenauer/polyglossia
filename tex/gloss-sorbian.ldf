@@ -14,47 +14,43 @@
    \ifcase\nr\relax
       % upper:
       \def\sorbian@variant{usorbian}%
-      \SetLanguageKeys{sorbian}{language=Lower Sorbian,langtag=LSB,babelname=uppersorbian}%
+      \SetLanguageKeys{sorbian}{language=Upper Sorbian,langtag=USB,babelname=uppersorbian}%
       \xpg@fontsetup@latin{sorbian}%
-      \ifbool{xpg@hyphenation@disabled}{}{%
-           % Check if \l@usorbian is defined. If not, try to set it to some variety
-           % (specific order as in the csv list below), or null language if everything fails
-           \xpg@ifdefined{usorbian}{}{%
-             \def\do##1{%
-                 \xpg@ifdefined{##1}%
-                   {\csletcs{l@usorbian}{l@##1}\listbreak}%
-                   {}%
-             }%
-             \docsvlist{uppersorbian}
-             \xpg@ifdefined{usorbian}{}{%
-                      \xpg@warning{No hyphenation patterns for Upper Sorbian found\MessageBreak
-                                   I will use the 'null' language instead}%
-                      \adddialect\l@usorbian0%
-             }
-          }%
+      % Check if \l@usorbian is defined. If not, try to set it to some variety
+      % (specific order as in the csv list below), or null language if everything fails
+      \xpg@ifdefined{usorbian}{}{%
+        \def\do##1{%
+            \xpg@ifdefined{##1}%
+              {\csletcs{l@usorbian}{l@##1}\listbreak}%
+              {}%
+        }%
+        \docsvlist{uppersorbian}
+        \xpg@ifdefined{usorbian}{}{%
+                 \xpg@warning{No hyphenation patterns for Upper Sorbian found\MessageBreak
+                              I will use the 'null' language instead}%
+                 \adddialect\l@usorbian0%
+        }
       }%
    \or
       % lower:
       \def\sorbian@variant{lsorbian}%
-      \SetLanguageKeys{sorbian}{language=Upper Sorbian,langtag=LSB,babelname=lowersorbian}%
+      \SetLanguageKeys{sorbian}{language=Lower Sorbian,langtag=LSB,babelname=lowersorbian}%
       \xpg@fontsetup@latin{sorbian}%
-      \ifbool{xpg@hyphenation@disabled}{}{%
-           % Check if \l@lsorbian is defined. If not, try to set it to some variety
-           % (specific order as in the csv list below), or null language if everything fails
-           \xpg@ifdefined{lsorbian}{}{%
-             \def\do##1{%
-                \xpg@ifdefined{##1}%
-                   {\csletcs{l@lsorbian}{l@##1}\listbreak}%
-                   {}%
-             }%
-             \docsvlist{lowersorbian,Lsorbian}
-             \xpg@ifdefined{lsorbian}{}{%
-                      \xpg@warning{No hyphenation patterns for Lower Sorbian found\MessageBreak
-                                   I will use the 'null' language instead}%
-                      \adddialect\l@lsorbian0%
-             }
-          }%
-      }%
+      % Check if \l@lsorbian is defined. If not, try to set it to some variety
+      % (specific order as in the csv list below), or null language if everything fails
+      \xpg@ifdefined{lsorbian}{}{%
+        \def\do##1{%
+           \xpg@ifdefined{##1}%
+              {\csletcs{l@lsorbian}{l@##1}\listbreak}%
+              {}%
+        }%
+        \docsvlist{lowersorbian,Lsorbian,usorbian,uppersorbian}
+        \xpg@ifdefined{lsorbian}{}{%
+                 \xpg@warning{No hyphenation patterns for Lower Sorbian found\MessageBreak
+                              I will use the 'null' language instead}%
+                 \adddialect\l@lsorbian0%
+        }
+     }%
    \fi
    \xpg@info{Option: sorbian, variant=\val}%
 }{\xpg@warning{Unknown sorbian variant `#1'}}
