@@ -1026,7 +1026,7 @@ A third method are so-called TECKit fontmappings.
 Those can be activated with the \pkg{fontspec} ¦Mapping¦ option,
 using ¦arabicdigits¦, ¦farsidigits¦ or ¦thaidigits¦.
 For instance if \cmd\arabicfont\ is defined with the option ¦Mapping=arabicdigits¦,
-typing ¦\textarabic{2010}¦ results in \textarabic{٢٠١٠}. Note that this method has some drawbacks, though,
+typing \cmd{\textarabic\{2010\}} results in \textarabic{٢٠١٠}. Note that this method has some drawbacks, though,
 for instance when the value of a counter has to be written and read from auxiliary files.
 So please use this with care.}
 The macros have the form ¦\<script>digits¦. They convert Arabic numerical input and leave every other input untouched.
