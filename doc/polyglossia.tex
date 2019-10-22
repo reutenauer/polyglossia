@@ -208,7 +208,7 @@ Lao, Malayalam, Marathi, Tamil, Telugu, and Turkmen.\footnote{%
 Version 1.43\new{v1.43} silently introduced basic support for Japanese. This
 is considered experimental, and feedback is appreciated.
 In version 1.45\new{v1.45}, support for Kurdish and Mongolian as well as some new
-variants (Canadian French and English) has been added. Furthermore,  for consistency reasons, some language have
+variants (Canadian French and English) have been added. Furthermore,  for consistency reasons, some language have
 been renamed (\emph{farsi}\textrightarrow\emph{persian}, \emph{friulan}\textrightarrow\emph{friulian},
 \emph{magyar}\textrightarrow\emph{hungarian}, \emph{portuges}\textrightarrow\emph{portuguese},
 \emph{samin}\textrightarrow\emph{sami}) or merged (\emph{bahasai}\slash\emph{bahasam}\textrightarrow\emph{malay},
@@ -301,8 +301,8 @@ uppersorbian    & sorbian    & variant=upper                  \\
 \section{Language-switching commands}\label{languageswitching}
 
 \subsection{Recommended commands}
-Whenever a language definition file \file{gloss-⟨lang⟩.ldf} is loaded,
-the command \cmd{\text⟨lang⟩[⟨options⟩]\{…\}} \DescribeMacro{\text⟨lang⟩}
+For each activated language the command
+\cmd{\text⟨lang⟩[⟨options⟩]\{…\}} \DescribeMacro{\text⟨lang⟩}
 becomes available for short insertions of text in that language.
 For example ¦\textrussian{\today}¦ yields \textrussian{\today}
 This command switches to the correct hyphenation patterns, it activates
@@ -312,10 +312,11 @@ It does not, however, translate so-called \textit{caption strings}, i.\,e.
 ``chapter'', ``figure'' etc., to the local language (these remain in the main
 language).
 
-The\DescribeEnv{⟨lang⟩}\ environment ¦⟨lang⟩¦, which is meant for longer passages of text,
-behaves slightly different. It does everything the \cmd{\text⟨lang⟩\{…\}} does,
-but additionally, the caption strings are translated as well, and the language is also
-passed to auxiliary files, the table of contents and the lists of figures/tables.
+The\DescribeEnv{⟨lang⟩}\ environment ¦⟨lang⟩¦, which is also available for any activated language,
+is meant for longer passages of text. It behaves slightly different than the \cmd{\text⟨lang⟩\{…\}}
+command: It does everything the latter does, but additionally, the caption strings are translated
+as well, and the language is also passed to auxiliary files, the table of contents and the lists of
+figures/tables.
 Like the command, the environment provides the possibility of setting language options locally.
 For instance the following allows us to quote the beginning
 of Homer’s \textit{Iliad}:
@@ -412,12 +413,14 @@ displayed.
 
 \subsection{Hyphenation exceptions}
 
-\TeX\ provides the command ¦\hyphenation¦ to globally define hyphenation exceptions which override
-the hyphenation patterns for specified words, and which is used like this:
+\TeX\ provides the command ¦\hyphenation{⟨exceptions⟩}¦ to globally define hyphenation exceptions
+which override the hyphenation patterns for specified words. The command takes as argument a space-separated
+list of words where hyphenation points are marked by a dash (if no dash is used, the respective word is not
+hyphenated at all):
 \begin{Verbatim}
 \hyphenation{%
   po-ly-glos-sia
-  ba-bel
+  LaTeX
 }
 \end{Verbatim}
 %
