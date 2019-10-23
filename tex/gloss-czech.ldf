@@ -24,9 +24,13 @@
   \shorthandoff{"}%
 }{}
 
-\def\cs@splithyphen{%
-  \kern\z@\discretionary{-}{\char\hyphenchar\the\font}{-}%
+\def\cs@@splithyphen#1{%
+  \kern\z@\discretionary{-}{\char\hyphenchar\the\font}{#1}%
   \nobreak\hskip\z@%
+}
+
+\def\cs@splithyphen{%
+  \cs@@splithyphen{-}%
 }
 
 \def\czech@shorthands{%
@@ -41,6 +45,30 @@
 
 \def\noczech@shorthands{%
   \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+
+\ifxetex
+  % splithyphens
+  \newXeTeXintercharclass\czech@hyphen % -
+\fi
+
+\def\czech@hyphens{%
+    \ifluatex
+      \xpg@warning{The 'splithyphens' option only works for XeLaTeX.\MessageBreak
+                   Please use the luavlna package to enable the feature for LuaLaTeX}
+    \else
+      \XeTeXinterchartokenstate=1
+      \XeTeXcharclass `\- \czech@hyphen
+      \XeTeXinterchartoks \z@ \czech@hyphen = {\cs@@splithyphen}% "-" -> "\cs@@splithyphen-"
+      % necessary if used together with vlna:
+      \XeTeXinterchartoks \czech@nonsyllabicpreposition \czech@hyphen = {\cs@@splithyphen}% "-" -> "\cs@@splithyphen-"
+    \fi%
+}
+
+\def\noczech@hyphens{%
+    \ifxetex
+      \XeTeXcharclass `\- \z@
+    \fi%
 }
 
 \def\captionsczech{%
@@ -78,14 +106,18 @@
 
 \def\noextras@czech{%
   \noczech@shorthands%
+  \noczech@hyphens%
+  \ifxetex\XeTeXinterchartokenstate=0\fi%
 }
 
 \def\blockextras@czech{%
-  \ifczech@babelshorthands\czech@shorthands\fi
+  \ifczech@babelshorthands\czech@shorthands\fi%
+  \ifczech@splithyphens\czech@hyphens\fi%
 }
 
 \def\inlineextras@czech{%
-  \ifczech@babelshorthands\czech@shorthands\fi
+  \ifczech@babelshorthands\czech@shorthands\fi%
+  \ifczech@splithyphens\czech@hyphens\fi%
 }
 
 \endinput
