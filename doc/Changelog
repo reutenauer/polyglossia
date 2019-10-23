@@ -11,6 +11,8 @@ New features:
     \Localnumeral* that convert Arabic digitals to the local number scheme.
   * Add new macro \pghyphenation to add language-specific hyphenation exceptions (#18).
   * Add support form (Khalkha & Cyrillic) Mongolian in line with babel-mongolian (#23).
+  * Add option splithyphens and vlna to Czech (XeTeX only; for LuaTeX, use the package
+    luavlna to get these features) (#32).
   * Add support for Kurdish, both Kurmanji and Sorani (#277).
   * Implement proper Cyrillic (alphanumeric) numbering (#285).
   * Add new language friulian.
