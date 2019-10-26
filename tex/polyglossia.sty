@@ -145,8 +145,18 @@
   }
 }
 
+% (lua)bidi commands to change directionality for paragraphs
+% and inline text.
 % overwritten with correct package
-\cs_new_nopar:Nn{\polyglossia@setdirection:n}{%
+\cs_new_nopar:Nn{\polyglossia@setpardirection:n}{%
+  \str_case_e:nnTF{#1}{%
+       {LR}{\relax}%
+       {RL}{\xpg@error{right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}}%
+     }%
+     {}%
+     {\xpg@error{Unknown~ language~ direction~ #1 ~(base~ wrapper)}}%
+}
+\cs_new_nopar:Nn{\polyglossia@settextdirection:n}{%
   \str_case_e:nnTF{#1}{%
        {LR}{\relax}%
        {RL}{\xpg@error{right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}}%
@@ -156,10 +166,18 @@
 }
 \AtEndOfPackageFile*{bidi}{%
   \ExplSyntaxOn%
-  \cs_gset_nopar:Nn{\polyglossia@setdirection:n}{%
+  \cs_gset_nopar:Nn{\polyglossia@setpardirection:n}{%
     \str_case_e:nnTF{#1}{%
         {LR}{\setLR}%
         {RL}{\setRL}%
+      }%
+      {}%
+      {\xpg@error{Unknown~ language~ direction~ #1 ~(bidi~ wrapper)}}%
+  }%
+  \cs_gset_nopar:Nn{\polyglossia@settextdirection:n}{%
+    \str_case_e:nnTF{#1}{%
+        {LR}{\LRE}%
+        {RL}{\RLE}%
       }%
       {}%
       {\xpg@error{Unknown~ language~ direction~ #1 ~(bidi~ wrapper)}}%
@@ -168,10 +186,18 @@
 }
 \AtEndOfPackageFile*{luabidi}{%
   \ExplSyntaxOn%
-  \cs_gset_nopar:Nn{\polyglossia@setdirection:n}{%
+  \cs_gset_nopar:Nn{\polyglossia@setpardirection:n}{%
     \str_case_e:nnTF{#1}{%
         {LR}{\setLR}%
         {RL}{\setRL}%
+      }
+      {}%
+      {\xpg@error{Unknown~ language~ direction~ #1 ~(luabidi~ wrapper)}}%
+  }%
+  \cs_gset_nopar:Nn{\polyglossia@settextdirection:n}{%
+    \str_case_e:nnTF{#1}{%
+        {LR}{\LRE}%
+        {RL}{\RLE}%
       }
       {}%
       {\xpg@error{Unknown~ language~ direction~ #1 ~(luabidi~ wrapper)}}%
@@ -671,10 +697,22 @@
 }
 
 
-\cs_new:Nn{\polyglossia@lang@setdirection:n}{
+\cs_new:Nn{\polyglossia@lang@setpardirection:n}{
   \prop_get:NnNTF \polyglossia@langsetup {#1/direction} \l_tmpa_tl
       {
-        \polyglossia@setdirection:n{\l_tmpa_tl}
+        \polyglossia@setpardirection:n{\l_tmpa_tl}
+      }
+      {
+        \xpg@error{Could~ not~ retrieve~ key~ direction~ for~ language~ "#1"}
+        \prop_show:N{\polyglossia@langsetup}
+      }
+}
+
+
+\cs_new:Nn{\polyglossia@lang@settextdirection:nn}{
+  \prop_get:NnNTF \polyglossia@langsetup {#1/direction} \l_tmpa_tl
+      {
+        \polyglossia@settextdirection:n{\l_tmpa_tl}{#2}
       }
       {
         \xpg@error{Could~ not~ retrieve~ key~ direction~ for~ language~ "#1"}
@@ -1224,7 +1262,7 @@
   \polyglossia@error@iflangnotloaded:n{#2}
    \bgroup
    \xpg@otherlanguage[#1]{#2}%
-   #3
+   \polyglossia@lang@settextdirection:nn{#2}{#3}%
    \egroup
 }
 
@@ -1234,8 +1272,9 @@
 \renewenvironment{otherlanguage*}[2][]
 {%
   \xpg@otherlanguage[#1]{#2}%
+  \polyglossia@lang@settextdirection:nn{#2}\bgroup%
 }
-{}
+{\egroup}
 
 % use by \text<lang>. Equivalent to \foreignlanguage,
 % except that dates are localized.
@@ -1247,7 +1286,7 @@
    % This is a hook for external packages which want to access variants
    % via babelname (such as biblatex)
    \cs_if_exist_use:c{date@bbl@\babelname}%
-   #3
+   \polyglossia@lang@settextdirection:nn{#2}{#3}%
    \egroup
   % Reset the language's/script's font families
   \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/lcscript}}{latin}{}{\resetfontlatin}%
@@ -1464,6 +1503,7 @@
    \xpg@set@bbl@hyphendata{\the\language}
    \xpg@initial@setup%
    \select@@language[#1]{#2}%
+   \polyglossia@lang@setpardirection:n{#2}%
    \csuse{captions#2}%
    \csuse{date#2}%
    % These are hooks for external packages which want to access variants
@@ -1516,7 +1556,6 @@
   \csuse{#2@numbers}%
   \use@localhyphenmins{#2}%
   \polyglossia@lang@frenchspacing:n{#2}
-  \polyglossia@lang@setdirection:n{#2}
 }
 
 
