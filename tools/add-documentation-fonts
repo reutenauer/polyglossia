@@ -6,6 +6,7 @@ install()
   echo "Installing in $TMPDIR"
   cd "$TMPDIR"
   mkdir fonts
+
   wget http://sourceforge.net/projects/dejavu/files/dejavu/2.37/dejavu-fonts-ttf-2.37.tar.bz2
   DEJAVUFONTS='dejavu-fonts-ttf-2.37/ttf/DejaVu'
   tar xvf dejavu-fonts-ttf-2.37.tar.bz2 $DEJAVUFONTS\*.ttf
@@ -25,6 +26,11 @@ install()
   EZRASILFONTS=EzraSIL2.51/SILE
   unzip EzraSIL-2.51.zip $EZRASILFONTS\*.ttf
   mv -f $EZRASILFONTS*.ttf $TMPDIR/fonts
+
+  wget https://www.greekfontsociety-gfs.gr/_assets/fonts/GFS_Ambrosia.zip
+  GFSAMBROSIAFONT=GFS_AMBROSIA/GFSAmbrosia.otf
+  unzip GFS_Ambrosia.zip $GFSAMBROSIAFONT
+  mv -f $GFSAMBROSIAFONT fonts
 }
 
 if install; then
