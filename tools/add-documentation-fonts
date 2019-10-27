@@ -1,0 +1,33 @@
+#!/bin/sh
+
+install()
+{
+  TMPDIR=`mktemp -d /tmp/fontsXXXXXX`
+  echo "Installing in $TMPDIR"
+  cd "$TMPDIR"
+  mkdir fonts
+  wget http://sourceforge.net/projects/dejavu/files/dejavu/2.37/dejavu-fonts-ttf-2.37.tar.bz2
+  DEJAVUFONTS='dejavu-fonts-ttf-2.37/ttf/DejaVu'
+  tar xvf dejavu-fonts-ttf-2.37.tar.bz2 $DEJAVUFONTS\*.ttf
+  mv -f $DEJAVUFONTS*.ttf $TMPDIR/fonts
+
+  wget https://github.com/alif-type/amiri/releases/download/0.112/Amiri-0.112.zip
+  AMIRIFONTS='Amiri-0.112/Amiri-'
+  unzip Amiri-0.112.zip $AMIRIFONTS\*.ttf
+  mv -f $AMIRIFONTS*.ttf $TMPDIR/fonts
+
+  wget https://sedra.bethmardutho.org/fonts/fonts.zip
+  SERTOJERUSALEMFONTS='fonts/syrcomjerusalem'
+  unzip fonts.zip $SERTOJERUSALEMFONTS\*.ttf
+  chmod 644 $SERTOJERUSALEMFONTS*.ttf
+
+  wget https://software.sil.org/downloads/r/ezra/EzraSIL-2.51.zip
+  EZRASILFONTS=EzraSIL2.51/SILE
+  unzip EzraSIL-2.51.zip $EZRASILFONTS\*.ttf
+}
+
+if install; then
+  echo "Fonts extracted to $TMPDIR/fonts/."
+else
+  echo 'Download(s) failed.'
+fi
