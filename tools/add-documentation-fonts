@@ -24,6 +24,7 @@ install()
   wget https://software.sil.org/downloads/r/ezra/EzraSIL-2.51.zip
   EZRASILFONTS=EzraSIL2.51/SILE
   unzip EzraSIL-2.51.zip $EZRASILFONTS\*.ttf
+  mv -f $EZRASILFONTS*.ttf $TMPDIR/fonts
 }
 
 if install; then
