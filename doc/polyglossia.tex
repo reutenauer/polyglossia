@@ -205,7 +205,7 @@ coptic       & \TX{greek}     & lithuanian   & \TX{russian}    & turkmen\\
 croatian     & \TX{hebrew}    & macedonian   & \TX{sami}       & \TX{ukrainian}\\
 \TX{czech}   & \TX{hindi}     & \TX{malay}   & \TX{sanskrit}   & urdu\\
 danish       & \TX{hungarian} & malayalam    & \TX{serbian}    & vietnamese\\
-divehi       & icelandic      & marathi      & slovak          & \TX{welsh}\\
+divehi       & icelandic      & marathi      & \TX{slovak}     & \TX{welsh}\\
 \bottomrule
 \end{tabular}
 
@@ -905,6 +905,44 @@ Currently support for Sami is limited to Northern Sami.
 	\item \Cmd\asbuk: same in lowercase
 \end{itemize}
 
+
+\subsection{slovak}\label{slovak}
+
+\paragraph*{Options:}
+\begin{itemize}
+	\item \TB{babelshorthands} = \textit{false} or true. \new{v1.46}
+	if this is turned on, the following shorthands for Slovak are activated:
+	\begin{shorthands}
+        \item[¦"=¦] for an explicit hyphen sign which is repeated at the beginning
+                    of the next line when hyphenated, as common in Slovak typesetting
+		            (also see option ¦splithyphens¦).
+        \item[¦"|¦] disables a ligature at this position.
+        \item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
+                    cases where the hyphen should stick at the following syllable.
+        \item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
+                    in the hyphenation patterns (as opposed to ¦\-¦).
+        \item[¦""¦] allows for a line break at this position (without hyphenation sign).
+        \item[¦"/¦] a slash that allows for a subsequent line break. As opposed to ¦\slash¦, hyphenation at the breakpoints
+                    preset in the hyphenation patterns is still allowed.
+        \item[¦"‘¦] for Slovak left double quotes (looks like ,,).
+        \item[¦"’¦] for Slovak right double quotes (looks like “).
+        \item[¦">¦] for Slovak left double guillemets (looks like >>).
+        \item[¦"<¦] for Slovak right double guillemets (looks like <<).
+	\end{shorthands}
+	\item \TB{splithyphens} = \textit{false} or true. \new{v1.46}
+	According to Slovak typesetting conventions, if a word with a hard hyphen (such as \emph{je-li})
+	is hyphenated at this hyphen, a second hyphenation character is to be inserted at the beginning
+	of the line that follows the hyphenation (\emph{je-/-li}).\\
+	If this option is true, this is done automatically (so the shorthand ¦"=¦ is not needed).
+	Note, however, that the option is only available for \XeTeX. If you are using \LuaTeX,
+	load the \pkg{luavlna} package to the same effect.
+	\item \TB{vlna} = \textit{false} or true. \new{v1.46}
+	According to Slovak typesetting conventions, single-letter words (non-syllable prepositions)
+	must not occur at line ends.\\
+	If this option is true, this is taken care of. Note, however, that the option
+	is only available for \XeTeX. If you are using \LuaTeX, load the \pkg{luavlna} package
+	to the same effect.
+\end{itemize}
 
 \subsection{slovenian}\label{slovenian}
 \paragraph*{Options:}
