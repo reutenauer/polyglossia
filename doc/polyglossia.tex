@@ -666,7 +666,7 @@ The default value of each option is given in italic.
 		\item[¦"<¦] for French left double quotes («)
 		\item[¦">¦] for French right double quotes (»).
 		\end{shorthands}
-	\item\TB{script} = \textit{latin} or blackletter (=~fraktur).\new{v1.2.0}
+	\item\TB{script} = \textit{latin} or blackletter\new{v1.46} (=~fraktur\new{v1.2.0}).
 		Setting ¦script=blackletter¦ adapts the captions for typesetting German in blackletter type (using the long s (ſ)
 		where appropriate).
 	\end{itemize}
@@ -931,18 +931,18 @@ Currently support for Sami is limited to Northern Sami.
         \item[¦"<¦] for Slovak right double guillemets (looks like <<).
 	\end{shorthands}
 	\item \TB{splithyphens} = \textit{false} or true. \new{v1.46}
-	According to Slovak typesetting conventions, if a word with a hard hyphen (such as \emph{je-li})
-	is hyphenated at this hyphen, a second hyphenation character is to be inserted at the beginning
-	of the line that follows the hyphenation (\emph{je-/-li}).\\
-	If this option is true, this is done automatically (so the shorthand ¦"=¦ is not needed).
-	Note, however, that the option is only available for \XeTeX. If you are using \LuaTeX,
-	load the \pkg{luavlna} package to the same effect.
+	      According to Slovak typesetting conventions, if a word with a hard hyphen (such as \emph{je-li})
+	      is hyphenated at this hyphen, a second hyphenation character is to be inserted at the beginning
+          of the line that follows the hyphenation (\emph{je-/-li}).\\
+	      If this option is true, this is done automatically (so the shorthand ¦"=¦ is not needed).
+	      Note, however, that the option is only available for \XeTeX. If you are using \LuaTeX,
+	      load the \pkg{luavlna} package to the same effect.
 	\item \TB{vlna} = \textit{false} or true. \new{v1.46}
-	According to Slovak typesetting conventions, single-letter words (non-syllable prepositions)
-	must not occur at line ends.\\
-	If this option is true, this is taken care of. Note, however, that the option
-	is only available for \XeTeX. If you are using \LuaTeX, load the \pkg{luavlna} package
-	to the same effect.
+	      According to Slovak typesetting conventions, single-letter words (non-syllable prepositions)
+	      must not occur at line ends.\\
+	      If this option is true, this is taken care of. Note, however, that the option
+	      is only available for \XeTeX. If you are using \LuaTeX, load the \pkg{luavlna} package
+	      to the same effect.
 \end{itemize}
 
 \subsection{slovenian}\label{slovenian}
