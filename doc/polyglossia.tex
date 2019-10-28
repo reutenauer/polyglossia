@@ -205,7 +205,7 @@ coptic       & \TX{greek}     & lithuanian   & \TX{russian}    & turkmen\\
 croatian     & \TX{hebrew}    & macedonian   & \TX{sami}       & \TX{ukrainian}\\
 \TX{czech}   & \TX{hindi}     & \TX{malay}   & \TX{sanskrit}   & urdu\\
 danish       & \TX{hungarian} & malayalam    & \TX{serbian}    & vietnamese\\
-divehi       & icelandic      & marathi      & slovak          & \TX{welsh}\\
+divehi       & icelandic      & marathi      & \TX{slovak}     & \TX{welsh}\\
 \bottomrule
 \end{tabular}
 
@@ -409,11 +409,12 @@ that occurs in the document. That font should always be defined as
 For instance, if the default font defined by \cmd\setmainfont\
 does not support Greek, then one can define the font used to display Greek with:\\
 \centerline{ \cmd\newfontfamily\cmd{\greekfont[Script=Greek,⟨…⟩]\{⟨font⟩\}}. }
-Note that polyglossia will use the font thus defined as is.
-for instance if ¦\arabicfont¦ is explicitly defined, then one should take care of
-including the option ¦Script=Arabic¦ in that definition.
-See the \pkg{fontspec} documentation for more information.
-If a specific sans or monospace font is needed for a particular script or language,
+Note that polyglossia will use the font defined as is, so assure to do all necessary settings
+(please refer to the \pkg{fontspec} documentation for details).
+For instance, if ¦\arabicfont¦ is explicitly defined, then the option ¦Script=Arabic¦ should
+be included in that definition.
+
+If a specific sans serif or monospace (`teletype') font is needed for a particular script or language,
 it can be defined by means of \new{v1.2.0}
 ¦\⟨script⟩fontsf¦\ or ¦\⟨language⟩fontsf¦ and ¦\⟨script⟩fonttt¦\ or ¦\⟨language⟩fonttt¦, respectively.
 
@@ -665,8 +666,9 @@ The default value of each option is given in italic.
 		\item[¦"<¦] for French left double quotes («)
 		\item[¦">¦] for French right double quotes (»).
 		\end{shorthands}
-	\item\TB{script} = \textit{latin} or fraktur.\new{v1.2.0}
-		Setting script=fraktur modifies the captions for typesetting German in Fraktur.
+	\item\TB{script} = \textit{latin} or blackletter\new{v1.46} (=~fraktur\new{v1.2.0}).
+		Setting ¦script=blackletter¦ adapts the captions for typesetting German in blackletter type (using the long s (ſ)
+		where appropriate).
 	\end{itemize}
 
 \subsection{greek}\label{greek}
@@ -741,7 +743,6 @@ The default value of each option is given in italic.
   \end{itemize}
 
 \subsection[kurdish]{kurdish\new{v1.45}}\label{kurdish}
-Kurdish support includes Sorani Kurdish and Kurmanji Kurdish, both in either Arabic or Latin script.
 
 \paragraph*{Options:}
 \begin{itemize}
@@ -750,8 +751,8 @@ Kurdish support includes Sorani Kurdish and Kurmanji Kurdish, both in either Ara
 	\item \TB{numerals} = western or eastern. Defaults are ¦western¦ for Latin and ¦eastern¦ for Arabic script, depending on the selection above.
 	\item \TB{abjadjimnotail} = \textit{false} or true.
 	Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
-	\item \TB{locale} (not yet implemented)
-	\item \TB{calendar} (not yet implemented)
+%	\item \TB{locale} (not yet implemented)
+%	\item \TB{calendar} (not yet implemented)
 \end{itemize}
 \paragraph*{Commands:}
 \begin{itemize}
@@ -827,8 +828,8 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 	\item \TB{numerals} = western or \textit{eastern}
 	\item \TB{abjadjimnotail} = \textit{false} or true. \new{v1.0.3}
 	Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
-	\item \TB{locale} (not yet implemented)
-	\item \TB{calendar} (not yet implemented)
+%	\item \TB{locale} (not yet implemented)
+%	\item \TB{calendar} (not yet implemented)
 \end{itemize}
 \paragraph*{Commands:}
 \begin{itemize}
@@ -893,7 +894,7 @@ Currently support for Sami is limited to Northern Sami.
 \subsection{serbian}\label{serbian}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \TB{Script} = \textit{Cyrillic} or Latin. Will likely go to a variant.
+	\item \TB{Script} = \textit{Cyrillic} or Latin.
 	\item \TB{numerals} = \textit{arabic} or cyrillic. Uses either Arabic numerals or Cyrillic
 	      alphanumerical numbering.
 	\end{itemize}
@@ -905,6 +906,44 @@ Currently support for Sami is limited to Northern Sami.
 	\item \Cmd\asbuk: same in lowercase
 \end{itemize}
 
+
+\subsection{slovak}\label{slovak}
+
+\paragraph*{Options:}
+\begin{itemize}
+	\item \TB{babelshorthands} = \textit{false} or true. \new{v1.46}
+	if this is turned on, the following shorthands for Slovak are activated:
+	\begin{shorthands}
+        \item[¦"=¦] for an explicit hyphen sign which is repeated at the beginning
+                    of the next line when hyphenated, as common in Slovak typesetting
+		            (also see option ¦splithyphens¦).
+        \item[¦"|¦] disables a ligature at this position.
+        \item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
+                    cases where the hyphen should stick at the following syllable.
+        \item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
+                    in the hyphenation patterns (as opposed to ¦\-¦).
+        \item[¦""¦] allows for a line break at this position (without hyphenation sign).
+        \item[¦"/¦] a slash that allows for a subsequent line break. As opposed to ¦\slash¦, hyphenation at the breakpoints
+                    preset in the hyphenation patterns is still allowed.
+        \item[¦"‘¦] for Slovak left double quotes (looks like ,,).
+        \item[¦"’¦] for Slovak right double quotes (looks like “).
+        \item[¦">¦] for Slovak left double guillemets (looks like >>).
+        \item[¦"<¦] for Slovak right double guillemets (looks like <<).
+	\end{shorthands}
+	\item \TB{splithyphens} = \textit{false} or true. \new{v1.46}
+	      According to Slovak typesetting conventions, if a word with a hard hyphen (such as \emph{je-li})
+	      is hyphenated at this hyphen, a second hyphenation character is to be inserted at the beginning
+          of the line that follows the hyphenation (\emph{je-/-li}).\\
+	      If this option is true, this is done automatically (so the shorthand ¦"=¦ is not needed).
+	      Note, however, that the option is only available for \XeTeX. If you are using \LuaTeX,
+	      load the \pkg{luavlna} package to the same effect.
+	\item \TB{vlna} = \textit{false} or true. \new{v1.46}
+	      According to Slovak typesetting conventions, single-letter words (non-syllable prepositions)
+	      must not occur at line ends.\\
+	      If this option is true, this is taken care of. Note, however, that the option
+	      is only available for \XeTeX. If you are using \LuaTeX, load the \pkg{luavlna} package
+	      to the same effect.
+\end{itemize}
 
 \subsection{slovenian}\label{slovenian}
 \paragraph*{Options:}
