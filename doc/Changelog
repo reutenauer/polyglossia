@@ -4,6 +4,7 @@ New features:
   * Add babelshorthands as well as options splithyphens and vlna to Slovak.
 
 Bug fixes:
+  * Fix problems with fragile font settings (#24).
   * Changed option name "fraktur" to "blackletter" in German (the former is still available
     as an alias).
 

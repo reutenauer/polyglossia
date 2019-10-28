@@ -1120,9 +1120,31 @@
 
 % This saves the normalfont for the latin script since we may change normalfont in other scripts
 \let\normalfontlatin=\normalfont%
-\let\rmfamilylatin=\rmfamily%
-\let\sffamilylatin=\sffamily%
-\let\ttfamilylatin=\ttfamily%
+
+% Provide default fonts (as set with \setmainfont, \setsansfont and \setmonofont)
+% for Latin scripts and as a fallback for non-Latin scripts.
+\DeclareRobustCommand\xpg@defaultfont@rm{%
+   \fontencoding{\g__fontspec_nfss_enc_tl}%
+   \fontfamily\rmdefault%
+   \selectfont%
+}
+\DeclareRobustCommand\xpg@defaultfont@sf{%
+   \fontencoding{\g__fontspec_nfss_enc_tl}%
+   \fontfamily\sfdefault%
+   \selectfont%
+}
+\DeclareRobustCommand\xpg@defaultfont@tt{%
+   \fontencoding{\g__fontspec_nfss_enc_tl}%
+   \fontfamily\ttdefault%
+   \selectfont%
+}
+
+% These switches activate the default fonts
+% Note that a simple \let\rmfamilylatin=\rmfamily
+% does not work reliably (see #24)
+\cs_gset_eq:cc{rmfamilylatin}{xpg@defaultfont@rm}%
+\cs_gset_eq:cc{sffamilylatin}{xpg@defaultfont@sf}%
+\cs_gset_eq:cc{ttfamilylatin}{xpg@defaultfont@tt}%
 
 \def\xpg@set@familydefault{%
   % We need the \edef route here in order
@@ -1144,15 +1166,16 @@
   % This (re-)saves the normalfont for the latin script since we may
   % change normalfont in other scripts
   \let\normalfontlatin=\normalfont%
-  \let\rmfamilylatin=\rmfamily%
-  \let\sffamilylatin=\sffamily%
-  \let\ttfamilylatin=\ttfamily%
+  % And for all cases, we also reset \<xx>familylatin
+  \cs_gset_eq:cc{rmfamilylatin}{xpg@defaultfont@rm}%
+  \cs_gset_eq:cc{sffamilylatin}{xpg@defaultfont@sf}%
+  \cs_gset_eq:cc{ttfamilylatin}{xpg@defaultfont@tt}%
 }
 
 \def\resetfontlatin{%
-   \let\rmfamily=\rmfamilylatin%
-   \let\sffamily=\sffamilylatin%
-   \let\ttfamily=\ttfamilylatin%
+   \cs_gset_eq:cc{rmfamily}{xpg@defaultfont@rm}%
+   \cs_gset_eq:cc{sffamily}{xpg@defaultfont@sf}%
+   \cs_gset_eq:cc{ttfamily}{xpg@defaultfont@tt}%
    \global\let\normalfont=\normalfontlatin}
 
 \def\selectfontfamilylatin{%
