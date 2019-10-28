@@ -5,6 +5,7 @@ New features:
 
 Bug fixes:
   * Fix problems with fragile font settings (#24).
+  * Fix some babel shorthand issues by updating the shorthand code from recent babel.
   * Changed option name "fraktur" to "blackletter" in German (the former is still available
     as an alias).
 
