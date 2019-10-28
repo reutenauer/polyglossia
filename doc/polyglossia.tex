@@ -301,18 +301,20 @@ uppersorbian    & sorbian    & variant=upper                  \\
 
 \begin{itemize}
 	\item \TB{babelshorthands}\new{v1.1.1} globally activates \pkg{babel}
-          shorthands whenever available. Currently shorthands are implemented for
-          Catalan, Czech, Dutch, Finnish, German, Italian, Latin, Mongolian, and Russian.
-          Please refer to the respective language descriptions (sec.~\ref{specific}) for details.
+		shorthands whenever available. Currently shorthands are implemented for
+		Catalan, Czech, Dutch, Finnish, German, Italian, Latin, Mongolian, Russian,
+		and Slovak. Please refer to the respective language descriptions
+		(sec.~\ref{specific}) for details.
 
-    \item \TB{localmarks} redefines the internal \LaTeX\ macros \cmd\markboth\ and \cmd\markright.
-          In earlier versions of \pkg{polyglossia},\new{v1.2.0} this option was set by default, but we
-          now realize that it causes more problems than it helps, so it is now off by default.
-          For backwards-compatibility, the option \TB{nolocalmarks} which used to switch off the previous
-          default, and now does nothing, is still available.
+	\item \TB{localmarks} redefines the internal \LaTeX\ macros \cmd\markboth\ and
+		\cmd\markright. In earlier versions of \pkg{polyglossia},\new{v1.2.0} this
+		option was set by default, but we now realize that it causes more problems
+		than it helps, so it is now off by default.  For backwards-compatibility, the
+		option \TB{nolocalmarks} which used to switch off the previous default, and
+		now does nothing, is still available.
 
-    \item \TB{quiet} turns off most info messages and some of the warnings issued by \LaTeX,
-          \pkg{fontspec} and \pkg{polyglossia}.
+	\item \TB{quiet} turns off most info messages and some of the warnings issued
+		by \LaTeX, \pkg{fontspec} and \pkg{polyglossia}.
 \end{itemize}
 
 \section{Language-switching commands}\label{languageswitching}
@@ -770,7 +772,7 @@ The default value of each option is given in italic.
 
 \subsection{latin}\label{latin}
 \paragraph*{Options:}
-	\begin{itemize}
+\begin{itemize}
 	\item \TB{variant} = classic, medieval, \emph{modern}, or ecclesiastic
 
 	These variants refer to different spelling conventions. The \texttt{classic}
@@ -855,87 +857,67 @@ The default value of each option is given in italic.
 	variant.
 	\item \TB{babelshorthands} = true or \emph{false}
 
-	Enable shorthands inherited from \pkg{babel-latin} and the \pkg{ecclesiastic}
-	package as explained in table
-	\ref{tab:latin-shorthands}.
-	\begin{table}
-	\begin{tabularx}{\linewidth}{lX}
-	\hline
-	\emph{Shorthand} & \emph{Meaning} \tabularnewline
-	\hline
-	\verb:"<: & « (left guillemet) \tabularnewline
-	\verb:">: & » (right guillemet) \tabularnewline
-	\verb:": & If no other shorthand applies, \verb:": before any letter
-	character defines an optional break point allowing further break points
-	within the same word (as opposed to the \cmd\- command). \tabularnewline
-	\verb:"|: & the same as \verb:":, but also possible before non-letter
-	characters \tabularnewline
-	\verb:'a: & á (a with acute), also available for é, í, ó, ú, ý, ǽ, and \'œ
-	\tabularnewline
-	\verb:'A: & Á (A with acute), also available for É, Í, Ó, Ú, \'V, Ý, Ǽ, and
-	\'Œ \tabularnewline
-	\hline
-	\multicolumn{2}{@{}p{\linewidth}}{\emph{The following shorthands are only
-	available for the \texttt{medieval} and the \texttt{ecclesiastic} variant.}}
-	\tabularnewline
-	\verb:"ae: & æ (ae ligature), also available for œ
-	\tabularnewline
-	\verb:"Ae: & Æ (AE ligature), also available for Œ
-	\tabularnewline
-	\verb:"AE: & Æ (AE ligature), also available for Œ
-	\tabularnewline
-	\verb:'ae: & ǽ (ae ligature with acute), also available for \'œ
-	\tabularnewline
-	\verb:'Ae: & Ǽ (AE ligature with acute), also available for \'Œ
-	\tabularnewline
-	\verb:'AE: & Ǽ (AE ligature with acute), also available for \'Œ
-	\tabularnewline
-	\hline
-	\end{tabularx}
-	\caption{\label{tab:latin-shorthands}Latin shorthands}
-	\end{table}
+	Enable the following shorthands inherited from \pkg{babel-latin} and the
+	\pkg{ecclesiastic} package.
+	\begin{shorthands}
+		\item[¦"<¦] for « (left guillemet)
+		\item[¦">¦] for » (right guillemet)
+		\item[¦"¦] If no other shorthand applies, \verb:": before any letter
+			character defines an optional break point allowing further break points
+			within the same word (as opposed to the \cmd\- command).
+		\item[¦"|¦] the same as \verb:":, but also possible before non-letter
+			characters
+		\item[¦'a¦] for á (a with acute), also available for é, í, ó, ú, ý, ǽ, and
+			\'œ
+		\item[¦'A¦] for Á (A with acute), also available for É, Í, Ó, Ú, \'V, Ý, Ǽ,
+			and \'Œ
+	\end{shorthands}
+	The following shorthands are only available for the \texttt{medieval} and the
+	\texttt{ecclesiastic} variant.
+	\begin{shorthands}
+		\item[¦"ae¦] for æ (ae ligature), also available for œ
+		\item[¦"Ae¦] for Æ (AE ligature), also available for Œ
+		\item[¦"AE¦] for Æ (AE ligature), also available for Œ
+		\item[¦'ae¦] for ǽ (ae ligature with acute), also available for \'œ
+		\item[¦'Ae¦] for Ǽ (AE ligature with acute), also available for \'Œ
+		\item[¦'AE¦] for Ǽ (AE ligature with acute), also available for \'Œ
+	\end{shorthands}
 	\item \TB{prosodicshorthands} = true or \emph{false}
 
 	Enable shorthands for prosodic marks (macrons and breves) very similiar to
 	those provided by \pkg{babel-latin} using the \texttt{withprosodicmarks}
-	modifier. The available shorthands are explained in table
-	\ref{tab:latin-prosodic}.
+	modifier.
 
 	Note that the active `=' character used for macrons will cause problems with
 	commands using \texttt{key=value} interfaces, e.\,g.
 	\verb:\includegraphics[scale=2]{...}:. Use \Cmd{\shorthandoff\{=\}} before
 	such commands (and \Cmd{\shorthandon\{=\}} thereafter) within every
 	environment with prosodic shorthands enabled.
-	\begin{table}
-	\begin{tabularx}{\linewidth}{lX}
-	\hline
-	\emph{Shorthand} & \emph{Meaning} \tabularnewline
-	\hline
-	\verb:=a: & ā (a with macron), also available for ē, ī, ō, ū, and ȳ
-	\tabularnewline
-	\verb:=A: & Ā (A with macron), also available for Ē, Ī, Ō, Ū, V̄, and Ȳ. Note
-	that a macron above the letter V is only displayed if your font supports the
-	Unicode character \texttt{0304} (\emph{combining macron}). \tabularnewline
-	\verb:=ae: & a͞e (ae diphthong with macron), also available for a͞u, e͞u, and
-	o͞e. Note that macrons above diphthongs are only displayed if your font
-	supports the Unicode character \texttt{035E} (\emph{combining double
-	macron}). \tabularnewline
-	\verb:=Ae: & A͞e (Ae diphthong with macron), also available for A͞u, E͞u, and
-	O͞e. \tabularnewline
-	\verb:=AE: & A͞E (AE diphthong with macron), also available for A͞U, E͞U, and
-	O͞E. \tabularnewline
-	\verb:^a: & ă (a with breve), also available for ĕ, ĭ, ŏ, ŭ, and y̆. Note that
-	a breve above the letter y is only displayed if your font supports the
-	Unicode character \texttt{0306} (\emph{combining breve}). \tabularnewline
-	\verb:^A: & Ă (A with breve), also available for Ĕ, Ĭ, Ŏ, Ŭ, V̆, and Y̆. Note
-	that breves above the letters V and Y are only displayed if your font
-	supports the Unicode character \texttt{0306} (\emph{combining breve}).
-	\tabularnewline
-	\hline
-	\end{tabularx}
-	\caption{\label{tab:latin-prosodic}Latin prosodic shorthands}
-	\end{table}
-	\end{itemize}
+
+	The following shorthands are available.
+	\begin{shorthands}
+		\item[¦=a¦] for ā (a with macron), also available for ē, ī, ō, ū, and ȳ
+		\item[¦=A¦] for Ā (A with macron), also available for Ē, Ī, Ō, Ū, V̄, and Ȳ.
+			Note that a macron above the letter V is only displayed if your font
+			supports the Unicode character \texttt{0304} (\emph{combining macron}).
+		\item[¦=ae¦] for a͞e (ae diphthong with macron), also available for a͞u, e͞u,
+			and o͞e. Note that macrons above diphthongs are only displayed if your font
+			supports the Unicode character \texttt{035E} (\emph{combining double
+			macron}).
+		\item[¦=Ae¦] for A͞e (Ae diphthong with macron), also available for A͞u, E͞u,
+			and O͞e.
+		\item[¦=AE¦] for A͞E (AE diphthong with macron), also available for A͞U, E͞U,
+			and O͞E.
+		\item[¦\textasciicircum a¦] for ă (a with breve), also available for ĕ, ĭ,
+			ŏ, ŭ, and y̆.  Note that a breve above the letter y is only displayed if
+			your font supports the Unicode character \texttt{0306} (\emph{combining
+			breve}).
+		\item[¦\textasciicircum A¦] Ă (A with breve), also available for Ĕ, Ĭ, Ŏ,
+			Ŭ, V̆, and Y̆. Note that breves above the letters V and Y are only displayed
+			if your font supports the Unicode character \texttt{0306} (\emph{combining
+			breve}).
+	\end{shorthands}
+\end{itemize}
 
 \subsection{malay}\label{malay}
 \paragraph*{Options:}
