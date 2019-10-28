@@ -409,11 +409,12 @@ that occurs in the document. That font should always be defined as
 For instance, if the default font defined by \cmd\setmainfont\
 does not support Greek, then one can define the font used to display Greek with:\\
 \centerline{ \cmd\newfontfamily\cmd{\greekfont[Script=Greek,⟨…⟩]\{⟨font⟩\}}. }
-Note that polyglossia will use the font thus defined as is.
-for instance if ¦\arabicfont¦ is explicitly defined, then one should take care of
-including the option ¦Script=Arabic¦ in that definition.
-See the \pkg{fontspec} documentation for more information.
-If a specific sans or monospace font is needed for a particular script or language,
+Note that polyglossia will use the font defined as is, so assure to do all necessary settings
+(please refer to the \pkg{fontspec} documentation for details).
+For instance, if ¦\arabicfont¦ is explicitly defined, then the option ¦Script=Arabic¦ should
+be included in that definition.
+
+If a specific sans serif or monospace (`teletype') font is needed for a particular script or language,
 it can be defined by means of \new{v1.2.0}
 ¦\⟨script⟩fontsf¦\ or ¦\⟨language⟩fontsf¦ and ¦\⟨script⟩fonttt¦\ or ¦\⟨language⟩fonttt¦, respectively.
 
@@ -742,7 +743,6 @@ The default value of each option is given in italic.
   \end{itemize}
 
 \subsection[kurdish]{kurdish\new{v1.45}}\label{kurdish}
-Kurdish support includes Sorani Kurdish and Kurmanji Kurdish, both in either Arabic or Latin script.
 
 \paragraph*{Options:}
 \begin{itemize}
@@ -751,8 +751,8 @@ Kurdish support includes Sorani Kurdish and Kurmanji Kurdish, both in either Ara
 	\item \TB{numerals} = western or eastern. Defaults are ¦western¦ for Latin and ¦eastern¦ for Arabic script, depending on the selection above.
 	\item \TB{abjadjimnotail} = \textit{false} or true.
 	Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
-	\item \TB{locale} (not yet implemented)
-	\item \TB{calendar} (not yet implemented)
+%	\item \TB{locale} (not yet implemented)
+%	\item \TB{calendar} (not yet implemented)
 \end{itemize}
 \paragraph*{Commands:}
 \begin{itemize}
@@ -828,8 +828,8 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 	\item \TB{numerals} = western or \textit{eastern}
 	\item \TB{abjadjimnotail} = \textit{false} or true. \new{v1.0.3}
 	Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
-	\item \TB{locale} (not yet implemented)
-	\item \TB{calendar} (not yet implemented)
+%	\item \TB{locale} (not yet implemented)
+%	\item \TB{calendar} (not yet implemented)
 \end{itemize}
 \paragraph*{Commands:}
 \begin{itemize}
@@ -894,7 +894,7 @@ Currently support for Sami is limited to Northern Sami.
 \subsection{serbian}\label{serbian}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \TB{Script} = \textit{Cyrillic} or Latin. Will likely go to a variant.
+	\item \TB{Script} = \textit{Cyrillic} or Latin.
 	\item \TB{numerals} = \textit{arabic} or cyrillic. Uses either Arabic numerals or Cyrillic
 	      alphanumerical numbering.
 	\end{itemize}
