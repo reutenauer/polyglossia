@@ -96,9 +96,9 @@ local right_space  = {}
 
 local function ensure_lang_id(lang)
     if not lang_id[lang] then
-		  lang_counter = lang_counter + 1
-			lang_id[lang] = lang_counter
-		end
+        lang_counter = lang_counter + 1
+        lang_id[lang] = lang_counter
+    end
 end
 
 local function clear_spaced_characters(lang)
@@ -126,7 +126,7 @@ local function process(head)
     while start do
         local id = start.id
         if id == glyph_code then
-				    local attr = has_attribute(start, punct_attr)
+            local attr = has_attribute(start, punct_attr)
             if attr then
                 local char = utf8.char(start.char) -- requires Lua 5.3
                 if left_space[attr][char] or right_space[attr][char] then
@@ -179,9 +179,9 @@ local callback_name = "pre_linebreak_filter"
 
 local function activate(lang)
     ensure_lang_id(lang)
-		-- We set the punctuation attribute to a language id here. This is
-		-- important to be able to intermix languages with different spacings
-		-- in one paragraph.
+    -- We set the punctuation attribute to a language id here. This is
+    -- important to be able to intermix languages with different spacings
+    -- in one paragraph.
     tex.setattribute(punct_attr, lang_id[lang])
     if not priority_in_callback(callback_name, "polyglossia-punct.process") then
         add_to_callback(callback_name, process, "polyglossia-punct.process", 1)
@@ -190,13 +190,13 @@ end
 
 local function deactivate()
     tex.setattribute(punct_attr, -0x7FFFFFFF) -- this value means "unset"
-		-- Though it would make compilation slightly faster, it is not possible to
-		-- safely uncomment the following lines. Imagine the following case: you
-		-- start a paragraph by some spaced punctuation text, then, in the same
-		-- paragraph, you change the language to something else, and thus call the
-		-- following lines. This means that, at the end of the paragraph, the
-		-- function won't be in the callback, so the beginning of the paragraph
-		-- won't be processed by it.
+    -- Though it would make compilation slightly faster, it is not possible to
+    -- safely uncomment the following lines. Imagine the following case: you
+    -- start a paragraph by some spaced punctuation text, then, in the same
+    -- paragraph, you change the language to something else, and thus call the
+    -- following lines. This means that, at the end of the paragraph, the
+    -- function won't be in the callback, so the beginning of the paragraph
+    -- won't be processed by it.
     -- if priority_in_callback(callback_name, "polyglossia-punct.process") then
     --     remove_from_callback(callback_name, "polyglossia-punct.process")
     -- end
