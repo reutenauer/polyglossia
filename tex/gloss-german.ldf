@@ -72,14 +72,17 @@
   \fi
 }
 
-\newif\if@german@fraktur
-\define@choicekey*+{german}{script}[\val\nr]{latin,fraktur}[latin]{%
+\newif\if@german@blackletter
+\define@choicekey*+{german}{script}[\val\nr]{latin,blackletter,fraktur}[latin]{%
    \ifcase\nr\relax
       % latin:
-      \@german@frakturfalse%
+      \@german@blackletterfalse%
+   \or
+      % blackletter:
+      \@german@blacklettertrue%
    \or
       % fraktur:
-      \@german@frakturtrue%
+      \@german@blacklettertrue%
    \fi
    \xpg@info{Option: German, script=\val}%
 }{\xpg@warning{Unknown German script `#1'}}
@@ -187,7 +190,7 @@
 }
 
 %%Strings for Fraktur contributed by Gerrit <z0idberg . gmx . de>
-\def\captions@german@fraktur{%
+\def\captions@german@blackletter{%
   \captions@german%
   \def\abstractname{Zuſammenfaſſung}%
   \def\seename{ſiehe}%
@@ -195,7 +198,7 @@
   \def\glossaryname{Gloſſar}%
 }
 
-\def\date@german@fraktur{%
+\def\date@german@blackletter{%
   \def\today{\number\day.%
     \space \ifcase\month%
     \or\if@austrian@locale Jänner\else Januar\fi\or Februar\or März\or%
@@ -205,13 +208,13 @@
 }
 
 \def\captionsgerman{%
-  \if@german@fraktur\captions@german@fraktur\else\captions@german\fi
+  \if@german@blackletter\captions@german@blackletter\else\captions@german\fi
   \if@austrian@locale\captions@german@austrian\fi
   \if@swiss@locale\captions@german@swiss\fi
 }
 
 \def\dategerman{%
-  \if@german@fraktur\date@german@fraktur\else\date@german\fi
+  \if@german@blackletter\date@german@blackletter\else\date@german\fi
 }
 
 \def\german@language{%
