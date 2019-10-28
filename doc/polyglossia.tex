@@ -443,7 +443,7 @@ hyphenated at all):
 \end{Verbatim}
 %
 These exceptions, however, apply to all languages. In addition to this, \pkg{polyglossia} provides
-the command\new{v.1.45}
+the command\new{v1.45}
 \displaycmd{\pghyphenation[⟨options⟩]\{⟨lang⟩\}\{⟨exceptions⟩\}}{\pghyphenation}
 which can be used to define exceptions that only apply to a specific language or language variant,
 respectively.
@@ -865,6 +865,9 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 %		\item[¦"<¦] for French left double quotes (looks like <<).
 %		\item[¦">¦] for French right double quotes (looks like >>).
 	\end{shorthands}
+    \item \TB{indentfirst}\new{v1.46} = \textit{true} or false. By default, all paragraphs are indented in Russian,
+          also those after a chapter or section heading. If this option is false, the latter paragraphs
+          are not indented, as normal in \LaTeX. 
 	\item \TB{spelling} = \textit{modern} or old (for captions and date only, not for hyphenation)
 	\item \TB{numerals} = \textit{arabic} or cyrillic. Uses either Arabic numerals or Cyrillic
 	alphanumerical numbering.
