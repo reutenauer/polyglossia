@@ -1032,7 +1032,7 @@
     \polyglossia_load_lang_definition:nn{#1}{#2}
     % define environment and command (except for internal latex language)
     \ifstrequal{#2}{latex}{}{%
-      \exp_args:Ne\polyglossia@define@language@cmd:n{#2}
+      \exp_args:Nx\polyglossia@define@language@cmd:n{#2}
     }%
     \csgdef{#2@loaded}{}%
   }
@@ -1233,7 +1233,7 @@
     \global\edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
     \polyglossia_load_lang_definition:nn{#1}{#2}
     % define environment and command
-    \exp_args:Ne\polyglossia@define@language@cmd:n{#2}
+    \exp_args:Nx\polyglossia@define@language@cmd:n{#2}
     \csgdef{#2@loaded}{}%
     % If a variant is set, store it.
     \gdef\otherlanguagevariant{}
