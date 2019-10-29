@@ -1067,6 +1067,7 @@
   \def\mainlanguagename{#2}
   % Store babelname of current language (for external packages such as biblatex)
   \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+  \csgdef{#2@gbabelname}{\babelname}%
   \ifluatex %
   \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
   \fi %
@@ -1116,7 +1117,15 @@
   \selectlanguage[#1]{#2}%
   \selectbackgroundlanguage{#2}%
   % Store babelname of current language (for external packages such as biblatex)
-  \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+  \tl_if_blank:nTF {#1}{%
+    \ifcsundef{#2@gbabelname}{%
+       \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+    }{%
+       \xdef\babelname{\csuse{#2@gbabelname}}%
+    }%
+  }{%
+    \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+  }%
 }
 
 % This saves the normalfont for the latin script since we may change normalfont in other scripts
@@ -1233,6 +1242,8 @@
       }%
     }%
     \csgdef{#2@gvar}{\otherlanguagevariant}%
+    \edef\otherlanguagebabelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+    \csgdef{#2@gbabelname}{\otherlanguagebabelname}%
   }{}
 }
 
@@ -1264,7 +1275,15 @@
 \newcommand*\polyglossia@setforeignlanguage[2][]{
   \select@@language[#1]{#2}
   % Store babelname of current language (for external packages such as biblatex)
-  \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+  \tl_if_blank:nTF {#1}{%
+    \ifcsundef{#2@gbabelname}{%
+       \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+    }{%
+       \xdef\babelname{\csuse{#2@gbabelname}}%
+    }%
+  }{%
+    \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+  }%
 }
 
 % joint code of \foreignlanguage, otherlanguage*
@@ -1410,7 +1429,15 @@
 
 \newcommand*{\xpg@set@language@aux}[2][]{%
    % Store babelname of current language (for external packages such as biblatex)
-   \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+   \tl_if_blank:nTF {#1}{%
+     \ifcsundef{#2@gbabelname}{%
+        \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+     }{%
+        \xdef\babelname{\csuse{#2@gbabelname}}%
+     }%
+   }{%
+     \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+   }%
    \@select@language[#1]{#2}%
     % Write to the aux
    \if@filesw%
