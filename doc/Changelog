@@ -5,7 +5,7 @@ New features:
   * Latin language variant "ecclesiastic".
   * Latin language options "capitalizemonth", "ecclesiasticfootnotes", "hyphenation",
     "prosodicshorthands", and "usej".
-	* Latin shorthands for "«", "»", "æ", "Æ", "œ", and "Œ".
+  * Latin shorthands for "«", "»", "æ", "Æ", "œ", and "Œ".
 
 Bug fixes:
   * Fix problems with fragile font settings (#24).
