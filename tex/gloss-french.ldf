@@ -108,6 +108,51 @@
    \fi
 }
 
+% Configuration of item labels
+\def\french@itemi{\textemdash}
+\def\french@itemii{\textemdash}
+\def\french@itemiii{\textemdash}
+\def\french@itemiv{\textemdash}
+
+\define@key{french}{itemlabels}[\textemdash]{%
+  \def\french@itemi{#1}
+  \def\french@itemii{#1}
+  \def\french@itemiii{#1}
+  \def\french@itemiv{#1}
+}
+
+\define@key{french}{itemlabeli}[\textemdash]{%
+  \def\french@itemi{#1}
+}
+
+\define@key{french}{itemlabelii}[\textemdash]{%
+  \def\french@itemii{#1}
+}
+
+\define@key{french}{itemlabeliii}[\textemdash]{%
+  \def\french@itemiii{#1}
+}
+
+\define@key{french}{itemlabeliv}[\textemdash]{%
+  \def\french@itemiv{#1}
+}
+
+\define@boolkey{french}[french@]{frenchitemlabels}[true]{%
+  \AfterPreamble{%
+    \ifdefstring{\xpg@main@language}{french}{%
+      \iffrench@frenchitemlabels
+         \renewcommand{\labelitemi}{\french@itemi}%
+         \renewcommand{\labelitemii}{\french@itemii}%
+         \renewcommand{\labelitemiii}{\french@itemiii}%
+         \renewcommand{\labelitemiv}{\french@itemiv}%
+      \else
+         \let\@makefntext\xpg@orig@makefntext
+      \fi
+    }{\xpg@warning{Option 'frenchitemlabels' only supported if French is main language!}}%
+  }%
+}
+
+
 \def\french@fontsetup{%
   \unless\iffrench@autospacetypewriter
     \let\ttfamily\french@ttfamilyFB

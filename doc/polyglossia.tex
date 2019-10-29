@@ -614,6 +614,14 @@ The default value of each option is given in italic.
 		\item \TB{autospacetypewriter}\footnote{Babel's syntax \textit{OriginalTypewriter} is also supported.}\new{1.45} = true or \textit{false} (default value = true). By default, automatic spacing is disabled in typewriter font. If this is enabled, spacing in typewriter context is the same as with roman and sans serif font, depending on the \textit{autospacing} and \textit{autospaceguillemets} settings (note that this was the default up to v.~1.44).	
 		\item \TB{frenchfootnote} = true or \textit{false} (default value = true). If \textit{true}, footnotes start with a non-superscripted number followed by a dot, as common in French typography. Note that this might interfere with the specific footnote handling of classes or packages.
 		Also note that this option is only functional (by design) if French is the main language.
+		\item \TB{frenchitemlabels}\new{v.1.46} = true or \textit{false} (default value = true). If \textit{true}, itemize item labels use em-dashes throughout,
+		as common in French typography.
+		Note that this option is only functional (by design) if French is the main language. Also, it might interfere with list packages such as \pkg{enumitem}.
+		\item \TB{itemlabels}\new{v.1.46} = ¦⟨cmd⟩¦ (default value = ¦\textemdash¦). If \emph{frenchitemlabels} is true, you can customize here the used item label of all levels.
+		\item \TB{itemlabeli}\new{v.1.46} = ¦⟨cmd⟩¦ (default value = ¦\textemdash¦). If \emph{frenchitemlabels} is true, you can customize here the used item label of the first level.
+		\item \TB{itemlabelii}\new{v.1.46} = ¦⟨cmd⟩¦ (default value = ¦\textemdash¦). If \emph{frenchitemlabels} is true, you can customize here the used item label of the second level.
+		\item \TB{itemlabeliii}\new{v.1.46} = ¦⟨cmd⟩¦ (default value = ¦\textemdash¦). If \emph{frenchitemlabels} is true, you can customize here the used item label of the third level.
+		\item \TB{itemlabeliv}\new{v.1.46} = ¦⟨cmd⟩¦ (default value = ¦\textemdash¦). If \emph{frenchitemlabels} is true, you can customize here the used item label of the fourth level.
 	\end{itemize}
 \paragraph*{Commands:}
 \begin{itemize}
