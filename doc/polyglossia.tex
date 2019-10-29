@@ -525,25 +525,25 @@ The default value of each option is given in italic.
 	\begin{shorthands}
 		\item[¦"=¦] for an explicit hyphen sign which is repeated at the beginning
 		            of the next line when hyphenated, as common in Czech typesetting
-		            (also see option ¦splithyphens¦).
+		            (only needed with ¦splithyphens=false¦).
 		\item[¦"‘¦] for Czech left double quotes (looks like ,,).
 		\item[¦"’¦] for Czech right double quotes (looks like “).
 		\item[¦">¦] for Czech left double guillemets (looks like >>).
 		\item[¦"<¦] for Czech right double guillemets (looks like <<).
 	\end{shorthands}
-	\item \TB{splithyphens} = \textit{false} or true. \new{v1.45}
+	\item \TB{splithyphens} = false or \textit{true}.\new{v1.45}
 	      According to Czech typesetting conventions, if a word with a hard hyphen (such as \emph{je-li})
 	      is hyphenated at this hyphen, a second hyphenation character is to be inserted at the beginning
-	      of the line that follows the hyphenation (\emph{je-/-li}).\\
-          If this option is true, this is done automatically (so the shorthand ¦"=¦ is not needed).
-          Note, however, that the option is only available for \XeTeX. If you are using \LuaTeX,
-          load the \pkg{luavlna} package to the same effect.
-    \item \TB{vlna} = \textit{false} or true. \new{v1.45}
+	      of the line that follows the hyphenation (\emph{je-/-li}).
+          By default, this is done automatically\new{v1.46} (if you are using \LuaTeX, the \pkg{luavlna} package is
+          loaded to achieve this).
+          Set this option to ¦false¦ to disable the feature.
+    \item \TB{vlna} = false or \textit{true}. \new{v1.45}
          According to Czech typesetting conventions, single-letter words (non-syllable prepositions)
-         must not occur at line ends.\\
-         If this option is true, this is taken care of. Note, however, that the option
-         is only available for \XeTeX. If you are using \LuaTeX, load the \pkg{luavlna} package
-         to the same effect.
+         must not occur at line ends.
+         \pkg{Polyglossia} takes care of this automatically by default\new{v1.46} (if you are using \LuaTeX, the
+         \pkg{luavlna} package is loaded to achieve this).
+         Set this option to ¦false¦ to disable the feature.
 \end{itemize}
 
 \subsection{dutch}\label{dutch}
@@ -919,7 +919,7 @@ Currently support for Sami is limited to Northern Sami.
 	\begin{shorthands}
         \item[¦"=¦] for an explicit hyphen sign which is repeated at the beginning
                     of the next line when hyphenated, as common in Slovak typesetting
-		            (also see option ¦splithyphens¦).
+		            (only needed with ¦splithyphens=false¦).
         \item[¦"|¦] disables a ligature at this position.
         \item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
                     cases where the hyphen should stick at the following syllable.
@@ -936,16 +936,16 @@ Currently support for Sami is limited to Northern Sami.
 	\item \TB{splithyphens} = \textit{false} or true. \new{v1.46}
 	      According to Slovak typesetting conventions, if a word with a hard hyphen (such as \emph{je-li})
 	      is hyphenated at this hyphen, a second hyphenation character is to be inserted at the beginning
-          of the line that follows the hyphenation (\emph{je-/-li}).\\
-	      If this option is true, this is done automatically (so the shorthand ¦"=¦ is not needed).
-	      Note, however, that the option is only available for \XeTeX. If you are using \LuaTeX,
-	      load the \pkg{luavlna} package to the same effect.
+          of the line that follows the hyphenation (\emph{je-/-li}).
+	      By default, this is done automatically (if you are using \LuaTeX, the \pkg{luavlna} package is
+	      loaded to achieve this).
+	      Set this option to ¦false¦ to disable the feature.
 	\item \TB{vlna} = \textit{false} or true. \new{v1.46}
 	      According to Slovak typesetting conventions, single-letter words (non-syllable prepositions)
-	      must not occur at line ends.\\
-	      If this option is true, this is taken care of. Note, however, that the option
-	      is only available for \XeTeX. If you are using \LuaTeX, load the \pkg{luavlna} package
-	      to the same effect.
+	      must not occur at line ends.
+	      \pkg{Polyglossia} takes care of this automatically by default (if you are using \LuaTeX, the
+	      \pkg{luavlna} package is loaded to achieve this).
+	      Set this option to ¦false¦ to disable the feature.
 \end{itemize}
 
 \subsection{slovenian}\label{slovenian}
