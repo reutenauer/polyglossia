@@ -186,7 +186,6 @@ Those in red have specific options and/or commands
 that are explained in section \ref{specific} below.
 
 \begin{table}[ht]\centering
-\label{tab:lang}
 % Produced with tools/insert-language-list.rb -- JS, 2019-10-18
 % Edited by hand -- JS, 2019-10-18
 \begin{tabular}{lllll}
@@ -209,8 +208,7 @@ divehi       & icelandic      & marathi      & \TX{slovak}     & \TX{welsh}\\
 \bottomrule
 \end{tabular}
 
-
-\caption{Languages currently supported in \pkg{polyglossia}}
+\caption{\label{tab:lang}Languages currently supported in \pkg{polyglossia}}
 \end{table}
 
 \paragraph{Version Notes} The support for Amharic\new{v1.0.1} should be considered an experimental attempt to
@@ -252,7 +250,6 @@ in \pkg{polyglossia} as an alias.\footnote{This is for historical reasons, since
     well, \eg \cmd\textportuges\ with \emph{portuges} (rather than \cmd\textportuguese).}
 
 \begin{table}
-\label{tab:bbllang}
 \begin{tabular}{lll}
 \toprule 
 \textbf{Babel name} & \textbf{Polyglossia name} & \textbf{Polyglossia options}\tabularnewline
@@ -272,6 +269,9 @@ canadien        & french     & variant=canadian               \\
 german          & german     & spelling=old                   \\
 \TR{irish}      & gaelic     & variant=irish                  \\
 kurmanji        & kurdish    & variant=kurmanji               \\
+latin.classic   & latin      & variant=classic                \\
+latin.ecclesiastic & latin   & variant=ecclesiastic           \\
+latin.medieval  & latin      & variant=medieval               \\
 lowersorbian    & sorbian    & variant=lower                  \\
 \TR{magyar}     & hungarian  &                                \\
 naustrian       & german     & variant=austrian               \\
@@ -291,7 +291,7 @@ uppersorbian    & sorbian    & variant=upper                  \\
 \bottomrule
 \end{tabular}
 	
-\caption{Babel-polyglossia language name matching}
+\caption{\label{tab:bbllang}Babel-polyglossia language name matching}
 \end{table}
 
 
