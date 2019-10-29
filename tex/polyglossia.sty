@@ -1047,6 +1047,7 @@
          \xpg@parsevariantkeyvalue##1=@xpg@main@langvariant\relax
      }%
   }%
+  \csgdef{#2@gvar}{\mainlanguagevariant}%
   % Store babelname of main language (for external packages such as biblatex)
   \xdef\mainbabelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
   %% The following settings are for the default language and script
