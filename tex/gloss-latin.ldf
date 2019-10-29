@@ -285,6 +285,7 @@
     \bool_set_false:N \l_polyglossia_latin_use_digraphs_bool
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
+    \SetLanguageKeys {latin} { babelname = latin.classic }
     \polyglossia_latin_set_patterns:n {classiclatin}
   }
 
@@ -295,6 +296,7 @@
     \bool_set_true:N \l_polyglossia_latin_use_digraphs_bool
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
+    \SetLanguageKeys {latin} { babelname = latin.medieval }
     \polyglossia_latin_use_modern_patterns:
   }
 
@@ -305,6 +307,7 @@
     \bool_set_false:N \l_polyglossia_latin_use_digraphs_bool
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
+    \SetLanguageKeys {latin} { babelname = latin }
     \polyglossia_latin_use_modern_patterns:
   }
 
@@ -315,6 +318,7 @@
     \bool_set_true:N \l_polyglossia_latin_use_digraphs_bool
     \bool_set_false:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_true:N \l_polyglossia_latin_punctuation_spacing_bool
+    \SetLanguageKeys {latin} { babelname = latin.ecclesiastic }
     \polyglossia_latin_use_modern_patterns:
   }
 
