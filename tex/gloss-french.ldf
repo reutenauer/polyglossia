@@ -20,17 +20,17 @@
       \def\french@variant{canadien}%
       \SetLanguageKeys{french}{babelname=canadien}%
       \xpg@ifdefined{canadien}{}%
-	    {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
-	      I will use the standard patterns for French instead}%
-	    \adddialect\l@canadien\l@french\relax}%
+      {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
+        I will use the standard patterns for French instead}%
+      \adddialect\l@canadien\l@french\relax}%
    \or
       % acadian:
       \def\french@variant{acadian}%
       \SetLanguageKeys{french}{babelname=canadien}%
       \xpg@ifdefined{acadian}{}%
-	    {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
-	      I will use the standard patterns for French instead}%
-	    \adddialect\l@acadian\l@french\relax}%
+      {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
+        I will use the standard patterns for French instead}%
+      \adddialect\l@acadian\l@french\relax}%
    \fi
    \xpg@info{Option: French, variant=\val}%
 }{\xpg@warning{Unknown French variant `#1'}}
@@ -41,8 +41,7 @@
 }%
 
 \ifluatex
-  \newluatexattribute\xpg@frpt %
-  \directlua{polyglossia.load_frpt()}%
+  \directlua{require('polyglossia-french')}%
 \else
   \newXeTeXintercharclass\french@openbrackets % ( ] {
   \newXeTeXintercharclass\french@closebrackets % ( ] {
@@ -123,8 +122,7 @@
 \def\french@punctuation{%
     \lccode"2019="2019
     \ifluatex
-      \xpg@frpt=1\relax %
-      \directlua{polyglossia.activate_frpt()}%
+      \directlua{polyglossia.activate_french_punct()}%
     \else
       \XeTeXinterchartokenstate=1
       \XeTeXcharclass `\! \french@punctthin
@@ -170,14 +168,7 @@
 \def\nofrench@punctuation{%
     \lccode"2019=\z@
     \ifluatex
-      \xpg@frpt=0\relax %
-      % Though it would make compilation slightly faster, it is not possible to
-      % safely uncomment the following line. Imagine the following case: you start
-      % a paragraph by some french text, then, in the same paragraph, you change
-      % the language to something else, and thus call the following line. This means
-      % that, at then end of the paragraph, the function won't be in the callback,
-      % so the beginning of the paragraph won't be processed by it.
-      %\directlua{polyglossia.desactivate_frpt()}
+      \directlua{polyglossia.deactivate_french_punct()}%
     \else
       \XeTeXcharclass `\! \z@
       \XeTeXcharclass `\? \z@

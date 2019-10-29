@@ -1,298 +1,874 @@
-%%
-%% This is file `gloss-latin.ldf',
-%% generated with the docstrip utility.
-%%
-%% The original source files were:
-%%
-%% gloss-latin.dtx  (with options: `lamodern')
-%%   ------------------------------------------------------------------
-%%   Latin module for polyglossia
-%%   Copyright (C) Claudio Beccari 2013-2016
-%%   Copyright (C) Élie Roux 2016
-%%   This work is distributed under the MIT License.
-%% 
-%%   See the postamble.
-%%   ------------------------------------------------------------------
-\ProvidesFile{gloss-latin.ldf}
-        [2016/09/10 v.1.03 Latin support from polyglossia]
-%%
+\ProvidesFile{gloss-latin.ldf}[polyglossia: module for Latin v.2.0 2019-10-28]
+
+\ExplSyntaxOn
+
+\PolyglossiaSetup {latin}
+  {
+    hyphennames = {latin},
+    hyphenmins = {2,2},
+    frenchspacing = true,
+    fontsetup = true,
+    langtag = LAT
+  }
 
 
-\PolyglossiaSetup{latin}{%
-      hyphennames={latin},
-      hyphenmins={2,2},
-      langtag=LAT,
-      frenchspacing=true,
-      fontsetup=true,
-}
-\def\classicuclccodes{\lccode`\V=`\u \uccode`\u=`\V}
-\def\noclassicuclccodes{\lccode`\V=`\v \uccode`\u=`\U}
-\def\tmp@modern{modern}
-\def\tmp@medieval{medieval}
-\unless\ifluatex
-  \def\tmp@classic{classic}
-  \def\tmp@liturgical{liturgical}
-\fi
-\newif\ifmedieval\medievalfalse
-\newif\ifclassic\classicfalse
-\define@boolkey{latin}[latin@]{ecclesiastic}[true]{}
+%%%%% Variables and commands concerning spelling
 
-\let\latin@variant\l@latin
-\ifluatex
-  \ifcsname l@latin\endcsname\xpg@set@language@luatex@ii{latin}\fi
-\fi
-\def\captionslatin{\latincaptions}%
-\def\datelatin{\latindate}%
-\define@key{latin}{variant}[modern]{%
-\def\@tempa{#1}%
-\ifx\@tempa\tmp@medieval
-  \ifluatex
-    \ifcsname l@latin\endcsname\xpg@set@language@luatex@ii{latin}\fi
-  \fi
-  \let\latin@variant\l@latin
-  \xpg@set@language@luatex@ii{latin}
-  \medievaltrue \classictrue
-  \xpg@info{Option: Medieval Latin}%
-\else
-  \ifx\@tempa\tmp@classic
-    \unless\ifluatex
-      \unless\ifcsname l@classiclatin\endcsname
-         \xpg@nopatterns{Classic Latin}%
-         \adddialect\l@classiclatin\l@latin
-         \let\latin@variant\l@latin
-      \else
-         \let\latin@variant\l@classiclatin
-      \fi
-    \fi
-    \medievalfalse\classictrue
-    \xpg@info{Option: Classic Latin}%
-  \else
-   \ifx\@tempa\tmp@liturgical\unless\ifluatex
-      \unless\ifcsname l@liturgicallatin\endcsname
-         \xpg@nopatterns{Liturgical Latin}%
-         \adddialect\l@liturgicallatin\l@latin
-         \def\latin@variant{\l@latin}%
-      \else
-         \let\latin@variant\l@liturgicallatin
-      \fi
-        \medievaltrue\classicfalse
-        \xpg@info{Option: Liturgical Latin}\fi
-   \else
-      \ifx\@tempa\tmp@modern
-        \let\latin@variant\l@latin
-        \ifluatex\xpg@set@language@luatex@ii{latin}\fi
-        \xpg@info{Option: Modern Latin}%
-      \else
-        \def\latin@variant{\l@nohyphenation}%
-        \PackageWarning{polyglossia}{%
-          *******************\MessageBreak
-          No hyphenation set for \@tempa
-          *******************\MessageBreak
-        }{}%
-      \fi
-    \fi
-  \fi
-\fi
-}
+\bool_new:N \l_polyglossia_latin_use_j_bool
+\bool_new:N \l_polyglossia_latin_use_v_bool
+\bool_new:N \l_polyglossia_latin_use_digraphs_bool
+\bool_new:N \l_polyglossia_latin_capitalize_month_bool
 
-\def\latin@language{\language=\latin@variant}%
-\ifluatex
-       \PackageWarning{polyglossia}{\MessageBreak\MessageBreak
-       *****************\MessageBreak
-       The ecclesiastic option is not active\MessageBreak
-       when typesetting with LuaLaTeX\MessageBreak
-       *****************\MessageBreak
-       \MessageBreak}{}
-  \else
-   \def\ecclesiasticlatin@punctuation{%
-      \def\xpg@unskip{\ifhmode\ifdim\lastskip>\z@\unskip\fi\fi}
-      \lccode\string"2019=\string"2019
-      \newXeTeXintercharclass\ecclesiasticlatin@punctthin
-      \newXeTeXintercharclass\ecclesiasticlatin@punctguillstart
-      \newXeTeXintercharclass\ecclesiasticlatin@punctguillend
-      \XeTeXinterchartokenstate=1
-      \XeTeXcharclass `\! \ecclesiasticlatin@punctthin
-      \XeTeXcharclass `\? \ecclesiasticlatin@punctthin
-      \XeTeXcharclass `\; \ecclesiasticlatin@punctthin
-      \XeTeXcharclass `\: \ecclesiasticlatin@punctthin
-      \XeTeXcharclass `\« \ecclesiasticlatin@punctguillstart
-      \XeTeXcharclass `\» \ecclesiasticlatin@punctguillend
-      \XeTeXinterchartoks \z@ \ecclesiasticlatin@punctthin = {\penalty\@M
-      \hskip.2\fontdimen2\font \@plus\z@\@minus\z@}%
-      \XeTeXinterchartoks 255 \ecclesiasticlatin@punctthin = {\xpg@unskip}
-      \XeTeXinterchartoks \ecclesiasticlatin@punctguillstart \z@ = {\penalty\@M
-      \hskip.2\fontdimen2\font \@plus\z@\@minus\z@\ignorespaces}
-      \XeTeXinterchartoks \z@ \ecclesiasticlatin@punctguillend = {\xpg@unskip
-      \penalty\@M\hskip.2\fontdimen2\font \@plus\z@\@minus\z@}
-    }
+\cs_new:Npn \polyglossia_latin_classical_character_codes:
+  {
+    \char_set_lccode:nn {`\V} {`\u}
+    \char_set_uccode:nn {`\u} {`\V}
+    \char_set_uccode:nn {`\ú} {`\V}
+    \char_set_uccode:nn {`\ū} {`\V}
+    \char_set_uccode:nn {`\ŭ} {`\V}
+  }
 
-   \def\noecclesiasticlatin@punctuation{%
-      \lccode\string"2019=\z@
+\cs_new:Npn \polyglossia_latin_modern_character_codes:
+  {
+    \char_set_lccode:nn {`\V} {`\v}
+    \char_set_uccode:nn {`\u} {`\U}
+    \char_set_uccode:nn {`\ú} {`\Ú}
+    \char_set_uccode:nn {`\ū} {`\Ū}
+    \char_set_uccode:nn {`\ŭ} {`\Ŭ}
+  }
+
+
+%%%%% Messages and commands concerning hyphenation
+
+\msg_new:nnn {polyglossia} {latin / missing modern patterns}
+  {
+    No~hyphenation~patterns~were~found~for~Latin~\msg_line_context:.~
+    I~will~not~hyphenate~Latin~words.
+  }
+
+\msg_new:nnn {polyglossia} {latin / missing patterns}
+  {
+    The~"#1"~hyphenation~patterns~were~not~found~\msg_line_context:.~
+    I~will~use~the~patterns~for~modern~Latin~instead.
+  }
+
+\cs_new:Npn \polyglossia_latin_use_modern_patterns:
+  {
+    \xpg@ifdefined {latin}
+      {
+        \def \latin@language
+          {
+            \polyglossia@setup@language@patterns {latin}
+          }
+      }
+      {
+        \msg_warning:nn {polyglossia} {latin / missing modern patterns}
+        \adddialect \l@latin \l@nohyphenation
+      }
+  }
+
+\cs_new:Npn \polyglossia_latin_set_patterns:n #1
+% #1 may be "classiclatin" or "liturgicallatin"
+  {
+    \xpg@ifdefined {#1}
+      {
+        \def \latin@language
+          {
+            \polyglossia@setup@language@patterns {#1}
+          }
+      }
+      {
+        \xpg@ifdefined {latin}
+          {
+            \msg_warning:nnn {polyglossia} {latin / missing patterns} {#1}
+            \adddialect \l@ #1 \l@latin
+            \polyglossia_latin_use_modern_patterns:
+          }
+          {
+            \msg_warning:nn {polyglossia} {latin / missing modern patterns}
+            \adddialect \l@ #1 \l@nohyphenation
+          }
+      }
+  }
+
+
+%%%%% Settings for the spacing of the punctuation for ecclesiastical Latin
+
+\bool_new:N \g_polyglossia_latin_punctuation_spacing_bool
+
+\sys_if_engine_luatex:TF
+  {
+    \directlua { require('polyglossia-latin') }
+  }
+  {
+    \newXeTeXintercharclass \g_polyglossia_latin_punctuation_class
+    \newXeTeXintercharclass \g_polyglossia_latin_opening_guillemet_class
+    \newXeTeXintercharclass \g_polyglossia_latin_closing_guillemet_class
+
+    \cs_new:Npn \polyglossia_latin_insert_punctuation_space:
+      {
+        \nobreak
+        \skip_horizontal:n { 0.08333 \fontdimen6 \font } % 1/12 quad
+      }
+    \cs_new:Npn \polyglossia_latin_replace_preceding_space:
+      {
+        \dim_compare:nNnT {\lastskip} > {\c_zero_dim} {\unskip}
+        \polyglossia_latin_insert_punctuation_space:
+      }
+    \cs_new:Npn \polyglossia_latin_replace_following_space:
+      {
+        \polyglossia_latin_insert_punctuation_space:
+        \ignorespaces
+      }
+  }
+
+\cs_new:Npn \polyglossia_latin_punctuation_spacing:
+  {
+    \sys_if_engine_luatex:TF
+      {
+        \directlua { polyglossia.activate_latin_punct() }
+      }
+      {
+        \XeTeXinterchartokenstate = 1
+        \XeTeXcharclass `\! \g_polyglossia_latin_punctuation_class
+        \XeTeXcharclass `\? \g_polyglossia_latin_punctuation_class
+        \XeTeXcharclass `\‼ \g_polyglossia_latin_punctuation_class
+        \XeTeXcharclass `\⁇ \g_polyglossia_latin_punctuation_class
+        \XeTeXcharclass `\⁈ \g_polyglossia_latin_punctuation_class
+        \XeTeXcharclass `\⁉ \g_polyglossia_latin_punctuation_class
+        \XeTeXcharclass `\; \g_polyglossia_latin_punctuation_class
+        \XeTeXcharclass `\: \g_polyglossia_latin_punctuation_class
+        \XeTeXcharclass `\« \g_polyglossia_latin_opening_guillemet_class
+        \XeTeXcharclass `\» \g_polyglossia_latin_closing_guillemet_class
+        \XeTeXcharclass `\‹ \g_polyglossia_latin_opening_guillemet_class
+        \XeTeXcharclass `\› \g_polyglossia_latin_closing_guillemet_class
+
+        % punctuation followed by a closing guillemet
+        \XeTeXinterchartoks \g_polyglossia_latin_punctuation_class \g_polyglossia_latin_closing_guillemet_class =
+          {
+            \polyglossia_latin_insert_punctuation_space:
+          }
+        % opening guillemet followed by a space
+        \XeTeXinterchartoks \g_polyglossia_latin_opening_guillemet_class \xpg@boundaryclass =
+          {
+            \polyglossia_latin_replace_following_space:
+          }
+        % opening guillemet followed by an ordinary character
+        \XeTeXinterchartoks \g_polyglossia_latin_opening_guillemet_class \z@ =
+          {
+            \polyglossia_latin_insert_punctuation_space:
+          }
+        % closing guillemet followed by punctuation
+        \XeTeXinterchartoks \g_polyglossia_latin_closing_guillemet_class \g_polyglossia_latin_punctuation_class =
+          {
+            \polyglossia_latin_insert_punctuation_space:
+          }
+        % space followed by punctuation
+        \XeTeXinterchartoks \xpg@boundaryclass \g_polyglossia_latin_punctuation_class =
+          {
+            \polyglossia_latin_replace_preceding_space:
+          }
+        % space followed by closing guillemet
+        \XeTeXinterchartoks \xpg@boundaryclass \g_polyglossia_latin_closing_guillemet_class =
+          {
+            \polyglossia_latin_replace_preceding_space:
+          }
+        % ordinary character followed by punctuation
+        \XeTeXinterchartoks \z@ \g_polyglossia_latin_punctuation_class =
+          {
+            \polyglossia_latin_insert_punctuation_space:
+          }
+        % ordinary character followed by closing guillemet
+        \XeTeXinterchartoks \z@ \g_polyglossia_latin_closing_guillemet_class =
+          {
+            \polyglossia_latin_insert_punctuation_space:
+          }
+      }
+  }
+
+\cs_new:Npn \polyglossia_latin_no_punctuation_spacing:
+  {
+    \sys_if_engine_luatex:TF
+      {
+        \directlua { polyglossia.deactivate_latin_punct() }
+      }
+      {
         \XeTeXcharclass `\! \z@
         \XeTeXcharclass `\? \z@
+        \XeTeXcharclass `\‼ \z@
+        \XeTeXcharclass `\⁇ \z@
+        \XeTeXcharclass `\⁈ \z@
+        \XeTeXcharclass `\⁉ \z@
         \XeTeXcharclass `\; \z@
         \XeTeXcharclass `\: \z@
         \XeTeXcharclass `\« \z@
         \XeTeXcharclass `\» \z@
-        \XeTeXinterchartokenstate=0
+        \XeTeXcharclass `\‹ \z@
+        \XeTeXcharclass `\› \z@
+        \XeTeXinterchartokenstate = 0
       }
-    \let\latin@original@makefntext\@makefntext
-    \newcommand\latin@ecclesiastic@makefntext[1]{%
-        \parindent 1em \noindent
-        \latin@Makefnmark{\enspace #1}}
-    \newcommand\latin@Makefnmark{\hbox{\normalfont\@thefnmark.}}
-\fi
-\setkeys{latin}{variant,ecclesiastic=false}
-\def\latincaptions{%
-   \def\prefacename{\ifmedieval Præfatio\else Praefatio\fi}%
-   \def\refname{Conspectus librorum}%
-   \def\abstractname{Summarium}%
-   \def\bibname{Conspectus librorum}%
-   \def\chaptername{Caput}%
-   \def\appendixname{Additamentum}%
-   \def\contentsname{Index}%
-   \def\listfigurename{Conspectus descriptionum}%
-   \def\listtablename{Conspectus tabularum}%
-   \def\indexname{Index rerum notabilium}%
-   \def\figurename{Descriptio}%
-   \def\tablename{Tabula}%
-   \def\partname{Pars}%
-   \def\enclname{Additur}%
-   \def\ccname{Exemplar}%
-   \def\headtoname{\ignorespaces}%
-   \def\pagename{charta}%
-   \def\seename{cfr.}%
-   \def\alsoname{cfr.}%
-   \def\proofname{Demonstratio}%
-   \def\glossaryname{Glossarium}%
-   }
+  }
 
-\def\latindate{%
-   \def\today{\uppercase\expandafter{\romannumeral\day}%
-      \space \ifcase\month%
-      \or Januarii\or Februarii\or Martii\or Aprilis\or Maji\or
-      Junii\or Julii\or Augusti\or Septembris\or Octobris\or
-        \ifclassic Nouembris\else Novembris\fi
-      \or Decembris\fi%
-      \space \uppercase\expandafter{\romannumeral\year}}}
-%%%%%%%%% Latin shorthands
 
-\define@boolkey{latin}[latin@]{babelshorthands}[true]{}
+%%%%% Messages and commands concerning footnotes
+
+\cs_if_exist:NT \@makefntext
+  {
+    \cs_set_eq:NN \polyglossia_latin_original_footnote:n \@makefntext
+  }
+
+% This is the footnote style as defined by the "ecclesiastic" package.
+\cs_new:Npn \polyglossia_latin_variant_footnote:n #1
+  {
+    \parindent 1em
+    \noindent
+    \hbox { \normalfont \@thefnmark . }
+    \enspace #1
+  }
+
+\msg_new:nnn {polyglossia} {latin / ineffective footnote option}
+  {
+    The~option~"ecclesiasticfootnotes"~is~ineffective~\msg_line_context:
+    \c_space_tl as~Latin~is~not~the~main~language.
+  }
+
+\cs_new:Npn \polyglossia_latin_apply_footnote_option:
+  {
+    \str_if_eq:VnTF \xpg@main@language {latin}
+      {
+        \cs_if_exist:NT \@makefntext
+          {
+            \iflatin@ecclesiasticfootnotes
+              \let \@makefntext \polyglossia_latin_variant_footnote:n
+            \else
+              \let \@makefntext \polyglossia_latin_original_footnote:n
+            \fi
+          }
+      }
+      {
+        \msg_warning:nn {polyglossia} {latin / ineffective footnote option}
+      }
+  }
+
+\define@boolkey {latin} [latin@] {ecclesiasticfootnotes} [true]
+  {
+    \token_if_eq_meaning:NNTF \@onlypreamble \@notprerr
+      {
+        % within the document
+        \polyglossia_latin_apply_footnote_option:
+      }
+      {
+        % within the preamble
+        % The application of the option has to be postponed as the main
+        % language may be undefined when the option is called.
+        \AtBeginDocument { \polyglossia_latin_apply_footnote_option: }
+      }
+  }
+
+
+%%%%% Language variants: classic, medieval, modern, and ecclesiastic
+
+\msg_new:nnn {polyglossia} {latin / language variant}
+  {
+    Activating~Latin~language~variant~"#1"~\msg_line_context:.
+  }
+
+\msg_new:nnn {polyglossia} {latin / illegal language variant}
+  {
+    The~Latin~language~variant~"#1"~is~undefined~\msg_line_context:.
+  }
+
+\cs_new:Npn \polyglossia_latin_classic_settings:
+  {
+    \bool_set_false:N \l_polyglossia_latin_use_j_bool
+    \bool_set_false:N \l_polyglossia_latin_use_v_bool
+    \bool_set_false:N \l_polyglossia_latin_use_digraphs_bool
+    \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
+    \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
+    \SetLanguageKeys {latin} { babelname = latin.classic }
+    \polyglossia_latin_set_patterns:n {classiclatin}
+  }
+
+\cs_new:Npn \polyglossia_latin_medieval_settings:
+  {
+    \bool_set_false:N \l_polyglossia_latin_use_j_bool
+    \bool_set_false:N \l_polyglossia_latin_use_v_bool
+    \bool_set_true:N \l_polyglossia_latin_use_digraphs_bool
+    \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
+    \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
+    \SetLanguageKeys {latin} { babelname = latin.medieval }
+    \polyglossia_latin_use_modern_patterns:
+  }
+
+\cs_new:Npn \polyglossia_latin_modern_settings:
+  {
+    \bool_set_false:N \l_polyglossia_latin_use_j_bool
+    \bool_set_true:N \l_polyglossia_latin_use_v_bool
+    \bool_set_false:N \l_polyglossia_latin_use_digraphs_bool
+    \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
+    \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
+    \SetLanguageKeys {latin} { babelname = latin }
+    \polyglossia_latin_use_modern_patterns:
+  }
+
+\cs_new:Npn \polyglossia_latin_ecclesiastic_settings:
+  {
+    \bool_set_false:N \l_polyglossia_latin_use_j_bool
+    \bool_set_true:N \l_polyglossia_latin_use_v_bool
+    \bool_set_true:N \l_polyglossia_latin_use_digraphs_bool
+    \bool_set_false:N \l_polyglossia_latin_capitalize_month_bool
+    \bool_set_true:N \l_polyglossia_latin_punctuation_spacing_bool
+    \SetLanguageKeys {latin} { babelname = latin.ecclesiastic }
+    \polyglossia_latin_use_modern_patterns:
+  }
+
+\define@key{latin}{variant}
+  {
+    \str_case:nnF {#1}
+      {
+        {classic}
+        {
+          \msg_info:nnn {polyglossia} {latin / language variant} {classic}
+          \polyglossia_latin_classic_settings:
+        }
+        {medieval}
+        {
+          \msg_info:nnn {polyglossia} {latin / language variant} {medieval}
+          \polyglossia_latin_medieval_settings:
+        }
+        {modern}
+        {
+          \msg_info:nnn {polyglossia} {latin / language variant} {modern}
+          \polyglossia_latin_modern_settings:
+        }
+        {ecclesiastic}
+        {
+          \msg_info:nnn {polyglossia} {latin / language variant} {ecclesiastic}
+          \polyglossia_latin_ecclesiastic_settings:
+        }
+      }
+      {
+        \msg_warning:nnn {polyglossia} {latin / illegal language variant} {#1}
+      }
+  }
+
+
+%%%%% Boolean options concerning spelling
+
+\define@boolkey{latin}[latin@]{usej}[true]
+  {
+    \iflatin@usej
+      \bool_set_true:N \l_polyglossia_latin_use_j_bool
+    \else
+      \bool_set_false:N \l_polyglossia_latin_use_j_bool
+    \fi
+  }
+
+\define@boolkey{latin}[latin@]{capitalizemonth}[true]
+  {
+    \iflatin@capitalizemonth
+      \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
+    \else
+      \bool_set_false:N \l_polyglossia_latin_capitalize_month_bool
+    \fi
+  }
+
+
+%%%%% Hyphenation variants: classic, liturgical, and modern
+
+\msg_new:nnn {polyglossia} {latin / hyphenation variant}
+  {
+    Activating~hyphenation~patterns~for~#1~Latin~\msg_line_context:.
+  }
+
+\msg_new:nnn {polyglossia} {latin / illegal hyphenation variant}
+  {
+    The~Latin~hyphenation~variant~"#1"~is~undefined~\msg_line_context:.
+  }
+
+\define@key{latin}{hyphenation}
+  {
+    \str_case:nnTF {#1}
+      {
+        {classic}    { \polyglossia_latin_set_patterns:n {classiclatin} }
+        {liturgical} { \polyglossia_latin_set_patterns:n {liturgicallatin} }
+        {modern}     { \polyglossia_latin_use_modern_patterns: }
+      }
+      {
+        \msg_info:nnn {polyglossia} {latin / hyphenation variant} {#1}
+      }
+      {
+        \msg_warning:nnn {polyglossia} {latin / illegal hyphenation variant} {#1}
+      }
+  }
+
+
+%%%%% Latin captions and date
+
+\def \captionslatin
+  {
+    \def \prefacename
+      {
+        \bool_if:NTF \l_polyglossia_latin_use_digraphs_bool {Præfatio} {Praefatio}
+      }
+    \def \refname {Conspectus~librorum}
+    \def \abstractname {Summarium}
+    \def \bibname {Conspectus~librorum}
+    \def \chaptername {Caput}
+    \def \appendixname {Additamentum}
+    \def \contentsname {Index}
+    \def \listfigurename {Conspectus~descriptionum}
+    \def \listtablename {Conspectus~tabularum}
+    \def \indexname {Index~rerum~notabilium}
+    \def \figurename {Descriptio}
+    \def \tablename {Tabula}
+    \def \partname {Pars}
+    \def \enclname {Additur}
+    \def \ccname {Exemplar}
+    \def \headtoname {\ignorespaces}
+    \def \pagename {charta}
+    \def \seename {cfr.}
+    \def \alsoname {cfr.}
+    \def \proofname {Demonstratio}
+    \def \glossaryname {Glossarium}
+  }
+
+\cs_new:Npn \polyglossia_latin_month_name:
+  {
+    \str_set:Nx \l_tmpa_str
+      {
+        \int_case:nn { \month }
+          {
+            {1} { \bool_if:NTF \l_polyglossia_latin_use_j_bool {januarii} {ianuarii} }
+            {2} {februarii}
+            {3} {martii}
+            {4} {aprilis}
+            {5} { \bool_if:NTF \l_polyglossia_latin_use_j_bool {maji} {maii} }
+            {6} { \bool_if:NTF \l_polyglossia_latin_use_j_bool {junii} {iunii} }
+            {7} { \bool_if:NTF \l_polyglossia_latin_use_j_bool {julii} {iulii} }
+            {8} {augusti}
+            {9} {septembris}
+            {10} {octobris}
+            {11} { \bool_if:NTF \l_polyglossia_latin_use_v_bool {novembris} {nouembris} }
+            {12} {decembris}
+          }
+      }
+    \bool_if:NTF \l_polyglossia_latin_capitalize_month_bool
+      {
+        \tl_mixed_case:n { \l_tmpa_str }
+      }
+      {
+        \str_use:N \l_tmpa_str
+      }
+  }
+
+\def \datelatin
+  {
+    \def \today
+      {
+        \int_to_Roman:n { \day }
+        \c_space_tl
+        \polyglossia_latin_month_name:
+        \c_space_tl
+        \int_to_Roman:n { \year }
+      }
+  }
+
+
+%%%%% Latin shorthands
+
+\define@boolkey{latin}[latin@]{babelshorthands}[true]
+  {
+  }
+
+\define@boolkey{latin}[latin@]{prosodicshorthands}[true]
+  {
+  }
 
 \ifsystem@babelshorthands
   \setkeys{latin}{babelshorthands=true}
 \else
   \setkeys{latin}{babelshorthands=false}
 \fi
-\ifcsundef{initiate@active@char}{%
-\input{babelsh.def}%
-\initiate@active@char{"}%
-\initiate@active@char{'}%
-}{}
-\def\latin@shorthands{%
-  \def\language@group{latin}%
-  \bbl@activate{"}%
-  \declare@shorthand{latin}{"}{\relax
-    \ifmmode
-      \def\xpgla@nextdq{''}%
-    \else
-      \def\xpgla@nextdq{\futurelet\xpgla@temp\xpgla@cwm}%
-    \fi
-  \xpgla@nextdq}%
-  \bbl@activate{'}%
-  \declare@shorthand{latin}{'}{\relax
-    \ifmmode
-      \def\xpgla@nextsq{'}%
-    \else
-      \def\xpgla@nextsq{\futurelet\xpgla@temp@A\xpgla@putacute}%
-    \fi
-  \xpgla@nextsq}%
-}
-\def\xpgla@allowhyphens{\bbl@allowhyphens
-        \discretionary{-}{}{}\bbl@allowhyphens}
-\newcommand*{\xpgla@cwm}{\let\xpgla@@nextdq\relax
-  \ifcat\noexpand\xpgla@temp a%
-    \let\xpgla@@nextdq\xpgla@allowhyphens
-  \else
-    \ifx\xpgla@temp\ae
-        \let\xpgla@@nextdq\xpgla@allowhyphens
-    \else
-        \ifx\xpgla@temp\oe
-           \let\xpgla@@nextdq\xpgla@allowhyphens
+
+\ExplSyntaxOff % babelsh.def does not support expl3 syntax
+\ifcsundef{initiate@active@char}{\input{babelsh.def}}{}
+\ExplSyntaxOn
+
+\initiate@active@char {"}
+\initiate@active@char {'}
+\initiate@active@char {^}
+\initiate@active@char {=}
+
+\shorthandoff {"}
+\shorthandoff {'}
+\shorthandoff {^}
+\shorthandoff {=}
+
+% The active '=' character may cause problems with key=value interfaces.
+% We have to make sure here that no problems can occur outside a Latin
+% prosodic shorthand environment.
+
+\protected@write \@auxout { } { \shorthandoff {=} } % for the aux file
+
+\AtBeginDocument
+  {
+    \str_if_eq:VnTF \xpg@main@language {latin}
+      {
+        \iflatin@prosodicshorthands
         \else
-           \if\noexpand\xpgla@temp\string|%
-              \def\xpgla@@nextdq{\xpgla@allowhyphens\@gobble}%
-           \fi
+          \shorthandoff {=}
         \fi
+      }
+      {
+        % The following command should not be called if the main language
+        % defines a '=' shorthand. However, there are no languages besides
+        % Latin defining such a shorthand in polyglossia.
+        \shorthandoff {=}
+      }
+  }
+
+\cs_new:Npn \polyglossia_latin_shorthands:
+  {
+    \def \language@group {latin}
+    \bbl@activate {"}
+    \declare@shorthand {latin} {"}
+      {
+        \mode_if_math:TF
+          {
+            \token_to_str:N "
+          }
+          {
+            \polyglossia_latin_apply_quotemark:N
+          }
+      }
+    \bbl@activate {'}
+    \declare@shorthand {latin} {'}
+      {
+        \mode_if_math:TF
+          {
+            \active@math@prime % defined in "latex.ltx"
+          }
+          {
+            \polyglossia_latin_put_acute:N
+          }
+      }
+  }
+
+\cs_new:Npn \polyglossia_latin_prosodic_shorthands:
+  {
+    \def \language@group {latin}
+    % The '=' shorthand is normally turned off to avoid problems with key=value
+    % interfaces. We turn it on here to enable prosodic shorthands.
+    \shorthandon {=}
+    \bbl@activate {=}
+    \declare@shorthand {latin} {=}
+      {
+        \mode_if_math:TF
+          {
+            \token_to_str:N =
+          }
+          {
+            \polyglossia_latin_put_macron:N
+          }
+      }
+    \bbl@activate {^}
+    \declare@shorthand {latin} {^}
+      {
+        \mode_if_math:TF
+          {
+            \token_to_str:N ^
+          }
+          {
+            \polyglossia_latin_put_breve:N
+          }
+      }
+  }
+
+\cs_new:Npn \polyglossia_latin_apply_quotemark:N #1
+  {
+    \str_case:nnF {#1}
+      {
+        {A} { \polyglossia_latin_digraph_shorthand:Nnn E { Æ }
+                {
+                  \polyglossia_latin_digraph_shorthand:Nnn e { Æ }
+                    {
+                      \polyglossia_latin_allow_hyphens: A
+                    }
+                }
+            }
+        {a} { \polyglossia_latin_digraph_shorthand:Nnn e { æ }
+                {
+                  \polyglossia_latin_allow_hyphens: a
+                }
+            }
+        {O} { \polyglossia_latin_digraph_shorthand:Nnn E { Œ }
+                {
+                  \polyglossia_latin_digraph_shorthand:Nnn e { Œ }
+                    {
+                      \polyglossia_latin_allow_hyphens: O
+                    }
+                }
+            }
+        {o} { \polyglossia_latin_digraph_shorthand:Nnn e { œ }
+                {
+                  \polyglossia_latin_allow_hyphens: o
+                }
+            }
+        {|} { \polyglossia_latin_allow_hyphens: }
+        {<} { « }
+        {>} { » }
+      }
+      {
+        \token_if_letter:NTF #1 { \polyglossia_latin_allow_hyphens: #1 }
+          {
+            \token_if_eq_meaning:NNTF #1 \AE { \polyglossia_latin_allow_hyphens: #1 }
+              {
+                \token_if_eq_meaning:NNTF #1 \ae { \polyglossia_latin_allow_hyphens: #1 }
+                  {
+                    \token_if_eq_meaning:NNTF #1 \OE { \polyglossia_latin_allow_hyphens: #1 }
+                      {
+                        \token_if_eq_meaning:NNTF #1 \oe { \polyglossia_latin_allow_hyphens: #1 }
+                          {
+                            \token_to_str:N "
+                            #1
+                          }
+                      }
+                  }
+              }
+          }
+      }
+  }
+
+\cs_new:Npn \polyglossia_latin_put_acute:N #1
+  {
+    \str_case:nnF {#1}
+      {
+        {A} { \polyglossia_latin_digraph_shorthand:Nnn E { Ǽ }
+                {
+                  \polyglossia_latin_digraph_shorthand:Nnn e { Ǽ } { Á }
+                }
+            }
+        {a} { \polyglossia_latin_digraph_shorthand:Nnn e { ǽ } { á } }
+        {E} { É }
+        {e} { é }
+        {I} { Í }
+        {i} { í }
+        {O} { \polyglossia_latin_digraph_shorthand:Nnn E { \'Œ }
+                {
+                  \polyglossia_latin_digraph_shorthand:Nnn e { \'Œ } { Ó }
+                }
+            }
+        {o} { \polyglossia_latin_digraph_shorthand:Nnn e { \'œ } { ó } }
+        {U} { Ú }
+        {u} { ú }
+        {V} { \' V } % V may be a vowel, but lowercase v is never used as a vowel.
+        {Y} { Ý }
+        {y} { ý }
+        {Æ} { Ǽ }
+        {æ} { ǽ }
+        {Œ} { \'Œ }
+        {œ} { \'œ }
+      }
+      {
+        \token_if_eq_meaning:NNTF #1 \AE { Ǽ }
+          {
+            \token_if_eq_meaning:NNTF #1 \ae { ǽ }
+              {
+                \token_if_eq_meaning:NNTF #1 \OE { \'Œ }
+                  {
+                    \token_if_eq_meaning:NNTF #1 \oe { \'œ }
+                      {
+                        \token_to_str:N '
+                        #1
+                      }
+                  }
+              }
+          }
+      }
+  }
+
+\cs_new:Npn \polyglossia_latin_put_macron:N #1
+  {
+    \str_case:nnF {#1}
+      {
+        {A} { \polyglossia_latin_diphthong_macron:NNn AE
+                {
+                  \polyglossia_latin_diphthong_macron:NNn Ae
+                    {
+                      \polyglossia_latin_diphthong_macron:NNn AU
+                        {
+                          \polyglossia_latin_diphthong_macron:NNn Au { Ā }
+                        }
+                    }
+                }
+            }
+        {a} { \polyglossia_latin_diphthong_macron:NNn ae
+                {
+                  \polyglossia_latin_diphthong_macron:NNn au { ā }
+                }
+            }
+        {E} { \polyglossia_latin_diphthong_macron:NNn EU
+                {
+                  \polyglossia_latin_diphthong_macron:NNn Eu { Ē }
+                }
+            }
+        {e} { \polyglossia_latin_diphthong_macron:NNn eu { ē } }
+        {I} { Ī }
+        {i} { ī }
+        {O} { \polyglossia_latin_diphthong_macron:NNn OE
+                {
+                  \polyglossia_latin_diphthong_macron:NNn Oe { Ō }
+                }
+            }
+        {o} { \polyglossia_latin_diphthong_macron:NNn oe { ō } }
+        {U} { Ū }
+        {u} { ū }
+        {V} { \= V } % V may be a vowel, but lowercase v is never used as a vowel.
+        {Y} { Ȳ }
+        {y} { ȳ }
+      }
+      {
+        \token_to_str:N =
+        #1
+      }
+  }
+
+\cs_new:Npn \polyglossia_latin_put_breve:N #1
+  {
+    \str_case:nnF {#1}
+      {
+        {A} { Ă }
+        {a} { ă }
+        {E} { Ĕ }
+        {e} { ĕ }
+        {I} { Ĭ }
+        {i} { ĭ }
+        {O} { Ŏ }
+        {o} { ŏ }
+        {U} { Ŭ }
+        {u} { ŭ }
+        {V} { \u{V} } % V may be a vowel, but lowercase v is never used as a vowel.
+        {Y} { \u{Y} }
+        {y} { \u{y} }
+      }
+      {
+        \token_to_str:N ^
+        #1
+      }
+  }
+
+
+\cs_new:Npn \polyglossia_latin_allow_hyphens:
+  {
+    \bbl@allowhyphens
+    \discretionary {-} {} {}
+    \bbl@allowhyphens
+  }
+
+\cs_new:Npn \polyglossia_latin_digraph_shorthand:Nnn #1#2#3
+% #1: second letter of digraph (E or e)
+% #2: digraph character
+% #3: non-digraph code
+  {
+    \bool_if:NTF \l_polyglossia_latin_use_digraphs_bool
+      {
+        \peek_meaning_remove:NTF #1 {#2} {#3}
+      }
+      {
+        #3
+      }
+  }
+
+\cs_new:Npn \polyglossia_latin_diphthong_macron:NNn #1#2#3
+% #1: first character of diphthong
+% #2: second character of diphthong
+% #3: non-diphthong code
+  {
+    \peek_meaning:NTF #2 { #1 \char "35E \relax } {#3} % U+35E: combining double macron
+  }
+
+\cs_new:Npn \polyglossia_latin_no_shorthands:
+  {
+    \bbl@deactivate {"}
+    \bbl@deactivate {'}
+    \bbl@deactivate {=}
+    \bbl@deactivate {^}
+    % The active '=' character may cause problems with key=value interfaces.
+    % We have to make sure here that no problems can occur outside a Latin
+    % prosodic shorthand environment.
+    \shorthandoff {=}
+  }
+
+
+%%%%% Further settings
+
+\let \xpgla@savedvalues \empty
+
+\AtEndPreamble
+  {
+    \edef \xpgla@savedvalues
+      {
+        \clubpenalty = \the \clubpenalty \space
+        \@clubpenalty = \the \@clubpenalty \space
+        \widowpenalty = \the \widowpenalty \space
+        \finalhyphendemerits = \the \finalhyphendemerits
+      }
+  }
+
+\def \noextras@latin
+  {
+    \polyglossia_latin_no_shorthands:
+    \xpgla@savedvalues
+    \polyglossia_latin_no_punctuation_spacing:
+    \polyglossia_latin_modern_character_codes:
+  }
+
+\cs_new:Npn \polyglossia_latin_inline_extras:
+  {
+    \bool_if:NF \l_polyglossia_latin_use_v_bool
+      {
+        \polyglossia_latin_classical_character_codes:
+      }
+    \bool_if:NT \l_polyglossia_latin_punctuation_spacing_bool
+      {
+        \polyglossia_latin_punctuation_spacing:
+      }
+    \iflatin@babelshorthands
+      \polyglossia_latin_shorthands:
     \fi
-  \fi
-  \xpgla@@nextdq}%
-\def\xpgla@putacute#1{\let\xpgla@nextsq\relax%
-\if a\xpgla@temp@A
-  æ\kern-0.175em^^^^0301\kern0.175em\xpgla@allowhyphens
-\else
-\if o\xpgla@temp@A
-  œ\kern-0.175em^^^^0301\kern0.175em\xpgla@allowhyphens
-\else
-  \if æ\xpgla@temp@A
-    æ^^^^0301%
-  \else
-    \if œ\xpgla@temp@A
-      œ^^^^0301%
-    \else
-      \string'%
+    \iflatin@prosodicshorthands
+      \polyglossia_latin_prosodic_shorthands:
     \fi
-  \fi
-\fi
-\fi}%
+  }
 
-\def\nolatin@shorthands{%
-  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
-  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{'}}%
-}
+\def \blockextras@latin
+  {
+    % The following four values were overtaken from the Italian language module.
+    % It is unclear why they were chosen.
+    \clubpenalty = 3000
+    \@clubpenalty = 3000
+    \widowpenalty = 3000
+    \finalhyphendemerits = 50000000
+    \polyglossia_latin_inline_extras:
+  }
 
-\let\xpgla@savedvalues\empty
-\AtEndPreamble{%
-  \edef\xpgla@savedvalues{%
-    \clubpenalty=\the\clubpenalty\space
-    \@clubpenalty=\the\@clubpenalty\space
-    \widowpenalty=\the\widowpenalty\space
-    \finalhyphendemerits=\the\finalhyphendemerits}
-}
-\def\noextras@latin{%
-   \lccode\string"2019=\z@
-   \nolatin@shorthands
-   \xpgla@savedvalues
-   \noclassicuclccodes
-  \iflatin@ecclesiastic
-    \unless\ifluatex\noecclesiasticlatin@punctuation
-    \let\@makefntext\latin@original@makefntext\fi
-  \fi
-}
+\def \inlineextras@latin
+  {
+    \polyglossia_latin_inline_extras:
+  }
 
-\def\blockextras@latin{%
-   \lccode\string"2019=\string"2019
-   \clubpenalty=3000 \@clubpenalty=3000 \widowpenalty=3000
-   \finalhyphendemerits=50000000
-   \ifclassic\classicuclccodes\fi
-   \iflatin@babelshorthands\latin@shorthands\fi
-   \iflatin@ecclesiastic\unless\ifluatex\ecclesiasticlatin@punctuation
-   \let\@makefntext\latin@ecclesiastic@makefntext\fi
-   \fi
-}
 
-\def\inlineextras@latin{%
-   \lccode\string"2019=\string"2019
-   \ifclassic\classicuclccodes\fi
-   \iflatin@babelshorthands\latin@shorthands\fi
-   \iflatin@ecclesiastic
-      \unless\ifluatex\ecclesiasticlatin@punctuation
-      \let\@makefntext\latin@ecclesiastic@makefntext\fi
-   \fi
-}
+%% Default settings
+
+\polyglossia_latin_modern_settings:
+
+\ExplSyntaxOff
+
 %%   Copyright (C) Claudio Beccari 2013-2016
-%%   Copyright (C) Élie Roux 2016
-%% 
+%%   Copyright (C) Élie Roux 2016-2019
+%%   Copyright (C) Keno Wehr 2019
+%%
 %%   Permission is hereby granted, free of charge, to any person obtaining
 %%   a copy of this software and associated documentation files
 %%   (the "Software"), to deal in the Software without restriction, including
@@ -300,10 +876,10 @@
 %%   distribute, sublicense, and/or sell copies of the Software, and to permit
 %%   persons to whom the Software is furnished to do so, subject to the following
 %%   conditions:
-%% 
+%%
 %%   The above copyright notice and this permission notice shall be included in
 %%   all copies or substantial portions of the Software.
-%% 
+%%
 %%   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 %%   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 %%   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL

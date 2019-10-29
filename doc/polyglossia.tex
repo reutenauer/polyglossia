@@ -186,7 +186,6 @@ Those in red have specific options and/or commands
 that are explained in section \ref{specific} below.
 
 \begin{table}[ht]\centering
-\label{tab:lang}
 % Produced with tools/insert-language-list.rb -- JS, 2019-10-18
 % Edited by hand -- JS, 2019-10-18
 \begin{tabular}{lllll}
@@ -209,8 +208,7 @@ divehi       & icelandic      & marathi      & \TX{slovak}     & \TX{welsh}\\
 \bottomrule
 \end{tabular}
 
-
-\caption{Languages currently supported in \pkg{polyglossia}}
+\caption{\label{tab:lang}Languages currently supported in \pkg{polyglossia}}
 \end{table}
 
 \paragraph{Version Notes} The support for Amharic\new{v1.0.1} should be considered an experimental attempt to
@@ -252,7 +250,6 @@ in \pkg{polyglossia} as an alias.\footnote{This is for historical reasons, since
     well, \eg \cmd\textportuges\ with \emph{portuges} (rather than \cmd\textportuguese).}
 
 \begin{table}
-\label{tab:bbllang}
 \begin{tabular}{lll}
 \toprule 
 \textbf{Babel name} & \textbf{Polyglossia name} & \textbf{Polyglossia options}\tabularnewline
@@ -272,6 +269,9 @@ canadien        & french     & variant=canadian               \\
 german          & german     & spelling=old                   \\
 \TR{irish}      & gaelic     & variant=irish                  \\
 kurmanji        & kurdish    & variant=kurmanji               \\
+latin.classic   & latin      & variant=classic                \\
+latin.ecclesiastic & latin   & variant=ecclesiastic           \\
+latin.medieval  & latin      & variant=medieval               \\
 lowersorbian    & sorbian    & variant=lower                  \\
 \TR{magyar}     & hungarian  &                                \\
 naustrian       & german     & variant=austrian               \\
@@ -291,7 +291,7 @@ uppersorbian    & sorbian    & variant=upper                  \\
 \bottomrule
 \end{tabular}
 	
-\caption{Babel-polyglossia language name matching}
+\caption{\label{tab:bbllang}Babel-polyglossia language name matching}
 \end{table}
 
 
@@ -301,18 +301,20 @@ uppersorbian    & sorbian    & variant=upper                  \\
 
 \begin{itemize}
 	\item \TB{babelshorthands}\new{v1.1.1} globally activates \pkg{babel}
-          shorthands whenever available. Currently shorthands are implemented for
-          Catalan, Czech, Dutch, Finnish, German, Italian, Mongolian, and Russian.
-          Please refer to the respective language descriptions (sec.~\ref{specific}) for details.
+		shorthands whenever available. Currently shorthands are implemented for
+		Catalan, Czech, Dutch, Finnish, German, Italian, Latin, Mongolian, Russian,
+		and Slovak. Please refer to the respective language descriptions
+		(sec.~\ref{specific}) for details.
 
-    \item \TB{localmarks} redefines the internal \LaTeX\ macros \cmd\markboth\ and \cmd\markright.
-          In earlier versions of \pkg{polyglossia},\new{v1.2.0} this option was set by default, but we
-          now realize that it causes more problems than it helps, so it is now off by default.
-          For backwards-compatibility, the option \TB{nolocalmarks} which used to switch off the previous
-          default, and now does nothing, is still available.
+	\item \TB{localmarks} redefines the internal \LaTeX\ macros \cmd\markboth\ and
+		\cmd\markright. In earlier versions of \pkg{polyglossia},\new{v1.2.0} this
+		option was set by default, but we now realize that it causes more problems
+		than it helps, so it is now off by default.  For backwards-compatibility, the
+		option \TB{nolocalmarks} which used to switch off the previous default, and
+		now does nothing, is still available.
 
-    \item \TB{quiet} turns off most info messages and some of the warnings issued by \LaTeX,
-          \pkg{fontspec} and \pkg{polyglossia}.
+	\item \TB{quiet} turns off most info messages and some of the warnings issued
+		by \LaTeX, \pkg{fontspec} and \pkg{polyglossia}.
 \end{itemize}
 
 \section{Language-switching commands}\label{languageswitching}
@@ -770,9 +772,152 @@ The default value of each option is given in italic.
 
 \subsection{latin}\label{latin}
 \paragraph*{Options:}
-	\begin{itemize}
-	\item \TB{variant} = classic, medieval or \textit{modern}
-	\end{itemize}
+\begin{itemize}
+	\item \TB{variant} = classic, medieval, \emph{modern}, or ecclesiastic
+
+	These variants refer to different spelling conventions. The \texttt{classic}
+	and the \texttt{medieval} variant do not use the letters \emph{U} and
+	\emph{v}, but only \emph{V} and \emph{u}. This concerns predefined terms like
+	month names as well as the behaviour of the \cmd\MakeUppercase{} and the
+	\cmd\MakeLowercase{} command. The \texttt{medieval} and the
+	\texttt{ecclesiastic} variant use the ligatures \emph{\ae} and \emph{\oe}.
+	See table \ref{tab:latin-spelling} for examples.
+
+	Furthermore, the \texttt{ecclesiastic} variant takes care for a punctuation
+	spacing similar to the French one, but with smaller spaces, as provided for
+	PDF\TeX{} by the \pkg{ecclesiastic} package.
+	\begin{table}
+	\centering
+	\begin{tabular}{llll}
+	\hline
+	\emph{classic} & \emph{medieval} & \emph{modern} & \emph{ecclesiastic} \\
+	\hline
+	Ianuarii & Ianuarii & Ianuarii & ianuarii \\
+	Nouembris & Nouembris & Novembris & novembris \\
+	Praefatio & Præfatio & Praefatio & Præfatio \\
+	\multicolumn{4}{@{}l}{\cmd{\MakeUppercase\{Iulius\}} yields:} \\
+	IVLIVS & IVLIVS & IULIUS & IULIUS \\
+	\hline
+	\end{tabular}
+	\caption{\label{tab:latin-spelling}Spelling differences between the Latin
+	language variants. The capitalization of month names and the use of
+	\emph{i/j} may be affected by the \texttt{capitalizemonth} and the
+	\texttt{usej} option.}
+	\end{table}
+	\item \TB{hyphenation} = classic, modern, or liturgical
+
+	There are three different sets of hyphenation patterns for Latin. Separate
+	documention for them is available on the
+	internet.\footnote{\url{https://github.com/gregorio-project/hyphen-la/blob/master/doc/README.md\#hyphenation-styles}}
+	Each of the four variants mentioned above has its default set of hyphenation
+	patterns as indicated by table \ref{tab:latin-hyphenation}. Use the
+	\texttt{hyphenation} option if the default style does not fit your needs.
+	Note that the liturgical hyphenation patterns are the default of none of the
+	language variants. To use them, you have to say
+	\texttt{hyphenation=liturgical} in any case.
+	\begin{table}
+	\centering
+	\begin{tabular}{ll}
+	\hline
+	\emph{Language variant} & \emph{Default hyphenation style} \\
+	\hline
+	classic & classic \\
+	medieval & modern \\
+	modern & modern \\
+	ecclesiastic & modern \\
+	\hline
+	\end{tabular}
+	\caption{\label{tab:latin-hyphenation}Latin default hyphenation styles}
+	\end{table}
+	\item \TB{ecclesiasticfootnotes} = true or \emph{false}
+
+	Use footnotes as provided by the \pkg{ecclesiastic} package, which typesets
+	footnotes with ordinary instead of superior numbers and without indentation.
+	As many ecclesiastic documents and liturgical books use footnotes that are
+	very similar to the ordinary \LaTeX{} ones, we do not use this footnote style
+	as default even for the \texttt{ecclesiastic} variant.
+
+	Note that this option is only possible if Latin is the main language of your
+	document.
+	\item \TB{usej} = true or \emph{false}
+
+	Use \emph{J/j} in predefined terms. The letter \emph{j} is not of ancient
+	origin. In early modern times, it was used to distinguish the consonantic
+	\emph{i} from the vocalic~\emph{i}. Nowadays, the use of \emph{j} has
+	disappeared from most Latin publications. So \emph{false} is the default
+	value for all four language variants. Use this option if you prefer
+	\emph{Januarii} and \emph{Maji} to \emph{Ianuarii} and \emph{Maii}.
+	\item \TB{capitalizemonth} = true or false
+
+	Capitalize the month name when printing dates (using the \cmd\today{}
+	command).  Traditionally, month names are capitalized. However, in recent
+	liturgical books they are lowercase. So \emph{true} is the default value for
+	the variants \texttt{classic}, \texttt{medieval}, and \texttt{modern},
+	whereas \emph{false} is the default value for the \texttt{ecclesiastic}
+	variant.
+	\item \TB{babelshorthands} = true or \emph{false}
+
+	Enable the following shorthands inherited from \pkg{babel-latin} and the
+	\pkg{ecclesiastic} package.
+	\begin{shorthands}
+		\item[¦"<¦] for « (left guillemet)
+		\item[¦">¦] for » (right guillemet)
+		\item[¦"¦] If no other shorthand applies, \verb:": before any letter
+			character defines an optional break point allowing further break points
+			within the same word (as opposed to the \cmd\- command).
+		\item[¦"|¦] the same as \verb:":, but also possible before non-letter
+			characters
+		\item[¦'a¦] for á (a with acute), also available for é, í, ó, ú, ý, ǽ, and
+			\'œ
+		\item[¦'A¦] for Á (A with acute), also available for É, Í, Ó, Ú, \'V, Ý, Ǽ,
+			and \'Œ
+	\end{shorthands}
+	The following shorthands are only available for the \texttt{medieval} and the
+	\texttt{ecclesiastic} variant.
+	\begin{shorthands}
+		\item[¦"ae¦] for æ (ae ligature), also available for œ
+		\item[¦"Ae¦] for Æ (AE ligature), also available for Œ
+		\item[¦"AE¦] for Æ (AE ligature), also available for Œ
+		\item[¦'ae¦] for ǽ (ae ligature with acute), also available for \'œ
+		\item[¦'Ae¦] for Ǽ (AE ligature with acute), also available for \'Œ
+		\item[¦'AE¦] for Ǽ (AE ligature with acute), also available for \'Œ
+	\end{shorthands}
+	\item \TB{prosodicshorthands} = true or \emph{false}
+
+	Enable shorthands for prosodic marks (macrons and breves) very similiar to
+	those provided by \pkg{babel-latin} using the \texttt{withprosodicmarks}
+	modifier.
+
+	Note that the active `=' character used for macrons will cause problems with
+	commands using \texttt{key=value} interfaces, e.\,g.
+	\verb:\includegraphics[scale=2]{...}:. Use \Cmd{\shorthandoff\{=\}} before
+	such commands (and \Cmd{\shorthandon\{=\}} thereafter) within every
+	environment with prosodic shorthands enabled.
+
+	The following shorthands are available.
+	\begin{shorthands}
+		\item[¦=a¦] for ā (a with macron), also available for ē, ī, ō, ū, and ȳ
+		\item[¦=A¦] for Ā (A with macron), also available for Ē, Ī, Ō, Ū, V̄, and Ȳ.
+			Note that a macron above the letter V is only displayed if your font
+			supports the Unicode character \texttt{0304} (\emph{combining macron}).
+		\item[¦=ae¦] for a͞e (ae diphthong with macron), also available for a͞u, e͞u,
+			and o͞e. Note that macrons above diphthongs are only displayed if your font
+			supports the Unicode character \texttt{035E} (\emph{combining double
+			macron}).
+		\item[¦=Ae¦] for A͞e (Ae diphthong with macron), also available for A͞u, E͞u,
+			and O͞e.
+		\item[¦=AE¦] for A͞E (AE diphthong with macron), also available for A͞U, E͞U,
+			and O͞E.
+		\item[¦\textasciicircum a¦] for ă (a with breve), also available for ĕ, ĭ,
+			ŏ, ŭ, and y̆.  Note that a breve above the letter y is only displayed if
+			your font supports the Unicode character \texttt{0306} (\emph{combining
+			breve}).
+		\item[¦\textasciicircum A¦] Ă (A with breve), also available for Ĕ, Ĭ, Ŏ,
+			Ŭ, V̆, and Y̆. Note that breves above the letters V and Y are only displayed
+			if your font supports the Unicode character \texttt{0306} (\emph{combining
+			breve}).
+	\end{shorthands}
+\end{itemize}
 
 \subsection{malay}\label{malay}
 \paragraph*{Options:}
