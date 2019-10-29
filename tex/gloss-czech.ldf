@@ -8,11 +8,17 @@
   fontsetup=true,
 }
 
+\ifluatex
+  \RequirePackage{luavlna}
+\fi
+
 \define@boolkey{czech}[czech@]{babelshorthands}[true]{}
 
 \define@boolkey{czech}[czech@]{splithyphens}[true]{}
 
 \define@boolkey{czech}[czech@]{vlna}[true]{}
+
+\setkeys{czech}{splithyphens,vlna}
 
 \ifsystem@babelshorthands
   \setkeys{czech}{babelshorthands=true}
@@ -71,8 +77,7 @@
 
 \def\czech@hyphens{%
     \ifluatex
-      \xpg@warning{The 'splithyphens' option only works for XeLaTeX.\MessageBreak
-                   Please use the luavlna package to enable the feature for LuaLaTeX}
+      \AfterPreamble{\enablesplithyphens{czech}}%
     \else
       \XeTeXinterchartokenstate=1
       \XeTeXcharclass `\- \czech@hyphen
@@ -83,7 +88,9 @@
 }
 
 \def\noczech@hyphens{%
-    \ifxetex
+    \ifluatex
+      \AfterPreamble{\disablesplithyphens{czech}}%
+    \else
       \XeTeXcharclass `\- \z@
     \fi%
 }
@@ -92,8 +99,7 @@
 % prevent them to land at the end of a line
 \def\czech@vlna{%
     \ifluatex
-       \xpg@warning{The 'vlna' option only works for XeLaTeX.\MessageBreak
-                    Please use the luavlna package to enable the feature for LuaLaTeX}
+       \preventsingleon
     \else
         % Code taken and adapted from xevlna.sty
         \XeTeXinterchartokenstate=1
@@ -137,6 +143,7 @@
 
 \def\noczech@vlna{%
     \ifluatex
+        \preventsingleoff
     \else
         \XeTeXcharclass`\(\z@
         \XeTeXcharclass`\[\z@
@@ -204,14 +211,14 @@
 
 \def\blockextras@czech{%
   \ifczech@babelshorthands\czech@shorthands\fi%
-  \ifczech@vlna\czech@vlna\fi%
-  \ifczech@splithyphens\czech@hyphens\fi%
+  \ifczech@vlna\czech@vlna\else\noczech@vlna\fi%
+  \ifczech@splithyphens\czech@hyphens\else\noczech@hyhens\fi%
 }
 
 \def\inlineextras@czech{%
   \ifczech@babelshorthands\czech@shorthands\fi%
-  \ifczech@vlna\czech@vlna\fi%
-  \ifczech@splithyphens\czech@hyphens\fi%
+  \ifczech@vlna\czech@vlna\else\noczech@vlna\fi%
+  \ifczech@splithyphens\czech@hyphens\else\noczech@hyhens\fi%
 }
 
 \endinput

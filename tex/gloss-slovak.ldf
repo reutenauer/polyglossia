@@ -7,11 +7,17 @@
   fontsetup=true,
 }
 
+\ifluatex
+  \RequirePackage{luavlna}
+\fi
+
 \define@boolkey{slovak}[slovak@]{babelshorthands}[true]{}
 
 \define@boolkey{slovak}[slovak@]{splithyphens}[true]{}
 
 \define@boolkey{slovak}[slovak@]{vlna}[true]{}
+
+\setkeys{slovak}{splithyphens,vlna}
 
 \ifsystem@babelshorthands
   \setkeys{slovak}{babelshorthands=true}
@@ -79,8 +85,7 @@
 
 \def\slovak@hyphens{%
     \ifluatex
-      \xpg@warning{The 'splithyphens' option only works for XeLaTeX.\MessageBreak
-                   Please use the luavlna package to enable the feature for LuaLaTeX}
+      \AfterPreamble{\enablesplithyphens{slovak}}%
     \else
       \XeTeXinterchartokenstate=1
       \XeTeXcharclass `\- \slovak@hyphen
@@ -91,7 +96,9 @@
 }
 
 \def\noslovak@hyphens{%
-    \ifxetex
+    \ifluatex
+      \AfterPreamble{\disablesplithyphens{slovak}}%
+    \else
       \XeTeXcharclass `\- \z@
     \fi%
 }
@@ -100,8 +107,7 @@
 % prevent them to land at the end of a line
 \def\slovak@vlna{%
     \ifluatex
-       \xpg@warning{The 'vlna' option only works for XeLaTeX.\MessageBreak
-                    Please use the luavlna package to enable the feature for LuaLaTeX}
+       \preventsingleon
     \else
         % Code taken and adapted from xevlna.sty
         \XeTeXinterchartokenstate=1
@@ -145,6 +151,7 @@
 
 \def\noslovak@vlna{%
     \ifluatex
+        \preventsingleoff
     \else
         \XeTeXcharclass`\(\z@
         \XeTeXcharclass`\[\z@
@@ -212,14 +219,14 @@
 
 \def\blockextras@slovak{%
   \ifslovak@babelshorthands\slovak@shorthands\fi%
-  \ifslovak@vlna\slovak@vlna\fi%
-  \ifslovak@splithyphens\slovak@hyphens\fi%
+  \ifslovak@vlna\slovak@vlna\else\noslovak@vlna\fi%
+  \ifslovak@splithyphens\slovak@hyphens\else\noslovak@hyhens\fi%
 }
 
 \def\inlineextras@slovak{%
   \ifslovak@babelshorthands\slovak@shorthands\fi%
-  \ifslovak@vlna\slovak@vlna\fi%
-  \ifslovak@splithyphens\slovak@hyphens\fi%
+  \ifslovak@vlna\slovak@vlna\else\noslovak@vlna\fi%
+  \ifslovak@splithyphens\slovak@hyphens\else\noslovak@hyhens\fi%
 }
 
 \endinput
