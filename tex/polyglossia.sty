@@ -1258,7 +1258,7 @@
 
 \newcommand\setotherlanguages[1]{%
   \def\do##1{\setotherlanguage{##1}}%
-   \docsvlist{#1}}%
+   \exp_args:Nx\docsvlist{#1}}%
 
 \def\common@language{% FIXME is this really needed???
   \ifbool{xpg@hyphenation@disabled}{%
