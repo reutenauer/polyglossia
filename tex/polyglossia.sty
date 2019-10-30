@@ -667,7 +667,7 @@
 }
 
 \cs_new_nopar:Nn{\polyglossia@lang@frenchspacing:n}{
-  \prop_get:NnNTF \polyglossia@langsetup {#1/frenchspacing} \l_tmpa_tl
+  \prop_get:NxNTF \polyglossia@langsetup {#1/frenchspacing} \l_tmpa_tl
       {
         \str_case_e:nnF{\l_tmpa_tl}{
           {true}{\frenchspacing}
@@ -682,7 +682,7 @@
 }
 
 \cs_new_nopar:Nn{\polyglossia@lang@indentfirst:n}{
-  \prop_get:NnNTF \polyglossia@langsetup {#1/indentfirst} \l_tmpa_tl
+  \prop_get:NxNTF \polyglossia@langsetup {#1/indentfirst} \l_tmpa_tl
       {
         \str_case_e:nnF{\l_tmpa_tl}{
           {true}{\french@indent}
@@ -698,7 +698,7 @@
 
 
 \cs_new:Nn{\polyglossia@lang@setpardirection:n}{
-  \prop_get:NnNTF \polyglossia@langsetup {#1/direction} \l_tmpa_tl
+  \prop_get:NxNTF \polyglossia@langsetup {#1/direction} \l_tmpa_tl
       {
         \polyglossia@setpardirection:n{\l_tmpa_tl}
       }
@@ -710,7 +710,7 @@
 
 
 \cs_new:Nn{\polyglossia@lang@settextdirection:nn}{
-  \prop_get:NnNTF \polyglossia@langsetup {#1/direction} \l_tmpa_tl
+  \prop_get:NxNTF \polyglossia@langsetup {#1/direction} \l_tmpa_tl
       {
         \polyglossia@settextdirection:n{\l_tmpa_tl}{#2}
       }
@@ -1032,7 +1032,7 @@
     \polyglossia_load_lang_definition:nn{#1}{#2}
     % define environment and command (except for internal latex language)
     \ifstrequal{#2}{latex}{}{%
-      \polyglossia@define@language@cmd:n{#2}
+      \exp_args:Nx\polyglossia@define@language@cmd:n{#2}
     }%
     \csgdef{#2@loaded}{}%
   }
@@ -1049,7 +1049,8 @@
   }%
   \csgdef{#2@gvar}{\mainlanguagevariant}%
   % Store babelname of main language (for external packages such as biblatex)
-  \xdef\mainbabelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+  \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
+      { \xdef\mainbabelname{\l_tmpa_tl} }
   %% The following settings are for the default language and script
   % this tells bidi.sty or luabidi.sty that the document is RTL
   \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{%
@@ -1066,8 +1067,10 @@
   \polyglossia@set@language@name[#1]{#2}%
   \def\mainlanguagename{#2}
   % Store babelname of current language (for external packages such as biblatex)
-  \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
-  \csgdef{#2@gbabelname}{\babelname}%
+  \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
+      { \xdef\babelname{\l_tmpa_tl}% 
+        \csgdef{#2@gbabelname}{\babelname}%
+      }
   \ifluatex %
   \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
   \fi %
@@ -1230,7 +1233,7 @@
     \global\edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
     \polyglossia_load_lang_definition:nn{#1}{#2}
     % define environment and command
-    \polyglossia@define@language@cmd:n{#2}
+    \exp_args:Nx\polyglossia@define@language@cmd:n{#2}
     \csgdef{#2@loaded}{}%
     % If a variant is set, store it.
     \gdef\otherlanguagevariant{}
@@ -1242,7 +1245,8 @@
       }%
     }%
     \csgdef{#2@gvar}{\otherlanguagevariant}%
-    \edef\otherlanguagebabelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+    \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
+      { \xdef\otherlanguagebabelname{\l_tmpa_tl} }
     \csgdef{#2@gbabelname}{\otherlanguagebabelname}%
   }{}
 }
