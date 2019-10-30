@@ -1,10 +1,12 @@
 % Created on September 1, 2019
 % Sina Ahmadi (https://sinaahmadi.github.io/)
 \ProvidesFile{gloss-kurdish.ldf}[polyglossia: module for Kurdish]
+
 \RequireBidi
 \RequirePackage{arabicnumbers}
 \RequirePackage{farsical}
 \RequirePackage{hijrical}
+
 \PolyglossiaSetup{kurdish}{
   script=Arabic,
   direction=RL,
@@ -15,11 +17,83 @@
   localnumeral=kurdishnumerals
 }
 
+\newif\if@kurdish@kurmanji
+\def\kurdish@variant{sorani}
+\define@choicekey*+{kurdish}{variant}[\val\nr]{sorani,kurmanji}[sorani]{%
+   \ifcase\nr\relax
+      % sorani:
+      \def\kurdish@variant{sorani}%
+      \@kurdish@kurmanjifalse%
+   \or
+      % kurmanji:
+      \def\kurdish@variant{kurmanji}%
+      \@kurdish@kurmanjitrue%
+   \fi
+   \kurdish@set@variety%
+   \xpg@info{Option: kurdish, variant=\val}%
+}{\xpg@warning{Unknown Kurdish variant `#1'}}
+
+\newif\if@kurdish@latin
+\newif\if@kurdish@arabic
+\define@choicekey*+{kurdish}{script}[\val\nr]{Arabic,Latin}{%
+   \ifcase\nr\relax
+      % Arabic:
+      \@kurdish@latinfalse%
+      \@kurdish@arabictrue%
+   \or
+      % Latin:
+      \@kurdish@latintrue%
+      \@kurdish@arabicfalse%
+   \fi
+   \kurdish@set@variety%
+   \xpg@info{Option: kurdish, script=\val}%
+}{\xpg@warning{Unknown Kurdish script `#1'}}
+
+
 \newif\if@western@numerals
+\newif\if@force@western@numerals
+\def\kurdish@script{arabic}
+\def\kurdish@pattern{nohyphenation}
+
+\def\kurdish@set@variety{%
+  \if@kurdish@latin% Latin explicitly set
+     \@western@numeralstrue%
+     \if@kurdish@kurmanji
+         \def\kurdish@pattern{kurmanji}%
+         \SetLanguageKeys{kurdish}{script=Latin,direction=LR,scripttag=latn,babelname=kurmanji}%
+     \else
+         \SetLanguageKeys{kurdish}{script=Latin,direction=LR,scripttag=latn,babelname=kurdish}%
+     \fi
+     \def\kurdish@script{latin}
+     \xpg@fontsetup@latin{kurdish}%
+  \else
+     \if@kurdish@arabic% Arabic explicitly set
+        \if@kurdish@kurmanji
+            \if@force@western@numerals\else\@western@numeralsfalse\fi%
+            \SetLanguageKeys{kurdish}{script=Arabic,direction=RL,scripttag=arab,babelname=kurmanji}%
+            \def\kurdish@script{arabic}%
+        \else
+            \SetLanguageKeys{kurdish}{script=Arabic,direction=RL,scripttag=arab,babelname=kurdish}%
+        \fi
+        \xpg@fontsetup@nonlatin{kurdish}%
+     \else% sorani=Arabic, kurmanji=Latin
+        \if@kurdish@kurmanji
+            \@western@numeralstrue%
+            \SetLanguageKeys{kurdish}{script=Latin,direction=LR,scripttag=latn,babelname=kurmanji}%
+            \xpg@fontsetup@latin{kurdish}%
+            \def\kurdish@script{latin}
+        \else
+            \SetLanguageKeys{kurdish}{script=Arabic,direction=RL,scripttag=arab,babelname=kurdish}%
+            \xpg@fontsetup@nonlatin{kurdish}%
+        \fi
+     \fi
+  \fi
+}
+
 \def\tmp@western{western}
 \define@key{kurdish}{numerals}[eastern]{%
   \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@western\@western@numeralstrue\else%
+  \ifx\@tmpa\tmp@western\@western@numeralstrue\@force@western@numeralstrue\else%
     \@western@numeralsfalse%
   \fi%
 }
@@ -38,9 +112,14 @@
 \define@key{kurdish}{locale}[default]{%
   \def\@kurdish@locale{#1}}
 
+
 %TODO add option for CALENDAR
 
-\setkeys{kurdish}{locale,numerals}
+\setkeys{kurdish}{variant,locale}
+
+\def\kurdish@language{%
+   \polyglossia@setup@language@patterns{\kurdish@pattern}%
+}%
 
 \def\kurdishNativemonth#1{\ifcase#1%
   \or رێبه‌ندان\or ره‌شه‌مێ\or خاكه‌لێوه‌\or گوڵان\or جۆزه‌ردان\or پووشپه‌ڕ\or خه‌رمانان\or گه‌لاوێژ\or ره‌زبه‌ر\or گه‌ڵارێزان\or سه‌رماوه‌ز\or به‌فرانبار\fi}
@@ -54,7 +133,7 @@
   }%
 }
 
-\def\captionskurdish{%
+\def\captionskurdish@sorani@arabic{%
   \def\prefacename{\@ensure@RTL{پێشه‌كی}}%
   \def\refname{\@ensure@RTL{سه‌رچاوه‌کان}}%
   \def\abstractname{\@ensure@RTL{پوخته‌}}%
@@ -78,8 +157,163 @@
   \def\glossaryname{\@ensure@RTL{فه‌رهه‌نگۆک}}%
 }
 
-\def\datekurdish{%
+\def\captionskurdish@sorani@latin{%
+  \def\prefacename{Pêşekî}%
+  \def\refname{Serçawekan}%
+  \def\abstractname{Puxte}%
+  \def\bibname{Kitêbname}%
+  \def\chaptername{Bendî}%
+  \def\appendixname{Paşko}%
+  \def\contentsname{Nêwerrok}%
+  \def\listfigurename{Lîstî Wênekan}%
+  \def\listtablename{Lîstî Xiştekan}%
+  \def\indexname{Pêrrist}%
+  \def\figurename{Wêney}%
+  \def\tablename{Xiştey}%
+  \def\partname{Beşî}%
+  \def\enclname{Hawpêç}%
+  \def\ccname{Rûnûs}%
+  \def\headtoname{Bo}%
+  \def\pagename{Laperre}%
+  \def\seename{Çaw lêken}%
+  \def\alsoname{Herweha çaw lêken}%
+  \def\proofname{Selmandin}%
+  \def\glossaryname{Ferhengok}%
+}
+
+\def\captionskurdish@kurmanji@latin{%
+  \def\prefacename{Peşgotin}%
+  \def\refname{Pirtuken bijartî}%
+  \def\abstractname{Kurtebîr}%
+  \def\bibname{Çavkanîya Pirtukan}%
+  \def\chaptername{Serê}%
+  \def\appendixname{Tebînîya}%
+  \def\contentsname{Navêrok}%
+  \def\listfigurename{Hejmara Dimena}%
+  \def\listtablename{Hejmara Kevalen}%
+  \def\indexname{Endeks}%
+  \def\figurename{Dimenê}%
+  \def\tablename{Kevala}%
+  \def\partname{Bêşa}%
+  \def\enclname{Dumahik}%
+  \def\ccname{Belavker}%
+  \def\headtoname{Ji bo}%
+  \def\pagename{Rûpelê}%
+  \def\seename{binêra}%
+  \def\alsoname{le vêya ji binêra}%
+  \def\proofname{Delîl}%
+  \def\glossaryname{Çavkanîya lêkolînê}%
+}
+
+\def\captionskurdish@kurmanji@arabic{%
+  \def\prefacename{\@ensure@RTL{پێشگۆتن}}%
+  \def\refname{\@ensure@RTL{پرتووکێن بژارتی}}%
+  \def\abstractname{\@ensure@RTL{کورتەبیر}}%
+  \def\bibname{\@ensure@RTL{چاڤکانییا پرتووکان}}%
+  \def\chaptername{\@ensure@RTL{سەرێ}}%
+  \def\appendixname{\@ensure@RTL{پاشکۆ}}%
+  \def\contentsname{\@ensure@RTL{ناڤێرۆک}}%
+  \def\listfigurename{\@ensure@RTL{هەژمارا دیمەنا}}%
+  \def\listtablename{\@ensure@RTL{هەژمارا کەڤالێن}}%
+  \def\indexname{\@ensure@RTL{پێرست}}%
+  \def\figurename{\@ensure@RTL{دیمەنێ}}%
+  \def\tablename{\@ensure@RTL{کەڤالا}}%
+  \def\partname{\@ensure@RTL{بەشا}}%
+  \def\enclname{\@ensure@RTL{دوماهک}}%
+  \def\ccname{\@ensure@RTL{بەلاڤکەر}}%
+  \def\headtoname{\@ensure@RTL{ژ بۆ}}%
+  \def\pagename{\@ensure@RTL{رووپەلێ}}%
+  \def\seename{\@ensure@RTL{بنێرا}}%
+  \def\alsoname{\@ensure@RTL{لە ڤێیا ژ بنێرا}}%
+  \def\proofname{\@ensure@RTL{دەلیل}}%
+  \def\glossaryname{\@ensure@RTL{چاڤکانییا لێکۆلینێ}}%
+}
+
+\def\captionskurdish{%
+  \csname captionskurdish@\kurdish@variant @\kurdish@script\endcsname%
+}
+
+\def\datekurdish@sorani@arabic{%
    \def\today{\@ensure@RTL{\kurdishnumber\day{ی}\space\kurdishmonth{\month}{ی}\space\kurdishnumber\year}}%
+}
+
+\def\datekurdish@sorani@latin{%
+  \def\today{%
+     \number\day.~\ifcase\month\or
+      \januaryname\or \februaryname\or \marchname\or \aprilname\or
+      \mayname\or \junename\or \julyname\or \augustname\or
+      \septembername\or \octobername\or \novembername\or
+      \decembername\or \@ctrerr\fi~\number\year}%
+  \def\ontoday{%
+      \number\day’ê~\ifcase\month\or
+      \januaryname\or \februaryname\or \marchname\or \aprilname\or
+      \mayname\or \junename\or \julyname\or \augustname\or
+      \septembername\or \octobername\or \novembername\or
+      \decembername\or \@ctrerr\fi ê~\number\year}%
+  \def\januaryname{Kanûnî Yekem}%
+  \def\februaryname{Şubat}%
+  \def\marchname{Azar}%
+  \def\aprilname{Nîsan}%
+  \def\mayname{Ayar}%
+  \def\junename{Huzeyran}%
+  \def\julyname{Temmûz}%
+  \def\augustname{Ab}%
+  \def\septembername{Eylûl}%
+  \def\octobername{Tişrînî Yekem}%
+  \def\novembername{Tişrînî Dûhem}%
+  \def\decembername{Kanûnî Dûhem}%
+}
+
+\def\datekurdish@kurmanji@latin{%
+  \def\today{%
+     \number\day.~\ifcase\month\or
+      \januaryname\or \februaryname\or \marchname\or \aprilname\or
+      \mayname\or \junename\or \julyname\or \augustname\or
+      \septembername\or \octobername\or \novembername\or
+      \decembername\or \@ctrerr\fi~\number\year}%
+  \def\ontoday{%
+      \number\day’ê~\ifcase\month\or
+      \januaryname\or \februaryname\or \marchname\or \aprilname\or
+      \mayname\or \junename\or \julyname\or \augustname\or
+      \septembername\or \octobername\or \novembername\or
+      \decembername\or \@ctrerr\fi ê~\number\year}%
+  \def\januaryname{Çileya Paşîn}%
+  \def\februaryname{Sibat}%
+  \def\marchname{Adar}%
+  \def\aprilname{Nîsan}%
+  \def\mayname{Gulan}%
+  \def\junename{Hezîran}%
+  \def\julyname{Tîrmeh}%
+  \def\augustname{Tebax}%
+  \def\septembername{Îlon}%
+  \def\octobername{Çiriya Pêşîn}%
+  \def\novembername{Çiriya Paşîn}%
+  \def\decembername{Çileya Pêşîn}%
+}
+
+\def\datekurdish@kurmanji@arabic{%
+   \datekurdish@sorani@arabic% FIXME: correct?
+}
+
+% TODO: babel-kurmanji has these "alternative" month names
+% How to integrate them ("montnames=alternative" is not really good)?
+% It seems the month name question is all but straightforward:
+% https://en.wikipedia.org/wiki/Kurdish_calendar#Names
+%\def\datekurdish@kurmanji@alternate{%
+%  \datekurdish@kurmanji
+%  \def\januaryname{Rêbendan}%
+%  \def\februaryname{Reşemih}%
+%  \def\aprilname{Cotan}%           % Avrêl
+%  \def\junename{Pûşper}%
+%  \def\augustname{Gelavêj}%
+%  \def\septembername{Gelarezan}%   % Rezber
+%  \def\octobername{Kewçêr}%
+%  \def\novembername{Sermawez}%
+%  \def\decembername{Berfandar}%
+%}
+
+\def\datekurdish{%
+  \csname datekurdish@\kurdish@variant @\kurdish@script\endcsname%
 }
 
 \newcommand{\kurdishnumerals}[2]{\kurdishnumber{#2}}
@@ -110,8 +344,11 @@
 %\def\kurdishalph#1{\expandafter\@farsialph\csname c@#1\endcsname}
 
 \def\kurdish@numbers{%
-   \let\@alph\abjad%
-   \let\@Alph\abjad%
+  \if@western@numerals%
+  \else%
+     \let\@alph\abjad%
+     \let\@Alph\abjad%
+  \fi%
 }
 
 \def\nokurdish@numbers{%

@@ -1,0 +1,171 @@
+\ProvidesFile{gloss-malay.ldf}[polyglossia: module for malay]
+
+\RequirePackage{hijrical}
+
+\PolyglossiaSetup{malay}{%
+  language=Malay,
+  langtag=MLY,
+  hyphennames={malay,melayu,bahasam,bahasai,indonesian,indon,bahasa},
+  hyphenmins={2,2},
+  fontsetup=true}
+
+\providebool{malay@melayu}
+\malay@melayufalse
+\def\malay@variant{malay}
+\define@choicekey*+{malay}{variant}[\val\nr]{indonesian,malaysian}[malaysian]{%
+   \ifcase\nr\relax
+      % indonesian:
+      \def\malay@variant{indonesian}%
+      \malay@melayufalse
+   \or
+      % malaysian:
+      \def\malay@variant{malay}%
+      \malay@melayutrue
+   \fi
+   \ifmalay@melayu
+      \SetLanguageKeys{malay}{language=Malay,langtag=MLY,babelname=bahasam}%
+      \xpg@fontsetup@latin{malay}%
+      % Check if \l@malay is defined. If not, try to set it to some variety
+      % (specific order as in the csv list below), or null language if everything fails
+      \xpg@ifdefined{malay}{}{%
+        \def\do##1{%
+            \xpg@ifdefined{##1}%
+              {\csletcs{l@malay}{l@##1}\listbreak}%
+              {}%
+        }%
+        \docsvlist{melayu,bahasam,bahasai,indonesian,indon,bahasa}
+        \xpg@ifdefined{malay}{}{%
+                 \xpg@warning{No hyphenation patterns for Malay (Malaysian) found\MessageBreak
+                              I will use the 'null' language instead}%
+                 \adddialect\l@malay0%
+        }%
+      }%
+   \else
+      \SetLanguageKeys{malay}{language=Indonesian,langtag=IND,babelname=bahasa}%
+      \xpg@fontsetup@latin{malay}%
+      % Check if \l@indonesian is defined. If not, try to set it to some variety
+      % (specific order as in the csv list below), or null language if everything fails
+      \xpg@ifdefined{indonesian}{}{%
+        \def\do##1{%
+           \xpg@ifdefined{##1}%
+              {\csletcs{l@indonesian}{l@##1}\listbreak}%
+              {}%
+        }%
+        \docsvlist{indon,bahasai,bahasam,malay,melayu,bahasa}
+        \xpg@ifdefined{indonesian}{}{%
+                 \xpg@warning{No hyphenation patterns for Malay (Indonesian) found\MessageBreak
+                              I will use the 'null' language instead}%
+                 \adddialect\l@indonesian0
+        }%
+      }%
+   \fi
+   \xpg@info{Option: malay, variant=\val}%
+}{\xpg@warning{Unknown malay variant `#1'}}
+
+
+\def\malay@language{%
+   \polyglossia@setup@language@patterns{\malay@variant}%
+}%
+
+
+\def\captionsmalay@indonesian{%
+   \def\refname{Pustaka}%
+   \def\abstractname{Ringkasan}%
+   \def\bibname{Bibliografi}%
+   \def\prefacename{Pendahuluan}%
+   \def\chaptername{Bab}%
+   \def\appendixname{Lampiran}%
+   \def\contentsname{Daftar Isi}%
+   \def\listfigurename{Daftar Gambar}%
+   \def\listtablename{Daftar Tabel}%
+   \def\indexname{Indeks}%
+   \def\figurename{Gambar}%
+   \def\tablename{Tabel}%
+   %\def\thepart{}%
+   \def\partname{Bagian}%
+   \def\pagename{Halaman}%
+   \def\seename{lihat}%
+   \def\alsoname{lihat juga}%
+   \def\enclname{Lampiran}%
+   \def\ccname{cc}%
+   \def\headtoname{Kepada}%
+   \def\proofname{Bukti}%
+   \def\glossaryname{Daftar Istilah}%
+}
+
+\def\captionsmalay@malay{%
+   \def\refname{Rujukan}%
+   \def\abstractname{Abstrak}%
+   \def\bibname{Bibliografi}%
+   \def\prefacename{Pendahuluan}%
+   \def\chaptername{Bab}%
+   \def\appendixname{Lampiran}%
+   \def\contentsname{Kandungan}%
+   \def\listfigurename{Senarai Rajah}%
+   \def\listtablename{Senarai Jadual}%
+   \def\indexname{Indeks}%
+   \def\figurename{Rajah}%
+   \def\tablename{Jadual}%
+   \def\thepart{}%
+   \def\partname{Bahagian}%
+   \def\pagename{Halaman}%
+   \def\seename{lihat}%
+   \def\alsoname{lihat juga}%
+   \def\enclname{Lampiran}%
+   \def\ccname{salinan kpd}%
+   \def\headtoname{Kepada}%
+   \def\proofname{Bukti}%
+   \def\glossaryname{Senarai Istilah}%
+}
+
+\def\captionsmalay{%
+  \csname captionsmalay@\malay@variant\endcsname%
+}
+
+\def\datemalay@indonesian{%
+   \def\today{\number\day~\ifcase\month\or
+    Januari\or Pebruari\or Maret\or April\or Mei\or Juni\or
+    Juli\or Agustus\or September\or Oktober\or Nopember\or Desember\fi
+    \space \number\year}}
+
+\def\datemalay@malay{%
+   \def\bahasam@day{%
+      \ifcase\day\or%
+        1hb\or 2hb\or 3hb\or 4hb\or 5hb\or%
+        6hb\or 7hb\or 8hb\or 9hb\or 10hb\or%
+        11hb\or 12hb\or 13hb\or 14hb\or 15hb\or%
+        16hb\or 17hb\or 18hb\or 19hb\or 20hb\or%
+        21hb\or 22hb\or 23hb\or 24hb\or 25hb\or%
+        26hb\or 27hb\or 28hb\or 29hb\or 30hb\or%
+        31hb\fi}%
+   \def\today{\bahasam@day~\ifcase\month\or
+    Januari\or Februari\or Mac\or April\or Mei\or Jun\or
+    Julai\or Ogos\or September\or Oktober\or November\or Disember\fi
+    \space \number\year}}
+
+\def\datemalay{%
+  \csname datemalay@\malay@variant\endcsname%
+}
+
+% Hijri calendar localizations
+\def\hijrimonthmalay@indonesian#1{%
+  \ifcase#1%
+  \or Muharram\or Safar\or Rabiul awal\or Rabiul akhir\or Jumadil awal\or Jumadil akhir\or Rajab%
+  \or Sya'ban\or Ramadhan\or Syawal\or Dzulkaidah\or Dzulhijjah\fi%
+}
+
+\def\hijrimonthmalay@malay#1{%
+  \ifcase#1%
+  \or Muharram\or Safar\or Rabiulawal\or Rabiulakhir\or Jamadilawal\or Jamadilakhir\or Rejab%
+  \or Syaaban\or Ramadan\or Syawal\or Zulkaedah\or Zulhijah\fi%
+}
+
+\def\hijrimonthmalay{%
+  \csname hijrimonthmalay@\malay@variant\endcsname%
+}
+
+%\Hijritoday is now locale-aware and will format the date with this macro:
+\DefineFormatHijriDate{malay}{%
+  \number\value{Hijriday}\space\hijrimonthmalay{\value{Hijrimonth}}\space\number\value{Hijriyear}}
+
+\endinput

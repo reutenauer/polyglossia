@@ -14,38 +14,34 @@
 \define@choicekey*+{french}{variant}[\val\nr]{french,canadian,acadian}[french]{%
    \ifcase\nr\relax
       % french:
-      \gdef\french@variant{french}%
+      \def\french@variant{french}%
    \or
       % canadian:
-      \gdef\french@variant{canadien}%
+      \def\french@variant{canadien}%
+      \SetLanguageKeys{french}{babelname=canadien}%
       \xpg@ifdefined{canadien}{}%
-	    {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
-	      I will use the standard patterns for French instead}%
-	    \adddialect\l@canadien\l@french\relax}%
+      {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
+        I will use the standard patterns for French instead}%
+      \adddialect\l@canadien\l@french\relax}%
    \or
       % acadian:
-      \gdef\french@variant{acadian}%
+      \def\french@variant{acadian}%
+      \SetLanguageKeys{french}{babelname=canadien}%
       \xpg@ifdefined{acadian}{}%
-	    {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
-	      I will use the standard patterns for French instead}%
-	    \adddialect\l@acadian\l@french\relax}%
+      {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
+        I will use the standard patterns for French instead}%
+      \adddialect\l@acadian\l@french\relax}%
    \fi
    \xpg@info{Option: French, variant=\val}%
 }{\xpg@warning{Unknown French variant `#1'}}
 
 
 \def\french@language{%
-   \ifxetex
-      \language=\csname l@\french@variant\endcsname
-   \fi
-   \ifluatex
-      \xpg@set@language@luatex@iv{\french@variant}
-   \fi
+   \polyglossia@setup@language@patterns{\french@variant}
 }%
 
 \ifluatex
-  \newluatexattribute\xpg@frpt %
-  \directlua{polyglossia.load_frpt()}%
+  \directlua{require('polyglossia-french')}%
 \else
   \newXeTeXintercharclass\french@openbrackets % ( ] {
   \newXeTeXintercharclass\french@closebrackets % ( ] {
@@ -61,18 +57,22 @@
 \let\xpg@orig@makefntext\@makefntext
 
 \define@boolkey{french}[french@]{frenchfootnote}[true]{%
-   \iffrench@frenchfootnote
-      \ifx\@makefntext\undefined\else        
-          \long\def\french@makefntext##1{%
-               \parindent1em \noindent\quad%
-               \ifx\@thefnmark\empty\else%
-               \@thefnmark.\space\fi ##1%
-          }
-          \let\@makefntext\french@makefntext
+  \AfterPreamble{%
+    \ifdefstring{\xpg@main@language}{french}{%
+      \iffrench@frenchfootnote
+         \ifx\@makefntext\undefined\else        
+             \long\def\french@makefntext##1{%
+                \parindent1em \noindent\quad%
+                \ifx\@thefnmark\empty\else%
+                \@thefnmark.\space\fi ##1%
+             }
+             \let\@makefntext\french@makefntext
+         \fi
+      \else
+         \let\@makefntext\xpg@orig@makefntext
       \fi
-   \else
-      \let\@makefntext\xpg@orig@makefntext
-   \fi
+    }{\xpg@warning{Option 'frenchfootnote' only supported if French is main language!}}%
+  }%
 }
 
 \define@boolkey{french}[french@]{autospacing}[true]{}
@@ -108,6 +108,51 @@
    \fi
 }
 
+% Configuration of item labels
+\def\french@itemi{\textemdash}
+\def\french@itemii{\textemdash}
+\def\french@itemiii{\textemdash}
+\def\french@itemiv{\textemdash}
+
+\define@key{french}{itemlabels}[\textemdash]{%
+  \def\french@itemi{#1}
+  \def\french@itemii{#1}
+  \def\french@itemiii{#1}
+  \def\french@itemiv{#1}
+}
+
+\define@key{french}{itemlabeli}[\textemdash]{%
+  \def\french@itemi{#1}
+}
+
+\define@key{french}{itemlabelii}[\textemdash]{%
+  \def\french@itemii{#1}
+}
+
+\define@key{french}{itemlabeliii}[\textemdash]{%
+  \def\french@itemiii{#1}
+}
+
+\define@key{french}{itemlabeliv}[\textemdash]{%
+  \def\french@itemiv{#1}
+}
+
+\define@boolkey{french}[french@]{frenchitemlabels}[true]{%
+  \AfterPreamble{%
+    \ifdefstring{\xpg@main@language}{french}{%
+      \iffrench@frenchitemlabels
+         \renewcommand{\labelitemi}{\french@itemi}%
+         \renewcommand{\labelitemii}{\french@itemii}%
+         \renewcommand{\labelitemiii}{\french@itemiii}%
+         \renewcommand{\labelitemiv}{\french@itemiv}%
+      \else
+         \let\@makefntext\xpg@orig@makefntext
+      \fi
+    }{\xpg@warning{Option 'frenchitemlabels' only supported if French is main language!}}%
+  }%
+}
+
+
 \def\french@fontsetup{%
   \unless\iffrench@autospacetypewriter
     \let\ttfamily\french@ttfamilyFB
@@ -122,8 +167,7 @@
 \def\french@punctuation{%
     \lccode"2019="2019
     \ifluatex
-      \xpg@frpt=1\relax %
-      \directlua{polyglossia.activate_frpt()}%
+      \directlua{polyglossia.activate_french_punct()}%
     \else
       \XeTeXinterchartokenstate=1
       \XeTeXcharclass `\! \french@punctthin
@@ -169,14 +213,7 @@
 \def\nofrench@punctuation{%
     \lccode"2019=\z@
     \ifluatex
-      \xpg@frpt=0\relax %
-      % Though it would make compilation slightly faster, it is not possible to
-      % safely uncomment the following line. Imagine the following case: you start
-      % a paragraph by some french text, then, in the same paragraph, you change
-      % the language to something else, and thus call the following line. This means
-      % that, at then end of the paragraph, the function won't be in the callback,
-      % so the beginning of the paragraph won't be processed by it.
-      %\directlua{polyglossia.desactivate_frpt()}
+      \directlua{polyglossia.deactivate_french_punct()}%
     \else
       \XeTeXcharclass `\! \z@
       \XeTeXcharclass `\? \z@

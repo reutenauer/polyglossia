@@ -1,0 +1,84 @@
+\ProvidesFile{gloss-sami.ldf}[polyglossia: module for sami]
+
+\PolyglossiaSetup{sami}{
+  babelname=samin,
+  hyphennames={samin},
+  hyphenmins={2,2},
+  language={Northern Sami},
+  langtag=NSM,
+  fontsetup=true,
+}
+
+% TODO: Add other Sami varieties
+\def\sami@variant{northern}
+%\define@choicekey*+{sami}{variant}[\val\nr]{northern}[nothern]{%
+%   \ifcase\nr\relax
+%      % northern:
+%      \def\sami@variant{samin}%
+%      \SetLanguageKeys{sami}{language=Northern Sami,langtag=NSM}%
+%      \xpg@fontsetup@latin{sami}%
+%   \or
+%      % other:
+%      \def\sami@variant{}%
+%      \SetLanguageKeys{sami}{language= Sami,langtag=}%
+%      \xpg@fontsetup@latin{sami}%
+%   \fi
+%   \xpg@info{Option: sami, variant=\val}%
+%}{\xpg@warning{Unknown sami variant `#1'}}
+
+
+%\def\sami@language{%
+%   \polyglossia@setup@language@patterns{\sami@variant}
+%}%
+
+\def\captionssami@northern{%
+   \def\refname{Čujuhusat}%
+   \def\abstractname{Čoahkkáigeassu}%
+   \def\bibname{Girjjálašvuohta}%
+   \def\prefacename{Ovdasátni}%
+   \def\chaptername{Kapihttal}%
+   \def\appendixname{Čuovus}%
+   \def\contentsname{Sisdoallu}%
+   \def\listfigurename{Govvosat}%
+   \def\listtablename{Tabeallat}%
+   \def\indexname{Registtar}%
+   \def\figurename{Govus}%
+   \def\tablename{Tabealla}%
+   \def\thepart{}%
+   \def\partname{Oassi}%
+   \def\pagename{Siidu}%
+   \def\seename{geahča}%
+   \def\alsoname{geahča maiddái}%
+   \def\enclname{Mielddus}%
+   \def\ccname{Kopia sáddejuvvon}%
+   \def\headtoname{Vuostáiváldi}%
+   \def\proofname{Duođaštus}%
+   \def\glossaryname{Sátnelistu}%
+}
+
+\def\captionssami{%
+  \csname captionssami@\sami@variant\endcsname%
+}
+
+\def\datesami@northern{%
+  \def\today{\ifcase\month\or
+    ođđajagemánu\or
+    guovvamánu\or
+    njukčamánu\or
+    cuoŋománu\or
+    miessemánu\or
+    geassemánu\or
+    suoidnemánu\or
+    borgemánu\or
+    čakčamánu\or
+    golggotmánu\or
+    skábmamánu\or
+    juovlamánu\fi
+    \space\number\day.~b.\space\number\year}%
+}
+
+\def\datesami{%
+  \csname datesami@\sami@variant\endcsname%
+}
+
+\endinput

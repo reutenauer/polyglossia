@@ -9,6 +9,7 @@
   hyphennames={russian},
   hyphenmins={2,2},
   frenchspacing=true,
+  indentfirst=true,
   fontsetup,
   localnumeral=russiannumerals,
   Localnumeral=Russiannumerals
@@ -36,6 +37,14 @@
       {\cyrillic@numeralsfalse}%
 }
 
+\define@boolkey{russian}[russian@]{indentfirst}{
+   \ifrussian@indentfirst
+      \SetLanguageKeys{russian}{indentfirst=true}
+   \else
+      \SetLanguageKeys{russian}{indentfirst=false}
+  \fi
+}
+
 \define@boolkey{russian}[russian@]{babelshorthands}[false]{}
 
 \setkeys{russian}{spelling,numerals}
@@ -49,6 +58,7 @@
 \ifcsundef{initiate@active@char}{%
   \input{babelsh.def}%
   \initiate@active@char{"}%
+  \shorthandoff{"}%
 }{}
 
 \def\russian@shorthands{%

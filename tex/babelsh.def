@@ -3,28 +3,71 @@
   \bbl@afterfi\endinput
 \fi
 \ProvidesFile{babelsh.def}
-         [2013/04/30 %
+         [2019/09/30 %
          Babel common definitions for shorthands^^J
-         Taken verbatim from babel.def (2013/04/15 v3.9e)]
+         Taken verbatim from babel files (2019/09/27 v3.34)]
 %
 % ------------------------------------------------------------------------------
 %
-% XXX: from babel.sty
+% lines 52 to 56 from babel.sty
 %
 % ------------------------------------------------------------------------------
 %
+\def\bbl@stripslash{\expandafter\@gobble\string}
+\def\bbl@add#1#2{%
+  \bbl@ifunset{\bbl@stripslash#1}%
+    {\def#1{#2}}%
+    {\expandafter\def\expandafter#1\expandafter{#1#2}}}
+%
+% ------------------------------------------------------------------------------
+%
+% line 73 to 74 from babel.sty
+%
+% ------------------------------------------------------------------------------
+%
+\long\def\bbl@afterelse#1\else#2\fi{\fi#1}
+\long\def\bbl@afterfi#1\fi{\fi#1}
+%
+% ------------------------------------------------------------------------------
+%
+% line 399 from babel.sty
+%
+% ------------------------------------------------------------------------------
+%
+\let\bbl@opt@shorthands\@nnil
+%
+% ------------------------------------------------------------------------------
+%
+% lines 432 to 445 from babel.sty
+%
+% ------------------------------------------------------------------------------
+%
+\ifx\bbl@opt@shorthands\@nnil
+  \def\bbl@ifshorthand#1#2#3{#2}%
+\else\ifx\bbl@opt@shorthands\@empty
+  \def\bbl@ifshorthand#1#2#3{#3}%
+\else
   \def\bbl@ifshorthand#1{%
-    \@expandtwoargs\in@{\string#1}{\bbl@opt@shorthands}%
+    \bbl@xin@{\string#1}{\bbl@opt@shorthands}%
     \ifin@
       \expandafter\@firstoftwo
     \else
       \expandafter\@secondoftwo
     \fi}
-\let\bbl@opt@shorthands\@nnil
+  \edef\bbl@opt@shorthands{%
+    \expandafter\bbl@sh@string\bbl@opt@shorthands\@empty}%
 %
 % ------------------------------------------------------------------------------
 %
-% XXX: from switch.def
+% line 450 from babel.sty
+%
+% ------------------------------------------------------------------------------
+%
+\fi\fi
+%
+% ------------------------------------------------------------------------------
+%
+% lines 389 to 424 from switch.def
 %
 % ------------------------------------------------------------------------------
 %
@@ -67,18 +110,90 @@
 %
 % ------------------------------------------------------------------------------
 %
-% XXX: from babel.def
+% lines 48 to 69 from babel.def
 %
 % ------------------------------------------------------------------------------
 %
-\def\bbl@for#1#2#3{\@for#1:=#2\do{\ifx#1\@empty\else#3\fi}}
-\def\bbl@add#1#2{%
-  \@ifundefined{\expandafter\@gobble\string#1}%
-    {\def#1{#2}}%
-    {\expandafter\def\expandafter#1\expandafter{#1#2}}}
-\long\def\bbl@afterelse#1\else#2\fi{\fi#1}
-\long\def\bbl@afterfi#1\fi{\fi#1}
+\ifx\bbl@ifshorthand\@undefined
+  \let\bbl@opt@shorthands\@nnil
+  \def\bbl@ifshorthand#1#2#3{#2}%
+  \let\bbl@language@opts\@empty
+  \ifx\babeloptionstrings\@undefined
+    \let\bbl@opt@strings\@nnil
+  \else
+    \let\bbl@opt@strings\babeloptionstrings
+  \fi
+  \def\BabelStringsDefault{generic}
+  \def\bbl@tempa{normal}
+  \ifx\babeloptionmath\bbl@tempa
+    \def\bbl@mathnormal{\noexpand\textormath}
+  \fi
+  \def\AfterBabelLanguage#1#2{}
+  \ifx\BabelModifiers\@undefined\let\BabelModifiers\relax\fi
+  \let\bbl@afterlang\relax
+  \def\bbl@opt@safe{BR}
+  \ifx\@uclclist\@undefined\let\@uclclist\@empty\fi
+  \ifx\bbl@trace\@undefined\def\bbl@trace#1{}\fi
+  \expandafter\newif\csname ifbbl@single\endcsname
+\fi
+%
+% ------------------------------------------------------------------------------
+%
+% line 108 from babel.def
+%
+% ------------------------------------------------------------------------------
+%
 \def\bbl@csarg#1#2{\expandafter#1\csname bbl@#2\endcsname}%
+%
+% ------------------------------------------------------------------------------
+%
+% lines 125 to 130 from babel.def
+%
+% ------------------------------------------------------------------------------
+%
+\def\bbl@exp#1{%
+  \begingroup
+    \let\\\noexpand
+    \def\<##1>{\expandafter\noexpand\csname##1\endcsname}%
+    \edef\bbl@exp@aux{\endgroup#1}%
+  \bbl@exp@aux}
+%
+% ------------------------------------------------------------------------------
+%
+% lines 144 to 149 from babel.def
+%
+% ------------------------------------------------------------------------------
+%
+\def\bbl@ifunset#1{%
+  \expandafter\ifx\csname#1\endcsname\relax
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi}
+%
+% ------------------------------------------------------------------------------
+%
+% lines 234 to 243 from babel.def
+%
+% ------------------------------------------------------------------------------
+%
+\chardef\bbl@engine=%
+  \ifx\directlua\@undefined
+    \ifx\XeTeXinputencoding\@undefined
+      \z@
+    \else
+      \tw@
+    \fi
+  \else
+    \@ne
+  \fi
+%
+% ------------------------------------------------------------------------------
+%
+% lines 255 to 258 from babel.def
+%
+% ------------------------------------------------------------------------------
+%
 \def\bbl@withactive#1#2{%
   \begingroup
     \lccode`~=`#2\relax
@@ -86,20 +201,24 @@
 %
 % ------------------------------------------------------------------------------
 %
-% XXX: a bit further in babel.def
+% lines 443 to 558 from babel.def
 %
 % ------------------------------------------------------------------------------
 %
-\def\bbl@add@special#1{%
-  \begingroup
-    \def\do{\noexpand\do\noexpand}%
-    \def\@makeother{\noexpand\@makeother\noexpand}%
-  \edef\x{\endgroup
-    \def\noexpand\dospecials{\dospecials\do#1}%
-    \expandafter\ifx\csname @sanitize\endcsname\relax \else
-      \def\noexpand\@sanitize{\@sanitize\@makeother#1}%
-    \fi}%
-  \x}
+\def\bbl@add@special#1{% 1:a macro like \", \?, etc.
+  \bbl@add\dospecials{\do#1}% test @sanitize = \relax, for back. compat.
+  \bbl@ifunset{@sanitize}{}{\bbl@add\@sanitize{\@makeother#1}}%
+  \ifx\nfss@catcodes\@undefined\else % TODO - same for above
+    \begingroup
+      \catcode`#1\active
+      \nfss@catcodes
+      \ifnum\catcode`#1=\active
+        \endgroup
+        \bbl@add\nfss@catcodes{\@makeother#1}%
+      \else
+        \endgroup
+      \fi
+  \fi}
 \def\bbl@remove@special#1{%
   \begingroup
     \def\x##1##2{\ifnum`#1=`##2\noexpand\@empty
@@ -108,7 +227,7 @@
     \def\@makeother{\x\@makeother}%
   \edef\x{\endgroup
     \def\noexpand\dospecials{\dospecials}%
-    \expandafter\ifx\csname @sanitize\endcsname\relax \else
+    \expandafter\ifx\csname @sanitize\endcsname\relax\else
       \def\noexpand\@sanitize{\@sanitize}%
     \fi}%
   \x}
@@ -126,19 +245,17 @@
       \bbl@afterfi\csname#2@sh@#1@\string##1@\endcsname
     \fi}}%
 \def\initiate@active@char#1{%
-  \expandafter\ifx\csname active@char\string#1\endcsname\relax
-    \bbl@withactive
-      {\expandafter\@initiate@active@char\expandafter}#1\string#1#1%
-  \fi}
+  \bbl@ifunset{active@char\string#1}%
+    {\bbl@withactive
+      {\expandafter\@initiate@active@char\expandafter}#1\string#1#1}%
+    {}}
 \def\@initiate@active@char#1#2#3{%
-  \expandafter\edef\csname bbl@oricat@#2\endcsname{%
-    \catcode`#2=\the\catcode`#2\relax}%
+  \bbl@csarg\edef{oricat@#2}{\catcode`#2=\the\catcode`#2\relax}%
   \ifx#1\@undefined
-    \expandafter\edef\csname bbl@oridef@#2\endcsname{%
-      \let\noexpand#1\noexpand\@undefined}%
+    \bbl@csarg\edef{oridef@#2}{\let\noexpand#1\noexpand\@undefined}%
   \else
-    \expandafter\let\csname bbl@oridef@@#2\endcsname#1%
-    \expandafter\edef\csname bbl@oridef@#2\endcsname{%
+    \bbl@csarg\let{oridef@@#2}#1%
+    \bbl@csarg\edef{oridef@#2}{%
       \let\noexpand#1%
       \expandafter\noexpand\csname bbl@oridef@@#2\endcsname}%
   \fi
@@ -146,7 +263,7 @@
     \expandafter\let\csname normal@char#2\endcsname#3%
   \else
     \bbl@info{Making #2 an active character}%
-    \ifnum\mathcode`#2="8000
+    \ifnum\mathcode`#2=\ifodd\bbl@engine"1000000 \else"8000 \fi
       \@namedef{normal@char#2}{%
         \textormath{#3}{\csname bbl@oridef@@#2\endcsname}}%
     \else
@@ -176,9 +293,11 @@
          \expandafter\noexpand\csname normal@char#2\endcsname
        \noexpand\else
          \noexpand\expandafter
-         \expandafter\noexpand\csname user@active#2\endcsname
+         \expandafter\noexpand\csname bbl@doactive#2\endcsname
        \noexpand\fi}%
      {\expandafter\noexpand\csname normal@char#2\endcsname}}%
+  \bbl@csarg\edef{doactive#2}{%
+    \expandafter\noexpand\csname user@active#2\endcsname}%
   \bbl@csarg\edef{active@#2}{%
     \noexpand\active@prefix\noexpand#1%
     \expandafter\noexpand\csname active@char#2\endcsname}%
@@ -196,22 +315,21 @@
   \if\string'#2%
     \let\prim@s\bbl@prim@s
     \let\active@math@prime#1%
-  \fi}
+  \fi
+  \bbl@usehooks{initiateactive}{{#1}{#2}{#3}}}
 \@ifpackagewith{babel}{KeepShorthandsActive}%
   {\let\bbl@restoreactive\@gobble}%
   {\def\bbl@restoreactive#1{%
-     \edef\bbl@tempa{%
+     \bbl@exp{%
 %
 % ------------------------------------------------------------------------------
 %
-% XXX: WARNING: this has been commented in babelsh.def
+% lines 561 to 755 from babel.def
 %
 % ------------------------------------------------------------------------------
 %
-%       \noexpand\AfterBabelLanguage\noexpand\CurrentOption
-%         {\catcode`#1=\the\catcode`#1\relax}%
-       \noexpand\AtEndOfPackage{\catcode`#1=\the\catcode`#1\relax}}%
-     \bbl@tempa}%
+       \\\AtEndOfPackage
+         {\catcode`#1=\the\catcode`#1\relax}}}%
    \AtEndOfPackage{\let\bbl@restoreactive\@gobble}}
 \def\bbl@sh@select#1#2{%
   \expandafter\ifx\csname#1@sh@#2@sel\endcsname\relax
@@ -245,7 +363,7 @@
   \def\bbl@tempa{#3}%
   \ifx\bbl@tempa\@empty
     \expandafter\let\csname #1@sh@\string#2@sel\endcsname\bbl@scndcs
-    \@ifundefined{#1@sh@\string#2@}{}%
+    \bbl@ifunset{#1@sh@\string#2@}{}%
       {\def\bbl@tempa{#4}%
        \expandafter\ifx\csname#1@sh@\string#2@\endcsname\bbl@tempa
        \else
@@ -256,7 +374,7 @@
     \@namedef{#1@sh@\string#2@}{#4}%
   \else
     \expandafter\let\csname #1@sh@\string#2@sel\endcsname\bbl@firstcs
-    \@ifundefined{#1@sh@\string#2@\string#3@}{}%
+    \bbl@ifunset{#1@sh@\string#2@\string#3@}{}%
       {\def\bbl@tempa{#4}%
        \expandafter\ifx\csname#1@sh@\string#2@\string#3@\endcsname\bbl@tempa
        \else
@@ -293,7 +411,7 @@
         turned off in the package options}}}
 \def\user@language@group{user@\language@group}
 \def\bbl@set@user@generic#1#2{%
-  \@ifundefined{user@generic@active#1}%
+  \bbl@ifunset{user@generic@active#1}%
     {\bbl@active@def#1\user@language@group{user@active}{user@generic@active}%
      \bbl@active@def#1\user@group{user@generic@active}{language@active}%
      \expandafter\edef\csname#2@sh@#1@@\endcsname{%
@@ -334,14 +452,15 @@
     The character `\string #1' should be made a shorthand character;\\%
     add the command \string\useshorthands\string{#1\string} to
     the preamble.\\%
-    I will ignore your instruction}{}}
+    I will ignore your instruction}%
+   {You may proceed, but expect unexpected results}}
 \newcommand*\shorthandon[1]{\bbl@switch@sh\@ne#1\@nnil}
 \DeclareRobustCommand*\shorthandoff{%
   \@ifstar{\bbl@shorthandoff\tw@}{\bbl@shorthandoff\z@}}
 \def\bbl@shorthandoff#1#2{\bbl@switch@sh#1#2\@nnil}
 \def\bbl@switch@sh#1#2{%
   \ifx#2\@nnil\else
-    \@ifundefined{bbl@active@\string#2}%
+    \bbl@ifunset{bbl@active@\string#2}%
       {\bbl@error
          {I cannot switch `\string#2' on or off--not a shorthand}%
          {This character is not a shorthand. Maybe you made\\%
@@ -358,9 +477,9 @@
   \fi}
 \def\babelshorthand{\active@prefix\babelshorthand\bbl@putsh}
 \def\bbl@putsh#1{%
-   \@ifundefined{bbl@active@\string#1}%
-      {\bbl@putsh@i#1\@empty\@nnil}%
-      {\csname bbl@active@\string#1\endcsname}}
+  \bbl@ifunset{bbl@active@\string#1}%
+     {\bbl@putsh@i#1\@empty\@nnil}%
+     {\csname bbl@active@\string#1\endcsname}}
 \def\bbl@putsh@i#1#2\@nnil{%
   \csname\languagename @sh@\string#1@%
     \ifx\@empty#2\else\string#2@\fi\endcsname}
@@ -381,6 +500,7 @@
   \def\bbl@deactivate#1{%
     \bbl@ifshorthand{#1}{\bbl@s@deactivate{#1}}{}}
 \fi
+\newcommand\ifbabelshorthand[3]{\bbl@ifunset{bbl@active@\string#1}{#3}{#2}}
 \def\bbl@prim@s{%
   \prime\futurelet\@let@token\bbl@pr@m@s}
 \def\bbl@if@primes#1#2{%
@@ -403,30 +523,28 @@
 \initiate@active@char{~}
 \declare@shorthand{system}{~}{\leavevmode\nobreak\ }
 \bbl@activate{~}
-\def\bbl@disc#1#2{\nobreak\discretionary{#2-}{}{#1}\bbl@allowhyphens}
-\def\bbl@t@one{T1}
-\def\bbl@allowhyphens{\nobreak\hskip\z@skip}
-\def\bbl@t@one{T1}
 %
 % ------------------------------------------------------------------------------
 %
-% XXX: later in babel.def
+% lines 890 to 927 from babel.def
 %
 % ------------------------------------------------------------------------------
 %
+\def\bbl@allowhyphens{\ifvmode\else\nobreak\hskip\z@skip\fi}
+\def\bbl@t@one{T1}
 \def\allowhyphens{\ifx\cf@encoding\bbl@t@one\else\bbl@allowhyphens\fi}
 \newcommand\babelnullhyphen{\char\hyphenchar\font}
 \def\babelhyphen{\active@prefix\babelhyphen\bbl@hyphen}
 \def\bbl@hyphen{%
   \@ifstar{\bbl@hyphen@i @}{\bbl@hyphen@i\@empty}}
 \def\bbl@hyphen@i#1#2{%
-  \@ifundefined{bbl@hy@#1#2\@empty}%
+  \bbl@ifunset{bbl@hy@#1#2\@empty}%
     {\csname bbl@#1usehyphen\endcsname{\discretionary{#2}{}{#2}}}%
     {\csname bbl@hy@#1#2\@empty\endcsname}}
 \def\bbl@usehyphen#1{%
   \leavevmode
-  \ifdim\lastskip>\z@\mbox{#1}\nobreak\else\nobreak#1\fi
-  \hskip\z@skip}
+  \ifdim\lastskip>\z@\mbox{#1}\else\nobreak#1\fi
+  \nobreak\hskip\z@skip}
 \def\bbl@@usehyphen#1{%
   \leavevmode\ifdim\lastskip>\z@\mbox{#1}\else#1\fi}
 \def\bbl@hyphenchar{%
@@ -439,12 +557,11 @@
 \def\bbl@hy@@soft{\bbl@@usehyphen{\discretionary{\bbl@hyphenchar}{}{}}}
 \def\bbl@hy@hard{\bbl@usehyphen\bbl@hyphenchar}
 \def\bbl@hy@@hard{\bbl@@usehyphen\bbl@hyphenchar}
-\def\bbl@hy@nobreak{\bbl@usehyphen{\mbox{\bbl@hyphenchar}\nobreak}}
+\def\bbl@hy@nobreak{\bbl@usehyphen{\mbox{\bbl@hyphenchar}}}
 \def\bbl@hy@@nobreak{\mbox{\bbl@hyphenchar}}
 \def\bbl@hy@repeat{%
   \bbl@usehyphen{%
-    \discretionary{\bbl@hyphenchar}{\bbl@hyphenchar}{\bbl@hyphenchar}%
-    \nobreak}}
+    \discretionary{\bbl@hyphenchar}{\bbl@hyphenchar}{\bbl@hyphenchar}}}
 \def\bbl@hy@@repeat{%
   \bbl@@usehyphen{%
     \discretionary{\bbl@hyphenchar}{\bbl@hyphenchar}{\bbl@hyphenchar}}}
@@ -454,7 +571,7 @@
 %
 % ------------------------------------------------------------------------------
 %
-% XXX: end of the code copied from babel files
+% end of the code copied from babel files
 %
 % ------------------------------------------------------------------------------
 %

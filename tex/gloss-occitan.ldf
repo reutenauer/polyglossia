@@ -32,10 +32,13 @@
 \else
   \setkeys{occitan}{babelshorthands=false}
 \fi
+
 \ifcsundef{initiate@active@char}{%
-\input{babelsh.def}%
-\initiate@active@char{"}%
+  \input{babelsh.def}%
+  \initiate@active@char{"}%
+  \shorthandoff{"}%
 }{}
+
 \def\occitan@shorthands{%
   \bbl@activate{"}%
   \def\language@group{occitan}%

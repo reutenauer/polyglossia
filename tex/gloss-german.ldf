@@ -4,63 +4,88 @@
   frenchspacing=true,
   fontsetup=true,
   langtag=DEU,
+  babelname=ngerman
 }
 
-\def\tmp@old{old}
-\def\tmp@oldyr{1901}
 \newif\if@german@oldspelling
 \@german@oldspellingfalse
-\define@key{german}{spelling}[new]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@oldyr\def\@tmpa{old}\fi
-  \ifx\@tmpa\tmp@old
-    \xpg@ifdefined{german}{}{%
-      \xpg@nopatterns{german}%
-      \adddialect\l@german\l@nohyphenation
-    }
-    \@german@oldspellingtrue
-  \else % try ngerman
-    \xpg@ifdefined{ngerman}{%
+\define@choicekey*+{german}{spelling}[\val\nr]{new,old,1901}[new]{%
+   \ifcase\nr\relax
+      % new:
       \@german@oldspellingfalse
-    }{% fall back to german
-      \xpg@ifdefined{german}{%
-        \xpg@warning{You asked for `ngerman' but only `german' hyphenation is available!}%
-        \@german@oldspellingtrue
-      }{%
-        \xpg@nopatterns{ngerman}%
-        \adddialect\l@ngerman\l@nohyphenation
-      }%
-    }%
-  \fi
-}
+   \or
+      % old:
+      \@german@oldspellingtrue
+   \or
+      % 1901:
+      \@german@oldspellingtrue
+   \fi
+   \german@set@babelname%
+   \xpg@info{Option: German, spelling=\val}%
+}{\xpg@warning{Unknown German spelling `#1'}}
 
 \newif\if@austrian@locale
 \@austrian@localefalse
 \newif\if@swiss@locale
 \@swiss@localefalse
-\def\tmp@austrian{austrian}
-\def\tmp@swiss{swiss}
-\define@key{german}{variant}[german]{%
-	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@austrian\@austrian@localetrue\else
-	  \@austrian@localefalse%
-	\fi
-	\ifx\@tmpa\tmp@swiss\@swiss@localetrue
-	  \xpg@ifdefined{swissgerman}{}%
-	    {\xpg@warning{No hyphenation patterns were loaded for "Swiss German (Old Spelling)"\MessageBreak
-	      I will use the standard patterns for German (old spelling) instead}%
-	    \adddialect\l@swissgerman\l@german\relax}%
-	\else
-	  \@swiss@localefalse%
-	\fi}
+\define@choicekey*+{german}{variant}[\val\nr]{german,austrian,swiss}[german]{%
+   \ifcase\nr\relax
+      % german:
+      \@swiss@localefalse%
+      \@austrian@localefalse%
+   \or
+      % austrian:
+      \@austrian@localetrue%
+      \@swiss@localefalse%
+   \or
+      % swiss:
+      \@swiss@localetrue%
+      \@austrian@localefalse%
+      \xpg@ifdefined{swissgerman}{}%
+         {%
+           \xpg@warning{No hyphenation patterns were loaded for "Swiss German (Old Spelling)"\MessageBreak
+	                I will use the standard patterns for German (old spelling) instead}%
+	                \adddialect\l@swissgerman\l@german\relax%
+         }%
+   \fi
+   \german@set@babelname%
+   \xpg@info{Option: German, variant=\val}%
+}{\xpg@warning{Unknown German variant `#1'}}
 
-\newif\if@german@fraktur
-\def\tmp@fraktur{fraktur}
-\define@key{german}{script}[latin]{%
-	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@fraktur\@german@frakturtrue\else
-	  \@german@frakturfalse%
-	\fi}
+\def\german@set@babelname{%
+  \if@german@oldspelling
+     \if@swiss@locale
+         \SetLanguageKeys{german}{babelname=swissgerman}%
+     \else
+     \if@austrian@locale
+         \SetLanguageKeys{german}{babelname=austrian}%
+     \else
+         \SetLanguageKeys{german}{babelname=german}%
+     \fi\fi
+  \else
+     \if@swiss@locale
+         \SetLanguageKeys{german}{babelname=nswissgerman}%
+     \fi
+     \if@austrian@locale
+         \SetLanguageKeys{german}{babelname=naustrian}%
+     \fi
+  \fi
+}
+
+\newif\if@german@blackletter
+\define@choicekey*+{german}{script}[\val\nr]{latin,blackletter,fraktur}[latin]{%
+   \ifcase\nr\relax
+      % latin:
+      \@german@blackletterfalse%
+   \or
+      % blackletter:
+      \@german@blacklettertrue%
+   \or
+      % fraktur:
+      \@german@blacklettertrue%
+   \fi
+   \xpg@info{Option: German, script=\val}%
+}{\xpg@warning{Unknown German script `#1'}}
 
 \define@boolkey{german}[german@]{latesthyphen}[false]{}
 
@@ -75,8 +100,9 @@
 \fi
 
 \ifcsundef{initiate@active@char}{%
-\input{babelsh.def}%
-\initiate@active@char{"}%
+  \input{babelsh.def}%
+  \initiate@active@char{"}%
+  \shorthandoff{"}%
 }{}
 
 \def\german@shorthands{%
@@ -164,7 +190,7 @@
 }
 
 %%Strings for Fraktur contributed by Gerrit <z0idberg . gmx . de>
-\def\captions@german@fraktur{%
+\def\captions@german@blackletter{%
   \captions@german%
   \def\abstractname{Zuſammenfaſſung}%
   \def\seename{ſiehe}%
@@ -172,7 +198,7 @@
   \def\glossaryname{Gloſſar}%
 }
 
-\def\date@german@fraktur{%
+\def\date@german@blackletter{%
   \def\today{\number\day.%
     \space \ifcase\month%
     \or\if@austrian@locale Jänner\else Januar\fi\or Februar\or März\or%
@@ -182,52 +208,37 @@
 }
 
 \def\captionsgerman{%
-  \if@german@fraktur\captions@german@fraktur\else\captions@german\fi
+  \if@german@blackletter\captions@german@blackletter\else\captions@german\fi
   \if@austrian@locale\captions@german@austrian\fi
   \if@swiss@locale\captions@german@swiss\fi
 }
 
 \def\dategerman{%
-  \if@german@fraktur\date@german@fraktur\else\date@german\fi
+  \if@german@blackletter\date@german@blackletter\else\date@german\fi
 }
 
-\def\german@language{\ifxetex\language=%
-  \csname l@%
-    \if@swiss@locale
-       \if@german@oldspelling
-           swissgerman%
-       \else
-            ngerman%
-            \ifgerman@latesthyphen
-                -x-latest
-            \fi
-        \fi
-    \else% (german, austrian)
-      \if@german@oldspelling\else n\fi german\ifgerman@latesthyphen -x-latest\fi
-    \fi
-  \endcsname\else\ifluatex
-  % LuaTeX
+\def\german@language{%
   \ifgerman@latesthyphen
     \if@german@oldspelling
         \if@swiss@locale
-            \xpg@set@language@luatex@iv{swissgerman}%
+            \polyglossia@setup@language@patterns{swissgerman}%
         \else
-            \xpg@set@language@luatex@iv{german-x-latest}%
+            \polyglossia@setup@language@patterns{german-x-latest}%
         \fi
     \else
-        \xpg@set@language@luatex@iv{ngerman-x-latest}%
+        \polyglossia@setup@language@patterns{ngerman-x-latest}%
     \fi
   \else% (latesthyphen=false)
     \if@german@oldspelling
         \if@swiss@locale
-            \xpg@set@language@luatex@iv{swissgerman}%
+            \polyglossia@setup@language@patterns{swissgerman}%
         \else
-            \xpg@set@language@luatex@iv{german}%
+            \polyglossia@setup@language@patterns{german}%
         \fi
     \else
-        \xpg@set@language@luatex@iv{ngerman}%
+        \polyglossia@setup@language@patterns{ngerman}%
     \fi
-  \fi\fi\fi
+  \fi
 }
 
 \def\noextras@german{%

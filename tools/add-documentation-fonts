@@ -1,0 +1,73 @@
+#!/bin/sh
+
+install()
+{
+  TMPDIR=`mktemp -d /tmp/fontsXXXXXX`
+  echo "Installing in $TMPDIR"
+  cd "$TMPDIR"
+  mkdir fonts
+
+  # wget http://sourceforge.net/projects/dejavu/files/dejavu/2.37/dejavu-fonts-ttf-2.37.tar.bz2
+  DEJAVUFONTS='dejavu-fonts-ttf-2.37/ttf/DejaVu'
+  tar xvf dejavu-fonts-ttf-2.37.tar.bz2 $DEJAVUFONTS\*.ttf
+  mv -f $DEJAVUFONTS*.ttf $TMPDIR/fonts
+
+  # wget https://github.com/alif-type/amiri/releases/download/0.112/Amiri-0.112.zip
+  AMIRIFONTS='Amiri-0.112/Amiri-'
+  unzip Amiri-0.112.zip $AMIRIFONTS\*.ttf
+  mv -f $AMIRIFONTS*.ttf $TMPDIR/fonts
+
+  # wget https://sedra.bethmardutho.org/fonts/fonts.zip
+  SERTOJERUSALEMFONTS='fonts/syrcomjerusalem'
+  unzip fonts.zip $SERTOJERUSALEMFONTS\*.ttf
+  chmod 644 $SERTOJERUSALEMFONTS*.ttf
+
+  # wget https://software.sil.org/downloads/r/ezra/EzraSIL-2.51.zip
+  EZRASILFONTS=EzraSIL2.51/SILE
+  unzip EzraSIL-2.51.zip $EZRASILFONTS\*.ttf
+  mv -f $EZRASILFONTS*.ttf $TMPDIR/fonts
+
+  # wget https://www.greekfontsociety-gfs.gr/_assets/fonts/GFS_Ambrosia.zip
+  GFSAMBROSIAFONT=GFS_AMBROSIA/GFSAmbrosia.otf
+  unzip GFS_Ambrosia.zip $GFSAMBROSIAFONT
+  mv -f $GFSAMBROSIAFONT fonts
+
+  IRANNASTALIQFONT=IranNastaliq.ttf
+  curl -o $IRANNASTALIQFONT http://www.parsilatex.com/joomla/index.php/remository/func-download/40/chk,431f555edd72a4f8aae1f3ca30e2497c/no_html,1/
+  mv -f $IRANNASTALIQFONT fonts
+
+  # wget ftp://ftp.nectec.or.th/NECTEC/fonts/Norasi.tar.gz
+  # NORASIFONTS=Norasi/Norasi
+  # tar xvf Norasi.tar.gz $NORARIFONTS\*.ttf
+  # mv -f $NORASIFONTS*.ttf fonts
+  wget https://www.hawaii.edu/thai/thaifonts/Norasi.ttf
+  NORASIFONT=Norasi.ttf
+  mv -f $NORASIFONT fonts
+
+  wget http://kldp.net/unfonts/release/2584-UnBatang.otf
+  mv -f 2584-UnBatang.otf fonts/UnBatang.otf
+
+  wget https://github.com/google/fonts/raw/master/ofl/inconsolata/Inconsolata-{Regular,Bold}.ttf
+  INCONSOLATAFONTS=Inconsolata
+  mv -f $INCONSOLATAFONTS*.ttf fonts
+
+  wget http://www.sanskritweb.net/itrans/sanskrit2003.zip
+  unzip sanskrit2003.zip
+  mv -f Sanskrit2003.ttf fonts
+
+  wget https://software.sil.org/downloads/r/abyssinica/AbyssinicaSIL-2.000.zip
+  ABYSSINICAFONT=AbyssinicaSIL-2.000/AbyssinicaSIL-Regular.ttf
+  unzip AbyssinicaSIL-2.000.zip $ABYSSINICAFONT
+  mv -f $ABYSSINICAFONT fonts
+
+  wget https://www.evertype.com/fonts/nko/ConakryFont.zip
+  CONAKRYFONT=ConakryFont/Conakry.ttf
+  unzip ConakryFont.zip $CONAKRYFONT
+  mv -f $CONAKRYFONT fonts
+}
+
+if install; then
+  echo "Fonts extracted to $TMPDIR/fonts/."
+else
+  echo 'Download(s) failed.'
+fi

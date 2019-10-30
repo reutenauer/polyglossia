@@ -1,13 +1,67 @@
-1.45 (????)
+1.46 (??)
 
 New features:
+  * Add options to set French-style itemize item labels to French (#89).
+  * Add babelshorthands as well as options splithyphens and vlna to Slovak.
+  * Latin language variant "ecclesiastic".
+  * Latin language options "capitalizemonth", "ecclesiasticfootnotes", "hyphenation",
+    "prosodicshorthands", and "usej".
+  * Latin shorthands for "«", "»", "æ", "Æ", "œ", and "Œ".
+
+Bug fixes:
+  * Fix problems with fragile font settings (#24).
+  * Add option indentfirst to Russian (#78).
+  * Fix detection of default \languagevariant (#332).
+  * Fix some babel shorthand issues by updating the shorthand code from recent babel.
+  * Changed option name "fraktur" to "blackletter" in German (the former is still available
+    as an alias).
+
+Other changes:
+  * In Russian, all paragraphs are now indented by default, as common in Russian typography.
+    The behavior can be opted out by indentfirst=false.
+  * In Czech, splithyphens and lvna are enabled by default. Also, the option does now work
+    as well with LuaTeX.
+
+1.45 (27-10-2019)
+
+New features:
+  * Introduce a framework for external packages to access language variants. This fixes,
+    among other things, long-standing problems in the interaction of biblatex and polyglossia.
+  * Add new macros \languagevariant, \mainlanguagevariant, \babelname and \mainbabelname
+    for package authors to access language information.
+  * Add new test \iflanguageloaded{<language>}{<true>}{<false>}, where <language>
+    can be a \polyglossia or babel language name.
   * Add new macros \localnumeral, \localnumeral*, \Localnumeral and
     \Localnumeral* that convert Arabic digitals to the local number scheme.
-  * Add support for (Sorani) Kurdish (#277).
+  * Add new macro \pghyphenation to add language-specific hyphenation exceptions (#18).
+  * Add support form (Khalkha & Cyrillic) Mongolian in line with babel-mongolian (#23).
+  * Add option splithyphens and vlna to Czech (XeTeX only; for LuaTeX, use the package
+    luavlna to get these features) (#32).
+  * Add support for Kurdish, both Kurmanji and Sorani (#277).
   * Implement proper Cyrillic (alphanumeric) numbering (#285).
+  * Add new language friulian.
+    This deprecates friulan (which is still supported for backwards compatibility).
+  * Add new language malay with variants indonesian and malaysian.
+    This deprecates bahasai and bahasam (which are still supported for
+    backwards compatibility).
+  * Add new language gaelic with variants irish and scottish.
+    This deprecates irish and scottish as own polyglossia languages (which
+    are still supported for backwards compatibility).
+  * Add new language hungarian.
+    This deprecates magyar (which is still supported for backwards compatibility).
+  * Add new language sorbian with variants lower and upper.
+    This deprecates lsorbian and usorbian (which are still supported for
+    backwards compatibility).
   * Add new language portuguese with variants portuguese and brazilian.
     This deprecates brazil and portuges (which are still supported for
     backwards compatibility).
+  * Add new language norwegian with variants nynorsk and bokmal.
+    This deprecates nynorsk and norsk (which are still supported for
+    backwards compatibility).
+  * Add new language persian.
+    This deprecates farsi (which is still supported for backwards compatibility).
+  * Add new language sami. Currently only Northern Sami is supported.
+    This deprecates samin (which is still supported for backwards compatibility).
   * gloss-serbian: add numerals=cyrillic option. Add \asbuk and \Asbuk (#285).
   * Implement basic support for (French) canadien and (English) canadian (#22)
   * Improve support for Armenian (#79): Add captions, Eastern month names
@@ -16,7 +70,8 @@ New features:
   * Add french option autospacing and commands \AutoSpacing, \NoAutoSpacing
     This allows to switch off autospacing globally or locally (#113)
   * Fixup \normalfont (#203)
-  * Implement babelshorthands for Finnish (#212)
+  * Fix directionality issues in mixed RTL/LTR paragraphs (#204)
+  * Implement babelshorthands for Finnish (#212) and Czech.
   * Implement access to current language via Lua (#243).
   * Introduce french option option autospacetypewriter
     alias OriginalTypewriter
@@ -31,6 +86,8 @@ Bug fixes:
   * Fix N'ko date format (#63).
   * Disable the extras of a language when a nested language starts (#66, #169).
   * Properly implement bengali numbers (#69, #184).
+  * Fix conflicts with other packages caused by premature shorthand activation
+    in preamble (#81, #200).
   * Fix kerning in math with French (#92).
   * Fix expansion issue in Hebrew (#93).
   * Fix numbering expansion issue in Greek (#110).

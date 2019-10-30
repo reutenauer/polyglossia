@@ -1,7 +1,8 @@
+% !TeX spellcheck = en_US
 % !TeX TS-program = xelatex
 \documentclass[11pt]{ltxdoc}
 \usepackage{color}
-\usepackage{xspace,fancyvrb}
+\usepackage{xspace,fancyvrb,booktabs}
 \usepackage[neverdecrease]{paralist}
 \definecolor{myblue}{rgb}{0.02,0.04,0.48}
 \definecolor{lightblue}{rgb}{0.61,.8,.8}
@@ -15,8 +16,8 @@
     citecolor=myblue,
     hyperindex=false,
     hyperfootnotes=false,
-    pdftitle={Polyglossia: An alternative to Babel for XeLaTeX and LuaLaTeX},
-    pdfauthor={F Charette, A Reutenauer},
+    pdftitle={Polyglossia: Modern multilingual typesetting with XeLaTeX and LuaLaTeX},
+    pdfauthor={F Charette, A Reutenauer, B Roucariès, J Spitzmüller},
     pdfkeywords={xetex, xelatex, luatex, lualatex, multilingual, babel, hyphenation}
     ]{hyperref}
 \usepackage{metalogo}
@@ -33,6 +34,7 @@
 \newcommand*\TR[1]{\textcolor{myred}{#1}}
 \newcommand*\TX[1]{\hyperref[#1]{\textcolor{myred}{#1}}}
 \newcommand*\TB[1]{\textcolor{myblue}{\bf #1}}
+\newcommand*\TA[1]{\textsc{\color{myblue}#1}}
 \newcommand*\link[1]{\href{#1}{#1}}
 \def\eg{\textit{e.g.,}\xspace}
 \def\ie{\textit{i.e.,}\xspace}
@@ -54,6 +56,18 @@
 \renewenvironment{itemize}{\begin{compactitem}[\char"2023]}%[{\fontspec{DejaVu Sans}\char"25BB}]}%
 		{\end{compactitem}}
 \renewenvironment{enumerate}{\begin{compactenum}}{\end{compactenum}}
+\newenvironment{shorthands}{%
+	 \begin{list}{}%
+	 	{\settowidth{\labelwidth}{MM}%
+	 	 \setlength{\leftmargin}{\labelwidth}%
+	 	 \addtolength{\leftmargin}{\labelsep}%
+	     \renewcommand{\makelabel}[1]{##1\hfil}}}%
+	{\end{list}}
+
+% This is to prevent page breaks too short after subsections
+\def\condbreak#1{%
+	\vskip 0pt plus #1\pagebreak[3]\vskip 0pt plus -#1\relax}
+\pretocmd{\subsection}{\condbreak{2\baselineskip}}{}{}
 
 %% fontspec declarations:
 \setmainfont{Linux Libertine O}
@@ -71,14 +85,17 @@
 \RecordChanges
 % COMMENT THE NEXT LINE TO INCLUDE THE CODE
 \AtBeginDocument{\OnlyDescription}
+
+
 \begin{document}
-\hyphenation{Kha-li-ghi}
+\hyphenation{Kha-li-ghi Reu-ten-auer}
 \GetFileInfo{polyglossia.sty}
 
 \title{\textcolor{lightblue}{\Huge\fontspec[LetterSpace=40]{GFS Ambrosia} Πολυγλωσσια}
 \\[16pt]
-\color{myblue}Polyglossia: An Alternative to Babel for \XeLaTeX\ and \LuaLaTeX}
-\author{\scshape\color{myblue}François Charette\\\color{myblue}Current maintainer: \scshape Arthur Reutenauer}
+\color{myblue}Polyglossia: Modern multilingual typesetting with \XeLaTeX\ and \LuaLaTeX}
+\author{\TA{François Charette} \and \TA{Arthur Reutenauer}\thanks{Current maintainer}
+	    \and \TA{Bastien Roucariès} \and \TA{Jürgen Spitzmüller}}
 \date{\filedate \qquad \fileversion\\
 \footnotesize (\textsc{pdf} file generated on \today)}
 
@@ -96,8 +113,8 @@
 
 \section{Introduction}
 
-Polyglossia is a package for facilitating multilingual typesetting with
-\XeLaTeX\ and (at an early stage) \LuaLaTeX.  Basically, it
+\pkg{Polyglossia} is a package for facilitating multilingual typesetting with
+\XeLaTeX\ and (with some exceptions) \LuaLaTeX.  Basically, it
 can be used as an alternative to \pkg{babel} for performing the following
 tasks automatically:
 
@@ -129,42 +146,38 @@ with the fundamental features of \pkg{babel} while being cleaner, light-weight,
 and modern. The package \pkg{antomega} has been very beneficial in our attempt to
 reach this objective.
 
-\paragraph{Requirements:} The current version of \pkg{polyglossia} makes use of some convenient
-macros defined in the \pkg{etoolbox} package by Philipp Lehmann. Being designed
-for \XeLaTeX\ and \LuaLaTeX, it obviously also relies on \pkg{fontspec} by Will
-Robertson. For languages written from right to left, it needs the package \pkg{bidi}
-by Vafa Khalighi (\textarabic{وفا خليقي}). Polyglossia also bundles three packages for calendaric
-computations (\pkg{hebrewcal}, \pkg{hijrical}, and \pkg{farsical}).
+\paragraph{Requirements} The current version of \pkg{polyglossia} makes use of some convenient
+macros defined in the \pkg{etoolbox} package by \TA{Philipp Lehmann} and \TA{Joseph Wright}.
+Being designed for \XeLaTeX\ and \LuaLaTeX, it obviously also relies on \pkg{fontspec} by
+\TA{Will Robertson}. For languages written from right to left, it needs the package \pkg{bidi}
+(for \XeTeX) or  \pkg{luabidi} (for \LuaTeX) by \TA{Vafa Khalighi} (\textarabic{وفا خليقي}) and
+the \pkg{bidi-tex GitHub Organisation}.
+Polyglossia also bundles three packages for calendaric computations (\pkg{hebrewcal},
+\pkg{hijrical}, and \pkg{farsical}).
 
-\section{Loading language definition files}
 
-\subsection{The recommended way}
-You can determine the default language by means of the command:
-	\displaycmd{\setdefaultlanguage[⟨options⟩]\{lang\}}{\setdefaultlanguage}
-(or equivalently \Cmd\setmainlanguage).
-Secondary languages can be loaded with
-	\displaycmd{\setotherlanguage[⟨options⟩]\{lang\}.}{\setotherlanguage}
-These commands have the advantage of being explicit and of allowing you to set
-language-specific options.\footnote{ %
-	More on language-specific options below.}
-It is also possible to load a series of secondary languages at once using
-	\displaycmd{\setotherlanguages\{lang1,lang2,lang3,…\}.}{\setotherlanguages}
+\section{Setting up multilingual documents}
 
-Global language-specific options can be modified by means of the
+\subsection{Activating languages}
+
+The default language of a document is specified by means of the command
+	\displaycmd{\setdefaultlanguage[⟨options⟩]\{⟨lang⟩\}}{\setdefaultlanguage}
+(or, equivalently, \Cmd\setmainlanguage).
+Secondary languages are specified with
+	\displaycmd{\setotherlanguage[⟨options⟩]\{⟨lang⟩\}.}{\setotherlanguage}
+All these commands allow you to set language-specific options.\footnote{%
+	Section~\ref{specific} documents these options for the respective languages.}
+It is also possible to load a series of secondary languages at once (but without options)
+using
+	\displaycmd{\setotherlanguages\{⟨lang1⟩,⟨lang2⟩,⟨lang3⟩,…\}.}{\setotherlanguages}
+
+All language-specific options can be modified locally by means of the
 language-switching commands described in section \ref{languageswitching}.
 
-\subsection{The “Babel way” – obsolete}
-\new{v1.2.0}
-{\color{red}\bfseries Warning}: \pkg{polyglossia} no longer supports loading
-language definition files as package options!
-%As with \pkg{babel}, \pkg{polyglossia} also allows you to load language definition files
-%as package options. In most cases, option \texttt{⟨lang⟩} will load the file
-%\file{gloss-⟨lang⟩.ldf}. Note however that the \textit{first} language listed in \\
-%\centerline{\cmd{\usepackage[lang1,lang2,…]{polyglossia}}}
-%will be the default language for the document, which
-%is the opposite convention of \pkg{babel}.
-%Note also that this method may not work in some cases, and should be
-%considered deprecated.
+\paragraph{Note} In general, it is advisable to activate the languages \emph{after} all
+packages have been loaded. This is particularly important if you use right-to-left scripts
+or languages with babel shorthands.
+
 
 \subsection{Supported languages}
 
@@ -173,33 +186,32 @@ Those in red have specific options and/or commands
 that are explained in section \ref{specific} below.
 
 \begin{table}[ht]\centering
-\label{tab:lang}
-% Produced with tools/insert-language-list.rb -- AR, 2015-07-14
-% Edited by hand -- AR 2019-04-04
+% Produced with tools/insert-language-list.rb -- JS, 2019-10-18
+% Edited by hand -- JS, 2019-10-18
 \begin{tabular}{lllll}
-\hline
-               & danish         & interlingua    & marathi        & \TX{slovenian}\\
-albanian       & divehi         & irish          & nko            & spanish       \\
-amharic        & \TX{dutch}     & \TX{italian}   & norsk          & swedish       \\
-\TX{arabic}    & \TX{english}   & japanese       & nynorsk        & \TX{syriac}   \\
-\TX{armenian}  & \TX{esperanto} & kannada        & occitan        & tamil         \\
-asturian       & estonian       & khmer          & piedmontese    & telugu        \\
-bahasai        & \TX{farsi}     & \TX{korean}    & polish         & \TX{thai}     \\
-bahasam        & \TX{finnish}   & \TX{kurdish}   & \TX{portuguese}& \TX{tibetan}  \\
-basque         & \TX{french}    & \TX{lao}       & romanian       & turkish       \\
-\TX{bengali}   & friulan        & \TX{latin}     & romansh        & turkmen       \\
-breton         & galician       & latvian        & \TX{russian}   & \TX{ukrainian}\\
-bulgarian      & \TX{german}    & lithuanian     & samin          & urdu          \\
-\TX{catalan}   & \TX{greek}     & \TX{lsorbian}  & \TX{sanskrit}  & \TX{usorbian} \\
-coptic         & \TX{hebrew}    & \TX{magyar}    & scottish       & vietnamese    \\
-croatian       & \TX{hindi}     & macedonian     & \TX{serbian}   & \TX{welsh}    \\
-czech          & icelandic      & malayalam      & slovak\\
-\hline
+\toprule
+albanian     & \TX{dutch}     & interlingua  & \TX{mongolian}  & \TX{slovenian}\\
+amharic      & \TX{english}   & \TX{italian} & nko             & \TX{sorbian}\\
+\TX{arabic}  & \TX{esperanto} & japanese     & \TX{norwegian}  & spanish\\
+\TX{armenian}& estonian       & kannada      & occitan         & swedish\\
+asturian     & \TX{finnish}   & khmer        & \TX{persian}    & \TX{syriac}\\
+basque       & \TX{french}    & \TX{korean}  & piedmontese     & tamil\\
+\TX{bengali} & friulian       & \TX{kurdish} & polish          & telugu\\
+breton       & \TX{gaelic}    & \TX{lao}     & \TX{portuguese} & \TX{thai}\\
+bulgarian    & galician       & \TX{latin}   & romanian        & \TX{tibetan}\\
+\TX{catalan} & \TX{german}    & latvian      & romansh         & turkish\\
+coptic       & \TX{greek}     & lithuanian   & \TX{russian}    & turkmen\\
+croatian     & \TX{hebrew}    & macedonian   & \TX{sami}       & \TX{ukrainian}\\
+\TX{czech}   & \TX{hindi}     & \TX{malay}   & \TX{sanskrit}   & urdu\\
+danish       & \TX{hungarian} & malayalam    & \TX{serbian}    & vietnamese\\
+divehi       & icelandic      & marathi      & \TX{slovak}     & \TX{welsh}\\
+\bottomrule
 \end{tabular}
-\caption{Languages currently supported in \pkg{polyglossia}}
+
+\caption{\label{tab:lang}Languages currently supported in \pkg{polyglossia}}
 \end{table}
 
-\textit{NB:} The support for Amharic\new{v1.0.1} should be considered an experimental attempt to
+\paragraph{Version Notes} The support for Amharic\new{v1.0.1} should be considered an experimental attempt to
 port the package \pkg{ethiop}.\footnote{Feedback is welcome.}
 Version 1.1.1\new{v1.1.1} added support for Asturian, %\footnote{ Provided by Kevin Godby and Xuacu Saturio.}, 
 Lithuanian, %\footnote{ Provided by Kevin Godby and Paulius Sladkevičius.},
@@ -210,29 +222,106 @@ Lao, Malayalam, Marathi, Tamil, Telugu, and Turkmen.\footnote{%
   See acknowledgements at the end for due credit to the various contributors.}
 Version 1.43\new{v1.43} silently introduced basic support for Japanese. This
 is considered experimental, and feedback is appreciated.
+In version 1.45\new{v1.45}, support for Kurdish and Mongolian as well as some new
+variants (Canadian French and English) have been added. Furthermore,  for consistency reasons, some language have
+been renamed (\emph{farsi}\textrightarrow\emph{persian}, \emph{friulan}\textrightarrow\emph{friulian},
+\emph{magyar}\textrightarrow\emph{hungarian}, \emph{portuges}\textrightarrow\emph{portuguese},
+\emph{samin}\textrightarrow\emph{sami}) or merged (\emph{bahasai}\slash\emph{bahasam}\textrightarrow\emph{malay},
+\emph{brazil}\slash\emph{portuges}\textrightarrow\emph{portuguese},
+\emph{lsorbian}\slash\emph{usorbian}\textrightarrow\emph{sorbian},
+\emph{irish}\slash\emph{scottish}\textrightarrow\emph{gaelic},
+\emph{norsk}\slash\emph{nynorsk}\textrightarrow\emph{norwegian}). The old names are still supported for backwards
+compatibility reasons, but they might not give access to newer language features.
 
 
+\subsection{Relation to Babel languages}
 
-Polyglossia can also be loaded with the option
-‘babelshorthands’\new{v1.1.1}, which globally activates \pkg{babel}
-shorthands whenever available. Currently shorthands are implemented for
-Catalan, Dutch, Finnish, German, Italian, and Russian: see these respective
-languages for details.
+If you are familiar with the \pkg{babel} package, you will note that \pkg{polyglossia}'s language naming
+slightly differs. Whereas \pkg{babel} has a unique name for each language variety (\eg\emph{american} and \emph{british}),
+\pkg{polyglossia} differentiates language varieties via language options.
 
-Another option (turned off by default) is ‘localmarks’, which
-redefines the internal \LaTeX\ macros \cmd\markboth\ and \cmd\markright.
-\new{v1.2.0}Note that this was formerly turned on by default, but we
-now realize that it causes more problems than otherwise. For backwards-compatibility
-the opposite option ‘nolocalmarks’ is still available.
+Furthermore, \pkg{babel} uses sometimes abbreviations for language names (\eg\emph{bahasam} for Bahasa Malayu) as well
+as endonyms, \ie language names coming from the designated languages (such as \emph{bahasa}, \emph{canadien} or \emph{magyar}).
+As opposed to this, \pkg{polyglossia} always uses spelled-out (lower-cased) English language names.
 
-There is also the option ‘quiet’ which turns off most info messages and some of the warnings
-issued by \LaTeX, \pkg{fontspec} and \pkg{polyglossia}.
+Table~\ref{tab:bbllang} lists the language names that differ in both packages. \pkg{Babel} names marked in red can also be used
+in \pkg{polyglossia} as an alias.\footnote{This is for historical reasons, since earlier versions of \pkg{polyglossia} used
+	those names as well. Note, however, that you need to use the matching language switching commands, then, as
+    well, \eg \cmd\textportuges\ with \emph{portuges} (rather than \cmd\textportuguese).}
+
+\begin{table}
+\begin{tabular}{lll}
+\toprule 
+\textbf{Babel name} & \textbf{Polyglossia name} & \textbf{Polyglossia options}\tabularnewline
+\midrule
+acadien         & french     & variant=acadian                \\
+american        & english    & \emph{(default)}               \\
+australian      & english    & variant=australian             \\
+austrian        & german     & variant=austrian, spelling=old \\
+bahasa          & malay      & \emph{(default)}               \\
+\TR{bahasam}    & malay      & variant=malaysian              \\
+\TR{brazil}     & portuguese & variant=brazilian              \\
+british         & english    & variant=british                \\
+canadian        & english    & variant=canadian               \\
+canadien        & french     & variant=canadian               \\
+\TR{farsi}      & persian    &                                \\
+\TR{friulan}    & friulian   &                                \\
+german          & german     & spelling=old                   \\
+\TR{irish}      & gaelic     & variant=irish                  \\
+kurmanji        & kurdish    & variant=kurmanji               \\
+latin.classic   & latin      & variant=classic                \\
+latin.ecclesiastic & latin   & variant=ecclesiastic           \\
+latin.medieval  & latin      & variant=medieval               \\
+lowersorbian    & sorbian    & variant=lower                  \\
+\TR{magyar}     & hungarian  &                                \\
+naustrian       & german     & variant=austrian               \\
+newzealand      & english    & variant=newzealand             \\
+ngerman         & german     & \emph{(default)}               \\
+\TR{norsk}      & norwegian  & variant=bokmal                 \\
+nswissgerman    & german     & variant=swiss                  \\
+\TR{nynorsk}    & norwegian  & \emph{(default)}               \\
+polutonikogreek & greek      & variant=polytonic              \\
+\TR{portuges}   & portuguese & \emph{(default)}               \\
+\TR{samin}      & sami       &                                \\
+\TR{scottish}   & gaelic     & variant=scottish               \\
+serbianc        & serbian    & script=Cyrillic                \\
+slovene         & slovenian  &                                \\
+swissgerman     & german     & variant=swiss, spelling=old    \\
+uppersorbian    & sorbian    & variant=upper                  \\
+\bottomrule
+\end{tabular}
+	
+\caption{\label{tab:bbllang}Babel-polyglossia language name matching}
+\end{table}
+
+
+\subsection{Global options}
+
+\pkg{Polyglossia} can be loaded with the following global package options:
+
+\begin{itemize}
+	\item \TB{babelshorthands}\new{v1.1.1} globally activates \pkg{babel}
+		shorthands whenever available. Currently shorthands are implemented for
+		Catalan, Czech, Dutch, Finnish, German, Italian, Latin, Mongolian, Russian,
+		and Slovak. Please refer to the respective language descriptions
+		(sec.~\ref{specific}) for details.
+
+	\item \TB{localmarks} redefines the internal \LaTeX\ macros \cmd\markboth\ and
+		\cmd\markright. In earlier versions of \pkg{polyglossia},\new{v1.2.0} this
+		option was set by default, but we now realize that it causes more problems
+		than it helps, so it is now off by default.  For backwards-compatibility, the
+		option \TB{nolocalmarks} which used to switch off the previous default, and
+		now does nothing, is still available.
+
+	\item \TB{quiet} turns off most info messages and some of the warnings issued
+		by \LaTeX, \pkg{fontspec} and \pkg{polyglossia}.
+\end{itemize}
 
 \section{Language-switching commands}\label{languageswitching}
 
 \subsection{Recommended commands}
-Whenever a language definition file \file{gloss-⟨lang⟩.ldf} is loaded,
-the command \cmd{\text⟨lang⟩[⟨options⟩]\{…\}} \DescribeMacro{\text⟨lang⟩}
+For each activated language the command
+\cmd{\text⟨lang⟩[⟨options⟩]\{…\}} \DescribeMacro{\text⟨lang⟩}
 becomes available for short insertions of text in that language.
 For example ¦\textrussian{\today}¦ yields \textrussian{\today}
 This command switches to the correct hyphenation patterns, it activates
@@ -242,10 +331,11 @@ It does not, however, translate so-called \textit{caption strings}, i.\,e.
 ``chapter'', ``figure'' etc., to the local language (these remain in the main
 language).
 
-The\DescribeEnv{⟨lang⟩}\ environment ¦⟨lang⟩¦, which is meant for longer passages of text,
-behaves slightly different. It does everything the \cmd{\text⟨lang⟩\{…\}} does,
-but additionally, the caption strings are translated as well, and the language is also
-passed to auxiliary files, the table of contents and the lists of figures/tables.
+The\DescribeEnv{⟨lang⟩}\ environment ¦⟨lang⟩¦, which is also available for any activated language,
+is meant for longer passages of text. It behaves slightly different than the \cmd{\text⟨lang⟩\{…\}}
+command: It does everything the latter does, but additionally, the caption strings are translated
+as well, and the language is also passed to auxiliary files, the table of contents and the lists of
+figures/tables.
 Like the command, the environment provides the possibility of setting language options locally.
 For instance the following allows us to quote the beginning
 of Homer’s \textit{Iliad}:
@@ -321,11 +411,12 @@ that occurs in the document. That font should always be defined as
 For instance, if the default font defined by \cmd\setmainfont\
 does not support Greek, then one can define the font used to display Greek with:\\
 \centerline{ \cmd\newfontfamily\cmd{\greekfont[Script=Greek,⟨…⟩]\{⟨font⟩\}}. }
-Note that polyglossia will use the font thus defined as is.
-for instance if ¦\arabicfont¦ is explicitly defined, then one should take care of
-including the option ¦Script=Arabic¦ in that definition.
-See the \pkg{fontspec} documentation for more information.
-If a specific sans or monospace font is needed for a particular script or language,
+Note that polyglossia will use the font defined as is, so assure to do all necessary settings
+(please refer to the \pkg{fontspec} documentation for details).
+For instance, if ¦\arabicfont¦ is explicitly defined, then the option ¦Script=Arabic¦ should
+be included in that definition.
+
+If a specific sans serif or monospace (`teletype') font is needed for a particular script or language,
 it can be defined by means of \new{v1.2.0}
 ¦\⟨script⟩fontsf¦\ or ¦\⟨language⟩fontsf¦ and ¦\⟨script⟩fonttt¦\ or ¦\⟨language⟩fonttt¦, respectively.
 
@@ -338,14 +429,35 @@ the font, by means of \pkg{fontspec}’s \cmd\addfontfeature. If the current fon
 does not appear to support the script of that language, an error message is
 displayed.
 
-\section{Hyphenation disabling}
+\section{Adapting hyphenation}
+
+\subsection{Hyphenation exceptions}
+
+\TeX\ provides the command ¦\hyphenation{⟨exceptions⟩}¦ to globally define hyphenation exceptions
+which override the hyphenation patterns for specified words. The command takes as argument a space-separated
+list of words where hyphenation points are marked by a dash (if no dash is used, the respective word is not
+hyphenated at all):
+\begin{Verbatim}
+\hyphenation{%
+  po-ly-glos-sia
+  LaTeX
+}
+\end{Verbatim}
+%
+These exceptions, however, apply to all languages. In addition to this, \pkg{polyglossia} provides
+the command\new{v1.45}
+\displaycmd{\pghyphenation[⟨options⟩]\{⟨lang⟩\}\{⟨exceptions⟩\}}{\pghyphenation}
+which can be used to define exceptions that only apply to a specific language or language variant,
+respectively.
+
+\subsection{Hyphenation disabling}
 
 In some very specific contexts (such as music score creation), \TeX{} hyphenation
 is something to avoid as it may cause troubles. \pkg{polyglossia} provides two
-functions: \cmd\disablehyphenation{} and \cmd\enablehyphenation . Note that when
-you select a new language, hyphenation will be in the same state (enabled or
-disabled) as before. When you reenable it, it will take the last selected
-language.
+functions: \Cmd\disablehyphenation\ and \Cmd\enablehyphenation. Note that if
+you select a new language while hyphenation is disabled, it will remain disabled.
+If you re-enable it, the hyphenation patterns of the currently selected language
+will be activated.
 
 \section{Language-specific options and commands}\label{specific}
 
@@ -355,7 +467,7 @@ The default value of each option is given in italic.
 %\subsection{amharic}\label{amharic}
 
 \subsection{arabic}\label{arabic}
-\textbf{Options}:
+\paragraph*{Options:}
 	\begin{itemize}
 	\item \TB{calendar} = \textit{gregorian} or islamic (= hijri)
 	\item \TB{locale} = \textit{default},\footnote{ %
@@ -370,7 +482,7 @@ The default value of each option is given in italic.
   \item \TB{abjadjimnotail} = \textit{false} or true. \new{v1.0.3}
     Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
 	\end{itemize}
-\textbf{Commands}:
+\paragraph*{Commands:}
 	\begin{itemize}
 	\item \Cmd\abjad and \Cmd\abjadmaghribi (see section \ref{abjad})
   \item \Cmd\aemph to emphasize text with ¦\overline¦.\new{v1.2.0}
@@ -379,14 +491,14 @@ The default value of each option is given in italic.
 	\end{itemize}
 
 \subsection{armenian}\label{armenian}
-\textbf{Options}:
+\paragraph*{Options:}
 \begin{itemize}
 	\item \TB{variant}\new{v1.45} = eastern or \textit{western}
 	\item \TB{numerals}\new{v1.45} = armenian or \textit{arabic}
 \end{itemize}
 
-\subsection{bengali}\label{bengali}\new{v1.2.0}
-\textbf{Options}:
+\subsection[bengali]{bengali\new{v1.2.0}}\label{bengali}
+\paragraph*{Options:}
 	\begin{itemize}
 		\item \TB{numerals} = Western, Bengali or \textit{Devanagari}
 		\item \TB{changecounternumbering} = true or \textit{false} (use specified
@@ -394,36 +506,69 @@ The default value of each option is given in italic.
 	\end{itemize}
 
 \subsection{catalan}\label{catalan}
-\textbf{Options:}
+\paragraph*{Options:}
 \begin{itemize}
   \item \TB{babelshorthands} = \textit{false} or true. \new{v1.1.1}
     Activates the shorthands \texttt{"l} and \texttt{"L} to type geminated l’s.
 \end{itemize}
-\textbf{Commands}:
+
+\paragraph*{Commands:}
 \begin{itemize}
   \item \Cmd{\l.l} and \Cmd{\L.L}\new{v1.1.1} can be used to type a geminated l, as in \textit{co\l.laborar},
         similar to \pkg{babel} (the glyph U+00B7 MIDDLE DOT is used as a geminating sign).
 \end{itemize}
 
+\subsection{czech}\label{czech}
+
+\paragraph*{Options:}
+\begin{itemize}
+	\item \TB{babelshorthands} = \textit{false} or true. \new{v1.45}
+	if this is turned on, the following shorthands for Czech are activated:
+	\begin{shorthands}
+		\item[¦"=¦] for an explicit hyphen sign which is repeated at the beginning
+		            of the next line when hyphenated, as common in Czech typesetting
+		            (only needed with ¦splithyphens=false¦).
+		\item[¦"‘¦] for Czech left double quotes (looks like ,,).
+		\item[¦"’¦] for Czech right double quotes (looks like “).
+		\item[¦">¦] for Czech left double guillemets (looks like >>).
+		\item[¦"<¦] for Czech right double guillemets (looks like <<).
+	\end{shorthands}
+	\item \TB{splithyphens} = false or \textit{true}.\new{v1.45}
+	      According to Czech typesetting conventions, if a word with a hard hyphen (such as \emph{je-li})
+	      is hyphenated at this hyphen, a second hyphenation character is to be inserted at the beginning
+	      of the line that follows the hyphenation (\emph{je-/-li}).
+          By default, this is done automatically\new{v1.46} (if you are using \LuaTeX, the \pkg{luavlna} package is
+          loaded to achieve this).
+          Set this option to ¦false¦ to disable the feature.
+    \item \TB{vlna} = false or \textit{true}. \new{v1.45}
+         According to Czech typesetting conventions, single-letter words (non-syllable prepositions)
+         must not occur at line ends.
+         \pkg{Polyglossia} takes care of this automatically by default\new{v1.46} (if you are using \LuaTeX, the
+         \pkg{luavlna} package is loaded to achieve this).
+         Set this option to ¦false¦ to disable the feature.
+\end{itemize}
+
 \subsection{dutch}\label{dutch}
-\textbf{Options:}
+\paragraph*{Options:}
 \begin{itemize}
   \item \TB{babelshorthands} = \textit{false} or true. \new{v1.1.1}
-		if this is turned on, all shorthands defined in \pkg{babel}
-		for fine-tuning the hyphenation of Dutch words are activated.
-		\begin{itemize}
-		\item ¦"-¦ for an explicit hyphen sign, allowing hyphenation in the rest of the word
-		\item ¦"~¦ for a compound word mark without a breakpoint
-		\item ¦"|¦ disables the ligature at this position
-		\item ¦""¦ is like ¦"-¦, but produces no hyphen sign
-			(for compound words with a hyphen, e.g., ¦foo-""bar¦)
-		\item ¦"/¦ to enable hyphenation in two words written together but separated by a slash.
-    \item In addition, the macro \Cmd\- is redefined to allow hyphens in the rest of the word.
-		\end{itemize}
+		if this is turned on, the following shorthands defined for fine-tuning hyphenation and
+		micro-typography of Dutch words are activated:
+		\begin{shorthands}
+		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
+			        in the hyphenation patterns (as opposed to ¦\-¦ in default \TeX).
+		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
+			        cases where the hyphen should stick at the following syllable.
+		\item[¦"|¦] disables a ligature at this position.
+		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
+		\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to ¦\slash¦,
+		            hyphenation at the breakpoints preset in the hyphenation patterns is still allowed.
+		\end{shorthands}
+        In addition, the macro \Cmd\- is redefined to allow hyphens in the rest of the word (equivalent to ¦"-¦).
 \end{itemize}
 
 \subsection{english}\label{english}
-\textbf{Options}:
+\paragraph*{Options:}
 	\begin{itemize}
 	\item \TB{variant} = \textit{american} (= us), usmax (same as ‘american’ but with additional hyphenation patterns),
 	british (= uk), australian, canadian\new{v1.45} or newzealand
@@ -431,44 +576,33 @@ The default value of each option is given in italic.
 	\end{itemize}
 
 \subsection{esperanto}\label{esperanto}
-\textbf{Commands}:
+\paragraph*{Commands:}
 	\begin{itemize}
-	\item \Cmd\hodiau\ and \Cmd\hodiaun are special forms of \cmd\today\ (see the \pkg{babel} documentation)
-	\end{itemize}
-
-\subsection{farsi}\label{farsi}
-\textbf{Options}:
-	\begin{itemize}
-	\item \TB{numerals} = western or \textit{eastern}
-	\item \TB{abjadjimnotail} = \textit{false} or true. \new{v1.0.3}
-	Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
-	\item \TB{locale} (not yet implemented)
-	\item \TB{calendar} (not yet implemented)
-	\end{itemize}
-\textbf{Commands}:
-	\begin{itemize}
-	\item \Cmd\abjad (see section \ref{abjad})
-  \item \Cmd\aemph (see section \ref{arabic}).
+	\item \Cmd\hodiau\ and \Cmd\hodiaun are special forms of \cmd\today. The former produces the date in Esperanto
+	      preceded by the article (\emph{la}), which is the most common date format.
+	      The latter produces the same date format in accusative case.
 	\end{itemize}
 
 \subsection{finnish}\label{finnish}
-\textbf{Options:}
+\paragraph*{Options:}
 \begin{itemize}
   \item \TB{babelshorthands} = \textit{false} or true. \new{v1.45}
-		if this is turned on, the following shorthands for fine-tuning the
-                hyphenation of Finnish words are activated.
-		\begin{itemize}
-		\item ¦"-¦ for an explicit hyphen sign, allowing hyphenation in the rest of the word
-		\item ¦"~¦ for a compound word mark without a breakpoint
-		\item ¦"|¦ disables the ligature at this position
-		\item ¦""¦ is like ¦"-¦, but produces no hyphen sign
-			(for compound words with a hyphen, e.g., ¦foo-""bar¦)
-		\item ¦"/¦ to enable hyphenation in two words written together but separated by a slash.
-		\end{itemize}
+		if this is turned on, the following shorthands for fine-tuning hyphenation and micro-typography
+		of Finnish words are activated:
+		\begin{shorthands}
+		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
+                    in the hyphenation patterns (as opposed to ¦\-¦).
+        \item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
+                    cases where the hyphen should stick at the following syllable.
+        \item[¦"|¦] disables a ligature at this position.
+        \item[¦""¦] allows for a line break at this position (without hyphenation sign).
+        \item[¦"/¦] a slash that allows for a subsequent line break. As opposed to ¦\slash¦,
+                  hyphenation at the breakpoints preset in the hyphenation patterns is still allowed.
+		\end{shorthands}
 \end{itemize}
 
 \subsection{french}\label{french}
-\textbf{Options}:
+\paragraph*{Options:}
 	\begin{itemize}
 		\item\TB{variant} = \textit{french} or canadian (=~acadian).\new{v1.45}
 		Currently, the three variants do not differ; they are supported for compatibility with \pkg{babel} (where they do not differ either).
@@ -479,15 +613,30 @@ The default value of each option is given in italic.
 		that the more general option \textit{autospacing} overrides this.
 		\item \TB{autospacetypewriter}\footnote{Babel's syntax \textit{OriginalTypewriter} is also supported.}\new{1.45} = true or \textit{false} (default value = true). By default, automatic spacing is disabled in typewriter font. If this is enabled, spacing in typewriter context is the same as with roman and sans serif font, depending on the \textit{autospacing} and \textit{autospaceguillemets} settings (note that this was the default up to v.~1.44).	
 		\item \TB{frenchfootnote} = true or \textit{false} (default value = true). If \textit{true}, footnotes start with a non-superscripted number followed by a dot, as common in French typography. Note that this might interfere with the specific footnote handling of classes or packages.
+		Also note that this option is only functional (by design) if French is the main language.
+		\item \TB{frenchitemlabels}\new{v.1.46} = true or \textit{false} (default value = true). If \textit{true}, itemize item labels use em-dashes throughout,
+		as common in French typography.
+		Note that this option is only functional (by design) if French is the main language. Also, it might interfere with list packages such as \pkg{enumitem}.
+		\item \TB{itemlabels}\new{v.1.46} = ¦⟨cmd⟩¦ (default value = ¦\textemdash¦). If \emph{frenchitemlabels} is true, you can customize here the used item label of all levels.
+		\item \TB{itemlabeli}\new{v.1.46} = ¦⟨cmd⟩¦ (default value = ¦\textemdash¦). If \emph{frenchitemlabels} is true, you can customize here the used item label of the first level.
+		\item \TB{itemlabelii}\new{v.1.46} = ¦⟨cmd⟩¦ (default value = ¦\textemdash¦). If \emph{frenchitemlabels} is true, you can customize here the used item label of the second level.
+		\item \TB{itemlabeliii}\new{v.1.46} = ¦⟨cmd⟩¦ (default value = ¦\textemdash¦). If \emph{frenchitemlabels} is true, you can customize here the used item label of the third level.
+		\item \TB{itemlabeliv}\new{v.1.46} = ¦⟨cmd⟩¦ (default value = ¦\textemdash¦). If \emph{frenchitemlabels} is true, you can customize here the used item label of the fourth level.
 	\end{itemize}
-\textbf{Commands}:
+\paragraph*{Commands:}
 \begin{itemize}
 	\item \Cmd\NoAutoSpacing\new{v1.45} disables automatic spacing around punctuation and quotation marks in all following text. The command can also be used locally if braces are used for grouping: ¦{\NoAutoSpacing foo:bar}¦
 	\item \Cmd\AutoSpacing\new{v1.45} enables automatic spacing around punctuation and quotation marks in all following text. The command can also be used locally if braces are used for grouping: ¦{\AutoSpacing regarde!}¦
 \end{itemize}
 
+\subsection[gaelic]{gaelic\new{v1.45}}\label{gaelic}
+\paragraph*{Options:}
+\begin{itemize}
+	\item \TB{variant} = \textit{irish} or scottish
+\end{itemize}
+
 \subsection{german}\label{german}
-\textbf{Options}:
+\paragraph*{Options:}
 	\begin{itemize}
 	\item\TB{variant} = \textit{german}, austrian or swiss.\new{v1.33.4}
 		Setting variant=austrian or variant=swiss uses some lexical variants.
@@ -502,39 +651,44 @@ The default value of each option is given in italic.
 		the file \texttt{language.dat} that comes with \TeX Live 2008 and later.
 	\item\TB{babelshorthands} = \textit{false} or true: \new{v1.0.3}
 		if this is turned on, all shorthands defined in \pkg{babel}
-		for fine-tuning the hyphenation of German words are activated.
-		\begin{itemize}
-		\item  ¦"ck¦ for ¦ck¦ to be hyphenated as ¦k-k¦
-		\item  ¦"ff¦ for ¦ff¦ to be hyphenated as ¦ff-f¦; this is also available for the letters l, m, n, p, r and t
-		\item ¦"|¦ disables the ligature at this position
-		\item ¦"-¦ for an explicit hyphen sign, allowing hyphenation in the rest of the word
-		\item ¦""¦ is like ¦"-¦, but produces no hyphen sign
-			(for compound words with a hyphen, e.g., ¦foo-""bar¦)
-		\item ¦"~¦ for a compound word mark without a breakpoint
-		\item ¦"=¦ for a compound word mark with a breakpoint,
-			allowing hyphenation in the composing words.
-		\item ¦"/¦ a slash that allows for a line break and maintains hyphenation points.
-		\end{itemize}
+		for fine-tuning hyphenation and micro-typography of German words are activated.
+		\begin{shorthands}
+		\item[¦"ck¦] for ¦ck¦ to be hyphenated as ¦k-k¦ (1901 spelling).
+		\item[¦"ff¦] for ¦ff¦ to be hyphenated as ¦ff-f¦ (1901 spelling); this is also available
+		           for the letters l, m, n, p, r and t.
+		\item[¦"|¦] disables a ligature at this position (\eg ¦Auf"|lage¦).
+		\item[¦"=¦] for an explicit hyphen with a breakpoint, allowing for hyphenation at the
+		           other points preset in the hyphenation patterns (as opposed to plain ¦-¦).
+		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
+		           cases where the hyphen should stick at the following syllable,\eg ¦bergauf und "~ab¦.
+		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
+		           in the hyphenation patterns (as opposed to ¦\-¦).
+		\item[¦""¦] allows for a line break at this position (without hyphenation sign); 
+		           \eg ¦(pseudo"~)""wissenschaftlich¦.
+		\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to ¦\slash¦, hyphenation at the breakpoints
+		           preset in the hyphenation patterns is still allowed.
+		\end{shorthands}
 
 		There are also four shorthands for quotation signs:
-		\begin{itemize}
-		\item  ¦"`¦ for German left double quotes („)
-		\item  ¦"'¦ for German right double quotes (“)
-		\item  ¦"<¦ for French left double quotes («)
-		\item  ¦">¦ for French right double quotes (»).
-		\end{itemize}
-	\item\TB{script} = \textit{latin} or fraktur.\new{v1.2.0}
-		Setting script=fraktur modifies the captions for typesetting German in Fraktur.
+		\begin{shorthands}
+		\item[¦"`¦] for German left double quotes („)
+		\item[¦"'¦] for German right double quotes (“)
+		\item[¦"<¦] for French left double quotes («)
+		\item[¦">¦] for French right double quotes (»).
+		\end{shorthands}
+	\item\TB{script} = \textit{latin} or blackletter\new{v1.46} (=~fraktur\new{v1.2.0}).
+		Setting ¦script=blackletter¦ adapts the captions for typesetting German in blackletter type (using the long s (ſ)
+		where appropriate).
 	\end{itemize}
 
 \subsection{greek}\label{greek}
-\textbf{Options}:
+\paragraph*{Options:}
 	\begin{itemize}
 	\item \TB{variant} = \textit{monotonic} (= mono), polytonic (= poly), or ancient
 	\item \TB{numerals} = \textit{greek} or arabic
 	\item \TB{attic} = \textit{false}/true
 	\end{itemize}
-\textbf{Commands}:
+\paragraph*{Commands:}
 	\begin{itemize}
 	\item \Cmd\Greeknumber and \Cmd\greeknumber \ (see section \ref{abjad}).
 	\item The command \Cmd\atticnumeral (= \Cmd\atticnum) (activated with
@@ -545,42 +699,51 @@ The default value of each option is given in italic.
 	\end{itemize}
 
 \subsection{hebrew}\label{hebrew}
-\textbf{Options}:
+\paragraph*{Options:}
 	\begin{itemize}
 	\item \TB{numerals} = hebrew or \textit{arabic}
 	\item \TB{calendar} = hebrew or \textit{gregorian}
 	\item \TB{marcheshvan} = true or \textit{false} (default value = true). If true, the second month of the civil year will be output as \texthebrew{מרחשון} (Marcheshvan)
 	rather than \texthebrew{חשון} (Heshvan), which is the default.
 	\end{itemize}
-\textbf{Commands}:
+\paragraph*{Commands:}
 	\begin{itemize}
 	\item \Cmd\hebrewnumeral\ (= \Cmd\hebrewalph) (see section \ref{abjad}).
   \item \Cmd\aemph (see section \ref{arabic}).
 	\end{itemize}
 
-\subsection{hindi}\label{hindi}\new{v1.2.0}
-\textbf{Options}:
+\subsection[hindi]{hindi\new{v1.2.0}}\label{hindi}
+\paragraph*{Options:}
 	\begin{itemize}
     \item \TB{numerals} = Western or \textit{Devanagari}
 	\end{itemize}
 
-\subsection{italian}\label{italian}
-\textbf{Option:}
+\subsection{hungarian}\label{hungarian}
+\paragraph*{Commands:}
 \begin{itemize}
-  \item \TB{babelshorthands} = \textit{false} or true. \new{v1.2.0cc}% TODO: check version
-	Activates the ¦"¦ character as a switch to perform etymological
-	hyphenation when followed by a letter, or other tasks when followed by
-	certain analphabetic characters; in particular ¦""¦ is used to enter
-	double raised open quotes (the Italian keyboard misses the backtick),
-	and ¦"<¦  and ¦">¦ to insert open and closed guillemets without any
-	spacing after the open or before the closed sign. ¦"/¦ is made
-	equivalent to \slash allowing a linebreak after the slash without any
-	hyphen sign; ¦"-¦ produces  a short rule/hyphen and a discretional line
-	break alowing line breaks in the second compound word fragment.
+	\item \Cmd\ontoday\ (= \Cmd\ondatehungarian): special form of \cmd\today\ which produces a slightly different
+	date format as used in prepositional phrases (such as ‘on February 10th’) in Hungarian.
 \end{itemize}
 
-\subsection{korean}\label{korean}\new{v1.40.0}
-\textbf{Options}:
+\subsection{italian}\label{italian}
+\paragraph*{Options:}
+\begin{itemize}
+  \item \TB{babelshorthands} = \textit{false} or true. \new{v1.2.0cc}% TODO: check version
+  Activates the ¦"¦ character as a switch to perform etymological
+  hyphenation when followed by a letter. Furthermore, the following shorthands are activated:
+  \begin{shorthands}
+  	\item[¦""¦] double raised open quotes (the Italian keyboard misses the backtick).
+  	\item[¦"<¦] open guillemet (looks like <<).
+  	\item[¦">¦] closing guillemet (looks like >>).
+  	\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to ¦\slash¦,
+               hyphenation at the breakpoints preset in the hyphenation patterns is still allowed.
+  	\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
+               in the hyphenation patterns (as opposed to ¦\-¦).
+  \end{shorthands}
+\end{itemize}
+
+\subsection[korean]{korean\new{v1.40.0}}\label{korean}
+\paragraph*{Options:}
   \begin{itemize}
   \item \TB{variant} = \textit{plain}, classic or modern:
     for spacing before/after CJK punctuations.
@@ -589,64 +752,281 @@ The default value of each option is given in italic.
   \item \TB{captions} = \textit{hangul} or hanja
   \end{itemize}
 
-\subsection{kurdish}\label{kurdish}
-Currently\new{v1.45} support for Kurdish is limited to Sorani Kurdish (support for Kurmanji Kurdish is planned).
+\subsection[kurdish]{kurdish\new{v1.45}}\label{kurdish}
 
-\noindent\textbf{Options}:
+\paragraph*{Options:}
 \begin{itemize}
-	\item \TB{numerals} = western or \textit{eastern}
+	\item \TB{variant} = kurmanji or \textit{sorani}
+	\item \TB{script} = Arabic or Latin. Defaults are ¦Arabic¦ for Sorani and ¦Latin¦ for Kurmanji.
+	\item \TB{numerals} = western or eastern. Defaults are ¦western¦ for Latin and ¦eastern¦ for Arabic script, depending on the selection above.
 	\item \TB{abjadjimnotail} = \textit{false} or true.
 	Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
-	\item \TB{locale} (not yet implemented)
-	\item \TB{calendar} (not yet implemented)
+%	\item \TB{locale} (not yet implemented)
+%	\item \TB{calendar} (not yet implemented)
 \end{itemize}
-\textbf{Commands}:
+\paragraph*{Commands:}
 \begin{itemize}
+	\item \Cmd\ontoday: special form of \cmd\today\ which produces a slightly different
+	date format as used in prepositional phrases (as in ‘on February 10th’). Only available for Latin script.
 	\item \Cmd\abjad (see section \ref{abjad})
-	\item \Cmd\aemph (see section \ref{arabic}).
+	\item \Cmd\aemph (see section \ref{arabic})
 \end{itemize}
 
-\subsection{lao}\label{lao}\new{v1.2.0}
-\textbf{Options}:
+\subsection[lao]{lao\new{v1.2.0}}\label{lao}
+\paragraph*{Options:}
 	\begin{itemize}
 	\item \TB{numerals} = lao or \textit{arabic}
 	\end{itemize}
 
 \subsection{latin}\label{latin}
-\textbf{Options}:
-	\begin{itemize}
-	\item \TB{variant} = classic, medieval or \textit{modern}
-	\end{itemize}
+\paragraph*{Options:}
+\begin{itemize}
+	\item \TB{variant} = classic, medieval, \emph{modern}, or ecclesiastic
 
-\subsection{lsorbian and usorbian}\label{lsorbian}\label{usorbian}
-\textbf{Commands}:
-	\begin{itemize}
-	\item \Cmd\oldtoday : see the \pkg{babel} documentation.
-	\end{itemize}
+	These variants refer to different spelling conventions. The \texttt{classic}
+	and the \texttt{medieval} variant do not use the letters \emph{U} and
+	\emph{v}, but only \emph{V} and \emph{u}. This concerns predefined terms like
+	month names as well as the behaviour of the \cmd\MakeUppercase{} and the
+	\cmd\MakeLowercase{} command. The \texttt{medieval} and the
+	\texttt{ecclesiastic} variant use the ligatures \emph{\ae} and \emph{\oe}.
+	See table \ref{tab:latin-spelling} for examples.
 
-\subsection{magyar}\label{magyar}
-\textbf{Commands}:
-	\begin{itemize}
-	\item \Cmd\ontoday\ (= \Cmd\ondatemagyar): special forms of \cmd\today\
-		(see the \pkg{babel} documentation).
-	\end{itemize}
+	Furthermore, the \texttt{ecclesiastic} variant takes care for a punctuation
+	spacing similar to the French one, but with smaller spaces, as provided for
+	PDF\TeX{} by the \pkg{ecclesiastic} package.
+	\begin{table}
+	\centering
+	\begin{tabular}{llll}
+	\hline
+	\emph{classic} & \emph{medieval} & \emph{modern} & \emph{ecclesiastic} \\
+	\hline
+	Ianuarii & Ianuarii & Ianuarii & ianuarii \\
+	Nouembris & Nouembris & Novembris & novembris \\
+	Praefatio & Præfatio & Praefatio & Præfatio \\
+	\multicolumn{4}{@{}l}{\cmd{\MakeUppercase\{Iulius\}} yields:} \\
+	IVLIVS & IVLIVS & IULIUS & IULIUS \\
+	\hline
+	\end{tabular}
+	\caption{\label{tab:latin-spelling}Spelling differences between the Latin
+	language variants. The capitalization of month names and the use of
+	\emph{i/j} may be affected by the \texttt{capitalizemonth} and the
+	\texttt{usej} option.}
+	\end{table}
+	\item \TB{hyphenation} = classic, modern, or liturgical
+
+	There are three different sets of hyphenation patterns for Latin. Separate
+	documention for them is available on the
+	internet.\footnote{\url{https://github.com/gregorio-project/hyphen-la/blob/master/doc/README.md\#hyphenation-styles}}
+	Each of the four variants mentioned above has its default set of hyphenation
+	patterns as indicated by table \ref{tab:latin-hyphenation}. Use the
+	\texttt{hyphenation} option if the default style does not fit your needs.
+	Note that the liturgical hyphenation patterns are the default of none of the
+	language variants. To use them, you have to say
+	\texttt{hyphenation=liturgical} in any case.
+	\begin{table}
+	\centering
+	\begin{tabular}{ll}
+	\hline
+	\emph{Language variant} & \emph{Default hyphenation style} \\
+	\hline
+	classic & classic \\
+	medieval & modern \\
+	modern & modern \\
+	ecclesiastic & modern \\
+	\hline
+	\end{tabular}
+	\caption{\label{tab:latin-hyphenation}Latin default hyphenation styles}
+	\end{table}
+	\item \TB{ecclesiasticfootnotes} = true or \emph{false}
+
+	Use footnotes as provided by the \pkg{ecclesiastic} package, which typesets
+	footnotes with ordinary instead of superior numbers and without indentation.
+	As many ecclesiastic documents and liturgical books use footnotes that are
+	very similar to the ordinary \LaTeX{} ones, we do not use this footnote style
+	as default even for the \texttt{ecclesiastic} variant.
+
+	Note that this option is only possible if Latin is the main language of your
+	document.
+	\item \TB{usej} = true or \emph{false}
+
+	Use \emph{J/j} in predefined terms. The letter \emph{j} is not of ancient
+	origin. In early modern times, it was used to distinguish the consonantic
+	\emph{i} from the vocalic~\emph{i}. Nowadays, the use of \emph{j} has
+	disappeared from most Latin publications. So \emph{false} is the default
+	value for all four language variants. Use this option if you prefer
+	\emph{Januarii} and \emph{Maji} to \emph{Ianuarii} and \emph{Maii}.
+	\item \TB{capitalizemonth} = true or false
+
+	Capitalize the month name when printing dates (using the \cmd\today{}
+	command).  Traditionally, month names are capitalized. However, in recent
+	liturgical books they are lowercase. So \emph{true} is the default value for
+	the variants \texttt{classic}, \texttt{medieval}, and \texttt{modern},
+	whereas \emph{false} is the default value for the \texttt{ecclesiastic}
+	variant.
+	\item \TB{babelshorthands} = true or \emph{false}
+
+	Enable the following shorthands inherited from \pkg{babel-latin} and the
+	\pkg{ecclesiastic} package.
+	\begin{shorthands}
+		\item[¦"<¦] for « (left guillemet)
+		\item[¦">¦] for » (right guillemet)
+		\item[¦"¦] If no other shorthand applies, \verb:": before any letter
+			character defines an optional break point allowing further break points
+			within the same word (as opposed to the \cmd\- command).
+		\item[¦"|¦] the same as \verb:":, but also possible before non-letter
+			characters
+		\item[¦'a¦] for á (a with acute), also available for é, í, ó, ú, ý, ǽ, and
+			\'œ
+		\item[¦'A¦] for Á (A with acute), also available for É, Í, Ó, Ú, \'V, Ý, Ǽ,
+			and \'Œ
+	\end{shorthands}
+	The following shorthands are only available for the \texttt{medieval} and the
+	\texttt{ecclesiastic} variant.
+	\begin{shorthands}
+		\item[¦"ae¦] for æ (ae ligature), also available for œ
+		\item[¦"Ae¦] for Æ (AE ligature), also available for Œ
+		\item[¦"AE¦] for Æ (AE ligature), also available for Œ
+		\item[¦'ae¦] for ǽ (ae ligature with acute), also available for \'œ
+		\item[¦'Ae¦] for Ǽ (AE ligature with acute), also available for \'Œ
+		\item[¦'AE¦] for Ǽ (AE ligature with acute), also available for \'Œ
+	\end{shorthands}
+	\item \TB{prosodicshorthands} = true or \emph{false}
+
+	Enable shorthands for prosodic marks (macrons and breves) very similiar to
+	those provided by \pkg{babel-latin} using the \texttt{withprosodicmarks}
+	modifier.
+
+	Note that the active `=' character used for macrons will cause problems with
+	commands using \texttt{key=value} interfaces, e.\,g.
+	\verb:\includegraphics[scale=2]{...}:. Use \Cmd{\shorthandoff\{=\}} before
+	such commands (and \Cmd{\shorthandon\{=\}} thereafter) within every
+	environment with prosodic shorthands enabled.
+
+	The following shorthands are available.
+	\begin{shorthands}
+		\item[¦=a¦] for ā (a with macron), also available for ē, ī, ō, ū, and ȳ
+		\item[¦=A¦] for Ā (A with macron), also available for Ē, Ī, Ō, Ū, V̄, and Ȳ.
+			Note that a macron above the letter V is only displayed if your font
+			supports the Unicode character \texttt{0304} (\emph{combining macron}).
+		\item[¦=ae¦] for a͞e (ae diphthong with macron), also available for a͞u, e͞u,
+			and o͞e. Note that macrons above diphthongs are only displayed if your font
+			supports the Unicode character \texttt{035E} (\emph{combining double
+			macron}).
+		\item[¦=Ae¦] for A͞e (Ae diphthong with macron), also available for A͞u, E͞u,
+			and O͞e.
+		\item[¦=AE¦] for A͞E (AE diphthong with macron), also available for A͞U, E͞U,
+			and O͞E.
+		\item[¦\textasciicircum a¦] for ă (a with breve), also available for ĕ, ĭ,
+			ŏ, ŭ, and y̆.  Note that a breve above the letter y is only displayed if
+			your font supports the Unicode character \texttt{0306} (\emph{combining
+			breve}).
+		\item[¦\textasciicircum A¦] Ă (A with breve), also available for Ĕ, Ĭ, Ŏ,
+			Ŭ, V̆, and Y̆. Note that breves above the letters V and Y are only displayed
+			if your font supports the Unicode character \texttt{0306} (\emph{combining
+			breve}).
+	\end{shorthands}
+\end{itemize}
+
+\subsection{malay}\label{malay}
+\paragraph*{Options:}
+\begin{itemize}
+	\item \TB{variant}\new{v1.45} = \textit{indonesian} (=~bahasai in \pkg{babel}) or
+	malaysian (=~bahasam in \pkg{babel})
+\end{itemize}
+
+\subsection[mongolian]{mongolian\new{v1.45}}\label{mongolian}
+Currently, only the Khalkha variety in Cyrillic script is supported.
+
+\paragraph*{Options:}
+\begin{itemize}
+	\item \TB{babelshorthands} = \textit{false} or true.
+	If this is turned on, the following shorthands are activated:
+	\begin{shorthands}
+        \item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
+		           in the hyphenation patterns (as opposed to ¦\-¦).
+		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
+		           cases where the hyphen should stick at the following syllable.
+		\item[¦"|¦] disables a ligature at this position.
+		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
+		\item[¦"---¦] Cyrillic emdash in plain text.
+		\item[¦"--~¦] Cyrillic emdash in compound names (surnames).
+		\item[¦"--*¦] Cyrillic emdash for denoting direct speech.
+		\item[¦",¦] thinspace for initials with a breakpoint in following surname.
+		\item[¦"‘¦] for German left double quotes (looks like ,,).
+		\item[¦"’¦] for German right double quotes (looks like “).
+		\item[¦"<¦] for French left double quotes (looks like <<).
+		\item[¦">¦] for French right double quotes (looks like >>).
+	\end{shorthands}
+	\item \TB{numerals} = \textit{arabic} or cyrillic. Uses either Arabic numerals or Cyrillic
+	alphanumerical numbering.
+\end{itemize}
+%
+\paragraph*{Commands:}
+\begin{itemize}
+	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
+	environments such as ¦enumerate¦. The command takes a counter as argument,
+	\eg ¦\textrussian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
+	\item \Cmd\asbuk: same in lowercase
+\end{itemize}
+
+\subsection{norwegian}\label{norwegian}
+\paragraph*{Options:}
+\begin{itemize}
+	\item \TB{variant}\new{v1.45} = bokmal (=~`norsk' in \pkg{babel}) or \textit{nynorsk}
+\end{itemize}
+
+\subsection{persian}\label{persian}
+\paragraph*{Options:}
+\begin{itemize}
+	\item \TB{numerals} = western or \textit{eastern}
+	\item \TB{abjadjimnotail} = \textit{false} or true. \new{v1.0.3}
+	Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
+%	\item \TB{locale} (not yet implemented)
+%	\item \TB{calendar} (not yet implemented)
+\end{itemize}
+\paragraph*{Commands:}
+\begin{itemize}
+	\item \Cmd\abjad (see section \ref{abjad})
+	\item \Cmd\aemph (see section \ref{arabic}).
+\end{itemize}
 
 \subsection{portuguese}\label{portuguese}
-\textbf{Options}:
+\paragraph*{Options:}
 \begin{itemize}
 	\item \TB{variant}\new{v1.45} = brazilian or \textit{portuguese}
 \end{itemize}
 
 \subsection{russian}\label{russian}
-\textbf{Options}:
+\paragraph*{Options:}
 	\begin{itemize}
-	\item \TB{babelshorthands} = \textit{false} or true. % TODO check and document!
+	\item \TB{babelshorthands} = \textit{false} or true.
+	If this is turned on, the following shorthands are activated:
+	\begin{shorthands}
+		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
+		           in the hyphenation patterns (as opposed to ¦\-¦).
+		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
+		           cases where the hyphen should stick at the following syllable.
+		\item[¦"|¦] disables a ligature at this position.
+		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
+		\item[¦"---¦] Cyrillic emdash in plain text.
+		\item[¦"--~¦] Cyrillic emdash in compound names (surnames).
+		\item[¦"--*¦] Cyrillic emdash for denoting direct speech.
+% These are commented out in gloss-russian
+%		\item[¦",¦] thinspace for initials with a breakpoint in following surname.
+%		\item[¦"‘¦] for German left double quotes (looks like ,,).
+%		\item[¦"’¦] for German right double quotes (looks like “).
+%		\item[¦"<¦] for French left double quotes (looks like <<).
+%		\item[¦">¦] for French right double quotes (looks like >>).
+	\end{shorthands}
+    \item \TB{indentfirst}\new{v1.46} = \textit{true} or false. By default, all paragraphs are indented in Russian,
+          also those after a chapter or section heading. If this option is false, the latter paragraphs
+          are not indented, as normal in \LaTeX. 
 	\item \TB{spelling} = \textit{modern} or old (for captions and date only, not for hyphenation)
 	\item \TB{numerals} = \textit{arabic} or cyrillic. Uses either Arabic numerals or Cyrillic
 	alphanumerical numbering.
 	\end{itemize}
-
-\textbf{Commands}:
+%
+\paragraph*{Commands:}
 	\begin{itemize}
 	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
 	environments such as ¦enumerate¦. The command takes a counter as argument,
@@ -654,8 +1034,11 @@ Currently\new{v1.45} support for Kurdish is limited to Sorani Kurdish (support f
 	\item \Cmd\asbuk: same in lowercase
 	\end{itemize}
 
+\subsection[sami]{sami\new{v1.45}}\label{sami}
+Currently support for Sami is limited to Northern Sami.
+
 \subsection{sanskrit}\label{sanskrit}
-\textbf{Options}:
+\paragraph*{Options:}
 	\begin{itemize}
 	\item \TB{Script} = \textit{Devanagari}\new{v1.0.2}, Gujarati, Malayalam, Bengali, Kannada,
 	Telugu or Latin.
@@ -665,13 +1048,13 @@ Currently\new{v1.45} support for Kurdish is limited to Sorani Kurdish (support f
 	\end{itemize}
  
 \subsection{serbian}\label{serbian}
-\textbf{Options}:
+\paragraph*{Options:}
 	\begin{itemize}
-	\item \TB{Script} = \textit{Cyrillic} or Latin. Will likely go to a variant.
+	\item \TB{Script} = \textit{Cyrillic} or Latin.
 	\item \TB{numerals} = \textit{arabic} or cyrillic. Uses either Arabic numerals or Cyrillic
 	      alphanumerical numbering.
 	\end{itemize}
-\textbf{Commands}:
+\paragraph*{Commands:}
 \begin{itemize}
 	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
 	environments such as ¦enumerate¦. The command takes a counter as argument,\\
@@ -680,43 +1063,93 @@ Currently\new{v1.45} support for Kurdish is limited to Sorani Kurdish (support f
 \end{itemize}
 
 
+\subsection{slovak}\label{slovak}
+
+\paragraph*{Options:}
+\begin{itemize}
+	\item \TB{babelshorthands} = \textit{false} or true. \new{v1.46}
+	if this is turned on, the following shorthands for Slovak are activated:
+	\begin{shorthands}
+        \item[¦"=¦] for an explicit hyphen sign which is repeated at the beginning
+                    of the next line when hyphenated, as common in Slovak typesetting
+		            (only needed with ¦splithyphens=false¦).
+        \item[¦"|¦] disables a ligature at this position.
+        \item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
+                    cases where the hyphen should stick at the following syllable.
+        \item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
+                    in the hyphenation patterns (as opposed to ¦\-¦).
+        \item[¦""¦] allows for a line break at this position (without hyphenation sign).
+        \item[¦"/¦] a slash that allows for a subsequent line break. As opposed to ¦\slash¦, hyphenation at the breakpoints
+                    preset in the hyphenation patterns is still allowed.
+        \item[¦"‘¦] for Slovak left double quotes (looks like ,,).
+        \item[¦"’¦] for Slovak right double quotes (looks like “).
+        \item[¦">¦] for Slovak left double guillemets (looks like >>).
+        \item[¦"<¦] for Slovak right double guillemets (looks like <<).
+	\end{shorthands}
+	\item \TB{splithyphens} = \textit{false} or true. \new{v1.46}
+	      According to Slovak typesetting conventions, if a word with a hard hyphen (such as \emph{je-li})
+	      is hyphenated at this hyphen, a second hyphenation character is to be inserted at the beginning
+          of the line that follows the hyphenation (\emph{je-/-li}).
+	      By default, this is done automatically (if you are using \LuaTeX, the \pkg{luavlna} package is
+	      loaded to achieve this).
+	      Set this option to ¦false¦ to disable the feature.
+	\item \TB{vlna} = \textit{false} or true. \new{v1.46}
+	      According to Slovak typesetting conventions, single-letter words (non-syllable prepositions)
+	      must not occur at line ends.
+	      \pkg{Polyglossia} takes care of this automatically by default (if you are using \LuaTeX, the
+	      \pkg{luavlna} package is loaded to achieve this).
+	      Set this option to ¦false¦ to disable the feature.
+\end{itemize}
+
 \subsection{slovenian}\label{slovenian}
-\textbf{Options}:
+\paragraph*{Options:}
 	\begin{itemize}
-	\item \TB{localalph} = true \textit{false}
+	\item \TB{localalph} = true or \textit{false}
 	\end{itemize}
 
+\subsection{sorbian}\label{sorbian}
+\paragraph*{Options:}
+\begin{itemize}
+	\item \TB{variant}\new{v1.45} = lower or \textit{upper}
+	\item \TB{olddate}\new{v1.45} = true or \textit{false} (default value = true). If true, ¦\today¦
+	      will use traditional Sorbian month names (\ie it will be synonymous to ¦\oldtoday¦ below)
+\end{itemize}
+\paragraph*{Commands:}
+\begin{itemize}
+	\item \Cmd\oldtoday: outputs the current date using traditional Sorbian month names, even if \TB{olddate} is false.
+\end{itemize}
+
 \subsection{syriac}\label{syriac}
-\textbf{Options}:
+\paragraph*{Options:}
 	\begin{itemize}
 	\item \TB{numerals} = \textit{western} (i.e., 1234567890), eastern
 		(for which the Oriental Arabic numerals are used: \textarabic{١٢٣٤٥٦٧٨٩٠}),
 		or abjad. \new{v1.0.1}.
 	\end{itemize}
-\textbf{Commands}:
+\paragraph*{Commands:}
 	\begin{itemize}
 	\item \Cmd\abjadsyriac (see section \ref{abjad})
   \item \Cmd\aemph (see section \ref{arabic}).
 	\end{itemize}
 
 \subsection{thai}\label{thai}
-\textbf{Options}:
+\paragraph*{Options:}
 	\begin{itemize}
 	\item \TB{numerals} = thai or \textit{arabic}
 	\end{itemize}
-
-To insert the word breaks, you need to use an external processor.
+%
+To insert word breaks, you need to use an external processor.
 See the documentation to \pkg{thai-latex} and the file \file{testthai.tex}
 that comes with this package.
 
 \subsection{tibetan}\label{tibetan}
-\textbf{Options}:
+\paragraph*{Options:}
 \begin{itemize}
 	\item \TB{numerals} = tibetan or \textit{arabic}
 \end{itemize}
 
 \subsection{ukrainian}\label{ukrainian}
-\textbf{Commands}:
+\paragraph*{Commands:}
 	\begin{itemize}
 	\item \Cmd\Asbuk: produces the uppercase Ukrainian alphabet, for
 	environments such as ¦enumerate¦
@@ -724,20 +1157,65 @@ that comes with this package.
 	\end{itemize}
 
 \subsection{welsh}\label{welsh}
-\textbf{Options}:
+\paragraph*{Options:}
 	\begin{itemize}
 	\item \TB{date} = long or \textit{short}
 	\end{itemize}
 
-\section{Modifying or extending captions and date formats}
 
-To redefine internal macros, you can use the command ¦\gappto¦ from the package
-\pkg{etoolbox}. For compatibility with \pkg{babel} the command ¦\addto¦ is also available
-with the same effect. For instance, to change the ¦\chaptername¦ for language ¦lingua¦,
+\section{Modifying or extending captions, date formats and language settings}
+
+\pkg{Polyglossia} uses the following macros to define language-specific captions
+(\ie strings such as ``chapter''), date formats and additional language settings
+(¦⟨lang⟩¦ is to be replaces with the respective language name):
+
+\begin{itemize}
+	\item \Cmd{\captions⟨lang⟩} stores definitions of caption strings
+	           (such as, in the case of English, ¦\def\chaptername{Chapter}¦)
+	\item \Cmd{\date⟨lang⟩} stores definitions of date formats (usually redefinitions
+	           of ¦\today¦, in some cases also definitions of additional date commands)
+	\item \Cmd{\blockextras⟨lang⟩} stores macros that are to be executed when the language
+              ⟨lang⟩ is activated via ¦\selectlanguage¦ command or the ¦⟨lang⟩¦ environment
+	\item \Cmd{\inlineextras⟨lang⟩} stores macros that are to be executed when the language
+	          ⟨lang⟩ is activated locally via ¦\text⟨lang⟩¦ command
+	\item \Cmd{\noextras⟨lang⟩} stores macros that are to be executed when the language
+	          ¦⟨lang⟩¦ is closed 
+\end{itemize} 
+%
+In order to redefine internal macros, we recommend to use the command ¦\gappto¦.
+For compatibility with \pkg{babel} the command ¦\addto¦ is also available
+to the same effect. For instance, to change the ¦\chaptername¦ for language ¦lingua¦,
 you can do this:
 \begin{verbatim}
-\gappto\captionslingua{\renewcommand{\chaptername}{Caput}}
+\gappto\captionslingua{\def\chaptername{Caput}}
 \end{verbatim}
+%
+Note that this needs to be done after the respective language has been loaded with
+¦\setmainlanguage¦ or ¦\setotherlanguage¦.
+
+Specifically for package authors, analogous commands are provided which are only executed
+if a specific language \emph{variety} is used. As opposed to the macros above, these refer
+to babel names. Other than that, the function is identical:
+
+\begin{itemize}
+	\item \Cmd{\captions@bbl@⟨babelname⟩} 
+	\item \Cmd{\date@bbl@⟨babelname⟩}
+	\item \Cmd{\blockextras@bbl@⟨babelname⟩}
+	\item \Cmd{\inlineextras@bbl@⟨babelname⟩}
+	\item \Cmd{\noextras@bbl@⟨babelname⟩} 
+\end{itemize}
+%
+By default, these macros are undefined. If they are defined (\eg by an external package),
+they will be executed after their respective ¦⟨lang⟩¦ counterpart and thus can be used to
+overwrite definitions of the former. Again, use ¦\gappto¦ to define\slash modify these macros.
+For instance, to add a new caption ¦\footnotename¦ to the Swiss variety of German (babel name
+¦nswissgerman¦), you can do this:
+\begin{verbatim}
+\gappto\captions@bbl@nswissgerman{\def\footnotename{Fussnote}}
+\end{verbatim}
+%
+If you do this in a document preamble rather than in a package, you need to embrace the redefinition
+by ¦\makeatletter¦ and ¦\makeatother¦ due to the ¦@¦ in the macro names.
 
 \section{Script-specific numbering}
 
@@ -787,7 +1265,7 @@ A third method are so-called TECKit fontmappings.
 Those can be activated with the \pkg{fontspec} ¦Mapping¦ option,
 using ¦arabicdigits¦, ¦farsidigits¦ or ¦thaidigits¦.
 For instance if \cmd\arabicfont\ is defined with the option ¦Mapping=arabicdigits¦,
-typing ¦\textarabic{2010}¦ results in \textarabic{٢٠١٠}. Note that this method has some drawbacks, though,
+typing \cmd{\textarabic\{2010\}} results in \textarabic{٢٠١٠}. Note that this method has some drawbacks, though,
 for instance when the value of a counter has to be written and read from auxiliary files.
 So please use this with care.}
 The macros have the form ¦\<script>digits¦. They convert Arabic numerical input and leave every other input untouched.
@@ -923,8 +1401,7 @@ sets the counters ¦Hijriday¦, ¦Hijrimonth¦ and ¦Hijriyear¦.
 \Cmd\Hijritoday\ formats the Hijri date for the current day.
 This command is now locale-aware\new{v1.1.1}: its output will differ depending on the
 currently active language. Presently \pkg{polyglossia}’s language definition files
-for Arabic, Farsi, Urdu, Turkish, Bahasa Indonesia and Bahasa Melayu
-provide a localized version of ¦\Hijritoday¦.
+for Arabic, Farsi, Urdu, Turkish and Malay provide a localized version of ¦\Hijritoday¦.
 If the formatting macro for the current language is undefined, the Hijri date will be formatted
 in Arabic or in roman transliteration, depending of the current writing direction.
 You can define a new format or redefine one with the command
@@ -953,38 +1430,69 @@ Example: today is \Jalalitoday.
 
 %\section{Varia}
 
+\section{Accessing language information}
+
+The following is specifically relevant to package authors who need information about the languages in use.
+
+In order to get such information, \pkg{polyglossia} provides the following macros:
+
+\begin{itemize}
+	\item \Cmd\languagename\ stores the currently active (polyglossia) language name.
+	\item \Cmd\mainlanguagename\ stores the (polyglossia) language name of the main document language.
+	\item \Cmd\languagevariant\ stores the language variant if set. The macro is empty if no variant has been set.
+	\item \Cmd\mainlanguagevariant\ stores the language variant of the main document language if set.
+	       The macro is empty if no variant has been set.
+	\item \Cmd\babelname\ stores the corresponding name of the currently active language (variant) in \pkg{babel}.
+	      This might not only be useful if you want to support both \pkg{babel} and \pkg{polyglossia}, but also
+	      since this name is unique for a given language variety (\eg ngerman, german, swissgerman etc.).
+	      Note that this macro is also defined for languages that are not supported in \pkg{babel}. In that
+	      case, they are equal to the polyglossia language name.
+	\item \Cmd\mainbabelname\ analogously stores the name of document's main language (variant) in \pkg{babel}.
+\end{itemize}
+%
+If you want to have a full list of loaded languages/variants, use the following macros:
+\begin{itemize}
+	\item \Cmd{\xpg@loaded}\ stores a comma-separated list of all loaded languages (polyglossia name)
+	\item \Cmd{\xpg@vloaded}\ stores a comma-separated list of all loaded variants
+	\item \Cmd{\xpg@bloaded}\ stores a comma-separated list of \pkg{babel} names of all language variants 
+\end{itemize}
+%
+Finally, you can test whether a language is loaded by
+\displaycmd{\iflanguageloaded\{⟨lang⟩\}\{⟨true⟩\}\{⟨false⟩\}}{\iflanguageloaded}
+where \texttt{⟨lang⟩} is a \pkg{polyglossia} language name, or
+\displaycmd{\ifbabellanguageloaded\{⟨lang⟩\}\{⟨true⟩\}\{⟨false⟩\}}{\ifbabellanguageloaded}
+where \texttt{⟨lang⟩} is a \pkg{babel} language name.
 
 \section{Acknowledgements (by François Charette)}
 \pkg{Polyglossia} is notable for being a recycle box of previous contributions
 by other people. I take this opportunity to thank the following individuals,
-whose splendid work has made my task almost trivial in comparision: Johannes
-Braams and the numerous contributors to the \pkg{babel}{} package (in particular
-Boris Lavva and others for its Hebrew support), Alexej Kryukov (\pkg{antomega}), Will
-Robertson (\pkg{fontspec}), Apostolos Syropoulos (\pkg{xgreek}), Youssef Jabri
-(\pkg{arabi}), and Vafa Khalighi (\pkg{xepersian} and \pkg{bidi}).
-The work of Mojca Miklavec and Arthur Reutenauer on hyphenation patterns with their package
+whose splendid work has made my task almost trivial in comparision: \TA{Johannes
+Braams} and the numerous contributors to the \pkg{babel} package (in particular
+\TA{Boris Lavva} and others for its Hebrew support), \TA{Alexej Kryuko}v (\pkg{antomega}),
+\TA{Will Robertson} (\pkg{fontspec}), \TA{Apostolos Syropoulos} (\pkg{xgreek}), \TA{Youssef Jabri}
+(\pkg{arabi}), and \TA{Vafa Khalighi} (\pkg{xepersian} and \pkg{bidi}).
+The work of \TA{Mojca Miklavec} and \TA{Arthur Reutenauer} on hyphenation patterns with their package
 \pkg{hyph-utf8} is of course invaluable. I should also thank other
-individuals for their assistance in supporting specific languages: Yves Codet
-(Sanskrit), Zdenĕk Wagner (Hindi), Mikhal Oren (Hebrew), Sergey Astanin (Russian),
-Khaled Hosny (Arabic), Sertaç Ö. Yıldız (Turkish), Kamal Abdali (Urdu),
-and several other members of the \XeTeX\ user community, notably Enrico Gregorio, who
+individuals for their assistance in supporting specific languages: \TA{Yves Codet}
+(Sanskrit), \TA{Zdenĕk Wagner} (Hindi), \TA{Mikhal Oren} (Hebrew), \TA{Sergey Astanin} (Russian),
+\TA{Khaled Hosny} (Arabic), \TA{Sertaç Ö. Yıldız} (Turkish), \TA{Kamal Abdali} (Urdu),
+and several other members of the \XeTeX\ user community, notably \TA{Enrico Gregorio}, who
 has sent me many useful suggestions and corrections and contributed the ¦\newXeTeXintercharclass¦
 mechanism in xelatex.ini which is now used by polyglossia.
-More recently, Kevin Godby of the \href{http://ubuntu-manual.org}{Ubuntu Manual} project has
+More recently, \TA{Kevin Godby} of the \href{http://ubuntu-manual.org}{Ubuntu Manual} project has
 contributed very useful feedback, bug hunting and, with the help of translators,
 new language definition files for Asturian, Lithuanian, Occitan, Bengali, Malayalam, Marathi, Tamil, and Telugu.
 It is particularly heartening to realize that this package is used to typeset a widely-read
 document in dozens of different languages!
-Support for Lao was also added thanks to Brian Wilson.
-I also thank Alan Munn for kindly proof-reading the penultimate version of this documentation.
-And of course my gratitude also goes to Jonathan Kew, the formidable author of \XeTeX!
+Support for Lao was also added thanks to \TA{Brian Wilson}.
+I also thank \TA{Alan Munn} for kindly proof-reading the penultimate version of this documentation.
+And of course my gratitude also goes to \TA{Jonathan Kew}, the formidable author of \XeTeX!
 
 \section{More acknowledgements (by Arthur Reutenauer)}
 Many thanks to all the people who have contributed bugfixes and new features to
-Polyglossia since I took over.  Most of them can be identified from the version
-control log on \href{https://github.com/reutenauer/polyglossia}{GitHub} and I won’t try to name them
+Polyglossia since I took over.  Most of them can be identified from the contributor statistics on \href{https://github.com/reutenauer/polyglossia/graphs/contributors}{GitHub} and I won’t try to name them
 all (maybe, one day ...); among the ones who sent contributions directly to me
-I would like to especially thank Claudio Beccari, the indefatigable champion of
+I would like to especially thank \TA{Claudio Beccari}, the indefatigable champion of
 Romance languages, and beyond!
 
 \end{document}

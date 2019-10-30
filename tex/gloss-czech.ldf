@@ -1,4 +1,5 @@
 \ProvidesFile{gloss-czech.ldf}[polyglossia: module for czech]
+
 \PolyglossiaSetup{czech}{
   hyphennames={czech},
   hyphenmins={2,2},
@@ -6,6 +7,167 @@
   frenchspacing=true,
   fontsetup=true,
 }
+
+\ifluatex
+  \RequirePackage{luavlna}
+\fi
+
+\define@boolkey{czech}[czech@]{babelshorthands}[true]{}
+
+\define@boolkey{czech}[czech@]{splithyphens}[true]{}
+
+\define@boolkey{czech}[czech@]{vlna}[true]{}
+
+\setkeys{czech}{splithyphens,vlna}
+
+\ifsystem@babelshorthands
+  \setkeys{czech}{babelshorthands=true}
+\else
+  \setkeys{czech}{babelshorthands=false}
+\fi
+
+\ifcsundef{initiate@active@char}{%
+  \input{babelsh.def}%
+  \initiate@active@char{"}%
+  \shorthandoff{"}%
+}{}
+
+\def\cs@@splithyphen#1{%
+  \kern\z@\discretionary{-}{\char\hyphenchar\the\font}{#1}%
+  \nobreak\hskip\z@%
+}
+
+\def\cs@splithyphen{%
+  \cs@@splithyphen{-}%
+}
+
+\def\czech@shorthands{%
+  \bbl@activate{"}%
+  \def\language@group{czech}%
+  \declare@shorthand{czech}{"=}{\cs@splithyphen}%
+  \declare@shorthand{czech}{"`}{„}%
+  \declare@shorthand{czech}{"'}{“}%
+  \declare@shorthand{czech}{"<}{«}%
+  \declare@shorthand{czech}{">}{»}%
+}
+
+\def\noczech@shorthands{%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+
+\ifxetex
+  % splithyphens
+  \newXeTeXintercharclass\czech@hyphen % -
+  % vlna
+  \newXeTeXintercharclass\czech@openpunctuation
+  \newXeTeXintercharclass\czech@nonsyllabicpreposition
+  \ifdefined\e@alloc@intercharclass@top
+    \chardef\czech@boundary=\e@alloc@intercharclass@top
+  \else
+    \ifdefined\XeTeXinterwordspaceshaping
+      \chardef\czech@boundary=4095 %
+      \def\newXeTeXintercharclass{%
+        \e@alloc\XeTeXcharclass\chardef
+              \xe@alloc@intercharclass\m@ne\@ucharclass@boundary}
+    \else
+      \chardef\czech@boundary=255
+    \fi
+  \fi
+\fi
+
+\def\czech@hyphens{%
+    \ifluatex
+      \AfterPreamble{\enablesplithyphens{czech}}%
+    \else
+      \XeTeXinterchartokenstate=1
+      \XeTeXcharclass `\- \czech@hyphen
+      \XeTeXinterchartoks \z@ \czech@hyphen = {\cs@@splithyphen}% "-" -> "\cs@@splithyphen-"
+      % necessary if used together with vlna:
+      \XeTeXinterchartoks \czech@nonsyllabicpreposition \czech@hyphen = {\cs@@splithyphen}% "-" -> "\cs@@splithyphen-"
+    \fi%
+}
+
+\def\noczech@hyphens{%
+    \ifluatex
+      \AfterPreamble{\disablesplithyphens{czech}}%
+    \else
+      \XeTeXcharclass `\- \z@
+    \fi%
+}
+
+% Add nonbreakable space after single-letter word to
+% prevent them to land at the end of a line
+\def\czech@vlna{%
+    \ifluatex
+       \preventsingleon
+    \else
+        % Code taken and adapted from xevlna.sty
+        \XeTeXinterchartokenstate=1
+        \XeTeXcharclass `\( \czech@openpunctuation
+        \XeTeXcharclass `\[ \czech@openpunctuation
+        \XeTeXcharclass `\„ \czech@openpunctuation
+        \XeTeXcharclass `\» \czech@openpunctuation
+        \XeTeXcharclass `\K \czech@nonsyllabicpreposition
+        \XeTeXcharclass `\k \czech@nonsyllabicpreposition
+        \XeTeXcharclass `\S \czech@nonsyllabicpreposition
+        \XeTeXcharclass `\s \czech@nonsyllabicpreposition
+        \XeTeXcharclass `\V \czech@nonsyllabicpreposition
+        \XeTeXcharclass `\v \czech@nonsyllabicpreposition
+        \XeTeXcharclass `\Z \czech@nonsyllabicpreposition
+        \XeTeXcharclass `\z \czech@nonsyllabicpreposition
+        \XeTeXcharclass `\O \czech@nonsyllabicpreposition
+        \XeTeXcharclass `\o \czech@nonsyllabicpreposition
+        \XeTeXcharclass `\U \czech@nonsyllabicpreposition
+        \XeTeXcharclass `\u \czech@nonsyllabicpreposition
+        \XeTeXcharclass `\A \czech@nonsyllabicpreposition
+        \XeTeXcharclass `\a \czech@nonsyllabicpreposition
+        \XeTeXcharclass `\I \czech@nonsyllabicpreposition
+        \XeTeXcharclass `\i \czech@nonsyllabicpreposition
+        \XeTeXinterchartoks \czech@boundary \czech@nonsyllabicpreposition {\czech@interchartoks}
+        \XeTeXinterchartoks \czech@openpunctuation \czech@nonsyllabicpreposition {\czech@interchartoks}
+        \def\czech@nointerchartoks{\let\czech@interchartoks\czech@PreCSpreposition}
+        \def\czech@PreCSpreposition{\def\next{}%
+           \ifnum\catcode`\ =10 % nothing will be done in verbatim
+           \ifmmode % nothing in math
+           \else
+              \let\czech@interchartoks\czech@nointerchartoks
+              \let\next\czech@ExamineCSpreposition
+           \fi \fi
+          \next%
+        }
+        \def\czech@ExamineCSpreposition ##1{##1\futurelet\next\czech@ProcessCSpreposition}
+        \def\czech@ProcessCSpreposition{\ifx\next\czech@XeTeXspace\nobreak\fi}
+        \futurelet\czech@XeTeXspace{ }\czech@nointerchartoks
+    \fi
+}
+
+\def\noczech@vlna{%
+    \ifluatex
+        \preventsingleoff
+    \else
+        \XeTeXcharclass`\(\z@
+        \XeTeXcharclass`\[\z@
+        \XeTeXcharclass`\„\z@
+        \XeTeXcharclass`\»\z@
+        \XeTeXcharclass`\K\z@
+        \XeTeXcharclass`\k\z@
+        \XeTeXcharclass`\S\z@
+        \XeTeXcharclass`\s\z@
+        \XeTeXcharclass`\V\z@
+        \XeTeXcharclass`\v\z@
+        \XeTeXcharclass`\Z\z@
+        \XeTeXcharclass`\z\z@
+        \XeTeXcharclass`\O\z@
+        \XeTeXcharclass`\o\z@
+        \XeTeXcharclass`\U\z@
+        \XeTeXcharclass`\u\z@
+        \XeTeXcharclass`\A\z@
+        \XeTeXcharclass`\a\z@
+        \XeTeXcharclass`\I\z@
+        \XeTeXcharclass`\i\z@
+    \fi
+}
+
 
 \def\captionsczech{%
    \def\refname{Reference}%
@@ -30,12 +192,33 @@
    \def\headtoname{Komu}%
    \def\proofname{Důkaz}%
    \def\glossaryname{Slovník}%was Glosář
-   }
+}
+
 \def\dateczech{%
    \def\today{\number\day.~\ifcase\month\or
     ledna\or února\or března\or dubna\or května\or
     června\or července\or srpna\or září\or
     října\or listopadu\or prosince\fi
-    \space \number\year}}
+    \space \number\year}%
+}
+
+\def\noextras@czech{%
+  \noczech@shorthands%
+  \noczech@hyphens%
+  \noczech@vlna%
+  \ifxetex\XeTeXinterchartokenstate=0\fi%
+}
+
+\def\blockextras@czech{%
+  \ifczech@babelshorthands\czech@shorthands\fi%
+  \ifczech@vlna\czech@vlna\else\noczech@vlna\fi%
+  \ifczech@splithyphens\czech@hyphens\else\noczech@hyhens\fi%
+}
+
+\def\inlineextras@czech{%
+  \ifczech@babelshorthands\czech@shorthands\fi%
+  \ifczech@vlna\czech@vlna\else\noczech@vlna\fi%
+  \ifczech@splithyphens\czech@hyphens\else\noczech@hyhens\fi%
+}
 
 \endinput
