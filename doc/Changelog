@@ -1,26 +1,26 @@
 1.46 (??)
 
 New features:
-  * Add options to set French-style itemize item labels to French (#89).
-  * Add babelshorthands as well as options splithyphens and vlna to Slovak.
-  * Latin language variant "ecclesiastic".
-  * Latin language options "capitalizemonth", "ecclesiasticfootnotes", "hyphenation",
+  * Add option "indentfirst" to Russian (#78).
+  * Add options to set and customize French-style itemize item labels to French (#89).
+  * Add babelshorthands as well as options "splithyphens" and "vlna" to Slovak.
+  * Add Latin language variant "ecclesiastic".
+  * Add Latin language options "capitalizemonth", "ecclesiasticfootnotes", "hyphenation",
     "prosodicshorthands", and "usej".
-  * Latin shorthands for "«", "»", "æ", "Æ", "œ", and "Œ".
+  * Add Latin shorthands for "«", "»", "æ", "Æ", "œ", and "Œ".
 
 Bug fixes:
   * Fix problems with fragile font settings (#24).
-  * Add option indentfirst to Russian (#78).
   * Fix detection of default \languagevariant (#332).
   * Fix some babel shorthand issues by updating the shorthand code from recent babel.
-  * Changed option name "fraktur" to "blackletter" in German (the former is still available
-    as an alias).
 
-Other changes:
+Interface and defaults changes:
   * In Russian, all paragraphs are now indented by default, as common in Russian typography.
     The behavior can be opted out by indentfirst=false.
   * In Czech, splithyphens and lvna are enabled by default. Also, the option does now work
     as well with LuaTeX.
+  * Changed option name "fraktur" to "blackletter" in German (the former is still available
+    as an alias).
 
 1.45 (27-10-2019)
 
