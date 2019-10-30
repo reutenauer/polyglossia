@@ -11,6 +11,8 @@ New features:
 
 Bug fixes:
   * Fix problems with fragile font settings (#24).
+  * Re-enable the possibility to pass a macro as main argumente to \setmainlanguage and
+    \setotherlanguage (#331).
   * Fix detection of default \languagevariant (#332).
   * Fix some babel shorthand issues by updating the shorthand code from recent babel.
 
