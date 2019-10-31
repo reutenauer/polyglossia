@@ -7,11 +7,7 @@ local new_attribute        = luatexbase.new_attribute
 
 local get_quad = luaotfload.aux.get_quad -- needs luaotfload > 20130516
 
-local next = next
-
-local nodes, node = nodes, node
-
-local nodecodes          = nodes.nodecodes
+local node = node
 
 local insert_node_before = node.insert_before
 local insert_node_after  = node.insert_after
@@ -19,26 +15,28 @@ local remove_node        = node.remove
 local has_attribute      = node.has_attribute
 local node_copy          = node.copy
 local new_node           = node.new
-
-local math_code          = nodecodes.math
 local end_of_math        = node.end_of_math
-if not end_of_math then -- luatex < .76
-    local traverse_nodes = node.traverse_id
-    local end_of_math = function (n)
-        for n in traverse_nodes(math_code, n.next) do
-            return n
-        end
-    end
-end
+local getnext            = node.getnext
+local getprev            = node.getprev
 
 -- node types according to node.types()
-local glue_code    = nodecodes.glue
-local glyph_code   = nodecodes.glyph
-local penalty_code = nodecodes.penalty
-local kern_code    = nodecodes.kern
+local glue_code    = node.id"glue"
+local glyph_code   = node.id"glyph"
+local penalty_code = node.id"penalty"
+local kern_code    = node.id"kern"
+local math_code    = node.id"math"
+
+-- we need some node subtypes
+local userkern  = 1
+local removable_skip = {
+    [0]  = true, -- userskip
+    [13] = true, -- spaceskip
+    [14] = true, -- xspaceskip
+}
 
 -- we make a new node, so that we can copy it later on
 local kern_node = new_node(kern_code)
+kern_node.subtype = userkern -- this kern can be removed later on
 
 local function get_kern_node(dim)
     local n = node_copy(kern_node)
@@ -56,20 +54,17 @@ local space_chars = {[32] = true, [160] = true, [5760] = true, [6158] = true,
 -- from nodes-tst.lua, adapted
 local function somespace(n)
     if n then
-        local id = n.id
+        local id, subtype = n.id, n.subtype
         if id == glue_code then
-            return glue_code
+            -- it is dangerous to remove all the type of glue
+            return removable_skip[subtype]
         elseif id == kern_code then
-            return kern_code
+            -- remove only user's kern
+            return subtype == userkern
         elseif id == glyph_code then
-            if space_chars[n.char] then
-                return true
-            else
-                return false
-            end
+            return space_chars[n.char]
         end
     end
-    return false
 end
 
 -- idem
@@ -84,7 +79,6 @@ local function somepenalty(n, value)
             end
         end
     end
-    return false
 end
 
 local punct_attr = new_attribute("polyglossia_punct")
@@ -99,68 +93,64 @@ local function ensure_lang_id(lang)
         lang_counter = lang_counter + 1
         lang_id[lang] = lang_counter
     end
+    return lang_id[lang]
 end
 
 local function clear_spaced_characters(lang)
-    ensure_lang_id(lang)
-    left_space[lang_id[lang]] = {}
-    right_space[lang_id[lang]] = {}
+    local id = ensure_lang_id(lang)
+    left_space[id]  = {}
+    right_space[id] = {}
 end
 
 local function add_left_spaced_character(lang, char, kern)
-    ensure_lang_id(lang)
-    left_space[lang_id[lang]][char] = kern -- "kern" is meant as a fraction of a quad
+    local id = ensure_lang_id(lang)
+    left_space[id][char] = kern -- "kern" is meant as a fraction of a quad
 end
 
 local function add_right_spaced_character(lang, char, kern)
-    ensure_lang_id(lang)
-    right_space[lang_id[lang]][char] = kern -- "kern" is meant as a fraction of a quad
+    local id = ensure_lang_id(lang)
+    right_space[id][char] = kern -- "kern" is meant as a fraction of a quad
 end
 
 -- from typo-spa.lua, adapted
 local function process(head)
-    local done = false
     local start = head
-    -- head is always begin of par (whatsit), so we have at least two prev nodes
-    -- penalty followed by glue
     while start do
         local id = start.id
         if id == glyph_code then
             local attr = has_attribute(start, punct_attr)
             if attr then
                 local char = utf8.char(start.char) -- requires Lua 5.3
-                if left_space[attr][char] or right_space[attr][char] then
+                local leftspace  = left_space[attr][char]
+                local rightspace = right_space[attr][char]
+                if leftspace or rightspace then
                     local quad = get_quad(start.font) -- might be optimized
-                    local prev = start.prev
-                    if left_space[attr][char] and prev then
-                        local prevprev = prev.prev
-                        if somespace(prev) then
-                        -- TODO: there is a question here: do we override a preceding space or not?...
-                            if somepenalty(prevprev, 10000) then
-                                head = remove_node(head, prev)
-                                head = remove_node(head, prevprev)
-                            else
+                    if leftspace then
+                        local prev = getprev(start)
+                        if prev then
+                            local prevprev = getprev(prev)
+                            if somespace(prev) then
+                            -- TODO: there is a question here: do we override a preceding space or not?...
+                                if somepenalty(prevprev, 10000) then
+                                    head = remove_node(head, prevprev)
+                                end
                                 head = remove_node(head, prev)
                             end
                         end
-                        insert_node_before(head, start, get_kern_node(left_space[attr][char]*quad))
-                        done = true
+                        head = insert_node_before(head, start, get_kern_node(leftspace*quad))
                     end
-                    local next = start.next
-                    if right_space[attr][char] and next then
-                        local nextnext = next.next
-                        if somepenalty(next, 10000) then
-                            if somespace(nextnext) then
+                    if rightspace then
+                        local next = getnext(start)
+                        if next then
+                            local nextnext = getnext(next)
+                            if somepenalty(next, 10000) and somespace(nextnext) then
                                 head = remove_node(head, next)
                                 head = remove_node(head, nextnext)
-                            end
-                        else
-                            if somespace(next) then
+                            elseif somespace(next) then
                                 head = remove_node(head, next)
                             end
                         end
-                        insert_node_after(head, start, get_kern_node(right_space[attr][char]*quad))
-                        done = true
+                        head, start = insert_node_after(head, start, get_kern_node(rightspace*quad))
                     end
                 end
             end
@@ -168,23 +158,21 @@ local function process(head)
             -- warning: this is a feature of luatex > 0.76
             start = end_of_math(start) -- weird, can return nil .. no math end?
         end
-        if start then
-            start = start.next
-        end
+        start = getnext(start) -- no error even if start is nil
     end
-    return head, done
+    return head
 end
 
-local callback_name = "pre_linebreak_filter"
-
 local function activate(lang)
-    ensure_lang_id(lang)
+    local id = ensure_lang_id(lang)
     -- We set the punctuation attribute to a language id here. This is
     -- important to be able to intermix languages with different spacings
     -- in one paragraph.
-    tex.setattribute(punct_attr, lang_id[lang])
-    if not priority_in_callback(callback_name, "polyglossia-punct.process") then
-        add_to_callback(callback_name, process, "polyglossia-punct.process", 1)
+    tex.setattribute(punct_attr, id)
+    for _, callback_name in ipairs{ "pre_linebreak_filter", "hpack_filter" } do
+        if not priority_in_callback(callback_name, "polyglossia-punct.process") then
+            add_to_callback(callback_name, process, "polyglossia-punct.process", 1)
+        end
     end
 end
 
