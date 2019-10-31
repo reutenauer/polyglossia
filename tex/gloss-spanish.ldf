@@ -7,7 +7,23 @@
   frenchspacing=true,
   indentfirst=true,
   fontsetup=true,
+  babelname=spanish
 }
+
+\newif\if@spanish@mexico
+\@spanish@mexicofalse
+\define@choicekey*+{spanish}{variant}[\val\nr]{spanish,mexican}[spanish]{%
+   \ifcase\nr\relax
+      % spanish:
+      \@spanish@mexicofalse%
+      \SetLanguageKeys{spanish}{babelname=spanish}%
+   \or
+      % mexican:
+      \@spanish@mexicotrue%
+      \SetLanguageKeys{spanish}{babelname=spanishmx}%
+   \fi
+   \xpg@info{Option: spanish, variant=\val}%
+}{\xpg@warning{Unknown spanish variant `#1'}}
 
 % Localized math operators à la babel
 \newif\ifspanish@accentedoperators
@@ -158,6 +174,13 @@
   \def\alsoname{véase también}%
   \def\proofname{Prueba}%
   \def\glossaryname{Glosario}%
+  \if@spanish@mexico
+    \captionsspanish@mexico%
+  \fi%
+}
+
+\def\captionsspanish@mexico{%
+  \def\tablename{Tabla}%
 }
 
 \def\datespanish{%

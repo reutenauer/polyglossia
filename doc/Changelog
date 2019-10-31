@@ -4,6 +4,7 @@ New features:
   * Add option "indentfirst" to Russian (#78).
   * Add options to set and customize French-style itemize item labels to French (#89).
   * Add optional localized math operators to Spanish (#123).
+  * Add Spanish variant "mexican".
   * Add babelshorthands as well as options "splithyphens" and "vlna" to Slovak.
   * Add Latin language variant "ecclesiastic".
   * Add Latin language options "capitalizemonth", "ecclesiasticfootnotes", "hyphenation",
