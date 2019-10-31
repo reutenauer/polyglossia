@@ -1,4 +1,5 @@
 \ProvidesFile{gloss-spanish.ldf}[polyglossia: module for spanish]
+
 \PolyglossiaSetup{spanish}{
   hyphennames={spanish},
   hyphenmins={2,2},
@@ -6,6 +7,133 @@
   frenchspacing=true,
   indentfirst=true,
   fontsetup=true,
+}
+
+% Localized math operators à la babel
+\newif\ifspanish@accentedoperators
+\newif\ifspanish@spacedoperators
+\newif\ifspanish@locoperators
+
+\define@choicekey*+{spanish}{spanishoperators}[\val\nr]{all,accented,spaced,none}[all]{%
+   \ifcase\nr\relax
+      % all:
+      \spanish@locoperatorstrue%
+      \spanish@accentedoperatorstrue%
+      \spanish@spacedoperatorstrue%
+   \or
+      % accented:
+      \spanish@locoperatorsfalse%
+      \spanish@accentedoperatorstrue%
+      \spanish@spacedoperatorsfalse%
+   \or
+      % spaced:
+      \spanish@locoperatorsfalse%
+      \spanish@accentedoperatorsfalse%
+      \spanish@spacedoperatorstrue%
+   \or
+      % none:
+      \spanish@locoperatorsfalse%
+      \spanish@accentedoperatorsfalse%
+      \spanish@spacedoperatorsfalse%
+   \fi
+   \xpg@info{Option: Spanish, spanishoperators=\val}%
+}{\xpg@warning{Unknown spanishoperators value `#1'}}
+
+\let\xpg@save@lim\lim
+\let\xpg@save@limsup\limsup
+\let\xpg@save@liminf\liminf
+\let\xpg@save@max\max
+\let\xpg@save@min\min
+\let\xpg@save@inf\inf
+\let\xpg@save@bmod\bmod
+\let\xpg@save@pmod\pmod
+
+\def\spanish@accentedoperators{%
+  \DeclareRobustCommand\lim{\mathop{\operator@font lím}}%
+  \DeclareRobustCommand\limsup{\mathop{\operator@font lím\,sup}}%
+  \DeclareRobustCommand\liminf{\mathop{\operator@font lím\,inf}}%
+  \DeclareRobustCommand\max{\mathop{\operator@font máx}}%
+  \DeclareRobustCommand\min{\mathop{\operator@font mín}}%
+  \DeclareRobustCommand\inf{\mathop{\operator@font ínf}}%
+  \DeclareRobustCommand\bmod{%
+    \nonscript\mskip-\medmuskip\mkern5mu%
+    \mathbin{\operator@font mód}\penalty900\mkern5mu%
+    \nonscript\mskip-\medmuskip}%
+  \@ifundefined{@amsmath@err}%
+    {\DeclareRobustCommand\pmod[1]{%
+       \allowbreak\mkern18mu({\operator@font mód}\,\,##1)}}%
+    {\let\xpg@save@mod\mod
+     \DeclareRobustCommand\mod[1]{\allowbreak\if@display\mkern18mu
+        \else\mkern12mu\fi{\operator@font mód}\,\,##1}%
+     \DeclareRobustCommand\pmod[1]{\pod{{\operator@font mód}%
+        \mkern6mu##1}}}%
+}
+
+\def\nospanish@accentedoperators{%
+  \let\lim\xpg@save@lim%
+  \let\limsup\xpg@save@limsup%
+  \let\liminf\xpg@save@liminf%
+  \let\max\xpg@save@max%
+  \let\min\xpg@save@min%
+  \let\inf\xpg@save@inf%
+  \let\bmod\xpg@save@bmod%
+  \let\pmod\xpg@save@pmod%
+  \@ifundefined{@amsmath@err}{}{\let\mod\xpg@save@mod}%
+}
+
+\let\xpg@save@arccos\arccos
+\let\xpg@save@arcsin\arcsin
+\let\xpg@save@arctan\arctan
+\let\arcsen\arcsin
+\let\arctg\arctan
+
+
+\def\spanish@spacedoperators{%
+  \DeclareRobustCommand\arccos{\mathop{\operator@font arc\,cos}\nolimits}%
+  \DeclareRobustCommand\arcsin{\mathop{\operator@font arc\,sen}\nolimits}%
+  \DeclareRobustCommand\arctan{\mathop{\operator@font arc\,tg}\nolimits}%
+}
+
+\def\nospanish@spacedoperators{%
+  \let\arccos\xpg@save@arccos%
+  \let\arcsen\arcsin%
+  \let\arctg\arctan%
+}
+
+
+\let\xpg@save@sin\sin
+\let\xpg@save@tan\tan
+\let\xpg@save@sinh\sinh
+\let\xpg@save@tanh\tanh
+\let\sen\sin
+\let\tg\tan
+\let\senh\sinh
+\let\tgh\tanh
+
+\def\spanish@locoperators{%
+  \DeclareRobustCommand\sin{\mathop{\operator@font sen}\nolimits}%
+  \DeclareRobustCommand\tan{\mathop{\operator@font tg}\nolimits}%
+  \DeclareRobustCommand\sinh{\mathop{\operator@font senh}\nolimits}%
+  \DeclareRobustCommand\tanh{\mathop{\operator@font tgh}\nolimits}%
+}
+
+\def\nospanish@locoperators{%
+  \let\sen\xpg@save@sin%
+  \let\tg\xpg@save@tan%
+  \let\sinh\xpg@save@sinh%
+  \let\tanh\xpg@save@tanh%
+  \let\sen\relax%
+  \let\tg\relax%
+  \let\senh\relax%
+  \let\tgh\relax%
+}
+
+\newcommand*\spanishoperator[2][]{%
+  \ifx#1\\\\
+    \protected@csxdef{#2}{\mathop{\operator@font #2}\nolimits}%
+  \else
+    \protected@csxdef{#2}{\mathop{\operator@font #1}\nolimits}%
+  \fi
 }
 
 \def\captionsspanish{%
@@ -30,13 +158,31 @@
   \def\alsoname{véase también}%
   \def\proofname{Prueba}%
   \def\glossaryname{Glosario}%
-  }
+}
 
 \def\datespanish{%
   \def\today{\number\day~de~\ifcase\month\or
     enero\or febrero\or marzo\or abril\or mayo\or junio\or
     julio\or agosto\or septiembre\or octubre\or noviembre\or
     diciembre\fi\space de~\number\year}%
-  }
+}
+
+\def\noextras@spanish{%
+  \nospanish@accentedoperators%
+  \nospanish@spacedoperators%
+  \nospanish@locoperators%
+}
+
+\def\blockextras@spanish{%
+  \ifspanish@accentedoperators\spanish@accentedoperators\fi%
+  \ifspanish@spacedoperators\spanish@spacedoperators\fi%
+  \ifspanish@locoperators\spanish@locoperators\fi%
+}
+
+\def\inlineextras@spanish{%
+  \ifspanish@accentedoperators\spanish@accentedoperators\fi%
+  \ifspanish@spacedoperators\spanish@spacedoperators\fi%
+  \ifspanish@locoperators\spanish@locoperators\fi%
+}
 
 \endinput

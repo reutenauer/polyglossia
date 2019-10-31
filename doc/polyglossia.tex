@@ -194,7 +194,7 @@ that are explained in section \ref{specific} below.
 \toprule
 albanian     & \TX{dutch}     & interlingua  & \TX{mongolian}  & \TX{slovenian}\\
 amharic      & \TX{english}   & \TX{italian} & nko             & \TX{sorbian}\\
-\TX{arabic}  & \TX{esperanto} & japanese     & \TX{norwegian}  & spanish\\
+\TX{arabic}  & \TX{esperanto} & japanese     & \TX{norwegian}  & \TX{spanish}\\
 \TX{armenian}& estonian       & kannada      & occitan         & swedish\\
 asturian     & \TX{finnish}   & khmer        & \TX{persian}    & \TX{syriac}\\
 basque       & \TX{french}    & \TX{korean}  & piedmontese     & tamil\\
@@ -1119,6 +1119,34 @@ Currently support for Sami is limited to Northern Sami.
 \paragraph*{Commands:}
 \begin{itemize}
 	\item \Cmd\oldtoday: outputs the current date using traditional Sorbian month names, even if \TB{olddate} is false.
+\end{itemize}
+
+\subsection{spanish}\label{spanish}
+\paragraph*{Options:}
+\begin{itemize}
+	\item \TB{spanishoperators} = all, accented, spaced or none or \textit{false} (default value = all).\new{v1.46}
+	      Determines of and how math operators are localized to Spanish.
+	      \begin{itemize}
+	      	\item ¦accented¦ causes some math operators to use accents where usual in Spanish (\emph{lím},
+	      	      \emph{lím\,sup}, \emph{lím\,inf}, \emph{máx}, \emph{mín}, \emph{ínf}, \emph{mód}).
+	      	\item ¦spaced¦ causes some math operators to use spaces where usual in Spanish (\emph{arc\,cos},
+	      	      \emph{arc\,sen}, \emph{arc\,tg}).
+	      	\item ¦all¦ activates ¦accented¦ and ¦spaced¦ and furthermore provides Spanish localizations of
+	      	      ¦\sin¦ (\emph{sen}), ¦\tan¦ (\emph{tg}), ¦\sinh¦ (\emph{senh}), and ¦\tanh¦ (\emph{tgh}).
+	      	\item ¦none¦ does no localization at all (default setting). 
+	      \end{itemize}
+\end{itemize}
+\paragraph*{\color{black}Commands:}\new{v1.46}
+\begin{itemize}
+	\item \Cmd\arcsen: alias to ¦\arcsin¦ (\pkg{babel} compatibility)
+	\item \Cmd\arctg: alias to ¦\arctan¦ (\pkg{babel} compatibility)
+	\item \Cmd\sen: alias to ¦\sin¦ (\pkg{babel} compatibility)
+	\item \Cmd\senh: alias to ¦\sinh¦ (\pkg{babel} compatibility)
+	\item \Cmd\tg: alias to ¦\tan¦ (\pkg{babel} compatibility)
+	\item \Cmd\tgh: alias to ¦\tanh¦ (\pkg{babel} compatibility)
+	\item \Cmd\spanishoperator: allows you to define further localized operators. For instance, ¦\spanishoperator{cotg}¦
+	      defines a command ¦\cotg¦ that outputs \emph{cotg} in math. The optional argument of the command lets you specify the
+	      spelling, if needed, \eg ¦\spanishoperator[arc\,ctg]{arcctg}¦.
 \end{itemize}
 
 \subsection{syriac}\label{syriac}
