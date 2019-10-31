@@ -1068,7 +1068,7 @@
   \def\mainlanguagename{#2}
   % Store babelname of current language (for external packages such as biblatex)
   \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
-      { \xdef\babelname{\l_tmpa_tl}% 
+      { \edef\babelname{\l_tmpa_tl}% 
         \csgdef{#2@gbabelname}{\babelname}%
       }
   \ifluatex %
@@ -1122,12 +1122,12 @@
   % Store babelname of current language (for external packages such as biblatex)
   \tl_if_blank:nTF {#1}{%
     \ifcsundef{#2@gbabelname}{%
-       \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+       \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
     }{%
-       \xdef\babelname{\csuse{#2@gbabelname}}%
+       \edef\babelname{\csuse{#2@gbabelname}}%
     }%
   }{%
-    \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+    \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
   }%
 }
 
@@ -1281,12 +1281,12 @@
   % Store babelname of current language (for external packages such as biblatex)
   \tl_if_blank:nTF {#1}{%
     \ifcsundef{#2@gbabelname}{%
-       \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+       \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
     }{%
-       \xdef\babelname{\csuse{#2@gbabelname}}%
+       \edef\babelname{\csuse{#2@gbabelname}}%
     }%
   }{%
-    \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+    \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
   }%
 }
 
@@ -1435,12 +1435,12 @@
    % Store babelname of current language (for external packages such as biblatex)
    \tl_if_blank:nTF {#1}{%
      \ifcsundef{#2@gbabelname}{%
-        \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+        \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
      }{%
-        \xdef\babelname{\csuse{#2@gbabelname}}%
+        \edef\babelname{\csuse{#2@gbabelname}}%
      }%
    }{%
-     \xdef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+     \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
    }%
    \@select@language[#1]{#2}%
     % Write to the aux
