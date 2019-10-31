@@ -65,10 +65,12 @@
   \else
      \if@swiss@locale
          \SetLanguageKeys{german}{babelname=nswissgerman}%
-     \fi
+     \else
      \if@austrian@locale
          \SetLanguageKeys{german}{babelname=naustrian}%
-     \fi
+     \else
+         \SetLanguageKeys{german}{babelname=ngerman}%
+     \fi\fi
   \fi
 }
 
