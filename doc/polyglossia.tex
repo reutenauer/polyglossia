@@ -188,27 +188,29 @@ that are explained in section \ref{specific} below.
 
 \begin{table}[ht]\centering
 \caption{\label{tab:lang}Languages currently supported in \pkg{polyglossia}}
-% Produced with tools/insert-language-list.rb -- JS, 2019-10-18
-% Edited by hand -- JS, 2019-10-18
+% Produced with tools/insert-language-list.rb -- JS, 2019-11-01
+% Edited by hand -- JS, 2019-11-01
 \begin{tabular}{lllll}
 \toprule
-albanian     & \TX{dutch}     & interlingua  & \TX{mongolian}  & \TX{slovenian}\\
-amharic      & \TX{english}   & \TX{italian} & nko             & \TX{sorbian}\\
-\TX{arabic}  & \TX{esperanto} & japanese     & \TX{norwegian}  & \TX{spanish}\\
-\TX{armenian}& estonian       & kannada      & occitan         & swedish\\
-asturian     & \TX{finnish}   & khmer        & \TX{persian}    & \TX{syriac}\\
-basque       & \TX{french}    & \TX{korean}  & piedmontese     & tamil\\
-\TX{bengali} & friulian       & \TX{kurdish} & polish          & telugu\\
-breton       & \TX{gaelic}    & \TX{lao}     & \TX{portuguese} & \TX{thai}\\
-bulgarian    & galician       & \TX{latin}   & romanian        & \TX{tibetan}\\
-\TX{catalan} & \TX{german}    & latvian      & romansh         & turkish\\
-coptic       & \TX{greek}     & lithuanian   & \TX{russian}    & turkmen\\
-croatian     & \TX{hebrew}    & macedonian   & \TX{sami}       & \TX{ukrainian}\\
-\TX{czech}   & \TX{hindi}     & \TX{malay}   & \TX{sanskrit}   & urdu\\
-danish       & \TX{hungarian} & malayalam    & \TX{serbian}    & vietnamese\\
-divehi       & icelandic      & marathi      & \TX{slovak}     & \TX{welsh}\\
+\TX{afrikaans} & \TX{dutch}     & \TX{italian}   & \TX{norwegian}  & swedish       \\
+albanian       & \TX{english}   & japanese       & occitan         & \TX{syriac}   \\
+amharic        & \TX{esperanto} & kannada        & \TX{persian}    & tamil         \\
+\TX{arabic}    & estonian       & khmer          & piedmontese     & telugu        \\
+\TX{armenian}  & \TX{finnish}   & \TX{korean}    & polish          & \TX{thai}     \\
+asturian       & \TX{french}    & \TX{kurdish}   & \TX{portuguese} & \TX{tibetan}  \\
+basque         & friulian       & \TX{lao}       & romanian        & turkish       \\
+\TX{bengali}   & \TX{gaelic}    & \TX{latin}     & romansh         & turkmen       \\
+breton         & galician       & latvian        & \TX{russian}    & \TX{ukrainian}\\
+bulgarian      & \TX{german}    & lithuanian     & \TX{sami}       & urdu          \\
+\TX{catalan}   & \TX{greek}     & macedonian     & \TX{sanskrit}   & vietnamese    \\
+coptic         & \TX{hebrew}    & \TX{malay}     & \TX{serbian}    & \TX{welsh}    \\
+croatian       & \TX{hindi}     & malayalam      & \TX{slovak}     &               \\
+\TX{czech}     & \TX{hungarian} & marathi        & \TX{slovenian}  &               \\
+danish         & icelandic      & \TX{mongolian} & \TX{sorbian}    &               \\
+divehi         & interlingua    & nko            & \TX{spanish}    &               \\
 \bottomrule
 \end{tabular}
+
 
 \end{table}
 
@@ -233,6 +235,7 @@ been renamed (\emph{farsi}\textrightarrow\emph{persian}, \emph{friulan}\textrigh
 \emph{irish}\slash\emph{scottish}\textrightarrow\emph{gaelic},
 \emph{norsk}\slash\emph{nynorsk}\textrightarrow\emph{norwegian}). The old names are still supported for backwards
 compatibility reasons, but they might not give access to newer language features.
+In version 1.46\new{v1.46}, support for Afrikaans has been added.
 
 
 \subsection{Relation to Babel languages}
@@ -305,8 +308,8 @@ uppersorbian    & sorbian    & variant=upper                  \\
 \begin{itemize}
 	\item \TB{babelshorthands}\new{v1.1.1} globally activates \pkg{babel}
 		shorthands whenever available. Currently shorthands are implemented for
-		Catalan, Czech, Dutch, Finnish, German, Italian, Latin, Mongolian, Russian,
-		and Slovak. Please refer to the respective language descriptions
+		Afrikaans, Catalan, Czech, Dutch, Finnish, German, Italian, Latin, Mongolian,
+		Russian, and Slovak. Please refer to the respective language descriptions
 		(sec.~\ref{specific}) for details.
 
 	\item \TB{localmarks} redefines the internal \LaTeX\ macros \cmd\markboth\ and
@@ -468,6 +471,24 @@ This section gives a list of all languages for which options and end-user comman
 The default value of each option is given in italic.
 
 %\subsection{amharic}\label{amharic}
+
+\subsection{afrikaans}\label{afikaans}
+\paragraph*{Options:}
+\begin{itemize}
+	\item \TB{babelshorthands} = \textit{false} or true. \new{v1.1.1}
+	if this is turned on, the following shorthands defined for fine-tuning hyphenation and
+	micro-typography of Afrikaans words are activated:
+	\begin{shorthands}
+		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
+		in the hyphenation patterns (as opposed to ¦\-¦ in default \TeX).
+		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
+		cases where the hyphen should stick at the following syllable.
+		\item[¦"|¦] disables a ligature at this position.
+		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
+		\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to ¦\slash¦,
+		hyphenation at the breakpoints preset in the hyphenation patterns is still allowed.
+	\end{shorthands}
+\end{itemize}
 
 \subsection{arabic}\label{arabic}
 \paragraph*{Options:}

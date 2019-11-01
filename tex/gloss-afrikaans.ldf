@@ -1,0 +1,86 @@
+\ProvidesFile{gloss-afrikaans.ldf}[polyglossia: module for afrikaans]
+
+\PolyglossiaSetup{afrikaans}{
+  hyphennames={afrikaans,dutch},
+  hyphenmins={2,2},
+  langtag=AFK,
+  frenchspacing=true,
+  fontsetup=true,
+}
+
+\define@boolkey{afrikaans}[afrikaans@]{babelshorthands}[true]{}
+
+\ifsystem@babelshorthands
+  \setkeys{afrikaans}{babelshorthands=true}
+\else
+  \setkeys{afrikaans}{babelshorthands=false}
+\fi
+
+\ifcsundef{initiate@active@char}{%
+  \input{babelsh.def}%
+  \initiate@active@char{"}%
+  \shorthandoff{"}%
+}{}
+
+\def\afrikaans@shorthands{%
+  \bbl@activate{"}%
+  \def\language@group{afrikaans}%
+  \declare@shorthand{afrikaans}{"-}{\nobreak-\bbl@allowhyphens}
+  \declare@shorthand{afrikaans}{"~}{\textormath{\leavevmode\hbox{-}}{-}}
+  \declare@shorthand{afrikaans}{"|}{%
+    \textormath{\discretionary{-}{}{\kern.03em}}{}}
+  \declare@shorthand{afrikaans}{""}{\hskip\z@skip}
+  \declare@shorthand{afrikaans}{"/}{\textormath
+    {\bbl@allowhyphens\discretionary{/}{}{/}\bbl@allowhyphens}{}}%
+  \def\-{\bbl@allowhyphens\discretionary{-}{}{}\bbl@allowhyphens}%
+}
+
+\def\noafrikaans@shorthands{%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+
+\def\captionsafrikaans{%
+    \def\prefacename{Voorwoord}%
+    \def\refname{Verwysings}%
+    \def\abstractname{Samevatting}%
+    \def\bibname{Bibliografie}%
+    \def\chaptername{Hoofstuk}%
+    \def\appendixname{Bylae}%
+    \def\contentsname{Inhoudsopgawe}%
+    \def\listfigurename{Lys van figure}%
+    \def\listtablename{Lys van tabelle}%
+    \def\indexname{Inhoud}%
+    \def\figurename{Figuur}%
+    \def\tablename{Tabel}%
+    \def\partname{Deel}%
+    \def\enclname{Bylae(n)}%
+    \def\ccname{a.\,a.}%
+    \def\headtoname{Aan}%
+    \def\pagename{Bladsy}%
+    \def\seename{sien}%
+    \def\alsoname{sien ook}%
+    \def\proofname{Bewys}%
+%   \def\glossaryname{}%
+}
+
+\def\dateafrikaans{%
+    \def\today{\number\day~\ifcase\month\or
+      Januarie\or Februarie\or Maart\or April\or Mei\or Junie\or
+      Julie\or  Augustus\or September\or Oktober\or November\or
+      Desember\fi
+      \space \number\year}%
+}
+
+\def\noextras@afrikaans{%
+  \noafrikaans@shorthands%
+}
+
+\def\blockextras@afrikaans{%
+  \ifafrikaans@babelshorthands\afrikaans@shorthands\fi%
+}
+
+\def\inlineextras@afrikaans{%
+  \ifafrikaans@babelshorthands\afrikaans@shorthands\fi%
+}
+
+\endinput
