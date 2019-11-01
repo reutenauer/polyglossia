@@ -5,6 +5,7 @@ New features:
   * Add options to set and customize French-style itemize item labels to French (#89).
   * Add optional localized math operators to Spanish (#123).
   * Add support for Afrikaans.
+  * Add support for Belarusian.
   * Add Spanish variant "mexican".
   * Add babelshorthands as well as options "splithyphens" and "vlna" to Slovak.
   * Add Latin language variant "ecclesiastic".

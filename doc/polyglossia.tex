@@ -192,25 +192,24 @@ that are explained in section \ref{specific} below.
 % Edited by hand -- JS, 2019-11-01
 \begin{tabular}{lllll}
 \toprule
-\TX{afrikaans} & \TX{dutch}     & \TX{italian}   & \TX{norwegian}  & swedish       \\
-albanian       & \TX{english}   & japanese       & occitan         & \TX{syriac}   \\
-amharic        & \TX{esperanto} & kannada        & \TX{persian}    & tamil         \\
-\TX{arabic}    & estonian       & khmer          & piedmontese     & telugu        \\
-\TX{armenian}  & \TX{finnish}   & \TX{korean}    & polish          & \TX{thai}     \\
-asturian       & \TX{french}    & \TX{kurdish}   & \TX{portuguese} & \TX{tibetan}  \\
-basque         & friulian       & \TX{lao}       & romanian        & turkish       \\
-\TX{bengali}   & \TX{gaelic}    & \TX{latin}     & romansh         & turkmen       \\
-breton         & galician       & latvian        & \TX{russian}    & \TX{ukrainian}\\
-bulgarian      & \TX{german}    & lithuanian     & \TX{sami}       & urdu          \\
-\TX{catalan}   & \TX{greek}     & macedonian     & \TX{sanskrit}   & vietnamese    \\
-coptic         & \TX{hebrew}    & \TX{malay}     & \TX{serbian}    & \TX{welsh}    \\
-croatian       & \TX{hindi}     & malayalam      & \TX{slovak}     &               \\
-\TX{czech}     & \TX{hungarian} & marathi        & \TX{slovenian}  &               \\
-danish         & icelandic      & \TX{mongolian} & \TX{sorbian}    &               \\
-divehi         & interlingua    & nko            & \TX{spanish}    &               \\
+\TX{afrikaans}  & divehi         & interlingua    & nko             & \TX{spanish}  \\
+albanian        & \TX{dutch}     & \TX{italian}   & \TX{norwegian}  & swedish       \\
+amharic         & \TX{english}   & japanese       & occitan         & \TX{syriac}   \\
+\TX{arabic}     & \TX{esperanto} & kannada        & \TX{persian}    & tamil         \\
+\TX{armenian}   & estonian       & khmer          & piedmontese     & telugu        \\
+asturian        & \TX{finnish}   & \TX{korean}    & polish          & \TX{thai}     \\
+basque          & \TX{french}    & \TX{kurdish}   & \TX{portuguese} & \TX{tibetan}  \\
+\TX{belarusian} & friulian       & \TX{lao}       & romanian        & turkish       \\
+\TX{bengali}    & \TX{gaelic}    & \TX{latin}     & romansh         & turkmen       \\
+breton          & galician       & latvian        & \TX{russian}    & \TX{ukrainian}\\
+bulgarian       & \TX{german}    & lithuanian     & \TX{sami}       & urdu          \\
+\TX{catalan}    & \TX{greek}     & macedonian     & \TX{sanskrit}   & vietnamese    \\
+coptic          & \TX{hebrew}    & \TX{malay}     & \TX{serbian}    & \TX{welsh}    \\
+croatian        & \TX{hindi}     & malayalam      & \TX{slovak}     &               \\
+\TX{czech}      & \TX{hungarian} & marathi        & \TX{slovenian}  &               \\
+danish          & icelandic      & \TX{mongolian} & \TX{sorbian}    &               \\
 \bottomrule
 \end{tabular}
-
 
 \end{table}
 
@@ -235,7 +234,7 @@ been renamed (\emph{farsi}\textrightarrow\emph{persian}, \emph{friulan}\textrigh
 \emph{irish}\slash\emph{scottish}\textrightarrow\emph{gaelic},
 \emph{norsk}\slash\emph{nynorsk}\textrightarrow\emph{norwegian}). The old names are still supported for backwards
 compatibility reasons, but they might not give access to newer language features.
-In version 1.46\new{v1.46}, support for Afrikaans has been added.
+In version 1.46\new{v1.46}, support for Afrikaans and Belarusian has been added.
 
 
 \subsection{Relation to Babel languages}
@@ -308,9 +307,9 @@ uppersorbian    & sorbian    & variant=upper                  \\
 \begin{itemize}
 	\item \TB{babelshorthands}\new{v1.1.1} globally activates \pkg{babel}
 		shorthands whenever available. Currently shorthands are implemented for
-		Afrikaans, Catalan, Czech, Dutch, Finnish, German, Italian, Latin, Mongolian,
-		Russian, and Slovak. Please refer to the respective language descriptions
-		(sec.~\ref{specific}) for details.
+		Afrikaans, Belarusian, Catalan, Czech, Dutch, Finnish, German, Italian,
+		Latin, Mongolian, Russian, and Slovak. Please refer to the respective
+		language descriptions (sec.~\ref{specific}) for details.
 
 	\item \TB{localmarks} redefines the internal \LaTeX\ macros \cmd\markboth\ and
 		\cmd\markright. In earlier versions of \pkg{polyglossia},\new{v1.2.0} this
@@ -519,6 +518,42 @@ The default value of each option is given in italic.
 \begin{itemize}
 	\item \TB{variant}\new{v1.45} = eastern or \textit{western}
 	\item \TB{numerals}\new{v1.45} = armenian or \textit{arabic}
+\end{itemize}
+
+\subsection[belarusian]{belarusian\new{v1.46}}\label{belarusian}
+
+\paragraph*{Options:}
+\begin{itemize}
+	\item \TB{babelshorthands} = \textit{false} or true.
+	If this is turned on, the following shorthands are activated:
+	\begin{shorthands}
+		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
+		in the hyphenation patterns (as opposed to ¦\-¦).
+		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
+		cases where the hyphen should stick at the following syllable.
+		\item[¦"|¦] disables a ligature at this position.
+		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
+		\item[¦"---¦] Cyrillic emdash in plain text.
+		\item[¦"--~¦] Cyrillic emdash in compound names (surnames).
+		\item[¦"--*¦] Cyrillic emdash for denoting direct speech.
+		\item[¦",¦] thinspace for initials with a breakpoint in following surname.
+		\item[¦"‘¦] for German left double quotes (looks like ,,).
+		\item[¦"’¦] for German right double quotes (looks like “).
+		\item[¦"<¦] for French left double quotes (looks like <<).
+		\item[¦">¦] for French right double quotes (looks like >>).
+	\end{shorthands}
+	\item \TB{numerals} = \textit{arabic} or cyrillic. Uses either Arabic numerals or Cyrillic
+	alphanumerical numbering.
+	\item \TB{spelling} = \textit{modern} or classic (=~tarask). With ¦spelling=classic¦, captions and dates
+	     adhere to the Taraškievica (or Belarusian classical) orthography rather than the standard orthography.
+\end{itemize}
+%
+\paragraph*{Commands:}
+\begin{itemize}
+	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
+	environments such as ¦enumerate¦. The command takes a counter as argument,
+	\eg ¦\textbelarusian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
+	\item \Cmd\asbuk: same in lowercase
 \end{itemize}
 
 \subsection[bengali]{bengali\new{v1.2.0}}\label{bengali}
@@ -989,7 +1024,7 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 \begin{itemize}
 	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
 	environments such as ¦enumerate¦. The command takes a counter as argument,
-	\eg ¦\textrussian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
+	\eg ¦\textmongolian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
 	\item \Cmd\asbuk: same in lowercase
 \end{itemize}
 

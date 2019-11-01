@@ -1,0 +1,272 @@
+\ProvidesFile{gloss-belarusian.ldf}[polyglossia: module for belarusian]
+
+\RequirePackage{cyrillicnumbers}
+
+\PolyglossiaSetup{belarusian}{
+  script=Cyrillic,
+  scripttag=cyrl,
+  langtag=BEL,
+  hyphennames={belarusian},
+  hyphenmins={2,2},
+  frenchspacing=true,
+  fontsetup,
+  localnumeral=belarusiannumerals,
+  Localnumeral=Belarusiannumerals
+}
+
+\def\belarusian@spelling{modern}
+\define@choicekey*+{belarusian}{spelling}[\val\nr]{modern,classic,tarask}[modern]{%
+   \ifcase\nr\relax
+      % modern:
+      \def\belarusian@spelling{modern}
+   \or
+      % classic:
+      \def\belarusian@spelling{tarask}
+   \or
+      % tarask:
+      \def\belarusian@spelling{tarask}
+   \fi
+}{\xpg@warning{Unknown Belarusian spelling `#1'}}
+
+\newif\ifcyrillic@numerals
+\define@key{belarusian}{numerals}[arabic]{%
+   \ifstrequal{#1}{cyrillic}%
+      {\cyrillic@numeralstrue}%
+      {\cyrillic@numeralsfalse}%
+}
+
+\define@boolkey{belarusian}[belarusian@]{babelshorthands}[false]{}
+
+\setkeys{belarusian}{numerals}
+
+\ifsystem@babelshorthands
+  \setkeys{belarusian}{babelshorthands=true}
+\else
+  \setkeys{belarusian}{babelshorthands=false}
+\fi
+
+\ifcsundef{initiate@active@char}{%
+  \input{babelsh.def}%
+  \initiate@active@char{"}%
+  \shorthandoff{"}%
+}{}
+
+\def\belarusian@shorthands{%
+  \bbl@activate{"}%
+  \def\language@group{belarusian}%
+  \declare@shorthand{belarusian}{"`}{„}%
+  \declare@shorthand{belarusian}{"'}{“}%
+  \declare@shorthand{belarusian}{"<}{«}%
+  \declare@shorthand{belarusian}{">}{»}%
+  \declare@shorthand{belarusian}{""}{\hskip\z@skip}%
+  \declare@shorthand{belarusian}{"~}{\textormath{\leavevmode\hbox{-}}{-}}%
+  \declare@shorthand{belarusian}{"=}{\nobreak-\hskip\z@skip}%
+  \declare@shorthand{belarusian}{"|}{\textormath{\nobreak\discretionary{-}{}{\kern.03em}\allowhyphens}{}}%
+  \declare@shorthand{belarusian}{"-}{%
+     \def\belarusian@sh@tmp{%
+       \if\belarusian@sh@next-\expandafter\belarusian@sh@emdash%
+       \else\expandafter\belarusian@sh@hyphen\fi%
+     }%
+     \futurelet\belarusian@sh@next\belarusian@sh@tmp%
+  }%
+  \def\belarusian@sh@hyphen{%
+    \nobreak\-\bbl@allowhyphens}%
+  \def\belarusian@sh@emdash##1##2{\cdash-##1##2}%
+  \def\cdash##1##2##3{\def\tempx@{##3}%
+  \def\tempa@{-}\def\tempb@{~}\def\tempc@{*}%
+   \ifx\tempx@\tempa@\@Acdash\else
+    \ifx\tempx@\tempb@\@Bcdash\else
+     \ifx\tempx@\tempc@\@Ccdash\else
+      \errmessage{Wrong usage of cdash}\fi\fi\fi}%
+  \def\@Acdash{\ifdim\lastskip>\z@\unskip\nobreak\hskip.2em\fi
+    \cyrdash\hskip.2em\ignorespaces}%
+  \def\@Bcdash{\leavevmode\ifdim\lastskip>\z@\unskip\fi
+   \nobreak\cyrdash\penalty\exhyphenpenalty\hskip\z@skip\ignorespaces}%
+  \def\@Ccdash{\leavevmode
+   \nobreak\cyrdash\nobreak\hskip.35em\ignorespaces}%
+  \ifx\cyrdash\undefined
+    \def\cyrdash{\hbox to.8em{--\hss--}}%
+  \fi
+  \declare@shorthand{belarusian}{",}{\nobreak\hskip.2em\ignorespaces}%
+}
+
+\def\nobelarusian@shorthands{%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+
+% Taken from babel-belarusian
+\def\captionsbelarusian@modern{%
+    \def\prefacename{Прадмова}%
+    \def\refname{Спіс літаратуры}%
+    \def\abstractname{Анатацыя}%
+    \def\bibname{Літаратура}%
+    \def\chaptername{Глава}%
+    \def\appendixname{Дадатак}%
+    \def\contentsname{Змест}%
+    \def\listfigurename{Спіс ілюстрацый}%
+    \def\listtablename{Спіс табліц}%
+    \def\indexname{Прадметны паказальнік}%
+    \def\authorname{Паказальнік імён}%
+    \def\figurename{Рыс.}%
+    \def\tablename{Табліца}%
+    \def\partname{Частка}%
+    \def\enclname{укл.}%
+    \def\ccname{зых.}%
+    \def\headtoname{вх.}%
+    \def\pagename{с.}%
+    \def\seename{гл.}%
+    \def\alsoname{гл.\ таксама}%
+    \def\proofname{Доказ}%
+    \def\glossaryname{Слоўнік тэрмінаў}%
+    \def\acronymname{Абрэвіятуры}%
+    \def\lstlistingname{Лістынг}%
+    \def\lstlistlistingname{Лістынгі}%
+    \def\notesname{Нататкі}%
+}
+
+\def\captionsbelarusian@tarask{%
+    \def\prefacename{Прадмова}%
+    \def\refname{Сьпіс літаратуры}%
+    \def\abstractname{Анатацыя}%
+    \def\bibname{Літаратура}%
+    \def\chaptername{Глава}%
+    \def\appendixname{Дадатак}%
+    \def\contentsname{Зьмест}%
+    \let\tocname=\contentsname
+    \def\listfigurename{Сьпіс ілюстрацый}%
+    \def\listtablename{Сьпіс табліц}%
+    \def\indexname{Прадметны паказальнік}%
+    \def\authorname{Паказальнік імён}%
+    \def\figurename{Рыс.}%
+    \def\tablename{Табліца}%
+    \def\partname{Частка}%
+    \def\enclname{укл.}%
+    \def\ccname{зых.}%
+    \def\headtoname{вх.}%
+    \def\pagename{с.}%
+    \def\seename{гл.}%
+    \def\alsoname{гл.\ таксама}%
+    \def\proofname{Доказ}%
+    \def\glossaryname{Слоўнік тэрмінаў}%
+    \def\acronymname{Абрэвіятуры}%
+    \def\lstlistingname{Лістынг}%
+    \def\lstlistlistingname{Лістынгі}%
+    \def\nomname{Азначэньні}%
+    \def\notesname{Нататкі}%
+}
+
+\def\captionsbelarusian{%
+  \csuse{captionsbelarusian@\belarusian@spelling}%
+}
+
+\def\datebelarusian@modern{%
+   \def\today{\number\day~\ifcase\month\or
+    студзеня\or
+    лютага\or
+    сакавіка\or
+    красавіка\or
+    мая\or
+    чэрвеня\or
+    ліпеня\or
+    жніўня\or
+    верасня\or
+    кастрычніка\or
+    лістапада\or
+    снежня\fi
+    \space \number\year~г.}%
+}
+
+\def\datebelarusian@tarask{%
+   \def\today{\number\day~\ifcase\month\or%
+    студзеня\or
+    лютага\or
+    сакавіка\or
+    красавіка\or
+    траўня\or
+    чэрвеня\or
+    ліпеня\or
+    жніўня\or
+    верасьня\or
+    кастрычніка\or
+    лістапада\or
+    сьнежня\fi%
+    \space \number\year~г.}%
+}
+
+\def\datebelarusian{%
+  \csuse{datebelarusian@\belarusian@spelling}%
+}
+
+\newcommand{\belarusiannumerals}[2]{\belarusiannumber{#2}}
+\newcommand{\Belarusiannumerals}[2]{\Belarusiannumber{#2}}
+
+\def\belarusiannumber#1{%
+  \ifcyrillic@numerals
+    \cyr@alph{#1}%
+  \else
+    \number#1%
+  \fi%
+}
+
+\def\Belarusiannumber#1{%
+  \ifcyrillic@numerals
+    \cyr@Alph{#1}%
+  \else
+    \number#1%
+  \fi%
+}
+
+\let\belarusiannumeral=\belarusiannumber
+\let\Belarusiannumeral=\Belarusiannumber
+
+\def\Asbuk#1{\expandafter\cyr@Alph\csname c@#1\endcsname}
+
+\def\asbuk#1{\expandafter\cyr@alph\csname c@#1\endcsname}
+
+% This is a poor man's cyrillic alphanumeric. It just uses the alphabet and
+% thus ends at 30. We now use proper cyrillic numbering.
+
+%\def\belarusian@Alph#1{\ifcase#1\or
+%   А\or Б\or В\or Г\or Д\or Е\or Ж\or
+%   З\or И\or К\or Л\or М\or Н\or О\or
+%   П\or Р\or С\or Т\or У\or Ф\or Х\or
+%   Ц\or Ч\or Ш\or Щ\or Э\or Ю\or Я\else\xpg@ill@value{#1}{belarusian@Alph}\fi}
+
+%\def\belarusian@alph#1{\ifcase#1\or
+%   а\or б\or в\or г\or д\or е\or ж\or
+%   з\or и\or к\or л\or м\or н\or о\or
+%   п\or р\or с\or т\or у\or ф\or х\or
+%   ц\or ч\or ш\or щ\or э\or ю\or я\else\xpg@ill@value{#1}{belarusian@alph}\fi}
+
+\def\belarusian@numbers{%
+   \let\latin@alph\@alph
+   \let\latin@Alph\@Alph
+   \ifcyrillic@numerals%
+     \def\belarusian@alph##1{\expandafter\belarusiannumeral\expandafter{\the##1}}%
+     \def\belarusian@Alph##1{\expandafter\belarusiannumeral\expandafter{\the##1}}%
+      \let\@alph\belarusian@alph%
+      \let\@Alph\belarusian@Alph%
+   \fi
+}
+
+\def\nobelarusian@numbers{%
+   \let\@alph\latin@alph%
+   \let\@Alph\latin@Alph%
+}
+
+\def\noextras@belarusian{%
+   \ifcyrillic@numerals\nobelarusian@numbers\fi%
+   \nobelarusian@shorthands%
+}
+
+\def\blockextras@belarusian{%
+   \ifcyrillic@numerals\belarusian@numbers\fi%
+   \ifbelarusian@babelshorthands\belarusian@shorthands\fi%
+}
+
+\def\inlineextras@belarusian{%
+   \ifbelarusian@babelshorthands\belarusian@shorthands\fi%
+}
+
+\endinput
+
