@@ -61,11 +61,15 @@
     \def\alsoname{zie ook}%
     \def\proofname{Bewijs}%
     \def\glossaryname{Verklarende woordenlijst}%
+}
+
+\def\datedutch{%
     \def\today{\number\day~\ifcase\month%
       \or januari\or februari\or maart\or april\or mei\or juni\or
       juli\or augustus\or september\or oktober\or november\or
       december\fi
-      \space \number\year}}
+      \space \number\year}%
+}
 
 \def\noextras@dutch{%
   \nodutch@shorthands%
