@@ -1,0 +1,46 @@
+\ProvidesFile{gloss-bosnian.ldf}[polyglossia: module for bosnian]
+
+\PolyglossiaSetup{bosnian}{
+  langtag=BOS,
+  hyphennames={bosnian,croatian},
+  hyphenmins={2,2}, % adapted from gloss-croatian
+  frenchspacing=true, % adapted from gloss-croatian
+  indentfirst=false, % adapted from gloss-croatian
+  fontsetup=true
+}
+
+% TODO: Add script=Cyrillic
+
+% from babel-bosnian
+\def\captionsbosnian{%
+  \def\prefacename{Predgovor}%
+  \def\refname{Literatura}%
+  \def\abstractname{Sažetak}%
+  \def\bibname{Bibliografija}%
+  \def\chaptername{Poglavlje}%
+  \def\appendixname{Dodatak}%
+  \def\contentsname{Sadržaj}%
+  \def\listfigurename{Popis slika}%
+  \def\listtablename{Popis tablica}%
+  \def\indexname{Indeks}%
+  \def\figurename{Slika}%
+  \def\tablename{Tablica}%
+  \def\partname{Dio}%
+  \def\enclname{Prilozi}%
+  \def\ccname{Kopija}%
+  \def\headtoname{Prima}%
+  \def\pagename{Stranica}%
+  \def\seename{Vidjeti}%
+  \def\alsoname{Također vidjeti}%
+  \def\proofname{Dokaz}%
+  \def\glossaryname{Rječnik}%
+}
+
+\def\datebosnian{%
+  \def\today{\number\day.~\ifcase\month\or
+    januar\or februar\or mart\or april\or maj\or
+    juni\or juli\or august\or septembar\or oktobar\or novembar\or
+    decembar\fi \space \number\year.~}%
+}
+
+\endinput

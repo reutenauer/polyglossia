@@ -6,6 +6,7 @@ New features:
   * Add optional localized math operators to Spanish (#123).
   * Add support for Afrikaans.
   * Add support for Belarusian.
+  * Add support for Bosnian.
   * Add Spanish variant "mexican".
   * Add babelshorthands as well as options "splithyphens" and "vlna" to Slovak.
   * Add Latin language variant "ecclesiastic".
