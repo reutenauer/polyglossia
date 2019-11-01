@@ -1,9 +1,6 @@
 === THIS IS THE TODO LIST FOR THE POLYGLOSSIA PACKAGE ===
 
 polyglossia.sty:
-	* for languages with hyphenation patterns but without
-	  a gloss-* module, allow to load it with only a warning message ?
-	  => perhaps better use hyphenrules: DONE
 	* Make polyglossia cooperate with Babel-aware packages and classes, for
 	  example scrlttr2! Lines 1347 to 1708 of scrlttr2.cls are a sort of 
 	  patch for Babel, which is not compatible with polyglossia right now...
@@ -27,21 +24,10 @@ LuaTeX:
     other things
 
 Miscellanea:
-  * N’Ko: DONE
-  * Georgian (see tex.tsu.ge)
   * Equivalent of luababel.def for luatex-hyphen.
-  * \disablehyphenation and \enablehyphenation
 
 
 ******************
-
-Suggestion from Vafa:
-
-I think it would be nice if you could in your next release add options for
-controlling footnote rule via bidi footnote interface, i.e. \autoffotnoterule,
-\rightfootnoterule, \leftfootnoterule and \textwidthfootnoterule
-
-=> DONE.
 
 TEST THIS:
 ============================================================================
@@ -100,18 +86,13 @@ Example (at the end of a gloss file):
 ============================================================================
 
 gloss-arabic.ldf:
-	* check locales: if morocco or algeria : use western numerals but don't 
-	  override the numbers key: DONE
 	* define a defaultLRlanguage … \def\LRtoday{\localdefaultLRlanguage{\today}} ???
-
-gloss-english.ldf: 
-	* change format to Day Month Year when dialect is british: DONE
 
 gloss-finnish.ldf:
 	* hyphenpenalty as in Babel?
 
 gloss-french.ldf:
-  * Implement all the other good stuff from Babel ... Aucune âme volontaire?
+	* Implement all the other good stuff from Babel ... Aucune âme volontaire?
 	* \define@key{french}{guillemets}[normal]{…}
 	* \addfontfeature{Mapping=sansaccents}%
 
@@ -124,10 +105,6 @@ gloss-italian.ldf
 	
 gloss-persian.ldf:
 	* add option for months 
-	* implement ftoday.sty? DONE
-
-gloss-sorbian.ldf
-	* implement option date=old: DONE
 
 gloss-ukrainian.ldf and others
 	* add stuff from Babel ? (operators etc)
@@ -135,11 +112,9 @@ gloss-ukrainian.ldf and others
 gloss-tibetan.ldf
 	* add support for different hyphenation algorithm
 
-gloss-khmer.ldf
-	* fix for LuaTeX: DONE
-
 hijrical.sty
 	* \def\CYearsFromHijri#1{%yields the corr julian or gregorian years
 
-** UPDATE ldf for spanish using new ldf for Babel by J Bezos
-          and add option for mexican (using mx package)
+gloss-spanish.ldf
+	* Update using new ldf for Babel by J Bezos
+
