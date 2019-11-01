@@ -37,7 +37,11 @@ def make_table
       next unless row < nrow || col < remainder
       language = languages[n]
       n += 1
-      table[[row, col]] = language + ' ' * (14 - offset - language.length > 0 ? language.length : 0)
+      if language
+          table[[row, col]] = language + ' ' * (14 - offset - language.length > 0 ? language.length : 0)
+      else
+          table[[row, col]] = ""
+      end
     end
   end
 
