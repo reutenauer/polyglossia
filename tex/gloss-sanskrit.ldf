@@ -69,34 +69,45 @@ and may look very wrong.}
   \fi%
 }
 
-% FIXME: Support LuaTeX
-\ifxetex
-  \newXeTeXintercharclass\sanskrit@punctthin % ! ? ; : danda double_danda
+\ifluatex
+  \directlua{require('polyglossia-sanskrit')}%
+\else
+  \newXeTeXintercharclass\sanskrit@punctthin % ! ? ‼ ⁇ ⁈ ⁉ : ; danda double_danda
 \fi
 
 \def\sanskrit@punctthinspace{{\unskip\thinspace}}
 
 \def\sanskrit@punctuation{%
-  % FIXME: Support LuaTeX
-  \ifxetex
+  \ifluatex
+    \directlua{polyglossia.activate_sanskrit_punct()}%
+  \else
     \XeTeXinterchartokenstate=1%
     \XeTeXcharclass `\! \sanskrit@punctthin
     \XeTeXcharclass `\? \sanskrit@punctthin
-    \XeTeXcharclass `\; \sanskrit@punctthin
+    \XeTeXcharclass `\‼ \sanskrit@punctthin
+    \XeTeXcharclass `\⁇ \sanskrit@punctthin
+    \XeTeXcharclass `\⁈ \sanskrit@punctthin
+    \XeTeXcharclass `\⁉ \sanskrit@punctthin
     \XeTeXcharclass `\: \sanskrit@punctthin
-    \XeTeXcharclass `\। \sanskrit@punctthin
-    \XeTeXcharclass `\॥ \sanskrit@punctthin
+    \XeTeXcharclass `\; \sanskrit@punctthin
+    \XeTeXcharclass `\। \sanskrit@punctthin % danda, U+0964
+    \XeTeXcharclass `\॥ \sanskrit@punctthin % double danda, U+0965
     \XeTeXinterchartoks \z@ \sanskrit@punctthin = \sanskrit@punctthinspace
   \fi
 }
 
 \def\nosanskrit@punctuation{%
-  % FIXME: Support LuaTeX
-  \ifxetex
+  \ifluatex
+    \directlua{polyglossia.deactivate_sanskrit_punct()}%
+  \else
     \XeTeXcharclass `\! \z@
     \XeTeXcharclass `\? \z@
-    \XeTeXcharclass `\; \z@
+    \XeTeXcharclass `\‼ \z@
+    \XeTeXcharclass `\⁇ \z@
+    \XeTeXcharclass `\⁈ \z@
+    \XeTeXcharclass `\⁉ \z@
     \XeTeXcharclass `\: \z@
+    \XeTeXcharclass `\; \z@
     \XeTeXcharclass `\। \z@
     \XeTeXcharclass `\॥ \z@
     \XeTeXinterchartokenstate=0%
