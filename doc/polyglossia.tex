@@ -27,7 +27,7 @@
 \usepackage[babelshorthands]{polyglossia}
 \usepackage{farsical}
 \setmainlanguage[variant=british,ordinalmonthday=false]{english}
-\setotherlanguages{arabic,armenian,hebrew,syriac,greek,russian,serbian,catalan}
+\setotherlanguages{arabic,armenian,hebrew,syriac,greek,russian,serbian,catalan,georgian}
 \usepackage[protrusion]{microtype}
 \newcommand*\Cmd[1]{\cmd{#1}\DescribeMacro{#1}\xspace}
 \newcommand*\pkg[1]{\textsf{\color{myblue}#1}}
@@ -78,6 +78,7 @@
 \newfontfamily\armenianfont[Script=Armenian]{DejaVu Sans}
 \newfontfamily\syriacfont[Script=Syriac]{Serto Jerusalem}
 \newfontfamily\hebrewfont[Script=Hebrew]{Ezra SIL}
+\newfontfamily\georgianfont{DejaVu Serif}
 
 \linespread{1.05}
 \frenchspacing
@@ -192,25 +193,24 @@ that are explained in section \ref{specific} below.
 % Edited by hand -- JS, 2019-11-01
 \begin{tabular}{lllll}
 \toprule
-\TX{afrikaans}  & danish         & icelandic    & \TX{mongolian}  & \TX{sorbian}  \\
-albanian        & divehi         & interlingua  & nko             & \TX{spanish}  \\
-amharic         & \TX{dutch}     & \TX{italian} & \TX{norwegian}  & swedish       \\
-\TX{arabic}     & \TX{english}   & japanese     & occitan         & \TX{syriac}   \\
-\TX{armenian}   & \TX{esperanto} & kannada      & \TX{persian}    & tamil         \\
-asturian        & estonian       & khmer        & piedmontese     & telugu        \\
-basque          & \TX{finnish}   & \TX{korean}  & polish          & \TX{thai}     \\
-\TX{belarusian} & \TX{french}    & \TX{kurdish} & \TX{portuguese} & \TX{tibetan}  \\
-\TX{bengali}    & friulian       & \TX{lao}     & romanian        & turkish       \\
-bosnian         & \TX{gaelic}    & \TX{latin}   & romansh         & turkmen       \\
-breton          & galician       & latvian      & \TX{russian}    & \TX{ukrainian}\\
-bulgarian       & \TX{german}    & lithuanian   & \TX{sami}       & urdu          \\
-\TX{catalan}    & \TX{greek}     & macedonian   & \TX{sanskrit}   & vietnamese    \\
-coptic          & \TX{hebrew}    & \TX{malay}   & \TX{serbian}    & \TX{welsh}    \\
-croatian        & \TX{hindi}     & malayalam    & \TX{slovak}     &               \\
-\TX{czech}      & \TX{hungarian} & marathi      & \TX{slovenian}  &               \\
+\TX{afrikaans}  & danish         & \TX{hungarian} & marathi         & \TX{slovenian} \\
+albanian        & divehi         & icelandic      & \TX{mongolian}  & \TX{sorbian}   \\
+amharic         & \TX{dutch}     & interlingua    & nko             & \TX{spanish}   \\
+\TX{arabic}     & \TX{english}   & \TX{italian}   & \TX{norwegian}  & swedish        \\
+\TX{armenian}   & \TX{esperanto} & japanese       & occitan         & \TX{syriac}    \\
+asturian        & estonian       & kannada        & \TX{persian}    & tamil          \\
+basque          & \TX{finnish}   & khmer          & piedmontese     & telugu         \\
+\TX{belarusian} & \TX{french}    & \TX{korean}    & polish          & \TX{thai}      \\
+\TX{bengali}    & friulian       & \TX{kurdish}   & \TX{portuguese} & \TX{tibetan}   \\
+bosnian         & \TX{gaelic}    & \TX{lao}       & romanian        & turkish        \\
+breton          & galician       & \TX{latin}     & romansh         & turkmen        \\
+bulgarian       & \TX{georgian}  & latvian        & \TX{russian}    & \TX{ukrainian} \\
+\TX{catalan}    & \TX{german}    & lithuanian     & \TX{sami}       & urdu           \\
+coptic          & \TX{greek}     & macedonian     & \TX{sanskrit}   & vietnamese     \\
+croatian        & \TX{hebrew}    & \TX{malay}     & \TX{serbian}    & \TX{welsh}     \\
+\TX{czech}      & \TX{hindi}     & malayalam      & \TX{slovak}     &                \\
 \bottomrule
 \end{tabular}
-
 
 \end{table}
 
@@ -235,7 +235,7 @@ been renamed (\emph{farsi}\textrightarrow\emph{persian}, \emph{friulan}\textrigh
 \emph{irish}\slash\emph{scottish}\textrightarrow\emph{gaelic},
 \emph{norsk}\slash\emph{nynorsk}\textrightarrow\emph{norwegian}). The old names are still supported for backwards
 compatibility reasons, but they might not give access to newer language features.
-In version 1.46\new{v1.46}, support for Afrikaans, Belarusian and Bosnian has been added.
+In version 1.46\new{v1.46}, support for Afrikaans, Belarusian, Bosnian and Georgian has been added.
 
 
 \subsection{Relation to Babel languages}
@@ -308,8 +308,8 @@ uppersorbian    & sorbian    & variant=upper                  \\
 \begin{itemize}
 	\item \TB{babelshorthands}\new{v1.1.1} globally activates \pkg{babel}
 		shorthands whenever available. Currently shorthands are implemented for
-		Afrikaans, Belarusian, Catalan, Czech, Dutch, Finnish, German, Italian,
-		Latin, Mongolian, Russian, and Slovak. Please refer to the respective
+		Afrikaans, Belarusian, Catalan, Czech, Dutch, Finnish, Georgian, German,
+		Italian, Latin, Mongolian, Russian, and Slovak. Please refer to the respective
 		language descriptions (sec.~\ref{specific}) for details.
 
 	\item \TB{localmarks} redefines the internal \LaTeX\ macros \cmd\markboth\ and
@@ -693,6 +693,34 @@ The default value of each option is given in italic.
 \paragraph*{Options:}
 \begin{itemize}
 	\item \TB{variant} = \textit{irish} or scottish
+\end{itemize}
+
+\subsection[georgian]{georgian\new{v1.46}}\label{georgian}
+
+\paragraph*{Options:}
+\begin{itemize}
+	\item \TB{babelshorthands} = \textit{false} or true.
+	If this is turned on, the following shorthands are activated:
+	\begin{shorthands}
+		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
+		in the hyphenation patterns (as opposed to ¦\-¦).
+		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
+		cases where the hyphen should stick at the following syllable.
+		\item[¦"|¦] disables a ligature at this position.
+		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
+		\item[¦"---¦] Cyrillic emdash in plain text.
+		\item[¦"--~¦] Cyrillic emdash in compound names (surnames).
+		\item[¦"--*¦] Cyrillic emdash for denoting direct speech.
+		\item[¦",¦] thinspace for initials with a breakpoint in following surname.
+		\item[¦"‘¦] for German left double quotes (looks like ,,).
+		\item[¦"’¦] for German right double quotes (looks like “).
+		\item[¦"<¦] for French left double quotes (looks like <<).
+		\item[¦">¦] for French right double quotes (looks like >>).
+	\end{shorthands}
+	\item \TB{numerals} = \textit{arabic} or georgian. Uses either Arabic numerals or Georgian
+	      alphanumerical numbering.
+    \item \TB{oldmonthnames} = \textit{true} or false (default: false). Uses traditional Georgian
+          month names.
 \end{itemize}
 
 \subsection{german}\label{german}
@@ -1403,6 +1431,9 @@ The following macros are provided:
 	
 	\item \Cmd\armeniannumeral produces Armenian alphabetic numbering.
 	          Example: ¦\armeniannumeral{1863}¦ yields \textarmenian{\armeniannumeral{1863}}.
+
+	\item \Cmd\georgiannumeral produces Georgian alphabetic numbering.\\
+              Example: ¦\georgiannumeral{1863}¦ yields \textgeorgian{\georgiannumeral{1863}}.
 
 	\item \Cmd\greeknumeral produces Greek alphabetic numbering, \Cmd\Greeknumeral outputs uppercased variants.
 			Example: ¦\greeknumeral{1863}¦ yields \textgreek{\greeknumeral{1863}},

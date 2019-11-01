@@ -1,0 +1,225 @@
+\ProvidesFile{gloss-georgian.ldf}[polyglossia: module for georgian]
+
+\PolyglossiaSetup{georgian}{
+  script=Georgian,
+  scripttag=geor,
+  langtag=KAT,
+  hyphennames={georgian},
+  fontsetup=true,
+  localnumeral=georgiannumerals
+}
+
+\newif\ifgeorgian@numerals
+\define@key{georgian}{numerals}[arabic]{%
+   \ifstrequal{#1}{georgian}%
+      {\georgian@numeralstrue}%
+      {\georgian@numeralsfalse}%
+}
+
+\define@boolkey{georgian}[georgian@]{babelshorthands}[true]{}
+
+\define@boolkey{georgian}[georgian@]{oldmonthnames}[true]{}
+
+\ifsystem@babelshorthands
+  \setkeys{georgian}{babelshorthands=true}
+\else
+  \setkeys{georgian}{babelshorthands=false}
+\fi
+
+\ifcsundef{initiate@active@char}{%
+  \input{babelsh.def}%
+  \initiate@active@char{"}%
+  \shorthandoff{"}%
+}{}
+
+\def\georgian@shorthands{%
+  \bbl@activate{"}%
+  \def\language@group{georgian}%
+  \declare@shorthand{georgian}{"`}{„}%
+  \declare@shorthand{georgian}{"'}{“}%
+  \declare@shorthand{georgian}{"<}{«}%
+  \declare@shorthand{georgian}{">}{»}%
+  \declare@shorthand{georgian}{""}{\hskip\z@skip}%
+  \declare@shorthand{georgian}{"~}{\textormath{\leavevmode\hbox{-}}{-}}%
+  \declare@shorthand{georgian}{"=}{\nobreak-\hskip\z@skip}%
+  \declare@shorthand{georgian}{"|}{\textormath{\nobreak\discretionary{-}{}{\kern.03em}\allowhyphens}{}}%
+  \declare@shorthand{georgian}{"-}{%
+    \def\georgian@sh@tmp{%
+      \if\georgian@sh@next-\expandafter\georgian@sh@emdash%
+      \else\expandafter\georgian@sh@hyphen\fi%
+    }%
+    \futurelet\georgian@sh@next\georgian@sh@tmp}%
+  \def\georgian@sh@hyphen{%
+    \nobreak\-\bbl@allowhyphens}%
+  \def\georgian@sh@emdash##1##2{\cdash-##1##2}%
+  \def\cdash##1##2##3{\def\tempx@{##3}%
+  \def\tempa@{-}\def\tempb@{~}\def\tempc@{*}%
+   \ifx\tempx@\tempa@\@Acdash\else
+    \ifx\tempx@\tempb@\@Bcdash\else
+     \ifx\tempx@\tempc@\@Ccdash\else
+      \errmessage{Wrong usage of cdash}\fi\fi\fi}%
+  \def\@Acdash{\ifdim\lastskip>\z@\unskip\nobreak\hskip.2em\fi
+    \cyrdash\hskip.2em\ignorespaces}%
+  \def\@Bcdash{\leavevmode\ifdim\lastskip>\z@\unskip\fi
+   \nobreak\cyrdash\penalty\exhyphenpenalty\hskip\z@skip\ignorespaces}%
+  \def\@Ccdash{\leavevmode
+   \nobreak\cyrdash\nobreak\hskip.35em\ignorespaces}%
+  \ifx\cyrdash\undefined
+    \def\cyrdash{\hbox to.8em{--\hss--}}%
+  \fi
+  \declare@shorthand{georgian}{",}{\nobreak\hskip.2em\ignorespaces}%
+}
+
+\def\nogeorgian@shorthands{%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+
+\def\captionsgeorgian{%
+    \def\prefacename{წინასიტყვაობა}%
+    \def\refname{ლიტერატურა}%
+    \def\abstractname{ანოტაცია}%
+    \def\bibname{ლიტერატურა}%
+    \def\chaptername{თავი}%
+    \def\appendixname{დანართი}%
+    \@ifundefined{thechapter}
+      {\def\contentsname{შინაარსი}}%
+      {\def\contentsname{შინაარსი}}%
+    \let\tocname=\contentsname
+    \def\listfigurename{სურათი}%
+    \def\listtablename{ცხრილი}%
+    \def\indexname{საძიებელი}%
+    \def\authorname{სახელთა საძიებელი}%
+    \def\figurename{სურ.}%
+    \def\tablename{ცხრ.}%
+    \def\partname{ნაწილი}%
+    \def\enclname{ჩათვ.}%
+    \def\ccname{წყარ.}%
+    \def\headtoname{შ.}%
+    \def\pagename{გვ.}%
+    \def\seename{იხ.}%
+    \def\alsoname{იხ.\ ასევე}%
+    \def\proofname{დამტკიცება}%
+    \def\glossaryname{ტერმინები}%
+}%
+
+\def\dategeorgian{%
+   \def\today{\number\day~\ifcase\month\or
+    იანვარი\or
+    თებერვალი\or
+    მარტი\or
+    აპრილი\or
+    მაისი\or
+    ივნისი\or
+    ივლისი\or
+    აგვისტო\or
+    სექტემბერი\or
+    ოქტომბერი\or
+    ნოემბერი\or
+    დეკემბერი\fi
+    \space \number\year~წ.}%
+    \ifgeorgian@oldmonthnames
+       \dategeorgian@old%
+    \fi
+}
+
+\def\dategeorgian@old{%
+   \def\today{\number\day~\ifcase\month\or
+    აპნისი\or
+    სურწყუნისი\or
+    მირკანი\or
+    იგრიკა\or
+    ვარდობისთვე\or
+    თიბათვე\or
+    მკათათვე\or
+    მარიამობისთვე\or
+    ახალწლისა ენკენისთვე\or
+    ღვინობისთვე\or
+    გიორგობისთვე\or
+    ქრისტეშობისთვე\fi
+    \space \number\year~წ.}%
+}
+
+\def\georgian@numbers{%
+   \ifgeorgian@numerals%
+     \def\georgian@alph##1{\expandafter\georgiannumeral\expandafter{\the##1}}%
+     \let\@alph\georgian@@alph%
+   \fi
+}
+
+\def\nogeorgian@numbers{%
+   \let\@alph\latin@alph%
+   \let\georgian@alph\@undefined%
+}
+
+\def\georgian@globalnumbers{%
+  \ifgeorgian@numerals
+    \let\@arabic\georgiannumber%
+    \renewcommand\thefootnote{\localnumeral*{footnote}}%
+    \renewcommand\theequation{\localnumeral*{equation}}%
+  \fi
+}
+
+% Store original definition
+\let\xpg@save@arabic\@arabic
+
+\def\nogeorgian@globalnumbers{
+   \let\@arabic\xpg@save@arabic%
+}
+
+\newcommand{\georgiannumerals}[2]{%
+  \ifgeorgian@numerals
+     \georgiannumber{#2}%
+  \else
+     #2%
+  \fi%
+}
+
+\protected\def\georgiannumber#1{\expandafter\@georgiannumber\expandafter{\number#1}}
+\def\@georgiannumber#1{%
+  \ifnum#1<\@ne\space\geor@ill@value{#1}%
+  \else
+    \ifnum#1<10\expandafter\geor@num@i\number#1%
+    \else
+      \ifnum#1<100\expandafter\geor@num@ii\number#1%
+      \else
+        \ifnum#1<\@m\expandafter\geor@num@iii\number#1%
+        \else
+          \ifnum#1<\@M\expandafter\geor@num@iv\number#1%
+          \else
+             \space\geor@ill@value{#1}%
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+}
+
+\let\georgiannumeral=\georgiannumber
+\def\geor@num@i#1{% 1--9
+  \ifcase#1\or ა\or ბ\or გ\or დ\or ე\or ვ\or ზ\or ჱ\or თ\fi}
+\def\geor@num@ii#1{% 10--90
+  \ifcase#1\or ი\or კ\or ლ\or მ\or ნ\or ჲ\or ო\or პ\or ჟ\fi
+  \geor@num@i}
+\def\geor@num@iii#1{% 100--900
+  \ifcase#1\or რ\or ს\or ტ\or ჳ\or ფ\or ქ\or ღ\or ყ\or შ\fi
+  \geor@num@ii}
+\def\geor@num@iv#1{% 1000--9000
+  \ifcase#1\or ჩ\or ც\or ძ\or წ\or ჭ\or ხ\or ჴ\or ჯ\or ჰ\fi
+  \geor@num@iii}
+\def\geor@ill@value#1{\xpg@warning{Illegal value (#1) for Georgian numeral}[$#1$]}
+
+\def\noextras@georgian{%
+   \ifgeorgian@numerals\nogeorgian@numbers\fi%
+   \nogeorgian@shorthands%
+}
+
+\def\blockextras@georgian{%
+   \ifgeorgian@numerals\georgian@numbers\fi%
+   \ifgeorgian@babelshorthands\georgian@shorthands\fi%
+}
+
+\def\inlineextras@georgian{%
+   \ifgeorgian@babelshorthands\georgian@shorthands\fi%
+}
+
+\endinput
