@@ -2,7 +2,7 @@
 
 \PolyglossiaSetup{hungarian}{
   babelname=magyar,
-  hyphennames={magyar,hungarian},
+  hyphennames={hungarian,magyar},
   langtag=HUN,
   hyphenmins={2,2},
   fontsetup=true,
