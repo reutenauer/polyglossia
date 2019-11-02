@@ -282,7 +282,7 @@ open DOC, $docsrc or die "Can't open '$docsrc'\n";
 
 while (<DOC>)
 {
-   s/\\usepackage{creatdtx}//;
+   s/\\usepackage\{creatdtx\}//;
     
    my $restofline = $_;
 
@@ -342,7 +342,7 @@ while (<DOC>)
 
    print DTX $line;
 
-   if ($line=~/\\begin{document}/)
+   if ($line=~/\\begin\{document\}/)
    {
       $indoc = 1;
 
@@ -375,12 +375,12 @@ while (<DOC>)
    my $inverb ;
    s/^\s*%+/^^A/ ; 
 
-   if (/\\begin{verbatim}/)
+   if (/\\begin\{verbatim\}/)
    {
       $inverb=1;
    }
 
-   if (/\\end{verbatim}/)
+   if (/\\end\{verbatim\}/)
    {
       $inverb=0;
    }
@@ -449,11 +449,11 @@ while (<DOC>)
 
    $line = $beginline . $restofline;
 
-   if (($line=~/\\end{document}/) and not $inverb)
+   if (($line=~/\\end\{document\}/) and not $inverb)
    {
       $indoc=0;
 
-      $line=~s/\\end{document}//;
+      $line=~s/\\end\{document\}//;
    }
 
    $line=~s/\n/\n\% /mg;
