@@ -21,6 +21,7 @@ Bug fixes:
   * Re-enable the possibility to pass a macro as main argumente to \setmainlanguage and
     \setotherlanguage (#331).
   * Fix detection of default \languagevariant (#332).
+  * Fix LaTeX error with undefined hyphenation pattern (#346).
   * Fix some babel shorthand issues by updating the shorthand code from recent babel.
 
 Interface and defaults changes:

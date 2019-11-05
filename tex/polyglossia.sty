@@ -324,7 +324,14 @@
             \xpg@set@hyphenation@patterns{#1}
           }
       }
-      {
+      {%
+        % Since this function is sometimes called from the gloss files
+        % directly, we need to check whether the requested hyphenname exists.
+        \xpg@ifdefined{#1}{}%
+        {%
+          \xpg@nopatterns{#1}
+          \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax%
+        }%
         \xpg@set@hyphenation@patterns{#1}
       }
   }
