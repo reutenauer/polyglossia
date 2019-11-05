@@ -1614,9 +1614,9 @@
 \provideenvironment{otherlanguage}{}{}
 
 \renewenvironment{otherlanguage}[2][]
-{
+{%
   \xpg@set@group@aux%
-  \selectlanguage[#1]{#2}
+  \selectlanguage[#1]{#2}%
 }
 {\xpg@unset@group@aux}
 
