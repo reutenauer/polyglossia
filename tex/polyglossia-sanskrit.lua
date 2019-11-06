@@ -10,16 +10,16 @@ local thinspace = 0.16667 -- 1/6
 local function activate_sanskrit_punct()
     polyglossia.activate_punct('sanskrit')
     polyglossia.clear_spaced_characters('sanskrit')
-    polyglossia.add_left_spaced_character('sanskrit','!',thinspace)
-    polyglossia.add_left_spaced_character('sanskrit','?',thinspace)
-    polyglossia.add_left_spaced_character('sanskrit','‼',thinspace)
-    polyglossia.add_left_spaced_character('sanskrit','⁇',thinspace)
-    polyglossia.add_left_spaced_character('sanskrit','⁈',thinspace)
-    polyglossia.add_left_spaced_character('sanskrit','⁉',thinspace)
-    polyglossia.add_left_spaced_character('sanskrit',':',thinspace)
-    polyglossia.add_left_spaced_character('sanskrit',';',thinspace)
-    polyglossia.add_left_spaced_character('sanskrit','।',thinspace) -- danda, U+0964
-    polyglossia.add_left_spaced_character('sanskrit','॥',thinspace) -- double danda, U+0965
+    polyglossia.add_left_spaced_character('sanskrit','!',thinspace,'quad')
+    polyglossia.add_left_spaced_character('sanskrit','?',thinspace,'quad')
+    polyglossia.add_left_spaced_character('sanskrit','‼',thinspace,'quad')
+    polyglossia.add_left_spaced_character('sanskrit','⁇',thinspace,'quad')
+    polyglossia.add_left_spaced_character('sanskrit','⁈',thinspace,'quad')
+    polyglossia.add_left_spaced_character('sanskrit','⁉',thinspace,'quad')
+    polyglossia.add_left_spaced_character('sanskrit',':',thinspace,'quad')
+    polyglossia.add_left_spaced_character('sanskrit',';',thinspace,'quad')
+    polyglossia.add_left_spaced_character('sanskrit','।',thinspace,'quad') -- danda, U+0964
+    polyglossia.add_left_spaced_character('sanskrit','॥',thinspace,'quad') -- double danda, U+0965
 end
 
 local function deactivate_sanskrit_punct()

@@ -82,6 +82,10 @@
 \define@boolkey{french}[french@]{autospaceguillemets}[true]{}
 \french@autospaceguillemetstrue
 
+\newif\iffrench@thincolonspace
+\define@boolkey{french}[french@]{thincolonspace}[true]{}
+\french@thincolonspacefalse
+
 % Backwards compatibility
 \define@boolkey{french}[french@]{automaticspacesaroundguillemets}[true]{%
    \iffrench@automaticspacesaroundguillemets
@@ -164,10 +168,24 @@
   \let\ttfamily\french@ttfamilyORI
 }
 
+\def\xpg@french@thinsp{\kern 0.5\fontdimen2\font}
+
 \def\french@punctuation{%
     \lccode"2019="2019
     \ifluatex
-      \directlua{polyglossia.activate_french_punct()}%
+      \iffrench@thincolonspace
+        \iffrench@autospaceguillemets
+          \directlua{polyglossia.activate_french_punct(true, true)}%
+        \else
+          \directlua{polyglossia.activate_french_punct(true, false)}%
+        \fi
+      \else
+        \iffrench@autospaceguillemets
+          \directlua{polyglossia.activate_french_punct(false, true)}%
+        \else
+          \directlua{polyglossia.activate_french_punct(false, false)}%
+        \fi
+      \fi
     \else
       \XeTeXinterchartokenstate=1
       \XeTeXcharclass `\! \french@punctthin
@@ -177,7 +195,11 @@
       \XeTeXcharclass `\⁈ \french@punctthin
       \XeTeXcharclass `\⁉ \french@punctthin
       \XeTeXcharclass `\; \french@punctthin
-      \XeTeXcharclass `\: \french@punctthick
+      \iffrench@thincolonspace
+        \XeTeXcharclass `\: \french@punctthin
+      \else
+        \XeTeXcharclass `\: \french@punctthick
+      \fi
       \XeTeXcharclass `\« \french@punctguillstart
       \XeTeXcharclass `\» \french@punctguillend
       \XeTeXcharclass `\‹ \french@punctguillstart
@@ -188,24 +210,24 @@
       \XeTeXcharclass `\[ \french@closebrackets
       \XeTeXcharclass `\{ \french@openbrackets
       \XeTeXcharclass `\} \french@closebrackets
-      \XeTeXinterchartoks \z@ \french@punctthin = {\thinspace}%
+      \XeTeXinterchartoks \z@ \french@punctthin = {\xpg@french@thinsp}%
       \XeTeXinterchartoks \z@ \french@punctthick = {\nobreakspace}%
-      \XeTeXinterchartoks \xpg@boundaryclass \french@punctthin = {\xpg@unskip\thinspace}%
+      \XeTeXinterchartoks \xpg@boundaryclass \french@punctthin = {\xpg@unskip\xpg@french@thinsp}%
       \XeTeXinterchartoks \xpg@boundaryclass \french@punctthick = {\xpg@unskip\nobreakspace}%
       \iffrench@autospaceguillemets
-        \XeTeXinterchartoks \french@punctguillstart \z@ = {\thinspace}% "«a" -> "«\,a"
+        \XeTeXinterchartoks \french@punctguillstart \z@ = {\xpg@french@thinsp}% "«a" -> "«\,a"
   %     \XeTeXinterchartoks \z@ \french@punctguillstart = {\nobreakspace}% "a«" unchanged?
   %     \XeTeXinterchartoks \french@punctguillend \z@ = {\nobreakspace}% "»a" unchanged?
-        \XeTeXinterchartoks \z@ \french@punctguillend = {\thinspace}% "a»" -> "a\,»"
-        \XeTeXinterchartoks \french@punctguillstart \xpg@boundaryclass = {\thinspace\ignorespaces}% "«  " -> "«\,"
-        \XeTeXinterchartoks \xpg@boundaryclass \french@punctguillend = {\xpg@unskip\thinspace}% "  »" -> "\,»"
+        \XeTeXinterchartoks \z@ \french@punctguillend = {\xpg@french@thinsp}% "a»" -> "a\,»"
+        \XeTeXinterchartoks \french@punctguillstart \xpg@boundaryclass = {\xpg@french@thinsp\ignorespaces}% "«  " -> "«\,"
+        \XeTeXinterchartoks \xpg@boundaryclass \french@punctguillend = {\xpg@unskip\xpg@french@thinsp}% "  »" -> "\,»"
      \fi
-     \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\thinspace}% "»;" -> "»\,;"
+     \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\xpg@french@thinsp}% "»;" -> "»\,;"
      \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace}% "»:" -> "» :"
-     \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\thinspace}% "?»" -> "?\,»"
+     \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\xpg@french@thinsp}% "?»" -> "?\,»"
      \XeTeXinterchartoks \french@openbrackets \french@punctthin = {\xpg@unskip}% "(?" -> "(?" and not "( ?"      
      \XeTeXinterchartoks \french@punctthin \french@closebrackets = {\xpg@unskip}% "?)" -> "?)" (code not need, just for symetry with previous one)
-     \XeTeXinterchartoks \french@closebrackets \french@punctthin = {\thinspace}% ")?" -> ")\,?"
+     \XeTeXinterchartoks \french@closebrackets \french@punctthin = {\xpg@french@thinsp}% ")?" -> ")\,?"
      \XeTeXinterchartoks \french@closebrackets \french@punctthick = {\nobreakspace}% "):" -> ") :"
     \fi
     }
