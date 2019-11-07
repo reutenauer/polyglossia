@@ -5,8 +5,6 @@ local remove_from_callback = luatexbase.remove_from_callback
 local priority_in_callback = luatexbase.priority_in_callback
 local new_attribute        = luatexbase.new_attribute
 
-local get_quad = luaotfload.aux.get_quad -- needs luaotfload > 20130516
-
 local node = node
 
 local insert_node_before = node.insert_before
@@ -27,7 +25,8 @@ local kern_code    = node.id"kern"
 local math_code    = node.id"math"
 
 -- we need some node subtypes
-local userkern  = 1
+local userkern = 1
+local userskip = 0
 local removable_skip = {
     [0]  = true, -- userskip
     [13] = true, -- spaceskip
@@ -42,6 +41,24 @@ local function get_kern_node(dim)
     local n = node_copy(kern_node)
     n.kern = dim
     return n
+end
+
+local glue_node = new_node(glue_code)
+glue_node.subtype = userskip
+
+local function get_glue_node(dim, stretch, shrink)
+    local n   = node_copy(glue_node)
+    n.width   = dim
+    n.stretch = stretch
+    n.shrink  = shrink
+    return n
+end
+
+local penalty_node   = new_node(penalty_code)
+penalty_node.penalty = 10000
+
+local function get_penalty_node()
+    return node_copy(penalty_node)
 end
 
 -- we have here all possible space characters, referenced by their unicode slot
@@ -102,14 +119,40 @@ local function clear_spaced_characters(lang)
     right_space[id] = {}
 end
 
-local function add_left_spaced_character(lang, char, kern)
-    local id = ensure_lang_id(lang)
-    left_space[id][char] = kern -- "kern" is meant as a fraction of a quad
+local function illegal_unit(unit)
+    if unit then
+        texio.write_nl('Illegal spacing unit "'..unit..'".')
+    else
+        texio.write_nl('Spacing unit is a nil value.')
+    end
 end
 
-local function add_right_spaced_character(lang, char, kern)
+local function add_left_spaced_character(lang, char, kern, unit, rubber)
+-- The parameter kern is a number meant as a fraction of the unit.
+-- The unit can be "quad" (1em) or "space" (interword space).
+-- The parameter rubber is a Boolean value indicating if the inserted space is
+-- stretchable and shrinkable (only relevant if the unit is "space").
     local id = ensure_lang_id(lang)
-    right_space[id][char] = kern -- "kern" is meant as a fraction of a quad
+    if unit == "quad" or unit == "space" then
+        left_space[id][char] = {}
+        left_space[id][char]["kern"] = kern
+        left_space[id][char]["unit"] = unit
+        left_space[id][char]["rubber"] = rubber
+    else
+        illegal_unit(unit)
+    end
+end
+
+local function add_right_spaced_character(lang, char, kern, unit, rubber)
+    local id = ensure_lang_id(lang)
+    if unit == "quad" or unit == "space" then
+        right_space[id][char] = {}
+        right_space[id][char]["kern"] = kern
+        right_space[id][char]["unit"] = unit
+        right_space[id][char]["rubber"] = rubber
+    else
+        illegal_unit(unit)
+    end
 end
 
 -- from typo-spa.lua, adapted
@@ -124,7 +167,8 @@ local function process(head)
                 local leftspace  = left_space[attr][char]
                 local rightspace = right_space[attr][char]
                 if leftspace or rightspace then
-                    local quad = get_quad(start.font) -- might be optimized
+                    local fontparameters = fonts.hashes.parameters[start.font]
+                    local unit, stretch, shrink, spacing_node
                     if leftspace then
                         local prev = getprev(start)
                         if prev then
@@ -137,7 +181,21 @@ local function process(head)
                                 head = remove_node(head, prev)
                             end
                         end
-                        head = insert_node_before(head, start, get_kern_node(leftspace*quad))
+                        if leftspace.unit == "quad" then
+                            unit = fontparameters.quad
+                            spacing_node = get_kern_node(leftspace.kern*unit)
+                        elseif leftspace.unit == "space" then
+                            unit = fontparameters.space
+                            if leftspace.rubber then
+                                stretch = leftspace.kern*fontparameters.space_stretch
+                                shrink  = leftspace.kern*fontparameters.space_shrink
+                                spacing_node = get_glue_node(leftspace.kern*unit, stretch, shrink)
+                                head = insert_node_before(head, start, get_penalty_node())
+                            else
+                                spacing_node = get_kern_node(leftspace.kern*unit)
+                            end
+                        end
+                        head = insert_node_before(head, start, spacing_node)
                     end
                     if rightspace then
                         local next = getnext(start)
@@ -150,7 +208,21 @@ local function process(head)
                                 head = remove_node(head, next)
                             end
                         end
-                        head, start = insert_node_after(head, start, get_kern_node(rightspace*quad))
+                        if rightspace.unit == "quad" then
+                            unit = fontparameters.quad
+                            spacing_node = get_kern_node(rightspace.kern*unit)
+                        elseif rightspace.unit == "space" then
+                            unit = fontparameters.space
+                            if rightspace.rubber then
+                                stretch = rightspace.kern*fontparameters.space_stretch
+                                shrink  = rightspace.kern*fontparameters.space_shrink
+                                spacing_node = get_glue_node(rightspace.kern*unit, stretch, shrink)
+                                head = insert_node_after(head, start, get_penalty_node())
+                            else
+                                spacing_node = get_kern_node(rightspace.kern*unit)
+                            end
+                        end
+                        head = insert_node_after(head, start, spacing_node)
                     end
                 end
             end

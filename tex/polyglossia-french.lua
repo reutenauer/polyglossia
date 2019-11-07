@@ -1,32 +1,47 @@
 require('polyglossia-punct')
 
--- How do we now, in Lua, what a \thinspace is? In the LaTeX source (latex.ltx)
--- it is defined as:
--- \def\thinspace{\leavevmode@ifvmode\kern .16667em }
--- I see no way of seeing if it has been overriden or not. So we stick to this
--- value.
-local thinspace = 0.16667 -- 1/6
--- thickspace is defined in amsmath.sty as:
--- \renewcommand{\;}{\tmspace+\thickmuskip{.2777em}}
--- \let\thickspace\;
--- Same problem as above, we stick to this fixed value.
-local thickspace = 0.2777 -- 5/18
+local function set_left_space(lang, char, kern, rubber)
+    polyglossia.add_left_spaced_character(lang, char, kern, "space", rubber)
+end
 
-local function activate_french_punct()
-    polyglossia.activate_punct('french')
-    polyglossia.clear_spaced_characters('french')
-    polyglossia.add_left_spaced_character('french',':',thickspace)
-    polyglossia.add_left_spaced_character('french','!',thinspace)
-    polyglossia.add_left_spaced_character('french','?',thinspace)
-    polyglossia.add_left_spaced_character('french',';',thinspace)
-    polyglossia.add_left_spaced_character('french','‼',thinspace)
-    polyglossia.add_left_spaced_character('french','⁇',thinspace)
-    polyglossia.add_left_spaced_character('french','⁈',thinspace)
-    polyglossia.add_left_spaced_character('french','⁉',thinspace)
-    polyglossia.add_left_spaced_character('french','»',thinspace)
-    polyglossia.add_left_spaced_character('french','›',thinspace)
-    polyglossia.add_right_spaced_character('french','«',thinspace)
-    polyglossia.add_right_spaced_character('french','‹',thinspace)
+local function set_right_space(lang, char, kern, rubber)
+    polyglossia.add_right_spaced_character(lang, char, kern, "space", rubber)
+end
+
+local function activate_french_punct(thincolonspace, autospaceguillemets)
+    -- We need different language tags here to make switching of options possible
+    -- within a paragraph.
+    local lang = "french"
+    if thincolonspace then
+        lang = lang.."-thincolon"
+    end
+    if autospaceguillemets then
+        lang = lang.."-autospace"
+    end
+
+    polyglossia.activate_punct(lang)
+    polyglossia.clear_spaced_characters(lang)
+
+    if thincolonspace then
+        set_left_space(lang, ':', 0.5)
+    else
+        set_left_space(lang, ':', 1, true) -- stretchable and shrinkable space
+    end
+
+    set_left_space(lang, '!', 0.5)
+    set_left_space(lang, '?', 0.5)
+    set_left_space(lang, ';', 0.5)
+    set_left_space(lang, '‼', 0.5)
+    set_left_space(lang, '⁇', 0.5)
+    set_left_space(lang, '⁈', 0.5)
+    set_left_space(lang, '⁉', 0.5)
+
+    if autospaceguillemets then
+        set_left_space(lang, '»', 0.5)
+        set_left_space(lang, '›', 0.5)
+        set_right_space(lang, '«', 0.5)
+        set_right_space(lang, '‹', 0.5)
+    end
 end
 
 local function deactivate_french_punct()

@@ -14,6 +14,7 @@ New features:
   * Add Latin language options "capitalizemonth", "ecclesiasticfootnotes", "hyphenation",
     "prosodicshorthands", and "usej".
   * Add Latin shorthands for "«", "»", "æ", "Æ", "œ", and "Œ".
+  * Add French language option "thincolonspace".
 
 Bug fixes:
   * Fix problems with fragile font settings (#24).
@@ -23,6 +24,7 @@ Bug fixes:
   * Fix detection of default \languagevariant (#332).
   * Fix LaTeX error with undefined hyphenation pattern (#346).
   * Fix some babel shorthand issues by updating the shorthand code from recent babel.
+  * Fix problems with French punctuation spacing (#345).
 
 Interface and defaults changes:
   * In Russian, all paragraphs are now indented by default, as common in Russian typography.
@@ -31,6 +33,8 @@ Interface and defaults changes:
     as well with LuaTeX.
   * Changed option name "fraktur" to "blackletter" in German (the former is still available
     as an alias).
+  * In French, high punctuation characters and guillemets are spaced by half an interword
+    space now instead of a \thinspace (cf. #345).
 
 1.45 (27-10-2019)
 
