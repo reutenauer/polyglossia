@@ -157,20 +157,20 @@ end
 
 -- from typo-spa.lua, adapted
 local function process(head)
-    local start = head
-    while start do
-        local id = start.id
+    local current = head
+    while current do
+        local id = current.id
         if id == glyph_code then
-            local attr = has_attribute(start, punct_attr)
+            local attr = has_attribute(current, punct_attr)
             if attr then
-                local char = utf8.char(start.char) -- requires Lua 5.3
+                local char = utf8.char(current.char) -- requires Lua 5.3
                 local leftspace  = left_space[attr][char]
                 local rightspace = right_space[attr][char]
                 if leftspace or rightspace then
-                    local fontparameters = fonts.hashes.parameters[start.font]
+                    local fontparameters = fonts.hashes.parameters[current.font]
                     local unit, stretch, shrink, spacing_node
                     if leftspace then
-                        local prev = getprev(start)
+                        local prev = getprev(current)
                         if prev then
                             local prevprev = getprev(prev)
                             if somespace(prev) then
@@ -190,15 +190,15 @@ local function process(head)
                                 stretch = leftspace.kern*fontparameters.space_stretch
                                 shrink  = leftspace.kern*fontparameters.space_shrink
                                 spacing_node = get_glue_node(leftspace.kern*unit, stretch, shrink)
-                                head = insert_node_before(head, start, get_penalty_node())
+                                head = insert_node_before(head, current, get_penalty_node())
                             else
                                 spacing_node = get_kern_node(leftspace.kern*unit)
                             end
                         end
-                        head = insert_node_before(head, start, spacing_node)
+                        head = insert_node_before(head, current, spacing_node)
                     end
                     if rightspace then
-                        local next = getnext(start)
+                        local next = getnext(current)
                         if next then
                             local nextnext = getnext(next)
                             if somepenalty(next, 10000) and somespace(nextnext) then
@@ -217,20 +217,20 @@ local function process(head)
                                 stretch = rightspace.kern*fontparameters.space_stretch
                                 shrink  = rightspace.kern*fontparameters.space_shrink
                                 spacing_node = get_glue_node(rightspace.kern*unit, stretch, shrink)
-                                head = insert_node_after(head, start, get_penalty_node())
+                                head, current = insert_node_after(head, current, get_penalty_node())
                             else
                                 spacing_node = get_kern_node(rightspace.kern*unit)
                             end
                         end
-                        head = insert_node_after(head, start, spacing_node)
+                        head, current = insert_node_after(head, current, spacing_node)
                     end
                 end
             end
         elseif id == math_code then
             -- warning: this is a feature of luatex > 0.76
-            start = end_of_math(start) -- weird, can return nil .. no math end?
+            current = end_of_math(current) -- weird, can return nil .. no math end?
         end
-        start = getnext(start) -- no error even if start is nil
+        current = getnext(current) -- no error even if current is nil
     end
     return head
 end
