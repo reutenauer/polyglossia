@@ -215,12 +215,15 @@
       \XeTeXinterchartoks \xpg@boundaryclass \french@punctthin = {\xpg@unskip\xpg@french@thinsp}%
       \XeTeXinterchartoks \xpg@boundaryclass \french@punctthick = {\xpg@unskip\nobreakspace}%
       \iffrench@autospaceguillemets
-        \XeTeXinterchartoks \french@punctguillstart \z@ = {\xpg@french@thinsp}% "«a" -> "«\,a"
-  %     \XeTeXinterchartoks \z@ \french@punctguillstart = {\nobreakspace}% "a«" unchanged?
-  %     \XeTeXinterchartoks \french@punctguillend \z@ = {\nobreakspace}% "»a" unchanged?
-        \XeTeXinterchartoks \z@ \french@punctguillend = {\xpg@french@thinsp}% "a»" -> "a\,»"
-        \XeTeXinterchartoks \french@punctguillstart \xpg@boundaryclass = {\xpg@french@thinsp\ignorespaces}% "«  " -> "«\,"
-        \XeTeXinterchartoks \xpg@boundaryclass \french@punctguillend = {\xpg@unskip\xpg@french@thinsp}% "  »" -> "\,»"
+        \let\xpg@french@guillspace\xpg@french@thinsp%
+        \XeTeXinterchartoks \french@punctguillstart \z@ = {\xpg@french@guillspace}% "«a" -> "«\,a"
+ %      \XeTeXinterchartoks \z@ \french@punctguillstart = {\nobreakspace}% "a«" unchanged?
+ %      \XeTeXinterchartoks \french@punctguillend \z@ = {\nobreakspace}% "»a" unchanged?
+        \XeTeXinterchartoks \z@ \french@punctguillend = {\xpg@french@guillspace}% "a»" -> "a\,»"
+        \XeTeXinterchartoks \french@punctguillstart \xpg@boundaryclass = {\xpg@french@guillspace\ignorespaces}% "«  " -> "«\,"
+        \XeTeXinterchartoks \xpg@boundaryclass \french@punctguillend = {\xpg@unskip\xpg@french@guillspace}% "  »" -> "\,»"
+     \else
+       \def\xpg@french@guillspace{}%
      \fi
      \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\xpg@french@thinsp}% "»;" -> "»\,;"
      \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace}% "»:" -> "» :"
@@ -230,7 +233,7 @@
      \XeTeXinterchartoks \french@closebrackets \french@punctthin = {\xpg@french@thinsp}% ")?" -> ")\,?"
      \XeTeXinterchartoks \french@closebrackets \french@punctthick = {\nobreakspace}% "):" -> ") :"
     \fi
-    }
+}
 
 \def\nofrench@punctuation{%
     \lccode"2019=\z@
@@ -251,7 +254,7 @@
       \XeTeXcharclass `\› \z@
       \XeTeXinterchartokenstate=0
     \fi
-    }
+}
 
 \def\captionsfrench{%
    \def\refname{Références}%
@@ -281,7 +284,7 @@
    \def\ccname{Copie à }%
    \def\headtoname{}%
    \def\proofname{Démonstration}%
-   }
+}
 
 \def\datefrench{%
    \def\today{\ifx\ier\undefined\def\ier{er}\fi
