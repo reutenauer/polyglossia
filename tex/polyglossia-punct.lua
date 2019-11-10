@@ -89,14 +89,8 @@ local left_bracket_chars = {[40] = true, [123] = true, [91] = true, [10216] = tr
 
 local function someleftbracket(n)
     if n then
-        local id, subtype = n.id, n.subtype
-        if id == glue_code then
-            -- it is dangerous to remove all the type of glue
-            return removable_skip[subtype]
-        elseif id == kern_code then
-            -- remove only user's kern
-            return subtype == userkern
-        elseif id == glyph_code then
+        local id = n.id
+        if id == glyph_code then
             return left_bracket_chars[n.char]
         end
     end
@@ -107,14 +101,8 @@ local right_bracket_chars = {[41] = true, [125] = true, [93] = true, [10217] = t
 
 local function somerightbracket(n)
     if n then
-        local id, subtype = n.id, n.subtype
-        if id == glue_code then
-            -- it is dangerous to remove all the type of glue
-            return removable_skip[subtype]
-        elseif id == kern_code then
-            -- remove only user's kern
-            return subtype == userkern
-        elseif id == glyph_code then
+        local id = n.id
+        if id == glyph_code then
             return right_bracket_chars[n.char]
         end
     end
