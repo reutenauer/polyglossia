@@ -84,6 +84,42 @@ local function somespace(n)
     end
 end
 
+-- we have here all left bracket characters, referenced by their unicode slot
+local left_bracket_chars = {[40] = true, [123] = true, [91] = true, [10216] = true}
+
+local function someleftbracket(n)
+    if n then
+        local id, subtype = n.id, n.subtype
+        if id == glue_code then
+            -- it is dangerous to remove all the type of glue
+            return removable_skip[subtype]
+        elseif id == kern_code then
+            -- remove only user's kern
+            return subtype == userkern
+        elseif id == glyph_code then
+            return left_bracket_chars[n.char]
+        end
+    end
+end
+
+-- we have here all right bracket characters, referenced by their unicode slot
+local right_bracket_chars = {[41] = true, [125] = true, [93] = true, [10217] = true}
+
+local function somerightbracket(n)
+    if n then
+        local id, subtype = n.id, n.subtype
+        if id == glue_code then
+            -- it is dangerous to remove all the type of glue
+            return removable_skip[subtype]
+        elseif id == kern_code then
+            -- remove only user's kern
+            return subtype == userkern
+        elseif id == glyph_code then
+            return right_bracket_chars[n.char]
+        end
+    end
+end
+
 -- idem
 local function somepenalty(n, value)
     if n then
@@ -171,8 +207,11 @@ local function process(head)
                     local unit, stretch, shrink, spacing_node
                     if leftspace then
                         local prev = getprev(current)
+                        local space_exception = false
                         if prev then
                             local prevprev = getprev(prev)
+                            -- do not add space after left (opening) bracket
+                            space_exception = someleftbracket(prev)
                             if somespace(prev) then
                             -- TODO: there is a question here: do we override a preceding space or not?...
                                 if somepenalty(prevprev, 10000) then
@@ -195,11 +234,16 @@ local function process(head)
                                 spacing_node = get_kern_node(leftspace.kern*unit)
                             end
                         end
-                        head = insert_node_before(head, current, spacing_node)
+                        if not space_exception then
+                            head = insert_node_before(head, current, spacing_node)
+                        end
                     end
                     if rightspace then
                         local next = getnext(current)
+                        local space_exception = false
                         if next then
+                            -- do not add space before right (closing) bracket
+                            space_exception = somerightbracket(next)
                             local nextnext = getnext(next)
                             if somepenalty(next, 10000) and somespace(nextnext) then
                                 head = remove_node(head, next)
@@ -222,7 +266,9 @@ local function process(head)
                                 spacing_node = get_kern_node(rightspace.kern*unit)
                             end
                         end
-                        head, current = insert_node_after(head, current, spacing_node)
+                        if not space_exception then
+                            head, current = insert_node_after(head, current, spacing_node)
+                        end
                     end
                 end
             end
