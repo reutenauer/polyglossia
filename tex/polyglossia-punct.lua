@@ -249,7 +249,9 @@ local function process(head)
                                 stretch = rightspace.kern*fontparameters.space_stretch
                                 shrink  = rightspace.kern*fontparameters.space_shrink
                                 spacing_node = get_glue_node(rightspace.kern*unit, stretch, shrink)
-                                head, current = insert_node_after(head, current, get_penalty_node())
+                                if not space_exception then
+                                    head, current = insert_node_after(head, current, get_penalty_node())
+                                end
                             else
                                 spacing_node = get_kern_node(rightspace.kern*unit)
                             end
