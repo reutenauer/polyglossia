@@ -206,10 +206,12 @@
       \XeTeXcharclass `\› \french@punctguillend
       \XeTeXcharclass `\( \french@openbrackets
       \XeTeXcharclass `\) \french@closebrackets
-      \XeTeXcharclass `\] \french@openbrackets
-      \XeTeXcharclass `\[ \french@closebrackets
+      \XeTeXcharclass `\[ \french@openbrackets
+      \XeTeXcharclass `\] \french@closebrackets
       \XeTeXcharclass `\{ \french@openbrackets
       \XeTeXcharclass `\} \french@closebrackets
+      \XeTeXcharclass `\⟨ \french@openbrackets
+      \XeTeXcharclass `\⟩ \french@closebrackets
       \XeTeXinterchartoks \z@ \french@punctthin = {\xpg@french@thinsp}%
       \XeTeXinterchartoks \z@ \french@punctthick = {\nobreakspace}%
       \XeTeXinterchartoks \xpg@boundaryclass \french@punctthin = {\xpg@unskip\xpg@french@thinsp}%
@@ -222,6 +224,7 @@
         \XeTeXinterchartoks \z@ \french@punctguillend = {\xpg@french@guillspace}% "a»" -> "a\,»"
         \XeTeXinterchartoks \french@punctguillstart \xpg@boundaryclass = {\xpg@french@guillspace\ignorespaces}% "«  " -> "«\,"
         \XeTeXinterchartoks \xpg@boundaryclass \french@punctguillend = {\xpg@unskip\xpg@french@guillspace}% "  »" -> "\,»"
+        \XeTeXinterchartoks \french@closebrackets \french@punctguillend = {\xpg@french@guillspace}% ")»" -> ")\,»"
      \else
        \def\xpg@french@guillspace{}%
      \fi
@@ -252,6 +255,14 @@
       \XeTeXcharclass `\» \z@
       \XeTeXcharclass `\‹ \z@
       \XeTeXcharclass `\› \z@
+      \XeTeXcharclass `\( \z@
+      \XeTeXcharclass `\) \z@
+      \XeTeXcharclass `\[ \z@
+      \XeTeXcharclass `\] \z@
+      \XeTeXcharclass `\{ \z@
+      \XeTeXcharclass `\} \z@
+      \XeTeXcharclass `\⟨ \z@
+      \XeTeXcharclass `\⟩ \z@
       \XeTeXinterchartokenstate=0
     \fi
 }
