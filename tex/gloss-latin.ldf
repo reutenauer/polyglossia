@@ -104,6 +104,8 @@
     \newXeTeXintercharclass \g_polyglossia_latin_punctuation_class
     \newXeTeXintercharclass \g_polyglossia_latin_opening_guillemet_class
     \newXeTeXintercharclass \g_polyglossia_latin_closing_guillemet_class
+    \newXeTeXintercharclass \g_polyglossia_latin_opening_bracket_class
+    \newXeTeXintercharclass \g_polyglossia_latin_closing_bracket_class
 
     \cs_new:Npn \polyglossia_latin_insert_punctuation_space:
       {
@@ -142,9 +144,27 @@
         \XeTeXcharclass `\» \g_polyglossia_latin_closing_guillemet_class
         \XeTeXcharclass `\‹ \g_polyglossia_latin_opening_guillemet_class
         \XeTeXcharclass `\› \g_polyglossia_latin_closing_guillemet_class
+        \XeTeXcharclass `\( \g_polyglossia_latin_opening_bracket_class
+        \XeTeXcharclass `\) \g_polyglossia_latin_closing_bracket_class
+        \XeTeXcharclass `\[ \g_polyglossia_latin_opening_bracket_class
+        \XeTeXcharclass `\] \g_polyglossia_latin_closing_bracket_class
+        \XeTeXcharclass `\{ \g_polyglossia_latin_opening_bracket_class
+        \XeTeXcharclass `\} \g_polyglossia_latin_closing_bracket_class
+        \XeTeXcharclass `\⟨ \g_polyglossia_latin_opening_bracket_class
+        \XeTeXcharclass `\⟩ \g_polyglossia_latin_closing_bracket_class
 
         % punctuation followed by a closing guillemet
         \XeTeXinterchartoks \g_polyglossia_latin_punctuation_class \g_polyglossia_latin_closing_guillemet_class =
+          {
+            \polyglossia_latin_insert_punctuation_space:
+          }
+        % closing bracket followed by punctuation
+        \XeTeXinterchartoks \g_polyglossia_latin_closing_bracket_class \g_polyglossia_latin_punctuation_class =
+          {
+            \polyglossia_latin_insert_punctuation_space:
+          }
+        % closing bracket followed by a closing guillemet
+        \XeTeXinterchartoks \g_polyglossia_latin_closing_bracket_class \g_polyglossia_latin_closing_guillemet_class =
           {
             \polyglossia_latin_insert_punctuation_space:
           }
