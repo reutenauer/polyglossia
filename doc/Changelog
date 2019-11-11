@@ -4,6 +4,8 @@ New features:
   * Add option "indentfirst" to Russian (#78).
   * Add options to set and customize French-style itemize item labels to French (#89).
   * Add optional localized math operators to Spanish (#123).
+  * Swap section headings in Hungarian (#344). New option "swapstrings" provides control
+    over this.
   * Add support for Afrikaans.
   * Add support for Belarusian.
   * Add support for Bosnian.
@@ -24,7 +26,7 @@ Bug fixes:
   * Fix detection of default \languagevariant (#332).
   * Fix LaTeX error with undefined hyphenation pattern (#346).
   * Fix some babel shorthand issues by updating the shorthand code from recent babel.
-  * Fix problems with French punctuation spacing (#345).
+  * Fix some problems with French and Latin auto-spacing (#345, #352).
 
 Interface and defaults changes:
   * In Russian, all paragraphs are now indented by default, as common in Russian typography.
