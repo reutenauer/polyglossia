@@ -1071,6 +1071,26 @@
   \csgdef{#3@alias@opts}{#1}%
 }
 
+% provide way to define alias environment and command
+% \setlanguagealias[<options>]{<language>}{<alias>}
+\DeclareDocumentCommand \setlanguagealias {O{} m m}
+{
+  \exp_args:Ne
+  \newenvironment {#3}
+  {
+    \begin{otherlanguage}[#1]{#2}
+  }%
+  {
+    \end{otherlanguage}
+  }%
+  \exp_args:Nc \newcommand {text#3} [1]
+  {%
+    \xpg@textlanguage[#1]{#2}{##1}%
+  }%
+  \csgdef{#3@alias@lang}{#2}%
+  \csgdef{#3@alias@opts}{#1}%
+}
+
 \newcommand{\setdefaultlanguage}[2][]{%
   \ifcsundef{#2@loaded}%
   {
