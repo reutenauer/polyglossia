@@ -1372,7 +1372,7 @@
   \polyglossia@error@iflangnotloaded:n{#3}
   \IfBooleanF {#1}
     {
-      \tl_set:Nx \xpg@pop@language { \exp_not:N \xpg@pop@language@i {#2} {#3} }
+      \cs_set_nopar:Npx \xpg@pop@language { \exp_not:N \xpg@pop@language@i {#2} {#3} }
       \group_insert_after:N \xpg@pop@language
     }
   \tl_if_blank:nTF {#2}{}{%
