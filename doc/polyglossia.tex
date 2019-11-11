@@ -824,13 +824,13 @@ The default value of each option is given in italic.
 	       (\eg \emph{1. fejezet} instead of \emph{Chapter 1}). By default, \pkg{polyglossia} tries hard to
 	       provide the correct order for different classes and packages (standard classes, \pkg{KOMA-script},
 	       \pkg{memoir}, and \pkg{titlesec} package should work, as well as \pkg{fancyhdr} and \pkg{caption}).
-	       However, since the definition of these strings is not standardized, the redefinitions might interfere
-	       if you use specific classes or packages that redefine the respective strings themselves.
-	       In this case, you can disable some or all changes.
+	       However, since the definition of these strings is not standardized, the redefinitions might not work
+	       and even interfere badly if you use specific classes or packages that redefine the respective strings
+	       themselves. In this case, you can disable some or all changes.
 	       The possibilities are:
 	       \begin{itemize}
 	       	\item ¦all¦: Redefine figure and table captions, part and chapter headings, and running headers (=~default setting)
-	       	\item ¦captions¦: Redefine captions only
+	       	\item ¦captions¦: Redefine figure and table captions only
 	       	\item ¦headings¦: Redefine part and chapter headings only
 	       	\item ¦headers¦: Redefine running headers only
 	       	\item ¦hheaders¦: Redefine part and chapter headings as well as running headers
