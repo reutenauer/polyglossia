@@ -45,7 +45,7 @@
       \@hungarian@swapheadingsfalse%
       \@hungarian@swapheadersfalse%
    \fi
-   \xpg@info{Option: German, script=\val}%
+   \xpg@info{Option: Hungarian, swapstrings=\val}%
 }{\xpg@warning{Unknown Hungarian swapstrings value `#1'}}
 
 \setkeys{hungarian}{swapstrings}
@@ -121,7 +121,11 @@
      \ifdefined\titleformat%
        \ifdefined\@part%
           \let\xpg@save@part@format\@part%
-          \patchcmd{\@part}{\partname\nobreakspace\thepart}{\thepart.\nobreakspace\partname}{}{\xpg@warning{Failed to patch part for Hungarian}}%
+          \patchcmd{\@part}%
+                    {\partname\nobreakspace\thepart}%
+                    {\thepart.\nobreakspace\partname}%
+                    {}%
+                    {\xpg@warning{Failed to patch part for Hungarian}}%
        \fi%
        \ifdefined\chapter%
           \titleformat\chapter[display]%
