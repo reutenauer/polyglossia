@@ -19,7 +19,7 @@
   fontsetup=true,
 }
 
-\let\captionsportuges\captionsportuguese@brazil
-\let\dateportuges\dateportuguese@brazil
+\let\captionsbrazil\captionsportuguese@brazil
+\let\datebrazil\dateportuguese@brazil
      
 \endinput
