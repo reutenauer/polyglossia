@@ -1034,6 +1034,26 @@
   }%
 }
 
+% provide way to define alias environment and command
+% \setlanguagealias[<options>]{<language>}{<alias>}
+\DeclareDocumentCommand \setlanguagealias {O{} m m}
+{
+  \exp_args:Ne
+  \newenvironment {#3}
+  {
+    \begin{otherlanguage}[#1]{#2}
+  }%
+  {
+    \end{otherlanguage}
+  }%
+  \exp_args:Nc \newcommand {text#3} [1]
+  {%
+    \xpg@textlanguage[#1]{#2}{##1}%
+  }%
+  \csgdef{#3@alias@lang}{#2}%
+  \csgdef{#3@alias@opts}{#1}%
+}
+
 \newcommand{\setdefaultlanguage}[2][]{%
   \ifcsundef{#2@loaded}%
   {
@@ -1309,7 +1329,7 @@
 \newcommand{\xpg@otherlanguage}[2][]
 {%
   \polyglossia@error@iflangnotloaded:n{#2}
-  \setkeys{#2}{#1}%
+  \exp_args:Nne \setkeys{#2}{#1}%
   \polyglossia@setforeignlanguage[#1]{#2}
   % buggy restoration heure
   \csuse{inlineextras@#2}%
@@ -1320,7 +1340,20 @@
 
 \renewcommand{\foreignlanguage}[3][]
 {%
-  \polyglossia@error@iflangnotloaded:n{#2}
+  \ifcsdef{#2@alias@lang}{%
+     \ifcsdef{#2@alias@opts}{%
+       \polyglossia@foreignlanguage:nnn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}} {#3}%
+     }{%
+       \polyglossia@foreignlanguage:nnn {#2} {\csuse{#2@alias@lang}} {#3}%
+     }%
+  }{%
+    \polyglossia@foreignlanguage:nnn {#1} {#2} {#3}%
+  }%
+}
+
+\cs_new:Nn \polyglossia@foreignlanguage:nnn
+{
+   \polyglossia@error@iflangnotloaded:n{#2}
    \bgroup
    \xpg@otherlanguage[#1]{#2}%
    \polyglossia@lang@settextdirection:nn{#2}{#3}%
@@ -1332,10 +1365,23 @@
 
 \renewenvironment{otherlanguage*}[2][]
 {%
+  \ifcsdef{#2@alias@lang}{%
+     \ifcsdef{#2@alias@opts}{%
+       \polyglossia@otherlanguage:nn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}}%
+     }{%
+       \polyglossia@otherlanguage:nn {#2} {\csuse{#2@alias@lang}}%
+     }%
+  }{%
+    \polyglossia@otherlanguage:nn {#1} {#2}%
+  }%
+}
+{\egroup}
+
+\cs_new:Nn \polyglossia@otherlanguage:nn
+{
   \xpg@otherlanguage[#1]{#2}%
   \polyglossia@lang@settextdirection:nn{#2}\bgroup%
 }
-{\egroup}
 
 % use by \text<lang>. Equivalent to \foreignlanguage,
 % except that dates are localized.
@@ -1376,7 +1422,20 @@
 
 \DeclareDocumentCommand \selectlanguage {s O{} m}
 {%
-  \polyglossia@error@iflangnotloaded:n{#3}
+  \ifcsdef{#3@alias@lang}{%
+     \ifcsdef{#3@alias@opts}{%
+       \polyglossia@select@language:nnn {#1} {\csuse{#3@alias@opts}} {\csuse{#3@alias@lang}}%
+     }{%
+       \polyglossia@select@language:nnn {#1} {#2} {\csuse{#3@alias@lang}}%
+     }%
+  }{%
+     \polyglossia@error@iflangnotloaded:n{#3}%
+     \polyglossia@select@language:nnn {#1} {#2} {#3}%
+  }
+}
+
+\cs_new:Nn \polyglossia@select@language:nnn
+{
   \IfBooleanF {#1}
     {
       \cs_set_nopar:Npx \xpg@pop@language { \exp_not:N \xpg@pop@language@i {#2} {#3} }
@@ -1387,7 +1446,7 @@
     \clist_map_inline:nn { #2 } {%
          \xpg@parsevariantkeyvalue##1=@xpg@langvariant\relax
      }%
-     \setkeys{#3}{#2}%
+     \exp_args:Nne \setkeys{#3}{#2}%
    }%
    % The starred variant does not write to the aux
    \IfBooleanTF#1{%

@@ -368,7 +368,7 @@ of Homer’s \textit{Iliad}:
 as \cmd\arabic\ is defined internally by \LaTeX. In this case
 we need to use the environment ¦Arabic¦ instead.
 
-\subsection{Babel commands}
+\subsection{Babel commands}\label{sec:babelcmds}
 Some macros defined in \pkg{babel}’s \file{hyphen.cfg} (and thus usually
 compiled into the \XeLaTeX\ and \LuaLaTeX\ format) are redefined, but keep a
 similar behaviour.
@@ -409,6 +409,23 @@ ought to be mentioned here.
 
 \item \Cmd\latinAlph: Representation of counter as a uper-case letter:  1 = A, 2 = B, etc.
 \end{itemize}
+
+
+\subsection{Setting up alias commands}
+
+By means of the macro \displaycmd{\setlanguagealias[⟨options⟩]\{⟨language⟩\}\{⟨alias⟩\}}{\setlanguagealias}
+you can define alias commands for specific language (variants). \Eg 
+
+\begin{verbatim}
+\setlanguagealias[variant=austrian]{german}{deAT}
+\end{verbatim}
+%
+will define a command \cmd{\textdeAT} as well as an environment ¦{deAT}¦ which will link towards
+the command \cmd{\textgerman[variant=austrian]} and the environment ¦{german}[variant=austrian]¦,
+respectively.
+The alias will also work with the babel commands described in sec.~\ref{sec:babelcmds}.
+Note, though, that the usual restrictions for command names apply, so something such as
+¦de-AT¦ or ¦de_AT¦ will not work since ¦-¦ and ¦_¦ are not allowed in command names.
 
 \section{Font setup}
 
