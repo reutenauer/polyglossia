@@ -4,12 +4,7 @@
 % 'brazil' was selected in accordance with babel.
 % Since brazil is a variety of portuguese, we use 'portuguese' now.
 
-% FIXME: Once we support babel aliases (#112) this gloss can go.
-
-\xpg@warning{The language name 'brazil' is deprectated.\MessageBreak
-             Please use 'portuguese' with variant 'brazilian' instead.}
-
-\input{gloss-portuguese.ldf}
+\xpg@load@master@language{portuguese}
 
 \PolyglossiaSetup{brazil}{
   language=Brazilian Portuguese,

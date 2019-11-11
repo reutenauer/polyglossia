@@ -3,7 +3,7 @@
 % We only provide this gloss for babel compatibility. Since nynorsk is 
 % a norwegian variety, we use 'norwegian' with variant 'nynorsk' now.
 
-\input{gloss-norwegian.ldf}
+\xpg@load@master@language{norwegian}
 
 \PolyglossiaSetup{nynorsk}{
   hyphennames={nynorsk},

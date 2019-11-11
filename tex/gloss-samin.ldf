@@ -3,7 +3,7 @@
 % We only provide this gloss for babel compatibility. Since samin is 
 % a sami variety, we use 'sami' with variant 'northern' now.
 
-\input{gloss-sami.ldf}
+\xpg@load@master@language{sami}
 
 \PolyglossiaSetup{samin}{
   hyphennames={samin},

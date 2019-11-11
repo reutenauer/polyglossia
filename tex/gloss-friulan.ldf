@@ -2,7 +2,7 @@
 
 % We only provide this gloss for babel compatibility.
 
-\input{gloss-friulian.ldf}
+\xpg@load@master@language{friulian}
 
 \PolyglossiaSetup{friulan}{%
   language=Friulian,

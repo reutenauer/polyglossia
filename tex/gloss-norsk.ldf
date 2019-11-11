@@ -3,7 +3,7 @@
 % We only provide this gloss for babel compatibility. Since norsk is 
 % actually norwegian bokmal, we use 'norwegian' with variant 'bokmal' now.
 
-\input{gloss-norwegian.ldf}
+\xpg@load@master@language{norwegian}
 
 \PolyglossiaSetup{norsk}{
   hyphennames={norsk},

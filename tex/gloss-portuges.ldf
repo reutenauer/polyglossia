@@ -5,12 +5,7 @@
 % introduced it in 8.3 filename times). Since polyglossia uses full
 % English language names, we use 'portuguese' now.
 
-% FIXME: Once we support babel aliases (#112) this gloss can go.
-
-\xpg@warning{The language name 'portuges' is deprectated.\MessageBreak
-             Please use 'portuguese' instead.}
-
-\input{gloss-portuguese.ldf}
+\xpg@load@master@language{portuguese}
 
 \PolyglossiaSetup{portuges}{
   hyphennames={portuges,portuguese},

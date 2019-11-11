@@ -3,7 +3,7 @@
 % We only provide this gloss for babel compatibility.
 % The proper English language name is Persian.
 
-\input{gloss-persian.ldf}
+\xpg@load@master@language{persian}
 
 \PolyglossiaSetup{farsi}{
   script=Arabic,

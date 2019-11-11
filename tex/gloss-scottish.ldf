@@ -3,7 +3,7 @@
 % We only provide this gloss for babel compatibility. Since scottish is 
 % a gaelic variety, we use 'gaelic' with variant 'scottish' now.
 
-\input{gloss-gaelic.ldf}
+\xpg@load@master@language{gaelic}
 
 \PolyglossiaSetup{scottish}{
   hyphennames={scottish},

@@ -3,7 +3,7 @@
 % We only provide this gloss for babel compatibility. Since bahasai is 
 % a malay variety, we use 'malay' with variant 'indonesian' now.
 
-\input{gloss-malay.ldf}
+\xpg@load@master@language{malay}
 
 \PolyglossiaSetup{bahasai}{%
   language=Indonesian,

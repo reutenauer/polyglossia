@@ -2,7 +2,7 @@
 
 % We only provide this gloss for babel compatibility.
 
-\input{gloss-hungarian.ldf}
+\xpg@load@master@language{hungarian}
 
 \PolyglossiaSetup{magyar}{
   hyphennames={hungarian,magyar},

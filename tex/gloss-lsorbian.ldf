@@ -3,7 +3,7 @@
 % We only provide this gloss for babel compatibility. Since lsorbian is 
 % a sorbian variety, we use 'sorbian' with variant 'lower' now.
 
-\input{gloss-sorbian.ldf}
+\xpg@load@master@language{sorbian}
 
 \PolyglossiaSetup{lsorbian}{
   language=Lower Sorbian,

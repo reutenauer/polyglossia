@@ -3,7 +3,7 @@
 % We only provide this gloss for babel compatibility. Since usorbian is 
 % a sorbian variety, we use 'sorbian' with variant 'upper' now.
 
-\input{gloss-sorbian.ldf}
+\xpg@load@master@language{sorbian}
 
 \PolyglossiaSetup{usorbian}{
   language=Upper Sorbian,

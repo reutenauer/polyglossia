@@ -3,7 +3,7 @@
 % We only provide this gloss for babel compatibility. Since irish is 
 % a gaelic variety, we use 'gaelic' with variant 'irish' now.
 
-\input{gloss-gaelic.ldf}
+\xpg@load@master@language{gaelic}
 
 \PolyglossiaSetup{irish}{
   hyphennames={irish},
