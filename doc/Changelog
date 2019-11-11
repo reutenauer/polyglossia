@@ -27,6 +27,7 @@ Bug fixes:
   * Fix LaTeX error with undefined hyphenation pattern (#346).
   * Fix some babel shorthand issues by updating the shorthand code from recent babel.
   * Fix some problems with French and Latin auto-spacing (#345, #352).
+  * Fix an expl3 declaration (#348).
 
 Interface and defaults changes:
   * In Russian, all paragraphs are now indented by default, as common in Russian typography.
