@@ -1038,17 +1038,32 @@
 % \setlanguagealias[<options>]{<language>}{<alias>}
 \DeclareDocumentCommand \setlanguagealias {O{} m m}
 {
-  \exp_args:Ne
-  \newenvironment {#3}
-  {
-    \begin{otherlanguage}[#1]{#2}
-  }%
-  {
-    \end{otherlanguage}
-  }%
-  \exp_args:Nc \newcommand {text#3} [1]
-  {%
-    \xpg@textlanguage[#1]{#2}{##1}%
+  \ifcsundef{#3@alias@lang}{%
+    \exp_args:Ne
+    \newenvironment {#3}
+    {
+      \begin{otherlanguage}[#1]{#2}
+    }%
+    {
+      \end{otherlanguage}
+    }%
+    \exp_args:Nc \newcommand {text#3} [1]
+    {%
+      \xpg@textlanguage[#1]{#2}{##1}%
+    }%
+  }{%
+    \exp_args:Ne
+    \renewenvironment {#3}
+    {
+      \begin{otherlanguage}[#1]{#2}
+    }%
+    {
+      \end{otherlanguage}
+    }%
+    \exp_args:Nc \renewcommand {text#3} [1]
+    {%
+      \xpg@textlanguage[#1]{#2}{##1}%
+    }%
   }%
   \csgdef{#3@alias@lang}{#2}%
   \csgdef{#3@alias@opts}{#1}%
