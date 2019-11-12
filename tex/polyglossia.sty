@@ -1020,18 +1020,20 @@
 
 % define environment and command
 \cs_new:Nn \polyglossia@define@language@cmd:n {
-  \exp_args:Ne
-  \newenvironment {\prop_item:Nn{\polyglossia@langsetup}{#1/envname}} [1] []
-  {
-    \begin{otherlanguage}[##1]{#1}
-  }%
-  {
-    \end{otherlanguage}
-  }%
-  \exp_args:Nc \newcommand {text#1} [2][]
-  {%
-    \xpg@textlanguage[##1]{#1}{##2}%
-  }%
+  \ifcsundef{#1@alias@lang}{%
+    \exp_args:Ne
+    \newenvironment {\prop_item:Nn{\polyglossia@langsetup}{#1/envname}} [1] []
+    {
+      \begin{otherlanguage}[##1]{#1}
+    }%
+    {
+      \end{otherlanguage}
+    }%
+    \exp_args:Nc \newcommand {text#1} [2][]
+    {%
+      \xpg@textlanguage[##1]{#1}{##2}%
+    }%
+  }{}
 }
 
 % provide way to define alias environment and command
