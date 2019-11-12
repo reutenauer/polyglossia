@@ -12,6 +12,7 @@
    \ifcase\nr\relax
       % portuguese:
       \def\portuguese@variant{portuges}%
+      \SetLanguageKeys{portuguese}{babelname=portuges}%
    \or
       % brazilian:
       \def\portuguese@variant{brazil}%
