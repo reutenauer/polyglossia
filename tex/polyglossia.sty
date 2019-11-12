@@ -1090,6 +1090,30 @@
   {
     \relax
   }
+  \ifcsdef{#2@alias@lang}{%
+     \ifcsdef{#2@alias@opts}{%
+       \exp_args:Nxx \polyglossia_load_lang_definition:nn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}}%
+       \exp_args:Nxx \polyglossia@set@default@language:nn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}}%
+     }{%
+       \polyglossia@set@default@language:nn {#1} {\csuse{#2@alias@lang}}%
+     }%
+  }{%
+    \polyglossia@set@default@language:nn {#1} {#2}%
+  }%
+}
+
+\cs_new:Nn \polyglossia@set@default@language:nn
+{
+  \ifcsundef{#2@loaded}%
+  {
+    % latex is an internal language, so do not record
+    \ifstrequal{#2}{latex}{}{%
+      \global\edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
+      \global\edef\xpg@bloaded{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}%
+          \ifx\xpg@bloaded\@empty\else,\xpg@bloaded\fi}%
+    }%
+    \csgdef{#2@loaded}{}%
+  }{}
   \gdef\xpg@main@language{#2}%
   \tl_if_blank:nTF {#1}{\gdef\mainlanguagevariant{}}{%
      % If the optional argument sets a value for the key “variant”,
@@ -1099,9 +1123,6 @@
      }%
   }%
   \csgdef{#2@gvar}{\mainlanguagevariant}%
-  % Store babelname of main language (for external packages such as biblatex)
-  \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
-      { \xdef\mainbabelname{\l_tmpa_tl} }
   %% The following settings are for the default language and script
   % this tells bidi.sty or luabidi.sty that the document is RTL
   \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{%
@@ -1117,6 +1138,9 @@
   \xpg@info{Default~ language~ is~ #2}%
   \polyglossia@set@language@name[#1]{#2}%
   \def\mainlanguagename{#2}
+  % Store babelname of main language (for external packages such as biblatex)
+  \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
+      { \edef\mainbabelname{\l_tmpa_tl} }
   % Store babelname of current language (for external packages such as biblatex)
   \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
       { \edef\babelname{\l_tmpa_tl}% 
@@ -1286,20 +1310,40 @@
     % define environment and command
     \exp_args:Nx\polyglossia@define@language@cmd:n{#2}
     \csgdef{#2@loaded}{}%
-    % If a variant is set, store it.
-    \gdef\otherlanguagevariant{}
-    \tl_if_blank:nTF {#1}{}{%
-      % If the optional argument sets a value for the key “variant”,
-      % store it in \xpg@main@langvariant
-      \clist_map_inline:nn { #1 } {%
-         \xpg@parsevariantkeyvalue##1=@xpg@other@langvariant\relax
-      }%
+    \ifcsdef{#2@alias@lang}{%
+       \ifcsdef{#2@alias@opts}{%
+         \exp_args:Nxx \polyglossia_load_lang_definition:nn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}}%
+         \exp_args:Nxx \polyglossia@set@other@language:nn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}}%
+       }{%
+         \polyglossia@set@other@language:nn {#1} {\csuse{#2@alias@lang}}%
+       }%
+    }{%
+      \polyglossia@set@other@language:nn {#1} {#2}%
     }%
-    \csgdef{#2@gvar}{\otherlanguagevariant}%
-    \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
-      { \xdef\otherlanguagebabelname{\l_tmpa_tl} }
-    \csgdef{#2@gbabelname}{\otherlanguagebabelname}%
+  }
+  {}
+}
+
+\cs_new:Nn \polyglossia@set@other@language:nn
+{
+  \ifcsundef{#2@loaded}
+  {
+    \global\edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
+    \csgdef{#2@loaded}{}%
   }{}
+  % If a variant is set, store it.
+  \gdef\otherlanguagevariant{}
+  \tl_if_blank:nTF {#1}{}{%
+    % If the optional argument sets a value for the key “variant”,
+    % store it in \xpg@other@langvariant
+    \clist_map_inline:nn { #1 } {%
+       \xpg@parsevariantkeyvalue##1=@xpg@other@langvariant\relax
+    }%
+  }%
+  \csgdef{#2@gvar}{\otherlanguagevariant}%
+  \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
+    { \xdef\otherlanguagebabelname{\l_tmpa_tl} }
+  \csgdef{#2@gbabelname}{\otherlanguagebabelname}%
 }
 
 % Store main language variant for external packages
