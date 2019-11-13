@@ -134,8 +134,8 @@ tasks automatically:
       calendars are supported).
 \item For languages that have their own numbering system, modifying the formatting
       of numbers appropriately (this also includes redefining the alphabetic sequence
-      for non-Latin alphabets).\footnote{ %
-        For the Arabic script this is now done by the bundled package \pkg{arabicnumbers}.}
+      for non-Latin alphabets).\footnote{%
+        This is done by bundled sub-packages such as \pkg{arabicnumbers}.}
 \item Ensuring proper directionality if the document contains languages
       that are written from right to left (via the package \pkg{bidi},
       available separately).
@@ -184,7 +184,7 @@ or languages with babel shorthands.
 \subsection{Supported languages}
 
 Table~\ref{tab:lang} lists all languages currently supported.
-Those in red have specific options and/or commands
+Those in \TR{red} have specific options and/or commands
 that are explained in section \ref{specific} below.
 
 \begin{table}[ht]\centering
@@ -348,21 +348,27 @@ For instance the following allows us to quote the beginning
 of Homer’s \textit{Iliad}:
 
 \begin{Verbatim}[formatcom=\color{myblue}]
-\begin{greek}[variant=ancient]
-μῆνιν ἄειδε θεὰ Πηληϊάδεω Ἀχιλῆος οὐλομένην, ἣ μυρί' Ἀχαιοῖς ἄλγε'
-ἔθηκε, πολλὰς δ' ἰφθίμους ψυχὰς Ἄϊδι προί̈αψεν ἡρώων, αὐτοὺς δὲ ἑλώρια
-τεῦχε κύνεσσιν οἰωνοῖσί τε πᾶσι, Διὸς δ' ἐτελείετο βουλή, ἐξ οὗ δὴ τὰ
-πρῶτα διαστήτην ἐρίσαντε Ἀτρεί̈δης τε ἄναξ ἀνδρῶν καὶ δῖος Ἀχιλλεύς.
-\end{greek}
+  \begin{quote}
+   \begin{greek}[variant=ancient]
+     μῆνιν ἄειδε θεὰ Πηληϊάδεω Ἀχιλῆος οὐλομένην, ἣ μυρί' Ἀχαιοῖς
+     ἄλγε' ἔθηκε, πολλὰς δ' ἰφθίμους ψυχὰς Ἄϊδι προί̈αψεν ἡρώων,
+     αὐτοὺς δὲ ἑλώρια τεῦχε κύνεσσιν οἰωνοῖσί τε πᾶσι, Διὸς δ'
+     ἐτελείετο βουλή, ἐξ οὗ δὴ τὰ πρῶτα διαστήτην ἐρίσαντε Ἀτρεί̈δης
+     τε ἄναξ ἀνδρῶν καὶ δῖος Ἀχιλλεύς.
+   \end{greek}
+  \end{quote}
 \end{Verbatim}
 
+\vspace{-.5\baselineskip}
+
+\begin{quote}
 \begin{greek}[variant=ancient]
 μῆνιν ἄειδε θεὰ Πηληϊάδεω Ἀχιλῆος οὐλομένην, ἣ μυρί' Ἀχαιοῖς ἄλγε' ἔθηκε,
 πολλὰς δ' ἰφθίμους ψυχὰς Ἄϊδι προί̈αψεν ἡρώων, αὐτοὺς δὲ ἑλώρια τεῦχε κύνεσσιν
 οἰωνοῖσί τε πᾶσι, Διὸς δ' ἐτελείετο βουλή, ἐξ οὗ δὴ τὰ πρῶτα διαστήτην ἐρίσαντε
 Ἀτρεί̈δης τε ἄναξ ἀνδρῶν καὶ δῖος Ἀχιλλεύς.
 \end{greek}
-\bigskip
+\end{quote}
 
 \noindent\DescribeEnv{Arabic} Note that for Arabic one cannot use the environment ¦arabic¦,
 as \cmd\arabic\ is defined internally by \LaTeX. In this case
@@ -900,6 +906,7 @@ The default value of each option is given in italic.
 %	\item \TB{locale} (not yet implemented)
 %	\item \TB{calendar} (not yet implemented)
 \end{itemize}
+\condbreak{2\baselineskip}
 \paragraph*{Commands:}
 \begin{itemize}
 	\item \Cmd\ontoday: special form of \cmd\today\ which produces a slightly different
