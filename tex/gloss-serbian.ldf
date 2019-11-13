@@ -18,24 +18,23 @@
 }
 
 \newif\if@serbian@cyr
+\define@choicekey*+{serbian}{Script}[\val\nr]{cyrillic,latin}[cyrillic]{%
+   \ifcase\nr\relax
+      % cyrillic:
+      \@serbian@cyrtrue
+      \SetLanguageKeys{serbian}{scripttag=cyrl,script=Cyrillic,babelname=serbianc}
+      \xpg@fontsetup@nonlatin{serbian}%
+   \or
+      % latin:
+      \@serbian@cyrfalse
+      \SetLanguageKeys{serbian}{scripttag=latn,script=Latin}
+      \xpg@fontsetup@latin{serbian}%
+      %TODO \def\serbian@language{\language=\l@serbianlat}%
+      % or should we use Croatian patterns as a fallback for the time being???
+   \fi
+   \xpg@info{Option: Serbian, script=\val}%
+}{\xpg@warning{Unknown Serbian script `#1'}}
 
-\define@key{serbian}{Script}[Cyrillic]{%
-  \ifstrequal{#1}{Cyrillic}%
-    {\@serbian@cyrtrue
-     \SetLanguageKeys{serbian}{scripttag=cyrl,script=Cyrillic,babelname=serbianc}
-     \xpg@fontsetup@nonlatin{serbian}%
-    }%
-    {\ifstrequal{#1}{Latin}%
-      {\@serbian@cyrfalse
-       \SetLanguageKeys{serbian}{scripttag=latn,script=Latin}
-       \xpg@fontsetup@latin{serbian}%
-       %TODO \def\serbian@language{\language=\l@serbianlat}%
-       % or should we use Croatian patterns as a fallback for the time being???
-      }%
-      {\xpg@error{Unknown script `#1' for Serbian language\MessageBreak
-      Valid values are "Cyrillic" and "Latin"}}%
-    }%
-}
 \define@key{serbian}{script}[Cyrillic]{\setkeys{serbian}{Script=#1}}
 
 \newif\ifserbian@numerals
