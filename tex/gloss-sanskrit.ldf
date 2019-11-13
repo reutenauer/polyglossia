@@ -24,6 +24,8 @@ and may look very wrong.}
   }%
 }
 
+\define@key{sanskrit}{script}[Devanagari]{\setkeys{sanskrit}{Script=#1}}
+
 \def\fontsetup@sanskrit@Devanagari{%
   \SetLanguageKeys{sanskrit}{scripttag=deva,script=Devanagari}
   \xpg@fontsetup@nonlatin{sanskrit}}
@@ -48,16 +50,20 @@ and may look very wrong.}
 
 \setkeys{sanskrit}{Script} %sets the default for Devanagari
 
-\def\tmp@western{Western}
+
 \newif\ifsanskrit@devanagari@numerals
 \sanskrit@devanagari@numeralstrue
+\define@choicekey*+{sanskrit}{numerals}[\val\nr]{Devanagari,Western}[Devanagari]{%
+   \ifcase\nr\relax
+      % Devanagari:
+      \sanskrit@devanagari@numeralstrue%
+   \or
+      % Western:
+      \sanskrit@devanagari@numeralsfalse%
+   \fi
+   \xpg@info{Option: Sanskrit, numerals=\val}%
+}{\xpg@warning{Unknown Sanskrit numeral `#1'}}
 
-\define@key{sanskrit}{numerals}[Devanagari]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@western
-    \sanskrit@devanagari@numeralsfalse
-  \fi%
-}
 
 \newcommand{\sanskritnumerals}[2]{\sanskritnumber{#2}}
 
