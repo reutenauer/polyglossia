@@ -1068,7 +1068,7 @@
     }%
   }%
   \csgdef{#3@alias@lang}{#2}%
-  \csgdef{#3@alias@opts}{#1}%
+  \tl_if_blank:nF {#1} {\csgdef{#3@alias@opts}{#1}}%
 }
 
 % provide way to define alias environment and command
@@ -1425,7 +1425,7 @@
      \ifcsdef{#2@alias@opts}{%
        \polyglossia@foreignlanguage:nnn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}} {#3}%
      }{%
-       \polyglossia@foreignlanguage:nnn {#2} {\csuse{#2@alias@lang}} {#3}%
+       \polyglossia@foreignlanguage:nnn {#1} {\csuse{#2@alias@lang}} {#3}%
      }%
   }{%
     \polyglossia@foreignlanguage:nnn {#1} {#2} {#3}%
@@ -1450,7 +1450,7 @@
      \ifcsdef{#2@alias@opts}{%
        \polyglossia@otherlanguage:nn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}}%
      }{%
-       \polyglossia@otherlanguage:nn {#2} {\csuse{#2@alias@lang}}%
+       \polyglossia@otherlanguage:nn {#1} {\csuse{#2@alias@lang}}%
      }%
   }{%
     \polyglossia@otherlanguage:nn {#1} {#2}%
