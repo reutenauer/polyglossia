@@ -3,12 +3,14 @@
 New features:
   * Add option "indentfirst" to Russian (#78).
   * Add options to set and customize French-style itemize item labels to French (#89).
+  * Polyglossia now understands all babel language names in \setdefaultlanguage,
+    \setotherlanguage and the language switching commands (#112, #132).
   * Add optional localized math operators to Spanish (#123).
   * Swap section headings in Hungarian (#344). New option "swapstrings" provides control
     over this.
   * Introduce macro \setlanguagealias and \setlanguagealias*.
   * Introduce language switching command \textlang{lang}{...} (equivalent to \text<lang>,
-    but also available with \setlanguagealias* which does not define \text<alias>)
+    but also available with \setlanguagealias* which does not define \text<alias>).
   * Add support for Afrikaans.
   * Add support for Belarusian.
   * Add support for Bosnian.

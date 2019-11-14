@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-newzealand.ldf}[polyglossia: module for newzealand english]
+
+% We provide this as a babel alias
+
+\xpg@load@master@language{english}
+
+\endinput

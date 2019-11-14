@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-slovene.ldf}[polyglossia: module for slovenian]
+
+% We provide this as a babel alias
+
+\xpg@load@master@language{slovenian}
+
+\endinput

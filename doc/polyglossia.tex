@@ -104,6 +104,8 @@
 \maketitle
 \tableofcontents
 
+\condbreak{4\baselineskip}
+
 
 \DeleteShortVerb{\|}
 \MakeShortVerb{\¦}
@@ -215,16 +217,16 @@ croatian        & \TX{hebrew}    & \TX{malay}     & \TX{serbian}    & \TX{welsh}
 \end{table}
 
 \paragraph{Version Notes} The support for Amharic\new{v1.0.1} should be considered an experimental attempt to
-port the package \pkg{ethiop}.\footnote{Feedback is welcome.}
+port the package \pkg{ethiop}; feedback is welcome.
 Version 1.1.1\new{v1.1.1} added support for Asturian, %\footnote{ Provided by Kevin Godby and Xuacu Saturio.}, 
 Lithuanian, %\footnote{ Provided by Kevin Godby and Paulius Sladkevičius.},
 and Urdu. %\footnote{ Provided by Kamal Abdali.}
 %
-Version 1.2\new{v1.2.0} adds support for Armenian, Occitan, Bengali,
+Version 1.2\new{v1.2.0} introduced Armenian, Occitan, Bengali,
 Lao, Malayalam, Marathi, Tamil, Telugu, and Turkmen.\footnote{%
   See acknowledgements at the end for due credit to the various contributors.}
-Version 1.43\new{v1.43} silently introduced basic support for Japanese. This
-is considered experimental, and feedback is appreciated.
+Version 1.43\new{v1.43} brought basic support for Japanese (this
+is considered experimental, feedback is appreciated).
 In version 1.45\new{v1.45}, support for Kurdish and Mongolian as well as some new
 variants (Canadian French and English) have been added. Furthermore,  for consistency reasons, some language have
 been renamed (\emph{farsi}\textrightarrow\emph{persian}, \emph{friulan}\textrightarrow\emph{friulian},
@@ -234,72 +236,82 @@ been renamed (\emph{farsi}\textrightarrow\emph{persian}, \emph{friulan}\textrigh
 \emph{lsorbian}\slash\emph{usorbian}\textrightarrow\emph{sorbian},
 \emph{irish}\slash\emph{scottish}\textrightarrow\emph{gaelic},
 \emph{norsk}\slash\emph{nynorsk}\textrightarrow\emph{norwegian}). The old names are still supported for backwards
-compatibility reasons, but they might not give access to newer language features.
-In version 1.46\new{v1.46}, support for Afrikaans, Belarusian, Bosnian and Georgian has been added.
+compatibility reasons.
+Version 1.46\new{v1.46} introduces support for Afrikaans, Belarusian, Bosnian and Georgian.
 
 
-\subsection{Relation to Babel languages}
+\subsection{Relation to and use of Babel language names}
 
 If you are familiar with the \pkg{babel} package, you will note that \pkg{polyglossia}'s language naming
 slightly differs. Whereas \pkg{babel} has a unique name for each language variety (\eg\emph{american} and \emph{british}),
-\pkg{polyglossia} differentiates language varieties via language options.
+\pkg{polyglossia} differentiates language varieties via language options (\eg \emph{english}, ¦variant=american¦).
 
-Furthermore, \pkg{babel} uses sometimes abbreviations for language names (\eg\emph{bahasam} for Bahasa Malayu) as well
+Furthermore, \pkg{babel} sometimes uses abbreviated language names (\eg\emph{bahasam} for Bahasa Malayu) as well
 as endonyms, \ie language names coming from the designated languages (such as \emph{bahasa}, \emph{canadien} or \emph{magyar}).
 As opposed to this, \pkg{polyglossia} always uses spelled-out (lower-cased) English language names.
-
-Table~\ref{tab:bbllang} lists the language names that differ in both packages. \pkg{Babel} names marked in red can also be used
-in \pkg{polyglossia} as an alias.\footnote{This is for historical reasons, since earlier versions of \pkg{polyglossia} used
-	those names as well. This also provides you with additional language switching commands and environments, \eg \cmd\textportuges\ 
-	and \emph{portuges} (in addition to \cmd\textportuguese\ and \emph{portuguese} which will be available this way as well).}
+Please refer to table~\ref{tab:bbllang} for the differing language names in both packages. 
 
 \begin{table}
 \caption{\label{tab:bbllang}Babel-polyglossia language name matching}
 
+\begin{minipage}[t]{1\columnwidth}
 \small\centering
 \begin{tabular}{lll}
 \toprule 
 \textbf{Babel name} & \textbf{Polyglossia name} & \textbf{Polyglossia options}\tabularnewline
 \midrule
-acadien         & french     & variant=acadian                \\
-american        & english    & \emph{(default)}               \\
-australian      & english    & variant=australian             \\
-austrian        & german     & variant=austrian, spelling=old \\
-bahasa          & malay      & \emph{(default)}               \\
-\TR{bahasam}    & malay      & variant=malaysian              \\
-\TR{brazil}     & portuguese & variant=brazilian              \\
-british         & english    & variant=british                \\
-canadian        & english    & variant=canadian               \\
-canadien        & french     & variant=canadian               \\
-\TR{farsi}      & persian    &                                \\
-\TR{friulan}    & friulian   &                                \\
-german          & german     & spelling=old                   \\
-\TR{irish}      & gaelic     & variant=irish                  \\
-kurmanji        & kurdish    & variant=kurmanji               \\
-latin.classic   & latin      & variant=classic                \\
-latin.ecclesiastic & latin   & variant=ecclesiastic           \\
-latin.medieval  & latin      & variant=medieval               \\
-lowersorbian    & sorbian    & variant=lower                  \\
-\TR{magyar}     & hungarian  &                                \\
-naustrian       & german     & variant=austrian               \\
-newzealand      & english    & variant=newzealand             \\
-ngerman         & german     & \emph{(default)}               \\
-\TR{norsk}      & norwegian  & variant=bokmal                 \\
-nswissgerman    & german     & variant=swiss                  \\
-\TR{nynorsk}    & norwegian  & \emph{(default)}               \\
-polutonikogreek & greek      & variant=polytonic              \\
-\TR{portuges}   & portuguese & \emph{(default)}               \\
-\TR{samin}      & sami       &                                \\
-\TR{scottish}   & gaelic     & variant=scottish               \\
-serbianc        & serbian    & script=Cyrillic                \\
-slovene         & slovenian  &                                \\
-spanishmx       & spanish    & variant=mexican                \\
-swissgerman     & german     & variant=swiss, spelling=old    \\
-uppersorbian    & sorbian    & variant=upper                  \\
+acadien            & french     & variant=acadian                     \\
+american           & english    & variant=american [\emph{default}]   \\
+australian         & english    & variant=australian                  \\
+austrian           & german     & variant=austrian, spelling=old      \\
+bahasa             & malay      & variant=indonesian [\emph{default}] \\
+bahasam            & malay      & variant=malaysian                   \\
+brazil             & portuguese & variant=brazilian                   \\
+british            & english    & variant=british                     \\
+canadian           & english    & variant=canadian                    \\
+canadien           & french     & variant=canadian                    \\
+farsi              & persian    &                                     \\
+friulan            & friulian   &                                     \\
+german\footnote{Due to the name conflict only available in \pkg{polyglossia} as \emph{germanb} (which is a \pkg{babel} synonym).}
+                   & german     & spelling=old                        \\
+irish              & gaelic     & variant=irish [\emph{default}]      \\
+kurmanji           & kurdish    & variant=kurmanji                    \\
+latin.classic\footnote{Available in \pkg{polyglossia} as \emph{latinclassic} (as dots are invalid in command names).}
+                   & latin      & variant=classic                     \\
+latin.ecclesiastic\footnote{Available in \pkg{polyglossia} as \emph{latinecclesiastic} (as dots are invalid in command names).}
+                   & latin      & variant=ecclesiastic                \\
+latin.medieval\footnote{Available in \pkg{polyglossia} as \emph{latinmedieval} (as dots are invalid in command names).}
+                   & latin      & variant=medieval                    \\
+lowersorbian       & sorbian    & variant=lower                       \\
+magyar             & hungarian  &                                     \\
+naustrian          & german     & variant=austrian                    \\
+newzealand         & english    & variant=newzealand                  \\
+ngerman            & german     & variant=german [\emph{default}]     \\
+norsk              & norwegian  & variant=bokmal                      \\
+nswissgerman       & german     & variant=swiss                       \\
+nynorsk            & norwegian  & variant=nynorsk [\emph{default}]    \\
+polutonikogreek    & greek      & variant=polytonic                   \\
+portuges           & portuguese & variant=portuguese [\emph{default}] \\
+samin              & sami       &                                     \\
+scottish           & gaelic     & variant=scottish                    \\
+serbianc           & serbian    & script=Cyrillic                     \\
+slovene            & slovenian  &                                     \\
+spanishmx          & spanish    & variant=mexican                     \\
+swissgerman        & german     & variant=swiss, spelling=old         \\
+uppersorbian       & sorbian    & variant=upper                       \\
 \bottomrule
 \end{tabular}
+\end{minipage}
 	
 \end{table}
+
+For convenience reasons, \pkg{polyglossia} also supports the use of babel names\new{v1.46} (for the few justified
+exceptions, please refer to the notes in table~\ref{tab:bbllang}).
+The babel names listed in table~\ref{tab:bbllang} can be used instead of the corresponding polyglossia
+name\slash options in \cmd\setdefaultlanguage\ and \cmd\setotherlanguage\ as well as in the \pkg{polyglossia} and
+\pkg{babel} language switching commands\slash environments documented in section~\ref{sec:langcmds} and
+\ref{sec:babelcmds} (\eg \cmd\textaustrian\ is synonymous to \cmd{\textgerman[variant=austrian,spelling=old]}).
+However, unless you have special reasons, we strongly encourage you to use the \pkg{polyglossia} names.
 
 
 \subsection{Global options}

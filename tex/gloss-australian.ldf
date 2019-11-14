@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-australian.ldf}[polyglossia: module for australian english]
+
+% We provide this as a babel alias
+
+\xpg@load@master@language{english}
+
+\endinput

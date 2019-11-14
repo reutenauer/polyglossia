@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-nswissgerman.ldf}[polyglossia: module for swiss german (current spelling)]
+
+% We provide this as a babel alias
+
+\xpg@load@master@language{german}
+
+\endinput

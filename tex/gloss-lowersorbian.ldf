@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-lowersorbian.ldf}[polyglossia: module for lower sorbian]
+
+% We provide this as a babel alias
+
+\xpg@load@master@language{sorbian}
+
+\endinput

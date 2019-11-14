@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-spanishmx.ldf}[polyglossia: module for mexican spanish]
+
+% We provide this as a babel alias
+
+\xpg@load@master@language{spanish}
+
+\endinput
