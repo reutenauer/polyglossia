@@ -1052,9 +1052,9 @@
     % The starred version does not define \text<alias>
     \IfBooleanT {#1}
       {
-        \exp_args:Nc \newcommand {text#4} [1]
+        \exp_args:Nc \newcommand {text#4} [2][]
         {%
-          \xpg@textlanguage[#2]{#3}{##1}%
+          \xpg@textlanguage[#2,##1]{#3}{##2}%
         }%
       }%
   }{%
@@ -1069,9 +1069,9 @@
     % The starred version does not (re)define \text<alias>
     \IfBooleanT {#1}
       {
-        \exp_args:Nc \renewcommand {text#4} [1]
+        \exp_args:Nc \renewcommand {text#4} [2][]
         {%
-          \xpg@textlanguage[#2]{#3}{##1}%
+          \xpg@textlanguage[#2,##1]{#3}{##2}%
         }%
       }%
   }%
@@ -1100,8 +1100,8 @@
   }
   \ifcsdef{#2@alias@lang}{%
      \ifcsdef{#2@alias@opts}{%
-       \exp_args:Nxx \polyglossia_load_lang_definition:nn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}}%
-       \exp_args:Nxx \polyglossia@set@default@language:nn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}}%
+       \exp_args:Nxx \polyglossia_load_lang_definition:nn {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
+       \exp_args:Nxx \polyglossia@set@default@language:nn {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
      }{%
        \polyglossia@set@default@language:nn {#1} {\csuse{#2@alias@lang}}%
      }%
@@ -1320,8 +1320,8 @@
     \csgdef{#2@loaded}{}%
     \ifcsdef{#2@alias@lang}{%
        \ifcsdef{#2@alias@opts}{%
-         \exp_args:Nxx \polyglossia_load_lang_definition:nn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}}%
-         \exp_args:Nxx \polyglossia@set@other@language:nn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}}%
+         \exp_args:Nxx \polyglossia_load_lang_definition:nn {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
+         \exp_args:Nxx \polyglossia@set@other@language:nn {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
        }{%
          \polyglossia@set@other@language:nn {#1} {\csuse{#2@alias@lang}}%
        }%
@@ -1384,7 +1384,7 @@
 \newcommand\textlang[3][]{%
   \ifcsdef{#2@alias@lang}{%
      \ifcsdef{#2@alias@opts}{%
-       \xpg@textlanguage[\csuse{#2@alias@opts}]{\csuse{#2@alias@lang}}{#3}%
+       \xpg@textlanguage[\csuse{#2@alias@opts},#1]{\csuse{#2@alias@lang}}{#3}%
      }{%
        \xpg@textlanguage[#1]{\csuse{#2@alias@lang}}{#3}%
      }%
@@ -1428,7 +1428,7 @@
 {%
   \ifcsdef{#2@alias@lang}{%
      \ifcsdef{#2@alias@opts}{%
-       \polyglossia@foreignlanguage:nnn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}} {#3}%
+       \polyglossia@foreignlanguage:nnn {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}} {#3}%
      }{%
        \polyglossia@foreignlanguage:nnn {#1} {\csuse{#2@alias@lang}} {#3}%
      }%
@@ -1453,7 +1453,7 @@
 {%
   \ifcsdef{#2@alias@lang}{%
      \ifcsdef{#2@alias@opts}{%
-       \polyglossia@otherlanguage:nn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}}%
+       \polyglossia@otherlanguage:nn {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
      }{%
        \polyglossia@otherlanguage:nn {#1} {\csuse{#2@alias@lang}}%
      }%
@@ -1510,7 +1510,7 @@
 {%
   \ifcsdef{#3@alias@lang}{%
      \ifcsdef{#3@alias@opts}{%
-       \polyglossia@select@language:nnn {#1} {\csuse{#3@alias@opts}} {\csuse{#3@alias@lang}}%
+       \polyglossia@select@language:nnn {#1} {\csuse{#3@alias@opts},#2} {\csuse{#3@alias@lang}}%
      }{%
        \polyglossia@select@language:nnn {#1} {#2} {\csuse{#3@alias@lang}}%
      }%
