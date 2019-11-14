@@ -6,15 +6,4 @@
 
 \xpg@load@master@language{portuguese}
 
-\PolyglossiaSetup{brazil}{
-  language=Brazilian Portuguese,
-  langtag=PTG,
-  hyphennames={brazil,portuguese,portuges},
-  hyphenmins={2,3},
-  fontsetup=true,
-}
-
-\let\captionsbrazil\captionsportuguese@brazil
-\let\datebrazil\dateportuguese@brazil
-     
 \endinput

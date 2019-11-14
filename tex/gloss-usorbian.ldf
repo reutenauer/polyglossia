@@ -5,16 +5,4 @@
 
 \xpg@load@master@language{sorbian}
 
-\PolyglossiaSetup{usorbian}{
-  language=Upper Sorbian,
-  babelname=uppersorbian,
-  hyphennames={usorbian,uppersorbian},
-  hyphenmins={2,2},
-  langtag=USB,
-  fontsetup=true,
-}
-
-\let\captionsusorbian\captionssorbian@usorbian
-\let\dateusorbian\datesorbian@usorbian
-
 \endinput

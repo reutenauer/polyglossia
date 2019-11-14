@@ -5,16 +5,4 @@
 
 \xpg@load@master@language{sorbian}
 
-\PolyglossiaSetup{lsorbian}{
-  language=Lower Sorbian,
-  babelname=lowersorbian,
-  hyphennames={lsorbian,lowersorbian,Lsorbian},
-  langtag=LSB,
-  hyphenmins={2,2},
-  fontsetup=true,
-}
-
-\let\captionslsorbian\captionssorbian@lsorbian
-\let\datelsorbian\datesorbian@lsorbian
-
 \endinput

@@ -5,38 +5,4 @@
 
 \xpg@load@master@language{persian}
 
-\PolyglossiaSetup{farsi}{
-  script=Arabic,
-  direction=RL,
-  scripttag=arab,
-  langtag=FAR,
-  hyphennames={nohyphenation},
-  fontsetup=true,
-  localnumeral=farsinumerals
-}
-
-\define@key{farsi}{numerals}[eastern]{%
-  \setkeys{persian}{numerals=#1}}
-
-\define@key{farsi}{abjadjimnotail}[true]{%
-  \setkeys{persian}{abjadjimnotail=#1}}
-
-\define@key{farsi}{locale}[default]{%
-  \setkeys{persian}{locale=#1}}
-
-\setkeys{farsi}{locale,numerals}
-
-%\Hijritoday is now locale-aware and will format the date with this macro:
-\DefineFormatHijriDate{farsi}{\@ensure@RTL{%
-   \farsinumber{\value{Hijriday}}\space\HijriMonthArabic{\value{Hijrimonth}}\space\farsinumber{\value{Hijriyear}}}}
-
-\let\captionsfarsi\captionspersian
-\let\datefarsi\datepersian
-\let\farsi@numbers\persian@numbers
-\let\nofarsi@numbers\nopersian@numbers
-\let\farsi@globalnumbers\persian@globalnumbers
-\let\nofarsi@globalnumbers\nopersian@globalnumbers
-\let\blockextras@farsi\blockextras@persian
-\let\noextras@farsi\noextras@persian
-
 \endinput

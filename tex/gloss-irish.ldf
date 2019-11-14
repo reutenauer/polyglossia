@@ -5,14 +5,4 @@
 
 \xpg@load@master@language{gaelic}
 
-\PolyglossiaSetup{irish}{
-  hyphennames={irish},
-  hyphenmins={2,2},
-  langtag=IRI,
-  fontsetup=true,
-}
-
-\let\captionsirish\captionsgaelic@irish
-\let\dateirish\dategaelic@irish
-
 \endinput

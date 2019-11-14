@@ -7,6 +7,10 @@
   fontsetup=false,
 }
 
+% Babel and backwards compat. aliases
+\setlanguagealias[variant=bokmal]{norwegian}{norsk}
+\setlanguagealias[variant=nynorsk]{norwegian}{nynorsk}
+
 \def\norwegian@variant{nynorsk}
 \define@choicekey*+{norwegian}{variant}[\val\nr]{nynorsk,bokmal}[nynorsk]{%
    \ifcase\nr\relax

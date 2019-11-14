@@ -9,6 +9,10 @@
   fontsetup=true,
 }
 
+% Babel and backwards compat. alias
+\setlanguagealias{sami}{samin}
+%\setlanguagealias[variant=northern]{sami}{samin}
+
 % TODO: Add other Sami varieties
 \def\sami@variant{northern}
 %\define@choicekey*+{sami}{variant}[\val\nr]{northern}[nothern]{%

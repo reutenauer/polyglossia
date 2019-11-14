@@ -5,16 +5,5 @@
 
 \xpg@load@master@language{norwegian}
 
-\PolyglossiaSetup{norsk}{
-  hyphennames={norsk},
-  hyphenmins={2,2},
-  langtag=NOR,
-  frenchspacing=true,
-  fontsetup=true,
-}
-
-\let\captionsnorsk\captionsnorwegian@norsk
-\let\datenorsk\datenorwegian@norsk
-
 \endinput
 

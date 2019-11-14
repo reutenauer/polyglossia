@@ -20,6 +20,9 @@ and may look very wrong.}
   localnumeral=farsinumerals
 }
 
+% Babel and backwards compat. alias
+\setlanguagealias{persian}{farsi}
+
 \newif\if@western@numerals
 \def\tmp@western{western}
 \define@key{persian}{numerals}[eastern]{%

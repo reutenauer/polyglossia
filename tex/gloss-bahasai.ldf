@@ -5,18 +5,4 @@
 
 \xpg@load@master@language{malay}
 
-\PolyglossiaSetup{bahasai}{%
-  language=Indonesian,
-  babelname=bahasa,
-  langtag=IND,
-  hyphennames={indonesian,indon,bahasai,bahasa,bahasam,malay,melayu},
-  hyphenmins={2,2},
-  fontsetup=true}
-
-\let\captionsbahasai\captionsmalay@indonesian
-\let\datebahasai\datemalay@indonesian
-
-\DefineFormatHijriDate{bahasai}{%
-  \number\value{Hijriday}\space\hijrimonthmalay@indonesian{\value{Hijrimonth}}\space\number\value{Hijriyear}}
-
 \endinput

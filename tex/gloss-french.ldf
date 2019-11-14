@@ -10,6 +10,10 @@
   hyphenmins={2,2},
   fontsetup=true}
 
+% Babel aliases
+\setlanguagealias[variant=acadian]{french}{acadien}
+\setlanguagealias[variant=canadian]{french}{canadien}
+
 \def\french@variant{french}
 \define@choicekey*+{french}{variant}[\val\nr]{french,canadian,acadian}[french]{%
    \ifcase\nr\relax

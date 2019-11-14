@@ -17,6 +17,9 @@
   localnumeral=kurdishnumerals
 }
 
+% Babel aliases
+\setlanguagealias[variant=kurmanji]{kurdish}{kurmanji}
+
 \newif\if@kurdish@kurmanji
 \def\kurdish@variant{sorani}
 \define@choicekey*+{kurdish}{variant}[\val\nr]{sorani,kurmanji}[sorani]{%

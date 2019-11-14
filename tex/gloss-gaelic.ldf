@@ -9,6 +9,10 @@
   fontsetup=true,
 }
 
+% Babel aliases
+\setlanguagealias[variant=irish]{gaelic}{irish}
+\setlanguagealias[variant=scottish]{gaelic}{scottish}
+
 \def\gaelic@variant{irish}
 \define@choicekey*+{gaelic}{variant}[\val\nr]{irish,scottish}[irish]{%
    \ifcase\nr\relax

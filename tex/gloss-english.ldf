@@ -1,10 +1,18 @@
 \ProvidesFile{gloss-english.ldf}[polyglossia: module for english]
+
 \PolyglossiaSetup{english}{
   hyphennames={english,american,usenglish,USenglish},
   hyphenmins={2,3},
   langtag=ENG,
   fontsetup=true,
 }
+
+% Babel aliases
+\setlanguagealias[variant=us]{english}{american}
+\setlanguagealias[variant=australian]{english}{australian}
+\setlanguagealias[variant=british]{english}{british}
+\setlanguagealias[variant=canadian]{english}{canadian}
+\setlanguagealias[variant=newzealand]{english}{newzealand}
 
 \providebool{british@hyphen}
 \providebool{english@ordinalmonthday}

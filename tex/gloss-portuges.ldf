@@ -1,4 +1,4 @@
-\ProvidesFile{gloss-portuges.ldf}[polyglossia: module for portuguese (DEPRECATED!)]
+\ProvidesFile{gloss-portuges.ldf}[polyglossia: module for portuguese]
 
 % We only provide this gloss for backwards compatibility. The name
 % 'portuges' was selected in accordance with babel (which probably
@@ -6,15 +6,5 @@
 % English language names, we use 'portuguese' now.
 
 \xpg@load@master@language{portuguese}
-
-\PolyglossiaSetup{portuges}{
-  hyphennames={portuges,portuguese},
-  hyphenmins={2,3},
-  langtag=PTG,
-  fontsetup=true,
-}
-
-\let\captionsportuges\captionsportuguese@portuges
-\let\dateportuges\dateportuguese@portuges
      
 \endinput

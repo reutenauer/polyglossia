@@ -11,6 +11,11 @@
     langtag = LAT
   }
 
+% Babel aliases
+\setlanguagealias[variant=classic]{latin}{latinclassic}
+\setlanguagealias[variant=ecclesiastic]{latin}{latinecclesiastic}
+\setlanguagealias[variant=medieval]{latin}{latinmedieval}
+
 
 %%%%% Variables and commands concerning spelling
 

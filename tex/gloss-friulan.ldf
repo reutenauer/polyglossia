@@ -4,19 +4,5 @@
 
 \xpg@load@master@language{friulian}
 
-\PolyglossiaSetup{friulan}{%
-  language=Friulian,
-  hyphennames={friulan,furlan},
-  hyphenmins={2,2},
-  langtag=FRL,
-  indentfirst=false,
-  fontsetup=true,
-  frenchspacing=true,
-}
-
-\let\captionsfriulan\captionsfriulian
-\let\datefriulan\datefriulian
-\let\noextras@friulan\noextras@friulian
-\let\blockextras@friulan\blockextras@friulian
-\let\inlineextras@friulan\inlineextras@friulian
+\endinput
 

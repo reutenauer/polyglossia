@@ -1,4 +1,5 @@
 \ProvidesFile{gloss-portuguese.ldf}[polyglossia: module for portuguese]
+
 \PolyglossiaSetup{portuguese}{
   babelname=portuges,
   hyphennames={portuges,portuguese},
@@ -6,6 +7,10 @@
   langtag=PTG,
   fontsetup=true,
 }
+
+% Babel aliases
+\setlanguagealias[variant=portuguese]{portuguese}{portuges}
+\setlanguagealias[variant=brazilian]{portuguese}{brazil}
 
 \def\portuguese@variant{portuges}
 \define@choicekey*+{portuguese}{variant}[\val\nr]{portuguese,brazilian}[portuguese]{%

@@ -10,6 +10,9 @@
   babelname=spanish
 }
 
+% Babel aliases
+\setlanguagealias[variant=mexican]{spanish}{spanishmx}
+
 \newif\if@spanish@mexico
 \@spanish@mexicofalse
 \define@choicekey*+{spanish}{variant}[\val\nr]{spanish,mexican}[spanish]{%

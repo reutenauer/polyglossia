@@ -1,4 +1,5 @@
 \ProvidesFile{gloss-greek.ldf}[polyglossia: module for greek]
+
 \PolyglossiaSetup{greek}{
   script=Greek,
   scripttag=grek,
@@ -10,6 +11,9 @@
   Localnumeral=Greeknumerals
   %TODO localalph={greek@alph,greek@Alph}
 }
+
+% Babel aliases
+\setlanguagealias[variant=polytonic]{greek}{polutonikogreek}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The code in this file was initially adapted from the antomega

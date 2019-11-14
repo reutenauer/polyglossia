@@ -11,6 +11,9 @@
   frenchspacing=true,
 }
 
+% Babel and backwards compat. alias
+\setlanguagealias{friulian}{friulan}
+
 \def\captionsfriulian{%
     \def\prefacename{Prefazion}%
     \def\refname{Riferiments}%

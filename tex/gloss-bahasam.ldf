@@ -1,21 +1,8 @@
 \ProvidesFile{gloss-bahasam.ldf}[polyglossia: module for bahasa melayu]
 
-% We only provide this gloss for babel compatibility. Since bahasai is 
-% a malay variety, we use 'malay' with variant 'indonesian' now.
+% We only provide this gloss for babel compatibility. Since bahasam is 
+% a malay variety, we use 'malay' with variant 'malaysian' now.
 
 \xpg@load@master@language{malay}
-
-\PolyglossiaSetup{bahasam}{%
-  language=Malay,
-  langtag=MLY,
-  hyphennames={malay,melayu,bahasam,bahasa,bahasai,indonesian,indon},
-  hyphenmins={2,2},
-  fontsetup=true}
-
-\let\captionsbahasam\captionsmalay@malay
-\let\datebahasam\datemalay@malay
-
-\DefineFormatHijriDate{bahasam}{%
-  \number\value{Hijriday}\space\hijrimonthmalay@malay{\value{Hijrimonth}}\space\number\value{Hijriyear}}
 
 \endinput

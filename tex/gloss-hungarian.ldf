@@ -10,6 +10,9 @@
 
 \frenchspacing
 
+% Babel and backwards compat. alias
+\setlanguagealias{hungarian}{magyar}
+
 \newif\if@hungarian@swapcaptions
 \newif\if@hungarian@swapheadings
 \newif\if@hungarian@swapheaders
@@ -98,6 +101,7 @@
      26-án\or 27-én\or 28-án\or 29-én\or 30-án\or
      31-én\fi}%
    \let\ontoday\ondatehungarian%
+   \let\ondatemagyar\ondatehungarian%
 }
 
 % Save original capsformats

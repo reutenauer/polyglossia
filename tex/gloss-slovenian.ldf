@@ -8,6 +8,9 @@
   fontsetup=true,
 }
 
+% Babel aliases
+\setlanguagealias{slovenian}{slovene}
+
 \providebool{slovenian@localalph}
 \define@boolkey{slovenian}[slovenian@]{localalph}[false]{%
   \def\@tmpa{#1}%

@@ -5,14 +5,4 @@
 
 \xpg@load@master@language{gaelic}
 
-\PolyglossiaSetup{scottish}{
-  hyphennames={scottish},
-  hyphenmins={2,2},
-  langtag=GAE,
-  fontsetup=true,
-}
-
-\let\captionsscottish\captionsgaelic@scottish
-\let\datescottish\dategaelic@scottish
-
 \endinput

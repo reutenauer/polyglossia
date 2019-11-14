@@ -17,6 +17,9 @@
   %TODO localalph
 }
 
+% Babel aliases
+\setlanguagealias[script=Cyrillic]{serbian}{serbianc}
+
 \newif\if@serbian@cyr
 \define@choicekey*+{serbian}{Script}[\val\nr]{cyrillic,latin}[cyrillic]{%
    \ifcase\nr\relax

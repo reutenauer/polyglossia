@@ -9,6 +9,14 @@
   fontsetup=true,
 }
 
+% Backwards compat. aliases
+\setlanguagealias[variant=lower]{sorbian}{lsorbian}
+\setlanguagealias[variant=upper]{sorbian}{usorbian}
+
+% Babel aliases
+\setlanguagealias[variant=lower]{sorbian}{lowersorbian}
+\setlanguagealias[variant=upper]{sorbian}{uppersorbian}
+
 \def\sorbian@variant{usorbian}
 \define@choicekey*+{sorbian}{variant}[\val\nr]{upper,lower}[upper]{%
    \ifcase\nr\relax

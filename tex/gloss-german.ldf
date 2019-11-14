@@ -1,4 +1,5 @@
 \ProvidesFile{gloss-german.ldf}[polyglossia: module for german]
+
 \PolyglossiaSetup{german}{
   hyphenmins={2,2},
   frenchspacing=true,
@@ -6,6 +7,14 @@
   langtag=DEU,
   babelname=ngerman
 }
+
+% Babel aliases
+\setlanguagealias[variant=austrian,spelling=old]{german}{austrian}
+\setlanguagealias[variant=austrian,spelling=new]{german}{naustrian}
+\setlanguagealias[variant=german,spelling=old]{german}{germanb}
+\setlanguagealias[variant=german,spelling=new]{german}{ngerman}
+\setlanguagealias[variant=swiss,spelling=old]{german}{swissgerman}
+\setlanguagealias[variant=swiss,spelling=new]{german}{nswissgerman}
 
 \newif\if@german@oldspelling
 \@german@oldspellingfalse
