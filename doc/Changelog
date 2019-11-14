@@ -6,6 +6,7 @@ New features:
   * Add optional localized math operators to Spanish (#123).
   * Swap section headings in Hungarian (#344). New option "swapstrings" provides control
     over this.
+  * Introduce macro \setlanguagealias. 
   * Add support for Afrikaans.
   * Add support for Belarusian.
   * Add support for Bosnian.

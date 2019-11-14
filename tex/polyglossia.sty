@@ -1020,18 +1020,63 @@
 
 % define environment and command
 \cs_new:Nn \polyglossia@define@language@cmd:n {
-  \exp_args:Ne
-  \newenvironment {\prop_item:Nn{\polyglossia@langsetup}{#1/envname}} [1] []
-  {
-    \begin{otherlanguage}[##1]{#1}
+  \ifcsundef{#1@alias@lang}{%
+    \exp_args:Ne
+    \newenvironment {\prop_item:Nn{\polyglossia@langsetup}{#1/envname}} [1] []
+    {
+      \begin{otherlanguage}[##1]{#1}
+    }%
+    {
+      \end{otherlanguage}
+    }%
+    \exp_args:Nc \newcommand {text#1} [2][]
+    {%
+      \xpg@textlanguage[##1]{#1}{##2}%
+    }%
+  }{}
+}
+
+% provide way to define alias environment and command
+% \setlanguagealias[<options>]{<language>}{<alias>}
+\DeclareDocumentCommand \setlanguagealias {s O{} m m}
+{
+  \ifcsundef{#4@alias@lang}{%
+    \exp_args:Ne
+    \newenvironment {#4}
+    {
+      \begin{otherlanguage}[#2]{#3}
+    }%
+    {
+      \end{otherlanguage}
+    }%
+    % The starred version does not define \text<alias>
+    \IfBooleanT {#1}
+      {
+        \exp_args:Nc \newcommand {text#4} [1]
+        {%
+          \xpg@textlanguage[#2]{#3}{##1}%
+        }%
+      }%
+  }{%
+    \exp_args:Ne
+    \renewenvironment {#4}
+    {
+      \begin{otherlanguage}[#2]{#3}
+    }%
+    {
+      \end{otherlanguage}
+    }%
+    % The starred version does not (re)define \text<alias>
+    \IfBooleanT {#1}
+      {
+        \exp_args:Nc \renewcommand {text#4} [1]
+        {%
+          \xpg@textlanguage[#2]{#3}{##1}%
+        }%
+      }%
   }%
-  {
-    \end{otherlanguage}
-  }%
-  \exp_args:Nc \newcommand {text#1} [2][]
-  {%
-    \xpg@textlanguage[##1]{#1}{##2}%
-  }%
+  \csgdef{#4@alias@lang}{#3}%
+  \tl_if_blank:nF {#2} {\csgdef{#4@alias@opts}{#2}}%
 }
 
 \newcommand{\setdefaultlanguage}[2][]{%
@@ -1053,6 +1098,30 @@
   {
     \relax
   }
+  \ifcsdef{#2@alias@lang}{%
+     \ifcsdef{#2@alias@opts}{%
+       \exp_args:Nxx \polyglossia_load_lang_definition:nn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}}%
+       \exp_args:Nxx \polyglossia@set@default@language:nn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}}%
+     }{%
+       \polyglossia@set@default@language:nn {#1} {\csuse{#2@alias@lang}}%
+     }%
+  }{%
+    \polyglossia@set@default@language:nn {#1} {#2}%
+  }%
+}
+
+\cs_new:Nn \polyglossia@set@default@language:nn
+{
+  \ifcsundef{#2@loaded}%
+  {
+    % latex is an internal language, so do not record
+    \ifstrequal{#2}{latex}{}{%
+      \global\edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
+      \global\edef\xpg@bloaded{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}%
+          \ifx\xpg@bloaded\@empty\else,\xpg@bloaded\fi}%
+    }%
+    \csgdef{#2@loaded}{}%
+  }{}
   \gdef\xpg@main@language{#2}%
   \tl_if_blank:nTF {#1}{\gdef\mainlanguagevariant{}}{%
      % If the optional argument sets a value for the key “variant”,
@@ -1062,9 +1131,6 @@
      }%
   }%
   \csgdef{#2@gvar}{\mainlanguagevariant}%
-  % Store babelname of main language (for external packages such as biblatex)
-  \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
-      { \xdef\mainbabelname{\l_tmpa_tl} }
   %% The following settings are for the default language and script
   % this tells bidi.sty or luabidi.sty that the document is RTL
   \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{%
@@ -1080,6 +1146,9 @@
   \xpg@info{Default~ language~ is~ #2}%
   \polyglossia@set@language@name[#1]{#2}%
   \def\mainlanguagename{#2}
+  % Store babelname of main language (for external packages such as biblatex)
+  \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
+      { \edef\mainbabelname{\l_tmpa_tl} }
   % Store babelname of current language (for external packages such as biblatex)
   \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
       { \edef\babelname{\l_tmpa_tl}% 
@@ -1249,20 +1318,40 @@
     % define environment and command
     \exp_args:Nx\polyglossia@define@language@cmd:n{#2}
     \csgdef{#2@loaded}{}%
-    % If a variant is set, store it.
-    \gdef\otherlanguagevariant{}
-    \tl_if_blank:nTF {#1}{}{%
-      % If the optional argument sets a value for the key “variant”,
-      % store it in \xpg@main@langvariant
-      \clist_map_inline:nn { #1 } {%
-         \xpg@parsevariantkeyvalue##1=@xpg@other@langvariant\relax
-      }%
+    \ifcsdef{#2@alias@lang}{%
+       \ifcsdef{#2@alias@opts}{%
+         \exp_args:Nxx \polyglossia_load_lang_definition:nn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}}%
+         \exp_args:Nxx \polyglossia@set@other@language:nn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}}%
+       }{%
+         \polyglossia@set@other@language:nn {#1} {\csuse{#2@alias@lang}}%
+       }%
+    }{%
+      \polyglossia@set@other@language:nn {#1} {#2}%
     }%
-    \csgdef{#2@gvar}{\otherlanguagevariant}%
-    \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
-      { \xdef\otherlanguagebabelname{\l_tmpa_tl} }
-    \csgdef{#2@gbabelname}{\otherlanguagebabelname}%
+  }
+  {}
+}
+
+\cs_new:Nn \polyglossia@set@other@language:nn
+{
+  \ifcsundef{#2@loaded}
+  {
+    \global\edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
+    \csgdef{#2@loaded}{}%
   }{}
+  % If a variant is set, store it.
+  \gdef\otherlanguagevariant{}
+  \tl_if_blank:nTF {#1}{}{%
+    % If the optional argument sets a value for the key “variant”,
+    % store it in \xpg@other@langvariant
+    \clist_map_inline:nn { #1 } {%
+       \xpg@parsevariantkeyvalue##1=@xpg@other@langvariant\relax
+    }%
+  }%
+  \csgdef{#2@gvar}{\otherlanguagevariant}%
+  \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
+    { \xdef\otherlanguagebabelname{\l_tmpa_tl} }
+  \csgdef{#2@gbabelname}{\otherlanguagebabelname}%
 }
 
 % Store main language variant for external packages
@@ -1309,7 +1398,7 @@
 \newcommand{\xpg@otherlanguage}[2][]
 {%
   \polyglossia@error@iflangnotloaded:n{#2}
-  \setkeys{#2}{#1}%
+  \exp_args:Nne \setkeys{#2}{#1}%
   \polyglossia@setforeignlanguage[#1]{#2}
   % buggy restoration heure
   \csuse{inlineextras@#2}%
@@ -1320,7 +1409,20 @@
 
 \renewcommand{\foreignlanguage}[3][]
 {%
-  \polyglossia@error@iflangnotloaded:n{#2}
+  \ifcsdef{#2@alias@lang}{%
+     \ifcsdef{#2@alias@opts}{%
+       \polyglossia@foreignlanguage:nnn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}} {#3}%
+     }{%
+       \polyglossia@foreignlanguage:nnn {#1} {\csuse{#2@alias@lang}} {#3}%
+     }%
+  }{%
+    \polyglossia@foreignlanguage:nnn {#1} {#2} {#3}%
+  }%
+}
+
+\cs_new:Nn \polyglossia@foreignlanguage:nnn
+{
+   \polyglossia@error@iflangnotloaded:n{#2}
    \bgroup
    \xpg@otherlanguage[#1]{#2}%
    \polyglossia@lang@settextdirection:nn{#2}{#3}%
@@ -1332,10 +1434,23 @@
 
 \renewenvironment{otherlanguage*}[2][]
 {%
+  \ifcsdef{#2@alias@lang}{%
+     \ifcsdef{#2@alias@opts}{%
+       \polyglossia@otherlanguage:nn {\csuse{#2@alias@opts}} {\csuse{#2@alias@lang}}%
+     }{%
+       \polyglossia@otherlanguage:nn {#1} {\csuse{#2@alias@lang}}%
+     }%
+  }{%
+    \polyglossia@otherlanguage:nn {#1} {#2}%
+  }%
+}
+{\egroup}
+
+\cs_new:Nn \polyglossia@otherlanguage:nn
+{
   \xpg@otherlanguage[#1]{#2}%
   \polyglossia@lang@settextdirection:nn{#2}\bgroup%
 }
-{\egroup}
 
 % use by \text<lang>. Equivalent to \foreignlanguage,
 % except that dates are localized.
@@ -1376,7 +1491,20 @@
 
 \DeclareDocumentCommand \selectlanguage {s O{} m}
 {%
-  \polyglossia@error@iflangnotloaded:n{#3}
+  \ifcsdef{#3@alias@lang}{%
+     \ifcsdef{#3@alias@opts}{%
+       \polyglossia@select@language:nnn {#1} {\csuse{#3@alias@opts}} {\csuse{#3@alias@lang}}%
+     }{%
+       \polyglossia@select@language:nnn {#1} {#2} {\csuse{#3@alias@lang}}%
+     }%
+  }{%
+     \polyglossia@error@iflangnotloaded:n{#3}%
+     \polyglossia@select@language:nnn {#1} {#2} {#3}%
+  }
+}
+
+\cs_new:Nn \polyglossia@select@language:nnn
+{
   \IfBooleanF {#1}
     {
       \cs_set_nopar:Npx \xpg@pop@language { \exp_not:N \xpg@pop@language@i {#2} {#3} }
@@ -1387,7 +1515,7 @@
     \clist_map_inline:nn { #2 } {%
          \xpg@parsevariantkeyvalue##1=@xpg@langvariant\relax
      }%
-     \setkeys{#3}{#2}%
+     \exp_args:Nne \setkeys{#3}{#2}%
    }%
    % The starred variant does not write to the aux
    \IfBooleanTF#1{%

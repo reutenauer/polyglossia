@@ -326,7 +326,7 @@ uppersorbian    & sorbian    & variant=upper                  \\
 
 \section{Language-switching commands}\label{languageswitching}
 
-\subsection{Recommended commands}
+\subsection{Recommended commands}\label{sec:langcmds}
 For each activated language the command
 \cmd{\text⟨lang⟩[⟨options⟩]\{…\}} \DescribeMacro{\text⟨lang⟩}
 becomes available for short insertions of text in that language.
@@ -413,8 +413,32 @@ ought to be mentioned here.
 
 \item \Cmd\latinalph: Representation of counter as a lower-case letter:  1 = a, 2 = b, etc.
 
-\item \Cmd\latinAlph: Representation of counter as a uper-case letter:  1 = A, 2 = B, etc.
+\item \Cmd\latinAlph: Representation of counter as a upper-case letter:  1 = A, 2 = B, etc.
 \end{itemize}
+
+
+\subsection{Setting up alias commands}
+
+By means of the macro
+\displaycmd{\setlanguagealias[⟨options⟩]\{⟨language⟩\}\{⟨alias⟩\}}{\setlanguagealias}\new{v1.46}
+you can define alias commands for specific language (variants). \Eg
+
+\begin{quote}
+\begin{verbatim}
+\setlanguagealias[variant=austrian]{german}{deAT}
+\end{verbatim}
+\end{quote}
+%
+will define a command \cmd{\textdeAT} as well as an environment ¦{deAT}¦ which will link towards
+the command \cmd{\textgerman[variant=austrian]} and the environment ¦{german}[variant=austrian]¦,
+respectively. The aliases can also be used in the language switching commands described in
+section~\ref{sec:langcmds} and \ref{sec:babelcmds}.
+Note, though, that the usual restrictions for command names apply, so something such as
+¦de-AT¦ or ¦de_AT¦ will not work since ¦-¦ and ¦_¦ are not allowed in command names.
+
+For the latter case, and for the case where an alias would clash with an existing \cmd{\text⟨...⟩}
+command (\eg ¦\textit¦), a starred version \Cmd{\setlanguagealias*} is provided which does not define
+a \cmd{\text⟨alias⟩} command (but which will set up the alias for everything else).
 
 \section{Font setup}
 
