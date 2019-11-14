@@ -1376,6 +1376,23 @@
   \common@language%
 }
 
+
+% Alias to \text<lang>, but more suitable
+% for specific (esp. tag-based) aliases
+% where \text<alias> would cause clashes
+% (e.g., \textit)
+\newcommand\textlang[3][]{%
+  \ifcsdef{#2@alias@lang}{%
+     \ifcsdef{#2@alias@opts}{%
+       \xpg@textlanguage[\csuse{#2@alias@opts}]{\csuse{#2@alias@lang}}{#3}%
+     }{%
+       \xpg@textlanguage[#1]{\csuse{#2@alias@lang}}{#3}%
+     }%
+  }{%
+    \xpg@textlanguage[#1]{#2}{#3}%
+  }%
+}%
+
 \providecommand{\foreignlanguage}{}
 
 % wrapper for foreignlanguage and otherlanguage*
@@ -1452,7 +1469,7 @@
   \polyglossia@lang@settextdirection:nn{#2}\bgroup%
 }
 
-% use by \text<lang>. Equivalent to \foreignlanguage,
+% use by \text<lang> and \textlang. Equivalent to \foreignlanguage,
 % except that dates are localized.
 \newcommand*\xpg@textlanguage[3][]{%
   \polyglossia@error@iflangnotloaded:n{#2}

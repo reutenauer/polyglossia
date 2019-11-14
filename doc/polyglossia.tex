@@ -329,21 +329,23 @@ uppersorbian    & sorbian    & variant=upper                  \\
 \subsection{Recommended commands}\label{sec:langcmds}
 For each activated language the command
 \cmd{\text⟨lang⟩[⟨options⟩]\{…\}} \DescribeMacro{\text⟨lang⟩}
+(as well as the synonymous \DescribeMacro{\textlang}%
+\cmd{\textlang[⟨options⟩]\{⟨lang⟩\}\{…\}}\new{1.46})
 becomes available for short insertions of text in that language.
-For example ¦\textrussian{\today}¦ yields \textrussian{\today}
-This command switches to the correct hyphenation patterns, it activates
+For example ¦\textrussian{\today}¦ and ¦\textlang{russian}{\today}¦ yield \textrussian{\today}
+The commands switch to the correct hyphenation patterns, they activate
 some extra features for the selected language (such as extra spacing before
-punctuation in French), and it translates the date when using ¦\today¦.
-It does not, however, translate so-called \textit{caption strings}, i.\,e.
+punctuation in French), and they translate the date when using ¦\today¦.
+They do not, however, translate so-called \textit{caption strings},\ie
 ``chapter'', ``figure'' etc., to the local language (these remain in the main
 language).
 
 The\DescribeEnv{⟨lang⟩}\ environment ¦⟨lang⟩¦, which is also available for any activated language,
-is meant for longer passages of text. It behaves slightly different than the \cmd{\text⟨lang⟩\{…\}}
-command: It does everything the latter does, but additionally, the caption strings are translated
-as well, and the language is also passed to auxiliary files, the table of contents and the lists of
-figures/tables.
-Like the command, the environment provides the possibility of setting language options locally.
+is meant for longer passages of text. It behaves slightly different than the \cmd{\text⟨lang⟩} and
+\cmd\textlang\ commands: It does everything the latter do, but additionally, the caption strings
+are translated as well, and the language is also passed to auxiliary files, the table of contents
+and the lists of figures/tables.
+Like the commands, the environment provides the possibility of setting language options locally.
 For instance the following allows us to quote the beginning
 of Homer’s \textit{Iliad}:
 
@@ -438,7 +440,8 @@ Note, though, that the usual restrictions for command names apply, so something 
 
 For the latter case, and for the case where an alias would clash with an existing \cmd{\text⟨...⟩}
 command (\eg ¦\textit¦), a starred version \Cmd{\setlanguagealias*} is provided which does not define
-a \cmd{\text⟨alias⟩} command (but which will set up the alias for everything else).
+a \cmd{\text⟨alias⟩} command (but which will set up the alias for everything else, including
+\cmd{\textlang\{⟨alias⟩\}}).
 
 \section{Font setup}
 
