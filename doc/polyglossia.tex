@@ -402,7 +402,7 @@ similar behaviour.
 ¦\selectlanguage{⟨lang⟩}¦ and the ¦otherlanguage¦ environment are identical to the
 the ¦⟨lang⟩¦ environment, except that ¦\selectlanguage{⟨lang⟩}¦
 does not need to be explicitly closed. The command ¦\foreinlanguage{⟨lang⟩}{…}¦ and the ¦otherlanguage*¦
-environment are identical with the use of the ¦\text⟨lang⟩¦ command, with the one
+environment are identical with the use of the ¦\text⟨lang⟩¦ or ¦\textlang¦ command, with the one
 notable exception that they do not translate the date with ¦\today¦.
 
 Since the \XeLaTeX\ and \LuaLaTeX\ format incorporate \pkg{babel}’s \file{hyphen.cfg},
@@ -411,12 +411,13 @@ defined there are also accessible.
 
 \subsection{Other commands}
 The following commands are probably of lesser interest to the end user, but
-ought to be mentioned here.
+ought to be mentioned here.\footnote{Note that these commands require polyglossia
+language names; they do not support language\slash babel aliases.}
 \begin{itemize}
-\item \Cmd\selectbackgroundlanguage: this selects the global font setup and
-	the numbering definitions for the default language.
+\item \DescribeMacro{\selectbackgroundlanguage}\cmd{\selectbackgroundlanguage\{⟨lang⟩\}}:
+    this selects the global font setup and the numbering definitions for the default language.
 
-\item \Cmd\resetdefaultlanguage\ (experimental):
+\item \DescribeMacro{\resetdefaultlanguage}\cmd{\resetdefaultlanguage[⟨options⟩]\{⟨lang⟩\}} (experimental):
 	completely switches the default language
 	to another one in the middle of a document: \textit{this may have adverse effects}!
 
@@ -1665,7 +1666,7 @@ where \texttt{⟨lang⟩} is a \pkg{babel} language name.
 by other people. I take this opportunity to thank the following individuals,
 whose splendid work has made my task almost trivial in comparision: \TA{Johannes
 Braams} and the numerous contributors to the \pkg{babel} package (in particular
-\TA{Boris Lavva} and others for its Hebrew support), \TA{Alexej Kryuko}v (\pkg{antomega}),
+\TA{Boris Lavva} and others for its Hebrew support), \TA{Alexej Kryukov} (\pkg{antomega}),
 \TA{Will Robertson} (\pkg{fontspec}), \TA{Apostolos Syropoulos} (\pkg{xgreek}), \TA{Youssef Jabri}
 (\pkg{arabi}), and \TA{Vafa Khalighi} (\pkg{xepersian} and \pkg{bidi}).
 The work of \TA{Mojca Miklavec} and \TA{Arthur Reutenauer} on hyphenation patterns with their package
@@ -1685,12 +1686,26 @@ Support for Lao was also added thanks to \TA{Brian Wilson}.
 I also thank \TA{Alan Munn} for kindly proof-reading the penultimate version of this documentation.
 And of course my gratitude also goes to \TA{Jonathan Kew}, the formidable author of \XeTeX!
 
-\section{More acknowledgements (by Arthur Reutenauer)}
-Many thanks to all the people who have contributed bugfixes and new features to
-Polyglossia since I took over.  Most of them can be identified from the contributor statistics on \href{https://github.com/reutenauer/polyglossia/graphs/contributors}{GitHub} and I won’t try to name them
-all (maybe, one day ...); among the ones who sent contributions directly to me
-I would like to especially thank \TA{Claudio Beccari}, the indefatigable champion of
-Romance languages, and beyond!
+\section{More acknowledgements (by the current development team)}
+Many thanks to all the people who have contributed bugfixes and new features to \pkg{polyglossia}
+since we took over.
+In alphabetical order: \TA{Ignas Anikevicius}, \TA{Sina Ahmadi}, \TA{Wouter Bolsterlee}, \TA{Christian Buhtz},
+\TA{Zgarbul Andrey}, \TA{Oleg Domanov}, \TA{Philipp Gesang}, \TA{Kevin Godby}, \TA{Enrico Gregorio},
+\TA{Khaled Hosny}, \TA{Najib Idrissi}, user \TA{julroy67}, \TA{Dohyun Kim}, \TA{Phil Kime}, \TA{Mike Kroutikov},
+\TA{Ivan Kokan}, \TA{Caleb Maclennan}, \TA{José Mancera}, \TA{Yevgen Pogribnyi}, \TA{Maïeul Rouquette},
+\TA{Elie Roux}, \TA{Hugo Roy},  \TA{Guy Rutenberg}, \TA{Philipp Stephani}, \TA{Keno Wehr}, \TA{Dominik Wujastyk},
+\TA{Sertaç Ö. Yıldız}, \TA{Maksim Zholudev}, \TA{Yan Zhou}, and \TA{Stefan Zlatinov}.
+Their respective contributions can be identified from the contributor statistics on
+\href{https://github.com/reutenauer/polyglossia/graphs/contributors}{GitHub}.
+
+Among the ones who sent contributions directly to us we would like to especially thank
+\TA{Claudio Beccari}, the indefatigable champion of Romance languages, and beyond! Furthermore,
+kudos go to \TA{Moritz Wemheuer} (of \pkg{biblatex}) who has helped a lot to improve \pkg{polyglossia} interaction
+with \pkg{biblatex} and \pkg{csquotes}.
+
+Not at least, we are very grateful for all bug reports and feature enhancement requests we received from
+the numerous users we cannot list all here (but again, you can find all names on \href{https://github.com/reutenauer/polyglossia/issues?utf8=%E2%9C%93&q=is%3Aissue}{GitHub}).
+Please go on with that, you are keeping \pkg{polyglossia} running!
 
 \end{document}
 
