@@ -1,7 +1,7 @@
 
    ¦----------------------------------------------¦
    ¦                                              ¦
-   ¦       THE POLYGLOSSIA PACKAGE v1.45          ¦
+   ¦       THE POLYGLOSSIA PACKAGE v1.46          ¦
    ¦                                              ¦
    ¦     Modern multilingual typesetting          ¦
    ¦        with XeLaTeX and LuaLaTeX             ¦
@@ -34,7 +34,8 @@ Polyglossia makes it possible to automate the following tasks:
 
 LICENSE
 
-Copyright (c) 2008-2010 François Charette, 2013 Élie Roux, 2011-2019 Arthur Reutenauer
+Copyright (c) 2008-2010 François Charette, 2013 Élie Roux, 2011-2019 Arthur Reutenauer,
+Copyright (c) 2019 Bastien Roucariès, 2019 Jürgen Spitzmüller
 
 Except where otherwise noted, Polyglossia is placed under the terms of the MIT licence
 (https://opensource.org/licenses/MIT).
