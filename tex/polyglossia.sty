@@ -1050,7 +1050,7 @@
       \end{otherlanguage}
     }%
     % The starred version does not define \text<alias>
-    \IfBooleanT {#1}
+    \IfBooleanF {#1}
       {
         \exp_args:Nc \newcommand {text#4} [2][]
         {%
@@ -1067,7 +1067,7 @@
       \end{otherlanguage}
     }%
     % The starred version does not (re)define \text<alias>
-    \IfBooleanT {#1}
+    \IfBooleanF {#1}
       {
         \exp_args:Nc \renewcommand {text#4} [2][]
         {%
