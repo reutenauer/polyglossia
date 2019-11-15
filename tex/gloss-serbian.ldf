@@ -4,7 +4,7 @@
 %% same thing for all languages that have a "script" key !
 %% BETTER APPROACH: see gloss-sanskrit!
 
-\RequirePackage{cyrillicnumbers}
+\RequirePackage{xpg-cyrillicnumbers}
 
 \PolyglossiaSetup{serbian}{
   langtag=SRB,

@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-belarusian.ldf}[polyglossia: module for belarusian]
 
-\RequirePackage{cyrillicnumbers}
+\RequirePackage{xpg-cyrillicnumbers}
 
 \PolyglossiaSetup{belarusian}{
   script=Cyrillic,

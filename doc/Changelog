@@ -35,6 +35,8 @@ Bug fixes:
   * Fix an expl3 declaration (#348).
 
 Interface and defaults changes:
+  * Per TeXLive request, the sub-package cyrillicnumbers.sty has been renamed to
+    xpg-cyrillicnumbers.sty.
   * In Russian, all paragraphs are now indented by default, as common in Russian typography.
     The behavior can be opted out by indentfirst=false.
   * In Czech, splithyphens and lvna are enabled by default. Also, the option does now work

@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-mongolian.ldf}[polyglossia: module for mongolian]
 
-\RequirePackage{cyrillicnumbers}
+\RequirePackage{xpg-cyrillicnumbers}
 
 \PolyglossiaSetup{mongolian}{
   script=Cyrillic,

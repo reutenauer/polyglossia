@@ -1,6 +1,6 @@
 \ProvidesFile{gloss-russian.ldf}[polyglossia: module for russian]
 
-\RequirePackage{cyrillicnumbers}
+\RequirePackage{xpg-cyrillicnumbers}
 
 \PolyglossiaSetup{russian}{
   script=Cyrillic,
