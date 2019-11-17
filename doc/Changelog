@@ -1,3 +1,13 @@
+1.47 (???)
+
+New features:
+
+
+Bug fixes:
+  * Fix \text<lang> command with multiple paragraphs.
+
+Interface and defaults changes:
+
 1.46 (15-11-2019)
 
 New features:

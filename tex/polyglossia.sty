@@ -1471,7 +1471,7 @@
 
 % use by \text<lang> and \textlang. Equivalent to \foreignlanguage,
 % except that dates are localized.
-\newcommand*\xpg@textlanguage[3][]{%
+\newcommand\xpg@textlanguage[3][]{%
   \polyglossia@error@iflangnotloaded:n{#2}
    \bgroup
    \xpg@otherlanguage[#1]{#2}%
