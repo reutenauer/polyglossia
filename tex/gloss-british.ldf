@@ -1,4 +1,4 @@
-\ProvidesFile{gloss-acadien.ldf}[polyglossia: module for british english]
+\ProvidesFile{gloss-british.ldf}[polyglossia: module for british english]
 
 % We provide this as a babel alias
 

@@ -1,4 +1,4 @@
-\ProvidesFile{gloss-acadien.ldf}[polyglossia: module for austrian german (old spelling)]
+\ProvidesFile{gloss-austrian.ldf}[polyglossia: module for austrian german (old spelling)]
 
 % We provide this as a babel alias
 
