@@ -1235,6 +1235,14 @@
    \selectfont%
 }
 
+\def\xpg@patch@fontfamilies{%
+  % This robustifies the redefinitions of \<xx>family (suggestion by Enrico Gregorio)
+  % e.g. to prevent expansion of the \familytype redefinition in auxiliary files
+  \csgappto{rmfamily~}{\def\familytype{rm}}
+  \csgappto{sffamily~}{\def\familytype{sf}}
+  \csgappto{ttfamily~}{\def\familytype{tt}}
+}
+
 % These switches activate the default fonts
 % Note that a simple \let\rmfamilylatin=\rmfamily
 % does not work reliably (see #24)
@@ -1254,11 +1262,7 @@
       \ifcsequal{tempa}{tempb}%
          {\def\familytype{tt}}
          {\def\familytype{rm}}}
-  % This robustifies the redefinitions of \<xx>family (suggestion by Enrico Gregorio)
-  % e.g. to prevent expansion of the \familytype redefinition in auxiliary files
-  \csgappto{rmfamily~}{\def\familytype{rm}}
-  \csgappto{sffamily~}{\def\familytype{sf}}
-  \csgappto{ttfamily~}{\def\familytype{tt}}
+  \xpg@patch@fontfamilies%
   % This (re-)saves the normalfont for the latin script since we may
   % change normalfont in other scripts
   \let\normalfontlatin=\normalfont%
@@ -1269,10 +1273,12 @@
 }
 
 \def\resetfontlatin{%
-   \cs_gset_eq:cc{rmfamily}{xpg@defaultfont@rm}%
-   \cs_gset_eq:cc{sffamily}{xpg@defaultfont@sf}%
-   \cs_gset_eq:cc{ttfamily}{xpg@defaultfont@tt}%
-   \global\let\normalfont=\normalfontlatin}
+  \DeclareRobustCommand\rmfamily{\xpg@defaultfont@rm}%
+  \DeclareRobustCommand\sffamily{\xpg@defaultfont@sf}%
+  \DeclareRobustCommand\ttfamily{\xpg@defaultfont@tt}%
+  \xpg@patch@fontfamilies%
+  \global\let\normalfont=\normalfontlatin%
+}
 
 \def\selectfontfamilylatin{%
   \def\tmp@tt{tt}\def\tmp@sf{sf}%

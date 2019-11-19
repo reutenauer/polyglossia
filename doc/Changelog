@@ -4,6 +4,7 @@ New features:
 
 
 Bug fixes:
+  * Fix font family issue in headers (#355).
   * Fix whitespace issues in \text<lang> (#356).
   * Fix \text<lang> command with multiple paragraphs.
 
