@@ -4,6 +4,7 @@ New features:
 
 
 Bug fixes:
+  * Fix whitespace issues in \text<lang> (#356).
   * Fix \text<lang> command with multiple paragraphs.
 
 Interface and defaults changes:

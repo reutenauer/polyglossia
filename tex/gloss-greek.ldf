@@ -73,7 +73,7 @@
   \fi}
 
 \def\greek@language{%
-  \polyglossia@setup@language@patterns{\greek@variant}
+  \polyglossia@setup@language@patterns{\greek@variant}%
 }
 
 

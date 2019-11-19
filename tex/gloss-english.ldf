@@ -126,7 +126,7 @@
 \fi
 
 \def\english@language{%
-   \polyglossia@setup@language@patterns{\english@variant}
+   \polyglossia@setup@language@patterns{\english@variant}%
 }%
 
 \def\captionsenglish{%

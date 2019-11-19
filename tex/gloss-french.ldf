@@ -41,7 +41,7 @@
 
 
 \def\french@language{%
-   \polyglossia@setup@language@patterns{\french@variant}
+   \polyglossia@setup@language@patterns{\french@variant}%
 }%
 
 \ifluatex
