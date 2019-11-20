@@ -1624,24 +1624,58 @@
    \fi
 }
 
+% The bidi package swaps the output stream within RTL tables
+% (to get the column order right). This also swaps group
+% delimiters inserted to the aux files via otherlanguage (see #354).
+% We therefore patch bidi and insert a bool that tells us
+% whether we are in such a table.
+\newbool{xpg@inbiditable}
+\AtBeginDocument{%
+  \@ifpackageloaded{bidi}{%
+     \patchcmd{\@tabular}%
+               {\if@RTLtab}%
+               {\if@RTLtab\booltrue{xpg@inbiditable}}%
+               {}% success
+               {\xpg@warning{Patching bidi table failed!}}%
+  }{}%
+}
+
 % Open a group in the aux file. This is to keep
-% nested language options local (see #320)
+% nested language options local (see #320).
+% In bidi RTL tables, the opening/closing needs
+% to be swapped (see #354).
 \newcommand*{\xpg@set@group@aux}{%
    \if@filesw%
-      \protected@write\@auxout{}{\bgroup}%
-      \addtocontents{toc}{\bgroup}%
-      \addtocontents{lof}{\bgroup}%
-      \addtocontents{lot}{\bgroup}%
+      \ifbool{xpg@inbiditable}{%
+        \protected@write\@auxout{}{\egroup}%
+        \addtocontents{toc}{\egroup}%
+        \addtocontents{lof}{\egroup}%
+        \addtocontents{lot}{\egroup}%
+      }{%
+        \protected@write\@auxout{}{\bgroup}%
+        \addtocontents{toc}{\bgroup}%
+        \addtocontents{lof}{\bgroup}%
+        \addtocontents{lot}{\bgroup}%
+      }%
     \fi
 }
 
-% Close the group in the aux file
+% Close the group in the aux file.
+% In bidi RTL tables, the opening/closing needs
+% to be swapped (see #354).
 \newcommand*{\xpg@unset@group@aux}{%
    \if@filesw%
-      \protected@write\@auxout{}{\egroup}%
-      \addtocontents{toc}{\egroup}%
-      \addtocontents{lof}{\egroup}%
-      \addtocontents{lot}{\egroup}%
+      \ifbool{xpg@inbiditable}{%
+        \protected@write\@auxout{}{\bgroup}%
+        \addtocontents{toc}{\bgroup}%
+        \addtocontents{lof}{\bgroup}%
+        \addtocontents{lot}{\bgroup}%
+      }{%
+        \protected@write\@auxout{}{\egroup}%
+        \addtocontents{toc}{\egroup}%
+        \addtocontents{lof}{\egroup}%
+        \addtocontents{lot}{\egroup}%
+      }%
     \fi
 }
 
