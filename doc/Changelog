@@ -10,6 +10,8 @@ Bug fixes:
   * Fix \text<lang> command with multiple paragraphs.
 
 Interface and defaults changes:
+  * The command \setlanguagealias* (introduced in v1.46) does no longer define
+    dedicated alias environments.
 
 1.46 (15-11-2019)
 

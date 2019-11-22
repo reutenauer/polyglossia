@@ -1040,40 +1040,36 @@
 % \setlanguagealias[<options>]{<language>}{<alias>}
 \DeclareDocumentCommand \setlanguagealias {s O{} m m}
 {
-  \ifcsundef{#4@alias@lang}{%
-    \exp_args:Ne
-    \newenvironment {#4}
+  % The starred version does not define commands and environments
+  \IfBooleanF {#1}
     {
-      \begin{otherlanguage}[#2]{#3}
-    }%
-    {
-      \end{otherlanguage}
-    }%
-    % The starred version does not define \text<alias>
-    \IfBooleanF {#1}
-      {
-        \exp_args:Nc \newcommand {text#4} [2][]
-        {%
-          \xpg@textlanguage[#2,##1]{#3}{##2}%
-        }%
-      }%
-  }{%
-    \exp_args:Ne
-    \renewenvironment {#4}
-    {
-      \begin{otherlanguage}[#2]{#3}
-    }%
-    {
-      \end{otherlanguage}
-    }%
-    % The starred version does not (re)define \text<alias>
-    \IfBooleanF {#1}
-      {
-        \exp_args:Nc \renewcommand {text#4} [2][]
-        {%
-          \xpg@textlanguage[#2,##1]{#3}{##2}%
-        }%
-      }%
+     \ifcsundef{#4@alias@lang}{%
+       \exp_args:Ne
+       \newenvironment {#4}
+       {
+         \begin{otherlanguage}[#2]{#3}
+       }%
+       {
+         \end{otherlanguage}
+       }%
+       \exp_args:Nc \newcommand {text#4} [2][]
+       {%
+         \xpg@textlanguage[#2,##1]{#3}{##2}%
+       }%
+     }{%
+       \exp_args:Ne
+       \renewenvironment {#4}
+       {
+         \begin{otherlanguage}[#2]{#3}
+       }%
+       {
+         \end{otherlanguage}
+       }%
+       \exp_args:Nc \renewcommand {text#4} [2][]
+       {%
+         \xpg@textlanguage[#2,##1]{#3}{##2}%
+       }%
+     }%
   }%
   \csgdef{#4@alias@lang}{#3}%
   \tl_if_blank:nF {#2} {\csgdef{#4@alias@opts}{#2}}%
