@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-kurmanji.ldf}[polyglossia: module for kurmanji kurdish]
+
+% We provide this gloss for babel compatibility.
+
+\xpg@load@master@language{kurdish}
+
+\endinput
