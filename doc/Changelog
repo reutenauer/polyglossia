@@ -6,6 +6,7 @@ New features:
 Bug fixes:
   * Fix font family issue in headers (#355).
   * Fix whitespace issues in \text<lang> (#356).
+  * Fix option-less \babelname in multi-variant languages (#357).
   * Fix \text<lang> command with multiple paragraphs.
 
 Interface and defaults changes:

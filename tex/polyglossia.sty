@@ -1152,7 +1152,7 @@
   % Store babelname of current language (for external packages such as biblatex)
   \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
       { \edef\babelname{\l_tmpa_tl}% 
-        \csgdef{#2@gbabelname}{\babelname}%
+        \cs_gset_eq:cc{#2@gbabelname}{babelname}%
       }
   \ifluatex %
   \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
@@ -1357,7 +1357,7 @@
   \csgdef{#2@gvar}{\otherlanguagevariant}%
   \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
     { \xdef\otherlanguagebabelname{\l_tmpa_tl} }
-  \csgdef{#2@gbabelname}{\otherlanguagebabelname}%
+  \cs_gset_eq:cc{#2@gbabelname}{otherlanguagebabelname}%
 }
 
 % Store main language variant for external packages
