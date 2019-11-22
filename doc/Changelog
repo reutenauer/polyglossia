@@ -1,7 +1,8 @@
 1.47 (???)
 
 New features:
-
+  * New environment {lang}{<lang>} (equivalent to {<lang>},  but also available with
+    \setlanguagealias* which does not define dedicated alias environments).
 
 Bug fixes:
   * Fix font family issue in headers (#355).

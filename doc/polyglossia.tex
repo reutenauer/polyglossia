@@ -352,7 +352,9 @@ They do not, however, translate so-called \textit{caption strings},\ie
 ``chapter'', ``figure'' etc., to the local language (these remain in the main
 language).
 
-The\DescribeEnv{⟨lang⟩}\ environment ¦⟨lang⟩¦, which is also available for any activated language,
+The\DescribeEnv{⟨lang⟩}\ environment ¦⟨lang⟩¦, which is also available for any activated language
+(as well as the equivalent \DescribeMacro{lang}%
+\cmd{\begin\{lang\}[⟨options⟩]\{⟨lang⟩\}} \dots{} \cmd{\end\{lang\}}\new{v1.47}),
 is meant for longer passages of text. It behaves slightly different than the \cmd{\text⟨lang⟩} and
 \cmd\textlang\ commands: It does everything the latter do, but additionally, the caption strings
 are translated as well, and the language is also passed to auxiliary files, the table of contents
@@ -451,10 +453,11 @@ section~\ref{sec:langcmds} and \ref{sec:babelcmds}.
 Note, though, that the usual restrictions for command names apply, so something such as
 ¦de-AT¦ or ¦de_AT¦ will not work since ¦-¦ and ¦_¦ are not allowed in command names.
 
-For the latter case, and for the case where an alias would clash with an existing \cmd{\text⟨...⟩}
-command (\eg ¦\textit¦), a starred version \Cmd{\setlanguagealias*} is provided which does not define
-a \cmd{\text⟨alias⟩} command (but which will set up the alias for everything else, including
-\cmd{\textlang\{⟨alias⟩\}}).
+For the latter case, and for the case where an alias would clash with an existing command
+(\eg ¦\fi¦) or \cmd{\text⟨...⟩} command (\eg ¦\textit¦), a starred version \Cmd{\setlanguagealias*}
+is provided which does neither define a \cmd{\text⟨alias⟩} command nor an ¦⟨alias⟩¦ environment,
+but which will set up the alias for everything else, including \cmd{\textlang\{⟨alias⟩\}}
+and \cmd{\begin\{lang\}\{⟨alias⟩\}}.
 
 \section{Font setup}
 

@@ -1395,6 +1395,16 @@
   }%
 }%
 
+% Alias to {<lang>}, but more suitable
+% for specific (esp. tag-based) aliases
+% where {<alias>} would cause clashes
+% (e.g., \fi)
+\newenvironment{lang}[2][]{%
+  \begin{otherlanguage}[#1]{#2}%
+}{%
+  \end{otherlanguage}
+}%
+
 \providecommand{\foreignlanguage}{}
 
 % wrapper for foreignlanguage and otherlanguage*
