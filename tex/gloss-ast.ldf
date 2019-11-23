@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-ast.ldf}[polyglossia: module for ast (asturian)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{asturian}
+
+\endinput

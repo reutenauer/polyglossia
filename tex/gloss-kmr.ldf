@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-kmr.ldf}[polyglossia: module for kmr (kurdish)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{kurdish}
+
+\endinput

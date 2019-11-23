@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-hsb.ldf}[polyglossia: module for hsb (sorbian)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{sorbian}
+
+\endinput

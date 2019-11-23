@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-af.ldf}[polyglossia: module for af (afrikaans)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{afrikaans}
+
+\endinput

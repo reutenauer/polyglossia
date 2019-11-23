@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-dv.ldf}[polyglossia: module for dv (divehi)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{divehi}
+
+\endinput

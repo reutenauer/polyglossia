@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-cy.ldf}[polyglossia: module for cy (welsh)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{welsh}
+
+\endinput

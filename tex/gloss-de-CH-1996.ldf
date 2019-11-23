@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-de-CH-1996.ldf}[polyglossia: module for de-CH-1996 (german)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{german}
+
+\endinput

@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-hr.ldf}[polyglossia: module for hr (croatian)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{croatian}
+
+\endinput

@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-eu.ldf}[polyglossia: module for eu (basque)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{basque}
+
+\endinput

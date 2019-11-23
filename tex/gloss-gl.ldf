@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-gl.ldf}[polyglossia: module for gl (galician)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{galician}
+
+\endinput

@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-it.ldf}[polyglossia: module for it (italian)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{italian}
+
+\endinput

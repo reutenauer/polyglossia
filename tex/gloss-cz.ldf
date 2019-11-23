@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-cz.ldf}[polyglossia: module for cz (czech)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{czech}
+
+\endinput

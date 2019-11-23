@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-ckb-Latn.ldf}[polyglossia: module for ckb-Latn (kurdish)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{kurdish}
+
+\endinput

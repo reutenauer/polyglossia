@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-el.ldf}[polyglossia: module for el (greek)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{greek}
+
+\endinput

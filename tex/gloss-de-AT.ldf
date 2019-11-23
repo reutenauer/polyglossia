@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-de-AT.ldf}[polyglossia: module for de-AT (german)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{german}
+
+\endinput

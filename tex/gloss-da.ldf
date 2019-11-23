@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-da.ldf}[polyglossia: module for da (danish)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{danish}
+
+\endinput

@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-eo.ldf}[polyglossia: module for eo (esperanto)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{esperanto}
+
+\endinput

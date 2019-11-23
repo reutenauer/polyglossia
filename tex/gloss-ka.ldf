@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-ka.ldf}[polyglossia: module for ka (georgian)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{georgian}
+
+\endinput

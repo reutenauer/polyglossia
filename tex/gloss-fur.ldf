@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-fur.ldf}[polyglossia: module for fur (friulian)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{friulian}
+
+\endinput

@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-bs.ldf}[polyglossia: module for bs (bosnian)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{bosnian}
+
+\endinput

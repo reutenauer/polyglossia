@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-es-MX.ldf}[polyglossia: module for es-MX (spanish)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{spanish}
+
+\endinput
