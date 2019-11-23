@@ -4,6 +4,8 @@ New features:
   * IETF BCP-47 compliant language tags can now be used for loading and switching
     languages alternatively to language names (#226).
   * New commands \languageid{<type>} and \mainlanguageid{<type>}.
+  * New test \iflanguageidloaded.
+  * New list \xpg@bcp@loaded.
   * New environment {lang}{<lang>} (equivalent to {<lang>},  but also available with
     \setlanguagealias* which does not define dedicated alias environments).
 

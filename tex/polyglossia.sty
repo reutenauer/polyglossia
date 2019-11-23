@@ -46,6 +46,7 @@
 \let\xpg@loaded\@empty% list of loaded languages (polyglossia name)
 \let\xpg@vloaded\@empty% list of loaded variants
 \let\xpg@bloaded\@empty% list of loaded languages (babel name)
+\let\xpg@bcp@loaded\@empty% list of loaded languages (bcp-47 id)
 
 % counter in latin
 \def\latinalph#1{\expandafter\latin@alph\csname c@#1\endcsname}
@@ -1094,6 +1095,8 @@
       \global\edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
       \global\edef\xpg@bloaded{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}%
           \ifx\xpg@bloaded\@empty\else,\xpg@bloaded\fi}%
+      \global\edef\xpg@bcp@loaded{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}%
+          \ifx\xpg@bcp@loaded\@empty\else,\xpg@bcp@loaded\fi}%
     }%
     \polyglossia_load_lang_definition:nn{#1}{#2}
     % define environment and command (except for internal latex language)
@@ -1126,6 +1129,8 @@
       \global\edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
       \global\edef\xpg@bloaded{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}%
           \ifx\xpg@bloaded\@empty\else,\xpg@bloaded\fi}%
+      \global\edef\xpg@bcp@loaded{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}%
+          \ifx\xpg@bcp@loaded\@empty\else,\xpg@bcp@loaded\fi}%
     }%
     \csgdef{#2@loaded}{}%
   }{}
@@ -1666,6 +1671,20 @@
   \polyglossia@check@if@lang@loaded:NTF{#1@bbl@loaded}{#2}{#3}%
 }
 
+% Same for languageid
+\DeclareDocumentCommand \iflanguageidloaded {mmmm}
+{
+    \str_case:nnTF {#1}
+      {
+        {bcp-47}    { \polyglossia@check@if@lang@loaded:NTF{#2@bcp@loaded}{#3}{#4} }
+        {bcp47}     { \polyglossia@check@if@lang@loaded:NTF{#2@bcp@loaded}{#3}{#4} }
+      }
+      {}
+      {
+        \xpg@error{Invalid~ \string\iflanguageidloaded\space argument:~ #1}
+      }
+}
+
 \newcommand*{\xpg@set@language@nonaux}[2][]{%
    \@select@language[#1]{#2}%
 }
@@ -1692,6 +1711,14 @@
    }{%
      \csedef{bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
    }%
+  % Store bcp47 in \xpg@bcp@loaded csv list
+  \def\xpg@tmp@bcpname{\csuse{bcp47id}}%
+  \ifcsundef{\csname xpg@tmp@bcpname\endcsname @bcp@loaded}
+  {
+    \global\edef\xpg@bcp@loaded{\xpg@tmp@bcpname%
+          \ifx\xpg@bcp@loaded\@empty\else,\xpg@bcp@loaded\fi}%
+    \csgdef{\csname xpg@tmp@bcpname\endcsname @bcp@loaded}{}%
+  }{}
    \@select@language[#1]{#2}%
     % Write to the aux
    \if@filesw%

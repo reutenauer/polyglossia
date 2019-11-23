@@ -1672,14 +1672,18 @@ If you want to have a full list of loaded languages/variants, use the following 
 \begin{itemize}
 	\item \Cmd{\xpg@loaded}\ stores a comma-separated list of all loaded languages (polyglossia name)
 	\item \Cmd{\xpg@vloaded}\ stores a comma-separated list of all loaded variants
-	\item \Cmd{\xpg@bloaded}\ stores a comma-separated list of \pkg{babel} names of all language variants 
+	\item \Cmd{\xpg@bloaded}\ stores a comma-separated list of \pkg{babel} names of all language variants
+	\item \Cmd{\xpg@bcp@loaded}\new{v1.47}\ stores a comma-separated list of the BCP-47 IDs of all language variants 
 \end{itemize}
 %
 Finally, you can test whether a language is loaded by
 \displaycmd{\iflanguageloaded\{⟨lang⟩\}\{⟨true⟩\}\{⟨false⟩\}}{\iflanguageloaded}
-where \texttt{⟨lang⟩} is a \pkg{polyglossia} language name, or
+where \texttt{⟨lang⟩} is a \pkg{polyglossia} language name, by
 \displaycmd{\ifbabellanguageloaded\{⟨lang⟩\}\{⟨true⟩\}\{⟨false⟩\}}{\ifbabellanguageloaded}
-where \texttt{⟨lang⟩} is a \pkg{babel} language name.
+where \texttt{⟨lang⟩} is a \pkg{babel} language name, or by
+\displaycmd{\iflanguageidloaded\{⟨type⟩\}\{⟨id⟩\}\{⟨true⟩\}\{⟨false⟩\}}{\iflanguageidloaded}\new{v1.47}
+where \texttt{⟨type⟩} is a supported language id type (such as ¦bcp-47¦) and \texttt{⟨id⟩} is a language id
+(such as ¦en-US¦).
 
 \section{Acknowledgements (by François Charette)}
 \pkg{Polyglossia} is notable for being a recycle box of previous contributions
