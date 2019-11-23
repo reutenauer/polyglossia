@@ -11,6 +11,12 @@
     langtag = LAT
   }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{latin}{la}
+\setlanguagealias*[variant=classic]{latin}{la-xclassic}
+\setlanguagealias*[variant=ecclesiastic]{latin}{la-xecclesiastic}
+\setlanguagealias*[variant=medieval]{latin}{la-xmedieval}
+
 % Babel aliases
 \setlanguagealias[variant=classic]{latin}{latinclassic}
 \setlanguagealias[variant=ecclesiastic]{latin}{latinecclesiastic}
