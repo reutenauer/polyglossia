@@ -314,6 +314,17 @@ name\slash options in \cmd\setdefaultlanguage\ and \cmd\setotherlanguage\ as wel
 However, unless you have special reasons, we strongly encourage you to use the \pkg{polyglossia} names.
 
 
+\subsection{Using IETF language tags}
+
+\pkg{Polyglossia}\new{v1.47} also supports the use of language tags that conform to the IETF BCP-47
+\emph{Best Current Practice}.\footnote{Please refer to \url{https://tools.ietf.org/html/bcp47} and
+	\url{https://en.wikipedia.org/wiki/IETF_language_tag} for details.}
+Thus, you can use tags such as ¦en-GB¦ (for British English) or ¦de-AT-1901¦ (for Austrian German, old spelling)
+in \cmd\setdefaultlanguage\ and \cmd\setotherlanguage\ as well as in the language switching command
+\cmd{\textlang\{⟨tag⟩\}}, the environment \cmd{\begin\{lang\}\{⟨tag⟩\}} \ldots\ \cmd{\end\{lang\}} and the \pkg{babel}
+language switching commands\slash environments documented in section~\ref{sec:babelcmds}.
+
+
 \subsection{Global options}
 
 \pkg{Polyglossia} can be loaded with the following global package options:

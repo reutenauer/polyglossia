@@ -1,6 +1,8 @@
 1.47 (???)
 
 New features:
+  * IETF BCP-47 compliant language tags can now be used for loading and switching
+    languages alternatively to language names (#226).
   * New environment {lang}{<lang>} (equivalent to {<lang>},  but also available with
     \setlanguagealias* which does not define dedicated alias environments).
 
