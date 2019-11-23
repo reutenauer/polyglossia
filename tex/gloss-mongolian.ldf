@@ -3,6 +3,7 @@
 \RequirePackage{xpg-cyrillicnumbers}
 
 \PolyglossiaSetup{mongolian}{
+  bcp47=mn,
   script=Cyrillic,
   scripttag=cyrl,
   langtag=MNG,

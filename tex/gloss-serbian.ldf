@@ -7,6 +7,7 @@
 \RequirePackage{xpg-cyrillicnumbers}
 
 \PolyglossiaSetup{serbian}{
+  bcp47=sr-Latn,
   langtag=SRB,
   hyphennames={serbian},
   hyphenmins={2,2},
@@ -30,12 +31,12 @@
    \ifcase\nr\relax
       % cyrillic:
       \@serbian@cyrtrue
-      \SetLanguageKeys{serbian}{scripttag=cyrl,script=Cyrillic,babelname=serbianc}
+      \SetLanguageKeys{serbian}{scripttag=cyrl,script=Cyrillic,babelname=serbianc,bcp47=sr-Cyrl}
       \xpg@fontsetup@nonlatin{serbian}%
    \or
       % latin:
       \@serbian@cyrfalse
-      \SetLanguageKeys{serbian}{scripttag=latn,script=Latin}
+      \SetLanguageKeys{serbian}{scripttag=latn,script=Latin,bcp47=sr-Latn}
       \xpg@fontsetup@latin{serbian}%
       %TODO \def\serbian@language{\language=\l@serbianlat}%
       % or should we use Croatian patterns as a fallback for the time being???

@@ -11,6 +11,7 @@ and may look very wrong.}
 \RequirePackage{hijrical}
 
 \PolyglossiaSetup{urdu}{
+  bcp47=ur,
   script=Arabic,
   direction=RL,
   scripttag=arab,

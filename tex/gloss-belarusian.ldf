@@ -3,6 +3,7 @@
 \RequirePackage{xpg-cyrillicnumbers}
 
 \PolyglossiaSetup{belarusian}{
+  bcp47=be,
   script=Cyrillic,
   scripttag=cyrl,
   langtag=BEL,
@@ -22,13 +23,16 @@
 \define@choicekey*+{belarusian}{spelling}[\val\nr]{modern,classic,tarask}[modern]{%
    \ifcase\nr\relax
       % modern:
-      \def\belarusian@spelling{modern}
+      \def\belarusian@spelling{modern}%
+      \SetLanguageKeys{belarusian}{bcp47=be}%
    \or
       % classic:
-      \def\belarusian@spelling{tarask}
+      \def\belarusian@spelling{tarask}%
+      \SetLanguageKeys{belarusian}{bcp47=be-tarask}%
    \or
       % tarask:
-      \def\belarusian@spelling{tarask}
+      \def\belarusian@spelling{tarask}%
+      \SetLanguageKeys{belarusian}{bcp47=be-tarask}%
    \fi
 }{\xpg@warning{Unknown Belarusian spelling `#1'}}
 

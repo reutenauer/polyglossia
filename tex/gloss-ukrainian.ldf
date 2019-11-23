@@ -3,6 +3,7 @@
 % and revised by Roman Kyrylych
 
 \PolyglossiaSetup{ukrainian}{
+  bcp47=uk,
   script=Cyrillic,
   scripttag=cyrl,
   langtag=UKR,

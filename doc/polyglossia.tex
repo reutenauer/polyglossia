@@ -1660,6 +1660,12 @@ In order to get such information, \pkg{polyglossia} provides the following macro
 	      Note that this macro is also defined for languages that are not supported in \pkg{babel}. In that
 	      case, they are equal to the polyglossia language name.
 	\item \Cmd\mainbabelname\ analogously stores the name of document's main language (variant) in \pkg{babel}.
+	\item \Cmd{\languageid\{⟨type⟩\}\}}\new{v1.47} stores the identifier tag of the current language. Currently supported ¦⟨types⟩¦:
+	      \begin{itemize}
+	      	\item ¦bcp-47¦ (alias ¦bcp47¦): IETF BCP-47 language identifier
+	      \end{itemize}
+	 \item \Cmd{\mainlanguageid\{⟨type⟩\}\}}\new{v1.47} stores identifier tag of the main language. Currently supported ¦⟨types⟩¦:
+	      see \cmd\languageid.
 \end{itemize}
 %
 If you want to have a full list of loaded languages/variants, use the following macros:

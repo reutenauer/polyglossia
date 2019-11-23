@@ -2,6 +2,7 @@
 %% Strings contributed by Daniel Owens < dhowens . pmbx . net >
 
 \PolyglossiaSetup{vietnamese}{
+  bcp47=vi,
   hyphennames={nohyphenation},
   hyphenmins={2,2},
   langtag=VIT,

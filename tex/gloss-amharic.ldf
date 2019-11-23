@@ -1,5 +1,6 @@
 \ProvidesFile{gloss-amharic.ldf}[polyglossia: module for amharic]
 \PolyglossiaSetup{amharic}{
+  bcp47=am,
   script=Ethiopic,
   scripttag=ethi,
   langtag=AMH,

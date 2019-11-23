@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-korean.ldf}[polyglossia: module for Korean]
 
 \PolyglossiaSetup{korean}{
+  bcp47=ko,
     script=Hangul,
     scripttag=hang,
     language=Korean,

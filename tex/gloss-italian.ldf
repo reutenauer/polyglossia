@@ -1,6 +1,7 @@
 % !TEX encoding = UTF-8 Unicode
 \ProvidesFile{gloss-italian.ldf}[polyglossia: module for italian]
 \PolyglossiaSetup{italian}{
+  bcp47=it,
   hyphennames={italian},
   hyphenmins={2,2},
   langtag=ITA,

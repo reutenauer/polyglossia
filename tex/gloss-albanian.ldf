@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-albanian.ldf}[polyglossia: module for albanian]
 
 \PolyglossiaSetup{albanian}{
+  bcp47=sq,
   hyphennames={albanian},
   langtag=SQI,
   hyphenmins={2,2},

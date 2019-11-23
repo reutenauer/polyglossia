@@ -1,5 +1,6 @@
 \ProvidesFile{gloss-bulgarian.ldf}[polyglossia: module for bulgarian]
 \PolyglossiaSetup{bulgarian}{
+  bcp47=bg,
   script=Cyrillic,
   scripttag=cyrl,
   langtag=BGR,

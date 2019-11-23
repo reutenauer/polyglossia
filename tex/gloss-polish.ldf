@@ -1,5 +1,6 @@
 \ProvidesFile{gloss-polish.ldf}[polyglossia: module for polish]
 \PolyglossiaSetup{polish}{
+  bcp47=pl,
   hyphennames={polish},
   hyphenmins={2,2},
   langtag=PLK,

@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-georgian.ldf}[polyglossia: module for georgian]
 
 \PolyglossiaSetup{georgian}{
+  bcp47=ka,
   script=Georgian,
   scripttag=geor,
   langtag=KAT,

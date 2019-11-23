@@ -3,6 +3,7 @@
 \RequirePackage{xpg-cyrillicnumbers}
 
 \PolyglossiaSetup{russian}{
+  bcp47=ru,
   script=Cyrillic,
   scripttag=cyrl,
   langtag=RUS,
@@ -23,8 +24,8 @@
 \newif\if@russian@modern
 \define@key{russian}{spelling}[modern]{%
   \ifstrequal{#1}{old}%
-    {\@russian@modernfalse}%
-    {\@russian@moderntrue}%
+    {\@russian@modernfalse\SetLanguageKeys{russian}{bcp47=ru-petr1708}}%
+    {\@russian@moderntrue\SetLanguageKeys{russian}{bcp47=ru}}%
 }
 
 \def\captionsrussian{%

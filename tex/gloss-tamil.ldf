@@ -8,6 +8,7 @@ and may look very wrong.}
 % Translations provided by Kevin & Siji, 01-11-2009
 
 \PolyglossiaSetup{tamil}{
+  bcp47=ta,
   script=Tamil,
   scripttag=taml,
   langtag=TAM,

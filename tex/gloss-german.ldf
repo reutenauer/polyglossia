@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-german.ldf}[polyglossia: module for german]
 
 \PolyglossiaSetup{german}{
+  bcp47=de-DE,
   hyphenmins={2,2},
   frenchspacing=true,
   fontsetup=true,
@@ -86,21 +87,45 @@
 \def\german@set@babelname{%
   \if@german@oldspelling
      \if@swiss@locale
-         \SetLanguageKeys{german}{babelname=swissgerman}%
+         \if@german@blackletter
+           \SetLanguageKeys{german}{babelname=swissgerman,bcp47=de-CH-1901-Latf}%
+         \else
+           \SetLanguageKeys{german}{babelname=swissgerman,bcp47=de-CH-1901}%
+         \fi
      \else
      \if@austrian@locale
-         \SetLanguageKeys{german}{babelname=austrian}%
+         \if@german@blackletter
+            \SetLanguageKeys{german}{babelname=austrian,bcp47=de-AT-1901-Latf}%
+         \else
+            \SetLanguageKeys{german}{babelname=austrian,bcp47=de-AT-1901}%
+         \fi
      \else
-         \SetLanguageKeys{german}{babelname=german}%
+         \if@german@blackletter
+            \SetLanguageKeys{german}{babelname=german,bcp47=de-DE-1901-Latf}%
+         \else
+            \SetLanguageKeys{german}{babelname=german,bcp47=de-DE-1901}%
+         \fi
      \fi\fi
   \else
      \if@swiss@locale
-         \SetLanguageKeys{german}{babelname=nswissgerman}%
+         \if@german@blackletter
+           \SetLanguageKeys{german}{babelname=nswissgerman,bcp47=de-CH-Latf}%
+         \else
+           \SetLanguageKeys{german}{babelname=nswissgerman,bcp47=de-CH}%
+         \fi
      \else
      \if@austrian@locale
-         \SetLanguageKeys{german}{babelname=naustrian}%
+         \if@german@blackletter
+           \SetLanguageKeys{german}{babelname=naustrian,bcp47=de-AT-Latf}%
+         \else
+           \SetLanguageKeys{german}{babelname=naustrian,bcp47=de-AT}%
+         \fi
      \else
-         \SetLanguageKeys{german}{babelname=ngerman}%
+         \if@german@blackletter
+           \SetLanguageKeys{german}{babelname=ngerman,bcp47=de-DE-Latf}%
+         \else
+           \SetLanguageKeys{german}{babelname=ngerman,bcp47=de-DE}%
+         \fi
      \fi\fi
   \fi
 }
@@ -117,6 +142,7 @@
       % fraktur:
       \@german@blacklettertrue%
    \fi
+   \german@set@babelname%
    \xpg@info{Option: German, script=\val}%
 }{\xpg@warning{Unknown German script `#1'}}
 

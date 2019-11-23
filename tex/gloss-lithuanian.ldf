@@ -2,6 +2,7 @@
 
 \ProvidesFile{gloss-lithuanian.ldf}[polyglossia: module for lithuanian]
 \PolyglossiaSetup{lithuanian}{
+  bcp47=lt,
   hyphennames={lithuanian},
   hyphenmins={2,2},
   langtag=LTH,

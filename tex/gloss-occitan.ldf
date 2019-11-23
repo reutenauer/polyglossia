@@ -18,6 +18,7 @@
 \ProvidesFile{gloss-occitan.ldf}[2016/02/04 v0.3 polyglossia:
      module for Occitan]
 \PolyglossiaSetup{occitan}{
+  bcp47=oc,
   hyphennames={occitan},
   langtag=OCI,
   hyphenmins={2,2},

@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-czech.ldf}[polyglossia: module for czech]
 
 \PolyglossiaSetup{czech}{
+  bcp47=cz,
   hyphennames={czech},
   hyphenmins={2,2},
   langtag=CSY,

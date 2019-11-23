@@ -373,6 +373,13 @@
        .value_required:n = true,
     #1 / langtag
        .initial:n = {},
+    % the BCP-47 tag
+    #1 / bcp47
+       .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/bcp47}{##1}},
+    #1 / bcp47
+       .value_required:n = true,
+    #1 / bcp47
+       .initial:n = {},
     % hyphennames
     #1 / hyphennames
     .code:n = {
@@ -1154,12 +1161,50 @@
       { \edef\babelname{\l_tmpa_tl}% 
         \cs_gset_eq:cc{#2@gbabelname}{babelname}%
       }
+  % Store BCP-47 id of main language
+  \prop_get:NxNT \polyglossia@langsetup {#2/bcp47} \l_tmpa_tl
+      { \csedef{mainbcp47id}{\l_tmpa_tl} }
+  % Store BCP-47 id of current language
+  \prop_get:NxNT \polyglossia@langsetup {#2/bcp47} \l_tmpa_tl
+      { \csedef{bcp47id}{\l_tmpa_tl}% 
+        \cs_gset_eq:cc{#2@gbcp47id}{bcp47id}%
+      }
   \ifluatex %
   \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
   \fi %
 }
 
 \let\setmainlanguage=\setdefaultlanguage
+
+% Returns the language ID of the current language
+% Currently supported: bcp-47
+\DeclareDocumentCommand \languageid {m}
+{
+    \str_case:nnTF {#1}
+      {
+        {bcp-47}    { \csuse{bcp47id} }
+        {bcp47}     { \csuse{bcp47id} }
+      }
+      {}
+      {
+        \xpg@error{Invalid~ \string\languageid\space argument:~ #1}
+      }
+}
+
+% Returns the language ID of the main language
+% Currently supported: bcp-47
+\DeclareDocumentCommand \mainlanguageid {m}
+{
+    \str_case:nnTF {#1}
+      {
+        {bcp-47}    { \csuse{mainbcp47id} }
+        {bcp47}     { \csuse{mainbcp47id} }
+      }
+      {}
+      {
+        \xpg@error{Invalid~ \string\mainlanguageid\space argument:~ #1}
+      }
+}
 
 \def\mainbabelname{}%
 \def\mainlanguagevariant{}%
@@ -1211,6 +1256,16 @@
     }%
   }{%
     \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+  }%
+  % Store BCP-47 id of current language
+  \tl_if_blank:nTF {#1}{%
+    \ifcsundef{#2@gbcp47id}{%
+       \csedef{bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
+    }{%
+       \csedef{bcp47id}{\csuse{#2@gbcp47id}}%
+    }%
+  }{%
+    \csedef{bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
   }%
 }
 
@@ -1424,6 +1479,16 @@
   }{%
     \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
   }%
+  % Store BCP-47 id of current language
+  \tl_if_blank:nTF {#1}{%
+    \ifcsundef{#2@gbcp47id}{%
+       \csedef{bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
+    }{%
+       \csedef{bcp47id}{\csuse{#2@gbcp47id}}%
+    }%
+  }{%
+    \csedef{bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
+  }%
 }
 
 % joint code of \foreignlanguage, otherlanguage*
@@ -1616,6 +1681,16 @@
      }%
    }{%
      \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+   }%
+   % Store BCP-47 id of current language
+   \tl_if_blank:nTF {#1}{%
+     \ifcsundef{#2@gbcp47id}{%
+        \csedef{bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
+     }{%
+        \csedef{bcp47id}{\csuse{#2@gbcp47id}}%
+     }%
+   }{%
+     \csedef{bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
    }%
    \@select@language[#1]{#2}%
     % Write to the aux

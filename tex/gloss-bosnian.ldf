@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-bosnian.ldf}[polyglossia: module for bosnian]
 
 \PolyglossiaSetup{bosnian}{
+  bcp47=bs,
   langtag=BOS,
   hyphennames={bosnian,croatian},
   hyphenmins={2,2}, % adapted from gloss-croatian

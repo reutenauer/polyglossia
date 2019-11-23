@@ -8,6 +8,7 @@ and may look very wrong.}
 % Translations provided by Anmol Sharma <unmole.in@gmail.com>
 
 \PolyglossiaSetup{telugu}{
+  bcp47=te,
   script=Telugu,
   scripttag=telu,
   langtag=TEL,

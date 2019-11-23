@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-afrikaans.ldf}[polyglossia: module for afrikaans]
 
 \PolyglossiaSetup{afrikaans}{
+  bcp47=af,
   hyphennames={afrikaans,dutch},
   hyphenmins={2,2},
   langtag=AFK,

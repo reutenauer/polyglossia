@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-friulian.ldf}[polyglossia: module for friulian]
 
 \PolyglossiaSetup{friulian}{%
+  bcp47=fur,
   language=Friulian,
   babelname=friulan,
   hyphennames={friulan,furlan},

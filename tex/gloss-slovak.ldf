@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-slovak.ldf}[polyglossia: module for slovak]
 
 \PolyglossiaSetup{slovak}{
+  bcp47=sk,
   hyphennames={slovak},
   hyphenmins={2,2},
   langtag=SKY,

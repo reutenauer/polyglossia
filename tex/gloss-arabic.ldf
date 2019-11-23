@@ -10,6 +10,7 @@ and may look very wrong.}
 \RequirePackage{hijrical}
 
 \PolyglossiaSetup{arabic}{
+  bcp47=ar,
   script=Arabic,
   direction=RL,
   langtag=ARA,
@@ -64,9 +65,11 @@ and may look very wrong.}
   \def\@tmpa{#1}%
   \ifx\@tmpa\tmp@morocco%
     \eastern@numeralsfalse%
+    \SetLanguageKeys{arabic}{bcp47=ary}%
   \else
     \ifx\@tmpa\tmp@algeria%
       \eastern@numeralsfalse%
+      \SetLanguageKeys{arabic}{bcp47=arq}%
     \fi%
   \fi%
   \gdef\@@arabic@month{\@arabic@month{#1}}}

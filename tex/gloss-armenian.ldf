@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-armenian.ldf}[polyglossia: module for armenian]
 
 \PolyglossiaSetup{armenian}{
+  bcp47=hy,
   script=Armenian,
   scripttag=armn,
   langtag=HYE,

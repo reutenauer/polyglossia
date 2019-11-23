@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-greek.ldf}[polyglossia: module for greek]
 
 \PolyglossiaSetup{greek}{
+  bcp47=el-monoton,
   script=Greek,
   scripttag=grek,
   langtag=ELL,
@@ -54,7 +55,7 @@
     \def\greek@variant{polygreek}%
     \def\captionsgreek{\polygreekcaptions}%
     \def\dategreek{\datepolygreek}%
-    \SetLanguageKeys{greek}{babelname=polutonikogreek}%
+    \SetLanguageKeys{greek}{babelname=polutonikogreek,bcp47=el-polyton}%
     \xpg@info{Option: Polytonic Greek}%
   \else
     \ifx\@tmpa\tmp@ancient
@@ -65,6 +66,7 @@
       \def\greek@variant{ancientgreek}%
       \def\captionsgreek{\ancientgreekcaptions}%
       \def\dategreek{\dateancientgreek}%
+      \SetLanguageKeys{greek}{babelname=greek,bcp47=grc}%
       \xpg@info{Option: Ancient Greek}%
     \else %monotonic
       \xpg@ifdefined{monogreek}{}%
@@ -74,6 +76,7 @@
       \def\greek@variant{monogreek}% monotonic
       \def\captionsgreek{\monogreekcaptions}%
       \def\dategreek{\datemonogreek}%
+      \SetLanguageKeys{greek}{babelname=greek,bcp47=el-monoton}%
       \xpg@info{Option: Monotonic Greek}%
     \fi
   \fi}

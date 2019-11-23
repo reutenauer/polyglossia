@@ -1,5 +1,6 @@
 \ProvidesFile{gloss-khmer.ldf}[polyglossia: module for Khmer]
 \PolyglossiaSetup{khmer}{
+  bcp47=km,
 	script=Khmer,%
 	scripttag=khmr,%
 	langtag=KHM,%

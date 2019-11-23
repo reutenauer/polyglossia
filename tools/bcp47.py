@@ -37,7 +37,7 @@ babelname2bcp47 = {
     "danish" : "da",
     "divehi" : "dv",
     "dutch" : "nl",
-    "english" : "en",
+    "english" : "en-US",
     "esperanto" : "eo",
     "estonian" : "et",
     "farsi" : "fa",
@@ -48,7 +48,7 @@ babelname2bcp47 = {
     "gaelic" : "ga",
     "galician" : "gl",
     "georgian" : "ka",
-    "german" : "de-DE-1996",
+    "german" : "de-DE",
     "germanb" : "de-DE-1901",
     "greek" : "el-monoton",
     "hebrew" : "he",
@@ -368,6 +368,7 @@ bcp472opts = {
 def main():
     generate_glosses()
     generate_aliases()
+    generate_ids()
 
 
 def generate_glosses():
@@ -410,6 +411,18 @@ def generate_aliases():
                     fertig = True
                     aliases.append(glossval)
                 print line,
+
+def generate_ids():
+    aliases = []
+    for key in babelname2bcp47:
+        val = babelname2bcp47[key]
+        gloss = key
+        addition = ("  bcp47=%s,\n" % val)
+        file_path = "../tex/" + ("gloss-%s.ldf" % gloss)
+        for line in fileinput.FileInput(file_path,inplace=1):
+            if "\\PolyglossiaSetup{" in line:
+                line = line.replace(line, line + addition)
+            print line,
 
 
 if __name__ == "__main__":

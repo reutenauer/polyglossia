@@ -6,6 +6,7 @@ the output is not guaranteed to be correct\MessageBreak
 and may look very wrong.}
 \fi
 \PolyglossiaSetup{lao}{
+  bcp47=lo,
   script=Lao,
   scripttag=lao,
   langtag=LAO,

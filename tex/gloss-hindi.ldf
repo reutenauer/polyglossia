@@ -6,6 +6,7 @@
 \ProvidesFile{gloss-hindi.ldf}[polyglossia: module for hindi]
 \RequirePackage{devanagaridigits}
 \PolyglossiaSetup{hindi}{
+  bcp47=hi,
   script=Devanagari,
   scripttag=deva,
   langtag=HIN,

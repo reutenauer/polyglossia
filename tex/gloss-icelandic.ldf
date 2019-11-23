@@ -1,5 +1,6 @@
 \ProvidesFile{gloss-icelandic.ldf}[polyglossia: module for icelandic]
 \PolyglossiaSetup{icelandic}{
+  bcp47=is,
   hyphennames={icelandic},
   hyphenmins={2,2},
   langtag=ISL,

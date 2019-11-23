@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-hungarian.ldf}[polyglossia: module for hungarian]
 
 \PolyglossiaSetup{hungarian}{
+  bcp47=hu,
   babelname=magyar,
   hyphennames={hungarian,magyar},
   langtag=HUN,

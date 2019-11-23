@@ -4,6 +4,7 @@
 
 \PolyglossiaSetup {latin}
   {
+    bcp47 = la,
     hyphennames = {latin},
     hyphenmins = {2,2},
     frenchspacing = true,
@@ -324,7 +325,7 @@
     \bool_set_false:N \l_polyglossia_latin_use_digraphs_bool
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
-    \SetLanguageKeys {latin} { babelname = latin.classic }
+    \SetLanguageKeys {latin} { babelname = latin.classic, bcp47 = la-xclassic }
     \polyglossia_latin_set_patterns:n {classiclatin}
   }
 
@@ -335,7 +336,7 @@
     \bool_set_true:N \l_polyglossia_latin_use_digraphs_bool
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
-    \SetLanguageKeys {latin} { babelname = latin.medieval }
+    \SetLanguageKeys {latin} { babelname = latin.medieval, bcp47 = la-xmedieval }
     \polyglossia_latin_use_modern_patterns:
   }
 
@@ -346,7 +347,7 @@
     \bool_set_false:N \l_polyglossia_latin_use_digraphs_bool
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
-    \SetLanguageKeys {latin} { babelname = latin }
+    \SetLanguageKeys {latin} { babelname = latin, bcp47 = la }
     \polyglossia_latin_use_modern_patterns:
   }
 
@@ -357,7 +358,7 @@
     \bool_set_true:N \l_polyglossia_latin_use_digraphs_bool
     \bool_set_false:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_true:N \l_polyglossia_latin_punctuation_spacing_bool
-    \SetLanguageKeys {latin} { babelname = latin.ecclesiastic }
+    \SetLanguageKeys {latin} { babelname = latin.ecclesiastic, bcp47 = la-xecclesiastic }
     \polyglossia_latin_use_modern_patterns:
   }
 

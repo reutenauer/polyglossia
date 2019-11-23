@@ -12,6 +12,7 @@ and may look very wrong.}
 \RequirePackage{bengalidigits}
 
 \PolyglossiaSetup{bengali}{
+  bcp47=bn,
   script=Bengali,
   scripttag=beng,
   langtag=BEN,

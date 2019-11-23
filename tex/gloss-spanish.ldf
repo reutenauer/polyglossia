@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-spanish.ldf}[polyglossia: module for spanish]
 
 \PolyglossiaSetup{spanish}{
+  bcp47=es-ES,
   hyphennames={spanish},
   hyphenmins={2,2},
   langtag=ESP,
@@ -24,11 +25,11 @@
    \ifcase\nr\relax
       % spanish:
       \@spanish@mexicofalse%
-      \SetLanguageKeys{spanish}{babelname=spanish}%
+      \SetLanguageKeys{spanish}{babelname=spanish,bcp47=es-ES}%
    \or
       % mexican:
       \@spanish@mexicotrue%
-      \SetLanguageKeys{spanish}{babelname=spanishmx}%
+      \SetLanguageKeys{spanish}{babelname=spanishmx,bcp47=es-MX}%
    \fi
    \xpg@info{Option: spanish, variant=\val}%
 }{\xpg@warning{Unknown spanish variant `#1'}}

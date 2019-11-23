@@ -1,5 +1,6 @@
 \ProvidesFile{gloss-danish.ldf}[polyglossia: module for danish]
 \PolyglossiaSetup{danish}{
+  bcp47=da,
   hyphennames={danish},
   hyphenmins={2,3},
   langtag=DAN,

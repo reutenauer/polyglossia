@@ -9,6 +9,7 @@ and may look very wrong.}
 \RequirePackage{devanagaridigits}
 
 \PolyglossiaSetup{sanskrit}{
+  bcp47=sa-Deva,
   langtag=SAN,
   hyphennames={sanskrit,prakrit},
   hyphenmins={1,3},
@@ -25,6 +26,7 @@ and may look very wrong.}
 \setlanguagealias*[script=Bengali]{sanskrit}{sa-Beng}
 \setlanguagealias*[script=Kannada]{sanskrit}{sa-Knda}
 \setlanguagealias*[script=Gujarati]{sanskrit}{sa-Gujr}
+\setlanguagealias*[script=Latin]{sanskrit}{sa-Latn}
 
 \define@key{sanskrit}{Script}[Devanagari]{%
   \ifcsdef{fontsetup@sanskrit@#1}%
@@ -36,25 +38,25 @@ and may look very wrong.}
 \define@key{sanskrit}{script}[Devanagari]{\setkeys{sanskrit}{Script=#1}}
 
 \def\fontsetup@sanskrit@Devanagari{%
-  \SetLanguageKeys{sanskrit}{scripttag=deva,script=Devanagari}
+  \SetLanguageKeys{sanskrit}{scripttag=deva,script=Devanagari,bcp47=sa-Deva}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Gujarati{%
-  \SetLanguageKeys{sanskrit}{scripttag=gujr,script=Gujarati}
+  \SetLanguageKeys{sanskrit}{scripttag=gujr,script=Gujarati,bcp47=sa-Gujr}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Malayalam{%
-  \SetLanguageKeys{sanskrit}{scripttag=mlym,script=Malayalam}
+  \SetLanguageKeys{sanskrit}{scripttag=mlym,script=Malayalam,bcp47=sa-Mlym}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Bengali{%
-  \SetLanguageKeys{sanskrit}{scripttag=beng,script=Bengali}
+  \SetLanguageKeys{sanskrit}{scripttag=beng,script=Bengali,bcp47=sa-Beng}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Kannada{%
-  \SetLanguageKeys{sanskrit}{scripttag=knda,script=Kannada}
+  \SetLanguageKeys{sanskrit}{scripttag=knda,script=Kannada,bcp47=sa-Knda}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Telugu{%
-  \SetLanguageKeys{sanskrit}{scripttag=telu,script=Telugu}
+  \SetLanguageKeys{sanskrit}{scripttag=telu,script=Telugu,bcp47=sa-Relu}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Latin{%
-  \SetLanguageKeys{sanskrit}{scripttag=latn,script=Latin}
+  \SetLanguageKeys{sanskrit}{scripttag=latn,script=Latin,bcp47=sa-Latn}
   \xpg@fontsetup@latin{sanskrit}}
 
 \setkeys{sanskrit}{Script} %sets the default for Devanagari

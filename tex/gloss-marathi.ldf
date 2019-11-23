@@ -11,6 +11,7 @@ and may look very wrong.}
 \RequirePackage{devanagaridigits}
 
 \PolyglossiaSetup{marathi}{
+  bcp47=mr,
   script=Devanagari,
   scripttag=deva,
   langtag=MAR,

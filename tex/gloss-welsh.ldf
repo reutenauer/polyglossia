@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-welsh.ldf}[polyglossia: module for welsh]
 
 \PolyglossiaSetup{welsh}{
+  bcp47=cy,
   hyphennames={welsh},
   hyphenmins={2,3},
   langtag=WEL,

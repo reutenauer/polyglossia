@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-romanian.ldf}[polyglossia: module for romanian]
 
 \PolyglossiaSetup{romanian}{
+  bcp47=ro,
   hyphennames={romanian},
   hyphenmins={2,2},
   langtag=ROM,

@@ -24,6 +24,7 @@ the output is not guaranteed to be correct\MessageBreak
 and may look very wrong.}
 \fi
 \PolyglossiaSetup{kannada}{
+  bcp47=kn,
   script=Kannada,
   scripttag=knda,
   langtag=KAN,

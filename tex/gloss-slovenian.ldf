@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-slovenian.ldf}[polyglossia: module for slovenian]
 
 \PolyglossiaSetup{slovenian}{
+  bcp47=sl,
   hyphennames={slovenian,slovene},
   babelname=slovene,
   hyphenmins={2,2},

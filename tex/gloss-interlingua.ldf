@@ -1,5 +1,6 @@
 \ProvidesFile{gloss-interlingua.ldf}[polyglossia: module for interlingua]
 \PolyglossiaSetup{interlingua}{
+  bcp47=ia,
   hyphennames={interlingua},
   hyphenmins={2,2},
   langtag=INA,

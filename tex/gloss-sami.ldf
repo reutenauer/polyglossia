@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-sami.ldf}[polyglossia: module for sami]
 
 \PolyglossiaSetup{sami}{
+  bcp47=se,
   babelname=samin,
   hyphennames={samin},
   hyphenmins={2,2},

@@ -9,6 +9,7 @@ and may look very wrong.}
 \RequirePackage{hebrewcal}
 
 \PolyglossiaSetup{hebrew}{
+  bcp47=he,
   script=Hebrew,
   direction=RL,
   scripttag=hebr,

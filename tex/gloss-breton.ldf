@@ -1,5 +1,6 @@
 \ProvidesFile{gloss-breton.ldf}[polyglossia: module for breton]
 \PolyglossiaSetup{breton}{
+  bcp47=br,
   hyphennames={breton},
   hyphenmins={2,2},
   langtag=BRE,

@@ -2,6 +2,7 @@
 \ProvidesFile{gloss-piedmontese.ldf}[2013/02/12 v1.0 polyglossia: module for piedmontese]
 \makeatletter
 \PolyglossiaSetup{piedmontese}{
+  bcp47=pms,
   hyphennames={piedmontese},
   hyphenmins={2,2},
   langtag=PMS,

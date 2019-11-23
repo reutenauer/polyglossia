@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-swedish.ldf}[polyglossia: module for swedish]
 
 \PolyglossiaSetup{swedish}{
+  bcp47=sv,
   hyphennames={swedish},
   hyphenmins={2,2},
   langtag=SVE,

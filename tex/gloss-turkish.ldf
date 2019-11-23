@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-turkish.ldf}[polyglossia: module for turkish]
 \RequirePackage{hijrical}
 \PolyglossiaSetup{turkish}{
+  bcp47=tr,
   hyphennames={turkish},
   hyphenmins={2,2},
   langtag=TRK,

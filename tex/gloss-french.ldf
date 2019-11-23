@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-french.ldf}[polyglossia: module for french]
 
 \PolyglossiaSetup{french}{%
+  bcp47=fr-FR,
   language=French,
   script=Latin,
   langtag=FRA,
@@ -24,10 +25,11 @@
    \ifcase\nr\relax
       % french:
       \def\french@variant{french}%
+      \SetLanguageKeys{french}{babelname=french,bcp47=fr-FR}%
    \or
       % canadian:
       \def\french@variant{canadien}%
-      \SetLanguageKeys{french}{babelname=canadien}%
+      \SetLanguageKeys{french}{babelname=canadien,bcp47=fr-CA}%
       \xpg@ifdefined{canadien}{}%
       {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
         I will use the standard patterns for French instead}%
@@ -35,7 +37,7 @@
    \or
       % acadian:
       \def\french@variant{acadian}%
-      \SetLanguageKeys{french}{babelname=canadien}%
+      \SetLanguageKeys{french}{babelname=canadien,bcp47=fr-CA}%
       \xpg@ifdefined{acadian}{}%
       {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
         I will use the standard patterns for French instead}%

@@ -1,5 +1,6 @@
 \ProvidesFile{gloss-coptic.ldf}[polyglossia: module for coptic]
 \PolyglossiaSetup{coptic}{
+  bcp47=cop,
   script=Coptic,
   scripttag=copt,
   langtag=COP,

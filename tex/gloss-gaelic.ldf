@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-gaelic.ldf}[polyglossia: module for gaelic]
 
 \PolyglossiaSetup{gaelic}{
+  bcp47=ga,
   language=Irish,
   babelname=irish,
   hyphennames={irish},
@@ -21,12 +22,12 @@
    \ifcase\nr\relax
       % irish:
       \gdef\gaelic@variant{irish}%
-      \SetLanguageKeys{gaelic}{language=Irish,langtag=IRI,babelname=irish}%
+      \SetLanguageKeys{gaelic}{language=Irish,langtag=IRI,babelname=irish,bcp47=ga}%
       \xpg@fontsetup@latin{gaelic}%
    \or
       % scottish:
       \gdef\gaelic@variant{scottish}%
-      \SetLanguageKeys{gaelic}{language=Gaelic,langtag=GAE,babelname=scottish}%
+      \SetLanguageKeys{gaelic}{language=Gaelic,langtag=GAE,babelname=scottish,bcp47=gd}%
       \xpg@fontsetup@latin{gaelic}%
    \fi
    \xpg@info{Option: gaelic, variant=\val}%

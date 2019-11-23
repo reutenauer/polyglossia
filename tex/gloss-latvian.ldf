@@ -1,5 +1,6 @@
 \ProvidesFile{gloss-latvian.ldf}[polyglossia: module for latvian]
 \PolyglossiaSetup{latvian}{
+  bcp47=lv,
   hyphennames={latvian},
   hyphenmins={2,2},
   langtag=LVI,

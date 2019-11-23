@@ -1,5 +1,6 @@
 \ProvidesFile{gloss-galician.ldf}[polyglossia: module for galician]
 \PolyglossiaSetup{galician}{
+  bcp47=gl,
   hyphennames={galician},
   hyphenmins={2,2},
   langtag=GAL,

@@ -9,6 +9,7 @@ and may look very wrong.}
 \RequirePackage{arabicnumbers}
 
 \PolyglossiaSetup{syriac}{
+  bcp47=syr,
   script=Syriac,
   scripttag=syrc,
   langtag=SYR,

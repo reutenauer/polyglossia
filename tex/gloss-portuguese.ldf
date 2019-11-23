@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-portuguese.ldf}[polyglossia: module for portuguese]
 
 \PolyglossiaSetup{portuguese}{
+  bcp47=pt-PT,
   babelname=portuges,
   hyphennames={portuges,portuguese},
   hyphenmins={2,3},
@@ -22,11 +23,11 @@
    \ifcase\nr\relax
       % portuguese:
       \def\portuguese@variant{portuges}%
-      \SetLanguageKeys{portuguese}{babelname=portuges}%
+      \SetLanguageKeys{portuguese}{babelname=portuges,bcp47=pt-PT}%
    \or
       % brazilian:
       \def\portuguese@variant{brazil}%
-      \SetLanguageKeys{portuguese}{babelname=brazil}%
+      \SetLanguageKeys{portuguese}{babelname=brazil,bcp47=pt-BR}%
       \xpg@ifdefined{brazil}{}%
 	    {\xpg@warning{No hyphenation patterns were loaded for "Portuguese (Brazil)"\MessageBreak
 	      I will use the standard patterns for Portuguese instead}%

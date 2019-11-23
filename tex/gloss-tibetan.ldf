@@ -6,6 +6,7 @@
 %%
 
 \PolyglossiaSetup{tibetan}{
+  bcp47=bo,
   script=Tibetan,
   scripttag=tibt,
   langtag=TIB,

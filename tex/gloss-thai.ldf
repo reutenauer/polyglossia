@@ -15,6 +15,7 @@ the output is not guaranteed to be correct\MessageBreak
 and may look very wrong.}
 \fi
 \PolyglossiaSetup{thai}{
+  bcp47=th,
   script=Thai,
   scripttag=thai,
   langtag=THA,
