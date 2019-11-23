@@ -1013,6 +1013,10 @@
 % load a master language from an alias file
 \newcommand*\xpg@load@master@language[1] {
    \xpg@input{gloss-#1.ldf}
+   \ifcsundef{#1@loaded}%
+   {
+     \exp_args:Nx\polyglossia@define@language@cmd:n{#1}%
+   }{}
    \csgdef{#1@loaded}{}
    \global\edef\xpg@loaded{#1\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
 }
