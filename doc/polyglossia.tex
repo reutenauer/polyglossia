@@ -240,7 +240,7 @@ compatibility reasons.
 Version 1.46\new{v1.46} introduces support for Afrikaans, Belarusian, Bosnian and Georgian.
 
 
-\subsection{Relation to and use of Babel language names}
+\subsection{Relation to and use of Babel language names}\label{sec:babelnames}
 
 If you are familiar with the \pkg{babel} package, you will note that \pkg{polyglossia}'s language naming
 slightly differs. Whereas \pkg{babel} has a unique name for each language variety (\eg\emph{american} and \emph{british}),
@@ -314,7 +314,7 @@ name\slash options in \cmd\setdefaultlanguage\ and \cmd\setotherlanguage\ as wel
 However, unless you have special reasons, we strongly encourage you to use the \pkg{polyglossia} names.
 
 
-\subsection{Using IETF language tags}
+\subsection{Using IETF language tags}\label{sec:langtags}
 
 \pkg{Polyglossia}\new{v1.47} also supports the use of language tags that conform to the IETF BCP-47
 \emph{Best Current Practice}.\footnote{Please refer to \url{https://tools.ietf.org/html/bcp47} and
@@ -453,22 +453,27 @@ you can define alias commands for specific language (variants). \Eg
 
 \begin{quote}
 \begin{verbatim}
-\setlanguagealias[variant=austrian]{german}{deAT}
+\setlanguagealias[variant=austrian]{german}{AT}
 \end{verbatim}
 \end{quote}
 %
-will define a command \cmd{\textdeAT} as well as an environment ¦{deAT}¦ which will link towards
+will define a command \cmd{\textAT} as well as an environment ¦{AT}¦ which will link towards
 the command \cmd{\textgerman[variant=austrian]} and the environment ¦{german}[variant=austrian]¦,
 respectively. The aliases can also be used in the language switching commands described in
 section~\ref{sec:langcmds} and \ref{sec:babelcmds}.
 Note, though, that the usual restrictions for command names apply, so something such as
-¦de-AT¦ or ¦de_AT¦ will not work since ¦-¦ and ¦_¦ are not allowed in command names.
+¦de-AT¦ or ¦de_AT¦ will not work since ¦-¦ and ¦_¦ are not allowed in command names (the same
+holds true for any non-ASCII character and for digits).
 
 For the latter case, and for the case where an alias would clash with an existing command
-(\eg ¦\fi¦) or \cmd{\text⟨...⟩} command (\eg ¦\textit¦), a starred version \Cmd{\setlanguagealias*}
+(\eg ¦\fi¦) or a \cmd{\text⟨...⟩} command (\eg ¦\textit¦), a starred version \Cmd{\setlanguagealias*}
 is provided which does neither define a \cmd{\text⟨alias⟩} command nor an ¦⟨alias⟩¦ environment,
 but which will set up the alias for everything else, including \cmd{\textlang\{⟨alias⟩\}}
 and \cmd{\begin\{lang\}\{⟨alias⟩\}}.
+
+\pkg{Polyglossia} comes with some aliases predefined, namely aliases for \pkg{babel} language names
+(see sec.~\ref{sec:babelnames}) and for IETF BCP-47 language tags (the latter via \cmd{\setlanguagealias*};
+see sec.~\ref{sec:langtags}).
 
 \section{Font setup}
 
