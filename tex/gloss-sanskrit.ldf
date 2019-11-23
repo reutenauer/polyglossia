@@ -17,6 +17,15 @@ and may look very wrong.}
   localnumeral=sanskritnumerals
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{sanskrit}{sa}
+\setlanguagealias*[script=Devanagari]{sanskrit}{sa-Deva}
+\setlanguagealias*[script=Malayalam]{sanskrit}{sa-Mlym}
+\setlanguagealias*[script=Telugu]{sanskrit}{sa-Telu}
+\setlanguagealias*[script=Bengali]{sanskrit}{sa-Beng}
+\setlanguagealias*[script=Kannada]{sanskrit}{sa-Knda}
+\setlanguagealias*[script=Gujarati]{sanskrit}{sa-Gujr}
+
 \define@key{sanskrit}{Script}[Devanagari]{%
   \ifcsdef{fontsetup@sanskrit@#1}%
     {\csname fontsetup@sanskrit@#1\endcsname}%

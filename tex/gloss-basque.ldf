@@ -7,6 +7,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{basque}{eu}
+
 \def\captionsbasque{%
    \def\refname{Erreferentziak}%
    \def\abstractname{Laburpena}%

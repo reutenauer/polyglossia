@@ -20,6 +20,9 @@ and may look very wrong.}
   %digits = hebrewnumber
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{hebrew}{he}
+
 \newif\if@calendar@hebrew
 \def\tmp@hebrew{hebrew}
 \define@key{hebrew}{calendar}[gregorian]{%

@@ -21,6 +21,9 @@ and may look very wrong.}
   %TODO localalph={abjad,abjad}
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{urdu}{ur}
+
 \newif\if@western@numerals
 \def\tmp@western{western}
 \define@key{urdu}{numerals}[eastern]{%

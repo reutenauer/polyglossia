@@ -9,6 +9,9 @@
   %TODO localalph=ethnum
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{amharic}{am}
+
 \def\captionsamharic{%
    \def\refname{የነሥ ጹሁፍ ምንጭ}%
    \def\abstractname{አኅጽተሮ ጽሁፍ}%

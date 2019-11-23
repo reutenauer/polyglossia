@@ -17,6 +17,9 @@ and may look very wrong.}
   %TODO localdigits=laonumber
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{lao}{lo}
+
 \newif\if@lao@numerals
 \def\tmp@lao{lao}
 \define@key{lao}{numerals}[arabic]{%

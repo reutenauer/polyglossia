@@ -9,6 +9,8 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{piedmontese}{pms}
 
 \define@boolkey{piedmontese}[piedmontese@]{babelshorthands}[true]{}
 

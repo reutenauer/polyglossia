@@ -17,6 +17,11 @@
   %TODO localalph
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{serbian}{sr}
+\setlanguagealias*[script=Cyrillic]{serbian}{sr-Cyrl}
+\setlanguagealias*[script=Latin]{serbian}{sr-Latn}
+
 % Babel aliases
 \setlanguagealias[script=Cyrillic]{serbian}{serbianc}
 

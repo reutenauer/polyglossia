@@ -10,6 +10,9 @@
   localnumeral=armeniannumerals
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{armenian}{hy}
+
 \newif\if@eastern@armenian
 \@eastern@armenianfalse
 \define@choicekey*+{armenian}{variant}[\val\nr]{western,eastern}[western]{%

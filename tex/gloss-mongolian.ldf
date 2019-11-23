@@ -14,6 +14,9 @@
   Localnumeral=Mongoliannumerals
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{mongolian}{mn}
+
 % This file is derived from mongolian-babel. which
 % provides support for Mongolian (Khalkha variety)
 % with Cyrillic script

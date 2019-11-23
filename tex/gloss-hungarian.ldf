@@ -8,6 +8,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{hungarian}{hu}
+
 \frenchspacing
 
 % Babel and backwards compat. alias

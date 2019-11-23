@@ -8,6 +8,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{catalan}{ca}
+
 \define@boolkey{catalan}[catalan@]{babelshorthands}[true]{}
 \ifsystem@babelshorthands
   \setkeys{catalan}{babelshorthands=true}

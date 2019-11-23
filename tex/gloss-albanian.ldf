@@ -8,6 +8,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{albanian}{sq}
+
 \def\captionsalbanian{%
    \def\refname{Referencat}%
    \def\abstractname{Përmbledhja}%

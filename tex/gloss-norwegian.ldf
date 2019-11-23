@@ -7,6 +7,9 @@
   fontsetup=false,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*[variant=bokmal]{norwegian}{nb}
+\setlanguagealias*[variant=nynorsk]{norwegian}{nn} 
 % Babel and backwards compat. aliases
 \setlanguagealias[variant=bokmal]{norwegian}{norsk}
 \setlanguagealias[variant=nynorsk]{norwegian}{nynorsk}

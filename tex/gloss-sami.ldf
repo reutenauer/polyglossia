@@ -9,6 +9,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{sami}{se}
+
 % Babel and backwards compat. alias
 \setlanguagealias{sami}{samin}
 %\setlanguagealias[variant=northern]{sami}{samin}

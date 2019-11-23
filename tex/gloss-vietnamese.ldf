@@ -9,6 +9,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{vietnamese}{vi}
+
 \def\captionsvietnamese{%
   \def\refname{Tài liệu}%
   \def\abstractname{Tóm tắt nội dung}%

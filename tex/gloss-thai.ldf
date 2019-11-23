@@ -25,6 +25,9 @@ and may look very wrong.}
   %TODO localdigits=thainumber
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{thai}{th}
+
 \newif\if@thai@numerals
 \def\tmp@thai{thai}
 \define@key{thai}{numerals}[arabic]{%

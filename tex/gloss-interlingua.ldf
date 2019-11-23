@@ -8,6 +8,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{interlingua}{ia}
+
 \def\captionsinterlingua{%
    \def\refname{Referentias}%
    \def\abstractname{Summario}%

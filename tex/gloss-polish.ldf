@@ -7,6 +7,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{polish}{pl}
+
 \def\captionspolish{%
   \def\prefacename{Przedmowa}%
   \def\refname{Literatura}%

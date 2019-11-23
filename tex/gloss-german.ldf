@@ -8,6 +8,28 @@
   babelname=ngerman
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{german}{de}
+\setlanguagealias*[variant=swiss,spelling=new]{german}{de-CH}
+\setlanguagealias*[variant=austrian,spelling=new]{german}{de-AT}
+\setlanguagealias*[variant=german,spelling=new]{german}{de-DE}
+\setlanguagealias*[variant=swiss,spelling=new,script=blackletter]{german}{de-CH-Latf}
+\setlanguagealias*[variant=german,spelling=new,script=blackletter]{german}{de-DE-Latf}
+\setlanguagealias*[variant=austrian,spelling=new,script=blackletter]{german}{de-AT-Latf}
+\setlanguagealias*[variant=austrian,spelling=old]{german}{de-AT-1901}
+\setlanguagealias*[variant=swiss,spelling=new]{german}{de-CH-1996}
+\setlanguagealias*[variant=austrian,spelling=new]{german}{de-AT-1996}
+\setlanguagealias*[variant=german,spelling=old]{german}{de-DE-1901}
+\setlanguagealias*[variant=swiss,spelling=old,script=blackletter]{german}{de-CH-1901-Latf}
+\setlanguagealias*[variant=swiss,spelling=old]{german}{de-CH-1901}
+\setlanguagealias*[variant=austrian,spelling=old,script=blackletter]{german}{de-AT-1901-Latf}
+\setlanguagealias*[variant=swiss,spelling=new,script=blackletter]{german}{de-CH-1996-Latf}
+\setlanguagealias*[script=blackletter]{german}{de-Latf}
+\setlanguagealias*[variant=german,spelling=new]{german}{de-DE-1996}
+\setlanguagealias*[variant=german,spelling=old,script=blackletter]{german}{de-DE-1901-Latf}
+\setlanguagealias*[variant=german,spelling=new,script=blackletter]{german}{de-DE-1996-Latf}
+\setlanguagealias*[variant=austrian,spelling=new,script=blackletter]{german}{de-AT-1996-Latf}
+
 % Babel aliases
 \setlanguagealias[variant=austrian,spelling=old]{german}{austrian}
 \setlanguagealias[variant=austrian,spelling=new]{german}{naustrian}

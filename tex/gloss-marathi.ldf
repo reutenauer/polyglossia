@@ -21,6 +21,9 @@ and may look very wrong.}
   %TODO nouppercase=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{marathi}{mr}
+
 \def\tmp@western{Western}
 \newif\ifmarathi@devanagari@numerals
 \marathi@devanagari@numeralstrue

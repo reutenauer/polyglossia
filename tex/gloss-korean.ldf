@@ -10,6 +10,9 @@
     fontsetup=true
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{korean}{ko}
+
 % variant : plain (0), classic (1), or modern (2)
 \define@choicekey{korean}{variant}[\val\nr]{plain,classic,modern}[plain]{%
     \let\xpg@korean@variant\nr

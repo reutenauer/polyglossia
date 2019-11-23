@@ -8,6 +8,8 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{romansh}{rm}
 
 \def\captionsromansh{%
   \def\prefacename{Prefaziun}%

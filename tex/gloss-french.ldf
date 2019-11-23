@@ -10,6 +10,11 @@
   hyphenmins={2,2},
   fontsetup=true}
 
+% BCP-47 compliant aliases
+\setlanguagealias*{french}{fr}
+\setlanguagealias*[variant=french]{french}{fr-FR}
+\setlanguagealias*[variant=canadian]{french}{fr-CA} 
+
 % Babel aliases
 \setlanguagealias[variant=acadian]{french}{acadien}
 \setlanguagealias[variant=canadian]{french}{canadien}

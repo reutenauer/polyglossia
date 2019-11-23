@@ -7,6 +7,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{slovak}{sk}
+
 \ifluatex
   \RequirePackage{luavlna}
 \fi

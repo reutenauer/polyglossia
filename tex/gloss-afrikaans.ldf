@@ -8,6 +8,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{afrikaans}{af}
+
 \define@boolkey{afrikaans}[afrikaans@]{babelshorthands}[true]{}
 
 \ifsystem@babelshorthands

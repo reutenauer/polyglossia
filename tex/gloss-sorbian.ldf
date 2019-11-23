@@ -9,6 +9,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*[variant=upper]{sorbian}{hsb}
+\setlanguagealias*[variant=lower]{sorbian}{dsb} 
 % Backwards compat. aliases
 \setlanguagealias[variant=lower]{sorbian}{lsorbian}
 \setlanguagealias[variant=upper]{sorbian}{usorbian}

@@ -7,6 +7,9 @@
   %TODO localalph={esperanto@alph,esperanto@Alph}
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{esperanto}{eo}
+
 \def\captionsesperanto{%
    \def\refname{Citaĵoj}%
    \def\abstractname{Resumo}%

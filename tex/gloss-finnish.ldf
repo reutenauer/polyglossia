@@ -7,6 +7,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{finnish}{fi}
+
 \define@boolkey{finnish}[finnish@]{babelshorthands}[true]{}
 
 \ifsystem@babelshorthands

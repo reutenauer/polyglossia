@@ -9,6 +9,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{italian}{it}
+
 
 %%% CHANGES START %%% by Enrico Gregorio
 \define@boolkey{italian}[italian@]{babelshorthands}[true]{}

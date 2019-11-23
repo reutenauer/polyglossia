@@ -15,6 +15,11 @@
   Localnumeral=Russiannumerals
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{russian}{ru}
+\setlanguagealias*[spelling=modern]{russian}{ru-luna1918}
+\setlanguagealias*[spelling=old]{russian}{ru-petr1708}
+
 \newif\if@russian@modern
 \define@key{russian}{spelling}[modern]{%
   \ifstrequal{#1}{old}%

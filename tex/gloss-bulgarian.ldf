@@ -10,6 +10,9 @@
   %TODO localalph=bulgarian@alph
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{bulgarian}{bg}
+
 \def\bulgarian@Alph#1{%
    \ifcase#1\or
    А\or Б\or В\or Г\or Д\or Е\or Ж\or

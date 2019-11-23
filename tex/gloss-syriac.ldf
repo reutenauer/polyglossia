@@ -19,6 +19,9 @@ and may look very wrong.}
   %TODO localalph
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{syriac}{syr}
+
 \def\syriacnumber#1{\@syriacnumber{#1}}%
 
 \newif\if@eastern@numerals

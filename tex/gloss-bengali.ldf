@@ -22,6 +22,9 @@ and may look very wrong.}
   %TODO nouppercase=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{bengali}{bn}
+
 \def\tmp@western{Western}
 \newif\ifbengali@devanagari@numerals
 \bengali@devanagari@numeralstrue

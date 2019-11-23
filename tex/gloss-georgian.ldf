@@ -9,6 +9,9 @@
   localnumeral=georgiannumerals
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{georgian}{ka}
+
 \newif\ifgeorgian@numerals
 \define@key{georgian}{numerals}[arabic]{%
    \ifstrequal{#1}{georgian}%

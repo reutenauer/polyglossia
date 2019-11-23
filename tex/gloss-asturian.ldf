@@ -11,6 +11,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{asturian}{ast}
+
 \def\captionsasturian{%
    \def\prefacename{Entamu}%
    \def\refname{Referencies}%

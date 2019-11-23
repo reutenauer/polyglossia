@@ -15,6 +15,9 @@
   %TODO localalph={xxx@alph,xxx@Alph}
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{tibetan}{bo}
+
 \newif\if@tibetan@numerals
 \def\tmp@tibetan{tibetan}
 \define@key{tibetan}{numerals}[tibetan]{%

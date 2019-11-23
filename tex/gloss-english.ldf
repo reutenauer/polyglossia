@@ -7,6 +7,14 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{english}{en}
+\setlanguagealias*[variant=australian]{english}{en-AU}
+\setlanguagealias*[variant=newzealand]{english}{en-NZ}
+\setlanguagealias*[variant=us]{english}{en-US}
+\setlanguagealias*[variant=british]{english}{en-GB}
+\setlanguagealias*[variant=canadian]{english}{en-CA}
+
 % Babel aliases
 \setlanguagealias[variant=us]{english}{american}
 \setlanguagealias[variant=australian]{english}{australian}

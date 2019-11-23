@@ -10,6 +10,11 @@
   babelname=spanish
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{spanish}{es}
+\setlanguagealias*[variant=mexican]{spanish}{es-MX}
+\setlanguagealias*[variant=spanish]{spanish}{es-ES}
+
 % Babel aliases
 \setlanguagealias[variant=mexican]{spanish}{spanishmx}
 

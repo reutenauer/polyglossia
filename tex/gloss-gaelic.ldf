@@ -9,6 +9,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*[variant=irish]{gaelic}{ga}
+\setlanguagealias*[variant=scottish]{gaelic}{gd} 
 % Babel aliases
 \setlanguagealias[variant=irish]{gaelic}{irish}
 \setlanguagealias[variant=scottish]{gaelic}{scottish}

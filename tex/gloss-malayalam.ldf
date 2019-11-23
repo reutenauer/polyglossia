@@ -16,6 +16,9 @@ and may look very wrong.}
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{malayalam}{ml}
+
 \def\captionsmalayalam{%
      \def\abstractname{സാരാംശം}%
      \def\appendixname{ശിഷ്ടം}%

@@ -8,6 +8,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{swedish}{sv}
+
 \def\captionsswedish{%
   \def\refname{Referenser}%
   \def\abstractname{Sammanfattning}%

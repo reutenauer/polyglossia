@@ -16,6 +16,9 @@ and may look very wrong.}
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{tamil}{ta}
+
 \def\captionstamil{%
      \def\abstractname{சாராம்சம்}%
      \def\appendixname{பிற்சேர்க்கை}%பின்னிணைப்பு

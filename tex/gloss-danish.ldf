@@ -7,6 +7,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{danish}{da}
+
 \def\captionsdanish{%
   \def\prefacename{Forord}%
   \def\refname{Litteratur}%

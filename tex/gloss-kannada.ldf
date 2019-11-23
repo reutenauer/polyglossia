@@ -33,6 +33,9 @@ and may look very wrong.}
   localnumeral=kannadanumerals
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{kannada}{kn}
+
 %% Defining Kannada digits equivalents to english
 \def\kannadadigits#1{\expandafter\@kannada@digits #1@}
 \def\@kannada@digits#1{%

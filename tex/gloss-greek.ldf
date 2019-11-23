@@ -12,6 +12,12 @@
   %TODO localalph={greek@alph,greek@Alph}
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*[variant=ancient]{greek}{grc}
+\setlanguagealias*[varant=polytonic]{greek}{el-polyton}
+\setlanguagealias*[variant=monotonic]{greek}{el-monoton}
+\setlanguagealias*{greek}{el}
+
 % Babel aliases
 \setlanguagealias[variant=polytonic]{greek}{polutonikogreek}
 

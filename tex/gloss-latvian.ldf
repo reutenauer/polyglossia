@@ -6,6 +6,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{latvian}{lv}
+
 \def\captionslatvian{%
    \def\prefacename{Priekšvārds}%
    \def\refname{Literatūras saraksts}%

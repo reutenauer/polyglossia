@@ -13,6 +13,9 @@
   %TODO localalph
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{ukrainian}{uk}
+
 \newif\ifcyrillic@numerals
 \define@key{ukrainian}{numerals}[latin]{%
 \ifstrequal{#1}{cyrillic}%

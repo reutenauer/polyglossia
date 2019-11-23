@@ -9,6 +9,9 @@
   fontsetup
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{macedonian}{mk}
+
 \def\macedonian@Alph#1{%
    \ifcase#1\or
    А\or Б\or В\or Г\or Д\or Ѓ\or Е\or

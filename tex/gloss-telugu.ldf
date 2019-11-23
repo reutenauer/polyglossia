@@ -16,6 +16,9 @@ and may look very wrong.}
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{telugu}{te}
+
 \def\captionstelugu{%
    \def\refname{ఆధారాలు}%
    \def\abstractname{సారాంశం}%

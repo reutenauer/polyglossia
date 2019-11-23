@@ -8,6 +8,9 @@
   fontsetup=true
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{coptic}{cop}
+
 %\def\captionscoptic{%
 %   \def\refname{<++>}%
 %   \def\abstractname{<++>}%

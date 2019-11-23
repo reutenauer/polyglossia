@@ -8,6 +8,9 @@
   fontsetup=true
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{croatian}{hr}
+
 \def\captionscroatian{%
   \def\prefacename{Predgovor}%
   \def\refname{Literatura}%

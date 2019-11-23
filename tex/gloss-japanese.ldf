@@ -8,6 +8,9 @@
 	fontsetup=true
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{japanese}{ja}
+
 \def\japanese@capsformat{%
 	\def\@seccntformat##1{%
 		\csname pre##1\endcsname%

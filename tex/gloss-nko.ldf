@@ -8,6 +8,10 @@
   direction=RL,
   localnumeral=nkonumerals
 }
+
+% BCP-47 compliant aliases
+\setlanguagealias*{nko}{nko}
+
 \RequirePackage{nkonumbers}%
 
 \newcommand{\nkonumerals}[2]{\nkonumber{#2}}

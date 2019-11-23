@@ -21,6 +21,23 @@ and may look very wrong.}
   %TODO localalph={abjad,abjad}
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{arabic}{ar}
+\setlanguagealias*[locale=mashriq]{arabic}{ar-IQ}
+\setlanguagealias*[locale=default]{arabic}{ar-YE}
+\setlanguagealias*[locale=mashriq]{arabic}{ar-LB}
+\setlanguagealias*[locale=mashriq]{arabic}{ar-JO}
+\setlanguagealias*[locale=default]{arabic}{afb}
+\setlanguagealias*[locale=mauritania]{arabic}{ar-MR}
+\setlanguagealias*[locale=default]{arabic}{arz}
+\setlanguagealias*[locale=morocco]{arabic}{ary}
+\setlanguagealias*[locale=algeria]{arabic}{arq}
+\setlanguagealias*[locale=tunisia]{arabic}{aeb}
+\setlanguagealias*[locale=mashriq]{arabic}{ar-SY}
+\setlanguagealias*[locale=libya]{arabic}{ayl}
+\setlanguagealias*[locale=default]{arabic}{apd}
+\setlanguagealias*[locale=mashriq]{arabic}{ar-PS}
+
 \newif\ifeastern@numerals
 \def\tmp@mashriq{mashriq}
 \def\tmp@maghrib{maghrib}

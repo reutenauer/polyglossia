@@ -9,6 +9,9 @@
   fontsetup=true
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{bosnian}{bs}
+
 % TODO: Add script=Cyrillic
 
 % from babel-bosnian

@@ -20,6 +20,9 @@ and may look very wrong.}
   localnumeral=farsinumerals
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{persian}{fa}
+
 % Babel and backwards compat. alias
 \setlanguagealias{persian}{farsi}
 

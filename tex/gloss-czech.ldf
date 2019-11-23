@@ -8,6 +8,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{czech}{cz}
+
 \ifluatex
   \RequirePackage{luavlna}
 \fi

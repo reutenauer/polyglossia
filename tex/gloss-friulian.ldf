@@ -11,6 +11,9 @@
   frenchspacing=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{friulian}{fur}
+
 % Babel and backwards compat. alias
 \setlanguagealias{friulian}{friulan}
 

@@ -15,6 +15,9 @@
   %TODO nouppercase=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{hindi}{hi}
+
 \ifx\l@hindi\@undefined%
   \ifx\l@sanskrit\@undefined%
     \xpg@nopatterns{Hindi}%

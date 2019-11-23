@@ -6,6 +6,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{icelandic}{is}
+
 \def\captionsicelandic{%
    \def\refname{Heimildir}%
    \def\abstractname{Útdráttur}%

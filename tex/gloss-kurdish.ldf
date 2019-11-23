@@ -17,6 +17,17 @@
   localnumeral=kurdishnumerals
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{kurdish}{ku}
+\setlanguagealias*[variant=kurmanji,script=Latin]{kurdish}{kmr-Latn}
+\setlanguagealias*[variant=sorani]{kurdish}{ckb}
+\setlanguagealias*[variant=kurmanji,script=Arabic]{kurdish}{kmr-Arab}
+\setlanguagealias*[script=Latin]{kurdish}{ku-Latn}
+\setlanguagealias*[variant=sorani]{kurdish}{ckb-Arab}
+\setlanguagealias*[variant=sorani]{kurdish}{ckb-Latn}
+\setlanguagealias*[script=Arabic]{kurdish}{ku-Arab}
+\setlanguagealias*[variant=kurmanji]{kurdish}{kmr}
+
 % Babel aliases
 \setlanguagealias[variant=kurmanji]{kurdish}{kurmanji}
 

@@ -9,6 +9,9 @@
   fontsetup=true
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{lithuanian}{lt}
+
 \def\captionslithuanian{%
    \def\prefacename{Pratarmė}%
    \def\refname{Literatūra}%

@@ -8,6 +8,11 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*[variant=portuguese]{portuguese}{pt-PT}
+\setlanguagealias*[variant=brazilian]{portuguese}{pt-BR}
+\setlanguagealias*{portuguese}{pt}
+
 % Babel aliases
 \setlanguagealias[variant=portuguese]{portuguese}{portuges}
 \setlanguagealias[variant=brazilian]{portuguese}{brazil}

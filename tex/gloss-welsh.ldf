@@ -7,6 +7,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{welsh}{cy}
+
 \providebool{welsh@formaldate}
 
 % TODO (maybe) Interface to change that mid-document

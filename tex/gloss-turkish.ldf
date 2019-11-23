@@ -28,6 +28,9 @@
    \fi
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{turkish}{tr}
+
 \def\noturkish@punctuation{%
    \ifxetex
    \XeTeXcharclass `\! \z@

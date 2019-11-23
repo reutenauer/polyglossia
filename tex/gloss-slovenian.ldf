@@ -8,6 +8,9 @@
   fontsetup=true,
 }
 
+% BCP-47 compliant aliases
+\setlanguagealias*{slovenian}{sl}
+
 % Babel aliases
 \setlanguagealias{slovenian}{slovene}
 
