@@ -24,8 +24,8 @@
 \setlanguagealias*[variant=sorani]{kurdish}{ckb}
 \setlanguagealias*[variant=kurmanji,script=Arabic]{kurdish}{kmr-Arab}
 \setlanguagealias*[script=Latin]{kurdish}{ku-Latn}
-\setlanguagealias*[variant=sorani]{kurdish}{ckb-Arab}
-\setlanguagealias*[variant=sorani]{kurdish}{ckb-Latn}
+\setlanguagealias*[variant=sorani,script=Arabic]{kurdish}{ckb-Arab}
+\setlanguagealias*[variant=sorani,script=Latin]{kurdish}{ckb-Latn}
 \setlanguagealias*[script=Arabic]{kurdish}{ku-Arab}
 \setlanguagealias*[variant=kurmanji]{kurdish}{kmr}
 
