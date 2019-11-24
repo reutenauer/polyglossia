@@ -298,7 +298,7 @@ serbianc           & serbian    & script=Cyrillic                     \\
 slovene            & slovenian  &                                     \\
 spanishmx          & spanish    & variant=mexican                     \\
 swissgerman        & german     & variant=swiss, spelling=old         \\
-uppersorbian       & sorbian    & variant=upper                       \\
+uppersorbian       & sorbian    & variant=upper [\emph{default}]      \\
 \bottomrule
 \end{tabular}
 \end{minipage}
@@ -363,7 +363,7 @@ Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 	br               & breton      &                                                    \\
 	bs               & bosnian     &                                                    \\
 	ca               & catalan     &                                                    \\
-	ckb              & kurdish     & variant=sorani                                     \\
+	ckb              & kurdish     & variant=sorani [\emph{default}]                    \\
 	ckb-Arab         & kurdish     & variant=sorani, script=Arabic [\emph{default}]     \\
 	ckb-Latn         & kurdish     & variant=sorani, script=Latin                       \\
 	cop              & coptic      &                                                    \\
@@ -1765,6 +1765,7 @@ footnotes at page boundaries that differ in directionality from the first footno
 Note also that the rule switches might interfere in bad ways with packages or classes that redefine footnotes themselves. This is also the reason
 why ¦\autofootnoterule¦ is not used by default.
 
+\condbreak{5\baselineskip}
 \section{Calendars}
 
 \subsection{Hebrew calendar (hebrewcal.sty)}
