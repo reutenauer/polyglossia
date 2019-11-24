@@ -2,7 +2,7 @@
 % !TeX TS-program = xelatex
 \documentclass[11pt]{ltxdoc}
 \usepackage{color}
-\usepackage{xspace,fancyvrb,booktabs}
+\usepackage{xspace,fancyvrb,longtable,booktabs}
 \usepackage[neverdecrease]{paralist}
 \usepackage[format=hang,labelfont=bf,labelsep=period]{caption}
 \definecolor{myblue}{rgb}{0.02,0.04,0.48}
@@ -323,7 +323,175 @@ Thus, you can use tags such as ¦en-GB¦ (for British English) or ¦de-AT-1901¦
 in \cmd\setdefaultlanguage\ and \cmd\setotherlanguage\ as well as in the language switching command
 \cmd{\textlang\{⟨tag⟩\}}, the environment \cmd{\begin\{lang\}\{⟨tag⟩\}} \ldots\ \cmd{\end\{lang\}} and the \pkg{babel}
 language switching commands\slash environments documented in section~\ref{sec:babelcmds}.
+Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 
+\bgroup\small
+\begin{longtable}[c]{lll}
+	\caption{\label{tab:BCP47-polyglossia}BCP47-polyglossia language name matching}\\
+	\toprule
+	\textbf{BCP-47 tag} & \textbf{Polyglossia name} & \textbf{Polyglossia options}\\
+	\midrule
+	\endfirsthead
+	\caption[]{BCP47-polyglossia language name matching (\emph{continued})}\\
+	\toprule
+	\textbf{BCP-47 tag} & \textbf{Polyglossia name} & \textbf{Polyglossia options}\\
+	\midrule
+	\endhead
+	aeb              & arabic      & locale=tunisia                                     \\
+	af               & afrikaans   &                                                    \\
+	afb              & arabic      & locale=default                                     \\
+	am               & amharic     &                                                    \\
+	apd              & arabic      & locale=default                                     \\
+	ar               & arabic      &                                                    \\
+	ar-IQ            & arabic      & locale=mashriq                                     \\
+	ar-JO            & arabic      & locale=mashriq                                     \\
+	ar-LB            & arabic      & locale=mashriq                                     \\
+	ar-MR            & arabic      & locale=mauritania                                  \\
+	ar-PS            & arabic      & locale=mashriq                                     \\
+	ar-SY            & arabic      & locale=mashriq                                     \\
+	ar-YE            & arabic      & locale=default                                     \\
+	arq              & arabic      & locale=algeria                                     \\
+	ary              & arabic      & locale=morocco                                     \\
+	arz              & arabic      & locale=default                                     \\
+	ast              & asturian    &                                                    \\
+	ayl              & arabic      & locale=libya                                       \\
+	be               & belarusian  &                                                    \\
+	be-tarask        & belarusian  & spelling=classic                                   \\
+	bg               & bulgarian   &                                                    \\
+	bn               & bengali     &                                                    \\
+	bo               & tibetan     &                                                    \\
+	br               & breton      &                                                    \\
+	bs               & bosnian     &                                                    \\
+	ca               & catalan     &                                                    \\
+	ckb              & kurdish     & variant=sorani                                     \\
+	ckb-Arab         & kurdish     & variant=sorani, script=Arabic [\emph{default}]     \\
+	ckb-Latn         & kurdish     & variant=sorani, script=Latin                       \\
+	cop              & coptic      &                                                    \\
+	cy               & welsh       &                                                    \\
+	cz               & czech       &                                                    \\
+	da               & danish      &                                                    \\
+	de               & german      &                                                    \\
+	de-AT            & german      & variant=austrian, spelling=new                     \\
+	de-AT-1901       & german      & variant=austrian, spelling=old                     \\
+	de-AT-1901-Latf  & german      & variant=austrian, spelling=old, script=blackletter \\
+	de-AT-1996       & german      & variant=austrian, spelling=new                     \\
+	de-AT-1996-Latf  & german      & variant=austrian, spelling=new, script=blackletter \\
+	de-AT-Latf       & german      & variant=austrian, spelling=new, script=blackletter \\
+	de-CH            & german      & variant=swiss, spelling=new                        \\
+	de-CH-1901       & german      & variant=swiss, spelling=old                        \\
+	de-CH-1901-Latf  & german      & variant=swiss, spelling=old, script=blackletter    \\
+	de-CH-1996       & german      & variant=swiss, spelling=new                        \\
+	de-CH-1996-Latf  & german      & variant=swiss, spelling=new, script=blackletter    \\
+	de-CH-Latf       & german      & variant=swiss, spelling=new, script=blackletter    \\
+	de-DE            & german      & variant=german, spelling=new                       \\
+	de-DE-1901       & german      & variant=german, spelling=old                       \\
+	de-DE-1901-Latf  & german      & variant=german, spelling=old, script=blackletter   \\
+	de-DE-1996       & german      & variant=german, spelling=new  [\emph{default}]     \\
+	de-DE-1996-Latf  & german      & variant=german, spelling=new, script=blackletter   \\
+	de-DE-Latf       & german      & variant=german, spelling=new, script=blackletter   \\
+	de-Latf          & german      & script=blackletter                                 \\
+	dsb              & sorbian     & variant=lower                                      \\
+	dv               & divehi      &                                                    \\
+	el               & greek       &                                                    \\
+	el-monoton       & greek       & variant=monotonic  [\emph{default}]                \\
+	el-polyton       & greek       & varant=polytonic                                   \\
+	en               & english     &                                                    \\
+	en-AU            & english     & variant=australian                                 \\
+	en-CA            & english     & variant=canadian                                   \\
+	en-GB            & english     & variant=british                                    \\
+	en-NZ            & english     & variant=newzealand                                 \\
+	en-US            & english     & variant=us [\emph{default}]                        \\
+	eo               & esperanto   &                                                    \\
+	es               & spanish     &                                                    \\
+	es-ES            & spanish     & variant=spanish [\emph{default}]                   \\
+	es-MX            & spanish     & variant=mexican                                    \\
+	et               & estonian    &                                                    \\
+	eu               & basque      &                                                    \\
+	fa               & persian     &                                                    \\
+	fi               & finnish     &                                                    \\
+	fr               & french      &                                                    \\
+	fr-CA            & french      & variant=canadian                                   \\
+	fr-FR            & french      & variant=french [\emph{default}]                    \\
+	fur              & friulian    &                                                    \\
+	ga               & gaelic      & variant=irish [\emph{default}]                     \\
+	gd               & gaelic      & variant=scottish                                   \\
+	gl               & galician    &                                                    \\
+	grc              & greek       & variant=ancient                                    \\
+	he               & hebrew      &                                                    \\
+	hi               & hindi       &                                                    \\
+	hr               & croatian    &                                                    \\
+	hsb              & sorbian     & variant=upper [\emph{default}]                     \\
+	hu               & hungarian   &                                                    \\
+	hy               & armenian    &                                                    \\
+	ia               & interlingua &                                                    \\
+	id               & malay       & variant=indonesian                                 \\
+	is               & icelandic   &                                                    \\
+	it               & italian     &                                                    \\
+	ja               & japanese    &                                                    \\
+	ka               & georgian    &                                                    \\
+	km               & khmer       &                                                    \\
+	kmr              & kurdish     & variant=kurmanji                                   \\
+	kmr-Arab         & kurdish     & variant=kurmanji, script=Arabic                    \\
+	kmr-Latn         & kurdish     & variant=kurmanji, script=Latin                     \\
+	kn               & kannada     &                                                    \\
+	ko               & korean      &                                                    \\
+	ku               & kurdish     &                                                    \\
+	ku-Arab          & kurdish     & script=Arabic                                      \\
+	ku-Latn          & kurdish     & script=Latin                                       \\
+	la               & latin       &                                                    \\
+	la-xclassic      & latin       & variant=classic                                    \\
+	la-xecclesiastic & latin       & variant=ecclesiastic                               \\
+	la-xmedieval     & latin       & variant=medieval                                   \\
+	lo               & lao         &                                                    \\
+	lt               & lithuanian  &                                                    \\
+	lv               & latvian     &                                                    \\
+	mk               & macedonian  &                                                    \\
+	ml               & malayalam   &                                                    \\
+	mn               & mongolian   &                                                    \\
+	mr               & marathi     &                                                    \\
+	nb               & norwegian   & variant=bokmal                                     \\
+	nko              & nko         &                                                    \\
+	nl               & dutch       &                                                    \\
+	nn               & norwegian   & variant=nynorsk [\emph{default}]                   \\
+	oc               & occitan     &                                                    \\
+	pl               & polish      &                                                    \\
+	pms              & piedmontese &                                                    \\
+	pt               & portuguese  &                                                    \\
+	pt-BR            & portuguese  & variant=brazilian                                  \\
+	pt-PT            & portuguese  & variant=portuguese [\emph{default}]                \\
+	rm               & romansh     &                                                    \\
+	ro               & romanian    &                                                    \\
+	ru               & russian     &                                                    \\
+	ru-luna1918      & russian     & spelling=modern [\emph{default}]                   \\
+	ru-petr1708      & russian     & spelling=old                                       \\
+	sa               & sanskrit    &                                                    \\
+	sa-Beng          & sanskrit    & script=Bengali                                     \\
+	sa-Deva          & sanskrit    & script=Devanagari [\emph{default}]                 \\
+	sa-Gujr          & sanskrit    & script=Gujarati                                    \\
+	sa-Knda          & sanskrit    & script=Kannada                                     \\
+	sa-Mlym          & sanskrit    & script=Malayalam                                   \\
+	sa-Telu          & sanskrit    & script=Telugu                                      \\
+	se               & sami        &                                                    \\
+	sk               & slovak      &                                                    \\
+	sl               & slovenian   &                                                    \\
+	sq               & albanian    &                                                    \\
+	sr               & serbian     &                                                    \\
+	sr-Cyrl          & serbian     & script=Cyrillic                                    \\
+	sr-Latn          & serbian     & script=Latin [\emph{default}]                      \\
+	sv               & swedish     &                                                    \\
+	syr              & syriac      &                                                    \\
+	ta               & tamil       &                                                    \\
+	te               & telugu      &                                                    \\
+	th               & thai        &                                                    \\
+	tk               & turkmen     &                                                    \\
+	tr               & turkish     &                                                    \\
+	uk               & ukrainian   &                                                    \\
+	ur               & urdu        &                                                    \\
+	vi               & vietnamese  &                                                    \\
+	zsm              & malay       & variant=malaysian [\emph{default}]                 \\
+	\bottomrule
+\end{longtable}
+\egroup
 
 \subsection{Global options}
 
@@ -1650,7 +1818,6 @@ Example: today is \Jalalitoday.
 \section{Accessing language information}
 
 The following is specifically relevant to package authors who need information about the languages in use.
-
 In order to get such information, \pkg{polyglossia} provides the following macros:
 
 \begin{itemize}
@@ -1685,10 +1852,10 @@ Finally, you can test whether a language is loaded by
 \displaycmd{\iflanguageloaded\{⟨lang⟩\}\{⟨true⟩\}\{⟨false⟩\}}{\iflanguageloaded}
 where \texttt{⟨lang⟩} is a \pkg{polyglossia} language name, by
 \displaycmd{\ifbabellanguageloaded\{⟨lang⟩\}\{⟨true⟩\}\{⟨false⟩\}}{\ifbabellanguageloaded}
-where \texttt{⟨lang⟩} is a \pkg{babel} language name, or by
+where \texttt{⟨lang⟩} is a \pkg{babel} language name (see table~\ref{tab:bbllang} on p.~\pageref{tab:bbllang}), or by
 \displaycmd{\iflanguageidloaded\{⟨type⟩\}\{⟨id⟩\}\{⟨true⟩\}\{⟨false⟩\}}{\iflanguageidloaded}\new{v1.47}
 where \texttt{⟨type⟩} is a supported language id type (such as ¦bcp-47¦) and \texttt{⟨id⟩} is a language id
-(such as ¦en-US¦).
+(such as ¦en-US¦; see table~\ref{tab:BCP47-polyglossia} on p.~\pageref{tab:BCP47-polyglossia}).
 
 \section{Acknowledgements (by François Charette)}
 \pkg{Polyglossia} is notable for being a recycle box of previous contributions

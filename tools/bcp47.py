@@ -301,8 +301,8 @@ bcp472opts = {
     "ayl" : "locale=libya",
     "be-tarask" : "spelling=classic",
     "ckb" : "variant=sorani",
-    "ckb-Arab" : "variant=sorani",
-    "ckb-Latn" : "variant=sorani",
+    "ckb-Arab" : "variant=sorani,script=Arabic",
+    "ckb-Latn" : "variant=sorani,script=Latin",
     "de-AT-1901" : "variant=austrian,spelling=old",
     "de-AT-1996" : "variant=austrian,spelling=new",
     "de-CH-1901" : "variant=swiss,spelling=old",
@@ -366,9 +366,34 @@ bcp472opts = {
 }
 
 def main():
-    generate_glosses()
-    generate_aliases()
-    generate_ids()
+    Glosses = False
+    Aliases = False
+    IDS     = False
+    Table   = False
+
+    if len(sys.argv) == 1:
+        Glosses = True
+        Aliases = True
+        IDS     = True
+        Table   = True
+
+    if "-g" in sys.argv:
+        Glosses = True
+    if "-a" in sys.argv:
+        Aliases = True
+    if "-i" in sys.argv:
+        IDS     = True
+    if "-t" in sys.argv:
+        Table   = True
+
+    if Glosses:
+        generate_glosses()
+    if Aliases:
+        generate_aliases()
+    if IDS:
+        generate_ids()
+    if Table:
+        generate_table()
 
 
 def generate_glosses():
@@ -423,6 +448,34 @@ def generate_ids():
             if "\\PolyglossiaSetup{" in line:
                 line = line.replace(line, line + addition)
             print line,
+
+def generate_table():
+    f = open("bcp47table.tex","w+")
+    f.write("\\begin{longtable}[c]{lll}\n")
+    f.write("\\caption{\\label{tab:BCP47-polyglossia}BCP47-polyglossia language name matching}")
+    f.write("\\\\\n")
+    f.write("\\toprule\n")
+    f.write("\\textbf{BCP-47 tag} & \\textbf{Polyglossia name} & \\textbf{Polyglossia options}\\\\\n")
+    f.write("\\midrule\n")
+    f.write("\\endfirsthead\n")
+    f.write("\\toprule\n")
+    f.write("\\textbf{BCP-47 tag} & \\textbf{Polyglossia name} & \\textbf{Polyglossia options}\\\\\n")
+    f.write("\\midrule\n")
+    f.write("\\endhead\n")
+    aliases = []
+    for key, gloss in sorted(bcp472lang.items()):
+        val = key
+        fertig = False
+        col1 = val
+        col2 = gloss
+        glossval = gloss + ":" + val
+        col3 = ""
+        if val in bcp472opts:
+            col3 = bcp472opts[val]
+        f.write("%s & %s & %s \\\\\n" % (col1, col2, col3))
+    f.write("\\bottomrule\n")
+    f.write("\\end{longtable}\n")
+    f.close()
 
 
 if __name__ == "__main__":
