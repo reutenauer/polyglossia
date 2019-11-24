@@ -418,6 +418,17 @@
       .value_required:n = true,
     #1 / hyphenmins
      .initial:n = {2,3},
+    % minimal length for hyphenation (LuaTeX only)
+    #1 / totalhyphenmin
+    .code:n = {
+      % check syntax
+      \int_compare:nNnF { \clist_count:n {##1} } = {1}
+        {\xpg@error{totalhyphenhypenmin~should~be~a~single~entry,~got~"##1"}}
+      % set prop
+      \prop_gput:Nnn \polyglossia@langsetup {#1/totalhyphenmin} {##1}
+    },
+    #1 / totalhyphenmin
+      .value_required:n = false,
     % frenchspacing
     #1 / frenchspacing
     .code:n = {
@@ -1944,7 +1955,17 @@
 
 \def\use@localhyphenmins#1{%
    \ifcsundef{#1hyphenmins}{}%
-   {\expandafter\expandafter\expandafter\set@hyphenmins\csname #1hyphenmins\endcsname\relax}}
+   {\expandafter\expandafter\expandafter\set@hyphenmins\csname #1hyphenmins\endcsname\relax}
+   \ifluatex
+     % Set \totalhyphenmin if specified
+     \prop_get:NxNTF \polyglossia@langsetup {#1/totalhyphenmin} \l_tmpa_tl
+     {
+        \xpg@warning{totalhyphenmin: '\l_tmpa_tl'}
+        \expandafter\hyphenationmin \l_tmpa_tl%
+     }%
+     {}%
+   \fi
+}
 
 \AtEndPreamble{%
    \@ifpackageloaded{bidi}{%

@@ -8,6 +8,7 @@ New features:
   * New list \xpg@bcp@loaded.
   * New environment {lang}{<lang>} (equivalent to {<lang>},  but also available with
     \setlanguagealias* which does not define dedicated alias environments).
+  * New gloss option totalhyphenmin (correpconds to LuaTeX's \hyphenationmin) (#111).
 
 Bug fixes:
   * Fix font family issue in headers (#355).
