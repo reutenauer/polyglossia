@@ -9,6 +9,8 @@ New features:
   * New environment {lang}{<lang>} (equivalent to {<lang>},  but also available with
     \setlanguagealias* which does not define dedicated alias environments).
   * New gloss option totalhyphenmin (correpconds to LuaTeX's \hyphenationmin) (#111).
+  * \selectbackgroundlanguage and \resetdefaultlanguage now also support language
+    aliases.
 
 Bug fixes:
   * Fix font family issue in headers (#355).

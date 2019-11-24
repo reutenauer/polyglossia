@@ -1250,7 +1250,20 @@
 }
 
 
-\newcommand{\resetdefaultlanguage}[2][]{%
+\newcommand*{\resetdefaultlanguage}[2][]{%
+  \ifcsdef{#2@alias@lang}{%
+     \ifcsdef{#2@alias@opts}{%
+       \polyglossia@reset@default@language:nn {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
+     }{%
+       polyglossia@reset@default@language:nn {#1} {\csuse{#2@alias@lang}}%
+     }%
+  }{%
+    polyglossia@reset@default@language:nn {#1} {#2}%
+  }%
+}
+
+\cs_new:Nn \polyglossia@reset@default@language:nn
+{
   \polyglossia@error@iflangnotloaded:n{#2}
   % disable globalnumbers of previously defined default language
   \csuse{no\xpg@main@language @globalnumbers}
@@ -1378,12 +1391,28 @@
 }
 
 \let\@@fterindentfalse\@afterindentfalse
-\def\french@indent{\let\@afterindentfalse\@afterindenttrue
-                        \@afterindenttrue}
-\def\nofrench@indent{\let\@afterindentfalse\@@fterindentfalse
-                          \@afterindentfalse}
-\newcommand{\selectbackgroundlanguage}[1]{%
-  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/lcscript}}{latin}{}{\xpg@set@normalfont{#1}}%
+\def\french@indent{%
+    \let\@afterindentfalse\@afterindenttrue
+    \@afterindenttrue%
+}
+\def\nofrench@indent{%
+    \let\@afterindentfalse\@@fterindentfalse
+    \@afterindentfalse%
+}
+
+\newcommand*{\selectbackgroundlanguage}[1]{%
+  \ifcsdef{#1@alias@lang}{%
+     \polyglossia@select@background@language:n {\csuse{#1@alias@lang}}%
+  }{%
+     \polyglossia@select@background@language:n {#1}%
+  }%
+}
+
+\cs_new:Nn \polyglossia@select@background@language:n
+{
+  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/lcscript}}{latin}
+                   {}
+                   {\xpg@set@normalfont{#1}}%
   \csuse{#1@globalnumbers}%
 }
 
