@@ -209,7 +209,7 @@ breton          & galician       & \TX{latin}     & romansh         & turkmen   
 bulgarian       & \TX{georgian}  & latvian        & \TX{russian}    & \TX{ukrainian} \\
 \TX{catalan}    & \TX{german}    & lithuanian     & \TX{sami}       & urdu           \\
 coptic          & \TX{greek}     & macedonian     & \TX{sanskrit}   & vietnamese     \\
-croatian        & \TX{hebrew}    & \TX{malay}     & \TX{serbian}    & \TX{welsh}     \\
+\TX{croatian}   & \TX{hebrew}    & \TX{malay}     & \TX{serbian}    & \TX{welsh}     \\
 \TX{czech}      & \TX{hindi}     & malayalam      & \TX{slovak}     &                \\
 \bottomrule
 \end{tabular}
@@ -500,7 +500,7 @@ Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 \begin{itemize}
 	\item \TB{babelshorthands}\new{v1.1.1} globally activates \pkg{babel}
 		shorthands whenever available. Currently shorthands are implemented for
-		Afrikaans, Belarusian, Catalan, Czech, Dutch, Finnish, Georgian, German,
+		Afrikaans, Belarusian, Catalan, Croatian, Czech, Dutch, Finnish, Georgian, German,
 		Italian, Latin, Mongolian, Russian, and Slovak. Please refer to the respective
 		language descriptions (sec.~\ref{specific}) for details.
 
@@ -811,6 +811,46 @@ The default value of each option is given in italic.
         similar to \pkg{babel} (the glyph U+00B7 MIDDLE DOT is used as a geminating sign).
 \end{itemize}
 
+\subsection{croatian}\label{croatian}
+\paragraph*{Options:}
+\begin{itemize}
+	\item\TB{babelshorthands} = \textit{false} or true: \new{v1.47}
+	if this is turned on, the following shorthands for fine-tuning hyphenation and micro-typography
+	of Croatian words are activated.
+	\begin{shorthands}
+		\item[¦"|¦] disables a ligature at this position.
+		\item[¦"=¦] for an explicit hyphen with a breakpoint, allowing for hyphenation at the
+		            other points preset in the hyphenation patterns (as opposed to plain ¦-¦).
+		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
+		            cases where the hyphen should stick at the following syllable.
+		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
+		            in the hyphenation patterns (as opposed to ¦\-¦).
+		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
+		\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to ¦\slash¦, hyphenation
+		            at the breakpoints preset in the hyphenation patterns is still allowed.
+	\end{shorthands}
+	Furthermore, the following shorthands generate easy access to Croatian digraphs (ligatures):
+	\begin{shorthands}
+		\item[¦"DZ¦] Generates the ligature \charifavailable{01C4}{DŽ}\ if the font provides it. If not, the
+		             two characters are output separately. Also available for ¦"Dz¦ (\charifavailable{01C5}{Dž})
+		             and ¦"dz¦ (\charifavailable{01C6}{dž}).
+		\item[¦"LJ¦] Generates the ligature \charifavailable{01C7}{LJ}\ if the font provides it. If not, the
+		             two characters are output separately. Also available for ¦"Lj¦ (\charifavailable{01C8}{Lj})
+		             and ¦"lj¦ (\charifavailable{01C9}{lj}).
+		\item[¦"NJ¦] Generates the ligature \charifavailable{01CA}{NJ}\ if the font provides it. If not, the
+		             two characters are output separately. Also available for ¦"Nj¦ (\charifavailable{01CB}{Nj})
+		             and ¦"nj¦ (\charifavailable{01CC}{nj}).
+	\end{shorthands}
+	
+	Finally, there are also four shorthands for quotation marks:
+	\begin{shorthands}
+		\item[¦"`¦] for Croatian left double quotes („)
+		\item[¦"'¦] for Croatian right double quotes (”)
+		\item[¦">¦] for Croatian left guillemets (»).
+		\item[¦"<¦] for Croatian right guillemets («)
+	\end{shorthands}
+\end{itemize}
+
 \subsection{czech}\label{czech}
 
 \paragraph*{Options:}
@@ -821,10 +861,10 @@ The default value of each option is given in italic.
 		\item[¦"=¦] for an explicit hyphen sign which is repeated at the beginning
 		            of the next line when hyphenated, as common in Czech typesetting
 		            (only needed with ¦splithyphens=false¦).
-		\item[¦"‘¦] for Czech left double quotes (looks like ,,).
-		\item[¦"’¦] for Czech right double quotes (looks like “).
-		\item[¦">¦] for Czech left double guillemets (looks like >>).
-		\item[¦"<¦] for Czech right double guillemets (looks like <<).
+		\item[¦"‘¦] for Czech left double quotes („).
+		\item[¦"’¦] for Czech right double quotes (“).
+		\item[¦">¦] for Czech left double guillemets (»).
+		\item[¦"<¦] for Czech right double guillemets («).
 	\end{shorthands}
 	\item \TB{splithyphens} = false or \textit{true}.\new{v1.45}
 	      According to Czech typesetting conventions, if a word with a hard hyphen (such as \emph{je-li})
