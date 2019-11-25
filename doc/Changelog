@@ -11,8 +11,9 @@ New features:
   * New gloss option totalhyphenmin (correpconds to LuaTeX's \hyphenationmin) (#111).
   * \selectbackgroundlanguage and \resetdefaultlanguage now also support language
     aliases.
-  * New macro \charifavailable{<char code>}{<substitution>}
+  * New macro \charifavailable{<char code>}{<substitution>}.
   * Add French language variant "swiss".
+  * Implement babelshorthands for Croatian.
 
 Bug fixes:
   * Fix font family issue in headers (#355).
