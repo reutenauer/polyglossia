@@ -147,15 +147,22 @@
     }
 \fi
 
-\def\blockextras@korean{%
-    \inlineextras@korean
+\def\korean@redefine@chapapp{%
     \ifdefined\@chapapp
-        \long\def\@tmpa{\chaptername}\def\@tmpb{\chaptername}%
+        \long\def\@tmpa{\chaptername}\def\@tmpb{\chaptername}% exclude appendix
         \ifnum0\ifx\@chapapp\@tmpa1\else\ifx\@chapapp\@tmpb1\fi\fi>\z@
             \let\xpg@orig@@chapapp\@chapapp
             \def\@chapapp##1##2{\koreanTHEname ##1##2##1\chaptername}%
         \fi
     \fi
+}
+\@ifclassloaded{book}{}{\@ifclassloaded{report}{}{%
+    \let\korean@redefine@chapapp\relax
+}}
+
+\def\blockextras@korean{%
+    \inlineextras@korean
+    \korean@redefine@chapapp
 }
 
 \def\noextras@korean@common{%
