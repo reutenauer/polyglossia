@@ -420,14 +420,19 @@ local function reorder_tm (head)
     local curr, tone = node.slide(head)
     while curr do
         if curr.id == glyph_id and node.has_attribute(curr, attr_korean) then
-            local c, wd = curr.char or 0, curr.width or 0
-            if (c == 0x302E or c == 0x302F) and wd > 0 then
-                tone = curr
-            elseif tone and not nobr_before[c] then
-                head = node.remove(head, tone)
-                tone.next, tone.prev = nil, nil
-                head, curr = node.insert_before(head, curr, tone)
+            local f = font.getfont(curr.font) or font.fonts[curr.font]
+            if f and f.hb then -- harfbuzz do the right thing
                 tone = nil
+            else
+                local c, wd = curr.char or 0, curr.width or 0
+                if (c == 0x302E or c == 0x302F) and wd > 0 then
+                    tone = curr
+                elseif tone and not nobr_before[c] then
+                    head = node.remove(head, tone)
+                    tone.next, tone.prev = nil, nil
+                    head, curr = node.insert_before(head, curr, tone)
+                    tone = nil
+                end
             end
         end
         curr = curr.prev
