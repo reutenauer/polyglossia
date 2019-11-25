@@ -57,13 +57,14 @@
 
 % Provide croatian ligatures if available in current font
 \def\xpg@hr@lig#1#2{%
+ \bgroup%
   % 1. DŽ, Dž and dž
   \ifx#1D%
     \ifx#2Z\relax%
        \charifavailable{01C4}{DŽ}%
     \else%
        \ifx#2z\relax
-          \charifavailable{01C5}{Dž}
+          \charifavailable{01C5}{Dž}%
        \else
            D#2%
        \fi%
@@ -71,7 +72,7 @@
   \fi%
   \ifx#1d%
     \ifx#2z\relax
-       \charifavailable{01C6}{dž}
+       \charifavailable{01C6}{dž}%
     \else
        d#2%
     \fi%
@@ -82,7 +83,7 @@
        \charifavailable{01C7}{LJ}%
     \else%
        \ifx#2j\relax
-          \charifavailable{01C8}{Lj}
+          \charifavailable{01C8}{Lj}%
        \else
            L#2%
        \fi%
@@ -90,7 +91,7 @@
   \fi%
   \ifx#1l%
     \ifx#2j\relax
-       \charifavailable{01C9}{lj}
+       \charifavailable{01C9}{lj}%
     \else
        l#2%
     \fi%
@@ -101,7 +102,7 @@
        \charifavailable{01CA}{NJ}%
     \else%
        \ifx#2j\relax
-          \charifavailable{01CB}{Nj}
+          \charifavailable{01CB}{Nj}%
        \else
            N#2%
        \fi%
@@ -109,11 +110,12 @@
   \fi%
   \ifx#1n%
     \ifx#2j\relax
-       \charifavailable{01CC}{nj}
+       \charifavailable{01CC}{nj}%
     \else
        n#2%
     \fi%
   \fi%
+  \egroup%
 }
 
 \def\captionscroatian{%
