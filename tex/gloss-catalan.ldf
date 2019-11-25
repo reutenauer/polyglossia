@@ -27,33 +27,21 @@
 
 %%% adapted from Babel's catalan.ldf
 \newdimen\leftllkern \newdimen\rightllkern \newdimen\raiselldim
+
 % we check if char · exists, and use it instead of raised dot:
 \def\xpg@raiseddot{%
-  \ifluatex %
-    \expandafter\ifnum\directlua{polyglossia.check_char(183)} > 0\hbox{\char"00B7}%
-    \else\raise\raiselldim\hbox{.}%
-    \fi %
-  \else %
-    \ifnum\XeTeXcharglyph"00B7 > 0\hbox{\char"00B7}% why a hbox here?
-      \else\raise\raiselldim\hbox{.}%
-    \fi %
-  \fi %
-  }
+  \charifavailable{00B7}{\raise\raiselldim\hbox{.}}%
+}
+
 \def\lgem{%
   \ifmmode
     \csname normal@char\string"\endcsname l%
   \else
     \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
     \setbox0\hbox{l}\setbox1\hbox{l\/}%
-    \ifluatex %
-      \expandafter\ifnum\directlua{polyglossia.check_char(183)} > 0\setbox2\hbox{\char"00B7}%
-      \else\setbox2\hbox{.}%
-      \fi %
-    \else %
-      \ifnum\XeTeXcharglyph"00B7 > 0\setbox2\hbox{\char"00B7}%
-        \else\setbox2\hbox{.}%
-      \fi %
-    \fi %
+    \xpg@if@char@available{00B7}%
+          {\setbox2\hbox{\char"00B7}}%
+          {\setbox2\hbox{.}}%
     \advance\raiselldim by \the\fontdimen5\the\font
     \advance\raiselldim by -\ht2%
     \leftllkern=-.25\wd0%
@@ -67,21 +55,16 @@
       \kern\rightllkern\hbox{l}}\allowhyphens
   \fi
 }
+
 \def\Lgem{%
   \ifmmode
     \csname normal@char\string"\endcsname L%
   \else
     \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
     \setbox0\hbox{L}\setbox1\hbox{L\/}%
-    \ifluatex %
-      \expandafter\ifnum\directlua{polyglossia.check_char(183)} > 0\setbox2\hbox{\char"00B7}%
-      \else\setbox2\hbox{.}%
-      \fi %
-    \else %
-      \ifnum\XeTeXcharglyph"00B7 > 0\setbox2\hbox{\char"00B7}%
-        \else\setbox2\hbox{.}%
-      \fi %
-    \fi %
+    \xpg@if@char@available{00B7}%
+          {\setbox2\hbox{\char"00B7}}%
+          {\setbox2\hbox{.}}%
     \advance\raiselldim by .5\ht0%
     \advance\raiselldim by -.5\ht2%
     \leftllkern=-.125\wd0%
@@ -96,6 +79,7 @@
       \kern\rightllkern\hbox{L}}\allowhyphens
   \fi
 }
+
 \AtBeginDocument{%
   \let\lslash\l
   \let\Lslash\L

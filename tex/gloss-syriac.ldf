@@ -124,33 +124,22 @@ and may look very wrong.}
       %%% we test for the presence of one of ١٢٣٤٥٦٧٨٩٠ in the Syriac font, 
       %%% else we try \arabicfont if defined (and give a warning), 
       %%% else we fall back to the Western numerals.
-      \ifxetex
-         \ifnum\XeTeXcharglyph"0661 > 0%
-           %%\protect\addfontfeature{Mapping=arabicdigits}\number#1}%
-           \protect\arabicdigits{\number#1}%
-         \else%
+      \xpg@if@char@available{0661}%
+          {\protect\arabicdigits{\number#1}}%
+          {\arabicdigits{\number#1}
            \ifcsdef{arabicfont}%
 	     {\protect\arabicdigits{\number#1}%
-	      \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: I am using \string\arabicfont instead}}%
+	      \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs:
+                           I am using \string\arabicfont instead}}%
 	     {\number#1%%% <---changed from \RL{\protect\reset@font\protect\number#1}%
-	      \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: since \string\arabicfont is not defined, we'll use Western numerals instead}}%
-         \fi
-     \else% LuaTeX
-         \expandafter\ifnum\directlua{polyglossia.check_char(0x661)} > 0\relax
-           %%\protect\addfontfeature{Mapping=arabicdigits}\number#1}%
-           \protect\arabicdigits{\number#1}%
-         \else%
-           \ifcsdef{arabicfont}%
-	     {\protect\arabicdigits{\number#1}%
-	      \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: I am using \string\arabicfont instead}}%
-	     {\number#1%%% <---changed from \RL{\protect\reset@font\protect\number#1}%
-	      \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs: since \string\arabicfont is not defined, we'll use Western numerals instead}}%
-         \fi
-     \fi
+	      \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs:
+                           since \string\arabicfont is not defined, we'll use Western numerals instead}}%
+          }%
    \else
      %%\RL{\protect\reset@font\number#1}%
      \number#1%
-   \fi}
+   \fi%
+}
 
 \def\syriac@numbers{%
    \let\@alph\abjadsyriac%

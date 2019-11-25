@@ -337,19 +337,9 @@
   \if@western@numerals
     \number#1%
   \else
-    \ifxetex
-      \ifnum\XeTeXcharglyph"06F0 > 0\relax
-        \farsidigits{\number#1}%
-      \else%
-         \arabicdigits{\number#1}%
-      \fi
-    \else\ifluatex
-      \expandafter\ifnum\directlua{polyglossia.check_char(0x6F0)} > 0\relax
-        \farsidigits{\number#1}%
-      \else%
-         \arabicdigits{\number#1}%
-      \fi
-    \fi\fi
+    \xpg@if@char@available{06F0}%
+          {\farsidigits{\number#1}}%
+          {\arabicdigits{\number#1}}%
   \fi
 }
 

@@ -1725,6 +1725,37 @@
       }
 }
 
+% Check if the current font has a given glyph
+\prg_set_conditional:Npnn \polyglossia@check@if@char@available:N #1 { p , T , F , TF }
+{
+  \str_case_e:nnF{\c_sys_engine_str}{
+    {luatex}{
+             \int_compare:nNnTF { \directlua{polyglossia.check_char(0x#1)} } > { 0 }
+                {\prg_return_true:}
+                {\prg_return_false:}
+            }
+    {xetex}{
+             \int_compare:nNnTF { \the\XeTeXcharglyph"#1 } > { 0 }
+                {\prg_return_true:}
+                {\prg_return_false:}
+           }
+  }
+  {
+    \xpg@warning{You’re running a TeX engine that is not LuaTeX or XeTeX.\MessageBreak
+                 That is almost guaranteed to cause problems.}
+  }
+}
+
+% Test if a char (by char code) is available in the current font
+\newcommand*\xpg@if@char@available[3]{%
+  \polyglossia@check@if@char@available:NTF{#1}{#2}{#3}%
+}
+
+\newcommand*\charifavailable[2]{%
+   \xpg@if@char@available{#1}{\char"#1}{#2}%
+}
+
+
 \newcommand*{\xpg@set@language@nonaux}[2][]{%
    \@select@language[#1]{#2}%
 }
