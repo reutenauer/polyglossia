@@ -12,12 +12,116 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{croatian}{hr}
 
+\define@boolkey{croatian}[croatian@]{babelshorthands}[true]{}
+
+\ifsystem@babelshorthands
+  \setkeys{croatian}{babelshorthands=true}
+\else
+  \setkeys{croatian}{babelshorthands=false}
+\fi
+
+\ifcsundef{initiate@active@char}{%
+  \input{babelsh.def}%
+  \initiate@active@char{"}%
+  \shorthandoff{"}%
+}{}
+
+\def\croatian@shorthands{%
+  \bbl@activate{"}%
+  \def\language@group{croatian}%
+  \declare@shorthand{croatian}{"=}{\penalty\@M-\hskip\z@skip}%
+  \declare@shorthand{croatian}{""}{\hskip\z@skip}%
+  \declare@shorthand{croatian}{"~}{\textormath{\leavevmode\hbox{-}}{-}}%
+  \declare@shorthand{croatian}{"-}{\nobreak\-\bbl@allowhyphens}%
+  \declare@shorthand{croatian}{"|}{%
+      \textormath{\penalty\@M\discretionary{-}{}{\kern.03em}%
+      \bbl@allowhyphens}{}%
+  }%
+  \declare@shorthand{croatian}{"/}{\textormath
+    {\bbl@allowhyphens\discretionary{/}{}{/}\bbl@allowhyphens}{}}%
+  \declare@shorthand{croatian}{"`}{„}%
+  \declare@shorthand{croatian}{"'}{”}%
+  \declare@shorthand{croatian}{"<}{«}%
+  \declare@shorthand{croatian}{">}{»}%
+  \declare@shorthand{croatian}{"D}{\xpg@hr@lig{D}}%
+  \declare@shorthand{croatian}{"d}{\xpg@hr@lig{d}}%
+  \declare@shorthand{croatian}{"L}{\xpg@hr@lig{L}}%
+  \declare@shorthand{croatian}{"l}{\xpg@hr@lig{l}}%
+  \declare@shorthand{croatian}{"N}{\xpg@hr@lig{N}}%
+  \declare@shorthand{croatian}{"n}{\xpg@hr@lig{n}}%
+}
+
+\def\nocroatian@shorthands{%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+
+% Provide croatian ligatures if available in current font
+\def\xpg@hr@lig#1#2{%
+  % 1. DŽ, Dž and dž
+  \ifx#1D%
+    \ifx#2Z\relax%
+       \charifavailable{01C4}{DŽ}%
+    \else%
+       \ifx#2z\relax
+          \charifavailable{01C5}{Dž}
+       \else
+           D#2%
+       \fi%
+    \fi%
+  \fi%
+  \ifx#1d%
+    \ifx#2z\relax
+       \charifavailable{01C6}{dž}
+    \else
+       d#2%
+    \fi%
+  \fi%
+  % 2. LJ, Lj and lj
+  \ifx#1L%
+    \ifx#2J\relax%
+       \charifavailable{01C7}{LJ}%
+    \else%
+       \ifx#2j\relax
+          \charifavailable{01C8}{Lj}
+       \else
+           L#2%
+       \fi%
+    \fi%
+  \fi%
+  \ifx#1l%
+    \ifx#2j\relax
+       \charifavailable{01C9}{lj}
+    \else
+       l#2%
+    \fi%
+  \fi%
+  % 2. NJ, Nj and nj
+  \ifx#1N%
+    \ifx#2J\relax%
+       \charifavailable{01CA}{NJ}%
+    \else%
+       \ifx#2j\relax
+          \charifavailable{01CB}{Nj}
+       \else
+           N#2%
+       \fi%
+    \fi%
+  \fi%
+  \ifx#1n%
+    \ifx#2j\relax
+       \charifavailable{01CC}{nj}
+    \else
+       n#2%
+    \fi%
+  \fi%
+}
+
 \def\captionscroatian{%
   \def\prefacename{Predgovor}%
   \def\refname{Literatura}%
   \def\abstractname{Sažetak}%
   \def\bibname{Bibliografija}%
-  \def\chaptername{Poglavlje}%
+  \def\chaptername{Poglav\charifavailable{01C9}{lj}e}%
   \def\appendixname{Dodatak}%
   \def\contentsname{Sadržaj}%
   \def\listfigurename{Popis slika}%
@@ -35,10 +139,24 @@
   \def\proofname{Dokaz}%
   \def\glossaryname{Pojmovnik}%
 }
+
 \def\datecroatian{%
   \def\today{\number\day.~\ifcase\month\or
     siječnja\or veljače\or ožujka\or travnja\or svibnja\or
     lipnja\or srpnja\or kolovoza\or rujna\or listopada\or studenoga\or
-    prosinca\fi \space \number\year.}}
+    prosinca\fi \space \number\year.}%
+}
+
+\def\noextras@croatian{%
+  \nocroatian@shorthands%
+}
+
+\def\blockextras@croatian{%
+  \ifcroatian@babelshorthands\croatian@shorthands\fi%
+}
+
+\def\inlineextras@croatian{%
+  \ifcroatian@babelshorthands\croatian@shorthands\fi%
+}
 
 \endinput
