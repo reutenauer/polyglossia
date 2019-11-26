@@ -14,6 +14,8 @@
 
 \define@boolkey{croatian}[croatian@]{babelshorthands}[true]{}
 
+\define@boolkey{croatian}[croatian@]{disableligatures}[true]{}
+
 \ifsystem@babelshorthands
   \setkeys{croatian}{babelshorthands=true}
 \else
@@ -55,16 +57,24 @@
   \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
 }
 
+\newcommand*\hr@charifavailable[2]{%
+   \ifcroatian@disableligatures
+     \bgroup#2\egroup%
+   \else
+     \charifavailable{#1}{#2}%
+   \fi%
+}
+
 % Provide croatian ligatures if available in current font
 \def\xpg@hr@lig#1#2{%
  \bgroup%
   % 1. DŽ, Dž and dž
   \ifx#1D%
     \ifx#2Z\relax%
-       \charifavailable{01C4}{DŽ}%
+       \hr@charifavailable{01C4}{DŽ}%
     \else%
        \ifx#2z\relax
-          \charifavailable{01C5}{Dž}%
+          \hr@charifavailable{01C5}{Dž}%
        \else
            D#2%
        \fi%
@@ -72,7 +82,7 @@
   \fi%
   \ifx#1d%
     \ifx#2z\relax
-       \charifavailable{01C6}{dž}%
+       \hr@charifavailable{01C6}{dž}%
     \else
        d#2%
     \fi%
@@ -80,10 +90,10 @@
   % 2. LJ, Lj and lj
   \ifx#1L%
     \ifx#2J\relax%
-       \charifavailable{01C7}{LJ}%
+       \hr@charifavailable{01C7}{LJ}%
     \else%
        \ifx#2j\relax
-          \charifavailable{01C8}{Lj}%
+          \hr@charifavailable{01C8}{Lj}%
        \else
            L#2%
        \fi%
@@ -91,7 +101,7 @@
   \fi%
   \ifx#1l%
     \ifx#2j\relax
-       \charifavailable{01C9}{lj}%
+       \hr@charifavailable{01C9}{lj}%
     \else
        l#2%
     \fi%
@@ -99,10 +109,10 @@
   % 2. NJ, Nj and nj
   \ifx#1N%
     \ifx#2J\relax%
-       \charifavailable{01CA}{NJ}%
+       \hr@charifavailable{01CA}{NJ}%
     \else%
        \ifx#2j\relax
-          \charifavailable{01CB}{Nj}%
+          \hr@charifavailable{01CB}{Nj}%
        \else
            N#2%
        \fi%
@@ -110,7 +120,7 @@
   \fi%
   \ifx#1n%
     \ifx#2j\relax
-       \charifavailable{01CC}{nj}%
+       \hr@charifavailable{01CC}{nj}%
     \else
        n#2%
     \fi%
@@ -123,7 +133,7 @@
   \def\refname{Literatura}%
   \def\abstractname{Sažetak}%
   \def\bibname{Bibliografija}%
-  \def\chaptername{Poglav\charifavailable{01C9}{lj}e}%
+  \def\chaptername{Poglav\hr@charifavailable{01C9}{lj}e}%
   \def\appendixname{Dodatak}%
   \def\contentsname{Sadržaj}%
   \def\listfigurename{Popis slika}%
