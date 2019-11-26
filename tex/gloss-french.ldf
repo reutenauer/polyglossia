@@ -49,7 +49,7 @@
    \or
       % swiss:
       \def\french@variant{swiss}%
-      \SetLanguageKeys{french}{babelname=canadien,bcp47=fr-CH}%
+      \SetLanguageKeys{french}{babelname=french,bcp47=fr-CH}%
       \adddialect\l@swissfrench\l@french\relax%
       \french@thincolonspacetrue
    \fi
