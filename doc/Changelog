@@ -12,6 +12,7 @@ New features:
   * \selectbackgroundlanguage and \resetdefaultlanguage now also support language
     aliases.
   * New macro \charifavailable{<char code>}{<substitution>}
+  * Add French language variant "swiss".
 
 Bug fixes:
   * Fix font family issue in headers (#355).

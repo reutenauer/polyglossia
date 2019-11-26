@@ -1,0 +1,7 @@
+\ProvidesFile{gloss-fr-CH.ldf}[polyglossia: module for fr-CH (french)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{french}
+
+\endinput
