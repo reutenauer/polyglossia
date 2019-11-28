@@ -126,81 +126,81 @@
   % change chapter and part headings
   \if@hungarian@swapheadings
      % With titlesec
-     \ifdefined\titleformat%
-       \ifdefined\@part%
+     \ifcsdef{titleformat}{%
+       \ifcsdef{@part}{%
           \let\xpg@save@part@format\@part%
           \patchcmd{\@part}%
                     {\partname\nobreakspace\thepart}%
                     {\thepart.\nobreakspace\partname}%
                     {}%
                     {\xpg@warning{Failed to patch part for Hungarian}}%
-       \fi%
-       \ifdefined\chapter%
+       }{}%
+       \ifcsdef{chapter}{%
           \titleformat\chapter[display]%
              {\@ifundefined{ttl@fil}{\raggedright}{\ttl@fil}\ttl@fonts\ttl@sizes6}
              {\thechapter.\space\@chapapp}{.8\baselineskip}{\ttl@sizes\z@\ttl@passexplicit}
-       \fi%
-     \else% (not \ifdefined\titleformat)
+       }{}%
+     }{% (not \ifdefined\titleformat)
        % With KOMA
-       \ifdefined\sectionformat%
-          \ifdefined\partformat%
+       \ifcsdef{sectionformat}{%
+          \ifcsdef{partformat}{%
             \let\xpg@save@part@format\partformat%
             \renewcommand{\partformat}{\thepart.~\partname}%
-          \fi%
-          \ifdefined\chapterformat%
+          }{}%
+          \ifcsdef{chapterformat}{%
             \let\xpg@save@chap@format\chapterformat%
             \renewcommand{\chapterformat}{\mbox{\thechapter\autodot%
                                           \IfUsePrefixLine{\nobreakspace\chapapp}{\enskip}}}%
-          \fi%
-       \else%  (not \ifdefined\sectionformat)
+          }{}%
+       }{%  (not \ifdefined\sectionformat)
          % With memoir
-         \ifdefined\@memptsize%
-           \ifdefined\@makechapterhead%
+         \ifcsdef{@memptsize}{%
+           \ifcsdef{@makechapterhead}{%
               \let\xpg@save@chap@format\@makechapterhead%
               \patchcmd{\@makechapterhead}{\printchaptername \chapternamenum \printchapternum}%
                        {\printchapternum.\chapternamenum\printchaptername}%
                        {}%
                        {\xpg@warning{Failed to patch chapter for Hungarian}}%
-           \fi%
-           \ifdefined\@part%
+           }{}%
+           \ifcsdef{@part}{%
               \let\xpg@save@part@format\@part%
               \patchcmd{\@part}{\printpartname \partnamenum \printpartnum}%
                                {\printpartnum.\partnamenum\printpartname}%
                                {}%
                                {\xpg@warning{Failed to patch part for Hungarian}}%
-           \fi%
-         \else%  (not \ifdefined\@memptsize)
+           }{}%
+         }{%  (not \ifdefined\@memptsize)
            % With standard classes
-            \ifdefined\@makechapterhead%
+            \ifcsdef{@makechapterhead}{%
               \let\xpg@save@chap@format\@makechapterhead%
               \patchcmd{\@makechapterhead}%
                        {\@chapapp\space \thechapter}%
                        {\thechapter.\space \@chapapp}%
                        {}%
                        {\xpg@warning{Failed to patch chapter for Hungarian}}%
-            \fi%
-            \ifdefined\@part%
+            }{}%
+            \ifcsdef{@part}{%
               \let\xpg@save@part@format\@part%
               \patchcmd{\@part}%
                        {\partname\nobreakspace\thepart}%
                        {\thepart.\nobreakspace\partname}%
                        {}%
                        {\xpg@warning{Failed to patch part for Hungarian}}%
-            \fi%  (end \ifdefined\@part)
-          \fi% (end \ifdefined\@memptsize)
-        \fi% (end \ifdefined\sectionformat)
-     \fi% (end \ifdefined\titleformat)
+            }{}%  (end \ifdefined\@part)
+          }% (end \ifdefined\@memptsize)
+        }% (end \ifdefined\sectionformat)
+     }% (end \ifdefined\titleformat)
   \fi% (end \if@hungarian@swapheadings)
   %
   % Change running headers
   \if@hungarian@swapheaders
-    \ifdefined\chapterformat%
+    \ifcsdef{chapterformat}{%
       % With KOMA
       \let\xpg@save@chaptermark@format\chaptermarkformat%
       \renewcommand*\chaptermarkformat{%
          \thechapter\autodot\ \IfChapterUsesPrefixLine{\chapapp\enskip}{}}
-    \else% (not \ifdefined\chapterformat)
-      \ifdefined\@memptsize%
+    }{% (not \ifdefined\chapterformat)
+      \ifcsdef{@memptsize}{%
         % With memoir
         \let\xpg@save@chaptermark@format\chaptermark%
         \renewcommand*\chaptermark[1]{%
@@ -211,18 +211,21 @@
               \fi
             \fi
             ##1}}{}}%
-      \else% (not \ifdefined\@memptsize)
+      }{% (not \ifdefined\@memptsize)
         % With standard classes
-        \ifdefined\chaptermark%
-           \let\xpg@save@chaptermark@format\chaptermark%
-           \patchcmd{\chaptermark}%
+        \ifcsdef{chaptermark}{%
+          \ifpatchable{\chaptermark}%
+               {\@chapapp\ \thechapter.}%
+               {\let\xpg@save@chaptermark@format\chaptermark%
+                \patchcmd{\chaptermark}%
                     {\@chapapp\ \thechapter.}%
                     {\thechapter.\ \@chapapp}%
                     {}%
-                    {\xpg@warning{Failed to patch chaptermark for Hungarian}}%
-        \fi% (end \ifdefined\chaptermark)
-      \fi% (end \ifdefined\@memptsize)
-    \fi% (end \ifdefined\chapterformat)
+                    {\xpg@warning{Failed to patch chaptermark for Hungarian}}}%
+               {}%
+        }{}% (end \ifdefined\chaptermark)
+      }% (end \ifdefined\@memptsize)
+    }% (end \ifdefined\chapterformat)
   \fi% (end \if@hungarian@swapheaders)
 }
 
@@ -233,50 +236,50 @@
    \let\fnum@figure\xpg@save@fnum@figure%
    %
    % Reset chapter and part heading
-   \ifdefined\titleformat%
+   \ifcsdef{titleformat}{%
       % With titlesec
-     \ifdefined\xpg@save@part@format
+     \ifcsdef{xpg@save@part@format}{%
         \let\@part\xpg@save@part@format
-     \fi%
-     \ifdefined\chapter
+     }{}%
+     \ifcsdef{chapter}{%
         \titleformat\chapter[display]%
           {\@ifundefined{ttl@fil}{\raggedright}{\ttl@fil}\ttl@fonts\ttl@sizes6}
           {\@chapapp\space\thechapter}{.8\baselineskip}{\ttl@sizes\z@\ttl@passexplicit}
-     \fi%
-   \else% (not \ifdefined\titleformat)
-     \ifdefined\sectionformat%
+     }{}%
+   }{% (not \ifdefined\titleformat)
+     \ifcsdef{sectionformat}{%
         % With KOMA
-        \ifdefined\xpg@save@part@format
+        \ifcsdef{xpg@save@part@format}{%
            \let\partformat\xpg@save@part@format
-        \fi%
-        \ifdefined\xpg@save@chap@format
+        }{}%
+        \ifcsdef{xpg@save@chap@format}{%
            \let\chapterformat\xpg@save@chap@format
-        \fi%
-     \else%
+        }{}%
+     }{%
         % With memoir and standard classes
-        \ifdefined\xpg@save@part@format
+        \ifcsdef{xpg@save@part@format}{%
            \let\@part\xpg@save@part@format
-        \fi%
-        \ifdefined\xpg@save@chap@format
+        }{}%
+        \ifcsdef{xpg@save@chap@format}{%
           \let\@makechapterhead\xpg@save@chap@format
-        \fi%
-     \fi% (end \ifdefined\sectionformat)
-   \fi% (end \ifdefined\titleformat)
+        }{}%
+     }% (end \ifdefined\sectionformat)
+   }% (end \ifdefined\titleformat)
   %
   % Reset headers
-  \ifdefined\chaptermarkformat%
+  \ifcsdef{chaptermarkformat}{%
      % With KOMA
-     \ifdefined\xpg@save@chaptermark@format
+     \ifcsdef{xpg@save@chaptermark@format}{%
        \let\chaptermarkformat\xpg@save@chaptermark@format%
-     \fi
-  \else%
-     \ifdefined\chaptermark%
+     }{}%
+  }{%
+     \ifcsdef{chaptermark}{%
        % With memoir and standard classes
-       \ifdefined\xpg@save@chaptermark@format
+       \ifcsdef{xpg@save@chaptermark@format}{%
          \let\chaptermark\xpg@save@chaptermark@format%
-       \fi
-     \fi% (end \ifdefined\chaptermark)
-  \fi% (end \ifdefined\chapterformat)
+       }{}%
+     }{}% (end \ifdefined\chaptermark)
+  }% (end \ifdefined\chapterformat)
 }
 
 \def\blockextras@hungarian{%
