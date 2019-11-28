@@ -1141,11 +1141,32 @@ The default value of each option is given in italic.
 \subsection[korean]{korean\new{v1.40.0}}\label{korean}
 \paragraph*{Options:}
   \begin{itemize}
-  \item \TB{variant} = \textit{plain}, classic or modern:
-    for spacing before/after CJK punctuations.
-    `classic' is suitable for text with no interword spaces,
-    `modern' for text with interword spaces.
+  \item \TB{variant} = \textit{plain}, classic or modern
+
+    These variants control spacing before/after CJK punctuations.
+      \begin{itemize}
+        \item ¦plain¦: Do nothing
+        \item ¦classic¦: Suitable for text with no interword spaces.
+          This option forces CJK punctuations to half-width, and
+          inserts half-width glue around them.
+        \item ¦modern¦: Suitable for text with interword spaces.
+          This option forces CJK punctuations to half-width, and
+          inserts small (half of interword space) glue around them.
+      \end{itemize}
   \item \TB{captions} = \textit{hangul} or hanja
+  \item \TB{swapstrings} = \textit{all}, headers, headings or none\new{v1.47}
+
+    With this option, Korean-style part and chapter headings, and
+    running headers are available.
+    It is similar to Hungarian (see \ref{hungarian}) except that
+    figure and table captions are not touched.
+      \begin{itemize}
+        \item ¦all¦: Redefine part and chapter headings, and running headers
+          (=~default setting)
+        \item ¦headings¦: Redefine part and chapter headings only
+        \item ¦headers¦: Redefine running headers only
+        \item ¦none¦: Do not redefine anything
+      \end{itemize}
   \end{itemize}
 
 \subsection[kurdish]{kurdish\new{v1.45}}\label{kurdish}
