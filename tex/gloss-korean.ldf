@@ -22,7 +22,31 @@
 \define@choicekey{korean}{captions}[\val\nr]{hangul,hanja}[hangul]{%
     \let\xpg@korean@captions\nr
 }
-\setkeys{korean}{variant,captions}
+% swapstrings: all (0), headings (1), headers (2), or none (3)
+\newif\if@korean@swapheadings
+\newif\if@korean@swapheaders
+\define@choicekey*+{korean}{swapstrings}[\val\nr]{all,headings,headers,none}[all]{%
+   \ifcase\nr\relax
+      % all:
+      \@korean@swapheadingstrue%
+      \@korean@swapheaderstrue%
+   \or
+      % headings:
+      \@korean@swapheadingstrue%
+      \@korean@swapheadersfalse%
+   \or
+      % headers:
+      \@korean@swapheadingsfalse%
+      \@korean@swapheaderstrue%
+   \or
+      % none:
+      \@korean@swapheadingsfalse%
+      \@korean@swapheadersfalse%
+   \fi
+   \xpg@info{Option: Korean, swapstrings=\val}%
+}{\xpg@warning{Unknown Korean swapstrings value `#1'}}
+
+\setkeys{korean}{variant,captions,swapstrings}
 
 \def\captionskorean{%
     \ifcase\xpg@korean@captions\relax
@@ -35,7 +59,7 @@
 }
 \def\captions@korean@hangul{%
     \def\koreanTHEname{제}%
-    \def\partname##1##2{제##1##2 편}%
+    \def\partname{편}%
     \def\chaptername{장}%
     \def\refname{참고문헌}%
     \def\abstractname{요약}%
@@ -53,10 +77,11 @@
     \def\proofname{증명}%
     \def\headtoname{수신:}%
     \def\ccname{사본}%
+    \def\glossaryname{용어집}%
 }
 \def\captions@korean@hanja{%
     \def\koreanTHEname{第}%
-    \def\partname##1##2{第##1##2 篇}%
+    \def\partname{篇}%
     \def\chaptername{章}%
     \def\refname{參考文獻}%
     \def\abstractname{要約}%
@@ -74,6 +99,217 @@
     \def\proofname{證明}%
     \def\headtoname{受信:}%
     \def\ccname{寫本}%
+    \def\glossaryname{用語集}%
+}
+
+\def\korean@appendix@chapapp{\appendixname}% to exclude appendix
+
+\def\korean@headingsformat{%
+  % change chapter and part headings
+  \if@korean@swapheadings
+    % With titlesec
+    \ifdefined\titleformat
+      \ifdefined\@part
+        \let\xpg@save@part@format\@part
+        \patchcmd{\@part}%
+                 {\partname\nobreakspace\thepart}%
+                 {\koreanTHEname\nobreakspace \thepart\nobreakspace \partname}%
+                 {}%
+                 {\xpg@warning{Failed to patch part for Korean}}%
+      \fi
+      \ifdefined\chapter
+        \titleformat\chapter[display]%
+          {\@ifundefined{ttl@fil}{\raggedright}{\ttl@fil}\ttl@fonts\ttl@sizes6}%
+          {%
+            \ifx\@chapapp\korean@appendix@chapapp
+              \appendixname\space \thechapter
+            \else
+              \koreanTHEname\space \thechapter\space \@chapapp
+            \fi
+          }{.8\baselineskip}{\ttl@sizes\z@\ttl@passexplicit}%
+      \fi
+    \else % (not \ifdefined\titleformat)
+      % With KOMA
+      \ifdefined\sectionformat
+        \ifdefined\partformat
+          \let\xpg@save@part@format\partformat
+          \renewcommand*{\partformat}{\koreanTHEname~\thepart~\partname}%
+        \fi
+        \ifdefined\chapterformat
+          \let\xpg@save@chap@format\chapterformat
+          \renewcommand*{\chapterformat}{\mbox{%
+            \IfChapterUsesPrefixLine
+            {%
+              \ifx\@chapapp\korean@appendix@chapapp
+                \chapappifchapterprefix\nobreakspace \thechapter\autodot
+              \else
+                \koreanTHEname\nobreakspace \thechapter\nobreakspace \chapappifchapterprefix{}%
+              \fi
+            }%
+            {\thechapter\autodot\enskip}%
+          }}%
+        \fi
+      \else % (not \ifdefined\sectionformat)
+        % With memoir
+        \ifdefined\@memptsize
+          \ifdefined\@makechapterhead
+            \let\xpg@save@chap@format\@makechapterhead
+            \patchcmd{\@makechapterhead}%
+                     {\printchaptername \chapternamenum \printchapternum}%
+                     {%
+                       \ifx\@chapapp\korean@appendix@chapapp
+                         \printchaptername\relax\chapternamenum \printchapternum
+                       \else
+                         \printkoreanchapterthe \printchapternum\chapternamenum \printchaptername
+                       \fi
+                     }%
+                     {}%
+                     {\xpg@warning{Failed to patch chapter for Korean}}%
+            \ifdefined\printkoreanchapterthe\else
+              \def\printkoreanchapterthe{%
+                \ifpatchable\printchaptername\@chapapp
+                  {\chapnamefont\koreanTHEname\chapternamenum}{}}%
+            \fi
+          \fi
+          \ifdefined\@part
+            \let\xpg@save@part@format\@part
+            \patchcmd{\@part}%
+                     {\printpartname \partnamenum \printpartnum}%
+                     {\printkoreanpartthe \printpartnum\partnamenum \printpartname}%
+                     {}%
+                     {\xpg@warning{Failed to patch part for Korean}}%
+            \ifdefined\printkoreanpartthe\else
+              \def\printkoreanpartthe{\partnamefont\koreanTHEname\partnamenum}%
+            \fi
+          \fi
+        \else % (not \ifdefined\@memptsize)
+          % With standard classes
+          \ifdefined\@makechapterhead
+            \let\xpg@save@chap@format\@makechapterhead
+            \patchcmd{\@makechapterhead}%
+                     {\@chapapp\space \thechapter}%
+                     {%
+                       \ifx\@chapapp\korean@appendix@chapapp
+                         \appendixname\space \thechapter
+                       \else
+                         \koreanTHEname\space \thechapter\space \@chapapp
+                       \fi
+                     }%
+                     {}%
+                     {\xpg@warning{Failed to patch chapter for Korean}}%
+          \fi
+          \ifdefined\@part
+            \let\xpg@save@part@format\@part
+            \patchcmd{\@part}%
+                     {\partname\nobreakspace\thepart}%
+                     {\koreanTHEname\nobreakspace \thepart\nobreakspace \partname}%
+                     {}%
+                     {\xpg@warning{Failed to patch part for Korean}}%
+          \fi % (end \ifdefined\@part)
+        \fi % (end \ifdefined\@memptsize)
+      \fi % (end \ifdefined\sectionformat)
+    \fi % (end \ifdefined\titleformat)
+  \fi % (end \if@korean@swapheadings)
+  %
+  % Change running headers
+  \if@korean@swapheaders
+    \ifdefined\chapterformat
+      % With KOMA
+      \let\xpg@save@chaptermark@format\chaptermarkformat
+      \renewcommand*\chaptermarkformat{%
+        \IfChapterUsesPrefixLine
+        {%
+          \ifx\@chapapp\korean@appendix@chapapp
+            \chapappifchapterprefix\ \thechapter\autodot
+          \else
+            \koreanTHEname\ \thechapter\ \chapappifchapterprefix{}%
+          \fi
+        }%
+        {\thechapter\autodot}%
+        \enskip
+      }%
+    \else % (not \ifdefined\chapterformat)
+      \ifdefined\@memptsize
+        % With memoir
+        \let\xpg@save@chaptermark@format\chaptermark
+        \patchcmd{\chaptermark}%
+                 {\@chapapp\ \@nameuse{thechapter}}%
+                 {%
+                   \ifx\@chapapp\korean@appendix@chapapp
+                     \appendixname\ \@nameuse{thechapter}%
+                   \else
+                     \koreanTHEname\ \@nameuse{thechapter}\ \@chapapp
+                   \fi
+                 }%
+                 {}%
+                 {}%
+      \else % (not \ifdefined\@memptsize)
+        % With standard classes
+        \ifdefined\chaptermark
+          \let\xpg@save@chaptermark@format\chaptermark
+          \patchcmd{\chaptermark}%
+                   {\@chapapp\ \thechapter}%
+                   {%
+                     \ifx\@chapapp\korean@appendix@chapapp
+                       \appendixname\ \thechapter
+                     \else
+                       \koreanTHEname\ \thechapter\ \@chapapp
+                     \fi
+                   }%
+                   {}%
+                   {}%
+        \fi % (end \ifdefined\chaptermark)
+      \fi % (end \ifdefined\@memptsize)
+    \fi % (end \ifdefined\chapterformat)
+  \fi % (end \if@korean@swapheaders)
+}
+
+\def\nokorean@headingsformat{%
+  % Reset chapter and part heading
+  \ifdefined\titleformat
+    % With titlesec
+    \ifdefined\xpg@save@part@format
+      \let\@part\xpg@save@part@format
+    \fi
+    \ifdefined\chapter
+      \titleformat\chapter[display]%
+        {\@ifundefined{ttl@fil}{\raggedright}{\ttl@fil}\ttl@fonts\ttl@sizes6}%
+        {\@chapapp\space\thechapter}{.8\baselineskip}{\ttl@sizes\z@\ttl@passexplicit}%
+    \fi
+  \else % (not \ifdefined\titleformat)
+    \ifdefined\sectionformat
+      % With KOMA
+      \ifdefined\xpg@save@part@format
+        \let\partformat\xpg@save@part@format
+      \fi
+      \ifdefined\xpg@save@chap@format
+        \let\chapterformat\xpg@save@chap@format
+      \fi
+    \else
+      % With memoir and standard classes
+      \ifdefined\xpg@save@part@format
+        \let\@part\xpg@save@part@format
+      \fi
+      \ifdefined\xpg@save@chap@format
+        \let\@makechapterhead\xpg@save@chap@format
+      \fi
+    \fi % (end \ifdefined\sectionformat)
+  \fi % (end \ifdefined\titleformat)
+  %
+  % Reset headers
+  \ifdefined\chaptermarkformat
+    % With KOMA
+    \ifdefined\xpg@save@chaptermark@format
+      \let\chaptermarkformat\xpg@save@chaptermark@format
+    \fi
+  \else
+    \ifdefined\chaptermark
+      % With memoir and standard classes
+      \ifdefined\xpg@save@chaptermark@format
+        \let\chaptermark\xpg@save@chaptermark@format
+      \fi
+    \fi % (end \ifdefined\chaptermark)
+  \fi % (end \ifdefined\chapterformat)
 }
 
 \def\datekorean{%
@@ -149,17 +385,11 @@
 
 \def\blockextras@korean{%
     \inlineextras@korean
-    \ifdefined\@chapapp
-        \long\def\@tmpa{\chaptername}\def\@tmpb{\chaptername}%
-        \ifnum0\ifx\@chapapp\@tmpa1\else\ifx\@chapapp\@tmpb1\fi\fi>\z@
-            \let\xpg@orig@@chapapp\@chapapp
-            \def\@chapapp##1##2{\koreanTHEname ##1##2##1\chaptername}%
-        \fi
-    \fi
+    \korean@headingsformat
 }
 
 \def\noextras@korean@common{%
-    \ifdefined\xpg@orig@@chapapp \let\@chapapp\xpg@orig@@chapapp \fi
+    \nokorean@headingsformat
 }
 
 \ifluatex % luatex
