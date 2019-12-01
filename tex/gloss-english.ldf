@@ -37,7 +37,7 @@
 % Option ordinalmonthday
 \define@boolkey{english}[english@]{ordinalmonthday}[true]{}
 
-\define@choicekey*+{english}{variant}[\val\nr]{uk,british,us,american,usmax,australian,newzealand,canadian}{%
+\define@choicekey*+{english}{variant}[\val\nr]{uk,british,us,american,usmax,australian,newzealand,canadian}[us]{%
    \ifcase\nr\relax
       % uk:
       \british@hyphentrue
