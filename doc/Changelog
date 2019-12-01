@@ -9,6 +9,7 @@ New features:
   * New environment {lang}{<lang>} (equivalent to {<lang>},  but also available with
     \setlanguagealias* which does not define dedicated alias environments).
   * New gloss option totalhyphenmin (correpconds to LuaTeX's \hyphenationmin) (#111).
+  * New test \iflanguageoption{<lang>}{<key>}{<val>} (#364).
   * \selectbackgroundlanguage and \resetdefaultlanguage now also support language
     aliases.
   * New macro \charifavailable{<char code>}{<substitution>}.

@@ -1150,7 +1150,7 @@
      % If the optional argument sets a value for the key “variant”,
      % store it in \xpg@main@langvariant
      \clist_map_inline:nn { #1 } {%
-         \xpg@parsevariantkeyvalue##1=@xpg@main@langvariant\relax
+         \xpg@parsevariantkeyvalue##1=@xpg@main@langvariant:#2\relax
      }%
   }%
   \csgdef{#2@gvar}{\mainlanguagevariant}%
@@ -1244,7 +1244,7 @@
      % If the argument sets a value for the key “variant”,
      % store it in \xpg@set@langvariant
      \clist_map_inline:nn { #1 } {%
-         \xpg@parsevariantkeyvalue##1=@xpg@set@langvariant\relax
+         \xpg@parsevariantkeyvalue##1=@xpg@set@langvariant:#2\relax
      }%
   }%
 }
@@ -1451,7 +1451,7 @@
     % If the optional argument sets a value for the key “variant”,
     % store it in \xpg@other@langvariant
     \clist_map_inline:nn { #1 } {%
-       \xpg@parsevariantkeyvalue##1=@xpg@other@langvariant\relax
+       \xpg@parsevariantkeyvalue##1=@xpg@other@langvariant:#2\relax
     }%
   }%
   \csgdef{#2@gvar}{\otherlanguagevariant}%
@@ -1656,7 +1656,7 @@
   \tl_if_blank:nTF {#2}{}{%
      % If the optional argument sets a value for the key “variant”, copy it to xpg@langvariant
     \clist_map_inline:nn { #2 } {%
-         \xpg@parsevariantkeyvalue##1=@xpg@langvariant\relax
+         \xpg@parsevariantkeyvalue##1=@xpg@langvariant:#3\relax
      }%
      \exp_args:Nne \setkeys{#3}{#2}%
    }%
@@ -1680,12 +1680,44 @@
   }{}
 }
 
-% Helper to get and register "variant" keyval
-\def\xpg@parsevariantkeyvalue#1=#2@#3\relax{%
+% Helper to get and register option keyvals
+\def\xpg@parsevariantkeyvalue#1=#2@#3:#4\relax{%
    \def\@tmpa{#1}
    \def\@tmpb{variant}
+   % variant values are stored in specific macros
+   % (\xpg@main@langvariant, \xpg@other@langvariant
+   % and \xpg@set@langvariant)
    \ifx\@tmpa\@tmpb\setkeys{#3}{#1=#2}\fi
+   \tl_if_empty:nF{#2}
+      { \xpg@store@opt@keyval#1:#2:#4\relax }
 }%
+
+% Store option keys and values
+% This strips trailing '=' from values.
+\def\xpg@store@opt@keyval#1:#2=:#3\relax{%
+   \prop_if_exist:cF { xpg@current@options@#3 }
+      { \prop_new:c {xpg@current@options@#3} }
+   \prop_put:cnn { xpg@current@options@#3 }
+      {#1}{#2}
+}
+
+
+\prg_set_conditional:Npnn \polyglossia@check@option@value:NNN #1#2#3 { p , T , F , TF }{
+  \prop_get:cnNTF {xpg@current@options@#1} {#2} \l_tmpa_tl
+     {
+        \str_if_eq:NNTF{\l_tmpa_tl}{#3}
+          {\prg_return_true:}
+          {\prg_return_false:}
+     }
+     {
+      \prg_return_false:
+     }
+}
+
+% Test if option value is set
+\newcommand*\iflanguageoption[3]{%
+  \polyglossia@check@option@value:NNNTF{#1}{#2}{#3}%
+}
 
 
 % Append any variant to csv list of variants
