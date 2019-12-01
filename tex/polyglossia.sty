@@ -1253,7 +1253,7 @@
 \newcommand*{\resetdefaultlanguage}[2][]{%
   \ifcsdef{#2@alias@lang}{%
      \ifcsdef{#2@alias@opts}{%
-       \polyglossia@reset@default@language:nn {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
+       \exp_args:Nxx \polyglossia@reset@default@language:nn {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
      }{%
        polyglossia@reset@default@language:nn {#1} {\csuse{#2@alias@lang}}%
      }%
@@ -1490,7 +1490,7 @@
 \newcommand\textlang[3][]{%
   \ifcsdef{#2@alias@lang}{%
      \ifcsdef{#2@alias@opts}{%
-       \xpg@textlanguage[\csuse{#2@alias@opts},#1]{\csuse{#2@alias@lang}}{#3}%
+       \exp_args:Nxx \xpg@textlanguage[\csuse{#2@alias@opts},#1]{\csuse{#2@alias@lang}}{#3}%
      }{%
        \xpg@textlanguage[#1]{\csuse{#2@alias@lang}}{#3}%
      }%
@@ -1554,7 +1554,7 @@
 {%
   \ifcsdef{#2@alias@lang}{%
      \ifcsdef{#2@alias@opts}{%
-       \polyglossia@foreignlanguage:nnn {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}} {#3}%
+       \exp_args:Nxx \polyglossia@foreignlanguage:nnn {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}} {#3}%
      }{%
        \polyglossia@foreignlanguage:nnn {#1} {\csuse{#2@alias@lang}} {#3}%
      }%
@@ -1579,7 +1579,7 @@
 {%
   \ifcsdef{#2@alias@lang}{%
      \ifcsdef{#2@alias@opts}{%
-       \polyglossia@otherlanguage:nn {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
+       \exp_args:Nxx \polyglossia@otherlanguage:nn {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
      }{%
        \polyglossia@otherlanguage:nn {#1} {\csuse{#2@alias@lang}}%
      }%
@@ -1636,7 +1636,7 @@
 {%
   \ifcsdef{#3@alias@lang}{%
      \ifcsdef{#3@alias@opts}{%
-       \polyglossia@select@language:nnn {#1} {\csuse{#3@alias@opts},#2} {\csuse{#3@alias@lang}}%
+       \exp_args:Nxx \polyglossia@select@language:nnn {#1} {\csuse{#3@alias@opts},#2} {\csuse{#3@alias@lang}}%
      }{%
        \polyglossia@select@language:nnn {#1} {#2} {\csuse{#3@alias@lang}}%
      }%
