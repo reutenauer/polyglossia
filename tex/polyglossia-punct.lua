@@ -61,12 +61,54 @@ local function get_penalty_node()
     return node_copy(penalty_node)
 end
 
--- we have here all possible space characters, referenced by their unicode slot
--- number, taken from char-def.lua
-local space_chars = {[32] = true, [160] = true, [5760] = true, [6158] = true,
-    [8192] = true, [8193] = true, [8194] = true, [8195] = true, [8196] = true,
-    [8197] = true, [8198] = true, [8199] = true, [8200] = true, [8201] = true,
-    [8202] = true, [8239] = true, [8287] = true, [12288] = true}
+-- all possible space characters according to section 6.2 of the Unicode Standard
+-- https://www.unicode.org/versions/Unicode12.0.0/ch06.pdf
+local space_chars = {
+    [0x20] = true, -- space
+    [0xA0] = true, -- no-break space
+    [0x1680] = true, -- ogham space mark
+    [0x2000] = true, -- en quad
+    [0x2001] = true, -- em quad
+    [0x2002] = true, -- en space
+    [0x2003] = true, -- em space
+    [0x2004] = true, -- three-per-em-space
+    [0x2005] = true, -- four-per-em space
+    [0x2006] = true, -- six-per-em space
+    [0x2007] = true, -- figure space
+    [0x2008] = true, -- punctuation space
+    [0x2009] = true, -- thin space
+    [0x200A] = true, -- hair space
+    [0x202F] = true, -- narrow no-break space
+    [0x205F] = true, -- medium mathematical space
+    [0x3000] = true -- ideographic space
+}
+
+-- all left bracket characters, referenced by their Unicode slot
+local left_bracket_chars = {
+    [0x28] = true, -- left parenthesis
+    [0x5B] = true, -- left square bracket
+    [0x7B] = true, -- left curly bracket
+    [0x27E8] = true -- mathematical left angle bracket
+}
+
+-- all right bracket characters, referenced by their Unicode slot
+local right_bracket_chars = {
+    [0x29] = true, -- right parenthesis
+    [0x5D] = true, -- right square bracket
+    [0x7D] = true, -- right curly bracket
+    [0x27E9] = true -- mathematical right angle bracket
+}
+
+-- question and exclamation marks, referenced by their Unicode slot
+local question_exclamation_chars = {
+    [0x21] = true, -- exclamation mark !
+    [0x3F] = true, -- question mark ?
+    [0x203C] = true, -- double exclamation mark ‼
+    [0x203D] = true, -- interrobang ‽
+    [0x2047] = true, -- double question mark ⁇
+    [0x2048] = true, -- question exclamation mark ⁈
+    [0x2049] = true, -- exclamation question mark ⁉
+}
 
 -- from nodes-tst.lua, adapted
 local function somespace(n)
@@ -84,9 +126,6 @@ local function somespace(n)
     end
 end
 
--- we have here all left bracket characters, referenced by their unicode slot
-local left_bracket_chars = {[40] = true, [123] = true, [91] = true, [10216] = true}
-
 local function someleftbracket(n)
     if n then
         local id = n.id
@@ -96,14 +135,21 @@ local function someleftbracket(n)
     end
 end
 
--- we have here all right bracket characters, referenced by their unicode slot
-local right_bracket_chars = {[41] = true, [125] = true, [93] = true, [10217] = true}
-
 local function somerightbracket(n)
     if n then
         local id = n.id
         if id == glyph_code then
             return right_bracket_chars[n.char]
+        end
+    end
+end
+
+local function question_exclamation_sequence(n1, n2)
+    if n1 and n2 then
+        local id1 = n1.id
+        local id2 = n2.id
+        if id1 == glyph_code and id2 == glyph_code then
+            return question_exclamation_chars[n1.char] and question_exclamation_chars[n2.char]
         end
     end
 end
@@ -198,8 +244,8 @@ local function process(head)
                         local space_exception = false
                         if prev then
                             local prevprev = getprev(prev)
-                            -- do not add space after left (opening) bracket
-                            space_exception = someleftbracket(prev)
+                            -- do not add space after left (opening) bracket and between question/exclamation marks
+                            space_exception = someleftbracket(prev) or question_exclamation_sequence(prev, current)
                             if somespace(prev) then
                             -- TODO: there is a question here: do we override a preceding space or not?...
                                 if somepenalty(prevprev, 10000) then
