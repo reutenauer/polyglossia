@@ -46,7 +46,7 @@ and may look very wrong.}
 \def\extras@bengali{}
 \def\noextras@bengali{}
 
-\define@boolkey{bengali}[bengali@]{changecounternumbering}{
+\define@boolkey{bengali}[bengali@]{changecounternumbering}[true]{
   \def\@tmpa{#1}
   \def\@tmptrue{true}
   \ifx\@tmpa\@tmptrue

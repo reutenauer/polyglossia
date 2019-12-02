@@ -43,7 +43,7 @@
       {\cyrillic@numeralsfalse}%
 }
 
-\define@boolkey{russian}[russian@]{indentfirst}{
+\define@boolkey{russian}[russian@]{indentfirst}[true]{
    \ifrussian@indentfirst
       \SetLanguageKeys{russian}{indentfirst=true}
    \else
