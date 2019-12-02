@@ -1,4 +1,4 @@
-\ProvidesFile{gloss-latin.ldf}[polyglossia: module for Latin v.2.0 2019-10-28]
+\ProvidesFile{gloss-latin.ldf}[polyglossia: module for Latin v.2.1 2019-12-02]
 
 \ExplSyntaxOn
 
@@ -113,7 +113,8 @@
     \directlua { require('polyglossia-latin') }
   }
   {
-    \newXeTeXintercharclass \g_polyglossia_latin_punctuation_class
+    \newXeTeXintercharclass \g_polyglossia_latin_question_exclamation_class
+    \newXeTeXintercharclass \g_polyglossia_latin_colon_semicolon_class
     \newXeTeXintercharclass \g_polyglossia_latin_opening_guillemet_class
     \newXeTeXintercharclass \g_polyglossia_latin_closing_guillemet_class
     \newXeTeXintercharclass \g_polyglossia_latin_opening_bracket_class
@@ -144,14 +145,15 @@
       }
       {
         \XeTeXinterchartokenstate = 1
-        \XeTeXcharclass `\! \g_polyglossia_latin_punctuation_class
-        \XeTeXcharclass `\? \g_polyglossia_latin_punctuation_class
-        \XeTeXcharclass `\‼ \g_polyglossia_latin_punctuation_class
-        \XeTeXcharclass `\⁇ \g_polyglossia_latin_punctuation_class
-        \XeTeXcharclass `\⁈ \g_polyglossia_latin_punctuation_class
-        \XeTeXcharclass `\⁉ \g_polyglossia_latin_punctuation_class
-        \XeTeXcharclass `\; \g_polyglossia_latin_punctuation_class
-        \XeTeXcharclass `\: \g_polyglossia_latin_punctuation_class
+        \XeTeXcharclass `\! \g_polyglossia_latin_question_exclamation_class
+        \XeTeXcharclass `\? \g_polyglossia_latin_question_exclamation_class
+        \XeTeXcharclass `\‼ \g_polyglossia_latin_question_exclamation_class
+        \XeTeXcharclass `\⁇ \g_polyglossia_latin_question_exclamation_class
+        \XeTeXcharclass `\⁈ \g_polyglossia_latin_question_exclamation_class
+        \XeTeXcharclass `\⁉ \g_polyglossia_latin_question_exclamation_class
+        \XeTeXcharclass `\‽ \g_polyglossia_latin_question_exclamation_class
+        \XeTeXcharclass `\; \g_polyglossia_latin_colon_semicolon_class
+        \XeTeXcharclass `\: \g_polyglossia_latin_colon_semicolon_class
         \XeTeXcharclass `\« \g_polyglossia_latin_opening_guillemet_class
         \XeTeXcharclass `\» \g_polyglossia_latin_closing_guillemet_class
         \XeTeXcharclass `\‹ \g_polyglossia_latin_opening_guillemet_class
@@ -165,13 +167,28 @@
         \XeTeXcharclass `\⟨ \g_polyglossia_latin_opening_bracket_class
         \XeTeXcharclass `\⟩ \g_polyglossia_latin_closing_bracket_class
 
-        % punctuation followed by a closing guillemet
-        \XeTeXinterchartoks \g_polyglossia_latin_punctuation_class \g_polyglossia_latin_closing_guillemet_class =
+        % question or exclamation mark followed by a closing guillemet
+        \XeTeXinterchartoks \g_polyglossia_latin_question_exclamation_class \g_polyglossia_latin_closing_guillemet_class =
           {
             \polyglossia_latin_insert_punctuation_space:
           }
-        % closing bracket followed by punctuation
-        \XeTeXinterchartoks \g_polyglossia_latin_closing_bracket_class \g_polyglossia_latin_punctuation_class =
+        % question or exclamation mark followed by a colon or semicolon
+        \XeTeXinterchartoks \g_polyglossia_latin_question_exclamation_class \g_polyglossia_latin_colon_semicolon_class =
+          {
+            \polyglossia_latin_insert_punctuation_space:
+          }
+        % colon or semicolon followed by a closing guillemet
+        \XeTeXinterchartoks \g_polyglossia_latin_colon_semicolon_class \g_polyglossia_latin_closing_guillemet_class =
+          {
+            \polyglossia_latin_insert_punctuation_space:
+          }
+        % closing bracket followed by a question or exclamation mark
+        \XeTeXinterchartoks \g_polyglossia_latin_closing_bracket_class \g_polyglossia_latin_question_exclamation_class =
+          {
+            \polyglossia_latin_insert_punctuation_space:
+          }
+        % closing bracket followed by a colon or semicolon
+        \XeTeXinterchartoks \g_polyglossia_latin_closing_bracket_class \g_polyglossia_latin_colon_semicolon_class =
           {
             \polyglossia_latin_insert_punctuation_space:
           }
@@ -185,18 +202,38 @@
           {
             \polyglossia_latin_replace_following_space:
           }
+        % opening guillemet followed by an opening guillemet
+        \XeTeXinterchartoks \g_polyglossia_latin_opening_guillemet_class \g_polyglossia_latin_opening_guillemet_class =
+          {
+            \polyglossia_latin_insert_punctuation_space:
+          }
         % opening guillemet followed by an ordinary character
         \XeTeXinterchartoks \g_polyglossia_latin_opening_guillemet_class \z@ =
           {
             \polyglossia_latin_insert_punctuation_space:
           }
-        % closing guillemet followed by punctuation
-        \XeTeXinterchartoks \g_polyglossia_latin_closing_guillemet_class \g_polyglossia_latin_punctuation_class =
+        % closing guillemet followed by a closing guillemet
+        \XeTeXinterchartoks \g_polyglossia_latin_closing_guillemet_class \g_polyglossia_latin_closing_guillemet_class =
           {
             \polyglossia_latin_insert_punctuation_space:
           }
-        % space followed by punctuation
-        \XeTeXinterchartoks \xpg@boundaryclass \g_polyglossia_latin_punctuation_class =
+        % closing guillemet followed by a question or exclamation mark
+        \XeTeXinterchartoks \g_polyglossia_latin_closing_guillemet_class \g_polyglossia_latin_question_exclamation_class =
+          {
+            \polyglossia_latin_insert_punctuation_space:
+          }
+        % closing guillemet followed by a colon or semicolon
+        \XeTeXinterchartoks \g_polyglossia_latin_closing_guillemet_class \g_polyglossia_latin_colon_semicolon_class =
+          {
+            \polyglossia_latin_insert_punctuation_space:
+          }
+        % space followed by a question or exclamation mark
+        \XeTeXinterchartoks \xpg@boundaryclass \g_polyglossia_latin_question_exclamation_class =
+          {
+            \polyglossia_latin_replace_preceding_space:
+          }
+        % space followed by a colon or semicolon
+        \XeTeXinterchartoks \xpg@boundaryclass \g_polyglossia_latin_colon_semicolon_class =
           {
             \polyglossia_latin_replace_preceding_space:
           }
@@ -205,8 +242,13 @@
           {
             \polyglossia_latin_replace_preceding_space:
           }
-        % ordinary character followed by punctuation
-        \XeTeXinterchartoks \z@ \g_polyglossia_latin_punctuation_class =
+        % ordinary character followed by a question or exclamation mark
+        \XeTeXinterchartoks \z@ \g_polyglossia_latin_question_exclamation_class =
+          {
+            \polyglossia_latin_insert_punctuation_space:
+          }
+        % ordinary character followed by a colon or semicolon
+        \XeTeXinterchartoks \z@ \g_polyglossia_latin_colon_semicolon_class =
           {
             \polyglossia_latin_insert_punctuation_space:
           }
@@ -231,6 +273,7 @@
         \XeTeXcharclass `\⁇ \z@
         \XeTeXcharclass `\⁈ \z@
         \XeTeXcharclass `\⁉ \z@
+        \XeTeXcharclass `\‽ \z@
         \XeTeXcharclass `\; \z@
         \XeTeXcharclass `\: \z@
         \XeTeXcharclass `\« \z@

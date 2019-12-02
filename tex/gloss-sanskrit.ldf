@@ -89,7 +89,8 @@ and may look very wrong.}
 \ifluatex
   \directlua{require('polyglossia-sanskrit')}%
 \else
-  \newXeTeXintercharclass\sanskrit@punctthin % ! ? ‼ ⁇ ⁈ ⁉ : ; danda double_danda
+  \newXeTeXintercharclass\sanskrit@questionexclamation % ! ? ‼ ⁇ ⁈ ⁉ ‽
+  \newXeTeXintercharclass\sanskrit@punctthin % : ; danda double_danda
 \fi
 
 \def\sanskrit@punctthinspace{{\unskip\thinspace}}
@@ -99,17 +100,20 @@ and may look very wrong.}
     \directlua{polyglossia.activate_sanskrit_punct()}%
   \else
     \XeTeXinterchartokenstate=1%
-    \XeTeXcharclass `\! \sanskrit@punctthin
-    \XeTeXcharclass `\? \sanskrit@punctthin
-    \XeTeXcharclass `\‼ \sanskrit@punctthin
-    \XeTeXcharclass `\⁇ \sanskrit@punctthin
-    \XeTeXcharclass `\⁈ \sanskrit@punctthin
-    \XeTeXcharclass `\⁉ \sanskrit@punctthin
+    \XeTeXcharclass `\! \sanskrit@questionexclamation
+    \XeTeXcharclass `\? \sanskrit@questionexclamation
+    \XeTeXcharclass `\‼ \sanskrit@questionexclamation
+    \XeTeXcharclass `\⁇ \sanskrit@questionexclamation
+    \XeTeXcharclass `\⁈ \sanskrit@questionexclamation
+    \XeTeXcharclass `\⁉ \sanskrit@questionexclamation
+    \XeTeXcharclass `\‽ \sanskrit@questionexclamation % interrobang, U+203D
     \XeTeXcharclass `\: \sanskrit@punctthin
     \XeTeXcharclass `\; \sanskrit@punctthin
     \XeTeXcharclass `\। \sanskrit@punctthin % danda, U+0964
     \XeTeXcharclass `\॥ \sanskrit@punctthin % double danda, U+0965
+    \XeTeXinterchartoks \z@ \sanskrit@questionexclamation = \sanskrit@punctthinspace
     \XeTeXinterchartoks \z@ \sanskrit@punctthin = \sanskrit@punctthinspace
+    \XeTeXinterchartoks \sanskrit@questionexclamation \sanskrit@punctthin = \sanskrit@punctthinspace
   \fi
 }
 
@@ -123,6 +127,7 @@ and may look very wrong.}
     \XeTeXcharclass `\⁇ \z@
     \XeTeXcharclass `\⁈ \z@
     \XeTeXcharclass `\⁉ \z@
+    \XeTeXcharclass `\‽ \z@
     \XeTeXcharclass `\: \z@
     \XeTeXcharclass `\; \z@
     \XeTeXcharclass `\। \z@
