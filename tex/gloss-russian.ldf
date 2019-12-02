@@ -51,7 +51,7 @@
   \fi
 }
 
-\define@boolkey{russian}[russian@]{babelshorthands}[false]{}
+\define@boolkey{russian}[russian@]{babelshorthands}[true]{}
 
 \setkeys{russian}{spelling,numerals}
 

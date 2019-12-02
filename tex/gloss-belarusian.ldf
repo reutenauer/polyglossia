@@ -43,7 +43,7 @@
       {\cyrillic@numeralsfalse}%
 }
 
-\define@boolkey{belarusian}[belarusian@]{babelshorthands}[false]{}
+\define@boolkey{belarusian}[belarusian@]{babelshorthands}[true]{}
 
 \setkeys{belarusian}{numerals}
 

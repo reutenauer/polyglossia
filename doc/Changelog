@@ -23,6 +23,15 @@ Bug fixes:
   * Fix \text<lang> command with multiple paragraphs.
 
 Interface and defaults changes:
+  * Some boolean options had 'false' value by default, which meant if you passed
+    them without value, the logic was reversed. This has been changed, leading to
+    change of behavior should you have used one of these options without value (#363).
+    Concerned are the following options:
+    - babelshorthands in language belarusian, mongolian, ukrainian, and russian
+      ('babelshorthands' now equals 'babelshorthand=true', no longer 'babelshorthands=false')
+    - localalph in language slovenian ('localalph' now equals 'localalph=true')
+    - latesthyphen in language german ('latesthyphen' now equals 'latesthyphen=true')
+    - fullyear in package hebrewcal ('fullyear' now equals 'fullyear=true')
   * The command \setlanguagealias* (introduced in v1.46) does no longer define
     dedicated alias environments.
 
