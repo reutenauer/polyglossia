@@ -16,7 +16,7 @@
 \setlanguagealias{slovenian}{slovene}
 
 \providebool{slovenian@localalph}
-\define@boolkey{slovenian}[slovenian@]{localalph}[false]{%
+\define@boolkey{slovenian}[slovenian@]{localalph}[true]{%
   \def\@tmpa{#1}%
   \def\@tmptrue{true}%
   \ifx\@tmpa\@tmptrue

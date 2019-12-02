@@ -31,7 +31,7 @@
       {\cyrillic@numeralsfalse}%
 }
 
-\define@boolkey{mongolian}[mongolian@]{babelshorthands}[false]{}
+\define@boolkey{mongolian}[mongolian@]{babelshorthands}[true]{}
 
 \setkeys{mongolian}{numerals}
 

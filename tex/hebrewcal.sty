@@ -1,5 +1,5 @@
 \ProvidesPackage{hebrewcal}
-        [2015/04/17 v2.6 %
+        [2019/12/03 v2.7 %
          Hebrew calendar for polyglossia (adapted from hebcal.sty in Babel)]
 \RequirePackage{xkeyval}
 \ifluatex\RequirePackage{luabidi}\else\RequirePackage{bidi}\fi
@@ -20,8 +20,8 @@
 
 \@ifundefined{@Remainder}{\input{cal-util.def}}{}
 
-\define@boolkey{hebrew}[@hebrew@]{fullyear}[false]{}
-\setkeys{hebrew}{fullyear}
+\define@boolkey{hebrew}[@hebrew@]{fullyear}[true]{}
+\setkeys{hebrew}{fullyear=false}
 
 \newcount\hebrewday  \newcount\hebrewmonth \newcount\hebrewyear
 \def\hebrewdate#1#2#3{%

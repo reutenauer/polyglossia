@@ -24,7 +24,7 @@
 {\cyrillic@numeralsfalse}%
 }
 
-\define@boolkey{ukrainian}[ukrainian@]{babelshorthands}[false]{}
+\define@boolkey{ukrainian}[ukrainian@]{babelshorthands}[true]{}
 
 \setkeys{ukrainian}{numerals}
 

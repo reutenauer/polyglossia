@@ -146,11 +146,11 @@
    \xpg@info{Option: German, script=\val}%
 }{\xpg@warning{Unknown German script `#1'}}
 
-\define@boolkey{german}[german@]{latesthyphen}[false]{}
+\define@boolkey{german}[german@]{latesthyphen}[true]{}
 
 \define@boolkey{german}[german@]{babelshorthands}[true]{}
 
-\setkeys{german}{spelling,latesthyphen,script,variant}
+\setkeys{german}{spelling,script,variant}
 
 \ifsystem@babelshorthands
   \setkeys{german}{babelshorthands=true}
