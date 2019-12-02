@@ -35,6 +35,7 @@ local function activate_french_punct(thincolonspace, autospaceguillemets)
     set_left_space(lang, '⁇', 0.5)
     set_left_space(lang, '⁈', 0.5)
     set_left_space(lang, '⁉', 0.5)
+    set_left_space(lang, '‽', 0.5) -- U+203D (interrobang)
 
     if autospaceguillemets then
         set_left_space(lang, '»', 0.5)

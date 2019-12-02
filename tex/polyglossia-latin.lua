@@ -6,21 +6,31 @@ require('polyglossia-punct')
 -- between 1/4 and 1/3 of a quad. We choose a half of a \thinspace here.
 local hairspace = 0.08333 -- 1/12
 
+local function space_left(char)
+    polyglossia.add_left_spaced_character('latin', char, hairspace, 'quad')
+end
+
+local function space_right(char)
+    polyglossia.add_right_spaced_character('latin', char, hairspace, 'quad')
+end
+
+polyglossia.clear_spaced_characters('latin')
+space_left('!')
+space_left('?')
+space_left('‼')
+space_left('⁇')
+space_left('⁈')
+space_left('⁉')
+space_left('‽') -- U+203D (interrobang)
+space_left(':')
+space_left(';')
+space_left('»')
+space_left('›')
+space_right('«')
+space_right('‹')
+
 local function activate_latin_punct()
     polyglossia.activate_punct('latin')
-    polyglossia.clear_spaced_characters('latin')
-    polyglossia.add_left_spaced_character('latin',':',hairspace,'quad')
-    polyglossia.add_left_spaced_character('latin','!',hairspace,'quad')
-    polyglossia.add_left_spaced_character('latin','?',hairspace,'quad')
-    polyglossia.add_left_spaced_character('latin',';',hairspace,'quad')
-    polyglossia.add_left_spaced_character('latin','‼',hairspace,'quad')
-    polyglossia.add_left_spaced_character('latin','⁇',hairspace,'quad')
-    polyglossia.add_left_spaced_character('latin','⁈',hairspace,'quad')
-    polyglossia.add_left_spaced_character('latin','⁉',hairspace,'quad')
-    polyglossia.add_left_spaced_character('latin','»',hairspace,'quad')
-    polyglossia.add_left_spaced_character('latin','›',hairspace,'quad')
-    polyglossia.add_right_spaced_character('latin','«',hairspace,'quad')
-    polyglossia.add_right_spaced_character('latin','‹',hairspace,'quad')
 end
 
 local function deactivate_latin_punct()
