@@ -64,9 +64,10 @@
 \ifluatex
   \directlua{require('polyglossia-french')}%
 \else
-  \newXeTeXintercharclass\french@openbrackets % ( ] {
-  \newXeTeXintercharclass\french@closebrackets % ( ] {
-  \newXeTeXintercharclass\french@punctthin % ! ? ; et autres
+  \newXeTeXintercharclass\french@openbrackets % ( [ {
+  \newXeTeXintercharclass\french@closebrackets % ) ] }
+  \newXeTeXintercharclass\french@questionexclamation % ! ? et autres
+  \newXeTeXintercharclass\french@punctthin % ; (et :)
   \newXeTeXintercharclass\french@punctthick % :
   \newXeTeXintercharclass\french@punctguillstart % « ‹
   \newXeTeXintercharclass\french@punctguillend % » ›
@@ -81,7 +82,7 @@
   \AfterPreamble{%
     \ifdefstring{\xpg@main@language}{french}{%
       \iffrench@frenchfootnote
-         \ifx\@makefntext\undefined\else        
+         \ifx\@makefntext\undefined\else
              \long\def\french@makefntext##1{%
                 \parindent1em \noindent\quad%
                 \ifx\@thefnmark\empty\else%
@@ -209,12 +210,13 @@
       \fi
     \else
       \XeTeXinterchartokenstate=1
-      \XeTeXcharclass `\! \french@punctthin
-      \XeTeXcharclass `\? \french@punctthin
-      \XeTeXcharclass `\‼ \french@punctthin
-      \XeTeXcharclass `\⁇ \french@punctthin
-      \XeTeXcharclass `\⁈ \french@punctthin
-      \XeTeXcharclass `\⁉ \french@punctthin
+      \XeTeXcharclass `\! \french@questionexclamation
+      \XeTeXcharclass `\? \french@questionexclamation
+      \XeTeXcharclass `\‼ \french@questionexclamation
+      \XeTeXcharclass `\⁇ \french@questionexclamation
+      \XeTeXcharclass `\⁈ \french@questionexclamation
+      \XeTeXcharclass `\⁉ \french@questionexclamation
+      \XeTeXcharclass `\‽ \french@questionexclamation % U+203D (interrobang)
       \XeTeXcharclass `\; \french@punctthin
       \iffrench@thincolonspace
         \XeTeXcharclass `\: \french@punctthin
@@ -233,26 +235,35 @@
       \XeTeXcharclass `\} \french@closebrackets
       \XeTeXcharclass `\⟨ \french@openbrackets
       \XeTeXcharclass `\⟩ \french@closebrackets
+      \XeTeXinterchartoks \z@ \french@questionexclamation = {\xpg@french@thinsp}%
       \XeTeXinterchartoks \z@ \french@punctthin = {\xpg@french@thinsp}%
       \XeTeXinterchartoks \z@ \french@punctthick = {\nobreakspace}%
+      \XeTeXinterchartoks \xpg@boundaryclass \french@questionexclamation = {\xpg@unskip\xpg@french@thinsp}%
       \XeTeXinterchartoks \xpg@boundaryclass \french@punctthin = {\xpg@unskip\xpg@french@thinsp}%
       \XeTeXinterchartoks \xpg@boundaryclass \french@punctthick = {\xpg@unskip\nobreakspace}%
       \iffrench@autospaceguillemets
         \let\xpg@french@guillspace\xpg@french@thinsp%
         \XeTeXinterchartoks \french@punctguillstart \z@ = {\xpg@french@guillspace}% "«a" -> "«\,a"
+        \XeTeXinterchartoks \french@punctguillstart \french@punctguillstart = {\xpg@french@guillspace}% "«‹" -> "«\,‹"
  %      \XeTeXinterchartoks \z@ \french@punctguillstart = {\nobreakspace}% "a«" unchanged?
  %      \XeTeXinterchartoks \french@punctguillend \z@ = {\nobreakspace}% "»a" unchanged?
         \XeTeXinterchartoks \z@ \french@punctguillend = {\xpg@french@guillspace}% "a»" -> "a\,»"
         \XeTeXinterchartoks \french@punctguillstart \xpg@boundaryclass = {\xpg@french@guillspace\ignorespaces}% "«  " -> "«\,"
         \XeTeXinterchartoks \xpg@boundaryclass \french@punctguillend = {\xpg@unskip\xpg@french@guillspace}% "  »" -> "\,»"
         \XeTeXinterchartoks \french@closebrackets \french@punctguillend = {\xpg@french@guillspace}% ")»" -> ")\,»"
+        \XeTeXinterchartoks \french@questionexclamation \french@punctguillend  = {\xpg@french@guillspace}% "?»" -> "?\,»"
+        \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\xpg@french@guillspace}% ";»" -> ";\,»"
+        \XeTeXinterchartoks \french@punctguillend \french@punctguillend  = {\xpg@french@guillspace}% "›»" -> "›\,»"
      \else
        \def\xpg@french@guillspace{}%
      \fi
+     \XeTeXinterchartoks \french@punctguillend \french@questionexclamation = {\xpg@french@thinsp}% "»?" -> "»\,?"
      \XeTeXinterchartoks \french@punctguillend \french@punctthin = {\xpg@french@thinsp}% "»;" -> "»\,;"
      \XeTeXinterchartoks \french@punctguillend \french@punctthick = {\nobreakspace}% "»:" -> "» :"
-     \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\xpg@french@thinsp}% "?»" -> "?\,»"
-     \XeTeXinterchartoks \french@openbrackets \french@punctthin = {\xpg@unskip}% "(?" -> "(?" and not "( ?"      
+     \XeTeXinterchartoks \french@questionexclamation \french@punctthin = {\xpg@french@thinsp}% "?;" -> "?\,;"
+     \XeTeXinterchartoks \french@questionexclamation \french@punctthick = {\xpg@french@thinsp}% "?:" -> "?\,:"
+     \XeTeXinterchartoks \french@openbrackets \french@questionexclamation = {\xpg@unskip}% "(?" -> "(?" and not "( ?"
+     \XeTeXinterchartoks \french@openbrackets \french@punctthin = {\xpg@unskip}% "(;" -> "(;" and not "( ;"
      \XeTeXinterchartoks \french@punctthin \french@closebrackets = {\xpg@unskip}% "?)" -> "?)" (code not need, just for symetry with previous one)
      \XeTeXinterchartoks \french@closebrackets \french@punctthin = {\xpg@french@thinsp}% ")?" -> ")\,?"
      \XeTeXinterchartoks \french@closebrackets \french@punctthick = {\nobreakspace}% "):" -> ") :"
@@ -270,6 +281,7 @@
       \XeTeXcharclass `\⁇ \z@
       \XeTeXcharclass `\⁈ \z@
       \XeTeXcharclass `\⁉ \z@
+      \XeTeXcharclass `\‽ \z@
       \XeTeXcharclass `\; \z@
       \XeTeXcharclass `\: \z@
       \XeTeXcharclass `\« \z@
