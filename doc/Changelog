@@ -8,7 +8,7 @@ New features:
   * New list \xpg@bcp@loaded.
   * New environment {lang}{<lang>} (equivalent to {<lang>},  but also available with
     \setlanguagealias* which does not define dedicated alias environments).
-  * New gloss option totalhyphenmin (correpconds to LuaTeX's \hyphenationmin) (#111).
+  * New gloss option totalhyphenmin (corresponds to LuaTeX's \hyphenationmin) (#111).
   * New test \iflanguageoption{<lang>}{<key>}{<val>} (#364).
   * \selectbackgroundlanguage and \resetdefaultlanguage now also support language
     aliases.
@@ -20,6 +20,7 @@ Bug fixes:
   * Fix font family issue in headers (#355).
   * Fix whitespace issues in \text<lang> (#356).
   * Fix option-less \babelname in multi-variant languages (#357).
+  * Fix some spacing inconsistencies with French, Latin, and Sanskrit (#358).
   * Fix \text<lang> command with multiple paragraphs.
 
 Interface and defaults changes:
