@@ -50,7 +50,8 @@ and may look very wrong.}
 
 %TODO add option for CALENDAR
 
-\setkeys{persian}{locale,numerals}
+% Register default options
+\xpg@initialize@gloss@options{persian}{locale=default,numerals=eastern,abjadjimnotail=false}
 
 \def\farsigregmonth#1{\ifcase#1%
   \or ژانویه\or فوریه\or مارس\or آوریل\or مه\or ژوئن\or ژوئیه\or اوت\or سپتامبر\or اکتبر\or نوامبر\or دسامبر\fi}

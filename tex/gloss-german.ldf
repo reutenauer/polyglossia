@@ -152,6 +152,9 @@
 
 \setkeys{german}{spelling,script,variant}
 
+% Register default options
+\xpg@initialize@gloss@options{german}{variant=german,spelling=new,script=latin,latesthyphen=false,babelshorthands=false}
+
 \ifsystem@babelshorthands
   \setkeys{german}{babelshorthands=true}
 \else

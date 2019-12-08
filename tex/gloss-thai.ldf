@@ -37,7 +37,8 @@ and may look very wrong.}
 	  \@thai@numeralsfalse\fi
 }
 
-\setkeys{thai}{numerals}
+% Register default options
+\xpg@initialize@gloss@options{thai}{numerals=arabic}
 
 \def\captionsthai{%
    \def\refname{หนังสืออ้างอิง}%

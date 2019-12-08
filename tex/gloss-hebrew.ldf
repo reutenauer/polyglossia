@@ -54,6 +54,9 @@ and may look very wrong.}
 
 \setkeys{hebrew}{numerals}
 
+% Register default options
+\xpg@initialize@gloss@options{hebrew}{numerals=arabic,calendar=gregorian,marcheshvan=false}
+
 \def\captionshebrew{%
   \def\prefacename{מבוא}%
   \def\refname{מקורות}%

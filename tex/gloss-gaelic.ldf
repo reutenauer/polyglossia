@@ -33,6 +33,9 @@
    \xpg@info{Option: gaelic, variant=\val}%
 }{\xpg@warning{Unknown gaelic variant `#1'}}
 
+% Register default options
+\xpg@initialize@gloss@options{gaelic}{variant=irish}
+
 \def\captionsgaelic@irish{%
    \def\refname{Tagairtí}%
    \def\abstractname{Achoimre}%

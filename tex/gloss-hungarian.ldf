@@ -55,7 +55,8 @@
    \xpg@info{Option: Hungarian, swapstrings=\val}%
 }{\xpg@warning{Unknown Hungarian swapstrings value `#1'}}
 
-\setkeys{hungarian}{swapstrings}
+% Register default options
+\xpg@initialize@gloss@options{hungarian}{swapstrings=all}
 
 \def\captionshungarian{%
    \def\refname{Hivatkozások}%

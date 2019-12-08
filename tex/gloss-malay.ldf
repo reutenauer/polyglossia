@@ -75,6 +75,9 @@
    \xpg@info{Option: malay, variant=\val}%
 }{\xpg@warning{Unknown malay variant `#1'}}
 
+% Register default options
+\xpg@initialize@gloss@options{malay}{variant=malaysian}
+
 
 \def\malay@language{%
    \polyglossia@setup@language@patterns{\malay@variant}%

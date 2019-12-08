@@ -53,7 +53,10 @@
 
 \define@boolkey{russian}[russian@]{babelshorthands}[true]{}
 
-\setkeys{russian}{spelling,numerals}
+
+% Register default options
+\xpg@initialize@gloss@options{russian}{babelshorthands=false,spelling=modern,numerals=arabic,indentfirst=false}
+
 
 \ifsystem@babelshorthands
   \setkeys{russian}{babelshorthands=true}

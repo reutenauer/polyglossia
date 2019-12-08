@@ -93,8 +93,8 @@
 
 \define@boolkey{greek}{attic}[true]{\xpg@warning{Greek option `attic' is no longer required.}}
 
-% This sets the defaults
-\setkeys{greek}{numerals,variant}
+% Register default options
+\xpg@initialize@gloss@options{greek}{variant=monotonic,numerals=greek}
 
 \def\monogreekcaptions{%
    \def\refname{Αναφορές}%

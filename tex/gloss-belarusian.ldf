@@ -45,7 +45,8 @@
 
 \define@boolkey{belarusian}[belarusian@]{babelshorthands}[true]{}
 
-\setkeys{belarusian}{numerals}
+% Register default options
+\xpg@initialize@gloss@options{belarusian}{babelshorthands=false,numerals=arabic,spelling=modern}
 
 \ifsystem@babelshorthands
   \setkeys{belarusian}{babelshorthands=true}

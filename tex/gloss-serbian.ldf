@@ -57,6 +57,9 @@
 
 \setkeys{serbian}{Script,numerals}
 
+% Register default options
+\xpg@initialize@gloss@options{serbian}{script=Cyrillic,numerals=arabic}
+
 \def\captionsserbian{%
    \if@serbian@cyr\captionsserbian@cyr\else\captionsserbian@lat\fi
 }

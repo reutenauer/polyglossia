@@ -178,6 +178,13 @@
   }%
 }
 
+% Register default options
+\xpg@initialize@gloss@options{french}{variant=french,autospacing=true,thincolonspace=false,
+                                      autospaceguillemets=true,autospacetypewriter=false,
+                                      frenchfootnote=false,frenchitemlabels=false,
+                                      itemlabels=\textemdash,itemlabeli=\textemdash,itemlabelii=\textemdash,
+                                      itemlabeliii=\textemdash,itemlabeliv=\textemdash}
+
 
 \def\french@fontsetup{%
   \unless\iffrench@autospacetypewriter

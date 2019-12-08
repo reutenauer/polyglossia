@@ -13,12 +13,19 @@
 
 \providebool{welsh@formaldate}
 
-% TODO (maybe) Interface to change that mid-document
-\define@key{welsh}{date}{%
-  \ifstrequal{#1}{long}{%
-    \welsh@formaldatetrue
-  }% Anything else gives \welsh@formaldatefalse
-}
+\define@choicekey*+{welsh}{date}[\val\nr]{long,short}[short]{%
+   \ifcase\nr\relax
+      % long:
+      \welsh@formaldatetrue
+   \or
+      % accented:
+      \welsh@formaldatefalse
+   \fi
+   \xpg@info{Option: Welsh, date=\val}%
+}{\xpg@warning{Unknown date value `#1'}}
+
+% Register default options
+\xpg@initialize@gloss@options{welsh}{date=short}
 
 \def\captionswelsh{%
   \def\refname{Cyfeiriadau}%
