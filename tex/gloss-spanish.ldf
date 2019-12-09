@@ -65,6 +65,10 @@
    \xpg@info{Option: Spanish, spanishoperators=\val}%
 }{\xpg@warning{Unknown spanishoperators value `#1'}}
 
+
+% Register default options
+\xpg@initialize@gloss@options{spanish}{variant=spanish,spanishoperators=none}
+
 \let\xpg@save@lim\lim
 \let\xpg@save@limsup\limsup
 \let\xpg@save@liminf\liminf

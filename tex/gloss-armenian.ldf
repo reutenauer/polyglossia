@@ -33,6 +33,9 @@
   \ifstrequal{#1}{arabic}{\@armenian@numeralsfalse}{\@armenian@numeralstrue}%
 }
 
+% Register default options
+\xpg@initialize@gloss@options{armenian}{numerals=armenian,variant=western}
+
 % Taken from ArmTeX. Audit!
 \def\captionsarmenian{%
    \def\refname{Հղումներ}%

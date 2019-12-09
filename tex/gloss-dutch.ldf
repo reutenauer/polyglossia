@@ -13,6 +13,9 @@
 
 \define@boolkey{dutch}[dutch@]{babelshorthands}[true]{}
 
+% Register default options
+\xpg@initialize@gloss@options{dutch}{babelshorthands=false}
+
 \ifsystem@babelshorthands
   \setkeys{dutch}{babelshorthands=true}
 \else

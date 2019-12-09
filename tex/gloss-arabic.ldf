@@ -89,8 +89,8 @@ and may look very wrong.}
 \define@key{arabic}{hijricorrection}[0]{%
   \gdef\@hijri@correction{#1}}%
 
-% This should set the defaults
-\setkeys{arabic}{locale,calendar,numerals,hijricorrection,abjadjimnotail=false}
+% Register default options
+\xpg@initialize@gloss@options{arabic}{locale=default,calendar=gregorian,numerals=mashriq,hijricorrection=0,abjadjimnotail=false}
 
 \def\arabicgregmonth@default#1{\ifcase#1%
   % Egypt, Sudan, Yemen and Golf states

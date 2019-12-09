@@ -42,7 +42,11 @@
   \def\@tmpa{#1}%
   \ifx\@tmpa\tmp@western
     \hindi@devanagari@numeralsfalse
-  \fi}
+  \fi%
+}
+
+% Register default options
+\xpg@initialize@gloss@options{hindi}{numerals=Devanagari}
 
 \newcommand{\hindinumerals}[2]{\hindinumber{#2}}
 

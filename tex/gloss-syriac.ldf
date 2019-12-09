@@ -40,7 +40,8 @@ and may look very wrong.}
  	  \fi
   \fi}
 
-\setkeys{syriac}{numerals}
+% Register default options
+\xpg@initialize@gloss@options{syriac}{numerals=western}
 	
 %\define@key{polyglossia}{syriaclocale}[default]{%
 %	\def\@syriac@locale{#1}}

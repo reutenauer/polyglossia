@@ -29,7 +29,8 @@ and may look very wrong.}
 	  \@lao@numeralsfalse\fi
 }
 
-\setkeys{lao}{numerals}
+% Register default options
+\xpg@initialize@gloss@options{lao}{numerals=arabic}
 
 % Translations provided by Brian Wilson <bountonw at gmail.com>
 \def\captionslao{%

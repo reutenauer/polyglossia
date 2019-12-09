@@ -32,6 +32,10 @@
 }{\xpg@warning{Unknown norwegian variant `#1'}}
 
 
+% Register default options
+\xpg@initialize@gloss@options{norwegian}{variant=nynorsk}
+
+
 \def\norwegian@language{%
    \polyglossia@setup@language@patterns{\norwegian@variant}%
 }%

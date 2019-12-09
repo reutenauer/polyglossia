@@ -24,6 +24,9 @@
 
 \define@boolkey{georgian}[georgian@]{oldmonthnames}[true]{}
 
+% Register default options
+\xpg@initialize@gloss@options{georgian}{babelshorthands=false,oldmonthnames=false,numerals=arabic}
+
 \ifsystem@babelshorthands
   \setkeys{georgian}{babelshorthands=true}
 \else

@@ -25,6 +25,9 @@
   \setlocalalph
 }
 
+% Register default options
+\xpg@initialize@gloss@options{slovenian}{localalph=false}
+
 
 \def\captionsslovenian{%
    \def\refname{Literatura}%

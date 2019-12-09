@@ -17,6 +17,9 @@
 %%% CHANGES START %%% by Enrico Gregorio
 \define@boolkey{italian}[italian@]{babelshorthands}[true]{}
 
+% Register default options
+\xpg@initialize@gloss@options{italian}{babelshorthands=false}
+
 \ifsystem@babelshorthands
   \setkeys{italian}{babelshorthands=true}
 \else

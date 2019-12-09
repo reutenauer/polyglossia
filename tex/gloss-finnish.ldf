@@ -13,6 +13,9 @@
 
 \define@boolkey{finnish}[finnish@]{babelshorthands}[true]{}
 
+% Register default options
+\xpg@initialize@gloss@options{finnish}{babelshorthands=false}
+
 \ifsystem@babelshorthands
   \setkeys{finnish}{babelshorthands=true}
 \else

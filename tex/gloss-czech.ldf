@@ -22,7 +22,8 @@
 
 \define@boolkey{czech}[czech@]{vlna}[true]{}
 
-\setkeys{czech}{splithyphens,vlna}
+% Register default options
+\xpg@initialize@gloss@options{czech}{babelshorthands=false,splithyphens=true,vlna=true}
 
 \ifsystem@babelshorthands
   \setkeys{czech}{babelshorthands=true}

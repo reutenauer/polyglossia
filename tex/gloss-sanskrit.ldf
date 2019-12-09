@@ -59,8 +59,6 @@ and may look very wrong.}
   \SetLanguageKeys{sanskrit}{scripttag=latn,script=Latin,bcp47=sa-Latn}
   \xpg@fontsetup@latin{sanskrit}}
 
-\setkeys{sanskrit}{Script} %sets the default for Devanagari
-
 
 \newif\ifsanskrit@devanagari@numerals
 \sanskrit@devanagari@numeralstrue
@@ -74,6 +72,10 @@ and may look very wrong.}
    \fi
    \xpg@info{Option: Sanskrit, numerals=\val}%
 }{\xpg@warning{Unknown Sanskrit numeral `#1'}}
+
+
+% Register default options
+\xpg@initialize@gloss@options{sanskrit}{script=Devanagari,numerals=Devanagari}
 
 
 \newcommand{\sanskritnumerals}[2]{\sanskritnumber{#2}}

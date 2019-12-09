@@ -568,6 +568,11 @@
   {
   }
 
+% Register default options
+\xpg@initialize@gloss@options{latin}{variant=modern,hyphenation=modern,babelshorthands=false,
+                                     prosodicshorthands=false,ecclesiasticfootnotes=false,
+                                     usej=false,capitalizemonth=true}
+
 \ifsystem@babelshorthands
   \setkeys{latin}{babelshorthands=true}
 \else

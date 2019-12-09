@@ -16,6 +16,9 @@
 
 \define@boolkey{croatian}[croatian@]{disableligatures}[true]{}
 
+% Register default options
+\xpg@initialize@gloss@options{croatian}{babelshorthands=false,disableligatures=false}
+
 \ifsystem@babelshorthands
   \setkeys{croatian}{babelshorthands=true}
 \else

@@ -76,6 +76,9 @@ and may look very wrong.}
   \fi
 }
 
+% Register default options
+\xpg@initialize@gloss@options{bengali}{changecounternumbering=false,numerals=Devanagari}
+
 \def\captionsbengali{%
   \def\refname{তথ্যসূত্রসমূহ}%
   \def\abstractname{সারসংক্ষেপ}%

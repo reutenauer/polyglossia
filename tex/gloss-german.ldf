@@ -41,7 +41,7 @@
 
 \newif\if@german@oldspelling
 \@german@oldspellingfalse
-\define@choicekey*+{german}{spelling}[\val\nr]{new,old,1901}[new]{%
+\define@choicekey*+{german}{spelling}[\val\nr]{new,old,1901,1996}[new]{%
    \ifcase\nr\relax
       % new:
       \@german@oldspellingfalse
@@ -51,6 +51,9 @@
    \or
       % 1901:
       \@german@oldspellingtrue
+   \or
+      % 1996:
+      \@german@oldspellingfalse
    \fi
    \german@set@babelname%
    \xpg@info{Option: German, spelling=\val}%
@@ -151,6 +154,9 @@
 \define@boolkey{german}[german@]{babelshorthands}[true]{}
 
 \setkeys{german}{spelling,script,variant}
+
+% Register default options
+\xpg@initialize@gloss@options{german}{variant=german,spelling=new,script=latin,latesthyphen=false,babelshorthands=false}
 
 \ifsystem@babelshorthands
   \setkeys{german}{babelshorthands=true}

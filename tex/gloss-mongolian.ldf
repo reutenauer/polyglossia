@@ -33,7 +33,8 @@
 
 \define@boolkey{mongolian}[mongolian@]{babelshorthands}[true]{}
 
-\setkeys{mongolian}{numerals}
+% Register default options
+\xpg@initialize@gloss@options{mongolian}{babelshorthands=false,numerals=arabic}
 
 \ifsystem@babelshorthands
   \setkeys{mongolian}{babelshorthands=true}
