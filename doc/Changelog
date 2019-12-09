@@ -22,6 +22,7 @@ Bug fixes:
   * Fix option-less \babelname in multi-variant languages (#357).
   * Fix some spacing inconsistencies with French, Latin, and Sanskrit (#358).
   * Fix \text<lang> command with multiple paragraphs.
+  * Actually implement documented german spelling variant '1996' (= 'new').
 
 Interface and defaults changes:
   * Some boolean options had 'false' value by default, which meant if you passed
