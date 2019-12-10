@@ -5,16 +5,16 @@
 \usepackage{xspace,fancyvrb,longtable,booktabs}
 \usepackage[neverdecrease]{paralist}
 \usepackage[format=hang,labelfont=bf,labelsep=period]{caption}
-\definecolor{pgblue}{rgb}{0.02,0.04,0.48}
+\definecolor{xpgblue}{rgb}{0.02,0.04,0.48}
 \definecolor{lightblue}{rgb}{0.61,.8,.8}
-\definecolor{pgred}{rgb}{0.65,0.04,0.07}
+\definecolor{xpgred}{rgb}{0.65,0.04,0.07}
 \usepackage[
     unicode=true,
     bookmarks=true,
     colorlinks=true,
-    linkcolor=pgblue,
-    urlcolor=pgblue,
-    citecolor=pgblue,
+    linkcolor=xpgblue,
+    urlcolor=xpgblue,
+    citecolor=xpgblue,
     hyperindex=false,
     hyperfootnotes=false,
     pdftitle={Polyglossia: Modern multilingual typesetting with XeLaTeX and LuaLaTeX},
@@ -30,11 +30,11 @@
 \setotherlanguages{arabic,armenian,hebrew,syriac,greek,russian,serbian,catalan,georgian}
 \usepackage[protrusion]{microtype}
 \newcommand*\Cmd[1]{\cmd{#1}\DescribeMacro{#1}\xspace}
-\newcommand*\pkg[1]{\textsf{\color{pgblue}#1}}
-\newcommand*\file[1]{\texttt{\color{pgblue}#1}}
-\newcommand*\TR[1]{\textcolor{pgred}{#1}}
-\newcommand*\TX[1]{\hyperref[#1]{\textcolor{pgred}{#1}}}
-\newcommand*\TA[1]{\textsc{\color{pgblue}#1}}
+\newcommand*\pkg[1]{\textsf{\color{xpgblue}#1}}
+\newcommand*\file[1]{\texttt{\color{xpgblue}#1}}
+\newcommand*\TR[1]{\textcolor{xpgred}{#1}}
+\newcommand*\TX[1]{\hyperref[#1]{\textcolor{xpgred}{#1}}}
+\newcommand*\TA[1]{\textsc{\color{xpgblue}#1}}
 \newcommand*\link[1]{\href{#1}{#1}}
 \def\eg{\textit{e.g.,}\xspace}
 \def\ie{\textit{i.e.,}\xspace}
@@ -44,67 +44,22 @@
 \def\etc{\@ifnextchar.{\textit{etc}}{\textit{etc.}\@\xspace}}
 
 %% Commands for documenting options
-\ExplSyntaxOn
+\NewDocumentCommand\xpgoption{m}{\textcolor{xpgblue}{\bfseries #1}}
+\NewDocumentCommand\xpgdefault{m}{\textit{#1}}
+\NewDocumentCommand\xpgdefaultchoice{m}{*#1}
 
-\NewDocumentCommand \pgoption {m}
-  {
-    \textcolor {pgblue} { \bfseries #1 }
-  }
+% arguments: #1 version number, #2 key name, #3 footnote, #4 possible values
+\NewDocumentCommand\xpgchoicekey{omom}{\xpgoption{#2}\IfValueT{#3}{\footnote{#3}}%
+\IfValueT{#1}{\new{#1}} = #4\par}
 
-\NewDocumentCommand \pgdefault {m}
-  {
-    \textit{#1}
-  }
+% arguments: #1 version number, #2 key name, #3 footnote
+\NewDocumentCommand\xpgboolkey{omo}{\xpgchoicekey[#1]{#2}[#3]{\xpgdefaultchoice{true} or false}}
+\NewDocumentCommand\xpgboolkeytrue{omo}{\xpgchoicekey[#1]{#2}[#3]{\xpgdefaultchoice{\xpgdefault{true}} or false}}
+\NewDocumentCommand\xpgboolkeyfalse{omo}{\xpgchoicekey[#1]{#2}[#3]{\xpgdefaultchoice{true} or \xpgdefault{false}}}
 
-\NewDocumentCommand \pgdefaultchoice {m}
-  {
-    \underline{#1}
-  }
-
-\NewDocumentCommand \pgchoicekey {omom}
-  {
-    \pgoption {#2}
-    \IfValueT {#3} { \footnote {#3} }
-    \IfValueT {#1} { \new {#1} }
-    \c_space_tl = \c_space_tl
-    \clist_set:Nn \l_tmpa_clist {#4}
-    \seq_set_from_clist:NN \l_tmpa_seq \l_tmpa_clist
-    \seq_use:Nnnn \l_tmpa_seq {~or~} {,~} {,~or~}
-    \par
-  }
-
-\NewDocumentCommand \pgboolkey {omo}
-  {
-    \pgchoicekey [#1] {#2} [#3] { \pgdefaultchoice{true}, false }
-  }
- 
-\NewDocumentCommand \pgboolkeytrue {omo}
-  {
-    \pgchoicekey [#1] {#2} [#3] { \pgdefaultchoice{\pgdefault{true}}, false }
-  }
-
-\NewDocumentCommand \pgboolkeyfalse {omo}
-  {
-    \pgchoicekey [#1] {#2} [#3] { \pgdefaultchoice{true}, \pgdefault{false} }
-  }
-
-\NewDocumentCommand \pgbabelshorthands {o}
-  {
-    \pgboolkeyfalse [#1] {babelshorthands}
-  }
-
-\NewDocumentCommand \pgcodekey {omv}
-  {
-    \pgoption {#2}
-    \IfValueT {#1} { \new {#1} }
-    \c_space_tl = \c_space_tl
-    ⟨code⟩
-    \c_space_tl
-    ( default~value:~ \texttt {#3} )
-    \par
-  }
-
-\ExplSyntaxOff
+% arguments: #1 version number, #2 key name, #3 default code
+\NewDocumentCommand\xpgcodekey{omv}{\xpgoption{#2}\IfValueT{#1}{\new{#1}}
+= ⟨code⟩ (default value: \texttt{#3})\par}
 
 %% Sidenotes  << copied from fontspec.dtx
 \newcommand\new[1]{%
@@ -157,7 +112,7 @@
 
 \title{\textcolor{lightblue}{\Huge\fontspec[LetterSpace=40]{GFS Ambrosia} Πολυγλωσσια}
 \\[16pt]
-\color{pgblue}Polyglossia: Modern multilingual typesetting with \XeLaTeX\ and \LuaLaTeX}
+\color{xpgblue}Polyglossia: Modern multilingual typesetting with \XeLaTeX\ and \LuaLaTeX}
 \author{\TA{François Charette} \and \TA{Arthur Reutenauer}\thanks{Current maintainer}
 	    \and \TA{Bastien Roucariès} \and \TA{Jürgen Spitzmüller}}
 \date{\filedate \qquad \fileversion\\
@@ -561,21 +516,21 @@ Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 \pkg{Polyglossia} can be loaded with the following global package options:
 
 \begin{itemize}
-	\item \pgbabelshorthands[1.1.1]
+	\item \xpgboolkeyfalse[1.1.1]{babelshorthands}
 		Globally activates \pkg{babel} shorthands whenever available. Currently
 		shorthands are implemented for Afrikaans, Belarusian, Catalan, Croatian,
 		Czech, Dutch, Finnish, Georgian, German, Italian, Latin, Mongolian,
 		Russian, and Slovak. Please refer to the respective language descriptions
 		(sec.~\ref{specific}) for details.
 
-	\item \pgoption{localmarks} redefines the internal \LaTeX\ macros \cmd\markboth\ and
+	\item \xpgoption{localmarks} redefines the internal \LaTeX\ macros \cmd\markboth\ and
 		\cmd\markright. In earlier versions of \pkg{polyglossia},\new{1.2.0} this
 		option was set by default, but we now realize that it causes more problems
 		than it helps, so it is now off by default.  For backwards-compatibility, the
-		option \pgoption{nolocalmarks} which used to switch off the previous default, and
+		option \xpgoption{nolocalmarks} which used to switch off the previous default, and
 		now does nothing, is still available.
 
-	\item \pgoption{quiet} turns off most info messages and some of the warnings issued
+	\item \xpgoption{quiet} turns off most info messages and some of the warnings issued
 		by \LaTeX, \pkg{fontspec} and \pkg{polyglossia}.
 \end{itemize}
 
@@ -606,7 +561,7 @@ Like the commands, the environment provides the possibility of setting language 
 For instance the following allows us to quote the beginning
 of Homer’s \textit{Iliad}:
 
-\begin{Verbatim}[formatcom=\color{pgblue}]
+\begin{Verbatim}[formatcom=\color{xpgblue}]
   \begin{quote}
    \begin{greek}[variant=ancient]
      μῆνιν ἄειδε θεὰ Πηληϊάδεω Ἀχιλῆος οὐλομένην, ἣ μυρί' Ἀχαιοῖς
@@ -749,7 +704,7 @@ hyphenated at all):
 %
 These exceptions, however, apply to all languages. In addition to this, \pkg{polyglossia} provides
 the command\new{1.45}
-\displaycmd{\pghyphenation[⟨options⟩]\{⟨lang⟩\}\{⟨exceptions⟩\}}{\pghyphenation}
+\displaycmd{\xpghyphenation[⟨options⟩]\{⟨lang⟩\}\{⟨exceptions⟩\}}{\xpghyphenation}
 which can be used to define exceptions that only apply to a specific language or language variant,
 respectively.
 
@@ -767,12 +722,12 @@ will be activated.
 This section gives a list of all languages for which options and end-user
 commands are defined. The default value of each option (\ie the predefined
 value if the option is not used) is given in italic. Some option keys may be
-used without a value; in these cases, the underlined value applies.
+used without a value; in these cases, the value marked by an asterisk applies.
 
 \subsection{afrikaans}\label{afrikaans}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \pgbabelshorthands[1.1.1]
+	\item \xpgboolkeyfalse[1.1.1]{babelshorthands}
 	If this is turned on, the following shorthands defined for fine-tuning hyphenation and
 	micro-typography of Afrikaans words are activated:
 	\begin{shorthands}
@@ -787,22 +742,20 @@ used without a value; in these cases, the underlined value applies.
 	\end{shorthands}
 \end{itemize}
 
-%\subsection{amharic}\label{amharic}
-
 \subsection{arabic}\label{arabic}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \pgchoicekey{calendar}{\pgdefault{gregorian}, islamic (= hijri)}
-	\item \pgchoicekey{locale}{\pgdefault{default}\footnote{ %
+	\item \xpgchoicekey{calendar}{\xpgdefault{gregorian} or islamic (= hijri)}
+	\item \xpgchoicekey{locale}{\xpgdefault{default}\footnote{ %
 			For Egypt, Sudan, Yemen and the Gulf states.},
 		mashriq\footnote{ %
 			For Iraq, Syria, Jordan, Lebanon and Palestine.},
 		libya, algeria, tunisia, morocco, mauritania}
 		This setting influences the spelling of the month names for the Gregorian calendar,
 		as well as the form of the numerals (unless overriden by the following option).
-	\item \pgchoicekey{numerals}{\pgdefault{mashriq}, maghrib}
+	\item \xpgchoicekey{numerals}{\xpgdefault{mashriq} or maghrib}
 		The latter is the default when locale = algeria, tunisia, or morocco.
-	\item \pgboolkeyfalse[1.0.3]{abjadjimnotail}
+	\item \xpgboolkeyfalse[1.0.3]{abjadjimnotail}
     Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
 	\end{itemize}
 \paragraph*{Commands:}
@@ -816,15 +769,15 @@ used without a value; in these cases, the underlined value applies.
 \subsection{armenian}\label{armenian}
 \paragraph*{Options:}
 \begin{itemize}
-  \item \pgchoicekey[1.45]{variant}{eastern, \pgdefault{western}}
-	\item \pgchoicekey[1.45]{numerals}{armenian, \pgdefault{arabic}}
+  \item \xpgchoicekey[1.45]{variant}{eastern or \xpgdefault{western}}
+	\item \xpgchoicekey[1.45]{numerals}{armenian or \xpgdefault{arabic}}
 \end{itemize}
 
 \subsection[belarusian]{belarusian\new{1.46}}\label{belarusian}
 
 \paragraph*{Options:}
 \begin{itemize}
-  \item \pgbabelshorthands
+  \item \xpgboolkeyfalse{babelshorthands}
 	If this is turned on, the following shorthands are activated:
 	\begin{shorthands}
 		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
@@ -842,9 +795,9 @@ used without a value; in these cases, the underlined value applies.
 		\item[¦"<¦] for French left double quotes (looks like <<).
 		\item[¦">¦] for French right double quotes (looks like >>).
 	\end{shorthands}
-	\item \pgchoicekey{numerals}{\pgdefault{arabic}, cyrillic}
+	\item \xpgchoicekey{numerals}{\xpgdefault{arabic} or cyrillic}
 	Uses either Arabic numerals or Cyrillic	alphanumerical numbering.
-	\item \pgchoicekey{spelling}{\pgdefault{modern}, classic (= tarask)}
+	\item \xpgchoicekey{spelling}{\xpgdefault{modern} or classic (= tarask)}
 	With ¦spelling=classic¦, captions and dates adhere to the Taraškievica (or
 	Belarusian classical) orthography rather than the standard orthography.
 \end{itemize}
@@ -860,15 +813,15 @@ used without a value; in these cases, the underlined value applies.
 \subsection[bengali]{bengali\new{1.2.0}}\label{bengali}
 \paragraph*{Options:}
 	\begin{itemize}
-	  \item \pgchoicekey{numerals}{Western, Bengali, \pgdefault{Devanagari}}
-		\item \pgboolkeyfalse{changecounternumbering}
+	  \item \xpgchoicekey{numerals}{Western, Bengali, or \xpgdefault{Devanagari}}
+		\item \xpgboolkeyfalse{changecounternumbering}
 		Use specified numerals for headings and page numbers.
 	\end{itemize}
 
 \subsection{catalan}\label{catalan}
 \paragraph*{Options:}
 \begin{itemize}
-  \item \pgbabelshorthands[1.1.1]
+  \item \xpgboolkeyfalse[1.1.1]{babelshorthands}
     Activates the shorthands \texttt{"l} and \texttt{"L} to type geminated l’s.
 \end{itemize}
 
@@ -881,7 +834,7 @@ used without a value; in these cases, the underlined value applies.
 \subsection{croatian}\label{croatian}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \pgbabelshorthands[1.47]
+	\item \xpgboolkeyfalse[1.47]{babelshorthands}
 	If this is turned on, the following shorthands for fine-tuning hyphenation and micro-typography
 	of Croatian words are activated.
 	\begin{shorthands}
@@ -916,7 +869,7 @@ used without a value; in these cases, the underlined value applies.
 		\item[¦">¦] for Croatian left guillemets (»).
 		\item[¦"<¦] for Croatian right guillemets («).
 	\end{shorthands}
-	\item \pgboolkeyfalse[1.47]{disableligatures}
+	\item \xpgboolkeyfalse[1.47]{disableligatures}
 		If this is true, all Croatian ligatures (for digraphs such as
 		\charifavailable{01C6}{dž}) will be replaced by single characters. This can
 		be useful if the ligatures on your font are broken (if the font does not
@@ -927,7 +880,7 @@ used without a value; in these cases, the underlined value applies.
 
 \paragraph*{Options:}
 \begin{itemize}
-	\item \pgbabelshorthands[1.45]
+	\item \xpgboolkeyfalse[1.45]{babelshorthands}
 	If this is turned on, the following shorthands for Czech are activated:
 	\begin{shorthands}
 		\item[¦"=¦] for an explicit hyphen sign which is repeated at the beginning
@@ -938,14 +891,14 @@ used without a value; in these cases, the underlined value applies.
 		\item[¦">¦] for Czech left double guillemets (»).
 		\item[¦"<¦] for Czech right double guillemets («).
 	\end{shorthands}
-	\item \pgboolkeytrue[1.45]{splithyphens}
+	\item \xpgboolkeytrue[1.45]{splithyphens}
 	      According to Czech typesetting conventions, if a word with a hard hyphen (such as \emph{je-li})
 	      is hyphenated at this hyphen, a second hyphenation character is to be inserted at the beginning
 	      of the line that follows the hyphenation (\emph{je-/-li}).
           By default, this is done automatically\new{1.46} (if you are using \LuaTeX, the \pkg{luavlna} package is
           loaded to achieve this).
           Set this option to ¦false¦ to disable the feature.
-	\item \pgboolkeytrue[1.45]{vlna}
+	\item \xpgboolkeytrue[1.45]{vlna}
          According to Czech typesetting conventions, single-letter words (non-syllable prepositions)
          must not occur at line ends.
          \pkg{Polyglossia} takes care of this automatically by default\new{1.46} (if you are using \LuaTeX, the
@@ -956,7 +909,7 @@ used without a value; in these cases, the underlined value applies.
 \subsection{dutch}\label{dutch}
 \paragraph*{Options:}
 \begin{itemize}
-  \item \pgbabelshorthands[1.1.1]
+  \item \xpgboolkeyfalse[1.1.1]{babelshorthands}
 		If this is turned on, the following shorthands defined for fine-tuning hyphenation and
 		micro-typography of Dutch words are activated:
 		\begin{shorthands}
@@ -975,9 +928,9 @@ used without a value; in these cases, the underlined value applies.
 \subsection{english}\label{english}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \pgchoicekey{variant}{\pgdefault{american} (= us), usmax (same as ‘american’ but with additional hyphenation patterns),
-	british (= uk), australian, canadian\new{1.45}, newzealand}
-	\item \pgboolkeyfalse{ordinalmonthday}
+	\item \xpgchoicekey{variant}{\xpgdefault{american} (= us), usmax (same as ‘american’ but with additional hyphenation patterns),
+	british (= uk), australian, canadian\new{1.45}, or newzealand}
+	\item \xpgboolkeyfalse{ordinalmonthday}
 		The default value is true for variant = british.
 	\end{itemize}
 
@@ -992,7 +945,7 @@ used without a value; in these cases, the underlined value applies.
 \subsection{finnish}\label{finnish}
 \paragraph*{Options:}
 \begin{itemize}
-  \item \pgbabelshorthands[1.45]
+  \item \xpgboolkeyfalse[1.45]{babelshorthands}
 		If this is turned on, the following shorthands for fine-tuning hyphenation
 		and micro-typography of Finnish words are activated:
 		\begin{shorthands}
@@ -1010,59 +963,59 @@ used without a value; in these cases, the underlined value applies.
 \subsection{french}\label{french}
 \paragraph*{Options:}
 	\begin{itemize}
-		\item \pgchoicekey{variant}{\pgdefault{french}, canadian (=~acadian)\new{1.45}, swiss\new{1.47}}
+		\item \xpgchoicekey{variant}{\xpgdefault{french} or canadian (=~acadian)\new{1.45}, swiss\new{1.47}}
 			Currently, the only difference between the four variants is that ¦swiss¦
 			uses ¦thincolonspace=true¦ by default since this conforms to the Swiss
 			conventions.
-		\item \pgboolkeytrue{autospacing}
+		\item \xpgboolkeytrue{autospacing}
 			One of the most distinct features of French typography is the addition of
 			extra spacing around punctuation and quotation marks (guillemets). By
 			default, polyglossia adds these spaces automatically, so you don't need
 			to enter them. This options allows you to switch this feature off
 			globally.
-		\item \pgboolkeyfalse[1.46]{thincolonspace}
+		\item \xpgboolkeyfalse[1.46]{thincolonspace}
 			With ¦variant=swiss¦, the default value is ¦true¦. If ¦false¦, a full
 			(non-breaking) interword space is inserted before a colon. If ¦true¦, a
 			thinner space -- as before \texttt{;}, \texttt{!}, and \texttt{?} -- is
 			used. Note that this option must be set after the ¦variant¦ option.
-		\item \pgboolkeytrue{autospaceguillemets}[Up to version 1.44, the option was
+		\item \xpgboolkeytrue{autospaceguillemets}[Up to version 1.44, the option was
 		called \textit{automaticspacesaroundguillemets}. For backwards compatibility
 		reasons, the more verbose old option is still supported.]
 			If you only want to disable the automatic addition of spacing after
 			opening and before closing guillemets (and not at punctuation), set this
 			to \textit{false}. Note that the more general option \textit{autospacing}
 			overrides this.
-		\item \pgboolkeyfalse[1.45]{autospacetypewriter}[Babel's syntax \textit{OriginalTypewriter}
+		\item \xpgboolkeyfalse[1.45]{autospacetypewriter}[Babel's syntax \textit{OriginalTypewriter}
 		is also supported.]
 			By default, automatic spacing is disabled in typewriter font. If this is
 			enabled, spacing in typewriter context is the same as with roman and sans
 			serif font, depending on the \textit{autospacing} and
 			\textit{autospaceguillemets} settings (note that this was the default up
 			to v.~1.44).	
-		\item \pgboolkeyfalse{frenchfootnote}
+		\item \xpgboolkeyfalse{frenchfootnote}
 			If \textit{true}, footnotes start with a non-superscripted number
 			followed by a dot, as common in French typography. Note that this might
 			interfere with the specific footnote handling of classes or packages.
 			Also note that this option is only functional (by design) if French is
 			the main language.
-		\item \pgboolkeyfalse[1.46]{frenchitemlabels}
+		\item \xpgboolkeyfalse[1.46]{frenchitemlabels}
 			If \textit{true}, itemize item labels use em-dashes throughout, as common
 			in French typography.  Note that this option is only functional (by
 			design) if French is the main language. Also, it might interfere with
 			list packages such as \pkg{enumitem}.
-		\item \pgcodekey[1.46]{itemlabels}¦\textemdash¦
+		\item \xpgcodekey[1.46]{itemlabels}¦\textemdash¦
 			If \emph{frenchitemlabels} is true, you can customize here the used item
 			label of all levels.
-		\item \pgcodekey[1.46]{itemlabeli}¦\textemdash¦
+		\item \xpgcodekey[1.46]{itemlabeli}¦\textemdash¦
 			If \emph{frenchitemlabels} is true, you can customize here the used item
 			label of the first level.
-		\item \pgcodekey[1.46]{itemlabelii}¦\textemdash¦
+		\item \xpgcodekey[1.46]{itemlabelii}¦\textemdash¦
 			If \emph{frenchitemlabels} is true, you can customize here the used item
 			label of the second level.
-		\item \pgcodekey[1.46]{itemlabeliii}¦\textemdash¦
+		\item \xpgcodekey[1.46]{itemlabeliii}¦\textemdash¦
 			If \emph{frenchitemlabels} is true, you can customize here the used item
 			label of the third level.
-		\item \pgcodekey[1.46]{itemlabeliv}¦\textemdash¦
+		\item \xpgcodekey[1.46]{itemlabeliv}¦\textemdash¦
 			If \emph{frenchitemlabels} is true, you can customize here the used item
 			label of the fourth level.
 	\end{itemize}
@@ -1075,14 +1028,14 @@ used without a value; in these cases, the underlined value applies.
 \subsection[gaelic]{gaelic\new{1.45}}\label{gaelic}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \pgchoicekey{variant}{\pgdefault{irish}, scottish}
+	\item \xpgchoicekey{variant}{\xpgdefault{irish} or scottish}
 \end{itemize}
 
 \subsection[georgian]{georgian\new{1.46}}\label{georgian}
 
 \paragraph*{Options:}
 \begin{itemize}
-	\item \pgbabelshorthands
+	\item \xpgboolkeyfalse{babelshorthands}
 		If this is turned on, the following shorthands are activated:
 		\begin{shorthands}
 			\item[¦"-¦] adds a hyphenation point that does still allow for
@@ -1101,28 +1054,28 @@ used without a value; in these cases, the underlined value applies.
 			\item[¦"<¦] for French left double quotes (looks like <<).
 			\item[¦">¦] for French right double quotes (looks like >>).
 		\end{shorthands}
-	\item \pgchoicekey{numerals}{\pgdefault{arabic}, georgian}
+	\item \xpgchoicekey{numerals}{\xpgdefault{arabic} or georgian}
 		Uses either Arabic numerals or Georgian alphanumerical numbering.
-	\item \pgboolkeyfalse{oldmonthnames}
+	\item \xpgboolkeyfalse{oldmonthnames}
 		Uses traditional Georgian month names.
 \end{itemize}
 
 \subsection{german}\label{german}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \pgchoicekey{variant}{\pgdefault{german}, austrian, swiss\new{1.33.4}}
+	\item \xpgchoicekey{variant}{\xpgdefault{german}, austrian, or swiss\new{1.33.4}}
 		Setting variant=austrian or variant=swiss uses some lexical variants.
 		With spelling=old, variant=swiss furthermore loads specific hyphenation
 		patterns.
-	\item \pgchoicekey{spelling}{\pgdefault{new} (= 1996), old (= 1901)}
+	\item \xpgchoicekey{spelling}{\xpgdefault{new} (= 1996) or old (= 1901)}
 		Indicates whether hyphenation patterns for traditional (1901) or reformed
 		(1996) orthography should be used. The latter is the default.
-	\item \pgboolkeyfalse{latesthyphen}
+	\item \xpgboolkeyfalse{latesthyphen}
 		If this option is set to true, the latest (experimental) hyphenation
 		patterns ‘(n)german-x-latest’ will be loaded instead of ‘german’ or
 		‘ngerman’. NB: This is based on the file \texttt{language.dat} that comes
 		with \TeX\ Live 2008 and later.
-	\item \pgbabelshorthands[1.0.3]
+	\item \xpgboolkeyfalse[1.0.3]{babelshorthands}
 		If this is turned on, all shorthands defined in \pkg{babel}
 		for fine-tuning hyphenation and micro-typography of German words are activated.
 		\begin{shorthands}
@@ -1149,7 +1102,7 @@ used without a value; in these cases, the underlined value applies.
 		\item[¦"<¦] for French left double quotes («)
 		\item[¦">¦] for French right double quotes (»).
 		\end{shorthands}
-	\item \pgchoicekey[1.2.0]{script}{\pgdefault{latin}, blackletter\new{1.46} (= fraktur)}
+	\item \xpgchoicekey[1.2.0]{script}{\xpgdefault{latin} or blackletter\new{1.46} (= fraktur)}
 		Setting ¦script=blackletter¦ adapts the captions for typesetting German in blackletter type (using the long s (ſ)
 		where appropriate).
 	\end{itemize}
@@ -1157,9 +1110,9 @@ used without a value; in these cases, the underlined value applies.
 \subsection{greek}\label{greek}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \pgchoicekey{variant}{\pgdefault{monotonic} (= mono), polytonic (= poly), ancient}
-	\item \pgchoicekey{numerals}{\pgdefault{greek}, arabic}
-	\item \pgboolkeyfalse{attic}
+	\item \xpgchoicekey{variant}{\xpgdefault{monotonic} (= mono), polytonic (= poly), or ancient}
+	\item \xpgchoicekey{numerals}{\xpgdefault{greek} or arabic}
+	\item \xpgboolkeyfalse{attic}
 	\end{itemize}
 \paragraph*{Commands:}
 	\begin{itemize}
@@ -1174,9 +1127,9 @@ used without a value; in these cases, the underlined value applies.
 \subsection{hebrew}\label{hebrew}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \pgchoicekey{numerals}{hebrew, \pgdefault{arabic}}
-	\item \pgchoicekey{calendar}{hebrew, \pgdefault{gregorian}}
-	\item \pgboolkeyfalse{marcheshvan}
+	\item \xpgchoicekey{numerals}{hebrew or \xpgdefault{arabic}}
+	\item \xpgchoicekey{calendar}{hebrew or \xpgdefault{gregorian}}
+	\item \xpgboolkeyfalse{marcheshvan}
 		If true, the second month of the civil year will be output as
 		\texthebrew{מרחשון} (Marcheshvan) rather than \texthebrew{חשון} (Heshvan),
 		which is the default.
@@ -1190,13 +1143,14 @@ used without a value; in these cases, the underlined value applies.
 \subsection[hindi]{hindi\new{1.2.0}}\label{hindi}
 \paragraph*{Options:}
 	\begin{itemize}
-		\item \pgchoicekey{numerals}{Western, \pgdefault{Devanagari}}
+		\item \xpgchoicekey{numerals}{Western or \xpgdefault{Devanagari}}
 	\end{itemize}
 
 \subsection{hungarian}\label{hungarian}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \pgchoicekey[1.46]{swapstrings}{\pgdefaultchoice{\pgdefault{all}}, captions, headings, headers, hheaders, none}
+	\item \xpgchoicekey[1.46]{swapstrings}{\xpgdefaultchoice{\xpgdefault{all}},
+	captions, headings, headers, hheaders, or none}
 	       In Hungarian, some caption strings need to be in a different order than in other languages
 	       (\eg \emph{1. fejezet} instead of \emph{Chapter 1}). By default, \pkg{polyglossia} tries hard to
 	       provide the correct order for different classes and packages (standard classes, \pkg{KOMA-script},
@@ -1223,7 +1177,7 @@ used without a value; in these cases, the underlined value applies.
 \subsection{italian}\label{italian}
 \paragraph*{Options:}
 \begin{itemize}
-  \item \pgbabelshorthands[1.2.0cc]% TODO: check version
+  \item \xpgboolkeyfalse[1.2.0cc]{babelshorthands}% TODO: check version
   Activates the ¦"¦ character as a switch to perform etymological
   hyphenation when followed by a letter. Furthermore, the following shorthands are activated:
   \begin{shorthands}
@@ -1240,7 +1194,7 @@ used without a value; in these cases, the underlined value applies.
 \subsection[korean]{korean\new{1.40.0}}\label{korean}
 \paragraph*{Options:}
   \begin{itemize}
-	\item \pgchoicekey{variant}{\pgdefault{plain}, classic, modern}
+	\item \xpgchoicekey{variant}{\xpgdefault{plain}, classic, or modern}
     These variants control spacing before/after CJK punctuations.
       \begin{itemize}
         \item ¦plain¦: Do nothing
@@ -1251,8 +1205,9 @@ used without a value; in these cases, the underlined value applies.
           This option forces CJK punctuations to half-width, and
           inserts small (half of interword space) glue around them.
       \end{itemize}
-	\item \pgchoicekey{captions}{\pgdefault{hangul}, hanja}
-	\item \pgchoicekey[1.47]{swapstrings}{\pgdefaultchoice{\pgdefault{all}}, headers, headings, none}
+	\item \xpgchoicekey{captions}{\xpgdefault{hangul} or hanja}
+	\item \xpgchoicekey[1.47]{swapstrings}{\xpgdefaultchoice{\xpgdefault{all}},
+	headers, headings, or none}
     With this option, Korean-style part and chapter headings, and
     running headers are available.
     It is similar to Hungarian (see \ref{hungarian}) except that
@@ -1270,18 +1225,18 @@ used without a value; in these cases, the underlined value applies.
 
 \paragraph*{Options:}
 \begin{itemize}
-	\item \pgchoicekey{variant}{kurmanji, \pgdefault{sorani}}
-	\item \pgchoicekey{script}{Arabic, Latin}
+	\item \xpgchoicekey{variant}{kurmanji or \xpgdefault{sorani}}
+	\item \xpgchoicekey{script}{Arabic or Latin}
 		Defaults are ¦Arabic¦ for Sorani and ¦Latin¦ for Kurmanji.
-	\item \pgchoicekey{numerals}{western, eastern}
+	\item \xpgchoicekey{numerals}{western or eastern}
 		Defaults are ¦western¦ for Latin and ¦eastern¦ for Arabic script, depending
 		on the selection above.
-	\item \pgboolkeyfalse{abjadjimnotail}
+	\item \xpgboolkeyfalse{abjadjimnotail}
 		Set this to true if you want the \textit{abjad} form of the number three to
 		be \textarabic{ج‍} – as in the manuscript tradition – instead of the
 		modern usage \textarabic{ج}.
-%	\item \pgchoicekey{locale}{} (not yet implemented)
-%	\item \pgchoicekey{calendar}{} (not yet implemented)
+%	\item \xpgchoicekey{locale}{} (not yet implemented)
+%	\item \xpgchoicekey{calendar}{} (not yet implemented)
 \end{itemize}
 \condbreak{2\baselineskip}
 \paragraph*{Commands:}
@@ -1295,13 +1250,13 @@ used without a value; in these cases, the underlined value applies.
 \subsection[lao]{lao\new{1.2.0}}\label{lao}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \pgchoicekey{numerals}{lao, \pgdefault{arabic}}
+	\item \xpgchoicekey{numerals}{lao or \xpgdefault{arabic}}
 	\end{itemize}
 
 \subsection{latin}\label{latin}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \pgchoicekey{variant}{classic, medieval, \pgdefault{modern}, ecclesiastic\new{1.46}}
+	\item \xpgchoicekey{variant}{classic, medieval, \xpgdefault{modern}, or ecclesiastic\new{1.46}}
 			These variants refer to different spelling conventions. The ¦classic¦
 			and the ¦medieval¦ variant do not use the letters \emph{U} and
 			\emph{v}, but only \emph{V} and \emph{u}. This concerns predefined terms like
@@ -1331,7 +1286,7 @@ used without a value; in these cases, the underlined value applies.
 			\bottomrule
 			\end{tabular}
 			\end{table}
-	\item \pgchoicekey[1.46]{hyphenation}{classic, modern, liturgical}
+	\item \xpgchoicekey[1.46]{hyphenation}{classic, modern, or liturgical}
 			There are three different sets of hyphenation patterns for Latin. Separate
 			documention for them is available on the
 			Internet.\footnote{\url{https://github.com/gregorio-project/hyphen-la/blob/master/doc/README.md\#hyphenation-styles}}
@@ -1355,7 +1310,7 @@ used without a value; in these cases, the underlined value applies.
 			\bottomrule
 			\end{tabular}
 			\end{table}
-	\item \pgboolkeyfalse[1.46]{ecclesiasticfootnotes}
+	\item \xpgboolkeyfalse[1.46]{ecclesiasticfootnotes}
 			Use footnotes as provided by the \pkg{ecclesiastic} package, which typesets
 			footnotes with ordinary instead of superior numbers and without indentation.
 			As many ecclesiastic documents and liturgical books use footnotes that are
@@ -1364,21 +1319,21 @@ used without a value; in these cases, the underlined value applies.
 		
 			Note that this option is only possible if Latin is the main language of your
 			document.
-	\item \pgboolkeyfalse[1.46]{usej}
+	\item \xpgboolkeyfalse[1.46]{usej}
 			Use \emph{J/j} in predefined terms. The letter \emph{j} is not of ancient
 			origin. In early modern times, it was used to distinguish the consonantic
 			\emph{i} from the vocalic~\emph{i}. Nowadays, the use of \emph{j} has
 			disappeared from most Latin publications. So ¦false¦ is the default
 			value for all four language variants. Use this option if you prefer
 			\emph{Januarii} and \emph{Maji} to \emph{Ianuarii} and \emph{Maii}.
-	\item \pgboolkey[1.46]{capitalizemonth}
+	\item \xpgboolkey[1.46]{capitalizemonth}
 			Capitalize the month name when printing dates (using the \cmd\today\
 			command).  Traditionally, month names are capitalized. However, in recent
 			liturgical books they are lowercase. So ¦true¦ is the default value for
 			the variants ¦classic¦, ¦medieval¦, and ¦modern¦,
 			whereas ¦false¦ is the default value for the ¦ecclesiastic¦
 			variant.
-	\item \pgbabelshorthands
+	\item \xpgboolkeyfalse{babelshorthands}
 			Enable the following shorthands inherited from \pkg{babel-latin} and the
 			\pkg{ecclesiastic} package.
 			\begin{shorthands}
@@ -1404,7 +1359,7 @@ used without a value; in these cases, the underlined value applies.
 				\item[¦'Ae¦] for Ǽ (AE ligature with acute), also available for \'Œ
 				\item[¦'AE¦] for Ǽ (AE ligature with acute), also available for \'Œ
 			\end{shorthands}
-	\item \pgboolkeyfalse[1.46]{prosodicshorthands}
+	\item \xpgboolkeyfalse[1.46]{prosodicshorthands}
 			Enable shorthands for prosodic marks (macrons and breves) very similiar to
 			those provided by \pkg{babel-latin} using the ¦withprosodicmarks¦
 			modifier.
@@ -1443,8 +1398,8 @@ used without a value; in these cases, the underlined value applies.
 \subsection{malay}\label{malay}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \pgchoicekey[1.45]{variant}{\pgdefault{indonesian} (= bahasai in
-	\pkg{babel}), malaysian (= bahasam in \pkg{babel})}
+	\item \xpgchoicekey[1.45]{variant}{\xpgdefault{indonesian} (= bahasai in
+	\pkg{babel}) or malaysian (= bahasam in \pkg{babel})}
 \end{itemize}
 
 \subsection[mongolian]{mongolian\new{1.45}}\label{mongolian}
@@ -1452,7 +1407,7 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 
 \paragraph*{Options:}
 \begin{itemize}
-	\item \pgbabelshorthands
+	\item \xpgboolkeyfalse{babelshorthands}
 	If this is turned on, the following shorthands are activated:
 	\begin{shorthands}
         \item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
@@ -1470,7 +1425,7 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 		\item[¦"<¦] for French left double quotes (looks like <<).
 		\item[¦">¦] for French right double quotes (looks like >>).
 	\end{shorthands}
-	\item \pgchoicekey{numerals}{\pgdefault{arabic}, cyrillic}
+	\item \xpgchoicekey{numerals}{\xpgdefault{arabic} or cyrillic}
 		Uses either Arabic numerals or Cyrillic alphanumerical numbering.
 \end{itemize}
 %
@@ -1485,20 +1440,19 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 \subsection{norwegian}\label{norwegian}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \pgchoicekey[1.45]{variant}{bokmal (= `norsk' in \pkg{babel}),
-	\pgdefault{nynorsk}}
+	\item \xpgchoicekey[1.45]{variant}{bokmal (= `norsk' in \pkg{babel}) or \xpgdefault{nynorsk}}
 \end{itemize}
 
 \subsection{persian}\label{persian}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \pgchoicekey{numerals}{western, \pgdefault{eastern}}
-	\item \pgboolkeyfalse[1.0.3]{abjadjimnotail}
+	\item \xpgchoicekey{numerals}{western or \xpgdefault{eastern}}
+	\item \xpgboolkeyfalse[1.0.3]{abjadjimnotail}
 		Set this to true if you want the \textit{abjad} form of the number three to
 		be \textarabic{ج‍} – as in the manuscript tradition – instead of the
 		modern usage \textarabic{ج}.
-%	\item \pgchoicekey{locale}{} (not yet implemented)
-%	\item \pgchoicekey{calendar}{} (not yet implemented)
+%	\item \xpgchoicekey{locale}{} (not yet implemented)
+%	\item \xpgchoicekey{calendar}{} (not yet implemented)
 \end{itemize}
 \paragraph*{Commands:}
 \begin{itemize}
@@ -1509,13 +1463,13 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 \subsection{portuguese}\label{portuguese}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \pgchoicekey[1.45]{variant}{brazilian, \pgdefault{portuguese}}
+	\item \xpgchoicekey[1.45]{variant}{brazilian or \xpgdefault{portuguese}}
 \end{itemize}
 
 \subsection{russian}\label{russian}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \pgbabelshorthands
+	\item \xpgboolkeyfalse{babelshorthands}
 	If this is turned on, the following shorthands are activated:
 	\begin{shorthands}
 		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
@@ -1534,13 +1488,13 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 %		\item[¦"<¦] for French left double quotes (looks like <<).
 %		\item[¦">¦] for French right double quotes (looks like >>).
 	\end{shorthands}
-	\item \pgboolkeytrue[1.46]{indentfirst}
+	\item \xpgboolkeytrue[1.46]{indentfirst}
 		By default, all paragraphs are indented in Russian, also those after a
 		chapter or section heading. If this option is false, the latter paragraphs
 		are not indented, as normal in \LaTeX.
-	\item \pgchoicekey{spelling}{\pgdefault{modern}, old}
+	\item \xpgchoicekey{spelling}{\xpgdefault{modern} or old}
 		This option is for captions and date only, not for hyphenation.
-	\item \pgchoicekey{numerals}{\pgdefault{arabic}, cyrillic}
+	\item \xpgchoicekey{numerals}{\xpgdefault{arabic} or cyrillic}
 		Uses either Arabic numerals or Cyrillic alphanumerical numbering.
 	\end{itemize}
 %
@@ -1558,19 +1512,19 @@ Currently support for Sami is limited to Northern Sami.
 \subsection{sanskrit}\label{sanskrit}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \pgchoicekey[1.0.2]{script}{\pgdefault{Devanagari}, Gujarati,
-	Malayalam, Bengali, Kannada, Telugu, Latin}
+	\item \xpgchoicekey[1.0.2]{script}{\xpgdefault{Devanagari}, Gujarati,
+	Malayalam, Bengali, Kannada, Telugu, or Latin}
 		The value is passed to \pkg{fontspec} in cases where the respective
 		¦\⟨script⟩font¦ is not defined.  This can be useful if you typeset Sanskrit
 		texts in scripts other than Devanagari.
-	\item \pgchoicekey[1.45]{numerals}{\pgdefault{Devanagari}, Western}
+	\item \xpgchoicekey[1.45]{numerals}{\xpgdefault{Devanagari} or Western}
 	\end{itemize}
 
 \subsection{serbian}\label{serbian}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \pgchoicekey{script}{\pgdefault{Cyrillic}, Latin}
-	\item \pgchoicekey{numerals}{\pgdefault{arabic}, cyrillic}
+	\item \xpgchoicekey{script}{\xpgdefault{Cyrillic} or Latin}
+	\item \xpgchoicekey{numerals}{\xpgdefault{arabic} or cyrillic}
 		Uses either Arabic numerals or Cyrillic alphanumerical numbering.
 	\end{itemize}
 \paragraph*{Commands:}
@@ -1586,7 +1540,7 @@ Currently support for Sami is limited to Northern Sami.
 
 \paragraph*{Options:}
 \begin{itemize}
-	\item \pgbabelshorthands[1.46]
+	\item \xpgboolkeyfalse[1.46]{babelshorthands}
 		If this is turned on, the following shorthands for Slovak are activated:
 		\begin{shorthands}
         \item[¦"=¦] for an explicit hyphen sign which is repeated at the beginning
@@ -1605,14 +1559,14 @@ Currently support for Sami is limited to Northern Sami.
         \item[¦">¦] for Slovak left double guillemets (looks like >>).
         \item[¦"<¦] for Slovak right double guillemets (looks like <<).
 		\end{shorthands}
-	\item \pgboolkeytrue[1.46]{splithyphens}
+	\item \xpgboolkeytrue[1.46]{splithyphens}
 	      According to Slovak typesetting conventions, if a word with a hard hyphen (such as \emph{je-li})
 	      is hyphenated at this hyphen, a second hyphenation character is to be inserted at the beginning
           of the line that follows the hyphenation (\emph{je-/-li}).
 	      By default, this is done automatically (if you are using \LuaTeX, the \pkg{luavlna} package is
 	      loaded to achieve this).
 	      Set this option to ¦false¦ to disable the feature.
-	\item \pgboolkeytrue[1.46]{vlna}
+	\item \xpgboolkeytrue[1.46]{vlna}
 	      According to Slovak typesetting conventions, single-letter words (non-syllable prepositions)
 	      must not occur at line ends.
 	      \pkg{Polyglossia} takes care of this automatically by default (if you are using \LuaTeX, the
@@ -1623,27 +1577,28 @@ Currently support for Sami is limited to Northern Sami.
 \subsection{slovenian}\label{slovenian}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \pgboolkeyfalse{localalph}
+	\item \xpgboolkeyfalse{localalph}
 	\end{itemize}
 
 \subsection{sorbian}\label{sorbian}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \pgchoicekey[1.45]{variant}{lower, \pgdefault{upper}}
-	\item \pgboolkeyfalse[1.45]{olddate}
+	\item \xpgchoicekey[1.45]{variant}{lower or \xpgdefault{upper}}
+	\item \xpgboolkeyfalse[1.45]{olddate}
 		If true, ¦\today¦ will use traditional Sorbian month names (\ie it will be
 		synonymous to ¦\oldtoday¦ below).
 \end{itemize}
 \paragraph*{Commands:}
 \begin{itemize}
-	\item \Cmd\oldtoday: outputs the current date using traditional Sorbian month names, even if \pgoption{olddate} is false.
+	\item \Cmd\oldtoday: outputs the current date using traditional Sorbian month names, even if \xpgoption{olddate} is false.
 \end{itemize}
 
 \subsection{spanish}\label{spanish}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \pgchoicekey[1.46]{variant}{\pgdefault{spanish}, mexican}
-	\item \pgchoicekey[1.46]{spanishoperators}{\pgdefaultchoice{all}, accented, spaced, none, \pgdefault{false}}
+	\item \xpgchoicekey[1.46]{variant}{\xpgdefault{spanish} or mexican}
+	\item \xpgchoicekey[1.46]{spanishoperators}{\xpgdefaultchoice{all}, accented,
+	spaced, none, or \xpgdefault{false}}
 	      Determines of and how math operators are localized to Spanish.
 	      \begin{itemize}
 	      	\item ¦accented¦ causes some math operators to use accents where usual in Spanish (\emph{lím},
@@ -1671,8 +1626,8 @@ Currently support for Sami is limited to Northern Sami.
 \subsection{syriac}\label{syriac}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \pgchoicekey[1.0.1]{numerals}{\pgdefault{western} (\ie 1234567890), eastern
-		(for which the Oriental Arabic numerals are used: \textarabic{١٢٣٤٥٦٧٨٩٠}),
+	\item \xpgchoicekey[1.0.1]{numerals}{\xpgdefault{western} (\ie 1234567890), eastern
+		(for which the Oriental Arabic numerals are used: \textarabic{١٢٣٤٥٦٧٨٩٠}), or
 		abjad}
 	\end{itemize}
 \paragraph*{Commands:}
@@ -1684,7 +1639,7 @@ Currently support for Sami is limited to Northern Sami.
 \subsection{thai}\label{thai}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \pgchoicekey{numerals}{thai, \pgdefault{arabic}}
+	\item \xpgchoicekey{numerals}{thai or \xpgdefault{arabic}}
 	\end{itemize}
 %
 To insert word breaks, you need to use an external processor.
@@ -1694,7 +1649,7 @@ that comes with this package.
 \subsection{tibetan}\label{tibetan}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \pgchoicekey{numerals}{tibetan, \pgdefault{arabic}}
+	\item \xpgchoicekey{numerals}{tibetan or \xpgdefault{arabic}}
 \end{itemize}
 
 \subsection{ukrainian}\label{ukrainian}
@@ -1708,7 +1663,7 @@ that comes with this package.
 \subsection{welsh}\label{welsh}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \pgchoicekey{date}{long, \pgdefault{short}}
+	\item \xpgchoicekey{date}{long or \xpgdefault{short}}
 	\end{itemize}
 
 
@@ -1801,8 +1756,8 @@ versions.\medskip
 \noindent All these macros provide the following options:
 
 \begin{itemize}
-	\item \DescribeMacro{[lang=]}\pgchoicekey{lang}{\pgdefault{local}, main,
-	⟨language⟩}
+	\item \DescribeMacro{[lang=]}\xpgchoicekey{lang}{\xpgdefault{local}, main,
+	or ⟨language⟩}
 		Output number in the local form of the currently active language for
 		¦local¦, the main language of the document for ¦main¦, and any (loaded)
 		language for ⟨language⟩ (\eg ¦\localnumeral[lang=arabic]{42}}¦).
