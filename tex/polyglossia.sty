@@ -1682,6 +1682,11 @@
    \polyglossia@set@lang@options:nn {#1} {#2}%
 }
 
+% Patch xkeyval to record default values of keys
+\pretocmd{\XKV@define@default}{%
+   \csxdef{xpg@default@opt@\XKV@header #1}{#2}%
+}{}{\xpg@warning{Patching xkeyval failed!}}
+
 % Helper to get and register option keyvals
 \def\xpg@parsevariantkeyvalue#1=#2@#3:#4\relax{%
    \def\@tmpa{#1}
@@ -1690,7 +1695,12 @@
    % (\xpg@main@langvariant, \xpg@other@langvariant
    % and \xpg@set@langvariant)
    \ifx\@tmpa\@tmpb\setkeys{#3}{#1=#2}\fi
-   \tl_if_empty:nF{#2}
+   \tl_if_empty:nTF{#2}
+      {
+        \ifcsdef{xpg@default@opt@KV@#4@#1}%
+           {\xpg@store@opt@keyval#1:\csuse{xpg@default@opt@KV@#4@#1}=:#4\relax}%
+           {}%
+      }
       { \xpg@store@opt@keyval#1:#2:#4\relax }
 }%
 
@@ -1707,7 +1717,7 @@
 \prg_set_conditional:Npnn \polyglossia@check@option@value:NNN #1#2#3 { p , T , F , TF }{
   \prop_get:cnNTF {xpg@current@options@#1} {#2} \l_tmpa_tl
      {
-        \str_if_eq:NNTF{\l_tmpa_tl}{#3}
+        \exp_args:Nee \str_if_eq:NNTF{\l_tmpa_tl}{#3}
           {\prg_return_true:}
           {\prg_return_false:}
      }
@@ -1717,8 +1727,8 @@
 }
 
 % Test if option value is set
-\newcommand*\iflanguageoption[3]{%
-  \polyglossia@check@option@value:NNNTF{#1}{#2}{#3}%
+\newcommand*\iflanguageoption[5]{%
+  \polyglossia@check@option@value:NNNTF{#1}{#2}{#3}{#4}{#5}%
 }
 
 
