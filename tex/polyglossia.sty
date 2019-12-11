@@ -1704,7 +1704,7 @@
 
 % Patch xkeyval to record default values of keys
 \pretocmd{\XKV@define@default}{%
-   \csxdef{xpg@default@opt@\XKV@header #1}{#2}%
+   \csgdef{xpg@default@opt@\XKV@header #1}{#2}%
 }{}{\xpg@warning{Patching xkeyval failed!}}
 
 % Helper to get and register option keyvals
