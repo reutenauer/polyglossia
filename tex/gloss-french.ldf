@@ -184,6 +184,8 @@
                                       frenchfootnote=false,frenchitemlabels=false,
                                       itemlabels=\textemdash,itemlabeli=\textemdash,itemlabelii=\textemdash,
                                       itemlabeliii=\textemdash,itemlabeliv=\textemdash}
+% Register alias options
+\xpg@set@alias@values{french}{variant}{canadian}{acadian}
 
 
 \def\french@fontsetup{%
