@@ -157,6 +157,10 @@
 
 % Register default options
 \xpg@initialize@gloss@options{german}{variant=german,spelling=new,script=latin,latesthyphen=false,babelshorthands=false}
+% Register alias options
+\xpg@set@alias@values{german}{spelling}{new}{1996}
+\xpg@set@alias@values{german}{spelling}{old}{1901}
+\xpg@set@alias@values{german}{script}{blackletter}{fraktur}
 
 \ifsystem@babelshorthands
   \setkeys{german}{babelshorthands=true}

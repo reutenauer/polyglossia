@@ -91,6 +91,8 @@ and may look very wrong.}
 
 % Register default options
 \xpg@initialize@gloss@options{arabic}{locale=default,calendar=gregorian,numerals=mashriq,hijricorrection=0,abjadjimnotail=false}
+% Register alias options
+\xpg@set@alias@values{arabic}{calendar}{islamic}{hijri}
 
 \def\arabicgregmonth@default#1{\ifcase#1%
   % Egypt, Sudan, Yemen and Golf states

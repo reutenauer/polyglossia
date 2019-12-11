@@ -118,6 +118,9 @@
 
 % Register default options
 \xpg@initialize@gloss@options{english}{variant=us,ordinalmonthday=false}
+% Register alias options
+\xpg@set@alias@values{english}{variant}{us}{american}
+\xpg@set@alias@values{english}{variant}{uk}{british}
 
 \ifxetex
    % Check if \l@english is defined. If not, try to set it to some variety
