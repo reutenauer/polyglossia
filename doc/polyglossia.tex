@@ -45,8 +45,8 @@
 
 %% Commands for documenting options
 \newcommand*\xpgoption[1]{\textcolor{xpgblue}{\bfseries #1}}
-\newcommand*\xpgdefault[1]{\textit{#1}}
-\newcommand*\xpgdefaultchoice[1]{*#1}
+\newcommand*\xpgpresetvalue[1]{\textit{#1}}
+\newcommand*\xpgdefaultvalue[1]{*#1}
 
 % arguments: #1 version number, #2 key name, #3 footnote, #4 possible values
 \NewDocumentCommand\xpgchoicekey{omom}{%
@@ -55,9 +55,9 @@
 }
 
 % arguments: #1 version number, #2 key name, #3 footnote
-\NewDocumentCommand\xpgboolkey{omo}{\xpgchoicekey[#1]{#2}[#3]{\xpgdefaultchoice{true} or false}}
-\NewDocumentCommand\xpgboolkeytrue{omo}{\xpgchoicekey[#1]{#2}[#3]{\xpgdefaultchoice{\xpgdefault{true}} or false}}
-\NewDocumentCommand\xpgboolkeyfalse{omo}{\xpgchoicekey[#1]{#2}[#3]{\xpgdefaultchoice{true} or \xpgdefault{false}}}
+\NewDocumentCommand\xpgboolkey{omo}{\xpgchoicekey[#1]{#2}[#3]{\xpgdefaultvalue{true} or false}}
+\NewDocumentCommand\xpgboolkeytrue{omo}{\xpgchoicekey[#1]{#2}[#3]{\xpgdefaultvalue{\xpgpresetvalue{true}} or false}}
+\NewDocumentCommand\xpgboolkeyfalse{omo}{\xpgchoicekey[#1]{#2}[#3]{\xpgdefaultvalue{true} or \xpgpresetvalue{false}}}
 
 % arguments: #1 version number, #2 key name, #3 default code
 \NewDocumentCommand\xpgcodekey{omv}{%
@@ -724,9 +724,13 @@ will be activated.
 \section{Language-specific options and commands}\label{specific}
 
 This section gives a list of all languages for which options and end-user
-commands are defined. The default value of each option (\ie the predefined
-value if the option is not used) is given in italic. Some option keys may be
-used without a value; in these cases, the value marked by an asterisk applies.
+commands are defined. Note the following conventions:
+\begin{itemize}
+	\item The preset value of each option (\ie the setting that applies by default,
+	if the option is not explicitly set) is given in \xpgpresetvalue{italics}.
+	\item If an option key may be used without a value, the value that applies
+	is marked by a preceding \xpgdefaultvalue{asterisk}.
+\end{itemize}
 
 \subsection{afrikaans}\label{afrikaans}
 \paragraph*{Options:}
@@ -749,15 +753,15 @@ used without a value; in these cases, the value marked by an asterisk applies.
 \subsection{arabic}\label{arabic}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{calendar}{\xpgdefault{gregorian} or islamic (= hijri)}
-	\item \xpgchoicekey{locale}{\xpgdefault{default}\footnote{ %
+	\item \xpgchoicekey{calendar}{\xpgpresetvalue{gregorian} or islamic (= hijri)}
+	\item \xpgchoicekey{locale}{\xpgpresetvalue{default}\footnote{ %
 			For Egypt, Sudan, Yemen and the Gulf states.},
 		mashriq\footnote{ %
 			For Iraq, Syria, Jordan, Lebanon and Palestine.},
 		libya, algeria, tunisia, morocco, mauritania}
 		This setting influences the spelling of the month names for the Gregorian calendar,
 		as well as the form of the numerals (unless overriden by the following option).
-	\item \xpgchoicekey{numerals}{\xpgdefault{mashriq} or maghrib}
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{mashriq} or maghrib}
 		The latter is the default when locale = algeria, tunisia, or morocco.
 	\item \xpgboolkeyfalse[1.0.3]{abjadjimnotail}
     Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
@@ -773,8 +777,8 @@ used without a value; in these cases, the value marked by an asterisk applies.
 \subsection{armenian}\label{armenian}
 \paragraph*{Options:}
 \begin{itemize}
-  \item \xpgchoicekey[1.45]{variant}{eastern or \xpgdefault{western}}
-	\item \xpgchoicekey[1.45]{numerals}{armenian or \xpgdefault{arabic}}
+  \item \xpgchoicekey[1.45]{variant}{eastern or \xpgpresetvalue{western}}
+	\item \xpgchoicekey[1.45]{numerals}{armenian or \xpgpresetvalue{arabic}}
 \end{itemize}
 
 \subsection[belarusian]{belarusian\new{1.46}}\label{belarusian}
@@ -799,9 +803,9 @@ used without a value; in these cases, the value marked by an asterisk applies.
 		\item[¦"<¦] for French left double quotes (looks like <<).
 		\item[¦">¦] for French right double quotes (looks like >>).
 	\end{shorthands}
-	\item \xpgchoicekey{numerals}{\xpgdefault{arabic} or cyrillic}
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or cyrillic}
 	Uses either Arabic numerals or Cyrillic	alphanumerical numbering.
-	\item \xpgchoicekey{spelling}{\xpgdefault{modern} or classic (= tarask)}
+	\item \xpgchoicekey{spelling}{\xpgpresetvalue{modern} or classic (= tarask)}
 	With ¦spelling=classic¦, captions and dates adhere to the Taraškievica (or
 	Belarusian classical) orthography rather than the standard orthography.
 \end{itemize}
@@ -817,7 +821,7 @@ used without a value; in these cases, the value marked by an asterisk applies.
 \subsection[bengali]{bengali\new{1.2.0}}\label{bengali}
 \paragraph*{Options:}
 	\begin{itemize}
-	  \item \xpgchoicekey{numerals}{Western, Bengali, or \xpgdefault{Devanagari}}
+	  \item \xpgchoicekey{numerals}{Western, Bengali, or \xpgpresetvalue{Devanagari}}
 		\item \xpgboolkeyfalse{changecounternumbering}
 		Use specified numerals for headings and page numbers.
 	\end{itemize}
@@ -932,7 +936,7 @@ used without a value; in these cases, the value marked by an asterisk applies.
 \subsection{english}\label{english}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{variant}{\xpgdefault{american} (= us), usmax (same as ‘american’ but with additional hyphenation patterns),
+	\item \xpgchoicekey{variant}{\xpgpresetvalue{american} (= us), usmax (same as ‘american’ but with additional hyphenation patterns),
 	british (= uk), australian, canadian\new{1.45}, or newzealand}
 	\item \xpgboolkeyfalse{ordinalmonthday}
 		The default value is true for variant = british.
@@ -967,7 +971,7 @@ used without a value; in these cases, the value marked by an asterisk applies.
 \subsection{french}\label{french}
 \paragraph*{Options:}
 	\begin{itemize}
-		\item \xpgchoicekey{variant}{\xpgdefault{french} or canadian (=~acadian)\new{1.45}, swiss\new{1.47}}
+		\item \xpgchoicekey{variant}{\xpgpresetvalue{french} or canadian (=~acadian)\new{1.45}, swiss\new{1.47}}
 			Currently, the only difference between the four variants is that ¦swiss¦
 			uses ¦thincolonspace=true¦ by default since this conforms to the Swiss
 			conventions.
@@ -1032,7 +1036,7 @@ used without a value; in these cases, the value marked by an asterisk applies.
 \subsection[gaelic]{gaelic\new{1.45}}\label{gaelic}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey{variant}{\xpgdefault{irish} or scottish}
+	\item \xpgchoicekey{variant}{\xpgpresetvalue{irish} or scottish}
 \end{itemize}
 
 \subsection[georgian]{georgian\new{1.46}}\label{georgian}
@@ -1058,7 +1062,7 @@ used without a value; in these cases, the value marked by an asterisk applies.
 			\item[¦"<¦] for French left double quotes (looks like <<).
 			\item[¦">¦] for French right double quotes (looks like >>).
 		\end{shorthands}
-	\item \xpgchoicekey{numerals}{\xpgdefault{arabic} or georgian}
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or georgian}
 		Uses either Arabic numerals or Georgian alphanumerical numbering.
 	\item \xpgboolkeyfalse{oldmonthnames}
 		Uses traditional Georgian month names.
@@ -1067,11 +1071,11 @@ used without a value; in these cases, the value marked by an asterisk applies.
 \subsection{german}\label{german}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{variant}{\xpgdefault{german}, austrian, or swiss\new{1.33.4}}
+	\item \xpgchoicekey{variant}{\xpgpresetvalue{german}, austrian, or swiss\new{1.33.4}}
 		Setting variant=austrian or variant=swiss uses some lexical variants.
 		With spelling=old, variant=swiss furthermore loads specific hyphenation
 		patterns.
-	\item \xpgchoicekey{spelling}{\xpgdefault{new} (= 1996) or old (= 1901)}
+	\item \xpgchoicekey{spelling}{\xpgpresetvalue{new} (= 1996) or old (= 1901)}
 		Indicates whether hyphenation patterns for traditional (1901) or reformed
 		(1996) orthography should be used. The latter is the default.
 	\item \xpgboolkeyfalse{latesthyphen}
@@ -1106,7 +1110,7 @@ used without a value; in these cases, the value marked by an asterisk applies.
 		\item[¦"<¦] for French left double quotes («)
 		\item[¦">¦] for French right double quotes (»).
 		\end{shorthands}
-	\item \xpgchoicekey[1.2.0]{script}{\xpgdefault{latin} or blackletter\new{1.46} (= fraktur)}
+	\item \xpgchoicekey[1.2.0]{script}{\xpgpresetvalue{latin} or blackletter\new{1.46} (= fraktur)}
 		Setting ¦script=blackletter¦ adapts the captions for typesetting German in blackletter type (using the long s (ſ)
 		where appropriate).
 	\end{itemize}
@@ -1114,8 +1118,8 @@ used without a value; in these cases, the value marked by an asterisk applies.
 \subsection{greek}\label{greek}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{variant}{\xpgdefault{monotonic} (= mono), polytonic (= poly), or ancient}
-	\item \xpgchoicekey{numerals}{\xpgdefault{greek} or arabic}
+	\item \xpgchoicekey{variant}{\xpgpresetvalue{monotonic} (= mono), polytonic (= poly), or ancient}
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{greek} or arabic}
 	\item \xpgboolkeyfalse{attic}
 	\end{itemize}
 \paragraph*{Commands:}
@@ -1131,8 +1135,8 @@ used without a value; in these cases, the value marked by an asterisk applies.
 \subsection{hebrew}\label{hebrew}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{numerals}{hebrew or \xpgdefault{arabic}}
-	\item \xpgchoicekey{calendar}{hebrew or \xpgdefault{gregorian}}
+	\item \xpgchoicekey{numerals}{hebrew or \xpgpresetvalue{arabic}}
+	\item \xpgchoicekey{calendar}{hebrew or \xpgpresetvalue{gregorian}}
 	\item \xpgboolkeyfalse{marcheshvan}
 		If true, the second month of the civil year will be output as
 		\texthebrew{מרחשון} (Marcheshvan) rather than \texthebrew{חשון} (Heshvan),
@@ -1147,13 +1151,13 @@ used without a value; in these cases, the value marked by an asterisk applies.
 \subsection[hindi]{hindi\new{1.2.0}}\label{hindi}
 \paragraph*{Options:}
 	\begin{itemize}
-		\item \xpgchoicekey{numerals}{Western or \xpgdefault{Devanagari}}
+		\item \xpgchoicekey{numerals}{Western or \xpgpresetvalue{Devanagari}}
 	\end{itemize}
 
 \subsection{hungarian}\label{hungarian}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey[1.46]{swapstrings}{\xpgdefaultchoice{\xpgdefault{all}},
+	\item \xpgchoicekey[1.46]{swapstrings}{\xpgdefaultvalue{\xpgpresetvalue{all}},
 	captions, headings, headers, hheaders, or none}
 	       In Hungarian, some caption strings need to be in a different order than in other languages
 	       (\eg \emph{1. fejezet} instead of \emph{Chapter 1}). By default, \pkg{polyglossia} tries hard to
@@ -1198,7 +1202,7 @@ used without a value; in these cases, the value marked by an asterisk applies.
 \subsection[korean]{korean\new{1.40.0}}\label{korean}
 \paragraph*{Options:}
   \begin{itemize}
-	\item \xpgchoicekey{variant}{\xpgdefault{plain}, classic, or modern}
+	\item \xpgchoicekey{variant}{\xpgpresetvalue{plain}, classic, or modern}
     These variants control spacing before/after CJK punctuations.
       \begin{itemize}
         \item ¦plain¦: Do nothing
@@ -1209,8 +1213,8 @@ used without a value; in these cases, the value marked by an asterisk applies.
           This option forces CJK punctuations to half-width, and
           inserts small (half of interword space) glue around them.
       \end{itemize}
-	\item \xpgchoicekey{captions}{\xpgdefault{hangul} or hanja}
-	\item \xpgchoicekey[1.47]{swapstrings}{\xpgdefaultchoice{\xpgdefault{all}},
+	\item \xpgchoicekey{captions}{\xpgpresetvalue{hangul} or hanja}
+	\item \xpgchoicekey[1.47]{swapstrings}{\xpgdefaultvalue{\xpgpresetvalue{all}},
 	headers, headings, or none}
     With this option, Korean-style part and chapter headings, and
     running headers are available.
@@ -1229,7 +1233,7 @@ used without a value; in these cases, the value marked by an asterisk applies.
 
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey{variant}{kurmanji or \xpgdefault{sorani}}
+	\item \xpgchoicekey{variant}{kurmanji or \xpgpresetvalue{sorani}}
 	\item \xpgchoicekey{script}{Arabic or Latin}
 		Defaults are ¦Arabic¦ for Sorani and ¦Latin¦ for Kurmanji.
 	\item \xpgchoicekey{numerals}{western or eastern}
@@ -1254,13 +1258,13 @@ used without a value; in these cases, the value marked by an asterisk applies.
 \subsection[lao]{lao\new{1.2.0}}\label{lao}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{numerals}{lao or \xpgdefault{arabic}}
+	\item \xpgchoicekey{numerals}{lao or \xpgpresetvalue{arabic}}
 	\end{itemize}
 
 \subsection{latin}\label{latin}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey{variant}{classic, medieval, \xpgdefault{modern}, or ecclesiastic\new{1.46}}
+	\item \xpgchoicekey{variant}{classic, medieval, \xpgpresetvalue{modern}, or ecclesiastic\new{1.46}}
 			These variants refer to different spelling conventions. The ¦classic¦
 			and the ¦medieval¦ variant do not use the letters \emph{U} and
 			\emph{v}, but only \emph{V} and \emph{u}. This concerns predefined terms like
@@ -1402,7 +1406,7 @@ used without a value; in these cases, the value marked by an asterisk applies.
 \subsection{malay}\label{malay}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey[1.45]{variant}{\xpgdefault{indonesian} (= bahasai in
+	\item \xpgchoicekey[1.45]{variant}{\xpgpresetvalue{indonesian} (= bahasai in
 	\pkg{babel}) or malaysian (= bahasam in \pkg{babel})}
 \end{itemize}
 
@@ -1429,7 +1433,7 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 		\item[¦"<¦] for French left double quotes (looks like <<).
 		\item[¦">¦] for French right double quotes (looks like >>).
 	\end{shorthands}
-	\item \xpgchoicekey{numerals}{\xpgdefault{arabic} or cyrillic}
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or cyrillic}
 		Uses either Arabic numerals or Cyrillic alphanumerical numbering.
 \end{itemize}
 %
@@ -1444,13 +1448,13 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 \subsection{norwegian}\label{norwegian}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey[1.45]{variant}{bokmal (= `norsk' in \pkg{babel}) or \xpgdefault{nynorsk}}
+	\item \xpgchoicekey[1.45]{variant}{bokmal (= `norsk' in \pkg{babel}) or \xpgpresetvalue{nynorsk}}
 \end{itemize}
 
 \subsection{persian}\label{persian}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey{numerals}{western or \xpgdefault{eastern}}
+	\item \xpgchoicekey{numerals}{western or \xpgpresetvalue{eastern}}
 	\item \xpgboolkeyfalse[1.0.3]{abjadjimnotail}
 		Set this to true if you want the \textit{abjad} form of the number three to
 		be \textarabic{ج‍} – as in the manuscript tradition – instead of the
@@ -1467,7 +1471,7 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 \subsection{portuguese}\label{portuguese}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey[1.45]{variant}{brazilian or \xpgdefault{portuguese}}
+	\item \xpgchoicekey[1.45]{variant}{brazilian or \xpgpresetvalue{portuguese}}
 \end{itemize}
 
 \subsection{russian}\label{russian}
@@ -1496,9 +1500,9 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 		By default, all paragraphs are indented in Russian, also those after a
 		chapter or section heading. If this option is false, the latter paragraphs
 		are not indented, as normal in \LaTeX.
-	\item \xpgchoicekey{spelling}{\xpgdefault{modern} or old}
+	\item \xpgchoicekey{spelling}{\xpgpresetvalue{modern} or old}
 		This option is for captions and date only, not for hyphenation.
-	\item \xpgchoicekey{numerals}{\xpgdefault{arabic} or cyrillic}
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or cyrillic}
 		Uses either Arabic numerals or Cyrillic alphanumerical numbering.
 	\end{itemize}
 %
@@ -1516,19 +1520,19 @@ Currently support for Sami is limited to Northern Sami.
 \subsection{sanskrit}\label{sanskrit}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey[1.0.2]{script}{\xpgdefault{Devanagari}, Gujarati,
+	\item \xpgchoicekey[1.0.2]{script}{\xpgpresetvalue{Devanagari}, Gujarati,
 	Malayalam, Bengali, Kannada, Telugu, or Latin}
 		The value is passed to \pkg{fontspec} in cases where the respective
 		¦\⟨script⟩font¦ is not defined.  This can be useful if you typeset Sanskrit
 		texts in scripts other than Devanagari.
-	\item \xpgchoicekey[1.45]{numerals}{\xpgdefault{Devanagari} or Western}
+	\item \xpgchoicekey[1.45]{numerals}{\xpgpresetvalue{Devanagari} or Western}
 	\end{itemize}
 
 \subsection{serbian}\label{serbian}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{script}{\xpgdefault{Cyrillic} or Latin}
-	\item \xpgchoicekey{numerals}{\xpgdefault{arabic} or cyrillic}
+	\item \xpgchoicekey{script}{\xpgpresetvalue{Cyrillic} or Latin}
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or cyrillic}
 		Uses either Arabic numerals or Cyrillic alphanumerical numbering.
 	\end{itemize}
 \paragraph*{Commands:}
@@ -1587,7 +1591,7 @@ Currently support for Sami is limited to Northern Sami.
 \subsection{sorbian}\label{sorbian}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey[1.45]{variant}{lower or \xpgdefault{upper}}
+	\item \xpgchoicekey[1.45]{variant}{lower or \xpgpresetvalue{upper}}
 	\item \xpgboolkeyfalse[1.45]{olddate}
 		If true, ¦\today¦ will use traditional Sorbian month names (\ie it will be
 		synonymous to ¦\oldtoday¦ below).
@@ -1600,9 +1604,9 @@ Currently support for Sami is limited to Northern Sami.
 \subsection{spanish}\label{spanish}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey[1.46]{variant}{\xpgdefault{spanish} or mexican}
-	\item \xpgchoicekey[1.46]{spanishoperators}{\xpgdefaultchoice{all}, accented,
-	spaced, none, or \xpgdefault{false}}
+	\item \xpgchoicekey[1.46]{variant}{\xpgpresetvalue{spanish} or mexican}
+	\item \xpgchoicekey[1.46]{spanishoperators}{\xpgdefaultvalue{all}, accented,
+	spaced, none, or \xpgpresetvalue{false}}
 	      Determines of and how math operators are localized to Spanish.
 	      \begin{itemize}
 	      	\item ¦accented¦ causes some math operators to use accents where usual in Spanish (\emph{lím},
@@ -1630,7 +1634,7 @@ Currently support for Sami is limited to Northern Sami.
 \subsection{syriac}\label{syriac}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey[1.0.1]{numerals}{\xpgdefault{western} (\ie 1234567890), eastern
+	\item \xpgchoicekey[1.0.1]{numerals}{\xpgpresetvalue{western} (\ie 1234567890), eastern
 		(for which the Oriental Arabic numerals are used: \textarabic{١٢٣٤٥٦٧٨٩٠}), or
 		abjad}
 	\end{itemize}
@@ -1643,7 +1647,7 @@ Currently support for Sami is limited to Northern Sami.
 \subsection{thai}\label{thai}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{numerals}{thai or \xpgdefault{arabic}}
+	\item \xpgchoicekey{numerals}{thai or \xpgpresetvalue{arabic}}
 	\end{itemize}
 %
 To insert word breaks, you need to use an external processor.
@@ -1653,7 +1657,7 @@ that comes with this package.
 \subsection{tibetan}\label{tibetan}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey{numerals}{tibetan or \xpgdefault{arabic}}
+	\item \xpgchoicekey{numerals}{tibetan or \xpgpresetvalue{arabic}}
 \end{itemize}
 
 \subsection{ukrainian}\label{ukrainian}
@@ -1667,7 +1671,7 @@ that comes with this package.
 \subsection{welsh}\label{welsh}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{date}{long or \xpgdefault{short}}
+	\item \xpgchoicekey{date}{long or \xpgpresetvalue{short}}
 	\end{itemize}
 
 
@@ -1760,7 +1764,7 @@ versions.\medskip
 \noindent All these macros provide the following options:
 
 \begin{itemize}
-	\item \DescribeMacro{[lang=]}\xpgchoicekey{lang}{\xpgdefault{local}, main,
+	\item \DescribeMacro{[lang=]}\xpgchoicekey{lang}{\xpgpresetvalue{local}, main,
 	or ⟨language⟩}
 		Output number in the local form of the currently active language for
 		¦local¦, the main language of the document for ¦main¦, and any (loaded)
