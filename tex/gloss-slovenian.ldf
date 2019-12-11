@@ -15,14 +15,10 @@
 % Babel aliases
 \setlanguagealias{slovenian}{slovene}
 
-\providebool{slovenian@localalph}
 \define@boolkey{slovenian}[slovenian@]{localalph}[true]{%
-  \def\@tmpa{#1}%
-  \def\@tmptrue{true}%
-  \ifx\@tmpa\@tmptrue
-    \slovenian@localalphtrue
+  \ifslovenian@localalph
+    \setlocalalph
   \fi
-  \setlocalalph
 }
 
 % Register default options
@@ -52,14 +48,14 @@
    \def\headtoname{Prejme}%
    \def\proofname{Dokaz}%
    \def\glossaryname{Slovar}%
-   }
+}
 
 \def\dateslovenian{%   
   \def\today{\number\day.~\ifcase\month\or
     januar\or februar\or marec\or april\or maj\or junij\or
     julij\or avgust\or september\or oktober\or november\or december\fi
     \space \number\year}%
-  }
+}
 
 \def\slovenian@alph#1{%
   \ifcase#1\or a\or b\or c\or č\or d\or e\or f\or g\or h\or i\or j\or k\or l\or
