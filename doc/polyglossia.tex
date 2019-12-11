@@ -36,6 +36,7 @@
 \newcommand*\TX[1]{\hyperref[#1]{\textcolor{xpgred}{#1}}}
 \newcommand*\TA[1]{\textsc{\color{xpgblue}#1}}
 \newcommand*\link[1]{\href{#1}{#1}}
+\renewcommand*\meta[1]{\texttt{⟨#1⟩}}
 \def\eg{\textit{e.g.,}\xspace}
 \def\ie{\textit{i.e.,}\xspace}
 \def\ca{\textit{ca.}\@\xspace}
@@ -44,25 +45,26 @@
 \def\etc{\@ifnextchar.{\textit{etc}}{\textit{etc.}\@\xspace}}
 
 %% Commands for documenting options
-\newcommand*\xpgoption[1]{\textcolor{xpgblue}{\bfseries #1}}
-\newcommand*\xpgpresetvalue[1]{\textit{#1}}
-\newcommand*\xpgdefaultvalue[1]{*#1}
+\newcommand*\xpgoption[1]{\textcolor{xpgblue}{\ttfamily\bfseries #1}}
+\newcommand*\xpgvalue[1]{\texttt{#1}}
+\newcommand*\xpgpresetvalue[1]{\texttt{\textit{#1}}}
+\newcommand*\xpgdefaultvalue[1]{\texttt{*#1}}
 
 % arguments: #1 version number, #2 key name, #3 footnote, #4 possible values
 \NewDocumentCommand\xpgchoicekey{omom}{%
 	\xpgoption{#2}\IfValueT{#3}{\footnote{#3}}%
-    \IfValueT{#1}{\new{#1}} = #4\par%
+    \IfValueT{#1}{\new{#1}} \xpgvalue{=} #4\par%
 }
 
 % arguments: #1 version number, #2 key name, #3 footnote
-\NewDocumentCommand\xpgboolkey{omo}{\xpgchoicekey[#1]{#2}[#3]{\xpgdefaultvalue{true} or false}}
-\NewDocumentCommand\xpgboolkeytrue{omo}{\xpgchoicekey[#1]{#2}[#3]{\xpgdefaultvalue{\xpgpresetvalue{true}} or false}}
+\NewDocumentCommand\xpgboolkey{omo}{\xpgchoicekey[#1]{#2}[#3]{\xpgdefaultvalue{true} or \xpgvalue{false}}}
+\NewDocumentCommand\xpgboolkeytrue{omo}{\xpgchoicekey[#1]{#2}[#3]{\xpgdefaultvalue{\xpgpresetvalue{true}} or \xpgvalue{false}}}
 \NewDocumentCommand\xpgboolkeyfalse{omo}{\xpgchoicekey[#1]{#2}[#3]{\xpgdefaultvalue{true} or \xpgpresetvalue{false}}}
 
 % arguments: #1 version number, #2 key name, #3 default code
 \NewDocumentCommand\xpgcodekey{omv}{%
 	\xpgoption{#2}\IfValueT{#1}{\new{#1}}
-     = ⟨code⟩ (default value: \texttt{#3})\par%
+     \xpgvalue{=} \meta{code} (default value: \texttt{#3})\par%
 }
 
 %% Sidenotes  << copied from fontspec.dtx
@@ -163,7 +165,7 @@ tasks automatically:
       that are written from right to left (via the package \pkg{bidi},
       available separately).
 \end{enumerate}
-
+%
 Several features of \pkg{babel} that do not make sense in the \XeTeX\ world (like font
 encodings, shorthands, etc.) are not supported.
 Generally speaking, \pkg{polyglossia} aims to remain as compatible as possible
@@ -186,15 +188,15 @@ Polyglossia also bundles three packages for calendaric computations (\pkg{hebrew
 \subsection{Activating languages}
 
 The default language of a document is specified by means of the command
-	\displaycmd{\setdefaultlanguage[⟨options⟩]\{⟨lang⟩\}}{\setdefaultlanguage}
+	\displaycmd{\setdefaultlanguage\oarg{options}\marg{lang}}{\setdefaultlanguage}
 (or, equivalently, \Cmd\setmainlanguage).
 Secondary languages are specified with
-	\displaycmd{\setotherlanguage[⟨options⟩]\{⟨lang⟩\}.}{\setotherlanguage}
+	\displaycmd{\setotherlanguage\oarg{options}\marg{lang}.}{\setotherlanguage}
 All these commands allow you to set language-specific options.\footnote{%
 	Section~\ref{specific} documents these options for the respective languages.}
 It is also possible to load a series of secondary languages at once (but without options)
 using
-	\displaycmd{\setotherlanguages\{⟨lang1⟩,⟨lang2⟩,⟨lang3⟩,…\}.}{\setotherlanguages}
+	\displaycmd{\setotherlanguages\marg{lang1⟩,⟨lang2⟩,⟨lang3⟩,…}.}{\setotherlanguages}
 
 All language-specific options can be modified locally by means of the
 language-switching commands described in section \ref{languageswitching}.
@@ -331,7 +333,7 @@ exceptions, please refer to the notes in table~\ref{tab:bbllang}).
 The babel names listed in table~\ref{tab:bbllang} can be used instead of the corresponding polyglossia
 name\slash options in \cmd\setdefaultlanguage\ and \cmd\setotherlanguage\ as well as in the \pkg{polyglossia} and
 \pkg{babel} language switching commands\slash environments documented in section~\ref{sec:langcmds} and
-\ref{sec:babelcmds} (\eg \cmd\textaustrian\ is synonymous to \cmd{\textgerman[variant=austrian,spelling=old]}).
+\ref{sec:babelcmds} (\eg \cmd\textaustrian\ is synonymous to ¦\textgerman[variant=austrian,spelling=old]¦).
 However, unless you have special reasons, we strongly encourage you to use the \pkg{polyglossia} names.
 
 
@@ -342,7 +344,7 @@ However, unless you have special reasons, we strongly encourage you to use the \
 	\url{https://en.wikipedia.org/wiki/IETF_language_tag} for details.}
 Thus, you can use tags such as ¦en-GB¦ (for British English) or ¦de-AT-1901¦ (for Austrian German, old spelling)
 in \cmd\setdefaultlanguage\ and \cmd\setotherlanguage\ as well as in the language switching command
-\cmd{\textlang\{⟨tag⟩\}}, the environment \cmd{\begin\{lang\}\{⟨tag⟩\}} \ldots\ \cmd{\end\{lang\}} and the \pkg{babel}
+\cmd{\textlang\marg{tag}}, the environment \cmd{\begin\{lang\}\marg{tag}} \ldots\ \cmd{\end\{lang\}} and the \pkg{babel}
 language switching commands\slash environments documented in section~\ref{sec:babelcmds}.
 Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 
@@ -538,26 +540,27 @@ Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 		by \LaTeX, \pkg{fontspec} and \pkg{polyglossia}.
 \end{itemize}
 
+\condbreak{5\baselineskip}
 \section{Language-switching commands}\label{languageswitching}
 
 \subsection{Recommended commands}\label{sec:langcmds}
 For each activated language the command
-\cmd{\text⟨lang⟩[⟨options⟩]\{…\}} \DescribeMacro{\text⟨lang⟩}
+\cmd{\text\meta{lang}\oarg{options}\marg{…}} \DescribeMacro{\text\meta{lang}}
 (as well as the synonymous \DescribeMacro{\textlang}%
-\cmd{\textlang[⟨options⟩]\{⟨lang⟩\}\{…\}}\new{1.46})
+\cmd{\textlang\oarg{options}\marg{lang}\{…\}}\new{1.46})
 becomes available for short insertions of text in that language.
 For example ¦\textrussian{\today}¦ and ¦\textlang{russian}{\today}¦ yield \textrussian{\today}
 The commands switch to the correct hyphenation patterns, they activate
 some extra features for the selected language (such as extra spacing before
-punctuation in French), and they translate the date when using ¦\today¦.
+punctuation in French), and they translate the date when using \cmd\today.
 They do not, however, translate so-called \textit{caption strings}, \ie
 ``chapter'', ``figure'' etc., to the local language (these remain in the main
 language).
 
-The\DescribeEnv{⟨lang⟩}\ environment ¦⟨lang⟩¦, which is also available for any activated language
+The\DescribeEnv{\meta{lang}}\ environment \meta{lang}, which is also available for any activated language
 (as well as the equivalent \DescribeMacro{lang}%
-\cmd{\begin\{lang\}[⟨options⟩]\{⟨lang⟩\}} \dots{} \cmd{\end\{lang\}}\new{1.47}),
-is meant for longer passages of text. It behaves slightly different than the \cmd{\text⟨lang⟩} and
+\cmd{\begin\{lang\}\oarg{options}\marg{lang}} \dots{} \cmd{\end\{lang\}}\new{1.47}),
+is meant for longer passages of text. It behaves slightly different than the \cmd{\text\meta{lang}} and
 \cmd\textlang\ commands: It does everything the latter do, but additionally, the caption strings
 are translated as well, and the language is also passed to auxiliary files, the table of contents
 and the lists of figures/tables.
@@ -597,17 +600,17 @@ Some macros defined in \pkg{babel}’s \file{hyphen.cfg} (and thus usually
 compiled into the \XeLaTeX\ and \LuaLaTeX\ format) are redefined, but keep a
 similar behaviour.
 \begin{itemize}
-\item \DescribeMacro{\selectlanguage}\cmd{\selectlanguage[⟨options⟩]\{⟨lang⟩\}}
-\item \DescribeMacro{\foreignlanguage}\cmd{\foreignlanguage[⟨options⟩]\{⟨lang⟩\}\{…\}}
-\item \DescribeEnv{otherlanguage}\cmd{\begin\{otherlanguage\}[⟨options⟩]\{⟨lang⟩\}} \dots{} \cmd{\end\{otherlanguage\}}
-\item \DescribeEnv{otherlanguage*}\cmd{\begin\{otherlanguage*\}[⟨options⟩]\{⟨lang⟩\}} \dots{} \cmd{\end\{otherlanguage*\}}
+\item \DescribeMacro{\selectlanguage}\cmd{\selectlanguage\oarg{options}\marg{lang}}
+\item \DescribeMacro{\foreignlanguage}\cmd{\foreignlanguage\oarg{options}\marg{lang}\{…\}}
+\item \DescribeEnv{otherlanguage}\cmd{\begin\{otherlanguage\}\oarg{options}\marg{lang}} \dots{} \cmd{\end\{otherlanguage\}}
+\item \DescribeEnv{otherlanguage*}\cmd{\begin\{otherlanguage*\}\oarg{options}\marg{lang}} \dots{} \cmd{\end\{otherlanguage*\}}
 \end{itemize}
 %
-¦\selectlanguage{⟨lang⟩}¦ and the ¦otherlanguage¦ environment are identical to the
-the ¦⟨lang⟩¦ environment, except that ¦\selectlanguage{⟨lang⟩}¦
-does not need to be explicitly closed. The command ¦\foreinlanguage{⟨lang⟩}{…}¦ and the ¦otherlanguage*¦
-environment are identical with the use of the ¦\text⟨lang⟩¦ or ¦\textlang¦ command, with the one
-notable exception that they do not translate the date with ¦\today¦.
+\cmd\selectlanguage\marg{lang} and the ¦otherlanguage¦ environment are identical to the
+the \meta{lang} environment, except that \cmd\selectlanguage\marg{lang}
+does not need to be explicitly closed. The command \cmd\foreinlanguage\marg{lang}\marg{…} and the ¦otherlanguage*¦
+environment are identical with the use of the \cmd\text\meta{lang} or \cmd\textlang\ command, with the one
+notable exception that they do not translate the date with \cmd\today.
 
 Since the \XeLaTeX\ and \LuaLaTeX\ format incorporate \pkg{babel}’s \file{hyphen.cfg},
 the low-level commands for hyphenation and language switching
@@ -617,10 +620,10 @@ defined there are also accessible.
 The following commands are probably of lesser interest to the end user, but
 ought to be mentioned here.
 \begin{itemize}
-\item \DescribeMacro{\selectbackgroundlanguage}\cmd{\selectbackgroundlanguage\{⟨lang⟩\}}:
+\item \DescribeMacro{\selectbackgroundlanguage}\cmd{\selectbackgroundlanguage\marg{lang}}:
     this selects the global font setup and the numbering definitions for the default language.
 
-\item \DescribeMacro{\resetdefaultlanguage}\cmd{\resetdefaultlanguage[⟨options⟩]\{⟨lang⟩\}} (experimental):
+\item \DescribeMacro{\resetdefaultlanguage}\cmd{\resetdefaultlanguage\oarg{options}\marg{lang}} (experimental):
 	completely switches the default language
 	to another one in the middle of a document: \textit{this may have adverse effects}!
 
@@ -638,7 +641,7 @@ ought to be mentioned here.
 \subsection{Setting up alias commands}
 
 By means of the macro
-\displaycmd{\setlanguagealias[⟨options⟩]\{⟨language⟩\}\{⟨alias⟩\}}{\setlanguagealias}\new{1.46}
+\displaycmd{\setlanguagealias\oarg{options}\marg{language}\marg{alias}}{\setlanguagealias}\new{1.46}
 you can define alias commands for specific language (variants). \Eg
 
 \begin{quote}
@@ -648,7 +651,7 @@ you can define alias commands for specific language (variants). \Eg
 \end{quote}
 %
 will define a command \cmd{\textAT} as well as an environment ¦{AT}¦ which will link towards
-the command \cmd{\textgerman[variant=austrian]} and the environment ¦{german}[variant=austrian]¦,
+the command ¦\textgerman[variant=austrian]¦ and the environment ¦{german}[variant=austrian]¦,
 respectively. The aliases can also be used in the language switching commands described in
 section~\ref{sec:langcmds} and \ref{sec:babelcmds}.
 Note, though, that the usual restrictions for command names apply, so something such as
@@ -656,10 +659,10 @@ Note, though, that the usual restrictions for command names apply, so something 
 holds true for any non-ASCII character and for digits).
 
 For the latter case, and for the case where an alias would clash with an existing command
-(\eg ¦\fi¦) or a \cmd{\text⟨...⟩} command (\eg ¦\textit¦), a starred version \Cmd{\setlanguagealias*}
-is provided which does neither define a \cmd{\text⟨alias⟩} command nor an ¦⟨alias⟩¦ environment,
-but which will set up the alias for everything else, including \cmd{\textlang\{⟨alias⟩\}}
-and \cmd{\begin\{lang\}\{⟨alias⟩\}}.
+(\eg ¦\fi¦) or a \cmd{\text\meta{\ldots}} command (\eg \cmd\textit), a starred version \Cmd{\setlanguagealias*}
+is provided which does neither define a \cmd{\text\meta{alias}} command nor an \meta{alias} environment,
+but which will set up the alias for everything else, including \cmd{\textlang\marg{alias}}
+and \cmd{\begin\{lang\}\marg{alias}}.
 
 \pkg{Polyglossia} comes with some aliases predefined, namely aliases for \pkg{babel} language names
 (see sec.~\ref{sec:babelnames}) and for IETF BCP-47 language tags (the latter via \cmd{\setlanguagealias*};
@@ -669,18 +672,18 @@ see sec.~\ref{sec:langtags}).
 
 With polyglossia it is possible to associate a specific font with any script or language
 that occurs in the document. That font should always be defined as
-¦\⟨script⟩font¦\ or ¦\⟨language⟩font¦.
+\cmd{\⟨script⟩font}\ or \cmd{\⟨language⟩font}.
 For instance, if the default font defined by \cmd\setmainfont\
 does not support Greek, then one can define the font used to display Greek with:\\
-\centerline{ \cmd\newfontfamily\cmd{\greekfont[Script=Greek,⟨…⟩]\{⟨font⟩\}}. }
+\centerline{ \cmd\newfontfamily\cmd{\greekfont[Script=Greek,\meta{…}]\marg{font}}. }
 Note that polyglossia will use the font defined as is, so assure to do all necessary settings
 (please refer to the \pkg{fontspec} documentation for details).
-For instance, if ¦\arabicfont¦ is explicitly defined, then the option ¦Script=Arabic¦ should
+For instance, if \cmd\arabicfont\ is explicitly defined, then the option ¦Script=Arabic¦ should
 be included in that definition.
 
 If a specific sans serif or monospace (`teletype') font is needed for a particular script or language,
 it can be defined by means of \new{1.2.0}
-¦\⟨script⟩fontsf¦\ or ¦\⟨language⟩fontsf¦ and ¦\⟨script⟩fonttt¦\ or ¦\⟨language⟩fonttt¦, respectively.
+\cmd{\⟨script⟩fontsf} or \cmd{\⟨language⟩fontsf} and \cmd{\⟨script⟩fonttt} or \cmd{\⟨language⟩fonttt}, respectively.
 
 Whenever a new language is activated, \pkg{polyglossia} will first check whether
 a font has been defined for that language or – for languages in non-Latin scripts –
@@ -695,7 +698,7 @@ displayed.
 
 \subsection{Hyphenation exceptions}
 
-\TeX\ provides the command ¦\hyphenation{⟨exceptions⟩}¦ to globally define hyphenation exceptions
+\TeX\ provides the command \cmd\hyphenation\marg{exceptions} to globally define hyphenation exceptions
 which override the hyphenation patterns for specified words. The command takes as argument a space-separated
 list of words where hyphenation points are marked by a dash (if no dash is used, the respective word is not
 hyphenated at all):
@@ -708,7 +711,7 @@ hyphenated at all):
 %
 These exceptions, however, apply to all languages. In addition to this, \pkg{polyglossia} provides
 the command\new{1.45}
-\displaycmd{\xpghyphenation[⟨options⟩]\{⟨lang⟩\}\{⟨exceptions⟩\}}{\xpghyphenation}
+\displaycmd{\xpghyphenation\oarg{options}\marg{lang}\marg{exceptions}}{\xpghyphenation}
 which can be used to define exceptions that only apply to a specific language or language variant,
 respectively.
 
@@ -740,12 +743,12 @@ commands are defined. Note the following conventions:
 	micro-typography of Afrikaans words are activated:
 	\begin{shorthands}
 		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
-		in the hyphenation patterns (as opposed to ¦\-¦ in default \TeX).
+		in the hyphenation patterns (as opposed to \cmd\- in default \TeX).
 		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
 		cases where the hyphen should stick at the following syllable.
 		\item[¦"|¦] disables a ligature at this position.
 		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
-		\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to ¦\slash¦,
+		\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to \cmd\slash,
 		hyphenation at the breakpoints preset in the hyphenation patterns is still allowed.
 	\end{shorthands}
 \end{itemize}
@@ -753,32 +756,32 @@ commands are defined. Note the following conventions:
 \subsection{arabic}\label{arabic}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{calendar}{\xpgpresetvalue{gregorian} or islamic (= hijri)}
+	\item \xpgchoicekey{calendar}{\xpgpresetvalue{gregorian} or \xpgvalue{islamic} (= \xpgvalue{hijri})}
 	\item \xpgchoicekey{locale}{\xpgpresetvalue{default}\footnote{ %
 			For Egypt, Sudan, Yemen and the Gulf states.},
-		mashriq\footnote{ %
+		\xpgvalue{mashriq}\footnote{ %
 			For Iraq, Syria, Jordan, Lebanon and Palestine.},
-		libya, algeria, tunisia, morocco, mauritania}
+		\xpgvalue{libya}, \xpgvalue{algeria}, \xpgvalue{tunisia}, \xpgvalue{morocco}, \xpgvalue{mauritania}}
 		This setting influences the spelling of the month names for the Gregorian calendar,
 		as well as the form of the numerals (unless overriden by the following option).
-	\item \xpgchoicekey{numerals}{\xpgpresetvalue{mashriq} or maghrib}
-		The latter is the default when locale = algeria, tunisia, or morocco.
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{mashriq} or \xpgvalue{maghrib}}
+		The latter is the default when \xpgvalue{locale=algeria}, \xpgvalue{tunisia}, or \xpgvalue{morocco}.
 	\item \xpgboolkeyfalse[1.0.3]{abjadjimnotail}
     Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
 	\end{itemize}
 \paragraph*{Commands:}
 	\begin{itemize}
 	\item \Cmd\abjad and \Cmd\abjadmaghribi (see section \ref{abjad})
-  \item \Cmd\aemph to emphasize text with ¦\overline¦.\new{1.2.0}
-    ¦\textarabic{\aemph{اب}}¦ yields \textarabic{\aemph{اب}}.
+  \item \Cmd\aemph to emphasize text with \cmd\overline.\new{1.2.0}
+    \cmd{\textarabic{\aemph{اب}}} yields \textarabic{\aemph{اب}}.
     This command is also available for Farsi, Urdu, etc.
 	\end{itemize}
 
 \subsection{armenian}\label{armenian}
 \paragraph*{Options:}
 \begin{itemize}
-  \item \xpgchoicekey[1.45]{variant}{eastern or \xpgpresetvalue{western}}
-	\item \xpgchoicekey[1.45]{numerals}{armenian or \xpgpresetvalue{arabic}}
+  \item \xpgchoicekey[1.45]{variant}{\xpgvalue{eastern} or \xpgpresetvalue{western}}
+	\item \xpgchoicekey[1.45]{numerals}{\xpgvalue{armenian} or \xpgpresetvalue{arabic}}
 \end{itemize}
 
 \subsection[belarusian]{belarusian\new{1.46}}\label{belarusian}
@@ -789,7 +792,7 @@ commands are defined. Note the following conventions:
 	If this is turned on, the following shorthands are activated:
 	\begin{shorthands}
 		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
-		in the hyphenation patterns (as opposed to ¦\-¦).
+		in the hyphenation patterns (as opposed to \cmd\-).
 		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
 		cases where the hyphen should stick at the following syllable.
 		\item[¦"|¦] disables a ligature at this position.
@@ -803,9 +806,9 @@ commands are defined. Note the following conventions:
 		\item[¦"<¦] for French left double quotes (looks like <<).
 		\item[¦">¦] for French right double quotes (looks like >>).
 	\end{shorthands}
-	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or cyrillic}
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or \xpgvalue{cyrillic}}
 	Uses either Arabic numerals or Cyrillic	alphanumerical numbering.
-	\item \xpgchoicekey{spelling}{\xpgpresetvalue{modern} or classic (= tarask)}
+	\item \xpgchoicekey{spelling}{\xpgpresetvalue{modern} or \xpgvalue{classic} (= \xpgvalue{tarask})}
 	With ¦spelling=classic¦, captions and dates adhere to the Taraškievica (or
 	Belarusian classical) orthography rather than the standard orthography.
 \end{itemize}
@@ -814,14 +817,14 @@ commands are defined. Note the following conventions:
 \begin{itemize}
 	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
 	environments such as ¦enumerate¦. The command takes a counter as argument,
-	\eg ¦\textbelarusian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
+	\eg \cmd\textbelarusian{{\Asbuk{page}}} produces \textrussian{\Asbuk{page}}.
 	\item \Cmd\asbuk: same in lowercase
 \end{itemize}
 
 \subsection[bengali]{bengali\new{1.2.0}}\label{bengali}
 \paragraph*{Options:}
 	\begin{itemize}
-	  \item \xpgchoicekey{numerals}{Western, Bengali, or \xpgpresetvalue{Devanagari}}
+	  \item \xpgchoicekey{numerals}{\xpgvalue{Western}, \xpgvalue{Bengali}, or \xpgpresetvalue{Devanagari}}
 		\item \xpgboolkeyfalse{changecounternumbering}
 		Use specified numerals for headings and page numbers.
 	\end{itemize}
@@ -852,9 +855,9 @@ commands are defined. Note the following conventions:
 		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
 		            cases where the hyphen should stick at the following syllable.
 		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
-		            in the hyphenation patterns (as opposed to ¦\-¦).
+		            in the hyphenation patterns (as opposed to \cmd\-).
 		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
-		\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to ¦\slash¦, hyphenation
+		\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to \cmd\slash, hyphenation
 		            at the breakpoints preset in the hyphenation patterns is still allowed.
 	\end{shorthands}
 	Furthermore, the following shorthands generate easy access to Croatian digraphs (ligatures):
@@ -878,7 +881,7 @@ commands are defined. Note the following conventions:
 		\item[¦"<¦] for Croatian right guillemets («).
 	\end{shorthands}
 	\item \xpgboolkeyfalse[1.47]{disableligatures}
-		If this is true, all Croatian ligatures (for digraphs such as
+		If this is \xpgvalue{true}, all Croatian ligatures (for digraphs such as
 		\charifavailable{01C6}{dž}) will be replaced by single characters. This can
 		be useful if the ligatures on your font are broken (if the font does not
 		have them, they are automatically replaced).
@@ -922,12 +925,12 @@ commands are defined. Note the following conventions:
 		micro-typography of Dutch words are activated:
 		\begin{shorthands}
 		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
-			        in the hyphenation patterns (as opposed to ¦\-¦ in default \TeX).
+			        in the hyphenation patterns (as opposed to \cmd\- in default \TeX).
 		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
 			        cases where the hyphen should stick at the following syllable.
 		\item[¦"|¦] disables a ligature at this position.
 		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
-		\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to ¦\slash¦,
+		\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to \cmd\slash,
 		            hyphenation at the breakpoints preset in the hyphenation patterns is still allowed.
 		\end{shorthands}
         In addition, the macro \Cmd\- is redefined to allow hyphens in the rest of the word (equivalent to ¦"-¦).
@@ -936,10 +939,10 @@ commands are defined. Note the following conventions:
 \subsection{english}\label{english}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{variant}{\xpgpresetvalue{american} (= us), usmax (same as ‘american’ but with additional hyphenation patterns),
-	british (= uk), australian, canadian\new{1.45}, or newzealand}
+	\item \xpgchoicekey{variant}{\xpgpresetvalue{american} (= \xpgvalue{us}), \xpgvalue{usmax} (same as \xpgvalue{american} but with additional hyphenation patterns),
+	\xpgvalue{british} (= \xpgvalue{uk}), \xpgvalue{australian}, \xpgvalue{canadian}\new{1.45}, or \xpgvalue{newzealand}}
 	\item \xpgboolkeyfalse{ordinalmonthday}
-		The default value is true for variant = british.
+		The default value is true for \xpgvalue{variant=british}.
 	\end{itemize}
 
 \subsection{esperanto}\label{esperanto}
@@ -958,12 +961,12 @@ commands are defined. Note the following conventions:
 		and micro-typography of Finnish words are activated:
 		\begin{shorthands}
 		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
-                    in the hyphenation patterns (as opposed to ¦\-¦).
+                    in the hyphenation patterns (as opposed to \cmd\-).
         \item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
                     cases where the hyphen should stick at the following syllable.
         \item[¦"|¦] disables a ligature at this position.
         \item[¦""¦] allows for a line break at this position (without hyphenation sign).
-        \item[¦"/¦] a slash that allows for a subsequent line break. As opposed to ¦\slash¦,
+        \item[¦"/¦] a slash that allows for a subsequent line break. As opposed to \cmd\slash,
                   hyphenation at the breakpoints preset in the hyphenation patterns is still allowed.
 		\end{shorthands}
 \end{itemize}
@@ -971,9 +974,9 @@ commands are defined. Note the following conventions:
 \subsection{french}\label{french}
 \paragraph*{Options:}
 	\begin{itemize}
-		\item \xpgchoicekey{variant}{\xpgpresetvalue{french} or canadian (=~acadian)\new{1.45}, swiss\new{1.47}}
-			Currently, the only difference between the four variants is that ¦swiss¦
-			uses ¦thincolonspace=true¦ by default since this conforms to the Swiss
+		\item \xpgchoicekey{variant}{\xpgpresetvalue{french} or \xpgvalue{canadian} (=~\xpgvalue{acadian})\new{1.45}, \xpgvalue{swiss}\new{1.47}}
+			Currently, the only difference between the four variants is that \xpgvalue{swiss}
+			uses \xpgvalue{thincolonspace=true} by default since this conforms to the Swiss
 			conventions.
 		\item \xpgboolkeytrue{autospacing}
 			One of the most distinct features of French typography is the addition of
@@ -982,26 +985,26 @@ commands are defined. Note the following conventions:
 			to enter them. This options allows you to switch this feature off
 			globally.
 		\item \xpgboolkeyfalse[1.46]{thincolonspace}
-			With ¦variant=swiss¦, the default value is ¦true¦. If ¦false¦, a full
-			(non-breaking) interword space is inserted before a colon. If ¦true¦, a
+			With \xpgvalue{variant=swiss}, the default value is \xpgvalue{true}. If \xpgvalue{false}, a full
+			(non-breaking) interword space is inserted before a colon. If \xpgvalue{true}, a
 			thinner space -- as before \texttt{;}, \texttt{!}, and \texttt{?} -- is
 			used. Note that this option must be set after the ¦variant¦ option.
 		\item \xpgboolkeytrue{autospaceguillemets}[Up to version 1.44, the option was
-		called \textit{automaticspacesaroundguillemets}. For backwards compatibility
+		called \xpgvalue{automaticspacesaroundguillemets}. For backwards compatibility
 		reasons, the more verbose old option is still supported.]
 			If you only want to disable the automatic addition of spacing after
 			opening and before closing guillemets (and not at punctuation), set this
 			to \textit{false}. Note that the more general option \textit{autospacing}
 			overrides this.
-		\item \xpgboolkeyfalse[1.45]{autospacetypewriter}[Babel's syntax \textit{OriginalTypewriter}
+		\item \xpgboolkeyfalse[1.45]{autospacetypewriter}[Babel's syntax \xpgvalue{OriginalTypewriter}
 		is also supported.]
 			By default, automatic spacing is disabled in typewriter font. If this is
 			enabled, spacing in typewriter context is the same as with roman and sans
-			serif font, depending on the \textit{autospacing} and
-			\textit{autospaceguillemets} settings (note that this was the default up
+			serif font, depending on the \xpgvalue{autospacing} and
+			\xpgvalue{autospaceguillemets} settings (note that this was the default up
 			to v.~1.44).	
 		\item \xpgboolkeyfalse{frenchfootnote}
-			If \textit{true}, footnotes start with a non-superscripted number
+			If \xpgvalue{true}, footnotes start with a non-superscripted number
 			followed by a dot, as common in French typography. Note that this might
 			interfere with the specific footnote handling of classes or packages.
 			Also note that this option is only functional (by design) if French is
@@ -1036,7 +1039,7 @@ commands are defined. Note the following conventions:
 \subsection[gaelic]{gaelic\new{1.45}}\label{gaelic}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey{variant}{\xpgpresetvalue{irish} or scottish}
+	\item \xpgchoicekey{variant}{\xpgpresetvalue{irish} or \xpgvalue{scottish}}
 \end{itemize}
 
 \subsection[georgian]{georgian\new{1.46}}\label{georgian}
@@ -1048,7 +1051,7 @@ commands are defined. Note the following conventions:
 		\begin{shorthands}
 			\item[¦"-¦] adds a hyphenation point that does still allow for
 			hyphenation at the points preset in the hyphenation patterns (as opposed
-			to ¦\-¦).
+			to \cmd\-).
 			\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
 			cases where the hyphen should stick at the following syllable.
 			\item[¦"|¦] disables a ligature at this position.
@@ -1062,7 +1065,7 @@ commands are defined. Note the following conventions:
 			\item[¦"<¦] for French left double quotes (looks like <<).
 			\item[¦">¦] for French right double quotes (looks like >>).
 		\end{shorthands}
-	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or georgian}
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or \xpgvalue{georgian}}
 		Uses either Arabic numerals or Georgian alphanumerical numbering.
 	\item \xpgboolkeyfalse{oldmonthnames}
 		Uses traditional Georgian month names.
@@ -1072,10 +1075,10 @@ commands are defined. Note the following conventions:
 \paragraph*{Options:}
 	\begin{itemize}
 	\item \xpgchoicekey{variant}{\xpgpresetvalue{german}, austrian, or swiss\new{1.33.4}}
-		Setting variant=austrian or variant=swiss uses some lexical variants.
-		With spelling=old, variant=swiss furthermore loads specific hyphenation
+		Setting \xpgvalue{variant=austrian} or \xpgvalue{variant=swiss} uses some lexical variants.
+		With \xpgvalue{spelling=old}, \xpgvalue{variant=swiss} furthermore loads specific hyphenation
 		patterns.
-	\item \xpgchoicekey{spelling}{\xpgpresetvalue{new} (= 1996) or old (= 1901)}
+	\item \xpgchoicekey{spelling}{\xpgpresetvalue{new} (= \xpgvalue{1996}) or \xpgvalue{old} (= \xpgvalue{1901})}
 		Indicates whether hyphenation patterns for traditional (1901) or reformed
 		(1996) orthography should be used. The latter is the default.
 	\item \xpgboolkeyfalse{latesthyphen}
@@ -1096,10 +1099,10 @@ commands are defined. Note the following conventions:
 		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
 		           cases where the hyphen should stick at the following syllable, \eg ¦bergauf und "~ab¦.
 		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
-		           in the hyphenation patterns (as opposed to ¦\-¦).
+		           in the hyphenation patterns (as opposed to \cmd\-).
 		\item[¦""¦] allows for a line break at this position (without hyphenation sign);
 		           \eg ¦(pseudo"~)""wissenschaftlich¦.
-		\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to ¦\slash¦, hyphenation at the breakpoints
+		\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to \cmd\slash, hyphenation at the breakpoints
 		           preset in the hyphenation patterns is still allowed.
 		\end{shorthands}
 
@@ -1110,7 +1113,7 @@ commands are defined. Note the following conventions:
 		\item[¦"<¦] for French left double quotes («)
 		\item[¦">¦] for French right double quotes (»).
 		\end{shorthands}
-	\item \xpgchoicekey[1.2.0]{script}{\xpgpresetvalue{latin} or blackletter\new{1.46} (= fraktur)}
+	\item \xpgchoicekey[1.2.0]{script}{\xpgpresetvalue{latin} or \xpgvalue{blackletter}\new{1.46} (= \xpgvalue{fraktur})}
 		Setting ¦script=blackletter¦ adapts the captions for typesetting German in blackletter type (using the long s (ſ)
 		where appropriate).
 	\end{itemize}
@@ -1118,8 +1121,8 @@ commands are defined. Note the following conventions:
 \subsection{greek}\label{greek}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{variant}{\xpgpresetvalue{monotonic} (= mono), polytonic (= poly), or ancient}
-	\item \xpgchoicekey{numerals}{\xpgpresetvalue{greek} or arabic}
+	\item \xpgchoicekey{variant}{\xpgpresetvalue{monotonic} (= \xpgvalue{mono}), \xpgvalue{polytonic} (= \xpgvalue{poly}), or \xpgvalue{ancient}}
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{greek} or \xpgvalue{arabic}}
 	\item \xpgboolkeyfalse{attic}
 	\end{itemize}
 \paragraph*{Commands:}
@@ -1135,10 +1138,10 @@ commands are defined. Note the following conventions:
 \subsection{hebrew}\label{hebrew}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{numerals}{hebrew or \xpgpresetvalue{arabic}}
-	\item \xpgchoicekey{calendar}{hebrew or \xpgpresetvalue{gregorian}}
+	\item \xpgchoicekey{numerals}{\xpgvalue{hebrew} or \xpgpresetvalue{arabic}}
+	\item \xpgchoicekey{calendar}{\xpgvalue{hebrew} or \xpgpresetvalue{gregorian}}
 	\item \xpgboolkeyfalse{marcheshvan}
-		If true, the second month of the civil year will be output as
+		If \xpgvalue{true}, the second month of the civil year will be output as
 		\texthebrew{מרחשון} (Marcheshvan) rather than \texthebrew{חשון} (Heshvan),
 		which is the default.
 	\end{itemize}
@@ -1151,14 +1154,14 @@ commands are defined. Note the following conventions:
 \subsection[hindi]{hindi\new{1.2.0}}\label{hindi}
 \paragraph*{Options:}
 	\begin{itemize}
-		\item \xpgchoicekey{numerals}{Western or \xpgpresetvalue{Devanagari}}
+		\item \xpgchoicekey{numerals}{\xpgvalue{Western} or \xpgpresetvalue{Devanagari}}
 	\end{itemize}
 
 \subsection{hungarian}\label{hungarian}
 \paragraph*{Options:}
 \begin{itemize}
 	\item \xpgchoicekey[1.46]{swapstrings}{\xpgdefaultvalue{\xpgpresetvalue{all}},
-	captions, headings, headers, hheaders, or none}
+	\xpgvalue{captions}, \xpgvalue{headings}, \xpgvalue{headers}, \xpgvalue{hheaders}, or \xpgvalue{none}}
 	       In Hungarian, some caption strings need to be in a different order than in other languages
 	       (\eg \emph{1. fejezet} instead of \emph{Chapter 1}). By default, \pkg{polyglossia} tries hard to
 	       provide the correct order for different classes and packages (standard classes, \pkg{KOMA-script},
@@ -1192,17 +1195,17 @@ commands are defined. Note the following conventions:
   	\item[¦""¦] double raised open quotes (the Italian keyboard misses the backtick).
   	\item[¦"<¦] open guillemet (looks like <<).
   	\item[¦">¦] closing guillemet (looks like >>).
-  	\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to ¦\slash¦,
+  	\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to \cmd\slash,
                hyphenation at the breakpoints preset in the hyphenation patterns is still allowed.
   	\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
-               in the hyphenation patterns (as opposed to ¦\-¦).
+               in the hyphenation patterns (as opposed to \cmd\-).
   \end{shorthands}
 \end{itemize}
 
 \subsection[korean]{korean\new{1.40.0}}\label{korean}
 \paragraph*{Options:}
   \begin{itemize}
-	\item \xpgchoicekey{variant}{\xpgpresetvalue{plain}, classic, or modern}
+	\item \xpgchoicekey{variant}{\xpgpresetvalue{plain}, \xpgvalue{classic}, or \xpgvalue{modern}}
     These variants control spacing before/after CJK punctuations.
       \begin{itemize}
         \item ¦plain¦: Do nothing
@@ -1213,9 +1216,9 @@ commands are defined. Note the following conventions:
           This option forces CJK punctuations to half-width, and
           inserts small (half of interword space) glue around them.
       \end{itemize}
-	\item \xpgchoicekey{captions}{\xpgpresetvalue{hangul} or hanja}
+	\item \xpgchoicekey{captions}{\xpgpresetvalue{hangul} or \xpgvalue{hanja}}
 	\item \xpgchoicekey[1.47]{swapstrings}{\xpgdefaultvalue{\xpgpresetvalue{all}},
-	headers, headings, or none}
+	\xpgvalue{headers}, \xpgvalue{headings}, or \xpgvalue{none}}
     With this option, Korean-style part and chapter headings, and
     running headers are available.
     It is similar to Hungarian (see \ref{hungarian}) except that
@@ -1233,11 +1236,11 @@ commands are defined. Note the following conventions:
 
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey{variant}{kurmanji or \xpgpresetvalue{sorani}}
-	\item \xpgchoicekey{script}{Arabic or Latin}
-		Defaults are ¦Arabic¦ for Sorani and ¦Latin¦ for Kurmanji.
-	\item \xpgchoicekey{numerals}{western or eastern}
-		Defaults are ¦western¦ for Latin and ¦eastern¦ for Arabic script, depending
+	\item \xpgchoicekey{variant}{\xpgvalue{kurmanji} or \xpgpresetvalue{sorani}}
+	\item \xpgchoicekey{script}{\xpgvalue{Arabic} or \xpgvalue{Latin}}
+		Defaults are \xpgvalue{Arabic} for Sorani and \xpgvalue{Latin} for Kurmanji.
+	\item \xpgchoicekey{numerals}{\xpgvalue{western} or \xpgvalue{eastern}}
+		Defaults are \xpgvalue{western} for Latin and \xpgvalue{eastern} for Arabic script, depending
 		on the selection above.
 	\item \xpgboolkeyfalse{abjadjimnotail}
 		Set this to true if you want the \textit{abjad} form of the number three to
@@ -1258,30 +1261,30 @@ commands are defined. Note the following conventions:
 \subsection[lao]{lao\new{1.2.0}}\label{lao}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{numerals}{lao or \xpgpresetvalue{arabic}}
+	\item \xpgchoicekey{numerals}{\xpgvalue{lao} or \xpgpresetvalue{arabic}}
 	\end{itemize}
 
 \subsection{latin}\label{latin}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey{variant}{classic, medieval, \xpgpresetvalue{modern}, or ecclesiastic\new{1.46}}
-			These variants refer to different spelling conventions. The ¦classic¦
-			and the ¦medieval¦ variant do not use the letters \emph{U} and
+	\item \xpgchoicekey{variant}{\xpgvalue{classic}, \xpgvalue{medieval}, \xpgpresetvalue{modern}, or \xpgvalue{ecclesiastic}\new{1.46}}
+			These variants refer to different spelling conventions. The \xpgvalue{classic}
+			and the \xpgvalue{medieval} variant do not use the letters \emph{U} and
 			\emph{v}, but only \emph{V} and \emph{u}. This concerns predefined terms like
 			month names as well as the behaviour of the \cmd\MakeUppercase\ and the
 			\cmd\MakeLowercase\ command. The ¦medieval¦ and the
 			¦ecclesiastic¦ variant use the ligatures \emph{\ae} and \emph{\oe}.
 			See table \ref{tab:latin-spelling} for examples.
 
-			Furthermore, the \texttt{ecclesiastic} variant takes care for a punctuation
+			Furthermore, the \xpgvalue{ecclesiastic} variant takes care for a punctuation
 			spacing similar to French, but with smaller spaces, as provided for
 			PDF\TeX\ by the \pkg{ecclesiastic} package.
 			\begin{table}
 			\centering
 			\caption{\label{tab:latin-spelling}Spelling differences between the Latin
 				language variants.\newline The capitalization of month names and the use of
-				\emph{i/j} may be affected by the \texttt{capitalizemonth} and the
-				\texttt{usej} option.}
+				\emph{i/j} may be affected by the \xpgvalue{capitalizemonth} and the
+				\xpgvalue{usej} option.}
 			\begin{tabular}{llll}
 			\toprule
 			\textbf{classic} & \textbf{medieval} & \textbf{modern} & \textbf{ecclesiastic} \\
@@ -1294,7 +1297,7 @@ commands are defined. Note the following conventions:
 			\bottomrule
 			\end{tabular}
 			\end{table}
-	\item \xpgchoicekey[1.46]{hyphenation}{classic, modern, or liturgical}
+	\item \xpgchoicekey[1.46]{hyphenation}{\xpgvalue{classic}, \xpgvalue{modern}, or \xpgvalue{liturgical}}
 			There are three different sets of hyphenation patterns for Latin. Separate
 			documention for them is available on the
 			Internet.\footnote{\url{https://github.com/gregorio-project/hyphen-la/blob/master/doc/README.md\#hyphenation-styles}}
@@ -1303,7 +1306,7 @@ commands are defined. Note the following conventions:
 			¦hyphenation¦ option if the default style does not fit your needs.
 			Note that the liturgical hyphenation patterns are the default of none of the
 			language variants. To use them, you have to say
-			¦hyphenation=liturgical¦ in any case.
+			\xpgvalue{hyphenation=liturgical} in any case.
 			\begin{table}
 			\caption{\label{tab:latin-hyphenation}Latin default hyphenation styles}
 			\centering
@@ -1406,8 +1409,7 @@ commands are defined. Note the following conventions:
 \subsection{malay}\label{malay}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey[1.45]{variant}{\xpgpresetvalue{indonesian} (= bahasai in
-	\pkg{babel}) or malaysian (= bahasam in \pkg{babel})}
+	\item \xpgchoicekey[1.45]{variant}{\xpgpresetvalue{indonesian} or \xpgvalue{malaysian}}
 \end{itemize}
 
 \subsection[mongolian]{mongolian\new{1.45}}\label{mongolian}
@@ -1419,7 +1421,7 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 	If this is turned on, the following shorthands are activated:
 	\begin{shorthands}
         \item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
-		           in the hyphenation patterns (as opposed to ¦\-¦).
+		           in the hyphenation patterns (as opposed to \cmd\-).
 		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
 		           cases where the hyphen should stick at the following syllable.
 		\item[¦"|¦] disables a ligature at this position.
@@ -1433,7 +1435,7 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 		\item[¦"<¦] for French left double quotes (looks like <<).
 		\item[¦">¦] for French right double quotes (looks like >>).
 	\end{shorthands}
-	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or cyrillic}
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or \xpgvalue{cyrillic}}
 		Uses either Arabic numerals or Cyrillic alphanumerical numbering.
 \end{itemize}
 %
@@ -1441,22 +1443,22 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 \begin{itemize}
 	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
 	environments such as ¦enumerate¦. The command takes a counter as argument,
-	\eg ¦\textmongolian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
+	\eg \cmd{\textmongolian{\Asbuk{page}}} produces \textrussian{\Asbuk{page}}.
 	\item \Cmd\asbuk: same in lowercase
 \end{itemize}
 
 \subsection{norwegian}\label{norwegian}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey[1.45]{variant}{bokmal (= `norsk' in \pkg{babel}) or \xpgpresetvalue{nynorsk}}
+	\item \xpgchoicekey[1.45]{variant}{\xpgvalue{bokmal} or \xpgpresetvalue{nynorsk}}
 \end{itemize}
 
 \subsection{persian}\label{persian}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey{numerals}{western or \xpgpresetvalue{eastern}}
+	\item \xpgchoicekey{numerals}{\xpgvalue{western} or \xpgpresetvalue{eastern}}
 	\item \xpgboolkeyfalse[1.0.3]{abjadjimnotail}
-		Set this to true if you want the \textit{abjad} form of the number three to
+		Set this to \xpgvalue{true} if you want the \textit{abjad} form of the number three to
 		be \textarabic{ج‍} – as in the manuscript tradition – instead of the
 		modern usage \textarabic{ج}.
 %	\item \xpgchoicekey{locale}{} (not yet implemented)
@@ -1471,7 +1473,7 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 \subsection{portuguese}\label{portuguese}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey[1.45]{variant}{brazilian or \xpgpresetvalue{portuguese}}
+	\item \xpgchoicekey[1.45]{variant}{\xpgvalue{brazilian} or \xpgpresetvalue{portuguese}}
 \end{itemize}
 
 \subsection{russian}\label{russian}
@@ -1481,7 +1483,7 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 	If this is turned on, the following shorthands are activated:
 	\begin{shorthands}
 		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
-		           in the hyphenation patterns (as opposed to ¦\-¦).
+		           in the hyphenation patterns (as opposed to \cmd\-).
 		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
 		           cases where the hyphen should stick at the following syllable.
 		\item[¦"|¦] disables a ligature at this position.
@@ -1500,9 +1502,9 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 		By default, all paragraphs are indented in Russian, also those after a
 		chapter or section heading. If this option is false, the latter paragraphs
 		are not indented, as normal in \LaTeX.
-	\item \xpgchoicekey{spelling}{\xpgpresetvalue{modern} or old}
+	\item \xpgchoicekey{spelling}{\xpgpresetvalue{modern} or \xpgvalue{old}}
 		This option is for captions and date only, not for hyphenation.
-	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or cyrillic}
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or \xpgvalue{cyrillic}}
 		Uses either Arabic numerals or Cyrillic alphanumerical numbering.
 	\end{itemize}
 %
@@ -1510,7 +1512,7 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 	\begin{itemize}
 	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
 	environments such as ¦enumerate¦. The command takes a counter as argument,
-	\eg ¦\textrussian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
+	\eg \cmd{\textrussian{\Asbuk{page}}} produces \textrussian{\Asbuk{page}}.
 	\item \Cmd\asbuk: same in lowercase
 	\end{itemize}
 
@@ -1520,19 +1522,19 @@ Currently support for Sami is limited to Northern Sami.
 \subsection{sanskrit}\label{sanskrit}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey[1.0.2]{script}{\xpgpresetvalue{Devanagari}, Gujarati,
-	Malayalam, Bengali, Kannada, Telugu, or Latin}
+	\item \xpgchoicekey[1.0.2]{script}{\xpgpresetvalue{Devanagari}, \xpgvalue{Gujarati},
+	\xpgvalue{Malayalam}, \xpgvalue{Bengali}, \xpgvalue{Kannada}, \xpgvalue{Telugu}, or \xpgvalue{Latin}}
 		The value is passed to \pkg{fontspec} in cases where the respective
-		¦\⟨script⟩font¦ is not defined.  This can be useful if you typeset Sanskrit
+		\cmd{\⟨script⟩font} is not defined.  This can be useful if you typeset Sanskrit
 		texts in scripts other than Devanagari.
-	\item \xpgchoicekey[1.45]{numerals}{\xpgpresetvalue{Devanagari} or Western}
+	\item \xpgchoicekey[1.45]{numerals}{\xpgpresetvalue{Devanagari} or \xpgvalue{Western}}
 	\end{itemize}
 
 \subsection{serbian}\label{serbian}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{script}{\xpgpresetvalue{Cyrillic} or Latin}
-	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or cyrillic}
+	\item \xpgchoicekey{script}{\xpgpresetvalue{Cyrillic} or \xpgvalue{Latin}}
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or \xpgvalue{cyrillic}}
 		Uses either Arabic numerals or Cyrillic alphanumerical numbering.
 	\end{itemize}
 \paragraph*{Commands:}
@@ -1558,9 +1560,9 @@ Currently support for Sami is limited to Northern Sami.
         \item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
                     cases where the hyphen should stick at the following syllable.
         \item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
-                    in the hyphenation patterns (as opposed to ¦\-¦).
+                    in the hyphenation patterns (as opposed to \cmd\-).
         \item[¦""¦] allows for a line break at this position (without hyphenation sign).
-        \item[¦"/¦] a slash that allows for a subsequent line break. As opposed to ¦\slash¦, hyphenation at the breakpoints
+        \item[¦"/¦] a slash that allows for a subsequent line break. As opposed to \cmd\slash, hyphenation at the breakpoints
                     preset in the hyphenation patterns is still allowed.
         \item[¦"‘¦] for Slovak left double quotes (looks like ,,).
         \item[¦"’¦] for Slovak right double quotes (looks like “).
@@ -1591,10 +1593,10 @@ Currently support for Sami is limited to Northern Sami.
 \subsection{sorbian}\label{sorbian}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey[1.45]{variant}{lower or \xpgpresetvalue{upper}}
+	\item \xpgchoicekey[1.45]{variant}{\xpgvalue{lower} or \xpgpresetvalue{upper}}
 	\item \xpgboolkeyfalse[1.45]{olddate}
-		If true, ¦\today¦ will use traditional Sorbian month names (\ie it will be
-		synonymous to ¦\oldtoday¦ below).
+		If \xpgvalue{true}, \cmd\today will use traditional Sorbian month names (\ie it will be
+		synonymous to \cmd\oldtoday below).
 \end{itemize}
 \paragraph*{Commands:}
 \begin{itemize}
@@ -1604,9 +1606,9 @@ Currently support for Sami is limited to Northern Sami.
 \subsection{spanish}\label{spanish}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey[1.46]{variant}{\xpgpresetvalue{spanish} or mexican}
-	\item \xpgchoicekey[1.46]{spanishoperators}{\xpgdefaultvalue{all}, accented,
-	spaced, none, or \xpgpresetvalue{false}}
+	\item \xpgchoicekey[1.46]{variant}{\xpgpresetvalue{spanish} or \xpgvalue{mexican}}
+	\item \xpgchoicekey[1.46]{spanishoperators}{\xpgdefaultvalue{all}, \xpgvalue{accented},
+	\xpgvalue{spaced}, \xpgvalue{none}, or \xpgpresetvalue{false}}
 	      Determines of and how math operators are localized to Spanish.
 	      \begin{itemize}
 	      	\item ¦accented¦ causes some math operators to use accents where usual in Spanish (\emph{lím},
@@ -1614,29 +1616,29 @@ Currently support for Sami is limited to Northern Sami.
 	      	\item ¦spaced¦ causes some math operators to use spaces where usual in Spanish (\emph{arc\,cos},
 	      	      \emph{arc\,sen}, \emph{arc\,tg}).
 	      	\item ¦all¦ activates ¦accented¦ and ¦spaced¦ and furthermore provides Spanish localizations of
-	      	      ¦\sin¦ (\emph{sen}), ¦\tan¦ (\emph{tg}), ¦\sinh¦ (\emph{senh}), and ¦\tanh¦ (\emph{tgh}).
+	      	      \cmd\sin (\emph{sen}), \cmd\tan (\emph{tg}), \cmd\sinh (\emph{senh}), and \cmd\tanh (\emph{tgh}).
 	      	\item ¦none¦ does no localization at all (default setting).
 	      \end{itemize}
 \end{itemize}
 \paragraph*{\color{black}Commands:}\new{1.46}
 \begin{itemize}
-	\item \Cmd\arcsen: alias to ¦\arcsin¦ (\pkg{babel} compatibility)
-	\item \Cmd\arctg: alias to ¦\arctan¦ (\pkg{babel} compatibility)
-	\item \Cmd\sen: alias to ¦\sin¦ (\pkg{babel} compatibility)
-	\item \Cmd\senh: alias to ¦\sinh¦ (\pkg{babel} compatibility)
-	\item \Cmd\tg: alias to ¦\tan¦ (\pkg{babel} compatibility)
-	\item \Cmd\tgh: alias to ¦\tanh¦ (\pkg{babel} compatibility)
+	\item \Cmd\arcsen: alias to \cmd\arcsin (\pkg{babel} compatibility)
+	\item \Cmd\arctg: alias to \cmd\arctan (\pkg{babel} compatibility)
+	\item \Cmd\sen: alias to \cmd\sin (\pkg{babel} compatibility)
+	\item \Cmd\senh: alias to \cmd\sinh (\pkg{babel} compatibility)
+	\item \Cmd\tg: alias to \cmd\tan (\pkg{babel} compatibility)
+	\item \Cmd\tgh: alias to \cmd\tanh (\pkg{babel} compatibility)
 	\item \Cmd\spanishoperator: allows you to define further localized operators. For instance, ¦\spanishoperator{cotg}¦
-	      defines a command ¦\cotg¦ that outputs \emph{cotg} in math. The optional argument of the command lets you specify the
+	      defines a command \cmd\cotg that outputs \emph{cotg} in math. The optional argument of the command lets you specify the
 	      spelling, if needed, \eg ¦\spanishoperator[arc\,ctg]{arcctg}¦.
 \end{itemize}
 
 \subsection{syriac}\label{syriac}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey[1.0.1]{numerals}{\xpgpresetvalue{western} (\ie 1234567890), eastern
+	\item \xpgchoicekey[1.0.1]{numerals}{\xpgpresetvalue{western} (\ie 1234567890), \xpgvalue{eastern}
 		(for which the Oriental Arabic numerals are used: \textarabic{١٢٣٤٥٦٧٨٩٠}), or
-		abjad}
+		\xpgvalue{abjad}}
 	\end{itemize}
 \paragraph*{Commands:}
 	\begin{itemize}
@@ -1647,7 +1649,7 @@ Currently support for Sami is limited to Northern Sami.
 \subsection{thai}\label{thai}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{numerals}{thai or \xpgpresetvalue{arabic}}
+	\item \xpgchoicekey{numerals}{\xpgvalue{thai} or \xpgpresetvalue{arabic}}
 	\end{itemize}
 %
 To insert word breaks, you need to use an external processor.
@@ -1657,7 +1659,7 @@ that comes with this package.
 \subsection{tibetan}\label{tibetan}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgchoicekey{numerals}{tibetan or \xpgpresetvalue{arabic}}
+	\item \xpgchoicekey{numerals}{\xpgvalue{tibetan} or \xpgpresetvalue{arabic}}
 \end{itemize}
 
 \subsection{ukrainian}\label{ukrainian}
@@ -1671,7 +1673,7 @@ that comes with this package.
 \subsection{welsh}\label{welsh}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{date}{long or \xpgpresetvalue{short}}
+	\item \xpgchoicekey{date}{\xpgvalue{long} or \xpgpresetvalue{short}}
 	\end{itemize}
 
 
@@ -1679,55 +1681,55 @@ that comes with this package.
 
 \pkg{Polyglossia} uses the following macros to define language-specific captions
 (\ie strings such as ``chapter''), date formats and additional language settings
-(¦⟨lang⟩¦ is to be replaces with the respective language name):
+(\meta{lang} is to be replaces with the respective language name):
 
 \begin{itemize}
-	\item \Cmd{\captions⟨lang⟩} stores definitions of caption strings
+	\item \Cmd{\captions\meta{lang}} stores definitions of caption strings
 	           (such as, in the case of English, ¦\def\chaptername{Chapter}¦)
-	\item \Cmd{\date⟨lang⟩} stores definitions of date formats (usually redefinitions
-	           of ¦\today¦, in some cases also definitions of additional date commands)
-	\item \Cmd{\blockextras⟨lang⟩} stores macros that are to be executed when the language
-              ⟨lang⟩ is activated via ¦\selectlanguage¦ command or the ¦⟨lang⟩¦ environment
-	\item \Cmd{\inlineextras⟨lang⟩} stores macros that are to be executed when the language
-	          ⟨lang⟩ is activated locally via ¦\text⟨lang⟩¦ command
-	\item \Cmd{\noextras⟨lang⟩} stores macros that are to be executed when the language
-	          ¦⟨lang⟩¦ is closed
+	\item \Cmd{\date\meta{lang}} stores definitions of date formats (usually redefinitions
+	           of \cmd\today, in some cases also definitions of additional date commands)
+	\item \Cmd{\blockextras\meta{lang}} stores macros that are to be executed when the language
+              \meta{lang} is activated via \cmd\selectlanguage command or the \meta{lang} environment
+	\item \Cmd{\inlineextras\meta{lang}} stores macros that are to be executed when the language
+	          \meta{lang} is activated locally via \cmd\text\meta{lang} command
+	\item \Cmd{\noextras\meta{lang}} stores macros that are to be executed when the language
+	          \meta{lang} is closed
 \end{itemize}
 %
-In order to redefine internal macros, we recommend to use the command ¦\gappto¦.
-For compatibility with \pkg{babel} the command ¦\addto¦ is also available
-to the same effect. For instance, to change the ¦\chaptername¦ for language ¦lingua¦,
+In order to redefine internal macros, we recommend to use the command \cmd\gappto.
+For compatibility with \pkg{babel} the command \cmd\addto\ is also available
+to the same effect. For instance, to change the \cmd\chaptername for language ¦lingua¦,
 you can do this:
 \begin{verbatim}
 \gappto\captionslingua{\def\chaptername{Caput}}
 \end{verbatim}
 %
 Note that this needs to be done after the respective language has been loaded with
-¦\setmainlanguage¦ or ¦\setotherlanguage¦.
+\cmd\setmainlanguage\ or \cmd\setotherlanguage.
 
 Specifically for package authors, analogous commands are provided which are only executed
 if a specific language \emph{variety} is used. As opposed to the macros above, these refer
 to babel names. Other than that, the function is identical:
 
 \begin{itemize}
-	\item \Cmd{\captions@bbl@⟨babelname⟩}
-	\item \Cmd{\date@bbl@⟨babelname⟩}
-	\item \Cmd{\blockextras@bbl@⟨babelname⟩}
-	\item \Cmd{\inlineextras@bbl@⟨babelname⟩}
-	\item \Cmd{\noextras@bbl@⟨babelname⟩}
+	\item \Cmd{\captions@bbl@\meta{babelname}}
+	\item \Cmd{\date@bbl@\meta{babelname}}
+	\item \Cmd{\blockextras@bbl@\meta{babelname}}
+	\item \Cmd{\inlineextras@bbl@\meta{babelname}}
+	\item \Cmd{\noextras@bbl@\meta{babelname}}
 \end{itemize}
 %
 By default, these macros are undefined. If they are defined (\eg by an external package),
-they will be executed after their respective ¦⟨lang⟩¦ counterpart and thus can be used to
-overwrite definitions of the former. Again, use ¦\gappto¦ to define\slash modify these macros.
-For instance, to add a new caption ¦\footnotename¦ to the Swiss variety of German (babel name
+they will be executed after their respective \meta{lang} counterpart and thus can be used to
+overwrite definitions of the former. Again, use \cmd\gappto\ to define\slash modify these macros.
+For instance, to add a new caption \cmd\footnotename\ to the Swiss variety of German (babel name
 ¦nswissgerman¦), you can do this:
 \begin{verbatim}
 \gappto\captions@bbl@nswissgerman{\def\footnotename{Fussnote}}
 \end{verbatim}
 %
 If you do this in a document preamble rather than in a package, you need to embrace the redefinition
-by ¦\makeatletter¦ and ¦\makeatother¦ due to the ¦@¦ in the macro names.
+by \cmd\makeatletter\ and \cmd\makeatother\ due to the ¦@¦ in the macro names.
 
 \section{Script-specific numbering}
 
@@ -1753,7 +1755,7 @@ For instance in an Arabic environment
 ¦\localnumeral{42}¦ yields \textarabic{\localnumeral{42}}, whereas in an Hebrew environment, it
 results in \texthebrew[numerals=hebrew]{\localnumeral{42}} with ¦numerals=hebrew¦, and \texthebrew{\localnumeral{42}}
 with ¦numerals=arabic¦. Note that, as opposed to the various ¦digits¦ macros (described in sec.~\ref{sec:decdigit}),
-the argument of ¦\localnumeral¦ must consist of numbers only.
+the argument of \cmd\localnumeral\ must consist of numbers only.
 
 For\new{1.45} the conversion of counters, the starred version \Cmd{\localnumeral*} is provided. This takes a counter as argument.
 For instance in an Arabic environment ¦\localnumeral*{page}¦ yields \textarabic{\localnumeral*{page}}.
@@ -1764,11 +1766,11 @@ versions.\medskip
 \noindent All these macros provide the following options:
 
 \begin{itemize}
-	\item \DescribeMacro{[lang=]}\xpgchoicekey{lang}{\xpgpresetvalue{local}, main,
-	or ⟨language⟩}
+	\item \DescribeMacro{[lang=]}\xpgchoicekey{lang}{\xpgpresetvalue{local}, \xpgvalue{main},
+	or \xpgvalue{\meta{language}}}
 		Output number in the local form of the currently active language for
 		¦local¦, the main language of the document for ¦main¦, and any (loaded)
-		language for ⟨language⟩ (\eg ¦\localnumeral[lang=arabic]{42}}¦).
+		language for \meta{language} (\eg ¦\localnumeral[lang=arabic]{42}}¦).
 \end{itemize}
 
 \subsection{Non-Western decimal digits}\label{sec:decdigit}
@@ -1782,7 +1784,7 @@ For instance if \cmd\arabicfont\ is defined with the option ¦Mapping=arabicdigi
 typing \cmd{\textarabic\{2010\}} results in \textarabic{٢٠١٠}. Note that this method has some drawbacks, though,
 for instance when the value of a counter has to be written and read from auxiliary files.
 So please use this with care.}
-The macros have the form ¦\⟨script⟩digits¦. They convert Arabic numerical input and leave every other input untouched.
+The macros have the form \cmd{\⟨script⟩digits}. They convert Arabic numerical input and leave every other input untouched.
 In an Arabic context, for instance, ¦\arabicdigits{9182/738543-X}¦ yields \textarabic{\arabicdigits{9182/738543-X}}.
 
 Currently, the following macros are provided:
@@ -1809,9 +1811,9 @@ For languages which use special (non-Latin) alphanumerical notation\footnote{%
 	\url{http://en.wikipedia.org/wiki/Hebrew_numerals},
 	and \url{http://en.wikipedia.org/wiki/Syriac_alphabet}.}, dedicated macros are provided.
 
-They work in a similar way than the ¦\⟨script⟩digits¦ macros described above: They take Arabic numerical input
+They work in a similar way than the \cmd{\⟨script⟩digits} macros described above: They take Arabic numerical input
 and output the respective value in the local alphabetic numbering scheme (most of these macros are equivalent
-to ¦\localnumeral¦ and ¦\Localnumeral¦ in the respective context).
+to \cmd\localnumeral\ and \cmd\Localnumeral\ in the respective context).
 
 The following macros are provided:
 
@@ -1837,8 +1839,8 @@ The following macros are provided:
 			¦\Greeknumeral{1863}¦ results in \textgreek{\Greeknumeral{1863}}.
 
 	\item \Cmd\hebrewnumeral, \Cmd\Hebrewnumeral and \Cmd\Hebrewnumeralfinal generate variants of Hebrew alphanumeric numerals.
-			The commands behave exactly as they do in \pkg{babel}: ¦\hebrewnumeral¦ outputs the numbers without any decoration,
-			¦\Hebrewnumeral¦ adds \textit{gereshayim} before the last letter, ¦\Hebrewnumeralfinal¦ uses in addition the final forms of Hebrew letters.
+			The commands behave exactly as they do in \pkg{babel}: \cmd\hebrewnumeral\ outputs the numbers without any decoration,
+			\cmd\Hebrewnumeral\ adds \textit{gereshayim} before the last letter, \cmd\Hebrewnumeralfinal\ uses in addition the final forms of Hebrew letters.
 			Examples:
 			¦\hebrewnumeral{1750}¦ yields \texthebrew{\hebrewnumeral{1750}},
 			¦\Hebrewnumeral{1750}¦ yields \texthebrew{\Hebrewnumeral{1750}},
@@ -1867,14 +1869,14 @@ Thus, footnote handling in right-to-left context sometimes needs manual interven
 
 \subsection{Horizontal footnote position}
 
-When right-to-left languages are used, the ¦\footnote¦ command becomes sensitive to the text directionality. The footnote is
+When right-to-left languages are used, the \cmd\footnote\ command becomes sensitive to the text directionality. The footnote is
 always placed on the side that is currently the origin of direction: on the left side of the page in LTR paragraphs and
 on the right in RTL paragraphs.
 
 For cases where this is not desired, two additional footnote commands are provided: \Cmd\RTLfootnote and \Cmd\LTRfootnote.
-¦\LTRfootnote¦ always places the footnote on the left side, notwithstanding the current
-directionality. Likewise, ¦\RTLfootnote¦ always places it on the right side. Like ¦\footnote¦, ¦\RTLfootnote¦
-and ¦\LTRfootnote¦ provide an optional argument to customize the number.
+\cmd\LTRfootnote\ always places the footnote on the left side, notwithstanding the current
+directionality. Likewise, \cmd\RTLfootnote\ always places it on the right side. Like \cmd\footnote, \cmd\RTLfootnote\
+and \cmd\LTRfootnote\ provide an optional argument to customize the number.
 
 
 \subsection{Footnote rule length and position}
@@ -1891,11 +1893,11 @@ In both cases, you can change the default behavior as follows:
 	\item Put \Cmd\autofootnoterule in the preamble to have automatic placement depending on the context (see below for elaboration).
 	\item Put \Cmd\textwidthfootnoterule in the preamble to have a rule that spans the whole text width.
 \end{itemize}
-With ¦\autofootnoterule¦, the first footnote on the current page determines the placement. Note that this automatic can fail with
-footnotes at page boundaries that differ in directionality from the first footnote on the page. You can work around such cases by switching to ¦\rightfootnoterule¦ or ¦\leftfootnoterule¦ on these pages.
+With \cmd\autofootnoterule, the first footnote on the current page determines the placement. Note that this automatic can fail with
+footnotes at page boundaries that differ in directionality from the first footnote on the page. You can work around such cases by switching to \cmd\rightfootnoterule\ or \cmd\leftfootnoterule\ on these pages.
 
 Note also that the rule switches might interfere in bad ways with packages or classes that redefine footnotes themselves. This is also the reason
-why ¦\autofootnoterule¦ is not used by default.
+why \cmd\autofootnoterule\ is not used by default.
 
 \condbreak{5\baselineskip}
 \section{Calendars}
@@ -1914,24 +1916,24 @@ This package computes dates in the lunar Islamic (Hijra) calendar.\footnote{ %
 	(Cambridge University Press, 2001).\label{reingold}}
 It provides two macros for the end-user.
 The command
-	\displaycmd{\HijriFromGregorian\{⟨year⟩\}\{⟨month⟩\}\{⟨day⟩\}}{\HijriFromGregorian}
+	\displaycmd{\HijriFromGregorian\marg{year}\marg{month}\marg{day}}{\HijriFromGregorian}
 sets the counters ¦Hijriday¦, ¦Hijrimonth¦ and ¦Hijriyear¦.
 \Cmd\Hijritoday\ formats the Hijri date for the current day.
 This command is now locale-aware\new{1.1.1}: its output will differ depending on the
 currently active language. Presently \pkg{polyglossia}’s language definition files
-for Arabic, Farsi, Urdu, Turkish and Malay provide a localized version of ¦\Hijritoday¦.
+for Arabic, Farsi, Urdu, Turkish and Malay provide a localized version of \cmd\Hijritoday.
 If the formatting macro for the current language is undefined, the Hijri date will be formatted
 in Arabic or in roman transliteration, depending of the current writing direction.
 You can define a new format or redefine one with the command
-  \displaycmd{\DefineHijriDateFormat\{⟨lang⟩\}\{⟨code⟩\}.}{\DefineHijriDateFormat}
+  \displaycmd{\DefineHijriDateFormat\marg{lang}\marg{code}.}{\DefineHijriDateFormat}
 
-The command ¦\Hijritoday¦ also accepts an optional argument to add or subtract a correction
+The command \cmd\Hijritoday\ also accepts an optional argument to add or subtract a correction
 (in days) to the date computed by the arithmetical algorithm.\footnote{ %
 	The Islamic calendar is indeed a purely lunar calendar based on the observation
 	of the first visibility of the lunar crescent at the beginning of the lunar month,
 	so there can be differences between different localities, as well as between
 	civil and religious authorities.}
-For instance if ¦\Hijritoday¦ yields the date “7 Rajab 1429” (which is the date that was
+For instance if \cmd\Hijritoday\ yields the date “7 Rajab 1429” (which is the date that was
 displayed on the front page of \href{http://www.aljazeera.net}{aljazeera.net} on
 11th July 2008), ¦\Hijritoday[1]¦ would rather print “8 Rajab 1429” (the date
 indicated the same day on the site \href{http://www.gulfnews.com}{gulfnews.com}).
@@ -1948,9 +1950,9 @@ Example: today is \Jalalitoday.
 
 \section{Auxiliary commands}
 
-The macro \displaycmd{\charifavailable\{⟨char code⟩\}\{⟨substitution⟩\}}{\charifavailable}\new{1.47} checks whether
-the character with the specified ¦⟨char code⟩¦ (\ie unicode utf-16 code without preceding ¦0x¦) exists in
-the current font. If so, the character is printed, if not, the ¦⟨substitution⟩¦ is printed.
+The macro \displaycmd{\charifavailable\marg{char code}\marg{substitution}}{\charifavailable}\new{1.47} checks whether
+the character with the specified \meta{char code} (\ie unicode utf-16 code without preceding ¦0x¦) exists in
+the current font. If so, the character is printed, if not, the \meta{substitution} is printed.
 
 Example: ¦\charifavailable{1E9E}{SS}¦ prints the capital version of the German letter ⟨ß⟩ if available
 (\ie \charifavailable{1E9E}{SS}), else it prints the substitution digraph ⟨SS⟩.
@@ -1973,11 +1975,11 @@ In order to get such information, \pkg{polyglossia} provides the following macro
 	      Note that this macro is also defined for languages that are not supported in \pkg{babel}. In that
 	      case, they are equal to the polyglossia language name.
 	\item \Cmd\mainbabelname\ analogously stores the name of document's main language (variant) in \pkg{babel}.
-	\item \Cmd{\languageid\{⟨type⟩\}\}}\new{1.47} stores the identifier tag of the current language. Currently supported ¦⟨types⟩¦:
+	\item \Cmd{\languageid\marg{type}}\new{1.47} stores the identifier tag of the current language. Currently supported \meta{types}:
 	      \begin{itemize}
 	      	\item ¦bcp-47¦ (alias ¦bcp47¦): IETF BCP-47 language identifier
 	      \end{itemize}
-	 \item \Cmd{\mainlanguageid\{⟨type⟩\}\}}\new{1.47} stores identifier tag of the main language. Currently supported ¦⟨types⟩¦:
+	 \item \Cmd{\mainlanguageid\marg{type}}\new{1.47} stores identifier tag of the main language. Currently supported \meta{types}:
 	      see \cmd\languageid.
 \end{itemize}
 \bigskip
@@ -1992,17 +1994,17 @@ In order to get such information, \pkg{polyglossia} provides the following macro
 \bigskip
 
 \noindent Whether a language is loaded can be tested by
-\displaycmd{\iflanguageloaded\{⟨lang⟩\}\{⟨true⟩\}\{⟨false⟩\}}{\iflanguageloaded}
-where \texttt{⟨lang⟩} is a \pkg{polyglossia} language name, by
-\displaycmd{\ifbabellanguageloaded\{⟨lang⟩\}\{⟨true⟩\}\{⟨false⟩\}}{\ifbabellanguageloaded}
-where \texttt{⟨lang⟩} is a \pkg{babel} language name (see table~\ref{tab:bbllang} on p.~\pageref{tab:bbllang}), or by
-\displaycmd{\iflanguageidloaded\{⟨type⟩\}\{⟨id⟩\}\{⟨true⟩\}\{⟨false⟩\}}{\iflanguageidloaded}\new{1.47}
-where \texttt{⟨type⟩} is a supported language id type (such as ¦bcp-47¦) and \texttt{⟨id⟩} is a language id
+\displaycmd{\iflanguageloaded\marg{lang}\marg{true}\marg{false}}{\iflanguageloaded}
+where \texttt{\meta{lang}} is a \pkg{polyglossia} language name, by
+\displaycmd{\ifbabellanguageloaded\marg{lang}\marg{true}\marg{false}}{\ifbabellanguageloaded}
+where \texttt{\meta{lang}} is a \pkg{babel} language name (see table~\ref{tab:bbllang} on p.~\pageref{tab:bbllang}), or by
+\displaycmd{\iflanguageidloaded\marg{type}\marg{id}\marg{true}\marg{false}}{\iflanguageidloaded}\new{1.47}
+where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta{id} is a language id
 (such as ¦en-US¦; see table~\ref{tab:BCP47-polyglossia} on p.~\pageref{tab:BCP47-polyglossia}).
 \bigskip
 
 \noindent Finally, if you want to know whether a specific language option has been set, you can use
-\displaycmd{\iflanguageoption\{⟨lang⟩\}\{⟨opt. key⟩\}\{⟨opt. value⟩\}\{⟨true⟩\}\{⟨false⟩\}}{\iflanguageoption}\new{1.47}
+\displaycmd{\iflanguageoption\marg{lang}\marg{opt. key}\marg{opt. value}\marg{true}\marg{false}}{\iflanguageoption}\new{1.47}
 
 \section{Acknowledgements (by François Charette)}
 \pkg{Polyglossia} is notable for being a recycle box of previous contributions
@@ -2018,7 +2020,7 @@ individuals for their assistance in supporting specific languages: \TA{Yves Code
 (Sanskrit), \TA{Zdenĕk Wagner} (Hindi), \TA{Mikhal Oren} (Hebrew), \TA{Sergey Astanin} (Russian),
 \TA{Khaled Hosny} (Arabic), \TA{Sertaç Ö. Yıldız} (Turkish), \TA{Kamal Abdali} (Urdu),
 and several other members of the \XeTeX\ user community, notably \TA{Enrico Gregorio}, who
-has sent me many useful suggestions and corrections and contributed the ¦\newXeTeXintercharclass¦
+has sent me many useful suggestions and corrections and contributed the \cmd\newXeTeXintercharclass\
 mechanism in xelatex.ini which is now used by polyglossia.
 More recently, \TA{Kevin Godby} of the \href{http://ubuntu-manual.org}{Ubuntu Manual} project has
 contributed very useful feedback, bug hunting and, with the help of translators,
