@@ -69,13 +69,19 @@
   \xpg@initial@setup
   % apply \familydefault changes
   \xpg@set@familydefault
+}
+
+\AtBeginDocument{
+  \polyglossia@AtBeginDocument:
+}
+
+% The following needs to go after any \AtBeginDocument (also of packages
+% loaded after \set[main|other]language
+\AfterEndPreamble{
   % now we have the C locale definition: select the language
   \polyglossia@AtBeginDocument@selectlanguage:
   % If hyphenation disabling has been requested in preamble, do it now
   \polyglossia@AtBeginDocument@hyphenation:
-}
-\AtBeginDocument{
-  \polyglossia@AtBeginDocument:
 }
 
 %% custom message macros
