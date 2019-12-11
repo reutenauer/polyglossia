@@ -44,13 +44,15 @@
 \def\etc{\@ifnextchar.{\textit{etc}}{\textit{etc.}\@\xspace}}
 
 %% Commands for documenting options
-\NewDocumentCommand\xpgoption{m}{\textcolor{xpgblue}{\bfseries #1}}
-\NewDocumentCommand\xpgdefault{m}{\textit{#1}}
-\NewDocumentCommand\xpgdefaultchoice{m}{*#1}
+\newcommand*\xpgoption[1]{\textcolor{xpgblue}{\bfseries #1}}
+\newcommand*\xpgdefault[1]{\textit{#1}}
+\newcommand*\xpgdefaultchoice[1]{*#1}
 
 % arguments: #1 version number, #2 key name, #3 footnote, #4 possible values
-\NewDocumentCommand\xpgchoicekey{omom}{\xpgoption{#2}\IfValueT{#3}{\footnote{#3}}%
-\IfValueT{#1}{\new{#1}} = #4\par}
+\NewDocumentCommand\xpgchoicekey{omom}{%
+	\xpgoption{#2}\IfValueT{#3}{\footnote{#3}}%
+    \IfValueT{#1}{\new{#1}} = #4\par%
+}
 
 % arguments: #1 version number, #2 key name, #3 footnote
 \NewDocumentCommand\xpgboolkey{omo}{\xpgchoicekey[#1]{#2}[#3]{\xpgdefaultchoice{true} or false}}
@@ -58,8 +60,10 @@
 \NewDocumentCommand\xpgboolkeyfalse{omo}{\xpgchoicekey[#1]{#2}[#3]{\xpgdefaultchoice{true} or \xpgdefault{false}}}
 
 % arguments: #1 version number, #2 key name, #3 default code
-\NewDocumentCommand\xpgcodekey{omv}{\xpgoption{#2}\IfValueT{#1}{\new{#1}}
-= ⟨code⟩ (default value: \texttt{#3})\par}
+\NewDocumentCommand\xpgcodekey{omv}{%
+	\xpgoption{#2}\IfValueT{#1}{\new{#1}}
+     = ⟨code⟩ (default value: \texttt{#3})\par%
+}
 
 %% Sidenotes  << copied from fontspec.dtx
 \newcommand\new[1]{%
