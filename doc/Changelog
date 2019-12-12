@@ -24,6 +24,7 @@ Bug fixes:
   * Fix issues with babelshorthands and graphics package (#368).
   * Fix \text<lang> command with multiple paragraphs.
   * Actually implement documented german spelling variant '1996' (= 'new').
+  * Fix Slovenian localalph option.
 
 Interface and defaults changes:
   * Some boolean options had 'false' value by default, which meant if you passed
