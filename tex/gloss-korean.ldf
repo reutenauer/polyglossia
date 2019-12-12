@@ -47,7 +47,7 @@
 }{\xpg@warning{Unknown Korean swapstrings value `#1'}}
 
 % Register default options
-\xpg@initialize@gloss@options{korean}{variant=plain,swapstring=all,captions=hangul}
+\xpg@initialize@gloss@options{korean}{variant=plain,swapstrings=all,captions=hangul}
 
 \def\captionskorean{%
     \ifcase\xpg@korean@captions\relax
