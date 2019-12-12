@@ -196,8 +196,8 @@ All these commands allow you to set language-specific options.\footnote{%
 	Section~\ref{specific} documents these options for the respective languages.}
 It is also possible to load a series of secondary languages at once (but without options)
 using
-	\displaycmd{\setotherlanguages\marg{lang1⟩,⟨lang2⟩,⟨lang3⟩,…}.}{\setotherlanguages}
-
+	\displaycmd{\setotherlanguages\marg{lang1⟩,⟨lang2⟩,⟨lang3⟩,⟨…}.}{\setotherlanguages}
+%
 All language-specific options can be modified locally by means of the
 language-switching commands described in section \ref{languageswitching}.
 
@@ -549,6 +549,7 @@ For each activated language the command
 (as well as the synonymous \DescribeMacro{\textlang}%
 \cmd{\textlang\oarg{options}\marg{lang}\{…\}}\new{1.46})
 becomes available for short insertions of text in that language.
+
 For example ¦\textrussian{\today}¦ and ¦\textlang{russian}{\today}¦ yield \textrussian{\today}
 The commands switch to the correct hyphenation patterns, they activate
 some extra features for the selected language (such as extra spacing before
@@ -732,8 +733,12 @@ commands are defined. Note the following conventions:
 	\item The preset value of each option (\ie the setting that applies by default,
 	if the option is not explicitly set) is given in \xpgpresetvalue{italics}.
 	\item If an option key may be used without a value, the value that applies
-	is marked by a preceding \xpgdefaultvalue{asterisk}.
+	for value-less keys is marked by a preceding \xpgdefaultvalue{asterisk}.
 \end{itemize}
+For instance, \texttt{babelshorthands = *true} or \texttt{\textit{false}} means that
+\xpgvalue{babelshorthands} is \xpgvalue{false} by default in the respective language,
+and that passing \xpgvalue{babelshorthands} (without value) is equivalent to passing
+\xpgvalue{babelshorthands=true}.
 
 \subsection{afrikaans}\label{afrikaans}
 \paragraph*{Options:}
@@ -773,7 +778,7 @@ commands are defined. Note the following conventions:
 	\begin{itemize}
 	\item \Cmd\abjad and \Cmd\abjadmaghribi (see section \ref{abjad})
   \item \Cmd\aemph to emphasize text with \cmd\overline.\new{1.2.0}
-    \cmd{\textarabic{\aemph{اب}}} yields \textarabic{\aemph{اب}}.
+    ¦\textarabic{\aemph{اب}}¦ yields \textarabic{\aemph{اب}}.
     This command is also available for Farsi, Urdu, etc.
 	\end{itemize}
 
@@ -817,7 +822,7 @@ commands are defined. Note the following conventions:
 \begin{itemize}
 	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
 	environments such as ¦enumerate¦. The command takes a counter as argument,
-	\eg \cmd\textbelarusian{{\Asbuk{page}}} produces \textrussian{\Asbuk{page}}.
+	\eg ¦\textbelarusian{{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
 	\item \Cmd\asbuk: same in lowercase
 \end{itemize}
 
@@ -833,7 +838,7 @@ commands are defined. Note the following conventions:
 \paragraph*{Options:}
 \begin{itemize}
   \item \xpgboolkeyfalse[1.1.1]{babelshorthands}
-    Activates the shorthands \texttt{"l} and \texttt{"L} to type geminated l’s.
+    Activates the shorthands \texttt{"l} and \texttt{"L} to type geminated l or L.
 \end{itemize}
 
 \paragraph*{Commands:}
@@ -1374,9 +1379,8 @@ commands are defined. Note the following conventions:
 			Enable shorthands for prosodic marks (macrons and breves) very similiar to
 			those provided by \pkg{babel-latin} using the ¦withprosodicmarks¦
 			modifier.
-		
 			Note that the active ¦=¦ character used for macrons will cause problems with
-			commands using \texttt{key=value} interfaces, \eg
+			commands using \texttt{key=value} interfaces, such as the command
 			¦\includegraphics[scale=2]{...}¦. Use \cmd{\shorthandoff\{=\}} before
 			such commands (and \cmd{\shorthandon\{=\}} thereafter) within every
 			environment with prosodic shorthands enabled.
@@ -1443,7 +1447,7 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 \begin{itemize}
 	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
 	environments such as ¦enumerate¦. The command takes a counter as argument,
-	\eg \cmd{\textmongolian{\Asbuk{page}}} produces \textrussian{\Asbuk{page}}.
+	\eg ¦\textmongolian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
 	\item \Cmd\asbuk: same in lowercase
 \end{itemize}
 
@@ -1512,7 +1516,7 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 	\begin{itemize}
 	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
 	environments such as ¦enumerate¦. The command takes a counter as argument,
-	\eg \cmd{\textrussian{\Asbuk{page}}} produces \textrussian{\Asbuk{page}}.
+	\eg ¦\textrussian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
 	\item \Cmd\asbuk: same in lowercase
 	\end{itemize}
 
@@ -1540,8 +1544,8 @@ Currently support for Sami is limited to Northern Sami.
 \paragraph*{Commands:}
 \begin{itemize}
 	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
-	environments such as ¦enumerate¦. The command takes a counter as argument,\\
-	Example: ¦\textserbian[numerals=cyrillic]{\Asbuk{page}}¦ produces \textserbian[numerals=cyrillic]{\Asbuk{page}}.
+	environments such as ¦enumerate¦. The command takes a counter as argument, \eg
+	¦\textserbian[numerals=cyrillic]{\Asbuk{page}}¦ produces \textserbian[numerals=cyrillic]{\Asbuk{page}}.
 	\item \Cmd\asbuk: same in lowercase
 \end{itemize}
 
@@ -1597,12 +1601,13 @@ Currently support for Sami is limited to Northern Sami.
 \begin{itemize}
 	\item \xpgchoicekey[1.45]{variant}{\xpgvalue{lower} or \xpgpresetvalue{upper}}
 	\item \xpgboolkeyfalse[1.45]{olddate}
-		If \xpgvalue{true}, \cmd\today will use traditional Sorbian month names (\ie it will be
-		synonymous to \cmd\oldtoday below).
+		If \xpgvalue{true}, \cmd\today\ will use traditional Sorbian month names (\ie it will be
+		synonymous to \cmd\oldtoday\ below).
 \end{itemize}
 \paragraph*{Commands:}
 \begin{itemize}
-	\item \Cmd\oldtoday: outputs the current date using traditional Sorbian month names, even if \xpgoption{olddate} is false.
+	\item \Cmd\oldtoday: outputs the current date using traditional Sorbian month names, even if
+	       \xpgvalue{olddate} is \xpgvalue{false}.
 \end{itemize}
 
 \subsection{spanish}\label{spanish}
@@ -1618,20 +1623,20 @@ Currently support for Sami is limited to Northern Sami.
 	      	\item ¦spaced¦ causes some math operators to use spaces where usual in Spanish (\emph{arc\,cos},
 	      	      \emph{arc\,sen}, \emph{arc\,tg}).
 	      	\item ¦all¦ activates ¦accented¦ and ¦spaced¦ and furthermore provides Spanish localizations of
-	      	      \cmd\sin (\emph{sen}), \cmd\tan (\emph{tg}), \cmd\sinh (\emph{senh}), and \cmd\tanh (\emph{tgh}).
+	      	      \cmd\sin\ (\emph{sen}), \cmd\tan\ (\emph{tg}), \cmd\sinh\ (\emph{senh}), and \cmd\tanh\ (\emph{tgh}).
 	      	\item ¦none¦ does no localization at all (default setting).
 	      \end{itemize}
 \end{itemize}
 \paragraph*{\color{black}Commands:}\new{1.46}
 \begin{itemize}
-	\item \Cmd\arcsen: alias to \cmd\arcsin (\pkg{babel} compatibility)
-	\item \Cmd\arctg: alias to \cmd\arctan (\pkg{babel} compatibility)
-	\item \Cmd\sen: alias to \cmd\sin (\pkg{babel} compatibility)
-	\item \Cmd\senh: alias to \cmd\sinh (\pkg{babel} compatibility)
-	\item \Cmd\tg: alias to \cmd\tan (\pkg{babel} compatibility)
-	\item \Cmd\tgh: alias to \cmd\tanh (\pkg{babel} compatibility)
+	\item \Cmd\arcsen: alias to \cmd\arcsin\ (\pkg{babel} compatibility)
+	\item \Cmd\arctg: alias to \cmd\arctan\ (\pkg{babel} compatibility)
+	\item \Cmd\sen: alias to \cmd\sin\ (\pkg{babel} compatibility)
+	\item \Cmd\senh: alias to \cmd\sinh\ (\pkg{babel} compatibility)
+	\item \Cmd\tg: alias to \cmd\tan\ (\pkg{babel} compatibility)
+	\item \Cmd\tgh: alias to \cmd\tanh\ (\pkg{babel} compatibility)
 	\item \Cmd\spanishoperator: allows you to define further localized operators. For instance, ¦\spanishoperator{cotg}¦
-	      defines a command \cmd\cotg that outputs \emph{cotg} in math. The optional argument of the command lets you specify the
+	      defines a command \cmd\cotg\ that outputs \emph{cotg} in math. The optional argument of the command lets you specify the
 	      spelling, if needed, \eg ¦\spanishoperator[arc\,ctg]{arcctg}¦.
 \end{itemize}
 
@@ -1700,7 +1705,7 @@ that comes with this package.
 %
 In order to redefine internal macros, we recommend to use the command \cmd\gappto.
 For compatibility with \pkg{babel} the command \cmd\addto\ is also available
-to the same effect. For instance, to change the \cmd\chaptername for language ¦lingua¦,
+to the same effect. For instance, to change the \cmd\chaptername\ for language ¦lingua¦,
 you can do this:
 \begin{verbatim}
 \gappto\captionslingua{\def\chaptername{Caput}}
@@ -1957,7 +1962,7 @@ the character with the specified \meta{char code} (\ie unicode utf-16 code witho
 the current font. If so, the character is printed, if not, the \meta{substitution} is printed.
 
 Example: ¦\charifavailable{1E9E}{SS}¦ prints the capital version of the German letter ⟨ß⟩ if available
-(\ie \charifavailable{1E9E}{SS}), else it prints the substitution digraph ⟨SS⟩.
+(\ie \charifavailable{1E9E}{SS}), else it prints the substitution digraph SS.
 
 
 \section{Accessing language information}
