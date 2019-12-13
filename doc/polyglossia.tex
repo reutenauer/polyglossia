@@ -94,7 +94,7 @@
 \pretocmd{\subsection}{\condbreak{2\baselineskip}}{}{}
 
 %% fontspec declarations:
-\setmainfont{Linux Libertine O}
+\setmainfont{Linux Libertine O}[Numbers=OldStyle]
 \setsansfont{Linux Biolinum O}
 \setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}
 \newfontfamily\arabicfont[Script=Arabic]{Amiri}
@@ -348,7 +348,7 @@ in \cmd\setdefaultlanguage\ and \cmd\setotherlanguage\ as well as in the languag
 language switching commands\slash environments documented in section~\ref{sec:babelcmds}.
 Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 
-\bgroup\small
+\bgroup\small\addfontfeatures{Numbers={Monospaced,Lining}}
 \begin{longtable}[c]{lll}
 	\caption{\label{tab:BCP47-polyglossia}BCP47-polyglossia language name matching}\\
 	\toprule
@@ -547,7 +547,7 @@ Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 For each activated language the command
 \cmd{\text\meta{lang}\oarg{options}\marg{…}} \DescribeMacro{\text\meta{lang}}
 (as well as the synonymous \DescribeMacro{\textlang}%
-\cmd{\textlang\oarg{options}\marg{lang}\{…\}}\new{1.46})
+\cmd{\textlang\oarg{options}\marg{lang}\marg{…}}\new{1.46})
 becomes available for short insertions of text in that language.
 
 For example ¦\textrussian{\today}¦ and ¦\textlang{russian}{\today}¦ yield \textrussian{\today}
@@ -555,7 +555,7 @@ The commands switch to the correct hyphenation patterns, they activate
 some extra features for the selected language (such as extra spacing before
 punctuation in French), and they translate the date when using \cmd\today.
 They do not, however, translate so-called \textit{caption strings}, \ie
-``chapter'', ``figure'' etc., to the local language (these remain in the main
+``chapter'', ``figure'' etc., to the local language (these remain in the currently active `outer'
 language).
 
 The\DescribeEnv{\meta{lang}}\ environment \meta{lang}, which is also available for any activated language
@@ -602,7 +602,7 @@ compiled into the \XeLaTeX\ and \LuaLaTeX\ format) are redefined, but keep a
 similar behaviour.
 \begin{itemize}
 \item \DescribeMacro{\selectlanguage}\cmd{\selectlanguage\oarg{options}\marg{lang}}
-\item \DescribeMacro{\foreignlanguage}\cmd{\foreignlanguage\oarg{options}\marg{lang}\{…\}}
+\item \DescribeMacro{\foreignlanguage}\cmd{\foreignlanguage\oarg{options}\marg{lang}\marg{…}}
 \item \DescribeEnv{otherlanguage}\cmd{\begin\{otherlanguage\}\oarg{options}\marg{lang}} \dots{} \cmd{\end\{otherlanguage\}}
 \item \DescribeEnv{otherlanguage*}\cmd{\begin\{otherlanguage*\}\oarg{options}\marg{lang}} \dots{} \cmd{\end\{otherlanguage*\}}
 \end{itemize}
@@ -1948,8 +1948,8 @@ indicated the same day on the site \href{http://www.gulfnews.com}{gulfnews.com})
 \subsection{Farsi (jalālī) calendar (farsical.sty)}
 This package is an almost verbatim copy of ¦Arabiftoday.sty¦ (in the \pkg{Arabi} package),
 itself a slight modification of ¦ftoday.sty¦ in Farsi\TeX.\footnote{ %
-	One day I may rewrite \pkg{farsical} from scratch using the algorithm in
-	Reingold \& Gershowitz (ref.~n.~\ref{reingold}).}
+	One day we may rewrite \pkg{farsical} from scratch using the algorithm in
+	Reingold \& Gershowitz (ref.~n.\,\ref{reingold}).}
 Here we have renamed the command \cmd\ftoday\ to
 \Cmd\Jalalitoday.
 Example: today is \Jalalitoday.
