@@ -217,13 +217,13 @@
 \def\blockextras@czech{%
   \ifczech@babelshorthands\czech@shorthands\fi%
   \ifczech@vlna\czech@vlna\else\noczech@vlna\fi%
-  \ifczech@splithyphens\czech@hyphens\else\noczech@hyhens\fi%
+  \ifczech@splithyphens\czech@hyphens\else\noczech@hyphens\fi%
 }
 
 \def\inlineextras@czech{%
   \ifczech@babelshorthands\czech@shorthands\fi%
   \ifczech@vlna\czech@vlna\else\noczech@vlna\fi%
-  \ifczech@splithyphens\czech@hyphens\else\noczech@hyhens\fi%
+  \ifczech@splithyphens\czech@hyphens\else\noczech@hyphens\fi%
 }
 
 \endinput

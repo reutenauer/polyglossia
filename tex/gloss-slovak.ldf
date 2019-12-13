@@ -225,13 +225,13 @@
 \def\blockextras@slovak{%
   \ifslovak@babelshorthands\slovak@shorthands\fi%
   \ifslovak@vlna\slovak@vlna\else\noslovak@vlna\fi%
-  \ifslovak@splithyphens\slovak@hyphens\else\noslovak@hyhens\fi%
+  \ifslovak@splithyphens\slovak@hyphens\else\noslovak@hyphens\fi%
 }
 
 \def\inlineextras@slovak{%
   \ifslovak@babelshorthands\slovak@shorthands\fi%
   \ifslovak@vlna\slovak@vlna\else\noslovak@vlna\fi%
-  \ifslovak@splithyphens\slovak@hyphens\else\noslovak@hyhens\fi%
+  \ifslovak@splithyphens\slovak@hyphens\else\noslovak@hyphens\fi%
 }
 
 \endinput
