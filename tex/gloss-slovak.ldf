@@ -37,8 +37,12 @@
 }{}
 
 \def\slovak@@splhyphen#1{%
-  \kern\z@\discretionary{-}{\char\hyphenchar\the\font}{#1}%
-  \nobreak\hskip\z@%
+  \ifnum\hyphenchar \font>0%
+    \kern\z@\discretionary{-}{\char\hyphenchar\the\font}{#1}%
+    \nobreak\hskip\z@%
+  \else%
+    #1%
+  \fi%
 }
 
 \def\slovak@splhyphen{%

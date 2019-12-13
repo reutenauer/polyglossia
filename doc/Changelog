@@ -25,6 +25,7 @@ Bug fixes:
   * Fix \text<lang> command with multiple paragraphs.
   * Actually implement documented german spelling variant '1996' (= 'new').
   * Fix Slovenian localalph option.
+  * Fix Czech and Slovak splithyphens with typewriter fonts.
   * farsical.sty: fix spacing issue with some months.
 
 Interface and defaults changes:
