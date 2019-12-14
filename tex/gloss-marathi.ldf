@@ -88,24 +88,43 @@ and may look very wrong.}
    }%
    \def\today{\marathinumber\day\space\marathimonth\space\marathinumber\year}%
 }
-\renewcommand{\labelitemii}{$\rightarrow$}
+\let\xpg@orig@labelitemii\labelitemii
+
+\def\blockextrasmarathi{%
+   ...
+   \renewcommand{\labelitemii}{$\rightarrow$}
+}
+
+\def\noextrasmarathi{%
+   ...
+   \let\labelitemii\xpg@orig@labelitemii
+}
 \def\devanagari@akshar#1{\ifcase#1\or अ\or आ\or इ\or ई\or उ\or ऊ\or ए\or ऐ\or ओ\or औ\or अं\or अः\else\@ctrerr\fi}
 \def\devanagari@alph#1{\ifcase#1\or क\or ख\or ग\or घ\or ङ\or च\or छ\or ज\or झ\or ञ\or ट\or ठ\or ड\or ढ\or ण\or त\or थ\or द\or ध\or न\or प\or फ\or ब\or भ\or म\or य\or र\or ल\or व\or श\or ष\or स\or ह\or ळ\else\@ctrerr\fi}
 \def\devanagari@letter#1{\ifcase#1\or एक\or दोन\or तीन\or चार\or पाच\or सहा\or सात\or आठ\or नऊ\or दहा\or अकरा\or बारा\or तेरा\or चौदा\or पंधरा\or सोळा\or सतरा\or अठरा\or एकोणीस\or वीसएकवीस\or बावीस\or तेवीस\or चोवीस\or पंचवीस\or सव्वीस\or सत्तावीस\or अठाव्वीस\or एकोणतीस\or तीस\or एकतीस\or बत्तीस\or तेहेत्तीस \or चौतीस \or पस्तीस \or छत्तीस \or सतदिस \or अडतीस \or एकोणचाळीस \or चाळीस \or एक्केचाळीस \or बेचाळीस \or त्रेचाळीस \or चौवेचाळीस\or पंचेचाळीस \or सेहेचाळीस \or सत्तेचाळीस \or अठ्ठेचाळीस \or एकोणपन्नास \or पन्नास \or एक्कावन्न \or बावन्न \or त्रेपन्न \or चोपन्न \or पंचावन्न \or छपन्न\or सत्तावन्न \or अठ्ठावन्न \or एकोणसाठ \or साठ \or एकसष्ठ \or बासष्ठ \or त्रेसष्ट \or चौसष्ठ \or पासष्ठ \or सहासष्ठ \or सदुष्ठ \or अडुसष्ठ \or एकोणसत्तर\or सत्तर \or एकाहत्तर \or बहात्तर \or त्र्याहत्तर \or चौऱ्याहत्तर \or पंच्याहत्तर \or शहात्तर \or सत्याहत्तर \or अठ्याहत्तर \or एकोणऐशी \or ऐंशी\or एक्याऐंशी \or ब्याऐंशी \or त्र्याऐंशी \or चौऱ्याऐंशी \or पंच्याऐंशी \or शह्यांशी \or सत्यांऐंशी \or अठ्ठ्याऐंशी \or एकोणनव्वद \or नव्वद \or एक्याण्णव\or ब्याण्णव \or त्र्याण्णव \or चौऱ्याण्णव \or पंच्याण्णव \or शहाण्णव \or सत्याण्णव \or अठ्याण्णव \or नव्याण्णव \or शंभर\else\@ctrerr\fi}
-\let\@alph\devanagari@akshar
-\let\@Alph\devanagari@letter
-\let\@roman\devanagari@alph
-\let\@Roman\devanagari@letter
 
-\ifcsname xpg@orig@baselinestretch\endcsname\renewcommand{\baselinestretch}{\xpg@orig@baselinestretch}\fi %
-\def\inlineextras@marathi{%
-	\xdef\xpg@orig@baselinestretch{\ifcsname baselinestretch\endcsname \baselinestretch \else 1\fi}%
-	\renewcommand{\baselinestretch}{1.2}%
+\let\xpg@save@roman\@roman
+\let\xpg@save@Roman\@Roman
+
+\def\marathi@numbers{%
+  \let\@alph\devanagari@akshar
+  \let\@Alph\devanagari@letter
+  \let\@roman\devanagari@alph
+  \let\@Roman\devanagari@letter
 }
-\def\blockextras@marathi{%
-	\xdef\xpg@orig@baselinestretch{%
-		\ifcsname baselinestretch\endcsname \baselinestretch \else 1\fi%
-	}%
-}%
+
+\def\nomarathi@numbers{%
+  \let\@alph\latin@alph%
+  \let\@Alph\latin@Alph%
+  \let\@roman\xpg@save@roman
+  \let\@Roman\xpg@save@Roman
+}
+
 \renewcommand{\baselinestretch}{1.2}%
+\ifcsname xpg@orig@baselinestretch\endcsname\renewcommand{\baselinestretch}{\xpg@orig@baselinestretch}\fi %
+
+\def\blockextras@marathi{%
+\def\noblockextras@marathi{%
+ \let\baselinestrech\xpg@orig@baselinestretch%
+}
 \endinput
