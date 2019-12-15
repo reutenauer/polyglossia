@@ -109,10 +109,11 @@ and may look very wrong.}
   \let\@Roman\xpg@save@Roman
 }
 \def\blockextrasmarathi{%
-   \let\baselinestrech\xpg@orig@baselinestretch%
+  \let\xpg@orig@baselinestretch\baselinestrech%
   \renewcommand{\baselinestretch}{1.2}%
    \renewcommand{\labelitemii}{$\rightarrow$}%
 }
+\let\xpg@orig@labelitemii\labelitemii
 \def\noextrasmarathi{%
   \let\baselinestrech\xpg@orig@baselinestretch%
    \let\labelitemii\xpg@orig@labelitemii%
