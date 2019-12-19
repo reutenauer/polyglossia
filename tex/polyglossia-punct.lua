@@ -239,7 +239,7 @@ local function process(head)
                 if leftspace or rightspace then
                     local fontparameters = fonts.hashes.parameters[current.font]
                     local unit, stretch, shrink, spacing_node
-                    if leftspace then
+                    if leftspace and fontparameters then
                         local prev = getprev(current)
                         local space_exception = false
                         if prev then
@@ -272,7 +272,7 @@ local function process(head)
                             head = insert_node_before(head, current, spacing_node)
                         end
                     end
-                    if rightspace then
+                    if rightspace and fontparameters then
                         local next = getnext(current)
                         local space_exception = false
                         if next then
