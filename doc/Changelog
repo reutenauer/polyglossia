@@ -22,6 +22,7 @@ Bug fixes:
   * Fix option-less \babelname in multi-variant languages (#357).
   * Fix some spacing inconsistencies with French, Latin, and Sanskrit (#358).
   * Fix issues with babelshorthands and graphics package (#368).
+  * Fix some captions and improve numbering in Marathi (#370).
   * Fix Hungarian swapstrings feature (#373).
   * Fix lua punctuation code problem (#374).
   * Fix \text<lang> command with multiple paragraphs.
