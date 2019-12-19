@@ -80,8 +80,8 @@
 
 \define@boolkey{french}[french@]{frenchfootnote}[true]{%
   \AfterPreamble{%
-    \ifdefstring{\xpg@main@language}{french}{%
-      \iffrench@frenchfootnote
+    \iffrench@frenchfootnote
+      \ifdefstring{\xpg@main@language}{french}{%
          \ifx\@makefntext\undefined\else
              \long\def\french@makefntext##1{%
                 \parindent1em \noindent\quad%
@@ -90,10 +90,10 @@
              }
              \let\@makefntext\french@makefntext
          \fi
-      \else
-         \let\@makefntext\xpg@orig@makefntext
-      \fi
-    }{\xpg@warning{Option 'frenchfootnote' only supported if French is main language!}}%
+      }{\xpg@warning{Option 'frenchfootnote' only supported if French is main language!}}%
+    \else
+       \let\@makefntext\xpg@orig@makefntext
+    \fi
   }%
 }
 
@@ -165,16 +165,16 @@
 
 \define@boolkey{french}[french@]{frenchitemlabels}[true]{%
   \AfterPreamble{%
-    \ifdefstring{\xpg@main@language}{french}{%
-      \iffrench@frenchitemlabels
+    \iffrench@frenchitemlabels
+      \ifdefstring{\xpg@main@language}{french}{%
          \renewcommand{\labelitemi}{\french@itemi}%
          \renewcommand{\labelitemii}{\french@itemii}%
          \renewcommand{\labelitemiii}{\french@itemiii}%
          \renewcommand{\labelitemiv}{\french@itemiv}%
-      \else
-         \let\@makefntext\xpg@orig@makefntext
-      \fi
-    }{\xpg@warning{Option 'frenchitemlabels' only supported if French is main language!}}%
+      }{\xpg@warning{Option 'frenchitemlabels' only supported if French is main language!}}%
+    \else
+       \let\@makefntext\xpg@orig@makefntext
+    \fi
   }%
 }
 

@@ -329,7 +329,9 @@
           }
       }
       {
-        \msg_warning:nn {polyglossia} {latin / ineffective footnote option}
+        \iflatin@ecclesiasticfootnotes
+          \msg_warning:nn {polyglossia} {latin / ineffective footnote option}
+        \fi
       }
   }
 
