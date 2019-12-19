@@ -23,6 +23,7 @@ Bug fixes:
   * Fix some spacing inconsistencies with French, Latin, and Sanskrit (#358).
   * Fix issues with babelshorthands and graphics package (#368).
   * Fix Hungarian swapstrings feature (#373).
+  * Fix lua punctuation code problem (#374).
   * Fix \text<lang> command with multiple paragraphs.
   * Actually implement documented german spelling variant '1996' (= 'new').
   * Fix Slovenian localalph option.
