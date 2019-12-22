@@ -138,16 +138,17 @@ and may look very wrong.}
   \let\@Roman\xpg@save@Roman
 }
 
-\def\blockextrasmarathi{%
+\def\blockextras@marathi{%
   \let\xpg@orig@baselinestretch\baselinestrech%
   \renewcommand{\baselinestretch}{1.2}%
-   \renewcommand{\labelitemii}{$\rightarrow$}%
+  \renewcommand{\labelitemii}{$\rightarrow$}%
 }
 
 \let\xpg@orig@labelitemii\labelitemii
-\def\noextrasmarathi{%
+
+\def\noextras@marathi{%
   \let\baselinestrech\xpg@orig@baselinestretch%
-   \let\labelitemii\xpg@orig@labelitemii%
+  \let\labelitemii\xpg@orig@labelitemii%
 }
 
 \endinput
