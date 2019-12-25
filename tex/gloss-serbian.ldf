@@ -46,14 +46,28 @@
 
 \define@key{serbian}{script}[Cyrillic]{\setkeys{serbian}{Script=#1}}
 
-\newif\ifserbian@numerals
-\define@key{serbian}{numerals}[arabic]{%
-   \ifstrequal{#1}{latin}{\serbian@numeralsfalse}{%
-       \ifstrequal{#1}{cyrillic}%
-          {\serbian@numeralstrue}
-          {\serbian@numeralsfalse}%
-   }%
-}
+\newif\ifcyrillic@numerals
+\newif\ifcyrillic@asbuk@numerals
+\define@choicekey*+{serbian}{numerals}[\val\nr]{arabic,cyrillic,cyrillic-trad,cyrillic-alph}[arabic]{%
+   \ifcase\nr\relax
+      % arabic:
+      \cyrillic@numeralsfalse%
+      \cyrillic@asbuk@numeralsfalse%
+   \or
+      % cyrillic:
+      \cyrillic@numeralstrue%
+      \cyrillic@asbuk@numeralsfalse%
+   \or
+      % cyrillic-trad:
+      \cyrillic@numeralstrue%
+      \cyrillic@asbuk@numeralsfalse%
+   \or
+      % cyrillic-alph:
+      \cyrillic@numeralstrue%
+      \cyrillic@asbuk@numeralstrue%
+   \fi
+   \xpg@info{Option: Serbian, numerals=\val}%
+}{\xpg@warning{Unknown Serbian numerals value `#1'}}
 
 \setkeys{serbian}{Script,numerals}
 
@@ -144,19 +158,27 @@
 \newcommand{\Serbiannumerals}[2]{\Serbiannumber{#2}}
 
 \def\serbiannumber#1{%
-  \ifserbian@numerals
-    \cyr@alph{#1}%
+  \ifcyrillic@numerals
+    \ifcyrillic@asbuk@numerals
+      \serbian@asbuk@alph{#1}%
+    \else
+      \cyr@alph{#1}%
+    \fi
   \else
     \number#1%
-  \fi
+  \fi%
 }
 
 \def\Serbiannumber#1{%
-  \ifserbian@numerals
-    \cyr@Alph{#1}%
+  \ifcyrillic@numerals
+    \ifcyrillic@asbuk@numerals
+      \serbian@asbuk@Alph{#1}%
+    \else
+      \cyr@Alph{#1}%
+    \fi
   \else
     \number#1%
-  \fi
+  \fi%
 }
 
 \let\serbiannumeral=\serbiannumber
@@ -186,24 +208,29 @@
    \ifserbian@numerals\noserbian@numbers\fi
 }
 
-\def\Asbuk#1{\expandafter\cyr@Alph\csname c@#1\endcsname}
+\def\Asbuk#1{\expandafter\serbian@asbuk@Alph\csname c@#1\endcsname}
+\def\asbuk#1{\expandafter\serbian@asbuk@alph\csname c@#1\endcsname}
 
-\def\asbuk#1{\expandafter\cyr@alph\csname c@#1\endcsname}
+\def\AsbukTrad#1{\expandafter\cyr@Alph\csname c@#1\endcsname}
+\def\asbukTrad#1{\expandafter\cyr@alph\csname c@#1\endcsname}
 
 % This is a poor man's cyrillic alphanumeric. It just uses the alphabet and
-% thus ends at 30. We now use proper cyrillic numbering.
+% thus ends at 30.
+\def\serbian@asbuk@Alph#1{\ifcase#1\or
+   А\or Б\or В\or Г\or Д\or Е\or Ж\or
+   З\or И\or К\or Л\or М\or Н\or О\or
+   П\or Р\or С\or Т\or У\or Ф\or Х\or
+   Ц\or Ч\or Ш\or Щ\or Э\or Ю\or Я%
+   \else\xpg@ill@value{#1}{serbian@asbuk@Alph}\fi%
+}
 
-%\def\cyr@Alph#1{\ifcase#1\or
-%   А\or Б\or В\or Г\or Д\or Ђ\or Е\or Ж\or
-%   З\or И\or Ј\or К\or Л\or Љ\or М\or Н\or
-%   Њ\or О\or П\or Р\or С\or Т\or Ћ\or У\or
-%   Ф\or Х\or Ц\or Ч\or Џ\or Ш\else\xpg@ill@value{#1}{cyr@Alph}\fi}
-
-%\def\cyr@alph#1{\ifcase#1\or
-%   а\or б\or в\or г\or д\or ђ\or е\or ж\or
-%   з\or и\or ј\or к\or л\or љ\or м\or н\or
-%   њ\or о\or п\or р\or с\or т\or ћ\or у\or
-%   ф\or х\or ц\or ч\or џ\or ш\else\xpg@ill@value{#1}{cyr@alph}\fi}
+\def\serbian@asbuk@alph#1{\ifcase#1\or
+   а\or б\or в\or г\or д\or е\or ж\or
+   з\or и\or к\or л\or м\or н\or о\or
+   п\or р\or с\or т\or у\or ф\or х\or
+   ц\or ч\or ш\or щ\or э\or ю\or я%
+   \else\xpg@ill@value{#1}{serbian@asbuk@alph}\fi%
+}
 
  
 \endinput

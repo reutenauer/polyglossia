@@ -10,6 +10,12 @@ New features:
     \setlanguagealias* which does not define dedicated alias environments).
   * New gloss option totalhyphenmin (corresponds to LuaTeX's \hyphenationmin) (#111).
   * New test \iflanguageoption{<lang>}{<key>}{<val>} (#364).
+  * Restore simple alphabetic numbering for \asbuk and \Asbuk in Belarusian, Mongolian,
+    Russian, Serbian, and Ukrainian (#377).
+  * New command \AsbukTrad and \asbukTrad for Belarusian, Mongolian, Russian, Serbian,
+    and Ukrainian which uses traditional alphanumerical numbering.
+  * New numerals option "cyrillic-trad" and "cyrillic-alph" to differentiate simple
+    alphabetic and traditional alpnanumerical Cyrillic numbering.
   * \selectbackgroundlanguage and \resetdefaultlanguage now also support language
     aliases.
   * New macro \charifavailable{<char code>}{<substitution>}.

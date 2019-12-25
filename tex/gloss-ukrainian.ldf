@@ -2,7 +2,9 @@
 % Strings taken from Babel
 % and revised by Roman Kyrylych
 
-\PolyglossiaSetup{ukrainian}{
+\RequirePackage{xpg-cyrillicnumbers}
+
+\PolyglossiaSetup{ukrainian}{%
   bcp47=uk,
   script=Cyrillic,
   scripttag=cyrl,
@@ -10,28 +12,47 @@
   hyphennames={ukrainian},
   hyphenmins={2,2},
   frenchspacing=true,
-  fontsetup=true
-  %TODO localalph
+  fontsetup=true,
+  localnumeral=ukrainiannumerals,
+  Localnumeral=Ukrainiannumerals
 }
 
 % BCP-47 compliant aliases
 \setlanguagealias*{ukrainian}{uk}
 
 \newif\ifcyrillic@numerals
-\define@key{ukrainian}{numerals}[latin]{%
-\ifstrequal{#1}{cyrillic}%
-{\cyrillic@numeralstrue}
-{\cyrillic@numeralsfalse}%
-}
+\newif\ifcyrillic@asbuk@numerals
+\define@choicekey*+{ukrainian}{numerals}[\val\nr]{arabic,cyrillic,cyrillic-trad,cyrillic-alph}[arabic]{%
+   \ifcase\nr\relax
+      % arabic:
+      \cyrillic@numeralsfalse%
+      \cyrillic@asbuk@numeralsfalse%
+   \or
+      % cyrillic:
+      \cyrillic@numeralstrue%
+      \cyrillic@asbuk@numeralsfalse%
+   \or
+      % cyrillic-trad:
+      \cyrillic@numeralstrue%
+      \cyrillic@asbuk@numeralsfalse%
+   \or
+      % cyrillic-alph:
+      \cyrillic@numeralstrue%
+      \cyrillic@asbuk@numeralstrue%
+   \fi
+   \xpg@info{Option: Ukrainian, numerals=\val}%
+}{\xpg@warning{Unknown Ukrainian numerals value `#1'}}
+
+
+% Register default options
+\xpg@initialize@gloss@options{ukrainian}{numerals=arabic}
 
 \define@boolkey{ukrainian}[ukrainian@]{babelshorthands}[true]{}
 
-\setkeys{ukrainian}{numerals}
-
 \ifsystem@babelshorthands
-\setkeys{ukrainian}{babelshorthands=true}
+  \setkeys{ukrainian}{babelshorthands=true}
 \else
-\setkeys{ukrainian}{babelshorthands=false}
+  \setkeys{ukrainian}{babelshorthands=false}
 \fi
 
 \ifcsundef{initiate@active@char}{%
@@ -41,45 +62,47 @@
 }{}
 
 \def\ukrainian@shorthands{%
-\bbl@activate{"}%
-\def\language@group{ukrainian}%
+  \bbl@activate{"}%
+  \def\language@group{ukrainian}%
 %  \declare@shorthand{ukrainian}{"`}{„}%
 %  \declare@shorthand{ukrainian}{"'}{“}%
 %  \declare@shorthand{ukrainian}{"<}{«}%
 %  \declare@shorthand{ukrainian}{">}{»}%
-\declare@shorthand{ukrainian}{""}{\hskip\z@skip}%
-\declare@shorthand{ukrainian}{"~}{\textormath{\leavevmode\hbox{-}}{-}}%
-\declare@shorthand{ukrainian}{"=}{\nobreak-\hskip\z@skip}%
-\declare@shorthand{ukrainian}{"|}{\textormath{\nobreak\discretionary{-}{}{\kern.03em}\allowhyphens}{}}%
-\declare@shorthand{ukrainian}{"-}{%
-\def\ukrainian@sh@tmp{%
-\if\ukrainian@sh@next-\expandafter\ukrainian@sh@emdash
-\else\expandafter\ukrainian@sh@hyphen\fi
-}%
-\futurelet\ukrainian@sh@next\ukrainian@sh@tmp}%
-\def\ukrainian@sh@hyphen{%
-\nobreak\-\bbl@allowhyphens}%
-\def\ukrainian@sh@emdash##1##2{\cdash-##1##2}%
-\def\cdash##1##2##3{\def\tempx@{##3}%
-\def\tempa@{-}\def\tempb@{~}\def\tempc@{*}%
-\ifx\tempx@\tempa@\@Acdash\else
-\ifx\tempx@\tempb@\@Bcdash\else
-\ifx\tempx@\tempc@\@Ccdash\else
-\errmessage{Wrong usage of cdash}\fi\fi\fi}%
-\def\@Acdash{\ifdim\lastskip>\z@\unskip\nobreak\hskip.2em\fi
-\cyrdash\hskip.2em\ignorespaces}%
-\def\@Bcdash{\leavevmode\ifdim\lastskip>\z@\unskip\fi
-\nobreak\cyrdash\penalty\exhyphenpenalty\hskip\z@skip\ignorespaces}%
-\def\@Ccdash{\leavevmode
-\nobreak\cyrdash\nobreak\hskip.35em\ignorespaces}%
-\ifx\cyrdash\undefined
-\def\cyrdash{\hbox to.8em{--\hss--}}
-\fi
-\declare@shorthand{ukrainian}{",}{\nobreak\hskip.2em\ignorespaces}%
+  \declare@shorthand{ukrainian}{""}{\hskip\z@skip}%
+  \declare@shorthand{ukrainian}{"~}{\textormath{\leavevmode\hbox{-}}{-}}%
+  \declare@shorthand{ukrainian}{"=}{\nobreak-\hskip\z@skip}%
+  \declare@shorthand{ukrainian}{"|}{\textormath{\nobreak\discretionary{-}{}{\kern.03em}\allowhyphens}{}}%
+  \declare@shorthand{ukrainian}{"-}{%
+  \def\ukrainian@sh@tmp{%
+    \if\ukrainian@sh@next-\expandafter\ukrainian@sh@emdash
+    \else\expandafter\ukrainian@sh@hyphen\fi
+  }%
+  \futurelet\ukrainian@sh@next\ukrainian@sh@tmp}%
+  \def\ukrainian@sh@hyphen{%
+  \nobreak\-\bbl@allowhyphens}%
+  \def\ukrainian@sh@emdash##1##2{\cdash-##1##2}%
+  \def\cdash##1##2##3{%
+    \def\tempx@{##3}%
+    \def\tempa@{-}\def\tempb@{~}\def\tempc@{*}%
+    \ifx\tempx@\tempa@\@Acdash\else
+    \ifx\tempx@\tempb@\@Bcdash\else
+    \ifx\tempx@\tempc@\@Ccdash\else
+    \errmessage{Wrong usage of cdash}\fi\fi\fi%
+  }%
+  \def\@Acdash{\ifdim\lastskip>\z@\unskip\nobreak\hskip.2em\fi
+  \cyrdash\hskip.2em\ignorespaces}%
+  \def\@Bcdash{\leavevmode\ifdim\lastskip>\z@\unskip\fi
+  \nobreak\cyrdash\penalty\exhyphenpenalty\hskip\z@skip\ignorespaces}%
+  \def\@Ccdash{\leavevmode
+  \nobreak\cyrdash\nobreak\hskip.35em\ignorespaces}%
+  \ifx\cyrdash\undefined
+    \def\cyrdash{\hbox to.8em{--\hss--}}
+  \fi
+  \declare@shorthand{ukrainian}{",}{\nobreak\hskip.2em\ignorespaces}%
 }
 
 \def\noukrainian@shorthands{%
-\@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
 }
 
 \def\captionsukrainian{%
@@ -106,7 +129,8 @@
    \def\headtoname{До}%
    \def\proofname{Доведення}%
    \def\glossaryname{Словник термінів}%
-   }
+}
+
 \def\dateukrainian{%
    \def\today{\number\day~\ifcase\month\or
     січня\or
@@ -121,39 +145,82 @@
     жовтня\or
     листопада\or
     грудня\fi%
-    \space\number\year~р.}}
+    \space\number\year~р.}%
+}
 
 % The following is based on some ideas from ruscor.sty
 \def\ukrainian@capsformat{%
-\def\@seccntformat##1{\csname pre##1\endcsname%
-\csname the##1\endcsname%
-\csname post##1\endcsname}%
-\def\@aftersepkern{\hspace{0.5em}}%
-\def\postchapter{.\@aftersepkern}%
-\def\postsection{.\@aftersepkern}%
-\def\postsubsection{.\@aftersepkern}%
-\def\postsubsubsection{.\@aftersepkern}%
-\def\postparagraph{.\@aftersepkern}%
-\def\postsubparagraph{.\@aftersepkern}%
-\def\prechapter{}%
-\def\presection{}%
-\def\presubsection{}%
-\def\presubsubsection{}%
-\def\preparagraph{}%
-\def\presubparagraph{}}
+  \def\@seccntformat##1{\csname pre##1\endcsname%
+  \csname the##1\endcsname%
+  \csname post##1\endcsname}%
+  \def\@aftersepkern{\hspace{0.5em}}%
+  \def\postchapter{.\@aftersepkern}%
+  \def\postsection{.\@aftersepkern}%
+  \def\postsubsection{.\@aftersepkern}%
+  \def\postsubsubsection{.\@aftersepkern}%
+  \def\postparagraph{.\@aftersepkern}%
+  \def\postsubparagraph{.\@aftersepkern}%
+  \def\prechapter{}%
+  \def\presection{}%
+  \def\presubsection{}%
+  \def\presubsubsection{}%
+  \def\preparagraph{}%
+  \def\presubparagraph{}%
+}
 
-\def\Asbuk#1{\expandafter\ukrainian@Alph\csname c@#1\endcsname}
-\def\ukrainian@Alph#1{\ifcase#1\or
-   А\or Б\or В\or Г\or Д\or Е\or Є\or Ж\or
-   З\or И\or І\or Ї\or Й\or К\or Л\or М\or Н\or О\or
+\newcommand{\ukrainiannumerals}[2]{\ukrainiannumber{#2}}
+\newcommand{\Ukrainiannumerals}[2]{\Ukrainiannumber{#2}}
+
+\def\ukrainiannumber#1{%
+  \ifcyrillic@numerals
+    \ifcyrillic@asbuk@numerals
+      \serbian@asbuk@alph{#1}%
+    \else
+      \cyr@alph{#1}%
+    \fi
+  \else
+    \number#1%
+  \fi%
+}
+
+\def\Ukrainiannumber#1{%
+  \ifcyrillic@numerals
+    \ifcyrillic@asbuk@numerals
+      \serbian@asbuk@Alph{#1}%
+    \else
+      \cyr@Alph{#1}%
+    \fi
+  \else
+    \number#1%
+  \fi%
+}
+
+\let\ukrainiannumeral=\ukrainiannumber
+\let\Ukrainiannumeral=\Ukrainiannumber
+
+\def\Asbuk#1{\expandafter\ukranian@asbuk@Alph\csname c@#1\endcsname}
+\def\asbuk#1{\expandafter\ukranian@asbuk@alph\csname c@#1\endcsname}
+
+\def\AsbukTrad#1{\expandafter\cyr@Alph\csname c@#1\endcsname}
+\def\asbukTrad#1{\expandafter\cyr@alph\csname c@#1\endcsname}
+
+% This is a poor man's cyrillic alphanumeric. It just uses the alphabet and
+% thus ends at 30.
+\def\ukranian@asbuk@Alph#1{\ifcase#1\or
+   А\or Б\or В\or Г\or Д\or Е\or Ж\or
+   З\or И\or К\or Л\or М\or Н\or О\or
    П\or Р\or С\or Т\or У\or Ф\or Х\or
-   Ц\or Ч\or Ш\or Щ\or Ю\or Я\else\xpg@ill@value{#1}{ukrainian@Alph}\fi}
-\def\asbuk#1{\expandafter\ukrainian@alph\csname c@#1\endcsname}
-\def\ukrainian@alph#1{\ifcase#1\or
-   а\or б\or в\or г\or д\or е\or є\or ж\or
-   з\or и\or і\or ї\or й\or к\or л\or м\or н\or о\or
+   Ц\or Ч\or Ш\or Щ\or Э\or Ю\or Я%
+   \else\xpg@ill@value{#1}{ukranian@asbuk@Alph}\fi%
+}
+
+\def\ukranian@asbuk@alph#1{\ifcase#1\or
+   а\or б\or в\or г\or д\or е\or ж\or
+   з\or и\or к\or л\or м\or н\or о\or
    п\or р\or с\or т\or у\or ф\or х\or
-   ц\or ч\or ш\or щ\or ю\or я\else\xpg@ill@value{#1}{ukrainian@alph}\fi}
+   ц\or ч\or ш\or щ\or э\or ю\or я%
+   \else\xpg@ill@value{#1}{ukranian@asbuk@alph}\fi%
+}
 
 \def\ukrainian@numbers{%
    \let\@Alph\ukrainian@Alph%
@@ -166,19 +233,19 @@
 }
 
 \def\noextras@ukrainian{%
-\def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
-\ifcyrillic@numerals\noukrainian@numbers\fi
-\noukrainian@shorthands%
+  \def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
+  \ifcyrillic@numerals\noukrainian@numbers\fi
+  \noukrainian@shorthands%
 }
 
 \def\blockextras@ukrainian{%
-\ukrainian@capsformat%
-\ifcyrillic@numerals\ukrainian@numbers\fi
-\ifukrainian@babelshorthands\ukrainian@shorthands\fi
+  \ukrainian@capsformat%
+  \ifcyrillic@numerals\ukrainian@numbers\fi
+  \ifukrainian@babelshorthands\ukrainian@shorthands\fi
 }
 
 \def\inlineextras@ukrainian{%
-\ifukrainian@babelshorthands\ukrainian@shorthands\fi%
+  \ifukrainian@babelshorthands\ukrainian@shorthands\fi%
 }
 
 %%% stuff from Babel

@@ -526,7 +526,7 @@ Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 		Globally activates \pkg{babel} shorthands whenever available. Currently
 		shorthands are implemented for Afrikaans, Belarusian, Catalan, Croatian,
 		Czech, Dutch, Finnish, Georgian, German, Italian, Latin, Mongolian,
-		Russian, and Slovak. Please refer to the respective language descriptions
+		Russian, Slovak, and Ukrainian. Please refer to the respective language descriptions
 		(sec.~\ref{specific}) for details.
 
 	\item \xpgoption{localmarks} redefines the internal \LaTeX\ macros \cmd\markboth\ and
@@ -811,8 +811,14 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		\item[¦"<¦] for French left double quotes (looks like <<).
 		\item[¦">¦] for French right double quotes (looks like >>).
 	\end{shorthands}
-	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or \xpgvalue{cyrillic}}
-	Uses either Arabic numerals or Cyrillic	alphanumerical numbering.
+    \item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic}, \xpgvalue{cyrillic-alph} or \xpgvalue{cyrillic-trad}}
+         Uses either Arabic numerals or Cyrillic alphanumerical numbering. The two Cyrillic variants differ as follows:
+         \begin{itemize}
+	          \item \xpgvalue{cyrillic-alph} steps through the Cyrillic alphabet. Thus in can only be used up to 30.
+	          \item \xpgvalue{cyrillic-trad} (= \xpgvalue{cyrillic}) uses a traditional Cyrillic alphanumeric system.%
+	                \footnote{See \url{https://en.wikipedia.org/wiki/Cyrillic_numerals}.}
+	                It supports numbers up to 1\,000\,000.
+         \end{itemize}
 	\item \xpgchoicekey{spelling}{\xpgpresetvalue{modern} or \xpgvalue{classic} (= \xpgvalue{tarask})}
 	With ¦spelling=classic¦, captions and dates adhere to the Taraškievica (or
 	Belarusian classical) orthography rather than the standard orthography.
@@ -820,10 +826,14 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 %
 \paragraph*{Commands:}
 \begin{itemize}
-	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
-	environments such as ¦enumerate¦. The command takes a counter as argument,
-	\eg ¦\textbelarusian{{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
-	\item \Cmd\asbuk: same in lowercase
+     \item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for environments such as ¦enumerate¦.
+          It steps through the Cyrillic alphabet and thus in can only be used up to 30.
+          The command takes a counter as argument, \eg ¦\textbelarusian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
+     \item \Cmd\asbuk: same as \cmd\Asbuk but in lowercase.
+     \item \Cmd\AsbukTrad: same as \cmd\Asbuk\ but using the traditional Cyrillic alphanumeric numbering which supports
+          numbers up to 1\,000\,000.\\
+          \Eg ¦\textbelarusian{\AsbukTrad{page}}¦ produces \textrussian{\AsbukTrad{page}}.
+     \item \Cmd\asbukTrad: same as \cmd\AsbukTrad\ but in lowercase
 \end{itemize}
 
 \subsection[bengali]{bengali\new{1.2.0}}\label{bengali}
@@ -1445,16 +1455,26 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 		\item[¦"<¦] for French left double quotes (looks like <<).
 		\item[¦">¦] for French right double quotes (looks like >>).
 	\end{shorthands}
-	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or \xpgvalue{cyrillic}}
-		Uses either Arabic numerals or Cyrillic alphanumerical numbering.
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic}, \xpgvalue{cyrillic-alph} or \xpgvalue{cyrillic-trad}}
+          Uses either Arabic numerals or Cyrillic alphanumerical numbering. The two Cyrillic variants differ as follows:
+          \begin{itemize}
+	           \item \xpgvalue{cyrillic-alph} steps through the Cyrillic alphabet. Thus in can only be used up to 30.
+	           \item \xpgvalue{cyrillic-trad} (= \xpgvalue{cyrillic}) uses a traditional Cyrillic alphanumeric system.%
+	                 \footnote{See \url{https://en.wikipedia.org/wiki/Cyrillic_numerals}.}
+	                 It supports numbers up to 1\,000\,000.
+          \end{itemize}
 \end{itemize}
 %
 \paragraph*{Commands:}
 \begin{itemize}
-	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
-	environments such as ¦enumerate¦. The command takes a counter as argument,
-	\eg ¦\textmongolian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
-	\item \Cmd\asbuk: same in lowercase
+    \item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for environments such as ¦enumerate¦.
+          It steps through the Cyrillic alphabet and thus in can only be used up to 30.
+          The command takes a counter as argument, \eg ¦\textmongolian{\Asbuk{section}}¦ produces \textrussian{\Asbuk{section}}.
+    \item \Cmd\asbuk: same as \cmd\Asbuk but in lowercase.
+    \item \Cmd\AsbukTrad: same as \cmd\Asbuk\ but using the traditional Cyrillic alphanumeric numbering which supports
+          numbers up to 1\,000\,000.\\
+          \Eg ¦\textmongolian{\AsbukTrad{section}}¦ produces \textrussian{\AsbukTrad{section}}.
+    \item \Cmd\asbukTrad: same as \cmd\AsbukTrad\ but in lowercase
 \end{itemize}
 
 \subsection{norwegian}\label{norwegian}
@@ -1514,16 +1534,26 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 		are not indented, as normal in \LaTeX.
 	\item \xpgchoicekey{spelling}{\xpgpresetvalue{modern} or \xpgvalue{old}}
 		This option is for captions and date only, not for hyphenation.
-	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or \xpgvalue{cyrillic}}
-		Uses either Arabic numerals or Cyrillic alphanumerical numbering.
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic}, \xpgvalue{cyrillic-alph} or \xpgvalue{cyrillic-trad}}
+		Uses either Arabic numerals or Cyrillic alphanumerical numbering. The two Cyrillic variants differ as follows:
+		\begin{itemize}
+			\item \xpgvalue{cyrillic-alph} steps through the Cyrillic alphabet. Thus in can only be used up to 30.
+			\item \xpgvalue{cyrillic-trad} (= \xpgvalue{cyrillic}) uses a traditional Cyrillic alphanumeric system.%
+			      \footnote{See \url{https://en.wikipedia.org/wiki/Cyrillic_numerals}.}
+			      It supports numbers up to 1\,000\,000.
+		\end{itemize}
 	\end{itemize}
 %
 \paragraph*{Commands:}
 	\begin{itemize}
-	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
-	environments such as ¦enumerate¦. The command takes a counter as argument,
-	\eg ¦\textrussian{\Asbuk{page}}¦ produces \textrussian{\Asbuk{page}}.
-	\item \Cmd\asbuk: same in lowercase
+	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for environments such as ¦enumerate¦.
+	      It steps through the Cyrillic alphabet and thus in can only be used up to 30.
+	      The command takes a counter as argument, \eg ¦\textrussian{\Asbuk{section}}¦ produces \textrussian{\Asbuk{section}}.
+	\item \Cmd\asbuk: same as \cmd\Asbuk but in lowercase.
+	\item \Cmd\AsbukTrad: same as \cmd\Asbuk\ but using the traditional Cyrillic alphanumeric numbering which supports
+	      numbers up to 1\,000\,000.\\
+	      \Eg ¦\textrussian{\AsbukTrad{page}}¦ produces \textrussian{\AsbukTrad{page}}.
+	\item \Cmd\asbukTrad: same as \cmd\AsbukTrad\ but in lowercase
 	\end{itemize}
 
 \subsection[sami]{sami\new{1.45}}\label{sami}
@@ -1544,15 +1574,26 @@ Currently support for Sami is limited to Northern Sami.
 \paragraph*{Options:}
 	\begin{itemize}
 	\item \xpgchoicekey{script}{\xpgpresetvalue{Cyrillic} or \xpgvalue{Latin}}
-	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or \xpgvalue{cyrillic}}
-		Uses either Arabic numerals or Cyrillic alphanumerical numbering.
-	\end{itemize}
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic}, \xpgvalue{cyrillic-alph} or \xpgvalue{cyrillic-trad}}
+          Uses either Arabic numerals or Cyrillic alphanumerical numbering. The two Cyrillic variants differ as follows:
+          \begin{itemize}
+               \item \xpgvalue{cyrillic-alph} steps through the Cyrillic alphabet. Thus in can only be used up to 30.
+	           \item \xpgvalue{cyrillic-trad} (= \xpgvalue{cyrillic}) uses a traditional Cyrillic alphanumeric system.%
+	                  \footnote{See \url{https://en.wikipedia.org/wiki/Cyrillic_numerals}.}
+	                  It supports numbers up to 1\,000\,000.
+          \end{itemize}
+\end{itemize}
+%
 \paragraph*{Commands:}
 \begin{itemize}
-	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for
-	environments such as ¦enumerate¦. The command takes a counter as argument, \eg
-	¦\textserbian[numerals=cyrillic]{\Asbuk{page}}¦ produces \textserbian[numerals=cyrillic]{\Asbuk{page}}.
-	\item \Cmd\asbuk: same in lowercase
+    \item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for environments such as ¦enumerate¦.
+          It steps through the Cyrillic alphabet and thus in can only be used up to 30.
+          The command takes a counter as argument, \eg ¦\textserbian{\Asbuk{section}}¦ produces \textrussian{\Asbuk{section}}.
+    \item \Cmd\asbuk: same as \cmd\Asbuk but in lowercase.
+    \item \Cmd\AsbukTrad: same as \cmd\Asbuk\ but using the traditional Cyrillic alphanumeric numbering which supports
+          numbers up to 1\,000\,000.\\
+          \Eg ¦\textserbian{\AsbukTrad{page}}¦ produces \textrussian{\AsbukTrad{page}}.
+    \item \Cmd\asbukTrad: same as \cmd\AsbukTrad\ but in lowercase
 \end{itemize}
 
 
@@ -1676,12 +1717,49 @@ that comes with this package.
 \end{itemize}
 
 \subsection{ukrainian}\label{ukrainian}
-\paragraph*{Commands:}
+
+\paragraph*{Options:}
+\begin{itemize}
+	\item \xpgboolkeyfalse{babelshorthands}
+	If this is turned on, the following shorthands are activated:
+	\begin{shorthands}
+		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
+		in the hyphenation patterns (as opposed to \cmd\-).
+		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
+		cases where the hyphen should stick at the following syllable.
+		\item[¦"|¦] disables a ligature at this position.
+		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
+		\item[¦"---¦] Cyrillic emdash in plain text.
+		\item[¦"--~¦] Cyrillic emdash in compound names (surnames).
+		\item[¦"--*¦] Cyrillic emdash for denoting direct speech.
+		% These are commented out in gloss-ukrainian
+		%		\item[¦",¦] thinspace for initials with a breakpoint in following surname.
+		%		\item[¦"‘¦] for German left double quotes (looks like ,,).
+		%		\item[¦"’¦] for German right double quotes (looks like “).
+		%		\item[¦"<¦] for French left double quotes (looks like <<).
+		%		\item[¦">¦] for French right double quotes (looks like >>).
+	\end{shorthands}
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic}, \xpgvalue{cyrillic-alph} or \xpgvalue{cyrillic-trad}}
+	      Uses either Arabic numerals or Cyrillic alphanumerical numbering. The two Cyrillic variants differ as follows:
 	\begin{itemize}
-	\item \Cmd\Asbuk: produces the uppercase Ukrainian alphabet, for
-	environments such as ¦enumerate¦
-	\item \Cmd\asbuk: same in lowercase
+		\item \xpgvalue{cyrillic-alph} steps through the Cyrillic alphabet. Thus in can only be used up to 30.
+		\item \xpgvalue{cyrillic-trad} (= \xpgvalue{cyrillic}) uses a traditional Cyrillic alphanumeric system.%
+		\footnote{See \url{https://en.wikipedia.org/wiki/Cyrillic_numerals}.}
+		It supports numbers up to 1\,000\,000.
 	\end{itemize}
+\end{itemize}
+%
+\paragraph*{Commands:}
+\begin{itemize}
+	\item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for environments such as ¦enumerate¦.
+	It steps through the Cyrillic alphabet and thus in can only be used up to 30.
+	The command takes a counter as argument, \eg ¦\textukrainian{\Asbuk{section}}¦ produces \textrussian{\Asbuk{section}}.
+	\item \Cmd\asbuk: same as \cmd\Asbuk but in lowercase.
+	\item \Cmd\AsbukTrad: same as \cmd\Asbuk\ but using the traditional Cyrillic alphanumeric numbering which supports
+	numbers up to 1\,000\,000.\\
+	\Eg ¦\textukrainian{\AsbukTrad{page}}¦ produces \textrussian{\AsbukTrad{page}}.
+	\item \Cmd\asbukTrad: same as \cmd\AsbukTrad\ but in lowercase
+\end{itemize}
 
 \subsection{welsh}\label{welsh}
 \paragraph*{Options:}
@@ -1868,8 +1946,8 @@ The following macros are provided:
 	\item \Cmd\serbiannumeral produces Serbian numbering, with uppercased variant (for alphanumerical variant) via \Cmd\Serbiannumeral.
 		    Depending on the ¦numerals¦ option in the Serbian language selection, this is either Arabic digit or Cyrillic
 		    alphanumercial output.\\
-		    Example: With ¦numerals=latin¦ ¦\serbiannumeral{19}¦ yields \textserbian{\serbiannumeral{19}},
-			with ¦numerals=cyrillic¦ ¦\serbiannumeral{19}¦ results in \textserbian[numerals=cyrillic]{\serbiannumeral{19}}.
+		    Example: With ¦numerals=latin¦ ¦\serbiannumeral{19}¦ yields \textrussian{\serbiannumeral{19}},
+			with ¦numerals=cyrillic¦ ¦\serbiannumeral{19}¦ results in \textrussian[numerals=cyrillic]{\serbiannumeral{19}}.
 \end{itemize}
 
 
