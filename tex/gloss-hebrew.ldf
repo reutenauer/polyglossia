@@ -105,7 +105,7 @@ and may look very wrong.}
 
 \def\hebrewnumber#1{%
    \if@hebrew@numerals
-     \@ensure@LR{\hebrewnumeral{#1}}%
+     \hebrewnumeral{#1}%
    \else
      \number#1%
    \fi
