@@ -111,19 +111,33 @@ and may look very wrong.}
    \fi
 }
 
+\newcommand\xpg@DigitsDotDashInterCharToks{}
 \def\hebrew@numbers{%
    \let\@alph\hebrewnumeral%
    \let\@Alph\Hebrewnumeral%
+   % This prevents bidi from setting the numbers RTL
+   \ifdefined\DigitsDotDashInterCharToks
+     \let\xpg@DigitsDotDashInterCharToks\DigitsDotDashInterCharToks%
+     \renewcommand*{\DigitsDotDashInterCharToks}{}%
+   \fi
 }
 
 \def\nohebrew@numbers{%
   \let\@alph\latin@alph%
   \let\@Alph\latin@Alph%
+  % Restore previous definition
+  \ifdefined\DigitsDotDashInterCharToks
+     \let\DigitsDotDashInterCharToks\xpg@DigitsDotDashInterCharToks%
+  \fi
 }
 
 \def\hebrew@globalnumbers{%
    \let\@arabic\hebrewnumber%
    \renewcommand\thefootnote{\localnumeral*{footnote}}%
+   \ifdefined\DigitsDotDashInterCharToks
+     \let\xpg@DigitsDotDashInterCharToks\DigitsDotDashInterCharToks%
+     \renewcommand*{\DigitsDotDashInterCharToks}{}%
+   \fi
 }
 
 % Store original definition
