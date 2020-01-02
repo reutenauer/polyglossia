@@ -1912,7 +1912,6 @@
 \newbool{xpg@reverse@groups}
 \newcommand*{\xpg@set@group@aux}[1]{%
    \if@filesw%
-      \boolfalse{xpg@reverse@groups}
       \ifbool{xpg@inbiditable}{\booltrue{xpg@reverse@groups}}{\boolfalse{xpg@reverse@groups}}%
       \ifxetex
         \str_if_eq:eeT{\exp_args:Nne\prop_item:Nn{\polyglossia@langsetup}{\languagename/direction}}{RL}%
