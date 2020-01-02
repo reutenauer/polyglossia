@@ -1905,11 +1905,24 @@
 
 % Open a group in the aux file. This is to keep
 % nested language options local (see #320).
-% In bidi RTL tables, the opening/closing needs
-% to be swapped (see #354).
-\newcommand*{\xpg@set@group@aux}{%
+% In some bidi cases, the opening/closing needs to be swapped, though:
+% 1. In bidi tables (see #354)
+% 2. If a non-RTL language is switched to (with otherlanguage) in
+%    a RTL paragraph (this is since bidi sets paragraph direction in \vmode).
+\newbool{xpg@reverse@groups}
+\newcommand*{\xpg@set@group@aux}[1]{%
    \if@filesw%
-      \ifbool{xpg@inbiditable}{%
+      \boolfalse{xpg@reverse@groups}
+      \ifbool{xpg@inbiditable}{\booltrue{xpg@reverse@groups}}{\boolfalse{xpg@reverse@groups}}%
+      \ifxetex
+        \str_if_eq:eeT{\exp_args:Nne\prop_item:Nn{\polyglossia@langsetup}{\languagename/direction}}{RL}%
+           {%
+            \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}{RL}%
+               {}% RTL -> RTL
+               {\ifvmode\else\booltrue{xpg@reverse@groups}\fi}% RTL -> LTR
+           }%
+      \fi%
+      \ifbool{xpg@reverse@groups}{%
         \protected@write\@auxout{}{\egroup}%
         \addtocontents{toc}{\egroup}%
         \addtocontents{lof}{\egroup}%
@@ -1928,7 +1941,7 @@
 % to be swapped (see #354).
 \newcommand*{\xpg@unset@group@aux}{%
    \if@filesw%
-      \ifbool{xpg@inbiditable}{%
+      \ifbool{xpg@reverse@groups}{%
         \protected@write\@auxout{}{\bgroup}%
         \addtocontents{toc}{\bgroup}%
         \addtocontents{lof}{\bgroup}%
@@ -2077,7 +2090,7 @@
 
 \renewenvironment{otherlanguage}[2][]
 {%
-  \xpg@set@group@aux%
+  \xpg@set@group@aux{#2}%
   \selectlanguage[#1]{#2}%
 }
 {\xpg@unset@group@aux}
