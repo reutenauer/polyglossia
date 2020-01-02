@@ -2048,7 +2048,7 @@
      \noextrascurrent{\languagename}%
      \csuse{no\languagename @numbers}%
      \ifxetex
-        \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{\languagename/direction}}{RL}%
+        \str_if_eq:eeTF{\exp_args:Nne\prop_item:Nn{\polyglossia@langsetup}{\languagename/direction}}{RL}%
             {%
                \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}%
                   {}% RTL -> RTL
