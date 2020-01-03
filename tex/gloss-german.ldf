@@ -149,6 +149,8 @@
    \xpg@info{Option: German, script=\val}%
 }{\xpg@warning{Unknown German script `#1'}}
 
+% Option defunc'ed, as bot XeTeX and LuaTeX meanwhile
+% use the experimental German hyphenation patterns by default.
 \define@boolkey{german}[german@]{latesthyphen}[true]{}
 
 \define@boolkey{german}[german@]{babelshorthands}[true]{}
@@ -287,44 +289,23 @@
 }
 
 \def\german@language{%
-  \ifgerman@latesthyphen
-    \if@german@oldspelling
-        \if@swiss@locale
-            \polyglossia@setup@language@patterns{swissgerman}%
-        \else
-            \polyglossia@setup@language@patterns{german-x-latest}%
-        \fi
-        \if@austrian@locale
-           \adddialect\l@austrian\l@german-x-latest%
-        \fi
-    \else
-        \polyglossia@setup@language@patterns{ngerman-x-latest}%
-        \if@austrian@locale
-           \adddialect\l@naustrian\l@ngerman-x-latest%
-        \fi
-        \if@swiss@locale
-           \adddialect\l@nswissgerman\l@ngerman-x-latest%
-        \fi
-    \fi
-  \else% (latesthyphen=false)
-    \if@german@oldspelling
-        \if@swiss@locale
-            \polyglossia@setup@language@patterns{swissgerman}%
-        \else
-            \polyglossia@setup@language@patterns{german}%
-        \fi
-        \if@austrian@locale
-           \adddialect\l@austrian\l@german%
-        \fi
-    \else
-        \polyglossia@setup@language@patterns{ngerman}%
-        \if@austrian@locale
-           \adddialect\l@naustrian\l@ngerman%
-        \fi
-        \if@swiss@locale
-           \adddialect\l@nswissgerman\l@ngerman%
-        \fi
-    \fi
+  \if@german@oldspelling
+      \if@swiss@locale
+          \polyglossia@setup@language@patterns{swissgerman}%
+      \else
+          \polyglossia@setup@language@patterns{german}%
+      \fi
+      \if@austrian@locale
+         \adddialect\l@austrian\l@german%
+      \fi
+  \else
+      \polyglossia@setup@language@patterns{ngerman}%
+      \if@austrian@locale
+         \adddialect\l@naustrian\l@ngerman%
+      \fi
+      \if@swiss@locale
+         \adddialect\l@nswissgerman\l@ngerman%
+      \fi
   \fi
 }
 
