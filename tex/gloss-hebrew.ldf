@@ -111,33 +111,45 @@ and may look very wrong.}
    \fi
 }
 
-\newcommand\xpg@DigitsDotDashInterCharToks{}
+% Bidi inserts an RTL mark (0x200f) before any number, forcing numbers to
+% RTL. Hebrew uses LTR numbers, though. So we insert an LTR mark to revert
+% the directionality
+\ifxetex
+  \newcommand\xpg@hebrew@DigitsDotDashInterCharToks{\if@nonlatin\char"200E \fi}
+\fi
+
+\def\hebrew@ltr@numbers{%
+    \ifxetex
+      \XeTeXinterchartoks \bidi@sepmark@charclass  \bidi@digits@charclass = {\xpg@hebrew@DigitsDotDashInterCharToks}
+    \fi%
+}
+
+\def\nohebrew@ltr@numbers{%
+    \ifxetex
+      % This is bidi's original intervention
+      \XeTeXinterchartoks \bidi@sepmark@charclass  \bidi@digits@charclass = {\DigitsDotDashInterCharToks}
+    \fi%
+}
+
 \def\hebrew@numbers{%
    \let\@alph\hebrewnumeral%
    \let\@Alph\Hebrewnumeral%
-   % This prevents bidi from setting the numbers RTL
-   \ifdefined\DigitsDotDashInterCharToks
-     \let\xpg@DigitsDotDashInterCharToks\DigitsDotDashInterCharToks%
-     \renewcommand*{\DigitsDotDashInterCharToks}{}%
-   \fi
+   % Prevent bidi from setting the numbers RTL
+   \hebrew@ltr@numbers%
 }
 
 \def\nohebrew@numbers{%
   \let\@alph\latin@alph%
   \let\@Alph\latin@Alph%
-  % Restore previous definition
-  \ifdefined\DigitsDotDashInterCharToks
-     \let\DigitsDotDashInterCharToks\xpg@DigitsDotDashInterCharToks%
-  \fi
+  % Restore previous bidi numbers definition
+  \nohebrew@ltr@numbers
 }
 
 \def\hebrew@globalnumbers{%
    \let\@arabic\hebrewnumber%
    \renewcommand\thefootnote{\localnumeral*{footnote}}%
-   \ifdefined\DigitsDotDashInterCharToks
-     \let\xpg@DigitsDotDashInterCharToks\DigitsDotDashInterCharToks%
-     \renewcommand*{\DigitsDotDashInterCharToks}{}%
-   \fi
+   % Prevent bidi from setting the numbers RTL
+   \hebrew@ltr@numbers%
 }
 
 % Store original definition
