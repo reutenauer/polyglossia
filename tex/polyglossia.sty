@@ -1905,23 +1905,10 @@
 
 % Open a group in the aux file. This is to keep
 % nested language options local (see #320).
-% In some bidi cases, the opening/closing needs to be swapped, though:
-% 1. In bidi tables (see #354)
-% 2. If a non-RTL language is switched to (with otherlanguage) in
-%    a RTL paragraph (this is since bidi sets paragraph direction in \vmode).
-\newbool{xpg@reverse@groups}
-\newcommand*{\xpg@set@group@aux}[1]{%
+% In bidi tables, the opening/closing needs to be swapped (see #354)
+\newcommand*{\xpg@set@group@aux}{%
    \if@filesw%
-      \ifbool{xpg@inbiditable}{\booltrue{xpg@reverse@groups}}{\boolfalse{xpg@reverse@groups}}%
-      \ifxetex
-        \str_if_eq:eeT{\exp_args:Nne\prop_item:Nn{\polyglossia@langsetup}{\languagename/direction}}{RL}%
-           {%
-            \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}{RL}%
-               {}% RTL -> RTL
-               {\ifvmode\else\booltrue{xpg@reverse@groups}\fi}% RTL -> LTR
-           }%
-      \fi%
-      \ifbool{xpg@reverse@groups}{%
+      \ifbool{xpg@inbiditable}{%
         \protected@write\@auxout{}{\egroup}%
         \addtocontents{toc}{\egroup}%
         \addtocontents{lof}{\egroup}%
@@ -1940,7 +1927,7 @@
 % to be swapped (see #354).
 \newcommand*{\xpg@unset@group@aux}{%
    \if@filesw%
-      \ifbool{xpg@reverse@groups}{%
+      \ifbool{xpg@inbiditable}{%
         \protected@write\@auxout{}{\bgroup}%
         \addtocontents{toc}{\bgroup}%
         \addtocontents{lof}{\bgroup}%
@@ -2087,12 +2074,24 @@
 
 \provideenvironment{otherlanguage}{}{}
 
+\newbool{xpg@noset@groups}
 \renewenvironment{otherlanguage}[2][]
 {%
-  \xpg@set@group@aux{#2}%
+  % We usually embrace the switch in groups to keep the changes local.
+  % We cannot do this if an LTR environmet starts in an RTL paragraph,
+  % as bidi interferes here badly with its directionality smartness.
+  \ifxetex
+    \str_if_eq:eeT{\exp_args:Nne\prop_item:Nn{\polyglossia@langsetup}{\languagename/direction}}{RL}%
+       {%
+        \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}{RL}%
+           {}% RTL -> RTL
+           {\ifvmode\else\booltrue{xpg@noset@groups}\fi}% RTL -> LTR
+       }%
+  \fi%
+  \ifbool{xpg@noset@groups}{}{\xpg@set@group@aux{#2}}%
   \selectlanguage[#1]{#2}%
 }
-{\xpg@unset@group@aux}
+{\ifbool{xpg@noset@groups}{}{\xpg@unset@group@aux}}
 
 \newcommand{\setlocalhyphenmins}[3]{%
    \xpg@ifdefined{#1}{%
