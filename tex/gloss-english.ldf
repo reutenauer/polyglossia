@@ -88,6 +88,7 @@
       \english@ordinalmonthdayfalse
       \SetLanguageKeys{english}{babelname=australian,bcp47=en-AU}%
       \xpg@info{Option: English, variant=australian}%
+      \adddialect\l@australian\l@english%
    \or
       % newzealand:
       % These use the british hyphenation patterns
@@ -97,6 +98,7 @@
       \english@ordinalmonthdayfalse
       \SetLanguageKeys{english}{babelname=newzealand,bcp47=en-NZ}%
       \xpg@info{Option: English, variant=newzealand}%
+      \adddialect\l@newzealand\l@english%
    \or
       % canadian:
       % This is currently equivalent to usenglish (as in babel)
@@ -105,6 +107,7 @@
       \english@ordinalmonthdayfalse
       \SetLanguageKeys{english}{babelname=canadian,bcp47=en-CA}%
       \xpg@info{Option: English, variant=american}%
+      \adddialect\l@canadian\l@english%
    \fi
    \ifbritish@hyphen
       \xpg@ifdefined{ukenglish}{}%

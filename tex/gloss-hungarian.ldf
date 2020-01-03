@@ -58,6 +58,11 @@
 % Register default options
 \xpg@initialize@gloss@options{hungarian}{swapstrings=all}
 
+\def\hungarian@language{%
+   \polyglossia@setup@language@patterns{hungarian}%
+   \xpg@ifdefined{hungarian}{\adddialect\l@magyar\l@hungarian}{}%
+}%
+
 \def\captionshungarian{%
    \def\refname{Hivatkozások}%
    \def\abstractname{Kivonat}%
