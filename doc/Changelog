@@ -37,6 +37,7 @@ Bug fixes:
   * Fix Czech and Slovak splithyphens with typewriter fonts.
   * farsical.sty: fix spacing issue with some month names.
   * Fix directionalty of numbers in Hebrew with XeTeX.
+  * Improve interoperatability with biblatex (some language variants did not work yet).
 
 Interface and defaults changes:
   * Some boolean options had 'false' value by default, which meant if you passed
