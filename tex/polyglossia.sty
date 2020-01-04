@@ -2088,7 +2088,7 @@
            {\ifvmode\else\booltrue{xpg@noset@groups}\fi}% RTL -> LTR
        }%
   \fi%
-  \ifbool{xpg@noset@groups}{}{\xpg@set@group@aux{#2}}%
+  \ifbool{xpg@noset@groups}{}{\xpg@set@group@aux}%
   \selectlanguage[#1]{#2}%
 }
 {\ifbool{xpg@noset@groups}{}{\xpg@unset@group@aux}}
