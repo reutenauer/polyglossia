@@ -1,11 +1,10 @@
-\ProvidesFile{gloss-latin.ldf}[polyglossia: module for Latin v.2.1 2019-12-02]
+\ProvidesFile{gloss-latin.ldf}[polyglossia: module for Latin v.2.2 2020-01-03]
 
 \ExplSyntaxOn
 
 \PolyglossiaSetup {latin}
   {
     bcp47 = la,
-    hyphennames = {latin},
     hyphenmins = {2,2},
     frenchspacing = true,
     fontsetup = true,
@@ -54,8 +53,7 @@
 
 \msg_new:nnn {polyglossia} {latin / missing modern patterns}
   {
-    No~hyphenation~patterns~were~found~for~Latin~\msg_line_context:.~
-    I~will~not~hyphenate~Latin~words.
+    The~hyphenation~patterns~for~modern~Latin~were~not~found~\msg_line_context:.
   }
 
 \msg_new:nnn {polyglossia} {latin / missing patterns}
@@ -71,11 +69,23 @@
         \def \latin@language
           {
             \polyglossia@setup@language@patterns {latin}
+            \str_case:Vn \l_polyglossia_latin_variant_str
+              {
+                {classic}      { \adddialect \l@latinclassic \l@latin }
+                {medieval}     { \adddialect \l@latinmedieval \l@latin }
+                {ecclesiastic} { \adddialect \l@latinecclesiastic \l@latin }
+              }
           }
       }
       {
         \msg_warning:nn {polyglossia} {latin / missing modern patterns}
-        \adddialect \l@latin \l@nohyphenation
+        \str_case:Vn \l_polyglossia_latin_variant_str
+          {
+            {classic}      { \adddialect \l@latinclassic \l@nohyphenation }
+            {medieval}     { \adddialect \l@latinmedieval \l@nohyphenation }
+            {modern}       { \adddialect \l@latin \l@nohyphenation }
+            {ecclesiastic} { \adddialect \l@latinecclesiastic \l@nohyphenation }
+          }
       }
   }
 
@@ -87,19 +97,18 @@
         \def \latin@language
           {
             \polyglossia@setup@language@patterns {#1}
+            \str_case:Vn \l_polyglossia_latin_variant_str
+              {
+                {classic}      { \adddialect \l@latinclassic { \use:c {l@#1} } }
+                {medieval}     { \adddialect \l@latinmedieval { \use:c {l@#1} } }
+                {modern}       { \adddialect \l@latin { \use:c {l@#1} } }
+                {ecclesiastic} { \adddialect \l@latinecclesiastic { \use:c {l@#1} } }
+              }
           }
       }
       {
-        \xpg@ifdefined {latin}
-          {
-            \msg_warning:nnn {polyglossia} {latin / missing patterns} {#1}
-            \adddialect \l@ #1 \l@latin
-            \polyglossia_latin_use_modern_patterns:
-          }
-          {
-            \msg_warning:nn {polyglossia} {latin / missing modern patterns}
-            \adddialect \l@ #1 \l@nohyphenation
-          }
+        \msg_warning:nnn {polyglossia} {latin / missing patterns} {#1}
+        \polyglossia_latin_use_modern_patterns:
       }
   }
 
@@ -353,6 +362,8 @@
 
 %%%%% Language variants: classic, medieval, modern, and ecclesiastic
 
+\str_new:N \l_polyglossia_latin_variant_str
+
 \msg_new:nnn {polyglossia} {latin / language variant}
   {
     Activating~Latin~language~variant~"#1"~\msg_line_context:.
@@ -370,7 +381,8 @@
     \bool_set_false:N \l_polyglossia_latin_use_digraphs_bool
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
-    \SetLanguageKeys {latin} { babelname = latin.classic, bcp47 = la-xclassic }
+    \str_set:Nn \l_polyglossia_latin_variant_str {classic}
+    \SetLanguageKeys {latin} { babelname = latinclassic, bcp47 = la-xclassic }
     \polyglossia_latin_set_patterns:n {classiclatin}
   }
 
@@ -381,7 +393,8 @@
     \bool_set_true:N \l_polyglossia_latin_use_digraphs_bool
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
-    \SetLanguageKeys {latin} { babelname = latin.medieval, bcp47 = la-xmedieval }
+    \str_set:Nn \l_polyglossia_latin_variant_str {medieval}
+    \SetLanguageKeys {latin} { babelname = latinmedieval, bcp47 = la-xmedieval }
     \polyglossia_latin_use_modern_patterns:
   }
 
@@ -392,6 +405,7 @@
     \bool_set_false:N \l_polyglossia_latin_use_digraphs_bool
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
+    \str_set:Nn \l_polyglossia_latin_variant_str {modern}
     \SetLanguageKeys {latin} { babelname = latin, bcp47 = la }
     \polyglossia_latin_use_modern_patterns:
   }
@@ -403,7 +417,8 @@
     \bool_set_true:N \l_polyglossia_latin_use_digraphs_bool
     \bool_set_false:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_true:N \l_polyglossia_latin_punctuation_spacing_bool
-    \SetLanguageKeys {latin} { babelname = latin.ecclesiastic, bcp47 = la-xecclesiastic }
+    \str_set:Nn \l_polyglossia_latin_variant_str {ecclesiastic}
+    \SetLanguageKeys {latin} { babelname = latinecclesiastic, bcp47 = la-xecclesiastic }
     \polyglossia_latin_use_modern_patterns:
   }
 
@@ -471,7 +486,7 @@
     The~Latin~hyphenation~variant~"#1"~is~undefined~\msg_line_context:.
   }
 
-\define@key{latin}{hyphenation}
+\define@key {latin} {hyphenation}
   {
     \str_case:nnTF {#1}
       {
@@ -957,7 +972,7 @@
 
 %%   Copyright (C) Claudio Beccari 2013-2016
 %%   Copyright (C) Élie Roux 2016-2019
-%%   Copyright (C) Keno Wehr 2019
+%%   Copyright (C) Keno Wehr 2019-2020
 %%
 %%   Permission is hereby granted, free of charge, to any person obtaining
 %%   a copy of this software and associated documentation files
