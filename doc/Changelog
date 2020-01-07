@@ -51,6 +51,9 @@ Interface and defaults changes:
     - fullyear in package hebrewcal ('fullyear' now equals 'fullyear=true')
   * The command \setlanguagealias* (introduced in v1.46) does no longer define
     dedicated alias environments.
+  * The babelnames for latin variants have been corrected to classiclatin, ecclesiasticlatin
+    and medievallatin. This is how the hyphenation patterns and babel \extras are named, even
+    though the variants can currently be selected in babel only via appended "dot modifier".
 
 1.46 (15-11-2019)
 

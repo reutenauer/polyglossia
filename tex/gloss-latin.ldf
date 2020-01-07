@@ -18,9 +18,9 @@
 \setlanguagealias*[variant=medieval]{latin}{la-xmedieval}
 
 % Babel aliases
-\setlanguagealias[variant=classic]{latin}{latinclassic}
-\setlanguagealias[variant=ecclesiastic]{latin}{latinecclesiastic}
-\setlanguagealias[variant=medieval]{latin}{latinmedieval}
+\setlanguagealias[variant=classic]{latin}{classiclatin}
+\setlanguagealias[variant=ecclesiastic]{latin}{ecclesiasticlatin}
+\setlanguagealias[variant=medieval]{latin}{medievallatin}
 
 
 %%%%% Variables and commands concerning spelling
@@ -71,9 +71,9 @@
             \polyglossia@setup@language@patterns {latin}
             \str_case:Vn \l_polyglossia_latin_variant_str
               {
-                {classic}      { \adddialect \l@latinclassic \l@latin }
-                {medieval}     { \adddialect \l@latinmedieval \l@latin }
-                {ecclesiastic} { \adddialect \l@latinecclesiastic \l@latin }
+                {classic}      { \adddialect \l@classiclatin \l@latin }
+                {medieval}     { \adddialect \l@medievallatin \l@latin }
+                {ecclesiastic} { \adddialect \l@ecclesiasticlatin \l@latin }
               }
           }
       }
@@ -81,10 +81,10 @@
         \msg_warning:nn {polyglossia} {latin / missing modern patterns}
         \str_case:Vn \l_polyglossia_latin_variant_str
           {
-            {classic}      { \adddialect \l@latinclassic \l@nohyphenation }
-            {medieval}     { \adddialect \l@latinmedieval \l@nohyphenation }
+            {classic}      { \adddialect \l@classiclatin \l@nohyphenation }
+            {medieval}     { \adddialect \l@medievallatin \l@nohyphenation }
             {modern}       { \adddialect \l@latin \l@nohyphenation }
-            {ecclesiastic} { \adddialect \l@latinecclesiastic \l@nohyphenation }
+            {ecclesiastic} { \adddialect \l@ecclesiasticlatin \l@nohyphenation }
           }
       }
   }
@@ -99,10 +99,9 @@
             \polyglossia@setup@language@patterns {#1}
             \str_case:Vn \l_polyglossia_latin_variant_str
               {
-                {classic}      { \adddialect \l@latinclassic { \use:c {l@#1} } }
-                {medieval}     { \adddialect \l@latinmedieval { \use:c {l@#1} } }
+                {medieval}     { \adddialect \l@medievallatin { \use:c {l@#1} } }
                 {modern}       { \adddialect \l@latin { \use:c {l@#1} } }
-                {ecclesiastic} { \adddialect \l@latinecclesiastic { \use:c {l@#1} } }
+                {ecclesiastic} { \adddialect \l@ecclesiasticlatin { \use:c {l@#1} } }
               }
           }
       }
@@ -382,7 +381,7 @@
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
     \str_set:Nn \l_polyglossia_latin_variant_str {classic}
-    \SetLanguageKeys {latin} { babelname = latinclassic, bcp47 = la-xclassic }
+    \SetLanguageKeys {latin} { babelname = classiclatin, bcp47 = la-xclassic }
     \polyglossia_latin_set_patterns:n {classiclatin}
   }
 
@@ -394,7 +393,7 @@
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
     \str_set:Nn \l_polyglossia_latin_variant_str {medieval}
-    \SetLanguageKeys {latin} { babelname = latinmedieval, bcp47 = la-xmedieval }
+    \SetLanguageKeys {latin} { babelname = medievallatin, bcp47 = la-xmedieval }
     \polyglossia_latin_use_modern_patterns:
   }
 
@@ -418,7 +417,7 @@
     \bool_set_false:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_true:N \l_polyglossia_latin_punctuation_spacing_bool
     \str_set:Nn \l_polyglossia_latin_variant_str {ecclesiastic}
-    \SetLanguageKeys {latin} { babelname = latinecclesiastic, bcp47 = la-xecclesiastic }
+    \SetLanguageKeys {latin} { babelname = ecclesiasticlatin, bcp47 = la-xecclesiastic }
     \polyglossia_latin_use_modern_patterns:
   }
 
