@@ -2,12 +2,14 @@
 % TODO implement Bengali calendar
 
 \ProvidesFile{gloss-bengali.ldf}[polyglossia: module for bengali]
+
 \ifluatex
   \xpg@warning{Bengali is not supported with LuaTeX.\MessageBreak
-I will proceed with the compilation, but\MessageBreak
-the output is not guaranteed to be correct\MessageBreak
-and may look very wrong.}
+               I will proceed with the compilation, but\MessageBreak
+               the output is not guaranteed to be correct\MessageBreak
+               and may look very wrong.}
 \fi
+
 \RequirePackage{devanagaridigits}
 \RequirePackage{bengalidigits}
 
@@ -26,55 +28,29 @@ and may look very wrong.}
 % BCP-47 compliant aliases
 \setlanguagealias*{bengali}{bn}
 
-\def\tmp@western{Western}
 \newif\ifbengali@devanagari@numerals
-\bengali@devanagari@numeralstrue
-\def\tmp@bengali{Bengali}
 \newif\ifbengali@bengali@numerals
-\bengali@bengali@numeralsfalse % Implied, but you never know
-
-
-\define@key{bengali}{numerals}[Devanagari]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@western
-    \bengali@devanagari@numeralsfalse
-  \else\ifx\@tmpa\tmp@bengali
-    \bengali@devanagari@numeralsfalse
-    \bengali@bengali@numeralstrue\fi
-  \fi}
+\define@choicekey*+{bengali}{numerals}[\val\nr]{Devanagari,Bengali,Western}[Devanagari]{%
+   \ifcase\nr\relax
+      % Devanagari:
+      \bengali@bengali@numeralsfalse%
+      \bengali@devanagari@numeralstrue%
+   \or
+      % Bengali:
+      \bengali@bengali@numeralstrue%
+      \bengali@devanagari@numeralsfalse%
+   \or
+      % Western:
+      \bengali@bengali@numeralsfalse%
+      \bengali@devanagari@numeralsfalse%
+   \fi
+   \xpg@info{Option: Bengali, numerals=\val}%
+}{\xpg@warning{Unknown Bengali numeral `#1'}}
 
 \def\extras@bengali{}
 \def\noextras@bengali{}
 
-\define@boolkey{bengali}[bengali@]{changecounternumbering}[true]{
-  \def\@tmpa{#1}
-  \def\@tmptrue{true}
-  \ifx\@tmpa\@tmptrue
-    \def\extras@bengali{%
-      % FIXME Tied to the article class!  And horrible coding style
-      \let\savethepage\thepage
-      \let\savethesection\thesection
-      \let\savethesubsection\thesubsection
-      \let\savethesubsubsection\thesubsubsection
-      \let\savetheparagraph\theparagraph
-      \let\savethesubparagraph\thesubparagraph
-      \def\thepage{\bengalinumeral{page}}
-      \def\thesection{\bengalinumeral{section}}
-      \def\thesubsection{\bengalinumeral{subsection}}
-      \def\thesubsubsection{\bengalinumeral{subsubsection}}
-      \def\theparagraph{\bengalinumeral{paragraph}}
-      \def\thesubparagraph{\bengalinumeral{subparagraph}}
-    }
-    \def\noextras@bengali{%
-      \let\thepage\savethepage
-      \let\thesection\savethesection
-      \let\thesubsection\savethesubsection
-      \let\thesubsubsection\savethesubsubsection
-      \let\theparagraph\savetheparagraph
-      \let\thesubparagraph\savethesubparagraph
-    }
-  \fi
-}
+\define@boolkey{bengali}[bengali@]{changecounternumbering}[true]{}
 
 % Register default options
 \xpg@initialize@gloss@options{bengali}{changecounternumbering=false,numerals=Devanagari}
@@ -132,13 +108,14 @@ and may look very wrong.}
     \else % Assumed Western
       \number#1%
     \fi
-  \fi}
-
-\def\bengalinumeral#1{\expandafter\bengalinumber\expandafter{\the##1}}% Takes counter
+  \fi%
+}
 
 \def\bengali@globalnumbers{%
-   \let\@arabic\bengalinumber%
-   \renewcommand\thefootnote{\localnumeral*{footnote}}%
+   \ifbengali@changecounternumbering
+     \let\@arabic\bengalinumber%
+     \renewcommand\thefootnote{\localnumeral*{footnote}}%
+  \fi
 }
 
 % Store original definition
