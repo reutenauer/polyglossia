@@ -99,6 +99,11 @@
             \polyglossia@setup@language@patterns {#1}
             \str_case:Vn \l_polyglossia_latin_variant_str
               {
+                {classic}      {
+                                 \str_if_eq:nnTF{#1}{liturgicallatin}
+                                     { \adddialect \l@classiclatin { \use:c {l@#1} } }
+                                     {}
+                               }
                 {medieval}     { \adddialect \l@medievallatin { \use:c {l@#1} } }
                 {modern}       { \adddialect \l@latin { \use:c {l@#1} } }
                 {ecclesiastic} { \adddialect \l@ecclesiasticlatin { \use:c {l@#1} } }
