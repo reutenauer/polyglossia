@@ -111,6 +111,11 @@
   \fi%
 }
 
+% Backwards compatibility. This command was never documented, but
+% some people might use it nevertheless (see #381).
+% This takes a counter.
+\newcommand\bengalinumeral[1]{\localnumeral*[lang=bengali]{#1}}
+
 \def\bengali@globalnumbers{%
    \ifbengali@changecounternumbering
      \let\@arabic\bengalinumber%
