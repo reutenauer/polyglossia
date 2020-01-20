@@ -55,6 +55,9 @@ Interface and defaults changes:
   * The babelnames for latin variants have been corrected to classiclatin, ecclesiasticlatin
     and medievallatin. This is how the hyphenation patterns and babel \extras are named, even
     though the variants can currently be selected in babel only via appended "dot modifier".
+  * In accordance with the respective l3kernel change, \str_lower_case:n  has been renamed to
+    \str_lowercase:n where used in polyglossia.sty. Thus polyglossia 1.47 requires l3kernel
+    2020-01-12 at least.
 
 1.46 (15-11-2019)
 
