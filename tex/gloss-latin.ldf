@@ -14,7 +14,7 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{latin}{la}
 \setlanguagealias*[variant=classic]{latin}{la-x-classic}
-\setlanguagealias*[variant=ecclesiastic]{latin}{la-x-ecclesiastic}
+\setlanguagealias*[variant=ecclesiastic]{latin}{la-x-ecclesia}
 \setlanguagealias*[variant=medieval]{latin}{la-x-medieval}
 
 % Babel aliases
@@ -422,7 +422,7 @@
     \bool_set_false:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_true:N \l_polyglossia_latin_punctuation_spacing_bool
     \str_set:Nn \l_polyglossia_latin_variant_str {ecclesiastic}
-    \SetLanguageKeys {latin} { babelname = ecclesiasticlatin, bcp47 = la-x-ecclesiastic }
+    \SetLanguageKeys {latin} { babelname = ecclesiasticlatin, bcp47 = la-x-ecclesia }
     \polyglossia_latin_use_modern_patterns:
   }
 
