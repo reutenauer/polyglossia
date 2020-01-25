@@ -14,22 +14,22 @@
 \setlanguagealias*[variant=swiss,spelling=new]{german}{de-CH}
 \setlanguagealias*[variant=austrian,spelling=new]{german}{de-AT}
 \setlanguagealias*[variant=german,spelling=new]{german}{de-DE}
-\setlanguagealias*[variant=swiss,spelling=new,script=blackletter]{german}{de-CH-Latf}
-\setlanguagealias*[variant=german,spelling=new,script=blackletter]{german}{de-DE-Latf}
-\setlanguagealias*[variant=austrian,spelling=new,script=blackletter]{german}{de-AT-Latf}
+\setlanguagealias*[variant=swiss,spelling=new,script=blackletter]{german}{de-Latf-CH}
+\setlanguagealias*[variant=german,spelling=new,script=blackletter]{german}{de-Latf-DE}
+\setlanguagealias*[variant=austrian,spelling=new,script=blackletter]{german}{de-Latf-AT}
 \setlanguagealias*[variant=austrian,spelling=old]{german}{de-AT-1901}
 \setlanguagealias*[variant=swiss,spelling=new]{german}{de-CH-1996}
 \setlanguagealias*[variant=austrian,spelling=new]{german}{de-AT-1996}
 \setlanguagealias*[variant=german,spelling=old]{german}{de-DE-1901}
-\setlanguagealias*[variant=swiss,spelling=old,script=blackletter]{german}{de-CH-1901-Latf}
+\setlanguagealias*[variant=swiss,spelling=old,script=blackletter]{german}{de-Latf-CH-1901}
 \setlanguagealias*[variant=swiss,spelling=old]{german}{de-CH-1901}
-\setlanguagealias*[variant=austrian,spelling=old,script=blackletter]{german}{de-AT-1901-Latf}
-\setlanguagealias*[variant=swiss,spelling=new,script=blackletter]{german}{de-CH-1996-Latf}
+\setlanguagealias*[variant=austrian,spelling=old,script=blackletter]{german}{de-Latf-AT-1901}
+\setlanguagealias*[variant=swiss,spelling=new,script=blackletter]{german}{de-Latf-CH-1996}
 \setlanguagealias*[script=blackletter]{german}{de-Latf}
 \setlanguagealias*[variant=german,spelling=new]{german}{de-DE-1996}
-\setlanguagealias*[variant=german,spelling=old,script=blackletter]{german}{de-DE-1901-Latf}
-\setlanguagealias*[variant=german,spelling=new,script=blackletter]{german}{de-DE-1996-Latf}
-\setlanguagealias*[variant=austrian,spelling=new,script=blackletter]{german}{de-AT-1996-Latf}
+\setlanguagealias*[variant=german,spelling=old,script=blackletter]{german}{de-Latf-DE-1901}
+\setlanguagealias*[variant=german,spelling=new,script=blackletter]{german}{de-Latf-DE-1996}
+\setlanguagealias*[variant=austrian,spelling=new,script=blackletter]{german}{de-Latf-AT-1996}
 
 % Babel aliases
 \setlanguagealias[variant=austrian,spelling=old]{german}{austrian}
@@ -91,20 +91,20 @@
   \if@german@oldspelling
      \if@swiss@locale
          \if@german@blackletter
-           \SetLanguageKeys{german}{babelname=swissgerman,bcp47=de-CH-1901-Latf}%
+           \SetLanguageKeys{german}{babelname=swissgerman,bcp47=de-Latf-CH-1901}%
          \else
            \SetLanguageKeys{german}{babelname=swissgerman,bcp47=de-CH-1901}%
          \fi
      \else
      \if@austrian@locale
          \if@german@blackletter
-            \SetLanguageKeys{german}{babelname=austrian,bcp47=de-AT-1901-Latf}%
+            \SetLanguageKeys{german}{babelname=austrian,bcp47=de-Latf-AT-1901}%
          \else
             \SetLanguageKeys{german}{babelname=austrian,bcp47=de-AT-1901}%
          \fi
      \else
          \if@german@blackletter
-            \SetLanguageKeys{german}{babelname=german,bcp47=de-DE-1901-Latf}%
+            \SetLanguageKeys{german}{babelname=german,bcp47=de-Latf-DE-1901}%
          \else
             \SetLanguageKeys{german}{babelname=german,bcp47=de-DE-1901}%
          \fi
@@ -112,20 +112,20 @@
   \else
      \if@swiss@locale
          \if@german@blackletter
-           \SetLanguageKeys{german}{babelname=nswissgerman,bcp47=de-CH-Latf}%
+           \SetLanguageKeys{german}{babelname=nswissgerman,bcp47=de-Latf-CH}%
          \else
            \SetLanguageKeys{german}{babelname=nswissgerman,bcp47=de-CH}%
          \fi
      \else
      \if@austrian@locale
          \if@german@blackletter
-           \SetLanguageKeys{german}{babelname=naustrian,bcp47=de-AT-Latf}%
+           \SetLanguageKeys{german}{babelname=naustrian,bcp47=de-Latf-AT}%
          \else
            \SetLanguageKeys{german}{babelname=naustrian,bcp47=de-AT}%
          \fi
      \else
          \if@german@blackletter
-           \SetLanguageKeys{german}{babelname=ngerman,bcp47=de-DE-Latf}%
+           \SetLanguageKeys{german}{babelname=ngerman,bcp47=de-Latf-DE}%
          \else
            \SetLanguageKeys{german}{babelname=ngerman,bcp47=de-DE}%
          \fi
