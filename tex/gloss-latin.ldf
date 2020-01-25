@@ -13,9 +13,9 @@
 
 % BCP-47 compliant aliases
 \setlanguagealias*{latin}{la}
-\setlanguagealias*[variant=classic]{latin}{la-xclassic}
-\setlanguagealias*[variant=ecclesiastic]{latin}{la-xecclesiastic}
-\setlanguagealias*[variant=medieval]{latin}{la-xmedieval}
+\setlanguagealias*[variant=classic]{latin}{la-x-classic}
+\setlanguagealias*[variant=ecclesiastic]{latin}{la-x-ecclesiastic}
+\setlanguagealias*[variant=medieval]{latin}{la-x-medieval}
 
 % Babel aliases
 \setlanguagealias[variant=classic]{latin}{classiclatin}
@@ -386,7 +386,7 @@
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
     \str_set:Nn \l_polyglossia_latin_variant_str {classic}
-    \SetLanguageKeys {latin} { babelname = classiclatin, bcp47 = la-xclassic }
+    \SetLanguageKeys {latin} { babelname = classiclatin, bcp47 = la-x-classic }
     \polyglossia_latin_set_patterns:n {classiclatin}
   }
 
@@ -398,7 +398,7 @@
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
     \str_set:Nn \l_polyglossia_latin_variant_str {medieval}
-    \SetLanguageKeys {latin} { babelname = medievallatin, bcp47 = la-xmedieval }
+    \SetLanguageKeys {latin} { babelname = medievallatin, bcp47 = la-x-medieval }
     \polyglossia_latin_use_modern_patterns:
   }
 
@@ -422,7 +422,7 @@
     \bool_set_false:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_true:N \l_polyglossia_latin_punctuation_spacing_bool
     \str_set:Nn \l_polyglossia_latin_variant_str {ecclesiastic}
-    \SetLanguageKeys {latin} { babelname = ecclesiasticlatin, bcp47 = la-xecclesiastic }
+    \SetLanguageKeys {latin} { babelname = ecclesiasticlatin, bcp47 = la-x-ecclesiastic }
     \polyglossia_latin_use_modern_patterns:
   }
 
