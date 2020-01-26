@@ -1,10 +1,18 @@
-      \documentclass{article}
-      \usepackage{breqn}
-      \usepackage{polyglossia}
-      \setmainlanguage{german}
-      \setotherlanguage{english}
-      \renewcommand*\do[1]{blah}
-      \begin{document}
-      Hallo, Welt!
-      \textenglish{Hello, World!}
-      \end{document}
+% !TeX TS-program = xelatex
+\documentclass{article}
+% The bug here is: if breqn is loaded
+% after before etoolbox (or polyglossia,
+% which loads etoolbox, we get a warning about
+% failed patchability)
+%\usepackage{etoolbox}
+\usepackage{breqn}
+\usepackage{polyglossia}
+\setmainlanguage{german}
+\setotherlanguage{english}
+% This was in the original report
+% but doesn't seem to trigger a bug anymore
+%\renewcommand*\do[1]{blah}
+\begin{document}
+Hallo, Welt!
+\textenglish{Hello, World!}
+\end{document}
