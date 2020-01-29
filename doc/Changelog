@@ -21,6 +21,7 @@ New features:
   * New macro \charifavailable{<char code>}{<substitution>}.
   * Add French language variant "swiss".
   * Implement babelshorthands for Croatian.
+  * Implement \localnumeral for Japanese.
 
 Bug fixes:
   * Fix font family issue in headers (#355).

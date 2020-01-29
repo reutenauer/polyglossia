@@ -7,7 +7,8 @@
 	langtag=JAN,
 	hyphennames={nohyphenation},
 	frenchspacing=false,
-	fontsetup=true
+	fontsetup=true,
+	localnumeral=japanesenumerals
 }
 
 % BCP-47 compliant aliases
@@ -147,6 +148,8 @@
 \def\japanesenumber#1{%
 	\expandafter\@japanesenumber\csname c@#1\endcsname%
 }
+
+\newcommand{\japanesenumerals}[2]{\@japanesenumber{#2}}
 
 \def\datejapanese{%
 	{%
