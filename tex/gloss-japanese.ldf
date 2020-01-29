@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-japanese.ldf}[polyglossia: module for japanese]
+
 \PolyglossiaSetup{japanese}{
-  bcp47=ja,
+	bcp47=ja,
 	script=CJK,
 	language=Japanese,
 	langtag=JAN,
@@ -93,7 +94,7 @@
 				六百\or 七百\or 八百\or 九百%
 			\fi
 			\c@TempJNum=#1\divide\c@TempJNum by 100\multiply\c@TempJNum by -100\advance\c@TempJNum#1\@JapaneseDigit\c@TempJNum\relax%
-		\fi
+		\fi%
 	\else
 		\ifcase\c@TempJNum\or 千\or 二千\or 三千\or 四千\or 五千\or
 			六千\or 七千\or 八千\or 九千%
