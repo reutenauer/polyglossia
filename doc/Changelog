@@ -1,4 +1,4 @@
-1.47 (???)
+1.47 (29-01-2020)
 
 New features:
   * IETF BCP-47 compliant language tags can now be used for loading and switching
