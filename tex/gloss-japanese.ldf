@@ -17,7 +17,7 @@
 		\csname pre##1\endcsname%
 		\csname the##1\endcsname%
 		\csname post##1\endcsname%
-	}
+	}%
 	\def\postsection{節\space}%
 	\def\postsubsection{節\space}%
 	\def\postsubsubsection{節\space}%
@@ -57,33 +57,33 @@
 \newif\if@IzumoTuki \@IzumoTukifalse%
 \newcount\c@TempJNum%
 
-\def\@JapaneseDigit#1{
-	\ifcase#1\or 一\or 二\or 三\or 四\or 五\or
-		六\or 七\or 八\or 九\or 十\or
-		十一\or 十二\or 十三\or 十四\or 十五\or
-		十六\or 十七\or 十八\or 十九\or 廿\or
-		廿一\or 廿二\or 廿三\or 廿四\or 廿五\or
-		廿六\or 廿七\or 廿八\or 廿九\or 丗\or
-		丗一\or 丗二\or 丗三\or 丗四\or 丗五\or
-		丗六\or 丗七\or 丗八\or 丗九\or 四十\or
-		四十一\or 四十二\or 四十三\or 四十四\or 四十五\or
-		四十六\or 四十七\or 四十八\or 四十九\or 五十\or
-		五十一\or 五十二\or 五十三\or 五十四\or 五十五\or
-		五十六\or 五十七\or 五十八\or 五十九\or 六十\or
-		六十一\or 六十二\or 六十三\or 六十四\or 六十五\or
-		六十六\or 六十七\or 六十八\or 六十九\or 七十\or
-		七十一\or 七十二\or 七十三\or 七十四\or 七十五\or
-		七十六\or 七十七\or 七十八\or 七十九\or 八十\or
-		八十一\or 八十二\or 八十三\or 八十四\or 八十五\or
-		八十六\or 八十七\or 八十八\or 八十九\or 九十\or
-		九十一\or 九十二\or 九十三\or 九十四\or 九十五\or
-		九十六\or 九十七\or 九十八\or 九十九
+\def\@JapaneseDigit#1{%
+	\ifcase#1\or 一\or 二\or 三\or 四\or 五\or%
+		六\or 七\or 八\or 九\or 十\or%
+		十一\or 十二\or 十三\or 十四\or 十五\or%
+		十六\or 十七\or 十八\or 十九\or 廿\or%
+		廿一\or 廿二\or 廿三\or 廿四\or 廿五\or%
+		廿六\or 廿七\or 廿八\or 廿九\or 丗\or%
+		丗一\or 丗二\or 丗三\or 丗四\or 丗五\or%
+		丗六\or 丗七\or 丗八\or 丗九\or 四十\or%
+		四十一\or 四十二\or 四十三\or 四十四\or 四十五\or%
+		四十六\or 四十七\or 四十八\or 四十九\or 五十\or%
+		五十一\or 五十二\or 五十三\or 五十四\or 五十五\or%
+		五十六\or 五十七\or 五十八\or 五十九\or 六十\or%
+		六十一\or 六十二\or 六十三\or 六十四\or 六十五\or%
+		六十六\or 六十七\or 六十八\or 六十九\or 七十\or%
+		七十一\or 七十二\or 七十三\or 七十四\or 七十五\or%
+		七十六\or 七十七\or 七十八\or 七十九\or 八十\or%
+		八十一\or 八十二\or 八十三\or 八十四\or 八十五\or%
+		八十六\or 八十七\or 八十八\or 八十九\or 九十\or%
+		九十一\or 九十二\or 九十三\or 九十四\or 九十五\or%
+		九十六\or 九十七\or 九十八\or 九十九%
 	\else
-		\@ctrerr
-	\fi\relax
+		\@ctrerr%
+	\fi\relax%
 }
 
-\def\@JapaneseNum#1{
+\def\@JapaneseNum#1{%
 	\c@TempJNum=#1\divide\c@TempJNum by 1000\relax%
 	\ifnum\c@TempJNum=\z@\c@TempJNum=#1%
 		\divide\c@TempJNum by 100\relax%
@@ -110,7 +110,7 @@
 	\fi
 }
 
-\def\@japanesenumber#1{
+\def\@japanesenumber#1{%
 	\@tempcnta=#1%
 	\ifnum\@tempcnta=\z@{〇}%
 	\else
@@ -143,12 +143,12 @@
 	\fi
 }
 
-\def\japanesenumber#1{
+\def\japanesenumber#1{%
 	\expandafter\@japanesenumber\csname c@#1\endcsname%
 }
 
-\def\datejapanese{
-	{
+\def\datejapanese{%
+	{%
 		\ifnum\year<1868%
 			\xdef\the@WarekiCur{}%
 		\else
@@ -167,14 +167,14 @@
 			\fi
 		\fi
 		\xdef\the@WameiTosi{\the\year}%
-	}
+	}%
 	\def\西暦{\@WameiRekifalse \@WameiTukifalse \@WameiHifalse}%
 	\def\和暦{\@WameiRekitrue \@WameiTosifalse \@WameiTukifalse \@WameiHifalse}%
 	\def\和名暦{\@WameiTositrue \@WameiTukitrue \@WameiHitrue}%
 	\def\数字暦{\@WameiTosifalse \@WameiTukifalse \@WameiHifalse}%
 	\def\出雲月{\@IzumoTukitrue}%
 	\def\大和月{\@IzumoTukifalse}%
-	\def\today{
+	\def\today{%
 		\if@WameiReki%
 			\the@WarekiCur%
 			\if@WameiTosi%
@@ -201,8 +201,8 @@
 		\else
 			\,\number\day\,%
 		\fi
-		{日}
-	}
+		{日}%
+	}%
 }
 
 \def\noextras@japanese{%

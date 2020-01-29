@@ -32,6 +32,7 @@ Bug fixes:
   * Fix Hungarian swapstrings feature (#373).
   * Fix lua punctuation code problem (#374).
   * Fix Bengali changecounternumbering option (#381).
+  * Fix whitespace issue in Japanese (#387).
   * Fix \text<lang> command with multiple paragraphs.
   * Actually implement documented german spelling variant '1996' (= 'new').
   * Fix Slovenian localalph option.
