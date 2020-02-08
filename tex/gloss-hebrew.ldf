@@ -120,14 +120,14 @@ and may look very wrong.}
 
 \def\hebrew@ltr@numbers{%
     \ifxetex
-      \XeTeXinterchartoks \bidi@sepmark@charclass  \bidi@digits@charclass = {\xpg@hebrew@DigitsDotDashInterCharToks}
+      \XeTeXinterchartoks \bidi@sepmark@charclass  \bidi@digits@charclass = {\xpg@hebrew@DigitsDotDashInterCharToks}%
     \fi%
 }
 
 \def\nohebrew@ltr@numbers{%
     \ifxetex
       % This is bidi's original intervention
-      \XeTeXinterchartoks \bidi@sepmark@charclass  \bidi@digits@charclass = {\DigitsDotDashInterCharToks}
+      \XeTeXinterchartoks \bidi@sepmark@charclass  \bidi@digits@charclass = {\DigitsDotDashInterCharToks}%
     \fi%
 }
 
