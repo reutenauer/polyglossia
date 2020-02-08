@@ -115,7 +115,7 @@ and may look very wrong.}
 % RTL. Hebrew uses LTR numbers, though. So we insert an LTR mark to revert
 % the directionality
 \ifxetex
-  \newcommand\xpg@hebrew@DigitsDotDashInterCharToks{\if@nonlatin\char"200E \fi}
+  \newcommand\xpg@hebrew@DigitsDotDashInterCharToks{\ifbool{@nonlatin}{\char"200E }{}}
 \fi
 
 \def\hebrew@ltr@numbers{%
