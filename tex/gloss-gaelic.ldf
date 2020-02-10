@@ -18,8 +18,8 @@
 \setlanguagealias[variant=scottish]{gaelic}{scottish}
 
 \def\gaelic@variant{irish}
-\define@choicekey*+{gaelic}{variant}[\val\nr]{irish,scottish}[irish]{%
-   \ifcase\nr\relax
+\define@choicekey*+{gaelic}{variant}[\xpg@val\xpg@nr]{irish,scottish}[irish]{%
+   \ifcase\xpg@nr\relax
       % irish:
       \gdef\gaelic@variant{irish}%
       \SetLanguageKeys{gaelic}{language=Irish,langtag=IRI,babelname=irish,bcp47=ga}%
@@ -30,7 +30,7 @@
       \SetLanguageKeys{gaelic}{language=Gaelic,langtag=GAE,babelname=scottish,bcp47=gd}%
       \xpg@fontsetup@latin{gaelic}%
    \fi
-   \xpg@info{Option: gaelic, variant=\val}%
+   \xpg@info{Option: gaelic, variant=\xpg@val}%
 }{\xpg@warning{Unknown gaelic variant `#1'}}
 
 % Register default options

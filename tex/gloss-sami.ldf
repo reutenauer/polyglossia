@@ -19,8 +19,8 @@
 
 % TODO: Add other Sami varieties
 \def\sami@variant{northern}
-%\define@choicekey*+{sami}{variant}[\val\nr]{northern}[nothern]{%
-%   \ifcase\nr\relax
+%\define@choicekey*+{sami}{variant}[\xpg@val\xpg@nr]{northern}[nothern]{%
+%   \ifcase\xpg@nr\relax
 %      % northern:
 %      \def\sami@variant{samin}%
 %      \SetLanguageKeys{sami}{language=Northern Sami,langtag=NSM}%
@@ -31,7 +31,7 @@
 %      \SetLanguageKeys{sami}{language= Sami,langtag=}%
 %      \xpg@fontsetup@latin{sami}%
 %   \fi
-%   \xpg@info{Option: sami, variant=\val}%
+%   \xpg@info{Option: sami, variant=\xpg@val}%
 %}{\xpg@warning{Unknown sami variant `#1'}}
 
 

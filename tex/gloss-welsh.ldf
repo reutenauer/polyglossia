@@ -13,15 +13,15 @@
 
 \providebool{welsh@formaldate}
 
-\define@choicekey*+{welsh}{date}[\val\nr]{long,short}[short]{%
-   \ifcase\nr\relax
+\define@choicekey*+{welsh}{date}[\xpg@val\xpg@nr]{long,short}[short]{%
+   \ifcase\xpg@nr\relax
       % long:
       \welsh@formaldatetrue
    \or
       % accented:
       \welsh@formaldatefalse
    \fi
-   \xpg@info{Option: Welsh, date=\val}%
+   \xpg@info{Option: Welsh, date=\xpg@val}%
 }{\xpg@warning{Unknown date value `#1'}}
 
 % Register default options

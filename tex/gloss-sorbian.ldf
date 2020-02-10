@@ -22,8 +22,8 @@
 \setlanguagealias[variant=upper]{sorbian}{uppersorbian}
 
 \def\sorbian@variant{usorbian}
-\define@choicekey*+{sorbian}{variant}[\val\nr]{upper,lower}[upper]{%
-   \ifcase\nr\relax
+\define@choicekey*+{sorbian}{variant}[\xpg@val\xpg@nr]{upper,lower}[upper]{%
+   \ifcase\xpg@nr\relax
       % upper:
       \def\sorbian@variant{usorbian}%
       \SetLanguageKeys{sorbian}{language=Upper Sorbian,langtag=USB,babelname=uppersorbian,bcp47=hsb}%
@@ -64,7 +64,7 @@
         }
      }%
    \fi
-   \xpg@info{Option: sorbian, variant=\val}%
+   \xpg@info{Option: sorbian, variant=\xpg@val}%
 }{\xpg@warning{Unknown sorbian variant `#1'}}
 
 

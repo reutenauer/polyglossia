@@ -29,15 +29,15 @@ and may look very wrong.}
 \newif\ifmarathi@devanagari@numerals
 \marathi@devanagari@numeralstrue
 
-\define@choicekey*+{marathi}{numerals}[\val\nr]{Western,Devanagari}[Devanagari]{%
-   \ifcase\nr\relax
+\define@choicekey*+{marathi}{numerals}[\xpg@val\xpg@nr]{Western,Devanagari}[Devanagari]{%
+   \ifcase\xpg@nr\relax
       % Western:
       \marathi@devanagari@numeralsfalse%
    \or
       % Devanagari:
       \marathi@devanagari@numeralstrue%
    \fi
-   \xpg@info{Option: Marathi, numerals=\val}%
+   \xpg@info{Option: Marathi, numerals=\xpg@val}%
 }{\xpg@warning{Unknown Marathi numerals value `#1'}}
 
 % Register default options

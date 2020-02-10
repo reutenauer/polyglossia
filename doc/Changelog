@@ -1,3 +1,13 @@
+1.48 (forthcoming)
+
+New features:
+
+Bug fixes:
+  * Fix use of Hebrew with LuaLaTeX (#389).
+
+Interface and defaults changes:
+  * Use private macros in keyval choice keys (#390).
+
 1.47 (29-01-2020)
 
 New features:

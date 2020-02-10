@@ -27,8 +27,8 @@
 \setlanguagealias[script=Cyrillic]{serbian}{serbianc}
 
 \newif\if@serbian@cyr
-\define@choicekey*+{serbian}{Script}[\val\nr]{cyrillic,latin}[cyrillic]{%
-   \ifcase\nr\relax
+\define@choicekey*+{serbian}{Script}[\xpg@val\xpg@nr]{cyrillic,latin}[cyrillic]{%
+   \ifcase\xpg@nr\relax
       % cyrillic:
       \@serbian@cyrtrue
       \SetLanguageKeys{serbian}{scripttag=cyrl,script=Cyrillic,babelname=serbianc,bcp47=sr-Cyrl}
@@ -41,15 +41,15 @@
       %TODO \def\serbian@language{\language=\l@serbianlat}%
       % or should we use Croatian patterns as a fallback for the time being???
    \fi
-   \xpg@info{Option: Serbian, script=\val}%
+   \xpg@info{Option: Serbian, script=\xpg@val}%
 }{\xpg@warning{Unknown Serbian script `#1'}}
 
 \define@key{serbian}{script}[Cyrillic]{\setkeys{serbian}{Script=#1}}
 
 \newif\ifcyrillic@numerals
 \newif\ifcyrillic@asbuk@numerals
-\define@choicekey*+{serbian}{numerals}[\val\nr]{arabic,cyrillic,cyrillic-trad,cyrillic-alph}[arabic]{%
-   \ifcase\nr\relax
+\define@choicekey*+{serbian}{numerals}[\xpg@val\xpg@nr]{arabic,cyrillic,cyrillic-trad,cyrillic-alph}[arabic]{%
+   \ifcase\xpg@nr\relax
       % arabic:
       \cyrillic@numeralsfalse%
       \cyrillic@asbuk@numeralsfalse%
@@ -66,7 +66,7 @@
       \cyrillic@numeralstrue%
       \cyrillic@asbuk@numeralstrue%
    \fi
-   \xpg@info{Option: Serbian, numerals=\val}%
+   \xpg@info{Option: Serbian, numerals=\xpg@val}%
 }{\xpg@warning{Unknown Serbian numerals value `#1'}}
 
 \setkeys{serbian}{Script,numerals}

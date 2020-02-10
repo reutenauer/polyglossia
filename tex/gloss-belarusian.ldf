@@ -20,8 +20,8 @@
 \setlanguagealias*{belarusian}{be}
 
 \def\belarusian@spelling{modern}
-\define@choicekey*+{belarusian}{spelling}[\val\nr]{modern,classic,tarask}[modern]{%
-   \ifcase\nr\relax
+\define@choicekey*+{belarusian}{spelling}[\xpg@val\xpg@nr]{modern,classic,tarask}[modern]{%
+   \ifcase\xpg@nr\relax
       % modern:
       \def\belarusian@spelling{modern}%
       \SetLanguageKeys{belarusian}{bcp47=be}%
@@ -38,8 +38,8 @@
 
 \newif\ifcyrillic@numerals
 \newif\ifcyrillic@asbuk@numerals
-\define@choicekey*+{belarusian}{numerals}[\val\nr]{arabic,cyrillic,cyrillic-trad,cyrillic-alph}[arabic]{%
-   \ifcase\nr\relax
+\define@choicekey*+{belarusian}{numerals}[\xpg@val\xpg@nr]{arabic,cyrillic,cyrillic-trad,cyrillic-alph}[arabic]{%
+   \ifcase\xpg@nr\relax
       % arabic:
       \cyrillic@numeralsfalse%
       \cyrillic@asbuk@numeralsfalse%
@@ -56,7 +56,7 @@
       \cyrillic@numeralstrue%
       \cyrillic@asbuk@numeralstrue%
    \fi
-   \xpg@info{Option: Belarusian, numerals=\val}%
+   \xpg@info{Option: Belarusian, numerals=\xpg@val}%
 }{\xpg@warning{Unknown Belarusian numerals value `#1'}}
 
 \define@boolkey{belarusian}[belarusian@]{babelshorthands}[true]{}

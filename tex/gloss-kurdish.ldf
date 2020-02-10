@@ -34,8 +34,8 @@
 
 \newif\if@kurdish@kurmanji
 \def\kurdish@variant{sorani}
-\define@choicekey*+{kurdish}{variant}[\val\nr]{sorani,kurmanji}[sorani]{%
-   \ifcase\nr\relax
+\define@choicekey*+{kurdish}{variant}[\xpg@val\xpg@nr]{sorani,kurmanji}[sorani]{%
+   \ifcase\xpg@nr\relax
       % sorani:
       \def\kurdish@variant{sorani}%
       \@kurdish@kurmanjifalse%
@@ -45,13 +45,13 @@
       \@kurdish@kurmanjitrue%
    \fi
    \kurdish@set@variety%
-   \xpg@info{Option: kurdish, variant=\val}%
+   \xpg@info{Option: kurdish, variant=\xpg@val}%
 }{\xpg@warning{Unknown Kurdish variant `#1'}}
 
 \newif\if@kurdish@latin
 \newif\if@kurdish@arabic
-\define@choicekey*+{kurdish}{script}[\val\nr]{Arabic,Latin}{%
-   \ifcase\nr\relax
+\define@choicekey*+{kurdish}{script}[\xpg@val\xpg@nr]{Arabic,Latin}{%
+   \ifcase\xpg@nr\relax
       % Arabic:
       \@kurdish@latinfalse%
       \@kurdish@arabictrue%
@@ -61,7 +61,7 @@
       \@kurdish@arabicfalse%
    \fi
    \kurdish@set@variety%
-   \xpg@info{Option: kurdish, script=\val}%
+   \xpg@info{Option: kurdish, script=\xpg@val}%
 }{\xpg@warning{Unknown Kurdish script `#1'}}
 
 

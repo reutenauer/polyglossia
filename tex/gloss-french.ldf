@@ -22,8 +22,8 @@
 \setlanguagealias[variant=canadian]{french}{canadien}
 
 \def\french@variant{french}
-\define@choicekey*+{french}{variant}[\val\nr]{french,canadian,acadian,swiss}[french]{%
-   \ifcase\nr\relax
+\define@choicekey*+{french}{variant}[\xpg@val\xpg@nr]{french,canadian,acadian,swiss}[french]{%
+   \ifcase\xpg@nr\relax
       % french:
       \def\french@variant{french}%
       \SetLanguageKeys{french}{babelname=french,bcp47=fr-FR}%
@@ -53,7 +53,7 @@
       \adddialect\l@swissfrench\l@french\relax%
       \french@thincolonspacetrue
    \fi
-   \xpg@info{Option: French, variant=\val}%
+   \xpg@info{Option: French, variant=\xpg@val}%
 }{\xpg@warning{Unknown French variant `#1'}}
 
 

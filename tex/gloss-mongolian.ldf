@@ -26,8 +26,8 @@
 
 \newif\ifcyrillic@numerals
 \newif\ifcyrillic@asbuk@numerals
-\define@choicekey*+{mongolian}{numerals}[\val\nr]{arabic,cyrillic,cyrillic-trad,cyrillic-alph}[arabic]{%
-   \ifcase\nr\relax
+\define@choicekey*+{mongolian}{numerals}[\xpg@val\xpg@nr]{arabic,cyrillic,cyrillic-trad,cyrillic-alph}[arabic]{%
+   \ifcase\xpg@nr\relax
       % arabic:
       \cyrillic@numeralsfalse%
       \cyrillic@asbuk@numeralsfalse%
@@ -44,7 +44,7 @@
       \cyrillic@numeralstrue%
       \cyrillic@asbuk@numeralstrue%
    \fi
-   \xpg@info{Option: Mongolian, numerals=\val}%
+   \xpg@info{Option: Mongolian, numerals=\xpg@val}%
 }{\xpg@warning{Unknown Mongolian numerals value `#1'}}
 
 \define@boolkey{mongolian}[mongolian@]{babelshorthands}[true]{}

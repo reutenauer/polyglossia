@@ -62,15 +62,15 @@ and may look very wrong.}
 
 \newif\ifsanskrit@devanagari@numerals
 \sanskrit@devanagari@numeralstrue
-\define@choicekey*+{sanskrit}{numerals}[\val\nr]{Devanagari,Western}[Devanagari]{%
-   \ifcase\nr\relax
+\define@choicekey*+{sanskrit}{numerals}[\xpg@val\xpg@nr]{Devanagari,Western}[Devanagari]{%
+   \ifcase\xpg@nr\relax
       % Devanagari:
       \sanskrit@devanagari@numeralstrue%
    \or
       % Western:
       \sanskrit@devanagari@numeralsfalse%
    \fi
-   \xpg@info{Option: Sanskrit, numerals=\val}%
+   \xpg@info{Option: Sanskrit, numerals=\xpg@val}%
 }{\xpg@warning{Unknown Sanskrit numeral `#1'}}
 
 

@@ -16,15 +16,15 @@
 
 \newif\if@eastern@armenian
 \@eastern@armenianfalse
-\define@choicekey*+{armenian}{variant}[\val\nr]{western,eastern}[western]{%
-   \ifcase\nr\relax
+\define@choicekey*+{armenian}{variant}[\xpg@val\xpg@nr]{western,eastern}[western]{%
+   \ifcase\xpg@nr\relax
       % western:
       \@eastern@armenianfalse%
    \or
       % eastern:
       \@eastern@armeniantrue%
    \fi
-   \xpg@info{Option: Armenian, variant=\val}%
+   \xpg@info{Option: Armenian, variant=\xpg@val}%
 }{\xpg@warning{Unknown Armenian variant `#1'}}
 
 \newif\if@armenian@numerals

@@ -22,8 +22,8 @@
 
 \newif\if@spanish@mexico
 \@spanish@mexicofalse
-\define@choicekey*+{spanish}{variant}[\val\nr]{spanish,mexican}[spanish]{%
-   \ifcase\nr\relax
+\define@choicekey*+{spanish}{variant}[\xpg@val\xpg@nr]{spanish,mexican}[spanish]{%
+   \ifcase\xpg@nr\relax
       % spanish:
       \@spanish@mexicofalse%
       \SetLanguageKeys{spanish}{babelname=spanish,bcp47=es-ES}%
@@ -32,7 +32,7 @@
       \@spanish@mexicotrue%
       \SetLanguageKeys{spanish}{babelname=spanishmx,bcp47=es-MX}%
    \fi
-   \xpg@info{Option: spanish, variant=\val}%
+   \xpg@info{Option: spanish, variant=\xpg@val}%
 }{\xpg@warning{Unknown spanish variant `#1'}}
 
 % Localized math operators à la babel
@@ -40,8 +40,8 @@
 \newif\ifspanish@spacedoperators
 \newif\ifspanish@locoperators
 
-\define@choicekey*+{spanish}{spanishoperators}[\val\nr]{all,accented,spaced,none}[all]{%
-   \ifcase\nr\relax
+\define@choicekey*+{spanish}{spanishoperators}[\xpg@val\xpg@nr]{all,accented,spaced,none}[all]{%
+   \ifcase\xpg@nr\relax
       % all:
       \spanish@locoperatorstrue%
       \spanish@accentedoperatorstrue%
@@ -62,7 +62,7 @@
       \spanish@accentedoperatorsfalse%
       \spanish@spacedoperatorsfalse%
    \fi
-   \xpg@info{Option: Spanish, spanishoperators=\val}%
+   \xpg@info{Option: Spanish, spanishoperators=\xpg@val}%
 }{\xpg@warning{Unknown spanishoperators value `#1'}}
 
 

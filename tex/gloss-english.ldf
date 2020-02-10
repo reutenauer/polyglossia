@@ -37,8 +37,8 @@
 % Option ordinalmonthday
 \define@boolkey{english}[english@]{ordinalmonthday}[true]{}
 
-\define@choicekey*+{english}{variant}[\val\nr]{uk,british,us,american,usmax,australian,newzealand,canadian}[us]{%
-   \ifcase\nr\relax
+\define@choicekey*+{english}{variant}[\xpg@val\xpg@nr]{uk,british,us,american,usmax,australian,newzealand,canadian}[us]{%
+   \ifcase\xpg@nr\relax
       % uk:
       \british@hyphentrue
       \british@dateformattrue

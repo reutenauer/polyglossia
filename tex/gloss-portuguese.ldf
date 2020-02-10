@@ -19,8 +19,8 @@
 \setlanguagealias[variant=brazilian]{portuguese}{brazil}
 
 \def\portuguese@variant{portuges}
-\define@choicekey*+{portuguese}{variant}[\val\nr]{portuguese,brazilian}[portuguese]{%
-   \ifcase\nr\relax
+\define@choicekey*+{portuguese}{variant}[\xpg@val\xpg@nr]{portuguese,brazilian}[portuguese]{%
+   \ifcase\xpg@nr\relax
       % portuguese:
       \def\portuguese@variant{portuges}%
       \SetLanguageKeys{portuguese}{babelname=portuges,bcp47=pt-PT}%
@@ -33,7 +33,7 @@
 	      I will use the standard patterns for Portuguese instead}%
 	    \adddialect\l@brazil\l@portuges\relax}%
    \fi
-   \xpg@info{Option: portuguese, variant=\val}%
+   \xpg@info{Option: portuguese, variant=\xpg@val}%
 }{\xpg@warning{Unknown portuguese variant `#1'}}
 
 

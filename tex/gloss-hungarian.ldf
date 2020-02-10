@@ -20,8 +20,8 @@
 \newif\if@hungarian@swapcaptions
 \newif\if@hungarian@swapheadings
 \newif\if@hungarian@swapheaders
-\define@choicekey*+{hungarian}{swapstrings}[\val\nr]{all,captions,headings,headers,hheaders,none}[all]{%
-   \ifcase\nr\relax
+\define@choicekey*+{hungarian}{swapstrings}[\xpg@val\xpg@nr]{all,captions,headings,headers,hheaders,none}[all]{%
+   \ifcase\xpg@nr\relax
       % all:
       \@hungarian@swapcaptionstrue%
       \@hungarian@swapheadingstrue%
@@ -52,7 +52,7 @@
       \@hungarian@swapheadingsfalse%
       \@hungarian@swapheadersfalse%
    \fi
-   \xpg@info{Option: Hungarian, swapstrings=\val}%
+   \xpg@info{Option: Hungarian, swapstrings=\xpg@val}%
 }{\xpg@warning{Unknown Hungarian swapstrings value `#1'}}
 
 % Register default options

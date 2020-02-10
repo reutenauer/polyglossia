@@ -22,8 +22,8 @@
 
 \newif\ifcyrillic@numerals
 \newif\ifcyrillic@asbuk@numerals
-\define@choicekey*+{ukrainian}{numerals}[\val\nr]{arabic,cyrillic,cyrillic-trad,cyrillic-alph}[arabic]{%
-   \ifcase\nr\relax
+\define@choicekey*+{ukrainian}{numerals}[\xpg@val\xpg@nr]{arabic,cyrillic,cyrillic-trad,cyrillic-alph}[arabic]{%
+   \ifcase\xpg@nr\relax
       % arabic:
       \cyrillic@numeralsfalse%
       \cyrillic@asbuk@numeralsfalse%
@@ -40,7 +40,7 @@
       \cyrillic@numeralstrue%
       \cyrillic@asbuk@numeralstrue%
    \fi
-   \xpg@info{Option: Ukrainian, numerals=\val}%
+   \xpg@info{Option: Ukrainian, numerals=\xpg@val}%
 }{\xpg@warning{Unknown Ukrainian numerals value `#1'}}
 
 

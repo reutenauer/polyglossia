@@ -15,18 +15,18 @@
 \setlanguagealias*{korean}{ko}
 
 % variant : plain (0), classic (1), or modern (2)
-\define@choicekey{korean}{variant}[\val\nr]{plain,classic,modern}[plain]{%
-    \let\xpg@korean@variant\nr
+\define@choicekey{korean}{variant}[\xpg@val\xpg@nr]{plain,classic,modern}[plain]{%
+    \let\xpg@korean@variant\xpg@nr
 }
 % captions : hangul (0) or hanja (1)
-\define@choicekey{korean}{captions}[\val\nr]{hangul,hanja}[hangul]{%
-    \let\xpg@korean@captions\nr
+\define@choicekey{korean}{captions}[\xpg@val\xpg@nr]{hangul,hanja}[hangul]{%
+    \let\xpg@korean@captions\xpg@nr
 }
 % swapstrings: all (0), headings (1), headers (2), or none (3)
 \newif\if@korean@swapheadings
 \newif\if@korean@swapheaders
-\define@choicekey*+{korean}{swapstrings}[\val\nr]{all,headings,headers,none}[all]{%
-   \ifcase\nr\relax
+\define@choicekey*+{korean}{swapstrings}[\xpg@val\xpg@nr]{all,headings,headers,none}[all]{%
+   \ifcase\xpg@nr\relax
       % all:
       \@korean@swapheadingstrue%
       \@korean@swapheaderstrue%
@@ -43,7 +43,7 @@
       \@korean@swapheadingsfalse%
       \@korean@swapheadersfalse%
    \fi
-   \xpg@info{Option: Korean, swapstrings=\val}%
+   \xpg@info{Option: Korean, swapstrings=\xpg@val}%
 }{\xpg@warning{Unknown Korean swapstrings value `#1'}}
 
 % Register default options

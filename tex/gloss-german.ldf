@@ -41,8 +41,8 @@
 
 \newif\if@german@oldspelling
 \@german@oldspellingfalse
-\define@choicekey*+{german}{spelling}[\val\nr]{new,old,1901,1996}[new]{%
-   \ifcase\nr\relax
+\define@choicekey*+{german}{spelling}[\xpg@val\xpg@nr]{new,old,1901,1996}[new]{%
+   \ifcase\xpg@nr\relax
       % new:
       \@german@oldspellingfalse
    \or
@@ -56,15 +56,15 @@
       \@german@oldspellingfalse
    \fi
    \german@set@babelname%
-   \xpg@info{Option: German, spelling=\val}%
+   \xpg@info{Option: German, spelling=\xpg@val}%
 }{\xpg@warning{Unknown German spelling `#1'}}
 
 \newif\if@austrian@locale
 \@austrian@localefalse
 \newif\if@swiss@locale
 \@swiss@localefalse
-\define@choicekey*+{german}{variant}[\val\nr]{german,austrian,swiss}[german]{%
-   \ifcase\nr\relax
+\define@choicekey*+{german}{variant}[\xpg@val\xpg@nr]{german,austrian,swiss}[german]{%
+   \ifcase\xpg@nr\relax
       % german:
       \@swiss@localefalse%
       \@austrian@localefalse%
@@ -84,7 +84,7 @@
          }%
    \fi
    \german@set@babelname%
-   \xpg@info{Option: German, variant=\val}%
+   \xpg@info{Option: German, variant=\xpg@val}%
 }{\xpg@warning{Unknown German variant `#1'}}
 
 \def\german@set@babelname{%
@@ -134,8 +134,8 @@
 }
 
 \newif\if@german@blackletter
-\define@choicekey*+{german}{script}[\val\nr]{latin,blackletter,fraktur}[latin]{%
-   \ifcase\nr\relax
+\define@choicekey*+{german}{script}[\xpg@val\xpg@nr]{latin,blackletter,fraktur}[latin]{%
+   \ifcase\xpg@nr\relax
       % latin:
       \@german@blackletterfalse%
    \or
@@ -146,7 +146,7 @@
       \@german@blacklettertrue%
    \fi
    \german@set@babelname%
-   \xpg@info{Option: German, script=\val}%
+   \xpg@info{Option: German, script=\xpg@val}%
 }{\xpg@warning{Unknown German script `#1'}}
 
 % Option defunc'ed, as bot XeTeX and LuaTeX meanwhile
