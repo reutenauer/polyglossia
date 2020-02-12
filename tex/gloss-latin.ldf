@@ -308,10 +308,15 @@
 
 %%%%% Messages and commands concerning footnotes
 
-\cs_if_exist:NT \@makefntext
-  {
-    \cs_set_eq:NN \polyglossia_latin_original_footnote:n \@makefntext
-  }
+% Save original footnote definition
+% Do this at the end of the preamble to catch other
+% packages' footnote changes (#391)
+\AtEndPreamble{%
+  \cs_if_exist:NT \@makefntext
+    {
+      \cs_set_eq:NN \polyglossia_latin_original_footnote:n \@makefntext
+    }
+}
 
 % This is the footnote style as defined by the "ecclesiastic" package.
 \cs_new:Npn \polyglossia_latin_variant_footnote:n #1

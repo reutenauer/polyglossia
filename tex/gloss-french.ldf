@@ -76,7 +76,11 @@
 \def\xpg@unskip{\ifhmode\ifdim\lastskip>\z@\unskip\fi\fi}
 
 % Save original footnote definition
-\let\xpg@orig@makefntext\@makefntext
+% Do this at the end of the preamble to catch other
+% packages' footnote changes (#391)
+\AtEndPreamble{%
+  \let\xpg@orig@makefntext\@makefntext
+}
 
 \define@boolkey{french}[french@]{frenchfootnote}[true]{%
   \AfterPreamble{%
