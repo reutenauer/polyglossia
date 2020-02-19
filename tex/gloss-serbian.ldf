@@ -187,7 +187,7 @@
 \def\serbian@numbers{%
    \let\latin@alph\@alph
    \let\latin@Alph\@Alph
-   \ifserbian@numerals
+   \ifcyrillic@numerals
      \def\serbian@alph##1{\expandafter\serbiannumeral\expandafter{\the##1}}%
      \def\serbian@Alph##1{\expandafter\Serbiannumeral\expandafter{\the##1}}%
       \let\@alph\serbian@alph%
@@ -201,11 +201,11 @@
 }
 
 \def\blockextras@serbian{%
-   \ifserbian@numerals\serbian@numbers\fi
+   \ifcyrillic@numerals\serbian@numbers\fi
 }
  
 \def\noextras@serbian{%
-   \ifserbian@numerals\noserbian@numbers\fi
+   \ifcyrillic@numerals\noserbian@numbers\fi
 }
 
 \def\Asbuk#1{\expandafter\serbian@asbuk@Alph\csname c@#1\endcsname}
