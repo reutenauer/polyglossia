@@ -967,26 +967,33 @@
             \begingroup
                \let\label\relax \let\index\relax \let\glossary\relax
                \unrestored@protected@xdef\@themark
-         {{\foreignlanguage{##1}{%
-            \protect\@@ensure@maindir{####1}}}%
-          {\foreignlanguage{##1}{%
-      \protect\@@ensure@maindir{####2}}}}%
+               {%
+                {\foreignlanguage{##1}{\protect\@@ensure@maindir{####1}}}%
+                {\foreignlanguage{##1}{\protect\@@ensure@maindir{####2}}}%
+               }%
                \@temptokena \expandafter{\@themark}%
                \mark{\the\@temptokena}%
             \endgroup
-            \if@nobreak\ifvmode\nobreak\fi\fi}%
-            \def\markright####1{%
-               \begingroup
-                  \let\label\relax \let\index\relax \let\glossary\relax
-                  \expandafter\@markright\@themark
-      {\foreignlanguage{##1}{\protect\@@ensure@maindir{####1}}}%
-                  \@temptokena \expandafter{\@themark}%
-                  \mark{\the\@temptokena}%
-               \endgroup
-               \if@nobreak\ifvmode\nobreak\fi\fi}%
-            \def\@markright####1####2####3{\@temptokena{\protect\@@ensure@maindir{####1}}%
-               \unrestored@protected@xdef\@themark{{\the\@temptokena}%
-               {\protect\@@ensure@maindir{####3}}}}}%
+            \if@nobreak\ifvmode\nobreak\fi\fi%
+         }%
+         \def\markright####1{%
+            \begingroup
+               \let\label\relax \let\index\relax \let\glossary\relax
+               \expandafter\@markright\@themark
+               {\foreignlanguage{##1}{\protect\@@ensure@maindir{####1}}}%
+               \@temptokena \expandafter{\@themark}%
+               \mark{\the\@temptokena}%
+            \endgroup
+            \if@nobreak\ifvmode\nobreak\fi\fi%
+         }%
+         \def\@markright####1####2####3{%
+            \@temptokena{\protect\@@ensure@maindir{####1}}%
+            \unrestored@protected@xdef\@themark{%
+               {\the\@temptokena}%
+               {\protect\@@ensure@maindir{####3}}%
+            }%
+         }%
+      }%
 }
 
 
