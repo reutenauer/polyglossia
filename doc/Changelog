@@ -7,6 +7,7 @@ Bug fixes:
   * Do not overwrite footnote redefinitions of other packages
     with Latin and French (#391)
   * Fix Serbian cyrillic numerals code (#392).
+  * Fix [no]localmarks option, whose logic was swapped (part of #395).
 
 Interface and defaults changes:
   * Use private macros in keyval choice keys (#390).
