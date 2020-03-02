@@ -529,18 +529,22 @@ Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 		Russian, Slovak, and Ukrainian. Please refer to the respective language descriptions
 		(sec.~\ref{specific}) for details.
 
-	\item \xpgoption{localmarks} redefines the internal \LaTeX\ macros \cmd\markboth\ and
-		\cmd\markright. In earlier versions of \pkg{polyglossia},\new{1.2.0} this
-		option was set by default, but we now realize that it causes more problems
-		than it helps, so it is now off by default.  For backwards-compatibility, the
+	\item \xpgboolkeyfalse{localmarks} redefines the internal \LaTeX\ macros \cmd\markboth\ and
+		\cmd\markright\ to the effect that the header text is explicitly set in the currently
+		active language (\ie wrapped into \cmd\foreignlanguage\{\meta{lang}\}\{\meta{\ldots}\}).
+		
+		In earlier versions of \pkg{polyglossia},\new{1.2.0} this
+		option was enabled by default, but we now realize that it causes more problems
+		than it helps (since it breaks if a package or class redefines \cmd\markboth\ or
+		\cmd\markright), so it is now disabled by default. For backwards compatibility, the
 		option \xpgoption{nolocalmarks} which used to switch off the previous default, and
-		now does nothing, is still available.
+		now equals the default, is still available.
 
 	\item \xpgoption{quiet} turns off most info messages and some of the warnings issued
 		by \LaTeX, \pkg{fontspec} and \pkg{polyglossia}.
 \end{itemize}
 
-\condbreak{5\baselineskip}
+\pagebreak
 \section{Language-switching commands}\label{languageswitching}
 
 \subsection{Recommended commands}\label{sec:langcmds}
