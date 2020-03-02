@@ -960,7 +960,7 @@
 %% ensure localization of \markright and \markboth commands
 %%% THIS IS NOW DISABLED BY DEFAULT
 \newcommand{\local@marks}[1]{}
-\def\enable@local@marks{
+\def\enable@local@marks{%
       \xpg@info{Option:~ localmarks}%
       \def\local@marks##1{%
          \def\markboth####1####2{%
