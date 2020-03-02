@@ -986,13 +986,14 @@
             \endgroup
             \if@nobreak\ifvmode\nobreak\fi\fi%
          }%
-         \def\@markright####1####2####3{%
-            \@temptokena{\protect\@@ensure@maindir{####1}}%
-            \unrestored@protected@xdef\@themark{%
-               {\the\@temptokena}%
-               {\protect\@@ensure@maindir{####3}}%
-            }%
-         }%
+% This part seems wrong (see #396 for explanation). Remove after a while.
+%         \def\@markright####1####2####3{%
+%            \@temptokena{\protect\@@ensure@maindir{####1}}%
+%            \unrestored@protected@xdef\@themark{%
+%               {\the\@temptokena}%
+%               {\protect\@@ensure@maindir{####3}}%
+%            }%
+%         }%
       }%
 }
 
