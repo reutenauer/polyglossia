@@ -968,8 +968,8 @@
                \let\label\relax \let\index\relax \let\glossary\relax
                \unrestored@protected@xdef\@themark
                {%
-                {\str_lowercase:n\foreignlanguage{##1}{\protect\@@ensure@maindir{####1}}}%
-                {\str_lowercase:n\foreignlanguage{##1}{\protect\@@ensure@maindir{####2}}}%
+                {\foreignlanguage{##1}{\protect\@@ensure@maindir{####1}}}%
+                {\foreignlanguage{##1}{\protect\@@ensure@maindir{####2}}}%
                }%
                \@temptokena \expandafter{\@themark}%
                \mark{\the\@temptokena}%
@@ -980,7 +980,7 @@
             \begingroup
                \let\label\relax \let\index\relax \let\glossary\relax
                \expandafter\@markright\@themark
-               {\str_lowercase:n\foreignlanguage{##1}{\protect\@@ensure@maindir{####1}}}%
+               {\foreignlanguage{##1}{\protect\@@ensure@maindir{####1}}}%
                \@temptokena \expandafter{\@themark}%
                \mark{\the\@temptokena}%
             \endgroup
