@@ -959,28 +959,31 @@
 
 %% ensure localization of \markright and \markboth commands
 %%% THIS IS NOW DISABLED BY DEFAULT
-\newcommand{\local@marks}[1]{}
-\def\enable@local@marks{%
+\cs_new_nopar:Nn {\polyglossia@local@marks:n} {}
+\cs_new_nopar:Nn {\polyglossia@enable@local@marks:}
+{
       \xpg@info{Option:~ localmarks}%
-      \def\local@marks##1{%
-         \def\markboth####1####2{%
+      \cs_gset_nopar:Nn \polyglossia@local@marks:n
+      {%
+         \def\xpg@tmp@lang{##1}%
+         \DeclareRobustCommand\markboth[2]{%
             \begingroup
                \let\label\relax \let\index\relax \let\glossary\relax
                \unrestored@protected@xdef\@themark
                {%
-                {\lowercase{\foreignlanguage{##1}}{\protect\@@ensure@maindir{####1}}}%
-                {\lowercase{\foreignlanguage{##1}}{\protect\@@ensure@maindir{####2}}}%
+                {\lowercase{\foreignlanguage{\xpg@tmp@lang}}{\protect\@@ensure@maindir{####1}}}%
+                {\lowercase{\foreignlanguage{\xpg@tmp@lang}}{\protect\@@ensure@maindir{####2}}}%
                }%
                \@temptokena \expandafter{\@themark}%
                \mark{\the\@temptokena}%
             \endgroup
             \if@nobreak\ifvmode\nobreak\fi\fi%
          }%
-         \def\markright####1{%
+         \DeclareRobustCommand\markright[1]{%
             \begingroup
                \let\label\relax \let\index\relax \let\glossary\relax
                \expandafter\@markright\@themark
-               {\lowercase{\foreignlanguage{##1}}{\protect\@@ensure@maindir{####1}}}%
+               {\lowercase{\foreignlanguage{\xpg@tmp@lang}}{\protect\@@ensure@maindir{####1}}}%
                \@temptokena \expandafter{\@themark}%
                \mark{\the\@temptokena}%
             \endgroup
@@ -2029,7 +2032,7 @@
    % via babelname (such as biblatex)
    \cs_if_exist_use:c{captions@bbl@\babelname}%
    \cs_if_exist_use:c{date@bbl@\babelname}%
-   \local@marks{#2}%
+   \polyglossia@local@marks:n{#2}%
    \csuse{init@extras@#2}%
    \polyglossia@lang@indentfirst:n{#2}
    \csuse{blockextras@#2}%
@@ -2180,7 +2183,7 @@
 }
 
 \bool_if:nTF \l_polyglossia_localmarks_bool {
-  \enable@local@marks{}
+  \polyglossia@enable@local@marks:
 }{}
 
 % compatibility
