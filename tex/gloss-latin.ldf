@@ -1,4 +1,4 @@
-\ProvidesFile{gloss-latin.ldf}[polyglossia: module for Latin v.2.2 2020-01-03]
+\ProvidesFile{gloss-latin.ldf}[polyglossia: module for Latin v.2.3 2020-03-08]
 
 \ExplSyntaxOn
 
@@ -100,9 +100,10 @@
             \str_case:Vn \l_polyglossia_latin_variant_str
               {
                 {classic}      {
-                                 \str_if_eq:nnTF{#1}{liturgicallatin}
-                                     { \adddialect \l@classiclatin { \use:c {l@#1} } }
-                                     {}
+                                 \str_if_eq:nnF {#1} {classiclatin}
+                                   {
+                                     \adddialect \l@classiclatin  { \use:c {l@#1} }
+                                   }
                                }
                 {medieval}     { \adddialect \l@medievallatin { \use:c {l@#1} } }
                 {modern}       { \adddialect \l@latin { \use:c {l@#1} } }
@@ -619,9 +620,12 @@
 \shorthandoff {^}
 \shorthandoff {=}
 
-% The active '=' character may cause problems with key=value interfaces.
+% The active = character may cause problems with key=value interfaces.
 % We have to make sure here that no problems can occur outside a Latin
 % prosodic shorthand environment.
+% The active ' character may cause problems with the unicode-math package
+% (in case Latin is used as a secondary language, see #394). We have to
+% turn it of if Latin is not the main language.
 
 \protected@write \@auxout { } { \shorthandoff {=} } % for the aux file
 
@@ -636,9 +640,13 @@
       }
       {
         % The following command should not be called if the main language
-        % defines a '=' shorthand. However, there are no languages besides
+        % defines a = shorthand. However, there are no languages besides
         % Latin defining such a shorthand in polyglossia.
         \shorthandoff {=}
+        % The following command should not be called if the main language
+        % defines a ' shorthand. However, there are no languages besides
+        % Latin defining such a shorthand in polyglossia.
+        \shorthandoff {'}
       }
   }
 
@@ -656,12 +664,18 @@
             \polyglossia_latin_apply_quotemark:N
           }
       }
+    % The ' shorthand is normally turned off to avoid problems with the unicode-math
+    % package. We have to turn it on here.
+    \shorthandon {'}
     \bbl@activate {'}
     \declare@shorthand {latin} {'}
       {
         \mode_if_math:TF
           {
             \active@math@prime % defined in "latex.ltx"
+            % This definition is differing from the primes of the unicode-math package.
+            % TO DO: Make sure that the appearance of primes is the same as with the
+            % unicode-math package if this package is loaded.
           }
           {
             \polyglossia_latin_put_acute:N
@@ -932,7 +946,9 @@
 
 \def \noextras@latin
   {
-    \polyglossia_latin_no_shorthands:
+    \iflatin@babelshorthands
+      \polyglossia_latin_no_shorthands:
+    \fi
     \xpgla@savedvalues
     \polyglossia_latin_no_punctuation_spacing:
     \polyglossia_latin_modern_character_codes:
