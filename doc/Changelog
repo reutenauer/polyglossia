@@ -10,9 +10,8 @@ Bug fixes:
   * Fix [no]localmarks option, whose logic was swapped (part of #395).
   * Protect localmarks function against uppercased language names (part of #395).
   * Fix buggy redefinition of \@markright with option localmarks (#396).
-  * Fix incompatibility between Latin and unicode-math (part of #394).
-    Note that unicode-math prime handling still does not work in Latin if
-    babelshorthands=true.
+  * Fix incompatibility between Latin and unicode-math (#394).
+  * Make (undocumented) \defineshorthand command (imported from babel) work.
   * Fix usage of localmarks option without value.
 
 Interface and defaults changes:
