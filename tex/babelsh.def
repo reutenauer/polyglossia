@@ -144,7 +144,22 @@
 % ------------------------------------------------------------------------------
 %
 \def\bbl@csarg#1#2{\expandafter#1\csname bbl@#2\endcsname}%
+
+% ------------------------------------------------------------------------------
 %
+% lines 110 to 116 from babel.def
+%
+% ------------------------------------------------------------------------------
+%
+
+\def\bbl@loop#1#2#3{\bbl@@loop#1{#3}#2,\@nnil,}
+\def\bbl@loopx#1#2{\expandafter\bbl@loop\expandafter#1\expandafter{#2}}
+\def\bbl@@loop#1#2#3,{%
+  \ifx\@nnil#3\relax\else
+    \def#1{#3}#2\bbl@afterfi\bbl@@loop#1{#2}%
+  \fi}
+\def\bbl@for#1#2#3{\bbl@loopx#1{#2}{\ifx#1\@empty\else#3\fi}}
+
 % ------------------------------------------------------------------------------
 %
 % lines 125 to 130 from babel.def
@@ -419,13 +434,6 @@
      \expandafter\edef\csname#2@sh@#1@\string\protect@\endcsname{%
        \expandafter\noexpand\csname user@active#1\endcsname}}%
   \@empty}
-\def\bbl@loop#1#2#3{\bbl@@loop#1{#3}#2,\@nnil,}
-\def\bbl@loopx#1#2{\expandafter\bbl@loop\expandafter#1\expandafter{#2}}
-\def\bbl@@loop#1#2#3,{%
-  \ifx\@nnil#3\relax\else
-    \def#1{#3}#2\bbl@afterfi\bbl@@loop#1{#2}%
-  \fi}
-\def\bbl@for#1#2#3{\bbl@loopx#1{#2}{\ifx#1\@empty\else#3\fi}}
 \newcommand\defineshorthand[3][user]{%
   \edef\bbl@tempa{\zap@space#1 \@empty}%
   \bbl@for\bbl@tempb\bbl@tempa{%
