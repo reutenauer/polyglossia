@@ -1,6 +1,6 @@
-1.48 (forthcoming)
+1.48 (25-03-2020)
 
-New features:
+No new features
 
 Bug fixes:
   * Fix use of Hebrew with LuaLaTeX (#389).
@@ -13,6 +13,7 @@ Bug fixes:
   * Fix incompatibility between Latin and unicode-math (#394).
   * Make (undocumented) \defineshorthand command (imported from babel) work.
   * Fix usage of localmarks option without value.
+  * Emergency fixes for bugs caused by updates in Babel’s switch.def (#399 and #400).
 
 Interface and defaults changes:
   * Use private macros in keyval choice keys (#390).
