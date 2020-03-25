@@ -301,7 +301,7 @@
   \csdef{#1@language}{%
     \polyglossia@setup@language@patterns{#1}%
   }%
-  % setup hypenmins
+  % setup hyphenmins
   \exp_args:NNe \clist_set:Nn \l_tmpa_clist
     { \prop_item:Nn \polyglossia@langsetup {#1 / hyphenmins} }
   \cs_if_eq:cNF {l@#1} \l@nohyphenation
