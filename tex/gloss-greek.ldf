@@ -44,7 +44,7 @@
   \xpg@ifdefined{greek}{}{%
       \xpg@nopatterns{greek}%
       \adddialect\l@greek\l@nohyphenation
-  }
+  }%
   \ifx\@tmpa\tmp@poly\def\@tmpa{polytonic}\fi
   \ifx\@tmpa\tmp@ancientgreek\def\@tmpa{ancient}\fi
   \ifx\@tmpa\tmp@polytonic%
