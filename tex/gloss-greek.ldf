@@ -44,7 +44,7 @@
   \xpg@ifdefined{greek}{}{%
       \xpg@nopatterns{greek}%
       \adddialect\l@greek\l@nohyphenation
-  }%
+  }
   \ifx\@tmpa\tmp@poly\def\@tmpa{polytonic}\fi
   \ifx\@tmpa\tmp@ancientgreek\def\@tmpa{ancient}\fi
   \ifx\@tmpa\tmp@polytonic%
@@ -231,17 +231,17 @@
       \greek@month%
       \space\Greeknumber\year}%
    \def\greek@month{\ifcase\month\or%
-      Ἰανουαρίου\or%
-      Φεβρουαρίου\or%
-      Μαρτίου\or%
-      Ἀπριλίου\or%
-      Μαΐου\or%
-      Ἰουνίου\or%
-      Ἰουλίου\or%
-      Αὐγούστου\or%
-      Σεπτεμβρίου\or%
-      Ὀκτωβρίου\or%
-      Νοεμβρίου\or%
+      Ἰανουαρίου\or
+      Φεβρουαρίου\or
+      Μαρτίου\or
+      Ἀπριλίου\or
+      Μαΐου\or
+      Ἰουνίου\or
+      Ἰουλίου\or
+      Αὐγούστου\or
+      Σεπτεμβρίου\or
+      Ὀκτωβρίου\or
+      Νοεμβρίου\or
       Δεκεμβρίου\fi}}
 
 % the code for alphabetic numbers and attic numerals 
