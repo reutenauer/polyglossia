@@ -1551,6 +1551,8 @@
   \polyglossia@error@iflangnotloaded:n{#2}
   \exp_args:Nne \setkeys{#2}{#1}%
   \polyglossia@setforeignlanguage[#1]{#2}
+  % Hook for biblatex
+  \polyglossia@language@switched%%
   % buggy restoration heure
   \csuse{inlineextras@#2}%
   % This is a hook for external packages which want to access variants
@@ -2025,6 +2027,8 @@
    \xpg@set@bbl@hyphendata{\the\language}
    \xpg@initial@setup%
    \select@@language[#1]{#2}%
+   % Hook for biblatex
+   \polyglossia@language@switched%
    \polyglossia@lang@setpardirection:n{#2}%
    \csuse{captions#2}%
    \csuse{date#2}%
@@ -2041,8 +2045,9 @@
    \cs_if_exist_use:c{blockextras@bbl@\babelname}%
  }
 
-% hook for compatibility with biblatex
+% hooks for compatibility with biblatex
 \def\select@language#1{}
+\def\polyglossia@language@switched{}
 
 \def\noextrascurrent#1{%
    \csuse{noextras@#1}%
