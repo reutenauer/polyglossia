@@ -2,11 +2,14 @@
 
 New features:
 
+  * Add hook \polyglossia@language@switched to the external package interface (#398).
+
 Bug fixes:
 
-- Fix whitespace problem in Greek language.
+  * Fix whitespace problem in Greek language.
 
 Interface and defaults changes:
+
 
 1.48 (25-03-2020)
 
