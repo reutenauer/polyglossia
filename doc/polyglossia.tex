@@ -1821,6 +1821,17 @@ For instance, to add a new caption \cmd\footnotename\ to the Swiss variety of Ge
 If you do this in a document preamble rather than in a package, you need to embrace the redefinition
 by \cmd\makeatletter\ and \cmd\makeatother\ due to the ¦@¦ in the macro names.
 
+Finally, as soon as the language has been switched (either inline or as a block), \pkg{polyglossia}
+executes the (by default empty) hook
+\begin{itemize}
+	\item \Cmd{\polyglossia@language@switched}
+\end{itemize}
+to which you can append arbitrary code (via \cmd\gappto) that should be executed if (a particular)
+language is being activated. This is done before any of the above
+macros are issued (so you can still alter them), but at a point where \cmd\languagename, \cmd\babelname\
+and \cmd\languageid\ are already set, so you can condition on specific languages in your code.
+This hook is particularly provided for package authors.
+
 \section{Script-specific numbering}
 
 Languages and scripts have specific numbering conventions. Some use decimal digits
