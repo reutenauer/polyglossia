@@ -1,12 +1,5 @@
-
-   ¦----------------------------------------------¦
-   ¦                                              ¦
-   ¦       THE POLYGLOSSIA PACKAGE v1.48          ¦
-   ¦                                              ¦
-   ¦     Modern multilingual typesetting          ¦
-   ¦        with XeLaTeX and LuaLaTeX             ¦
-   ¦                                              ¦
-   ¦----------------------------------------------¦
+# THE POLYGLOSSIA PACKAGE v1.48
+## Multilingual typesetting with XeLaTeX and LuaLaTeX
 
 This package provides an alternative to Babel for users of XeLaTeX and LuaLaTeX
 (with a few languages incompletely supported for the latter). This version
@@ -32,7 +25,7 @@ Polyglossia makes it possible to automate the following tasks:
   written from right to left (via the packages bidi and luabidi, available
   separately).
 
-LICENSE
+# LICENCE
 
 Copyright (c) 2008-2010 François Charette, 2013 Élie Roux, 2011-2020 Arthur Reutenauer,
 Copyright (c) 2019-2020 Bastien Roucariès, 2019-2020 Jürgen Spitzmüller
@@ -40,7 +33,7 @@ Copyright (c) 2019-2020 Bastien Roucariès, 2019-2020 Jürgen Spitzmüller
 Except where otherwise noted, Polyglossia is placed under the terms of the MIT licence
 (https://opensource.org/licenses/MIT).
 
-BUGS
+# BUGS
 
 If you run into a bug, or suspect you do, or you have a request or comment, please
 use the GitHub issue tracker: http://github.com/reutenauer/polyglossia/issues

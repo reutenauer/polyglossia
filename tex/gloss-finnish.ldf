@@ -51,7 +51,7 @@
    \def\prefacename{Esipuhe}%
    \def\chaptername{Luku}%
    \def\appendixname{Liite}%
-   \def\contentsname{Sisältö}%
+   \def\contentsname{Sisällys}%
    \def\listfigurename{Kuvat}%
    \def\listtablename{Taulukot}%
    \def\indexname{Hakemisto}%
