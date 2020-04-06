@@ -3,6 +3,7 @@
 New features:
 
   * Add hook \polyglossia@language@switched to the external package interface (#398).
+  * Real fix for #400, that wasn’t properly taken care of in 1.48.
 
 Bug fixes:
 
