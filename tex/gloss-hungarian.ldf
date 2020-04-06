@@ -212,9 +212,9 @@
         \renewcommand*\chaptermark[1]{%
           \markboth{\memUChead{%
             \ifnum \c@secnumdepth >\m@ne
-              \if@mainmatter
+              \ifbool{@mainmatter}{%
                 \thechapter.\ \@chapapp\ %
-              \fi
+              }{}%
             \fi
             ##1}}{}}%
       }{% (not \ifdefined\@memptsize)

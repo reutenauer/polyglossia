@@ -6,9 +6,12 @@ New features:
 
 Bug fixes:
 
+  * Fix compilation error with some swapstring options in Hungarian (#373).
   * Fix whitespace problem in Greek language.
 
 Interface and defaults changes:
+
+  * Changed Finnish caption for "Table of Contents" to "Sisällys" (#403).
 
 
 1.48 (25-03-2020)
