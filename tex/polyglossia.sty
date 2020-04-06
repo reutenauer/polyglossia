@@ -29,6 +29,7 @@
 %% This is for compatibility with Babel-aware package:
 \cslet{ver@babel.sty}{\@empty} % this "fakes" babel
 \def\languageshorthands#1{\relax} %this is for scrlttr2 class
+\def\bbl@cs#1{\csname bbl@#1\endcsname}%
 \AtEndPreamble{\let\bbl@set@language\xpg@set@language@aux} %for biblatex
 \AtEndPreamble{\let\bbl@main@language\xpg@main@language} %for biblatex
 
