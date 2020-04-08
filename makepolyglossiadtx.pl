@@ -29,8 +29,8 @@ my $srcdir          = "$basedir/tex";
 my $docsrcdir       = "$basedir/doc";
 my $fontmapsrcdir   = "$basedir/fontmapping";
 my $docsrc          = "$docsrcdir/polyglossia.tex";
-my $readme          = "$basedir/README";
-my @docsrcfiles     = qw(../README
+my $readme          = "$basedir/README.md";
+my @docsrcfiles     = qw(../README.md
                           Changelog
                           examples.tex
                           example-arabic.tex
@@ -39,7 +39,7 @@ my $patternop       = "=";
 my $verbose         = 0;
 my $noins           = 0;
 my $askforoverwrite = 0;
-my $version         = '0.94b';
+my $version         = '1.49';
 my $author          = 'Arthur Reutenauer';
 my $email           = "<arthur 'dot' reutenauer 'at' normalesup 'dot' org>";
 (my $sec, my $min, my $hour, my $mday, my $mon, my $year, my $wday, my $yday, my $isdst) 
@@ -52,8 +52,10 @@ my $preamble        = <<_END
 
   The polyglossia package         
   (C) 2008–2010 François Charette    
-  (C) 2011-$year Arthur Reutenauer
+  (C) 2011–$year Arthur Reutenauer
   (C) 2013 Elie Roux
+  (C) 2019 Bastien Roucariès
+  (C) 2019–$year Jürgen Spitzmüller
   License information appended
 
 _END

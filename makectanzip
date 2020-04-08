@@ -116,7 +116,7 @@ mkdir -p $TDS_map
 cp polyglossia.dtx $TDS_src/ || exit 1
 cp $root/tex/* $TDS_tex/ || exit 1
 cp $root/doc/* $TDS_doc/ || exit 1
-cp $root/README $TDS_doc/ || exit 1
+cp $root/README.md $TDS_doc/ || exit 1
 cp $root/fontmapping/* $TDS_map/ || exit 1
 
 echo "Update TECkit mappings ..."
@@ -132,7 +132,7 @@ zip $tarball tex/latex/polyglossia/*.{ldf,def,sty,lua} || exit 1
 zip $tarball fonts/misc/xetex/fontmapping/polyglossia/* || exit 1
 zip $tarball source/latex/polyglossia/polyglossia.dtx || exit 1
 zip $tarball doc/latex/polyglossia/*.{tex,pdf} || exit 1
-zip $tarball doc/latex/polyglossia/README || exit 1
+zip $tarball doc/latex/polyglossia/README.md || exit 1
 
 echo "Make CTAN zip ..."
 ctanzip="polyglossia.zip"
@@ -140,7 +140,7 @@ mkdir -p $builddir/tmp/polyglossia
 cd $builddir/tmp
 mv $builddir/$tarball . || exit 1
 mv $builddir/polyglossia.{dtx,ins} polyglossia/ || exit 1
-cp $root/{doc/polyglossia.pdf,README} polyglossia/ || exit 1
+cp $root/{doc/polyglossia.pdf,README.md} polyglossia/ || exit 1
 zip -9 $ctanzip polyglossia/* polyglossia.tds.zip || exit 1
 mv $ctanzip $root/ || exit 1
 cd $root
