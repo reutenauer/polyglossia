@@ -28,10 +28,8 @@
       % brazilian:
       \def\portuguese@variant{brazil}%
       \SetLanguageKeys{portuguese}{babelname=brazil,bcp47=pt-BR}%
-      \xpg@ifdefined{brazil}{}%
-	    {\xpg@warning{No hyphenation patterns were loaded for "Portuguese (Brazil)"\MessageBreak
-	      I will use the standard patterns for Portuguese instead}%
-	    \adddialect\l@brazil\l@portuges\relax}%
+      % There are no specific brazil patterns
+      \adddialect\l@brazil\l@portuges\relax%
    \fi
    \xpg@info{Option: portuguese, variant=\xpg@val}%
 }{\xpg@warning{Unknown portuguese variant `#1'}}
