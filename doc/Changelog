@@ -5,7 +5,8 @@ New features:
 
 Bug fixes:
 
-  * Remove warning about missing Brazil patterns (#404)
+  * Remove warning about missing Brazil patterns (#404).
+  * Fix incompatibility with recent babel release (#408).
 
 Interface and defaults changes:
 
