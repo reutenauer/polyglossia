@@ -62,7 +62,7 @@ and may look very wrong.}
    \def\appendixname{परिशिष्ट}%
    \def\contentsname{अनुक्रमणिका}%
    \def\listfigurename{आकृत्यांची सूची}%
-   \def\listtablename{कोष्टक सूची}%
+   \def\listtablename{कोष्टकसूची}%
    \def\indexname{सूची}%
    \def\figurename{आकृती}%
    \def\tablename{कोष्टक}%
@@ -71,10 +71,10 @@ and may look very wrong.}
    \def\seename{पाहा}%
    \def\alsoname{हेदेखील पाहा}%
    \def\enclname{समाविष्ट}%
-   \def\ccname{सी.सी.}%
+   \def\ccname{प्रत}%
    \def\headtoname{प्रति}%
    \def\proofname{सिद्धता}%
-   \def\glossaryname{संक्षेपसूची}%
+   \def\glossaryname{संज्ञांची सूची}%
    \def\authorsand{आणि}%
 }
 
@@ -100,23 +100,23 @@ and may look very wrong.}
    }%
 }
 
-\def\devanagari@akshar#1{\ifcase#1\or अ\or आ\or इ\or ई\or उ\or ऊ\or ए\or ऐ\or ओ\or औ\or अं\or अः\else\@ctrerr\fi}
+\def\devanagari@akshar#1{\ifcase#1\or अ\or आ\or इ\or ई\or उ\or ऊ\or ऋ\or ऌ\or ए\or ॲ\or ऐ\or ओ\or ऑ\or औ\or अं\or अः\else\@ctrerr\fi}
 
 \def\devanagari@alph#1{%
     \ifcase#1\or क\or ख\or ग\or घ\or ङ\or च\or छ\or ज\or झ\or ञ\or ट\or ठ\or ड\or ढ\or ण\or त\or थ\or द%
-       \or ध\or न\or प\or फ\or ब\or भ\or म\or य\or र\or ल\or व\or श\or ष\or स\or ह\or ळ\else\@ctrerr%
+       \or ध\or न\or प\or फ\or ब\or भ\or म\or य\or र\or ल\or व\or श\or ष\or स\or ह\or ळ\or क्ष \or ज्ञ \else\@ctrerr%
     \fi%
 }
 
 \def\devanagari@letter#1{%
   \ifcase#1\or एक\or दोन\or तीन\or चार\or पाच\or सहा\or सात\or आठ\or नऊ\or दहा\or अकरा\or बारा\or तेरा\or चौदा%
-    \or पंधरा\or सोळा\or सतरा\or अठरा\or एकोणीस\or वीसएकवीस\or बावीस\or तेवीस\or चोवीस\or पंचवीस\or सव्वीस\or सत्तावीस\or अठाव्वीस%
-    \or एकोणतीस\or तीस\or एकतीस\or बत्तीस\or तेहेत्तीस \or चौतीस \or पस्तीस \or छत्तीस \or सतदिस \or अडतीस \or एकोणचाळीस \or चाळीस %
-    \or एक्केचाळीस \or बेचाळीस \or त्रेचाळीस \or चौवेचाळीस\or पंचेचाळीस \or सेहेचाळीस \or सत्तेचाळीस \or अठ्ठेचाळीस \or एकोणपन्नास \or पन्नास %
-    \or एक्कावन्न \or बावन्न \or त्रेपन्न \or चोपन्न \or पंचावन्न \or छपन्न\or सत्तावन्न \or अठ्ठावन्न \or एकोणसाठ \or साठ \or एकसष्ठ \or बासष्ठ \or त्रेसष्ट %
-    \or चौसष्ठ \or पासष्ठ \or सहासष्ठ \or सदुष्ठ \or अडुसष्ठ \or एकोणसत्तर\or सत्तर \or एकाहत्तर \or बहात्तर \or त्र्याहत्तर \or चौऱ्याहत्तर \or पंच्याहत्तर %
-    \or शहात्तर \or सत्याहत्तर \or अठ्याहत्तर \or एकोणऐशी \or ऐंशी\or एक्याऐंशी \or ब्याऐंशी \or त्र्याऐंशी \or चौऱ्याऐंशी \or पंच्याऐंशी \or शह्यांशी \or सत्यांऐंशी %
-    \or अठ्ठ्याऐंशी \or एकोणनव्वद \or नव्वद \or एक्याण्णव\or ब्याण्णव \or त्र्याण्णव \or चौऱ्याण्णव \or पंच्याण्णव \or शहाण्णव \or सत्याण्णव \or अठ्याण्णव %
+    \or पंधरा\or सोळा\or सतरा\or अठरा\or एकोणीस\or वीस\or एकवीस\or बावीस\or तेवीस\or चोवीस\or पंचवीस\or सव्वीस\or सत्तावीस\or अठ्ठावीस%
+    \or एकोणतीस\or तीस\or एकतीस\or बत्तीस\or तेहतीस \or चौतीस \or पस्तीस \or छत्तीस \or सदतीस \or अडतीस \or एकोणचाळीस \or चाळीस %
+    \or एकेचाळीस \or बेचाळीस \or त्रेचाळीस \or चव्वेचाळीस \or पंचेचाळीस \or शेहेचाळीस \or सत्तेचाळीस \or अठ्ठेचाळीस \or एकोणपन्नास \or पन्नास %
+    \or एकावन्न \or बावन्न \or त्रेपन्न \or चौपन्न \or पंचावन्न \or छप्पन्न\or सत्तावन्न \or अठ्ठावन्न \or एकोणसाठ \or साठ \or एकसष्ट \or बासष्ट \or त्रेसष्ट %
+    \or चौसष्ट \or पासष्ट \or सहासष्ट \or सदुष्ट \or अडुसष्ट \or एकोणसत्तर\or सत्तर \or एकाहत्तर \or बाहत्तर \or त्र्याहत्तर \or चौऱ्याहत्तर \or पंचाहत्तर %
+    \or शाहत्तर \or सत्त्याहत्तर \or अठ्ठ्याहत्तर \or एकोणऐंशी \or ऐंशी\or एक्याऐंशी \or ब्याऐंशी \or त्र्याऐंशी \or चौऱ्याऐंशी \or पंच्याऐंशी \or श्याऐंशी \or सत्त्याऐंशी %
+    \or अठ्ठ्याऐंशी \or एकोणनव्वद \or नव्वद \or एक्याण्णव\or ब्याण्णव \or त्र्याण्णव \or चौऱ्याण्णव \or पंचाण्णव \or शहाण्णव \or सत्त्याण्णव \or अठ्याण्णव %
     \or नव्याण्णव \or शंभर\else\@ctrerr%
   \fi%
 }
