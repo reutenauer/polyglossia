@@ -45,14 +45,19 @@
     \xpg@if@char@available{00B7}%
           {\setbox2\hbox{\char"00B7}}%
           {\setbox2\hbox{.}}%
+    \setbox3\hbox{.}%
     \advance\raiselldim by \the\fontdimen5\the\font
     \advance\raiselldim by -\ht2%
     \leftllkern=-.25\wd0%
     \advance\leftllkern by \wd1%
     \advance\leftllkern by -\wd0%
+    \advance\leftllkern by -0.5\wd2%
+    \advance\leftllkern by 0.5\wd3%
     \rightllkern=-.25\wd0%
     \advance\rightllkern by -\wd1%
     \advance\rightllkern by \wd0%
+    \advance\rightllkern by -0.5\wd2%
+    \advance\rightllkern by 0.5\wd3%
     \allowhyphens\discretionary{l-}{l}%
     {\hbox{l}\kern\leftllkern\xpg@raiseddot%
       \kern\rightllkern\hbox{l}}\allowhyphens
@@ -68,15 +73,20 @@
     \xpg@if@char@available{00B7}%
           {\setbox2\hbox{\char"00B7}}%
           {\setbox2\hbox{.}}%
+    \setbox3\hbox{.}%
     \advance\raiselldim by .5\ht0%
     \advance\raiselldim by -.5\ht2%
     \leftllkern=-.125\wd0%
     \advance\leftllkern by \wd1%
     \advance\leftllkern by -\wd0%
+    \advance\leftllkern by -0.5\wd2%
+    \advance\leftllkern by 0.5\wd3%
     \rightllkern=-\wd0%
     \divide\rightllkern by 6%
     \advance\rightllkern by -\wd1%
     \advance\rightllkern by \wd0%
+    \advance\rightllkern by -0.5\wd2%
+    \advance\rightllkern by 0.5\wd3%
     \allowhyphens\discretionary{L-}{L}%
     {\hbox{L}\kern\leftllkern\xpg@raiseddot%
       \kern\rightllkern\hbox{L}}\allowhyphens
