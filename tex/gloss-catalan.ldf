@@ -41,12 +41,12 @@
     \csname normal@char\string"\endcsname l%
   \else
     \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
-    \setbox0\hbox{l}\setbox1\hbox{l\/}%
+    \setbox0\hbox{l}%
     \xpg@if@char@available{00B7}%
-          {\setbox2\hbox{\char"00B7}}%
-          {\setbox2\hbox{.}}%
+          {\setbox2\hbox{\char"00B7}\setbox1\hbox{l}}%
+          {\setbox2\hbox{.}\setbox1\hbox{l\/}}%
     \setbox3\hbox{.}%
-    \advance\raiselldim by \the\fontdimen5\the\font
+    \advance\raiselldim by \the\fontdimen5\the\font%
     \advance\raiselldim by -\ht2%
     \leftllkern=-.25\wd0%
     \advance\leftllkern by \wd1%
@@ -69,10 +69,10 @@
     \csname normal@char\string"\endcsname L%
   \else
     \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
-    \setbox0\hbox{L}\setbox1\hbox{L\/}%
+    \setbox0\hbox{L}%
     \xpg@if@char@available{00B7}%
-          {\setbox2\hbox{\char"00B7}}%
-          {\setbox2\hbox{.}}%
+          {\setbox2\hbox{\char"00B7}\setbox1\hbox{L}}%
+          {\setbox2\hbox{.}\setbox1\hbox{L\/}}%
     \setbox3\hbox{.}%
     \advance\raiselldim by .5\ht0%
     \advance\raiselldim by -.5\ht2%
