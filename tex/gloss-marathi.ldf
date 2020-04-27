@@ -76,7 +76,8 @@ and may look very wrong.}
    \def\proofname{सिद्धता}%
    \def\glossaryname{संज्ञांची सूची}%
    \def\authorsand{आणि}%
-   \def\Authands{ आणि }
+   \def\Authand{ आणि }
+   \def\Authands{ आणि }%
 }
 
 \def\datemarathi{%
