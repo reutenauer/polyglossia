@@ -7,6 +7,8 @@ Bug fixes:
 
   * Remove warning about missing Brazil patterns (#404).
   * Fix incompatibility with recent babel release (#408).
+  * Fixed some spellings in Marathi (#409).
+  * Fix spacing of geminating dot in Catalan (#410).
 
 Interface and defaults changes:
 
