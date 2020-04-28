@@ -41,18 +41,23 @@
     \csname normal@char\string"\endcsname l%
   \else
     \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
-    \setbox0\hbox{l}\setbox1\hbox{l\/}%
+    \setbox0\hbox{l}%
     \xpg@if@char@available{00B7}%
-          {\setbox2\hbox{\char"00B7}}%
-          {\setbox2\hbox{.}}%
-    \advance\raiselldim by \the\fontdimen5\the\font
+          {\setbox2\hbox{\char"00B7}\setbox1\hbox{l}}%
+          {\setbox2\hbox{.}\setbox1\hbox{l\/}}%
+    \setbox3\hbox{.}%
+    \advance\raiselldim by \the\fontdimen5\the\font%
     \advance\raiselldim by -\ht2%
     \leftllkern=-.25\wd0%
     \advance\leftllkern by \wd1%
     \advance\leftllkern by -\wd0%
+    \advance\leftllkern by -0.5\wd2%
+    \advance\leftllkern by 0.5\wd3%
     \rightllkern=-.25\wd0%
     \advance\rightllkern by -\wd1%
     \advance\rightllkern by \wd0%
+    \advance\rightllkern by -0.5\wd2%
+    \advance\rightllkern by 0.5\wd3%
     \allowhyphens\discretionary{l-}{l}%
     {\hbox{l}\kern\leftllkern\xpg@raiseddot%
       \kern\rightllkern\hbox{l}}\allowhyphens
@@ -64,19 +69,24 @@
     \csname normal@char\string"\endcsname L%
   \else
     \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
-    \setbox0\hbox{L}\setbox1\hbox{L\/}%
+    \setbox0\hbox{L}%
     \xpg@if@char@available{00B7}%
-          {\setbox2\hbox{\char"00B7}}%
-          {\setbox2\hbox{.}}%
+          {\setbox2\hbox{\char"00B7}\setbox1\hbox{L}}%
+          {\setbox2\hbox{.}\setbox1\hbox{L\/}}%
+    \setbox3\hbox{.}%
     \advance\raiselldim by .5\ht0%
     \advance\raiselldim by -.5\ht2%
     \leftllkern=-.125\wd0%
     \advance\leftllkern by \wd1%
     \advance\leftllkern by -\wd0%
+    \advance\leftllkern by -0.5\wd2%
+    \advance\leftllkern by 0.5\wd3%
     \rightllkern=-\wd0%
     \divide\rightllkern by 6%
     \advance\rightllkern by -\wd1%
     \advance\rightllkern by \wd0%
+    \advance\rightllkern by -0.5\wd2%
+    \advance\rightllkern by 0.5\wd3%
     \allowhyphens\discretionary{L-}{L}%
     {\hbox{L}\kern\leftllkern\xpg@raiseddot%
       \kern\rightllkern\hbox{L}}\allowhyphens
