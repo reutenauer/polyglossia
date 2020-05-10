@@ -9,6 +9,7 @@ Bug fixes:
   * Fix incompatibility with recent babel release (#408).
   * Fixed some spellings in Marathi (#409).
   * Fix spacing of geminating dot in Catalan (#410).
+  * Fix incompatibilty of Marathi with Beamer.
 
 Interface and defaults changes:
 
