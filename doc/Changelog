@@ -10,6 +10,7 @@ Bug fixes:
   * Fixed some spellings in Marathi (#409).
   * Fix spacing of geminating dot in Catalan (#410).
   * Fix incompatibility of Marathi with Beamer.
+  * Correct \partname in Hindi (#416)
 
 Interface and defaults changes:
 

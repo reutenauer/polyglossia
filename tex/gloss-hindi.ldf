@@ -75,7 +75,7 @@
      \def\listfigurename{चित्रों की सूची}%
      \def\listtablename{तालिकाओं की सूची}%
      \def\pagename{पृष्ठ}%
-     \def\partname{खणड}%
+     \def\partname{खण्ड}%
      \def\prefacename{प्रस्तावना}% प्राक्कथन
      \def\refname{हवाले}%
      \def\tablename{तालिका}%
