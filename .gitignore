@@ -12,3 +12,4 @@ tests/out
 *.out
 *.toc
 hidden
+.DS_Store
