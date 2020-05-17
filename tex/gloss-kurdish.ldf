@@ -1,5 +1,7 @@
 % Created on September 1, 2019
-% Sina Ahmadi (https://sinaahmadi.github.io/)
+% Last updated on May 17, 2020
+% Sina Ahmadi (ahmadi.sina@outlook.com)
+% For more information, visit the Kurdish XeLaTeX Users Group at https://github.com/KurdishXeLaTeX
 \ProvidesFile{gloss-kurdish.ldf}[polyglossia: module for Kurdish]
 
 \RequireBidi
@@ -127,7 +129,6 @@
 \define@key{kurdish}{locale}[default]{%
   \def\@kurdish@locale{#1}}
 
-
 %TODO add option for CALENDAR
 
 % Register default options
@@ -138,9 +139,9 @@
 }%
 
 \def\kurdishNativemonth#1{\ifcase#1%
-  \or رێبه‌ندان\or ره‌شه‌مێ\or خاكه‌لێوه‌\or گوڵان\or جۆزه‌ردان\or پووشپه‌ڕ\or خه‌رمانان\or گه‌لاوێژ\or ره‌زبه‌ر\or گه‌ڵارێزان\or سه‌رماوه‌ز\or به‌فرانبار\fi}
+  \or رێبەندان\or رەشەمێ\or خاكەلێوە\or گوڵان\or جۆزەردان\or پووشپەڕ\or خەرمانان\or گەلاوێژ\or رەزبەر\or گەڵارێزان\or سەرماوەز\or بەفرانبار\fi}
 \def\kurdishmonth#1{\ifcase#1%
-  \or کانونی دووەم\or شوبات\or ئازار\or نیسان\or ئایار\or حوزه‌یران\or ته‌ممووز\or ئاب\or ئه‌یلوول\or تشرینی یه‌كه‌م\or تشرینی دووهه‌م\or كانوونی یه‌كه‌م\fi}
+  \or كانوونی دووهەم\or شوبات\or ئازار\or نیسان\or ئایار\or حوزەیران\or تەممووز\or ئاب\or ئەیلوول\or تشرینی یەكەم\or تشرینی دووهەم\or كانوونی یەكەم\fi}
 
 %\Hijritoday is now locale-aware and will format the date with this macro:
 \DefineFormatHijriDate{kurdish}{%
@@ -150,27 +151,27 @@
 }
 
 \def\captionskurdish@sorani@arabic{%
-  \def\prefacename{\@ensure@RTL{پێشه‌كی}}%
-  \def\refname{\@ensure@RTL{سه‌رچاوه‌کان}}%
-  \def\abstractname{\@ensure@RTL{پوخته‌}}%
-  \def\bibname{\@ensure@RTL{کتێبنامه‌}}%
-  \def\chaptername{\@ensure@RTL{به‌ندی}}%
+  \def\prefacename{\@ensure@RTL{پێشەكی}}%
+  \def\refname{\@ensure@RTL{سەرچاوەکان}}%
+  \def\abstractname{\@ensure@RTL{پوختە}}%
+  \def\bibname{\@ensure@RTL{کتێبنامە}}%
+  \def\chaptername{\@ensure@RTL{بەندی}}%
   \def\appendixname{\@ensure@RTL{پاشکۆ}}%
-  \def\contentsname{\@ensure@RTL{نێوه‌ڕۆک}}%
-  \def\listfigurename{\@ensure@RTL{لیستی وێنه‌کان}}%
-  \def\listtablename{\@ensure@RTL{لیستی خشته‌کان}}%
+  \def\contentsname{\@ensure@RTL{نێوەڕۆک}}%
+  \def\listfigurename{\@ensure@RTL{لیستی وێنەکان}}%
+  \def\listtablename{\@ensure@RTL{لیستی خشتەکان}}%
   \def\indexname{\@ensure@RTL{پێنوێن}}%
-  \def\figurename{\@ensure@RTL{وێنه‌}}%
-  \def\tablename{\@ensure@RTL{خشتە}}%
-  \def\partname{\@ensure@RTL{به‌شی}}%
+  \def\figurename{\@ensure@RTL{وێنەی}}%
+  \def\tablename{\@ensure@RTL{خشتەی}}%
+  \def\partname{\@ensure@RTL{بەشی}}%
   \def\enclname{\@ensure@RTL{هاوپێچ}}%
-  \def\ccname{\@ensure@RTL{روونووس}}%
+  \def\ccname{\@ensure@RTL{ڕوونووس}}%
   \def\headtoname{\@ensure@RTL{بۆ}}%
-  \def\pagename{\@ensure@RTL{لاپه‌ڕه‌}}%
-  \def\seename{\@ensure@RTL{چاو لێکه‌ن}}%
-  \def\alsoname{\@ensure@RTL{هه‌روه‌ها چاو لێکه‌ن}}%
+  \def\pagename{\@ensure@RTL{لاپەڕە}}%
+  \def\seename{\@ensure@RTL{چاو لێکەن}}%
+  \def\alsoname{\@ensure@RTL{هەروەها چاو لێکەن}}%
   \def\proofname{\@ensure@RTL{سەلماندن}}%
-  \def\glossaryname{\@ensure@RTL{فه‌رهه‌نگۆک}}%
+  \def\glossaryname{\@ensure@RTL{فەرهەنگۆک}}%
 }
 
 \def\captionskurdish@sorani@latin{%
@@ -180,17 +181,17 @@
   \def\bibname{Kitêbname}%
   \def\chaptername{Bendî}%
   \def\appendixname{Paşko}%
-  \def\contentsname{Nêwerrok}%
+  \def\contentsname{Nêweřok}%
   \def\listfigurename{Lîstî Wênekan}%
   \def\listtablename{Lîstî Xiştekan}%
-  \def\indexname{Pêrrist}%
+  \def\indexname{Pêřist}%
   \def\figurename{Wêney}%
   \def\tablename{Xiştey}%
   \def\partname{Beşî}%
   \def\enclname{Hawpêç}%
-  \def\ccname{Rûnûs}%
+  \def\ccname{Řûnûs}%
   \def\headtoname{Bo}%
-  \def\pagename{Laperre}%
+  \def\pagename{Lapeře}%
   \def\seename{Çaw lêken}%
   \def\alsoname{Herweha çaw lêken}%
   \def\proofname{Selmandin}%
@@ -199,7 +200,7 @@
 
 \def\captionskurdish@kurmanji@latin{%
   \def\prefacename{Peşgotin}%
-  \def\refname{Pirtuken bijartî}%
+  \def\refname{Jêder}%
   \def\abstractname{Kurtebîr}%
   \def\bibname{Çavkanîya Pirtukan}%
   \def\chaptername{Serê}%
@@ -216,14 +217,14 @@
   \def\headtoname{Ji bo}%
   \def\pagename{Rûpelê}%
   \def\seename{binêra}%
-  \def\alsoname{le vêya ji binêra}%
+  \def\alsoname{li vêya jî binêra}%
   \def\proofname{Delîl}%
   \def\glossaryname{Çavkanîya lêkolînê}%
 }
 
 \def\captionskurdish@kurmanji@arabic{%
   \def\prefacename{\@ensure@RTL{پێشگۆتن}}%
-  \def\refname{\@ensure@RTL{پرتووکێن بژارتی}}%
+  \def\refname{\@ensure@RTL{ژێدەر}}%
   \def\abstractname{\@ensure@RTL{کورتەبیر}}%
   \def\bibname{\@ensure@RTL{چاڤکانییا پرتووکان}}%
   \def\chaptername{\@ensure@RTL{سەرێ}}%
@@ -255,17 +256,17 @@
 
 \def\datekurdish@sorani@latin{%
   \def\today{%
-     \number\day.~\ifcase\month\or
+     \number\day ~\ifcase\month\or
       \januaryname\or \februaryname\or \marchname\or \aprilname\or
       \mayname\or \junename\or \julyname\or \augustname\or
       \septembername\or \octobername\or \novembername\or
       \decembername\or \@ctrerr\fi~\number\year}%
   \def\ontoday{%
-      \number\day’ê~\ifcase\month\or
+      \number\day î~\ifcase\month\or
       \januaryname\or \februaryname\or \marchname\or \aprilname\or
       \mayname\or \junename\or \julyname\or \augustname\or
       \septembername\or \octobername\or \novembername\or
-      \decembername\or \@ctrerr\fi ê~\number\year}%
+      \decembername\or \@ctrerr\fi î~\number\year}%
   \def\januaryname{Kanûnî Yekem}%
   \def\februaryname{Şubat}%
   \def\marchname{Azar}%
@@ -282,13 +283,13 @@
 
 \def\datekurdish@kurmanji@latin{%
   \def\today{%
-     \number\day.~\ifcase\month\or
+     \number\day ~\ifcase\month\or
       \januaryname\or \februaryname\or \marchname\or \aprilname\or
       \mayname\or \junename\or \julyname\or \augustname\or
       \septembername\or \octobername\or \novembername\or
       \decembername\or \@ctrerr\fi~\number\year}%
   \def\ontoday{%
-      \number\day’ê~\ifcase\month\or
+      \number\day ê~\ifcase\month\or
       \januaryname\or \februaryname\or \marchname\or \aprilname\or
       \mayname\or \junename\or \julyname\or \augustname\or
       \septembername\or \octobername\or \novembername\or
@@ -307,8 +308,11 @@
   \def\decembername{Çileya Pêşîn}%
 }
 
+\def\kurdishmonthkurmanji#1{\ifcase#1%
+  چلەیا پاشین \or شبات \or ئادار \or نیسان \or گولان \or حەزیران \or تیرمەهـ \or تەباخ \or ئیلۆن \or چریا پێشین \or چریا پاشین \or چلەیا پێشین\fi}
+
 \def\datekurdish@kurmanji@arabic{%
-   \datekurdish@sorani@arabic% FIXME: correct?
+   \def\today{\@ensure@RTL{\kurdishnumber\day\space\kurdishmonthkurmanji{\month}\space\kurdishnumber\year}}%
 }
 
 % TODO: babel-kurmanji has these "alternative" month names
