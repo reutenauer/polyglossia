@@ -99,21 +99,21 @@
 
 
 \def\noextras@piedmontese{%
-   \lccode\string"2019=\z@
-   \nopiedmontese@shorthands
-   \xpgpms@savedvalues
+   \lccode\string"2019=\z@%
+   \ifpiedmontese@babelshorthands\nopiedmontese@shorthands\fi%
+   \xpgpms@savedvalues%
 }
 
 \def\blockextras@piedmontese{%
-   \lccode\string"2019=\string"2019
-   \clubpenalty=3000 \@clubpenalty=3000 \widowpenalty=3000
-   \finalhyphendemerits=50000000
-   \ifpiedmontese@babelshorthands\piedmontese@shorthands\fi
+   \lccode\string"2019=\string"2019%
+   \clubpenalty=3000 \@clubpenalty=3000 \widowpenalty=3000%
+   \finalhyphendemerits=50000000%
+   \ifpiedmontese@babelshorthands\piedmontese@shorthands\fi%
 }
 
 \def\inlineextras@piedmontese{%
-   \lccode\string"2019=\string"2019
-   \ifpiedmontese@babelshorthands\piedmontese@shorthands\fi
+   \lccode\string"2019=\string"2019%
+   \ifpiedmontese@babelshorthands\piedmontese@shorthands\fi%
 }
 %%% CHANGES END %%%
 \endinput

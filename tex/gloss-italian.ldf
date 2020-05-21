@@ -120,21 +120,21 @@
 
 
 \def\noextras@italian{%
-   \lccode\string"2019=\z@
-   \noitalian@shorthands
-   \xpgit@savedvalues
+   \lccode\string"2019=\z@%
+   \ifitalian@babelshorthands\noitalian@shorthands\fi%
+   \xpgit@savedvalues%
 }
 
 \def\blockextras@italian{%
-   \lccode\string"2019=\string"2019
-   \clubpenalty=3000 \@clubpenalty=3000 \widowpenalty=3000
-   \finalhyphendemerits=50000000
-   \ifitalian@babelshorthands\italian@shorthands\fi
+   \lccode\string"2019=\string"2019%
+   \clubpenalty=3000 \@clubpenalty=3000 \widowpenalty=3000%
+   \finalhyphendemerits=50000000%
+   \ifitalian@babelshorthands\italian@shorthands\fi%
 }
 
 \def\inlineextras@italian{%
-   \lccode\string"2019=\string"2019
-   \ifitalian@babelshorthands\italian@shorthands\fi
+   \lccode\string"2019=\string"2019%
+   \ifitalian@babelshorthands\italian@shorthands\fi%
 }
 %%% CHANGES END %%%
 \endinput

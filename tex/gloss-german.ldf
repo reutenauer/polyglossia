@@ -310,15 +310,15 @@
 }
 
 \def\noextras@german{%
-  \nogerman@shorthands%
+  \ifgerman@babelshorthands\nogerman@shorthands\fi%
 }
 
 \def\blockextras@german{%
-  \ifgerman@babelshorthands\german@shorthands\fi
+  \ifgerman@babelshorthands\german@shorthands\fi%
 }
 
 \def\inlineextras@german{%
-  \ifgerman@babelshorthands\german@shorthands\fi
+  \ifgerman@babelshorthands\german@shorthands\fi%
 }
 
 \endinput

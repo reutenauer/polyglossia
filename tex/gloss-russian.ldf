@@ -340,7 +340,7 @@
       \def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
    }%
    \ifcyrillic@numerals\norussian@numbers\fi%
-   \norussian@shorthands%
+   \ifrussian@babelshorthands\norussian@shorthands\fi%
 }
 
 \def\blockextras@russian{%

@@ -79,7 +79,7 @@
 }
 
 \def\noextras@dutch{%
-  \nodutch@shorthands%
+  \ifdutch@babelshorthands\nodutch@shorthands\fi%
 }
 
 \def\blockextras@dutch{%

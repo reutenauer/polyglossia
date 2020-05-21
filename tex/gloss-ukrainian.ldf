@@ -235,13 +235,13 @@
 \def\noextras@ukrainian{%
   \def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
   \ifcyrillic@numerals\noukrainian@numbers\fi
-  \noukrainian@shorthands%
+  \ifukrainian@babelshorthands\noukrainian@shorthands\fi%
 }
 
 \def\blockextras@ukrainian{%
   \ukrainian@capsformat%
-  \ifcyrillic@numerals\ukrainian@numbers\fi
-  \ifukrainian@babelshorthands\ukrainian@shorthands\fi
+  \ifcyrillic@numerals\ukrainian@numbers\fi%
+  \ifukrainian@babelshorthands\ukrainian@shorthands\fi%
 }
 
 \def\inlineextras@ukrainian{%

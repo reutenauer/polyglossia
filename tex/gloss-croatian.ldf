@@ -163,7 +163,7 @@
 }
 
 \def\noextras@croatian{%
-  \nocroatian@shorthands%
+  \ifcroatian@babelshorthands\nocroatian@shorthands\fi%
 }
 
 \def\blockextras@croatian{%

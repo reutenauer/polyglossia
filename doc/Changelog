@@ -12,6 +12,7 @@ Bug fixes:
   * Fix incompatibility of Marathi with Beamer.
   * Correct \partname in Hindi (#416).
   * Updates and improvements to Kurdish (#418).
+  * Only activate shorthand character if babelshorthands is true (#421). 
 
 Interface and defaults changes:
 

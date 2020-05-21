@@ -212,7 +212,7 @@
 }
 
 \def\noextras@czech{%
-  \noczech@shorthands%
+  \ifczech@babelshorthands\noczech@shorthands\fi%
   \noczech@hyphens%
   \noczech@vlna%
   \ifxetex\XeTeXinterchartokenstate=0\fi%

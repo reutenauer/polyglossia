@@ -217,7 +217,7 @@
 
 \def\noextras@georgian{%
    \ifgeorgian@numerals\nogeorgian@numbers\fi%
-   \nogeorgian@shorthands%
+   \ifgeorgian@babelshorthands\nogeorgian@shorthands\fi%
 }
 
 \def\blockextras@georgian{%

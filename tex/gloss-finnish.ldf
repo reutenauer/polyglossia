@@ -76,7 +76,7 @@
     \space\number\year}}
 
 \def\noextras@finnish{%
-  \nofinnish@shorthands%
+  \iffinnish@babelshorthands\nofinnish@shorthands\fi%
 }
 
 \def\blockextras@finnish{%

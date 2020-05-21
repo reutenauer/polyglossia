@@ -140,20 +140,20 @@
     \finalhyphendemerits=\the\finalhyphendemerits}
 }
 \def\noextras@occitan{%
-   \lccode\string"2019=\z@
-   \nooccitan@shorthands
-   \xpgoc@savedvalues
+   \lccode\string"2019=\z@%
+   \ifoccitan@babelshorthands\nooccitan@shorthands\fi%
+   \xpgoc@savedvalues%
 }
 \def\blockextras@occitan{%
-   \lccode\string"2019=\string"2019
-   \clubpenalty=3000 \@clubpenalty=3000 \widowpenalty=3000
-   \finalhyphendemerits=50000000
-   \ifoccitan@babelshorthands\occitan@shorthands\fi
+   \lccode\string"2019=\string"2019%
+   \clubpenalty=3000 \@clubpenalty=3000 \widowpenalty=3000%
+   \finalhyphendemerits=50000000%
+   \ifoccitan@babelshorthands\occitan@shorthands\fi%
 }
 
 \def\inlineextras@occitan{%
-   \lccode\string"2019=\string"2019
-   \ifoccitan@babelshorthands\occitan@shorthands\fi
+   \lccode\string"2019=\string"2019%
+   \ifoccitan@babelshorthands\occitan@shorthands\fi%
 }
 %% Distributable under the LaTeX Project Public License,
 %% version 1.3c or higher (your choice). The latest version of

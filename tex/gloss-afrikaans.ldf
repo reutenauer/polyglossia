@@ -79,7 +79,7 @@
 }
 
 \def\noextras@afrikaans{%
-  \noafrikaans@shorthands%
+  \ifafrikaans@babelshorthands\noafrikaans@shorthands\fi%
 }
 
 \def\blockextras@afrikaans{%

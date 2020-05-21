@@ -297,7 +297,7 @@
 
 \def\noextras@belarusian{%
    \ifcyrillic@numerals\nobelarusian@numbers\fi%
-   \nobelarusian@shorthands%
+   \ifbelarusian@babelshorthands\nobelarusian@shorthands\fi%
 }
 
 \def\blockextras@belarusian{%

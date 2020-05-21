@@ -144,7 +144,7 @@
     \space de~\number\year}}
 
 \def\noextras@catalan{%
-   \nocatalan@shorthands%
+   \ifcatalan@babelshorthands\nocatalan@shorthands\fi%
 }
 
 \def\blockextras@catalan{%

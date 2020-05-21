@@ -220,7 +220,7 @@
 }
 
 \def\noextras@slovak{%
-  \noslovak@shorthands%
+  \ifslovak@babelshorthands\noslovak@shorthands\fi%
   \noslovak@hyphens%
   \noslovak@vlna%
   \ifxetex\XeTeXinterchartokenstate=0\fi%

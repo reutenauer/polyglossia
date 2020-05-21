@@ -212,7 +212,7 @@
 
 \def\noextras@mongolian{%
    \ifcyrillic@numerals\nomongolian@numbers\fi%
-   \nomongolian@shorthands%
+   \ifmongolian@babelshorthands\nomongolian@shorthands\fi%
 }
 
 \def\blockextras@mongolian{%
