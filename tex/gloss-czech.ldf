@@ -77,7 +77,7 @@
       \chardef\czech@boundary=4095 %
       \def\newXeTeXintercharclass{%
         \e@alloc\XeTeXcharclass\chardef
-              \xe@alloc@intercharclass\m@ne\@ucharclass@boundary}
+              \xe@alloc@intercharclass\m@ne\@ucharclass@boundary}%
     \else
       \chardef\czech@boundary=255
     \fi
@@ -106,6 +106,22 @@
 
 % Add nonbreakable space after single-letter word to
 % prevent them to land at the end of a line
+% vlna code taken and adapted from xevlna.sty
+\def\czech@nointerchartoks{\let\czech@interchartoks\czech@PreCSpreposition}%
+\def\czech@PreCSpreposition{%
+   \def\next{}%
+   \ifnum\catcode`\ =10 % nothing will be done in verbatim
+   \ifmmode % nothing in math
+   \else
+      \let\czech@interchartoks\czech@nointerchartoks
+      \let\next\czech@ExamineCSpreposition
+   \fi \fi
+  \next%
+}%
+\def\czech@ExamineCSpreposition #1{#1\futurelet\next\czech@ProcessCSpreposition}%
+\def\czech@ProcessCSpreposition{\ifx\next\czech@XeTeXspace\nobreak\fi}%
+\futurelet\czech@XeTeXspace{ }\czech@nointerchartoks
+
 \def\czech@vlna{%
     \ifluatex
        \preventsingleon
@@ -132,21 +148,8 @@
         \XeTeXcharclass `\a \czech@nonsyllabicpreposition
         \XeTeXcharclass `\I \czech@nonsyllabicpreposition
         \XeTeXcharclass `\i \czech@nonsyllabicpreposition
-        \XeTeXinterchartoks \czech@boundary \czech@nonsyllabicpreposition {\czech@interchartoks}
-        \XeTeXinterchartoks \czech@openpunctuation \czech@nonsyllabicpreposition {\czech@interchartoks}
-        \def\czech@nointerchartoks{\let\czech@interchartoks\czech@PreCSpreposition}
-        \def\czech@PreCSpreposition{\def\next{}%
-           \ifnum\catcode`\ =10 % nothing will be done in verbatim
-           \ifmmode % nothing in math
-           \else
-              \let\czech@interchartoks\czech@nointerchartoks
-              \let\next\czech@ExamineCSpreposition
-           \fi \fi
-          \next%
-        }
-        \def\czech@ExamineCSpreposition ##1{##1\futurelet\next\czech@ProcessCSpreposition}
-        \def\czech@ProcessCSpreposition{\ifx\next\czech@XeTeXspace\nobreak\fi}
-        \futurelet\czech@XeTeXspace{ }\czech@nointerchartoks
+        \XeTeXinterchartoks \czech@boundary \czech@nonsyllabicpreposition {\czech@interchartoks}%
+        \XeTeXinterchartoks \czech@openpunctuation \czech@nonsyllabicpreposition {\czech@interchartoks}%
     \fi
 }
 

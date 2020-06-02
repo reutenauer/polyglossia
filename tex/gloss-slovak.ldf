@@ -85,7 +85,7 @@
       \chardef\slovak@boundary=4095 %
       \def\newXeTeXintercharclass{%
         \e@alloc\XeTeXcharclass\chardef
-              \xe@alloc@intercharclass\m@ne\@ucharclass@boundary}
+              \xe@alloc@intercharclass\m@ne\@ucharclass@boundary}%
     \else
       \chardef\slovak@boundary=255
     \fi
@@ -114,6 +114,22 @@
 
 % Add nonbreakable space after single-letter word to
 % prevent them to land at the end of a line
+% vlna code taken and adapted from xevlna.sty
+\def\slovak@nointerchartoks{\let\slovak@interchartoks\slovak@PreCSpreposition}%
+\def\slovak@PreCSpreposition{%
+   \def\next{}%
+   \ifnum\catcode`\ =10 % nothing will be done in verbatim
+   \ifmmode % nothing in math
+   \else
+      \let\slovak@interchartoks\slovak@nointerchartoks
+      \let\next\slovak@ExamineCSpreposition
+   \fi \fi
+  \next%
+}%
+\def\slovak@ExamineCSpreposition #1{#1\futurelet\next\slovak@ProcessCSpreposition}%
+\def\slovak@ProcessCSpreposition{\ifx\next\slovak@XeTeXspace\nobreak\fi}%
+\futurelet\slovak@XeTeXspace{ }\slovak@nointerchartoks
+
 \def\slovak@vlna{%
     \ifluatex
        \preventsingleon
@@ -140,21 +156,8 @@
         \XeTeXcharclass `\a \slovak@nonsyllabicpreposition
         \XeTeXcharclass `\I \slovak@nonsyllabicpreposition
         \XeTeXcharclass `\i \slovak@nonsyllabicpreposition
-        \XeTeXinterchartoks \slovak@boundary \slovak@nonsyllabicpreposition {\slovak@interchartoks}
-        \XeTeXinterchartoks \slovak@openpunctuation \slovak@nonsyllabicpreposition {\slovak@interchartoks}
-        \def\slovak@nointerchartoks{\let\slovak@interchartoks\slovak@PreCSpreposition}
-        \def\slovak@PreCSpreposition{\def\next{}%
-           \ifnum\catcode`\ =10 % nothing will be done in verbatim
-           \ifmmode % nothing in math
-           \else
-              \let\slovak@interchartoks\slovak@nointerchartoks
-              \let\next\slovak@ExamineCSpreposition
-           \fi \fi
-          \next%
-        }
-        \def\slovak@ExamineCSpreposition ##1{##1\futurelet\next\slovak@ProcessCSpreposition}
-        \def\slovak@ProcessCSpreposition{\ifx\next\slovak@XeTeXspace\nobreak\fi}
-        \futurelet\slovak@XeTeXspace{ }\slovak@nointerchartoks
+        \XeTeXinterchartoks \slovak@boundary \slovak@nonsyllabicpreposition {\slovak@interchartoks}%
+        \XeTeXinterchartoks \slovak@openpunctuation \slovak@nonsyllabicpreposition {\slovak@interchartoks}%
     \fi
 }
 
