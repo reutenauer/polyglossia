@@ -107,20 +107,22 @@
 % Add nonbreakable space after single-letter word to
 % prevent them to land at the end of a line
 % vlna code taken and adapted from xevlna.sty
-\def\czech@nointerchartoks{\let\czech@interchartoks\czech@PreCSpreposition}%
-\def\czech@PreCSpreposition{%
-   \def\next{}%
-   \ifnum\catcode`\ =10 % nothing will be done in verbatim
-   \ifmmode % nothing in math
-   \else
-      \let\czech@interchartoks\czech@nointerchartoks
-      \let\next\czech@ExamineCSpreposition
-   \fi \fi
-  \next%
-}%
-\def\czech@ExamineCSpreposition #1{#1\futurelet\next\czech@ProcessCSpreposition}%
-\def\czech@ProcessCSpreposition{\ifx\next\czech@XeTeXspace\nobreak\fi}%
-\futurelet\czech@XeTeXspace{ }\czech@nointerchartoks
+\ifxetex
+    \def\czech@nointerchartoks{\let\czech@interchartoks\czech@PreCSpreposition}%
+    \def\czech@PreCSpreposition{%
+       \def\next{}%
+       \ifnum\catcode`\ =10 % nothing will be done in verbatim
+       \ifmmode % nothing in math
+       \else
+          \let\czech@interchartoks\czech@nointerchartoks
+          \let\next\czech@ExamineCSpreposition
+       \fi\fi
+       \next%
+    }%
+    \def\czech@ExamineCSpreposition #1{#1\futurelet\next\czech@ProcessCSpreposition}%
+    \def\czech@ProcessCSpreposition{\ifx\next\czech@XeTeXspace\nobreak\fi}%
+    \futurelet\czech@XeTeXspace{ }\czech@nointerchartoks
+\fi
 
 \def\czech@vlna{%
     \ifluatex
