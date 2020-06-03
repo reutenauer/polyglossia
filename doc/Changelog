@@ -14,6 +14,7 @@ Bug fixes:
   * Updates and improvements to Kurdish (#418).
   * Only activate shorthand character if babelshorthands is true (#421). 
   * Fix whitespace issue in Czech and Slovak with vlna=true (#423).
+  * Fix whitespace issue in Danish (#424).
 
 Interface and defaults changes:
 
