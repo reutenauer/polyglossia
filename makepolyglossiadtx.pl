@@ -30,8 +30,7 @@ my $docsrcdir       = "$basedir/doc";
 my $fontmapsrcdir   = "$basedir/fontmapping";
 my $docsrc          = "$docsrcdir/polyglossia.tex";
 my $readme          = "$basedir/README.md";
-my @docsrcfiles     = qw(../README.md
-                          Changelog
+my @docsrcfiles     = qw(Changelog
                           examples.tex
                           example-arabic.tex
                           example-thai.tex);
@@ -266,6 +265,7 @@ for (my $idx = 0; $idx <= $#deriveddocfiles; $idx++) {
     my $outfile = $deriveddocfiles[$idx]{'out'};
     print DTX "\\generate{\\file{$outfile}{\\from{polyglossia.dtx}{$outfile}}}\n"
 }
+print DTX "\\generate{\\file{README.md}{\\from{polyglossia.dtx}{README}}}\n";
 
 print DTX<<_END
 \\endgroup
