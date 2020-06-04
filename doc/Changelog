@@ -19,6 +19,12 @@ Bug fixes:
 Interface and defaults changes:
 
 
+Build fixes:
+
+  * Fix a bug in the dtx build script which was the reason for an utterly
+    incomplete polyglossia.dtx file (#420).
+
+
 1.49 (08-04-2020)
 
 New features:
