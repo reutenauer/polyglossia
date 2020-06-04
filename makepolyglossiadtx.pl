@@ -114,6 +114,8 @@ my @outputdocfiles = ();
 
 my $numoutput = 0;
 
+my $numoutputlua = 0;
+
 foreach my $source (@source)
 {  
 
@@ -155,8 +157,6 @@ foreach my $source (@source)
       }
    }
    
-   $numoutput = 0;
-   
    foreach my $srcdirluafile (@srcdirluafile)
    {
       my $fileexp = $srcdir . "/" . $infile;
@@ -171,11 +171,11 @@ foreach my $source (@source)
 
          my $thisinfile  = $srcdirluafile;
 
-         $derivedluafiles[$numoutput]{'in'} = $thisinfile;
-         $derivedluafiles[$numoutput]{'out'} = $thisoutfile;
-         $outputluafiles[$numoutput] = $thisoutfile;
+         $derivedluafiles[$numoutputlua]{'in'} = $thisinfile;
+         $derivedluafiles[$numoutputlua]{'out'} = $thisoutfile;
+         $outputluafiles[$numoutputlua] = $thisoutfile;
 
-         $numoutput++;
+         $numoutputlua++;
       }
    }
    
