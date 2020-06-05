@@ -1032,11 +1032,11 @@
 
 \newcommand{\xpg@input}[1]{%
   % Store catcode of @ before making at letter
-  \chardef\xpg@atcatcode\catcode`\@
+  \chardef\xpg@saved@at@catcode\catcode`\@
   \makeatletter
   \input{#1}%
   % restore former @ catcode
-  \catcode`\@=\xpg@atcatcode%
+  \catcode`\@=\xpg@saved@at@catcode%
 }
 
 % try to load a language file
