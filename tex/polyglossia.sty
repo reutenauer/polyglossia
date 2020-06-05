@@ -1031,9 +1031,13 @@
 }
 
 \newcommand{\xpg@input}[1]{%
+  % Store catcode of @ before making at letter
   \chardef\xpg@atcatcode\catcode`\@
   \makeatletter
-  \input{#1}\catcode`\@=\xpg@atcatcode}
+  \input{#1}%
+  % restore former @ catcode
+  \catcode`\@=\xpg@atcatcode%
+}
 
 % try to load a language file
 \cs_new:Nn \polyglossia_load_lang_definition:nn {
