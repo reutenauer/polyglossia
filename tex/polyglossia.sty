@@ -6,12 +6,7 @@
 \RequirePackage{xkeyval}[2008/08/13]
 % Will raise error if used with anything else than XeTeX or LuaTeX
 \RequirePackage{fontspec}[2010/06/08]% v2.0
-% Ironically, ifluatex.sty is included by some other package if we run
-% LuaTeX, but it's not if we run XeTeX, and we need it to know which of
-% the two engines it is!  Hence we include it here.
-\RequirePackage{ifluatex}
-% For symmetry with ifluatex
-\RequirePackage{ifxetex}
+\RequirePackage{iftex}
 \RequirePackage{expl3}
 \RequirePackage{l3keys2e}
 \RequirePackage{xparse}
