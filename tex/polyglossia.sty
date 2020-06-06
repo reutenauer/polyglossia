@@ -1043,8 +1043,15 @@
 \cs_new:Nn \polyglossia_load_lang_definition:nn {
   \file_if_exist:nTF{gloss-#2.ldf}
   {
+    % Temporarily force catcode of ~ to 13 since babelsh.def
+    % requires it. This is needed particularly with LaTeX3
+    % packages which force \ExplSyntaxOn (#425)
+    \protected\edef\xpg@restore@tilde@catcode{\catcode 126 = \the\catcode 126\relax}
+    \catcode 126 = 13
     \xpg@input{gloss-#2.ldf}
     \setkeys{#2}{#1}
+    % restore former ~ catcode
+    \xpg@restore@tilde@catcode
   }
   {
     \xpg@nogloss{#2}
