@@ -1,7 +1,9 @@
 1.50 (forthcoming)
 
 New features:
-
+  * Polyglossia now uses the Harfbuzz renderer by default with LuaTeX
+    output. This brings LuaTeX on par with XeTeX for all scripts (#337).
+    The renderer can be changed via the new global luatexrenderer option.
 
 Bug fixes:
 

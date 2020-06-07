@@ -67,6 +67,12 @@
      \xpgvalue{=} \meta{code} (default value: \texttt{#3})\par%
 }
 
+% arguments: #1 version number, #2 key name, #3 value type, #4 default value
+\NewDocumentCommand\xpgoptkey{ommo}{%
+	\xpgoption{#2}\IfValueT{#1}{\new{#1}}
+	\xpgvalue{=} \meta{#3} (default value: \texttt{#4})\par%
+}
+
 %% Sidenotes  << copied from fontspec.dtx
 \newcommand\new[1]{%
   \edef\thisversion{v#1}%
@@ -141,7 +147,7 @@
 \section{Introduction}
 
 \pkg{Polyglossia} is a package for facilitating multilingual typesetting with
-\XeLaTeX\ and (with some exceptions) \LuaLaTeX. Basically, it
+\XeLaTeX\ and \LuaLaTeX. Basically, it
 can be used as an alternative to \pkg{babel} for performing the following
 tasks automatically:
 
@@ -540,11 +546,19 @@ Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 		option \xpgoption{nolocalmarks} which used to switch off the previous default, and
 		now equals the default, is still available.
 
-	\item \xpgoption{quiet} turns off most info messages and some of the warnings issued
-		by \LaTeX, \pkg{fontspec} and \pkg{polyglossia}.
+    \item \xpgoptkey[1.50]{luatexrenderer}{renderer}[Harfbuzz] determines which font renderer is used
+        with \LuaTeX\ output. The correct font renderer is essential particularly for non-Latin scripts.
+        By default, \pkg{polyglossia} uses the \xpgvalue{Harfbuzz} renderer that has been introduced to
+        \LuaTeX\ in 2019 (\TeX Live 2020), as this gives the best results generally. If you want to use
+        a different renderer, you can specify this here (or individually for specific fonts via the optional
+        argument of the font selection commands). Please refer to the \pkg{fontspec} manual for supported
+        values and for details on how to change the renderer for individual fonts.\\
+        \xpgoption{luatexrenderer=none} disables \pkg{polyglossia}'s automatic renderer setting.
+
+	\item \xpgboolkeytrue{verbose} determines whether info messages and (some of the) warnings issued
+		by \LaTeX, \pkg{fontspec} and \pkg{polyglossia} are output.
 \end{itemize}
 
-\pagebreak
 \section{Language-switching commands}\label{languageswitching}
 
 \subsection{Recommended commands}\label{sec:langcmds}

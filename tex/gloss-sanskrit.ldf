@@ -1,10 +1,4 @@
 \ProvidesFile{gloss-sanskrit.ldf}[polyglossia: module for sanskrit]
-\ifluatex
-  \xpg@warning{Sanskrit is not supported with LuaTeX.\MessageBreak
-I will proceed with the compilation, but\MessageBreak
-the output is not guaranteed to be correct\MessageBreak
-and may look very wrong.}
-\fi
 
 \RequirePackage{devanagaridigits}
 

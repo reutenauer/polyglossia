@@ -8,12 +8,6 @@
 %%%%              Thai Linux Working Group
 %%%%              http://linux.thai.net/
 %%%%
-\ifluatex
-  \xpg@warning{Thai is not supported with LuaTeX.\MessageBreak
-I will proceed with the compilation, but\MessageBreak
-the output is not guaranteed to be correct\MessageBreak
-and may look very wrong.}
-\fi
 \PolyglossiaSetup{thai}{
   bcp47=th,
   script=Thai,

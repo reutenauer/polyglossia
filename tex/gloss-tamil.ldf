@@ -1,10 +1,5 @@
 ﻿\ProvidesFile{gloss-tamil.ldf}[polyglossia: module for tamil]
-\ifluatex
-  \xpg@warning{Tamil is not supported with LuaTeX.\MessageBreak
-I will proceed with the compilation, but\MessageBreak
-the output is not guaranteed to be correct\MessageBreak
-and may look very wrong.}
-\fi
+
 % Translations provided by Kevin & Siji, 01-11-2009
 
 \PolyglossiaSetup{tamil}{
