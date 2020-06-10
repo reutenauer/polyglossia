@@ -2146,6 +2146,47 @@
    \fi
 }
 
+% Babel previously compiled in hyphenrules into the kernel (via hyphen.cfg)
+% but this is no longer the case. In any case, we roll our own one now
+% and possibly overwrite babel's.
+\provideenvironment{hyphenrules}{}{}
+
+% As opposed to the one inherited from switch.def/babel, our environment
+% supports language options and aliases.
+\renewenvironment{hyphenrules}[2][]
+{%
+  % We usually embrace the switch in groups to keep the changes local.
+  % We cannot do this if an LTR environmet starts in an RTL paragraph,
+  % as bidi interferes here badly with its directionality smartness.
+  \ifxetex
+    \str_if_eq:eeT{\exp_args:Nne\prop_item:Nn{\polyglossia@langsetup}{\languagename/direction}}{RL}%
+       {%
+        \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}{RL}%
+           {}% RTL -> RTL
+           {\ifvmode\else\booltrue{xpg@noset@groups}\fi}% RTL -> LTR
+       }%
+  \fi%
+  \ifbool{xpg@noset@groups}{}{\xpg@set@group@aux}%
+  % Check for real language name and options
+  \edef\xpg@tmp@lang{#2}%
+  \edef\xpg@tmp@opts{#1}%
+  \ifcsdef{#2@alias@lang}{%
+     \edef\xpg@tmp@lang{\csuse{#2@alias@lang}}%
+     \ifcsdef{#2@alias@opts}{%
+       \edef\xpg@tmp@opts{\csuse{#2@alias@opts},#1}%
+     }{}%
+  }{}%
+  \tl_if_blank:nF {\xpg@tmp@opts}{%
+     % Register the language options
+     \polyglossia@set@lang@options:nn {\xpg@tmp@lang} {\xpg@tmp@opts}%
+  }%
+  % Now switch patterns
+  \csuse@warn{\csuse{xpg@tmp@lang}@language}%
+  % And activate hyphenmins
+  \use@localhyphenmins{\xpg@tmp@lang}%
+}
+{\ifbool{xpg@noset@groups}{}{\xpg@unset@group@aux}}
+
 \AtEndPreamble{%
    \@ifpackageloaded{bidi}{%
       \providecommand*{\aemph}[1]{$\overline{\hboxR{#1}}$}%
