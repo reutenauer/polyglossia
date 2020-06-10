@@ -609,17 +609,22 @@ similar behaviour.
 \item \DescribeMacro{\foreignlanguage}\cmd{\foreignlanguage\oarg{options}\marg{lang}\marg{…}}
 \item \DescribeEnv{otherlanguage}\cmd{\begin\{otherlanguage\}\oarg{options}\marg{lang}} \dots{} \cmd{\end\{otherlanguage\}}
 \item \DescribeEnv{otherlanguage*}\cmd{\begin\{otherlanguage*\}\oarg{options}\marg{lang}} \dots{} \cmd{\end\{otherlanguage*\}}
+\item \DescribeEnv{hyphenrules}\cmd{\begin\{hyphenrules\}\oarg{options}\marg{lang}} \dots{} \cmd{\end\{hyphenrules\}}\new{1.50}
 \end{itemize}
 %
 \cmd\selectlanguage\marg{lang} and the ¦otherlanguage¦ environment are identical to the
-the \meta{lang} environment, except that \cmd\selectlanguage\marg{lang}
+\meta{lang} environment, except that \cmd\selectlanguage\marg{lang}
 does not need to be explicitly closed. The command \cmd\foreinlanguage\marg{lang}\marg{…} and the ¦otherlanguage*¦
 environment are identical with the use of the \cmd\text\meta{lang} or \cmd\textlang\ command, with the one
 notable exception that they do not translate the date with \cmd\today.
 
+The \meta{hyphenrules} environment only switches the hyphenation patterns to the one associated with the language \meta{lang}
+(or the language variety as specified via \meta{options}). It does no further language-specific change.
+
 Since the \XeLaTeX\ and \LuaLaTeX\ format incorporate \pkg{babel}’s \file{hyphen.cfg},
-the low-level commands for hyphenation and language switching
-defined there are also accessible.
+the low-level commands for hyphenation and language switching defined there are in principal also accessible.
+Note, however, that the availability of such low-level commands is not guaranteed, as \file{hyphen.cfg}, which is
+out of \pkg{polyglossia}'s control, is (or at least has been) subject to regular change.
 
 \subsection{Other commands}
 The following commands are probably of lesser interest to the end user, but
