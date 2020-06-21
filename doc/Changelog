@@ -20,6 +20,7 @@ Bug fixes:
   * Fix whitespace issue in Danish (#424).
   * Fix catcode conflicts that might occur in language definition files
     f. ex. when loaded from a LaTeX3 class (#67, #425).
+  * Robustify font series commands (#428).
 
 Interface and defaults changes:
 

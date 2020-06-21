@@ -1399,9 +1399,9 @@
       \else\csuse@warn{#1@font@rm}\fi\fi}
 
 \def\xpg@set@normalfont#1{%
-  \letcs{\rmfamily}{#1@font@rm}%
-  \letcs{\sffamily}{#1@font@sf}%
-  \letcs{\ttfamily}{#1@font@tt}%
+  \DeclareRobustCommand\rmfamily{\csuse{#1@font@rm}}%
+  \DeclareRobustCommand\sffamily{\csuse{#1@font@sf}}%
+  \DeclareRobustCommand\ttfamily{\csuse{#1@font@tt}}%
   \gdef\normalfont{\protect\xpg@select@fontfamily{#1}%
                      \fontseries{\seriesdefault}\selectfont%
                      \fontshape{\shapedefault}\selectfont}%
