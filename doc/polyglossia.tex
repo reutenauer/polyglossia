@@ -785,8 +785,10 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 	\end{itemize}
 \paragraph*{Commands:}
 	\begin{itemize}
-	\item \Cmd\abjad and \Cmd\abjadmaghribi (see section \ref{abjad})
-  \item \Cmd\aemph to emphasize text with \cmd\overline.\new{1.2.0}
+	\item \Cmd\abjad, \Cmd\abjadmaghribi (see section \ref{abjad})
+	\item \Cmd\abjadalph\new{1.50} steps through the Arabic alphabet, thus it can only be used up to 28.
+	Example: ¦\textarabic{\abjadalph{18}}¦ yields \textarabic{\abjadalph{18}}.
+    \item \Cmd\aemph to emphasize text with \cmd\overline.\new{1.2.0}
     ¦\textarabic{\aemph{اب}}¦ yields \textarabic{\aemph{اب}}.
     This command is also available for Farsi, Urdu, etc.
 	\end{itemize}

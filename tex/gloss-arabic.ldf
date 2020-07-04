@@ -173,6 +173,19 @@ and may look very wrong.}
 \def\@ornatebracearabic#1{\RL{\char"FD3F\@arabic#1\char"FD3E}}
 \def\@ornatebracealph#1{\RL{\char"FD3F\@alph#1\char"FD3E}}
 
+\def\abjadalph#1{\expandafter\arabic@abjad@alph{\number#1}}
+
+% This is a poor man's Arabic alphanumeric. It just uses the alphabet and
+% thus ends at 28.
+\def\arabic@abjad@alph#1{\ifcase#1%
+   \or ا\or ب\or ج\or د\or و\or ه‍\or ز%
+   \or ح\or ط\or ي\or ك\or ل\or م\or ن%
+   \or س\or ع\or ف\or ص\or ق\or ر\or ش%
+   \or ت\or ث\or خ\or ذ\or ض\or ظ\or غ%
+   \else\xpg@ill@value{#1}{arabic@abjad@alph}\fi%
+}
+
+
 \def\abjadmaghribi#1{%
 \ifnum#1>1999\xpg@ill@value{#1}{abjad}%
 \else
