@@ -39,6 +39,8 @@ and may look very wrong.}
 \setlanguagealias*[locale=default]{arabic}{apd}
 \setlanguagealias*[locale=mashriq]{arabic}{ar-PS}
 
+\define@boolkey{arabic}[arabic@]{abjadalph}[true]{}
+
 \newif\ifeastern@numerals
 \def\tmp@mashriq{mashriq}
 \def\tmp@maghrib{maghrib}
@@ -220,8 +222,13 @@ and may look very wrong.}
   \ifnum#1=\z@\fi\abj@maghribi@num@iii}
 
 \def\arabic@numbers{%
+ \ifarabic@abjadalph
+   \let\@alph\abjadalph%
+   \let\@Alph\abjadalph%
+ \else
    \let\@alph\abjad%
    \let\@Alph\abjad%
+ \fi
 }
 
 \def\noarabic@numbers{%
