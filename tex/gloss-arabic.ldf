@@ -178,7 +178,7 @@ and may look very wrong.}
 % This is a poor man's Arabic alphanumeric. It just uses the alphabet and
 % thus ends at 28.
 \def\arabic@abjad@alph#1{\ifcase#1%
-   \or ا\or ب\or ج\or د\or و\or ه‍\or ز%
+   \or ا\or ب\or\abjad@three\or د\or و\or ه‍\or ز%
    \or ح\or ط\or ي\or ك\or ل\or م\or ن%
    \or س\or ع\or ف\or ص\or ق\or ر\or ش%
    \or ت\or ث\or خ\or ذ\or ض\or ظ\or غ%
