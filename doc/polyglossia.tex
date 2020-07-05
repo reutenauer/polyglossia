@@ -782,17 +782,21 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		The latter is the default when \xpgvalue{locale=algeria}, \xpgvalue{tunisia}, or \xpgvalue{morocco}.
 	\item \xpgboolkeyfalse[1.50]{abjadalph}
 	     Set this to true if you want the alphabetic counters to be output using \cmd\abjadalph\ rather than \cmd\abjad.
+	     Note that this limits the counter scope to 28 (see \cmd\abjadalph\ below).
 	\item \xpgboolkeyfalse[1.0.3]{abjadjimnotail}
     Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
 	\end{itemize}
 \paragraph*{Commands:}
 	\begin{itemize}
-	\item \Cmd\abjad, \Cmd\abjadmaghribi (see section \ref{abjad})
+	\item \Cmd\abjad outputs Arabic \textit{abjad} numbers according to the Mashriq varieties.
+	      Example: ¦\abjad{1863}¦ yields \textarabic{\abjad{1863}}.	
+	\item \Cmd\abjadmaghribi outputs Arabic \textit{abjad} numbers according to the Maghrib varieties.
+	       Example: ¦\abjadmaghribi{1863}¦ yields \textarabic{\abjadmaghribi{1863}}.
 	\item \Cmd\abjadalph\new{1.50} steps through the Arabic alphabet, thus it can only be used up to 28.
-	Example: ¦\textarabic{\abjadalph{18}}¦ yields \textarabic{\abjadalph{18}}.
+	       Example: ¦\textarabic{\abjadalph{18}}¦ yields \textarabic{\abjadalph{18}}.
     \item \Cmd\aemph to emphasize text with \cmd\overline.\new{1.2.0}
-    ¦\textarabic{\aemph{اب}}¦ yields \textarabic{\aemph{اب}}.
-    This command is also available for Farsi, Urdu, etc.
+          ¦\textarabic{\aemph{اب}}¦ yields \textarabic{\aemph{اب}}.
+           This command is also available for Farsi, Urdu, etc.
 	\end{itemize}
 
 \subsection{armenian}\label{armenian}
