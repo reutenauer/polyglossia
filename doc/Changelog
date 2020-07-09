@@ -23,6 +23,7 @@ Bug fixes:
     f. ex. when loaded from a LaTeX3 class (#67, #425).
   * Robustify font family switches (#428).
   * Fix whitespace issue in Russian indentfirst option (#433).
+  * In Russian, indentfirst is now again default (#434).
 
 Interface and defaults changes:
 

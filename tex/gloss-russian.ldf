@@ -71,7 +71,7 @@
 
 
 % Register default options
-\xpg@initialize@gloss@options{russian}{babelshorthands=false,spelling=modern,numerals=arabic,indentfirst=false}
+\xpg@initialize@gloss@options{russian}{babelshorthands=false,spelling=modern,numerals=arabic,indentfirst=true}
 
 
 \ifsystem@babelshorthands
