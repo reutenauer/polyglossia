@@ -59,12 +59,12 @@
    \xpg@info{Option: Russian, numerals=\xpg@val}%
 }{\xpg@warning{Unknown Russian numerals value `#1'}}
 
-\define@boolkey{russian}[russian@]{indentfirst}[true]{
-   \ifrussian@indentfirst
-      \SetLanguageKeys{russian}{indentfirst=true}
-   \else
-      \SetLanguageKeys{russian}{indentfirst=false}
-  \fi
+\define@boolkey{russian}[russian@]{indentfirst}[true]{%
+  \ifrussian@indentfirst
+      \SetLanguageKeys{russian}{indentfirst=true}%
+  \else
+      \SetLanguageKeys{russian}{indentfirst=false}%
+  \fi%
 }
 
 \define@boolkey{russian}[russian@]{babelshorthands}[true]{}
