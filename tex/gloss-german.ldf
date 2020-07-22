@@ -200,12 +200,12 @@
   \declare@shorthand{german}{"T}{\textormath{\bbl@disc@german T{TT}}{T}}%
   \declare@shorthand{german}{"f}{\textormath{\bbl@discff}{f}}%
   \def\bbl@discff{\penalty\@M
-    \afterassignment\bbl@insertff \let\bbl@nextff= }%
+    \afterassignment\bbl@insertff \cslet{bbl@nextff}{ }}%
   \def\bbl@insertff{%
     \if f\bbl@nextff
       \expandafter\@firstoftwo\else\expandafter\@secondoftwo\fi
     {\relax\discretionary{ff-}{f}{ff}\allowhyphens}{f\bbl@nextff}}%
-  \let\bbl@nextff=f%
+  \cslet{bbl@nextff}{f}%
   \declare@shorthand{german}{"-}{\nobreak\-\nobreak\hskip\z@skip}%
   \declare@shorthand{german}{"|}{\textormath{\penalty\@M\discretionary{-}{}{\kern.03em}}{}}%
   \declare@shorthand{german}{""}{\hskip\z@skip}%
