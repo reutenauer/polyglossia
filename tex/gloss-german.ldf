@@ -198,7 +198,7 @@
   \declare@shorthand{german}{"R}{\textormath{\bbl@disc@german R{RR}}{R}}%
   \declare@shorthand{german}{"t}{\textormath{\bbl@disc@german t{tt}}{t}}%
   \declare@shorthand{german}{"T}{\textormath{\bbl@disc@german T{TT}}{T}}%
-  \declare@shorthand{german}{"f}{\textormath{\bbl@discff}{f}}%
+  \declare@shorthand{german}{"f}{\texorpdfstring{\textormath{\bbl@discff}{f}}{f}}%
   \def\bbl@discff{\penalty\@M
     \afterassignment\bbl@insertff \cslet{bbl@nextff}{ }}%
   \def\bbl@insertff{%
