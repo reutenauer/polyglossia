@@ -712,12 +712,14 @@ displayed.
 which override the hyphenation patterns for specified words. The command takes as argument a space-separated
 list of words where hyphenation points are marked by a dash (if no dash is used, the respective word is not
 hyphenated at all):
-\begin{Verbatim}
+\begin{quote}
+\begin{verbatim}
 \hyphenation{%
   po-ly-glos-sia
   LaTeX
 }
-\end{Verbatim}
+\end{verbatim}
+\end{quote}
 %
 These exceptions, however, apply to all languages. In addition to this, \pkg{polyglossia} provides
 the command\new{1.45}
@@ -728,11 +730,31 @@ respectively.
 \subsection{Hyphenation disabling}
 
 In some very specific contexts (such as music score creation), \TeX{} hyphenation
-is something to avoid as it may cause troubles. \pkg{polyglossia} provides two
+is something to avoid as it may cause troubles. \pkg{Polyglossia} provides two
 functions: \Cmd\disablehyphenation\ and \Cmd\enablehyphenation. Note that if
 you select a new language while hyphenation is disabled, it will remain disabled.
 If you re-enable it, the hyphenation patterns of the currently selected language
 will be activated.
+
+\subsection{Hyphenation thresholds}
+
+\pkg{Polyglossia} sets reasonable defaults for the hyphenation thresholds of each language,
+\ie the number of characters that must be there at least at the beginning or end of a
+word before it is hyphenated (\cmd\lefthyphenmin\ and \cmd\righthyphenmin\ in \TeX).
+
+For instance, with English, this threshold is 2 at the beginning (`left') and 3 at the end (`right'),
+so a word will only be hyphenated after at least two characters at the beginning and not
+within the last three characters at the end.
+
+To change this value, do the following after \pkg{polyglossia} is loaded:
+\begin{quote}
+\begin{verbatim}
+\renewcommand*{⟨lang⟩hyphenmins}{{⟨l⟩}{⟨r⟩}}
+\end{verbatim}
+\end{quote}
+with \meta{lang} replaced with the respective language (\eg \texttt{english}),
+\meta{l} with the left threshold value (\eg \texttt{3}), \meta{r} with the right
+threshold value.
 
 \section{Language-specific options and commands}\label{specific}
 

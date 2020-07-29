@@ -33,6 +33,10 @@ Build fixes:
   * Fix a bug in the dtx build script which was the reason for an utterly
     incomplete polyglossia.dtx file (#420).
 
+Documentation improvements:
+  * Document how to change \lefthyphenmin and \righthyphenmin for a language
+    (#435).
+
 
 1.49 (08-04-2020)
 
