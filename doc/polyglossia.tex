@@ -746,13 +746,15 @@ For instance, with English, this threshold is 2 at the beginning (`left') and 3 
 so a word will only be hyphenated after at least two characters at the beginning and not
 within the last three characters at the end.
 
-To change this value, do the following after \pkg{polyglossia} is loaded:
+To change this value, do the following after \pkg{polyglossia} is loaded and the languages
+have been activated:
 \begin{quote}
 \begin{verbatim}
-\renewcommand*{⟨lang⟩hyphenmins}{{⟨l⟩}{⟨r⟩}}
+\renewcommand*{⟨pattern⟩hyphenmins}{{⟨l⟩}{⟨r⟩}}
 \end{verbatim}
 \end{quote}
-with \meta{lang} replaced with the respective language (\eg \texttt{english}),
+with \meta{pattern} replaced with the respective hyphenation pattern name (\eg \texttt{english}
+for English or \texttt{ngerman} for German, new spelling),
 \meta{l} with the left threshold value (\eg \texttt{3}), \meta{r} with the right
 threshold value.
 
