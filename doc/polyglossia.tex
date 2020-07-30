@@ -750,13 +750,13 @@ To change this value, do the following after \pkg{polyglossia} is loaded and the
 have been activated:
 \begin{quote}
 \begin{verbatim}
-\renewcommand*{⟨pattern⟩hyphenmins}{{⟨l⟩}{⟨r⟩}}
+\renewcommand*{\⟨lang⟩hyphenmins}{{⟨l⟩}{⟨r⟩}}
 \end{verbatim}
 \end{quote}
-with \meta{pattern} replaced with the respective hyphenation pattern name (\eg \texttt{english}
-for English or \texttt{ngerman} for German, new spelling),
-\meta{l} with the left threshold value (\eg \texttt{3}), \meta{r} with the right
-threshold value.
+with \meta{lang} replaced with the respective polyglossia language name (\eg \texttt{english}
+for English), \meta{l} with the left threshold value (\eg \texttt{3}), \meta{r} with the right
+threshold value. Note that this can be only changed once for all varieties of a given polyglossia
+language currently.
 
 \section{Language-specific options and commands}\label{specific}
 
