@@ -743,8 +743,9 @@ where \meta{lang} is to be replaced with the respective language name or alias, 
 can be used to delimit the modification to a particular variety (\eg via \texttt{variant} or \texttt{spelling}),
 \meta{l} with the left threshold value (\eg \texttt{3}), and \meta{r} with the right
 threshold value (\eg \verb|\setlanghyphenmins[spelling=old]{german}{4}{4}|).
-This setting can be changed repeatedly in the preamble and the document body, and
-it applies to all subsequent text in the respective language (variety).
+This setting can be changed repeatedly in the preamble and the document body.
+It applies to all subsequent text in the respective language (variety), but only after the
+next language switch.
 
 \subsection{Hyphenation disabling}
 
