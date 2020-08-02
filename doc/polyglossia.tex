@@ -727,15 +727,6 @@ the command\new{1.45}
 which can be used to define exceptions that only apply to a specific language or language variant,
 respectively.
 
-\subsection{Hyphenation disabling}
-
-In some very specific contexts (such as music score creation), \TeX{} hyphenation
-is something to avoid as it may cause troubles. \pkg{Polyglossia} provides two
-functions: \Cmd\disablehyphenation\ and \Cmd\enablehyphenation. Note that if
-you select a new language while hyphenation is disabled, it will remain disabled.
-If you re-enable it, the hyphenation patterns of the currently selected language
-will be activated.
-
 \subsection{Hyphenation thresholds}
 
 \pkg{Polyglossia} sets reasonable defaults for the hyphenation thresholds of each language,
@@ -751,8 +742,18 @@ To change this value, \pkg{polyglossia} provides the command\new{1.50}
 where \meta{lang} is to be replaced with the respective language name or alias, \meta{options}
 can be used to delimit the modification to a particular variety (\eg via \texttt{variant} or \texttt{spelling}),
 \meta{l} with the left threshold value (\eg \texttt{3}), and \meta{r} with the right
-threshold value. This setting can be changed repeatedly in the preamble and the document body, and
+threshold value (\eg \verb|\setlanghyphenmins[spelling=old]{german}{4}{4}|).
+This setting can be changed repeatedly in the preamble and the document body, and
 it applies to all subsequent text in the respective language (variety).
+
+\subsection{Hyphenation disabling}
+
+In some very specific contexts (such as music score creation), \TeX\ hyphenation
+is something to avoid completely as it may cause troubles.
+\pkg{Polyglossia} provides two functions: \Cmd\disablehyphenation\ and \Cmd\enablehyphenation.
+Note that if you select a new language while hyphenation is disabled, it will remain disabled.
+If you re-enable it, the hyphenation patterns of the currently selected language
+will be activated.
 
 \section{Language-specific options and commands}\label{specific}
 
