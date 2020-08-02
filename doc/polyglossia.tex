@@ -739,24 +739,20 @@ will be activated.
 \subsection{Hyphenation thresholds}
 
 \pkg{Polyglossia} sets reasonable defaults for the hyphenation thresholds of each language,
-\ie the number of characters that must be there at least at the beginning or end of a
+\ie the number of characters that must  at least be there at the beginning or end of a
 word before it is hyphenated (\cmd\lefthyphenmin\ and \cmd\righthyphenmin\ in \TeX).
-
 For instance, with English, this threshold is 2 at the beginning (`left') and 3 at the end (`right'),
-so a word will only be hyphenated after at least two characters at the beginning and not
-within the last three characters at the end.
+so a word will not be hyphenated within the first two characters at the beginning and the last three
+characters at the end.
 
-To change this value, do the following after \pkg{polyglossia} is loaded and the languages
-have been activated:
-\begin{quote}
-\begin{verbatim}
-\renewcommand*{\⟨lang⟩hyphenmins}{{⟨l⟩}{⟨r⟩}}
-\end{verbatim}
-\end{quote}
-with \meta{lang} replaced with the respective polyglossia language name (\eg \texttt{english}
-for English), \meta{l} with the left threshold value (\eg \texttt{3}), \meta{r} with the right
-threshold value. Note that this can be only changed once for all varieties of a given polyglossia
-language currently.
+To change this value, \pkg{polyglossia} provides the command\new{1.50}
+\displaycmd{\setlanghyphenmins\oarg{options}\marg{lang}\marg{l}\marg{r}}{\setlanghyphenmins}
+%
+where \meta{lang} is to be replaced with the respective language name or alias, \meta{options}
+can be used to delimit the modification to a particular variety (\eg via \texttt{variant} or \texttt{spelling}),
+\meta{l} with the left threshold value (\eg \texttt{3}), and \meta{r} with the right
+threshold value. This setting can be changed repeatedly in the preamble and the document body, and
+it applies to all subsequent text in the respective language (variety).
 
 \section{Language-specific options and commands}\label{specific}
 

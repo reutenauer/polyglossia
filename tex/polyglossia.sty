@@ -2094,7 +2094,7 @@
   \xpg@select@fontfamily{#2}%
   \csuse@warn{#2@language}%
   \csuse{#2@numbers}%
-  \use@localhyphenmins{#2}%
+  \use@localhyphenmins[#1]{#2}%
   \polyglossia@lang@frenchspacing:n{#2}
 }
 
@@ -2131,14 +2131,66 @@
       \fi
    }{%
      \xpg@warning{\string\setlocalhyphenmin\space~ useless~ for~ unknown~ language~ #1}%
-   }}%
+   }%
+}%
 
-\def\use@localhyphenmins#1{%
-   \ifcsundef{#1hyphenmins}{}%
-   {\expandafter\expandafter\expandafter\set@hyphenmins\csname #1hyphenmins\endcsname\relax}
+% \setlanghyphenmins[options]{lang}{l}{r}
+\newcommand*\setlanghyphenmins[4][]{%
+  % Check for real language name and options
+  \edef\xpg@tmp@lang{#2}%
+  \edef\xpg@tmp@opts{#1}%
+  \ifcsdef{#2@alias@lang}{%
+     \edef\xpg@tmp@lang{\csuse{#2@alias@lang}}%
+     \ifcsdef{#2@alias@opts}{%
+       \edef\xpg@tmp@opts{\csuse{#2@alias@opts},#1}%
+     }{}%
+  }{}%
+  \bgroup
+  \polyglossia@error@iflangnotloaded:n{\xpg@tmp@lang}
+  \exp_args:Nne \setkeys{\xpg@tmp@lang}{\xpg@tmp@opts}%
+  % Store BCP-47 id of language
+  \tl_if_blank:nTF {\xpg@tmp@opts}{%
+    \ifcsundef{\csname xpg@tmp@lang\endcsname @gbcp47id}{%
+       \csedef{tmp@bcp47id}{\exp_args:Nne\prop_item:Nn{\polyglossia@langsetup}{\xpg@tmp@lang /bcp47}}%
+    }{%
+       \csedef{tmp@bcp47id}{\csuse{#2@gbcp47id}}%
+    }%
+  }{%
+    \csedef{tmp@bcp47id}{\exp_args:Nne \prop_item:Nn{\polyglossia@langsetup}{\xpg@tmp@lang /bcp47}}%
+  }%
+  \xpg@warning{id: \csuse{tmp@bcp47id}}%
+  \csgdef{\csname tmp@bcp47id\endcsname @hyphenmins}{{#3}{#4}}%
+  \egroup
+}
+
+% \use@localhypenmins[options]{lang}
+\newcommand*\use@localhyphenmins[2][]{%
+  \bgroup
+  \polyglossia@error@iflangnotloaded:n{#2}
+  \setkeys{#2}{#1}%
+  % Store BCP-47 id of language
+  \tl_if_blank:nTF {#1}{%
+    \ifcsundef{#2@gbcp47id}{%
+       \csxdef{tmp@bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
+    }{%
+       \csxdef{tmp@bcp47id}{\csuse{#2@gbcp47id}}%
+    }%
+  }{%
+    \csxdef{tmp@bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
+  }%
+  \egroup
+  \ifcsundef{\csname tmp@bcp47id\endcsname @hyphenmins}{%
+     \ifcsundef{#2hyphenmins}{}%
+        {%
+          \expandafter\expandafter\expandafter\set@hyphenmins\csname #2hyphenmins\endcsname\relax%
+        }
+   }{%
+      \edef\tmpa{\csuse{\csname tmp@bcp47id\endcsname @hyphenmins}}%
+      \expandafter\expandafter\expandafter\set@hyphenmins\tmpa\relax%
+   }
    \ifluatex
      % Set \totalhyphenmin if specified
-     \prop_get:NxNTF \polyglossia@langsetup {#1/totalhyphenmin} \l_tmpa_tl
+     \prop_get:NxNTF \polyglossia@langsetup {#2/totalhyphenmin} \l_tmpa_tl
      {
         \xpg@warning{totalhyphenmin: '\l_tmpa_tl'}
         \expandafter\hyphenationmin \l_tmpa_tl%
@@ -2184,7 +2236,7 @@
   % Now switch patterns
   \csuse@warn{\csuse{xpg@tmp@lang}@language}%
   % And activate hyphenmins
-  \use@localhyphenmins{\xpg@tmp@lang}%
+  \use@localhyphenmins[\xpg@tmp@opts]{\xpg@tmp@lang}%
 }
 {\ifbool{xpg@noset@groups}{}{\xpg@unset@group@aux}}
 
