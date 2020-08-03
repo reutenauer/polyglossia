@@ -5,7 +5,7 @@ New features:
   * The (previously inadvertently working) hyphenrules environment that ceased
     to work after a recent babel update is back and now officially supported.
     The environment now also supports language options and aliases (#427).
-  * New command \setlanghyphenmins to adapt hyphenation tresholds of languages
+  * New command \setlanghyphenmins to adapt hyphenation thresholds of languages
     and varieties.
   * New command \abjadalph for Arabic with corresponding option (#431).
 
