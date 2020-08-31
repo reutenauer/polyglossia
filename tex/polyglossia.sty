@@ -2272,18 +2272,34 @@
      .bool_set:N = \l_polyglossia_babelshorthands_bool,
   babelshorthands
      .default:n = true,
+
+  luatexrenderer
+     .cs_set:Np = \l_polyglossia_luatex_renderer,
+  luatexrenderer
+     .value_required:n = true,
 }
 
 \keys_set:nn { polyglossia } {
   localmarks = false,
   verbose = true,
   babelshorthands = false,
+  luatexrenderer = Harfbuzz
 }
 
 % load by default latex
 \setmainlanguage{latex}
 % then process key in order to overwrite
 \ProcessKeysOptions{polyglossia}
+
+% Set the LuaTeX renderer. As opposed to fontspec, we use Harfbuzz by default.
+% This can be changed via the luatexrenderer package option.
+\ifluatex
+  \exp_args:Nee \str_if_eq:nnF{\l_polyglossia_luatex_renderer}{none}
+     {
+         \xpg@info{Setting~ LuaTeX~ font~ renderer~ to~ \l_polyglossia_luatex_renderer}
+         \exp_args:Nee \defaultfontfeatures{Renderer=\l_polyglossia_luatex_renderer}
+     }
+\fi
 
 \bool_if:nTF \l_polyglossia_verbose_bool {} {
    \gdef\@latex@info#1{\relax}% no latex info

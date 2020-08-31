@@ -1,10 +1,4 @@
 \ProvidesFile{gloss-arabic.ldf}[polyglossia: module for arabic]
-\ifluatex
-  \xpg@warning{Arabic is not supported with LuaTeX.\MessageBreak
-I will proceed with the compilation, but\MessageBreak
-the output is not guaranteed to be correct\MessageBreak
-and may look very wrong.}
-\fi
 \RequireBidi
 \RequirePackage{arabicnumbers}
 \RequirePackage{hijrical}
