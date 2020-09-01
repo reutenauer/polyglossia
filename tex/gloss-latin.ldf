@@ -625,7 +625,7 @@
 % prosodic shorthand environment.
 % The active ' character may cause problems with the unicode-math package
 % (in case Latin is used as a secondary language, see #394). We have to
-% turn it of if Latin is not the main language.
+% turn it off if Latin is not the main language.
 
 \protected@write \@auxout { } { \shorthandoff {=} } % for the aux file
 

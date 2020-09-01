@@ -12,6 +12,8 @@ New features:
   * New command \setlanghyphenmins to adapt hyphenation thresholds of languages
     and varieties.
   * New command \abjadalph for Arabic with corresponding option (#431).
+  * Replace consecutive glues around punctuation by the correct amount of space
+    with LuaLaTeX for French, ecclesiastic Latin, and Sanskrit (#437).
 
 Bug fixes:
 

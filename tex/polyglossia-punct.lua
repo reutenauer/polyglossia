@@ -243,14 +243,14 @@ local function process(head)
                         local prev = getprev(current)
                         local space_exception = false
                         if prev then
-                            local prevprev = getprev(prev)
                             -- do not add space after left (opening) bracket and between question/exclamation marks
                             space_exception = someleftbracket(prev) or question_exclamation_sequence(prev, current)
-                            if somespace(prev) then
                             -- TODO: there is a question here: do we override a preceding space or not?...
-                                if somepenalty(prevprev, 10000) then
-                                    head = remove_node(head, prevprev)
-                                end
+                            while somespace(prev) do
+                                head = remove_node(head, prev)
+                                prev = getprev(current)
+                            end
+                            if somepenalty(prev, 10000) then
                                 head = remove_node(head, prev)
                             end
                         end
@@ -280,10 +280,10 @@ local function process(head)
                             space_exception = somerightbracket(next)
                             local nextnext = getnext(next)
                             if somepenalty(next, 10000) and somespace(nextnext) then
-                                head = remove_node(head, next)
-                                head = remove_node(head, nextnext)
-                            elseif somespace(next) then
-                                head = remove_node(head, next)
+                                head, next = remove_node(head, next)
+                            end
+                            while somespace(next) do
+                                head, next = remove_node(head, next)
                             end
                         end
                         if rightspace.unit == "quad" then
