@@ -174,7 +174,7 @@
 \def\ukrainiannumber#1{%
   \ifcyrillic@numerals
     \ifcyrillic@asbuk@numerals
-      \serbian@asbuk@alph{#1}%
+      \ukrainian@asbuk@alph{#1}%
     \else
       \cyr@alph{#1}%
     \fi
@@ -223,8 +223,15 @@
 }
 
 \def\ukrainian@numbers{%
-   \let\@Alph\ukrainian@Alph%
-   \let\@alph\ukrainian@alph%
+  \ifcyrillic@numerals
+    \ifcyrillic@asbuk@numerals
+      \let\@Alph\ukrainian@asbuk@Alph%
+      \let\@alph\ukrainian@asbuk@alph%
+    \else
+      \let\@Alph\cyr@Alph%
+      \let\@alph\cyr@alph%
+    \fi
+  \fi
 }
 
 \def\noukrainian@numbers{%

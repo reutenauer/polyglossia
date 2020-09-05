@@ -32,6 +32,7 @@ Bug fixes:
   * Robustify font family switches (#428).
   * Fix whitespace issue in Russian indentfirst option (#433).
   * In Russian, indentfirst is now again default (#434).
+  * Fix LaTeX error with arabic numbering in Ukrainian (#440).
 
 Interface and defaults changes:
 
