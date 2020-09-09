@@ -106,23 +106,23 @@
    \fi
 }
 
-% Bidi inserts an RTL mark (0x200f) before any number, forcing numbers to
-% RTL. Hebrew uses LTR numbers, though. So we insert an LTR mark to revert
-% the directionality
 \ifxetex
-  \newcommand\xpg@hebrew@DigitsDotDashInterCharToks{\ifbool{@nonlatin}{\char"200E }{}}
+  \let\xpg@orig@DigitsDotDashInterCharToks\DigitsDotDashInterCharToks%
 \fi
 
 \def\hebrew@ltr@numbers{%
     \ifxetex
-      \XeTeXinterchartoks \bidi@sepmark@charclass  \bidi@digits@charclass = {\xpg@hebrew@DigitsDotDashInterCharToks}%
+       % Bidi inserts an RTL mark (0x200f) between number and number separator (- .),
+       % forcing numbers to RTL. This is wrong for Hebrew.
+       % So we defunc the respective command.
+       \renewcommand*{\DigitsDotDashInterCharToks}{}
     \fi%
 }
 
 \def\nohebrew@ltr@numbers{%
     \ifxetex
-      % This is bidi's original intervention
-      \XeTeXinterchartoks \bidi@sepmark@charclass  \bidi@digits@charclass = {\DigitsDotDashInterCharToks}%
+      % Restore bidi's \DigitsDotDashInterCharToks
+      \let\DigitsDotDashInterCharToks\xpg@orig@DigitsDotDashInterCharToks%
     \fi%
 }
 

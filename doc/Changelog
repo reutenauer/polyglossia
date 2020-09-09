@@ -33,6 +33,7 @@ Bug fixes:
   * Fix whitespace issue in Russian indentfirst option (#433).
   * In Russian, indentfirst is now again default (#434).
   * Fix LaTeX error with arabic numbering in Ukrainian (#440).
+  * Fix directionality after Hebrew decimal numbers (#441).
 
 Interface and defaults changes:
 
