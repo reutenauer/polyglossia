@@ -14,7 +14,8 @@
   indentfirst=true,
   fontsetup=false,
   localnumeral=serbiannumerals,
-  Localnumeral=Serbiannumerals
+  Localnumeral=Serbiannumerals,
+  babelname=serbian
   %TODO localalph
 }
 
@@ -36,7 +37,7 @@
    \or
       % latin:
       \@serbian@cyrfalse
-      \SetLanguageKeys{serbian}{scripttag=latn,script=Latin,bcp47=sr-Latn}
+      \SetLanguageKeys{serbian}{scripttag=latn,script=Latin,babelname=serbian,bcp47=sr-Latn}
       \xpg@fontsetup@latin{serbian}%
       %TODO \def\serbian@language{\language=\l@serbianlat}%
       % or should we use Croatian patterns as a fallback for the time being???

@@ -34,6 +34,7 @@ Bug fixes:
   * In Russian, indentfirst is now again default (#434).
   * Fix LaTeX error with arabic numbering in Ukrainian (#440).
   * Fix directionality after Hebrew decimal numbers (#441).
+  * Fix babelname of Latin Serbian (#442).
 
 Interface and defaults changes:
 
