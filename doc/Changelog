@@ -35,6 +35,8 @@ Bug fixes:
   * Fix LaTeX error with arabic numbering in Ukrainian (#440).
   * Fix directionality after Hebrew decimal numbers (#441).
   * Fix babelname of Latin Serbian (#442).
+  * Fix recording of secondary languages in \xpg@bloaded and \xpg@bcp@loaded
+    lists (#443).
 
 Interface and defaults changes:
 

@@ -1061,8 +1061,8 @@
    {
      \exp_args:Nx\polyglossia@define@language@cmd:n{#1}%
    }{}
-   \csgdef{#1@loaded}{}
-   \global\edef\xpg@loaded{#1\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
+   \polyglossia@register@language:nn{}{#1}%
+   \csgdef{#1@loaded}{}%
 }
 
 
@@ -1123,17 +1123,40 @@
   \tl_if_blank:nF {#2} {\csgdef{#4@alias@opts}{#2}}%
 }
 
+\cs_new:Nn \polyglossia@register@language:nn {
+   % register polyglossia language name
+   \ifcsundef{#2@registered}{%
+       \global\edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
+   }{}
+   \csgdef{#2@registered}{}%
+   \tl_if_blank:nF {#1}{%
+      % Register the language options
+      \polyglossia@set@lang@options:nn {#2} {#1}%
+   }%
+   % register babelname
+   \def\xpg@tmp@babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
+   \ifcsundef{\csname xpg@tmp@babelname\endcsname @bbl@registered}{%
+       \global\edef\xpg@bloaded{\xpg@tmp@babelname%
+           \ifx\xpg@bloaded\@empty\else,\xpg@bloaded\fi}%
+   }{}%
+   \csgdef{\csname xpg@tmp@babelname\endcsname @bbl@registered}{}%
+   % register BCP-47 ID
+   \def\xpg@tmp@bcpname{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
+   \ifcsundef{\csname xpg@tmp@bcpname\endcsname @bcp@registered}{%
+       \global\edef\xpg@bcp@loaded{\xpg@tmp@bcpname%
+           \ifx\xpg@bcp@loaded\@empty\else,\xpg@bcp@loaded\fi}%
+   }{}%
+   \csgdef{\csname xpg@tmp@bcpname\endcsname @bcp@registered}{}%
+}
+
+
 \newcommand{\setdefaultlanguage}[2][]{%
+  % latex is an internal language, so do not record
+  \ifstrequal{#2}{latex}{}{%
+     \polyglossia@register@language:nn{#1}{#2}%
+  }%
   \ifcsundef{#2@loaded}%
   {
-    % latex is an internal language, so do not record
-    \ifstrequal{#2}{latex}{}{%
-      \global\edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
-      \global\edef\xpg@bloaded{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}%
-          \ifx\xpg@bloaded\@empty\else,\xpg@bloaded\fi}%
-      \global\edef\xpg@bcp@loaded{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}%
-          \ifx\xpg@bcp@loaded\@empty\else,\xpg@bcp@loaded\fi}%
-    }%
     \polyglossia_load_lang_definition:nn{#1}{#2}
     % define environment and command (except for internal latex language)
     \ifstrequal{#2}{latex}{}{%
@@ -1158,18 +1181,6 @@
 
 \cs_new:Nn \polyglossia@set@default@language:nn
 {
-  \ifcsundef{#2@loaded}%
-  {
-    % latex is an internal language, so do not record
-    \ifstrequal{#2}{latex}{}{%
-      \global\edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
-      \global\edef\xpg@bloaded{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}%
-          \ifx\xpg@bloaded\@empty\else,\xpg@bloaded\fi}%
-      \global\edef\xpg@bcp@loaded{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}%
-          \ifx\xpg@bcp@loaded\@empty\else,\xpg@bcp@loaded\fi}%
-    }%
-    \csgdef{#2@loaded}{}%
-  }{}
   \gdef\xpg@main@language{#2}%
   \tl_if_blank:nTF {#1}{\gdef\mainlanguagevariant{}}{%
      % Register the language options
@@ -1438,11 +1449,9 @@
 \newcommand{\setotherlanguage}[2][]{%
   \ifcsundef{#2@loaded}
   {
-    \global\edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
     \polyglossia_load_lang_definition:nn{#1}{#2}
     % define environment and command
     \exp_args:Nx\polyglossia@define@language@cmd:n{#2}
-    \csgdef{#2@loaded}{}%
     \ifcsdef{#2@alias@lang}{%
        \ifcsdef{#2@alias@opts}{%
          \exp_args:Nxx \polyglossia_load_lang_definition:nn {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
@@ -1453,17 +1462,14 @@
     }{%
       \polyglossia@set@other@language:nn {#1} {#2}%
     }%
+    \csgdef{#2@loaded}{}%
   }
   {}
 }
 
 \cs_new:Nn \polyglossia@set@other@language:nn
 {
-  \ifcsundef{#2@loaded}
-  {
-    \global\edef\xpg@loaded{#2\ifx\xpg@loaded\@empty\else,\xpg@loaded\fi}%
-    \csgdef{#2@loaded}{}%
-  }{}
+  \polyglossia@register@language:nn{#1}{#2}%
   % If a variant is set, store it.
   \gdef\otherlanguagevariant{}
   \tl_if_blank:nTF {#1}{}{%
@@ -1530,6 +1536,7 @@
 % wrapper for foreignlanguage and otherlanguage*
 \newcommand*\polyglossia@setforeignlanguage[2][]{
   \select@@language[#1]{#2}
+  \polyglossia@register@language:nn{#1}{#2}%
   % Store babelname of current language (for external packages such as biblatex)
   \tl_if_blank:nTF {#1}{%
     \ifcsundef{#2@gbabelname}{%
@@ -1685,14 +1692,7 @@
      \directlua{polyglossia.select_language('\luatexluaescapestring{\string#3}',
                      \the\csname l@#3\endcsname)}%
    \fi%
-  \def\xpg@tmp@babelname{\prop_item:Nn{\polyglossia@langsetup}{#3/babelname}}
-  % Store babelname in \xpg@bloaded csv list
-  \ifcsundef{\csname xpg@tmp@babelname\endcsname @bbl@loaded}
-  {
-    \global\edef\xpg@bloaded{\xpg@tmp@babelname%
-          \ifx\xpg@bloaded\@empty\else,\xpg@bloaded\fi}%
-    \csgdef{\csname xpg@tmp@babelname\endcsname @bbl@loaded}{}%
-  }{}
+  \polyglossia@register@language:nn{#2}{#3}%
 }
 
 
@@ -1883,14 +1883,6 @@
    }{%
      \csedef{bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
    }%
-  % Store bcp47 in \xpg@bcp@loaded csv list
-  \def\xpg@tmp@bcpname{\csuse{bcp47id}}%
-  \ifcsundef{\csname xpg@tmp@bcpname\endcsname @bcp@loaded}
-  {
-    \global\edef\xpg@bcp@loaded{\xpg@tmp@bcpname%
-          \ifx\xpg@bcp@loaded\@empty\else,\xpg@bcp@loaded\fi}%
-    \csgdef{\csname xpg@tmp@bcpname\endcsname @bcp@loaded}{}%
-  }{}
    \@select@language[#1]{#2}%
     % Write to the aux
    \if@filesw%
