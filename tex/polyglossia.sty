@@ -1151,10 +1151,6 @@
 
 
 \newcommand{\setdefaultlanguage}[2][]{%
-  % latex is an internal language, so do not record
-  \ifstrequal{#2}{latex}{}{%
-     \polyglossia@register@language:nn{#1}{#2}%
-  }%
   \ifcsundef{#2@loaded}%
   {
     \polyglossia_load_lang_definition:nn{#1}{#2}
