@@ -5,7 +5,6 @@ New features:
   * Polyglossia now uses the Harfbuzz renderer by default with LuaTeX
     output. This brings LuaTeX on par with XeTeX for all scripts (#337).
     The renderer can be changed via the new global luatexrenderer option.
-
   * The (previously inadvertently working) hyphenrules environment that ceased
     to work after a recent babel update is back and now officially supported.
     The environment now also supports language options and aliases (#427).
@@ -40,6 +39,8 @@ Bug fixes:
 
 Interface and defaults changes:
 
+  * Polyglossia now uses the Harfbuzz renderer by default with LuaTeX
+    output. See new features section.
 
 Build fixes:
 
