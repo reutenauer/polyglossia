@@ -36,6 +36,7 @@ Bug fixes:
   * Fix babelname of Latin Serbian (#442).
   * Fix recording of secondary languages in \xpg@bloaded and \xpg@bcp@loaded
     lists (#443).
+  * Simplify and robustify section heading modification in Russian (#444).
 
 Interface and defaults changes:
 
