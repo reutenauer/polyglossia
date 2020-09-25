@@ -69,9 +69,16 @@
 
 \define@boolkey{russian}[russian@]{babelshorthands}[true]{}
 
+% Force punctuation after heading number
+\define@boolkey{russian}[russian@]{forceheadingpunctuation}[true]{}
+
 
 % Register default options
-\xpg@initialize@gloss@options{russian}{babelshorthands=false,spelling=modern,numerals=arabic,indentfirst=true}
+\xpg@initialize@gloss@options{russian}{babelshorthands=false,
+                                       spelling=modern,
+                                       numerals=arabic,
+                                       indentfirst=true,
+                                       forceheadingpunctuation=true}
 
 
 \ifsystem@babelshorthands
@@ -216,39 +223,46 @@
       \space \number\year\space г.}%
 }
 
-% The following is based on some ideas from ruscor.sty
+% Russian needs trailing dots in all headings
+\def\xpg@save@autodot{}
+\ifdef{\KOMAScript}{%
+    \let\xpg@save@autodot\autodot%
+}
+
 \def\russian@capsformat{%
+  \ifrussian@forceheadingpunctuation%
    \ifdef{\KOMAScript}{%
-      \ifdef{\chapterformat}{%
-        \renewcommand{\chapterformat}{\prechapter\thechapter\postchapter}}{}%
-      \ifdef{\sectionformat}{%
-        \renewcommand{\sectionformat}{\presection\thesection\postsection}}{}%
-      \ifdef{\subsectionformat}{%
-        \renewcommand{\subsectionformat}{\presubsection\thesubsection\postsubsection}}{}%
-      \ifdef{\subsubsectionformat}{%
-        \renewcommand{\subsubsectionformat}{\presubsubsection\thesubsubsection\postsubsubsection}}{}%
-      \ifdef{\paragraphformat}{%
-        \renewcommand{\paragraphformat}{\preparagraph\theparagraph\postparagraph}}{}%
-      \ifdef{\subparagraphformat}{%
-        \renewcommand{\subparagraphformat}{\presubparagraph\thesubparagraph\postsubparagraph}}{}%
+      \renewcommand*\autodot{.}%
    }{%
+      % The following is based on some ideas from ruscor.sty
       \def\@seccntformat##1{\csname pre##1\endcsname%
          \csname the##1\endcsname%
          \csname post##1\endcsname}%
-   }%
-   \def\@aftersepkern{\hspace{0.5em}}%
-   \def\postchapter{.\@aftersepkern}%
-   \def\postsection{.\@aftersepkern}%
-   \def\postsubsection{.\@aftersepkern}%
-   \def\postsubsubsection{.\@aftersepkern}%
-   \def\postparagraph{.\@aftersepkern}%
-   \def\postsubparagraph{.\@aftersepkern}%
-   \def\prechapter{}%
-   \def\presection{}%
-   \def\presubsection{}%
-   \def\presubsubsection{}%
-   \def\preparagraph{}%
-   \def\presubparagraph{}%
+       \def\@aftersepkern{\hspace{0.5em}}%
+       \def\postchapter{.\@aftersepkern}%
+       \def\postsection{.\@aftersepkern}%
+       \def\postsubsection{.\@aftersepkern}%
+       \def\postsubsubsection{.\@aftersepkern}%
+       \def\postparagraph{.\@aftersepkern}%
+       \def\postsubparagraph{.\@aftersepkern}%
+       \def\prechapter{}%
+       \def\presection{}%
+       \def\presubsection{}%
+       \def\presubsubsection{}%
+       \def\preparagraph{}%
+       \def\presubparagraph{}%
+    }%
+  \fi%
+}
+
+\def\norussian@capsformat{%
+  \ifrussian@forceheadingpunctuation%
+    \ifdef{\KOMAScript}{%
+       \let\autodot\xpg@save@autodot%
+    }{%
+       \def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
+    }%
+  \fi%
 }
 
 \newcommand{\russiannumerals}[2]{\russiannumber{#2}}
@@ -323,22 +337,7 @@
 }
 
 \def\noextras@russian{%
-   \ifdef{\KOMAScript}{%
-      \ifdef{\chapterformat}{%
-        \renewcommand{\chapterformat}{\thechapter\autodot\enskip}}{}%
-      \ifdef{\sectionformat}{%
-        \renewcommand{\sectionformat}{\thesection\autodot\enskip}}{}%
-      \ifdef{\subsectionformat}{%
-        \renewcommand{\subsectionformat}{\thesubsection\autodot\enskip}}{}%
-      \ifdef{\subsubsectionformat}{%
-        \renewcommand{\subsubsectionformat}{\thesubsubsection\autodot\enskip}}{}%
-      \ifdef{\paragraphformat}{%
-        \renewcommand{\paragraphformat}{\theparagraph\autodot\enskip}}{}%
-      \ifdef{\subparagraphformat}{%
-        \renewcommand{\subparagraphformat}{\thesubparagraph\autodot\enskip}}{}%
-   }{%
-      \def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
-   }%
+   \norussian@capsformat%
    \ifcyrillic@numerals\norussian@numbers\fi%
    \ifrussian@babelshorthands\norussian@shorthands\fi%
 }
