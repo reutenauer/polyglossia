@@ -96,7 +96,7 @@
   \def\@Ccdash{\leavevmode
   \nobreak\cyrdash\nobreak\hskip.35em\ignorespaces}%
   \ifx\cyrdash\undefined
-    \def\cyrdash{\hbox to.8em{--\hss--}}
+    \def\cyrdash{\hbox to.8em{\textendash\hss\textendash}}%
   \fi
   \declare@shorthand{ukrainian}{",}{\nobreak\hskip.2em\ignorespaces}%
 }

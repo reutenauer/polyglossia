@@ -38,6 +38,8 @@ Bug fixes:
     lists (#443).
   * Simplify and robustify section heading modification in Russian
     and introduce option forceheadingpunctuation (#444).
+  * Fix Cyrillic dash (via babelshorthand "---) when TeX ligatures
+    are disabled (#445)
 
 Interface and defaults changes:
 
