@@ -69,9 +69,16 @@
 
 \define@boolkey{russian}[russian@]{babelshorthands}[true]{}
 
+% Force punctuation after heading number
+\define@boolkey{russian}[russian@]{forceheadingpunctuation}[true]{}
+
 
 % Register default options
-\xpg@initialize@gloss@options{russian}{babelshorthands=false,spelling=modern,numerals=arabic,indentfirst=true}
+\xpg@initialize@gloss@options{russian}{babelshorthands=false,
+                                       spelling=modern,
+                                       numerals=arabic,
+                                       indentfirst=true,
+                                       forceheadingpunctuation=true}
 
 
 \ifsystem@babelshorthands
@@ -223,6 +230,7 @@
 }
 
 \def\russian@capsformat{%
+  \ifrussian@forceheadingpunctuation%
    \ifdef{\KOMAScript}{%
       \renewcommand*\autodot{.}%
    }{%
@@ -244,14 +252,17 @@
        \def\preparagraph{}%
        \def\presubparagraph{}%
     }%
+  \fi%
 }
 
 \def\norussian@capsformat{%
-   \ifdef{\KOMAScript}{%
-      \let\autodot\xpg@save@autodot%
-   }{%
-      \def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
-   }%
+  \ifrussian@forceheadingpunctuation%
+    \ifdef{\KOMAScript}{%
+       \let\autodot\xpg@save@autodot%
+    }{%
+       \def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
+    }%
+  \fi%
 }
 
 \newcommand{\russiannumerals}[2]{\russiannumber{#2}}

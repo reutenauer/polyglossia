@@ -1576,6 +1576,10 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 %		\item[¦"<¦] for French left double quotes (looks like <<).
 %		\item[¦">¦] for French right double quotes (looks like >>).
 	\end{shorthands}
+    \item \xpgboolkeytrue[1.50]{forceheadingpunctuation}
+        By default, chapter and section numbers always have a trailing punctuation in Russian
+        (as in \emph{1.1.} as opposed to \emph{1.1}). If this option is set to false, \textsf{polyglossia}
+        will not touch heading punctuation, so this will be whatever the class or a package determines.
 	\item \xpgboolkeytrue[1.46]{indentfirst}
 		By default, all paragraphs are indented in Russian, also those after a
 		chapter or section heading. If this option is false, the latter paragraphs
