@@ -727,12 +727,14 @@ which override the hyphenation patterns for specified words. The command takes a
 list of words where hyphenation points are marked by a dash (if no dash is used, the respective word is not
 hyphenated at all):
 \begin{quote}
+\begin{minipage}{\textwidth}
 \begin{verbatim}
 \hyphenation{%
   po-ly-glos-sia
   LaTeX
 }
 \end{verbatim}
+\end{minipage}
 \end{quote}
 %
 These exceptions, however, apply to all languages. In addition to this, \pkg{polyglossia} provides
@@ -855,8 +857,8 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		cases where the hyphen should stick at the following syllable.
 		\item[¦"|¦] disables a ligature at this position.
 		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
-		\item[¦"---¦] Cyrillic emdash in plain text.
-		\item[¦"--~¦] Cyrillic emdash in compound names (surnames).
+		\item[¦"---¦] Cyrillic emdash (width: 0.8 em) in plain text.
+		\item[¦"--\textasciitilde¦] Cyrillic emdash in compound names (surnames).
 		\item[¦"--*¦] Cyrillic emdash for denoting direct speech.
 		\item[¦",¦] thinspace for initials with a breakpoint in following surname.
 		\item[¦"‘¦] for German left double quotes (looks like ,,).
@@ -1124,14 +1126,14 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 			cases where the hyphen should stick at the following syllable.
 			\item[¦"|¦] disables a ligature at this position.
 			\item[¦""¦] allows for a line break at this position (without hyphenation sign).
-			\item[¦"---¦] Cyrillic emdash in plain text.
-			\item[¦"--~¦] Cyrillic emdash in compound names (surnames).
+			\item[¦"---¦] Cyrillic emdash (width: 0.8 em) in plain text.
+			\item[¦"--\textasciitilde¦] Cyrillic emdash in compound names (surnames).
 			\item[¦"--*¦] Cyrillic emdash for denoting direct speech.
 			\item[¦",¦] thinspace for initials with a breakpoint in following surname.
-			\item[¦"‘¦] for German left double quotes (looks like ,,).
-			\item[¦"’¦] for German right double quotes (looks like “).
-			\item[¦"<¦] for French left double quotes (looks like <<).
-			\item[¦">¦] for French right double quotes (looks like >>).
+			\item[¦"‘¦] for German-style left double quotes (looks like ,,).
+			\item[¦"’¦] for German-style right double quotes (looks like “).
+			\item[¦"<¦] for French-style left double quotes (looks like <<).
+			\item[¦">¦] for French-style right double quotes (looks like >>).
 		\end{shorthands}
 	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or \xpgvalue{georgian}}
 		Uses either Arabic numerals or Georgian alphanumerical numbering.
@@ -1171,10 +1173,10 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 
 		There are also four shorthands for quotation signs:
 		\begin{shorthands}
-		\item[¦"`¦] for German left double quotes („)
-		\item[¦"'¦] for German right double quotes (“)
-		\item[¦"<¦] for French left double quotes («)
-		\item[¦">¦] for French right double quotes (»).
+		\item[¦"`¦] for German-style left double quotes („)
+		\item[¦"'¦] for German-style right double quotes (“)
+		\item[¦"<¦] for French-style left double quotes («)
+		\item[¦">¦] for French-style right double quotes (»).
 		\end{shorthands}
 	\item \xpgchoicekey[1.2.0]{script}{\xpgpresetvalue{latin} or \xpgvalue{blackletter}\new{1.46} (= \xpgvalue{fraktur})}
 		Setting ¦script=blackletter¦ adapts the captions for typesetting German in blackletter type (using the long s (ſ)
@@ -1494,14 +1496,14 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 		           cases where the hyphen should stick at the following syllable.
 		\item[¦"|¦] disables a ligature at this position.
 		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
-		\item[¦"---¦] Cyrillic emdash in plain text.
-		\item[¦"--~¦] Cyrillic emdash in compound names (surnames).
+		\item[¦"---¦] Cyrillic (width: 0.8 em) emdash in plain text.
+		\item[¦"--\textasciitilde¦] Cyrillic emdash in compound names (surnames).
 		\item[¦"--*¦] Cyrillic emdash for denoting direct speech.
 		\item[¦",¦] thinspace for initials with a breakpoint in following surname.
-		\item[¦"‘¦] for German left double quotes (looks like ,,).
-		\item[¦"’¦] for German right double quotes (looks like “).
-		\item[¦"<¦] for French left double quotes (looks like <<).
-		\item[¦">¦] for French right double quotes (looks like >>).
+		\item[¦"‘¦] for German-style left double quotes (looks like ,,).
+		\item[¦"’¦] for German-style right double quotes (looks like “).
+		\item[¦"<¦] for French-style left double quotes (looks like <<).
+		\item[¦">¦] for French-style right double quotes (looks like >>).
 	\end{shorthands}
 	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic}, \xpgvalue{cyrillic-alph} or \xpgvalue{cyrillic-trad}}
           Uses either Arabic numerals or Cyrillic alphanumerical numbering. The two Cyrillic variants differ as follows:
@@ -1568,8 +1570,8 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 		           cases where the hyphen should stick at the following syllable.
 		\item[¦"|¦] disables a ligature at this position.
 		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
-		\item[¦"---¦] Cyrillic emdash in plain text.
-		\item[¦"--~¦] Cyrillic emdash in compound names (surnames).
+		\item[¦"---¦] Cyrillic emdash (width: 0.8 em) in plain text.
+		\item[¦"--\textasciitilde¦] Cyrillic emdash in compound names (surnames).
 		\item[¦"--*¦] Cyrillic emdash for denoting direct speech.
 % These are commented out in gloss-russian
 %		\item[¦",¦] thinspace for initials with a breakpoint in following surname.
@@ -1783,8 +1785,8 @@ that comes with this package.
 		cases where the hyphen should stick at the following syllable.
 		\item[¦"|¦] disables a ligature at this position.
 		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
-		\item[¦"---¦] Cyrillic emdash in plain text.
-		\item[¦"--~¦] Cyrillic emdash in compound names (surnames).
+		\item[¦"---¦] Cyrillic emdash (width: 0.8 em) in plain text.
+		\item[¦"--\textasciitilde¦] Cyrillic emdash in compound names (surnames).
 		\item[¦"--*¦] Cyrillic emdash for denoting direct speech.
 		% These are commented out in gloss-ukrainian
 		%		\item[¦",¦] thinspace for initials with a breakpoint in following surname.
@@ -2078,7 +2080,8 @@ footnotes at page boundaries that differ in directionality from the first footno
 Note also that the rule switches might interfere in bad ways with packages or classes that redefine footnotes themselves. This is also the reason
 why \cmd\autofootnoterule\ is not used by default.
 
-\condbreak{5\baselineskip}
+\clearpage
+
 \section{Calendars}
 
 \subsection{Hebrew calendar (hebrewcal.sty)}
