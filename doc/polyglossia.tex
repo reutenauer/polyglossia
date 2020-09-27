@@ -852,19 +852,31 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 	If this is turned on, the following shorthands are activated:
 	\begin{shorthands}
 		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
-		in the hyphenation patterns (as opposed to \cmd\-).
+		    in the hyphenation patterns (as opposed to \cmd\-).
+		\item[¦"=¦] adds an explicit hyphen with a breakpoint, allowing for hyphenation at the
+		    other points preset in the hyphenation patterns (as opposed to plain ¦-¦).
 		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
-		cases where the hyphen should stick at the following syllable.
+		    cases where the hyphen should stick at the following syllable.
 		\item[¦"|¦] disables a ligature at this position.
 		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
-		\item[¦"---¦] Cyrillic emdash (width: 0.8 em) in plain text.
-		\item[¦"--\textasciitilde¦] Cyrillic emdash in compound names (surnames).
-		\item[¦"--*¦] Cyrillic emdash for denoting direct speech.
 		\item[¦",¦] thinspace for initials with a breakpoint in following surname.
 		\item[¦"‘¦] for German left double quotes (looks like ,,).
 		\item[¦"’¦] for German right double quotes (looks like “).
 		\item[¦"<¦] for French left double quotes (looks like <<).
 		\item[¦">¦] for French right double quotes (looks like >>).
+	\end{shorthands}
+
+	There are also three shorthands for the Cyrillic `emdash' (\textrussian{тире}), which is shorter than the
+	emdash used in Latin script (0.8\,em as opposed to 1\,em, so it is not really an em-dash actually).
+	Note that, since it is not covered by unicode, this character is faked by overlapping two endashes:
+	\begin{shorthands}
+		\item[¦"---¦] Cyrillic \textrussian{тире} for the use in normal text. This requires preceding space
+		       in input (trailing space is optional) and prints with a non-breakable thin space before
+	           and after the dash.
+		\item[¦"--\textasciitilde¦] Cyrillic \textrussian{тире} for the use in compound names (surnames).
+		       As opposed to ¦"---¦ this adds no space before and after the dash. 
+		\item[¦"--*¦] Cyrillic \textrussian{тире} for denoting direct speech. This adds a larger space after
+		       the dash. Space before the dash is output as is.
 	\end{shorthands}
     \item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic}, \xpgvalue{cyrillic-alph} or \xpgvalue{cyrillic-trad}}
          Uses either Arabic numerals or Cyrillic alphanumerical numbering. The two Cyrillic variants differ as follows:
@@ -878,7 +890,8 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 	With ¦spelling=classic¦, captions and dates adhere to the Taraškievica (or
 	Belarusian classical) orthography rather than the standard orthography.
 \end{itemize}
-%
+
+\condbreak{\baselineskip}
 \paragraph*{Commands:}
 \begin{itemize}
      \item \Cmd\Asbuk: produces uppercased Cyrillic alphanumerals, for environments such as ¦enumerate¦.
@@ -1120,20 +1133,31 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		If this is turned on, the following shorthands are activated:
 		\begin{shorthands}
 			\item[¦"-¦] adds a hyphenation point that does still allow for
-			hyphenation at the points preset in the hyphenation patterns (as opposed
-			to \cmd\-).
+			    hyphenation at the points preset in the hyphenation patterns (as opposed to \cmd\-).
+		    \item[¦"=¦] adds an explicit hyphen with a breakpoint, allowing for hyphenation at the
+			    other points preset in the hyphenation patterns (as opposed to plain ¦-¦).
 			\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
 			cases where the hyphen should stick at the following syllable.
 			\item[¦"|¦] disables a ligature at this position.
 			\item[¦""¦] allows for a line break at this position (without hyphenation sign).
-			\item[¦"---¦] Cyrillic emdash (width: 0.8 em) in plain text.
-			\item[¦"--\textasciitilde¦] Cyrillic emdash in compound names (surnames).
-			\item[¦"--*¦] Cyrillic emdash for denoting direct speech.
 			\item[¦",¦] thinspace for initials with a breakpoint in following surname.
 			\item[¦"‘¦] for German-style left double quotes (looks like ,,).
 			\item[¦"’¦] for German-style right double quotes (looks like “).
 			\item[¦"<¦] for French-style left double quotes (looks like <<).
 			\item[¦">¦] for French-style right double quotes (looks like >>).
+	    \end{shorthands}
+    
+		There are also three shorthands for the Cyrillic `emdash' (\textrussian{тире}), which is shorter than the
+		emdash used in Latin script (0.8\,em as opposed to 1\,em, so it is not really an em-dash actually).
+		Note that, since it is not covered by unicode, this character is faked by overlapping two endashes:
+		\begin{shorthands}
+		\item[¦"---¦] Cyrillic \textrussian{тире} for the use in normal text. This requires preceding space
+		    in input (trailing space is optional) and prints with a non-breakable thin space before
+	     	and after the dash.
+		\item[¦"--\textasciitilde¦] Cyrillic \textrussian{тире} for the use in compound names (surnames).
+     		As opposed to ¦"---¦ this adds no space before and after the dash. 
+		\item[¦"--*¦] Cyrillic \textrussian{тире} for denoting direct speech. This adds a larger space after
+    		the dash. Space before the dash is output as is.
 		\end{shorthands}
 	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or \xpgvalue{georgian}}
 		Uses either Arabic numerals or Georgian alphanumerical numbering.
@@ -1492,18 +1516,30 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 	\begin{shorthands}
         \item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
 		           in the hyphenation patterns (as opposed to \cmd\-).
+		\item[¦"=¦] adds an explicit hyphen with a breakpoint, allowing for hyphenation at the
+		           other points preset in the hyphenation patterns (as opposed to plain ¦-¦).
 		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
 		           cases where the hyphen should stick at the following syllable.
 		\item[¦"|¦] disables a ligature at this position.
 		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
-		\item[¦"---¦] Cyrillic (width: 0.8 em) emdash in plain text.
-		\item[¦"--\textasciitilde¦] Cyrillic emdash in compound names (surnames).
-		\item[¦"--*¦] Cyrillic emdash for denoting direct speech.
 		\item[¦",¦] thinspace for initials with a breakpoint in following surname.
 		\item[¦"‘¦] for German-style left double quotes (looks like ,,).
 		\item[¦"’¦] for German-style right double quotes (looks like “).
 		\item[¦"<¦] for French-style left double quotes (looks like <<).
 		\item[¦">¦] for French-style right double quotes (looks like >>).
+    \end{shorthands}
+
+	There are also three shorthands for the Cyrillic `emdash' (\textrussian{тире}), which is shorter than the
+	emdash used in Latin script (0.8\,em as opposed to 1\,em, so it is not really an em-dash actually).
+	Note that, since it is not covered by unicode, this character is faked by overlapping two endashes:
+	\begin{shorthands}
+		\item[¦"---¦] Cyrillic \textrussian{тире} for the use in normal text. This requires preceding space
+		     in input (trailing space is optional) and prints with a non-breakable thin space before
+	         and after the dash.
+		\item[¦"--\textasciitilde¦] Cyrillic \textrussian{тире} for the use in compound names (surnames).
+		     As opposed to ¦"---¦ this adds no space before and after the dash. 
+		\item[¦"--*¦] Cyrillic \textrussian{тире} for denoting direct speech. This adds a larger space after
+		     the dash. Space before the dash is output as is.
 	\end{shorthands}
 	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic}, \xpgvalue{cyrillic-alph} or \xpgvalue{cyrillic-trad}}
           Uses either Arabic numerals or Cyrillic alphanumerical numbering. The two Cyrillic variants differ as follows:
@@ -1570,9 +1606,19 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 		           cases where the hyphen should stick at the following syllable.
 		\item[¦"|¦] disables a ligature at this position.
 		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
-		\item[¦"---¦] Cyrillic emdash (width: 0.8 em) in plain text.
-		\item[¦"--\textasciitilde¦] Cyrillic emdash in compound names (surnames).
-		\item[¦"--*¦] Cyrillic emdash for denoting direct speech.
+	 \end{shorthands}
+
+     There are also three shorthands for the Cyrillic `emdash' (\textrussian{тире}), which is shorter than the
+     emdash used in Latin script (0.8\,em as opposed to 1\,em, so it is not really an em-dash actually).
+     Note that, since it is not covered by unicode, this character is faked by overlapping two endashes:
+     \begin{shorthands}
+		\item[¦"---¦] Cyrillic \textrussian{тире} for the use in normal text. This requires preceding space
+		      in input (trailing space is optional) and prints with a non-breakable thin space before
+		      and after the dash.
+		\item[¦"--\textasciitilde¦] Cyrillic \textrussian{тире} for the use in compound names (surnames).
+		         As opposed to ¦"---¦ this adds no space before and after the dash. 
+		\item[¦"--*¦] Cyrillic \textrussian{тире} for denoting direct speech. This adds a larger space after
+		         the dash. Space before the dash is output as is.
 % These are commented out in gloss-russian
 %		\item[¦",¦] thinspace for initials with a breakpoint in following surname.
 %		\item[¦"‘¦] for German left double quotes (looks like ,,).
@@ -1780,20 +1826,32 @@ that comes with this package.
 	If this is turned on, the following shorthands are activated:
 	\begin{shorthands}
 		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
-		in the hyphenation patterns (as opposed to \cmd\-).
+		     in the hyphenation patterns (as opposed to \cmd\-).
+		\item[¦"=¦] adds an explicit hyphen with a breakpoint, allowing for hyphenation at the
+		     other points preset in the hyphenation patterns (as opposed to plain ¦-¦).
 		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
-		cases where the hyphen should stick at the following syllable.
+		     cases where the hyphen should stick at the following syllable.
 		\item[¦"|¦] disables a ligature at this position.
 		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
-		\item[¦"---¦] Cyrillic emdash (width: 0.8 em) in plain text.
-		\item[¦"--\textasciitilde¦] Cyrillic emdash in compound names (surnames).
-		\item[¦"--*¦] Cyrillic emdash for denoting direct speech.
 		% These are commented out in gloss-ukrainian
 		%		\item[¦",¦] thinspace for initials with a breakpoint in following surname.
 		%		\item[¦"‘¦] for German left double quotes (looks like ,,).
 		%		\item[¦"’¦] for German right double quotes (looks like “).
 		%		\item[¦"<¦] for French left double quotes (looks like <<).
 		%		\item[¦">¦] for French right double quotes (looks like >>).
+	\end{shorthands}
+
+	There are also three shorthands for the Cyrillic `emdash' (\textrussian{тире}), which is shorter than the
+	emdash used in Latin script (0.8\,em as opposed to 1\,em, so it is not really an em-dash actually).
+	Note that, since it is not covered by unicode, this character is faked by overlapping two endashes:
+	\begin{shorthands}
+		\item[¦"---¦] Cyrillic \textrussian{тире} for the use in normal text. This requires preceding space
+	    	in input (trailing space is optional) and prints with a non-breakable thin space before
+    		and after the dash.
+		\item[¦"--\textasciitilde¦] Cyrillic \textrussian{тире} for the use in compound names (surnames).
+    		As opposed to ¦"---¦ this adds no space before and after the dash. 
+		\item[¦"--*¦] Cyrillic \textrussian{тире} for denoting direct speech. This adds a larger space after
+    		the dash. Space before the dash is output as is.
 	\end{shorthands}
 	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic}, \xpgvalue{cyrillic-alph} or \xpgvalue{cyrillic-trad}}
 	      Uses either Arabic numerals or Cyrillic alphanumerical numbering. The two Cyrillic variants differ as follows:
@@ -2080,7 +2138,6 @@ footnotes at page boundaries that differ in directionality from the first footno
 Note also that the rule switches might interfere in bad ways with packages or classes that redefine footnotes themselves. This is also the reason
 why \cmd\autofootnoterule\ is not used by default.
 
-\clearpage
 
 \section{Calendars}
 
