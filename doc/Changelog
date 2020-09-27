@@ -40,7 +40,7 @@ Bug fixes:
     and introduce option forceheadingpunctuation (#444).
   * Fix Cyrillic dash (via babelshorthand "---) when TeX ligatures
     are disabled (#445)
-  * Fix problem with great character indices in Lua module for punctuation
+  * Fix problem with large character indices in Lua module for punctuation
     spacing
 
 Interface and defaults changes:
