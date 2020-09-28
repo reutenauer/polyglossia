@@ -866,16 +866,16 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		\item[¦">¦] for French right double quotes (looks like >>).
 	\end{shorthands}
 
-	There are also three shorthands for the Cyrillic `emdash' (\textrussian{тире}), which is shorter than the
-	emdash used in Latin script (0.8\,em as opposed to 1\,em, so it is not really an em-dash actually).
-	Note that, since it is not covered by unicode, this character is faked by overlapping two endashes:
+	There are also three shorthands for the Cyrillic dash (\textrussian{тире}), which is shorter than the
+	emdash but longer than the endash (namely 0.8\,em).
+	Note that, since it is not covered by unicode, this character is faked by telescoping two endashes:
 	\begin{shorthands}
-		\item[¦"---¦] Cyrillic \textrussian{тире} for the use in normal text. This requires preceding space
+		\item[¦"---¦] Cyrillic dash for the use in normal text. This requires preceding space
 		       in input (trailing space is optional) and prints with a non-breakable thin space before
 	           and after the dash.
-		\item[¦"--\textasciitilde¦] Cyrillic \textrussian{тире} for the use in compound names (surnames).
-		       As opposed to ¦"---¦ this adds no space before and after the dash. 
-		\item[¦"--*¦] Cyrillic \textrussian{тире} for denoting direct speech. This adds a larger space after
+		\item[¦"--\textasciitilde¦] Cyrillic dash for the use in compound names (surnames).
+		       As opposed to ¦"---¦ this removes any space before and after the dash. 
+		\item[¦"--*¦] Cyrillic dash for denoting direct speech. This adds a larger space after
 		       the dash. Space before the dash is output as is.
 	\end{shorthands}
     \item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic}, \xpgvalue{cyrillic-alph} or \xpgvalue{cyrillic-trad}}
@@ -1147,17 +1147,17 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 			\item[¦">¦] for French-style right double quotes (looks like >>).
 	    \end{shorthands}
     
-		There are also three shorthands for the Cyrillic `emdash' (\textrussian{тире}), which is shorter than the
-		emdash used in Latin script (0.8\,em as opposed to 1\,em, so it is not really an em-dash actually).
-		Note that, since it is not covered by unicode, this character is faked by overlapping two endashes:
+		There are also three shorthands for the Cyrillic dash (\textrussian{тире}), which is shorter than the
+		emdash but longer than the endash (namely 0.8\,em).
+		Note that, since it is not covered by unicode, this character is faked by telescoping two endashes:
 		\begin{shorthands}
-		\item[¦"---¦] Cyrillic \textrussian{тире} for the use in normal text. This requires preceding space
-		    in input (trailing space is optional) and prints with a non-breakable thin space before
-	     	and after the dash.
-		\item[¦"--\textasciitilde¦] Cyrillic \textrussian{тире} for the use in compound names (surnames).
-     		As opposed to ¦"---¦ this adds no space before and after the dash. 
-		\item[¦"--*¦] Cyrillic \textrussian{тире} for denoting direct speech. This adds a larger space after
-    		the dash. Space before the dash is output as is.
+			\item[¦"---¦] Cyrillic dash for the use in normal text. This requires preceding space
+			in input (trailing space is optional) and prints with a non-breakable thin space before
+			and after the dash.
+			\item[¦"--\textasciitilde¦] Cyrillic dash for the use in compound names (surnames).
+			As opposed to ¦"---¦ this removes any space before and after the dash. 
+			\item[¦"--*¦] Cyrillic dash for denoting direct speech. This adds a larger space after
+			the dash. Space before the dash is output as is.
 		\end{shorthands}
 	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or \xpgvalue{georgian}}
 		Uses either Arabic numerals or Georgian alphanumerical numbering.
@@ -1529,17 +1529,17 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 		\item[¦">¦] for French-style right double quotes (looks like >>).
     \end{shorthands}
 
-	There are also three shorthands for the Cyrillic `emdash' (\textrussian{тире}), which is shorter than the
-	emdash used in Latin script (0.8\,em as opposed to 1\,em, so it is not really an em-dash actually).
-	Note that, since it is not covered by unicode, this character is faked by overlapping two endashes:
+	There are also three shorthands for the Cyrillic dash (\textrussian{тире}), which is shorter than the
+	emdash but longer than the endash (namely 0.8\,em).
+	Note that, since it is not covered by unicode, this character is faked by telescoping two endashes:
 	\begin{shorthands}
-		\item[¦"---¦] Cyrillic \textrussian{тире} for the use in normal text. This requires preceding space
-		     in input (trailing space is optional) and prints with a non-breakable thin space before
-	         and after the dash.
-		\item[¦"--\textasciitilde¦] Cyrillic \textrussian{тире} for the use in compound names (surnames).
-		     As opposed to ¦"---¦ this adds no space before and after the dash. 
-		\item[¦"--*¦] Cyrillic \textrussian{тире} for denoting direct speech. This adds a larger space after
-		     the dash. Space before the dash is output as is.
+		\item[¦"---¦] Cyrillic dash for the use in normal text. This requires preceding space
+		in input (trailing space is optional) and prints with a non-breakable thin space before
+		and after the dash.
+		\item[¦"--\textasciitilde¦] Cyrillic dash for the use in compound names (surnames).
+		As opposed to ¦"---¦ this removes any space before and after the dash. 
+		\item[¦"--*¦] Cyrillic dash for denoting direct speech. This adds a larger space after
+		the dash. Space before the dash is output as is.
 	\end{shorthands}
 	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic}, \xpgvalue{cyrillic-alph} or \xpgvalue{cyrillic-trad}}
           Uses either Arabic numerals or Cyrillic alphanumerical numbering. The two Cyrillic variants differ as follows:
@@ -1608,17 +1608,17 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
 	 \end{shorthands}
 
-     There are also three shorthands for the Cyrillic `emdash' (\textrussian{тире}), which is shorter than the
-     emdash used in Latin script (0.8\,em as opposed to 1\,em, so it is not really an em-dash actually).
-     Note that, since it is not covered by unicode, this character is faked by overlapping two endashes:
-     \begin{shorthands}
-		\item[¦"---¦] Cyrillic \textrussian{тире} for the use in normal text. This requires preceding space
-		      in input (trailing space is optional) and prints with a non-breakable thin space before
-		      and after the dash.
-		\item[¦"--\textasciitilde¦] Cyrillic \textrussian{тире} for the use in compound names (surnames).
-		         As opposed to ¦"---¦ this adds no space before and after the dash. 
-		\item[¦"--*¦] Cyrillic \textrussian{тире} for denoting direct speech. This adds a larger space after
-		         the dash. Space before the dash is output as is.
+	There are also three shorthands for the Cyrillic dash (\textrussian{тире}), which is shorter than the
+	emdash but longer than the endash (namely 0.8\,em).
+	Note that, since it is not covered by unicode, this character is faked by telescoping two endashes:
+	\begin{shorthands}
+		\item[¦"---¦] Cyrillic dash for the use in normal text. This requires preceding space
+		in input (trailing space is optional) and prints with a non-breakable thin space before
+		and after the dash.
+		\item[¦"--\textasciitilde¦] Cyrillic dash for the use in compound names (surnames).
+		As opposed to ¦"---¦ this removes any space before and after the dash. 
+		\item[¦"--*¦] Cyrillic dash for denoting direct speech. This adds a larger space after
+		the dash. Space before the dash is output as is.
 % These are commented out in gloss-russian
 %		\item[¦",¦] thinspace for initials with a breakpoint in following surname.
 %		\item[¦"‘¦] for German left double quotes (looks like ,,).
@@ -1841,17 +1841,17 @@ that comes with this package.
 		%		\item[¦">¦] for French right double quotes (looks like >>).
 	\end{shorthands}
 
-	There are also three shorthands for the Cyrillic `emdash' (\textrussian{тире}), which is shorter than the
-	emdash used in Latin script (0.8\,em as opposed to 1\,em, so it is not really an em-dash actually).
-	Note that, since it is not covered by unicode, this character is faked by overlapping two endashes:
+	There are also three shorthands for the Cyrillic dash (\textrussian{тире}), which is shorter than the
+	emdash but longer than the endash (namely 0.8\,em).
+	Note that, since it is not covered by unicode, this character is faked by telescoping two endashes:
 	\begin{shorthands}
-		\item[¦"---¦] Cyrillic \textrussian{тире} for the use in normal text. This requires preceding space
-	    	in input (trailing space is optional) and prints with a non-breakable thin space before
-    		and after the dash.
-		\item[¦"--\textasciitilde¦] Cyrillic \textrussian{тире} for the use in compound names (surnames).
-    		As opposed to ¦"---¦ this adds no space before and after the dash. 
-		\item[¦"--*¦] Cyrillic \textrussian{тире} for denoting direct speech. This adds a larger space after
-    		the dash. Space before the dash is output as is.
+		\item[¦"---¦] Cyrillic dash for the use in normal text. This requires preceding space
+		in input (trailing space is optional) and prints with a non-breakable thin space before
+		and after the dash.
+		\item[¦"--\textasciitilde¦] Cyrillic dash for the use in compound names (surnames).
+		As opposed to ¦"---¦ this removes any space before and after the dash. 
+		\item[¦"--*¦] Cyrillic dash for denoting direct speech. This adds a larger space after
+		the dash. Space before the dash is output as is.
 	\end{shorthands}
 	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic}, \xpgvalue{cyrillic-alph} or \xpgvalue{cyrillic-trad}}
 	      Uses either Arabic numerals or Cyrillic alphanumerical numbering. The two Cyrillic variants differ as follows:
