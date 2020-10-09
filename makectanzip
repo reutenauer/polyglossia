@@ -141,7 +141,7 @@ cd $builddir/tmp
 mv $builddir/$tarball . || exit 1
 mv $builddir/polyglossia.dtx polyglossia/ || exit 1
 cp $root/doc/polyglossia.pdf polyglossia/ || exit 1
-cp $root/README.md . || exit 1
+cp $root/README.md polyglossia/ || exit 1
 zip -9 $ctanzip polyglossia/* README.md polyglossia.tds.zip || exit 1
 mv $ctanzip $root/ || exit 1
 cd $root
