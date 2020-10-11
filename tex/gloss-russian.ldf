@@ -226,6 +226,7 @@
 % Russian needs trailing dots in all headings
 \def\xpg@save@autodot{}
 \ifdef{\KOMAScript}{%
+    \providecommand*\autodot{}%
     \let\xpg@save@autodot\autodot%
 }
 

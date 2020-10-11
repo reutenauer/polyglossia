@@ -1,3 +1,22 @@
+1.51 (forthcoming)
+
+New features:
+
+
+Bug fixes:
+
+  * Assure \autodot is defined with \KOMAScript in Russian.
+
+Interface and defaults changes:
+
+
+
+Build fixes:
+
+
+Documentation improvements:
+
+
 1.50 (09-10-2020)
 
 New features:
