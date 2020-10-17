@@ -1,3 +1,11 @@
+1.51 (forthcoming)
+
+Bug fixes:
+
+   * Use new LaTeX core hooks rather than filehook package. This fixes
+     a recent breakage of filehook (#453).
+
+
 1.50a (15-10-2020)
 
 Bug fixes:

@@ -10,16 +10,21 @@
 \RequirePackage{expl3}
 \RequirePackage{l3keys2e}
 \RequirePackage{xparse}
-\RequirePackage{filehook}
-
-% correct a bug in tracklang
-\AtBeginOfPackageFile*{tracklang}{
-  \@ifpackagelater{tracklang}{2019/08/30}{}{\global\def\AddTrackedLangage{\AddTrackedLanguage}}
-}
-
 
 % fontspec now uses LaTeX3 packages such as expl3, so we need this:
 \ExplSyntaxOn
+
+% Execute code #3 if package #1 has been loaded already, else
+% add to package hook #2
+\newcommand\xpg@at@package[3]{%
+    \@ifpackageloaded{#1}{#3}{\AddToHook{#2}{#3}}%
+}
+
+% correct a bug in tracklang
+\xpg@at@package{tracklang}{file/after/tracklang.sty}{%
+  \@ifpackagelater{tracklang}{2019/08/30}{}{\global\def\AddTrackedLangage{\AddTrackedLanguage}}
+}
+
 
 %% This is for compatibility with Babel-aware package:
 \cslet{ver@babel.sty}{\@empty} % this "fakes" babel
@@ -168,7 +173,7 @@
      {}%
      {\xpg@error{Unknown~ language~ direction~ #1 ~(base~ wrapper)}}%
 }
-\AtEndOfPackageFile*{bidi}{%
+\xpg@at@package{bidi}{package/after/bidi}{%
   \ExplSyntaxOn%
   \cs_gset_nopar:Nn{\polyglossia@setpardirection:n}{%
     \str_case_e:nnTF{#1}{%
@@ -188,7 +193,7 @@
   }%
   \ExplSyntaxOff%
 }
-\AtEndOfPackageFile*{luabidi}{%
+\xpg@at@package{luabidi}{package/after/luabidi}{%
   \ExplSyntaxOn%
   \cs_gset_nopar:Nn{\polyglossia@setpardirection:n}{%
     \str_case_e:nnTF{#1}{%
