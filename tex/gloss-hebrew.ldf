@@ -115,7 +115,7 @@
        % Bidi inserts an RTL mark (0x200f) between number and number separator (- .),
        % forcing numbers to RTL. This is wrong for Hebrew.
        % So we defunc the respective command.
-       \renewcommand*{\DigitsDotDashInterCharToks}{}
+       \renewcommand*{\DigitsDotDashInterCharToks}{}%
     \fi%
 }
 

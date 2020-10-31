@@ -8,6 +8,7 @@ Bug fixes:
    * Use new LaTeX core hooks rather than filehook package. This fixes
      a recent breakage of filehook with other external packages (#453).
    * Fix part heading modification in French (#458).
+   * Fix extra space in Hebrew (#459).
 
 
 1.50a (15-10-2020)
