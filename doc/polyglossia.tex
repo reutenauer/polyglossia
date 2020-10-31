@@ -1085,7 +1085,7 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 			enabled, spacing in typewriter context is the same as with roman and sans
 			serif font, depending on the \xpgvalue{autospacing} and
 			\xpgvalue{autospaceguillemets} settings (note that this was the default up
-			to v.~1.44).	
+			to v.~1.44).
 		\item \xpgboolkeyfalse{frenchfootnote}
 			If \xpgvalue{true}, footnotes start with a non-superscripted number
 			followed by a dot, as common in French typography. Note that this might
@@ -1097,6 +1097,14 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 			in French typography.  Note that this option is only functional (by
 			design) if French is the main language. Also, it might interfere with
 			list packages such as \pkg{enumitem}.
+		\item \xpgboolkeytrue[1.51]{frenchpart}
+			By default, \pkg{polyglossia} modifies part headings to match French conventions
+			(\emph{Première partie} rather than \emph{Partie I}). Next to the standard classes,
+			specifics of \pkg{KOMA-script}, \pkg{memoir} and the \pkg{titlesec} package are
+			taken into account. With other classes or packages, redefinition might fail if these
+			have particular part settings.
+			In such case, or if you don't want the redefinition, you can switch off the feature
+			by passing \textit{false} to this option.
 		\item \xpgcodekey[1.46]{itemlabels}¦\textemdash¦
 			If \emph{frenchitemlabels} is true, you can customize here the used item
 			label of all levels.

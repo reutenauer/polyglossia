@@ -104,6 +104,9 @@
 \define@boolkey{french}[french@]{autospacing}[true]{}
 \french@autospacingtrue
 
+\define@boolkey{french}[french@]{frenchpart}[true]{}
+\french@frenchparttrue
+
 \newif\iffrench@autospaceguillemets
 \define@boolkey{french}[french@]{autospaceguillemets}[true]{}
 \french@autospaceguillemetstrue
@@ -326,14 +329,11 @@
    \def\indexname{Index}%
    \def\figurename{\textsc{Fig.}}%
    \def\tablename{\textsc{Tab.}}%
-   \def\@Fpt{\ifcase\value{part}\or Première\or Deuxième\or
-   Troisième\or Quatrième\or Cinquième\or Sixième\or
-   Septième\or Huitième\or Neuvième\or Dixième\or Onzième\or
-   Douzième\or Treizième\or Quatorzième\or Quinzième\or
-   Seizième\or Dix-septième\or Dix-huitième\or Dix-neuvième\or
-   Vingtième\fi\space}%
-   \def\thepart{\@Fpt partie}%
-   \def\partname{}%
+   \iffrench@frenchpart
+     \def\partname{partie}%
+   \else
+     \def\partname{Partie}%
+   \fi%
    \def\pagename{page}%
    \def\seename{\emph{voir}}%
    \def\alsoname{\emph{voir aussi}}%
@@ -353,9 +353,83 @@
       décembre\fi
       \space \number\year}}
 
+\def\xpg@french@part{\ifcase\value{part}\or Première\or Deuxième\or%
+   Troisième\or Quatrième\or Cinquième\or Sixième\or%
+   Septième\or Huitième\or Neuvième\or Dixième\or Onzième\or%
+   Douzième\or Treizième\or Quatorzième\or Quinzième\or%
+   Seizième\or Dix-septième\or Dix-huitième\or Dix-neuvième\or%
+   Vingtième\fi}%
+
+\def\french@capsformat{%
+   % Change part heading
+   % With titlesec
+   \ifcsdef{titleformat}{%
+     \ifcsdef{@part}{%
+        \let\xpg@save@part@format\@part%
+        \patchcmd{\@part}%
+                  {\partname\nobreakspace\thepart}%
+                  {\xpg@french@part\nobreakspace\partname}%
+                  {}%
+                  {\xpg@warning{Failed to patch part for French}}%
+     }{}%
+   }{% (not \ifdefined\titleformat)
+     % With KOMA
+     \ifcsdef{sectionformat}{%
+        \ifcsdef{partformat}{%
+          \let\xpg@save@part@format\partformat%
+          \renewcommand{\partformat}{\xpg@french@part~\partname}%
+        }{}%
+     }{%  (not \ifdefined\sectionformat)
+       % With memoir
+       \ifcsdef{@memptsize}{%
+         \ifcsdef{@part}{%
+           \let\xpg@save@part@format\@part%
+           \patchcmd{\@part}{\printpartname \partnamenum \printpartnum}%
+                            {\partnamefont\xpg@french@part\partnamenum\printpartname}%
+                            {}%
+                            {\xpg@warning{Failed to patch part for French}}%
+          }{}%
+       }{%  (not \ifdefined\@memptsize)
+         % With standard classes
+         \ifcsdef{@part}{%
+           \let\xpg@save@part@format\@part%
+           \patchcmd{\@part}%
+                    {\partname\nobreakspace\thepart}%
+                    {\xpg@french@part\nobreakspace\partname}%
+                    {}%
+                    {\xpg@warning{Failed to patch part for French}}%
+         }{}%  (end \ifdefined\@part)
+       }% (end \ifdefined\@memptsize)
+     }% (end \ifdefined\sectionformat)
+   }% (end \ifdefined\titleformat)
+}
+
+\def\nofrench@capsformat{%
+   % Reset chapter and part heading
+   \ifcsdef{titleformat}{%
+      % With titlesec
+     \ifcsdef{xpg@save@part@format}{%
+        \let\@part\xpg@save@part@format
+     }{}%
+   }{% (not \ifdefined\titleformat)
+     \ifcsdef{sectionformat}{%
+        % With KOMA
+        \ifcsdef{xpg@save@part@format}{%
+           \let\partformat\xpg@save@part@format
+        }{}%
+     }{%
+        % With memoir and standard classes
+        \ifcsdef{xpg@save@part@format}{%
+           \let\@part\xpg@save@part@format
+        }{}%
+     }% (end \ifdefined\sectionformat)
+   }% (end \ifdefined\titleformat)
+}
+
 \def\noextras@french{%
    \nofrench@punctuation%
    \nofrench@fontsetup%
+   \nofrench@capsformat%
 }
 
 \def\blockextras@french{%
@@ -363,6 +437,9 @@
       \french@punctuation%
    \fi
    \french@fontsetup%
+   \iffrench@frenchpart
+     \french@capsformat%
+   \fi%
 }
 
 \def\inlineextras@french{%

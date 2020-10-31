@@ -1,9 +1,13 @@
 1.51 (forthcoming)
 
+New features:
+   * New option "frenchpart" for French (#458).
+
 Bug fixes:
 
    * Use new LaTeX core hooks rather than filehook package. This fixes
      a recent breakage of filehook with other external packages (#453).
+   * Fix part heading modification in French (#458).
 
 
 1.50a (15-10-2020)
