@@ -1160,7 +1160,13 @@
 \newcommand{\setdefaultlanguage}[2][]{%
   % latex is an internal language, so do not record
   \ifstrequal{#2}{latex}{}{%
-     \polyglossia@register@language:nn{#1}{#2}%
+     % register polyglossia language name
+     \ifcsundef{#2@registered}{%
+       \global\edef\xpg@loaded{%
+           \ifx\xpg@loaded\@empty\else\xpg@loaded,\fi #2%
+        }%
+     }{}%
+     \csgdef{#2@registered}{}%
   }%
   \ifcsundef{#2@loaded}%
   {
