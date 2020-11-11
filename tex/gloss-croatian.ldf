@@ -12,12 +12,18 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{croatian}{hr}
 
+\ifluatex
+  \RequirePackage{luavlna}
+\fi
+
 \define@boolkey{croatian}[croatian@]{babelshorthands}[true]{}
 
 \define@boolkey{croatian}[croatian@]{disableligatures}[true]{}
 
+\define@boolkey{croatian}[croatian@]{splithyphens}[true]{}
+
 % Register default options
-\xpg@initialize@gloss@options{croatian}{babelshorthands=false,disableligatures=false}
+\xpg@initialize@gloss@options{croatian}{babelshorthands=false,disableligatures=false,splithyphens=true}
 
 \ifsystem@babelshorthands
   \setkeys{croatian}{babelshorthands=true}
@@ -30,6 +36,19 @@
   \initiate@active@char{"}%
   \shorthandoff{"}%
 }{}
+
+\def\croatian@@splhyphen#1{%
+  \ifnum\hyphenchar \font>0%
+    \kern\z@\discretionary{-}{\char\hyphenchar\the\font}{#1}%
+    \nobreak\hskip\z@%
+  \else%
+    #1%
+  \fi%
+}
+
+\def\croatian@splhyphen{%
+  \croatian@@splhyphen{-}%
+}
 
 \def\croatian@shorthands{%
   \bbl@activate{"}%
@@ -58,6 +77,32 @@
 
 \def\nocroatian@shorthands{%
   \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+
+\ifxetex
+  % splithyphens
+  \newXeTeXintercharclass\croatian@hyphen % -
+  \newXeTeXintercharclass\croatian@nonsyllabicpreposition%
+\fi
+
+\def\croatian@hyphens{%
+    \ifluatex
+      \AfterPreamble{\enablesplithyphens{croatian}}%
+    \else
+      \XeTeXinterchartokenstate=1
+      \XeTeXcharclass `\- \croatian@hyphen
+      \XeTeXinterchartoks \z@ \croatian@hyphen = {\croatian@@splhyphen}% "-" -> "\croatian@@splhyphen-"
+      % necessary if used together with vlna:
+      \XeTeXinterchartoks \croatian@nonsyllabicpreposition \croatian@hyphen = {\croatian@@splhyphen}% "-" -> "\croatian@@splhyphen-"
+    \fi%
+}
+
+\def\nocroatian@hyphens{%
+    \ifluatex
+      \AfterPreamble{\disablesplithyphens{croatian}}%
+    \else
+      \XeTeXcharclass `\- \z@
+    \fi%
 }
 
 \newcommand*\hr@charifavailable[2]{%
@@ -164,14 +209,17 @@
 
 \def\noextras@croatian{%
   \ifcroatian@babelshorthands\nocroatian@shorthands\fi%
+  \nocroatian@hyphens%
 }
 
 \def\blockextras@croatian{%
   \ifcroatian@babelshorthands\croatian@shorthands\fi%
+  \ifcroatian@splithyphens\croatian@hyphens\else\nocroatian@hyphens\fi%
 }
 
 \def\inlineextras@croatian{%
   \ifcroatian@babelshorthands\croatian@shorthands\fi%
+  \ifcroatian@splithyphens\croatian@hyphens\else\nocroatian@hyphens\fi%
 }
 
 \endinput

@@ -968,6 +968,13 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		\charifavailable{01C6}{dž}) will be replaced by single characters. This can
 		be useful if the ligatures on your font are broken (if the font does not
 		have them, they are automatically replaced).
+    \item \xpgboolkeytrue[1.51]{splithyphens}
+	    According to Croatian typesetting conventions, if a word with a hard hyphen (such as \emph{je-li})
+	    is hyphenated at this hyphen, a second hyphenation character is to be inserted at the beginning
+	    of the line that follows the hyphenation (\emph{je-/-li}).
+	    By default, this is done automatically (if you are using \LuaTeX, the \pkg{luavlna} package is
+	    loaded to achieve this).
+	    Set this option to ¦false¦ to disable the feature.
 \end{itemize}
 
 \subsection{czech}\label{czech}
