@@ -11,6 +11,8 @@ Bug fixes:
    * Fix part heading modification in French (#458).
    * Fix extra space in Hebrew (#459).
    * Register main polyglossia language earlier (#461).
+   * Allow for hyphenations in words following opening guillemet in French
+     with XeTeX (#462).
 
 
 1.50a (15-10-2020)

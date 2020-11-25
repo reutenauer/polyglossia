@@ -206,7 +206,7 @@
   \let\ttfamily\french@ttfamilyORI
 }
 
-\def\xpg@french@thinsp{\kern 0.5\fontdimen2\font}
+\def\xpg@french@thinsp{\kern 0.5\fontdimen2\font\nobreak\hskip\z@skip}
 
 \def\french@punctuation{%
     \lccode"2019="2019
