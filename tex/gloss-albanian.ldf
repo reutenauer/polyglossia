@@ -19,7 +19,7 @@
    \def\prefacename{Parathenia}%
    \def\chaptername{Kapitulli}%
    \def\appendixname{Shtesa}%
-   \def\contentsname{Përmbajta}%
+   \def\contentsname{Përmbajtja}%
    \def\listfigurename{Figurat}%
    \def\listtablename{Tabelat}%
    \def\indexname{Indeksi}%
