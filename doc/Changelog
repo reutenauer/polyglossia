@@ -8,6 +8,7 @@ Bug fixes:
 
    * Use new LaTeX core hooks rather than filehook package. This fixes
      a recent breakage of filehook with other external packages (#453).
+   * Remove very old code that pretends polyglossia is babel (#455).
    * Fix spelling of Albanian contentsname (#456).
    * Fix part heading modification in French (#458).
    * Fix extra space in Hebrew (#459).
