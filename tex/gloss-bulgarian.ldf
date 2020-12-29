@@ -65,7 +65,8 @@
    %\def\headtoname{}%
    \def\proofname{Proof}%
    \def\glossaryname{Glossary}%
-   }
+}
+
 \def\datebulgarian{%
    \def\today{\number\day~\ifcase\month\or
        януари\or
@@ -91,6 +92,8 @@
 %% this is from Babel:
 \def\Romannumeral#1{\uppercase\expandafter{\romannumeral #1}}
 \def\todayRoman{\number\day.\Romannumeral{\month}.\number\year~г.}
+%
+% If you implement this, add an option mathfunction as in gloss-russian.ldf
 \def\sh{\mathop{\operator@font sh}\nolimits}
 \def\ch{\mathop{\operator@font ch}\nolimits}
 \def\tg{\mathop{\operator@font tg}\nolimits}

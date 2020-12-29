@@ -237,6 +237,7 @@
 \endinput
 
 % TODO ? stuff from babel
+% If you implement this, add an option mathfunction as in gloss-russian.ldf
 
 \def\sh{\mathop{\operator@font sh}\nolimits} % same as \sinh
 \def\ch{\mathop{\operator@font ch}\nolimits} % same as \cosh
