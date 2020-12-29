@@ -1643,12 +1643,16 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 	\end{shorthands}
     \item \xpgboolkeytrue[1.50]{forceheadingpunctuation}
         By default, chapter and section numbers always have a trailing punctuation in Russian
-        (as in \emph{1.1.} as opposed to \emph{1.1}). If this option is set to false, \textsf{polyglossia}
+        (as in \emph{1.1.} as opposed to \emph{1.1}). If this option is set to \xpgvalue{false}, \textsf{polyglossia}
         will not touch heading punctuation, so this will be whatever the class or a package determines.
 	\item \xpgboolkeytrue[1.46]{indentfirst}
 		By default, all paragraphs are indented in Russian, also those after a
-		chapter or section heading. If this option is false, the latter paragraphs
+		chapter or section heading. If this option is \xpgvalue{false}, the latter paragraphs
 		are not indented, as normal in \LaTeX.
+    \item \xpgboolkeytrue[1.52]{mathfunctions}
+	    By default, some specific math macros are defined for Russian (see below). In order to prevent command
+	    clashes (\eg with the \pkg{chemformula} package), you can switch these definitions off by passing \xpgvalue{false}
+	    to this option.
 	\item \xpgchoicekey{spelling}{\xpgpresetvalue{modern} or \xpgvalue{old}}
 		This option is for captions and date only, not for hyphenation.
 	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic}, \xpgvalue{cyrillic-alph} or \xpgvalue{cyrillic-trad}}
@@ -1672,6 +1676,13 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 	      \Eg ¦\textrussian{\AsbukTrad{page}}¦ produces \textrussian{\AsbukTrad{page}}.
 	\item \Cmd\asbukTrad: same as \cmd\AsbukTrad\ but in lowercase.
 	\end{itemize}
+    If the \xpgoption{mathfunctions} option is \xpgvalue{true}, loading Russian defines a few macros than can be used
+    independently of the current language. These are nine macros to be used in math mode to type the names of
+    trigonometric functions common for Russian documents: \cmd\sh , \cmd\ch , \cmd\tg , \cmd\ctg , \cmd\arctg ,
+    \cmd\arcctg , \cmd\th , \cmd\cth , and \cmd\cosec . Cyrillic letters in math mode can be typed with
+    the aid of text commands such as \cmd\textbf , \cmd\textsf , \cmd\textit , \cmd\texttt , etc.
+    The macros \cmd\Prob , \cmd\Variance , \cmd\NOD , \cmd\nod , \cmd\NOK , \cmd\nok , \cmd\Proj\ print some rare
+    Russian mathematical symbols.
 
 \subsection[sami]{sami\new{1.45}}\label{sami}
 Currently support for Sami is limited to Northern Sami.
@@ -1868,6 +1879,10 @@ that comes with this package.
 		\item[¦"--*¦] Cyrillic dash for denoting direct speech. This adds a larger space after
 		the dash. Space before the dash is output as is.
 	\end{shorthands}
+    \item \xpgboolkeytrue[1.52]{mathfunctions}
+		By default, some specific math macros are defined for Ukrainian (see below). In order to prevent command
+		clashes (\eg with the \pkg{chemformula} package), you can switch these definitions off by passing \xpgvalue{false}
+		to this option.
 	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic}, \xpgvalue{cyrillic-alph} or \xpgvalue{cyrillic-trad}}
 	      Uses either Arabic numerals or Cyrillic alphanumerical numbering. The two Cyrillic variants differ as follows:
 	\begin{itemize}
@@ -1889,6 +1904,14 @@ that comes with this package.
 	\Eg ¦\textukrainian{\AsbukTrad{page}}¦ produces \textrussian{\AsbukTrad{page}}.
 	\item \Cmd\asbukTrad: same as \cmd\AsbukTrad\ but in lowercase.
 \end{itemize}
+%
+If the \xpgoption{mathfunctions} option is \xpgvalue{true}, loading Ukrainian defines a few macros than can be used
+independently of the current language. These are nine macros to be used in math mode to type the names of
+trigonometric functions common for Ukrainian documents: \cmd\sh , \cmd\ch , \cmd\tg , \cmd\ctg , \cmd\arctg ,
+\cmd\arcctg , \cmd\th , \cmd\cth , and \cmd\cosec . Cyrillic letters in math mode can be typed with
+the aid of text commands such as \cmd\textbf , \cmd\textsf , \cmd\textit , \cmd\texttt , etc.
+The macros \cmd\Prob , \cmd\Variance , \cmd\NOD , \cmd\nod , \cmd\NOK , \cmd\nok , \cmd\NSD , \cmd\nsd , \cmd\NSK ,
+\cmd\nsk , \cmd\Proj\ print some rareUkrainian mathematical symbols.
 
 \subsection{welsh}\label{welsh}
 \paragraph*{Options:}

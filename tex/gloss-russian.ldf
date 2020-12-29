@@ -72,13 +72,16 @@
 % Force punctuation after heading number
 \define@boolkey{russian}[russian@]{forceheadingpunctuation}[true]{}
 
+% Define some math functions
+\define@boolkey{russian}[russian@]{mathfunctions}[true]{}
 
 % Register default options
 \xpg@initialize@gloss@options{russian}{babelshorthands=false,
                                        spelling=modern,
                                        numerals=arabic,
                                        indentfirst=true,
-                                       forceheadingpunctuation=true}
+                                       forceheadingpunctuation=true,
+                                       mathfunctions=true}
 
 
 \ifsystem@babelshorthands
@@ -354,24 +357,27 @@
 }
 
 %%% These lines taken from russianb.ldf, part of babel package.
-% make it optional?
-\def\sh    {\mathop{\operator@font sh}\nolimits}
-\def\ch    {\mathop{\operator@font ch}\nolimits}
-\def\tg    {\mathop{\operator@font tg}\nolimits}
-\def\arctg {\mathop{\operator@font arctg}\nolimits}
-\def\arcctg{\mathop{\operator@font arcctg}\nolimits}
-\def\th    {\mathop{\operator@font th}\nolimits}
-\def\ctg   {\mathop{\operator@font ctg}\nolimits}
-\def\cth   {\mathop{\operator@font cth}\nolimits}
-\def\cosec {\mathop{\operator@font cosec}\nolimits}
-\def\Prob  {\mathop{\kern\z@\mathsf{P}}\nolimits}
-\def\Variance{\mathop{\kern\z@\mathsf{D}}\nolimits}
-\def\nod   {\mathop{\mathrm{н.о.д.}}\nolimits}
-\def\nok   {\mathop{\mathrm{н.о.к.}}\nolimits}
-\def\NOD   {\mathop{\mathrm{НОД}}\nolimits}
-\def\NOK   {\mathop{\mathrm{НОК}}\nolimits}
-\def\Proj  {\mathop{\mathrm{Пр}}\nolimits}
-%\DeclareRobustCommand{\No}{№}
+\AtBeginDocument{%
+\ifrussian@mathfunctions%
+  \def\sh    {\mathop{\operator@font sh}\nolimits}
+  \def\ch    {\mathop{\operator@font ch}\nolimits}
+  \def\tg    {\mathop{\operator@font tg}\nolimits}
+  \def\arctg {\mathop{\operator@font arctg}\nolimits}
+  \def\arcctg{\mathop{\operator@font arcctg}\nolimits}
+  \def\th    {\mathop{\operator@font th}\nolimits}
+  \def\ctg   {\mathop{\operator@font ctg}\nolimits}
+  \def\cth   {\mathop{\operator@font cth}\nolimits}
+  \def\cosec {\mathop{\operator@font cosec}\nolimits}
+  \def\Prob  {\mathop{\kern\z@\mathsf{P}}\nolimits}
+  \def\Variance{\mathop{\kern\z@\mathsf{D}}\nolimits}
+  \def\nod   {\mathop{\mathrm{н.о.д.}}\nolimits}
+  \def\nok   {\mathop{\mathrm{н.о.к.}}\nolimits}
+  \def\NOD   {\mathop{\mathrm{НОД}}\nolimits}
+  \def\NOK   {\mathop{\mathrm{НОК}}\nolimits}
+  \def\Proj  {\mathop{\mathrm{Пр}}\nolimits}
+  %\DeclareRobustCommand{\No}{№}
+\fi
+}
 
 \endinput
 

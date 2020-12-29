@@ -1,3 +1,14 @@
+1.52 (forthcoming)
+
+New features:
+   * New option "mathfunctions" for Russian and Ukrainian allows to
+     disable the definitions of math macros that might clash with
+     other packages (#465).
+
+Bug fixes:
+
+
+
 1.51 (08-12-2020)
 
 New features:
