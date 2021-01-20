@@ -7,6 +7,7 @@ New features:
 
 Bug fixes:
    * Fix French part modifications with hyperref (#469).
+   * Fix markup of French \see and \alsoname (#468).
 
 
 1.51 (08-12-2020)

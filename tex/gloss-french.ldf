@@ -335,8 +335,8 @@
      \def\partname{Partie}%
    \fi%
    \def\pagename{page}%
-   \def\seename{\emph{voir}}%
-   \def\alsoname{\emph{voir aussi}}%
+   \def\seename{voir}%
+   \def\alsoname{voir aussi}%
    \def\enclname{P.~J. }%
    \def\ccname{Copie à }%
    \def\headtoname{}%
