@@ -365,7 +365,7 @@
    % With titlesec
    \ifcsdef{titleformat}{%
      \ifcsdef{H@old@part}{% Hyperref
-        \let\xpg@save@part@format\@part%
+        \let\xpg@save@part@format\H@old@part%
         \patchcmd{\H@old@part}%
                   {\partname\nobreakspace\thepart}%
                   {\xpg@french@part\nobreakspace\partname}%
@@ -392,7 +392,7 @@
        % With memoir
        \ifcsdef{@memptsize}{%
          \ifcsdef{H@old@part}{% Hyperref
-           \let\xpg@save@part@format\@part%
+           \let\xpg@save@part@format\H@old@part%
            \patchcmd{\H@old@part}{\printpartname \partnamenum \printpartnum}%
                             {\partnamefont\xpg@french@part\partnamenum\printpartname}%
                             {}%
@@ -409,7 +409,7 @@
        }{%  (not \ifdefined\@memptsize)
          % With standard classes
          \ifcsdef{H@old@part}{% Hyperref
-           \let\xpg@save@part@format\@part%
+           \let\xpg@save@part@format\H@old@part%
            \patchcmd{\H@old@part}%
                     {\partname\nobreakspace\thepart}%
                     {\xpg@french@part\nobreakspace\partname}%
