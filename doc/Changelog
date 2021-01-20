@@ -6,7 +6,7 @@ New features:
      other packages (#465).
 
 Bug fixes:
-
+   * Fix French part modifications with hyperref (#469).
 
 
 1.51 (08-12-2020)

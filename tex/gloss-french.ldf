@@ -364,14 +364,23 @@
    % Change part heading
    % With titlesec
    \ifcsdef{titleformat}{%
-     \ifcsdef{@part}{%
+     \ifcsdef{H@old@part}{% Hyperref
         \let\xpg@save@part@format\@part%
-        \patchcmd{\@part}%
+        \patchcmd{\H@old@part}%
                   {\partname\nobreakspace\thepart}%
                   {\xpg@french@part\nobreakspace\partname}%
                   {}%
                   {\xpg@warning{Failed to patch part for French}}%
-     }{}%
+     }{% not hyperref
+       \ifcsdef{@part}{%
+          \let\xpg@save@part@format\@part%
+          \patchcmd{\@part}%
+                    {\partname\nobreakspace\thepart}%
+                    {\xpg@french@part\nobreakspace\partname}%
+                    {}%
+                    {\xpg@warning{Failed to patch part for French}}%
+       }{}%
+     }%
    }{% (not \ifdefined\titleformat)
      % With KOMA
      \ifcsdef{sectionformat}{%
@@ -382,23 +391,40 @@
      }{%  (not \ifdefined\sectionformat)
        % With memoir
        \ifcsdef{@memptsize}{%
-         \ifcsdef{@part}{%
+         \ifcsdef{H@old@part}{% Hyperref
            \let\xpg@save@part@format\@part%
-           \patchcmd{\@part}{\printpartname \partnamenum \printpartnum}%
+           \patchcmd{\H@old@part}{\printpartname \partnamenum \printpartnum}%
                             {\partnamefont\xpg@french@part\partnamenum\printpartname}%
                             {}%
                             {\xpg@warning{Failed to patch part for French}}%
-          }{}%
+          }{% not hyperref
+            \ifcsdef{@part}{%
+              \let\xpg@save@part@format\@part%
+              \patchcmd{\@part}{\printpartname \partnamenum \printpartnum}%
+                               {\partnamefont\xpg@french@part\partnamenum\printpartname}%
+                               {}%
+                               {\xpg@warning{Failed to patch part for French}}%
+             }{}%
+          }%
        }{%  (not \ifdefined\@memptsize)
          % With standard classes
-         \ifcsdef{@part}{%
+         \ifcsdef{H@old@part}{% Hyperref
            \let\xpg@save@part@format\@part%
-           \patchcmd{\@part}%
+           \patchcmd{\H@old@part}%
                     {\partname\nobreakspace\thepart}%
                     {\xpg@french@part\nobreakspace\partname}%
                     {}%
                     {\xpg@warning{Failed to patch part for French}}%
-         }{}%  (end \ifdefined\@part)
+         }{% not hyperref
+            \ifcsdef{@part}{%
+              \let\xpg@save@part@format\@part%
+              \patchcmd{\@part}%
+                       {\partname\nobreakspace\thepart}%
+                       {\xpg@french@part\nobreakspace\partname}%
+                       {}%
+                       {\xpg@warning{Failed to patch part for French}}%
+            }{}%  (end \ifdefined \H@old@part)
+         }%  (end \ifdefined\@part)
        }% (end \ifdefined\@memptsize)
      }% (end \ifdefined\sectionformat)
    }% (end \ifdefined\titleformat)
@@ -409,7 +435,7 @@
    \ifcsdef{titleformat}{%
       % With titlesec
      \ifcsdef{xpg@save@part@format}{%
-        \let\@part\xpg@save@part@format
+        \ifcsdef{H@old@part}{\let\@H@old@part\xpg@save@part@format}{\let\@part\xpg@save@part@format}
      }{}%
    }{% (not \ifdefined\titleformat)
      \ifcsdef{sectionformat}{%
@@ -420,7 +446,7 @@
      }{%
         % With memoir and standard classes
         \ifcsdef{xpg@save@part@format}{%
-           \let\@part\xpg@save@part@format
+           \ifcsdef{H@old@part}{\let\@H@old@part\xpg@save@part@format}{\let\@part\xpg@save@part@format}
         }{}%
      }% (end \ifdefined\sectionformat)
    }% (end \ifdefined\titleformat)
