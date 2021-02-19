@@ -1,0 +1,52 @@
+\ProvidesFile{gloss-uyghur.ldf}[polyglossia: module for Uyghur]
+%% Translations provided by Osman Tursun (Github Account: neouyghur)
+
+\PolyglossiaSetup{uyghur}{
+  bcp47=ug,
+  script=Arabic,
+  direction=RL,
+  scripttag=arab,
+  langtag=UYG,
+  hyphennames={nohyphenation}،
+  fontsetup=true,
+}
+
+% BCP-47 compliant aliases
+\setlanguagealias*{uyghur}{ug}
+
+\def\captionsuyghur{%
+  \def\refname{\@ensure@RTL{پايدىلانما}}%
+  \def\abstractname{\@ensure@RTL{ئابستراكت}}%
+  \def\bibname{\@ensure@RTL{پايدىلانما}}%
+  \def\prefacename{\@ensure@RTL{كىرىش سۆز}}%
+  \def\chaptername{\@ensure@RTL{باب}}%
+  \def\appendixname{\@ensure@RTL{قوشۇمچە}}%
+  \def\contentsname{\@ensure@RTL{مۇندەرىجە}}%
+  \def\listfigurename{\@ensure@RTL{رەسىملەر}}%
+  \def\listtablename{\@ensure@RTL{جەدۋەللەر}}%
+  \def\indexname{\@ensure@RTL{ئىندېكىس}}%
+  \def\figurename{\@ensure@RTL{رەسىم}}%
+  \def\tablename{\@ensure@RTL{جەدۋەل}}%
+  %\def\thepart{}%
+  \def\partname{\@ensure@RTL{قىسىم}}%
+  \def\pagename{\@ensure@RTL{بەت}}%
+  \def\seename{\@ensure@RTL{قاراڭ}}%
+  \def\alsoname{\@ensure@RTL{ئايرىم قاراڭ}}%
+  \def\enclname{\@ensure@RTL{قوشۇمچە ھۆججەت}}%
+  \def\ccname{\@ensure@RTL{باشقا تاپشۇرۇۋالغۇچى}}%
+  \def\headtoname{\@ensure@RTL{تاپشۇرۇۋالغۇچى}}%
+  \def\proofname{\@ensure@RTL{ئىسپات}}%
+  \def\glossaryname{\@ensure@RTL{لۇغەت}}%
+  %\def\sectionname{\@ensure@RTL{}}%
+  \def\subjectname{\@ensure@RTL{تېما}}%
+}
+
+\def\dateuyghur{%
+   \def\today{\number\day~\ifcase\month\or
+    يانۋار\or فېۋرال\or مارت\or ئاپرېل\or ماي\or ئىيۇن\or
+    ئىيۇل\or ئاۋغۇست\or سېنتەبىر\or ئۆكتەبىر\or نويابىر\or
+    دېكابىر\fi
+    \space\number\year}%
+}
+
+\endinput
