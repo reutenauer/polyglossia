@@ -1,6 +1,7 @@
 1.52 (forthcoming)
 
 New features:
+   * Add support for Uyghur (#475).
    * New option "mathfunctions" for Russian and Ukrainian allows to
      disable the definitions of math macros that might clash with
      other packages (#465).
