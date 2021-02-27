@@ -26,8 +26,8 @@ Polyglossia makes it possible to automate the following tasks:
 
 # LICENCE
 
-Copyright (c) 2008-2010 François Charette, 2013 Élie Roux, 2011-2020 Arthur Reutenauer,
-Copyright (c) 2019-2020 Bastien Roucariès, 2019-2020 Jürgen Spitzmüller
+Copyright (c) 2008-2010 François Charette, 2013 Élie Roux, 2011-2021 Arthur Reutenauer,
+Copyright (c) 2019-2021 Bastien Roucariès, 2019-2021 Jürgen Spitzmüller
 
 Except where otherwise noted, Polyglossia is placed under the terms of the MIT licence
 (https://opensource.org/licenses/MIT).
