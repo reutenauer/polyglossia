@@ -37,6 +37,7 @@
 \newcommand*\TA[1]{\textsc{\color{xpgblue}#1}}
 \newcommand*\link[1]{\href{#1}{#1}}
 \renewcommand*\meta[1]{\texttt{⟨#1⟩}}
+\newcommand*\TXI[1]{\href{https://github.com/reutenauer/polyglossia/issues/#1}{\textcolor{xpgred}{\##1}}}
 \def\eg{\textit{e.g.,}\xspace}
 \def\ie{\textit{i.e.,}\xspace}
 \def\ca{\textit{ca.}\@\xspace}
@@ -2285,6 +2286,751 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 
 \noindent Finally, if you want to know whether a specific language option has been set, you can use
 \displaycmd{\iflanguageoption\marg{lang}\marg{opt. key}\marg{opt. value}\marg{true}\marg{false}}{\iflanguageoption}\new{1.47}
+
+\section{Revision history}
+
+\bgroup\footnotesize
+\subsection*{1.52 (forthcoming)}
+
+\subsubsection*{New features}
+\begin{itemize}
+\item Add support for Uyghur (\TXI{475}).
+\item New option \xpgoption{mathfunctions} for Russian and Ukrainian allows todisable the definitions
+      of math macros that might clash withother packages (\TXI{465}).
+\item Support LaTeX's new NFSS hooks (\TXI{471}).
+\end{itemize}
+
+\subsubsection*{Bug fixes}
+\begin{itemize}
+\item Fix French part modifications with \pkg{hyperref} (\TXI{469}).
+\item Fix markup of French ¦\see¦ and ¦\alsoname¦ (\TXI{468}).
+\end{itemize}
+
+\subsection*{1.51 (08-12-2020)}
+
+\subsubsection*{New features}
+\begin{itemize}
+\item New option \xpgoption{frenchpart} for French (\TXI{458}).
+\item New option \xpgoption{splithyphens} for Croatian (\TXI{454}).
+\end{itemize}
+
+\subsubsection*{Bug fixes}
+\begin{itemize}
+\item Use new LaTeX core hooks rather than \pkg{filehook} package. This fixes
+      a recent breakage of \pkg{filehook} with other external packages (\TXI{453}).
+\item Remove very old code that pretends \pkg{polyglossia} is \pkg{babel} (\TXI{455}).
+\item Fix spelling of Albanian contentsname (\TXI{456}).
+\item Fix part heading modification in French (\TXI{458}).
+\item Fix extra space in Hebrew (\TXI{459}).
+\item Register main polyglossia language earlier (\TXI{461}).
+\item Allow for hyphenations in words following opening guillemet in Frenchwith XeTeX (\TXI{462}).
+\end{itemize}
+
+
+\subsection*{1.50a (15-10-2020)}
+
+\subsubsection*{Bug fixes}
+\begin{itemize}
+\item Assure ¦\autodot¦ is defined with ¦\KOMAScript¦ in Russian.
+\end{itemize}
+
+\subsection*{1.50 (09-10-2020)}
+
+\subsubsection*{New features}
+\begin{itemize}
+\item Polyglossia now uses the Harfbuzz renderer by default with LuaTeX
+      output. This brings LuaTeX on par with XeTeX for all scripts (\TXI{337}).
+      The renderer can be changed via the new global \xpgoption{luatexrenderer} option.
+\item The (previously inadvertently working) ¦hyphenrules¦ environment that ceased
+      to work after a recent \pkg{babel} update is back and now officially supported.
+      The environment now also supports language options and aliases (\TXI{427}).
+\item New command ¦\setlanghyphenmins¦ to adapt hyphenation thresholds of languages
+      and varieties.
+\item New command ¦\abjadalph¦ for Arabic with corresponding option (\TXI{431}).
+\item Replace consecutive glues around punctuation by the correct amount of space
+      with lualatex for French, ecclesiastic Latin, and Sanskrit (\TXI{437}).
+\end{itemize}
+
+\subsubsection*{Bug fixes}
+\begin{itemize}
+\item Remove warning about missing Brazil patterns (\TXI{404}).
+\item Fix incompatibility with recent \pkg{babel} release (\TXI{408}).
+\item Fixed some spellings in Marathi (\TXI{409}).
+\item Fix spacing of geminating dot in Catalan (\TXI{410}).
+\item Fix incompatibility of Marathi with \pkg{beamer}.
+\item Correct ¦\partname¦ in Hindi (\TXI{416}).
+\item Updates and improvements to Kurdish (\TXI{418}).
+\item Only activate shorthand character if \xpgoption{babelshorthands} is \xpgvalue{true} (\TXI{421}). 
+\item Fix whitespace issue in Czech and Slovak with \xpgvalue{vlna=true} (\TXI{423}).
+\item Fix whitespace issue in Danish (\TXI{424}).
+\item Fix catcode conflicts that might occur in language definition files
+      f.\,ex.\ when loaded from a LaTeX3 class (\TXI{67}, \TXI{425}).
+\item Robustify font family switches (\TXI{428}).
+\item Fix whitespace issue in Russian \xpgoption{indentfirst} option (\TXI{433}).
+\item In Russian, \xpgoption{indentfirst} is now again default (\TXI{434}).
+\item Fix LaTeX error with arabic numbering in Ukrainian (\TXI{440}).
+\item Fix directionality after Hebrew decimal numbers (\TXI{441}).
+\item Fix ¦babelname¦ of Latin Serbian (\TXI{442}).
+\item Fix recording of secondary languages in ¦\xpg@bloaded¦ and ¦\xpg@bcp@loaded¦
+      lists (\TXI{443}).
+\item Simplify and robustify section heading modification in Russian
+      and introduce option \xpgoption{forceheadingpunctuation} (\TXI{444}).
+\item Fix Cyrillic dash (via babelshorthand ¦"---¦) when TeX ligatures
+      are disabled (\TXI{445}).
+\item Fix problem with large character indices in Lua module for punctuation
+      spacing
+\end{itemize}
+
+\subsubsection*{Interface and defaults changes}
+\begin{itemize}
+\item Polyglossia now uses the Harfbuzz renderer by default with LuaTeX
+      output. See new features section.
+\end{itemize}
+
+\subsubsection*{Build fixes}
+\begin{itemize}
+\item Fix a bug in the dtx build script which was the reason for an utterly
+       incomplete ¦polyglossia.dtx¦ file (\TXI{420}).
+\end{itemize}
+
+\subsubsection*{Documentation improvements}
+\begin{itemize}
+\item Document how to change ¦\lefthyphenmin¦ and ¦\righthyphenmin¦ for a language
+      (\TXI{435}).
+\end{itemize}
+
+
+\subsection*{1.49 (08-04-2020)}
+
+\subsubsection*{New features}
+\begin{itemize}
+\item Add hook ¦\polyglossia@language@switched¦ to the external package interface (\TXI{398}).
+\item Real fix for \TXI{400}, that wasn’t properly taken care of in 1.48.
+\end{itemize}
+
+\subsubsection*{Bug fixes}
+\begin{itemize}
+\item Fix compilation error with some \xpgoption{swapstring} options in Hungarian (\TXI{373}).
+\item Fix whitespace problem in Greek language.
+\end{itemize}
+
+\subsubsection*{Interface and defaults changes}
+\begin{itemize}
+\item Changed Finnish caption for ``Table of Contents'' to ``Sisällys'' (\TXI{403}).
+\end{itemize}
+
+
+\subsection*{1.48 (25-03-2020)}
+
+\begin{itemize}
+\item No new features
+\end{itemize}
+
+\subsubsection*{Bug fixes}
+\begin{itemize}
+\item Fix use of Hebrew with LuaLaTeX (\TXI{389}).
+\item Do not overwrite footnote redefinitions of other packages
+      with Latin and French (\TXI{391}).
+\item Fix Serbian cyrillic numerals code (\TXI{392}).
+\item Fix \xpgoption{[no]localmarks} option, whose logic was swapped (part of \TXI{395}).
+\item Protect \xpgoption{localmarks} function against uppercased language names (part of \TXI{395}).
+\item Fix buggy redefinition of ¦\@markright¦ with option localmarks (\TXI{396}).
+\item Fix incompatibility between Latin and unicode-math (\TXI{394}).
+\item Make (undocumented) ¦\defineshorthand¦ command (imported from babel) work.
+\item Fix usage of \xpgoption{localmarks} option without value.
+\item Emergency fixes for bugs caused by updates in \pkg{babel}’s ¦switch.def¦ (\TXI{399} and \TXI{400}).
+\end{itemize}
+
+\subsubsection*{Interface and defaults changes}
+\begin{itemize}
+\item Use private macros in keyval choice keys (\TXI{390}).
+\end{itemize}
+
+\subsection*{1.47 (29-01-2020)}
+
+\subsubsection*{New features}
+\begin{itemize}
+\item IETF BCP-47 compliant language tags can now be used for loading and switching
+      languages alternatively to language names (\TXI{226}).
+\item New commands ¦\languageid{<type>}¦ and ¦\mainlanguageid{<type>}¦.
+\item New test ¦\iflanguageidloaded¦.
+\item New list ¦\xpg@bcp@loaded¦.
+\item New environment ¦{lang}{<lang>}¦ (this is equivalent to ¦{<lang>}¦,  but also available with
+      ¦\setlanguagealias*¦ which does not define dedicated alias environments).
+\item New gloss option ¦totalhyphenmin¦ (corresponds to LuaTeX's ¦\hyphenationmin¦) (\TXI{111}).
+\item New test ¦\iflanguageoption{<lang>}{<key>}{<val>}¦ (\TXI{364}).
+\item Restore simple alphabetic numbering for ¦\asbuk¦ and ¦\Asbuk¦ in Belarusian, Mongolian,
+      Russian, Serbian, and Ukrainian (\TXI{377}).
+\item New command ¦\AsbukTrad¦ and ¦\asbukTrad¦ for Belarusian, Mongolian, Russian, Serbian,
+      and Ukrainian which uses traditional alphanumerical numbering.
+\item New numerals option ¦cyrillic-trad¦ and ¦cyrillic-alph¦ to differentiate simple
+      alphabetic and traditional alphanumerical Cyrillic numbering.
+\item ¦\selectbackgroundlanguage¦ and ¦\resetdefaultlanguage¦ now also support language
+      aliases.
+\item New macro ¦\charifavailable{<char code>}{<substitution>}¦.
+\item Add French language variant ¦swiss¦.
+\item Implement \xpgoption{babelshorthands} for Croatian.
+\item Implement ¦\localnumeral¦ for Japanese.
+\end{itemize}
+
+\subsubsection*{Bug fixes}
+\begin{itemize}
+\item Fix font family issue in headers (\TXI{355}).
+\item Fix whitespace issues in ¦\text<lang>¦ (\TXI{356}).
+\item Fix option-less ¦\babelname¦ in multi-variant languages (\TXI{357}).
+\item Fix some spacing inconsistencies with French, Latin, and Sanskrit (\TXI{358}).
+\item Fix issues with \xpgoption{babelshorthands} and \pkg{graphics} package (\TXI{368}).
+\item Fix some captions and improve numbering in Marathi (\TXI{370}).
+\item Fix Hungarian \xpgoption{swapstrings} feature (\TXI{373}).
+\item Fix lua punctuation code problem (\TXI{374}).
+\item Fix Bengali changecounternumbering option (\TXI{381}).
+\item Fix whitespace issue in Japanese (\TXI{387}).
+\item Fix ¦\text<lang>¦ command with multiple paragraphs.
+\item Actually implement documented german spelling variant ¦1996¦ (= ¦new¦).
+\item Fix Slovenian \xpgoption{localalph} option.
+\item Fix Czech and Slovak \xpgoption{splithyphens} with typewriter fonts.
+\item ¦farsical.sty¦: fix spacing issue with some month names.
+\item Fix directionalty of numbers in Hebrew with XeTeX.
+\item Improve interoperatability with \pkg{biblatex} (some language variants did not work yet).
+\end{itemize}
+
+\subsubsection*{Interface and defaults changes}
+\begin{itemize}
+\item Some boolean options had ¦false¦ value by default, which meant if you passed
+      them without value, the logic was reversed. This has been changed, leading to
+      change of behavior should you have used one of these options without value (\TXI{363}).
+      Concerned are the following options:
+      \begin{itemize}
+	   \item ¦babelshorthands¦ in language Belarusian, Mongolian, Ukrainian, and Russian
+             (now ¦babelshorthands¦ equals ¦babelshorthand=true¦, no longer ¦babelshorthands=false¦).
+	   \item ¦localalph¦ in language Slovenian (¦localalph¦ now equals ¦localalph=true¦).
+	   \item ¦latesthyphen¦ in language German (¦latesthyphen¦ now equals ¦latesthyphen=true¦).
+	   \item ¦fullyear¦ in package \pkg{hebrewcal} (¦fullyear¦ now equals ¦fullyear=true¦).
+      \end{itemize}
+\item The command ¦\setlanguagealias*¦ (introduced in v1.46) does no longer define
+      dedicated alias environments.
+\item The babelnames for Latin variants have been corrected to ¦classiclatin¦, ¦ecclesiasticlatin¦
+      and ¦medievallatin¦. This is how the hyphenation patterns and \pkg{babel} ¦\extras¦ are named, even
+      though the variants can currently be selected in \pkg{babel} only via appended ``dot modifier''.
+\item In accordance with the respective \pkg{l3kernel} change, ¦\str_lower_case:n¦  has been renamed to
+      ¦\str_lowercase:n¦ where used in ¦polyglossia.sty¦. Thus \pkg{polyglossia} 1.47 requires \pkg{l3kernel}
+      2020-01-12 at least.
+\end{itemize}
+
+\subsection*{1.46 (15-11-2019)}
+
+\subsubsection*{New features}
+\begin{itemize}
+\item Add option \xpgoption{indentfirst} to Russian (\TXI{78}).
+\item Add options to set and customize French-style itemize item labels to French (\TXI{89}).
+\item \pkg{Polyglossia} now decodes all supported \pkg{babel} language names in ¦\setdefaultlanguage¦,
+      ¦\setotherlanguage¦ and the language switching commands (\TXI{112}, \TXI{132}).
+\item Add optional localized math operators to Spanish (\TXI{123}).
+\item Swap section headings in Hungarian (\TXI{344}). New option \xpgoption{swapstrings} provides control
+      over this.
+\item Introduce macro ¦\setlanguagealias¦ and ¦\setlanguagealias*¦.
+\item Introduce language switching command ¦\textlang{lang}{...}¦ (equivalent to ¦\text<lang>¦,
+      but also available with ¦\setlanguagealias*¦ which does not define ¦\text<alias>¦).
+\item Add support for Afrikaans.
+\item Add support for Belarusian.
+\item Add support for Bosnian.
+\item Add support for Georgian.
+\item Add Spanish variant ¦mexican¦.
+\item Add babelshorthands as well as options \xpgoption{splithyphens} and \xpgoption{vlna} to Slovak.
+\item Add Latin language variant ¦ecclesiastic¦.
+\item Add Latin language options ¦capitalizemonth¦, ¦ecclesiasticfootnotes¦, ¦hyphenation¦,
+      ¦prosodicshorthands¦, and ¦usej¦.
+\item Add Latin shorthands for «, », æ, Æ, œ, and Œ.
+\item Add French language option \xpgoption{thincolonspace}.
+\end{itemize}
+
+\subsubsection*{Bug fixes}
+\begin{itemize}
+\item Fix problems with fragile font settings (\TXI{24}).
+\item Fix clash of French punctuation spacing with the \pkg{soul} package (\TXI{52}).
+\item Re-enable the possibility to pass a macro as main argument to ¦\setmainlanguage¦ and
+      ¦\setotherlanguage¦ (\TXI{331}).
+\item Fix detection of default ¦\languagevariant¦ (\TXI{332}).
+\item Fix LaTeX error with undefined hyphenation pattern (\TXI{346}).
+\item Fix some babel shorthand issues by updating the shorthand code from recent \pkg{babel}.
+\item Fix some problems with French and Latin auto-spacing (\TXI{345}, \TXI{352}).
+\item Fix an \pkg{expl3} declaration (\TXI{348}).
+\end{itemize}
+
+\subsubsection*{Interface and defaults changes}
+\begin{itemize}
+\item The sub-package ¦cyrillicnumbers.sty¦ has been renamed to
+      ¦xpg-cyrillicnumbers.sty¦ (per TeXLive request).
+\item In Russian, all paragraphs are now indented by default, as common in Russian typography.
+      The behavior can be opted out by \xpgoption{indentfirst=false}.
+\item In Czech, \xpgoption{splithyphens} and \xpgoption{lvna} are enabled by default.
+      Also, the option does now workas well with LuaTeX.
+\item Changed option name ¦fraktur¦ to ¦blackletter¦ in German (the former is still available
+      as an alias).
+\item In French, high punctuation characters and guillemets are spaced by half an interword
+      space now instead of a ¦\thinspace¦ (cf. \TXI{345}).
+\end{itemize}
+
+\subsection*{1.45 (27-10-2019)}
+
+\subsubsection*{New features}
+\begin{itemize}
+\item Introduce a framework for external packages to access language variants. This fixes,
+      among other things, long-standing problems in the interaction of \pkg{biblatex} and \pkg{polyglossia}.
+\item Add new macros ¦\languagevariant¦, ¦\mainlanguagevariant¦, ¦\babelname¦ and ¦\mainbabelname¦
+      for package authors to access language information.
+\item Add new test ¦\iflanguageloaded{<language>}{<true>}{<false>}¦ where <language>
+      can be a \pkg{polyglossia} or \pkg{babel} language name.
+\item Add new macros ¦\localnumeral,¦ ¦\localnumeral*,¦ ¦\Localnumeral¦ and
+      ¦\Localnumeral*¦ that convert Arabic digitals to the local number scheme.
+\item Add new macro ¦\pghyphenation¦ to add language-specific hyphenation exceptions (\TXI{18}).
+\item Add support form (Khalkha \& Cyrillic) Mongolian in line with \pkg{babel-mongolian} (\TXI{23}).
+\item Add option \xpgoption{splithyphens} and \xpgoption{vlna} to Czech (XeTeX only; for LuaTeX, use the package
+      \pkg{luavlna} to get these features) (\TXI{32}).
+\item Add support for Kurdish, both Kurmanji and Sorani (\TXI{277}).
+\item Implement proper Cyrillic (alphanumeric) numbering (\TXI{285}).
+\item Add new language ¦friulian¦.
+      This deprecates ¦friulan¦ (which is still supported for backwards compatibility).
+\item Add new language ¦malay¦ with variants ¦indonesian¦ and ¦malaysian¦.
+      This deprecates ¦bahasai¦ and ¦bahasam¦ (which are still supported for
+      backwards compatibility).
+\item Add new language ¦gaelic¦ with variants ¦irish¦ and ¦scottish¦.
+      This deprecates ¦irish¦ and ¦scottish¦ as own \pkg{polyglossia} languages (which
+      are still supported for backwards compatibility).
+\item Add new language ¦hungarian¦.
+      This deprecates ¦magyar¦ (which is still supported for backwards compatibility).
+\item Add new language ¦sorbian¦ with variants ¦lower¦ and ¦upper¦.
+      This deprecates ¦lsorbian¦ and ¦usorbian¦ (which are still supported for
+      backwards compatibility).
+\item Add new language ¦portuguese¦ with variants ¦portuguese¦ and ¦brazilian¦.
+      This deprecates ¦brazil¦ and ¦portuges¦ (which are still supported for
+      backwards compatibility).
+\item Add new language ¦norwegian¦ with variants ¦nynorsk¦ and ¦bokmal¦.
+      This deprecates ¦nynorsk¦ and ¦norsk¦ (which are still supported for
+      backwards compatibility).
+\item Add new language ¦persian¦.
+      This deprecates ¦farsi¦ (which is still supported for backwards compatibility).
+\item Add new language ¦sami¦. Currently only Northern Sami is supported.
+      This deprecates ¦samin¦ (which is still supported for backwards compatibility).
+\item ¦gloss-serbian¦: add \xpgoption{numerals=cyrillic} option. Add ¦\asbuk¦ and ¦\Asbuk¦ (\TXI{285}).
+\item Implement basic support for (French) ¦canadien¦ and (English) ¦canadian¦ (\TXI{22}).
+\item Improve support for Armenian (\TXI{79}): Add captions, Eastern month names
+      (accessible via variant=eastern) and Armenian alphabetic numbering
+      (via \xpgoption{numerals=armenian} and ¦\armenicnumeral¦).
+\item Add french option \xpgoption{autospacing} and commands ¦\AutoSpacing,¦ ¦\NoAutoSpacing¦
+      This allows to switch off autospacing globally or locally (\TXI{113}).
+\item Fixup ¦\normalfont¦ (\TXI{203}).
+\item Fix directionality issues in mixed RTL/LTR paragraphs (\TXI{204}).
+\item Implement \xpgoption{babelshorthands} for Finnish (\TXI{212}) and Czech.
+\item Implement access to current language via Lua (\TXI{243}).
+\item Introduce french option option \xpgoption{autospacetypewriter}
+      alias \xpgoption{OriginalTypewriter}.
+\item Support ¦\aemph¦ with lualatex
+\item Rename \xpgoption{automaticspacesaroundguillemets} to \xpgoption{autospaceguillemets} 
+      The old option is kept for backwards compatibility.
+\end{itemize}
+
+\subsubsection*{Bug fixes}
+\begin{itemize}
+\item Fix equation number in Arabic and Farsi (\TXI{7}).
+\item Simplify and document Hebrew \xpgoption{marcheshvan} option (\TXI{16}).
+\item Fix hyphenation of Greek with LuaTeX (\TXI{55}).
+\item Fix N'ko date format (\TXI{63}).
+\item Disable the extras of a language when a nested language starts (\TXI{66}, \TXI{169}).
+\item Properly implement Bengali numbers (\TXI{69}, \TXI{184}).
+\item Fix conflicts with other packages caused by premature shorthand activation
+      in preamble (\TXI{81}, \TXI{200}).
+\item Fix kerning in math with French (\TXI{92}).
+\item Fix expansion issue in Hebrew (\TXI{93}).
+\item Fix numbering expansion issue in Greek (\TXI{110}).
+\item Postpone ¦\disablehyphenation¦ in preamble until after setting of
+      document language (\TXI{125}).
+\item Postpone the assignment of defaultfamily to ¦\AtBeginDocument¦,
+      thus do not overwrite ¦\familydefault¦ redefinitions in the preamble (\TXI{127}).
+\item Reset number settings when switching language (\TXI{133}).
+\item Hebrew: Properly store ¦\MakeUppercase¦ for later restoration (\TXI{152}).
+\item Fix whitespace issue in ¦\datewelsh¦ (\TXI{158}).
+\item When switching language, set the language/script specific font families (\TXI{164}).
+\item Correct some Bengali captions (\TXI{165}).
+\item Fix documentation of Serbian (\TXI{168}).
+\item Reset ucl codes in Latin only if the respective variant is used (\TXI{172}).
+\item Fix ¦\disablehyphenation¦ with LuaTeX (\TXI{187}).
+\item Fix typos in Hindi captions (\TXI{202}).
+\item Pass language options to the aux files (\TXI{205}).
+\item Rewrite and fix English variant handling (\TXI{208}).
+\item Define magyar caption formats in ¦\blockextras¦ and undef them in ¦\noextras¦ (\TXI{209}).
+\item Ensure proper direction with arabic digits in Arabic and Farsi (\TXI{213}).
+\item Fix ¦\linespread¦ with Korean (\TXI{218}).
+\item Define Russian caption before key allocation (\TXI{219}).
+\item Register current language in \pkg{polyglossia} lua module after selection (\TXI{234}).
+\item Fix \pkg{babel} language switching commands (\TXI{239}):
+      ¦\foreignlanguage¦ and the starred ¦otherlanguage*¦ environment are not
+      supposed to change dates.
+\item Fix French spacing leaking beyond French (\TXI{270}).
+\item Redefine font families for French only if language is loaded (\TXI{270}).
+\item ¦gloss-russian¦: 
+     \begin{itemize}
+	 \item Check whether command exist before redefining (\TXI{280}).
+	 \item Fix some whitespace issues.
+     \end{itemize}
+\item Fix and simplify ¦\frenchfootnote¦ definition (\TXI{294}).
+\item Fix footnote numbering in Farsi.
+\item Fix Latin footnotes in Arabic documents.
+\item Set the correct main direction with \pkg{luabidi}.
+\item Fix \xpgoption{autospaceguillemets} option in French.
+\item Fix grouping in ¦gloss-danish.ldf¦.
+\item Properly store ¦\MakeUppercase¦ and ¦\@arabic¦ for later restoration.
+\end{itemize}
+
+\subsubsection*{Documentation}
+\begin{itemize}
+\item Add documentation about footnotes in RTL context
+\item Document Tibetan numerals option (\TXI{109}).
+\item Improve ¦\frenchfootnote¦ documentation.
+\item Mention Japanese support in the docs.
+\end{itemize}
+
+\subsection*{1.44 (04-04-2019)}
+\begin{itemize}
+\item Correction to Russian language file, by \TA{Maksim Zholudev} (commit d2f383e).
+\item Added Macedonian language file, by \TA{Stefan Zlatinov} (commit cd379e1).
+\end{itemize}
+
+\subsection*{1.43 (05-03-2019)}
+\begin{itemize}
+\item Correction to Hindi language file, by \TA{Zdenĕk Wagner}.
+\end{itemize}
+
+\subsection*{1.42.5 (13-04-2017)}
+\begin{itemize}
+\item Many changes to the French language file, by \TA{Maïeul Rouquette}.
+\end{itemize}
+
+\subsection*{1.42.4 (February, March 2016)}
+\begin{itemize}
+\item Remedial actions for the \pkg{babel} changes.
+\item Fixed side effect of pull request \TXI{122} (see commit d2a34ff).
+\item Added automatic Josa selection, variant, and captions options to Korean, by \TA{Dohyun Kim} (pull request \TXI{128}).
+\item Updated ¦gloss-occitan¦ from CTAN.
+\end{itemize}
+
+\subsection*{18-01-2016}
+\begin{itemize}
+	\item Fixed issue \TXI{124} (minor typo in ¦polyglossia-frpt.lua¦)
+	\item Merged pull request \TXI{117} for more French guillemet spacing
+	\item Merged pull request \TXI{121} to add ¦\bbl@loaded¦; fixes issue \TXI{120}
+	\item Merged pull request \TXI{122} that build on \TXI{121}
+	\item Merged pull request \TXI{116} for French (spacing around guillemets)
+	\item Fixed issue \TXI{115} (spurious spaces in Arabic)
+\end{itemize}
+	
+\subsection*{19-08-2015}
+\begin{itemize}
+	\item Fixed issue \TXI{107} for Marathi (labels and month names)
+\end{itemize}
+		
+\subsection*{1.42.0 (06-08-2015)}
+\begin{itemize}
+	\item Add Bengali digits package, and option to reset all numbering functions.
+	\item Add ¦long¦ option for Welsh date.
+	\item Add local alphabet in Slovenian, for enumerations and such.
+	\item Fix long-standing bug with Welsh: date should use ordinals.
+	\item Fix for Latin with LuaTeX: all variants had same problems as Classic.
+	\item Fixed error with British variant of English and LuaTeX (issue \TXI{86}).
+\end{itemize}
+			
+\subsection*{1.41.0 (16-07-2015)}
+\begin{itemize}
+	\item Added support for Khmer, by \TA{Say Ol} (private email)
+\end{itemize}
+			
+\subsection*{1.40.1 (14-07-2015)}
+\begin{itemize}
+	\item Bugfix for Korean, by \TA{Dohyun Kim} (pull request \TXI{103})
+\end{itemize}
+			
+\subsection*{1.40.0 (07-07-2015)}
+\begin{itemize}
+	\item ¦gloss-korean.ldf¦ contributed by \TA{Dohyun Kim} (pull request \TXI{102})
+\end{itemize}
+			
+\subsection*{1.33.7 (04-07-2015)}
+\begin{itemize}
+	\item Release to CTAN, no code change
+	\item Fixed extraneous space in code for Swiss German (pull request \TXI{101})
+	\item Fixed a typo in Ukrainian alphabet, for ¦\Asbuk¦ (pull request \TXI{99})
+	\item Fix for Classic Latin: load patterns for LuaTeX
+	\item Made ¦\rmfamily¦, ¦\sffamily¦ and ¦\ttfamily¦ robust again
+	\item Merged fix for Hebrew date format, by \TA{Guy Rutenberg} (pull request \TXI{94})
+	\item Merged fix for spurious space, by \TA{Caleb McKennan} (pull request \TXI{91})
+	\item Merged pull request \TXI{84} by \TA{Élie Roux} for Tibetan
+	\item Added support for Swiss German (pull request \TXI{75})
+	\item Added commands ¦\Asbuk¦ and ¦\asbuk¦ for Ukrainian (pull request \TXI{76}), similar to Russian
+	\item Documented changes to Latin from last year.
+	\item Be friendlier to right-to-left languages with LuaTeX
+	\item Enhanced Latin support by \TA{Claudio Beccari}
+\end{itemize}
+
+\subsection*{1.33.6 (15-05-2015)}
+\begin{itemize}
+	\item Introduce a ¦classical¦ and ¦medieval¦ variant of Latin
+	\item Add ¦\asbuk¦ and ¦\Asbuk¦ for Ukrainian (after their Russian counterpart)
+	\item Fix a number of bugs
+\end{itemize}
+					
+\subsection*{1.33.5 (21-05-2014)}
+\begin{itemize}
+	\item Option to disable hyphenation entirely, by \TA{Élie Roux}
+	\item Fix spurious spaces in gloss-russian.ldf, by \TA{Oleg Domanov}
+	\item Support for the Austrian variant of German, by \TA{Jürgen Spitzmüller}
+	\item Changes to the Croatian translations, by \TA{Ivan Kokan}
+	\item Correction to the Lithuanian translations, by \TA{Ignas Anikevičius}
+\end{itemize}
+					
+\subsection*{1.33.4 (27-06-2013)}
+\begin{itemize}
+	\item Emergency release for a bug introduced in ¦babelsh.def¦
+\end{itemize}
+					
+\subsection*{1.33.3 (28-05-2013)}
+\begin{itemize}
+	\item Changed formatting of some error messages (emergency fixes for TeX Live 2013)
+\end{itemize}
+					
+\subsection*{1.33.2 (26-05-2013)}
+\begin{itemize}
+	\item Added ¦\disablehyphenation¦ and ¦\enablehyphenation¦, contributed by
+	      \TA{Élie Roux}.
+	\item Fixed bug related to package inclusion. \pkg{Polyglossia} would break if
+	      we loaded ¦breqn.sty¦, and then called ¦\setmainlanguage{english}¦, this
+	      is no longer the case.
+	\item Removed spurious space introduced by ¦\captionswedish¦.
+\end{itemize}
+					
+\subsection*{1.33.1 (23-05-2013)}
+\begin{itemize}
+	\item Editorial changes to the documentation
+	\item Hunted and documented bugs
+\end{itemize}
+					
+\subsection*{1.33.0 (20-05-2013)}
+\begin{itemize}
+	\item Added support for N’Ko.
+	\item Bugfixes for LuaTeX
+	\item More work in progress on Bidi in LuaTeX.
+\end{itemize}
+					
+\subsection*{1.32.0 (15-05-2013)}
+\begin{itemize}
+	\item Transitional version to support right-to-left languages with LuaTeX.
+\end{itemize}
+
+\subsection*{1.31 (10-05-2013) / 1.3 (11-05-2013)}
+\begin{itemize}
+	\item Several bugfixes.
+	\item Sync with \pkg{babel} 3.9.
+	\item Consolidated support for LuaTeX for all languages but the ones using
+	      South and South-East Asian scripts, and languages written from right
+	      to left.  Many thanks to \TA{Élie Roux} for his help.
+	\item Added support for Tibetan, contributed by \TA{Élie Roux} (end of lines are experimental).
+\end{itemize}
+					
+\subsection*{1.30 (06-08-2012)}
+\begin{itemize}
+	\item Added support for LuaTeX.  Many languages don’t work yet.  Please bepatient.
+\end{itemize}
+					
+\subsection*{1.2.0e (28-04-2012)}
+\begin{itemize}
+	\item Fixed a number of outstanding and not very interesting bugs.
+	\item Added gloss files for Romansh and Friulan, contributed by \TA{ClaudioBeccari}.
+\end{itemize}
+					
+\subsection*{1.2.0d (12-01-2012)}
+\begin{itemize}
+	\item Removed ¦\makeatletter¦ and ¦\makeother¦ from gloss files entirely.
+\end{itemize}
+					
+\subsection*{1.2.0c (12-10-2011) [First update by Arthur Reutenauer]}
+\begin{itemize}
+	\item Update to ¦gloss-italian.ldf¦ by \TA{Claudio Beccari}, incorporating changes
+	      by \TA{Enrico Gregorio}.
+	\item Conclude every gloss file with ¦\makeatother¦ to match the initial
+	      ¦\makeatletter¦.  (Not necessary from a technical point of vue, because of one 
+	      of the changes by Enrico reported below, but I like it better that way :-)
+	\item Conclude ¦polyglossia.sty¦ with ¦\ExplSyntaxOff¦ to match the initial
+	      ¦\ExplSyntaxOn¦.
+	\item Added gloss file for Kannada, contributed by \TA{Aravinda VK} and others.
+	\item Corrections to the gloss-dutch.ldf thanks to \TA{Wouter Bolsterlee}.
+	\item Several patches by \TA{Enrico Gregorio}, fixing long-standing bugs.
+	      From the git log:
+			\begin{itemize}
+				\item Deleted setup for right-to-left writing direction, see \url{http://tug.org/pipermail/xetex/2011-April/020319.html}
+				\item Changed three appearances of ¦\newcommand¦ to ¦\newrobustcmd,¦ as the commands needs to be protected.
+				      Bug reported by \TA{kamensky}.
+				\item Corrected ¦\datepolish¦ as suggested by \TA{Piotr Kempa}
+				\item Changed ¦\lccode"¦ into ¦\lccode\string",¦ because it might come into action at wrong times when ¦"¦ is active
+				\item Changed definition of key ¦\xpg@setup¦, as ¦\@tmpfirst¦ and ¦\@tmpsecond¦ were not expanded, causing dependence
+				      of ¦\lefthyphenmin¦ and   ¦\righthyphenmin¦ to the last loaded language.
+				      Raised by \TA{Vadim Rodionov} on the XeTeX mailing list.
+				\item Deleted ¦\bgroup¦ and ¦\egroup¦ tokens from the definition of ¦otherlanguage*¦; they serve no purpose
+				      (we are already inside an environment) and conflict with \pkg{csquotes}. Noticed by \TA{P. Lehman}.
+				\item Changed the calls of ¦\input¦ to ¦\xpg@input,¦ which inputs the required file and resets the catcode
+				      of ¦@¦ to the same value as it had before the input. Since each ¦.ldf¦ file starts with ¦\makeatletter¦,
+				      the old behaviour would leave a category 11 @, which is wrong.
+				\item Added ¦\csuse{date#2}¦ to the definition of ¦otherlanguage*¦.
+			\end{itemize}
+\end{itemize}				
+						
+\subsection*{1.2.0b (03-10-2011) [Update by Philipp Stephani]}
+\begin{itemize}
+	\item Load \pkg{xkeyval} package explicitly since newer versions
+	      of \pkg{fontspec} don't load it any more.
+\end{itemize}
+							
+\subsection*{1.2.0a (27-07-2010) [Last update by François Charette]}
+\begin{itemize}
+	\item Initialize ¦\fontfamily¦ acc to value of ¦\familydefault¦
+	      (Fixes a bug when using \pkg{polyglossia} with beamer)
+	\item Remove spurious space in def of ¦\dateenglish¦
+	\item Add missing English variant ¦american¦
+	\item Serbian: fix date format and captions (Latin+Cyrillic)
+	\item Fix ¦\atticnumeral¦ in ¦gloss-greek¦
+	\item Small improvements and fixes in documentation
+\end{itemize}
+								
+								
+\subsection*{1.2.0 (15-07-2010)}
+\begin{itemize}
+	\item Adapted for \pkg{fontspec} 2.0 (will not work with earlier versions!)
+	\item New implementation of a ¦\PolyglossiaSetup¦ interface
+	      that simplifies writing ¦gloss-*.ldf¦ files
+	\item Many internal enhancements and refactoring
+	      (including a patch by \TA{Dirk Ulrich})
+	\item Improved automatic font setup when ¦\<lang>font¦ is not defined
+	\item New environment otherlanguage* (env. equivalent of ¦\foreignlanguage¦
+	      (\TA{Enrico Gregorio})
+	\item Bugfix to prevent bogus expansion of ¦\{rm,sf,tt}family¦ even in aux files(\TA{Enrico Gregorio})
+	\item New gloss files for Armenian, Bengali, Occitan, Bengali, Lao,
+	      Malayalam, Marathi, Tamil, Telugu, and Turkmen.
+	\item New auxiliary packages ¦devanagaridigits¦ and ¦bengalidigits¦
+	\item \pkg{hijrical} no longer loads \pkg{bidi} and checks for incompatible \pkg{l3calc}
+	\item Add \pkg{babel} shorthands for Russian (based on a patch by \TA{Vladimir Lomov})
+	\item Fix ¦\fnum@{table,figure}¦ for Lithuanian
+	\item Various improvements in ¦gloss-russian¦ (provided by \TA{Vladimir Lomov} and
+	      others)
+	\item Corrected captions for Bahasai, Lithuanian, Russian, Croatian
+	\item Add option \xpgoption{indentfirst=true} for Spanish, Croation and other languages
+	      (NB: \xpgoption{indentfirst} was previously named \xpgoption{frenchindent})
+	\item New option \xpgoption{script} for German: Setting \xpgoption{script=fraktur} modifies the
+	      captions for typesetting in Fraktur.
+	\item New command ¦\aemph¦ for Arabic, Farsi, Urdu, etc. to mark emphasis through
+	      overlining.
+	\item Package option \xpgoption{nolocalmarks} is now true by default: to activate it the
+	      option \xpgoption{localmarks} must be passed instead.
+	\item Loading languages à la \pkg{babel} as package options is no longer possible (this
+	      feature was deprecated since v1.1.0).
+\end{itemize}
+							
+\subsection*{1.1.1 (23-03-2010)}
+\begin{itemize}
+	\item Bugfix for French: explicit spaces before/after double punctuation
+	      signs (Par exemple : les grands « espaces » du Canada !) are
+	      now replaced by the appropriate non-breaking spaces, as in \pkg{babel}.
+	\item Bugfix for font switching mechanism within Latin script
+	      (pending a complete re-implementation in v1.2):
+	      the font shape and series are no longer reset when switching language.
+	\item New macros for non-Western decimal digits
+	      (instead of fontmappings)
+	\item New gloss files for Asturian, Lithuanian and Urdu
+	\item ¦hijrical.sty¦ is now locale-aware: ¦\hijritoday¦ is
+	      formatted differently in Arabic, Farsi, Urdu, Turkish
+	      and Bahasa Indonesia.
+	\item Enable \xpgoption{babelshorthands} for Dutch
+	\item Add missing macro ¦\allowhyphens¦
+	\item Add global option \xpgoption{babelshorthands}
+	\item Support Catalan geminated l
+	\item Bugfix when declaring more than one pkg option
+	\item Protect ¦\reset@font¦
+	\item Add missing requirement \pkg{makecmds}
+	\item Bugfix for smallcaps in captions
+	\item Typo for ¦ccname¦ in Hebrew
+	\item Add option \xpgoption{numerals} to ¦gloss-russian¦
+	\item Provide ¦\newXeTeXintercharclass¦ when undefined
+	\item Bugfix for Russian ¦\alph¦
+	\item Remove superfluous level of ¦{}¦ in definition of ¦\markright¦
+	\item Bugfix for ¦\datecatalan¦
+	\item Change ¦hyphenmins¦ for Sanskrit
+\end{itemize}
+							
+\subsection*{1.1.0b (22-11-2009)}
+\begin{itemize}
+	\item Modify ¦\hyphenmins¦ for Sanskrit (\TA{Yves Codet})
+	\item Bugfixes for Serbian and Bulgarian (\TA{Enrico Gregorio})
+\end{itemize}
+
+\subsection*{1.1.0a (22-11-2009)}
+\begin{itemize}
+	\item Bugfix for interchar tokens
+\end{itemize}
+
+\subsection*{1.1.0 (20-11-2009)}
+\begin{itemize}
+	\item Use ¦\newXeTeXintercharclass¦ (thanks to \TA{Enrico Gregorio})
+	\item Fixed implementation of shorthands for German (\pkg{babel} code in file ¦babelsh.def¦)
+	\item Arabic (\TA{Khaled Hosny}):
+	\begin{itemize}
+		\item Fix abjad form for 3 and 5 and add option ¦\abjadjimnotail¦
+		\item bugfix for ¦\arabicnumber¦
+		\item make Gregorian calendar the default
+		\item fixed typos in the sample text
+	\end{itemize}
+	\item Turkish (\TA{S. Ö. Yıldız}):
+	\begin{itemize}
+		\item fix white-space before : and !
+		\item also check if the font specified TRK for language
+		\item added missing Turkish translation of ``Glossary''
+	\end{itemize}
+	\item Suppress ¦nopattern¦ warning for non-hyphenated scripts
+	\item Changed U+0163 to U+021B for Romanian (\TA{Elie Roux})
+	\item Stylistic fixes and use macro ¦\xpg@option¦ for package options (\TA{E. Gregorio})
+	\item Fix month names in Dutch (\TA{A. Ledda})
+	\item Add Brazilian translation for ``glossary''
+	\item Remove spurious space generated by ¦gloss-spanish¦
+	\item Fix ¦ldf¦ file for brazilian
+	\item Various improvements in the code communicated by \TA{E. Gregorio}:
+	\begin{itemize}
+		\item remove superfluous ¦\protect\language¦
+		\item change default language from ¦0¦ to ¦\l@nohyphenation=255¦
+		\item localize ¦lccode¦ handling of apostrophe in French; add it to Italian
+	\end{itemize}
+	\item Fix ¦frenchspacing¦ for Vietnamese
+	\item Other minor bugfixes
+\end{itemize}
+							
+\subsection*{1.0.2 (27-01-2009)}
+\begin{itemize}
+	\item Captions corrected in Hebrew, Russian and Spanish
+	\item Removed all ¦\text<lang>¦ wrappers within caption definitions
+	\item Improved compatibility with \pkg{babel}
+	\item New option \xpgoption{babelshorthands} for German
+	\item New option \xpgoption{Script} for Sanskrit
+\end{itemize}
+							
+\subsection*{1.0.1 (31-07-2008)}
+\begin{itemize}
+	\item Improved documentation (added sections on font setup and numeration mappings)
+	\item Improvements and bug fixes for English and German
+	\item Bugfix in ¦gloss-syriac.ldf¦ (spurious space after ¦\textsyriac{...}¦)
+	\item Extended the scope of ¦\syriacabjad¦
+	\item Added ¦gloss-amharic.ldf¦ (ported from ¦ethiop.ldf¦ in the package \pkg{ethiop})
+\end{itemize}
+							
+\subsection*{1.0 (13-07-2008)}
+\begin{itemize}
+	\item Initial release on CTAN.
+\end{itemize}
+\egroup
 
 \section{Acknowledgements (by François Charette)}
 \pkg{Polyglossia} is notable for being a recycle box of previous contributions

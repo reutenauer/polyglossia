@@ -30,8 +30,7 @@ my $docsrcdir       = "$basedir/doc";
 my $fontmapsrcdir   = "$basedir/fontmapping";
 my $docsrc          = "$docsrcdir/polyglossia.tex";
 my $readme          = "$basedir/README.md";
-my @docsrcfiles     = qw(Changelog
-                          examples.tex
+my @docsrcfiles     = qw(examples.tex
                           example-arabic.tex
                           example-thai.tex);
 my $patternop       = "=";
