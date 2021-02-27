@@ -5,6 +5,7 @@ New features:
    * New option "mathfunctions" for Russian and Ukrainian allows to
      disable the definitions of math macros that might clash with
      other packages (#465).
+   * Support LaTeX's new NFSS hooks (#471).
 
 Bug fixes:
    * Fix French part modifications with hyperref (#469).

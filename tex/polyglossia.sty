@@ -1348,16 +1348,19 @@
 \DeclareRobustCommand\xpg@defaultfont@rm{%
    \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}%
    \fontfamily\rmdefault%
+   \ifdefined\UseHook\UseHook{rmfamily}\fi%
    \selectfont%
 }
 \DeclareRobustCommand\xpg@defaultfont@sf{%
    \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}%
    \fontfamily\sfdefault%
+   \ifdefined\UseHook\UseHook{sffamily}\fi%
    \selectfont%
 }
 \DeclareRobustCommand\xpg@defaultfont@tt{%
    \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}%
    \fontfamily\ttdefault%
+   \ifdefined\UseHook\UseHook{ttfamily}\fi%
    \selectfont%
 }
 
@@ -1427,8 +1430,10 @@
   \DeclareRobustCommand\sffamily{\csuse{#1@font@sf}}%
   \DeclareRobustCommand\ttfamily{\csuse{#1@font@tt}}%
   \gdef\normalfont{\protect\xpg@select@fontfamily{#1}%
-                     \fontseries{\seriesdefault}\selectfont%
-                     \fontshape{\shapedefault}\selectfont}%
+                   \fontseries{\seriesdefault}\selectfont%
+                   \fontshape{\shapedefault}
+                   \ifdefined\UseHook\UseHook{normalfont}\fi%
+                   \selectfont}%
   \gdef\reset@font{\protect\normalfont}%
 }
 
