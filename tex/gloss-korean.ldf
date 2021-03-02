@@ -515,15 +515,41 @@
 \def\XPGKOstartAA{\global\futurelet\XPGKO@let@josa\XPGKO@skipAA}
 \def\XPGKO@skipID{\XeTeXinterchartoks\XeTeXcharclassBoundary\XeTeXcharclassID{\empty}}
 \def\XPGKO@skipAA{\XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassAA{\empty}}
-\def\XPGKOstopID {\XeTeXinterchartoks\XeTeXcharclassBoundary\XeTeXcharclassID{\XPGKOstartID}}
-\def\XPGKOstopAA {\XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassAA{\XPGKOstartAA}}
+\def\XPGKOstopID {%
+    \XeTeXinterchartoks\XeTeXcharclassBoundary\XeTeXcharclassID{%
+        \ifnum\lastnodetype=12 %
+            \ifcase\lastkern
+                \or \unkern\unkern
+                \or \unkern\unkern \XPGKOhalfhalf
+                \or \unkern\unkern \XPGKOquarterquarter
+                \or \unkern\unkern \XPGKOhalfzero
+            \fi
+        \fi
+        \XPGKOstartID}}
+\def\XPGKOstopAA {%
+    \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassAA{%
+        \ifnum\lastnodetype=12 %
+            \ifcase\lastkern
+                \or \unkern\unkern
+                \or \unkern\unkern \XPGKOhalfhalf
+                \or \unkern\unkern \XPGKOquarterquarter
+                \or \unkern\unkern \XPGKOhalfzero
+            \fi
+        \fi
+        \XPGKOstartAA}}
 % macros for interchartoks (CJK punctuations)
-\def\XPGKOstartOP{\leavevmode\hbox to.5em\bgroup\hss}%
-\def\XPGKOstopOP {\egroup}%
-\def\XPGKOstartCL{\leavevmode\hbox to.5em\bgroup}%
-\def\XPGKOstopCL {\hss\egroup}%
-\let\XPGKOstartFS\XPGKOstartCL \let\XPGKOstopFS\XPGKOstopCL
-\let\XPGKOstartMD\XPGKOstartOP \let\XPGKOstopMD\XPGKOstopCL
+\def\XPGKOstartOP#1{\leavevmode
+    \hbox to.5em\bgroup\hss\XeTeXinterchartokenstate\z@ #1\egroup
+    \kern-1sp \kern1sp }
+\def\XPGKOstartCL#1{\leavevmode
+    \hbox to.5em\bgroup\XeTeXinterchartokenstate\z@ #1\hss\egroup
+    \kern-2sp \kern2sp }
+\def\XPGKOstartMD#1{\leavevmode
+    \hbox to.5em\bgroup\hss\XeTeXinterchartokenstate\z@ #1\hss\egroup
+    \kern-3sp \kern3sp }
+\def\XPGKOstartFS#1{\leavevmode
+    \hbox to.5em\bgroup\XeTeXinterchartokenstate\z@ #1\hss\egroup
+    \kern-4sp \kern4sp }
 \let\XPGKOnobreak          \nobreak
 \def\XPGKOhalfzero         {\hskip   \XPGKOhalfdim \relax}%
 \def\XPGKOhalfhalf         {\hskip   \XPGKOhalfdim minus  \XPGKOhalfdim \relax}%
@@ -616,10 +642,6 @@
             \XeTeXinterchartoks\count@\XPGKOcharclassFS{\XPGKOstartFS}%
             \XeTeXinterchartoks\count@\XPGKOcharclassAA{\XPGKOstartAA}%
             \XeTeXinterchartoks\XeTeXcharclassID\count@{\XPGKOstopID}%
-            \XeTeXinterchartoks\XeTeXcharclassOP\count@{\XPGKOstopOP}%
-            \XeTeXinterchartoks\XeTeXcharclassCL\count@{\XPGKOstopCL}%
-            \XeTeXinterchartoks\XPGKOcharclassMD\count@{\XPGKOstopMD}%
-            \XeTeXinterchartoks\XPGKOcharclassFS\count@{\XPGKOstopFS}%
             \XeTeXinterchartoks\XPGKOcharclassAA\count@{\XPGKOstopAA}%
         \fi\fi\fi\fi\fi\fi
         \ifnum\count@=\XeTeXcharclassBoundary \count@\m@ne \fi
@@ -642,45 +664,88 @@
     \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassAO{\XPGKOstopID\XPGKOlatincjk}%
     \XeTeXinterchartoks\XeTeXcharclassID\XPGKOcharclassAA{\XPGKOstopID\XPGKOlatincjk\XPGKOstartAA}%
     %
-    \XeTeXinterchartoks\XeTeXcharclassOP\XeTeXcharclassID{\XPGKOstopOP\XPGKOstartID}%
-    \XeTeXinterchartoks\XeTeXcharclassOP\XeTeXcharclassOP{\XPGKOstopOP\XPGKOstartOP}%
-    \XeTeXinterchartoks\XeTeXcharclassOP\XeTeXcharclassCL{\XPGKOstopOP\XPGKOstartCL}%
-    \XeTeXinterchartoks\XeTeXcharclassOP\XPGKOcharclassMD{\XPGKOstopOP\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
-    \XeTeXinterchartoks\XeTeXcharclassOP\XPGKOcharclassFS{\XPGKOstopOP\XPGKOstartFS}%
-    \XeTeXinterchartoks\XeTeXcharclassOP\XPGKOcharclassAA{\XPGKOstopOP\XPGKOstartAA}%
-    %
-    \XeTeXinterchartoks\XeTeXcharclassCL\XeTeXcharclassID{\XPGKOstopCL\XPGKOhalfhalf\XPGKOstartID}%
-    \XeTeXinterchartoks\XeTeXcharclassCL\XeTeXcharclassOP{\XPGKOstopCL\XPGKOhalfhalf\XPGKOstartOP}%
-    \XeTeXinterchartoks\XeTeXcharclassCL\XeTeXcharclassCL{\XPGKOstopCL\XPGKOstartCL}%
-    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassMD{\XPGKOstopCL\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
-    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassFS{\XPGKOstopCL\XPGKOstartFS}%
-    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassLD{\XPGKOstopCL\XPGKOnobreak\XPGKOhalfhalf}%
-    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassEX{\XPGKOstopCL\XPGKOnobreak\XPGKOhalfhalf}%
-    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassAO{\XPGKOstopCL\XPGKOhalfhalf}%
-    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassAC{\XPGKOstopCL\XPGKOnobreak\XPGKOhalfhalf}%
-    \XeTeXinterchartoks\XeTeXcharclassCL\XPGKOcharclassAA{\XPGKOstopCL\XPGKOhalfhalf\XPGKOstartAA}%
-    %
-    \XeTeXinterchartoks\XPGKOcharclassMD\XeTeXcharclassID{\XPGKOstopMD\XPGKOquarterquarter\XPGKOstartID}%
-    \XeTeXinterchartoks\XPGKOcharclassMD\XeTeXcharclassOP{\XPGKOstopMD\XPGKOquarterquarter\XPGKOstartOP}%
-    \XeTeXinterchartoks\XPGKOcharclassMD\XeTeXcharclassCL{\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartCL}%
-    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassMD{\XPGKOstopMD\XPGKOnobreak\XPGKOhalfquarter\XPGKOstartMD}%
-    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassFS{\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartFS}%
-    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassLD{\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter}%
-    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassEX{\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter}%
-    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassAO{\XPGKOstopMD\XPGKOquarterquarter}%
-    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassAC{\XPGKOstopMD\XPGKOnobreak\XPGKOquarterquarter}%
-    \XeTeXinterchartoks\XPGKOcharclassMD\XPGKOcharclassAA{\XPGKOstopMD\XPGKOquarterquarter\XPGKOstartAA}%
-    %
-    \XeTeXinterchartoks\XPGKOcharclassFS\XeTeXcharclassID{\XPGKOstopFS\XPGKOhalfzero\XPGKOstartID}%
-    \XeTeXinterchartoks\XPGKOcharclassFS\XeTeXcharclassOP{\XPGKOstopFS\XPGKOhalfzero\XPGKOstartOP}%
-    \XeTeXinterchartoks\XPGKOcharclassFS\XeTeXcharclassCL{\XPGKOstopFS\XPGKOstartCL}%
-    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassMD{\XPGKOstopFS\XPGKOnobreak\XPGKOiiiquarterquarter\XPGKOstartMD}%
-    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassFS{\XPGKOstopFS\XPGKOstartFS}%
-    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassLD{\XPGKOstopFS\XPGKOnobreak\XPGKOhalfzero}%
-    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassEX{\XPGKOstopFS\XPGKOnobreak\XPGKOhalfzero}%
-    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassAO{\XPGKOstopFS\XPGKOhalfzero}%
-    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassAC{\XPGKOstopFS\XPGKOnobreak\XPGKOhalfzero}%
-    \XeTeXinterchartoks\XPGKOcharclassFS\XPGKOcharclassAA{\XPGKOstopFS\XPGKOhalfzero\XPGKOstartAA}%
+    \XPGKOstopID
+    \XPGKOstopAA
+    \XeTeXinterchartoks\XeTeXcharclassBoundary\XeTeXcharclassOP{%
+        \ifnum\lastnodetype=12 %
+            \ifcase\lastkern
+                \or \unkern\unkern
+                \or \unkern\unkern \XPGKOhalfhalf
+                \or \unkern\unkern \XPGKOquarterquarter
+                \or \unkern\unkern \XPGKOhalfzero
+            \fi
+        \fi
+        \XPGKOstartOP}%
+    \XeTeXinterchartoks\XeTeXcharclassBoundary\XeTeXcharclassCL{%
+        \ifnum\lastnodetype=12 %
+            \ifcase\lastkern
+                \or \unkern\unkern
+                \or \unkern\unkern
+                \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
+                \or \unkern\unkern
+            \fi
+        \fi
+        \XPGKOstartCL}%
+    \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassMD{%
+        \ifnum\lastnodetype=12 %
+            \ifcase\lastkern
+                \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
+                \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
+                \or \unkern\unkern \XPGKOnobreak\XPGKOhalfquarter
+                \or \unkern\unkern \XPGKOnobreak\XPGKOiiiquarterquarter
+            \fi
+        \fi
+        \XPGKOstartMD}%
+    \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassFS{%
+        \ifnum\lastnodetype=12 %
+            \ifcase\lastkern
+                \or \unkern\unkern
+                \or \unkern\unkern
+                \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
+                \or \unkern\unkern
+            \fi
+        \fi
+        \XPGKOstartFS}%
+    \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassLD{%
+        \ifnum\lastnodetype=12 %
+            \ifcase\lastkern
+                \or \unkern\unkern
+                \or \unkern\unkern \XPGKOnobreak\XPGKOhalfhalf
+                \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
+                \or \unkern\unkern \XPGKOnobreak\XPGKOhalfzero
+            \fi
+        \fi
+        }%
+    \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassEX{%
+        \ifnum\lastnodetype=12 %
+            \ifcase\lastkern
+                \or \unkern\unkern
+                \or \unkern\unkern \XPGKOnobreak\XPGKOhalfhalf
+                \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
+                \or \unkern\unkern \XPGKOnobreak\XPGKOhalfzero
+            \fi
+        \fi
+        }%
+    \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassAO{%
+        \ifnum\lastnodetype=12 %
+            \ifcase\lastkern
+                \or \unkern\unkern
+                \or \unkern\unkern \XPGKOhalfhalf
+                \or \unkern\unkern \XPGKOquarterquarter
+                \or \unkern\unkern \XPGKOhalfzero
+            \fi
+        \fi
+        }%
+    \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassAC{%
+        \ifnum\lastnodetype=12 %
+            \ifcase\lastkern
+                \or \unkern\unkern
+                \or \unkern\unkern \XPGKOnobreak\XPGKOhalfhalf
+                \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
+                \or \unkern\unkern \XPGKOnobreak\XPGKOhalfzero
+            \fi
+        \fi
+        }%
     %
     \XeTeXinterchartoks\XPGKOcharclassLD\XeTeXcharclassOP{\XPGKOhalfhalf\XPGKOstartOP}%
     \XeTeXinterchartoks\XPGKOcharclassLD\XPGKOcharclassMD{\XPGKOnobreak\XPGKOquarterquarter\XPGKOstartMD}%
