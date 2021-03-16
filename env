@@ -1,6 +1,6 @@
 #!/bin/sh
 
-root=`python \`dirname $0\`/realpath.py`
+root=`realpath .`
 
 TEXINPUTS=$root/tex:$root/support/luabidi/tex:$root/support/UAX9:
 LUAINPUTS=$root/tex:   

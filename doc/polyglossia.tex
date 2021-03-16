@@ -2290,13 +2290,14 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \section{Revision history}
 
 \bgroup\footnotesize
-\subsection*{1.52 (forthcoming)}
+\subsection*{1.52 (16-03-2021)}
 
 \subsubsection*{New features}
 \begin{itemize}
+\item Adaptations to \LaTeX\ 2021/05/01 pre-release 2 for Korean (\TXI{477}).
 \item Add support for Uyghur (\TXI{475}).
-\item New option \xpgoption{mathfunctions} for Russian and Ukrainian allows todisable the definitions
-      of math macros that might clash withother packages (\TXI{465}).
+\item New option \xpgoption{mathfunctions} for Russian and Ukrainian allows to disable the definitions
+      of math macros that might clash with other packages (\TXI{465}).
 \item Support LaTeX's new NFSS hooks (\TXI{471}).
 \end{itemize}
 
@@ -2323,7 +2324,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \item Fix part heading modification in French (\TXI{458}).
 \item Fix extra space in Hebrew (\TXI{459}).
 \item Register main polyglossia language earlier (\TXI{461}).
-\item Allow for hyphenations in words following opening guillemet in Frenchwith XeTeX (\TXI{462}).
+\item Allow for hyphenations in words following opening guillemet in French with XeTeX (\TXI{462}).
 \end{itemize}
 
 
@@ -2564,7 +2565,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \item In Russian, all paragraphs are now indented by default, as common in Russian typography.
       The behavior can be opted out by \xpgoption{indentfirst=false}.
 \item In Czech, \xpgoption{splithyphens} and \xpgoption{lvna} are enabled by default.
-      Also, the option does now workas well with LuaTeX.
+      Also, the option does now work as well with LuaTeX.
 \item Changed option name ¦fraktur¦ to ¦blackletter¦ in German (the former is still available
       as an alias).
 \item In French, high punctuation characters and guillemets are spaced by half an interword
@@ -2837,13 +2838,13 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 					
 \subsection*{1.30 (06-08-2012)}
 \begin{itemize}
-	\item Added support for LuaTeX.  Many languages don’t work yet.  Please bepatient.
+	\item Added support for LuaTeX.  Many languages don’t work yet.  Please be patient.
 \end{itemize}
 					
 \subsection*{1.2.0e (28-04-2012)}
 \begin{itemize}
 	\item Fixed a number of outstanding and not very interesting bugs.
-	\item Added gloss files for Romansh and Friulan, contributed by \TA{ClaudioBeccari}.
+	\item Added gloss files for Romansh and Friulan, contributed by \TA{Claudio Beccari}.
 \end{itemize}
 					
 \subsection*{1.2.0d (12-01-2012)}
@@ -2910,7 +2911,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Improved automatic font setup when ¦\<lang>font¦ is not defined
 	\item New environment otherlanguage* (env. equivalent of ¦\foreignlanguage¦
 	      (\TA{Enrico Gregorio})
-	\item Bugfix to prevent bogus expansion of ¦\{rm,sf,tt}family¦ even in aux files(\TA{Enrico Gregorio})
+	\item Bugfix to prevent bogus expansion of ¦\{rm,sf,tt}family¦ even in aux files (\TA{Enrico Gregorio})
 	\item New gloss files for Armenian, Bengali, Occitan, Bengali, Lao,
 	      Malayalam, Marathi, Tamil, Telugu, and Turkmen.
 	\item New auxiliary packages ¦devanagaridigits¦ and ¦bengalidigits¦
