@@ -7,7 +7,7 @@
   direction=RL,
   scripttag=arab,
   langtag=UYG,
-  hyphennames={nohyphenation}،
+  hyphennames={nohyphenation},
   fontsetup=true,
 }
 
