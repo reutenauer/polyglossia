@@ -41,12 +41,12 @@
   \def\subjectname{\@ensure@RTL{تېما}}%
 }
 
+\def\uyghurmonth#1{\ifcase#1%
+  \or يانۋار\or فېۋرال\or مارت\or ئاپرېل\or ماي\or ئىيۇن
+  \or ئىيۇل\or ئاۋغۇست\or سېنتەبىر\or ئۆكتەبىر\or نويابىر\or دېكابىر\fi}
+
 \def\dateuyghur{%
-   \def\today{\number\day~\ifcase\month\or
-    يانۋار\or فېۋرال\or مارت\or ئاپرېل\or ماي\or ئىيۇن\or
-    ئىيۇل\or ئاۋغۇست\or سېنتەبىر\or ئۆكتەبىر\or نويابىر\or
-    دېكابىر\fi
-    \space\number\year}%
+   \def\today{\number\year-يىلى\space\number\day-\uyghurmonth{\month}}%
 }
 
 \endinput
