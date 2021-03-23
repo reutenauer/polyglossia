@@ -202,9 +202,10 @@
 
 \def\datecroatian{%
   \def\today{\number\day.~\ifcase\month\or
-    siječnja\or veljače\or ožujka\or travnja\or svibnja\or
-    lipnja\or srpnja\or kolovoza\or rujna\or listopada\or studenoga\or
-    prosinca\fi \space \number\year.}%
+    siječ\hr@charifavailable{01CC}{nj}a\or ve\hr@charifavailable{01C9}{lj}ače\or
+    ožujka\or trav\hr@charifavailable{01CC}{nj}a\or svib\hr@charifavailable{01CC}{nj}a\or
+    lip\hr@charifavailable{01CC}{nj}a\or srp\hr@charifavailable{01CC}{nj}a\or
+    kolovoza\or rujna\or listopada\or studenoga\or prosinca\fi \space \number\year.}%
 }
 
 \def\noextras@croatian{%
