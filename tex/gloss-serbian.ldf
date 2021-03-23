@@ -98,7 +98,7 @@
    \def\tablename{Tabela}%
    \def\partname{Deo}%
    \renewcommand\thepart{\ifcase\value{part}\or Prvi\or Drugi\or
-      Treći\or Čevrti\or Peti\or Šesti\or Sedmi\or Osmi\or
+      Treći\or Četvrti\or Peti\or Šesti\or Sedmi\or Osmi\or
       Deveti\or Deseti\or Jedanaesti\or Dvanaesti\or Trinaesti\or
       Četrnaesti\or Petnaesti\or Šesnaesti\or Sedamnaesti\or
       Osamnaesti\or Devetnaesti\or Dvadeseti\fi}%
