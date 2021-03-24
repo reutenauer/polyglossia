@@ -972,6 +972,10 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		\charifavailable{01C6}{dž}) will be replaced by single characters. This can
 		be useful if the ligatures on your font are broken (if the font does not
 		have them, they are automatically replaced).
+	\item \xpgboolkeytrue[1.53]{localalph}
+		If \xpgvalue{true}, alphanumeric counters will use a locally established version which excludes
+		the characters \meta{q}, \meta{w}, \meta{x} and \meta{y} from alphabetic counting.
+		Obviously this limits the counting range to 22.
     \item \xpgboolkeytrue[1.51]{splithyphens}
 	    According to Croatian typesetting conventions, if a word with a hard hyphen (such as \emph{je-li})
 	    is hyphenated at this hyphen, a second hyphenation character is to be inserted at the beginning
@@ -1772,7 +1776,8 @@ Currently support for Sami is limited to Northern Sami.
 	\begin{itemize}
 	\item \xpgboolkeyfalse{localalph}
 	      If \xpgvalue{true}, alphanumeric counters will use a localized version including characters with caron
-	      (a, b, c, č, d, \ldots).
+	      (\emph{a, b, c, č, d, \ldots}) and excluding the characters \meta{q}, \meta{w}, \meta{x} and \meta{y}
+	      from alphabetic counting.
 	\end{itemize}
 
 \subsection{sorbian}\label{sorbian}
@@ -2302,6 +2307,12 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 
 \bgroup\footnotesize
 \subsection*{1.53 (forthcoming)}
+
+\subsubsection*{New features}
+\begin{itemize}
+	\item New option \xpgoption{localalph} for Croatian (\TXI{486}).
+\end{itemize}
+
 \subsubsection*{Bug fixes}
 \begin{itemize}
 	\item Fix typo in Uyghur language definition file (\TXI{479}).

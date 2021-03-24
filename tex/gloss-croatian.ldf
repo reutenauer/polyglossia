@@ -22,8 +22,11 @@
 
 \define@boolkey{croatian}[croatian@]{splithyphens}[true]{}
 
+\define@boolkey{croatian}[croatian@]{localalph}[true]{}
+
 % Register default options
-\xpg@initialize@gloss@options{croatian}{babelshorthands=false,disableligatures=false,splithyphens=true}
+\xpg@initialize@gloss@options{croatian}{babelshorthands=false,disableligatures=false,
+                                        splithyphens=true,localalph=true}
 
 \ifsystem@babelshorthands
   \setkeys{croatian}{babelshorthands=true}
@@ -208,14 +211,28 @@
     kolovoza\or rujna\or listopada\or studenoga\or prosinca\fi \space \number\year.}%
 }
 
+\def\croatian@@alph#1{%
+  \ifcase#1\or a\or b\or c\or d\or e\or f\or g\or h\or i\or j\or k\or l\or
+  m\or n\or o\or p\or r\or s\or t\or u\or v\or z\else#1\fi
+}
+\def\croatian@@Alph#1{%
+  \ifcase#1\or A\or B\or C\or D\or E\or F\or G\or H\or I\or J\or K\or L\or
+  M\or N\or O\or P\or R\or S\or T\or U\or V\or Z\else#1\fi
+}
+
+\def\croation@alph#1{\expandafter\croatian@@alph\csname c@#1\endcsname}
+\def\croation@Alph#1{\expandafter\croatian@@Alph\csname c@#1\endcsname}
+
 \def\noextras@croatian{%
   \ifcroatian@babelshorthands\nocroatian@shorthands\fi%
   \nocroatian@hyphens%
+  \ifcroatian@localalph\let\alph\latinalph\let\Alph\latinAlph\fi%
 }
 
 \def\blockextras@croatian{%
   \ifcroatian@babelshorthands\croatian@shorthands\fi%
   \ifcroatian@splithyphens\croatian@hyphens\else\nocroatian@hyphens\fi%
+  \ifcroatian@localalph\let\alph\croation@alph\let\Alph\croation@Alph\fi%
 }
 
 \def\inlineextras@croatian{%
