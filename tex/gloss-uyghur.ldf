@@ -14,6 +14,11 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{uyghur}{ug}
 
+\define@boolkey{uyghur}[@uyghur@]{swapcaptions}[true]{}
+
+% Register default options
+\xpg@initialize@gloss@options{uyghur}{swapcaptions=true}
+
 \def\captionsuyghur{%
   \def\refname{\@ensure@RTL{پايدىلانما}}%
   \def\abstractname{\@ensure@RTL{ئابستراكت}}%
@@ -39,6 +44,35 @@
   \def\glossaryname{\@ensure@RTL{لۇغەت}}%
   %\def\sectionname{\@ensure@RTL{}}%
   \def\subjectname{\@ensure@RTL{تېما}}%
+}
+
+% Save original capsformats
+\let\xpg@save@fnum@table\fnum@table
+\let\xpg@save@fnum@figure\fnum@figure
+
+\def\uyghur@capsformat{%
+  % Change captions
+  \if@uyghur@swapcaptions
+     % change ‫‪'x.x‬‬ ‫ﺭﻩﺳﯩﻢ‬' to 'ﺭﻩﺳﯩﻢ-x.x‬‬'
+     \def\fnum@figure{\thefigure-\figurename}
+     %
+     % same for table
+     \def\fnum@table{\thetable-\tablename}
+  \fi
+}
+
+\def\nouyghur@capsformat{%
+   % Reset changes of \uyghur@capsformat
+   \let\fnum@table\xpg@save@fnum@table%
+   \let\fnum@figure\xpg@save@fnum@figure%
+}
+
+\def\blockextras@uyghur{%
+   \uyghur@capsformat%
+}
+
+\def\noextras@uyghur{%
+   \nouyghur@capsformat%
 }
 
 \def\uyghurmonth#1{\ifcase#1%

@@ -239,7 +239,7 @@ bosnian         & \TX{gaelic}    & \TX{lao}       & romanian        & turkish   
 breton          & galician       & \TX{latin}     & romansh         & turkmen        \\
 bulgarian       & \TX{georgian}  & latvian        & \TX{russian}    & \TX{ukrainian} \\
 \TX{catalan}    & \TX{german}    & lithuanian     & \TX{sami}       & urdu           \\
-coptic          & \TX{greek}     & macedonian     & \TX{sanskrit}   & uyghur         \\
+coptic          & \TX{greek}     & macedonian     & \TX{sanskrit}   & \TX{uyghur}    \\
 \TX{croatian}   & \TX{hebrew}    & \TX{malay}     & \TX{serbian}    & vietnamese     \\
 \TX{czech}      & \TX{hindi}     & malayalam      & \TX{slovak}     & \TX{welsh}     \\
 \bottomrule
@@ -1918,6 +1918,16 @@ The macros \cmd\Prob , \cmd\Variance , \cmd\NOD , \cmd\nod , \cmd\NOK , \cmd\nok
 \cmd\nsk , \cmd\Proj\ print some rare
 Ukrainian mathematical symbols.
 
+
+\subsection{uyghur}\label{uyghur}
+\paragraph*{Options:}
+\begin{itemize}
+	\item \xpgboolkeytrue[1.53]{swapcaptions}
+	In Uyghur, table and figure caption strings need to be in a different order and format than in other languages.
+	By default, \pkg{polyglossia} provides the correct form.
+	You can reset to \LaTeX\ default by setting this option to false.
+\end{itemize}
+
 \subsection{welsh}\label{welsh}
 \paragraph*{Options:}
 	\begin{itemize}
@@ -2296,6 +2306,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \begin{itemize}
 	\item Fix typo in Uyghur language definition file (\TXI{479}).
 	\item Fix Uyghur date format (\TXI{479}).
+	\item Fix Uyghur caption format and add \xpgoption{swapcaptions} option (\TXI{479}).
 	\item Add overlooked digraphs in Croatian (\TXP{484}).
 	\item Fix typo in Serbian ¦\thepart¦ (\TXP{485}).
 \end{itemize}
