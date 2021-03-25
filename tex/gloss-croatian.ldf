@@ -238,6 +238,7 @@
 \def\inlineextras@croatian{%
   \ifcroatian@babelshorthands\croatian@shorthands\fi%
   \ifcroatian@splithyphens\croatian@hyphens\else\nocroatian@hyphens\fi%
+  \ifcroatian@localalph\let\alph\croatian@alph\let\Alph\croatian@Alph\fi%
 }
 
 \endinput
