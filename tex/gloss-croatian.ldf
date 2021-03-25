@@ -220,8 +220,8 @@
   M\or N\or O\or P\or R\or S\or T\or U\or V\or Z\else#1\fi
 }
 
-\def\croation@alph#1{\expandafter\croatian@@alph\csname c@#1\endcsname}
-\def\croation@Alph#1{\expandafter\croatian@@Alph\csname c@#1\endcsname}
+\def\croatian@alph#1{\expandafter\croatian@@alph\csname c@#1\endcsname}
+\def\croatian@Alph#1{\expandafter\croatian@@Alph\csname c@#1\endcsname}
 
 \def\noextras@croatian{%
   \ifcroatian@babelshorthands\nocroatian@shorthands\fi%
@@ -232,7 +232,7 @@
 \def\blockextras@croatian{%
   \ifcroatian@babelshorthands\croatian@shorthands\fi%
   \ifcroatian@splithyphens\croatian@hyphens\else\nocroatian@hyphens\fi%
-  \ifcroatian@localalph\let\alph\croation@alph\let\Alph\croation@Alph\fi%
+  \ifcroatian@localalph\let\alph\croatian@alph\let\Alph\croatian@Alph\fi%
 }
 
 \def\inlineextras@croatian{%
