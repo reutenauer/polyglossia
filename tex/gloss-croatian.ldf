@@ -226,7 +226,7 @@
 \def\noextras@croatian{%
   \ifcroatian@babelshorthands\nocroatian@shorthands\fi%
   \nocroatian@hyphens%
-  \ifcroatian@localalph\let\alph\latinalph\let\Alph\latinAlph\fi%
+  \let\alph\latinalph\let\Alph\latinAlph%
 }
 
 \def\blockextras@croatian{%
