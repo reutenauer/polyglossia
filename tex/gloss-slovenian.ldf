@@ -73,6 +73,8 @@
 
 \def\inlineextras@slovenian{\extras@slovenian}
 
-\def\noextras@slovenian{\let\alph\latinalph\let\Alph\latinAlph}
+\def\noextras@slovenian{%
+  \ifslovenian@localalph\let\alph\latinalph\let\Alph\latinAlph\fi%
+}
 
 \endinput
