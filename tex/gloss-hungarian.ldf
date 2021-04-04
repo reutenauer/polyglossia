@@ -133,14 +133,23 @@
   \if@hungarian@swapheadings
      % With titlesec
      \ifcsdef{titleformat}{%
-       \ifcsdef{@part}{%
-          \let\xpg@save@part@format\@part%
-          \patchcmd{\@part}%
-                    {\partname\nobreakspace\thepart}%
-                    {\thepart.\nobreakspace\partname}%
-                    {}%
-                    {\xpg@warning{Failed to patch part for Hungarian}}%
-       }{}%
+       \ifcsdef{H@old@part}{% Hyperref
+            \let\xpg@save@part@format\H@old@part%
+            \patchcmd{\H@old@part}%
+                      {\partname\nobreakspace\thepart}%
+                      {\thepart.\nobreakspace\partname}%
+                      {}%
+                      {\xpg@warning{Failed to patch part for Hungarian}}%
+       }{% not hyperref
+         \ifcsdef{@part}{%
+            \let\xpg@save@part@format\@part%
+            \patchcmd{\@part}%
+                      {\partname\nobreakspace\thepart}%
+                      {\thepart.\nobreakspace\partname}%
+                      {}%
+                      {\xpg@warning{Failed to patch part for Hungarian}}%
+         }{}%
+       }
        \ifcsdef{chapter}{%
           \titleformat\chapter[display]%
              {\@ifundefined{ttl@fil}{\raggedright}{\ttl@fil}\ttl@fonts\ttl@sizes6}
@@ -168,13 +177,21 @@
                        {}%
                        {\xpg@warning{Failed to patch chapter for Hungarian}}%
            }{}%
-           \ifcsdef{@part}{%
-              \let\xpg@save@part@format\@part%
-              \patchcmd{\@part}{\printpartname \partnamenum \printpartnum}%
-                               {\printpartnum.\partnamenum\printpartname}%
-                               {}%
-                               {\xpg@warning{Failed to patch part for Hungarian}}%
-           }{}%
+           \ifcsdef{H@old@part}{% Hyperref
+             \let\xpg@save@part@format\H@old@part%
+                \patchcmd{\H@old@part}{\printpartname \partnamenum \printpartnum}%
+                                 {\printpartnum.\partnamenum\printpartname}%
+                                 {}%
+                                 {\xpg@warning{Failed to patch part for Hungarian}}%
+           }{% not hyperref
+             \ifcsdef{@part}{%
+                \let\xpg@save@part@format\@part%
+                \patchcmd{\@part}{\printpartname \partnamenum \printpartnum}%
+                                 {\printpartnum.\partnamenum\printpartname}%
+                                 {}%
+                                 {\xpg@warning{Failed to patch part for Hungarian}}%
+             }{}%
+           }%
          }{%  (not \ifdefined\@memptsize)
            % With standard classes
             \ifcsdef{@makechapterhead}{%
@@ -185,14 +202,23 @@
                        {}%
                        {\xpg@warning{Failed to patch chapter for Hungarian}}%
             }{}%
-            \ifcsdef{@part}{%
-              \let\xpg@save@part@format\@part%
-              \patchcmd{\@part}%
+            \ifcsdef{H@old@part}{% Hyperref
+              \let\xpg@save@part@format\H@old@part%
+              \patchcmd{\H@old@part}%
                        {\partname\nobreakspace\thepart}%
                        {\thepart.\nobreakspace\partname}%
                        {}%
-                       {\xpg@warning{Failed to patch part for Hungarian}}%
-            }{}%  (end \ifdefined\@part)
+                       {\xpg@warning{Failed to patch part for Hungarian}}%            
+            }{% not hyperref
+              \ifcsdef{@part}{%
+                \let\xpg@save@part@format\@part%
+                \patchcmd{\@part}%
+                         {\partname\nobreakspace\thepart}%
+                         {\thepart.\nobreakspace\partname}%
+                         {}%
+                         {\xpg@warning{Failed to patch part for Hungarian}}%
+              }{}%  (end \ifdefined\@part)
+            }% (end not hyperref)
           }% (end \ifdefined\@memptsize)
         }% (end \ifdefined\sectionformat)
      }% (end \ifdefined\titleformat)
@@ -245,7 +271,7 @@
    \ifcsdef{titleformat}{%
       % With titlesec
      \ifcsdef{xpg@save@part@format}{%
-        \let\@part\xpg@save@part@format
+        \ifcsdef{H@old@part}{\let\@H@old@part\xpg@save@part@format}{\let\@part\xpg@save@part@format}
      }{}%
      \ifcsdef{chapter}{%
         \titleformat\chapter[display]%
@@ -264,7 +290,7 @@
      }{%
         % With memoir and standard classes
         \ifcsdef{xpg@save@part@format}{%
-           \let\@part\xpg@save@part@format
+           \ifcsdef{H@old@part}{\let\@H@old@part\xpg@save@part@format}{\let\@part\xpg@save@part@format}
         }{}%
         \ifcsdef{xpg@save@chap@format}{%
           \let\@makechapterhead\xpg@save@chap@format
