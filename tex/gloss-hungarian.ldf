@@ -178,7 +178,7 @@
                        {\xpg@warning{Failed to patch chapter for Hungarian}}%
            }{}%
            \ifcsdef{H@old@part}{% Hyperref
-             \let\xpg@save@part@format\H@old@part%
+                \let\xpg@save@part@format\H@old@part%
                 \patchcmd{\H@old@part}{\printpartname \partnamenum \printpartnum}%
                                  {\printpartnum.\partnamenum\printpartname}%
                                  {}%
@@ -271,7 +271,11 @@
    \ifcsdef{titleformat}{%
       % With titlesec
      \ifcsdef{xpg@save@part@format}{%
-        \ifcsdef{H@old@part}{\let\@H@old@part\xpg@save@part@format}{\let\@part\xpg@save@part@format}
+        \ifcsdef{H@old@part}{%
+            \let\H@old@part\xpg@save@part@format%
+        }{%
+            \let\@part\xpg@save@part@format%
+        }%
      }{}%
      \ifcsdef{chapter}{%
         \titleformat\chapter[display]%
@@ -290,7 +294,11 @@
      }{%
         % With memoir and standard classes
         \ifcsdef{xpg@save@part@format}{%
-           \ifcsdef{H@old@part}{\let\@H@old@part\xpg@save@part@format}{\let\@part\xpg@save@part@format}
+           \ifcsdef{H@old@part}{%
+               \let\H@old@part\xpg@save@part@format%
+           }{%
+               \let\@part\xpg@save@part@format%
+           }%
         }{}%
         \ifcsdef{xpg@save@chap@format}{%
           \let\@makechapterhead\xpg@save@chap@format
