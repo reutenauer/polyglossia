@@ -216,7 +216,7 @@
                          {\partname\nobreakspace\thepart}%
                          {\thepart.\nobreakspace\partname}%
                          {}%
-                         {\xpg@warning{Failed to patch part for Hungarian}}%
+                         {\ifcsdef{part}{\xpg@warning{Failed to patch part for Hungarian}}{}}%
               }{}%  (end \ifdefined\@part)
             }% (end not hyperref)
           }% (end \ifdefined\@memptsize)
