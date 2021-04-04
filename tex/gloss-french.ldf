@@ -435,7 +435,11 @@
    \ifcsdef{titleformat}{%
       % With titlesec
      \ifcsdef{xpg@save@part@format}{%
-        \ifcsdef{H@old@part}{\let\@H@old@part\xpg@save@part@format}{\let\@part\xpg@save@part@format}
+        \ifcsdef{H@old@part}{%
+            \let\H@old@part\xpg@save@part@format%
+        }{%
+            \let\@part\xpg@save@part@format%
+        }%
      }{}%
    }{% (not \ifdefined\titleformat)
      \ifcsdef{sectionformat}{%
@@ -446,7 +450,11 @@
      }{%
         % With memoir and standard classes
         \ifcsdef{xpg@save@part@format}{%
-           \ifcsdef{H@old@part}{\let\@H@old@part\xpg@save@part@format}{\let\@part\xpg@save@part@format}
+           \ifcsdef{H@old@part}{%
+              \let\H@old@part\xpg@save@part@format%
+           }{%
+              \let\@part\xpg@save@part@format%
+           }%
         }{}%
      }% (end \ifdefined\sectionformat)
    }% (end \ifdefined\titleformat)
