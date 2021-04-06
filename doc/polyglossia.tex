@@ -1927,10 +1927,23 @@ Ukrainian mathematical symbols.
 \subsection{uyghur}\label{uyghur}
 \paragraph*{Options:}
 \begin{itemize}
-	\item \xpgboolkeytrue[1.53]{swapcaptions}
+	\item \xpgchoicekey[1.53]{swapstrings}{\xpgdefaultvalue{\xpgpresetvalue{all}},
+		\xpgvalue{captions}, \xpgvalue{headings}, \xpgvalue{headers}, \xpgvalue{hheaders}, or \xpgvalue{none}}
 	In Uyghur, table and figure caption strings need to be in a different order and format than in other languages.
-	By default, \pkg{polyglossia} provides the correct form.
-	You can reset to \LaTeX\ default by setting this option to false.
+	By default, \pkg{polyglossia} provides the correct for different classes and packages (standard classes, \pkg{KOMA-script},
+	\pkg{memoir}, and \pkg{titlesec} package should work, as well as \pkg{fancyhdr} and \pkg{caption}).
+	However, since the definition of these strings is not standardized, the redefinitions might not work
+	and even interfere badly if you use specific classes or packages that redefine the respective strings
+	themselves. In this case, you can disable some or all changes.
+	The possibilities are:
+	\begin{itemize}
+		\item ¦all¦: Redefine figure and table captions, part and chapter headings, and running headers (=~default setting)
+		\item ¦captions¦: Redefine figure and table captions only
+		\item ¦headings¦: Redefine part and chapter headings only
+		\item ¦headers¦: Redefine running headers only
+		\item ¦hheaders¦: Redefine part and chapter headings as well as running headers
+		\item ¦none¦: Do not redefine anything
+	\end{itemize}
 \end{itemize}
 
 \subsection{welsh}\label{welsh}
@@ -2317,7 +2330,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \begin{itemize}
 	\item Fix typo in Uyghur language definition file (\TXI{479}).
 	\item Fix Uyghur date format (\TXI{479}).
-	\item Fix Uyghur caption format and add \xpgoption{swapcaptions} option (\TXI{479}).
+	\item Fix Uyghur caption format and add \xpgoption{swapstrings} option (\TXI{479}).
 	\item Add overlooked digraphs in Croatian (\TXP{484}).
 	\item Fix typo in Serbian ¦\thepart¦ (\TXP{485}).
 	\item Fix part modifications in Hungarian with \pkg{hyperref} (\TXI{493}).
