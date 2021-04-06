@@ -1927,6 +1927,18 @@ Ukrainian mathematical symbols.
 \subsection{uyghur}\label{uyghur}
 \paragraph*{Options:}
 \begin{itemize}
+	\item \xpgchoicekey[1.53]{chapterformat}{\xpgdefaultvalue{\xpgpresetvalue{ordinal}},
+		\xpgvalue{roman}, \xpgvalue{arabic}}
+	In Uyghur, chapter and part headings usually use ordinals rather than numbers. Alternatively Roman numbers
+	are common as well. By default, \pkg{polyglossia} uses ordinals.
+	This option allows to change this. Choices are:
+	\begin{itemize}
+		\item ¦ordinal¦: Use ordinals for chapter and part headings (=~default setting)
+		\item ¦roman¦: Use Roman numbering for chapter and part heading.
+		\item ¦arabic¦: Use Arabic numbering for chapter and part heading (=~LaTeX default).
+	\end{itemize}
+    Note that this option only works if \xpgoption{swapstrings} is set to \xpgvalue{all}, \xpgvalue{headings} or
+    \xpgvalue{hheaders}. The caveats for that options (see below) apply.
 	\item \xpgchoicekey[1.53]{swapstrings}{\xpgdefaultvalue{\xpgpresetvalue{all}},
 		\xpgvalue{captions}, \xpgvalue{headings}, \xpgvalue{headers}, \xpgvalue{hheaders}, or \xpgvalue{none}}
 	In Uyghur, table and figure caption strings need to be in a different order and format than in other languages.
@@ -1944,6 +1956,12 @@ Ukrainian mathematical symbols.
 		\item ¦hheaders¦: Redefine part and chapter headings as well as running headers
 		\item ¦none¦: Do not redefine anything
 	\end{itemize}
+\end{itemize}
+%
+\paragraph*{Commands:}
+\begin{itemize}
+	\item \Cmd\uyghurordinal: outputs Uyghur ordinals. Supported input: integer numbers in the range of 1--100.
+	\item \Cmd\uyghurord: same as \cmd\uyghurordinal\ but with counter as input (\eg ¦\textuyghur{\uyghurord{page}}¦).
 \end{itemize}
 
 \subsection{welsh}\label{welsh}
@@ -2324,6 +2342,9 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \subsubsection*{New features}
 \begin{itemize}
 	\item New option \xpgoption{localalph} for Croatian (\TXI{486}).
+	\item Use ordinals in part and chapter headings. A new option \xpgoption{chapterformat} has been
+	      added to disable this or change format to Roman numbering (\TXI{479}).
+	\item New command \cmd\uyghurordinal\ and \cmd\uyghurord\ to produce Uyghur ordinals from 1--100.
 \end{itemize}
 
 \subsubsection*{Bug fixes}

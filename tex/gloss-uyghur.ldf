@@ -53,8 +53,27 @@
    \xpg@info{Option: Uyghur, swapstrings=\xpg@val}%
 }{\xpg@warning{Unknown Uyghur swapstrings value `#1'}}
 
+\newif\if@uyghur@ordchapter
+\newif\if@uyghur@romchapter
+\define@choicekey*+{uyghur}{chapterformat}[\xpg@val\xpg@nr]{ordinal,roman,arabic}[ordinal]{%
+   \ifcase\xpg@nr\relax
+      % ordinal:
+      \@uyghur@ordchaptertrue%
+      \@uyghur@romchapterfalse%
+   \or
+      % roman:
+      \@uyghur@ordchapterfalse%
+      \@uyghur@romchaptertrue%
+   \or
+      % arabic:
+      \@uyghur@ordchapterfalse%
+      \@uyghur@romchapterfalse%
+   \fi
+   \xpg@info{Option: Uyghur, chapterformat=\xpg@val}%
+}{\xpg@warning{Unknown Uyghur chapterformat value `#1'}}
+
 % Register default options
-\xpg@initialize@gloss@options{uyghur}{swapstrings=all}
+\xpg@initialize@gloss@options{uyghur}{swapstrings=all,chapterformat=ordinal}
 
 
 \def\captionsuyghur{%
@@ -107,7 +126,7 @@
             \let\xpg@save@part@format\H@old@part%
             \patchcmd{\H@old@part}%
                       {\partname\nobreakspace\thepart}%
-                      {\thepart\nobreakspace\partname}%
+                      {\the@uyghur@part\nobreakspace\partname}%
                       {}%
                       {\xpg@warning{Failed to patch part for Uyghur}}%
        }{% not hyperref
@@ -115,7 +134,7 @@
             \let\xpg@save@part@format\@part%
             \patchcmd{\@part}%
                       {\partname\nobreakspace\thepart}%
-                      {\thepart\nobreakspace\partname}%
+                      {\the@uyghur@part\nobreakspace\partname}%
                       {}%
                       {\xpg@warning{Failed to patch part for Uyghur}}%
          }{}%
@@ -123,18 +142,18 @@
        \ifcsdef{chapter}{%
           \titleformat\chapter[display]%
              {\@ifundefined{ttl@fil}{\raggedright}{\ttl@fil}\ttl@fonts\ttl@sizes6}
-             {\thechapter\space\@chapapp}{.8\baselineskip}{\ttl@sizes\z@\ttl@passexplicit}
+             {\the@uyghur@chapter\space\@chapapp}{.8\baselineskip}{\ttl@sizes\z@\ttl@passexplicit}
        }{}%
      }{% (not \ifdefined\titleformat)
        % With KOMA
        \ifcsdef{sectionformat}{%
           \ifcsdef{partformat}{%
             \let\xpg@save@part@format\partformat%
-            \renewcommand{\partformat}{\thepart~\partname}%
+            \renewcommand{\partformat}{\the@uyghur@part~\partname}%
           }{}%
           \ifcsdef{chapterformat}{%
             \let\xpg@save@chap@format\chapterformat%
-            \renewcommand{\chapterformat}{\mbox{\thechapter%
+            \renewcommand{\chapterformat}{\mbox{\the@uyghur@chapter%
                                           \IfUsePrefixLine{\nobreakspace\chapapp}{\enskip}}}%
           }{}%
        }{%  (not \ifdefined\sectionformat)
@@ -143,21 +162,21 @@
            \ifcsdef{@makechapterhead}{%
               \let\xpg@save@chap@format\@makechapterhead%
               \patchcmd{\@makechapterhead}{\printchaptername \chapternamenum \printchapternum}%
-                       {\printchapternum\chapternamenum\printchaptername}%
+                       {\chapnumfont\the@uyghur@chapter\chapternamenum\printchaptername}%
                        {}%
                        {\xpg@warning{Failed to patch chapter for Uyghur}}%
            }{}%
            \ifcsdef{H@old@part}{% Hyperref
                 \let\xpg@save@part@format\H@old@part%
                 \patchcmd{\H@old@part}{\printpartname \partnamenum \printpartnum}%
-                                 {\printpartnum\partnamenum\printpartname}%
+                                 {\chapnumfont\the@uyghur@part\partnamenum\printpartname}%
                                  {}%
                                  {\xpg@warning{Failed to patch part for Uyghur}}%
            }{% not hyperref
              \ifcsdef{@part}{%
                 \let\xpg@save@part@format\@part%
                 \patchcmd{\@part}{\printpartname \partnamenum \printpartnum}%
-                                 {\printpartnum\partnamenum\printpartname}%
+                                 {\chapnumfont\the@uyghur@part\partnamenum\printpartname}%
                                  {}%
                                  {\xpg@warning{Failed to patch part for Uyghur}}%
              }{}%
@@ -168,7 +187,7 @@
               \let\xpg@save@chap@format\@makechapterhead%
               \patchcmd{\@makechapterhead}%
                        {\@chapapp\space \thechapter}%
-                       {\thechapter\space \@chapapp}%
+                       {\the@uyghur@chapter\space \@chapapp}%
                        {}%
                        {\xpg@warning{Failed to patch chapter for Uyghur}}%
             }{}%
@@ -176,7 +195,7 @@
               \let\xpg@save@part@format\H@old@part%
               \patchcmd{\H@old@part}%
                        {\partname\nobreakspace\thepart}%
-                       {\thepart\nobreakspace\partname}%
+                       {\the@uyghur@part\nobreakspace\partname}%
                        {}%
                        {\xpg@warning{Failed to patch part for Uyghur}}%            
             }{% not hyperref
@@ -184,7 +203,7 @@
                 \let\xpg@save@part@format\@part%
                 \patchcmd{\@part}%
                          {\partname\nobreakspace\thepart}%
-                         {\thepart\nobreakspace\partname}%
+                         {\the@uyghur@part\nobreakspace\partname}%
                          {}%
                          {\ifcsdef{part}{\xpg@warning{Failed to patch part for Uyghur}}{}}%
               }{}%  (end \ifdefined\@part)
@@ -336,9 +355,33 @@
     \fi%
 }
 
+\let\the@uyghur@part\thepart
+\let\the@uyghur@chapter\thechapter
+
+\def\uyghur@chapterformat{%
+   \ifcsdef{part}{%
+      \if@uyghur@ordchapter%
+        \renewcommand{\the@uyghur@part}{\uyghurord{part}}%
+      \fi%
+      \if@uyghur@romchapter%
+        \renewcommand{\the@uyghur@part}{\Roman{part}}%
+      \fi%
+   }{}%
+   \ifcsdef{chapter}{%
+      \if@uyghur@ordchapter%
+        \renewcommand{\the@uyghur@chapter}{\uyghurord{chapter}}%
+      \fi%
+      \if@uyghur@romchapter%
+        \renewcommand{\the@uyghur@chapter}{\Roman{chapter}}%
+      \fi%
+   }{}%
+}
+
 \def\uyghur@numbers{%
    % Prevent bidi from setting the numbers RTL
    \uyghur@ltr@numbers%
+   % Format chapter and part
+   \uyghur@chapterformat%
 }
 
 \def\nouyghur@numbers{%
@@ -349,6 +392,8 @@
 \def\uyghur@globalnumbers{%
    % Prevent bidi from setting the numbers RTL
    \uyghur@ltr@numbers%
+   % Format chapter and part
+   \uyghur@chapterformat%
 }
 
 \def\uyghurmonth#1{\ifcase#1%
@@ -358,5 +403,27 @@
 \def\dateuyghur{%
    \def\today{\number\year-يىلى\space\number\day-\uyghurmonth{\month}}%
 }
+
+\def\uyghurord#1{\expandafter\uyghurordinal\csname c@#1\endcsname}
+
+% Ordinals 1--100
+\def\uyghurordinal#1{\ifcase#1%
+\or بىرىنچى\or ئىككىنچى\or ئۈچىنچى\or تۆتىنچى\or بەشىنچى\or ئالتىنچى\or يەتتىنچى\or سەككىزىنچى
+\or توققۇزىنچى\or ئونىنچى\or ئون بىرىنچى\or ئون ئىككىنچى\or ئون ئۈچىنچى\or ئون تۆتىنچى\or ئون بەشىنچى
+\or ئون ئالتىنچى\or ئون يەتتىنچى\or ئون سەككىزىنچى\or ئون توققۇزىنچى\or يىگىرمىنچى\or يىگىرمە بىرىنچى
+\or يىگىرمە ئىككىنچى\or يىگىرمە ئۈچىنچى\or يىگىرمە تۆتىنچى\or يىگىرمە بەشىنچى\or يىگىرمە ئالتىنچى
+\or يىگىرمە يەتتىنچى\or يىگىرمە سەككىزىنچى\or يىگىرمە توققۇزىنچى\or ئوتتۇزىنچى\or ئوتتۇز بىرىنچى
+\or ئوتتۇز ئىككىنچى\or ئوتتۇز ئۈچىنچى\or ئوتتۇز تۆتىنچى\or ئوتتۇز بەشىنچى\or ئوتتۇز ئالتىنچى\or ئوتتۇز يەتتىنچى
+\or ئوتتۇز سەككىزىنچى\or ئوتتۇز توققۇزىنچى\or قىرىقىنچى\or قىرىق بىرىنچى\or قىرىق ئىككىنچى\or قىرىق ئۈچىنچى
+\or قىرىق تۆتىنچى\or قىرىق بەشىنچى\or قىرىق ئالتىنچى\or قىرىق يەتتىنچى\or قىرىق سەككىزىنچى\or قىرىق توققۇزىنچى
+\or ئەللىكىنچى\or ئەللىك بىرىنچى\or ئەللىك ئىككىنچى\or ئەللىك ئۈچىنچى\or ئەللىك تۆتىنچى\or ئەللىك بەشىنچى
+\or ئەللىك ئالتىنچى\or ئەللىك يەتتىنچى\or ئەللىك سەككىزىنچى\or ئەللىك توققۇزىنچى\or ئاتمىشىنچى\or ئاتمىش بىرىنچى
+\or ئاتمىش ئىككىنچى\or ئاتمىش ئۈچىنچى\or ئاتمىش تۆتىنچى\or ئاتمىش بەشىنچى\or ئاتمىش ئالتىنچى\or ئاتمىش يەتتىنچى
+\or ئاتمىش سەككىزىنچى\or ئاتمىش توققۇزىنچى\or يەتمىشىنچى\or يەتمىش بىرىنچى\or يەتمىش ئىككىنچى\or يەتمىش ئۈچىنچى
+\or يەتمىش تۆتىنچى\or يەتمىش بەشىنچى\or يەتمىش ئالتىنچى\or يەتمىش يەتتىنچى\or يەتمىش سەككىزىنچى\or يەتمىش توققۇزىنچى
+\or سەكسىنىنچى\or سەكسەن بىرىنچى\or سەكسەن ئىككىنچى\or سەكسەن ئۈچىنچى\or سەكسەن تۆتىنچى\or سەكسەن بەشىنچى
+\or سەكسەن ئالتىنچى\or سەكسەن يەتتىنچى\or سەكسەن سەككىزىنچى\or سەكسەن توققۇزىنچى\or توقسىنىنچى\or توقسان بىرىنچى
+\or توقسان ئىككىنچى\or توقسان ئۈچىنچى\or توقسان تۆتىنچى\or توقسان بەشىنچى\or توقسان ئالتىنچى\or توقسان يەتتىنچى
+\or توقسان سەككىزىنچى\or توقسان توققۇزىنچى\or يۈزىنچى\fi}
 
 \endinput
