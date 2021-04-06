@@ -1,6 +1,7 @@
 \ProvidesFile{gloss-uyghur.ldf}[polyglossia: module for Uyghur]
 %% Translations provided by Osman Tursun (Github Account: neouyghur)
 
+\RequireBidi
 \PolyglossiaSetup{uyghur}{
   bcp47=ug,
   script=Arabic,
@@ -73,6 +74,41 @@
 
 \def\noextras@uyghur{%
    \nouyghur@capsformat%
+}
+
+\ifxetex
+  \let\xpg@orig@DigitsDotDashInterCharToks\DigitsDotDashInterCharToks%
+\fi
+
+\def\uyghur@ltr@numbers{%
+    \ifxetex
+       % Bidi inserts an RTL mark (0x200f) between number and number separator (- .),
+       % forcing numbers to RTL. This is wrong for Uyghur, where numbers are left to right.
+       % So we defunc the respective command.
+       \renewcommand*{\DigitsDotDashInterCharToks}{}%
+    \fi%
+}
+
+\def\nouyghur@ltr@numbers{%
+    \ifxetex
+      % Restore bidi's \DigitsDotDashInterCharToks
+      \let\DigitsDotDashInterCharToks\xpg@orig@DigitsDotDashInterCharToks%
+    \fi%
+}
+
+\def\uyghur@numbers{%
+   % Prevent bidi from setting the numbers RTL
+   \uyghur@ltr@numbers%
+}
+
+\def\nouyghur@numbers{%
+  % Restore previous bidi numbers definition
+  \nouyghur@ltr@numbers
+}
+
+\def\uyghur@globalnumbers{%
+   % Prevent bidi from setting the numbers RTL
+   \uyghur@ltr@numbers%
 }
 
 \def\uyghurmonth#1{\ifcase#1%
