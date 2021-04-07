@@ -77,9 +77,9 @@
 
 
 \def\captionsuyghur{%
-  \def\refname{\@ensure@RTL{پايدىلانما}}%
-  \def\abstractname{\@ensure@RTL{ئابستراكت}}%
-  \def\bibname{\@ensure@RTL{پايدىلانما}}%
+  \def\refname{\@ensure@RTL{پايدىلانمىلار}}%
+  \def\abstractname{\@ensure@RTL{قىسقىچە مەزمۇنى}}%
+  \def\bibname{\@ensure@RTL{پايدىلانمىلار}}%
   \def\prefacename{\@ensure@RTL{كىرىش سۆز}}%
   \def\chaptername{\@ensure@RTL{باب}}%
   \def\appendixname{\@ensure@RTL{قوشۇمچە}}%
