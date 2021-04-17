@@ -11,7 +11,7 @@
   langtag=SRB,
   hyphennames={serbian},
   hyphenmins={2,2},
-  indentfirst=true,
+  indentfirst=true, % Правопис српскога језика, Матица српска, 1994. (друго издање): т. 236, под Обликовање ступца и пасуса
   fontsetup=false,
   localnumeral=serbiannumerals,
   Localnumeral=Serbiannumerals,
