@@ -27,6 +27,10 @@
 % Babel aliases
 \setlanguagealias[script=Cyrillic]{serbian}{serbianc}
 
+\ifluatex
+  \RequirePackage{luavlna}
+\fi
+
 \newif\if@serbian@cyr
 \define@choicekey*+{serbian}{Script}[\xpg@val\xpg@nr]{cyrillic,latin}[cyrillic]{%
    \ifcase\xpg@nr\relax
@@ -70,10 +74,12 @@
    \xpg@info{Option: Serbian, numerals=\xpg@val}%
 }{\xpg@warning{Unknown Serbian numerals value `#1'}}
 
+\define@boolkey{serbian}[serbian@]{splithyphens}[true]{}
+
 \setkeys{serbian}{Script,numerals}
 
 % Register default options
-\xpg@initialize@gloss@options{serbian}{script=Cyrillic,numerals=arabic}
+\xpg@initialize@gloss@options{serbian}{script=Cyrillic,numerals=arabic,splithyphens=true}
 
 \def\captionsserbian{%
    \if@serbian@cyr\captionsserbian@cyr\else\captionsserbian@lat\fi
@@ -201,12 +207,57 @@
    \let\@Alph\latin@Alph
 }
 
+\def\serbian@@splhyphen#1{%
+  \ifnum\hyphenchar \font>0%
+    \kern\z@\discretionary{-}{\char\hyphenchar\the\font}{#1}%
+    \nobreak\hskip\z@%
+  \else%
+    #1%
+  \fi%
+}
+
+\def\serbian@splhyphen{%
+  \serbian@@splhyphen{-}%
+}
+
+\ifxetex
+  % splithyphens
+  \newXeTeXintercharclass\serbian@hyphen % -
+  \newXeTeXintercharclass\serbian@nonsyllabicpreposition%
+\fi
+
+\def\serbian@hyphens{%
+    \ifluatex
+      \AfterPreamble{\enablesplithyphens{serbian}}%
+    \else
+      \XeTeXinterchartokenstate=1
+      \XeTeXcharclass `\- \serbian@hyphen
+      \XeTeXinterchartoks \z@ \serbian@hyphen = {\serbian@@splhyphen}% "-" -> "\serbian@@splhyphen-"
+      % necessary if used together with vlna:
+      \XeTeXinterchartoks \serbian@nonsyllabicpreposition \serbian@hyphen = {\serbian@@splhyphen}% "-" -> "\serbian@@splhyphen-"
+    \fi%
+}
+
+\def\noserbian@hyphens{%
+    \ifluatex
+      \AfterPreamble{\disablesplithyphens{serbian}}%
+    \else
+      \XeTeXcharclass `\- \z@
+    \fi%
+}
+
 \def\blockextras@serbian{%
-   \ifcyrillic@numerals\serbian@numbers\fi
+  \ifcyrillic@numerals\serbian@numbers\fi%
+  \ifserbian@splithyphens\serbian@hyphens\else\noserbian@hyphens\fi%
+}
+
+\def\inlineextras@serbian{%
+  \ifserbian@splithyphens\serbian@hyphens\else\noserbian@hyphens\fi%
 }
  
 \def\noextras@serbian{%
-   \ifcyrillic@numerals\noserbian@numbers\fi
+   \ifcyrillic@numerals\noserbian@numbers\fi%
+   \noserbian@hyphens%
 }
 
 \def\Asbuk#1{\expandafter\serbian@asbuk@Alph\csname c@#1\endcsname}
