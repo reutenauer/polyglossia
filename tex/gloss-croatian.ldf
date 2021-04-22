@@ -122,10 +122,10 @@
   % 1. DŽ, Dž and dž
   \ifx#1D%
     \ifx#2Z\relax%
-       \hr@charifavailable{01C4}{DŽ}%
+       \hr@charifavailable{01C4}{D\nobreak Ž}%
     \else%
        \ifx#2z\relax
-          \hr@charifavailable{01C5}{Dž}%
+          \hr@charifavailable{01C5}{D\nobreak ž}%
        \else
            D#2%
        \fi%
@@ -133,7 +133,7 @@
   \fi%
   \ifx#1d%
     \ifx#2z\relax
-       \hr@charifavailable{01C6}{dž}%
+       \hr@charifavailable{01C6}{d\nobreak ž}%
     \else
        d#2%
     \fi%
@@ -141,10 +141,10 @@
   % 2. LJ, Lj and lj
   \ifx#1L%
     \ifx#2J\relax%
-       \hr@charifavailable{01C7}{LJ}%
+       \hr@charifavailable{01C7}{L\nobreak J}%
     \else%
        \ifx#2j\relax
-          \hr@charifavailable{01C8}{Lj}%
+          \hr@charifavailable{01C8}{L\nobreak j}%
        \else
            L#2%
        \fi%
@@ -152,7 +152,7 @@
   \fi%
   \ifx#1l%
     \ifx#2j\relax
-       \hr@charifavailable{01C9}{lj}%
+       \hr@charifavailable{01C9}{l\nobreak j}%
     \else
        l#2%
     \fi%
@@ -160,10 +160,10 @@
   % 2. NJ, Nj and nj
   \ifx#1N%
     \ifx#2J\relax%
-       \hr@charifavailable{01CA}{NJ}%
+       \hr@charifavailable{01CA}{N\nobreak J}%
     \else%
        \ifx#2j\relax
-          \hr@charifavailable{01CB}{Nj}%
+          \hr@charifavailable{01CB}{N\nobreak j}%
        \else
            N#2%
        \fi%
@@ -171,7 +171,7 @@
   \fi%
   \ifx#1n%
     \ifx#2j\relax
-       \hr@charifavailable{01CC}{nj}%
+       \hr@charifavailable{01CC}{n\nobreak j}%
     \else
        n#2%
     \fi%
@@ -184,7 +184,7 @@
   \def\refname{Literatura}%
   \def\abstractname{Sažetak}%
   \def\bibname{Bibliografija}%
-  \def\chaptername{Poglav\hr@charifavailable{01C9}{lj}e}%
+  \def\chaptername{Poglav\xpg@hr@lig{l}je}%
   \def\appendixname{Dodatak}%
   \def\contentsname{Sadržaj}%
   \def\listfigurename{Popis slika}%
@@ -205,9 +205,9 @@
 
 \def\datecroatian{%
   \def\today{\number\day.~\ifcase\month\or
-    siječ\hr@charifavailable{01CC}{nj}a\or ve\hr@charifavailable{01C9}{lj}ače\or
-    ožujka\or trav\hr@charifavailable{01CC}{nj}a\or svib\hr@charifavailable{01CC}{nj}a\or
-    lip\hr@charifavailable{01CC}{nj}a\or srp\hr@charifavailable{01CC}{nj}a\or
+    siječ\xpg@hr@lig{n}ja\or ve\xpg@hr@lig{l}jače\or
+    ožujka\or trav\xpg@hr@lig{n}ja\or svib\xpg@hr@lig{n}ja\or
+    lip\xpg@hr@lig{n}ja\or srp\xpg@hr@lig{n}ja\or
     kolovoza\or rujna\or listopada\or studenoga\or prosinca\fi \space \number\year.}%
 }
 
