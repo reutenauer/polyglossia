@@ -18,14 +18,14 @@
 
 \define@boolkey{croatian}[croatian@]{babelshorthands}[true]{}
 
-\define@boolkey{croatian}[croatian@]{disableligatures}[true]{}
+\define@boolkey{croatian}[croatian@]{disabledigraphs}[true]{}
 
 \define@boolkey{croatian}[croatian@]{splithyphens}[true]{}
 
 \define@boolkey{croatian}[croatian@]{localalph}[true]{}
 
 % Register default options
-\xpg@initialize@gloss@options{croatian}{babelshorthands=false,disableligatures=false,
+\xpg@initialize@gloss@options{croatian}{babelshorthands=false,disabledigraphs=false,
                                         splithyphens=true,localalph=true}
 
 \ifsystem@babelshorthands
@@ -70,12 +70,12 @@
   \declare@shorthand{croatian}{"'}{”}%
   \declare@shorthand{croatian}{"<}{«}%
   \declare@shorthand{croatian}{">}{»}%
-  \declare@shorthand{croatian}{"D}{\xpg@hr@lig{D}}%
-  \declare@shorthand{croatian}{"d}{\xpg@hr@lig{d}}%
-  \declare@shorthand{croatian}{"L}{\xpg@hr@lig{L}}%
-  \declare@shorthand{croatian}{"l}{\xpg@hr@lig{l}}%
-  \declare@shorthand{croatian}{"N}{\xpg@hr@lig{N}}%
-  \declare@shorthand{croatian}{"n}{\xpg@hr@lig{n}}%
+  \declare@shorthand{croatian}{"D}{\xpg@hr@digraph{D}}%
+  \declare@shorthand{croatian}{"d}{\xpg@hr@digraph{d}}%
+  \declare@shorthand{croatian}{"L}{\xpg@hr@digraph{L}}%
+  \declare@shorthand{croatian}{"l}{\xpg@hr@digraph{l}}%
+  \declare@shorthand{croatian}{"N}{\xpg@hr@digraph{N}}%
+  \declare@shorthand{croatian}{"n}{\xpg@hr@digraph{n}}%
 }
 
 \def\nocroatian@shorthands{%
@@ -109,15 +109,15 @@
 }
 
 \newcommand*\hr@charifavailable[2]{%
-   \ifcroatian@disableligatures
+   \ifcroatian@disabledigraphs
      \bgroup#2\egroup%
    \else
      \charifavailable{#1}{#2}%
    \fi%
 }
 
-% Provide croatian ligatures if available in current font
-\def\xpg@hr@lig#1#2{%
+% Provide croatian digraphs if available in current font
+\def\xpg@hr@digraph#1#2{%
  \bgroup%
   % 1. DŽ, Dž and dž
   \ifx#1D%
@@ -184,7 +184,7 @@
   \def\refname{Literatura}%
   \def\abstractname{Sažetak}%
   \def\bibname{Bibliografija}%
-  \def\chaptername{Poglav\xpg@hr@lig{l}je}%
+  \def\chaptername{Poglav\xpg@hr@digraph{l}je}%
   \def\appendixname{Dodatak}%
   \def\contentsname{Sadržaj}%
   \def\listfigurename{Popis slika}%
@@ -205,9 +205,9 @@
 
 \def\datecroatian{%
   \def\today{\number\day.~\ifcase\month\or
-    siječ\xpg@hr@lig{n}ja\or ve\xpg@hr@lig{l}jače\or
-    ožujka\or trav\xpg@hr@lig{n}ja\or svib\xpg@hr@lig{n}ja\or
-    lip\xpg@hr@lig{n}ja\or srp\xpg@hr@lig{n}ja\or
+    siječ\xpg@hr@digraph{n}ja\or ve\xpg@hr@digraph{l}jače\or
+    ožujka\or trav\xpg@hr@digraph{n}ja\or svib\xpg@hr@digraph{n}ja\or
+    lip\xpg@hr@digraph{n}ja\or srp\xpg@hr@digraph{n}ja\or
     kolovoza\or rujna\or listopada\or studenoga\or prosinca\fi \space \number\year.}%
 }
 
