@@ -184,7 +184,7 @@
   \def\refname{Literatura}%
   \def\abstractname{Sažetak}%
   \def\bibname{Bibliografija}%
-  \def\chaptername{Poglav\xpg@hr@digraph{l}je}%
+  \def\chaptername{Poglav\xpg@hr@digraph{l}{j}e}%
   \def\appendixname{Dodatak}%
   \def\contentsname{Sadržaj}%
   \def\listfigurename{Popis slika}%
@@ -205,9 +205,9 @@
 
 \def\datecroatian{%
   \def\today{\number\day.~\ifcase\month\or
-    siječ\xpg@hr@digraph{n}ja\or ve\xpg@hr@digraph{l}jače\or
-    ožujka\or trav\xpg@hr@digraph{n}ja\or svib\xpg@hr@digraph{n}ja\or
-    lip\xpg@hr@digraph{n}ja\or srp\xpg@hr@digraph{n}ja\or
+    siječ\xpg@hr@digraph{n}{j}a\or ve\xpg@hr@digraph{l}{j}ače\or
+    ožujka\or trav\xpg@hr@digraph{n}{j}a\or svib\xpg@hr@digraph{n}{j}a\or
+    lip\xpg@hr@digraph{n}{j}a\or srp\xpg@hr@digraph{n}{j}a\or
     kolovoza\or rujna\or listopada\or studenoga\or prosinca\fi \space \number\year.}%
 }
 
