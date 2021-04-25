@@ -111,8 +111,8 @@
 \newcommand*\hr@charifavailable[3]{%
    \ifcroatian@disabledigraphs% no notion of digraphs at all
      \bgroup#3\egroup%
-   \else% digraph
-     \charifavailable{#1}{#2}% digraph, either a Unicode driginal or a mimic of one
+   \else% digraph...
+     \charifavailable{#1}{#2}% ... either a Unicode original or a mimic of one
    \fi%
 }
 
