@@ -120,7 +120,7 @@
    \ifcroatian@disableligatures
      \bgroup#2\egroup%
    \else
-     \charifavailable{#1}{\mbox{#2}}%
+     \charifavailable{#1}{#2}%
    \fi%
 }
 
