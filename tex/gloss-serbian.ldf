@@ -208,6 +208,14 @@
 }
 
 \def\serbian@@splhyphen#1{%
+  \def\serbian@sh@tmp{%
+       \if\serbian@sh@next-#1%
+       \else\expandafter\serbian@@@splhyphen{#1}\fi%
+     }%
+     \futurelet\serbian@sh@next\serbian@sh@tmp%
+}
+
+\def\serbian@@@splhyphen#1{%
   \ifnum\hyphenchar \font>0%
     \kern\z@\discretionary{-}{\char\hyphenchar\the\font}{#1}%
     \nobreak\hskip\z@%

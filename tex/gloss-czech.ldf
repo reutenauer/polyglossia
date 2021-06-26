@@ -37,7 +37,15 @@
   \shorthandoff{"}%
 }{}
 
-\def\cs@@splithyphen#1{%
+\def\czech@@splithyphen#1{%
+  \def\czech@sh@tmp{%
+       \if\czech@sh@next-#1%
+       \else\expandafter\czech@@@splithyphen{#1}\fi%
+     }%
+     \futurelet\czech@sh@next\czech@sh@tmp%
+}
+
+\def\czech@@@splithyphen#1{%
   \ifnum\hyphenchar \font>0%
     \kern\z@\discretionary{-}{\char\hyphenchar\the\font}{#1}%
     \nobreak\hskip\z@%
@@ -46,14 +54,14 @@
   \fi%
 }
 
-\def\cs@splithyphen{%
-  \cs@@splithyphen{-}%
+\def\czech@splithyphen{%
+  \czech@@splithyphen{-}%
 }
 
 \def\czech@shorthands{%
   \bbl@activate{"}%
   \def\language@group{czech}%
-  \declare@shorthand{czech}{"=}{\cs@splithyphen}%
+  \declare@shorthand{czech}{"=}{\czech@splithyphen}%
   \declare@shorthand{czech}{"`}{„}%
   \declare@shorthand{czech}{"'}{“}%
   \declare@shorthand{czech}{"<}{«}%
@@ -90,9 +98,9 @@
     \else
       \XeTeXinterchartokenstate=1
       \XeTeXcharclass `\- \czech@hyphen
-      \XeTeXinterchartoks \z@ \czech@hyphen = {\cs@@splithyphen}% "-" -> "\cs@@splithyphen-"
+      \XeTeXinterchartoks \z@ \czech@hyphen = {\czech@@splithyphen}% "-" -> "\czech@@splithyphen-"
       % necessary if used together with vlna:
-      \XeTeXinterchartoks \czech@nonsyllabicpreposition \czech@hyphen = {\cs@@splithyphen}% "-" -> "\cs@@splithyphen-"
+      \XeTeXinterchartoks \czech@nonsyllabicpreposition \czech@hyphen = {\czech@@splithyphen}% "-" -> "\czech@@splithyphen-"
     \fi%
 }
 

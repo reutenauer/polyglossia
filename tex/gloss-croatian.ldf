@@ -41,6 +41,14 @@
 }{}
 
 \def\croatian@@splhyphen#1{%
+  \def\croatian@sh@tmp{%
+       \if\croatian@sh@next-#1%
+       \else\expandafter\croatian@@@splhyphen{#1}\fi%
+     }%
+     \futurelet\croatian@sh@next\croatian@sh@tmp%
+}
+
+\def\croatian@@@splhyphen#1{%
   \ifnum\hyphenchar \font>0%
     \kern\z@\discretionary{-}{\char\hyphenchar\the\font}{#1}%
     \nobreak\hskip\z@%
@@ -112,7 +120,7 @@
    \ifcroatian@disableligatures
      \bgroup#2\egroup%
    \else
-     \charifavailable{#1}{#2}%
+     \charifavailable{#1}{\mbox{#2}}%
    \fi%
 }
 
