@@ -109,16 +109,25 @@
   % change chapter and part headings
   \if@korean@swapheadings
     % With titlesec
-    \ifdefined\titleformat
-      \ifdefined\@part
-        \let\xpg@save@part@format\@part
-        \patchcmd{\@part}%
+    \ifcsdef{titleformat}{%
+      \ifcsdef{H@old@part}{% Hyperref
+        \let\xpg@save@part@format\H@old@part
+        \patchcmd{\H@old@part}%
                  {\partname\nobreakspace\thepart}%
                  {\koreanTHEname\nobreakspace \thepart\nobreakspace \partname}%
                  {}%
                  {\xpg@warning{Failed to patch part for Korean}}%
-      \fi
-      \ifdefined\chapter
+      }{% not hyperref
+        \ifcsdef{@part}{%
+            \let\xpg@save@part@format\@part
+            \patchcmd{\@part}%
+                     {\partname\nobreakspace\thepart}%
+                     {\koreanTHEname\nobreakspace \thepart\nobreakspace \partname}%
+                     {}%
+                     {\xpg@warning{Failed to patch part for Korean}}%
+        }{}%
+      }
+      \ifcsdef{chapter}{%
         \titleformat\chapter[display]%
           {\@ifundefined{ttl@fil}{\raggedright}{\ttl@fil}\ttl@fonts\ttl@sizes6}%
           {%
@@ -128,15 +137,15 @@
               \koreanTHEname\space \thechapter\space \@chapapp
             \fi
           }{.8\baselineskip}{\ttl@sizes\z@\ttl@passexplicit}%
-      \fi
-    \else % (not \ifdefined\titleformat)
+      }{}%
+    }{% (not \ifdefined\titleformat)
       % With KOMA
-      \ifdefined\sectionformat
-        \ifdefined\partformat
+      \ifcsdef{sectionformat}{%
+        \ifcsdef{partformat}{%
           \let\xpg@save@part@format\partformat
           \renewcommand*{\partformat}{\koreanTHEname~\thepart~\partname}%
-        \fi
-        \ifdefined\chapterformat
+        }{}%
+        \ifcsdef{chapterformat}{%
           \let\xpg@save@chap@format\chapterformat
           \renewcommand*{\chapterformat}{\mbox{%
             \IfChapterUsesPrefixLine
@@ -149,11 +158,11 @@
             }%
             {\thechapter\autodot\enskip}%
           }}%
-        \fi
-      \else % (not \ifdefined\sectionformat)
+        }{}%
+      }{% (not \ifdefined\sectionformat)
         % With memoir
-        \ifdefined\@memptsize
-          \ifdefined\@makechapterhead
+        \ifcsdef{@memptsize}{%
+          \ifcsdef{@makechapterhead}{%
             \let\xpg@save@chap@format\@makechapterhead
             \patchcmd{\@makechapterhead}%
                      {\printchaptername \chapternamenum \printchapternum}%
@@ -171,10 +180,10 @@
                 \ifpatchable\printchaptername\@chapapp
                   {\chapnamefont\koreanTHEname\chapternamenum}{}}%
             \fi
-          \fi
-          \ifdefined\@part
-            \let\xpg@save@part@format\@part
-            \patchcmd{\@part}%
+          }{}%
+          \ifcsdef{H@old@part}{% Hyperref
+            \let\xpg@save@part@format\H@old@part
+            \patchcmd{\H@old@part}%
                      {\printpartname \partnamenum \printpartnum}%
                      {\printkoreanpartthe \printpartnum\partnamenum \printpartname}%
                      {}%
@@ -182,10 +191,22 @@
             \ifdefined\printkoreanpartthe\else
               \def\printkoreanpartthe{\partnamefont\koreanTHEname\partnamenum}%
             \fi
-          \fi
-        \else % (not \ifdefined\@memptsize)
+          }{% not hyperref
+            \ifcsdef{@part}{%
+              \let\xpg@save@part@format\@part
+              \patchcmd{\@part}%
+                       {\printpartname \partnamenum \printpartnum}%
+                       {\printkoreanpartthe \printpartnum\partnamenum \printpartname}%
+                       {}%
+                       {\xpg@warning{Failed to patch part for Korean}}%
+              \ifdefined\printkoreanpartthe\else
+                \def\printkoreanpartthe{\partnamefont\koreanTHEname\partnamenum}%
+              \fi
+            }{}%
+          }%
+        }{% (not \ifdefined\@memptsize)
           % With standard classes
-          \ifdefined\@makechapterhead
+          \ifcsdef{@makechapterhead}{%
             \let\xpg@save@chap@format\@makechapterhead
             \patchcmd{\@makechapterhead}%
                      {\@chapapp\space \thechapter}%
@@ -198,23 +219,35 @@
                      }%
                      {}%
                      {\xpg@warning{Failed to patch chapter for Korean}}%
-          \fi
-          \ifdefined\@part
-            \let\xpg@save@part@format\@part
-            \patchcmd{\@part}%
+          }{}%
+          \ifcsdef{H@old@part}{% Hyperref
+            \let\xpg@save@part@format\H@old@part
+            \patchcmd{\H@old@part}%
                      {\partname\nobreakspace\thepart}%
                      {\koreanTHEname\nobreakspace \thepart\nobreakspace \partname}%
                      {}%
                      {\xpg@warning{Failed to patch part for Korean}}%
-          \fi % (end \ifdefined\@part)
-        \fi % (end \ifdefined\@memptsize)
-      \fi % (end \ifdefined\sectionformat)
-    \fi % (end \ifdefined\titleformat)
+          }{% not hyperref
+            \ifcsdef{@part}{%
+              \ifpatchable{\@part}%
+                   {\partname\nobreakspace\thepart}%
+                   {\let\xpg@save@part@format\@part
+                    \patchcmd{\@part}%
+                             {\partname\nobreakspace\thepart}%
+                             {\koreanTHEname\nobreakspace \thepart\nobreakspace \partname}%
+                             {}%
+                             {\ifcsdef{part}{\xpg@warning{Failed to patch part for Korean}}{}}}%
+                   {}%
+            }{}%  (end \ifdefined\@part)
+          }% (end not hyperref)
+        }% (end \ifdefined\@memptsize)
+      }% (end \ifdefined\sectionformat)
+    }% (end \ifdefined\titleformat)
   \fi % (end \if@korean@swapheadings)
   %
   % Change running headers
   \if@korean@swapheaders
-    \ifdefined\chapterformat
+    \ifcsdef{chapterformat}{%
       % With KOMA
       \let\xpg@save@chaptermark@format\chaptermarkformat
       \renewcommand*\chaptermarkformat{%
@@ -229,8 +262,8 @@
         {\thechapter\autodot}%
         \enskip
       }%
-    \else % (not \ifdefined\chapterformat)
-      \ifdefined\@memptsize
+    }{% (not \ifdefined\chapterformat)
+      \ifcsdef{@memptsize}{%
         % With memoir
         \let\xpg@save@chaptermark@format\chaptermark
         \patchcmd{\chaptermark}%
@@ -243,74 +276,85 @@
                    \fi
                  }%
                  {}%
-                 {}%
-      \else % (not \ifdefined\@memptsize)
+                 {\xpg@warning{Failed to patch chaptermark for Korean}}%
+      }{% (not \ifdefined\@memptsize)
         % With standard classes
-        \ifdefined\chaptermark
-          \let\xpg@save@chaptermark@format\chaptermark
-          \patchcmd{\chaptermark}%
-                   {\@chapapp\ \thechapter}%
-                   {%
-                     \ifx\@chapapp\korean@appendix@chapapp
-                       \appendixname\ \thechapter
-                     \else
-                       \koreanTHEname\ \thechapter\ \@chapapp
-                     \fi
-                   }%
-                   {}%
-                   {}%
-        \fi % (end \ifdefined\chaptermark)
-      \fi % (end \ifdefined\@memptsize)
-    \fi % (end \ifdefined\chapterformat)
+        \ifcsdef{chaptermark}{%
+          \ifpatchable{\chaptermark}%
+               {\@chapapp\ \thechapter}%
+               {\let\xpg@save@chaptermark@format\chaptermark
+                \patchcmd{\chaptermark}%
+                         {\@chapapp\ \thechapter}%
+                         {%
+                           \ifx\@chapapp\korean@appendix@chapapp
+                             \appendixname\ \thechapter
+                           \else
+                             \koreanTHEname\ \thechapter\ \@chapapp
+                           \fi
+                         }%
+                         {}%
+                         {\xpg@warning{Failed to patch chaptermark for Korean}}}%
+               {}%
+        }{}% (end \ifdefined\chaptermark)
+      }% (end \ifdefined\@memptsize)
+    }% (end \ifdefined\chapterformat)
   \fi % (end \if@korean@swapheaders)
 }
 
 \def\nokorean@headingsformat{%
   % Reset chapter and part heading
-  \ifdefined\titleformat
+  \ifcsdef{titleformat}{%
     % With titlesec
-    \ifdefined\xpg@save@part@format
-      \let\@part\xpg@save@part@format
-    \fi
-    \ifdefined\chapter
+    \ifcsdef{xpg@save@part@format}{%
+      \ifcsdef{H@old@part}{%
+        \let\H@old@part\xpg@save@part@format
+      }{%
+        \let\@part\xpg@save@part@format
+      }%
+    }{}%
+    \ifcsdef{chapter}{%
       \titleformat\chapter[display]%
         {\@ifundefined{ttl@fil}{\raggedright}{\ttl@fil}\ttl@fonts\ttl@sizes6}%
         {\@chapapp\space\thechapter}{.8\baselineskip}{\ttl@sizes\z@\ttl@passexplicit}%
-    \fi
-  \else % (not \ifdefined\titleformat)
-    \ifdefined\sectionformat
+    }{}%
+  }{% (not \ifdefined\titleformat)
+    \ifcsdef{sectionformat}{%
       % With KOMA
-      \ifdefined\xpg@save@part@format
+      \ifcsdef{xpg@save@part@format}{%
         \let\partformat\xpg@save@part@format
-      \fi
-      \ifdefined\xpg@save@chap@format
+      }{}%
+      \ifcsdef{xpg@save@chap@format}{%
         \let\chapterformat\xpg@save@chap@format
-      \fi
-    \else
+      }{}%
+    }{%
       % With memoir and standard classes
-      \ifdefined\xpg@save@part@format
-        \let\@part\xpg@save@part@format
-      \fi
-      \ifdefined\xpg@save@chap@format
+      \ifcsdef{xpg@save@part@format}{%
+        \ifcsdef{H@old@part}{%
+          \let\H@old@part\xpg@save@part@format
+        }{%
+          \let\@part\xpg@save@part@format
+        }%
+      }{}%
+      \ifcsdef{xpg@save@chap@format}{%
         \let\@makechapterhead\xpg@save@chap@format
-      \fi
-    \fi % (end \ifdefined\sectionformat)
-  \fi % (end \ifdefined\titleformat)
+      }{}%
+    }% (end \ifdefined\sectionformat)
+  }% (end \ifdefined\titleformat)
   %
   % Reset headers
-  \ifdefined\chaptermarkformat
+  \ifcsdef{chaptermarkformat}{%
     % With KOMA
-    \ifdefined\xpg@save@chaptermark@format
+    \ifcsdef{xpg@save@chaptermark@format}{%
       \let\chaptermarkformat\xpg@save@chaptermark@format
-    \fi
-  \else
-    \ifdefined\chaptermark
+    }{}%
+  }{%
+    \ifcsdef{chaptermark}{%
       % With memoir and standard classes
-      \ifdefined\xpg@save@chaptermark@format
+      \ifcsdef{xpg@save@chaptermark@format}{%
         \let\chaptermark\xpg@save@chaptermark@format
-      \fi
-    \fi % (end \ifdefined\chaptermark)
-  \fi % (end \ifdefined\chapterformat)
+      }{}%
+    }{}% (end \ifdefined\chaptermark)
+  }% (end \ifdefined\chapterformat)
 }
 
 \def\datekorean{%
@@ -519,6 +563,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XeTeXcharclassID{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOhalfhalf
                 \or \unkern\unkern \XPGKOquarterquarter
@@ -530,6 +575,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassAA{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOhalfhalf
                 \or \unkern\unkern \XPGKOquarterquarter
@@ -540,16 +586,16 @@
 % macros for interchartoks (CJK punctuations)
 \def\XPGKOstartOP#1{\leavevmode
     \hbox to.5em\bgroup\hss\XeTeXinterchartokenstate\z@ #1\egroup
-    \kern-1sp \kern1sp }
+    \kern-6sp \kern6sp }
 \def\XPGKOstartCL#1{\leavevmode
     \hbox to.5em\bgroup\XeTeXinterchartokenstate\z@ #1\hss\egroup
-    \kern-2sp \kern2sp }
+    \kern-7sp \kern7sp }
 \def\XPGKOstartMD#1{\leavevmode
     \hbox to.5em\bgroup\hss\XeTeXinterchartokenstate\z@ #1\hss\egroup
-    \kern-3sp \kern3sp }
+    \kern-8sp \kern8sp }
 \def\XPGKOstartFS#1{\leavevmode
     \hbox to.5em\bgroup\XeTeXinterchartokenstate\z@ #1\hss\egroup
-    \kern-4sp \kern4sp }
+    \kern-9sp \kern9sp }
 \let\XPGKOnobreak          \nobreak
 \def\XPGKOhalfzero         {\hskip   \XPGKOhalfdim \relax}%
 \def\XPGKOhalfhalf         {\hskip   \XPGKOhalfdim minus  \XPGKOhalfdim \relax}%
@@ -669,6 +715,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XeTeXcharclassOP{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOhalfhalf
                 \or \unkern\unkern \XPGKOquarterquarter
@@ -679,6 +726,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XeTeXcharclassCL{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
@@ -689,6 +737,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassMD{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
                 \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
                 \or \unkern\unkern \XPGKOnobreak\XPGKOhalfquarter
@@ -699,6 +748,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassFS{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
@@ -709,6 +759,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassLD{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOnobreak\XPGKOhalfhalf
                 \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
@@ -719,6 +770,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassEX{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOnobreak\XPGKOhalfhalf
                 \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
@@ -729,6 +781,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassAO{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOhalfhalf
                 \or \unkern\unkern \XPGKOquarterquarter
@@ -739,6 +792,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassAC{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOnobreak\XPGKOhalfhalf
                 \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
