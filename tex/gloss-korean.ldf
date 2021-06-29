@@ -519,6 +519,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XeTeXcharclassID{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOhalfhalf
                 \or \unkern\unkern \XPGKOquarterquarter
@@ -530,6 +531,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassAA{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOhalfhalf
                 \or \unkern\unkern \XPGKOquarterquarter
@@ -540,16 +542,16 @@
 % macros for interchartoks (CJK punctuations)
 \def\XPGKOstartOP#1{\leavevmode
     \hbox to.5em\bgroup\hss\XeTeXinterchartokenstate\z@ #1\egroup
-    \kern-1sp \kern1sp }
+    \kern-6sp \kern6sp }
 \def\XPGKOstartCL#1{\leavevmode
     \hbox to.5em\bgroup\XeTeXinterchartokenstate\z@ #1\hss\egroup
-    \kern-2sp \kern2sp }
+    \kern-7sp \kern7sp }
 \def\XPGKOstartMD#1{\leavevmode
     \hbox to.5em\bgroup\hss\XeTeXinterchartokenstate\z@ #1\hss\egroup
-    \kern-3sp \kern3sp }
+    \kern-8sp \kern8sp }
 \def\XPGKOstartFS#1{\leavevmode
     \hbox to.5em\bgroup\XeTeXinterchartokenstate\z@ #1\hss\egroup
-    \kern-4sp \kern4sp }
+    \kern-9sp \kern9sp }
 \let\XPGKOnobreak          \nobreak
 \def\XPGKOhalfzero         {\hskip   \XPGKOhalfdim \relax}%
 \def\XPGKOhalfhalf         {\hskip   \XPGKOhalfdim minus  \XPGKOhalfdim \relax}%
@@ -669,6 +671,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XeTeXcharclassOP{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOhalfhalf
                 \or \unkern\unkern \XPGKOquarterquarter
@@ -679,6 +682,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XeTeXcharclassCL{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
@@ -689,6 +693,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassMD{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
                 \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
                 \or \unkern\unkern \XPGKOnobreak\XPGKOhalfquarter
@@ -699,6 +704,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassFS{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
@@ -709,6 +715,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassLD{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOnobreak\XPGKOhalfhalf
                 \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
@@ -719,6 +726,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassEX{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOnobreak\XPGKOhalfhalf
                 \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
@@ -729,6 +737,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassAO{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOhalfhalf
                 \or \unkern\unkern \XPGKOquarterquarter
@@ -739,6 +748,7 @@
     \XeTeXinterchartoks\XeTeXcharclassBoundary\XPGKOcharclassAC{%
         \ifnum\lastnodetype=12 %
             \ifcase\lastkern
+                \or \or \or \or \or
                 \or \unkern\unkern
                 \or \unkern\unkern \XPGKOnobreak\XPGKOhalfhalf
                 \or \unkern\unkern \XPGKOnobreak\XPGKOquarterquarter
