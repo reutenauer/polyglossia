@@ -6,7 +6,7 @@
 \RequirePackage{xkeyval}[2008/08/13]
 % Will raise error if used with anything else than XeTeX or LuaTeX
 \RequirePackage{fontspec}[2010/06/08]% v2.0
-\RequirePackage{iftex}
+%\RequirePackage{iftex}
 \RequirePackage{expl3}
 \RequirePackage{l3keys2e}
 \RequirePackage{xparse}
@@ -34,10 +34,10 @@
   \providecommand\texorpdfstring[2]{#1}% dummy command if hyperref is not loaded
 }
 
-\ifluatex
+\sys_if_engine_luatex:T{
   \RequirePackage{luatexbase} % already included by fontspec, but needed here
   \RequireLuaModule{polyglossia}
-\fi
+}
 
 % Which version of XeTeX do we use? What is the boudary class? 4095 or 255
 \@ifundefined{e@alloc@intercharclass@top}
@@ -1009,15 +1009,23 @@
 \newXeTeXintercharclass\xpg@normalclass %TODO
 }{}
 
-\ifxetex
 %% when no patterns are available, we use \l@nohyphenation, assigned to 255
 %%  (suggestion by Enrico Gregorio)
-  \@ifundefined{l@nohyphenation}{\chardef\l@nohyphenation=255 }{}
-\else\ifluatex
-  \@ifundefined{l@nohyphenation}{\chardef\l@nohyphenation=\directlua{
-    tex.sprint(polyglossia.newloader_loaded_languages.nohyphenation)}\relax
-  }{}
-\fi\fi
+\str_case_e:nn{\c_sys_engine_str}{
+  {luatex}
+    {
+      \@ifundefined{l@nohyphenation}
+        {\chardef\l@nohyphenation=\directlua{
+           tex.sprint(polyglossia.newloader_loaded_languages.nohyphenation)}\relax
+        }
+        {}
+    }
+  {xetex}
+    {
+      \@ifundefined{l@nohyphenation}{\chardef\l@nohyphenation=255 }{}
+    }
+}
+
 
 %we call this macro when a gloss file is not found for a given language
 \def\xpg@nogloss#1{%
@@ -1231,9 +1239,10 @@
       { \csedef{bcp47id}{\l_tmpa_tl}% 
         \cs_gset_eq:cc{#2@gbcp47id}{bcp47id}%
       }
-  \ifluatex %
-  \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
-  \fi %
+ \sys_if_engine_luatex:T
+   {
+     \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
+   }
 }
 
 \let\setmainlanguage=\setdefaultlanguage
@@ -1706,10 +1715,11 @@
    }{%
      \xpg@set@language@aux[#2]{#3}%
    }%
-   \ifluatex%
-     \directlua{polyglossia.select_language('\luatexluaescapestring{\string#3}',
+   \sys_if_engine_luatex:T
+     {
+       \directlua{polyglossia.select_language('\luatexluaescapestring{\string#3}',
                      \the\csname l@#3\endcsname)}%
-   \fi%
+     }
   \polyglossia@register@language:nn{#2}{#3}%
 }
 
@@ -2004,38 +2014,44 @@
 % This check is also used by biblatex, so don't
 % rename silently.
 \newcommand\xpg@ifdefined[3]{%
-    % With luatex, we first need to define \l@#1.
-    \ifluatex
-      \polyglossia@luatex@load@lang{#1}%
-    \fi
-    \polyglossia@check@ifdefined:NTF{#1}{#2}{#3}%
+  % With luatex, we first need to define \l@#1.
+  \sys_if_engine_luatex:T
+  {
+    \polyglossia@luatex@load@lang{#1}%
+  }
+  \polyglossia@check@ifdefined:NTF{#1}{#2}{#3}%
 }%
 
 % Set \bbl@hyphendata@\the\language, which is (lua)babel's
 % hyphenation pattern hook
 % FIXME Clarifiy why/when this is needed.
 \newcommand*\xpg@set@bbl@hyphendata[1]{%
-    \ifluatex%
-        \ifcsdef{bbl@hyphendata@#1}{}{%
-            \global\@namedef{bbl@hyphendata@\the\language}{}%
-        }%
-    \fi% 
+  \sys_if_engine_luatex:T
+  {
+    \ifcsdef{bbl@hyphendata@#1}{}{%
+      \global\@namedef{bbl@hyphendata@\the\language}{}%
+    }%
+  }
 }
 
 % Set hyphenation patterns for a given language. This does the right
 % thing both for XeTeX and LuaTeX
 \newcommand*\xpg@set@hyphenation@patterns[1]{%
-  \ifluatex
-    \polyglossia@luatex@load@lang{#1}%
-    \language=\csname l@#1\endcsname
-  \else
-    \ifxetex
-      \language=\csname l@#1\endcsname
-    \else
+  \str_case_e:nnF{\c_sys_engine_str}{
+      {luatex}
+        {
+          \polyglossia@luatex@load@lang{#1}%
+          \language=\csname l@#1\endcsname
+        }
+      {xetex}
+        {
+          \language=\csname l@#1\endcsname
+        }
+    }
+    {
       \xpg@warning{You’re~running~a~TeX~engine~that~is~not~LuaTeX~or~XeTeX.\MessageBreak
         That~is~almost~guaranteed~to~cause~problems.}%
-    \fi
-  \fi
+    }
 }
 
 
@@ -2198,7 +2214,7 @@
       \edef\tmpa{\csuse{\csname tmp@bcp47id\endcsname @hyphenmins}}%
       \expandafter\expandafter\expandafter\set@hyphenmins\tmpa\relax%
    }
-   \ifluatex
+   \sys_if_engine_luatex:T{
      % Set \totalhyphenmin if specified
      \prop_get:NxNTF \polyglossia@langsetup {#2/totalhyphenmin} \l_tmpa_tl
      {
@@ -2206,7 +2222,7 @@
         \expandafter\hyphenationmin \l_tmpa_tl%
      }%
      {}%
-   \fi
+   }
 }
 
 % Babel previously compiled in hyphenrules into the kernel (via hyphen.cfg)
@@ -2303,15 +2319,15 @@
 
 % Set the LuaTeX renderer. As opposed to fontspec, we use Harfbuzz by default.
 % This can be changed via the luatexrenderer package option.
-\ifluatex
-  \exp_args:Nee \str_if_eq:nnF{\l_polyglossia_luatex_renderer}{none}
-     {
-         \xpg@info{Setting~ LuaTeX~ font~ renderer~ to~ \l_polyglossia_luatex_renderer}
-         \exp_args:Nee \defaultfontfeatures{Renderer=\l_polyglossia_luatex_renderer}
-     }
-\fi
+\sys_if_engine_luatex:T{
+  \str_if_eq:eeF{\l_polyglossia_luatex_renderer}{none}
+  {
+    \xpg@info{Setting~ LuaTeX~ font~ renderer~ to~ \l_polyglossia_luatex_renderer}
+    \exp_args:Ne \defaultfontfeatures{Renderer=\l_polyglossia_luatex_renderer}
+  }
+}
 
-\bool_if:nTF \l_polyglossia_verbose_bool {} {
+\bool_if:nF \l_polyglossia_verbose_bool {
    \gdef\@latex@info#1{\relax}% no latex info
    \gdef\@font@info#1{\relax}% no latex font info
    \gdef\@font@warning#1{\relax}% no latex font warnings
@@ -2319,9 +2335,9 @@
    \gdef\xpg@info#1{\relax}% no polyglossia info
 }
 
-\bool_if:nTF \l_polyglossia_localmarks_bool {
+\bool_if:nT \l_polyglossia_localmarks_bool {
   \polyglossia@enable@local@marks:
-}{}
+}
 
 % compatibility
 \newif\ifsystem@babelshorthands
