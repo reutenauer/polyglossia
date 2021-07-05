@@ -118,10 +118,13 @@
 \def\xpg@ill@value#1#2{%
   \xpg@warning{Illegal~ value~ (#1)~ for~ #2}}
 
+% all language loaded
+\seq_new:N \__xpg_langs_loaded
+
 % error out if lang is not loaded
 \cs_new_nopar:Nn \polyglossia@error@iflangnotloaded:n
 {
-  \cs_if_exist:cF{#1@loaded}
+  \seq_if_in:NxF \__xpg_langs_loaded {#1}
   {
     \xpg@error{language~ #1~ is~ not~ loaded.~ Please~ load~ it~ before~ using~ it.}
   }
@@ -1079,13 +1082,13 @@
 
 % load a master language from an alias file
 \newcommand*\xpg@load@master@language[1] {
-   \xpg@input{gloss-#1.ldf}
-   \ifcsundef{#1@loaded}%
-   {
-     \polyglossia@define@language@cmd:e{#1}%
-   }{}
-   \polyglossia@register@language:nn{}{#1}%
-   \csgdef{#1@loaded}{}%
+  \xpg@input{gloss-#1.ldf}
+  \seq_if_in:NxF \__xpg_langs_loaded {#1}
+  {
+    \polyglossia@define@language@cmd:e{#1}%
+  }
+  \polyglossia@register@language:nn{}{#1}%
+  \seq_put_right:Nn \__xpg_langs_loaded {#1}
 }
 
 
@@ -1186,18 +1189,15 @@
         }%
      }{}%
      \csgdef{#2@registered}{}%
-  }%
-  \ifcsundef{#2@loaded}%
+   }%
+  \seq_if_in:NxF \__xpg_langs_loaded {#2}
   {
     \polyglossia_load_lang_definition:nn{#1}{#2}
     % define environment and command (except for internal latex language)
     \ifstrequal{#2}{latex}{}{%
       \polyglossia@define@language@cmd:x{#2}
     }%
-    \csgdef{#2@loaded}{}%
-  }
-  {
-    \relax
+    \seq_put_right:Nn \__xpg_langs_loaded {#2}
   }
   \ifcsdef{#2@alias@lang}{%
      \ifcsdef{#2@alias@opts}{%
@@ -1497,7 +1497,7 @@
 }
 
 \newcommand{\setotherlanguage}[2][]{%
-  \ifcsundef{#2@loaded}
+  \seq_if_in:NxF \__xpg_langs_loaded {#2}
   {
     \polyglossia_load_lang_definition:nn{#1}{#2}
     % define environment and command
@@ -1512,9 +1512,8 @@
     }{%
       \polyglossia@set@other@language:nn {#1} {#2}%
     }%
-    \csgdef{#2@loaded}{}%
+    \seq_put_right:Nn \__xpg_langs_loaded {#2}
   }
-  {}
 }
 
 \cs_new:Nn \polyglossia@set@other@language:nn
@@ -1925,7 +1924,7 @@
 
 % Test if language is loaded
 \newcommand*\iflanguageloaded[3]{%
-  \polyglossia@check@if@lang@loaded:NTF{#1@loaded}{#2}{#3}%
+  \seq_if_in:NxTF \__xpg_langs_loaded {#1} {#2} {#3}
 }
 
 % Same for babellanguage is loaded
