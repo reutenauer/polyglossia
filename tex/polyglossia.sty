@@ -31,7 +31,9 @@
 \def\bbl@cs#1{\csname bbl@#1\endcsname}%
 \AtEndPreamble{\let\bbl@set@language\xpg@set@language@aux} %for biblatex
 \AtEndPreamble{\let\bbl@main@language\xpg@main@language} %for biblatex
-\providecommand\texorpdfstring[2]{#1}% dummy command if hyperref is not loaded
+\AtEndPreamble{
+  \providecommand\texorpdfstring[2]{#1}% dummy command if hyperref is not loaded
+}
 
 \ifluatex
   \RequirePackage{luatexbase} % already included by fontspec, but needed here
