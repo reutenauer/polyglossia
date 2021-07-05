@@ -20,6 +20,9 @@
   \@ifpackageloaded{#1}{#3}{\AddToHook{#2}{#3}}%
 }
 
+% safe according to expl3 bug #960
+\cs_generate_variant:Nn \prop_item:Nn { Ne, Nf, No, Nx }
+\cs_generate_variant:Nn \clist_set:Nn { Ne, Nf, No, Nx }
 % correct a bug in tracklang
 \__xpg_at_package_hook:nnn{tracklang}{file/after/tracklang.sty}{%
   \@ifpackagelater{tracklang}{2019/08/30}{}{\global\def\AddTrackedLangage{\AddTrackedLanguage}}
@@ -261,7 +264,7 @@
 
 % setup hyphennames from a str list of hyphen
 \cs_new:Nn \polyglossia_setup_hyphen:n {
-  \exp_args:Nne \clist_set:Nn{\l_tmpa_clist}{\prop_item:Nn \polyglossia@langsetup {#1 / hyphennames}}
+  \clist_set:Ne{\l_tmpa_clist}{\prop_item:Nn \polyglossia@langsetup {#1 / hyphennames}}
   \providebool{havehyphen}
   \boolfalse{havehyphen}
   % for each hyphen in the set until we find one that works
@@ -304,7 +307,7 @@
     \polyglossia@setup@language@patterns{#1}%
   }%
   % setup hyphenmins
-  \exp_args:NNe \clist_set:Nn \l_tmpa_clist
+  \clist_set:Ne \l_tmpa_clist
     { \prop_item:Nn \polyglossia@langsetup {#1 / hyphenmins} }
   \cs_if_eq:cNF {l@#1} \l@nohyphenation
     {
@@ -1882,7 +1885,7 @@
           {
             \prop_get:cnNTF {xpg@alias@keyvals@#1@#3} {#2} \l_tmpb_tl
                {
-                \exp_args:Nne \clist_set:Nn{\l_tmpa_clist}{\l_tmpb_tl}
+                \clist_set:Ne{\l_tmpa_clist}{\l_tmpb_tl}
                 \providetoggle{xpgvalfound}
                 \togglefalse{xpgvalfound}
                 \clist_map_inline:Nn \l_tmpa_clist {
@@ -2192,7 +2195,7 @@
     \noextrascurrent{\languagename}%
     \csuse{no\languagename @numbers}%
     \sys_if_engine_xetex:T{
-      \str_if_eq:eeTF{\exp_args:Nne\prop_item:Nn{\polyglossia@langsetup}{\languagename/direction}}{RL}%
+      \str_if_eq:eeTF{\prop_item:Ne{\polyglossia@langsetup}{\languagename/direction}}{RL}%
       {%
         \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}%
           {}% RTL -> RTL
@@ -2227,7 +2230,7 @@
   % as bidi interferes here badly with its directionality smartness.
   \sys_if_engine_xetex:T
   {
-    \str_if_eq:eeT{\exp_args:Nne\prop_item:Nn{\polyglossia@langsetup}{\languagename/direction}}{RL}%
+    \str_if_eq:eeT{\prop_item:Ne{\polyglossia@langsetup}{\languagename/direction}}{RL}%
       {%
         \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}{RL}%
           {}% RTL -> RTL
@@ -2268,12 +2271,12 @@
   % Store BCP-47 id of language
   \tl_if_blank:nTF {\xpg@tmp@opts}{%
     \ifcsundef{\csname xpg@tmp@lang\endcsname @gbcp47id}{%
-       \csedef{tmp@bcp47id}{\exp_args:Nne\prop_item:Nn{\polyglossia@langsetup}{\xpg@tmp@lang /bcp47}}%
+       \csedef{tmp@bcp47id}{\prop_item:Ne{\polyglossia@langsetup}{\xpg@tmp@lang /bcp47}}%
     }{%
        \csedef{tmp@bcp47id}{\csuse{#2@gbcp47id}}%
     }%
   }{%
-    \csedef{tmp@bcp47id}{\exp_args:Nne \prop_item:Nn{\polyglossia@langsetup}{\xpg@tmp@lang /bcp47}}%
+    \csedef{tmp@bcp47id}{\prop_item:Ne{\polyglossia@langsetup}{\xpg@tmp@lang /bcp47}}%
   }%
   \xpg@warning{id: \csuse{tmp@bcp47id}}%
   \csgdef{\csname tmp@bcp47id\endcsname @hyphenmins}{{#3}{#4}}%
@@ -2329,7 +2332,7 @@
   % We cannot do this if an LTR environmet starts in an RTL paragraph,
   % as bidi interferes here badly with its directionality smartness.
   \sys_if_engine_xetex:T{
-    \str_if_eq:eeT{\exp_args:Nne\prop_item:Nn{\polyglossia@langsetup}{\languagename/direction}}{RL}%
+    \str_if_eq:eeT{\prop_item:Ne{\polyglossia@langsetup}{\languagename/direction}}{RL}%
        {%
         \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}{RL}%
            {}% RTL -> RTL
