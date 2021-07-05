@@ -2189,20 +2189,20 @@
 \newcommand{\select@@language}[2][]{%
   % disable the extras and number settings of the previous language
   \ifcsundef{languagename}{}{%
-     \noextrascurrent{\languagename}%
-     \csuse{no\languagename @numbers}%
-     \ifxetex
-        \str_if_eq:eeTF{\exp_args:Nne\prop_item:Nn{\polyglossia@langsetup}{\languagename/direction}}{RL}%
-            {%
-               \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}%
-                  {}% RTL -> RTL
-                  {\setlatin}% RTL -> LTR
-            }{%
-               \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}%
-                  {\setnonlatin}% LTR -> RTL
-                  {}% LTR -> LTR
-           }%
-     \fi
+    \noextrascurrent{\languagename}%
+    \csuse{no\languagename @numbers}%
+    \sys_if_engine_xetex:T{
+      \str_if_eq:eeTF{\exp_args:Nne\prop_item:Nn{\polyglossia@langsetup}{\languagename/direction}}{RL}%
+      {%
+        \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}%
+          {}% RTL -> RTL
+          {\setlatin}% RTL -> LTR
+      }{%
+        \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}%
+          {\setnonlatin}% LTR -> RTL
+          {}% LTR -> LTR
+      }%
+    }
   }%
   \polyglossia@set@language@name[#1]{#2}%
   % Set the language's/script's font families
