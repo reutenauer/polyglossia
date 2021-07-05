@@ -2225,14 +2225,15 @@
   % We usually embrace the switch in groups to keep the changes local.
   % We cannot do this if an LTR environmet starts in an RTL paragraph,
   % as bidi interferes here badly with its directionality smartness.
-  \ifxetex
+  \sys_if_engine_xetex:T
+  {
     \str_if_eq:eeT{\exp_args:Nne\prop_item:Nn{\polyglossia@langsetup}{\languagename/direction}}{RL}%
-       {%
+      {%
         \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}{RL}%
-           {}% RTL -> RTL
-           {\ifvmode\else\booltrue{xpg@noset@groups}\fi}% RTL -> LTR
-       }%
-  \fi%
+          {}% RTL -> RTL
+          {\ifvmode\else\booltrue{xpg@noset@groups}\fi}% RTL -> LTR
+      }%
+  }
   \ifbool{xpg@noset@groups}{}{\xpg@set@group@aux}%
   \selectlanguage[#1]{#2}%
 }
@@ -2327,14 +2328,14 @@
   % We usually embrace the switch in groups to keep the changes local.
   % We cannot do this if an LTR environmet starts in an RTL paragraph,
   % as bidi interferes here badly with its directionality smartness.
-  \ifxetex
+  \sys_if_engine_xetex:T{
     \str_if_eq:eeT{\exp_args:Nne\prop_item:Nn{\polyglossia@langsetup}{\languagename/direction}}{RL}%
        {%
         \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}{RL}%
            {}% RTL -> RTL
            {\ifvmode\else\booltrue{xpg@noset@groups}\fi}% RTL -> LTR
        }%
-  \fi%
+  }
   \ifbool{xpg@noset@groups}{}{\xpg@set@group@aux}%
   % Check for real language name and options
   \edef\xpg@tmp@lang{#2}%
