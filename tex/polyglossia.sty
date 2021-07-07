@@ -23,6 +23,9 @@
 % safe according to expl3 bug #960
 \cs_generate_variant:Nn \prop_item:Nn { Ne, Nf, No, Nx }
 \cs_generate_variant:Nn \clist_set:Nn { Ne, Nf, No, Nx }
+\cs_generate_variant:Nn \clist_gput_right:Nn {Ne}
+\cs_generate_variant:Nn  \prop_get:NnN {NeN}
+\prg_generate_conditional_variant:Nnn \clist_if_in:Nn {Ne} {TF, T, F, p}
 % correct a bug in tracklang
 \__xpg_at_package_hook:nnn{tracklang}{file/after/tracklang.sty}{%
   \@ifpackagelater{tracklang}{2019/08/30}{}{\global\def\AddTrackedLangage{\AddTrackedLanguage}}
@@ -48,10 +51,16 @@
   {\let\xpg@boundaryclass=\e@alloc@intercharclass@top}
 
 % Useful for getting list of loaded languages and variants. Like babel's bbl@loaded
-\let\xpg@loaded\@empty% list of loaded languages (polyglossia name)
-\let\xpg@vloaded\@empty% list of loaded variants
-\let\xpg@bloaded\@empty% list of loaded languages (babel name)
-\let\xpg@bcp@loaded\@empty% list of loaded languages (bcp-47 id)
+% all language loaded
+\seq_new:N \__xpg_langs_loaded
+% list of loaded languages (polyglossia name)
+\clist_new:N \xpg@loaded
+% list of loaded variants
+\clist_new:N \xpg@vloaded
+% list of loaded languages (babel name)
+\clist_new:N \xpg@bloaded
+% list of loaded languages (bcp-47 id)
+\clist_new:N \xpg@bcp@bloaded
 
 % counter in latin
 \def\latinalph#1{\expandafter\latin@alph\csname c@#1\endcsname}
@@ -117,9 +126,6 @@
 
 \def\xpg@ill@value#1#2{%
   \xpg@warning{Illegal~ value~ (#1)~ for~ #2}}
-
-% all language loaded
-\seq_new:N \__xpg_langs_loaded
 
 % error out if lang is not loaded
 \cs_new_nopar:Nn \polyglossia@error@iflangnotloaded:n
@@ -1088,7 +1094,7 @@
     \polyglossia@define@language@cmd:e{#1}%
   }
   \polyglossia@register@language:nn{}{#1}%
-  \seq_put_right:Nn \__xpg_langs_loaded {#1}
+  \seq_gput_right:Nn \__xpg_langs_loaded {#1}
 }
 
 
@@ -1151,53 +1157,43 @@
 }
 
 \cs_new:Nn \polyglossia@register@language:nn {
-   % register polyglossia language name
-   \ifcsundef{#2@registered}{%
-       \global\edef\xpg@loaded{%
-           \ifx\xpg@loaded\@empty\else\xpg@loaded,\fi #2%
-        }%
-   }{}
-   \csgdef{#2@registered}{}%
-   \tl_if_blank:nF {#1}{%
-      % Register the language options
-      \polyglossia@set@lang@options:nn {#2} {#1}%
-   }%
-   % register babelname
-   \def\xpg@tmp@babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
-   \ifcsundef{\csname xpg@tmp@babelname\endcsname @bbl@registered}{%
-       \global\edef\xpg@bloaded{%
-           \ifx\xpg@bloaded\@empty\else\xpg@bloaded,\fi\xpg@tmp@babelname}%
-   }{}%
-   \csgdef{\csname xpg@tmp@babelname\endcsname @bbl@registered}{}%
-   % register BCP-47 ID
-   \def\xpg@tmp@bcpname{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
-   \ifcsundef{\csname xpg@tmp@bcpname\endcsname @bcp@registered}{%
-       \global\edef\xpg@bcp@loaded{%
-           \ifx\xpg@bcp@loaded\@empty\else\xpg@bcp@loaded,\fi\xpg@tmp@bcpname}%
-   }{}%
-   \csgdef{\csname xpg@tmp@bcpname\endcsname @bcp@registered}{}%
+  \clist_if_in:NeF \xpg@loaded {#2}{
+    \clist_gput_right:Ne \xpg@loaded {#2}
+  }
+  \tl_if_blank:nF {#1}{%
+    % Register the language options
+    \polyglossia@set@lang@options:nn {#2} {#1}%
+  }%
+  % register babelname
+  \prop_get:NeN \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
+  \clist_if_in:NeF \xpg@bloaded {\l_tmpa_tl}{
+    \clist_gput_right:Ne \xpg@bloaded {\l_tmpa_tl}
+  }
+  % register BCP-47 ID
+  \prop_get:NeN \polyglossia@langsetup {#2/bcp47} \l_tmpa_tl
+  \clist_if_in:NeF \xpg@bcp@bloaded {\l_tmpa_tl}{
+    \clist_gput_right:Ne \xpg@bcp@bloaded {\l_tmpa_tl}
+  }
 }
 
 
 \newcommand{\setdefaultlanguage}[2][]{%
   % latex is an internal language, so do not record
-  \ifstrequal{#2}{latex}{}{%
-     % register polyglossia language name
-     \ifcsundef{#2@registered}{%
-       \global\edef\xpg@loaded{%
-           \ifx\xpg@loaded\@empty\else\xpg@loaded,\fi #2%
-        }%
-     }{}%
-     \csgdef{#2@registered}{}%
-   }%
+  \str_if_eq:eeF{#2}{latex}
+  {
+    \clist_if_in:NeF \xpg@loaded {#2}{
+      \clist_gput_right:Ne \xpg@loaded {#2}
+    }
+  }
   \seq_if_in:NxF \__xpg_langs_loaded {#2}
   {
     \polyglossia_load_lang_definition:nn{#1}{#2}
     % define environment and command (except for internal latex language)
-    \ifstrequal{#2}{latex}{}{%
+    \str_if_eq:eeF{#2}{latex}
+    {
       \polyglossia@define@language@cmd:x{#2}
     }%
-    \seq_put_right:Nn \__xpg_langs_loaded {#2}
+    \seq_gput_right:Nn \__xpg_langs_loaded {#2}
   }
   \ifcsdef{#2@alias@lang}{%
      \ifcsdef{#2@alias@opts}{%
@@ -1512,7 +1508,7 @@
     }{%
       \polyglossia@set@other@language:nn {#1} {#2}%
     }%
-    \seq_put_right:Nn \__xpg_langs_loaded {#2}
+    \seq_gput_right:Nn \__xpg_langs_loaded {#2}
   }
 }
 
@@ -1911,7 +1907,9 @@
 
 % Append any variant to csv list of variants
 \define@key{xpg@langvariant}{variant}{%
-  \edef\xpg@vloaded{#1\ifx\xpg@vloaded\@empty\else,\xpg@vloaded\fi}%
+  \clist_if_in:NeF \xpg@vloaded {#1}{
+    \clist_gput_right:Ne \xpg@vloaded {#1}
+  }
 }
 
 \prg_set_conditional:Npnn \polyglossia@check@if@lang@loaded:N #1 { p , T , F , TF }{
@@ -1962,8 +1960,10 @@
            }
   }
   {
-    \xpg@warning{You’re running a TeX engine that is not LuaTeX or XeTeX.\MessageBreak
-                 That is almost guaranteed to cause problems.}
+    \xpg@warning{You’re ~ running ~ a ~ TeX engine ~ that ~ is ~
+      not ~ LuaTeX ~ or ~ XeTeX.\MessageBreak
+      That~ is~ almost~ guaranteed~ to~ cause~ problems.}
+    \prg_return_false:
   }
 }
 
