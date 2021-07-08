@@ -522,7 +522,14 @@
             \prop_gput:Nnn{\polyglossia@langsetup}{#1/Localnumeral}{##1}
          },
     #1 / Localnumeral.value_required:n = true,
-    #1 / Localnumeral.initial:n = {polyglossia@C@localnumeral}
+    #1 / Localnumeral.initial:n = {polyglossia@C@localnumeral},
+    % environment define command (by default create the environment)
+    #1 / DefineCommandsCmd
+       .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/DefineCommandsCmd}{##1}},
+    #1 / DefineCommandsCmd
+       .value_required:n = true,
+    #1 / DefineCommandsCmd
+      .initial:n = {xpg_define_language_commands:e}
   }
 }
 
@@ -1091,7 +1098,8 @@
   \xpg@input{gloss-#1.ldf}
   \seq_if_in:NxF \__xpg_langs_loaded {#1}
   {
-    \polyglossia@define@language@cmd:e{#1}%
+    % define environment and command
+    \use:c{\prop_item:Nn{\polyglossia@langsetup}{#1/DefineCommandsCmd}}{#1}
   }
   \polyglossia@register@language:nn{}{#1}%
   \seq_gput_right:Nn \__xpg_langs_loaded {#1}
@@ -1099,7 +1107,7 @@
 
 
 % define environment and command
-\cs_new:Nn \polyglossia@define@language@cmd:n {
+\cs_new:Nn \xpg_define_language_commands:n {
   \ifcsundef{#1@alias@lang}{%
     \exp_args:Ne
     \newenvironment {\prop_item:Nn{\polyglossia@langsetup}{#1/envname}} [1] []
@@ -1115,7 +1123,7 @@
     }%
   }{}
 }
-\cs_generate_variant:Nn \polyglossia@define@language@cmd:n {e, ,o ,x, f}
+\cs_generate_variant:Nn \xpg_define_language_commands:n {e}
 
 % provide way to define alias environment and command
 % \setlanguagealias[<options>]{<language>}{<alias>}
@@ -1188,11 +1196,8 @@
   \seq_if_in:NxF \__xpg_langs_loaded {#2}
   {
     \polyglossia_load_lang_definition:nn{#1}{#2}
-    % define environment and command (except for internal latex language)
-    \str_if_eq:eeF{#2}{latex}
-    {
-      \polyglossia@define@language@cmd:x{#2}
-    }%
+    % define environment and command
+    \use:c{\prop_item:Nn{\polyglossia@langsetup}{#2/DefineCommandsCmd}}{#2}
     \seq_gput_right:Nn \__xpg_langs_loaded {#2}
   }
   \ifcsdef{#2@alias@lang}{%
@@ -1492,12 +1497,14 @@
   \csuse{#1@globalnumbers}%
 }
 
-\newcommand{\setotherlanguage}[2][]{%
+%  Declare secondary language #2 with language options #1
+\DeclareDocumentCommand \setotherlanguage { O{} m }
+{
   \seq_if_in:NxF \__xpg_langs_loaded {#2}
   {
     \polyglossia_load_lang_definition:nn{#1}{#2}
     % define environment and command
-    \polyglossia@define@language@cmd:e{#2}
+    \use:c{\prop_item:Nn{\polyglossia@langsetup}{#2/DefineCommandsCmd}}{#2}
     \ifcsdef{#2@alias@lang}{%
        \ifcsdef{#2@alias@opts}{%
          \polyglossia_load_lang_definition:ee {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
