@@ -25,6 +25,9 @@
 \cs_generate_variant:Nn \clist_set:Nn { Ne, Nf, No, Nx }
 \cs_generate_variant:Nn \clist_gput_right:Nn {Ne}
 \cs_generate_variant:Nn  \prop_get:NnN {NeN}
+\cs_generate_variant:Nn  \cs_gset:Npn {Npe}
+\cs_generate_variant:Nn  \cs_gset_nopar:Npn {Npe}
+\cs_generate_variant:Nn  \cs_gset_nopar:Npn {cpe}
 \prg_generate_conditional_variant:Nnn \clist_if_in:Nn {Ne} {TF, T, F, p}
 \prg_generate_conditional_variant:Nnn \prop_if_in:Nn {Ne} {TF, T, F, p}
 % correct a bug in tracklang
@@ -1227,6 +1230,9 @@
   }%
 }
 
+
+
+
 \cs_new:Nn \polyglossia@set@default@language:nn
 {
   \gdef\xpg@main@language{#2}%
@@ -1247,23 +1253,18 @@
   }
   \xpg@info{Default~ language~ is~ #2}%
   \polyglossia@set@language@name[#1]{#2}%
-  \def\mainlanguagename{#2}
+
+  \cs_gset_nopar:Npn \mainlanguagename {#2}
   % Store babelname of main language (for external packages such as biblatex)
-  \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
-      { \edef\mainbabelname{\l_tmpa_tl} }
+  \cs_gset_nopar:Npe \mainbabelname { \prop_item:Nn  \polyglossia@langsetup {#2/babelname} }
   % Store babelname of current language (for external packages such as biblatex)
-  \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
-      { \edef\babelname{\l_tmpa_tl}% 
-        \cs_gset_eq:cc{#2@gbabelname}{babelname}%
-      }
+  \cs_gset_eq:NN \babelname \mainbabelname
+  \cs_gset_eq:cc{#2@gbabelname}{babelname}%
   % Store BCP-47 id of main language
-  \prop_get:NxNT \polyglossia@langsetup {#2/bcp47} \l_tmpa_tl
-      { \csedef{mainbcp47id}{\l_tmpa_tl} }
-  % Store BCP-47 id of current language
-  \prop_get:NxNT \polyglossia@langsetup {#2/bcp47} \l_tmpa_tl
-      { \csedef{bcp47id}{\l_tmpa_tl}% 
-        \cs_gset_eq:cc{#2@gbcp47id}{bcp47id}%
-      }
+  \cs_gset_nopar:cpe {mainbcp47id} { \prop_item:Nn  \polyglossia@langsetup {#2/bcp47} }
+  \cs_gset_eq:cc {bcp47id} {mainbcp47id}
+  \cs_gset_eq:cc{#2@gbcp47id}{bcp47id}
+
  \sys_if_engine_luatex:T
    {
      \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
@@ -1306,15 +1307,17 @@
         \xpg@error{Invalid~ \string\mainlanguageid\space argument:~ #1}
       }
 }
-
-\def\mainbabelname{}%
+% main babel name
+\cs_new_nopar:Npn \mainlanguagename {}
+\cs_new_nopar:Npn \mainbabelname {}
+\cs_new_nopar:cpn {mainbcp47id} {}
 \def\mainlanguagevariant{}%
 % Store main language variant for external packages
 \define@key{xpg@main@langvariant}{variant}{%
   \gdef\mainlanguagevariant{#1}%
 }
 
-\def\babelname{}%
+\cs_new_nopar:Npn \babelname {}
 \def\languagevariant{}%
 % Store current language variant for external packages
 \define@key{xpg@set@langvariant}{variant}{%
