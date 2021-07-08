@@ -26,6 +26,7 @@
 \cs_generate_variant:Nn \clist_gput_right:Nn {Ne}
 \cs_generate_variant:Nn  \prop_get:NnN {NeN}
 \prg_generate_conditional_variant:Nnn \clist_if_in:Nn {Ne} {TF, T, F, p}
+\prg_generate_conditional_variant:Nnn \prop_if_in:Nn {Ne} {TF, T, F, p}
 % correct a bug in tracklang
 \__xpg_at_package_hook:nnn{tracklang}{file/after/tracklang.sty}{%
   \@ifpackagelater{tracklang}{2019/08/30}{}{\global\def\AddTrackedLangage{\AddTrackedLanguage}}
@@ -224,6 +225,20 @@
       {\xpg@error{Unknown~ language~ direction~ #1 ~(luabidi~ wrapper)}}%
   }%
   \ExplSyntaxOff%
+}
+
+% emulate \RTLmain
+\cs_new_nopar:Nn \__xpg_setRTLmain: {}
+\str_case_e:nnF{\c_sys_engine_str}{%
+  {luatex}{\cs_gset:Nn \__xpg_setRTLmain: {\setRTLmain}}
+  {xetex}{\cs_gset_Nn \__xpg_setRTLmain: {\@RTLmaintrue\setnonlatin}}
+}
+{
+  \cs_gset_Nn \__xpg_setRTLmain:
+  {
+    \xpg@warning{You’re~ running a~ TeX~ engine~ that~ is~ not~ LuaTeX~ or~ XeTeX.\MessageBreak
+      That~ is~ almost~ guaranteed~ to~ cause~ problems.}
+  }
 }
 
 %% compatibility with babel
@@ -1222,12 +1237,10 @@
   \csgdef{#2@gvar}{\mainlanguagevariant}%
   %% The following settings are for the default language and script
   % this tells bidi.sty or luabidi.sty that the document is RTL
-  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{%
-    \str_case_e:nnF{\c_sys_engine_str}{%
-      {luatex}{\setRTLmain}
-      {xetex}{\@RTLmaintrue\setnonlatin}
-    }{}%
-  }{}%
+  \str_if_eq:eeT{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}
+  {
+    \__xpg_setRTLmain:
+  }
   \cs_gset_nopar:Nn \polyglossia@AtBeginDocument@selectlanguage: {
     \selectbackgroundlanguage{#2}
     \selectlanguage[#1]{#2}%
