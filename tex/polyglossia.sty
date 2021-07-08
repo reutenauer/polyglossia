@@ -1123,10 +1123,12 @@
   \seq_gput_right:Nn \__xpg_langs_loaded {#1}
 }
 
+\prop_new:N \__xpg_alias
 
 % define environment and command
 \cs_new:Nn \xpg_define_language_commands:n {
-  \ifcsundef{#1@alias@lang}{%
+  \prop_if_in:NeF \__xpg_alias {#1/target}
+  {
     \exp_args:Ne
     \newenvironment {\prop_item:Nn{\polyglossia@langsetup}{#1/envname}} [1] []
     {
@@ -1139,7 +1141,7 @@
     {%
       \__xpg_textlanguage:nen{##1}{#1}{##2}%
     }%
-  }{}
+  }
 }
 \cs_generate_variant:Nn \xpg_define_language_commands:n {e}
 
@@ -1149,25 +1151,13 @@
 {
   % The starred version does not define commands and environments
   \IfBooleanF {#1}
-    {
-     \ifcsundef{#4@alias@lang}{%
-       \exp_args:Ne
-       \newenvironment {#4}
-       {
-         \begin{otherlanguage}[#2]{#3}
-       }%
-       {
-         \end{otherlanguage}
-       }%
-       \exp_args:Nc \newcommand {text#4} [2][]
-       {%
-         \__xpg_textlanguage:een{#2,##1}{#3}{##2}%
-       }%
-     }{%
-       \exp_args:Ne
-       \renewenvironment {#4}
-       {
-         \begin{otherlanguage}[#2]{#3}
+  {
+    \prop_if_in:NeTF \__xpg_alias {#4/target}
+    {%
+      \exp_args:Ne
+      \renewenvironment {#4}
+      {
+        \begin{otherlanguage}[#2]{#3}
        }%
        {
          \end{otherlanguage}
@@ -1177,9 +1167,25 @@
          \__xpg_textlanguage:een{#2,##1}{#3}{##2}%
        }%
      }%
+     {
+      \exp_args:Ne
+      \newenvironment {#4}
+      {
+        \begin{otherlanguage}[#2]{#3}
+      }%
+      {
+        \end{otherlanguage}
+      }%
+      \exp_args:Nc \newcommand {text#4} [2][]
+      {%
+        \__xpg_textlanguage:een{#2,##1}{#3}{##2}%
+      }%
+    }
   }%
-  \csgdef{#4@alias@lang}{#3}%
-  \tl_if_blank:nF {#2} {\csgdef{#4@alias@opts}{#2}}%
+  \prop_gput:Nnn \__xpg_alias {#4/target} {#3}
+  \tl_if_blank:nF {#2} {
+    \csgdef{#4@alias@opts}{#2}
+  }%
 }
 
 \cs_new:Nn \polyglossia@register@language:nn {
@@ -1216,14 +1222,18 @@
     \use:c{\prop_item:Nn{\polyglossia@langsetup}{#2/DefineCommandsCmd}}{#2}
     \seq_gput_right:Nn \__xpg_langs_loaded {#2}
   }
-  \ifcsdef{#2@alias@lang}{%
+  \prop_if_in:NeTF \__xpg_alias {#2/target}
+  {%
      \ifcsdef{#2@alias@opts}{%
-       \polyglossia_load_lang_definition:xx {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
-       \polyglossia@set@default@language:xx {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
+       \polyglossia_load_lang_definition:xx
+          {\csuse{#2@alias@opts},#1} {\prop_item:Nn \__xpg_alias {#2/target} }%
+        \polyglossia@set@default@language:xx
+          {\csuse{#2@alias@opts},#1} {\prop_item:Nn \__xpg_alias {#2/target} }%
      }{%
-       \polyglossia@set@default@language:nx {#1} {\csuse{#2@alias@lang}}%
+       \polyglossia@set@default@language:nx {#1} {\prop_item:Nn \__xpg_alias {#2/target}}%
      }%
-  }{%
+  }
+  {%
     \polyglossia@set@default@language:nn {#1} {#2}%
   }%
 }
@@ -1338,13 +1348,19 @@
 
 
 \newcommand*{\resetdefaultlanguage}[2][]{%
-  \ifcsdef{#2@alias@lang}{%
-     \ifcsdef{#2@alias@opts}{%
-       \polyglossia@reset@default@language:xx {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
-     }{%
-       polyglossia@reset@default@language:nx {#1} {\csuse{#2@alias@lang}}%
-     }%
-  }{%
+  \prop_if_in:NeTF \__xpg_alias {#2/target}
+  {%
+    \ifcsdef{#2@alias@opts}{%
+      \polyglossia@reset@default@language:xx
+        {\csuse{#2@alias@opts},#1}
+        {\prop_item:Nn \__xpg_alias {#2/target}}%
+    }{%
+      \polyglossia@reset@default@language:nx
+        {#1}
+        {\prop_item:Nn \__xpg_alias {#2/target}}
+    }%
+  }
+  {%
     polyglossia@reset@default@language:nn {#1} {#2}%
   }%
 }
@@ -1499,14 +1515,16 @@
     \@afterindentfalse%
 }
 
-\newcommand*{\selectbackgroundlanguage}[1]{%
-  \ifcsdef{#1@alias@lang}{%
-     \polyglossia@select@background@language:n {\csuse{#1@alias@lang}}%
-  }{%
-     \polyglossia@select@background@language:n {#1}%
+\cs_new_nopar:Npn \selectbackgroundlanguage #1
+{%
+  \prop_if_in:NnTF \__xpg_alias {#1/target} %
+  {%
+    \polyglossia@select@background@language:e {\prop_item:Nn {\__xpg_alias} {#1/target}} %
+  }%
+  {%
+    \polyglossia@select@background@language:n {#1}%
   }%
 }
-
 \cs_new:Nn \polyglossia@select@background@language:n
 {
   \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/lcscript}}{latin}
@@ -1514,7 +1532,7 @@
                    {\xpg@set@normalfont{#1}}%
   \csuse{#1@globalnumbers}%
 }
-
+\cs_generate_variant:Nn \polyglossia@select@background@language:n {e}
 %  Declare secondary language #2 with language options #1
 \DeclareDocumentCommand \setotherlanguage { O{} m }
 {
@@ -1523,14 +1541,22 @@
     \polyglossia_load_lang_definition:nn{#1}{#2}
     % define environment and command
     \use:c{\prop_item:Nn{\polyglossia@langsetup}{#2/DefineCommandsCmd}}{#2}
-    \ifcsdef{#2@alias@lang}{%
-       \ifcsdef{#2@alias@opts}{%
-         \polyglossia_load_lang_definition:ee {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
-         \polyglossia@set@other@language:ee {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
-       }{%
-         \polyglossia@set@other@language:ne {#1} {\csuse{#2@alias@lang}}%
-       }%
-    }{%
+    \prop_if_in:NeTF \__xpg_alias {#2/target}
+    {%
+      \ifcsdef{#2@alias@opts}{%
+        \polyglossia_load_lang_definition:ee
+          {\csuse{#2@alias@opts},#1}
+          {\prop_item:Nn \__xpg_alias {#2/target} }%
+        \polyglossia@set@other@language:ee
+          {\csuse{#2@alias@opts},#1}
+          {\prop_item:Nn \__xpg_alias {#2/target} }%
+      }
+      {%
+        \polyglossia@set@other@language:ne {#1}
+          {\prop_item:Nn \__xpg_alias {#2/target} }%
+      }%
+    }
+    {%
       \polyglossia@set@other@language:nn {#1} {#2}%
     }%
     \seq_gput_right:Nn \__xpg_langs_loaded {#2}
@@ -1587,13 +1613,21 @@
 % where \text<alias> would cause clashes
 % (e.g., \textit)
 \newcommand\textlang[3][]{%
-  \ifcsdef{#2@alias@lang}{%
-     \ifcsdef{#2@alias@opts}{%
-       \__xpg_textlanguage:een{\csuse{#2@alias@opts},#1}{\csuse{#2@alias@lang}}{#3}%
-     }{%
-       \__xpg_textlanguage:een{#1}{\csuse{#2@alias@lang}}{#3}%
-     }%
-  }{%
+  \prop_if_in:NeTF \__xpg_alias {#2/target}
+  {
+    \ifcsdef{#2@alias@opts}
+    {%
+      \__xpg_textlanguage:een{\csuse{#2@alias@opts},#1}
+        {\prop_item:Nn \__xpg_alias {#2/target} }%
+        {#3}%
+    }
+    {%
+      \__xpg_textlanguage:een{#1}
+        {\prop_item:Nn \__xpg_alias {#2/target} }%
+        {#3}%
+    }%
+  }
+  {%
     \__xpg_textlanguage:een{#1}{#2}{#3}%
   }%
 }%
@@ -1654,13 +1688,21 @@
 
 \renewcommand{\foreignlanguage}[3][]
 {%
-  \ifcsdef{#2@alias@lang}{%
-     \ifcsdef{#2@alias@opts}{%
-       \polyglossia@foreignlanguage:een {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}} {#3}%
-     }{%
-       \polyglossia@foreignlanguage:nen {#1} {\csuse{#2@alias@lang}} {#3}%
-     }%
-  }{%
+  \prop_if_in:NeTF \__xpg_alias {#2/target}
+  {%
+    \ifcsdef{#2@alias@opts}
+    {%
+      \polyglossia@foreignlanguage:een {\csuse{#2@alias@opts},#1}
+        {\prop_item:Nn \__xpg_alias {#2/target} }%
+        {#3}%
+    }%
+    {%
+      \polyglossia@foreignlanguage:nen {#1}
+        {\prop_item:Nn \__xpg_alias {#2/target} }%
+        {#3}%
+    }%
+  }
+  {%
     \polyglossia@foreignlanguage:nnn {#1} {#2} {#3}%
   }%
 }
@@ -1707,13 +1749,18 @@
 
 \renewenvironment{otherlanguage*}[2][]
 {%
-  \ifcsdef{#2@alias@lang}{%
-     \ifcsdef{#2@alias@opts}{%
-       \polyglossia@otherlanguage:ee {\csuse{#2@alias@opts},#1} {\csuse{#2@alias@lang}}%
-     }{%
-       \polyglossia@otherlanguage:ne {#1} {\csuse{#2@alias@lang}}%
-     }%
-  }{%
+  \prop_if_in:NeTF \__xpg_alias {#2/target}
+  {%
+    \ifcsdef{#2@alias@opts}{%
+      \polyglossia@otherlanguage:ee {\csuse{#2@alias@opts},#1}
+        {\prop_item:Nn \__xpg_alias {#2/target} }
+    }
+    {%
+      \polyglossia@otherlanguage:ne {#1}
+        {\prop_item:Nn \__xpg_alias {#2/target} }
+    }%
+  }
+  {%
     \polyglossia@otherlanguage:nn {#1} {#2}%
   }%
 }
@@ -1774,16 +1821,22 @@
   \let\emp@langname\@undefined}
 
 \DeclareDocumentCommand \selectlanguage {s O{} m}
-{%
-  \ifcsdef{#3@alias@lang}{%
-     \ifcsdef{#3@alias@opts}{%
-       \polyglossia@select@language:nee {#1} {\csuse{#3@alias@opts},#2} {\csuse{#3@alias@lang}}%
-     }{%
-       \polyglossia@select@language:nne {#1} {#2} {\csuse{#3@alias@lang}}%
-     }%
-  }{%
-     \polyglossia@error@iflangnotloaded:n{#3}%
-     \polyglossia@select@language:nnn {#1} {#2} {#3}%
+{
+  \prop_if_in:NeTF \__xpg_alias {#3/target}
+  {%
+    \ifcsdef{#3@alias@opts}
+    {%
+      \polyglossia@select@language:nee {#1} {\csuse{#3@alias@opts},#2}
+        {\prop_item:Nn \__xpg_alias {#3/target} }%
+    }
+    {%
+      \polyglossia@select@language:nne {#1} {#2}
+         {\prop_item:Nn \__xpg_alias {#3/target} }%
+    }%
+  }
+  {%
+    \polyglossia@error@iflangnotloaded:n{#3}%
+    \polyglossia@select@language:nnn {#1} {#2} {#3}%
   }
 }
 
@@ -2266,12 +2319,13 @@
   % Check for real language name and options
   \edef\xpg@tmp@lang{#2}%
   \edef\xpg@tmp@opts{#1}%
-  \ifcsdef{#2@alias@lang}{%
-     \edef\xpg@tmp@lang{\csuse{#2@alias@lang}}%
-     \ifcsdef{#2@alias@opts}{%
-       \edef\xpg@tmp@opts{\csuse{#2@alias@opts},#1}%
-     }{}%
-  }{}%
+  \prop_if_in:NeT \__xpg_alias {#2/target}
+  {%
+    \edef\xpg@tmp@lang{\prop_item:Nn \__xpg_alias {#2/target}}%
+    \ifcsdef{#2@alias@opts}{%
+      \edef\xpg@tmp@opts{\csuse{#2@alias@opts},#1}%
+    }{}%
+  }
   \bgroup
   \polyglossia@error@iflangnotloaded:n{\xpg@tmp@lang}
   \exp_args:Nne \setkeys{\xpg@tmp@lang}{\xpg@tmp@opts}%
@@ -2350,12 +2404,14 @@
   % Check for real language name and options
   \edef\xpg@tmp@lang{#2}%
   \edef\xpg@tmp@opts{#1}%
-  \ifcsdef{#2@alias@lang}{%
-     \edef\xpg@tmp@lang{\csuse{#2@alias@lang}}%
-     \ifcsdef{#2@alias@opts}{%
-       \edef\xpg@tmp@opts{\csuse{#2@alias@opts},#1}%
-     }{}%
-  }{}%
+  \prop_if_in:NeT \__xpg_alias {#2/target}
+  {%
+    \edef\xpg@tmp@lang{\prop_item:Nn \__xpg_alias {#2/target}}%
+    \ifcsdef{#2@alias@opts}
+    {%
+      \edef\xpg@tmp@opts{\csuse{#2@alias@opts},#1}%
+    }{}%
+  }
   % Register the language options
   \polyglossia@set@lang@options:nn {\xpg@tmp@lang} {\xpg@tmp@opts}%
   % Now switch patterns
