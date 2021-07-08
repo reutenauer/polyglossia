@@ -298,7 +298,7 @@
   \clist_map_inline:Nn \l_tmpa_clist {
     \ifbool{havehyphen}{}{%
        % check if language hyphenname is defined
-       \polyglossia@check@ifdefined:NF{#1}{%
+      \__xpg_check_if_exist_l@:NF{#1}{%
           % if not, first consider nohyphenation
           \str_if_eq:nnTF{##1}{nohyphenation}
             {%
@@ -315,7 +315,7 @@
                       \xpg@set@hyphenation@patterns{##1}
                       \global\booltrue{havehyphen}
                   }%
-               }{}%
+                }{}%
            }%
        }%
     }%
@@ -1137,7 +1137,7 @@
     }%
     \exp_args:Nc \newcommand {text#1} [2][]
     {%
-      \xpg@textlanguage[##1]{#1}{##2}%
+      \__xpg_textlanguage:nen{##1}{#1}{##2}%
     }%
   }{}
 }
@@ -1161,7 +1161,7 @@
        }%
        \exp_args:Nc \newcommand {text#4} [2][]
        {%
-         \xpg@textlanguage[#2,##1]{#3}{##2}%
+         \__xpg_textlanguage:een{#2,##1}{#3}{##2}%
        }%
      }{%
        \exp_args:Ne
@@ -1174,7 +1174,7 @@
        }%
        \exp_args:Nc \renewcommand {text#4} [2][]
        {%
-         \xpg@textlanguage[#2,##1]{#3}{##2}%
+         \__xpg_textlanguage:een{#2,##1}{#3}{##2}%
        }%
      }%
   }%
@@ -1186,10 +1186,8 @@
   \clist_if_in:NeF \xpg@loaded {#2}{
     \clist_gput_right:Ne \xpg@loaded {#2}
   }
-  \tl_if_blank:nF {#1}{%
-    % Register the language options
-    \polyglossia@set@lang@options:nn {#2} {#1}%
-  }%
+  % Register the language options
+  \polyglossia@set@lang@options:nn {#2} {#1}
   % register babelname
   \prop_get:NeN \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
   \clist_if_in:NeF \xpg@bloaded {\l_tmpa_tl}{
@@ -1236,7 +1234,11 @@
 \cs_new:Nn \polyglossia@set@default@language:nn
 {
   \gdef\xpg@main@language{#2}%
-  \tl_if_blank:nTF {#1}{\gdef\mainlanguagevariant{}}{%
+  \tl_if_blank:nTF {#1}
+  {
+    \cs_gset_nopar:Npn \mainlanguagevariant {}
+  }
+  {%
      % Register the language options
      \polyglossia@set@lang@options:nn {#2} {#1}%
   }%
@@ -1311,10 +1313,10 @@
 \cs_new_nopar:Npn \mainlanguagename {}
 \cs_new_nopar:Npn \mainbabelname {}
 \cs_new_nopar:cpn {mainbcp47id} {}
-\def\mainlanguagevariant{}%
+\cs_new_nopar:Npn \mainlanguagevariant {}%
 % Store main language variant for external packages
 \define@key{xpg@main@langvariant}{variant}{%
-  \gdef\mainlanguagevariant{#1}%
+  \cs_gset_nopar:Npn \mainlanguagevariant {#1}%
 }
 
 \cs_new_nopar:Npn \babelname {}
@@ -1540,10 +1542,9 @@
   \polyglossia@register@language:nn{#1}{#2}%
   % If a variant is set, store it.
   \gdef\otherlanguagevariant{}
-  \tl_if_blank:nTF {#1}{}{%
-    % Register the language options
-    \polyglossia@set@lang@options:nn {#2} {#1}%
-  }%
+  % Register the language options
+  \polyglossia@set@lang@options:nn {#2} {#1}%
+
   \csgdef{#2@gvar}{\otherlanguagevariant}%
   \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
     { \xdef\otherlanguagebabelname{\l_tmpa_tl} }
@@ -1588,12 +1589,12 @@
 \newcommand\textlang[3][]{%
   \ifcsdef{#2@alias@lang}{%
      \ifcsdef{#2@alias@opts}{%
-       \exp_args:Nxx \xpg@textlanguage[\csuse{#2@alias@opts},#1]{\csuse{#2@alias@lang}}{#3}%
+       \__xpg_textlanguage:een{\csuse{#2@alias@opts},#1}{\csuse{#2@alias@lang}}{#3}%
      }{%
-       \xpg@textlanguage[#1]{\csuse{#2@alias@lang}}{#3}%
+       \__xpg_textlanguage:een{#1}{\csuse{#2@alias@lang}}{#3}%
      }%
   }{%
-    \xpg@textlanguage[#1]{#2}{#3}%
+    \__xpg_textlanguage:een{#1}{#2}{#3}%
   }%
 }%
 
@@ -1733,20 +1734,24 @@
 
 % use by \text<lang> and \textlang. Equivalent to \foreignlanguage,
 % except that dates are localized.
-\newcommand\xpg@textlanguage[3][]{%
+% #1: option
+% #2: language
+% #3: text
+\cs_new:Nn \__xpg_textlanguage:nnn
+{
   \polyglossia@error@iflangnotloaded:n{#2}
-   \bgroup
-   \xpg@otherlanguage[#1]{#2}%
-   \csuse{date#2}%
-   % This is a hook for external packages which want to access variants
-   % via babelname (such as biblatex)
-   \cs_if_exist_use:c{date@bbl@\babelname}%
-   \polyglossia@lang@settextdirection:nn{#2}{#3}%
-   \egroup
+  \group_begin:
+    \xpg@otherlanguage[#1]{#2}%
+    \csuse{date#2}%
+    % This is a hook for external packages which want to access variants
+    % via babelname (such as biblatex)
+    \cs_if_exist_use:c{date@bbl@\babelname}%
+    \polyglossia@lang@settextdirection:nn{#2}{#3}%
+  \group_end:
   % Reset the language's/script's font families
   \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/lcscript}}{latin}{}{\resetfontlatin}%
 }
-
+\cs_generate_variant:Nn \__xpg_textlanguage:nnn {een, nen}
 
 % Define language-specific hyphenation exceptions
 \newcommand\pghyphenation[3][]{
@@ -1785,63 +1790,42 @@
 \cs_new:Nn \polyglossia@select@language:nnn
 {
   \IfBooleanF {#1}
-    {
-      \cs_set_nopar:Npx \xpg@pop@language { \exp_not:N \xpg@pop@language@i {#2} {#3} }
-      \group_insert_after:N \xpg@pop@language
-    }
-  \tl_if_blank:nTF {#2}{}{%
-    % Register the language options
-    \polyglossia@set@lang@options:nn {#3} {#2}%
-   }%
-   % The starred variant does not write to the aux
-   \IfBooleanTF#1{%
-     \xpg@set@language@nonaux[#2]{#3}%
-   }{%
-     \xpg@set@language@aux[#2]{#3}%
-   }%
-   \sys_if_engine_luatex:T
-     {
-       \directlua{polyglossia.select_language('\luatexluaescapestring{\string#3}',
-                     \the\csname l@#3\endcsname)}%
-     }
+  {
+    \cs_set_nopar:Npx \xpg@pop@language { \exp_not:N \xpg@pop@language@i {#2} {#3} }
+    \group_insert_after:N \xpg@pop@language
+  }
+  % Register the language options
+  \polyglossia@set@lang@options:nn {#3} {#2}%
+  % The starred variant does not write to the aux
+  \IfBooleanTF#1{%
+    \xpg@set@language@nonaux[#2]{#3}%
+  }
+  {%
+    \xpg@set@language@aux[#2]{#3}%
+  }%
+  \sys_if_engine_luatex:T
+  {
+    \directlua{polyglossia.select_language('\luatexluaescapestring{\string#3}',
+      \the\csname l@#3\endcsname)}%
+  }
   \polyglossia@register@language:nn{#2}{#3}%
 }
 \cs_generate_variant:Nn \polyglossia@select@language:nnn {
-  eee, eef, een, eeo, eex,
-  ffe, fff, ffn, ffo, ffx,
-  nne, nnf,    , nno, nnx,
-  ooe, oof, oon, ooo, oox,
-  xxe, xxf, xxn, xxo, xxx,
-
-  efe, eff, efn, efo, efx,
-  ene, enf, enn, eno, enx,
-  eoe, eof, eon, eoo, eox,
-  exe, exf, exn, exo, exx,
-
-  fee, fef, fen, feo, fex,
-  fne, fnf, fnn, fno, fnx,
-  foe, fof, fon, foo, fox,
-  fxe, fxf, fxn, fxo, fxx,
-
-  nee, nef, nen, neo, nex,
-  nfe, nff, nfn, nfo, nfx,
-  noe, nof, non, noo, nox,
-  nxe, nxf, nxn, nxo, nxx,
-
-  xee, xef, xen, xeo, xex,
-  xfe, xff, xfn, xfo, xfx,
-  xoe, xof, xon, xoo, xox,
-  xxe, xxf, xxn, xxo, xxx
+ nee, nne
 }
 
 
+% set lang option #2 for lang #1
 \cs_new:Nn \polyglossia@set@lang@options:nn
-{  
+{
+  \tl_if_blank:nF {#2}
+  {
     % If the optional argument sets a value for the key “variant”, copy it to xpg@langvariant
     \clist_map_inline:nn { #2 } {%
-        \xpg@parsevariantkeyvalue##1=@xpg@langvariant:#1\relax
+      \xpg@parsevariantkeyvalue##1=@xpg@langvariant:#1\relax
     }%
     \exp_args:Nne \setkeys{#1}{#2}%
+  }
 }
 
 % Initialize default language options, so that
@@ -2097,7 +2081,8 @@
     \fi
 }
 
-\prg_set_conditional:Npnn \polyglossia@check@ifdefined:N #1 { p , T , F , TF }{
+% check if language is defined
+\prg_set_conditional:Npnn \__xpg_check_if_exist_l@:N #1 { p , T , F , TF }{
   \cs_if_exist:cTF {l@#1}
     {
       \cs_if_eq:cNTF {l@#1} \l@nohyphenation
@@ -2119,11 +2104,11 @@
 \def\polyglossia@luatex@load@lang#1{%
   % if \l@#1 is not properly defined, call lua function newloader(#1),
   % and assign the returned number to \l@#1
-  \polyglossia@check@ifdefined:NF {#1}
-    {
-      \expandafter\chardef\csname l@#1\endcsname=
-        \directlua{ tex.sprint(polyglossia.newloader'#1') }\relax
-    }
+  \__xpg_check_if_exist_l@:NF {#1}
+  {
+    \expandafter\chardef\csname l@#1\endcsname=
+    \directlua{ tex.sprint(polyglossia.newloader'#1') }\relax
+  }
 }
 
 % This check is also used by biblatex, so don't
@@ -2134,7 +2119,7 @@
   {
     \polyglossia@luatex@load@lang{#1}%
   }
-  \polyglossia@check@ifdefined:NTF{#1}{#2}{#3}%
+  \__xpg_check_if_exist_l@:NTF{#1}{#2}{#3}%
 }%
 
 % Set \bbl@hyphendata@\the\language, which is (lua)babel's
@@ -2371,10 +2356,8 @@
        \edef\xpg@tmp@opts{\csuse{#2@alias@opts},#1}%
      }{}%
   }{}%
-  \tl_if_blank:nF {\xpg@tmp@opts}{%
-     % Register the language options
-     \polyglossia@set@lang@options:nn {\xpg@tmp@lang} {\xpg@tmp@opts}%
-  }%
+  % Register the language options
+  \polyglossia@set@lang@options:nn {\xpg@tmp@lang} {\xpg@tmp@opts}%
   % Now switch patterns
   \csuse@warn{\csuse{xpg@tmp@lang}@language}%
   % And activate hyphenmins
