@@ -145,9 +145,15 @@
 
 
 %% use macro if defined, else warn that it is not
-\def\csuse@warn#1{%
-   \ifcsundef{#1}{\xpg@warning{ \expandafter\string\csname #1\endcsname\space is~ not~ defined}}%
-   {\csname #1\endcsname}}
+\cs_new_nopar:Nn \__xpg_use_or_warn:N
+{
+  \cs_if_exist_use:NF {#1}
+  {
+    \xpg@warning {  \tl_to_str:N {#1} ~ is~ not~ defined }
+  }
+}
+\cs_generate_variant:Nn \__xpg_use_or_warn:N {c}
+
 
 %% ensure directionality if bidi is loaded, else ignore
 \def\@@ensure@dir#1{\ifcsundef{@ensure@dir}{#1}{\@ensure@dir{#1}}}
@@ -1559,10 +1565,10 @@
 \def\xpg@select@fontfamily#1{%
   \def\tmp@tt{tt}\def\tmp@sf{sf}%
   \ifx\familytype\tmp@tt
-    \csuse@warn{#1@font@tt}%
+    \__xpg_use_or_warn:c{#1@font@tt}%
   \else\ifx\familytype\tmp@sf
-    \csuse@warn{#1@font@sf}%
-      \else\csuse@warn{#1@font@rm}\fi\fi}
+    \__xpg_use_or_warn:c{#1@font@sf}%
+      \else\__xpg_use_or_warn:c{#1@font@rm}\fi\fi}
 
 \def\xpg@set@normalfont#1{%
   \DeclareRobustCommand\rmfamily{\csuse{#1@font@rm}}%
@@ -2358,7 +2364,7 @@
     \xpg@set@normalfont{#2}
   }%
   \xpg@select@fontfamily{#2}%
-  \csuse@warn{#2@language}%
+  \__xpg_use_or_warn:c{#2@language}%
   \cs_if_exist_use:c{#2@numbers}%
   \use@localhyphenmins[#1]{#2}%
   \polyglossia@lang@frenchspacing:n{#2}
@@ -2501,7 +2507,7 @@
   % Register the language options
   \polyglossia@set@lang@options:nn {\xpg@tmp@lang} {\xpg@tmp@opts}%
   % Now switch patterns
-  \csuse@warn{\csuse{xpg@tmp@lang}@language}%
+  \__xpg_use_or_warn:c{\use:c{xpg@tmp@lang}@language}%
   % And activate hyphenmins
   \use@localhyphenmins[\xpg@tmp@opts]{\xpg@tmp@lang}%
 }
