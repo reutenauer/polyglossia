@@ -1155,7 +1155,7 @@
 
 % load a master language from an alias file
 \newcommand*\xpg@load@master@language[1] {
-  \file_if_exist:eTF{gloss-#2.lde}
+  \file_if_exist:eTF{gloss-#1.lde}
   {
     \RequireLanguageDefinitionExtension{#1}
   }
