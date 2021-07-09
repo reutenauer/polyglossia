@@ -165,62 +165,76 @@
   }
 }
 
+% if #1 is LR run #2 else #3
+\prg_set_conditional:Nnn \__xpg_if_LR_str:n {p, T, F, TF}
+{
+  \str_case_e:nnF{#1}{
+    {LR}{\prg_return_true:}
+    {RL}{\prg_return_false:}
+  }
+  {
+    \xpg@error{Unknow~ direction~#1}
+    \prg_return_false:
+  }
+}
+\prg_generate_conditional_variant:Nnn \__xpg_if_LR_str:n {e} {p, T, F, TF}
+
 % (lua)bidi commands to change directionality for paragraphs
 % and inline text.
 % overwritten with correct package
 \cs_new_nopar:Nn{\polyglossia@setpardirection:n}{%
-  \str_case_e:nnTF{#1}{%
-       {LR}{\relax}%
-       {RL}{\xpg@error{right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}}%
-     }%
-     {}%
-     {\xpg@error{Unknown~ language~ direction~ #1 ~(base~ wrapper)}}%
+  \__xpg_if_LR_str:nF {#1}
+  {
+    \xpg@error{right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}
+  }
 }
 \cs_new_nopar:Nn{\polyglossia@settextdirection:n}{%
-  \str_case_e:nnTF{#1}{%
-       {LR}{\relax}%
-       {RL}{\xpg@error{right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}}%
-     }%
-     {}%
-     {\xpg@error{Unknown~ language~ direction~ #1 ~(base~ wrapper)}}%
+  \__xpg_if_LR_str:nF {#1}
+  {
+    \xpg@error{right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}
+  }
 }
 \__xpg_at_package_hook:nnn{bidi}{package/after/bidi}{%
   \ExplSyntaxOn%
   \cs_gset_nopar:Nn{\polyglossia@setpardirection:n}{%
-    \str_case_e:nnTF{#1}{%
-        {LR}{\setLR}%
-        {RL}{\setRL}%
-      }%
-      {}%
-      {\xpg@error{Unknown~ language~ direction~ #1 ~(bidi~ wrapper)}}%
+    \__xpg_if_LR_str:nTF{#1}%
+    {%
+      \setLR%
+    }%
+    {%
+      \setRL%
+    }%
   }%
   \cs_gset_nopar:Nn{\polyglossia@settextdirection:n}{%
-    \str_case_e:nnTF{#1}{%
-        {LR}{\LRE}%
-        {RL}{\RLE}%
-      }%
-      {}%
-      {\xpg@error{Unknown~ language~ direction~ #1 ~(bidi~ wrapper)}}%
+    \__xpg_if_LR_str:nTF{#1}%
+    {%
+      \LRE%
+    }%
+    {%
+      \RLE%
+    }%
   }%
   \ExplSyntaxOff%
 }
 \__xpg_at_package_hook:nnn{luabidi}{package/after/luabidi}{%
   \ExplSyntaxOn%
   \cs_gset_nopar:Nn{\polyglossia@setpardirection:n}{%
-    \str_case_e:nnTF{#1}{%
-        {LR}{\setLR}%
-        {RL}{\setRL}%
-      }
-      {}%
-      {\xpg@error{Unknown~ language~ direction~ #1 ~(luabidi~ wrapper)}}%
+    \__xpg_if_LR_str:nTF{#1}%
+    {%
+      \setLR%
+    }%
+    {%
+      \setRL%
+    }%
   }%
   \cs_gset_nopar:Nn{\polyglossia@settextdirection:n}{%
-    \str_case_e:nnTF{#1}{%
-        {LR}{\LRE}%
-        {RL}{\RLE}%
-      }
-      {}%
-      {\xpg@error{Unknown~ language~ direction~ #1 ~(luabidi~ wrapper)}}%
+    \__xpg_if_LR_str:nTF{#1}%
+    {%
+      \LRE%
+    }%
+    {%
+      \RLE%
+    }%
   }%
   \ExplSyntaxOff%
 }
@@ -1307,7 +1321,7 @@
   \csgdef{#2@gvar}{\mainlanguagevariant}%
   %% The following settings are for the default language and script
   % this tells bidi.sty or luabidi.sty that the document is RTL
-  \str_if_eq:eeT{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}
+  \__xpg_if_LR_str:eF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}
   {
     \__xpg_setRTLmain:
   }
@@ -1430,7 +1444,10 @@
   \cs_if_exist_use:c{noextras@bbl@\mainbabelname}%
   \csuse{init@noextras@\xpg@main@language}%
   \polyglossia@set@language@name[#1]{#2}%
-  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}{\@rlmaintrue\@rl@footnotetrue}{}%
+  \__xpg_if_LR_str:eF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}
+  {
+    \@rlmaintrue\@rl@footnotetrue
+  }
   \selectlanguage[#1]{#2}%
   \selectbackgroundlanguage{#2}%
   % Store babelname of current language (for external packages such as biblatex)
@@ -2320,17 +2337,15 @@
     \noextrascurrent{\languagename}%
     \cs_if_exist_use:c{no\languagename @numbers}%
     \sys_if_engine_xetex:T{
-      \str_if_eq:eeTF{\prop_item:Ne{\polyglossia@langsetup}{\languagename/direction}}{RL}%
+      \__xpg_if_LR_str:eTF{\prop_item:Ne{\polyglossia@langsetup}{\languagename/direction}}
+      {
+        \__xpg_if_LR_str:eF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}
+          {\setnonlatin}% LTR -> RTL
+      }%
       {%
-        \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}%
-          {}% RTL -> RTL
+        \__xpg_if_LR_str:eT{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}
           {\setlatin}% RTL -> LTR
       }
-      {
-        \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}{RL}%
-        {\setnonlatin}% LTR -> RTL
-        {}% LTR -> LTR
-      }%
     }
   }%
   \polyglossia@set@language@name[#1]{#2}%
@@ -2362,12 +2377,11 @@
   % as bidi interferes here badly with its directionality smartness.
   \sys_if_engine_xetex:T
   {
-    \str_if_eq:eeT{\prop_item:Ne{\polyglossia@langsetup}{\languagename/direction}}{RL}%
-      {%
-        \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}{RL}%
-          {}% RTL -> RTL
-          {\ifvmode\else\booltrue{xpg@noset@groups}\fi}% RTL -> LTR
-      }%
+    \__xpg_if_LR_str:eF{\prop_item:Ne{\polyglossia@langsetup}{\languagename/direction}}
+    {%
+      \__xpg_if_LR_str:eT{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}
+        {\ifvmode\else\booltrue{xpg@noset@groups}\fi}% RTL -> LTR
+    }%
   }
   \ifbool{xpg@noset@groups}{}{\xpg@set@group@aux}%
   \selectlanguage[#1]{#2}%
@@ -2466,13 +2480,12 @@
   % We cannot do this if an LTR environmet starts in an RTL paragraph,
   % as bidi interferes here badly with its directionality smartness.
   \sys_if_engine_xetex:T{
-    \str_if_eq:eeT{\prop_item:Ne{\polyglossia@langsetup}{\languagename/direction}}{RL}%
-       {%
-        \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}{RL}%
-           {}% RTL -> RTL
-           {\ifvmode\else\booltrue{xpg@noset@groups}\fi}% RTL -> LTR
-       }%
-  }
+    \__xpg_if_LR_str:eF{\prop_item:Ne{\polyglossia@langsetup}{\languagename/direction}}
+    {%
+      \__xpg_if_LR_str:eT{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}%
+        {\ifvmode\else\booltrue{xpg@noset@groups}\fi}% RTL -> LTR
+    }%
+  }%
   \ifbool{xpg@noset@groups}{}{\xpg@set@group@aux}%
   % Check for real language name and options
   \edef\xpg@tmp@lang{#2}%
