@@ -26,8 +26,11 @@
 \cs_generate_variant:Nn \clist_gput_right:Nn {Ne}
 \cs_generate_variant:Nn  \prop_get:NnN {NeN}
 \cs_generate_variant:Nn  \cs_gset:Npn {Npe}
+\cs_generate_variant:Nn  \cs_new:Nn {Ne}
+\cs_generate_variant:Nn  \cs_new_nopar:Nn {Ne}
 \cs_generate_variant:Nn  \cs_gset_nopar:Npn {Npe}
 \cs_generate_variant:Nn  \cs_gset_nopar:Npn {cpe}
+\prg_generate_conditional_variant:Nnn \file_if_exist:n {e} {TF, T, F, p}
 \prg_generate_conditional_variant:Nnn \clist_if_in:Nn {Ne} {TF, T, F, p}
 \prg_generate_conditional_variant:Nnn \prop_if_in:Nn {Ne} {TF, T, F, p}
 % correct a bug in tracklang
@@ -140,14 +143,6 @@
   }
 }
 
-
-% error do not use directly the gloss file
-\msg_new:nnn { polyglossia } { directloadgloss }
-{
-  You~ should~ not~ load~ directly~ the~ gloss~ file~ using~ `\string\usepackage'.
-  You~ must~ use~ `\string\setotherlanguage\{#1\}' or  `\string\setmainlanguage\{#1\}'.
-}
-\msg_redirect_name:nnn { polyglossia } { directloadgloss } { critical }
 
 %% use macro if defined, else warn that it is not
 \def\csuse@warn#1{%
@@ -1088,22 +1083,66 @@
   \catcode`\@=\xpg@saved@at@catcode%
 }
 
+%% Load a lde file
+\cs_new_nopar:Nn \__xpg_gloss_ext: {lde}
+\cs_new_nopar:Ne \__xpg_saved_@pkgextension: {\@pkgextension}
+
+\msg_new:nnn { polyglossia } { directloadgloss }
+{
+  You~ should~ not~ load~ directly~ the~ gloss~ file. ~
+  You~ must~ use~ `\string\setotherlanguage\{#1\}' or  `\string\setmainlanguage\{#1\}'.
+}
+\msg_redirect_name:nnn { polyglossia } { directloadgloss } { critical }
+\NewDocumentCommand{\__xpg_ProvidesLanguageDefinitionExtension_error}{m m m m}
+{
+  \msg_critical:nn { polyglossia } { directloadgloss }
+}
+% ProvideExplPackage but for language file
+\cs_new_eq:NN \ProvidesLanguageDefinitionExtension \__xpg_ProvidesLanguageDefinitionExtension_error
+\cs_new_eq:NN \__xpg_saved_ProvidesExplPackage \ProvidesExplPackage
+\NewDocumentCommand{\__xpg_ProvidesLanguageDefinitionExtension}{m m m m}
+{
+  \__xpg_saved_ProvidesExplPackage{#1}{#2}{#3}{#4}
+  \cs_gset_eq:NN \@pkgextension \__xpg_saved_@pkgextension:
+  \cs_gset_eq:NN \ProvidesLanguageDefinitionExtension \__xpg_ProvidesLanguageDefinitionExtension_error
+}
+
+
+% wrapper for loading a gle file
+\NewDocumentCommand{\RequireLanguageDefinitionExtension}{O{} m}
+{
+  \cs_gset_eq:NN \__xpg_saved_@pkgextension: \@pkgextension
+  \cs_gset_eq:NN \__xpg_saved_ProvidesExplPackage \ProvidesExplPackage
+  \cs_gset_eq:NN \@pkgextension \__xpg_gloss_ext:
+  \cs_gset_eq:NN \ProvidesLanguageDefinitionExtension \__xpg_ProvidesLanguageDefinitionExtension
+  \RequirePackage[#1]{gloss-#2}
+  % be paranoiac restore
+  \cs_gset_eq:NN \@pkgextension \__xpg_saved_@pkgextension:
+  \cs_gset_eq:NN \__xpg_ProvidesLanguageDefinitionExtension_error \ProvideLanguageDefinitionExtension
+}
+
 % try to load a language file
 \cs_new:Nn \polyglossia_load_lang_definition:nn {
-  \file_if_exist:nTF{gloss-#2.ldf}
+  \file_if_exist:eTF{gloss-#2.lde}
   {
-    % Temporarily force catcode of ~ to 13 since babelsh.def
-    % requires it. This is needed particularly with LaTeX3
-    % packages which force \ExplSyntaxOn (#425)
-    \protected\edef\xpg@restore@tilde@catcode{\catcode 126 = \the\catcode 126\relax}
-    \catcode 126 = 13
-    \xpg@input{gloss-#2.ldf}
-    \setkeys{#2}{#1}
-    % restore former ~ catcode
-    \xpg@restore@tilde@catcode
+    \RequireLanguageDefinitionExtension[#1]{#2}
   }
   {
-    \xpg@nogloss{#2}
+    \file_if_exist:nTF{gloss-#2.ldf}
+    {
+      % Temporarily force catcode of ~ to 13 since babelsh.def
+      % requires it. This is needed particularly with LaTeX3
+      % packages which force \ExplSyntaxOn (#425)
+      \protected\edef\xpg@restore@tilde@catcode{\catcode 126 = \the\catcode 126\relax}
+      \catcode 126 = 13
+      \xpg@input{gloss-#2.ldf}
+      \setkeys{#2}{#1}
+      % restore former ~ catcode
+      \xpg@restore@tilde@catcode
+    }
+    {
+      \xpg@nogloss{#2}
+    }
   }
 }
 \cs_generate_variant:Nn \polyglossia_load_lang_definition:nn {
@@ -2483,11 +2522,6 @@
   luatexrenderer = Harfbuzz
 }
 
-% load by default latex
-\setmainlanguage{latex}
-% then process key in order to overwrite
-\ProcessKeysOptions{polyglossia}
-
 % Set the LuaTeX renderer. As opposed to fontspec, we use Harfbuzz by default.
 % This can be changed via the luatexrenderer package option.
 \sys_if_engine_luatex:T{
@@ -2517,6 +2551,11 @@
 }{
   \system@babelshorthandsfalse
 }
+
+% load by default latex
+\setmainlanguage{latex}
+% then process key in order to overwrite
+\ProcessKeysOptions{polyglossia}
 
 %
 % FIXME these should also be loaded \AtEndOfPackage !!!
