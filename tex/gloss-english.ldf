@@ -169,6 +169,7 @@
    \def\alsoname{see also}%
    \def\proofname{Proof}%
 }
+
 \def\dateenglish{%
    \def\english@day{%
      \ifenglish@ordinalmonthday

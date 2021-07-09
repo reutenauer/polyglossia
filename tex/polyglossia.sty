@@ -1155,7 +1155,13 @@
 
 % load a master language from an alias file
 \newcommand*\xpg@load@master@language[1] {
-  \xpg@input{gloss-#1.ldf}
+  \file_if_exist:eTF{gloss-#2.lde}
+  {
+    \RequireLanguageDefinitionExtension{#1}
+  }
+  {
+    \xpg@input{gloss-#1.ldf}
+  }
   \seq_if_in:NxF \__xpg_langs_loaded {#1}
   {
     % define environment and command
