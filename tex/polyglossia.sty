@@ -34,6 +34,7 @@
 \cs_generate_variant:Nn  \tl_set:Nn {Ne}
 \cs_generate_variant:Nn  \str_foldcase:n {e}
 \prg_generate_conditional_variant:Nnn \file_if_exist:n {e} {TF, T, F, p}
+\prg_generate_conditional_variant:Nnn \tl_if_blank:n {e} {TF, T, F, p}
 \prg_generate_conditional_variant:Nnn \clist_if_in:Nn {Ne} {TF, T, F, p}
 \prg_generate_conditional_variant:Nnn \prop_if_in:Nn {Ne} {TF, T, F, p}
 % correct a bug in tracklang
@@ -1218,7 +1219,7 @@
 
 \AtBeginDocument{
   \prop_log:N{\__xpg_alias}
-%  \xpg@error{t}
+  %\xpg@error{t}
 }
 
 % follow an alias link to lang
@@ -1259,6 +1260,19 @@
 {
   \prop_gput:Nee \__xpg_alias {#2/#3} { \xpg_alias_lang_default_if_empty:nnn {#4} {#1} {#3}}
 }
+\cs_generate_variant:Nn \xpg_alias_put_with_default:nnnn {nnne}
+
+\keys_define:nn { polyglossia/alias }
+{
+  % babelname\l_tmpa_prop
+  babelname .prop_put:N = \__xpg_language_alias_prop,
+  % bcp47
+  bcp47 .prop_put:N = \__xpg_language_alias_prop,
+  % variant
+  variant .prop_put:N = \__xpg_language_alias_prop,
+}
+
+
 
 % provide way to define alias environment and command
 % #1 () variant
@@ -1274,30 +1288,16 @@
   \prop_gremove:Nn \__xpg_alias {#6/bcp47}
   \prop_gremove:Nn \__xpg_alias {#6/babelname}
   \prop_gremove:Nn \__xpg_alias {#6/variant}
-  \xpg_alias_put_with_default:nnnn {#3} {#6} {target} {#3}
-  \xpg_alias_put_with_default:nnnn {#3} {#6} {babelname} {#4}
-  \xpg_alias_put_with_default:nnnn {#3} {#6} {bcp47} {#5}
-  \tl_if_blank:nF {#1}
+  \xpg_alias_put_with_default:nnne {#3} {#6} {target} {#3}
+  \xpg_alias_put_with_default:nnne {#3} {#6} {babelname} {#4}
+  \xpg_alias_put_with_default:nnne {#3} {#6} {bcp47} {#5}
+  \tl_if_blank:eF {#1}
   {
-    \xpg_alias_put_with_default:nnnn {#3} {#6} {variant} {#1}
+    \xpg_alias_put_with_default:nnne {#3} {#6} {variant} {#1}
   }
-  \tl_if_blank:nF {#2}
+  \tl_if_blank:eF {#2}
   {
-    \prop_gput:Nen \__xpg_alias {#6/options} {#2}
-    \tl_if_blank:nT {#1} {
-      % low level parse option and extract variant and babelname
-      \tl_set:Ne  \l_tmpa_tl
-      {
-        \keyval_parse:nnn{\use_none:n}{\str_if_eq:nnT{variant}}{#2}
-      }
-      \tl_set:Ne \l_tmpa_tl {\tl_item:Nn \l_tmpa_tl {-1}}
-      \tl_trim_spaces:N \l_tmpa_tl
-      \tl_set:Ne  \l_tmpa_tl { \str_foldcase:e  \l_tmpa_tl }
-      \tl_if_blank:eF {\l_tmpa_tl}
-      {
-        \prop_gput:Nne \__xpg_alias {#6/variant} {\l_tmpa_tl}
-      }
-    }
+    \prop_gput:Nee \__xpg_alias {#6/options} {#2}
   }
 }
 
@@ -1339,7 +1339,17 @@
       }%
     }
   }%
-  \xpg_language_alias[#2]{#3}{#4}
+  \tl_clear_new:N \__xpg_alias_option_tl
+  \prop_clear_new:N \__xpg_language_alias_prop
+  \keys_set_known:nnN{polyglossia/alias} {#2} \__xpg_alias_option_tl
+  \xpg_language_alias
+    (\prop_item:Nn \__xpg_language_alias_prop {variant})
+    % TODO not yet [\__xpg_alias_option_tl]
+    [#2]
+    {#3}
+    (\prop_item:Nn \__xpg_language_alias_prop {babelname})
+    [\prop_item:Nn \__xpg_language_alias_prop {bcp47}]
+    {#4}
 }
 
 \cs_new:Nn \polyglossia@register@language:nn {

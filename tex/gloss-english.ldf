@@ -11,8 +11,8 @@
 % BCP-47 compliant aliases
 \ExplSyntaxOn
 \xpg_language_alias{english}{english}
-\xpg_language_alias{english}[en]{en}
-\xpg_language_alias(australian)[variant=australian]{english}(australian)[en-AU]{en-AU}
+\setlanguagealias*[bcp47=en]{english}{en}
+\setlanguagealias*[variant=australian,babelname=autralian,bcp47=en-AU]{english}{en-AU}
 \xpg_language_alias(newzealand)[variant=newzealand]{english}(newzealand)[en-NZ]{en-NZ}
 \xpg_language_alias(us)[variant=us]{english}(american)[en-US]{en-US}
 \xpg_language_alias(british)[variant=british]{english}(british)[en-GB]{en-GB}
