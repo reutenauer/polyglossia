@@ -25,11 +25,14 @@
 \cs_generate_variant:Nn \clist_set:Nn { Ne, Nf, No, Nx }
 \cs_generate_variant:Nn \clist_gput_right:Nn {Ne}
 \cs_generate_variant:Nn  \prop_get:NnN {NeN}
+\cs_generate_variant:Nn  \prop_gput:Nnn {Nne, Nee, Nen}
 \cs_generate_variant:Nn  \cs_gset:Npn {Npe}
 \cs_generate_variant:Nn  \cs_new:Nn {Ne}
 \cs_generate_variant:Nn  \cs_new_nopar:Nn {Ne}
 \cs_generate_variant:Nn  \cs_gset_nopar:Npn {Npe}
 \cs_generate_variant:Nn  \cs_gset_nopar:Npn {cpe}
+\cs_generate_variant:Nn  \tl_set:Nn {Ne}
+\cs_generate_variant:Nn  \str_foldcase:n {e}
 \prg_generate_conditional_variant:Nnn \file_if_exist:n {e} {TF, T, F, p}
 \prg_generate_conditional_variant:Nnn \clist_if_in:Nn {Ne} {TF, T, F, p}
 \prg_generate_conditional_variant:Nnn \prop_if_in:Nn {Ne} {TF, T, F, p}
@@ -1213,6 +1216,92 @@
 }
 \cs_generate_variant:Nn \xpg_define_language_commands:n {e}
 
+\AtBeginDocument{
+  \prop_log:N{\__xpg_alias}
+%  \xpg@error{t}
+}
+
+% follow an alias link to lang
+\cs_new:Nn \xpg_alias_to_lang:n
+{
+  \prop_if_in:NeTF \__xpg_alias {#1/target}
+  {
+    \prop_item:Ne  \__xpg_alias {#1/target}
+  }
+  {
+    #1
+  }
+}
+\cs_generate_variant:Nn \xpg_alias_to_lang:n {e}
+
+\cs_new:Nn \xpg_alias_lang_default_if_empty:nnn
+{
+  \tl_if_blank:nTF{#1}
+  {
+    \prop_if_in:NeTF \__xpg_alias {#2 / #3}
+    {
+      \prop_item:Ne \__xpg_alias {#2 / #3}
+    }
+    {
+      \prop_item:Ne \polyglossia@langsetup {\xpg_alias_to_lang:n{#2}/#3}
+    }
+  }
+  {
+    #1
+  }
+}
+
+% #1 base language (may be alias)
+% #2 alias
+% #3 propname
+% #4 value
+\cs_new:Nn \xpg_alias_put_with_default:nnnn
+{
+  \prop_gput:Nee \__xpg_alias {#2/#3} { \xpg_alias_lang_default_if_empty:nnn {#4} {#1} {#3}}
+}
+
+% provide way to define alias environment and command
+% #1 () variant
+% #2 [] option (not yet without variant and bcp47 name)
+% #3 language
+% #4 () babel name
+% #5 [] bcp47 name
+% #6 alias
+\DeclareDocumentCommand \xpg_language_alias { D(){} O{} m D(){} O{} m}
+{
+  \prop_gremove:Nn \__xpg_alias {#6/target}
+  \prop_gremove:Nn \__xpg_alias {#6/options}
+  \prop_gremove:Nn \__xpg_alias {#6/bcp47}
+  \prop_gremove:Nn \__xpg_alias {#6/babelname}
+  \prop_gremove:Nn \__xpg_alias {#6/variant}
+  \xpg_alias_put_with_default:nnnn {#3} {#6} {target} {#3}
+  \xpg_alias_put_with_default:nnnn {#3} {#6} {babelname} {#4}
+  \xpg_alias_put_with_default:nnnn {#3} {#6} {bcp47} {#5}
+  \tl_if_blank:nF {#1}
+  {
+    \xpg_alias_put_with_default:nnnn {#3} {#6} {variant} {#1}
+  }
+  \tl_if_blank:nF {#2}
+  {
+    \prop_gput:Nen \__xpg_alias {#6/options} {#2}
+    \tl_if_blank:nT {#1} {
+      % low level parse option and extract variant and babelname
+      \tl_set:Ne  \l_tmpa_tl
+      {
+        \keyval_parse:nnn{\use_none:n}{\str_if_eq:nnT{variant}}{#2}
+      }
+      \tl_set:Ne \l_tmpa_tl {\tl_item:Nn \l_tmpa_tl {-1}}
+      \tl_trim_spaces:N \l_tmpa_tl
+      \tl_set:Ne  \l_tmpa_tl { \str_foldcase:e  \l_tmpa_tl }
+      \tl_if_blank:eF {\l_tmpa_tl}
+      {
+        \prop_gput:Nne \__xpg_alias {#6/variant} {\l_tmpa_tl}
+      }
+    }
+  }
+}
+
+
 % provide way to define alias environment and command
 % \setlanguagealias[<options>]{<language>}{<alias>}
 \DeclareDocumentCommand \setlanguagealias {s O{} m m}
@@ -1250,10 +1339,7 @@
       }%
     }
   }%
-  \prop_gput:Nnn \__xpg_alias {#4/target} {#3}
-  \tl_if_blank:nF {#2} {
-    \prop_gput:Nnn \__xpg_alias {#4/options} {#2}
-  }%
+  \xpg_language_alias[#2]{#3}{#4}
 }
 
 \cs_new:Nn \polyglossia@register@language:nn {
