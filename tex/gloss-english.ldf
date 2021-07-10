@@ -9,15 +9,12 @@
 }
 
 % BCP-47 compliant aliases
-\ExplSyntaxOn
-\xpg_language_alias{english}{english}
 \setlanguagealias*[bcp47=en]{english}{en}
-\setlanguagealias*[variant=australian,babelname=autralian,bcp47=en-AU]{english}{en-AU}
-\xpg_language_alias(newzealand)[variant=newzealand]{english}(newzealand)[en-NZ]{en-NZ}
-\xpg_language_alias(us)[variant=us]{english}(american)[en-US]{en-US}
-\xpg_language_alias(british)[variant=british]{english}(british)[en-GB]{en-GB}
-\xpg_language_alias(canadian)[variant=canadian]{english}(canadian)[en-CA]{en-CA}
-\ExplSyntaxOff
+\setlanguagealias*[variant=australian,babelname=autralian,bcp47=en-AU]{en}{en-AU}
+\setlanguagealias*[variant=canadian,babelname=canadian,bcp47=en-CA]{en}{en-CA}
+\setlanguagealias*[variant=british,babelname=british,bcp47=en-NZ]{en}{en-GB}
+\setlanguagealias*[variant=newzealand,babelname=newzealand,bcp47=en-NZ]{en}{en-NZ}
+\setlanguagealias*[variant=us,babelname=american,bcp47=en-US]{en}{en-US}
 
 
 % Babel aliases
