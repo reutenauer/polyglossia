@@ -1166,6 +1166,7 @@
   \file_if_exist:eTF{gloss-#2.lde}
   {
     \RequireLanguageDefinitionExtension[#1]{#2}
+    \setkeys{#2}{#1}
   }
   {
     \file_if_exist:nTF{gloss-#2.ldf}
@@ -1213,9 +1214,9 @@
 
 \prop_new:N \__xpg_alias
 
-% define environment and command
+% define environment and command if not alias
 \cs_new:Nn \xpg_define_language_commands:n {
-  \prop_if_in:NeF \__xpg_alias {#1/target}
+  \str_if_eq:eeT {\prop_item:Ne \__xpg_alias {#1/target}} {#1}
   {
     \exp_args:Ne
     \newenvironment {\prop_item:Nn{\polyglossia@langsetup}{#1/envname}} [1] []
@@ -1227,7 +1228,7 @@
     }%
     \exp_args:Nc \newcommand {text#1} [2][]
     {%
-      \__xpg_textlanguage:nen{##1}{#1}{##2}%
+      \__xpg_textlanguage:een{##1}{#1}{##2}%
     }%
   }
 }
@@ -1346,34 +1347,18 @@
   % The starred version does not define commands and environments
   \IfBooleanF {#1}
   {
-    \prop_if_in:NeTF \__xpg_alias {#4/target}
-    {%
-      \exp_args:Ne
-      \renewenvironment {#4}
-      {
-        \begin{otherlanguage}[#2]{#3}
-       }%
-       {
-         \end{otherlanguage}
-       }%
-       \exp_args:Nc \renewcommand {text#4} [2][]
-       {%
-         \__xpg_textlanguage:een{#2,##1}{#3}{##2}%
-       }%
-     }%
-     {
-      \exp_args:Ne
-      \newenvironment {#4}
-      {
-        \begin{otherlanguage}[#2]{#3}
-      }%
-      {
-        \end{otherlanguage}
-      }%
-      \exp_args:Nc \newcommand {text#4} [2][]
-      {%
-        \__xpg_textlanguage:een{#2,##1}{#3}{##2}%
-      }%
+    \exp_args:Nc \providecommand {text#4} [2][] {}
+    \exp_args:Nc \renewcommand {text#4} [2][]
+    {
+      \__xpg_textlanguage:een{##1}{#4}{##2}
+    }
+    \exp_args:Nc \providecommand {#4} {}
+    \exp_args:Ne  \renewenvironment {#4}
+    {
+      \begin{otherlanguage}{#4}
+    }
+    {
+      \end{otherlanguage}
     }
   }%
   \tl_clear_new:N \__xpg_alias_option_tl
@@ -1771,8 +1756,7 @@
 % where \text<alias> would cause clashes
 % (e.g., \textit)
 \newcommand\textlang[3][]{%
-  \__xpg_textlanguage:een {\xpg_alias_add_to_option_i:nn{#2}{#1}}
-    {\xpg_alias_base_lang:n{#2}} {#3}
+  \__xpg_textlanguage:een {#1} {#2} {#3}
 }%
 
 % Alias to {<lang>}, but more suitable
@@ -1832,50 +1816,27 @@
 }
 
 \renewcommand{\foreignlanguage}[3][]
-{%
-  \polyglossia@foreignlanguage:een {\xpg_alias_add_to_option_i:nn{#2}{#1}}
-    {\xpg_alias_base_lang:n{#2}} {#3}
-}
-
-% internal wrapper
-% #1 option
-% #2 lang
-% #3 text
-\cs_new:Nn \polyglossia@foreignlanguage:nnn
 {
-   \polyglossia@error@iflangnotloaded:n{#2}
-   \bgroup
-   \xpg@otherlanguage[#1]{#2}%
-   \polyglossia@lang@settextdirection:nn{#2}{#3}%
-   \egroup
+  \__xpg_foreignlanguage:eeen {#1} {#2} {\xpg_alias_base_lang:n{#2}} {#3}
 }
-\cs_generate_variant:Nn \polyglossia@foreignlanguage:nnn {
-  eee, eef, een, eeo, eex,
-  ffe, fff, ffn, ffo, ffx,
-  nne, nnf,    , nno, nnx,
-  ooe, oof, oon, ooo, oox,
-  xxe, xxf, xxn, xxo, xxx,
 
-  efe, eff, efn, efo, efx,
-  ene, enf, enn, eno, enx,
-  eoe, eof, eon, eoo, eox,
-  exe, exf, exn, exo, exx,
-
-  fee, fef, fen, feo, fex,
-  fne, fnf, fnn, fno, fnx,
-  foe, fof, fon, foo, fox,
-  fxe, fxf, fxn, fxo, fxx,
-
-  nee, nef, nen, neo, nex,
-  nfe, nff, nfn, nfo, nfx,
-  noe, nof, non, noo, nox,
-  nxe, nxf, nxn, nxo, nxx,
-
-  xee, xef, xen, xeo, xex,
-  xfe, xff, xfn, xfo, xfx,
-  xoe, xof, xon, xoo, xox,
-  xxe, xxf, xxn, xxo, xxx
+% internal wrapper for foreing language
+% #1 option
+% #2 alias
+% #3 base lang
+% #3 text
+\cs_new:Nn \__xpg_foreignlanguage:nnnn
+{
+  \tl_if_blank:nT {#3}
+  {
+    \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
+  }
+  \group_begin:
+    \xpg@otherlanguage[\xpg_alias_add_to_option_i:nn{#2}{#1}]{#4}%
+    \polyglossia@lang@settextdirection:nn{#3}{#4}%
+  \group_end:
 }
+\cs_generate_variant:Nn \__xpg_foreignlanguage:nnn {een}
 
 
 % otherlanguage* is the environment equivalent of \foreignlanguage
@@ -1883,44 +1844,62 @@
 
 \renewenvironment{otherlanguage*}[2][]
 {%
-  \polyglossia@otherlanguage:nn {\xpg_alias_add_to_option_i:nn{#2}{#1}}
-     {\xpg_alias_base_lang:n{#2}}%
+  \__xpg_otherlanguage:eee {#1} {#2} {\xpg_alias_base_lang:n{#2}}
 }
-{\egroup}
+{\group_end:}
 
-\cs_new:Nn \polyglossia@otherlanguage:nn
+% internal wrapper
+% #1 option
+% #2 alias
+% #3 base lang
+\cs_new:Nn \__xpg_otherlanguage:nnn
 {
-  \xpg@otherlanguage[#1]{#2}%
-  \polyglossia@lang@settextdirection:nn{#2}\bgroup%
+  \tl_if_blank:nT {#3}
+  {
+    \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
+  }
+  \xpg@otherlanguage[\xpg_alias_add_to_option_i:nn{#2}{#1}]{#3}%
+  \polyglossia@lang@settextdirection:nn{#3}\group_begin:%
 }
-\cs_generate_variant:Nn \polyglossia@otherlanguage:nn {
-  ee, ef, en, eo, ex,
-  fe, ff, fn, fo, fx,
-  ne, nf,     no, nx,
-  oe, of, on, oo, ox,
-  xe, xf, xn, xo, xx
+\cs_generate_variant:Nn \__xpg_otherlanguage:nnn {
+  eee
 }
 
 % use by \text<lang> and \textlang. Equivalent to \foreignlanguage,
 % except that dates are localized.
 % #1: option
-% #2: language
+% #2: alias
 % #3: text
 \cs_new:Nn \__xpg_textlanguage:nnn
 {
-  \polyglossia@error@iflangnotloaded:n{#2}
+  \__xpg_textlanguage:nnen {#1} {#2} {\xpg_alias_base_lang:n{#2}} {#3}
+}
+\cs_generate_variant:Nn \__xpg_textlanguage:nnn {een}
+
+% use by \text<lang> and \textlang. Equivalent to \foreignlanguage,
+% except that dates are localized.
+% #1: option
+% #2: alias
+% #3: base language
+% #4: text
+\cs_new:Nn \__xpg_textlanguage:nnnn
+{
+  \tl_if_blank:nT {#3}
+  {
+    \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
+  }
   \group_begin:
-    \xpg@otherlanguage[#1]{#2}%
-    \csuse{date#2}%
+    \xpg@otherlanguage[#1]{#3}%
+    \csuse{date#3}%
     % This is a hook for external packages which want to access variants
     % via babelname (such as biblatex)
     \cs_if_exist_use:c{date@bbl@\babelname}%
-    \polyglossia@lang@settextdirection:nn{#2}{#3}%
+    \polyglossia@lang@settextdirection:nn{#3}{#4}%
   \group_end:
   % Reset the language's/script's font families
-  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/lcscript}}{latin}{}{\resetfontlatin}%
+  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#3/lcscript}}{latin}{}{\resetfontlatin}%
 }
-\cs_generate_variant:Nn \__xpg_textlanguage:nnn {een, nen}
+\cs_generate_variant:Nn \__xpg_textlanguage:nnnn {nnen}
 
 % Define language-specific hyphenation exceptions
 \newcommand\pghyphenation[3][]{
