@@ -1264,14 +1264,15 @@
 }
 \cs_generate_variant:Nn \xpg_alias_prop_item:nn {en, ne, ee}
 
+% add option #2 to list of option of language #1
 \cs_new:Nn \xpg_alias_add_to_option_i:nn
 {
-  \tl_if_blank:nTF {#2}
+  \tl_if_blank:eTF {#2}
   {
     \xpg_alias_prop_item:nn {#1}{options}
   }
   {
-    \tl_if_blank:nTF { \xpg_alias_prop_item:nn {#1}{options} }
+    \tl_if_blank:eTF { \xpg_alias_prop_item:nn {#1}{options} }
     {
       #2
     }
@@ -1392,7 +1393,6 @@
   }
 }
 
-
 \newcommand{\setdefaultlanguage}[2][]{%
   % latex is an internal language, so do not record
   \str_if_eq:eeF{#2}{latex}
@@ -1408,11 +1408,9 @@
     \use:c{\prop_item:Nn{\polyglossia@langsetup}{#2/DefineCommandsCmd}}{#2}
     \seq_gput_right:Nn \__xpg_langs_loaded {#2}
   }
-  \polyglossia@set@default@language:xx {\xpg_alias_add_to_option_i:nn{#2}{#1}}
+  \polyglossia@set@default@language:ee {\xpg_alias_add_to_option_i:nn{#2}{#1}}
     {\xpg_alias_base_lang:n{#2}}%
 }
-
-
 
 
 \cs_new:Nn \polyglossia@set@default@language:nn
