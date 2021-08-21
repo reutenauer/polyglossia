@@ -267,10 +267,10 @@
 \cs_new_nopar:Nn \__xpg_setRTLmain: {}
 \str_case_e:nnF{\c_sys_engine_str}{%
   {luatex}{\cs_gset:Nn \__xpg_setRTLmain: {\setRTLmain}}
-  {xetex}{\cs_gset_Nn \__xpg_setRTLmain: {\@RTLmaintrue\setnonlatin}}
+  {xetex}{\cs_gset:Nn \__xpg_setRTLmain: {\@RTLmaintrue\setnonlatin}}
 }
 {
-  \cs_gset_Nn \__xpg_setRTLmain:
+  \cs_gset:Nn \__xpg_setRTLmain:
   {
     \xpg@warning{You’re~ running a~ TeX~ engine~ that~ is~ not~ LuaTeX~ or~ XeTeX.\MessageBreak
       That~ is~ almost~ guaranteed~ to~ cause~ problems.}
