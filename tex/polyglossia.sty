@@ -197,7 +197,7 @@
     {RL}{\prg_return_false:}
   }
   {
-    \xpg@error{Unknow~ direction~#1}
+    \xpg@error{Unknown~ direction~#1}
     \prg_return_false:
   }
 }
@@ -2387,7 +2387,7 @@
   {
     \__xpg_if_LR_str:eF{\prop_item:Ne{\polyglossia@langsetup}{\languagename/direction}}
     {%
-      \__xpg_if_LR_str:eT{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}
+      \__xpg_if_LR_str:eT{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}
         {\ifvmode\else\booltrue{xpg@noset@groups}\fi}% RTL -> LTR
     }%
   }
