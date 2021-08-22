@@ -1106,7 +1106,7 @@
 \def\xpg@nogloss#1{%
    \xpg@warning{File~ gloss-#1.ldf~ does~ not~ exist!\MessageBreak
    I~ will~ nevertheless~ try~ to~ use~ hyphenation~ patterns~ for~ #1.}%
-  \PolyglossiaSetup{#1}{hyphenmins,hyphennames={#1},fontsetup=true}%
+  \PolyglossiaSetup{#1}{hyphenmins={2,3},hyphennames={#1},fontsetup=true}%
   % the above amounts to:
   %\ifcsundef{l@#1}%
   %  {\expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}%
