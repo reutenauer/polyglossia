@@ -1657,9 +1657,12 @@
       \else\__xpg_use_or_warn:c{#1@font@rm}\fi\fi}
 
 \def\xpg@set@normalfont#1{%
-  \DeclareRobustCommand\rmfamily{\csuse{#1@font@rm}}%
-  \DeclareRobustCommand\sffamily{\csuse{#1@font@sf}}%
-  \DeclareRobustCommand\ttfamily{\csuse{#1@font@tt}}%
+  \letcs{\rmfamily}{#1@font@rm}%
+  \letcs{\sffamily}{#1@font@sf}%
+  \letcs{\ttfamily}{#1@font@tt}%
+  \robustify\rmfamily%
+  \robustify\sffamily%
+  \robustify\ttfamily%
   \gdef\normalfont{\protect\xpg@select@fontfamily{#1}%
                    \fontseries{\seriesdefault}\selectfont%
                    \fontshape{\shapedefault}
