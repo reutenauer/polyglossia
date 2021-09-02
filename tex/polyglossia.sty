@@ -2558,6 +2558,11 @@
   }
 }
 
+% load by default latex
+\setmainlanguage{latex}
+% then process key in order to overwrite
+\ProcessKeysOptions{polyglossia}
+
 \bool_if:nF \l_polyglossia_verbose_bool {
    \gdef\@latex@info#1{\relax}% no latex info
    \gdef\@font@info#1{\relax}% no latex font info
@@ -2577,11 +2582,6 @@
 }{
   \system@babelshorthandsfalse
 }
-
-% load by default latex
-\setmainlanguage{latex}
-% then process key in order to overwrite
-\ProcessKeysOptions{polyglossia}
 
 %
 % FIXME these should also be loaded \AtEndOfPackage !!!
