@@ -1495,16 +1495,22 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 				\item[¦=A¦] for Ā (A with macron), also available for Ē, Ī, Ō, Ū, V̄, and Ȳ.
 					Note that a macron above the letter V is only displayed if your font
 					supports the Unicode character ¦0304¦ (\emph{combining macron}).
-				\item[¦=ae¦] for a͞e (ae diphthong with macron), also available for a͞u, e͞u,
-					and o͞e. Note that macrons above diphthongs are only displayed if your font
-					supports the Unicode character ¦035E¦ (\emph{combining double
+				\item[¦=ae¦] for a͞e (ae diphthong with macron, for the ¦classic¦ and
+					the ¦modern¦ variant) or ǣ (ae ligature with macron, for the ¦medieval¦
+					and the ¦ecclesiastic¦ variant), respectively; also available for a͞u,
+					e͞u, and o͞e/œ̄. Note that macrons above diphthongs are only displayed if
+					your font supports the Unicode character ¦035E¦ (\emph{combining double
 					macron}).
-				\item[¦=Ae¦] for A͞e (Ae diphthong with macron), also available for A͞u, E͞u,
-					and O͞e.
-				\item[¦=AE¦] for A͞E (AE diphthong with macron), also available for A͞U, E͞U,
-					and O͞E.
+				\item[¦=Ae¦] for A͞e (Ae diphthong with macron, for the ¦classic¦ and
+					the ¦modern¦ variant) or Ǣ (AE ligature with macron, for the ¦medieval¦
+					and the ¦ecclesiastic¦ variant), respectively; also available for A͞u,
+					E͞u, and O͞e/Œ̄.
+				\item[¦=AE¦] for A͞E (AE diphthong with macron, for the ¦classic¦ and
+					the ¦modern¦ variant) or Ǣ (AE ligature with macron, for the ¦medieval¦
+					and the ¦ecclesiastic¦ variant), respectively; also available for A͞U,
+					E͞U, and O͞E/Œ̄.
 				\item[¦\textasciicircum a¦] for ă (a with breve), also available for ĕ, ĭ,
-					ŏ, ŭ, and y̆.  Note that a breve above the letter y is only displayed if
+					ŏ, ŭ, and y̆. Note that a breve above the letter y is only displayed if
 					your font supports the Unicode character ¦0306¦ (\emph{combining
 					breve}).
 				\item[¦\textasciicircum A¦] Ă (A with breve), also available for Ĕ, Ĭ, Ŏ,
@@ -2356,6 +2362,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Prevent \emph{missing hyphenmins value} \LaTeX\ error with unknown languages (\TXI{513}).
 	\item Fix global \xpgoption{babelshorthands}, \xpgoption{localmarks} and \xpgoption{verbose}
 	      options (\TXI{515}).
+	\item Fix Latin shorthands (\TXI{516}).
 \end{itemize}
 
 \subsubsection*{Documentation improvements}
