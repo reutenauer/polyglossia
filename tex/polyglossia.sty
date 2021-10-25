@@ -986,7 +986,9 @@
        }%
        \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
                                               {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
-      }}%
+      }%
+      \def\familytype{rm}%
+  }%
   \csgdef{#1@font@sf}{%
     \cs_if_exist_use:cF{#1fontsf}%
       {
@@ -1007,7 +1009,9 @@
        }%
        \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
                                               {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
-      }}%
+      }%
+      \def\familytype{sf}%
+  }%
   \csgdef{#1@font@tt}{%
     \cs_if_exist_use:cF{#1fonttt}%
       {
@@ -1028,7 +1032,9 @@
        }%
        \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
                                               {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
-      }}%
+      }%
+      \def\familytype{tt}%
+  }%
   \endgroup
 }
 
