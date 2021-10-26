@@ -302,11 +302,9 @@ brazil             & portuguese & variant=brazilian                   \\
 british            & english    & variant=british                     \\
 canadian           & english    & variant=canadian                    \\
 canadien           & french     & variant=canadian                    \\
-classiclatin\footnote{In \pkg{babel} currently only selectable via dot modifier (\emph{latin.classic}).}
-                   & latin      & variant=classic                     \\
+classiclatin       & latin      & variant=classic                     \\
 farsi              & persian    &                                     \\
-ecclesiasticlatin\footnote{In \pkg{babel} currently only selectable via dot modifier (\emph{latin.ecclesiastic}).}
-                   & latin      & variant=ecclesiastic                \\
+ecclesiasticlatin  & latin      & variant=ecclesiastic                \\
 friulan            & friulian   &                                     \\
 german\footnote{Due to the name conflict only available in \pkg{polyglossia} as \emph{germanb} (which is a \pkg{babel} synonym).}
                    & german     & spelling=old                        \\
@@ -314,8 +312,7 @@ irish              & gaelic     & variant=irish [\emph{default}]      \\
 kurmanji           & kurdish    & variant=kurmanji                    \\
 lowersorbian       & sorbian    & variant=lower                       \\
 magyar             & hungarian  &                                     \\
-medievallatin\footnote{In \pkg{babel} currently only selectable via dot modifier (\emph{latin.medieval}).}
-                   & latin      & variant=medieval                    \\
+medievallatin      & latin      & variant=medieval                    \\
 naustrian          & german     & variant=austrian                    \\
 newzealand         & english    & variant=newzealand                  \\
 ngerman            & german     & variant=german [\emph{default}]     \\
@@ -334,7 +331,7 @@ uppersorbian       & sorbian    & variant=upper [\emph{default}]      \\
 \bottomrule
 \end{tabular}
 \end{minipage}
-	
+
 \end{table}
 
 For convenience reasons, \pkg{polyglossia} also supports the use of babel names\new{1.46} (for the few justified
@@ -831,7 +828,7 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 \paragraph*{Commands:}
 	\begin{itemize}
 	\item \Cmd\abjad outputs Arabic \textit{abjad} numbers according to the Mashriq varieties.
-	      Example: ¦\abjad{1863}¦ yields \textarabic{\abjad{1863}}.	
+	      Example: ¦\abjad{1863}¦ yields \textarabic{\abjad{1863}}.
 	\item \Cmd\abjadmaghribi outputs Arabic \textit{abjad} numbers according to the Maghrib varieties.
 	       Example: ¦\abjadmaghribi{1863}¦ yields \textarabic{\abjadmaghribi{1863}}.
 	\item \Cmd\abjadalph\new{1.50} steps through the Arabic alphabet, thus it can only be used up to 28.
@@ -1498,16 +1495,22 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 				\item[¦=A¦] for Ā (A with macron), also available for Ē, Ī, Ō, Ū, V̄, and Ȳ.
 					Note that a macron above the letter V is only displayed if your font
 					supports the Unicode character ¦0304¦ (\emph{combining macron}).
-				\item[¦=ae¦] for a͞e (ae diphthong with macron), also available for a͞u, e͞u,
-					and o͞e. Note that macrons above diphthongs are only displayed if your font
-					supports the Unicode character ¦035E¦ (\emph{combining double
+				\item[¦=ae¦] for a͞e (ae diphthong with macron, for the ¦classic¦ and
+					the ¦modern¦ variant) or ǣ (ae ligature with macron, for the ¦medieval¦
+					and the ¦ecclesiastic¦ variant), respectively; also available for a͞u,
+					e͞u, and o͞e/œ̄. Note that macrons above diphthongs are only displayed if
+					your font supports the Unicode character ¦035E¦ (\emph{combining double
 					macron}).
-				\item[¦=Ae¦] for A͞e (Ae diphthong with macron), also available for A͞u, E͞u,
-					and O͞e.
-				\item[¦=AE¦] for A͞E (AE diphthong with macron), also available for A͞U, E͞U,
-					and O͞E.
+				\item[¦=Ae¦] for A͞e (Ae diphthong with macron, for the ¦classic¦ and
+					the ¦modern¦ variant) or Ǣ (AE ligature with macron, for the ¦medieval¦
+					and the ¦ecclesiastic¦ variant), respectively; also available for A͞u,
+					E͞u, and O͞e/Œ̄.
+				\item[¦=AE¦] for A͞E (AE diphthong with macron, for the ¦classic¦ and
+					the ¦modern¦ variant) or Ǣ (AE ligature with macron, for the ¦medieval¦
+					and the ¦ecclesiastic¦ variant), respectively; also available for A͞U,
+					E͞U, and O͞E/Œ̄.
 				\item[¦\textasciicircum a¦] for ă (a with breve), also available for ĕ, ĭ,
-					ŏ, ŭ, and y̆.  Note that a breve above the letter y is only displayed if
+					ŏ, ŭ, and y̆. Note that a breve above the letter y is only displayed if
 					your font supports the Unicode character ¦0306¦ (\emph{combining
 					breve}).
 				\item[¦\textasciicircum A¦] Ă (A with breve), also available for Ĕ, Ĭ, Ŏ,
@@ -2359,6 +2362,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Prevent \emph{missing hyphenmins value} \LaTeX\ error with unknown languages (\TXI{513}).
 	\item Fix global \xpgoption{babelshorthands}, \xpgoption{localmarks} and \xpgoption{verbose}
 	      options (\TXI{515}).
+	\item Fix Latin shorthands (\TXI{516}).
 \end{itemize}
 
 \subsubsection*{Documentation improvements}
