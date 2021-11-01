@@ -201,8 +201,8 @@
 \let\ukrainiannumeral=\ukrainiannumber
 \let\Ukrainiannumeral=\Ukrainiannumber
 
-\def\Asbuk#1{\expandafter\ukranian@asbuk@Alph\csname c@#1\endcsname}
-\def\asbuk#1{\expandafter\ukranian@asbuk@alph\csname c@#1\endcsname}
+\def\Asbuk#1{\expandafter\ukrainian@asbuk@Alph\csname c@#1\endcsname}
+\def\asbuk#1{\expandafter\ukrainian@asbuk@alph\csname c@#1\endcsname}
 
 \def\AsbukTrad#1{\expandafter\cyr@Alph\csname c@#1\endcsname}
 \def\asbukTrad#1{\expandafter\cyr@alph\csname c@#1\endcsname}
