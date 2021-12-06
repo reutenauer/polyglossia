@@ -71,7 +71,7 @@
 % list of loaded languages (babel name)
 \clist_new:N \xpg@bloaded
 % list of loaded languages (bcp-47 id)
-\clist_new:N \xpg@bcp@bloaded
+\clist_new:N \xpg@bcp@loaded
 
 % counter in latin
 \def\latinalph#1{\expandafter\latin@alph\csname c@#1\endcsname}
@@ -1396,8 +1396,8 @@
   }
   % register BCP-47 ID
   \prop_get:NeN \polyglossia@langsetup {#2/bcp47} \l_tmpa_tl
-  \clist_if_in:NeF \xpg@bcp@bloaded {\l_tmpa_tl}{
-    \clist_gput_right:Ne \xpg@bcp@bloaded {\l_tmpa_tl}
+  \clist_if_in:NeF \xpg@bcp@loaded {\l_tmpa_tl}{
+    \clist_gput_right:Ne \xpg@bcp@loaded {\l_tmpa_tl}
   }
 }
 
@@ -2074,14 +2074,6 @@
   }
 }
 
-\prg_set_conditional:Npnn \polyglossia@check@if@lang@loaded:N #1 { p , T , F , TF }{
-  \cs_if_exist:cTF{#1}{
-     \prg_return_true:
-  }{
-    \prg_return_false:
-  }
-}
-
 % Test if language is loaded
 \newcommand*\iflanguageloaded[3]{%
   \seq_if_in:NxTF \__xpg_langs_loaded {#1} {#2} {#3}
@@ -2089,7 +2081,7 @@
 
 % Same for babellanguage is loaded
 \newcommand*\ifbabellanguageloaded[3]{%
-  \polyglossia@check@if@lang@loaded:NTF{#1@bbl@loaded}{#2}{#3}%
+  \clist_if_in:NeTF \xpg@bloaded{#1}{#2}{#3}%
 }
 
 % Same for languageid
@@ -2097,8 +2089,8 @@
 {
     \str_case:nnTF {#1}
       {
-        {bcp-47}    { \polyglossia@check@if@lang@loaded:NTF{#2@bcp@loaded}{#3}{#4} }
-        {bcp47}     { \polyglossia@check@if@lang@loaded:NTF{#2@bcp@loaded}{#3}{#4} }
+        {bcp-47}    { \clist_if_in:NeTF \xpg@bcp@loaded{#2}{#3}{#4} }
+        {bcp47}     { \clist_if_in:NeTF \xpg@bcp@loaded{#2}{#3}{#4} }
       }
       {}
       {
