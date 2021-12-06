@@ -2076,7 +2076,7 @@
 
 % Test if language is loaded
 \newcommand*\iflanguageloaded[3]{%
-  \seq_if_in:NxTF \__xpg_langs_loaded {#1} {#2} {#3}
+  \clist_if_in:NeTF \xpg@loaded{#1}{#2}{#3}%
 }
 
 % Same for babellanguage is loaded
