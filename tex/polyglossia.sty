@@ -1212,7 +1212,9 @@
   \seq_if_in:NxF \__xpg_langs_loaded {#1}
   {
     % define environment and command
-    \use:c{\prop_item:Nn{\polyglossia@langsetup}{#1/DefineCommandsCmd}}{#1}
+    \use:c{\prop_item:Nn{\polyglossia@langsetup}
+                        {\xpg_alias_base_lang:n{##1}/DefineCommandsCmd}}
+                        {\xpg_alias_base_lang:n{##1}}
   }
   \polyglossia@register@language:nn{}{#1}%
   \seq_gput_right:Nn \__xpg_langs_loaded {#1}
@@ -1403,15 +1405,17 @@
   % latex is an internal language, so do not record
   \str_if_eq:eeF{#2}{latex}
   {
-    \clist_if_in:NeF \xpg@loaded {#2}{
-      \clist_gput_right:Ne \xpg@loaded {#2}
+    \clist_if_in:NeF \xpg@loaded {\xpg_alias_base_lang:n{##2}}{
+      \clist_gput_right:Ne \xpg@loaded {\xpg_alias_base_lang:n{##2}}
     }
   }
   \seq_if_in:NxF \__xpg_langs_loaded {#2}
   {
     \polyglossia_load_lang_definition:nn{#1}{#2}
     % define environment and command
-    \use:c{\prop_item:Nn{\polyglossia@langsetup}{#2/DefineCommandsCmd}}{#2}
+    \use:c{\prop_item:Nn{\polyglossia@langsetup}
+         {\xpg_alias_base_lang:n{##2}/DefineCommandsCmd}}
+         {\xpg_alias_base_lang:n{##2}}
     \seq_gput_right:Nn \__xpg_langs_loaded {#2}
   }
   \polyglossia@set@default@language:ee {\xpg_alias_add_to_option_i:nn{#2}{#1}}
@@ -1706,7 +1710,9 @@
   {
     \polyglossia_load_lang_definition:ee {#1} {#2}%
     % define environment and command
-    \use:c{\prop_item:Nn{\polyglossia@langsetup}{#2/DefineCommandsCmd}}{#2}
+    \use:c{\prop_item:Nn{\polyglossia@langsetup}
+          {\xpg_alias_base_lang:n{##2}/DefineCommandsCmd}}
+          {\xpg_alias_base_lang:n{##2}}
     \polyglossia@set@other@language:ee {\xpg_alias_add_to_option_i:nn{#2}{#1}}
       {\xpg_alias_base_lang:n{#2}}%
     \seq_gput_right:Nn \__xpg_langs_loaded {#2}
