@@ -2386,7 +2386,7 @@
 \renewenvironment{otherlanguage}[2][]
 {%
   % Get real current options (incl. defaults)
-  \clist_new:N \l_xpg_current_options
+  \clist_clear_new:N \l_xpg_current_options
   \prop_map_inline:cn {xpg@current@options@#2}
   {
       \clist_put_right:Nn \l_xpg_current_options {##1=##2}
