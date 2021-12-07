@@ -2165,6 +2165,11 @@
    }%
    \@select@language[#1]{#2}%
     % Write to the aux
+   \xpg@set@language@only@aux[#1]{#2}%
+}
+
+\newcommand*{\xpg@set@language@only@aux}[2][]{%
+    % Write to the aux
    \if@filesw%
       \ifx#1\\\\%
           \protected@write\@auxout{}{\protect\selectlanguage*{#2}}%
@@ -2194,44 +2199,6 @@
                {}% success
                {\xpg@warning{Patching bidi table failed!}}%
   }{}%
-}
-
-% Open a group in the aux file. This is to keep
-% nested language options local (see #320).
-% In bidi tables, the opening/closing needs to be swapped (see #354)
-\newcommand*{\xpg@set@group@aux}{%
-   \if@filesw%
-      \ifbool{xpg@inbiditable}{%
-        \protected@write\@auxout{}{\egroup}%
-        \addtocontents{toc}{\egroup}%
-        \addtocontents{lof}{\egroup}%
-        \addtocontents{lot}{\egroup}%
-      }{%
-        \protected@write\@auxout{}{\bgroup}%
-        \addtocontents{toc}{\bgroup}%
-        \addtocontents{lof}{\bgroup}%
-        \addtocontents{lot}{\bgroup}%
-      }%
-    \fi
-}
-
-% Close the group in the aux file.
-% In bidi RTL tables, the opening/closing needs
-% to be swapped (see #354).
-\newcommand*{\xpg@unset@group@aux}{%
-   \if@filesw%
-      \ifbool{xpg@inbiditable}{%
-        \protected@write\@auxout{}{\bgroup}%
-        \addtocontents{toc}{\bgroup}%
-        \addtocontents{lof}{\bgroup}%
-        \addtocontents{lot}{\bgroup}%
-      }{%
-        \protected@write\@auxout{}{\egroup}%
-        \addtocontents{toc}{\egroup}%
-        \addtocontents{lof}{\egroup}%
-        \addtocontents{lot}{\egroup}%
-      }%
-    \fi
 }
 
 % check if language is defined
@@ -2390,24 +2357,48 @@
 
 \provideenvironment{otherlanguage}{}{}
 
-\newbool{xpg@noset@groups}
+%
+% Keep track of the active (nested) languages and options
+%
+\clist_new:N \l_xpg_lang_stack
+
+\cs_new:Nn \polyglossia@stack@language:nn
+{
+  \clist_push:Nn \l_xpg_lang_stack {#1:#2}
+}
+
+\cs_generate_variant:Nn \seq_set_split:Nnn {Nnx}
+
+\cs_new:Nn \polyglossia@unstack@language:n
+{
+  \clist_gpop:NNTF \l_xpg_lang_stack \l_tmpa_tl {
+     % Stored format = options:language => split:
+     \seq_set_split:Nnx \l_tmpa_seq {:} \l_tmpa_tl
+     \seq_get_left:NN \l_tmpa_seq \l_tmpb_tl
+     \seq_get_right:NN \l_tmpa_seq \l_tmpc_tl
+     % Execute passed command with language and maybe options
+     \tl_if_empty:NTF \l_tmpb_tl {\cs_if_exist_use:c{#1}{\l_tmpc_tl}}
+                                 {\cs_if_exist_use:c{#1}[\l_tmpb_tl]{\l_tmpc_tl}}
+  }
+  {}
+}
+
 \renewenvironment{otherlanguage}[2][]
 {%
-  % We usually embrace the switch in groups to keep the changes local.
-  % We cannot do this if an LTR environmet starts in an RTL paragraph,
-  % as bidi interferes here badly with its directionality smartness.
-  \sys_if_engine_xetex:T
+  % Get real current options (incl. defaults)
+  \clist_new:N \l_xpg_current_options
+  \prop_map_inline:cn {xpg@current@options@#2}
   {
-    \__xpg_if_LR_str:eF{\prop_item:Ne{\polyglossia@langsetup}{\languagename/direction}}
-    {%
-      \__xpg_if_LR_str:eT{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}
-        {\ifvmode\else\booltrue{xpg@noset@groups}\fi}% RTL -> LTR
-    }%
+      \clist_put_right:Nn \l_xpg_current_options {##1=##2}
   }
-  \ifbool{xpg@noset@groups}{}{\xpg@set@group@aux}%
+  % Store current options and language on stack
+  \polyglossia@stack@language:nn{\clist_use:Nn \l_xpg_current_options {,}}{#2}%
   \selectlanguage[#1]{#2}%
 }
-{\ifbool{xpg@noset@groups}{}{\xpg@unset@group@aux}}
+{%
+   % restore previous language in aux file and remove closed one from stack
+   \polyglossia@unstack@language:n{xpg@set@language@only@aux}%
+}
 
 \newcommand{\setlocalhyphenmins}[3]{%
    \xpg@ifdefined{#1}{%
@@ -2489,17 +2480,6 @@
 % supports language options and aliases.
 \renewenvironment{hyphenrules}[2][]
 {%
-  % We usually embrace the switch in groups to keep the changes local.
-  % We cannot do this if an LTR environmet starts in an RTL paragraph,
-  % as bidi interferes here badly with its directionality smartness.
-  \sys_if_engine_xetex:T{
-    \__xpg_if_LR_str:eF{\prop_item:Ne{\polyglossia@langsetup}{\languagename/direction}}
-    {%
-      \__xpg_if_LR_str:eT{\prop_item:Nn{\polyglossia@langsetup}{#1/direction}}%
-        {\ifvmode\else\booltrue{xpg@noset@groups}\fi}% RTL -> LTR
-    }%
-  }%
-  \ifbool{xpg@noset@groups}{}{\xpg@set@group@aux}%
   % Check for real language name and options
   \edef\xpg@tmp@opts{\xpg_alias_add_to_option_i:nn{#2}{#1}}
   \edef\xpg@tmp@lang{\xpg_alias_base_lang:n{#2}}
@@ -2510,7 +2490,7 @@
   % And activate hyphenmins
   \use@localhyphenmins[\xpg@tmp@opts]{\xpg@tmp@lang}%
 }
-{\ifbool{xpg@noset@groups}{}{\xpg@unset@group@aux}}
+{}
 
 \AtEndPreamble{%
    \@ifpackageloaded{bidi}{%
