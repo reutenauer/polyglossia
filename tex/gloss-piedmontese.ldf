@@ -108,12 +108,12 @@
    \lccode\string"2019=\string"2019%
    \clubpenalty=3000 \@clubpenalty=3000 \widowpenalty=3000%
    \finalhyphendemerits=50000000%
-   \ifpiedmontese@babelshorthands\piedmontese@shorthands\fi%
+   \ifpiedmontese@babelshorthands\piedmontese@shorthands\else\nopiedmontese@shorthands\fi%
 }
 
 \def\inlineextras@piedmontese{%
    \lccode\string"2019=\string"2019%
-   \ifpiedmontese@babelshorthands\piedmontese@shorthands\fi%
+   \ifpiedmontese@babelshorthands\piedmontese@shorthands\else\nopiedmontese@shorthands\fi%
 }
 %%% CHANGES END %%%
 \endinput

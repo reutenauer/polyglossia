@@ -248,11 +248,11 @@
 \def\blockextras@ukrainian{%
   \ukrainian@capsformat%
   \ifcyrillic@numerals\ukrainian@numbers\fi%
-  \ifukrainian@babelshorthands\ukrainian@shorthands\fi%
+  \ifukrainian@babelshorthands\ukrainian@shorthands\else\noukrainian@shorthands\fi%
 }
 
 \def\inlineextras@ukrainian{%
-  \ifukrainian@babelshorthands\ukrainian@shorthands\fi%
+  \ifukrainian@babelshorthands\ukrainian@shorthands\else\noukrainian@shorthands\fi%
 }
 
 %%% stuff from Babel

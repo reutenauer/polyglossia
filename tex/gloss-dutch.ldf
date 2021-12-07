@@ -83,11 +83,11 @@
 }
 
 \def\blockextras@dutch{%
-  \ifdutch@babelshorthands\dutch@shorthands\fi%
+  \ifdutch@babelshorthands\dutch@shorthands\else\nodutch@shorthands\fi%
 }
 
 \def\inlineextras@dutch{%
-  \ifdutch@babelshorthands\dutch@shorthands\fi%
+  \ifdutch@babelshorthands\dutch@shorthands\else\nodutch@shorthands\fi%
 }
 
 \endinput

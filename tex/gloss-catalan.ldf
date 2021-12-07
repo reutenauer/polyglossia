@@ -148,10 +148,10 @@
 }
 
 \def\blockextras@catalan{%
-   \ifcatalan@babelshorthands\catalan@shorthands\fi%
+   \ifcatalan@babelshorthands\catalan@shorthands\else\nocatalan@shorthands\fi%
 }
 
 \def\inlineextras@catalan{%
-   \ifcatalan@babelshorthands\catalan@shorthands\fi%
+   \ifcatalan@babelshorthands\catalan@shorthands\else\nocatalan@shorthands\fi%
 }
 \endinput

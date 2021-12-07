@@ -83,11 +83,11 @@
 }
 
 \def\blockextras@afrikaans{%
-  \ifafrikaans@babelshorthands\afrikaans@shorthands\fi%
+  \ifafrikaans@babelshorthands\afrikaans@shorthands\else\noafrikaans@shorthands\fi%
 }
 
 \def\inlineextras@afrikaans{%
-  \ifafrikaans@babelshorthands\afrikaans@shorthands\fi%
+  \ifafrikaans@babelshorthands\afrikaans@shorthands\else\noafrikaans@shorthands\fi%
 }
 
 \endinput

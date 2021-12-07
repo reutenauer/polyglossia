@@ -314,11 +314,11 @@
 }
 
 \def\blockextras@german{%
-  \ifgerman@babelshorthands\german@shorthands\fi%
+  \ifgerman@babelshorthands\german@shorthands\else\nogerman@shorthands\fi%
 }
 
 \def\inlineextras@german{%
-  \ifgerman@babelshorthands\german@shorthands\fi%
+  \ifgerman@babelshorthands\german@shorthands\else\nogerman@shorthands\fi%
 }
 
 \endinput

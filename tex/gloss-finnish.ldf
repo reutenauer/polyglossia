@@ -80,11 +80,11 @@
 }
 
 \def\blockextras@finnish{%
-  \iffinnish@babelshorthands\finnish@shorthands\fi%
+  \iffinnish@babelshorthands\finnish@shorthands\else\nofinnish@shorthands\fi%
 }
 
 \def\inlineextras@finnish{%
-  \iffinnish@babelshorthands\finnish@shorthands\fi%
+  \iffinnish@babelshorthands\finnish@shorthands\else\nofinnish@shorthands\fi%
 }
 
 \endinput

@@ -302,11 +302,11 @@
 
 \def\blockextras@belarusian{%
    \ifcyrillic@numerals\belarusian@numbers\fi%
-   \ifbelarusian@babelshorthands\belarusian@shorthands\fi%
+   \ifbelarusian@babelshorthands\belarusian@shorthands\else\nobelarusian@shorthands\fi%
 }
 
 \def\inlineextras@belarusian{%
-   \ifbelarusian@babelshorthands\belarusian@shorthands\fi%
+   \ifbelarusian@babelshorthands\belarusian@shorthands\else\nobelarusian@shorthands\fi%
 }
 
 \endinput
