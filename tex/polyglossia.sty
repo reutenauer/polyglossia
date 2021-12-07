@@ -1211,10 +1211,12 @@
   }
   \seq_if_in:NxF \__xpg_langs_loaded {#1}
   {
-    % define environment and command
-    \use:c{\prop_item:Nn{\polyglossia@langsetup}
-                        {\xpg_alias_base_lang:n{##1}/DefineCommandsCmd}}
-                        {\xpg_alias_base_lang:n{##1}}
+    % define environment and command if not alias
+    \str_if_eq:eeT {\prop_item:Ne \__xpg_alias {#1/target}} {#1} {
+      \use:c{\prop_item:Nn{\polyglossia@langsetup}
+                          {#1/DefineCommandsCmd}}
+                          {#1}
+      }
   }
   \polyglossia@register@language:nn{}{#1}%
   \seq_gput_right:Nn \__xpg_langs_loaded {#1}
@@ -1412,10 +1414,12 @@
   \seq_if_in:NxF \__xpg_langs_loaded {#2}
   {
     \polyglossia_load_lang_definition:nn{#1}{#2}
-    % define environment and command
-    \use:c{\prop_item:Nn{\polyglossia@langsetup}
-         {\xpg_alias_base_lang:n{##2}/DefineCommandsCmd}}
-         {\xpg_alias_base_lang:n{##2}}
+    % define environment and command if not alias
+    \str_if_eq:eeT {\prop_item:Ne \__xpg_alias {#2/target}} {#2} {
+       \use:c{\prop_item:Nn{\polyglossia@langsetup}
+            {#2/DefineCommandsCmd}}
+            {#2}
+    }
     \seq_gput_right:Nn \__xpg_langs_loaded {#2}
   }
   \polyglossia@set@default@language:ee {\xpg_alias_add_to_option_i:nn{#2}{#1}}
@@ -1709,10 +1713,12 @@
   \seq_if_in:NxF \__xpg_langs_loaded {#2}
   {
     \polyglossia_load_lang_definition:ee {#1} {#2}%
-    % define environment and command
-    \use:c{\prop_item:Nn{\polyglossia@langsetup}
-          {\xpg_alias_base_lang:n{##2}/DefineCommandsCmd}}
-          {\xpg_alias_base_lang:n{##2}}
+    % define environment and command if not alias
+    \str_if_eq:eeT {\prop_item:Ne \__xpg_alias {#2/target}} {#2} {
+       \use:c{\prop_item:Nn{\polyglossia@langsetup}
+             {#2/DefineCommandsCmd}}
+             {#2}
+    }
     \polyglossia@set@other@language:ee {\xpg_alias_add_to_option_i:nn{#2}{#1}}
       {\xpg_alias_base_lang:n{#2}}%
     \seq_gput_right:Nn \__xpg_langs_loaded {#2}
