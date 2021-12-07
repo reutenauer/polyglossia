@@ -216,7 +216,7 @@
 }
 
 \def\blockextras@mongolian{%
-   \ifcyrillic@numerals\mongolian@numbers\fi%
+   \ifcyrillic@numerals\mongolian@numbers\else\nomongolian@numbers\fi%
    \ifmongolian@babelshorthands\mongolian@shorthands\else\nomongolian@shorthands\fi%
 }
 

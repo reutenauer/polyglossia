@@ -221,7 +221,7 @@
 }
 
 \def\blockextras@georgian{%
-   \ifgeorgian@numerals\georgian@numbers\fi%
+   \ifgeorgian@numerals\georgian@numbers\else\nogeorgian@numbers\fi%
    \ifgeorgian@babelshorthands\georgian@shorthands\else\nogeorgian@shorthands\fi%
 }
 

@@ -348,7 +348,7 @@
 
 \def\blockextras@russian{%
    \russian@capsformat%
-   \ifcyrillic@numerals\russian@numbers\fi%
+   \ifcyrillic@numerals\russian@numbers\else\norussian@numbers\fi%
    \ifrussian@babelshorthands\russian@shorthands\else\norussian@shorthands\fi%
 }
 

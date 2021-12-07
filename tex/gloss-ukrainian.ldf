@@ -247,7 +247,7 @@
 
 \def\blockextras@ukrainian{%
   \ukrainian@capsformat%
-  \ifcyrillic@numerals\ukrainian@numbers\fi%
+  \ifcyrillic@numerals\ukrainian@numbers\else\noukrainian@numbers\fi%
   \ifukrainian@babelshorthands\ukrainian@shorthands\else\noukrainian@shorthands\fi%
 }
 
