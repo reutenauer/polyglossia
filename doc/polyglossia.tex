@@ -944,17 +944,17 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to \cmd\slash, hyphenation
 		            at the breakpoints preset in the hyphenation patterns is still allowed.
 	\end{shorthands}
-	Furthermore, the following shorthands generate easy access to Croatian digraphs (ligatures):
+	Furthermore, the following shorthands generate easy access to Croatian digraphs:
 	\begin{shorthands}
-		\item[¦"dz¦] Generates the ligature \charifavailable{01C6}{dž}\ if the font provides it. If not, the
-		             two characters are output separately. Also available for ¦"Dz¦ (\charifavailable{01C5}{Dž})
-		             and ¦"DZ¦ (\charifavailable{01C4}{DŽ}).
-		\item[¦"lj¦] Generates the ligature \charifavailable{01C9}{lj}\ if the font provides it. If not, the
-		             two characters are output separately. Also available for ¦"Lj¦ (\charifavailable{01C8}{Lj})
-		             and ¦"LJ¦ (\charifavailable{01C7}{LJ}).
-		\item[¦"nj¦] Generates the ligature \charifavailable{01CC}{nj}\ if the font provides it. If not, the
-		             two characters are output separately. Also available for ¦"Nj¦ (\charifavailable{01CB}{Nj})
-		             and ¦"NJ¦ (\charifavailable{01CA}{NJ}).
+		\item[¦"dz¦] Generates the digraph \charifavailable{01C6}{dž}\ if the font provides it. If not,
+		             the two consecutive glyphs are output mimicking the digraph. Also available for
+		             ¦"Dz¦ (\charifavailable{01C5}{Dž}) and ¦"DZ¦ (\charifavailable{01C4}{DŽ}).
+		\item[¦"lj¦] Generates the digraph \charifavailable{01C9}{lj}\ if the font provides it. If not,
+		             the two consecutive glyphs are output mimicking the digraph. Also available for
+		             ¦"Lj¦ (\charifavailable{01C8}{Lj}) and ¦"LJ¦ (\charifavailable{01C7}{LJ}).
+		\item[¦"nj¦] Generates the digraph \charifavailable{01CC}{nj}\ if the font provides it. If not,
+		             the two consecutive glyphs are output mimicking the digraph. Also available for
+		             ¦"Nj¦ (\charifavailable{01CB}{Nj}) and ¦"NJ¦ (\charifavailable{01CA}{NJ}).
 	\end{shorthands}
 	
 	Finally, there are also four shorthands for quotation marks:
@@ -964,11 +964,12 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		\item[¦">¦] for Croatian left guillemets (»).
 		\item[¦"<¦] for Croatian right guillemets («).
 	\end{shorthands}
-	\item \xpgboolkeyfalse[1.47]{disableligatures}
-		If this is \xpgvalue{true}, all Croatian ligatures (for digraphs such as
-		\charifavailable{01C6}{dž}) will be replaced by single characters. This can
-		be useful if the ligatures on your font are broken (if the font does not
-		have them, they are automatically replaced).
+	\item \xpgboolkeyfalse[1.47]{disabledigraphs}[Up to version 1.53, the option was
+		called \xpgvalue{disableligatures}.] If this is \xpgvalue{true}, all Croatian digraphs
+		(such as \charifavailable{01C6}{dž}) will be replaced by the two consecutive letters,
+		which is the most common way of typesetting them in Croatian. This can be useful if
+		the Unicode digraphs in your font are broken (if the font does not have them,
+		they are automatically mimicked by the two consecutive glyphs).
 	\item \xpgboolkeytrue[1.53]{localalph}
 		If \xpgvalue{true}, alphanumeric counters will use a locally established version which excludes
 		the characters \meta{q}, \meta{w}, \meta{x} and \meta{y} from alphabetic counting.
@@ -2352,6 +2353,11 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \subsubsection*{New features}
 \begin{itemize}
 	\item New option \xpgoption{splithyphens} for Serbian (\TXI{496}).
+\end{itemize}
+
+\subsubsection*{Interface and defaults changes}
+\begin{itemize}
+	\item Rename \xpgoption{disableligatures} to \xpgoption{disabledigraphs} for Croatian (\TXI{497}, \TXP{500}).
 \end{itemize}
 
 \subsubsection*{Bug fixes}

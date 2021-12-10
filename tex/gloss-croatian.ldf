@@ -18,14 +18,14 @@
 
 \define@boolkey{croatian}[croatian@]{babelshorthands}[true]{}
 
-\define@boolkey{croatian}[croatian@]{disableligatures}[true]{}
+\define@boolkey{croatian}[croatian@]{disabledigraphs}[true]{}
 
 \define@boolkey{croatian}[croatian@]{splithyphens}[true]{}
 
 \define@boolkey{croatian}[croatian@]{localalph}[true]{}
 
 % Register default options
-\xpg@initialize@gloss@options{croatian}{babelshorthands=false,disableligatures=false,
+\xpg@initialize@gloss@options{croatian}{babelshorthands=false,disabledigraphs=false,
                                         splithyphens=true,localalph=true}
 
 \ifsystem@babelshorthands
@@ -78,12 +78,12 @@
   \declare@shorthand{croatian}{"'}{”}%
   \declare@shorthand{croatian}{"<}{«}%
   \declare@shorthand{croatian}{">}{»}%
-  \declare@shorthand{croatian}{"D}{\xpg@hr@lig{D}}%
-  \declare@shorthand{croatian}{"d}{\xpg@hr@lig{d}}%
-  \declare@shorthand{croatian}{"L}{\xpg@hr@lig{L}}%
-  \declare@shorthand{croatian}{"l}{\xpg@hr@lig{l}}%
-  \declare@shorthand{croatian}{"N}{\xpg@hr@lig{N}}%
-  \declare@shorthand{croatian}{"n}{\xpg@hr@lig{n}}%
+  \declare@shorthand{croatian}{"D}{\xpg@hr@digraph{D}}%
+  \declare@shorthand{croatian}{"d}{\xpg@hr@digraph{d}}%
+  \declare@shorthand{croatian}{"L}{\xpg@hr@digraph{L}}%
+  \declare@shorthand{croatian}{"l}{\xpg@hr@digraph{l}}%
+  \declare@shorthand{croatian}{"N}{\xpg@hr@digraph{N}}%
+  \declare@shorthand{croatian}{"n}{\xpg@hr@digraph{n}}%
 }
 
 \def\nocroatian@shorthands{%
@@ -116,24 +116,24 @@
     \fi%
 }
 
-\newcommand*\hr@charifavailable[2]{%
-   \ifcroatian@disableligatures
-     \bgroup#2\egroup%
-   \else
-     \charifavailable{#1}{#2}%
+\newcommand*\hr@charifavailable[3]{%
+   \ifcroatian@disabledigraphs% no notion of digraphs at all
+     \bgroup#3\egroup%
+   \else% digraph...
+     \charifavailable{#1}{#2}% ... either a Unicode original or a mimic of one
    \fi%
 }
 
-% Provide croatian ligatures if available in current font
-\def\xpg@hr@lig#1#2{%
+% Provide croatian digraphs if available in current font
+\def\xpg@hr@digraph#1#2{%
  \bgroup%
   % 1. DŽ, Dž and dž
   \ifx#1D%
     \ifx#2Z\relax%
-       \hr@charifavailable{01C4}{DŽ}%
+       \hr@charifavailable{01C4}{D\nobreak Ž}{DŽ}%
     \else%
        \ifx#2z\relax
-          \hr@charifavailable{01C5}{Dž}%
+          \hr@charifavailable{01C5}{D\nobreak ž}{Dž}%
        \else
            D#2%
        \fi%
@@ -141,7 +141,7 @@
   \fi%
   \ifx#1d%
     \ifx#2z\relax
-       \hr@charifavailable{01C6}{dž}%
+       \hr@charifavailable{01C6}{d\nobreak ž}{dž}%
     \else
        d#2%
     \fi%
@@ -149,10 +149,10 @@
   % 2. LJ, Lj and lj
   \ifx#1L%
     \ifx#2J\relax%
-       \hr@charifavailable{01C7}{LJ}%
+       \hr@charifavailable{01C7}{L\nobreak J}{LJ}%
     \else%
        \ifx#2j\relax
-          \hr@charifavailable{01C8}{Lj}%
+          \hr@charifavailable{01C8}{L\nobreak j}{Lj}%
        \else
            L#2%
        \fi%
@@ -160,7 +160,7 @@
   \fi%
   \ifx#1l%
     \ifx#2j\relax
-       \hr@charifavailable{01C9}{lj}%
+       \hr@charifavailable{01C9}{l\nobreak j}{lj}%
     \else
        l#2%
     \fi%
@@ -168,10 +168,10 @@
   % 2. NJ, Nj and nj
   \ifx#1N%
     \ifx#2J\relax%
-       \hr@charifavailable{01CA}{NJ}%
+       \hr@charifavailable{01CA}{N\nobreak J}{NJ}%
     \else%
        \ifx#2j\relax
-          \hr@charifavailable{01CB}{Nj}%
+          \hr@charifavailable{01CB}{N\nobreak j}{Nj}%
        \else
            N#2%
        \fi%
@@ -179,7 +179,7 @@
   \fi%
   \ifx#1n%
     \ifx#2j\relax
-       \hr@charifavailable{01CC}{nj}%
+       \hr@charifavailable{01CC}{n\nobreak j}{nj}%
     \else
        n#2%
     \fi%
@@ -192,7 +192,7 @@
   \def\refname{Literatura}%
   \def\abstractname{Sažetak}%
   \def\bibname{Bibliografija}%
-  \def\chaptername{Poglav\hr@charifavailable{01C9}{lj}e}%
+  \def\chaptername{Poglav\xpg@hr@digraph{l}{j}e}%
   \def\appendixname{Dodatak}%
   \def\contentsname{Sadržaj}%
   \def\listfigurename{Popis slika}%
@@ -213,9 +213,9 @@
 
 \def\datecroatian{%
   \def\today{\number\day.~\ifcase\month\or
-    siječ\hr@charifavailable{01CC}{nj}a\or ve\hr@charifavailable{01C9}{lj}ače\or
-    ožujka\or trav\hr@charifavailable{01CC}{nj}a\or svib\hr@charifavailable{01CC}{nj}a\or
-    lip\hr@charifavailable{01CC}{nj}a\or srp\hr@charifavailable{01CC}{nj}a\or
+    siječ\xpg@hr@digraph{n}{j}a\or ve\xpg@hr@digraph{l}{j}ače\or
+    ožujka\or trav\xpg@hr@digraph{n}{j}a\or svib\xpg@hr@digraph{n}{j}a\or
+    lip\xpg@hr@digraph{n}{j}a\or srp\xpg@hr@digraph{n}{j}a\or
     kolovoza\or rujna\or listopada\or studenoga\or prosinca\fi \space \number\year.}%
 }
 
