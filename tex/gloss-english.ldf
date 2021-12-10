@@ -9,19 +9,20 @@
 }
 
 % BCP-47 compliant aliases
-\setlanguagealias*{english}{en}
-\setlanguagealias*[variant=australian]{english}{en-AU}
-\setlanguagealias*[variant=newzealand]{english}{en-NZ}
-\setlanguagealias*[variant=us]{english}{en-US}
-\setlanguagealias*[variant=british]{english}{en-GB}
-\setlanguagealias*[variant=canadian]{english}{en-CA}
+\setlanguagealias*[bcp47=en]{english}{en}
+\setlanguagealias*[variant=australian,babelname=autralian,bcp47=en-AU]{en}{en-AU}
+\setlanguagealias*[variant=canadian,babelname=canadian,bcp47=en-CA]{en}{en-CA}
+\setlanguagealias*[variant=british,babelname=british,bcp47=en-NZ]{en}{en-GB}
+\setlanguagealias*[variant=newzealand,babelname=newzealand,bcp47=en-NZ]{en}{en-NZ}
+\setlanguagealias*[variant=us,babelname=american,bcp47=en-US]{en}{en-US}
+
 
 % Babel aliases
-\setlanguagealias[variant=us]{english}{american}
-\setlanguagealias[variant=australian]{english}{australian}
-\setlanguagealias[variant=british]{english}{british}
-\setlanguagealias[variant=canadian]{english}{canadian}
-\setlanguagealias[variant=newzealand]{english}{newzealand}
+\setlanguagealias[variant=us]{en-US}{american}
+\setlanguagealias[variant=australian]{en-AU}{australian}
+\setlanguagealias[variant=british]{en-GB}{british}
+\setlanguagealias[variant=canadian]{en-CA}{canadian}
+\setlanguagealias[variant=newzealand]{en-NZ}{newzealand}
 
 \providebool{british@hyphen}
 \providebool{english@ordinalmonthday}
@@ -169,6 +170,7 @@
    \def\alsoname{see also}%
    \def\proofname{Proof}%
 }
+
 \def\dateenglish{%
    \def\english@day{%
      \ifenglish@ordinalmonthday

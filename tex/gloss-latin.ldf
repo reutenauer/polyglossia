@@ -1,4 +1,4 @@
-\ProvidesFile{gloss-latin.ldf}[polyglossia: module for Latin v.2.3 2020-03-08]
+\ProvidesFile{gloss-latin.ldf}[polyglossia: module for Latin v.2.4 2021-10-25]
 
 \ExplSyntaxOn
 
@@ -27,7 +27,7 @@
 
 \bool_new:N \l_polyglossia_latin_use_j_bool
 \bool_new:N \l_polyglossia_latin_use_v_bool
-\bool_new:N \l_polyglossia_latin_use_digraphs_bool
+\bool_new:N \l_polyglossia_latin_use_ligatures_bool
 \bool_new:N \l_polyglossia_latin_capitalize_month_bool
 
 \cs_new:Npn \polyglossia_latin_classical_character_codes:
@@ -388,7 +388,7 @@
   {
     \bool_set_false:N \l_polyglossia_latin_use_j_bool
     \bool_set_false:N \l_polyglossia_latin_use_v_bool
-    \bool_set_false:N \l_polyglossia_latin_use_digraphs_bool
+    \bool_set_false:N \l_polyglossia_latin_use_ligatures_bool
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
     \str_set:Nn \l_polyglossia_latin_variant_str {classic}
@@ -400,7 +400,7 @@
   {
     \bool_set_false:N \l_polyglossia_latin_use_j_bool
     \bool_set_false:N \l_polyglossia_latin_use_v_bool
-    \bool_set_true:N \l_polyglossia_latin_use_digraphs_bool
+    \bool_set_true:N \l_polyglossia_latin_use_ligatures_bool
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
     \str_set:Nn \l_polyglossia_latin_variant_str {medieval}
@@ -412,7 +412,7 @@
   {
     \bool_set_false:N \l_polyglossia_latin_use_j_bool
     \bool_set_true:N \l_polyglossia_latin_use_v_bool
-    \bool_set_false:N \l_polyglossia_latin_use_digraphs_bool
+    \bool_set_false:N \l_polyglossia_latin_use_ligatures_bool
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
     \str_set:Nn \l_polyglossia_latin_variant_str {modern}
@@ -424,7 +424,7 @@
   {
     \bool_set_false:N \l_polyglossia_latin_use_j_bool
     \bool_set_true:N \l_polyglossia_latin_use_v_bool
-    \bool_set_true:N \l_polyglossia_latin_use_digraphs_bool
+    \bool_set_true:N \l_polyglossia_latin_use_ligatures_bool
     \bool_set_false:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_true:N \l_polyglossia_latin_punctuation_spacing_bool
     \str_set:Nn \l_polyglossia_latin_variant_str {ecclesiastic}
@@ -519,7 +519,7 @@
   {
     \def \prefacename
       {
-        \bool_if:NTF \l_polyglossia_latin_use_digraphs_bool {Præfatio} {Praefatio}
+        \bool_if:NTF \l_polyglossia_latin_use_ligatures_bool {Præfatio} {Praefatio}
       }
     \def \refname {Conspectus~librorum}
     \def \abstractname {Summarium}
@@ -545,7 +545,7 @@
 
 \cs_new:Npn \polyglossia_latin_month_name:
   {
-    \str_set:Nx \l_tmpa_str
+    \tl_set:Nx \l_tmpa_tl
       {
         \int_case:nn { \month }
           {
@@ -565,10 +565,10 @@
       }
     \bool_if:NTF \l_polyglossia_latin_capitalize_month_bool
       {
-        \tl_mixed_case:n { \l_tmpa_str }
+        \text_titlecase:n { \l_tmpa_tl }
       }
       {
-        \str_use:N \l_tmpa_str
+        \l_tmpa_tl
       }
   }
 
@@ -717,28 +717,28 @@
   {
     \str_case:nnF {#1}
       {
-        {A} { \polyglossia_latin_digraph_shorthand:Nnn E { Æ }
+        {A} { \polyglossia_latin_ligature_shorthand:Nnn E { Æ }
                 {
-                  \polyglossia_latin_digraph_shorthand:Nnn e { Æ }
+                  \polyglossia_latin_ligature_shorthand:Nnn e { Æ }
                     {
                       \polyglossia_latin_allow_hyphens: A
                     }
                 }
             }
-        {a} { \polyglossia_latin_digraph_shorthand:Nnn e { æ }
+        {a} { \polyglossia_latin_ligature_shorthand:Nnn e { æ }
                 {
                   \polyglossia_latin_allow_hyphens: a
                 }
             }
-        {O} { \polyglossia_latin_digraph_shorthand:Nnn E { Œ }
+        {O} { \polyglossia_latin_ligature_shorthand:Nnn E { Œ }
                 {
-                  \polyglossia_latin_digraph_shorthand:Nnn e { Œ }
+                  \polyglossia_latin_ligature_shorthand:Nnn e { Œ }
                     {
                       \polyglossia_latin_allow_hyphens: O
                     }
                 }
             }
-        {o} { \polyglossia_latin_digraph_shorthand:Nnn e { œ }
+        {o} { \polyglossia_latin_ligature_shorthand:Nnn e { œ }
                 {
                   \polyglossia_latin_allow_hyphens: o
                 }
@@ -748,23 +748,20 @@
         {>} { » }
       }
       {
-        \token_if_letter:NTF #1 { \polyglossia_latin_allow_hyphens: #1 }
+        \tl_if_single_token:nTF {#1}
           {
-            \token_if_eq_meaning:NNTF #1 \AE { \polyglossia_latin_allow_hyphens: #1 }
+            \token_if_letter:NTF #1 { \polyglossia_latin_allow_hyphens: }
               {
-                \token_if_eq_meaning:NNTF #1 \ae { \polyglossia_latin_allow_hyphens: #1 }
+                \polyglossia_latin_if_ligature_command:NTF #1 { \polyglossia_latin_allow_hyphens: }
                   {
-                    \token_if_eq_meaning:NNTF #1 \OE { \polyglossia_latin_allow_hyphens: #1 }
-                      {
-                        \token_if_eq_meaning:NNTF #1 \oe { \polyglossia_latin_allow_hyphens: #1 }
-                          {
-                            \token_to_str:N "
-                            #1
-                          }
-                      }
+                    \token_to_str:N "
                   }
               }
           }
+          {
+            \token_to_str:N "
+          }
+          #1
       }
   }
 
@@ -772,22 +769,22 @@
   {
     \str_case:nnF {#1}
       {
-        {A} { \polyglossia_latin_digraph_shorthand:Nnn E { Ǽ }
+        {A} { \polyglossia_latin_ligature_shorthand:Nnn E { Ǽ }
                 {
-                  \polyglossia_latin_digraph_shorthand:Nnn e { Ǽ } { Á }
+                  \polyglossia_latin_ligature_shorthand:Nnn e { Ǽ } { Á }
                 }
             }
-        {a} { \polyglossia_latin_digraph_shorthand:Nnn e { ǽ } { á } }
+        {a} { \polyglossia_latin_ligature_shorthand:Nnn e { ǽ } { á } }
         {E} { É }
         {e} { é }
         {I} { Í }
         {i} { í }
-        {O} { \polyglossia_latin_digraph_shorthand:Nnn E { \'Œ }
+        {O} { \polyglossia_latin_ligature_shorthand:Nnn E { \'Œ }
                 {
-                  \polyglossia_latin_digraph_shorthand:Nnn e { \'Œ } { Ó }
+                  \polyglossia_latin_ligature_shorthand:Nnn e { \'Œ } { Ó }
                 }
             }
-        {o} { \polyglossia_latin_digraph_shorthand:Nnn e { \'œ } { ó } }
+        {o} { \polyglossia_latin_ligature_shorthand:Nnn e { \'œ } { ó } }
         {U} { Ú }
         {u} { ú }
         {V} { \' V } % V may be a vowel, but lowercase v is never used as a vowel.
@@ -799,20 +796,17 @@
         {œ} { \'œ }
       }
       {
-        \token_if_eq_meaning:NNTF #1 \AE { Ǽ }
+        \tl_if_single_token:nTF {#1}
           {
-            \token_if_eq_meaning:NNTF #1 \ae { ǽ }
+            \polyglossia_latin_if_ligature_command:NTF #1 { \' }
               {
-                \token_if_eq_meaning:NNTF #1 \OE { \'Œ }
-                  {
-                    \token_if_eq_meaning:NNTF #1 \oe { \'œ }
-                      {
-                        \token_to_str:N '
-                        #1
-                      }
-                  }
+                \token_to_str:N '
               }
           }
+          {
+            \token_to_str:N '
+          }
+          #1
       }
   }
 
@@ -820,9 +814,9 @@
   {
     \str_case:nnF {#1}
       {
-        {A} { \polyglossia_latin_diphthong_macron:NNn AE
+        {A} { \polyglossia_latin_ligature_macron:NNnn AE { Ǣ }
                 {
-                  \polyglossia_latin_diphthong_macron:NNn Ae
+                  \polyglossia_latin_ligature_macron:NNnn Ae { Ǣ }
                     {
                       \polyglossia_latin_diphthong_macron:NNn AU
                         {
@@ -831,7 +825,7 @@
                     }
                 }
             }
-        {a} { \polyglossia_latin_diphthong_macron:NNn ae
+        {a} { \polyglossia_latin_ligature_macron:NNnn ae { ǣ }
                 {
                   \polyglossia_latin_diphthong_macron:NNn au { ā }
                 }
@@ -844,12 +838,12 @@
         {e} { \polyglossia_latin_diphthong_macron:NNn eu { ē } }
         {I} { Ī }
         {i} { ī }
-        {O} { \polyglossia_latin_diphthong_macron:NNn OE
+        {O} { \polyglossia_latin_ligature_macron:NNnn OE { \=Œ }
                 {
-                  \polyglossia_latin_diphthong_macron:NNn Oe { Ō }
+                  \polyglossia_latin_ligature_macron:NNnn Oe { \=Œ } { Ō }
                 }
             }
-        {o} { \polyglossia_latin_diphthong_macron:NNn oe { ō } }
+        {o} { \polyglossia_latin_ligature_macron:NNnn oe { \=œ } { ō } }
         {U} { Ū }
         {u} { ū }
         {V} { \= V } % V may be a vowel, but lowercase v is never used as a vowel.
@@ -857,7 +851,16 @@
         {y} { ȳ }
       }
       {
-        \token_to_str:N =
+        \tl_if_single_token:nTF {#1}
+          {
+            \polyglossia_latin_if_ligature_command:NTF #1 { \= }
+              {
+                \token_to_str:N =
+              }
+          }
+          {
+            \token_to_str:N =
+          }
         #1
       }
   }
@@ -894,12 +897,12 @@
     \bbl@allowhyphens
   }
 
-\cs_new:Npn \polyglossia_latin_digraph_shorthand:Nnn #1#2#3
-% #1: second letter of digraph (E or e)
-% #2: digraph character
-% #3: non-digraph code
+\cs_new:Npn \polyglossia_latin_ligature_shorthand:Nnn #1#2#3
+% #1: second letter of ligature (E or e)
+% #2: ligature character
+% #3: non-ligature code
   {
-    \bool_if:NTF \l_polyglossia_latin_use_digraphs_bool
+    \bool_if:NTF \l_polyglossia_latin_use_ligatures_bool
       {
         \peek_meaning_remove:NTF #1 {#2} {#3}
       }
@@ -908,12 +911,60 @@
       }
   }
 
+\msg_new:nnn {polyglossia} {latin / no-double-macron-font}
+  {
+    The~combining~double~macron~(U+035E)~is~not~available~in~the~current~
+    font.~The~diphthong~is~typeset~without~macron~ \msg_line_context: .
+  }
+
 \cs_new:Npn \polyglossia_latin_diphthong_macron:NNn #1#2#3
 % #1: first character of diphthong
 % #2: second character of diphthong
 % #3: non-diphthong code
   {
-    \peek_meaning:NTF #2 { #1 \char "35E \relax } {#3} % U+35E: combining double macron
+    \peek_meaning:NTF #2
+      {
+        #1
+        \iffontchar \font "35E \relax % U+35E: combining double macron
+          \char "35E \relax
+        \else
+          \msg_warning:nn {polyglossia} {latin / no-double-macron-font}
+        \fi
+      }
+      {
+        #3
+      }
+  }
+
+\cs_new:Npn \polyglossia_latin_ligature_macron:NNnn #1#2#3#4
+% #1: first character of diphthong
+% #2: second character of diphthong
+% #3: ligature code
+% #4: false code
+  {
+    \polyglossia_latin_ligature_shorthand:Nnn #2 {#3}
+      {
+        \polyglossia_latin_diphthong_macron:NNn #1 #2 {#4}
+      }
+  }
+
+% The following conditional tests if the argument is a ligature command (\AE,
+% \ae, \OE, or \oe).
+\prg_new_conditional:Npnn \polyglossia_latin_if_ligature_command:N #1 {TF}
+  {
+    \token_if_eq_meaning:NNTF #1 \AE { \prg_return_true: }
+      {
+        \token_if_eq_meaning:NNTF #1 \ae { \prg_return_true: }
+          {
+            \token_if_eq_meaning:NNTF #1 \OE { \prg_return_true: }
+              {
+                \token_if_eq_meaning:NNTF #1 \oe { \prg_return_true: }
+                  {
+                    \prg_return_false:
+                  }
+              }
+          }
+      }
   }
 
 \cs_new:Npn \polyglossia_latin_no_shorthands:

@@ -129,12 +129,12 @@
    \lccode\string"2019=\string"2019%
    \clubpenalty=3000 \@clubpenalty=3000 \widowpenalty=3000%
    \finalhyphendemerits=50000000%
-   \ifitalian@babelshorthands\italian@shorthands\fi%
+   \ifitalian@babelshorthands\italian@shorthands\else\noitalian@shorthands\fi%
 }
 
 \def\inlineextras@italian{%
    \lccode\string"2019=\string"2019%
-   \ifitalian@babelshorthands\italian@shorthands\fi%
+   \ifitalian@babelshorthands\italian@shorthands\else\noitalian@shorthands\fi%
 }
 %%% CHANGES END %%%
 \endinput

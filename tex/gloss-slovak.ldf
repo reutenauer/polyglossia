@@ -37,6 +37,14 @@
 }{}
 
 \def\slovak@@splhyphen#1{%
+  \def\slovak@sh@tmp{%
+       \if\slovak@sh@next-#1%
+       \else\expandafter\slovak@@@splhyphen{#1}\fi%
+     }%
+     \futurelet\slovak@sh@next\slovak@sh@tmp%
+}
+
+\def\slovak@@@splhyphen#1{%
   \ifnum\hyphenchar \font>0%
     \kern\z@\discretionary{-}{\char\hyphenchar\the\font}{#1}%
     \nobreak\hskip\z@%
@@ -232,13 +240,13 @@
 }
 
 \def\blockextras@slovak{%
-  \ifslovak@babelshorthands\slovak@shorthands\fi%
+  \ifslovak@babelshorthands\slovak@shorthands\else\noslovak@shorthands\fi%
   \ifslovak@vlna\slovak@vlna\else\noslovak@vlna\fi%
   \ifslovak@splithyphens\slovak@hyphens\else\noslovak@hyphens\fi%
 }
 
 \def\inlineextras@slovak{%
-  \ifslovak@babelshorthands\slovak@shorthands\fi%
+  \ifslovak@babelshorthands\slovak@shorthands\else\noslovak@shorthands\fi%
   \ifslovak@vlna\slovak@vlna\else\noslovak@vlna\fi%
   \ifslovak@splithyphens\slovak@hyphens\else\noslovak@hyphens\fi%
 }

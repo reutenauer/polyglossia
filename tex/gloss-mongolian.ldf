@@ -216,12 +216,12 @@
 }
 
 \def\blockextras@mongolian{%
-   \ifcyrillic@numerals\mongolian@numbers\fi%
-   \ifmongolian@babelshorthands\mongolian@shorthands\fi%
+   \ifcyrillic@numerals\mongolian@numbers\else\nomongolian@numbers\fi%
+   \ifmongolian@babelshorthands\mongolian@shorthands\else\nomongolian@shorthands\fi%
 }
 
 \def\inlineextras@mongolian{%
-   \ifmongolian@babelshorthands\mongolian@shorthands\fi%
+   \ifmongolian@babelshorthands\mongolian@shorthands\else\nomongolian@shorthands\fi%
 }
 
 \endinput

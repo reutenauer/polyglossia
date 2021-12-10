@@ -348,12 +348,12 @@
 
 \def\blockextras@russian{%
    \russian@capsformat%
-   \ifcyrillic@numerals\russian@numbers\fi%
-   \ifrussian@babelshorthands\russian@shorthands\fi%
+   \ifcyrillic@numerals\russian@numbers\else\norussian@numbers\fi%
+   \ifrussian@babelshorthands\russian@shorthands\else\norussian@shorthands\fi%
 }
 
 \def\inlineextras@russian{%
-   \ifrussian@babelshorthands\russian@shorthands\fi%
+   \ifrussian@babelshorthands\russian@shorthands\else\norussian@shorthands\fi%
 }
 
 %%% These lines taken from russianb.ldf, part of babel package.

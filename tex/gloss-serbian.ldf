@@ -11,7 +11,8 @@
   langtag=SRB,
   hyphennames={serbian},
   hyphenmins={2,2},
-  indentfirst=true, % Правопис српскога језика, Матица српска, 1994. (друго издање): т. 236, под Обликовање ступца и пасуса
+  frenchspacing=true, % Правопис српскога језика, Матица српска, 2010. (измењено и допуњено, четврто издање): т. 188, под Обликовање ступца и пасуса
+  indentfirst=true, % Правопис српскога језика, Матица српска, 2010. (измењено и допуњено, четврто издање): т. 188, под Обликовање ступца и пасуса
   fontsetup=false,
   localnumeral=serbiannumerals,
   Localnumeral=Serbiannumerals,
@@ -208,6 +209,14 @@
 }
 
 \def\serbian@@splhyphen#1{%
+  \def\serbian@sh@tmp{%
+       \if\serbian@sh@next-#1%
+       \else\expandafter\serbian@@@splhyphen{#1}\fi%
+     }%
+     \futurelet\serbian@sh@next\serbian@sh@tmp%
+}
+
+\def\serbian@@@splhyphen#1{%
   \ifnum\hyphenchar \font>0%
     \kern\z@\discretionary{-}{\char\hyphenchar\the\font}{#1}%
     \nobreak\hskip\z@%
@@ -247,7 +256,7 @@
 }
 
 \def\blockextras@serbian{%
-  \ifcyrillic@numerals\serbian@numbers\fi%
+  \ifcyrillic@numerals\serbian@numbers\else\noserbian@numbers\fi%
   \ifserbian@splithyphens\serbian@hyphens\else\noserbian@hyphens\fi%
 }
 

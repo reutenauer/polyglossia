@@ -221,12 +221,12 @@
 }
 
 \def\blockextras@georgian{%
-   \ifgeorgian@numerals\georgian@numbers\fi%
-   \ifgeorgian@babelshorthands\georgian@shorthands\fi%
+   \ifgeorgian@numerals\georgian@numbers\else\nogeorgian@numbers\fi%
+   \ifgeorgian@babelshorthands\georgian@shorthands\else\nogeorgian@shorthands\fi%
 }
 
 \def\inlineextras@georgian{%
-   \ifgeorgian@babelshorthands\georgian@shorthands\fi%
+   \ifgeorgian@babelshorthands\georgian@shorthands\else\nogeorgian@shorthands\fi%
 }
 
 \endinput

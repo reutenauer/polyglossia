@@ -1,10 +1,12 @@
-\ProvidesFile{gloss-latex.ldf}[polyglossia: module for default language]
+\ProvidesLanguageDefinitionExtension{gloss-latex}{2021/07/10}{v1.53}{polyglossia: module for default language}
 
 \PolyglossiaSetup{latex}{
   hyphennames={english},
   hyphenmins={2,3},
   langtag=ENG,
   fontsetup=true,
+  % ignore command
+  DefineCommandsCmd={use_none:n}
 }
 
 \def\captionslatex{%
@@ -29,5 +31,6 @@
    \def\alsoname{see also}%
    \def\proofname{Proof}%
 }
+
 
 \endinput
