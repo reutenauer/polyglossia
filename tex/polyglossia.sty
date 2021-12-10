@@ -38,7 +38,7 @@
 \prg_generate_conditional_variant:Nnn \clist_if_in:Nn {Ne} {TF, T, F, p}
 \prg_generate_conditional_variant:Nnn \prop_if_in:Nn {Ne} {TF, T, F, p}
 % correct a bug in tracklang
-\__xpg_at_package_hook:nnn{tracklang}{file/after/tracklang.sty}{%
+\__xpg_at_package_hook:nnn{tracklang}{file/tracklang.sty/after}{%
   \@ifpackagelater{tracklang}{2019/08/30}{}{\global\def\AddTrackedLangage{\AddTrackedLanguage}}
 }
 
@@ -218,7 +218,7 @@
     \xpg@error{right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}
   }
 }
-\__xpg_at_package_hook:nnn{bidi}{package/after/bidi}{%
+\__xpg_at_package_hook:nnn{bidi}{package/bidi/after}{%
   \ExplSyntaxOn%
   \cs_gset_nopar:Nn{\polyglossia@setpardirection:n}{%
     \__xpg_if_LR_str:nTF{#1}%
@@ -240,7 +240,7 @@
   }%
   \ExplSyntaxOff%
 }
-\__xpg_at_package_hook:nnn{luabidi}{package/after/luabidi}{%
+\__xpg_at_package_hook:nnn{luabidi}{package/luabidi/after}{%
   \ExplSyntaxOn%
   \cs_gset_nopar:Nn{\polyglossia@setpardirection:n}{%
     \__xpg_if_LR_str:nTF{#1}%
