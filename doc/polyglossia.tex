@@ -965,7 +965,8 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		\item[¦"<¦] for Croatian right guillemets («).
 	\end{shorthands}
 	\item \xpgboolkeyfalse[1.47]{disabledigraphs}[Up to version 1.53, the option was
-		called \xpgvalue{disableligatures}.] If this is \xpgvalue{true}, all Croatian digraphs
+		called \xpgvalue{disableligatures}. The old option is kept for backwards compatibility,
+		but the use is discouraged.] If this is \xpgvalue{true}, all Croatian digraphs
 		(such as \charifavailable{01C6}{dž}) will be replaced by the two consecutive letters,
 		which is the most common way of typesetting them in Croatian. This can be useful if
 		the Unicode digraphs in your font are broken (if the font does not have them,

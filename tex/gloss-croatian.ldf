@@ -20,6 +20,17 @@
 
 \define@boolkey{croatian}[croatian@]{disabledigraphs}[true]{}
 
+% Alias kept for backwards compatibility. Please do not remove
+\define@boolkey{croatian}[croatian@]{disableligatures}[true]{%
+   \xpg@warning{The option disableligatures is deprected.\MessageBreak
+                Please use disabledigraphs instead}%
+   \ifcroatian@disableligatures
+      \croatian@disabledigraphstrue
+   \else
+      \croatian@disabledigraphsfalse
+   \fi
+}
+
 \define@boolkey{croatian}[croatian@]{splithyphens}[true]{}
 
 \define@boolkey{croatian}[croatian@]{localalph}[true]{}
