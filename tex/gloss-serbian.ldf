@@ -161,9 +161,10 @@
     децембар\fi \space \number\year.}%
 }
 
-
-\newcommand{\serbiannumerals}[2]{\serbiannumber{#2}}
-\newcommand{\Serbiannumerals}[2]{\Serbiannumber{#2}}
+% Use \providecommand here as the ldf file might
+% be reloaded via serbianc.
+\providecommand{\serbiannumerals}[2]{\serbiannumber{#2}}
+\providecommand{\Serbiannumerals}[2]{\Serbiannumber{#2}}
 
 \def\serbiannumber#1{%
   \ifcyrillic@numerals
