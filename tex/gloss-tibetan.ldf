@@ -23,8 +23,10 @@
 \def\tmp@tibetan{tibetan}
 \define@key{tibetan}{numerals}[tibetan]{%
 	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@tibetan\@tibetan@numeralstrue\else
-	  \@tibetan@numeralsfalse\fi
+	\ifx\@tmpa\tmp@tibetan\@tibetan@numeralstrue%
+	\else
+	  \@tibetan@numeralsfalse%
+	\fi%
 }
 
 \ifluatex
@@ -33,23 +35,23 @@
 \fi
 
 \def\tibetan@eol{%
-  \ifluatex %
-    \xpg@tibteol=1\relax %
+  \ifluatex%
+    \xpg@tibteol=1\relax%
     \directlua{polyglossia.activate_tibt_eol()}%
-  \else %
+  \else%
     \XeTeXlinebreaklocale "bo"%
     \XeTeXlinebreakskip=0pt plus 0.1em% doesn't do much, but doesn't harm I guess...
-  \fi %
+  \fi%
 }
 
 \def\notibetan@eol{%
-  \ifluatex %
-    \xpg@tibteol=0\relax %
+  \ifluatex%
+    \xpg@tibteol=0\relax%
     %\directlua{polyglossia.activate_tibt_eol()}%
-  \else %
+  \else%
     \XeTeXlinebreaklocale "en"% en? really?
     \XeTeXlinebreakskip=0pt plus 0pt%
-  \fi %
+  \fi%
 }
 
 % Register default options
@@ -82,6 +84,7 @@
    \def\proofname{བདེན་དཔང་།}% not sure about this one...
    \def\glossaryname{མིང་ཚིག་རེའུ་མིག།}%
 }
+
 \def\datetibetan{%   
    \def\tibetan@month{%
      \ifcase\month\or
@@ -106,6 +109,7 @@
 }
 
 \def\tibetandigits#1{\expandafter\@tibetan@digits #1@}
+
 \def\@tibetan@digits#1{%
   \ifx @#1% then terminate
   \else
@@ -124,14 +128,28 @@
   \fi}
 
 \def\@tibetanalph#1{%
-  \ifcase#1\or ཀ\or ཁ\or ག\or ང\or ཅ\or ཆ\or ཇ\or ཉ\or ཏ\or ཐ\or ད\or ན\or པ\or 
-  ཕ\or བ\or མ\or ཙ\or ཚ\or ཛ\or ཝ\or ཞ\or ཟ\or འ\or ཡ\or ར\or ལ\or ཤ\or ས\or ཧ\or ཨ
- \else\xpg@ill@value{#1}{@tibetanalph}\fi}
-\def\tibetanAlph#1{\expandafter\@tibetanAlph\csname c@#1\endcsname}
+    \ifcase#1\or ཀ\or ཁ\or ག\or ང\or ཅ\or ཆ\or
+           ཇ\or ཉ\or ཏ\or ཐ\or ད\or ན\or པ\or ཕ\or
+           བ\or མ\or ཙ\or ཚ\or ཛ\or ཝ\or ཞ\or ཟ\or
+           འ\or ཡ\or ར\or ལ\or ཤ\or ས\or ཧ\or ཨ
+    \else%
+        \xpg@ill@value{#1}{@tibetanalph}%
+    \fi%
+}
+ 
+\def\tibetanAlph#1{%
+    \expandafter\@tibetanAlph\csname c@#1\endcsname%
+}
+
 \def\@tibetanAlph#1{%
-  \ifcase#1\or ཀ\or ཁ\or ག\or ང\or ཅ\or ཆ\or ཇ\or ཉ\or ཏ\or ཐ\or ད\or ན\or པ\or 
-  ཕ\or བ\or མ\or ཙ\or ཚ\or ཛ\or ཝ\or ཞ\or ཟ\or འ\or ཡ\or ར\or ལ\or ཤ\or ས\or ཧ\or ཨ
- \else\xpg@ill@value{#1}{@tibetanalph}\fi}
+    \ifcase#1\or ཀ\or ཁ\or ག\or ང\or ཅ\or ཆ\or ཇ\or
+          ཉ\or ཏ\or ཐ\or ད\or ན\or པ\or ཕ\or བ\or མ\or ཙ\or
+           ཚ\or ཛ\or ཝ\or ཞ\or ཟ\or འ\or ཡ\or ར\or ལ\or ཤ\or
+            ས\or ཧ\or ཨ%
+    \else%
+       \xpg@ill@value{#1}{@tibetanalph}%
+    \fi%
+}
 
 \newcommand{\tibetanumerals}[2]{\tibetannumber{#2}}
 
@@ -141,13 +159,16 @@
      \let\@Alph\@tibetanAlph%
    \fi
 }
+
 \def\notibetan@numbers{%
   \let\@alph\latin@alph%
   \let\@Alph\latin@Alph%
 }
 
+% Store original definition
+\let\xpg@orig@arabic\@arabic
+
 \def\tibetan@globalnumbers{%
-   \let\xpg@orig@arabic\@arabic%
    \let\@arabic\tibetannumber%
    \renewcommand{\thefootnote}{\localnumeral*{footnote}}%
 }
@@ -158,17 +179,31 @@
 
 \def\noextras@tibetan{%
    \notibetan@eol%
-   \ifcsname xpg@orig@baselinestretch\endcsname\renewcommand{\baselinestretch}{\xpg@orig@baselinestretch}\fi %
-   }
+   \ifcsname xpg@orig@baselinestretch\endcsname%
+       \renewcommand{\baselinestretch}{\xpg@orig@baselinestretch}%
+   \fi%
+}
 
 \def\inlineextras@tibetan{%
-   \xdef\xpg@orig@baselinestretch{\ifcsname baselinestretch\endcsname \baselinestretch \else 1\fi}%
+   \xdef\xpg@orig@baselinestretch{%
+       \ifcsname baselinestretch\endcsname
+           \baselinestretch
+        \else
+           1%
+        \fi%
+   }%
    \renewcommand{\baselinestretch}{1.2}%
    \tibetan@eol%
-   }
+}
 
 \def\blockextras@tibetan{%
-   \xdef\xpg@orig@baselinestretch{\ifcsname baselinestretch\endcsname \baselinestretch \else 1\fi}%
+   \xdef\xpg@orig@baselinestretch{%
+        \ifcsname baselinestretch\endcsname
+            \baselinestretch
+        \else
+           1%
+        \fi%
+   }%
    \renewcommand{\baselinestretch}{1.2}%
    \tibetan@eol%
 }
