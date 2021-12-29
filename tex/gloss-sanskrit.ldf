@@ -71,8 +71,9 @@
 % Register default options
 \xpg@initialize@gloss@options{sanskrit}{script=Devanagari,numerals=Devanagari}
 
-
-\newcommand{\sanskritnumerals}[2]{\sanskritnumber{#2}}
+% Use \providecommand here as the ldf file might
+% be reloaded via BCP.
+\providecommand{\sanskritnumerals}[2]{\sanskritnumber{#2}}
 
 \def\sanskritnumber#1{%
   \ifsanskrit@devanagari@numerals

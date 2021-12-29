@@ -158,7 +158,9 @@
   \let\tgh\relax%
 }
 
-\newcommand*\spanishoperator[2][]{%
+% Use \providecommand here as the ldf file might
+% be reloaded via babel aliases.
+\providecommand*\spanishoperator[2][]{%
   \ifx#1\\\\
     \protected@csxdef{#2}{\mathop{\operator@font #2}\nolimits}%
   \else

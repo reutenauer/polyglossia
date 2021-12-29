@@ -252,8 +252,10 @@
    \renewrobustcmd\anw@print{ʹ}}
 \anw@true
 
-\newcommand{\greeknumerals}[2]{\greeknumber{#2}}
-\newcommand{\Greeknumerals}[2]{\Greeknumber{#2}}
+% Use \providecommand here as the ldf file might
+% be reloaded via politunikogreek.
+\providecommand{\greeknumerals}[2]{\greeknumber{#2}}
+\providecommand{\Greeknumerals}[2]{\Greeknumber{#2}}
 
 \protected\def\greeknumber#1{\expandafter\@greeknumber\expandafter{\number#1}}
 \def\@greeknumber#1{%

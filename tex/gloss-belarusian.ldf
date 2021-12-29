@@ -224,8 +224,10 @@
   \csuse{datebelarusian@\belarusian@spelling}%
 }
 
-\newcommand{\belarusiannumerals}[2]{\belarusiannumber{#2}}
-\newcommand{\Belarusiannumerals}[2]{\Belarusiannumber{#2}}
+% Use \providecommand here as the ldf file might
+% be reloaded via be-tarask (BCP).
+\providecommand{\belarusiannumerals}[2]{\belarusiannumber{#2}}
+\providecommand{\Belarusiannumerals}[2]{\Belarusiannumber{#2}}
 
 \def\belarusiannumber#1{%
   \ifcyrillic@numerals

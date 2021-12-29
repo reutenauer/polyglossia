@@ -156,8 +156,9 @@
     \fi%
  \fi}}
 
-
-\newcommand{\arabicnumerals}[2]{\arabicnumber{#2}}
+% Use \providecommand here as the ldf file might
+% be reloaded via aeb (BCP).
+\providecommand{\arabicnumerals}[2]{\arabicnumber{#2}}
 
 \def\arabicnumber#1{%
   \ifeastern@numerals

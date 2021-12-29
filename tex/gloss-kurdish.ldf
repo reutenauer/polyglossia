@@ -336,7 +336,9 @@
   \csname datekurdish@\kurdish@variant @\kurdish@script\endcsname%
 }
 
-\newcommand{\kurdishnumerals}[2]{\kurdishnumber{#2}}
+% Use \providecommand here as the ldf file might
+% be reloaded via BCP.
+\providecommand{\kurdishnumerals}[2]{\kurdishnumber{#2}}
 
 \def\kurdishnumber#1{%
   \if@western@numerals
