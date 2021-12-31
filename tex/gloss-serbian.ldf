@@ -121,9 +121,9 @@
 
 \def\dateserbian@lat{%
    \def\today{\number\day .~\ifcase\month\or
-    januar\or februar\or mart\or april\or maj\or
-    jun\or jul\or avgust\or septembar\or oktobar\or novembar\or
-    decembar\fi \space \number\year.}%
+    januara\or februara\or marta\or aprila\or maja\or
+    juna\or jula\or avgusta\or septembra\or oktobra\or novembra\or
+    decembra\fi \space \number\year.}%
 }
 
 \def\captionsserbian@cyr{%
@@ -156,9 +156,9 @@
 
 \def\dateserbian@cyr{%
    \def\today{\number\day .~\ifcase\month\or
-    јануар\or фебруар\or март\or април\or мај\or
-    јун\or јул\or август\or септембар\or октобар\or новембар\or
-    децембар\fi \space \number\year.}%
+    јануара\or фебруара\or марта\or априла\or маја\or
+    јуна\or јула\or августа\or септембра\or октобра\or новембра\or
+    децембра\fi \space \number\year.}%
 }
 
 % Use \providecommand here as the ldf file might
