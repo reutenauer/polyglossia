@@ -120,7 +120,7 @@
 }
 
 \def\dateserbian@lat{%
-   \def\today{\number\day .~\ifcase\month\or
+   \def\today{\number\day.~\ifcase\month\or
     januara\or februara\or marta\or aprila\or maja\or
     juna\or jula\or avgusta\or septembra\or oktobra\or novembra\or
     decembra\fi \space \number\year.}%
@@ -155,7 +155,7 @@
 }
 
 \def\dateserbian@cyr{%
-   \def\today{\number\day .~\ifcase\month\or
+   \def\today{\number\day.~\ifcase\month\or
     јануара\or фебруара\or марта\or априла\or маја\or
     јуна\or јула\or августа\or септембра\or октобра\or новембра\or
     децембра\fi \space \number\year.}%
