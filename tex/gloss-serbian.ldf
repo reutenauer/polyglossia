@@ -124,6 +124,7 @@
     januara\or februara\or marta\or aprila\or maja\or
     juna\or jula\or avgusta\or septembra\or oktobra\or novembra\or
     decembra\fi \space \number\year\@ifstar{}{.}}%
+   \def\todayRoman{\number\day.~\@Roman\month~\number\year\@ifstar{}{.}}%
 }
 
 \def\captionsserbian@cyr{%
@@ -159,6 +160,7 @@
     јануара\or фебруара\or марта\or априла\or маја\or
     јуна\or јула\or августа\or септембра\or октобра\or новембра\or
     децембра\fi \space \number\year\@ifstar{}{.}}%
+   \def\todayRoman{\number\day.~\@Roman\month~\number\year\@ifstar{}{.}}%
 }
 
 % Use \providecommand here as the ldf file might
