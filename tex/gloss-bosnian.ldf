@@ -44,7 +44,7 @@
   \def\today{\number\day.~\ifcase\month\or
     januar\or februar\or mart\or april\or maj\or
     juni\or juli\or august\or septembar\or oktobar\or novembar\or
-    decembar\fi \space \number\year.~}%
+    decembar\fi \space \number\year.}%
 }
 
 \endinput
