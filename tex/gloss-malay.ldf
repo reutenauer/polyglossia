@@ -140,8 +140,8 @@
 
 \def\datemalay@indonesian{%
    \def\today{\number\day~\ifcase\month\or
-    Januari\or Pebruari\or Maret\or April\or Mei\or Juni\or
-    Juli\or Agustus\or September\or Oktober\or Nopember\or Desember\fi
+    Januari\or Februari\or Maret\or April\or Mei\or Juni\or
+    Juli\or Agustus\or September\or Oktober\or November\or Desember\fi
     \space \number\year}}
 
 \def\datemalay@malay{%
