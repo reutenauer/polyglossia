@@ -1550,7 +1550,7 @@
   \cs_if_exist_use:c{noextras@bbl@\mainbabelname}%
   \csuse{init@noextras@\xpg@main@language}%
   \polyglossia@set@language@name[#1]{#2}%
-  \__xpg_if_LR_str:eF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}
+  \__xpg_if_LR_str:eF{\prop_item:Ne{\polyglossia@langsetup}{#2/direction}}
   {
     \@rlmaintrue\@rl@footnotetrue
   }
