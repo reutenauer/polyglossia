@@ -149,7 +149,7 @@
    \xpg@info{Option: German, script=\xpg@val}%
 }{\xpg@warning{Unknown German script `#1'}}
 
-% Option defunc'ed, as bot XeTeX and LuaTeX meanwhile
+% Option defunc'ed, as both XeTeX and LuaTeX meanwhile
 % use the experimental German hyphenation patterns by default.
 \define@boolkey{german}[german@]{latesthyphen}[true]{}
 
@@ -158,7 +158,7 @@
 \setkeys{german}{spelling,script,variant}
 
 % Register default options
-\xpg@initialize@gloss@options{german}{variant=german,spelling=new,script=latin,latesthyphen=false,babelshorthands=false}
+\xpg@initialize@gloss@options{german}{variant=german,spelling=new,script=latin,babelshorthands=false}
 % Register alias options
 \xpg@set@alias@values{german}{spelling}{new}{1996}
 \xpg@set@alias@values{german}{spelling}{old}{1901}
