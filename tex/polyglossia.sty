@@ -1529,6 +1529,7 @@
    }{%
      % Register the language options
      \polyglossia@set@lang@options:nnn {#2} {#1} {@xpg@set@langvariant}%
+     \cs_set_eq:cc{#2@gvar}{languagevariant}%
   }%
 }
 
