@@ -1390,7 +1390,7 @@
     \clist_gput_right:Ne \xpg@loaded {#2}
   }
   % Register the language options
-  \polyglossia@set@lang@options:nn {#2} {#1}
+  \polyglossia@set@lang@options:nnn {#2} {#1} {@xpg@set@langvariant}
   % register babelname
   \prop_get:NeN \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
   \clist_if_in:NeF \xpg@bloaded {\l_tmpa_tl}{
@@ -1436,7 +1436,7 @@
   }
   {%
      % Register the language options
-     \polyglossia@set@lang@options:nn {#2} {#1}%
+     \polyglossia@set@lang@options:nnn {#2} {#1} {@xpg@main@langvariant}%
   }%
   \csgdef{#2@gvar}{\mainlanguagevariant}%
   %% The following settings are for the default language and script
@@ -1528,7 +1528,7 @@
      \ifcsundef{#2@gvar}{\def\languagevariant{}}{\def\languagevariant{\csuse{#2@gvar}}}
    }{%
      % Register the language options
-     \polyglossia@set@lang@options:nn {#2} {#1}%
+     \polyglossia@set@lang@options:nnn {#2} {#1} {@xpg@set@langvariant}%
   }%
 }
 
@@ -1731,7 +1731,7 @@
   % If a variant is set, store it.
   \gdef\otherlanguagevariant{}
   % Register the language options
-  \polyglossia@set@lang@options:nn {#2} {#1}%
+  \polyglossia@set@lang@options:nnn {#2} {#1} {@xpg@other@langvariant}%
 
   \csgdef{#2@gvar}{\otherlanguagevariant}%
   \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
@@ -1956,7 +1956,7 @@
     \group_insert_after:N \xpg@pop@language
   }
   % Register the language options
-  \polyglossia@set@lang@options:nn {#3} {#2}%
+  \polyglossia@set@lang@options:nnn {#3} {#2} {@xpg@set@langvariant}%
   % The starred variant does not write to the aux
   \IfBooleanTF#1{%
     \xpg@set@language@nonaux[#2]{#3}%
@@ -1977,13 +1977,13 @@
 
 
 % set lang option #2 for lang #1
-\cs_new:Nn \polyglossia@set@lang@options:nn
+\cs_new:Nn \polyglossia@set@lang@options:nnn
 {
   \tl_if_blank:nF {#2}
   {
     % If the optional argument sets a value for the key “variant”, copy it to xpg@langvariant
     \clist_map_inline:nn { #2 } {%
-      \xpg@parsevariantkeyvalue##1=@xpg@langvariant:#1\relax
+      \xpg@parsevariantkeyvalue##1=#3:#1\relax
     }%
     \exp_args:Nne \setkeys{#1}{#2}%
   }
@@ -1993,7 +1993,7 @@
 % \iflanguageoption has the info it needs also
 % for default settings
 \newcommand*\xpg@initialize@gloss@options[2]{%
-   \polyglossia@set@lang@options:nn {#1} {#2}%
+   \polyglossia@set@lang@options:nnn {#1} {#2} {@xpg@set@langvariant}%
 }
 
 % Record synonymous keyvals such as variant=us and variant=american
@@ -2484,7 +2484,7 @@
   \edef\xpg@tmp@opts{\xpg_alias_add_to_option_i:nn{#2}{#1}}
   \edef\xpg@tmp@lang{\xpg_alias_base_lang:n{#2}}
   % Register the language options
-  \polyglossia@set@lang@options:nn {\xpg@tmp@lang} {\xpg@tmp@opts}%
+  \polyglossia@set@lang@options:nnn {\xpg@tmp@lang} {\xpg@tmp@opts} {@xpg@set@langvariant}%
   % Now switch patterns
   \__xpg_use_or_warn:c{\use:c{xpg@tmp@lang}@language}%
   % And activate hyphenmins
