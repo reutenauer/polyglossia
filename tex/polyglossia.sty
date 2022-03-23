@@ -2083,17 +2083,22 @@
 
 % Test if language is loaded
 \newcommand*\iflanguageloaded[3]{%
-  \clist_if_in:NeTF \xpg@loaded{#1}{#2}{#3}%
+   \AddToHook{begindocument/end}{%
+     \clist_if_in:NeTF \xpg@loaded{#1}{#2}{#3}%
+   }%
 }
 
 % Same for babellanguage is loaded
 \newcommand*\ifbabellanguageloaded[3]{%
-  \clist_if_in:NeTF \xpg@bloaded{#1}{#2}{#3}%
+  \AddToHook{begindocument/end}{%
+     \clist_if_in:NeTF \xpg@bloaded{#1}{#2}{#3}%
+  }%
 }
 
 % Same for languageid
 \DeclareDocumentCommand \iflanguageidloaded {mmmm}
 {
+  \AddToHook{begindocument/end}{%
     \str_case:nnTF {#1}
       {
         {bcp-47}    { \clist_if_in:NeTF \xpg@bcp@loaded{#2}{#3}{#4} }
@@ -2103,6 +2108,7 @@
       {
         \xpg@error{Invalid~ \string\iflanguageidloaded\space argument:~ #1}
       }
+   }%
 }
 
 % Check if the current font has a given glyph
