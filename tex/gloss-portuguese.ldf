@@ -18,6 +18,10 @@
 \setlanguagealias[variant=portuguese]{portuguese}{portuges}
 \setlanguagealias[variant=brazilian]{portuguese}{brazil}
 
+\ifluatex
+  \RequirePackage{luavlna}
+\fi
+
 \def\portuguese@variant{portuges}
 \define@choicekey*+{portuguese}{variant}[\xpg@val\xpg@nr]{portuguese,brazilian}[portuguese]{%
    \ifcase\xpg@nr\relax
@@ -34,10 +38,91 @@
    \xpg@info{Option: portuguese, variant=\xpg@val}%
 }{\xpg@warning{Unknown portuguese variant `#1'}}
 
+\define@boolkey{portuguese}[portuguese@]{babelshorthands}[true]{}
+
+\define@boolkey{portuguese}[portuguese@]{splithyphens}[true]{}
 
 % Register default options
-\xpg@initialize@gloss@options{portuguese}{variant=portuguese}
+\xpg@initialize@gloss@options{portuguese}{variant=portuguese,
+      babelshorthands=false,
+      splithyphens=true}
 
+\ifsystem@babelshorthands
+  \setkeys{portuguese}{babelshorthands=true}
+\else
+  \setkeys{portuguese}{babelshorthands=false}
+\fi
+
+\ifcsundef{initiate@active@char}{%
+  \input{babelsh.def}%
+  \initiate@active@char{"}%
+  \shorthandoff{"}%
+}{}
+
+\def\portuguese@@splhyphen#1{%
+  \def\portuguese@sh@tmp{%
+       \if\portuguese@sh@next-#1%
+       \else\expandafter\portuguese@@@splhyphen{#1}\fi%
+     }%
+     \futurelet\portuguese@sh@next\portuguese@sh@tmp%
+}
+
+\def\portuguese@@@splhyphen#1{%
+  \ifnum\hyphenchar \font>0%
+    \kern\z@\discretionary{-}{\char\hyphenchar\the\font}{#1}%
+    \nobreak\hskip\z@%
+  \else%
+    #1%
+  \fi%
+}
+
+\def\portuguese@splhyphen{%
+  \portuguese@@splhyphen{-}%
+}
+
+\def\portuguese@shorthands{%
+  \bbl@activate{"}%
+  \def\language@group{portuguese}%
+  \declare@shorthand{portuguese}{"=}{\portuguese@splhyphen}%
+  \declare@shorthand{portuguese}{""}{\hskip\z@skip}%
+  \declare@shorthand{portuguese}{"~}{\textormath{\leavevmode\hbox{-}}{-}}%
+  \declare@shorthand{portuguese}{"-}{\nobreak\-\bbl@allowhyphens}%
+  \declare@shorthand{portuguese}{"|}{%
+      \textormath{\penalty\@M\discretionary{-}{}{\kern.03em}%
+      \bbl@allowhyphens}{}%
+  }%
+  \declare@shorthand{portuguese}{"/}{\textormath
+    {\bbl@allowhyphens\discretionary{/}{}{/}\bbl@allowhyphens}{}}%
+  \declare@shorthand{portuguese}{"<}{«}%
+  \declare@shorthand{portuguese}{">}{»}%
+}
+
+\def\noportuguese@shorthands{%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+
+\ifxetex
+  % splithyphens
+  \newXeTeXintercharclass\portuguese@hyphen % -
+\fi
+
+\def\portuguese@hyphens{%
+    \ifluatex
+      \AfterPreamble{\enablesplithyphens{portuguese}}%
+    \else
+      \XeTeXinterchartokenstate=1
+      \XeTeXcharclass `\- \portuguese@hyphen
+      \XeTeXinterchartoks \z@ \portuguese@hyphen = {\portuguese@@splhyphen}% "-" -> "\portuguese@@splhyphen-"
+    \fi%
+}
+
+\def\noportuguese@hyphens{%
+    \ifluatex
+      \AfterPreamble{\disablesplithyphens{portuguese}}%
+    \else
+      \XeTeXcharclass `\- \z@
+    \fi%
+}
 
 \def\portuguese@language{%
    \polyglossia@setup@language@patterns{\portuguese@variant}%
@@ -112,6 +197,21 @@
 
 \def\dateportuguese{%
   \csname dateportuguese@\portuguese@variant\endcsname%
+}
+
+\def\noextras@portuguese{%
+  \ifportuguese@babelshorthands\noportuguese@shorthands\fi%
+  \noportuguese@hyphens%
+}
+
+\def\blockextras@portuguese{%
+  \ifportuguese@babelshorthands\portuguese@shorthands\else\noportuguese@shorthands\fi%
+  \ifportuguese@splithyphens\portuguese@hyphens\else\noportuguese@hyphens\fi%
+}
+
+\def\inlineextras@portuguese{%
+  \ifportuguese@babelshorthands\portuguese@shorthands\else\noportuguese@shorthands\fi%
+  \ifportuguese@splithyphens\portuguese@hyphens\else\noportuguese@hyphens\fi%
 }
      
 \endinput

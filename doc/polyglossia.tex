@@ -1618,6 +1618,32 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 \paragraph*{Options:}
 \begin{itemize}
 	\item \xpgchoicekey[1.45]{variant}{\xpgvalue{brazilian} or \xpgpresetvalue{portuguese}}
+	\item \xpgboolkeyfalse[1.54]{babelshorthands}
+	If this is turned on, the following shorthands for fine-tuning hyphenation and micro-typography
+	of Portuguese words are activated.
+	\begin{shorthands}
+		\item[¦"|¦] disables a ligature at this position.
+		\item[¦"=¦] for an explicit hyphen sign which is repeated at the beginning
+		of the next line when hyphenated, as common in Portuguese typesetting
+		(also if ¦splithyphens=false¦). Unlike  plain ¦-¦, this also allows
+		for hyphenation at the other points preset in the hyphenation patterns.
+		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
+		cases where the hyphen should stick at the following syllable.
+		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
+		in the hyphenation patterns (as opposed to \cmd\-).
+		\item[¦""¦] allows for a line break at this position (without hyphenation sign).
+		\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to \cmd\slash, hyphenation
+		at the breakpoints preset in the hyphenation patterns is still allowed.
+		\item[¦"<¦] for French left guillemets («).
+		\item[¦">¦] for French right guillemets (»).
+	\end{shorthands}
+    \item \xpgboolkeytrue[1.51]{splithyphens}
+	According to Portuguese typesetting conventions, if a word with a hard hyphen (such as
+	\emph{anti-inflamatório}) is hyphenated at this hyphen, a second hyphenation character is to be
+	inserted at the beginning of the line that follows the hyphenation (\emph{anti-/-inflamatório}).
+	By default, this is done automatically (if you are using \LuaTeX, the \pkg{luavlna} package is
+	loaded to achieve this).
+	Set this option to ¦false¦ to disable the feature.
 \end{itemize}
 
 \subsection{russian}\label{russian}
@@ -1754,7 +1780,8 @@ Currently support for Sami is limited to Northern Sami.
 		\begin{shorthands}
         \item[¦"=¦] for an explicit hyphen sign which is repeated at the beginning
                     of the next line when hyphenated, as common in Slovak typesetting
-		            (only needed with ¦splithyphens=false¦).
+		            (also if ¦splithyphens=false¦). Unlike  plain ¦-¦, this also allows
+		            for hyphenation at the other points preset in the hyphenation patterns.
         \item[¦"|¦] disables a ligature at this position.
         \item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
                     cases where the hyphen should stick at the following syllable.
@@ -2353,7 +2380,8 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 
 \subsubsection*{New features}
 \begin{itemize}
-	\item New option \xpgoption{splithyphens} for Serbian (\TXI{496}).
+	\item New option \xpgoption{splithyphens} for Serbian (\TXI{496}) and Portuguese (\TXI{534}).
+	\item Add \xpgoption{babelshorthands} to Portuguese.
 \end{itemize}
 
 \subsubsection*{Interface and defaults changes}
