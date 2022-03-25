@@ -13,8 +13,10 @@
 
 \define@boolkey{finnish}[finnish@]{babelshorthands}[true]{}
 
+\define@boolkey{finnish}[finnish@]{schoolhyphens}[true]{}
+
 % Register default options
-\xpg@initialize@gloss@options{finnish}{babelshorthands=false}
+\xpg@initialize@gloss@options{finnish}{babelshorthands=false,schoolhyphens=false}
 
 \ifsystem@babelshorthands
   \setkeys{finnish}{babelshorthands=true}
@@ -68,6 +70,21 @@
    \def\proofname{Todistus}%
    \def\glossaryname{Sanasto}%
 }
+
+\def\finnish@language{%
+  \iffinnish@schoolhyphens
+      \xpg@ifdefined{schoolfinnish}{%
+         \polyglossia@setup@language@patterns{schoolfinnish}%
+      }{%
+           \xpg@warning{Finnish 'School' hyphenation patterns (schoolfinnish) not available.\MessageBreak
+	                I will use the standard patterns for Finnish instead}%
+	   \polyglossia@setup@language@patterns{finnish}%
+     }%
+  \else
+      \polyglossia@setup@language@patterns{finnish}%
+  \fi
+}
+
 \def\datefinnish{%
    \def\today{\number\day.~\ifcase\month\or
     tammikuuta\or helmikuuta\or maaliskuuta\or huhtikuuta\or

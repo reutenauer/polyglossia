@@ -1066,6 +1066,13 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
         \item[¦"/¦] a slash that allows for a subsequent line break. As opposed to \cmd\slash,
                   hyphenation at the breakpoints preset in the hyphenation patterns is still allowed.
 		\end{shorthands}
+  \item \xpgboolkeyfalse[1.54]{schoolhyphens}
+	    If this is set to true, alternative (experimental) hyphenation patterns are used rather than the
+	    default Finnish patterns. These patterns (called `School Hyphenation') are more basic in that
+	    they do not contain hyphenation exceptions for compound words since these result in simple words
+	    not being hyphenated at points where this would be valid. The backdrop of the  `School' patterns
+	    is that compound words might be hyphenated incorrectly.
+	    See \url{https://github.com/hyphenation/basic-finnish} for details.
 \end{itemize}
 
 \subsection{french}\label{french}
@@ -2382,6 +2389,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \begin{itemize}
 	\item New option \xpgoption{splithyphens} for Serbian (\TXI{496}) and Portuguese (\TXI{534}).
 	\item Add \xpgoption{babelshorthands} to Portuguese.
+	\item Add \xpgoption{schoolhyphens} option to Finnish (\TXI{525}).
 \end{itemize}
 
 \subsubsection*{Interface and defaults changes}
