@@ -2545,6 +2545,11 @@
   luatexrenderer = Harfbuzz
 }
 
+% load by default latex
+\setmainlanguage{latex}
+% then process key in order to overwrite
+\ProcessKeysOptions{polyglossia}
+
 % Set the LuaTeX renderer. As opposed to fontspec, we use Harfbuzz by default.
 % This can be changed via the luatexrenderer package option.
 \sys_if_engine_luatex:T{
@@ -2554,11 +2559,6 @@
     \exp_args:Ne \defaultfontfeatures{Renderer=\l_polyglossia_luatex_renderer}
   }
 }
-
-% load by default latex
-\setmainlanguage{latex}
-% then process key in order to overwrite
-\ProcessKeysOptions{polyglossia}
 
 \bool_if:nF \l_polyglossia_verbose_bool {
    \gdef\@latex@info#1{\relax}% no latex info
