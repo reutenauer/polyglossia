@@ -1068,10 +1068,11 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		\end{shorthands}
   \item \xpgboolkeyfalse[1.54]{schoolhyphens}
 	    If this is set to true, alternative (experimental) hyphenation patterns are used rather than the
-	    default Finnish patterns. These patterns (called `School Hyphenation') are more basic in that
-	    they do not contain hyphenation exceptions for compound words since these result in simple words
-	    not being hyphenated at points where this would be valid. The backdrop of the  `School' patterns
-	    is that compound words might be hyphenated incorrectly.
+	    default Finnish patterns. These (so-called `School Hyphenation') patterns allow hyphenation at
+	    all valid points, including hyphenation points that are considered sub-optimal from an
+	    ortho-typographic point of view (e.\,g., hyphenation between two vowels).
+	    The default patterns try to prevent such hyphenation, with the drawback that simple words
+	    are often not being hyphenated at points where this would be valid.
 	    See \url{https://github.com/hyphenation/basic-finnish} for details.
 \end{itemize}
 
