@@ -1,4 +1,5 @@
 \ProvidesFile{gloss-polish.ldf}[polyglossia: module for polish]
+
 \PolyglossiaSetup{polish}{
   bcp47=pl,
   hyphennames={polish},
@@ -10,6 +11,193 @@
 
 % BCP-47 compliant aliases
 \setlanguagealias*{polish}{pl}
+
+\ifluatex
+  \RequirePackage{luavlna}
+\fi
+
+\define@boolkey{polish}[polish@]{babelshorthands}[true]{}
+
+\define@boolkey{polish}[polish@]{splithyphens}[true]{}
+
+\define@boolkey{polish}[polish@]{vlna}[true]{}
+
+% Register default options
+\xpg@initialize@gloss@options{polish}{babelshorthands=false,splithyphens=true,vlna=true}
+
+\ifsystem@babelshorthands
+  \setkeys{polish}{babelshorthands=true}
+\else
+  \setkeys{polish}{babelshorthands=false}
+\fi
+
+\ifcsundef{initiate@active@char}{%
+  \input{babelsh.def}%
+  \initiate@active@char{"}%
+  \shorthandoff{"}%
+}{}
+
+\def\polish@@splhyphen#1{%
+  \def\polish@sh@tmp{%
+       \if\polish@sh@next-#1%
+       \else\expandafter\polish@@@splhyphen{#1}\fi%
+     }%
+     \futurelet\polish@sh@next\polish@sh@tmp%
+}
+
+\def\polish@@@splhyphen#1{%
+  \ifnum\hyphenchar \font>0%
+    \kern\z@\discretionary{-}{\char\hyphenchar\the\font}{#1}%
+    \nobreak\hskip\z@%
+  \else%
+    #1%
+  \fi%
+}
+
+\def\polish@splhyphen{%
+  \polish@@splhyphen{-}%
+}
+
+\def\polish@shorthands{%
+  \bbl@activate{"}%
+  \def\language@group{polish}%
+  \declare@shorthand{polish}{"=}{\polish@splhyphen}%
+  \declare@shorthand{polish}{""}{\hskip\z@skip}%
+  \declare@shorthand{polish}{"~}{\textormath{\leavevmode\hbox{-}}{-}}%
+  \declare@shorthand{polish}{"-}{\nobreak\-\bbl@allowhyphens}%
+  \declare@shorthand{polish}{"|}{%
+      \textormath{\penalty\@M\discretionary{-}{}{\kern.03em}%
+      \bbl@allowhyphens}{}%
+  }%
+  \declare@shorthand{polish}{"/}{\textormath
+    {\bbl@allowhyphens\discretionary{/}{}{/}\bbl@allowhyphens}{}}%
+  \declare@shorthand{polish}{"`}{„}%
+  \declare@shorthand{polish}{"'}{”}%
+  \declare@shorthand{polish}{"<}{«}%
+  \declare@shorthand{polish}{">}{»}%
+}
+
+\def\nopolish@shorthands{%
+  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+}
+
+\ifxetex
+  % splithyphens
+  \newXeTeXintercharclass\polish@hyphen % -
+  % vlna
+  \newXeTeXintercharclass\polish@openpunctuation
+  \newXeTeXintercharclass\polish@nonsyllabicpreposition
+  \ifdefined\e@alloc@intercharclass@top
+    \chardef\polish@boundary=\e@alloc@intercharclass@top
+  \else
+    \ifdefined\XeTeXinterwordspaceshaping
+      \chardef\polish@boundary=4095 %
+      \def\newXeTeXintercharclass{%
+        \e@alloc\XeTeXcharclass\chardef
+              \xe@alloc@intercharclass\m@ne\@ucharclass@boundary}%
+    \else
+      \chardef\polish@boundary=255
+    \fi
+  \fi
+\fi
+
+\def\polish@hyphens{%
+    \ifluatex
+      \AfterPreamble{\enablesplithyphens{polish}}%
+    \else
+      \XeTeXinterchartokenstate=1
+      \XeTeXcharclass `\- \polish@hyphen
+      \XeTeXinterchartoks \z@ \polish@hyphen = {\polish@@splhyphen}% "-" -> "\polish@@splhyphen-"
+      % necessary if used together with vlna:
+      \XeTeXinterchartoks \polish@nonsyllabicpreposition \polish@hyphen = {\polish@@splhyphen}% "-" -> "\polish@@splhyphen-"
+    \fi%
+}
+
+\def\nopolish@hyphens{%
+    \ifluatex
+      \AfterPreamble{\disablesplithyphens{polish}}%
+    \else
+      \XeTeXcharclass `\- \z@
+    \fi%
+}
+
+% Add nonbreakable space after single-letter word to
+% prevent them to land at the end of a line
+% vlna code taken and adapted from xevlna.sty
+\ifxetex
+    \def\polish@nointerchartoks{\let\polish@interchartoks\polish@PreCSpreposition}%
+    \def\polish@PreCSpreposition{%
+       \def\next{}%
+       \ifnum\catcode`\ =10 % nothing will be done in verbatim
+       \ifmmode % nothing in math
+       \else
+          \let\polish@interchartoks\polish@nointerchartoks
+          \let\next\polish@ExamineCSpreposition
+       \fi\fi
+       \next%
+    }%
+    \def\polish@ExamineCSpreposition #1{#1\futurelet\next\polish@ProcessCSpreposition}%
+    \def\polish@ProcessCSpreposition{\ifx\next\polish@XeTeXspace\nobreak\fi}%
+    \futurelet\polish@XeTeXspace{ }\polish@nointerchartoks
+\fi
+
+\def\polish@vlna{%
+    \ifluatex
+       \preventsingleon
+    \else
+        % Code taken and adapted from xevlna.sty
+        \XeTeXinterchartokenstate=1
+        \XeTeXcharclass `\( \polish@openpunctuation
+        \XeTeXcharclass `\[ \polish@openpunctuation
+        \XeTeXcharclass `\„ \polish@openpunctuation
+        \XeTeXcharclass `\» \polish@openpunctuation
+        \XeTeXcharclass `\K \polish@nonsyllabicpreposition
+        \XeTeXcharclass `\k \polish@nonsyllabicpreposition
+        \XeTeXcharclass `\S \polish@nonsyllabicpreposition
+        \XeTeXcharclass `\s \polish@nonsyllabicpreposition
+        \XeTeXcharclass `\V \polish@nonsyllabicpreposition
+        \XeTeXcharclass `\v \polish@nonsyllabicpreposition
+        \XeTeXcharclass `\Z \polish@nonsyllabicpreposition
+        \XeTeXcharclass `\z \polish@nonsyllabicpreposition
+        \XeTeXcharclass `\O \polish@nonsyllabicpreposition
+        \XeTeXcharclass `\o \polish@nonsyllabicpreposition
+        \XeTeXcharclass `\U \polish@nonsyllabicpreposition
+        \XeTeXcharclass `\u \polish@nonsyllabicpreposition
+        \XeTeXcharclass `\A \polish@nonsyllabicpreposition
+        \XeTeXcharclass `\a \polish@nonsyllabicpreposition
+        \XeTeXcharclass `\I \polish@nonsyllabicpreposition
+        \XeTeXcharclass `\i \polish@nonsyllabicpreposition
+        \XeTeXinterchartoks \polish@boundary \polish@nonsyllabicpreposition {\polish@interchartoks}%
+        \XeTeXinterchartoks \polish@openpunctuation \polish@nonsyllabicpreposition {\polish@interchartoks}%
+    \fi
+}
+
+\def\nopolish@vlna{%
+    \ifluatex
+        \preventsingleoff
+    \else
+        \XeTeXcharclass`\(\z@
+        \XeTeXcharclass`\[\z@
+        \XeTeXcharclass`\„\z@
+        \XeTeXcharclass`\»\z@
+        \XeTeXcharclass`\K\z@
+        \XeTeXcharclass`\k\z@
+        \XeTeXcharclass`\S\z@
+        \XeTeXcharclass`\s\z@
+        \XeTeXcharclass`\V\z@
+        \XeTeXcharclass`\v\z@
+        \XeTeXcharclass`\Z\z@
+        \XeTeXcharclass`\z\z@
+        \XeTeXcharclass`\O\z@
+        \XeTeXcharclass`\o\z@
+        \XeTeXcharclass`\U\z@
+        \XeTeXcharclass`\u\z@
+        \XeTeXcharclass`\A\z@
+        \XeTeXcharclass`\a\z@
+        \XeTeXcharclass`\I\z@
+        \XeTeXcharclass`\i\z@
+    \fi
+}
 
 \def\captionspolish{%
   \def\prefacename{Przedmowa}%
@@ -33,7 +221,7 @@
   \def\alsoname{Zobacz też}%
   \def\proofname{Dowód}%
   \def\glossaryname{Glossary}% <-- Needs translation
-  }
+}
 
 \def\datepolish{%
   \def\today{\number\day\space\ifcase\month\or
@@ -41,6 +229,25 @@
       lipca\or sierpnia\or września\or października\or
       listopada\or grudnia\fi\space
       \number\year}%
-  }
+}
+
+\def\noextras@polish{%
+  \ifpolish@babelshorthands\nopolish@shorthands\fi%
+  \nopolish@hyphens%
+  \nopolish@vlna%
+  \ifxetex\XeTeXinterchartokenstate=0\fi%
+}
+
+\def\blockextras@polish{%
+  \ifpolish@babelshorthands\polish@shorthands\else\nopolish@shorthands\fi%
+  \ifpolish@vlna\polish@vlna\else\nopolish@vlna\fi%
+  \ifpolish@splithyphens\polish@hyphens\else\nopolish@hyphens\fi%
+}
+
+\def\inlineextras@polish{%
+  \ifpolish@babelshorthands\polish@shorthands\else\nopolish@shorthands\fi%
+  \ifpolish@vlna\polish@vlna\else\nopolish@vlna\fi%
+  \ifpolish@splithyphens\polish@hyphens\else\nopolish@hyphens\fi%
+}
 
 \endinput
