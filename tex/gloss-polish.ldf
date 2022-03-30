@@ -220,7 +220,7 @@
   \def\seename{Zobacz}%
   \def\alsoname{Zobacz też}%
   \def\proofname{Dowód}%
-  \def\glossaryname{Glossary}% <-- Needs translation
+  \def\glossaryname{Słowniczek}%
 }
 
 \def\datepolish{%
