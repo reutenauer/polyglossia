@@ -143,6 +143,7 @@
 
 \def\polish@vlna{%
     \ifluatex
+       \singlechars{polish}{AaIiOoUuWwZz}
        \preventsingleon
     \else
         % Code taken and adapted from xevlna.sty
@@ -150,13 +151,9 @@
         \XeTeXcharclass `\( \polish@openpunctuation
         \XeTeXcharclass `\[ \polish@openpunctuation
         \XeTeXcharclass `\„ \polish@openpunctuation
-        \XeTeXcharclass `\» \polish@openpunctuation
-        \XeTeXcharclass `\K \polish@nonsyllabicpreposition
-        \XeTeXcharclass `\k \polish@nonsyllabicpreposition
-        \XeTeXcharclass `\S \polish@nonsyllabicpreposition
-        \XeTeXcharclass `\s \polish@nonsyllabicpreposition
-        \XeTeXcharclass `\V \polish@nonsyllabicpreposition
-        \XeTeXcharclass `\v \polish@nonsyllabicpreposition
+        \XeTeXcharclass `\« \polish@openpunctuation
+        \XeTeXcharclass `\W \polish@nonsyllabicpreposition
+        \XeTeXcharclass `\w \polish@nonsyllabicpreposition
         \XeTeXcharclass `\Z \polish@nonsyllabicpreposition
         \XeTeXcharclass `\z \polish@nonsyllabicpreposition
         \XeTeXcharclass `\O \polish@nonsyllabicpreposition
@@ -179,13 +176,9 @@
         \XeTeXcharclass`\(\z@
         \XeTeXcharclass`\[\z@
         \XeTeXcharclass`\„\z@
-        \XeTeXcharclass`\»\z@
-        \XeTeXcharclass`\K\z@
-        \XeTeXcharclass`\k\z@
-        \XeTeXcharclass`\S\z@
-        \XeTeXcharclass`\s\z@
-        \XeTeXcharclass`\V\z@
-        \XeTeXcharclass`\v\z@
+        \XeTeXcharclass`\«\z@
+        \XeTeXcharclass`\W\z@
+        \XeTeXcharclass`\w\z@
         \XeTeXcharclass`\Z\z@
         \XeTeXcharclass`\z\z@
         \XeTeXcharclass`\O\z@
