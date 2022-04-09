@@ -15,7 +15,7 @@
 # <basename> : create <basename>.dtx and <basename>.ins
 
 #BEGIN {
-#  system("rm *.{dtx,sty,def,ldf,map,txt,tex,glo,log,ins,out,idx,aux,lua}");
+#  system("rm *.{dtx,sty,def,lde,ldf,map,txt,tex,glo,log,ins,out,idx,aux,lua}");
 #};
 
 
@@ -80,7 +80,7 @@ my $stopeventually  = "";
 my $prefinale       = "";
 my $codetitle       = "Implementation";
 
-my @source = qw/(polyglossia\.sty)=>$1 (.+cal\.sty)=>$1 (.+\.lua)=>$1 (.+\.def)=>$1 (gloss-.+\.ldf$)=>$1/;
+my @source = qw/(polyglossia\.sty)=>$1 (.+cal\.sty)=>$1 (.+\.lua)=>$1 (.+\.def)=>$1 (gloss-.+\.ld[ef]$)=>$1/;
 
 my $basename = "polyglossia";
 
@@ -94,7 +94,7 @@ if ($verbose)
 
 # work out the derived files
 
-my @srcdirfile = glob("$srcdir/*.{sty,ldf,def,lua}");
+my @srcdirfile = glob("$srcdir/*.{sty,lde,ldf,def,lua}");
 
 my @srcdirluafile = glob("$srcdir/*.{lua}");
 
@@ -579,7 +579,7 @@ print DTX <<_END
 % \\typeout{* To finish the installation you have to move the following}
 % \\typeout{* file into a directory searched by TeX:}
 % \\typeout{*}
-% \\typeout{* \\space\\space\\space all *.sty, *.lua, *.def and *.ldf files}
+% \\typeout{* \\space\\space all *.sty, *.lua, *.def, *.lde and *.ldf files}
 % \\typeout{*}
 % \\typeout{* You also need to compile the *.map files with teckit_compile}
 % \\typeout{* and place the resulting *.tec files under}
