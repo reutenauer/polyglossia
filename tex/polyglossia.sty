@@ -1844,7 +1844,7 @@
 % #1 option
 % #2 alias
 % #3 base lang
-% #3 text
+% #4 text
 \cs_new:Nn \__xpg_foreignlanguage:nnnn
 {
   \tl_if_blank:nT {#3}
@@ -1852,11 +1852,11 @@
     \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
   }
   \group_begin:
-    \xpg@otherlanguage[\xpg_alias_add_to_option_i:nn{#2}{#1}]{#4}%
+    \xpg@otherlanguage[\xpg_alias_add_to_option_i:nn{#2}{#1}]{#3}%
     \polyglossia@lang@settextdirection:nn{#3}{#4}%
   \group_end:
 }
-\cs_generate_variant:Nn \__xpg_foreignlanguage:nnn {een}
+\cs_generate_variant:Nn \__xpg_foreignlanguage:nnnn {eeen}
 
 
 % otherlanguage* is the environment equivalent of \foreignlanguage
