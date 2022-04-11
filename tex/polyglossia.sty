@@ -1110,7 +1110,7 @@
 
 %we call this macro when a gloss file is not found for a given language
 \def\xpg@nogloss#1{%
-   \xpg@warning{File~ gloss-#1.ldf~ does~ not~ exist!\MessageBreak
+   \xpg@warning{Neither~ file~ gloss-#1.ldf~ nor file~ gloss-#1.lde~ exists!\MessageBreak
    I~ will~ nevertheless~ try~ to~ use~ hyphenation~ patterns~ for~ #1.}%
   \PolyglossiaSetup{#1}{hyphenmins={2,3},hyphennames={#1},fontsetup=true}%
   % the above amounts to:
