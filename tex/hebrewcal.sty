@@ -20,6 +20,19 @@
   \fi
 }
 
+\newif\if@xpg@hebrewcal@academytransliteration
+\@xpg@hebrewcal@academytransliteration
+
+\DeclareOption{academytransliteration}{\@xpg@hebrewcal@academytransliteration}
+
+
+\@ifundefined{if@xpg@hebrew@academytransliteration}{}{%
+  \if@xpg@hebrew@academytransliteration
+     \@xpg@hebrewcal@academytransliterationtrue
+  \fi
+}
+
+
 %% TODO rewrite this on the basis of Reingold & Dershowitz 
 %%      on the model of hijrical (using calc)
 
@@ -99,18 +112,21 @@
     \else%
         \ifcase #1%
             % nothing for 0
-            \or Tishrei%
-            \or\if@xpg@hebrewcal@marcheshvan Marcheshvan\else Heshvan\fi%
+            \or \if@xpg@hebrewcal@academytransliteration Tishri\else Tishrei\fi%
+            \or \if@xpg@hebrewcal@academytransliteration%
+              \if@xpg@hebrewcal@marcheshvan Marẖeshvan\else Heshvan\fi%
+              \else \if@xpg@hebrewcal@marcheshvan Marcheshvan\else Cheshvan\fi%
+            \fi%
             \or Kislev%
-            \or Tebeth%
-            \or Shebat%
+            \or \if@xpg@hebrewcal@academytransliteration Tevet\else Tebeth\fi%
+            \or \if@xpg@hebrewcal@academytransliteration Shvat\else Shebat\fi%
             \or Adar I%
             \or Adar II%
             \or Nisan%
-            \or Iyar%
+            \or \if@xpg@hebrewcal@academytransliteration Iyyar\else Iyar\fi%
             \or Sivan%
             \or Tammuz%
-            \or Av%
+            \or \if@xpg@hebrewcal@academytransliteration Av\else Ab\fi%
             \or Elul%
         \fi
     \fi}
@@ -221,12 +237,12 @@
                0 \or%          % Tishri
               30 \or%          % Heshvan
               59 \or%          % Kislev
-              89 \or%          % Tebeth
-             118 \or%          % Shebat
+              89 \or%          % Tevet
+             118 \or%          % Shvat
              148 \or%          % Adar I
              148 \or%          % Adar II
              177 \or%          % Nisan
-             207 \or%          % Iyar
+             207 \or%          % Iyyar
              236 \or%          % Sivan
              266 \or%          % Tammuz
              295 \or%          % Av
