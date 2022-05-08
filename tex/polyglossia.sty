@@ -1403,7 +1403,8 @@
   }
 }
 
-\newcommand{\setdefaultlanguage}[2][]{%
+\DeclareDocumentCommand \setdefaultlanguage { O{} m }
+{
   % latex is an internal language, so do not record
   \str_if_eq:eeF{#2}{latex}
   {
@@ -1416,11 +1417,11 @@
     \polyglossia_load_lang_definition:nn{#1}{#2}
     % define environment and command if not alias
     \str_if_eq:eeT {\prop_item:Ne \__xpg_alias {#2/target}} {#2} {
-       \use:c{\prop_item:Nn{\polyglossia@langsetup}
+       \use:c{\prop_item:Ne{\polyglossia@langsetup}
             {#2/DefineCommandsCmd}}
             {#2}
     }
-    \seq_gput_right:Nn \__xpg_langs_loaded {#2}
+    \exp_args:Nnx \seq_gput_right:Nn \__xpg_langs_loaded {#2}
   }
   \polyglossia@set@default@language:ee {\xpg_alias_add_to_option_i:nn{#2}{#1}}
     {\xpg_alias_base_lang:n{#2}}%
@@ -1716,13 +1717,13 @@
     \polyglossia_load_lang_definition:ee {#1} {#2}%
     % define environment and command if not alias
     \str_if_eq:eeT {\prop_item:Ne \__xpg_alias {#2/target}} {#2} {
-       \use:c{\prop_item:Nn{\polyglossia@langsetup}
+       \use:c{\prop_item:Ne{\polyglossia@langsetup}
              {#2/DefineCommandsCmd}}
              {#2}
     }
     \polyglossia@set@other@language:ee {\xpg_alias_add_to_option_i:nn{#2}{#1}}
       {\xpg_alias_base_lang:n{#2}}%
-    \seq_gput_right:Nn \__xpg_langs_loaded {#2}
+    \exp_args:Nnx \seq_gput_right:Nn \__xpg_langs_loaded {#2}
   }
 }
 
