@@ -1867,7 +1867,7 @@
 {%
   \__xpg_otherlanguage:eee {#1} {#2} {\xpg_alias_base_lang:n{#2}}
 }
-{\group_end:}
+{\egroup}
 
 % internal wrapper
 % #1 option
@@ -1880,7 +1880,7 @@
     \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
   }
   \xpg@otherlanguage[\xpg_alias_add_to_option_i:nn{#2}{#1}]{#3}%
-  \polyglossia@lang@settextdirection:nn{#3}\group_begin:%
+  \polyglossia@lang@settextdirection:nn{#3}\bgroup
 }
 \cs_generate_variant:Nn \__xpg_otherlanguage:nnn {
   eee
