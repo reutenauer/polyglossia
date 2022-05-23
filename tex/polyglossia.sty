@@ -1880,7 +1880,8 @@
     \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
   }
   \xpg@otherlanguage[\xpg_alias_add_to_option_i:nn{#2}{#1}]{#3}%
-  \polyglossia@lang@settextdirection:nn{#3}\bgroup
+  \polyglossia@lang@settextdirection:nn{#3}%
+  \bgroup
 }
 \cs_generate_variant:Nn \__xpg_otherlanguage:nnn {
   eee
