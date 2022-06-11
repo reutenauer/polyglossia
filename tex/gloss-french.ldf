@@ -364,9 +364,9 @@
    % Change part heading
    % With titlesec
    \ifcsdef{titleformat}{%
-     \ifcsdef{H@old@part}{% Hyperref
-        \let\xpg@save@part@format\H@old@part%
-        \patchcmd{\H@old@part}%
+     \ifcsdef{NR@part}{% Hyperref (nameref)
+        \let\xpg@save@part@format\NR@part%
+        \patchcmd{\NR@part}%
                   {\partname\nobreakspace\thepart}%
                   {\xpg@french@part\nobreakspace\partname}%
                   {}%
@@ -391,9 +391,9 @@
      }{%  (not \ifdefined\sectionformat)
        % With memoir
        \ifcsdef{@memptsize}{%
-         \ifcsdef{H@old@part}{% Hyperref
-           \let\xpg@save@part@format\H@old@part%
-           \patchcmd{\H@old@part}{\printpartname \partnamenum \printpartnum}%
+         \ifcsdef{NR@part}{% Hyperref (nameref)
+           \let\xpg@save@part@format\NR@part%
+           \patchcmd{\NR@part}{\printpartname \partnamenum \printpartnum}%
                             {\partnamefont\xpg@french@part\partnamenum\printpartname}%
                             {}%
                             {\xpg@warning{Failed to patch part for French}}%
@@ -408,9 +408,9 @@
           }%
        }{%  (not \ifdefined\@memptsize)
          % With standard classes
-         \ifcsdef{H@old@part}{% Hyperref
-           \let\xpg@save@part@format\H@old@part%
-           \patchcmd{\H@old@part}%
+         \ifcsdef{NR@part}{% Hyperref
+           \let\xpg@save@part@format\NR@part%
+           \patchcmd{\NR@part}%
                     {\partname\nobreakspace\thepart}%
                     {\xpg@french@part\nobreakspace\partname}%
                     {}%
@@ -423,7 +423,7 @@
                        {\xpg@french@part\nobreakspace\partname}%
                        {}%
                        {\ifcsdef{part}{\xpg@warning{Failed to patch part for French}}{}}%
-            }{}%  (end \ifdefined \H@old@part)
+            }{}%  (end \ifdefined \NR@part)
          }%  (end \ifdefined\@part)
        }% (end \ifdefined\@memptsize)
      }% (end \ifdefined\sectionformat)
@@ -435,8 +435,8 @@
    \ifcsdef{titleformat}{%
       % With titlesec
      \ifcsdef{xpg@save@part@format}{%
-        \ifcsdef{H@old@part}{%
-            \let\H@old@part\xpg@save@part@format%
+        \ifcsdef{NR@part}{%
+            \let\NR@part\xpg@save@part@format%
         }{%
             \let\@part\xpg@save@part@format%
         }%
@@ -450,8 +450,8 @@
      }{%
         % With memoir and standard classes
         \ifcsdef{xpg@save@part@format}{%
-           \ifcsdef{H@old@part}{%
-              \let\H@old@part\xpg@save@part@format%
+           \ifcsdef{NR@part}{%
+              \let\NR@part\xpg@save@part@format%
            }{%
               \let\@part\xpg@save@part@format%
            }%
