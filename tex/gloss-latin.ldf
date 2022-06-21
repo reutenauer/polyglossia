@@ -1,4 +1,4 @@
-\ProvidesFile{gloss-latin.ldf}[polyglossia: module for Latin v.2.4 2021-10-25]
+\ProvidesFile{gloss-latin.ldf}[polyglossia: module for Latin v.2.5 2022-06-21]
 
 \ExplSyntaxOn
 
@@ -623,6 +623,9 @@
 % The active = character may cause problems with key=value interfaces.
 % We have to make sure here that no problems can occur outside a Latin
 % prosodic shorthand environment.
+% The active ^ character may cause problems with TeX's ^^xx convention
+% for hexadecimal input. We have to make sure here that no problems can
+% occur outside a Latin prosodic shorthand environment.
 % The active ' character may cause problems with the unicode-math package
 % (in case Latin is used as a secondary language, see #394). We have to
 % turn it off if Latin is not the main language.
@@ -636,6 +639,7 @@
         \iflatin@prosodicshorthands
         \else
           \shorthandoff {=}
+          \shorthandoff* {^}
         \fi
       }
       {
@@ -643,6 +647,10 @@
         % defines a = shorthand. However, there are no languages besides
         % Latin defining such a shorthand in polyglossia.
         \shorthandoff {=}
+        % The following command should not be called if the main language
+        % defines a ^ shorthand. However, there are no languages besides
+        % Latin defining such a shorthand in polyglossia.
+        \shorthandoff* {^}
         % The following command should not be called if the main language
         % defines a ' shorthand. However, there are no languages besides
         % Latin defining such a shorthand in polyglossia.
@@ -686,8 +694,9 @@
 \cs_new:Npn \polyglossia_latin_prosodic_shorthands:
   {
     \def \language@group {latin}
-    % The '=' shorthand is normally turned off to avoid problems with key=value
-    % interfaces. We turn it on here to enable prosodic shorthands.
+    % The '=' and '^' shorthands are normally turned off to avoid problems with
+    % key=value interfaces and TeX's ^^xx convention for hexadecimal input. We
+    % turn them on here to enable prosodic shorthands.
     \shorthandon {=}
     \bbl@activate {=}
     \declare@shorthand {latin} {=}
@@ -700,6 +709,7 @@
             \polyglossia_latin_put_macron:N
           }
       }
+    \shorthandon {^}
     \bbl@activate {^}
     \declare@shorthand {latin} {^}
       {
@@ -925,7 +935,7 @@
     \peek_meaning:NTF #2
       {
         #1
-        \iffontchar \font "35E \relax % U+35E: combining double macron
+        \iffontchar \font "35E \relax % U+035E: combining double macron
           \char "35E \relax
         \else
           \msg_warning:nn {polyglossia} {latin / no-double-macron-font}
@@ -971,12 +981,20 @@
   {
     \bbl@deactivate {"}
     \bbl@deactivate {'}
+  }
+
+\cs_new:Npn \polyglossia_latin_no_prosodic_shorthands:
+  {
     \bbl@deactivate {=}
     \bbl@deactivate {^}
     % The active '=' character may cause problems with key=value interfaces.
     % We have to make sure here that no problems can occur outside a Latin
     % prosodic shorthand environment.
     \shorthandoff {=}
+    % The active '^' character may cause problems with TeX's ^^xx convention
+    % for hexadecimal input. We have to make sure here that no problems can
+    % occur outside a Latin prosodic shorthand environment.
+    \shorthandoff* {^}
   }
 
 
@@ -1000,6 +1018,9 @@
     \iflatin@babelshorthands
       \polyglossia_latin_no_shorthands:
     \fi
+    \iflatin@prosodicshorthands
+      \polyglossia_latin_no_prosodic_shorthands:
+    \fi
     \xpgla@savedvalues
     \polyglossia_latin_no_punctuation_spacing:
     \polyglossia_latin_modern_character_codes:
@@ -1017,9 +1038,13 @@
       }
     \iflatin@babelshorthands
       \polyglossia_latin_shorthands:
+    \else
+      \polyglossia_latin_no_shorthands:
     \fi
     \iflatin@prosodicshorthands
       \polyglossia_latin_prosodic_shorthands:
+    \else
+      \polyglossia_latin_no_prosodic_shorthands:
     \fi
   }
 
@@ -1048,7 +1073,7 @@
 
 %%   Copyright (C) Claudio Beccari 2013-2016
 %%   Copyright (C) Élie Roux 2016-2019
-%%   Copyright (C) Keno Wehr 2019-2020
+%%   Copyright (C) Keno Wehr 2019-2022
 %%
 %%   Permission is hereby granted, free of charge, to any person obtaining
 %%   a copy of this software and associated documentation files
