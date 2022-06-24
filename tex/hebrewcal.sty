@@ -20,26 +20,14 @@
   \fi
 }
 
-\newif\if@xpg@hebrewcal@academytransliteration
-\@xpg@hebrewcal@academytransliteration
-
-\DeclareOption{academytransliteration}{\@xpg@hebrewcal@academytransliteration}
-
-
-\@ifundefined{if@xpg@hebrew@academytransliteration}{}{%
-  \if@xpg@hebrew@academytransliteration
-     \@xpg@hebrewcal@academytransliterationtrue
-  \fi
-}
-
-
 %% TODO rewrite this on the basis of Reingold & Dershowitz 
 %%      on the model of hijrical (using calc)
 
 \@ifundefined{@Remainder}{\input{cal-util.def}}{}
 
 \define@boolkey{hebrew}[@hebrew@]{fullyear}[true]{}
-\setkeys{hebrew}{fullyear=false}
+\define@boolkey{hebrew}[@hebrew@]{academytransliteration}[true]{}
+\setkeys{hebrew}{fullyear=false,academytransliteration=true}
 
 \newcount\hebrewday  \newcount\hebrewmonth \newcount\hebrewyear
 \def\hebrewdate#1#2#3{%
@@ -112,21 +100,21 @@
     \else%
         \ifcase #1%
             % nothing for 0
-            \or \if@xpg@hebrewcal@academytransliteration Tishri\else Tishrei\fi%
-            \or \if@xpg@hebrewcal@academytransliteration%
+            \or \if@hebrew@academytransliteration Tishri\else Tishrei\fi%
+            \or \if@hebrew@academytransliteration%
               \if@xpg@hebrewcal@marcheshvan Marẖeshvan\else Heshvan\fi%
               \else \if@xpg@hebrewcal@marcheshvan Marcheshvan\else Cheshvan\fi%
             \fi%
             \or Kislev%
-            \or \if@xpg@hebrewcal@academytransliteration Tevet\else Tebeth\fi%
-            \or \if@xpg@hebrewcal@academytransliteration Shvat\else Shebat\fi%
+            \or \if@hebrew@academytransliteration Tevet\else Tebeth\fi%
+            \or \if@hebrew@academytransliteration Shvat\else Shebat\fi%
             \or Adar I%
             \or Adar II%
             \or Nisan%
-            \or \if@xpg@hebrewcal@academytransliteration Iyyar\else Iyar\fi%
+            \or \if@hebrew@academytransliteration Iyyar\else Iyar\fi%
             \or Sivan%
             \or Tammuz%
-            \or \if@xpg@hebrewcal@academytransliteration Av\else Ab\fi%
+            \or \if@hebrew@academytransliteration Av\else Ab\fi%
             \or Elul%
         \fi
     \fi}
