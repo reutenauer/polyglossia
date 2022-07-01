@@ -3,13 +3,37 @@
   \bbl@afterfi\endinput
 \fi
 \ProvidesFile{babelsh.def}
-         [2019/09/30 %
+         [2022/06/21 %
          Babel common definitions for shorthands^^J
-         Taken verbatim from babel files (2019/09/27 v3.34)]
+         Taken verbatim from babel files (2022/06/06 v3.76)]
 %
 % ------------------------------------------------------------------------------
 %
 % lines 52 to 56 from babel.sty
+%
+% ------------------------------------------------------------------------------
+%
+\def\bbl@error#1#2{%
+  \begingroup
+    \def\\{\MessageBreak}%
+    \PackageError{babel}{#1}{#2}%
+  \endgroup}
+%
+% ------------------------------------------------------------------------------
+%
+% lines 69 to 73 from babel.sty
+%
+% ------------------------------------------------------------------------------
+%
+\def\bbl@info#1{%
+  \begingroup
+    \def\\{\MessageBreak}%
+    \PackageInfo{babel}{#1}%
+  \endgroup}
+%
+% ------------------------------------------------------------------------------
+%
+% lines 75 to 80 from babel.sty
 %
 % ------------------------------------------------------------------------------
 %
@@ -18,10 +42,11 @@
   \bbl@ifunset{\bbl@stripslash#1}%
     {\def#1{#2}}%
     {\expandafter\def\expandafter#1\expandafter{#1#2}}}
+\def\bbl@xin@{\@expandtwoargs\in@}
 %
 % ------------------------------------------------------------------------------
 %
-% line 73 to 74 from babel.sty
+% line 97 to 98 from babel.sty
 %
 % ------------------------------------------------------------------------------
 %
@@ -30,7 +55,7 @@
 %
 % ------------------------------------------------------------------------------
 %
-% line 399 from babel.sty
+% line 376 from babel.sty
 %
 % ------------------------------------------------------------------------------
 %
@@ -38,10 +63,18 @@
 %
 % ------------------------------------------------------------------------------
 %
-% lines 432 to 445 from babel.sty
+% lines 414 to 435 from babel.sty
 %
 % ------------------------------------------------------------------------------
 %
+\def\bbl@sh@string#1{%
+  \ifx#1\@empty\else
+    \ifx#1t\string~%
+    \else\ifx#1c\string,%
+    \else\string#1%
+    \fi\fi
+    \expandafter\bbl@sh@string
+  \fi}
 \ifx\bbl@opt@shorthands\@nnil
   \def\bbl@ifshorthand#1#2#3{#2}%
 \else\ifx\bbl@opt@shorthands\@empty
@@ -59,7 +92,7 @@
 %
 % ------------------------------------------------------------------------------
 %
-% line 450 from babel.sty
+% line 440 from babel.sty
 %
 % ------------------------------------------------------------------------------
 %
@@ -67,91 +100,45 @@
 %
 % ------------------------------------------------------------------------------
 %
-% lines 389 to 424 from switch.def
+% lines 387 to 406 from babel.def
 %
 % ------------------------------------------------------------------------------
 %
-\ifx\PackageError\@undefined
-  \def\bbl@error#1#2{%
-    \begingroup
-      \newlinechar=`\^^J
-      \def\\{^^J(babel) }%
-      \errhelp{#2}\errmessage{\\#1}%
-    \endgroup}
-  \def\bbl@warning#1{%
-    \begingroup
-      \newlinechar=`\^^J
-      \def\\{^^J(polyglossia) }%
-      \message{\\#1}%
-    \endgroup}
-  \def\bbl@info#1{%
-    \begingroup
-      \newlinechar=`\^^J
-      \def\\{^^J}%
-      \wlog{#1}%
-    \endgroup}
+\let\bbl@opt@shorthands\@nnil
+\def\bbl@ifshorthand#1#2#3{#2}%
+\let\bbl@language@opts\@empty
+\ifx\babeloptionstrings\@undefined
+  \let\bbl@opt@strings\@nnil
 \else
-  \def\bbl@error#1#2{%
-    \begingroup
-      \def\\{\MessageBreak}%
-      \PackageError{polyglossia}{#1}{#2}%
-    \endgroup}
-  \def\bbl@warning#1{%
-    \begingroup
-      \def\\{\MessageBreak}%
-      \PackageWarning{polyglossia}{#1}%
-    \endgroup}
-  \def\bbl@info#1{%
-    \begingroup
-      \def\\{\MessageBreak}%
-      \PackageInfo{polyglossia}{#1}%
-    \endgroup}
+  \let\bbl@opt@strings\babeloptionstrings
 \fi
-%
-% ------------------------------------------------------------------------------
-%
-% lines 48 to 69 from babel.def
-%
-% ------------------------------------------------------------------------------
-%
-\ifx\bbl@ifshorthand\@undefined
-  \let\bbl@opt@shorthands\@nnil
-  \def\bbl@ifshorthand#1#2#3{#2}%
-  \let\bbl@language@opts\@empty
-  \ifx\babeloptionstrings\@undefined
-    \let\bbl@opt@strings\@nnil
-  \else
-    \let\bbl@opt@strings\babeloptionstrings
-  \fi
-  \def\BabelStringsDefault{generic}
-  \def\bbl@tempa{normal}
-  \ifx\babeloptionmath\bbl@tempa
-    \def\bbl@mathnormal{\noexpand\textormath}
-  \fi
-  \def\AfterBabelLanguage#1#2{}
-  \ifx\BabelModifiers\@undefined\let\BabelModifiers\relax\fi
-  \let\bbl@afterlang\relax
-  \def\bbl@opt@safe{BR}
-  \ifx\@uclclist\@undefined\let\@uclclist\@empty\fi
-  \ifx\bbl@trace\@undefined\def\bbl@trace#1{}\fi
-  \expandafter\newif\csname ifbbl@single\endcsname
+\def\BabelStringsDefault{generic}
+\def\bbl@tempa{normal}
+\ifx\babeloptionmath\bbl@tempa
+  \def\bbl@mathnormal{\noexpand\textormath}
 \fi
+\def\AfterBabelLanguage#1#2{}
+\ifx\BabelModifiers\@undefined\let\BabelModifiers\relax\fi
+\let\bbl@afterlang\relax
+\def\bbl@opt@safe{BR}
+\ifx\@uclclist\@undefined\let\@uclclist\@empty\fi
+\ifx\bbl@trace\@undefined\def\bbl@trace#1{}\fi
+\expandafter\newif\csname ifbbl@single\endcsname
 %
 % ------------------------------------------------------------------------------
 %
-% line 108 from babel.def
+% line 938 from babel.def
 %
 % ------------------------------------------------------------------------------
 %
 \def\bbl@csarg#1#2{\expandafter#1\csname bbl@#2\endcsname}%
-
-% ------------------------------------------------------------------------------
-%
-% lines 110 to 116 from babel.def
 %
 % ------------------------------------------------------------------------------
 %
-
+% lines 941 to 947 from babel.def
+%
+% ------------------------------------------------------------------------------
+%
 \def\bbl@loop#1#2#3{\bbl@@loop#1{#3}#2,\@nnil,}
 \def\bbl@loopx#1#2{\expandafter\bbl@loop\expandafter#1\expandafter{#2}}
 \def\bbl@@loop#1#2#3,{%
@@ -159,36 +146,54 @@
     \def#1{#3}#2\bbl@afterfi\bbl@@loop#1{#2}%
   \fi}
 \def\bbl@for#1#2#3{\bbl@loopx#1{#2}{\ifx#1\@empty\else#3\fi}}
-
+%
 % ------------------------------------------------------------------------------
 %
-% lines 125 to 130 from babel.def
+% lines 956 to 965 from babel.def
 %
 % ------------------------------------------------------------------------------
 %
 \def\bbl@exp#1{%
   \begingroup
     \let\\\noexpand
-    \def\<##1>{\expandafter\noexpand\csname##1\endcsname}%
+    \let\<\bbl@exp@en
+    \let\[\bbl@exp@ue
     \edef\bbl@exp@aux{\endgroup#1}%
   \bbl@exp@aux}
+\def\bbl@exp@en#1>{\expandafter\noexpand\csname#1\endcsname}%
+\def\bbl@exp@ue#1]{%
+  \unexpanded\expandafter\expandafter\expandafter{\csname#1\endcsname}}%
 %
 % ------------------------------------------------------------------------------
 %
-% lines 144 to 149 from babel.def
+% lines 979 to 998 from babel.def
 %
 % ------------------------------------------------------------------------------
 %
-\def\bbl@ifunset#1{%
-  \expandafter\ifx\csname#1\endcsname\relax
-    \expandafter\@firstoftwo
-  \else
-    \expandafter\@secondoftwo
-  \fi}
+\begingroup
+  \gdef\bbl@ifunset#1{%
+    \expandafter\ifx\csname#1\endcsname\relax
+      \expandafter\@firstoftwo
+    \else
+      \expandafter\@secondoftwo
+    \fi}
+  \bbl@ifunset{ifcsname}% TODO. A better test?
+    {}%
+    {\gdef\bbl@ifunset#1{%
+       \ifcsname#1\endcsname
+         \expandafter\ifx\csname#1\endcsname\relax
+           \bbl@afterelse\expandafter\@firstoftwo
+         \else
+           \bbl@afterfi\expandafter\@secondoftwo
+         \fi
+       \else
+         \expandafter\@firstoftwo
+       \fi}}
+\endgroup
 %
 % ------------------------------------------------------------------------------
 %
-% lines 234 to 243 from babel.def
+% lines 1075 to 1084 from babel.def
 %
 % ------------------------------------------------------------------------------
 %
@@ -205,7 +210,7 @@
 %
 % ------------------------------------------------------------------------------
 %
-% lines 255 to 258 from babel.def
+% lines 1152 to 1155 from babel.def
 %
 % ------------------------------------------------------------------------------
 %
@@ -216,7 +221,7 @@
 %
 % ------------------------------------------------------------------------------
 %
-% lines 293 to 301 from babel.def
+% line 1185 from babel.def
 %
 % NOTE: In order to avoid importing more unneeded definitions, this macro
 %       does nothing for us.
@@ -227,7 +232,7 @@
 %
 % ------------------------------------------------------------------------------
 %
-% lines 443 to 558 from babel.def
+% lines 1348 to 1463 from babel.def
 %
 % ------------------------------------------------------------------------------
 %
@@ -278,7 +283,7 @@
 \def\@initiate@active@char#1#2#3{%
   \bbl@csarg\edef{oricat@#2}{\catcode`#2=\the\catcode`#2\relax}%
   \ifx#1\@undefined
-    \bbl@csarg\edef{oridef@#2}{\let\noexpand#1\noexpand\@undefined}%
+    \bbl@csarg\def{oridef@#2}{\def#1{\active@prefix#1\@undefined}}%
   \else
     \bbl@csarg\let{oridef@@#2}#1%
     \bbl@csarg\edef{oridef@#2}{%
@@ -350,7 +355,7 @@
 %
 % ------------------------------------------------------------------------------
 %
-% lines 561 to 755 from babel.def
+% lines 1466 to 1516 from babel.def
 %
 % ------------------------------------------------------------------------------
 %
@@ -363,27 +368,55 @@
   \else
     \bbl@afterfi\csname#1@sh@#2@sel\endcsname
   \fi}
-\def\active@prefix#1{%
-  \ifx\protect\@typeset@protect
-  \else
-    \ifx\protect\@unexpandable@protect
-      \noexpand#1%
-    \else
-      \protect#1%
-    \fi
-    \expandafter\@gobble
-  \fi}
+\begingroup
+\bbl@ifunset{ifincsname}% TODO. Ugly. Correct? Only Plain?
+  {\gdef\active@prefix#1{%
+     \ifx\protect\@typeset@protect
+     \else
+       \ifx\protect\@unexpandable@protect
+         \noexpand#1%
+       \else
+         \protect#1%
+       \fi
+       \expandafter\@gobble
+     \fi}}
+  {\gdef\active@prefix#1{%
+     \ifincsname
+       \string#1%
+       \expandafter\@gobble
+     \else
+       \ifx\protect\@typeset@protect
+       \else
+         \ifx\protect\@unexpandable@protect
+           \noexpand#1%
+         \else
+           \protect#1%
+         \fi
+         \expandafter\expandafter\expandafter\@gobble
+       \fi
+     \fi}}
+\endgroup
 \newif\if@safe@actives
 \@safe@activesfalse
 \def\bbl@restore@actives{\if@safe@actives\@safe@activesfalse\fi}
+\chardef\bbl@activated\z@
 \def\bbl@activate#1{%
+  \chardef\bbl@activated\@ne
   \bbl@withactive{\expandafter\let\expandafter}#1%
     \csname bbl@active@\string#1\endcsname}
 \def\bbl@deactivate#1{%
+  \chardef\bbl@activated\tw@
   \bbl@withactive{\expandafter\let\expandafter}#1%
     \csname bbl@normal@\string#1\endcsname}
 \def\bbl@firstcs#1#2{\csname#1\endcsname}
 \def\bbl@scndcs#1#2{\csname#2\endcsname}
+%
+% ------------------------------------------------------------------------------
+%
+% lines 1525 to 1702 from babel.def
+%
+% ------------------------------------------------------------------------------
+%
 \def\declare@shorthand#1#2{\@decl@short{#1}#2\@nil}
 \def\@decl@short#1#2#3\@nil#4{%
   \def\bbl@tempa{#3}%
@@ -417,7 +450,7 @@
     \expandafter\@firstoftwo
   \fi}
 \def\user@group{user}
-\def\language@group{english}
+\def\language@group{english} % TODO. I don't like defaults
 \def\system@group{system}
 \def\useshorthands{%
   \@ifstar\bbl@usesh@s{\bbl@usesh@x{}}}
@@ -432,8 +465,8 @@
      #1%
      \bbl@activate{#2}}%
     {\bbl@error
-       {Cannot declare a shorthand turned off (\string#2)}
-       {Sorry, but you cannot use shorthands which have been\\%
+       {I can't declare a shorthand turned off (\string#2)}
+       {Sorry, but you can't use shorthands which have been\\%
         turned off in the package options}}}
 \def\user@language@group{user@\language@group}
 \def\bbl@set@user@generic#1#2{%
@@ -475,7 +508,7 @@
         turned off in the package options}}}
 \def\@notshorthand#1{%
   \bbl@error{%
-    The character `\string #1' should be made a shorthand character;\\%
+    The character '\string #1' should be made a shorthand character;\\%
     add the command \string\useshorthands\string{#1\string} to
     the preamble.\\%
     I will ignore your instruction}%
@@ -488,14 +521,27 @@
   \ifx#2\@nnil\else
     \bbl@ifunset{bbl@active@\string#2}%
       {\bbl@error
-         {I cannot switch `\string#2' on or off--not a shorthand}%
+         {I can't switch '\string#2' on or off--not a shorthand}%
          {This character is not a shorthand. Maybe you made\\%
-          a typing mistake? I will ignore your instruction}}%
-      {\ifcase#1%
+          a typing mistake? I will ignore your instruction.}}%
+      {\ifcase#1%   off, on, off*
          \catcode`#212\relax
        \or
          \catcode`#2\active
+         \bbl@ifunset{bbl@shdef@\string#2}%
+           {}%
+           {\bbl@withactive{\expandafter\let\expandafter}#2%
+              \csname bbl@shdef@\string#2\endcsname
+            \bbl@csarg\let{shdef@\string#2}\relax}%
+         \ifcase\bbl@activated\or
+           \bbl@activate{#2}%
+         \else
+           \bbl@deactivate{#2}%
+         \fi
        \or
+         \bbl@ifunset{bbl@shdef@\string#2}%
+           {\bbl@withactive{\bbl@csarg\let{shdef@\string#2}}#2}%
+           {}%
          \csname bbl@oricat@\string#2\endcsname
          \csname bbl@oridef@\string#2\endcsname
        \fi}%
@@ -507,7 +553,7 @@
      {\bbl@putsh@i#1\@empty\@nnil}%
      {\csname bbl@active@\string#1\endcsname}}
 \def\bbl@putsh@i#1#2\@nnil{%
-  \csname\languagename @sh@\string#1@%
+  \csname\language@group @sh@\string#1@%
     \ifx\@empty#2\else\string#2@\fi\endcsname}
 \ifx\bbl@opt@shorthands\@nnil\else
   \let\bbl@s@initiate@active@char\initiate@active@char
@@ -552,7 +598,7 @@
 %
 % ------------------------------------------------------------------------------
 %
-% lines 890 to 927 from babel.def
+% lines 1863 to 1900 from babel.def
 %
 % ------------------------------------------------------------------------------
 %
