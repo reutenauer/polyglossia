@@ -30,7 +30,7 @@
 \setotherlanguages{arabic,armenian,hebrew,syriac,greek,russian,serbian,catalan,georgian}
 \usepackage[protrusion]{microtype}
 \newcommand*\Cmd[1]{\cmd{#1}\DescribeMacro{#1}\xspace}
-\renewcommand*\pkg[1]{\textsf{\color{xpgblue}#1}}
+\newcommand*\pkg[1]{\textsf{\color{xpgblue}#1}}
 \newcommand*\file[1]{\texttt{\color{xpgblue}#1}}
 \newcommand*\TR[1]{\textcolor{xpgred}{#1}}
 \newcommand*\TX[1]{\hyperref[#1]{\textcolor{xpgred}{#1}}}
@@ -1257,12 +1257,17 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 \subsection{hebrew}\label{hebrew}
 \paragraph*{Options:}
 	\begin{itemize}
+    \item \xpgboolkeyfalse{fullyear} causes years from the current millenium to be printed with the thousands digit
+          (he-tav-shin-samekh-gimel). Without this option, thousands are not printed for the current millenium.
 	\item \xpgchoicekey{numerals}{\xpgvalue{hebrew} or \xpgpresetvalue{arabic}}
 	\item \xpgchoicekey{calendar}{\xpgvalue{hebrew} or \xpgpresetvalue{gregorian}}
 	\item \xpgboolkeyfalse{marcheshvan}
 		If \xpgvalue{true}, the second month of the civil year will be output as
 		\texthebrew{מרחשון} (Marcheshvan) rather than \texthebrew{חשון} (Heshvan),
 		which is the default.
+	\item \xpgchoicekey{transliteration}{\xpgvalue{academy} or \xpgpresetvalue{alt}} With value \xpgvalue{academy}, transliteration
+	follows	the recommendations of the Hebrew Language Academy. The default (\xpgvalue{alt}) uses the received settings of
+	\pkg{babel} (\pkg{hebcal}) and	\pkg{polyglossia} (\pkg{hebrewcal}).
 	\end{itemize}
 \paragraph*{Commands:}
 	\begin{itemize}
@@ -2433,6 +2438,12 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Re-fix patching of French part headings with hyperref (\TXI{546}).
 	\item Fix Latin prosodic shorthand issues (\TXI{547}, \href{https://github.com/latex3/babel/issues/126}{Babel/\#126},
 	      \href{https://github.com/latex3/babel/issues/129}{Babel/\#129}).
+\end{itemize}
+
+\subsubsection*{New features}
+\begin{itemize}
+	\item New option \xpgoption{transliteration} to Hebrew and hebrewcal (\TXI{540}).
+	\item New option \xpgoption{fullyear} to Hebrew.
 \end{itemize}
 
 \subsection*{1.56 (20-04-2022)}
