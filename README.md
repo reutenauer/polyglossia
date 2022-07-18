@@ -1,4 +1,4 @@
-# THE POLYGLOSSIA PACKAGE v1.56
+# THE POLYGLOSSIA PACKAGE v1.57
 ## Multilingual typesetting with XeLaTeX and LuaLaTeX
 
 This package provides an alternative to Babel for users of XeLaTeX and LuaLaTeX.

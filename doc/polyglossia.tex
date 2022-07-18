@@ -1257,7 +1257,7 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 \subsection{hebrew}\label{hebrew}
 \paragraph*{Options:}
 	\begin{itemize}
-    \item \xpgboolkeyfalse{fullyear} causes years from the current millenium to be printed with the thousands digit
+    \item \xpgboolkeyfalse[1.57]{fullyear} causes years from the current millenium to be printed with the thousands digit
           (he-tav-shin-samekh-gimel). Without this option, thousands are not printed for the current millenium.
 	\item \xpgchoicekey{numerals}{\xpgvalue{hebrew} or \xpgpresetvalue{arabic}}
 	\item \xpgchoicekey{calendar}{\xpgvalue{hebrew} or \xpgpresetvalue{gregorian}}
@@ -1265,7 +1265,7 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		If \xpgvalue{true}, the second month of the civil year will be output as
 		\texthebrew{מרחשון} (Marcheshvan) rather than \texthebrew{חשון} (Heshvan),
 		which is the default.
-	\item \xpgchoicekey{transliteration}{\xpgvalue{academy} or \xpgpresetvalue{alt}} With value \xpgvalue{academy}, transliteration
+	\item \xpgchoicekey[1.57]{transliteration}{\xpgvalue{academy} or \xpgpresetvalue{alt}} With value \xpgvalue{academy}, transliteration
 	follows	the recommendations of the Hebrew Language Academy. The default (\xpgvalue{alt}) uses the received settings of
 	\pkg{babel} (\pkg{hebcal}) and	\pkg{polyglossia} (\pkg{hebrewcal}).
 	\end{itemize}
@@ -2429,7 +2429,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \section{Revision history}
 
 \bgroup\footnotesize
-\subsection*{1.57 (forthcoming)}
+\subsection*{1.57 (18-07-2022)}
 
 \subsubsection*{Bug fixes}
 \begin{itemize}
