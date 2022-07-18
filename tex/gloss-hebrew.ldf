@@ -19,6 +19,11 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{hebrew}{he}
 
+% hebrewcal options
+\define@key{hebrew}{marcheshvan}[true]{\setkeys{hebrewcal}{marcheshvan=#1}}
+\define@key{hebrew}{transliteration}[alt]{\setkeys{hebrewcal}{transliteration=#1}}
+\define@key{hebrew}{fullyear}[true]{\setkeys{hebrewcal}{fullyear=#1}}
+
 \newif\if@calendar@hebrew
 \def\tmp@hebrew{hebrew}
 \define@key{hebrew}{calendar}[gregorian]{%
@@ -29,13 +34,6 @@
 	\else%
     \@calendar@hebrewfalse%
 	\fi}
-
-\newif\if@xpg@hebrew@marcheshvan
-\@xpg@hebrew@marcheshvanfalse
-
-\define@boolkey{hebrew}[@xpg@hebrew@]{marcheshvan}[true]{}
-
-% hebrewcal.sty also defines the boolean key fullyear (default=false)
 
 \newif\if@hebrew@numerals
 \def\tmp@hebrew{hebrew}
@@ -50,7 +48,7 @@
 \setkeys{hebrew}{numerals}
 
 % Register default options
-\xpg@initialize@gloss@options{hebrew}{numerals=arabic,calendar=gregorian,marcheshvan=false}
+\xpg@initialize@gloss@options{hebrew}{numerals=arabic,calendar=gregorian,marcheshvan=false,fullyear=false}
 
 \def\captionshebrew{%
   \def\prefacename{מבוא}%

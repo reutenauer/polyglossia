@@ -1,7 +1,7 @@
 \ProvidesPackage{hebrewcal}
         [2022/07/16 v2.8 %
          Hebrew calendar for polyglossia (adapted from hebcal.sty in Babel)]
-\RequirePackage{xkeyval}
+
 \RequirePackage{iftex}
 \ifluatex
   \RequirePackage{luabidi}
@@ -9,37 +9,42 @@
   \RequirePackage{bidi}
 \fi
 
-\newif\if@xpg@hebrewcal@marcheshvan
-\@xpg@hebrewcal@marcheshvanfalse
-
-\DeclareOption{marcheshvan}{\@xpg@hebrewcal@marcheshvantrue}
-\DeclareOptionX{style}{%
-  \def\my@emphstyle{\csname my@style@#1\endcsname}}
-
-\@ifundefined{if@xpg@hebrew@marcheshvan}{}{%
-  \if@xpg@hebrew@marcheshvan
-     \@xpg@hebrewcal@marcheshvantrue
-  \fi
-}
-
 %% TODO rewrite this on the basis of Reingold & Dershowitz 
 %%      on the model of hijrical (using calc)
 
 \@ifundefined{@Remainder}{\input{cal-util.def}}{}
 
-\define@boolkey{hebrew}[@hebrew@]{fullyear}[true]{}
+%
+% OPTIONS
+%
+\RequirePackage{xkeyval}
 
-%\PackageWarning{foo}{bar}
+% marcheshvan=true|false
+\define@boolkey{hebrewcal}[@xpg@hebrew@]{marcheshvan}[true]{}
 
-\define@choicekey*+{hebrew}{transliteration}[\xpg@hebrew@tlval\xpg@hebrew@tlnr]{academy,alt}[alt]{%
-\message{Processing transliteration; got \xpg@hebrew@tlval (index \xpg@hebrew@tlnr), and that's it.}%
-}{\PackageWarning{hebcal}{Unknown transliteration option `#1'}}%
+% fullyear=true|false
+\define@boolkey{hebrewcal}[@xpg@hebrew@]{fullyear}[true]{}
 
-\setkeys{hebrew}{fullyear=false,transliteration=alt}
-    % Note: For some reason, without this explicit setting, the transliteration macros are not set
-    % using the default vaue provided to \define@choicekey . SO, we must be more "forceful" and set
-    % the key explicitly.
+% transliteration=academy|alt
+\newif\if@hebrewcal@academytrans
+\@hebrewcal@academytransfalse
+\define@choicekey*+{hebrewcal}{transliteration}[\hcal@val\hcal@nr]{academy,alt}[alt]{%
+   \ifcase\hcal@nr\relax
+      % academy:
+     \@hebrewcal@academytranstrue
+   \or
+      % alt:
+      \@hebrewcal@academytransfalse
+   \fi
+   \PackageInfo{hebrewcal}{Setting transliteration=\hcal@val}%
+}{%
+  \PackageWarning{hebrewcal}{Unknown transliteration option `#1'}%
+}
 
+% Process
+\ProcessOptionsX*<hebrewcal>
+%%
+%% END OPTIONS
 
 \newcount\hebrewday  \newcount\hebrewmonth \newcount\hebrewyear
 \def\hebrewdate#1#2#3{%
@@ -70,7 +75,7 @@
        \else
          \ifnum#1<6000 % current millenium, print without thousands
            \@tempcnta=#1\relax
-           \if@hebrew@fullyear\else\advance\@tempcnta by -5000\fi
+           \if@xpg@hebrew@fullyear\else\advance\@tempcnta by -5000\fi
            \Hebrewnumeral{\@tempcnta}%
          \else % #1>6000
            \Hebrewnumeral{#1}%
@@ -88,7 +93,7 @@
         \ifcase#1%
            % nothing for 0
            \or תשרי%
-           \or\if@xpg@hebrewcal@marcheshvan מרחשון\else חשון\fi%
+           \or\if@xpg@hebrew@marcheshvan מרחשון\else חשון\fi%
            \or כסלו%
            \or טבת%
            \or שבט%
@@ -112,21 +117,23 @@
     \else%
         \ifcase #1%
             % nothing for 0
-            \or \ifcase\xpg@hebrew@tlnr\relax Tishri \or Tishrei \fi%
-            \or \ifcase\xpg@hebrew@tlnr\relax%
-              \if@xpg@hebrewcal@marcheshvan Marẖeshvan\else Heshvan\fi%
-              \else \if@xpg@hebrewcal@marcheshvan Marcheshvan\else Cheshvan\fi%
-            \fi%
+            \or \if@hebrewcal@academytrans Tishri \else Tishrei \fi%
+            \or%
+              \if@hebrewcal@academytrans%
+                 \if@xpg@hebrew@marcheshvan Marẖeshvan\else Heshvan\fi%
+              \else%
+                 \if@xpg@hebrew@marcheshvan Marcheshvan\else Heshvan\fi%
+              \fi%
             \or Kislev%
-            \or \ifcase\xpg@hebrew@tlnr\relax Tevet \or Tebeth \fi%
-            \or \ifcase\xpg@hebrew@tlnr\relax Shvat \or Shebat \fi%
+            \or \if@hebrewcal@academytrans Tevet \else Tebeth \fi%
+            \or \if@hebrewcal@academytrans Shvat \else Shebat \fi%
             \or Adar I%
             \or Adar II%
             \or Nisan%
-            \or \ifcase\xpg@hebrew@tlnr\relax Iyyar \or Iyar \fi%
+            \or \if@hebrewcal@academytrans Iyyar \else Iyar \fi%
             \or Sivan%
             \or Tammuz%
-            \or \ifcase\xpg@hebrew@tlnr\relax Av \or Ab \fi%
+            \or \if@hebrewcal@academytrans Av \else Ab \fi%
             \or Elul%
         \fi
     \fi}
@@ -364,6 +371,8 @@
                 \tmpy = \tmpx%
         \repeat%
         \global\advance #5 by -1%
-        \global\advance #4 by -\tmpy}}
-\ProcessOptionsX*<hebrew>
+        \global\advance #4 by -\tmpy%
+   }%
+}
+
 \endinput
