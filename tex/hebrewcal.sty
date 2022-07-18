@@ -1,5 +1,5 @@
 \ProvidesPackage{hebrewcal}
-        [2019/12/03 v2.7 %
+        [2022/07/16 v2.8 %
          Hebrew calendar for polyglossia (adapted from hebcal.sty in Babel)]
 \RequirePackage{xkeyval}
 \RequirePackage{iftex}
@@ -13,6 +13,8 @@
 \@xpg@hebrewcal@marcheshvanfalse
 
 \DeclareOption{marcheshvan}{\@xpg@hebrewcal@marcheshvantrue}
+\DeclareOptionX{style}{%
+  \def\my@emphstyle{\csname my@style@#1\endcsname}}
 
 \@ifundefined{if@xpg@hebrew@marcheshvan}{}{%
   \if@xpg@hebrew@marcheshvan
@@ -26,7 +28,18 @@
 \@ifundefined{@Remainder}{\input{cal-util.def}}{}
 
 \define@boolkey{hebrew}[@hebrew@]{fullyear}[true]{}
-\setkeys{hebrew}{fullyear=false}
+
+%\PackageWarning{foo}{bar}
+
+\define@choicekey*+{hebrew}{transliteration}[\xpg@hebrew@tlval\xpg@hebrew@tlnr]{academy,alt}[alt]{%
+\message{Processing transliteration; got \xpg@hebrew@tlval (index \xpg@hebrew@tlnr), and that's it.}%
+}{\PackageWarning{hebcal}{Unknown transliteration option `#1'}}%
+
+\setkeys{hebrew}{fullyear=false,transliteration=alt}
+    % Note: For some reason, without this explicit setting, the transliteration macros are not set
+    % using the default vaue provided to \define@choicekey . SO, we must be more "forceful" and set
+    % the key explicitly.
+
 
 \newcount\hebrewday  \newcount\hebrewmonth \newcount\hebrewyear
 \def\hebrewdate#1#2#3{%
@@ -99,18 +112,21 @@
     \else%
         \ifcase #1%
             % nothing for 0
-            \or Tishrei%
-            \or\if@xpg@hebrewcal@marcheshvan Marcheshvan\else Heshvan\fi%
+            \or \ifcase\xpg@hebrew@tlnr\relax Tishri \or Tishrei \fi%
+            \or \ifcase\xpg@hebrew@tlnr\relax%
+              \if@xpg@hebrewcal@marcheshvan Marẖeshvan\else Heshvan\fi%
+              \else \if@xpg@hebrewcal@marcheshvan Marcheshvan\else Cheshvan\fi%
+            \fi%
             \or Kislev%
-            \or Tebeth%
-            \or Shebat%
+            \or \ifcase\xpg@hebrew@tlnr\relax Tevet \or Tebeth \fi%
+            \or \ifcase\xpg@hebrew@tlnr\relax Shvat \or Shebat \fi%
             \or Adar I%
             \or Adar II%
             \or Nisan%
-            \or Iyar%
+            \or \ifcase\xpg@hebrew@tlnr\relax Iyyar \or Iyar \fi%
             \or Sivan%
             \or Tammuz%
-            \or Av%
+            \or \ifcase\xpg@hebrew@tlnr\relax Av \or Ab \fi%
             \or Elul%
         \fi
     \fi}
@@ -221,12 +237,12 @@
                0 \or%          % Tishri
               30 \or%          % Heshvan
               59 \or%          % Kislev
-              89 \or%          % Tebeth
-             118 \or%          % Shebat
+              89 \or%          % Tevet
+             118 \or%          % Shvat
              148 \or%          % Adar I
              148 \or%          % Adar II
              177 \or%          % Nisan
-             207 \or%          % Iyar
+             207 \or%          % Iyyar
              236 \or%          % Sivan
              266 \or%          % Tammuz
              295 \or%          % Av
@@ -349,5 +365,5 @@
         \repeat%
         \global\advance #5 by -1%
         \global\advance #4 by -\tmpy}}
-\ProcessOptions*
+\ProcessOptionsX*<hebrew>
 \endinput
