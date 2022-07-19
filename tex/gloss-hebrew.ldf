@@ -25,25 +25,28 @@
 \define@key{hebrew}{fullyear}[true]{\setkeys{hebrewcal}{fullyear=#1}}
 
 \newif\if@calendar@hebrew
-\def\tmp@hebrew{hebrew}
-\define@key{hebrew}{calendar}[gregorian]{%
-	\message{Setting \string\if@calendar@hebrew}
-	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@hebrew%
-    \@calendar@hebrewtrue%
-	\else%
-    \@calendar@hebrewfalse%
-	\fi}
+\define@choicekey*+{hebrew}{calendar}[\xpg@val\xpg@nr]{hebrew,gregorian}[gregorian]{%
+   \ifcase\xpg@nr\relax
+      % hebrew:
+      \@calendar@hebrewtrue%
+   \or
+      % gregorian:
+      \@calendar@hebrewfalse%
+   \fi
+   \xpg@info{Option: Hebrew, calendar=\xpg@val}%
+}{\xpg@warning{Unknown Hebrew calendar `#1'}}
 
 \newif\if@hebrew@numerals
-\def\tmp@hebrew{hebrew}
-\define@key{hebrew}{numerals}[arabic]{%
-	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@hebrew%
-	  \@hebrew@numeralstrue%
-	\else%
-    \@hebrew@numeralsfalse%
-	\fi}
+\define@choicekey*+{hebrew}{numerals}[\xpg@val\xpg@nr]{hebrew,arabic}[arabic]{%
+   \ifcase\xpg@nr\relax
+      % hebrew:
+      \@hebrew@numeralstrue%
+   \or
+      % arabic:
+      \@hebrew@numeralsfalse%
+   \fi
+   \xpg@info{Option: Hebrew, numerals=\xpg@val}%
+}{\xpg@warning{Unknown Hebrew numerals value `#1'}}
 
 \setkeys{hebrew}{numerals}
 
@@ -82,7 +85,8 @@
       \hebrewnumber\day%
       \space ב\hebrewgregmonth{\month}\space%
       \hebrewnumber\year%
-     \fi}%
+     \fi%
+  }%
 }
 
 \def\hebrewgregmonth#1{\ifcase#1%
