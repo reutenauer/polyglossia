@@ -1841,6 +1841,13 @@
   \__xpg_foreignlanguage:eeen {#1} {#2} {\xpg_alias_base_lang:n{#2}} {#3}
 }
 
+% Direct access to polyglossia@setforeignlanguage
+% used in captions
+\newcommand{\setforeignlanguage}[2][]
+{
+  \polyglossia@setforeignlanguage[#1]{#2}%
+}
+
 % internal wrapper for foreing language
 % #1 option
 % #2 alias
@@ -2183,15 +2190,18 @@
       \ifx#1\\\\%
           \protected@write\@auxout{}{\protect\selectlanguage*{#2}}%
           \addtocontents{toc}{\protect\selectlanguage*{#2}}%
-          \addtocontents{lof}{\protect\selectlanguage*{#2}}%
-          \addtocontents{lot}{\protect\selectlanguage*{#2}}%
        \else
           \protected@write\@auxout{}{\protect\selectlanguage*[#1]{#2}}%
           \addtocontents{toc}{\protect\selectlanguage*[#1]{#2}}%
-          \addtocontents{lof}{\protect\selectlanguage*[#1]{#2}}%
-          \addtocontents{lot}{\protect\selectlanguage*[#1]{#2}}%
        \fi
    \fi
+}
+
+% Since captions might float to other language regions,
+% we need to change the language here (#542)
+\AddToHook{cmd/caption/before}{%
+    \addtocontents{lof}{\protect\setforeignlanguage{\languagename}}%
+    \addtocontents{lot}{\protect\setforeignlanguage{\languagename}}%
 }
 
 % The bidi package swaps the output stream within RTL tables
