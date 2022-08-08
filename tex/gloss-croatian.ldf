@@ -136,7 +136,7 @@
 }
 
 % Provide croatian digraphs if available in current font
-\def\xpg@hr@digraph#1#2{%
+\protected\def\xpg@hr@digraph#1#2{%
  \bgroup%
   % 1. DŽ, Dž and dž
   \ifx#1D%
