@@ -34,10 +34,10 @@
   \bbl@activate{"}%
   \def\language@group{finnish}%
   \declare@shorthand{finnish}{"-}{\nobreak-\bbl@allowhyphens}
-  \declare@shorthand{finnish}{"|}{\textormath{\penalty@M\discretionary{-}{}{\kern.03em}}{}}%
+  \declare@shorthand{finnish}{"|}{\textormath{\penalty\@M\discretionary{-}{}{\kern.03em}}{}}%
   \declare@shorthand{finnish}{""}{\hskip\z@skip}%
   \declare@shorthand{finnish}{"~}{\textormath{\leavevmode\hbox{-}}{-}}%
-  \declare@shorthand{finnish}{"=}{\penalty@M-\hskip\z@skip}%
+  \declare@shorthand{finnish}{"=}{\penalty\@M-\hskip\z@skip}%
   \declare@shorthand{finnish}{"/}{\textormath
     {\bbl@allowhyphens\discretionary{/}{}{/}\bbl@allowhyphens}{}}%
 }
