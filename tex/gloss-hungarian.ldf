@@ -230,7 +230,7 @@
       % With KOMA
       \let\xpg@save@chaptermark@format\chaptermarkformat%
       \renewcommand*\chaptermarkformat{%
-         \thechapter\autodot\ \IfChapterUsesPrefixLine{\chapapp\enskip}{}}
+         \thechapter\autodot\ \IfChapterUsesPrefixLine{\chapapp.\enskip}{}}
     }{% (not \ifdefined\chapterformat)
       \ifcsdef{@memptsize}{%
         % With memoir
@@ -239,7 +239,7 @@
           \markboth{\memUChead{%
             \ifnum \c@secnumdepth >\m@ne
               \ifbool{@mainmatter}{%
-                \thechapter.\ \@chapapp\ %
+                \thechapter.\ \@chapapp.\ %
               }{}%
             \fi
             ##1}}{}}%
@@ -251,7 +251,7 @@
                {\let\xpg@save@chaptermark@format\chaptermark%
                 \patchcmd{\chaptermark}%
                     {\@chapapp\ \thechapter.}%
-                    {\thechapter.\ \@chapapp}%
+                    {\thechapter.\ \@chapapp.}%
                     {}%
                     {\xpg@warning{Failed to patch chaptermark for Hungarian}}}%
                {}%
