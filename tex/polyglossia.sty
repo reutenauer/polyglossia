@@ -1848,7 +1848,7 @@
   \polyglossia@setforeignlanguage[#1]{#2}%
 }
 
-% internal wrapper for foreing language
+% internal wrapper for foreign language
 % #1 option
 % #2 alias
 % #3 base lang
@@ -2458,7 +2458,7 @@
 \newcommand*\use@localhyphenmins[2][]{%
   \bgroup
   \polyglossia@error@iflangnotloaded:n{#2}
-  \setkeys{#2}{#1}%
+  \exp_args:Nne \setkeys{#2}{#1}%
   % Store BCP-47 id of language
   \tl_if_blank:nTF {#1}{%
     \ifcsundef{#2@gbcp47id}{%
