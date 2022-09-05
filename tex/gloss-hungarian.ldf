@@ -61,8 +61,8 @@
 % Register default options
 % forceheadinpunctuatin is recommended, but the default value is false for compatibility reasons
 \xpg@initialize@gloss@options{hungarian}{swapstrings=all,
-                                         forceheadingpunctuation=false
-                                        }
+                                         forceheadingpunctuation=false}
+
 
 \def\hungarian@language{%
    \polyglossia@setup@language@patterns{hungarian}%
@@ -333,7 +333,7 @@
 \ifdef{\KOMAScript}{%
     \providecommand*\autodot{}%
     \let\xpg@save@autodot\autodot%
-}
+}{}
 % The following is based on some ideas from gloss-russian.ldf
 \def\hungarian@sectsformat{%
   \ifhungarian@forceheadingpunctuation%
