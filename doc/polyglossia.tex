@@ -1302,6 +1302,13 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 	       	\item ¦hheaders¦: Redefine part and chapter headings as well as running headers
 	       	\item ¦none¦: Do not redefine anything
 	       \end{itemize}
+    \item \xpgboolkeytrue[1.58]{forceheadingpunctuation}
+        Section numbers always have a trailing punctuation in Hungarian (as in \emph{1.1.} as opposed to \emph{1.1}).
+        For compatibility reasons, the default option is \xpgvalue{false}, thus \textsf{polyglossia}
+        does not touch heading punctuation, so this will be whatever the class or a package determines.
+        Set this option to \xpgvalue{true}, 
+        and \textsf{polyglossia} appends a period after the section counters, 
+        and adjusts the header punctuation (as in \emph{1. fejezet.} as opposed to \emph{1. fejezet}).
 \end{itemize}
 \paragraph*{Commands:}
 \begin{itemize}
@@ -2433,6 +2440,8 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 
 \subsubsection*{Bug fixes}
 \begin{itemize}
+    \item The option \xpgoption{forceheadingpunctuation} is introduced
+        for correct running headers in Hungarian documents (\TXI{557}).
 	\item Fix language setting in list of figure and table if captions float to different
 	      language areas (\TXI{542}).
 	\item Make Croatian digraphs robust (\TXI{552}).
