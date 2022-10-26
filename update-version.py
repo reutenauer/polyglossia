@@ -86,8 +86,8 @@ def replacetext():
     print("lua module versions updated")
 
     for dname, dirs, files in os.walk("doc/"):
-        chsearch_text = "\d\.\d+ \(forthcoming\)"
-        chreplace_text = new_version + " (" + new_date + ")" 
+        search_text = "\d\.\d+ \(forthcoming\)"
+        replace_text = new_version + " (" + new_date + ")" 
         for fname in files:
             if fname != "polyglossia.tex":
                 continue
