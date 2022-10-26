@@ -37,5 +37,5 @@ Except where otherwise noted, Polyglossia is placed under the terms of the MIT l
 If you run into a bug, or suspect you do, or you have a request or comment, please
 use the GitHub issue tracker: http://github.com/reutenauer/polyglossia/issues
 
-This is more efficient than contacting the maintainer by email as it allows me
+This is more efficient than contacting the maintainer by email as it allows us
 to track the issues and follow progress.
