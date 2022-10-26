@@ -1,6 +1,8 @@
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
 % Translated by Paulius Sladkevičius <komsas@gmail.com>
 
-\ProvidesFile{gloss-lithuanian.ldf}[polyglossia: module for lithuanian]
+\ProvidesFile{gloss-lithuanian.ldf}[polyglossia: module for Lithuanian]
 \PolyglossiaSetup{lithuanian}{
   bcp47=lt,
   hyphennames={lithuanian},

@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-tibetan.ldf}[polyglossia: module for tibetan]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-tibetan.ldf}[polyglossia: module for Tibetan]
 %% Copyright 2013 Elie Roux
 %% Under the CC0 license <http://creativecommons.org/publicdomain/zero/1.0/>
 %%

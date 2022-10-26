@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-fr-CA.ldf}[polyglossia: module for fr-CA (french)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-fr-CA.ldf}[polyglossia: module for fr-CA (Canadian French)]
 
 % We provide this as a bcp47-compliant alias
 

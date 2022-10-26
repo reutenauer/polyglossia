@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-bosnian.ldf}[polyglossia: module for bosnian]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-bosnian.ldf}[polyglossia: module for Bosnian]
 
 \PolyglossiaSetup{bosnian}{
   bcp47=bs,

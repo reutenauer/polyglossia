@@ -1,9 +1,11 @@
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
 % UTF-8 strings kindly provided by Zdenĕk Wagner, 10-03-2008
 % with corrections and additional contributions by Anshuman Pandey
 % TODO: add option for velthuis transliteration with link to
 % Velthuis Devanagari project.
 
-\ProvidesFile{gloss-hindi.ldf}[polyglossia: module for hindi]
+\ProvidesFile{gloss-hindi.ldf}[polyglossia: module for Hindi]
 \RequirePackage{devanagaridigits}
 \PolyglossiaSetup{hindi}{
   bcp47=hi,

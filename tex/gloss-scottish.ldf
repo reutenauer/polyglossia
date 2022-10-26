@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-scottish.ldf}[polyglossia: module for scottish]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-scottish.ldf}[polyglossia: module for Scottish Gaelic]
 
 % We only provide this gloss for babel compatibility. Since scottish is 
 % a gaelic variety, we use 'gaelic' with variant 'scottish' now.

@@ -1,4 +1,6 @@
 %% gloss-kannada.ldf
+%% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%%
 %% Copyright 2011 Aravinda VK <hallimanearavind AT gmail.com>,
 %%                Shankar Prasad <prasad.mvs AT gmail.com>,
 %%                Team Sanchaya <dev AT lists.sanchaya.net>
@@ -16,7 +18,7 @@
 % The Current Maintainer of this work is Aravinda VK <hallimanearavind AT gmail.com>.
 %
 % This work consists of the file gloss-kannada.ldf
-\ProvidesFile{gloss-kannada.ldf}[polyglossia: module for kannada]
+\ProvidesFile{gloss-kannada.ldf}[polyglossia: module for Kannada]
 
 \PolyglossiaSetup{kannada}{
   bcp47=kn,

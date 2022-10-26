@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-mr.ldf}[polyglossia: module for mr (marathi)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-mr.ldf}[polyglossia: module for mr (Marathi)]
 
 % We provide this as a bcp47-compliant alias
 

@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-la.ldf}[polyglossia: module for la (latin)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-la.ldf}[polyglossia: module for la (Latin)]
 
 % We provide this as a bcp47-compliant alias
 

@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-id.ldf}[polyglossia: module for id (malay)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-id.ldf}[polyglossia: module for id (Malay)]
 
 % We provide this as a bcp47-compliant alias
 

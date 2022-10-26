@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-macedonian.ldf}[polyglossia: module for macedonian]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-macedonian.ldf}[polyglossia: module for Macedonian]
 \PolyglossiaSetup{macedonian}{
   bcp47=mk,
   script=Cyrillic,

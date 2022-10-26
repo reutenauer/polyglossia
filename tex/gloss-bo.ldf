@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-bo.ldf}[polyglossia: module for bo (tibetan)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-bo.ldf}[polyglossia: module for bo (Tibetan)]
 
 % We provide this as a bcp47-compliant alias
 

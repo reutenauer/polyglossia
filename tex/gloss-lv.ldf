@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-lv.ldf}[polyglossia: module for lv (latvian)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-lv.ldf}[polyglossia: module for lv (Latvian)]
 
 % We provide this as a bcp47-compliant alias
 

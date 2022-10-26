@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-polish.ldf}[polyglossia: module for polish]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-polish.ldf}[polyglossia: module for Polish]
 
 \PolyglossiaSetup{polish}{
   bcp47=pl,

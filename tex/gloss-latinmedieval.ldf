@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-latinmedieval.ldf}[polyglossia: module for medieval latin]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-latinmedieval.ldf}[polyglossia: module for medieval Latin]
 
 % We provide this as a babel alias
 

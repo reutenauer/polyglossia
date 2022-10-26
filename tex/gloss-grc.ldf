@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-grc.ldf}[polyglossia: module for grc (greek)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-grc.ldf}[polyglossia: module for grc (Greek)]
 
 % We provide this as a bcp47-compliant alias
 

@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-brazil.ldf}[polyglossia: module for brazilian portuguese]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-brazil.ldf}[polyglossia: module for Brazilian Portuguese]
 
 % We only provide this gloss for backwards compatibility. The name
 % 'brazil' was selected in accordance with babel.

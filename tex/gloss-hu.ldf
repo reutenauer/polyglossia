@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-hu.ldf}[polyglossia: module for hu (hungarian)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-hu.ldf}[polyglossia: module for hu (Hungarian)]
 
 % We provide this as a bcp47-compliant alias
 

@@ -1,7 +1,9 @@
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
 % Translations provided by সাজেদুর রহিম জোয়ারদার <toshazed@gmail.com>
 % TODO implement Bengali calendar
 
-\ProvidesFile{gloss-bengali.ldf}[polyglossia: module for bengali]
+\ProvidesFile{gloss-bengali.ldf}[polyglossia: module for Bengali]
 
 \RequirePackage{devanagaridigits}
 \RequirePackage{bengalidigits}

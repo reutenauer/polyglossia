@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-latinclassic.ldf}[polyglossia: module for classic latin]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-latinclassic.ldf}[polyglossia: module for classic Latin]
 
 % We provide this as a babel alias
 

@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-dutch.ldf}[polyglossia: module for dutch]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-dutch.ldf}[polyglossia: module for Dutch]
 \PolyglossiaSetup{dutch}{
   bcp47=nl,
   hyphennames={dutch},

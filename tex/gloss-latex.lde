@@ -1,3 +1,5 @@
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
 \ProvidesLanguageDefinitionExtension{gloss-latex}{2021/07/10}{v1.53}{polyglossia: module for default language}
 
 \PolyglossiaSetup{latex}{

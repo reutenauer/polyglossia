@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-polutonikogreek.ldf}[polyglossia: module for polytonic greek]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-polutonikogreek.ldf}[polyglossia: module for polytonic Greek]
 
 % We provide this as a babel alias
 

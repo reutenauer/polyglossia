@@ -1,8 +1,10 @@
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
 % Translations provided by Abhijit Navale <abhi_navale@live.in>
 % Ordinals (1-100) added by Niranjan Tambe <niranjanvikastambe@gmail.com> on 14th December, 2019
 % TODO implement Hindu calendar (not used in day-to-day practice)
 
-\ProvidesFile{gloss-marathi.ldf}[polyglossia: module for marathi]
+\ProvidesFile{gloss-marathi.ldf}[polyglossia: module for Marathi]
 
 \RequirePackage{devanagaridigits}
 

@@ -1,5 +1,7 @@
 % !TEX encoding = UTF-8 Unicode
-\ProvidesFile{gloss-piedmontese.ldf}[2013/02/12 v1.0 polyglossia: module for piedmontese]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-piedmontese.ldf}[2013/02/12 v1.0 polyglossia: module for Piedmontese]
 \makeatletter
 \PolyglossiaSetup{piedmontese}{
   bcp47=pms,

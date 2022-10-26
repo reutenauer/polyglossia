@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-spanish.ldf}[polyglossia: module for spanish]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-spanish.ldf}[polyglossia: module for Spanish]
 
 \PolyglossiaSetup{spanish}{
   bcp47=es-ES,

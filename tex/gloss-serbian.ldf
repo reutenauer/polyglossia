@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-serbian.ldf}[polyglossia: module for serbian]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-serbian.ldf}[polyglossia: module for Serbian]
 %TODO split into gloss-serbiancyr.ldf and gloss-serbianlat.ldf
 %% load these automatically from polyglossia.sty according to the script option ??
 %% same thing for all languages that have a "script" key !

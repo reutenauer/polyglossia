@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-serbianc.ldf}[polyglossia: module for serbian (cyrillic)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-serbianc.ldf}[polyglossia: module for Serbian (cyrillic)]
 
 % We provide this as a babel alias
 

@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-bulgarian.ldf}[polyglossia: module for bulgarian]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-bulgarian.ldf}[polyglossia: module for Bulgarian]
 \PolyglossiaSetup{bulgarian}{
   bcp47=bg,
   script=Cyrillic,

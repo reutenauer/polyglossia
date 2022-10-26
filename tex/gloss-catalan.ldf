@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-catalan.ldf}[polyglossia: module for catalan]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-catalan.ldf}[polyglossia: module for Catalan]
 \PolyglossiaSetup{catalan}{
   bcp47=ca,
   hyphennames={catalan},

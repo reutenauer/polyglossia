@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-british.ldf}[polyglossia: module for british english]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-british.ldf}[polyglossia: module for British English]
 
 % We provide this as a babel alias
 

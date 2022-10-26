@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-telugu.ldf}[polyglossia: module for telugu]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-telugu.ldf}[polyglossia: module for Telugu]
 
 % Translations provided by Anmol Sharma <unmole.in@gmail.com>
 

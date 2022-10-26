@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-de-AT-1901.ldf}[polyglossia: module for de-AT-1901 (german)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-de-AT-1901.ldf}[polyglossia: module for de-AT-1901 (Austrian German, old spelling)]
 
 % We provide this as a bcp47-compliant alias
 

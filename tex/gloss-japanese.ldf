@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-japanese.ldf}[polyglossia: module for japanese]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-japanese.ldf}[polyglossia: module for Japanese]
 
 \PolyglossiaSetup{japanese}{
 	bcp47=ja,

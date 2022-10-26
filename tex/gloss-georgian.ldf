@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-georgian.ldf}[polyglossia: module for georgian]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-georgian.ldf}[polyglossia: module for Georgian]
 
 \PolyglossiaSetup{georgian}{
   bcp47=ka,

@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-lt.ldf}[polyglossia: module for lt (lithuanian)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-lt.ldf}[polyglossia: module for lt (Lithuanian)]
 
 % We provide this as a bcp47-compliant alias
 

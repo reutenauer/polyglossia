@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-el.ldf}[polyglossia: module for el (greek)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-el.ldf}[polyglossia: module for el (Greek)]
 
 % We provide this as a bcp47-compliant alias
 

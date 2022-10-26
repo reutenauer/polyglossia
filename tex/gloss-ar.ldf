@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-ar.ldf}[polyglossia: module for ar (arabic)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-ar.ldf}[polyglossia: module for ar (Arabic)]
 
 % We provide this as a bcp47-compliant alias
 

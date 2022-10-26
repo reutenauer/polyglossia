@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-lsorbian.ldf}[polyglossia: module for lower sorbian]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-lsorbian.ldf}[polyglossia: module for Lower Sorbian]
 
 % We only provide this gloss for babel compatibility. Since lsorbian is 
 % a sorbian variety, we use 'sorbian' with variant 'lower' now.

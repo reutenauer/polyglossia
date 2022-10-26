@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-ukrainian.ldf}[polyglossia: module for ukrainian]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-ukrainian.ldf}[polyglossia: module for Ukrainian]
 % Strings taken from Babel
 % and revised by Roman Kyrylych
 

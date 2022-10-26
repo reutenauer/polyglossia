@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-armenian.ldf}[polyglossia: module for armenian]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-armenian.ldf}[polyglossia: module for Armenian]
 
 \PolyglossiaSetup{armenian}{
   bcp47=hy,

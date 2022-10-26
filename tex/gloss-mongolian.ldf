@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-mongolian.ldf}[polyglossia: module for mongolian]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-mongolian.ldf}[polyglossia: module for Mongolian]
 
 \RequirePackage{xpg-cyrillicnumbers}
 

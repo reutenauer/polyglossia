@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-nynorsk.ldf}[polyglossia: module for norwegian (Nynorsk)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-nynorsk.ldf}[polyglossia: module for Norwegian (Nynorsk)]
 
 % We only provide this gloss for babel compatibility. Since nynorsk is 
 % a norwegian variety, we use 'norwegian' with variant 'nynorsk' now.

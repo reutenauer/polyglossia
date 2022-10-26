@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-thai.ldf}[polyglossia: module for thai]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-thai.ldf}[polyglossia: module for Thai]
 %% This is partly based on thai-latex for Babel:
 %%%% Copyright (C) 1999 - 2006
 %%%%           by Surapant Meknavin,

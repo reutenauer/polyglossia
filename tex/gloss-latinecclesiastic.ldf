@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-latinecclesiastic.ldf}[polyglossia: module for ecclesiastic latin]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-latinecclesiastic.ldf}[polyglossia: module for ecclesiastic Latin]
 
 % We provide this as a babel alias
 

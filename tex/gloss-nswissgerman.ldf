@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-nswissgerman.ldf}[polyglossia: module for swiss german (current spelling)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-nswissgerman.ldf}[polyglossia: module for Swiss German (current spelling)]
 
 % We provide this as a babel alias
 

@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-fur.ldf}[polyglossia: module for fur (friulian)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-fur.ldf}[polyglossia: module for fur (Friulian)]
 
 % We provide this as a bcp47-compliant alias
 

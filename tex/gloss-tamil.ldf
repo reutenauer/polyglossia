@@ -1,4 +1,6 @@
-﻿\ProvidesFile{gloss-tamil.ldf}[polyglossia: module for tamil]
+﻿% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-tamil.ldf}[polyglossia: module for Tamil]
 
 % Translations provided by Kevin & Siji, 01-11-2009
 

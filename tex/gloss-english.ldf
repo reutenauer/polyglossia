@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-english.ldf}[polyglossia: module for english]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-english.ldf}[polyglossia: module for English]
 
 \PolyglossiaSetup{english}{
   bcp47=en-US,

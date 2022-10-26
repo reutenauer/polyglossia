@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-syriac.ldf}[polyglossia: module for syriac]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-syriac.ldf}[polyglossia: module for Syriac]
 
 \RequireBidi
 \RequirePackage{arabicnumbers}

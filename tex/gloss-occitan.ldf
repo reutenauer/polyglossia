@@ -1,3 +1,5 @@
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
 %%
 %% This is file `gloss-occitan.ldf',
 %% generated with the docstrip utility.
@@ -15,8 +17,8 @@
 %%   Created by Cédric Valmary: cvalmary at yahoo dot fr
 %%   of Tot en òc <http://www.totenoc.eu/>
 %% 
-\ProvidesFile{gloss-occitan.ldf}[2016/02/04 v0.3 polyglossia:
-     module for Occitan]
+\ProvidesFile{gloss-occitan.ldf}[polyglossia: module for Occitan]
+
 \PolyglossiaSetup{occitan}{
   bcp47=oc,
   hyphennames={occitan},

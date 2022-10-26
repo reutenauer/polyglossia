@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-basque.ldf}[polyglossia: module for basque]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-basque.ldf}[polyglossia: module for Basque]
 \PolyglossiaSetup{basque}{
   bcp47=eu,
   hyphennames={basque},

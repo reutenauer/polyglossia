@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-de.ldf}[polyglossia: module for de (german)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-de.ldf}[polyglossia: module for de (German)]
 
 % We provide this as a bcp47-compliant alias
 

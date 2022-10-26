@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-french.ldf}[polyglossia: module for french]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-french.ldf}[polyglossia: module for French]
 
 \PolyglossiaSetup{french}{%
   bcp47=fr-FR,

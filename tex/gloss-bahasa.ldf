@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-bahasa.ldf}[polyglossia: module for bahasa indonesia]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-bahasa.ldf}[polyglossia: module for Bahasa Indonesia]
 
 % We provide this as a babel alias
 

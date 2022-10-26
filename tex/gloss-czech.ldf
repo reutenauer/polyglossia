@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-czech.ldf}[polyglossia: module for czech]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-czech.ldf}[polyglossia: module for Czech]
 
 \PolyglossiaSetup{czech}{
   bcp47=cz,

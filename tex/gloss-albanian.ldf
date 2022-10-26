@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-albanian.ldf}[polyglossia: module for albanian]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-albanian.ldf}[polyglossia: module for Albanian]
 
 \PolyglossiaSetup{albanian}{
   bcp47=sq,

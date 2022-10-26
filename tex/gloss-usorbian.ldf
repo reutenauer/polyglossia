@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-usorbian.ldf}[polyglossia: module for upper sorbian]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-usorbian.ldf}[polyglossia: module for Upper Sorbian]
 
 % We only provide this gloss for babel compatibility. Since usorbian is 
 % a sorbian variety, we use 'sorbian' with variant 'upper' now.

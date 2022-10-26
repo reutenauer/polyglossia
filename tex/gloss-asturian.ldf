@@ -1,7 +1,9 @@
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
 % Translated by Xuacu <xuacusk8 at gmail dot com>
 % Contributed by Kevin Godby <godbyk at gmail dot com>
 %
-\ProvidesFile{gloss-asturian.ldf}[polyglossia: module for asturian]
+\ProvidesFile{gloss-asturian.ldf}[polyglossia: module for Asturian]
 \PolyglossiaSetup{asturian}{
   bcp47=ast,
   hyphennames={asturian,catalan},

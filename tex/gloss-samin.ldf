@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-samin.ldf}[polyglossia: module for samin]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-samin.ldf}[polyglossia: module for Northern Sami]
 
 % We only provide this gloss for babel compatibility. Since samin is 
 % a sami variety, we use 'sami' with variant 'northern' now.

@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-en-NZ.ldf}[polyglossia: module for en-NZ (english)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-en-NZ.ldf}[polyglossia: module for en-NZ (Newzealand English)]
 
 % We provide this as a bcp47-compliant alias
 

@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-russian.ldf}[polyglossia: module for russian]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-russian.ldf}[polyglossia: module for Russian]
 
 \RequirePackage{xpg-cyrillicnumbers}
 

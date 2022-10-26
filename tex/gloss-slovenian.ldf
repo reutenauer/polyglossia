@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-slovenian.ldf}[polyglossia: module for slovenian]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-slovenian.ldf}[polyglossia: module for Slovenian]
 
 \PolyglossiaSetup{slovenian}{
   bcp47=sl,

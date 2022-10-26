@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-nko.ldf}[Polyglossia: module for N’Ko v0.1 2013/05/19]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-nko.ldf}[Polyglossia: module for N’Ko]
 \PolyglossiaSetup{nko}{%
   bcp47=nko,
   script=N'ko,

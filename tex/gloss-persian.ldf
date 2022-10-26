@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-persian.ldf}[polyglossia: module for persian]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-persian.ldf}[polyglossia: module for Persian]
 
 \RequireBidi
 \RequirePackage{arabicnumbers}

@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-slovene.ldf}[polyglossia: module for slovenian]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-slovene.ldf}[polyglossia: module for Slovenian]
 
 % We provide this as a babel alias
 

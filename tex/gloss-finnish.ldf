@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-finnish.ldf}[polyglossia: module for finnish]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-finnish.ldf}[polyglossia: module for Finnish]
 \PolyglossiaSetup{finnish}{
   bcp47=fi,
   hyphennames={finnish},

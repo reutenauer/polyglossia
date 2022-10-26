@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-br.ldf}[polyglossia: module for br (breton)]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-br.ldf}[polyglossia: module for br (Breton)]
 
 % We provide this as a bcp47-compliant alias
 

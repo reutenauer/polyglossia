@@ -1,4 +1,6 @@
-\ProvidesFile{gloss-bahasam.ldf}[polyglossia: module for bahasa melayu]
+% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+%
+\ProvidesFile{gloss-bahasam.ldf}[polyglossia: module for Bahasa Melayu]
 
 % We only provide this gloss for babel compatibility. Since bahasam is 
 % a malay variety, we use 'malay' with variant 'malaysian' now.
