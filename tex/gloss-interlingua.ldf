@@ -1,4 +1,4 @@
-% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
+% Language definition file (part of polyglossia v1.58 -- 2022/10/26)
 %
 \ProvidesFile{gloss-interlingua.ldf}[polyglossia: module for Interlingua]
 \PolyglossiaSetup{interlingua}{

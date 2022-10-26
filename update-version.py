@@ -6,8 +6,8 @@ import re, os
 #
 # Adapt these before a new release an run the script
 #
-new_version = "1.57"
-new_date = "2022/07/18"
+new_version = "1.58"
+new_date = "2022/10/26"
 
 # Replace version and date in all files
 def replacetext():

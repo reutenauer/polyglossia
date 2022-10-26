@@ -1,5 +1,5 @@
-% Language definition file (part of polyglossia v1.57 -- 2022/07/18)
-
+% Language definition file (part of polyglossia v1.58 -- 2022/10/26)
+%
 \ProvidesFile{gloss-acadien.ldf}[polyglossia: module for Canadian (Acadian) French]
 
 % We provide this as a babel alias
