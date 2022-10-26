@@ -1,3 +1,8 @@
+--
+-- polyglossia-punct.lua
+-- part of polyglossia v1.57 -- 2022/07/18
+--
+
 require('polyglossia') -- just in case...
 
 local add_to_callback      = luatexbase.add_to_callback

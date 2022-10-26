@@ -1,3 +1,8 @@
+--
+-- polyglossia-sanskrit.lua
+-- part of polyglossia v1.57 -- 2022/07/18
+--
+
 require('polyglossia-punct')
 
 -- How do we now, in Lua, what a \thinspace is? In the LaTeX source (latex.ltx)

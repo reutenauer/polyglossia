@@ -1,5 +1,6 @@
 --
 -- polyglossia-korean.lua
+-- part of polyglossia v1.57 -- 2022/07/18
 --
 
 local glyph_id = node.id"glyph"
