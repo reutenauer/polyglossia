@@ -33,6 +33,13 @@
 \setotherlanguages{arabic,armenian,hebrew,syriac,greek,russian,serbian,catalan,georgian}
 \usepackage[protrusion,nopatch=footnote]{microtype}
 \renewcommand\MacroFont{\footnotesize\color{xpgblue}\ttfamily}
+% Customizable version of \DescribeMacro (e.g. if macro is too long)
+\newcommand*\DescribeMacroCust[2]{%
+  \let\origMacroFont\MacroFont%
+  \renewcommand\MacroFont{\footnotesize\color{xpgblue}\ttfamily#1}%
+  \DescribeMacro{#2}%
+  \let\MacroFont\origMacroFont%
+}
 \newcommand*\Cmd[1]{\cmd{#1}\DescribeMacro{#1}\xspace}
 \newcommand*\pkg[1]{\textsf{\color{xpgblue}#1}}
 \newcommand*\file[1]{\texttt{\color{xpgblue}#1}}
@@ -780,7 +787,7 @@ To change this value, \pkg{polyglossia} provides the command\new{1.50}
 where \meta{lang} is to be replaced with the respective language name or alias, \meta{options}
 can be used to delimit the modification to a particular variety (\eg via \texttt{variant} or \texttt{spelling}),
 \meta{l} with the left threshold value (\eg \texttt{3}), and \meta{r} with the right
-threshold value (\eg \verb|\setlanghyphenmins[spelling=old]{german}{4}{4}|).
+one (\eg \verb|\setlanghyphenmins[spelling=old]{german}{4}{4}|).
 This setting can be changed repeatedly in the preamble and the document body.
 It applies to all subsequent text in the respective language (variety), but only after the
 next language switch.
@@ -2147,7 +2154,7 @@ by \cmd\makeatletter\ and \cmd\makeatother\ due to the ¦@¦ in the macro names.
 Finally, as soon as the language has been switched (either inline or as a block), \pkg{polyglossia}
 executes the (by default empty) hook
 \begin{itemize}
-	\item \Cmd{\polyglossia@language@switched}
+	\item \cmd{\polyglossia@language@switched}\DescribeMacroCust{\scriptsize}{\polyglossia@language@switched}
 \end{itemize}
 to which you can append arbitrary code (via \cmd\gappto) that should be executed if (a particular)
 language is being activated. This is done before any of the above
@@ -2269,7 +2276,7 @@ The following macros are provided:
 			Example: ¦\greeknumeral{1863}¦ yields \textgreek{\greeknumeral{1863}},
 			¦\Greeknumeral{1863}¦ results in \textgreek{\Greeknumeral{1863}}.
 
-	\item \Cmd\hebrewnumeral, \Cmd\Hebrewnumeral and \Cmd\Hebrewnumeralfinal generate variants of Hebrew alphanumeric numerals.
+	\item \Cmd\hebrewnumeral, \Cmd\Hebrewnumeral and \Cmd\Hebrewnumeralfinal produce variants of Hebrew alphanumeric numerals.
 			The commands behave identical as in \pkg{babel}: \cmd\hebrewnumeral\ outputs the numbers without any decoration at all,
 			\cmd\Hebrewnumeral\ adds \textit{gereshayim} before the last letter, and \cmd\Hebrewnumeralfinal\ uses in addition the final
 			forms of Hebrew letters.
