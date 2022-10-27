@@ -686,8 +686,8 @@ ought to be mentioned here.
 
 \subsection{Setting up alias commands}
 
-By means of the macro
-\displaycmd{\setlanguagealias\oarg{options}\marg{language}\marg{alias}}{\setlanguagealias}\new{1.46}
+By means of the macro\new{1.46}
+\displaycmd{\setlanguagealias\oarg{options}\marg{language}\marg{alias}}{\setlanguagealias}
 you can define alias commands for specific language (variants). \Eg
 
 \begin{quote}
@@ -2398,7 +2398,7 @@ Example: today is \Jalalitoday.
 
 \section{Auxiliary commands}
 
-The macro \displaycmd{\charifavailable\marg{char code}\marg{substitution}}{\charifavailable}\new{1.47} checks whether
+The macro\new{1.47} \displaycmd{\charifavailable\marg{char code}\marg{substitution}}{\charifavailable} checks whether
 the character with the specified \meta{char code} (\ie unicode utf-16 code without preceding ¦0x¦) exists in
 the current font. If so, the character is printed, if not, the \meta{substitution} is printed.
 
@@ -2445,14 +2445,14 @@ In order to get such information, \pkg{polyglossia} provides the following macro
 \displaycmd{\iflanguageloaded\marg{lang}\marg{true}\marg{false}}{\iflanguageloaded}
 where \texttt{\meta{lang}} is a \pkg{polyglossia} language name, by
 \displaycmd{\ifbabellanguageloaded\marg{lang}\marg{true}\marg{false}}{\ifbabellanguageloaded}
-where \texttt{\meta{lang}} is a \pkg{babel} language name (see table~\ref{tab:bbllang} on p.~\pageref{tab:bbllang}), or by
-\displaycmd{\iflanguageidloaded\marg{type}\marg{id}\marg{true}\marg{false}}{\iflanguageidloaded}\new{1.47}
+where \texttt{\meta{lang}} is a \pkg{babel} language name (see table~\ref{tab:bbllang} on p.~\pageref{tab:bbllang}), or by\new{1.47}
+\displaycmd{\iflanguageidloaded\marg{type}\marg{id}\marg{true}\marg{false}}{\iflanguageidloaded}
 where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta{id} is a language id
 (such as ¦en-US¦; see table~\ref{tab:BCP47-polyglossia} on p.~\pageref{tab:BCP47-polyglossia}).
 \bigskip
 
-\noindent Finally, if you want to know whether a specific language option has been set, you can use
-\displaycmd{\iflanguageoption\marg{lang}\marg{opt. key}\marg{opt. value}\marg{true}\marg{false}}{\iflanguageoption}\new{1.47}
+\noindent Finally, if you want to know whether a specific language option has been set, you can use\new{1.47}
+\displaycmd{\iflanguageoption\marg{lang}\marg{key}\marg{value}\marg{true}\marg{false}}{\iflanguageoption}
 
 \section{Revision history}
 
