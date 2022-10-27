@@ -21,6 +21,7 @@
     pdfauthor={F Charette, A Reutenauer, B Roucariès, J Spitzmüller},
     pdfkeywords={xetex, xelatex, luatex, lualatex, multilingual, babel, hyphenation}
     ]{hyperref}
+\usepackage{array}
 \usepackage{metalogo}
 \let\XeTeX\undefined
 \let\XeLaTeX\undefined
@@ -31,6 +32,7 @@
 \setmainlanguage[variant=british,ordinalmonthday=false]{english}
 \setotherlanguages{arabic,armenian,hebrew,syriac,greek,russian,serbian,catalan,georgian}
 \usepackage[protrusion]{microtype}
+\renewcommand\MacroFont{\footnotesize\color{xpgblue}\ttfamily}
 \newcommand*\Cmd[1]{\cmd{#1}\DescribeMacro{#1}\xspace}
 \newcommand*\pkg[1]{\textsf{\color{xpgblue}#1}}
 \newcommand*\file[1]{\texttt{\color{xpgblue}#1}}
@@ -374,171 +376,171 @@ language switching commands\slash environments documented in section~\ref{sec:ba
 Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 
 \bgroup\small\addfontfeatures{Numbers={Monospaced,Lining}}
-\begin{longtable}[c]{lll}
-	\caption{\label{tab:BCP47-polyglossia}BCP47-polyglossia language name matching}\\
+\begin{longtable}[c]{ll>{\raggedright}p{6cm}}
+	\caption{\label{tab:BCP47-polyglossia}BCP47-polyglossia language name matching}\tabularnewline
 	\toprule
-	\textbf{BCP-47 tag} & \textbf{Polyglossia name} & \textbf{Polyglossia options}\\
+	\textbf{BCP-47 tag} & \textbf{Polyglossia name} & \textbf{Polyglossia options}\tabularnewline
 	\midrule
 	\endfirsthead
-	\caption[]{BCP47-polyglossia language name matching (\emph{continued})}\\
+	\caption[]{BCP47-polyglossia language name matching (\emph{continued})}\tabularnewline
 	\toprule
-	\textbf{BCP-47 tag} & \textbf{Polyglossia name} & \textbf{Polyglossia options}\\
+	\textbf{BCP-47 tag} & \textbf{Polyglossia name} & \textbf{Polyglossia options}\tabularnewline
 	\midrule
 	\endhead
-	aeb              & arabic      & locale=tunisia                                     \\
-	af               & afrikaans   &                                                    \\
-	afb              & arabic      & locale=default                                     \\
-	am               & amharic     &                                                    \\
-	apd              & arabic      & locale=default                                     \\
-	ar               & arabic      &                                                    \\
-	ar-IQ            & arabic      & locale=mashriq                                     \\
-	ar-JO            & arabic      & locale=mashriq                                     \\
-	ar-LB            & arabic      & locale=mashriq                                     \\
-	ar-MR            & arabic      & locale=mauritania                                  \\
-	ar-PS            & arabic      & locale=mashriq                                     \\
-	ar-SY            & arabic      & locale=mashriq                                     \\
-	ar-YE            & arabic      & locale=default                                     \\
-	arq              & arabic      & locale=algeria                                     \\
-	ary              & arabic      & locale=morocco                                     \\
-	arz              & arabic      & locale=default                                     \\
-	ast              & asturian    &                                                    \\
-	ayl              & arabic      & locale=libya                                       \\
-	be               & belarusian  &                                                    \\
-	be-tarask        & belarusian  & spelling=classic                                   \\
-	bg               & bulgarian   &                                                    \\
-	bn               & bengali     &                                                    \\
-	bo               & tibetan     &                                                    \\
-	br               & breton      &                                                    \\
-	bs               & bosnian     &                                                    \\
-	ca               & catalan     &                                                    \\
-	ckb              & kurdish     & variant=sorani [\emph{default}]                    \\
-	ckb-Arab         & kurdish     & variant=sorani, script=Arabic [\emph{default}]     \\
-	ckb-Latn         & kurdish     & variant=sorani, script=Latin                       \\
-	cop              & coptic      &                                                    \\
-	cy               & welsh       &                                                    \\
-	cz               & czech       &                                                    \\
-	da               & danish      &                                                    \\
-	de               & german      &                                                    \\
-	de-AT            & german      & variant=austrian, spelling=new                     \\
-	de-AT-1901       & german      & variant=austrian, spelling=old                     \\
-	de-AT-1996       & german      & variant=austrian, spelling=new                     \\
-	de-CH            & german      & variant=swiss, spelling=new                        \\
-	de-CH-1901       & german      & variant=swiss, spelling=old                        \\
-	de-CH-1996       & german      & variant=swiss, spelling=new                        \\
-	de-DE            & german      & variant=german, spelling=new                       \\
-	de-DE-1901       & german      & variant=german, spelling=old                       \\
-	de-DE-1996       & german      & variant=german, spelling=new  [\emph{default}]     \\
-	de-Latf          & german      & script=blackletter                                 \\
-	de-Latf-AT       & german      & variant=austrian, spelling=new, script=blackletter \\
-	de-Latf-AT-1901  & german      & variant=austrian, spelling=old, script=blackletter \\
-	de-Latf-AT-1996  & german      & variant=austrian, spelling=new, script=blackletter \\
-	de-Latf-CH       & german      & variant=swiss, spelling=new, script=blackletter    \\
-	de-Latf-CH-1901  & german      & variant=swiss, spelling=old, script=blackletter    \\
-	de-Latf-CH-1996  & german      & variant=swiss, spelling=new, script=blackletter    \\
-	de-Latf-DE       & german      & variant=german, spelling=new, script=blackletter   \\
-	de-Latf-DE-1901  & german      & variant=german, spelling=old, script=blackletter   \\
-	de-Latf-DE-1996  & german      & variant=german, spelling=new, script=blackletter   \\
-	dsb              & sorbian     & variant=lower                                      \\
-	dv               & divehi      &                                                    \\
-	el               & greek       &                                                    \\
-	el-monoton       & greek       & variant=monotonic  [\emph{default}]                \\
-	el-polyton       & greek       & varant=polytonic                                   \\
-	en               & english     &                                                    \\
-	en-AU            & english     & variant=australian                                 \\
-	en-CA            & english     & variant=canadian                                   \\
-	en-GB            & english     & variant=british                                    \\
-	en-NZ            & english     & variant=newzealand                                 \\
-	en-US            & english     & variant=us [\emph{default}]                        \\
-	eo               & esperanto   &                                                    \\
-	es               & spanish     &                                                    \\
-	es-ES            & spanish     & variant=spanish [\emph{default}]                   \\
-	es-MX            & spanish     & variant=mexican                                    \\
-	et               & estonian    &                                                    \\
-	eu               & basque      &                                                    \\
-	fa               & persian     &                                                    \\
-	fi               & finnish     &                                                    \\
-	fr               & french      &                                                    \\
-	fr-CA            & french      & variant=canadian                                   \\
-	fr-CH            & french      & variant=swiss                                      \\
-	fr-FR            & french      & variant=french [\emph{default}]                    \\
-	fur              & friulian    &                                                    \\
-	ga               & gaelic      & variant=irish [\emph{default}]                     \\
-	gd               & gaelic      & variant=scottish                                   \\
-	gl               & galician    &                                                    \\
-	grc              & greek       & variant=ancient                                    \\
-	he               & hebrew      &                                                    \\
-	hi               & hindi       &                                                    \\
-	hr               & croatian    &                                                    \\
-	hsb              & sorbian     & variant=upper [\emph{default}]                     \\
-	hu               & hungarian   &                                                    \\
-	hy               & armenian    &                                                    \\
-	ia               & interlingua &                                                    \\
-	id               & malay       & variant=indonesian                                 \\
-	is               & icelandic   &                                                    \\
-	it               & italian     &                                                    \\
-	ja               & japanese    &                                                    \\
-	ka               & georgian    &                                                    \\
-	km               & khmer       &                                                    \\
-	kmr              & kurdish     & variant=kurmanji                                   \\
-	kmr-Arab         & kurdish     & variant=kurmanji, script=Arabic                    \\
-	kmr-Latn         & kurdish     & variant=kurmanji, script=Latin                     \\
-	kn               & kannada     &                                                    \\
-	ko               & korean      &                                                    \\
-	ku               & kurdish     &                                                    \\
-	ku-Arab          & kurdish     & script=Arabic                                      \\
-	ku-Latn          & kurdish     & script=Latin                                       \\
-	la               & latin       &                                                    \\
-	la-x-classic     & latin       & variant=classic                                    \\
-	la-x-ecclesia    & latin       & variant=ecclesiastic                               \\
-	la-x-medieval    & latin       & variant=medieval                                   \\
-	lo               & lao         &                                                    \\
-	lt               & lithuanian  &                                                    \\
-	lv               & latvian     &                                                    \\
-	mk               & macedonian  &                                                    \\
-	ml               & malayalam   &                                                    \\
-	mn               & mongolian   &                                                    \\
-	mr               & marathi     &                                                    \\
-	nb               & norwegian   & variant=bokmal                                     \\
-	nko              & nko         &                                                    \\
-	nl               & dutch       &                                                    \\
-	nn               & norwegian   & variant=nynorsk [\emph{default}]                   \\
-	oc               & occitan     &                                                    \\
-	pl               & polish      &                                                    \\
-	pms              & piedmontese &                                                    \\
-	pt               & portuguese  &                                                    \\
-	pt-BR            & portuguese  & variant=brazilian                                  \\
-	pt-PT            & portuguese  & variant=portuguese [\emph{default}]                \\
-	rm               & romansh     &                                                    \\
-	ro               & romanian    &                                                    \\
-	ru               & russian     &                                                    \\
-	ru-luna1918      & russian     & spelling=modern [\emph{default}]                   \\
-	ru-petr1708      & russian     & spelling=old                                       \\
-	sa               & sanskrit    &                                                    \\
-	sa-Beng          & sanskrit    & script=Bengali                                     \\
-	sa-Deva          & sanskrit    & script=Devanagari [\emph{default}]                 \\
-	sa-Gujr          & sanskrit    & script=Gujarati                                    \\
-	sa-Knda          & sanskrit    & script=Kannada                                     \\
-	sa-Mlym          & sanskrit    & script=Malayalam                                   \\
-	sa-Telu          & sanskrit    & script=Telugu                                      \\
-	se               & sami        &                                                    \\
-	sk               & slovak      &                                                    \\
-	sl               & slovenian   &                                                    \\
-	sq               & albanian    &                                                    \\
-	sr               & serbian     &                                                    \\
-	sr-Cyrl          & serbian     & script=Cyrillic                                    \\
-	sr-Latn          & serbian     & script=Latin [\emph{default}]                      \\
-	sv               & swedish     &                                                    \\
-	syr              & syriac      &                                                    \\
-	ta               & tamil       &                                                    \\
-	te               & telugu      &                                                    \\
-	th               & thai        &                                                    \\
-	tk               & turkmen     &                                                    \\
-	tr               & turkish     &                                                    \\
-	ug               & uyghur      &                                                    \\
-	uk               & ukrainian   &                                                    \\
-	ur               & urdu        &                                                    \\
-	vi               & vietnamese  &                                                    \\
-	zsm              & malay       & variant=malaysian [\emph{default}]                 \\
+	aeb              & arabic      & locale=tunisia                                     \tabularnewline
+	af               & afrikaans   &                                                    \tabularnewline
+	afb              & arabic      & locale=default                                     \tabularnewline
+	am               & amharic     &                                                    \tabularnewline
+	apd              & arabic      & locale=default                                     \tabularnewline
+	ar               & arabic      &                                                    \tabularnewline
+	ar-IQ            & arabic      & locale=mashriq                                     \tabularnewline
+	ar-JO            & arabic      & locale=mashriq                                     \tabularnewline
+	ar-LB            & arabic      & locale=mashriq                                     \tabularnewline
+	ar-MR            & arabic      & locale=mauritania                                  \tabularnewline
+	ar-PS            & arabic      & locale=mashriq                                     \tabularnewline
+	ar-SY            & arabic      & locale=mashriq                                     \tabularnewline
+	ar-YE            & arabic      & locale=default                                     \tabularnewline
+	arq              & arabic      & locale=algeria                                     \tabularnewline
+	ary              & arabic      & locale=morocco                                     \tabularnewline
+	arz              & arabic      & locale=default                                     \tabularnewline
+	ast              & asturian    &                                                    \tabularnewline
+	ayl              & arabic      & locale=libya                                       \tabularnewline
+	be               & belarusian  &                                                    \tabularnewline
+	be-tarask        & belarusian  & spelling=classic                                   \tabularnewline
+	bg               & bulgarian   &                                                    \tabularnewline
+	bn               & bengali     &                                                    \tabularnewline
+	bo               & tibetan     &                                                    \tabularnewline
+	br               & breton      &                                                    \tabularnewline
+	bs               & bosnian     &                                                    \tabularnewline
+	ca               & catalan     &                                                    \tabularnewline
+	ckb              & kurdish     & variant=sorani [\emph{default}]                    \tabularnewline
+	ckb-Arab         & kurdish     & variant=sorani, script=Arabic [\emph{default}]     \tabularnewline
+	ckb-Latn         & kurdish     & variant=sorani, script=Latin                       \tabularnewline
+	cop              & coptic      &                                                    \tabularnewline
+	cy               & welsh       &                                                    \tabularnewline
+	cz               & czech       &                                                    \tabularnewline
+	da               & danish      &                                                    \tabularnewline
+	de               & german      &                                                    \tabularnewline
+	de-AT            & german      & variant=austrian, spelling=new                     \tabularnewline
+	de-AT-1901       & german      & variant=austrian, spelling=old                     \tabularnewline
+	de-AT-1996       & german      & variant=austrian, spelling=new                     \tabularnewline
+	de-CH            & german      & variant=swiss, spelling=new                        \tabularnewline
+	de-CH-1901       & german      & variant=swiss, spelling=old                        \tabularnewline
+	de-CH-1996       & german      & variant=swiss, spelling=new                        \tabularnewline
+	de-DE            & german      & variant=german, spelling=new                       \tabularnewline
+	de-DE-1901       & german      & variant=german, spelling=old                       \tabularnewline
+	de-DE-1996       & german      & variant=german, spelling=new  [\emph{default}]     \tabularnewline
+	de-Latf          & german      & script=blackletter                                 \tabularnewline
+	de-Latf-AT       & german      & variant=austrian, spelling=new, script=blackletter \tabularnewline
+	de-Latf-AT-1901  & german      & variant=austrian, spelling=old, script=blackletter \tabularnewline
+	de-Latf-AT-1996  & german      & variant=austrian, spelling=new, script=blackletter \tabularnewline
+	de-Latf-CH       & german      & variant=swiss, spelling=new, script=blackletter    \tabularnewline
+	de-Latf-CH-1901  & german      & variant=swiss, spelling=old, script=blackletter    \tabularnewline
+	de-Latf-CH-1996  & german      & variant=swiss, spelling=new, script=blackletter    \tabularnewline
+	de-Latf-DE       & german      & variant=german, spelling=new, script=blackletter   \tabularnewline
+	de-Latf-DE-1901  & german      & variant=german, spelling=old, script=blackletter   \tabularnewline
+	de-Latf-DE-1996  & german      & variant=german, spelling=new, script=blackletter   \tabularnewline
+	dsb              & sorbian     & variant=lower                                      \tabularnewline
+	dv               & divehi      &                                                    \tabularnewline
+	el               & greek       &                                                    \tabularnewline
+	el-monoton       & greek       & variant=monotonic  [\emph{default}]                \tabularnewline
+	el-polyton       & greek       & varant=polytonic                                   \tabularnewline
+	en               & english     &                                                    \tabularnewline
+	en-AU            & english     & variant=australian                                 \tabularnewline
+	en-CA            & english     & variant=canadian                                   \tabularnewline
+	en-GB            & english     & variant=british                                    \tabularnewline
+	en-NZ            & english     & variant=newzealand                                 \tabularnewline
+	en-US            & english     & variant=us [\emph{default}]                        \tabularnewline
+	eo               & esperanto   &                                                    \tabularnewline
+	es               & spanish     &                                                    \tabularnewline
+	es-ES            & spanish     & variant=spanish [\emph{default}]                   \tabularnewline
+	es-MX            & spanish     & variant=mexican                                    \tabularnewline
+	et               & estonian    &                                                    \tabularnewline
+	eu               & basque      &                                                    \tabularnewline
+	fa               & persian     &                                                    \tabularnewline
+	fi               & finnish     &                                                    \tabularnewline
+	fr               & french      &                                                    \tabularnewline
+	fr-CA            & french      & variant=canadian                                   \tabularnewline
+	fr-CH            & french      & variant=swiss                                      \tabularnewline
+	fr-FR            & french      & variant=french [\emph{default}]                    \tabularnewline
+	fur              & friulian    &                                                    \tabularnewline
+	ga               & gaelic      & variant=irish [\emph{default}]                     \tabularnewline
+	gd               & gaelic      & variant=scottish                                   \tabularnewline
+	gl               & galician    &                                                    \tabularnewline
+	grc              & greek       & variant=ancient                                    \tabularnewline
+	he               & hebrew      &                                                    \tabularnewline
+	hi               & hindi       &                                                    \tabularnewline
+	hr               & croatian    &                                                    \tabularnewline
+	hsb              & sorbian     & variant=upper [\emph{default}]                     \tabularnewline
+	hu               & hungarian   &                                                    \tabularnewline
+	hy               & armenian    &                                                    \tabularnewline
+	ia               & interlingua &                                                    \tabularnewline
+	id               & malay       & variant=indonesian                                 \tabularnewline
+	is               & icelandic   &                                                    \tabularnewline
+	it               & italian     &                                                    \tabularnewline
+	ja               & japanese    &                                                    \tabularnewline
+	ka               & georgian    &                                                    \tabularnewline
+	km               & khmer       &                                                    \tabularnewline
+	kmr              & kurdish     & variant=kurmanji                                   \tabularnewline
+	kmr-Arab         & kurdish     & variant=kurmanji, script=Arabic                    \tabularnewline
+	kmr-Latn         & kurdish     & variant=kurmanji, script=Latin                     \tabularnewline
+	kn               & kannada     &                                                    \tabularnewline
+	ko               & korean      &                                                    \tabularnewline
+	ku               & kurdish     &                                                    \tabularnewline
+	ku-Arab          & kurdish     & script=Arabic                                      \tabularnewline
+	ku-Latn          & kurdish     & script=Latin                                       \tabularnewline
+	la               & latin       &                                                    \tabularnewline
+	la-x-classic     & latin       & variant=classic                                    \tabularnewline
+	la-x-ecclesia    & latin       & variant=ecclesiastic                               \tabularnewline
+	la-x-medieval    & latin       & variant=medieval                                   \tabularnewline
+	lo               & lao         &                                                    \tabularnewline
+	lt               & lithuanian  &                                                    \tabularnewline
+	lv               & latvian     &                                                    \tabularnewline
+	mk               & macedonian  &                                                    \tabularnewline
+	ml               & malayalam   &                                                    \tabularnewline
+	mn               & mongolian   &                                                    \tabularnewline
+	mr               & marathi     &                                                    \tabularnewline
+	nb               & norwegian   & variant=bokmal                                     \tabularnewline
+	nko              & nko         &                                                    \tabularnewline
+	nl               & dutch       &                                                    \tabularnewline
+	nn               & norwegian   & variant=nynorsk [\emph{default}]                   \tabularnewline
+	oc               & occitan     &                                                    \tabularnewline
+	pl               & polish      &                                                    \tabularnewline
+	pms              & piedmontese &                                                    \tabularnewline
+	pt               & portuguese  &                                                    \tabularnewline
+	pt-BR            & portuguese  & variant=brazilian                                  \tabularnewline
+	pt-PT            & portuguese  & variant=portuguese [\emph{default}]                \tabularnewline
+	rm               & romansh     &                                                    \tabularnewline
+	ro               & romanian    &                                                    \tabularnewline
+	ru               & russian     &                                                    \tabularnewline
+	ru-luna1918      & russian     & spelling=modern [\emph{default}]                   \tabularnewline
+	ru-petr1708      & russian     & spelling=old                                       \tabularnewline
+	sa               & sanskrit    &                                                    \tabularnewline
+	sa-Beng          & sanskrit    & script=Bengali                                     \tabularnewline
+	sa-Deva          & sanskrit    & script=Devanagari [\emph{default}]                 \tabularnewline
+	sa-Gujr          & sanskrit    & script=Gujarati                                    \tabularnewline
+	sa-Knda          & sanskrit    & script=Kannada                                     \tabularnewline
+	sa-Mlym          & sanskrit    & script=Malayalam                                   \tabularnewline
+	sa-Telu          & sanskrit    & script=Telugu                                      \tabularnewline
+	se               & sami        &                                                    \tabularnewline
+	sk               & slovak      &                                                    \tabularnewline
+	sl               & slovenian   &                                                    \tabularnewline
+	sq               & albanian    &                                                    \tabularnewline
+	sr               & serbian     &                                                    \tabularnewline
+	sr-Cyrl          & serbian     & script=Cyrillic                                    \tabularnewline
+	sr-Latn          & serbian     & script=Latin [\emph{default}]                      \tabularnewline
+	sv               & swedish     &                                                    \tabularnewline
+	syr              & syriac      &                                                    \tabularnewline
+	ta               & tamil       &                                                    \tabularnewline
+	te               & telugu      &                                                    \tabularnewline
+	th               & thai        &                                                    \tabularnewline
+	tk               & turkmen     &                                                    \tabularnewline
+	tr               & turkish     &                                                    \tabularnewline
+	ug               & uyghur      &                                                    \tabularnewline
+	uk               & ukrainian   &                                                    \tabularnewline
+	ur               & urdu        &                                                    \tabularnewline
+	vi               & vietnamese  &                                                    \tabularnewline
+	zsm              & malay       & variant=malaysian [\emph{default}]                 \tabularnewline
 	\bottomrule
 \end{longtable}
 \egroup
@@ -549,8 +551,8 @@ Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 
 \begin{itemize}
 	\item \xpgboolkeyfalse[1.1.1]{babelshorthands}
-		Globally activates \pkg{babel} shorthands whenever available. Currently
-		shorthands are implemented for Afrikaans, Belarusian, Catalan, Croatian,
+		Globally activates \pkg{babel} shorthands whenever available. Such shorthands are
+		implemented currently for Afrikaans, Belarusian, Catalan, Croatian,
 		Czech, Dutch, Finnish, Georgian, German, Italian, Latin, Mongolian,
 		Russian, Slovak, and Ukrainian. Please refer to the respective language descriptions
 		(sec.~\ref{specific}) for details.
@@ -668,7 +670,7 @@ ought to be mentioned here.
     this selects the global font setup and the numbering definitions for the default language.
 
 \item \DescribeMacro{\resetdefaultlanguage}\cmd{\resetdefaultlanguage\oarg{options}\marg{lang}} (experimental):
-	completely switches the default language
+	Switches the default language
 	to another one in the middle of a document: \textit{this may have adverse effects}!
 
 \item \Cmd\normalfontlatin: in an environment where \cmd\normalfont\ has been redefined
@@ -747,7 +749,7 @@ which override the hyphenation patterns for specified words. The command takes a
 list of words where hyphenation points are marked by a dash (if no dash is used, the respective word is not
 hyphenated at all):
 \begin{quote}
-\begin{minipage}{\textwidth}
+\begin{minipage}{.7\textwidth}
 \begin{verbatim}
 \hyphenation{%
   po-ly-glos-sia
@@ -829,13 +831,12 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 \paragraph*{Options:}
 	\begin{itemize}
 	\item \xpgchoicekey{calendar}{\xpgpresetvalue{gregorian} or \xpgvalue{islamic} (= \xpgvalue{hijri})}
-	\item \xpgchoicekey{locale}{\xpgpresetvalue{default}\footnote{ %
-			For Egypt, Sudan, Yemen and the Gulf states.},
-		\xpgvalue{mashriq}\footnote{ %
-			For Iraq, Syria, Jordan, Lebanon and Palestine.},
-		\xpgvalue{libya}, \xpgvalue{algeria}, \xpgvalue{tunisia}, \xpgvalue{morocco}, \xpgvalue{mauritania}}
+	\item \xpgchoicekey{locale}{\xpgpresetvalue{default}, \xpgvalue{mashriq}, \xpgvalue{libya},
+		\xpgvalue{algeria}, \xpgvalue{tunisia}, \xpgvalue{morocco}, \xpgvalue{mauritania}}
 		This setting influences the spelling of the month names for the Gregorian calendar,
-		as well as the form of the numerals (unless overriden by the following option).
+		as well as the form of the numerals (unless overridden by the following option). Recommended settings are
+		\xpgvalue{default} for Egypt, Sudan, Yemen and the Gulf states, and \xpgvalue{mashriq} for Iraq, Syria,
+		Jordan, Lebanon and Palestine.
 	\item \xpgchoicekey{numerals}{\xpgpresetvalue{mashriq} or \xpgvalue{maghrib}}
 		The latter is the default when \xpgvalue{locale=algeria}, \xpgvalue{tunisia}, or \xpgvalue{morocco}.
 	\item \xpgboolkeyfalse[1.50]{abjadalph}
@@ -1450,7 +1451,7 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 	\item \xpgchoicekey[1.46]{hyphenation}{\xpgvalue{classic}, \xpgvalue{modern}, or \xpgvalue{liturgical}}
 			There are three different sets of hyphenation patterns for Latin. Separate
 			documention for them is available on the
-			Internet.\footnote{\url{https://github.com/gregorio-project/hyphen-la/blob/master/doc/README.md\#hyphenation-styles}}
+			Internet.\footnote{Refer to \url{https://github.com/gregorio-project/hyphen-la/blob/master/doc/README.md\#hyphenation-styles}}
 			Each of the four variants mentioned above has its default set of hyphenation
 			patterns as indicated by table \ref{tab:latin-hyphenation}. Use the
 			¦hyphenation¦ option if the default style does not fit your needs.
@@ -1809,9 +1810,9 @@ Currently support for Sami is limited to Northern Sami.
 \paragraph*{Options:}
 	\begin{itemize}
 	\item \xpgchoicekey[1.0.2]{script}{\xpgpresetvalue{Devanagari}, \xpgvalue{Gujarati},
-	\xpgvalue{Malayalam}, \xpgvalue{Bengali}, \xpgvalue{Kannada}, \xpgvalue{Telugu}, or \xpgvalue{Latin}}
-		The value is passed to \pkg{fontspec} in cases where the respective
-		\cmd{\⟨script⟩font} is not defined.  This can be useful if you typeset Sanskrit
+	\xpgvalue{Malayalam}, \xpgvalue{Bengali}, \xpgvalue{Kannada}, \xpgvalue{Telugu}, \xpgvalue{Latin}}
+		The value is passed to \pkg{fontspec} should the respective
+		\cmd{\⟨script⟩font} not be defined.  This can be useful if you typeset Sanskrit
 		texts in scripts other than Devanagari.
 	\item \xpgchoicekey[1.45]{numerals}{\xpgpresetvalue{Devanagari} or \xpgvalue{Western}}
 	\end{itemize}
@@ -2269,8 +2270,9 @@ The following macros are provided:
 			¦\Greeknumeral{1863}¦ results in \textgreek{\Greeknumeral{1863}}.
 
 	\item \Cmd\hebrewnumeral, \Cmd\Hebrewnumeral and \Cmd\Hebrewnumeralfinal generate variants of Hebrew alphanumeric numerals.
-			The commands behave exactly as they do in \pkg{babel}: \cmd\hebrewnumeral\ outputs the numbers without any decoration,
-			\cmd\Hebrewnumeral\ adds \textit{gereshayim} before the last letter, \cmd\Hebrewnumeralfinal\ uses in addition the final forms of Hebrew letters.
+			The commands behave identical as in \pkg{babel}: \cmd\hebrewnumeral\ outputs the numbers without any decoration at all,
+			\cmd\Hebrewnumeral\ adds \textit{gereshayim} before the last letter, and \cmd\Hebrewnumeralfinal\ uses in addition the final
+			forms of Hebrew letters.
 			Examples:
 			¦\hebrewnumeral{1750}¦ yields \texthebrew{\hebrewnumeral{1750}},
 			¦\Hebrewnumeral{1750}¦ yields \texthebrew{\Hebrewnumeral{1750}},
@@ -2677,7 +2679,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 
 \subsubsection*{Build fixes}
 \begin{itemize}
-\item Fix a bug in the dtx build script which was the reason for an utterly
+\item Fix an embarrassing bug in the dtx build script which was the reason for an utterly
        incomplete ¦polyglossia.dtx¦ file (\TXI{420}).
 \end{itemize}
 
@@ -2798,7 +2800,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
       always use the latest German hyphens.
 \item The command ¦\setlanguagealias*¦ (introduced in v1.46) does no longer define
       dedicated alias environments.
-\item The babelnames for Latin variants have been corrected to ¦classiclatin¦, ¦ecclesiasticlatin¦
+\item The babelnames for Latin variants are now changed to ¦classiclatin¦, ¦ecclesiasticlatin¦
       and ¦medievallatin¦. This is how the hyphenation patterns and \pkg{babel} ¦\extras¦ are named, even
       though the variants can currently be selected in \pkg{babel} only via appended ``dot modifier''.
 \item In accordance with the respective \pkg{l3kernel} change, ¦\str_lower_case:n¦  has been renamed to
@@ -2818,7 +2820,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \item Swap section headings in Hungarian (\TXI{344}). New option \xpgoption{swapstrings} provides control
       over this.
 \item Introduce macro ¦\setlanguagealias¦ and ¦\setlanguagealias*¦.
-\item Introduce language switching command ¦\textlang{lang}{...}¦ (equivalent to ¦\text<lang>¦,
+\item Introduce language switching command ¦\textlang{lang}{...}¦ (these are equivalent to ¦\text<lang>¦,
       but also available with ¦\setlanguagealias*¦ which does not define ¦\text<alias>¦).
 \item Add support for Afrikaans.
 \item Add support for Belarusian.
@@ -2866,7 +2868,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \begin{itemize}
 \item Introduce a framework for external packages to access language variants. This fixes,
       among other things, long-standing problems in the interaction of \pkg{biblatex} and \pkg{polyglossia}.
-\item Add new macros ¦\languagevariant¦, ¦\mainlanguagevariant¦, ¦\babelname¦ and ¦\mainbabelname¦
+\item Add new macros ¦\languagevariant¦ and ¦\mainlanguagevariant¦ as well as ¦\babelname¦ and ¦\mainbabelname¦
       for package authors to access language information.
 \item Add new test ¦\iflanguageloaded{<language>}{<true>}{<false>}¦ where <language>
       can be a \pkg{polyglossia} or \pkg{babel} language name.
@@ -3192,12 +3194,12 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \subsection*{1.2.0 (2010/07/15)}
 \begin{itemize}
 	\item Adapted for \pkg{fontspec} 2.0 (will not work with earlier versions!)
-	\item New implementation of a ¦\PolyglossiaSetup¦ interface
+	\item Implementation of a ¦\PolyglossiaSetup¦ interface
 	      that simplifies writing ¦gloss-*.ldf¦ files
 	\item Many internal enhancements and refactoring
 	      (including a patch by \TA{Dirk Ulrich})
 	\item Improved automatic font setup when ¦\<lang>font¦ is not defined
-	\item New environment otherlanguage* (env. equivalent of ¦\foreignlanguage¦
+	\item New environment \texttt{otherlanguage*} (equivalent to ¦\foreignlanguage¦
 	      (\TA{Enrico Gregorio})
 	\item Bugfix to prevent bogus expansion of ¦\{rm,sf,tt}family¦ even in aux files (\TA{Enrico Gregorio})
 	\item New gloss files for Armenian, Bengali, Occitan, Bengali, Lao,
@@ -3210,7 +3212,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	      others)
 	\item Corrected captions for Bahasai, Lithuanian, Russian, Croatian
 	\item Add option \xpgoption{indentfirst=true} for Spanish, Croatian and other languages
-	      (NB: \xpgoption{indentfirst} was previously named \xpgoption{frenchindent})
+	      (\xpgoption{indentfirst} was previously named \xpgoption{frenchindent})
 	\item New option \xpgoption{script} for German: Setting \xpgoption{script=fraktur} modifies the
 	      captions for typesetting in Fraktur.
 	\item New command ¦\aemph¦ for Arabic, Farsi, Urdu, etc. to mark emphasis through
@@ -3227,7 +3229,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	      signs (Par exemple : les grands « espaces » du Canada !) are
 	      now replaced by the appropriate non-breaking spaces, as in \pkg{babel}.
 	\item Bugfix for font switching mechanism within Latin script
-	      (pending a complete re-implementation in v1.2):
+	      (pending a complete re-implemen\-tation in v1.2):
 	      the font shape and series are no longer reset when switching language.
 	\item New macros for non-Western decimal digits
 	      (instead of fontmappings)
