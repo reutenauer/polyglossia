@@ -138,6 +138,8 @@
 % in the x11-fonts set and can be downloaded from
 % https://bethmardutho.org/meltho/ (Meltho Fonts Package)
 \newfontfamily\syriacfont[Script=Syriac]{Serto Jerusalem}
+% Our decorative title: package gfscomplutum
+\newfontfamily\xpgtitlefont[Scale=1.4, LetterSpace=30]{GFSPolyglot.otf}
 
 \linespread{1.05}
 \frenchspacing
@@ -152,7 +154,7 @@
 \hyphenation{Kha-li-ghi Reu-ten-auer new-zea-land}
 \GetFileInfo{polyglossia.sty}
 
-\title{\textcolor{lightblue}{\Huge\fontspec[LetterSpace=40]{GFS Ambrosia} Πολυγλωσσια}
+\title{{\textgreek{\xpgtitlefont\color{lightblue}\MakeUppercase{Πολυγλωσσια}}}
 \\[16pt]
 \color{xpgblue}Polyglossia: Modern multilingual typesetting with \XeLaTeX\ and \LuaLaTeX}
 \author{\TA{François Charette} \and \TA{Arthur Reutenauer}\thanks{Current maintainer}
