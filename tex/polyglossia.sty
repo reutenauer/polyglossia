@@ -153,13 +153,6 @@
 }
 \msg_redirect_name:nnn { polyglossia } { languagenotloaded } { critical }
 
-\cs_new_nopar:Nn \__xpg_msg_if_lang_not_loaded:n
-{
-  \tl_if_blank:eT {\xpg_alias_base_lang:n{#1}}
-  {
-    \msg_show:nnn { polyglossia } { languagenotloaded } {#1}
-  }
-}
 % 
 
 %% use macro if defined, else warn that it is not
@@ -1855,14 +1848,15 @@
 % #4 text
 \cs_new:Nn \__xpg_foreignlanguage:nnnn
 {
-  \tl_if_blank:nT {#3}
+  \tl_if_blank:nTF {#3}
   {
     \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
+  }{
+    \group_begin:
+      \xpg@otherlanguage[\xpg_alias_add_to_option_i:nn{#2}{#1}]{#3}%
+      \polyglossia@lang@settextdirection:nn{#3}{#4}%
+    \group_end:
   }
-  \group_begin:
-    \xpg@otherlanguage[\xpg_alias_add_to_option_i:nn{#2}{#1}]{#3}%
-    \polyglossia@lang@settextdirection:nn{#3}{#4}%
-  \group_end:
 }
 \cs_generate_variant:Nn \__xpg_foreignlanguage:nnnn {eeen}
 
@@ -1882,13 +1876,14 @@
 % #3 base lang
 \cs_new:Nn \__xpg_otherlanguage:nnn
 {
-  \tl_if_blank:nT {#3}
+  \tl_if_blank:nTF {#3}
   {
     \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
+  }{
+    \xpg@otherlanguage[\xpg_alias_add_to_option_i:nn{#2}{#1}]{#3}%
+    \polyglossia@lang@settextdirection:nn{#3}%
+    \bgroup
   }
-  \xpg@otherlanguage[\xpg_alias_add_to_option_i:nn{#2}{#1}]{#3}%
-  \polyglossia@lang@settextdirection:nn{#3}%
-  \bgroup
 }
 \cs_generate_variant:Nn \__xpg_otherlanguage:nnn {
   eee
@@ -1913,20 +1908,22 @@
 % #4: text
 \cs_new:Nn \__xpg_textlanguage:nnnn
 {
-  \tl_if_blank:nT {#3}
+  \tl_if_blank:nTF {#3}
   {
     \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
   }
-  \group_begin:
-    \xpg@otherlanguage[#1]{#3}%
-    \csuse{date#3}%
-    % This is a hook for external packages which want to access variants
-    % via babelname (such as biblatex)
-    \cs_if_exist_use:c{date@bbl@\babelname}%
-    \polyglossia@lang@settextdirection:nn{#3}{#4}%
-  \group_end:
-  % Reset the language's/script's font families
-  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#3/lcscript}}{latin}{}{\resetfontlatin}%
+  {
+    \group_begin:
+      \xpg@otherlanguage[#1]{#3}%
+      \csuse{date#3}%
+      % This is a hook for external packages which want to access variants
+      % via babelname (such as biblatex)
+      \cs_if_exist_use:c{date@bbl@\babelname}%
+      \polyglossia@lang@settextdirection:nn{#3}{#4}%
+    \group_end:
+    % Reset the language's/script's font families
+    \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#3/lcscript}}{latin}{}{\resetfontlatin}%
+  }
 }
 \cs_generate_variant:Nn \__xpg_textlanguage:nnnn {nnen}
 
@@ -1952,10 +1949,15 @@
 
 \DeclareDocumentCommand \selectlanguage {s O{} m}
 {
-  \__xpg_msg_if_lang_not_loaded:n {#3}
-  \polyglossia@select@language:nee {#1}
-    {\xpg_alias_add_to_option_i:nn{#3}{#2}}
-    {\xpg_alias_base_lang:n{#3}}
+  \tl_if_blank:eTF {\xpg_alias_base_lang:n{#3}}
+  {
+    \msg_show:nnn { polyglossia } { languagenotloaded } {#3}
+  }
+  {
+    \polyglossia@select@language:nee {#1}
+      {\xpg_alias_add_to_option_i:nn{#3}{#2}}
+      {\xpg_alias_base_lang:n{#3}}
+  }
 }
 
 \DeclareDocumentCommand \xselectlanguage {s O{} m}
