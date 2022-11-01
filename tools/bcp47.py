@@ -31,6 +31,9 @@ babelname2bcp47 = {
     "canadian" : "en-CA",
     "canadien" : "fr-CA",
     "catalan" : "ca",
+    "chinese" : "zh",
+    "chinese" : "zh-CN",
+    "chinese" : "zh-TW",
     "coptic" : "cop",
     "croatian" : "hr",
     "czech" : "cz",
@@ -281,6 +284,9 @@ bcp472lang = {
     "uk" : "ukrainian",
     "ur" : "urdu",
     "vi" : "vietnamese",
+    "zh" : "chinese",
+    "zh-CN" : "chinese",
+    "zh-TW" : "chinese",
     "zsm" : "malay",
 }
 
@@ -362,6 +368,8 @@ bcp472opts = {
     "sa-Latn" : "script=Latin",
     "sr-Cyrl" : "script=Cyrillic",
     "sr-Latn" : "script=Latin",
+    "zh-CN" : "variant=simplified",
+    "zh-TW" : "variant=traditional",
     "zsm" : "variant=malaysian",
 }
 

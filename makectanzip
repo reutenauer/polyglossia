@@ -65,7 +65,7 @@ if [[ ! -f $pdf || $pdf -ot $pdfsrc  ]] ; then
 	xelatex $pdfsrc 
         cp -f $pdf $pgroot/generated
   rm -f $pdfbasename.{aux,toc,lof,lot,lop,log,out,nav,bbl,blg,ind,idx,glo,ilg,dvi}
-  for doc in example-arabic example-thai example-korean examples; do
+  for doc in example-arabic example-thai example-chinese example-japanese example-korean examples; do
     echo "COMPILING doc '$doc'"
     cd $root/doc
     # The line below generates an error even if things don’t go wrong,
