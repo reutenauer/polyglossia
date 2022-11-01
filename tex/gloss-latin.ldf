@@ -619,7 +619,7 @@
 
 \shorthandoff {"}
 \shorthandoff {'}
-\shorthandoff {^}
+\shorthandoff* {^}
 \shorthandoff {=}
 
 % The active = character may cause problems with key=value interfaces.
