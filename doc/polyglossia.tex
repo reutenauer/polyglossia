@@ -961,7 +961,7 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
         similar to \pkg{babel} (the glyph U+00B7 MIDDLE DOT is used as a geminating sign).
 \end{itemize}
 
-\subsection[chinese]{chinese\new{1.59}}
+\subsection[chinese]{chinese\new{1.59}}\label{chinese}
 \paragraph*{Options:}
 	\begin{itemize}
 	\item \xpgchoicekey{variant}{\xpgpresetvalue{simplified} (= \xpgvalue{cn}), or \xpgvalue{traditional} (= \xpgvalue{tw})}
@@ -2289,9 +2289,8 @@ The following macros are provided:
 	          with ¦numerals=cyrillic-trad¦ ¦\belarusiannumeral{19}¦ results in \textrussian[numerals=cyrillic-trad]{\russiannumeral{19}},\\
 	          with ¦numerals=cyrillic-alph¦ ¦\belarusiannumeral{19}¦ results in \textrussian[numerals=cyrillic-alph]{\russiannumeral{19}}.
 
-	\item \Cmd\chinesenumeral produces Chinese numbering.
-	          Depending on the ¦numerals¦ option in the Chinese language selection, this is either Arabic digit or Chinese
-	          ideographic output.\\
+	\item \Cmd\chinesenumeral produces Chinese numbering which, depending on the ¦numerals¦ option in the Chinese language selection,
+			  produces is either Arabic digit or Chinese ideographic output.\\
 	          Example: With ¦numerals=arabic¦ ¦\chinesenumeral{753}¦ yields \textchinese[numerals=arabic]{\chinesenumeral{753}},
 	          with ¦numerals=chinese¦ ¦\chinesenumeral{753}¦ results in \textchinese[numerals=chinese]{\chinesenumeral{753}}.
 
@@ -2501,7 +2500,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 
 \subsubsection*{New features}
 \begin{itemize}
-\item Add support for Chinese (\TXI{65}).
+\item Add support for (simplified and traditional) Chinese (\TXI{65}, provided by \TA{Takuji Tanaka}).
 \end{itemize}
 
 \subsection*{1.58 (2022/10/26)}
@@ -3403,8 +3402,8 @@ In alphabetical order: \TA{Ignas Anikevicius}, \TA{Sina Ahmadi}, \TA{Wouter Bols
 \TA{Khaled Hosny}, \TA{Najib Idrissi}, user \TA{julroy67}, \TA{Dohyun Kim}, \TA{Phil Kime}, \TA{Mike Kroutikov},
 \TA{Ivan Kokan}, \TA{Caleb Maclennan}, \TA{Gyula Magyarkuti}, \TA{José Mancera}, \TA{Miquel Ortega}, \TA{Yevgen Pogribnyi},
 \TA{Will Robertson}, \TA{Maïeul Rouquette}, \TA{Elie Roux}, \TA{Hugo Roy},  \TA{Guy Rutenberg}, \TA{Marcin Serwin},
-\TA{Philipp Stephani}, \TA{Niranjan Tambe}, \TA{Osman Tursun}, \TA{Keno Wehr}, \TA{Dominik Wujastyk}, \TA{Sertaç Ö. Yıldız},
-\TA{Maksim Zholudev}, \TA{Yan Zhou}, and \TA{Stefan Zlatinov}.
+\TA{Philipp Stephani}, \TA{Niranjan Tambe}, \TA{Takuji Tanaka}, \TA{Osman Tursun}, \TA{Keno Wehr}, \TA{Dominik Wujastyk},
+\TA{Sertaç Ö. Yıldız}, \TA{Maksim Zholudev}, \TA{Yan Zhou}, and \TA{Stefan Zlatinov}.
 Their respective contributions can be identified from the contributor statistics on
 \href{https://github.com/reutenauer/polyglossia/graphs/contributors}{GitHub}.
 
