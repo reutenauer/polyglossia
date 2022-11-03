@@ -1,0 +1,275 @@
+% Language definition file (part of polyglossia v1.58 -- 2022/10/26)
+%
+\ProvidesFile{gloss-chinese.ldf}[polyglossia: module for Chinese]
+
+\PolyglossiaSetup{chinese}{
+    bcp47=zh,
+    script=CJK,
+    scripttag=hani,
+    language=Chinese,
+    hyphennames={nohyphenation},
+    frenchspacing=false,
+    fontsetup=true,
+    localnumeral=chinesenumerals
+}
+
+% BCP-47 compliant aliases
+\setlanguagealias*{chinese}{zh}
+\setlanguagealias*[variant=simplified]{chinese}{zh-CN}
+\setlanguagealias*[variant=traditional]{chinese}{zh-TW}
+
+\providebool{chinese@traditional}
+
+\def\chinese@variant{chinese}
+
+\newif\ifchinese@numerals
+\define@key{chinese}{numerals}[arabic]{%
+   \ifstrequal{#1}{chinese}%
+      {\chinese@numeralstrue}%
+      {\chinese@numeralsfalse}%
+}
+
+
+\define@choicekey*+{chinese}{variant}[\xpg@val\xpg@nr]{cn,simplified,tw,traditional}[cn]{%
+   \ifcase\xpg@nr\relax
+      % cn:
+      \chinese@traditionalfalse
+      \SetLanguageKeys{chinese}{bcp47=zh-CN}%
+      \xpg@info{Option: Chinese, variant=simplified}%
+   \or
+      % simplified:
+      \chinese@traditionalfalse
+      \SetLanguageKeys{chinese}{bcp47=zh-CN}%
+      \xpg@info{Option: Chinese, variant=simplified}%
+   \or
+      % tw:
+      \chinese@traditionaltrue
+      \SetLanguageKeys{chinese}{bcp47=zh-TW}%
+      \xpg@info{Option: Chinese, variant=traditional}%
+   \or
+      % traditional:
+      \chinese@traditionaltrue
+      \SetLanguageKeys{chinese}{bcp47=zh-TW}%
+      \xpg@info{Option: Chinese, variant=traditional}%
+   \fi
+}{\xpg@warning{Unknown Chinese variant `#1'}}
+
+% Register default options
+\xpg@initialize@gloss@options{chinese}{variant=cn,numerals=arabic}
+%\xpg@initialize@gloss@options{chinese}{variant=tw,numerals=arabic}
+% Register alias options
+\xpg@set@alias@values{chinese}{variant}{cn}{simplified}
+\xpg@set@alias@values{chinese}{variant}{tw}{traditional}
+
+
+\def\chinese@capsformat{%
+    \def\@seccntformat##1{%
+        \csname pre##1\endcsname%
+        \csname the##1\endcsname%
+        \csname post##1\endcsname%
+    }%
+    \ifchinese@traditional
+        \def\postsection{節\space}%
+        \def\postsubsection{節\space}%
+        \def\postsubsubsection{節\space}%
+    \else
+        \def\postsection{节\space}%
+        \def\postsubsection{节\space}%
+        \def\postsubsubsection{节\space}%
+    \fi
+    \def\presection{第}%
+    \def\presubsection{第}%
+    \def\presubsubsection{第}%
+}
+
+\def\captionschinese{%
+    \ifchinese@traditional
+        \captions@chinese@traditional
+    \else
+        \captions@chinese@simplified
+    \fi
+}
+
+\def\captions@chinese@traditional{%
+    \def\contentsname{目錄}%
+    \def\listfigurename{插圖}%
+    \def\listtablename{表格}%
+    \def\figurename{圖}%
+    \def\tablename{表}%
+    \def\abstractname{摘要}%
+    \def\prefacename{前言}%
+    \def\indexname{索引}%
+    \def\bibname{參考文獻}%
+    \def\appendixname{附錄}%
+    \def\proofname{證明}%
+    \def\refname{參考文獻}%
+    \def\partname##1##2{第##1##2 部分}%
+    \def\chaptername##1##2{第##1##2 章}%
+    \def\pagename##1##2{第##1##2 頁}%
+    \def\seename{參照}%
+    \def\alsoname{參照}%
+    \def\enclname{附件}%
+    \def\ccname{抄送}%
+    \def\headtoname{收件人}%
+    \def\\glossaryname{詞彙表}%
+}
+\def\captions@chinese@simplified{%
+    \def\contentsname{目录}%
+    \def\listfigurename{插图}%
+    \def\listtablename{表格}%
+    \def\figurename{图}%
+    \def\tablename{表}%
+    \def\abstractname{摘要}%
+    \def\prefacename{前言}%
+    \def\indexname{索引}%
+    \def\bibname{参考文献}%
+    \def\appendixname{附录}%
+    \def\proofname{证明}%
+    \def\refname{参考文献}%
+    \def\partname##1##2{第##1##2 部分}%
+    \def\chaptername##1##2{第##1##2 章}%
+    \def\pagename##1##2{第##1##2 页}%
+    \def\seename{参照}%
+    \def\alsoname{参照}%
+    \def\enclname{附件}%
+    \def\ccname{抄送}%
+    \def\headtoname{收件人}%
+    \def\\glossaryname{词汇表}%
+}
+
+\newcount\c@TempJNum%
+
+\def\@ChineseDigit#1{%
+    \ifcase#1\or 一\or 二\or 三\or 四\or 五\or%
+        六\or 七\or 八\or 九\or 十\or%
+        十一\or 十二\or 十三\or 十四\or 十五\or%
+        十六\or 十七\or 十八\or 十九\or 二十\or%
+        二十一\or 二十二\or 二十三\or 二十四\or 二十五\or%
+        二十六\or 二十七\or 二十八\or 二十九\or 三十\or%
+        三十一\or 三十二\or 三十三\or 三十四\or 三十五\or%
+        三十六\or 三十七\or 三十八\or 三十九\or 四十\or%
+        四十一\or 四十二\or 四十三\or 四十四\or 四十五\or%
+        四十六\or 四十七\or 四十八\or 四十九\or 五十\or%
+        五十一\or 五十二\or 五十三\or 五十四\or 五十五\or%
+        五十六\or 五十七\or 五十八\or 五十九\or 六十\or%
+        六十一\or 六十二\or 六十三\or 六十四\or 六十五\or%
+        六十六\or 六十七\or 六十八\or 六十九\or 七十\or%
+        七十一\or 七十二\or 七十三\or 七十四\or 七十五\or%
+        七十六\or 七十七\or 七十八\or 七十九\or 八十\or%
+        八十一\or 八十二\or 八十三\or 八十四\or 八十五\or%
+        八十六\or 八十七\or 八十八\or 八十九\or 九十\or%
+        九十一\or 九十二\or 九十三\or 九十四\or 九十五\or%
+        九十六\or 九十七\or 九十八\or 九十九%
+    \else
+        \@ctrerr%
+    \fi\relax%
+}
+
+\def\@ChineseNum#1{%
+    \c@TempJNum=#1\divide\c@TempJNum by 1000\relax%
+    \ifnum\c@TempJNum=\z@\c@TempJNum=#1%
+        \divide\c@TempJNum by 100\relax%
+        \ifnum\c@TempJNum=\z@\@ChineseDigit{#1}\relax%
+        \else
+            \ifcase\c@TempJNum\or 百\or 二百\or 三百\or 四百\or 五百\or
+                六百\or 七百\or 八百\or 九百%
+            \fi
+            \c@TempJNum=#1\divide\c@TempJNum by 100\multiply\c@TempJNum by -100\advance\c@TempJNum#1\@ChineseDigit\c@TempJNum\relax%
+        \fi%
+    \else
+        \ifcase\c@TempJNum\or 千\or 二千\or 三千\or 四千\or 五千\or
+            六千\or 七千\or 八千\or 九千%
+        \fi
+        \c@TempJNum=#1\divide\c@TempJNum by 1000\multiply\c@TempJNum by -1000\advance\c@TempJNum#1\divide\c@TempJNum by 100\relax%
+        \ifnum\c@TempJNum=\z@\c@TempJNum=#1%
+            \divide\c@TempJNum by 100\multiply\c@TempJNum by -100\advance\c@TempJNum#1\@ChineseDigit\c@TempJNum\relax%
+        \else
+            \ifcase\c@TempJNum\or 百\or 二百\or 三百\or 四百\or 五百\or
+                六百\or 七百\or 八百\or 九百%
+            \fi
+            \c@TempJNum=#1\divide\c@TempJNum by 100\multiply\c@TempJNum by -100\advance\c@TempJNum#1\@ChineseDigit\c@TempJNum\relax%
+        \fi
+    \fi
+}
+
+\def\@chinesenumber#1{%
+    \@tempcnta=#1%
+    \ifnum\@tempcnta=\z@{〇}%
+    \else
+        \ifnum\@tempcnta<\z@{負}%
+            \multiply\@tempcnta by -1%
+        \fi
+        \@tempcntb=\@tempcnta\divide\@tempcntb by 10000\relax%
+        \ifnum\@tempcntb=\z@\@ChineseNum%
+            \@tempcnta%
+        \else
+            \@tempcntb=\@tempcnta\divide\@tempcntb by 100000000\relax%
+            \ifnum\@tempcntb=\z@\@tempcntb=\@tempcnta%
+                \divide\@tempcntb by 10000%
+                \@ChineseNum\@tempcntb{万}\@tempcntb=\@tempcnta%
+                \divide\@tempcntb by 10000\multiply\@tempcntb by -10000%
+                \advance\@tempcntb\@tempcnta\relax\@ChineseNum\@tempcntb%
+            \else
+                \@ChineseNum\@tempcntb{億}\@tempcntb=\@tempcnta%
+                \divide\@tempcntb by 100000000\multiply\@tempcntb by -100000000%
+                \advance\@tempcntb\@tempcnta\divide\@tempcntb by 10000\relax%
+                \ifnum\@tempcntb=\z@%
+                \else
+                    \@ChineseNum\@tempcntb{万}%
+                \fi
+                \@tempcntb=\@tempcnta\divide\@tempcntb by 10000%
+                \multiply\@tempcntb by -10000\advance\@tempcntb\@tempcnta%
+                \@ChineseNum\@tempcntb%
+            \fi
+        \fi
+    \fi
+}
+
+
+\newcommand{\chinesenumerals}[2]{\chinesenumber{#2}}
+
+\def\chinesenumber#1{%
+  \ifchinese@numerals
+    \@chinesenumber{\number#1}%
+  \else
+    \number#1%
+  \fi}
+
+\let\chinesenumeral=\chinesenumber
+
+\def\datechinese{%
+    \def\today{%
+        \ifchinese@numerals
+           \@chinesenumber{\number\year}%
+        \else
+           \number\year\,%
+        \fi
+        {年}%
+        \ifchinese@numerals
+           \@chinesenumber{\number\month}%
+        \else
+           \,\number\month\,%
+        \fi
+        {月}%
+        \ifchinese@numerals
+           \@chinesenumber{\number\day}%
+        \else
+           \,\number\day\,%
+        \fi
+        {日}%
+    }%
+}
+
+\def\noextras@chinese{%
+    \chinese@capsformat%
+}
+
+\def\blockextras@chinese{%
+    \chinese@capsformat%
+}
+
+\def\inlineextras@chinese{%
+    \chinese@capsformat%
+}
+% Based on contributions of Toru Inagaki, Norio Iwase, François Charette
+

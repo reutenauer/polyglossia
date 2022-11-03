@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{japanese}
+\setotherlanguage{english}
+\setmainfont{Noto Serif CJK JP}[Script=CJK]
+\newfontfamily\japanesefont{Noto Serif CJK JP}[Script=CJK]
+\begin{document}
+\XeTeXlinebreaklocale "ja"
+\XeTeXlinebreakskip=0em plus 0.1em minus 0.01em
+\parindent0em
+
+\begin{center}
+	\abstractname
+\end{center}
+\begin{english}
+All human beings are born free and equal in dignity and rights.
+They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood.
+\footnote{%
+	This is a footnote.}
+
+This is today: \today
+\end{english}
+
+\section{第一条}
+
+すべての人間は、生まれながらにして自由であり、かつ、尊厳と権利とについて平等である。人間は、理性と良心とを授けられており、互いに同胞の精神をもって行動しなければならない。
+
+\today
+
+localnumeral: \localnumeral{1863}
+
+\end{document}

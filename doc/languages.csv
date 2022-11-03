@@ -11,6 +11,7 @@ bosnian
 breton,
 bulgarian,
 catalan,true
+chinese,true
 coptic,
 croatian,true
 czech,true
@@ -34,7 +35,7 @@ hungarian,true
 icelandic,
 interlingua,
 italian,true
-japanese,
+japanese,true
 kannada,
 khmer,
 korean,true

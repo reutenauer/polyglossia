@@ -30,7 +30,7 @@
 %
 % Languages we need in the documentation. See below for fonts
 \setmainlanguage[variant=british,ordinalmonthday=false]{english}
-\setotherlanguages{arabic,armenian,hebrew,syriac,greek,russian,serbian,catalan,georgian}
+\setotherlanguages{arabic,armenian,hebrew,syriac,greek,russian,serbian,catalan,georgian,chinese}
 \usepackage[protrusion,nopatch=footnote]{microtype}
 \renewcommand\MacroFont{\footnotesize\color{xpgblue}\ttfamily}
 % Customizable version of \DescribeMacro (e.g. if macro is too long)
@@ -140,6 +140,8 @@
 \newfontfamily\syriacfont[Script=Syriac]{Serto Jerusalem}
 % Our decorative title: package gfscomplutum
 \newfontfamily\xpgtitlefont[Scale=1.4, LetterSpace=30]{GFSPolyglot.otf}
+% Package noto, notoCJKsc
+\newfontfamily\chinesefont{Noto Serif CJK SC}[Script=CJK]
 
 \linespread{1.05}
 \frenchspacing
@@ -269,9 +271,10 @@ bosnian         & \TX{gaelic}    & \TX{lao}       & romanian        & turkish   
 breton          & galician       & \TX{latin}     & romansh         & turkmen        \\
 bulgarian       & \TX{georgian}  & latvian        & \TX{russian}    & \TX{ukrainian} \\
 \TX{catalan}    & \TX{german}    & lithuanian     & \TX{sami}       & urdu           \\
-coptic          & \TX{greek}     & macedonian     & \TX{sanskrit}   & \TX{uyghur}    \\
-\TX{croatian}   & \TX{hebrew}    & \TX{malay}     & \TX{serbian}    & vietnamese     \\
-\TX{czech}      & \TX{hindi}     & malayalam      & \TX{slovak}     & \TX{welsh}     \\
+\TX{chinese}    & \TX{greek}     & macedonian     & \TX{sanskrit}   & \TX{uyghur}    \\
+coptic          & \TX{hebrew}    & \TX{malay}     & \TX{serbian}    & vietnamese     \\
+\TX{croatian}   & \TX{hindi}     & malayalam      & \TX{slovak}     & \TX{welsh}     \\
+\TX{czech}      &                &                &                 &                \\
 \bottomrule
 \end{tabular}
 
@@ -549,6 +552,9 @@ Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 	uk               & ukrainian   &                                                    \tabularnewline
 	ur               & urdu        &                                                    \tabularnewline
 	vi               & vietnamese  &                                                    \tabularnewline
+	zh               & chinese     &                                                    \tabularnewline
+	zh-CN            & chinese     & variant=simplified [\emph{default}]                \tabularnewline
+	zh-TW            & chinese     & variant=traditional                                \tabularnewline
 	zsm              & malay       & variant=malaysian [\emph{default}]                 \tabularnewline
 	\bottomrule
 \end{longtable}
@@ -954,6 +960,18 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
   \item \Cmd{\l.l} and \Cmd{\L.L}\new{1.1.1} can be used to type a geminated l, as in \textit{co\l.laborar},
         similar to \pkg{babel} (the glyph U+00B7 MIDDLE DOT is used as a geminating sign).
 \end{itemize}
+
+\subsection[chinese]{chinese\new{1.59}}
+\paragraph*{Options:}
+	\begin{itemize}
+	\item \xpgchoicekey{variant}{\xpgpresetvalue{simplified} (= \xpgvalue{cn}), or \xpgvalue{traditional} (= \xpgvalue{tw})}
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{arabic} or \xpgvalue{chinese}}
+		Uses either Arabic numerals or Chinese ideographic numbering.
+	\end{itemize}
+\paragraph*{Commands:}
+	\begin{itemize}
+	\item \Cmd\chinesenumeral (see section \ref{abjad}).
+	\end{itemize}
 
 \subsection{croatian}\label{croatian}
 \paragraph*{Options:}
@@ -2271,6 +2289,12 @@ The following macros are provided:
 	          with ¦numerals=cyrillic-trad¦ ¦\belarusiannumeral{19}¦ results in \textrussian[numerals=cyrillic-trad]{\russiannumeral{19}},\\
 	          with ¦numerals=cyrillic-alph¦ ¦\belarusiannumeral{19}¦ results in \textrussian[numerals=cyrillic-alph]{\russiannumeral{19}}.
 
+	\item \Cmd\chinesenumeral produces Chinese numbering.
+	          Depending on the ¦numerals¦ option in the Chinese language selection, this is either Arabic digit or Chinese
+	          ideographic output.\\
+	          Example: With ¦numerals=arabic¦ ¦\chinesenumeral{753}¦ yields \textchinese[numerals=arabic]{\chinesenumeral{753}},
+	          with ¦numerals=chinese¦ ¦\chinesenumeral{753}¦ results in \textchinese[numerals=chinese]{\chinesenumeral{753}}.
+
 	\item \Cmd\georgiannumeral produces Georgian alphabetic numbering.\\
               Example: ¦\georgiannumeral{1863}¦ yields \textgeorgian{\georgiannumeral{1863}}.
 
@@ -2473,6 +2497,11 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Do not error, but warn, after language change due to non-updated aux file (\TXI{565}).
 	      A helper macro \cmd\xselectlanguage\ is introduced for this.
 	\item Fix catcode issue for Latin (\TXI{566}).
+\end{itemize}
+
+\subsubsection*{New features}
+\begin{itemize}
+\item Add support for Chinese (\TXI{65}).
 \end{itemize}
 
 \subsection*{1.58 (2022/10/26)}

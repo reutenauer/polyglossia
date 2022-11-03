@@ -1,0 +1,61 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{chinese}
+\setotherlanguage{english}
+% Package noto, notoCJKsc
+\setmainfont{Noto Serif CJK SC}[Script=CJK]
+\newfontfamily\chinesefont{Noto Serif CJK SC}[Script=CJK]
+% Package arphic-ttf
+%\setmainfont{bkai00mp.ttf}[Script=CJK]% ZenKai-Medium
+%\setmainfont{bsmi00lp.ttf}[Script=CJK]% ShanHeiSun-Light
+%\setmainfont{gbsn00lp.ttf}[Script=CJK]% BousungEG-Light-GB
+%\setmainfont{gkai00mp.ttf}[Script=CJK]% GBZenKai-Medium
+\begin{document}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip=0em plus 0.1em minus 0.01em
+\parindent0em
+
+\begin{center}
+	\abstractname
+\end{center}
+\begin{english}
+All human beings are born free and equal in dignity and rights.
+They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood.
+\footnote{%
+	This is a footnote.}
+
+This is today: \today
+\end{english}
+
+\section{第一条 (简体中文, Simplified Chinese)}
+
+人人生而自由、在尊严和权利上一律平等。他们赋有理性和良心、并应以兄弟关系的精神相对待。
+
+\today
+
+localnumeral: \localnumeral{1863}, chinesenumeral: \chinesenumeral{1863}
+
+\renewfontfamily\chinesefont{Noto Serif CJK TC}[Script=CJK]
+\begin{chinese}[variant=traditional,numerals=chinese]
+
+\section{第一條 (繁體中文, Traditional Chinese)}
+
+人人生而自由、在尊嚴和權利上一律平等。他們賦有理性和良心、並應以兄弟關係的精神相對待。
+
+\today
+
+localnumeral: \localnumeral{1863}, chinesenumeral: \chinesenumeral{1863}
+
+\end{chinese}
+
+\section{numeral}
+\begin{english}
+
+numerals=arabic: \textchinese[numerals=arabic]{\localnumeral{1863}, \chinesenumeral{1863}}
+
+numerals=chinese: \textchinese[numerals=chinese]{\localnumeral{1863}, \chinesenumeral{1863}}
+
+\end{english}
+
+\end{document}
