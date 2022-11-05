@@ -153,6 +153,12 @@
 }
 \msg_redirect_name:nnn { polyglossia } { languagenotloaded } { critical }
 
+\msg_new:nnn { polyglossia } { languagenolongerloaded }
+{
+  The~ language~ #1~ is~ no~ longer~ loaded.~ Please~ rerun~ LaTeX.
+}
+\msg_redirect_name:nnn { polyglossia } { languagenolongerloaded } { warning }
+
 % 
 
 %% use macro if defined, else warn that it is not
@@ -1947,26 +1953,23 @@
   \xpg@hook@setlanguage
   \let\emp@langname\@undefined}
 
+\newif\ifxpglanginaux\xpglanginauxfalse
+
 \DeclareDocumentCommand \selectlanguage {s O{} m}
 {
   \tl_if_blank:eTF {\xpg_alias_base_lang:n{#3}}
   {
-    \msg_show:nnn { polyglossia } { languagenotloaded } {#3}
+    \ifxpglanginaux
+      \msg_show:nnn { polyglossia } { languagenolongerloaded } {#3}
+    \else
+      \msg_show:nnn { polyglossia } { languagenotloaded } {#3}
+    \fi
   }
   {
     \polyglossia@select@language:nee {#1}
       {\xpg_alias_add_to_option_i:nn{#3}{#2}}
       {\xpg_alias_base_lang:n{#3}}
   }
-}
-
-\DeclareDocumentCommand \xselectlanguage {s O{} m}
-{
-  \iflanguageloaded{#3}{%
-     \polyglossia@select@language:nee {#1}
-        {\xpg_alias_add_to_option_i:nn{#3}{#2}}
-        {\xpg_alias_base_lang:n{#3}}
-  }{\xpg@warning{Language~ #3~ no~ longer~ loaded.~ Please~ rerun~ LaTeX!}}%
 }
 
 \cs_new:Nn \polyglossia@select@language:nnn
@@ -2198,13 +2201,15 @@
 \newcommand*{\xpg@set@language@only@aux}[2][]{%
     % Write to the aux
    \if@filesw%
+      \protected@write\@auxout{}{\protect\xpglanginauxtrue}%
       \ifx#1\\\\%
-          \protected@write\@auxout{}{\protect\xselectlanguage*{#2}}%
-          \addtocontents{toc}{\protect\xselectlanguage*{#2}}%
+          \protected@write\@auxout{}{\protect\selectlanguage*{#2}}%
+          \addtocontents{toc}{\protect\selectlanguage*{#2}}%
        \else
-          \protected@write\@auxout{}{\protect\xselectlanguage*[#1]{#2}}%
-          \addtocontents{toc}{\protect\xselectlanguage*[#1]{#2}}%
+          \protected@write\@auxout{}{\protect\selectlanguage*[#1]{#2}}%
+          \addtocontents{toc}{\protect\selectlanguage*[#1]{#2}}%
        \fi
+       \protected@write\@auxout{}{\protect\xpglanginauxfalse}%
    \fi
 }
 
