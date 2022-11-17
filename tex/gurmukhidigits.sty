@@ -1,0 +1,13 @@
+\ProvidesPackage{gurmukhidigits}
+        [2022/11/17 v0.1 %
+         Formatting of Gurmukhi digits]
+
+\def\digits#1{\expandafter\@gurmukhi@digits #1@}
+\def\@gurmukhi@digits#1{%
+  \ifx @#1% then terminate
+  \else
+    \ifx0#1੦\else\ifx1#1੧\else\ifx2#1੨\else\ifx3#1੩\else\ifx4#1੪\else\ifx5#1੫\else\ifx6#1੬\else\ifx7#1੭\else\ifx8#1੮\else\ifx9#1੯\else#1\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+    \expandafter\@gurmukhi@digits
+  \fi
+}
+\endinput
