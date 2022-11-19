@@ -917,25 +917,41 @@
 
 % add fontfeature Script=#2 to scripttag #1
 % do nothing if #1 or #2 is empty
-\cs_new:Nn \polyglossia@addfontfeature@script:nn {
-  \bool_if:nTF{\tl_if_empty_p:n{#1} || \tl_if_empty_p:n{#2}}
+\cs_new:Nn \polyglossia@addfontfeature@script:nnn {
+  \bool_if:nTF{\tl_if_empty_p:n{#2} || \tl_if_empty_p:n{#3}}
   {
     % maybe an error ?
     \xpg@warning{Asking~ to~ add~ empty~ feature~to~ latin~ font
-                 (Script="#2"~ to~ scripttag~ "#1")}
+                 (Script="#3"~ to~ scripttag~ "#2")}
   }
   {
-    \fontspec_if_script:nTF{#1}
-       {\addfontfeature{Script=#2}}
-       {\xpg@error{
-          The~ current~ latin ~ font~ \l_fontspec_family_tl\space does~ not~ contain~ the~"#2"~ script!\MessageBreak
-          Please~ define~\csname\tl_if_empty:nF{#2}{\str_lowercase:n#2}font\endcsname~
+    \fontspec_if_script:nTF{#2}
+       {\addfontfeature{Script=#3}}
+       {
+        \tl_set:Nn \l_ffamily_tl {}
+        \tl_set:Nn \l_ffamilysh_tl { #1 }
+        \str_if_eq:nnT { #1 } { rm }
+           {
+             \tl_set:Nn \l_ffamily_tl { roman }
+             \tl_set:Nn \l_ffamilysh_tl {}
+           }
+        \str_if_eq:nnT { #1 } { sf }
+           {
+             \tl_set:Nn \l_ffamily_tl { sans~ serif }
+           }
+        \str_if_eq:nnT { #1 } { tt }
+           {
+             \tl_set:Nn \l_ffamily_tl { monospace }
+           }
+        \xpg@error{
+          The~ current~ latin ~ \l_ffamily_tl\space font~ does~ not~ contain~ the~"#3"~ script!\MessageBreak
+          Please~ define~\csname\tl_if_empty:nF{#3}{\str_lowercase:n#3}font\l_ffamilysh_tl\endcsname~
           with~ \string\newfontfamily\space command
           }
         }
   }
 }
-\cs_generate_variant:Nn  \polyglossia@addfontfeature@script:nn { on , no, oo , Vn, nV, VV , xn, nx, xx}
+\cs_generate_variant:Nn  \polyglossia@addfontfeature@script:nnn { non , nno, noo , nVn, nnV, nVV , nxn, nnx, nxx}
 
 \def\xpg@fontsetup@latin#1{%
   \begingroup
@@ -980,7 +996,8 @@
            }
        }
        \iftoggle{#1@use@script@font}{}{%
-           \polyglossia@addfontfeature@script:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
+           \polyglossia@addfontfeature@script:nxx{rm}
+                                                 {\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
                                                  {\prop_item:Nn{\polyglossia@langsetup}{#1/script}}
        }%
        \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
@@ -1003,7 +1020,8 @@
            }
        }
        \iftoggle{#1@use@script@fontsf}{}{%
-           \polyglossia@addfontfeature@script:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
+           \polyglossia@addfontfeature@script:nxx{sf}
+                                                 {\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
                                                  {\prop_item:Nn{\polyglossia@langsetup}{#1/script}}
        }%
        \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
@@ -1026,7 +1044,8 @@
            }
        }
        \iftoggle{#1@use@script@fonttt}{}{%
-           \polyglossia@addfontfeature@script:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
+           \polyglossia@addfontfeature@script:nxx{tt}
+                                                 {\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
                                                  {\prop_item:Nn{\polyglossia@langsetup}{#1/script}}
        }%
        \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
