@@ -1,0 +1,103 @@
+% Language definition file (part of polyglossia v1.58 -- 2022/10/26)
+%
+% UTF-8 strings kindly provided by 
+% Arvinder Singh Kang, <17-11-2022>
+% Amanpreet Singh Brar <17-11-2022>
+% Amandeep Singh Saini <17-11-2022>
+
+\ProvidesFile{gloss-panjabi.ldf}[polyglossia: module for Panjabi/Punjabi/pa-Gurmukhi]
+\RequirePackage{gurmukhidigits}
+\PolyglossiaSetup{panjabi}{
+  bcp47=pa,
+  script=Gurmukhi,
+  scripttag=gur,
+  langtag=pan,
+%%  hyphennames={panjabi,punjabi,gurmukhi}, TODO: implement fallback patterns (with ! prefix)
+  fontsetup=true,
+  localnumeral=panjabinumerals
+  %TODO nouppercase=true,
+}
+
+% BCP-47 compliant aliases
+\setlanguagealias*{panjabi}{pa}
+
+\def\panjabi@language{%
+  \polyglossia@setup@language@patterns{panjabi}%
+}
+
+\def\tmp@western{Western}
+\newif\ifpanjabi@gurmukhi@numerals
+\panjabi@gurmukhi@numeralstrue
+
+\define@key{panjabi}{numerals}[Gurmukhi]{%
+  \def\@tmpa{#1}%
+  \ifx\@tmpa\tmp@western
+    \panjabi@gurmukhi@numeralsfalse
+  \fi%
+}
+
+% Register default options
+\xpg@initialize@gloss@options{panjabi}{numerals=Gurmukhi}
+
+\newcommand{\panjabinumerals}[2]{\panjabinumber{#2}}
+
+\def\panjabinumber#1{%
+  \ifpanjabi@gurmukhi@numerals
+    \gurmukhidigits{\number#1}%
+  \else
+    \number#1%
+  \fi}
+
+\def\captionspanjabi{%
+     \def\abstractname{ਨਿਚੋੜ}%
+     \def\appendixname{ਅੰਤਿਕਾ}%
+     \def\bibname{ਪੁਸਤਕ ਸੂਚੀ}%
+     \def\ccname{}%
+     \def\chaptername{ਖੰਡ}%
+     \def\contentsname{ਸਮਗਰੀ ਸੂਚੀ}%
+     \def\enclname{ਨੱਥੀ}%
+     \def\figurename{ਚਿੱਤਰ}%
+     \def\headpagename{ਪਲੇਠਾ-ਪੰਨਾ}%
+     \def\headtoname{}%
+     \def\indexname{ਸੂਚੀ}%
+     \def\listfigurename{ਚਿੱਤਰਾਂ ਦੀ ਸੂਚੀ}%
+     \def\listtablename{ਸਾਰਣੀ}%
+     \def\pagename{ਪੰਨਾ}%
+     \def\partname{ਭਾਗ}%
+     \def\prefacename{ਮੁੱਖਬੰਦ}%
+     \def\refname{ਹਵਾਲੇ}%
+     \def\tablename{ਸਾਰਣੀ}%
+     \def\seename{ਵੇਖੋ}%
+     \def\alsoname{ਹੋਰ ਵੇਖੋ}%
+     \def\alsoseename{ਹੋਰ ਵੇਖੋ}%
+}
+\def\datepanjabi{%
+  \def\today{\panjabinumber\day\space\ifcase\month\or
+    ਜਨਵਰੀ\or
+    ਫਰਵਰੀ\or
+    ਮਾਰਚ\or
+    ਅਪ੍ਰੈਲ\or
+    ਮਈ\or
+    ਜੂਨ\or
+    ਜੁਲਾਈ\or
+    ਅਗਸਤ\or
+    ਸਤੰਬਰ\or
+    ਅਕਤੂਬਰ\or
+    ਨਵੰਬਰ\or
+    ਦਸੰਬਰ\fi
+    \space\panjabinumber\year}%
+}
+
+% Save original \MakeUppercase definition
+\let\xpg@save@MakeUppercase\MakeUppercase
+
+\def\blockextras@panjabi{%
+  \def\MakeUppercase##1{##1}%
+}
+
+\def\noextras@panjabi{%
+   % restore original \MakeUppercase definition
+   \let\MakeUppercase\xpg@save@MakeUppercase%
+}
+
+\endinput
