@@ -25,16 +25,18 @@
   \polyglossia@setup@language@patterns{panjabi}%
 }
 
-\def\tmp@western{western}
 \newif\ifpanjabi@gurmukhi@numerals
 \panjabi@gurmukhi@numeralstrue
-
-\define@key{panjabi}{numerals}[gurmukhi]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@western
-    \panjabi@gurmukhi@numeralsfalse
-  \fi%
-}
+\define@choicekey*+{panjabi}{numerals}[\xpg@val\xpg@nr]{Gurmukhi,Western}[Gurmukhi]{%
+   \ifcase\xpg@nr\relax
+      % Gurmukhi:
+      \panjabi@gurmukhi@numeralstrue%
+   \or
+      % Western:
+      \panjabi@gurmukhi@numeralsfalse%
+   \fi
+   \xpg@info{Option: Panjabi, numerals=\xpg@val}%
+}{\xpg@warning{Unknown Panjabi numeral `#1'}}
 
 % Register default options
 \xpg@initialize@gloss@options{panjabi}{numerals=gurmukhi}

@@ -36,19 +36,21 @@
   \polyglossia@setup@language@patterns{hindi}%
 }
 
-\def\tmp@western{Western}
 \newif\ifhindi@devanagari@numerals
 \hindi@devanagari@numeralstrue
-
-\define@key{hindi}{numerals}[Devanagari]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@western
-    \hindi@devanagari@numeralsfalse
-  \fi%
-}
+\define@choicekey*+{hindi}{numerals}[\xpg@val\xpg@nr]{Devanagari,Western}[Devanagari]{%
+   \ifcase\xpg@nr\relax
+      % Devanagari:
+      \hindi@devanagari@numeralstrue%
+   \or
+      % Western:
+      \hindi@devanagari@numeralsfalse%
+   \fi
+   \xpg@info{Option: Hindi, numerals=\xpg@val}%
+}{\xpg@warning{Unknown Hindi numeral `#1'}}
 
 % Register default options
-\xpg@initialize@gloss@options{hindi}{numerals=Devanagari}
+\xpg@initialize@gloss@options{hindi}{numerals=devanagari}
 
 \newcommand{\hindinumerals}[2]{\hindinumber{#2}}
 
