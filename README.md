@@ -2,7 +2,7 @@
 ## Multilingual typesetting with XeLaTeX and LuaLaTeX
 
 This package provides an alternative to Babel for users of XeLaTeX and LuaLaTeX.
-This version includes support for over 70 different languages, some of which in
+This version includes support for over 80 different languages, some of which in
 different regional or national varieties, or using a different writing system.
 
 Polyglossia makes it possible to automate the following tasks:
