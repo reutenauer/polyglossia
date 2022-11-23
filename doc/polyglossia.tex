@@ -254,30 +254,29 @@ that are explained in section \ref{specific} below.
 
 \begin{table}[ht]\centering
 \caption{\label{tab:lang}Languages currently supported in \pkg{polyglossia}}
-% Produced with tools/insert-language-list.rb -- JS, 2019-11-01
-% Edited by hand -- JS, 2019-11-01
+% Produced with tools/insert-language-list.rb -- JS, 2022-11-23
+% Edited by hand -- JS, 2022-11-23
 \begin{tabular}{lllll}
-\toprule
-\TX{afrikaans}  & danish         & \TX{hungarian} & \TX{marathi}    & \TX{slovenian} \\
-albanian        & divehi         & icelandic      & \TX{mongolian}  & \TX{sorbian}   \\
-amharic         & \TX{dutch}     & interlingua    & nko             & \TX{spanish}   \\
-\TX{arabic}     & \TX{english}   & \TX{italian}   & \TX{norwegian}  & swedish        \\
-\TX{armenian}   & \TX{esperanto} & japanese       & occitan         & \TX{syriac}    \\
-asturian        & estonian       & kannada        & \TX{panjabi}    & tamil          \\
-basque          & \TX{finnish}   & khmer          & \TX{persian}    & telugu         \\
-\TX{belarusian} & \TX{french}    & \TX{korean}    & piedmontese     & \TX{thai}      \\
-\TX{bengali}    & friulian       & \TX{kurdish}   & \TX{polish}     & \TX{tibetan}   \\
-bosnian         & \TX{gaelic}    & \TX{lao}       & \TX{portuguese} & turkish        \\
-breton          & galician       & \TX{latin}     & romanian        & turkmen        \\
-bulgarian       & \TX{georgian}  & latvian        & romansh         & \TX{ukrainian} \\
-\TX{catalan}    & \TX{german}    & lithuanian     & \TX{russian}    & urdu           \\
-\TX{chinese}    & \TX{greek}     & macedonian     & \TX{sami}       & \TX{uyghur}    \\
-coptic          & \TX{hebrew}    & \TX{malay}     & \TX{sanskrit}   & vietnamese     \\
-\TX{croatian}   & \TX{hindi}     & malayalam      & \TX{serbian}    & \TX{welsh}     \\
-\TX{czech}      &                &                & \TX{slovak}     &                \\
-\bottomrule                 
+	\toprule
+	\TX{afrikaans}	& danish		& icelandic		& nko			& \TX{spanish}	\\
+	albanian		& divehi		& interlingua	& \TX{norwegian}& swedish		\\
+	amharic			& \TX{dutch}	& \TX{italian}	& occitan		& \TX{syriac}	\\
+	\TX{arabic}		& \TX{english}	& japanese		& \TX{panjabi}	& tamil			\\
+	\TX{armenian}	& \TX{esperanto}& kannada		& \TX{persian}	& telugu		\\
+	asturian		& estonian		& khmer			& piedmontese	& \TX{thai}		\\
+	basque			& \TX{finnish}	& \TX{korean}	& \TX{polish}	& \TX{tibetan}	\\
+	\TX{belarusian}	& \TX{french}	& \TX{kurdish}	& \TX{portuguese}& turkish		\\
+	\TX{bengali}	& friulian		& \TX{lao}		& romanian		& turkmen		\\
+	bosnian			& \TX{gaelic}	& \TX{latin}	& romansh		& \TX{ukrainian}\\
+	breton			& galician		& latvian		& \TX{russian}	& urdu			\\
+	bulgarian		& \TX{georgian}	& lithuanian	& \TX{sami}		& \TX{uyghur}	\\
+	\TX{catalan}	& \TX{german}	& macedonian	& \TX{sanskrit}	& vietnamese	\\
+	\TX{chinese}	& \TX{greek}	& \TX{malay}	& \TX{serbian}	& \TX{welsh}	\\
+	coptic			& \TX{hebrew}	& malayalam		& \TX{slovak}	& 				\\
+	\TX{croatian}	& \TX{hindi}	& \TX{marathi}	& \TX{slovenian}& 				\\
+	\TX{czech}		& \TX{hungarian}& \TX{mongolian}& \TX{sorbian}	& 				\\
+	\bottomrule
 \end{tabular}
-
 \end{table}
 
 \paragraph{Version Notes} The support for Amharic\new{1.0.1} should be considered an experimental attempt to
@@ -517,7 +516,7 @@ Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 	nl               & dutch       &                                                    \tabularnewline
 	nn               & norwegian   & variant=nynorsk [\emph{default}]                   \tabularnewline
 	oc               & occitan     &                                                    \tabularnewline
-  pa               & panjabi     &                                                    \tabularnewline
+	pa               & panjabi     & numerals=Gumurkhi                                  \tabularnewline
 	pl               & polish      &                                                    \tabularnewline
 	pms              & piedmontese &                                                    \tabularnewline
 	pt               & portuguese  &                                                    \tabularnewline
@@ -1665,6 +1664,12 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 	\item \xpgchoicekey[1.45]{variant}{\xpgvalue{bokmal} or \xpgpresetvalue{nynorsk}}
 \end{itemize}
 
+\subsection[panjabi]{panjabi\new{1.59}}\label{panjabi}
+\paragraph*{Options:}
+\begin{itemize}
+	\item \xpgchoicekey{numerals}{\xpgvalue{western} or \xpgpresetvalue{gurmukhi}}
+\end{itemize}
+
 \subsection{persian}\label{persian}
 \paragraph*{Options:}
 \begin{itemize}
@@ -1681,13 +1686,6 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 	\item \Cmd\abjad (see section \ref{abjad})
 	\item \Cmd\aemph (see section \ref{arabic}).
 \end{itemize}
-
-\subsection{panjabi}\label{panjabi}
-\paragraph*{Options:}
-  \begin{itemize}
-    \item \xpgchoicekey{numerals}{\xpgvalue{Western} or \xpgpresetvalue{Gurmukhi}}
-  \end{itemize}
-
 
 \subsection{polish}\label{polish}
 
@@ -2252,6 +2250,7 @@ Currently, the following macros are provided:
 	\item \Cmd\bengalidigits
 	\item \Cmd\devanagaridigits
 	\item \Cmd\farsidigits
+	\item \Cmd\gurmukhidigits
 	\item \Cmd\kannadadigits
 	\item \Cmd\khmerdigits
 	\item \Cmd\laodigits
@@ -2323,6 +2322,9 @@ The following macros are provided:
             Example: With ¦numerals=latin¦ ¦\mongoliannumeral{19}¦ yields \textrussian{\russiannumeral{19}},
             with ¦numerals=cyrillic-trad¦ ¦\mongoliannumeral{19}¦ results in \textrussian[numerals=cyrillic-trad]{\russiannumeral{19}},\\
             with ¦numerals=cyrillic-alph¦ ¦\mongoliannumeral{19}¦ results in \textrussian[numerals=cyrillic-alph]{\russiannumeral{19}}.
+    
+    \item \Cmd\panjabinumeral produces Panjabi numbering, depending on the ¦numerals¦ option in the Panjabi language selection, this
+           is either Gurmukhi of Latin (Western).
 	
 	\item \Cmd\russiannumeral produces Russian numbering, with uppercased variant (for alphanumerical variant) via \Cmd\Russiannumeral.
 	        Depending on the ¦numerals¦ option in the Russian language selection, this is either Arabic digit or Cyrillic
@@ -2508,6 +2510,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \subsubsection*{New features}
 \begin{itemize}
 \item Add support for (simplified and traditional) Chinese (\TXI{65}, provided by \TA{Takuji Tanaka}).
+\item Add support for Punjabi (\TXP{572}), provided by \TA{Arvinder Singh}.
 \end{itemize}
 
 \subsection*{1.58 (2022/10/26)}
@@ -3409,8 +3412,8 @@ In alphabetical order: \TA{Ignas Anikevicius}, \TA{Sina Ahmadi}, \TA{Wouter Bols
 \TA{Khaled Hosny}, \TA{Najib Idrissi}, user \TA{julroy67}, \TA{Dohyun Kim}, \TA{Phil Kime}, \TA{Mike Kroutikov},
 \TA{Ivan Kokan}, \TA{Caleb Maclennan}, \TA{Gyula Magyarkuti}, \TA{José Mancera}, \TA{Miquel Ortega}, \TA{Yevgen Pogribnyi},
 \TA{Will Robertson}, \TA{Maïeul Rouquette}, \TA{Elie Roux}, \TA{Hugo Roy},  \TA{Guy Rutenberg}, \TA{Marcin Serwin},
-\TA{Philipp Stephani}, \TA{Niranjan Tambe}, \TA{Takuji Tanaka}, \TA{Osman Tursun}, \TA{Keno Wehr}, \TA{Dominik Wujastyk},
-\TA{Sertaç Ö. Yıldız}, \TA{Maksim Zholudev}, \TA{Yan Zhou}, and \TA{Stefan Zlatinov}.
+\TA{Arvinder Singh}, \TA{Philipp Stephani}, \TA{Niranjan Tambe}, \TA{Takuji Tanaka}, \TA{Osman Tursun}, \TA{Keno Wehr},
+\TA{Dominik Wujastyk}, \TA{Sertaç Ö. Yıldız}, \TA{Maksim Zholudev}, \TA{Yan Zhou}, and \TA{Stefan Zlatinov}.
 Their respective contributions can be identified from the contributor statistics on
 \href{https://github.com/reutenauer/polyglossia/graphs/contributors}{GitHub}.
 

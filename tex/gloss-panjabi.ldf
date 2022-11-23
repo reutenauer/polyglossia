@@ -25,11 +25,11 @@
   \polyglossia@setup@language@patterns{panjabi}%
 }
 
-\def\tmp@western{Western}
+\def\tmp@western{western}
 \newif\ifpanjabi@gurmukhi@numerals
 \panjabi@gurmukhi@numeralstrue
 
-\define@key{panjabi}{numerals}[Gurmukhi]{%
+\define@key{panjabi}{numerals}[gurmukhi]{%
   \def\@tmpa{#1}%
   \ifx\@tmpa\tmp@western
     \panjabi@gurmukhi@numeralsfalse
@@ -37,7 +37,7 @@
 }
 
 % Register default options
-\xpg@initialize@gloss@options{panjabi}{numerals=Gurmukhi}
+\xpg@initialize@gloss@options{panjabi}{numerals=gurmukhi}
 
 \newcommand{\panjabinumerals}[2]{\panjabinumber{#2}}
 
@@ -47,6 +47,8 @@
   \else
     \number#1%
   \fi}
+
+\let\panjabinumeral=\panjabinumber
 
 \def\captionspanjabi{%
      \def\abstractname{ਨਿਚੋੜ}%
