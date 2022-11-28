@@ -5,54 +5,55 @@
 % Amanpreet Singh Brar <17-11-2022>
 % Amandeep Singh Saini <17-11-2022>
 
-\ProvidesFile{gloss-panjabi.ldf}[polyglossia: module for Panjabi/Punjabi/pa-Gurmukhi]
+\ProvidesFile{gloss-punjabi.ldf}[polyglossia: module for Panjabi/Punjabi/pa-Gurmukhi]
 \RequirePackage{gurmukhidigits}
-\PolyglossiaSetup{panjabi}{
+\PolyglossiaSetup{punjabi}{
   bcp47=pa,
   script=Gurmukhi,
   scripttag=gur,
   langtag=pan,
 %%  hyphennames={panjabi,punjabi,gurmukhi}, TODO: implement fallback patterns (with ! prefix)
   fontsetup=true,
-  localnumeral=panjabinumerals
+  localnumeral=punjabinumerals
   %TODO nouppercase=true,
 }
 
 % BCP-47 compliant aliases
-\setlanguagealias*{panjabi}{pa}
+\setlanguagealias*{punjabi}{pa}
 
-\def\panjabi@language{%
+\def\punjabi@language{%
+  % patterns are spelled panjabi
   \polyglossia@setup@language@patterns{panjabi}%
 }
 
-\newif\ifpanjabi@gurmukhi@numerals
-\panjabi@gurmukhi@numeralstrue
-\define@choicekey*+{panjabi}{numerals}[\xpg@val\xpg@nr]{Gurmukhi,Western}[Gurmukhi]{%
+\newif\ifpunjabi@gurmukhi@numerals
+\punjabi@gurmukhi@numeralstrue
+\define@choicekey*+{punjabi}{numerals}[\xpg@val\xpg@nr]{Gurmukhi,Western}[Gurmukhi]{%
    \ifcase\xpg@nr\relax
       % Gurmukhi:
-      \panjabi@gurmukhi@numeralstrue%
+      \punjabi@gurmukhi@numeralstrue%
    \or
       % Western:
-      \panjabi@gurmukhi@numeralsfalse%
+      \punjabi@gurmukhi@numeralsfalse%
    \fi
-   \xpg@info{Option: Panjabi, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Panjabi numeral `#1'}}
+   \xpg@info{Option: Punjabi, numerals=\xpg@val}%
+}{\xpg@warning{Unknown Punjabi numeral `#1'}}
 
 % Register default options
-\xpg@initialize@gloss@options{panjabi}{numerals=gurmukhi}
+\xpg@initialize@gloss@options{punjabi}{numerals=gurmukhi}
 
-\newcommand{\panjabinumerals}[2]{\panjabinumber{#2}}
+\newcommand{\punjabinumerals}[2]{\punjabinumber{#2}}
 
-\def\panjabinumber#1{%
-  \ifpanjabi@gurmukhi@numerals
+\def\punjabinumber#1{%
+  \ifpunjabi@gurmukhi@numerals
     \gurmukhidigits{\number#1}%
   \else
     \number#1%
   \fi}
 
-\let\panjabinumeral=\panjabinumber
+\let\punjabinumeral=\punjabinumber
 
-\def\captionspanjabi{%
+\def\captionspunjabi{%
      \def\abstractname{ਨਿਚੋੜ}%
      \def\appendixname{ਅੰਤਿਕਾ}%
      \def\bibname{ਪੁਸਤਕ ਸੂਚੀ}%
@@ -75,8 +76,8 @@
      \def\alsoname{ਹੋਰ ਵੇਖੋ}%
      \def\alsoseename{ਹੋਰ ਵੇਖੋ}%
 }
-\def\datepanjabi{%
-  \def\today{\panjabinumber\day\space\ifcase\month\or
+\def\datepunjabi{%
+  \def\today{\punjabinumber\day\space\ifcase\month\or
     ਜਨਵਰੀ\or
     ਫਰਵਰੀ\or
     ਮਾਰਚ\or
@@ -89,17 +90,17 @@
     ਅਕਤੂਬਰ\or
     ਨਵੰਬਰ\or
     ਦਸੰਬਰ\fi
-    \space\panjabinumber\year}%
+    \space\punjabinumber\year}%
 }
 
 % Save original \MakeUppercase definition
 \let\xpg@save@MakeUppercase\MakeUppercase
 
-\def\blockextras@panjabi{%
+\def\blockextras@punjabi{%
   \def\MakeUppercase##1{##1}%
 }
 
-\def\noextras@panjabi{%
+\def\noextras@punjabi{%
    % restore original \MakeUppercase definition
    \let\MakeUppercase\xpg@save@MakeUppercase%
 }

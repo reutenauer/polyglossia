@@ -261,11 +261,11 @@ that are explained in section \ref{specific} below.
 	\TX{afrikaans}	& danish		& icelandic		& nko			& \TX{spanish}	\\
 	albanian		& divehi		& interlingua	& \TX{norwegian}& swedish		\\
 	amharic			& \TX{dutch}	& \TX{italian}	& occitan		& \TX{syriac}	\\
-	\TX{arabic}		& \TX{english}	& japanese		& \TX{panjabi}	& tamil			\\
-	\TX{armenian}	& \TX{esperanto}& kannada		& \TX{persian}	& telugu		\\
-	asturian		& estonian		& khmer			& piedmontese	& \TX{thai}		\\
-	basque			& \TX{finnish}	& \TX{korean}	& \TX{polish}	& \TX{tibetan}	\\
-	\TX{belarusian}	& \TX{french}	& \TX{kurdish}	& \TX{portuguese}& turkish		\\
+	\TX{arabic}		& \TX{english}	& japanese		& \TX{persian}	& tamil			\\
+	\TX{armenian}	& \TX{esperanto}& kannada		& piedmontese	& telugu		\\
+	asturian		& estonian		& khmer			& \TX{polish}	& \TX{thai}		\\
+	basque			& \TX{finnish}	& \TX{korean}	&\TX{portuguese}& \TX{tibetan}	\\
+	\TX{belarusian}	& \TX{french}	& \TX{kurdish}	& \TX{punjabi}	& turkish		\\
 	\TX{bengali}	& friulian		& \TX{lao}		& romanian		& turkmen		\\
 	bosnian			& \TX{gaelic}	& \TX{latin}	& romansh		& \TX{ukrainian}\\
 	breton			& galician		& latvian		& \TX{russian}	& urdu			\\
@@ -516,7 +516,7 @@ Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 	nl               & dutch       &                                                    \tabularnewline
 	nn               & norwegian   & variant=nynorsk [\emph{default}]                   \tabularnewline
 	oc               & occitan     &                                                    \tabularnewline
-	pa               & panjabi     & numerals=gurmukhi                                  \tabularnewline
+	pa               & punjabi     & numerals=gurmukhi                                  \tabularnewline
 	pl               & polish      &                                                    \tabularnewline
 	pms              & piedmontese &                                                    \tabularnewline
 	pt               & portuguese  &                                                    \tabularnewline
@@ -1664,12 +1664,6 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 	\item \xpgchoicekey[1.45]{variant}{\xpgvalue{bokmal} or \xpgpresetvalue{nynorsk}}
 \end{itemize}
 
-\subsection[panjabi]{panjabi\new{1.59}}\label{panjabi}
-\paragraph*{Options:}
-\begin{itemize}
-	\item \xpgchoicekey{numerals}{\xpgvalue{western} or \xpgpresetvalue{gurmukhi}}
-\end{itemize}
-
 \subsection{persian}\label{persian}
 \paragraph*{Options:}
 \begin{itemize}
@@ -1756,6 +1750,12 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 		By default, this is done automatically (if you are using \LuaTeX, the \pkg{luavlna} package is
 		loaded to achieve this).
 		Set this option to ¦false¦ to disable the feature.
+\end{itemize}
+
+\subsection[punjabi]{punjabi\new{1.59}}\label{punjabi}
+\paragraph*{Options:}
+\begin{itemize}
+	\item \xpgchoicekey{numerals}{\xpgvalue{western} or \xpgpresetvalue{gurmukhi}}
 \end{itemize}
 
 \subsection{russian}\label{russian}
@@ -2323,7 +2323,7 @@ The following macros are provided:
             with ¦numerals=cyrillic-trad¦ ¦\mongoliannumeral{19}¦ results in \textrussian[numerals=cyrillic-trad]{\russiannumeral{19}},\\
             with ¦numerals=cyrillic-alph¦ ¦\mongoliannumeral{19}¦ results in \textrussian[numerals=cyrillic-alph]{\russiannumeral{19}}.
     
-    \item \Cmd\panjabinumeral produces Panjabi numbering, depending on the ¦numerals¦ option in the Panjabi language selection, this
+    \item \Cmd\punjabinumeral produces Punjabi numbering, depending on the ¦numerals¦ option in the Punjabi language selection, this
            is either Gurmukhi or Arabic (Western).
 	
 	\item \Cmd\russiannumeral produces Russian numbering, with uppercased variant (for alphanumerical variant) via \Cmd\Russiannumeral.
