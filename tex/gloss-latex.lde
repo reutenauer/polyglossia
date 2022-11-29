@@ -1,6 +1,6 @@
-% Language definition file (part of polyglossia v1.58 -- 2022/10/26)
+% Language definition file (part of polyglossia v1.59 -- 2022/11/29)
 %
-\ProvidesLanguageDefinitionExtension{gloss-latex}{2022/10/26}{v1.58}{polyglossia: module for default language}
+\ProvidesLanguageDefinitionExtension{gloss-latex}{2022/11/29}{v1.59}{polyglossia: module for default language}
 
 \PolyglossiaSetup{latex}{
   hyphennames={english},

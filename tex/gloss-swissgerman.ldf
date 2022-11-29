@@ -1,4 +1,4 @@
-% Language definition file (part of polyglossia v1.58 -- 2022/10/26)
+% Language definition file (part of polyglossia v1.59 -- 2022/11/29)
 %
 \ProvidesFile{gloss-swissgerman.ldf}[polyglossia: module for Swiss German (old spelling)]
 
