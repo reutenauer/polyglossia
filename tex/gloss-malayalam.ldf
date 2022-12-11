@@ -1,6 +1,6 @@
 % Language definition file (part of polyglossia v1.59 -- 2022/11/29)
 %
-﻿\ProvidesFile{gloss-malayalam.ldf}[polyglossia: module for Malayalam]
+\ProvidesFile{gloss-malayalam.ldf}[polyglossia: module for Malayalam]
 
 % Translations provided by Kevin & Siji, 01-11-2009
 
