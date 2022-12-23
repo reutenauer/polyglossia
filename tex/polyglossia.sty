@@ -2235,6 +2235,7 @@
 % Since captions might float to other language regions,
 % we need to change the language here (#542)
 \AddToHook{cmd/caption/before}{%
+    \ifhmode\unskip\fi%
     \addtocontents{lof}{\protect\setforeignlanguage{\languagename}}%
     \addtocontents{lot}{\protect\setforeignlanguage{\languagename}}%
 }
