@@ -33,11 +33,11 @@
 \def\dutch@shorthands{%
   \bbl@activate{"}%
   \def\language@group{dutch}%
-  \declare@shorthand{dutch}{"-}{\nobreak-\bbl@allowhyphens}
-  \declare@shorthand{dutch}{"~}{\textormath{\leavevmode\hbox{-}}{-}}
+  \declare@shorthand{dutch}{"-}{\nobreak-\bbl@allowhyphens}%
+  \declare@shorthand{dutch}{"~}{\textormath{\leavevmode\hbox{-}}{-}}%
   \declare@shorthand{dutch}{"|}{%
-    \textormath{\discretionary{-}{}{\kern.03em}}{}}
-  \declare@shorthand{dutch}{""}{\hskip\z@skip}
+    \textormath{\discretionary{-}{}{\kern.03em}}{}}%
+  \declare@shorthand{dutch}{""}{\hskip\z@skip}%
   \declare@shorthand{dutch}{"/}{\textormath
     {\bbl@allowhyphens\discretionary{/}{}{/}\bbl@allowhyphens}{}}%
   \def\-{\bbl@allowhyphens\discretionary{-}{}{}\bbl@allowhyphens}%
