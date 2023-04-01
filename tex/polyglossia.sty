@@ -2393,13 +2393,12 @@
   }%
   \polyglossia@set@language@name[#1]{#2}%
   % Set the language's/script's font families
-  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#2/lcscript}} {latin}
+  \str_if_eq:eeT{\prop_item:Nn{\polyglossia@langsetup}{#2/lcscript}} {latin}
   {
     \resetfontlatin
   }
-  {
-    \xpg@set@normalfont{#2}
-  }%
+  % This needs to be done anyway in case a \<lang>font is defined
+  \xpg@set@normalfont{#2}
   \xpg@select@fontfamily{#2}%
   \__xpg_use_or_warn:c{#2@language}%
   \cs_if_exist_use:c{#2@numbers}%
