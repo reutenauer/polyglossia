@@ -2186,6 +2186,16 @@
 }
 
 
+% Register locale for \MakeUpppercase and friends
+% The kernel only cares about babel
+\AddToHook{begindocument/end}{%
+    \cs_gset_protected:Npn \@@text@case@aux@
+        {
+          \str_set:Nx \reserved@a { \csuse{ bcp47id } }
+        }
+}
+
+
 \newcommand*{\xpg@set@language@nonaux}[2][]{%
    \@select@language[#1]{#2}%
 }
