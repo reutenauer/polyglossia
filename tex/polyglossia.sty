@@ -1532,15 +1532,17 @@
 % * region (e.g., AT)
 % * script (e.g., Latn)
 % * variant (e.g., 1901)
+% * extension-x (e.g., classic for la-x-classic)
 \DeclareExpandableDocumentCommand \BCPdata {m}
 {
     \csuse{bcp47id}
 %    \str_case:nnF {#1}
 %      {
-%        {language}   { \csuse{bcp47lang} }
-%        {region}     { \csuse{bcp47region} }
-%        {script}     { \csuse{bcp47script} }
-%        {variant}     { \csuse{bcp47variant} }
+%        {language}     { \csuse{bcp47lang} }
+%        {region}       { \csuse{bcp47region} }
+%        {script}       { \csuse{bcp47script} }
+%        {variant}      { \csuse{bcp47variant} }
+%        {extension.x}  { \csuse{bcp47extensionx} }
 %      }
 %      {
 %        \xpg@error{Invalid~ \string\BCPdata\space argument:~ #1}
