@@ -2195,9 +2195,10 @@
         }
 }
 
-% Same for hyperref
+% Same for hyperref. Here we need to patch the pdfstring
+% helper commands
 \AddToHook{package/hyperref/after}
-     {
+{
       \def\MakeUppercaseUnsupportedInPdfStrings#1
          {\use:e 
            {\exp_args:Ne
