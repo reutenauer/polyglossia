@@ -2186,13 +2186,30 @@
 }
 
 
-% Register locale for \MakeUpppercase and friends
+% Register locale for \MakeUppercase and friends
 % The kernel only cares about babel
 \AddToHook{begindocument/end}{%
     \cs_gset_protected:Npn \@@text@case@aux@
         {
           \str_set:Nx \reserved@a { \csuse{ bcp47id } }
         }
+}
+
+% Same for hyperref
+\AddToHook{package/hyperref/after}
+     {
+      \def\MakeUppercaseUnsupportedInPdfStrings#1
+         {\use:e 
+           {\exp_args:Ne
+              \text_uppercase:nn{\csuse{ bcp47id }}{#1}
+           }
+         }
+      \def\MakeLowercaseUnsupportedInPdfStrings#1
+         {\use:e 
+           {\exp_args:Ne
+              \text_lowercase:nn{\csuse{ bcp47id }}{#1}
+           }
+         }         
 }
 
 
