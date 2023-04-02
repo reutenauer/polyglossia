@@ -1524,6 +1524,25 @@
         \xpg@error{Invalid~ \string\mainlanguageid\space argument:~ #1}
       }
 }
+% babel-compliant access to BCP-47 data
+% FIXME: Currently only supports the full tag,
+% no matter what argument is passed
+\DeclareExpandableDocumentCommand \BCPdata {m}
+{
+    \csuse{bcp47id}
+%    \str_case:nnF {#1}
+%      {
+%        {language}   { \csuse{bcp47langid} }
+%        {region}     { \csuse{bcp47regionid} }
+%        {script}     { \csuse{bcp47scriptid} }
+%      }
+%      {
+%        \xpg@error{Invalid~ \string\BCPdata\space argument:~ #1}
+%      }
+}
+
+
+
 % main babel name
 \cs_new_nopar:Npn \mainlanguagename {}
 \cs_new_nopar:Npn \mainbabelname {}
@@ -2191,7 +2210,7 @@
 \AddToHook{begindocument/end}{%
     \cs_gset_protected:Npn \@@text@case@aux@
         {
-          \str_set:Nx \reserved@a { \csuse{ bcp47id } }
+          \str_set:Nx \reserved@a { \BCPdata {} }
         }
 }
 
@@ -2202,13 +2221,13 @@
       \def\MakeUppercaseUnsupportedInPdfStrings#1
          {\use:e 
            {\exp_args:Ne
-              \text_uppercase:nn{\csuse{ bcp47id }}{#1}
+              \text_uppercase:nn{\BCPdata{}}{#1}
            }
          }
       \def\MakeLowercaseUnsupportedInPdfStrings#1
          {\use:e 
            {\exp_args:Ne
-              \text_lowercase:nn{\csuse{ bcp47id }}{#1}
+              \text_lowercase:nn{\BCPdata{}}{#1}
            }
          }         
 }
