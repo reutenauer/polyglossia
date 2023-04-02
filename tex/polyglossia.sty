@@ -1527,14 +1527,20 @@
 % babel-compliant access to BCP-47 data
 % FIXME: Currently only supports the full tag,
 % no matter what argument is passed
+% We should support:
+% * language (e.g., de)
+% * region (e.g., AT)
+% * script (e.g., Latn)
+% * variant (e.g., 1901)
 \DeclareExpandableDocumentCommand \BCPdata {m}
 {
     \csuse{bcp47id}
 %    \str_case:nnF {#1}
 %      {
-%        {language}   { \csuse{bcp47langid} }
-%        {region}     { \csuse{bcp47regionid} }
-%        {script}     { \csuse{bcp47scriptid} }
+%        {language}   { \csuse{bcp47lang} }
+%        {region}     { \csuse{bcp47region} }
+%        {script}     { \csuse{bcp47script} }
+%        {variant}     { \csuse{bcp47variant} }
 %      }
 %      {
 %        \xpg@error{Invalid~ \string\BCPdata\space argument:~ #1}
