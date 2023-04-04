@@ -632,7 +632,12 @@
 % (in case Latin is used as a secondary language, see #394). We have to
 % turn it off if Latin is not the main language.
 
-\protected@write \@auxout { } { \shorthandoff {=} } % for the aux file
+% For the aux file:
+\protected@write \@auxout { }
+  {
+    \shorthandoff {=}
+    \shorthandoff* {^} % #582
+  }
 
 \AtBeginDocument
   {
