@@ -2213,34 +2213,6 @@
 }
 
 
-% Register locale for \MakeUppercase and friends
-% The kernel only cares about babel
-\AddToHook{begindocument/end}{%
-    \cs_gset_protected:Npn \@@text@case@aux@
-        {
-          \str_set:Nx \reserved@a { \BCPdata {} }
-        }
-}
-
-% Same for hyperref. Here we need to patch the pdfstring
-% helper commands
-\AddToHook{package/hyperref/after}
-{
-      \def\MakeUppercaseUnsupportedInPdfStrings#1
-         {\use:e 
-           {\exp_args:Ne
-              \text_uppercase:nn{\BCPdata{}}{#1}
-           }
-         }
-      \def\MakeLowercaseUnsupportedInPdfStrings#1
-         {\use:e 
-           {\exp_args:Ne
-              \text_lowercase:nn{\BCPdata{}}{#1}
-           }
-         }         
-}
-
-
 \newcommand*{\xpg@set@language@nonaux}[2][]{%
    \@select@language[#1]{#2}%
 }
