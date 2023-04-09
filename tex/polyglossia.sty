@@ -2485,12 +2485,27 @@
      \seq_set_split:Nnx \l_tmpa_seq {:} \l_tmpa_tl
      \seq_get_left:NN \l_tmpa_seq \l_tmpb_tl
      \seq_get_right:NN \l_tmpa_seq \l_tmpc_tl
+	 % Check if language is RTL to fix \write order
+	 \__xpg_fix_write_order:
      % Execute passed command with language and maybe options
      \tl_if_empty:NTF \l_tmpb_tl {\cs_if_exist_use:c{#1}{\l_tmpc_tl}}
                                  {\cs_if_exist_use:c{#1}[\l_tmpb_tl]{\l_tmpc_tl}}
   }
   {}
 }
+
+\cs_new_nopar:Nn \__xpg_fix_write_order: {}
+
+\__xpg_at_package_hook:nnn{bidi}{package/bidi/after}{
+  \cs_set_nopar:Nn \__xpg_fix_write_order:
+  {
+    \__xpg_if_LR_str:eF{\prop_item:No{\polyglossia@langsetup}{\l_tmpc_tl/direction}}
+	{
+	  \beginL\aftergroup\endL
+	}
+  }
+}
+
 
 \renewenvironment{otherlanguage}[2][]
 {%
