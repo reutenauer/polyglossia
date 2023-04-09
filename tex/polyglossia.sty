@@ -2473,8 +2473,10 @@
 
 \cs_new:Nn \polyglossia@stack@language:nn
 {
-  \clist_push:Nn \l_xpg_lang_stack {#1:#2}
+  \clist_gpush:Nn \l_xpg_lang_stack {#1:#2}
 }
+
+\cs_generate_variant:Nn \polyglossia@stack@language:nn {nx}
 
 \cs_generate_variant:Nn \seq_set_split:Nnn {Nnx}
 
@@ -2494,14 +2496,14 @@
 
 \renewenvironment{otherlanguage}[2][]
 {%
-  % Get real current options (incl. defaults)
+  % Get real current (pre-switch) options (incl. defaults)
   \clist_clear_new:N \l_xpg_current_options
-  \prop_map_inline:cn {xpg@current@options@#2}
+  \prop_map_inline:cn {xpg@current@options@\languagename}
   {
       \clist_put_right:Nn \l_xpg_current_options {##1=##2}
   }
-  % Store current options and language on stack
-  \polyglossia@stack@language:nn{\clist_use:Nn \l_xpg_current_options {,}}{#2}%
+  % Store current (pre-switch) options and language on stack
+  \polyglossia@stack@language:nx{\clist_use:Nn \l_xpg_current_options {,}}{\languagename}%
   \selectlanguage[#1]{#2}%
 }
 {%
