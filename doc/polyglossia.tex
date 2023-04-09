@@ -2503,9 +2503,6 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \subsubsection*{Bug fixes}
 \begin{itemize}
 	\item Fix \cmd\MakeUppercase\ and friends for specific locales with LaTeX 2022/11 and later (\TXI{581})
-	\item The above fix allows us to remove hacks where \cmd\MakeUppercase\ has been redefined to a no-op
-	      with scripts that do not have uppercasing. This concerns Arabic, Divehi, Hebrew, Hindi, Kurdish,
-	      Persian, Punjabi, Syriac, and Urdu.
 	\item Properly reset fonts on change to Latin other language (\TXI{580})
 	\item Turn ^ shorthand off in aux file for Latin (\TXI{582})
 	\item Fix stacking of nested languages and resulting bus in TOC language assignment (\TXI{585})

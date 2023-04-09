@@ -158,4 +158,16 @@
   \let\@arabic\xpg@save@arabic%
 }
 
+% Save original \MakeUppercase definition
+\let\xpg@save@MakeUppercase\MakeUppercase
+
+\def\blockextras@hebrew{%
+   \def\MakeUppercase##1{##1}%
+}
+
+\def\noextras@hebrew{%
+   % restore original \MakeUppercase definition
+   \let\MakeUppercase\xpg@save@MakeUppercase%
+}
+
 \endinput

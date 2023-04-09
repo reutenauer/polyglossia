@@ -246,4 +246,17 @@
    \let\@arabic\xpg@save@arabic%
 }
 
+% Save original \MakeUppercase definition
+\let\xpg@save@MakeUppercase\MakeUppercase
+
+\def\blockextras@arabic{%
+   \def\MakeUppercase##1{##1}%
+   % TODO disable \@Roman and \@roman ?
+}
+
+\def\noextras@arabic{%
+   % restore original \MakeUppercase definition
+   \let\MakeUppercase\xpg@save@MakeUppercase
+}
+
 \endinput

@@ -133,5 +133,17 @@
   \let\@arabic\xpg@save@arabic%
 }
 
+% Save original \MakeUppercase definition
+\let\xpg@save@MakeUppercase\MakeUppercase
+
+\def\blockextras@urdu{%
+  \def\MakeUppercase##1{##1}%
+}
+
+\def\noextras@urdu{%
+   % restore original \MakeUppercase definition
+   \let\MakeUppercase\xpg@save@MakeUppercase%
+}
+
 \endinput
 
