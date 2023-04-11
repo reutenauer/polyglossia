@@ -1532,17 +1532,29 @@
 % * region (e.g., AT)
 % * script (e.g., Latn)
 % * variant (e.g., 1901)
+% * extension-t (transformation, e.g., en-t-ja)
+% * extension-u (additional locale information, e.g., ar-u-nu-latn)
 % * extension-x (e.g., classic for la-x-classic)
+% * casing (whatever is suitable for \MakeUppercase and friends,
+%           usually alias to language but could also be something
+%           like el-x-iota or ckb-Latn)
+% * tag (the registered full tag)
+% and main.* variants thereof
+% See https://github.com/latex3/latex2e/issues/1035
 \DeclareExpandableDocumentCommand \BCPdata {m}
 {
     \csuse{bcp47id}
 %    \str_case:nnF {#1}
 %      {
-%        {language}     { \csuse{bcp47lang} }
-%        {region}       { \csuse{bcp47region} }
-%        {script}       { \csuse{bcp47script} }
-%        {variant}      { \csuse{bcp47variant} }
-%        {extension.x}  { \csuse{bcp47extensionx} }
+%        {language}     { \csuse{bcp47-lang} }
+%        {region}       { \csuse{bcp47-region} }
+%        {script}       { \csuse{bcp47-script} }
+%        {variant}      { \csuse{bcp47-variant} }
+%        {extension.t}  { \csuse{bcp47-extension-t} }
+%        {extension.u}  { \csuse{bcp47-extension-u} }
+%        {extension.x}  { \csuse{bcp47-extension-x} }
+%        {tag}          { \csuse{bcp47id} }
+%        {casing}       { \csuse{bcp47-casing} }
 %      }
 %      {
 %        \xpg@error{Invalid~ \string\BCPdata\space argument:~ #1}
