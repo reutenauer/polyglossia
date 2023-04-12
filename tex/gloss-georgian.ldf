@@ -21,10 +21,10 @@
 \define@key{georgian}{numerals}[arabic]{%
    \ifstrequal{#1}{georgian}%
       {\georgian@numeralstrue%
-       \SetLanguageKeys{armenian}{bcp47-extension-u=nu-geor}%
+       \SetLanguageKeys{georgian}{bcp47-extension-u=nu-geor}%
       }%
       {\georgian@numeralsfalse%
-       \SetLanguageKeys{armenian}{bcp47-extension-u=nu-latn}%
+       \SetLanguageKeys{georgian}{bcp47-extension-u=nu-latn}%
       }%
 }
 
