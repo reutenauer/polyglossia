@@ -453,6 +453,62 @@
        .value_required:n = true,
     #1 / bcp47
        .initial:n = {},
+    % the BCP-47 language tag
+    #1 / bcp47-language
+       .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/bcp47-language}{##1}},
+    #1 / bcp47-language
+       .value_required:n = true,
+    #1 / bcp47-language
+       .initial:n = {},
+    % the BCP-47 region tag
+    #1 / bcp47-region
+       .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/bcp47-region}{##1}},
+    #1 / bcp47-region
+       .value_required:n = false,
+    #1 / bcp47-region
+       .initial:n = {},
+    % the BCP-47 script tag
+    #1 / bcp47-script
+       .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/bcp47-script}{##1}},
+    #1 / bcp47-script
+       .value_required:n = true,
+    #1 / bcp47-script
+       .initial:n = {},
+    % the BCP-47 variant tag
+    #1 / bcp47-variant
+       .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/bcp47-variant}{##1}},
+    #1 / bcp47-variant
+       .value_required:n = false,
+    #1 / bcp47-variant
+       .initial:n = {},
+    % the BCP-47 extension-t tag
+    #1 / bcp47-extension-t
+       .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/bcp47-extension-t}{##1}},
+    #1 / bcp47-extension-t
+       .value_required:n = false,
+    #1 / bcp47-extension-t
+       .initial:n = {},
+    % the BCP-47 extension-u tag
+    #1 / bcp47-extension-u
+       .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/bcp47-extension-u}{##1}},
+    #1 / bcp47-extension-u
+       .value_required:n = false,
+    #1 / bcp47-extension-u
+       .initial:n = {},
+    % the BCP-47 extension-x tag
+    #1 / bcp47-extension-x
+       .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/bcp47-extension-x}{##1}},
+    #1 / bcp47-extension-x
+       .value_required:n = false,
+    #1 / bcp47-extension-x
+       .initial:n = {},
+    % the BCP-47 casing alias
+    #1 / bcp47-casing
+       .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/bcp47-casing}{##1}},
+    #1 / bcp47-casing
+       .value_required:n = false,
+    #1 / bcp47-casing
+       .initial:n = {},
     % hyphennames
     #1 / hyphennames
     .code:n = {
@@ -1524,10 +1580,9 @@
         \xpg@error{Invalid~ \string\mainlanguageid\space argument:~ #1}
       }
 }
-% babel-compliant access to BCP-47 data
-% FIXME: Currently only supports the full tag,
-% no matter what argument is passed
-% We should support:
+% Kernel command to access to BCP-47 data.
+% Shared interface with babel.
+% We support:
 % * language (e.g., de)
 % * region (e.g., AT)
 % * script (e.g., Latn)
@@ -1543,22 +1598,39 @@
 % See https://github.com/latex3/latex2e/issues/1035
 \DeclareExpandableDocumentCommand \BCPdata {m}
 {
-    \csuse{bcp47id}
-%    \str_case:nnF {#1}
-%      {
-%        {language}     { \csuse{bcp47-lang} }
-%        {region}       { \csuse{bcp47-region} }
-%        {script}       { \csuse{bcp47-script} }
-%        {variant}      { \csuse{bcp47-variant} }
-%        {extension.t}  { \csuse{bcp47-extension-t} }
-%        {extension.u}  { \csuse{bcp47-extension-u} }
-%        {extension.x}  { \csuse{bcp47-extension-x} }
-%        {tag}          { \csuse{bcp47id} }
-%        {casing}       { \csuse{bcp47-casing} }
-%      }
-%      {
-%        \xpg@error{Invalid~ \string\BCPdata\space argument:~ #1}
-%      }
+    \tl_set:Nn \l_tmpa_tl {#1}
+    % Check whether we have main.*
+    \str_if_in:nnTF {#1} { main. }
+        {
+          % split main.var and strip main.
+          \seq_set_split:Nnx \l_tmpa_seq {.} \l_tmpa_tl
+          \seq_get_right:NN \l_tmpa_seq \l_tmpa_tl
+          \str_set_eq:NN \l_tmpa_str \mainlanguagename
+        }
+        {
+          \str_set_eq:NN \l_tmpa_str \languagename
+        }
+    % return value for argument or error
+    \str_case_e:nnF { \l_tmpa_tl }
+      {
+        {language}     { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47-language } }
+        {region}       { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47-region } }
+        {script}       { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47-script } }
+        {variant}      { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47-variant } }
+        {extension.t}  { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47extension-t } }
+        {extension.u}  { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47-extension-u } }
+        {extension.x}  { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47-extension-x } }
+        {tag}          { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47 } }
+        {casing}       {  % For casing, we fall back to language if bcp47-casing is not explicitly set
+                          \cs_set_nopar:cpx {tmpcasing} { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47-casing } }
+                          \str_if_empty:NTF \tmpcasing
+                                           { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47-language } }
+                                           { \tmpcasing }
+                       }
+      }
+      {
+        \xpg@error{Invalid~ \string\BCPdata\space argument:~ #1}
+      }
 }
 
 
