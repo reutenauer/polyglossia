@@ -3,6 +3,8 @@
 \ProvidesFile{gloss-interlingua.ldf}[polyglossia: module for Interlingua]
 \PolyglossiaSetup{interlingua}{
   bcp47=ia,
+  bcp47-language=ia,
+  bcp47-script=Latn,
   hyphennames={interlingua},
   hyphenmins={2,2},
   langtag=INA,

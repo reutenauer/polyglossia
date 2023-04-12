@@ -4,6 +4,9 @@
 
 \PolyglossiaSetup{hungarian}{
   bcp47=hu,
+  bcp47-language=hu,
+  bcp47-region=HU,
+  bcp47-script=Latn,
   babelname=magyar,
   hyphennames={hungarian,magyar},
   langtag=HUN,

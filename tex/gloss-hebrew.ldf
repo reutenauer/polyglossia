@@ -7,6 +7,9 @@
 
 \PolyglossiaSetup{hebrew}{
   bcp47=he,
+  bcp47-language=hr,
+  bcp47-region=HE,
+  bcp47-script=Hebr,
   script=Hebrew,
   direction=RL,
   scripttag=hebr,
@@ -43,9 +46,11 @@
    \ifcase\xpg@nr\relax
       % hebrew:
       \@hebrew@numeralstrue%
+      \SetLanguageKeys{hebrew}{bcp47-extension-u=nu-hebr}%
    \or
       % arabic:
       \@hebrew@numeralsfalse%
+      \SetLanguageKeys{hebrew}{bcp47-extension-u=nu-latn}%
    \fi
    \xpg@info{Option: Hebrew, numerals=\xpg@val}%
 }{\xpg@warning{Unknown Hebrew numerals value `#1'}}

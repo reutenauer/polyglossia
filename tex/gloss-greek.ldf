@@ -4,6 +4,10 @@
 
 \PolyglossiaSetup{greek}{
   bcp47=el-monoton,
+  bcp47-language=el,
+  bcp47-variant=monoton,
+  bcp47-script=Grek,
+  bcp47-extension-u=nu-grek,
   script=Greek,
   scripttag=grek,
   langtag=ELL,
@@ -57,7 +61,7 @@
     \def\greek@variant{polygreek}%
     \def\captionsgreek{\polygreekcaptions}%
     \def\dategreek{\datepolygreek}%
-    \SetLanguageKeys{greek}{babelname=polutonikogreek,bcp47=el-polyton}%
+    \SetLanguageKeys{greek}{babelname=polutonikogreek,bcp47=el-polyton,bcp47-language=el,bcp47-variant=polyton}%
     \xpg@info{Option: Polytonic Greek}%
   \else
     \ifx\@tmpa\tmp@ancient
@@ -68,7 +72,7 @@
       \def\greek@variant{ancientgreek}%
       \def\captionsgreek{\ancientgreekcaptions}%
       \def\dategreek{\dateancientgreek}%
-      \SetLanguageKeys{greek}{babelname=greek,bcp47=grc}%
+      \SetLanguageKeys{greek}{babelname=greek,bcp47=grc,bcp47-language=grc,bcp47-variant={}}%
       \xpg@info{Option: Ancient Greek}%
     \else %monotonic
       \xpg@ifdefined{monogreek}{}%
@@ -78,7 +82,7 @@
       \def\greek@variant{monogreek}% monotonic
       \def\captionsgreek{\monogreekcaptions}%
       \def\dategreek{\datemonogreek}%
-      \SetLanguageKeys{greek}{babelname=greek,bcp47=el-monoton}%
+      \SetLanguageKeys{greek}{babelname=greek,bcp47=el-monoton,bcp47-language=el,bcp47-variant=polyton}%
       \xpg@info{Option: Monotonic Greek}%
     \fi
   \fi}
@@ -90,7 +94,12 @@
 
 \newif\if@greek@numerals
 \define@key{greek}{numerals}[greek]{%
-  \ifstrequal{#1}{arabic}{\@greek@numeralsfalse}{\@greek@numeralstrue}%
+  \ifstrequal{#1}{arabic}{%
+   \@greek@numeralsfalse%
+    \SetLanguageKeys{greek}{bcp47-extension-u=nu-latn}%
+   }{\@greek@numeralstrue%
+    \SetLanguageKeys{greek}{bcp47-extension-u=nu-grek}%
+   }%
 }
 
 \define@boolkey{greek}{attic}[true]{\xpg@warning{Greek option `attic' is no longer required.}}

@@ -9,6 +9,8 @@
 \RequirePackage{devanagaridigits}
 \PolyglossiaSetup{hindi}{
   bcp47=hi,
+  bcp47-language=hi,
+  bcp47-script=Deva,
   script=Devanagari,
   scripttag=deva,
   langtag=HIN,
@@ -42,9 +44,11 @@
    \ifcase\xpg@nr\relax
       % Devanagari:
       \hindi@devanagari@numeralstrue%
+      \SetLanguageKeys{hindi}{bcp47-extension-u=nu-deva}%
    \or
       % Western:
       \hindi@devanagari@numeralsfalse%
+      \SetLanguageKeys{hindi}{bcp47-extension-u=nu-latn}%
    \fi
    \xpg@info{Option: Hindi, numerals=\xpg@val}%
 }{\xpg@warning{Unknown Hindi numeral `#1'}}

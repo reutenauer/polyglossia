@@ -4,6 +4,9 @@
 \ProvidesFile{gloss-italian.ldf}[polyglossia: module for Italian]
 \PolyglossiaSetup{italian}{
   bcp47=it,
+  bcp47-language=it,
+  bcp47-region=IT,
+  bcp47-script=Latn,
   hyphennames={italian},
   hyphenmins={2,2},
   langtag=ITA,
