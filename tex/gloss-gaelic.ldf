@@ -4,6 +4,8 @@
 
 \PolyglossiaSetup{gaelic}{
   bcp47=ga,
+  bcp47-language=ga,
+  bcp47-script=Latn,
   language=Irish,
   babelname=irish,
   hyphennames={irish},
@@ -24,12 +26,12 @@
    \ifcase\xpg@nr\relax
       % irish:
       \gdef\gaelic@variant{irish}%
-      \SetLanguageKeys{gaelic}{language=Irish,langtag=IRI,babelname=irish,bcp47=ga}%
+      \SetLanguageKeys{gaelic}{language=Irish,langtag=IRI,babelname=irish,bcp47=ga,bcp47-language=ga}%
       \xpg@fontsetup@latin{gaelic}%
    \or
       % scottish:
       \gdef\gaelic@variant{scottish}%
-      \SetLanguageKeys{gaelic}{language=Gaelic,langtag=GAE,babelname=scottish,bcp47=gd}%
+      \SetLanguageKeys{gaelic}{language=Gaelic,langtag=GAE,babelname=scottish,bcp47=gd,bcp47-language=gd}%
       \xpg@fontsetup@latin{gaelic}%
    \fi
    \xpg@info{Option: gaelic, variant=\xpg@val}%

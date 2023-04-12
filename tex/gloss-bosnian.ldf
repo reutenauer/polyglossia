@@ -4,6 +4,9 @@
 
 \PolyglossiaSetup{bosnian}{
   bcp47=bs,
+  bcp47-language=bs,
+  bcp47-region=BA,
+  bcp47-script=Latn,
   langtag=BOS,
   hyphennames={bosnian,croatian},
   hyphenmins={2,2}, % adapted from gloss-croatian

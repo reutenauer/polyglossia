@@ -10,6 +10,8 @@
 
 \PolyglossiaSetup{bengali}{
   bcp47=bn,
+  bcp47-language=bn,
+  bcp47-script=Beng,
   script=Bengali,
   scripttag=beng,
   langtag=BEN,

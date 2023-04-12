@@ -4,6 +4,8 @@
 
 \PolyglossiaSetup{afrikaans}{
   bcp47=af,
+  bcp47-language=af,
+  bcp47-script=Latn,
   hyphennames={afrikaans,dutch},
   hyphenmins={2,2},
   langtag=AFK,

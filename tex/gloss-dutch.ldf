@@ -3,6 +3,8 @@
 \ProvidesFile{gloss-dutch.ldf}[polyglossia: module for Dutch]
 \PolyglossiaSetup{dutch}{
   bcp47=nl,
+  bcp47-language=nl,
+  bcp47-script=Latn,
   hyphennames={dutch},
   hyphenmins={2,2},
   langtag=NLD,

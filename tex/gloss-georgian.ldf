@@ -4,6 +4,8 @@
 
 \PolyglossiaSetup{georgian}{
   bcp47=ka,
+  bcp47-language=ka,
+  bcp47-script=Geor,
   script=Georgian,
   scripttag=geor,
   langtag=KAT,
@@ -18,8 +20,12 @@
 \newif\ifgeorgian@numerals
 \define@key{georgian}{numerals}[arabic]{%
    \ifstrequal{#1}{georgian}%
-      {\georgian@numeralstrue}%
-      {\georgian@numeralsfalse}%
+      {\georgian@numeralstrue%
+       \SetLanguageKeys{armenian}{bcp47-extension-u=nu-geor}%
+      }%
+      {\georgian@numeralsfalse%
+       \SetLanguageKeys{armenian}{bcp47-extension-u=nu-latn}%
+      }%
 }
 
 \define@boolkey{georgian}[georgian@]{babelshorthands}[true]{}

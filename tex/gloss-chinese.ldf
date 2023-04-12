@@ -4,6 +4,9 @@
 
 \PolyglossiaSetup{chinese}{
     bcp47=zh,
+    bcp47-language=zh,
+    bcp47-region=CN,
+    bcp47-script=Hans,
     script=CJK,
     scripttag=hani,
     language=Chinese,
@@ -26,7 +29,10 @@
 \define@key{chinese}{numerals}[arabic]{%
    \ifstrequal{#1}{chinese}%
       {\chinese@numeralstrue}%
-      {\chinese@numeralsfalse}%
+       \SetLanguageKeys{chinese}{bcp47-extension-u=nu-hant}%
+      {\chinese@numeralsfalse%
+       \SetLanguageKeys{chinese}{bcp47-extension-u=nu-latn}%
+      }%
 }
 
 
@@ -34,22 +40,22 @@
    \ifcase\xpg@nr\relax
       % cn:
       \chinese@traditionalfalse
-      \SetLanguageKeys{chinese}{bcp47=zh-CN}%
+      \SetLanguageKeys{chinese}{bcp47=zh-CN,bcp47-language=zh,bcp47-region=CN,bcp47-script=Hans}%
       \xpg@info{Option: Chinese, variant=simplified}%
    \or
       % simplified:
       \chinese@traditionalfalse
-      \SetLanguageKeys{chinese}{bcp47=zh-CN}%
+      \SetLanguageKeys{chinese}{bcp47=zh-CN,bcp47-language=zh,bcp47-region=CN,bcp47-script=Hans}%
       \xpg@info{Option: Chinese, variant=simplified}%
    \or
       % tw:
       \chinese@traditionaltrue
-      \SetLanguageKeys{chinese}{bcp47=zh-TW}%
+      \SetLanguageKeys{chinese}{bcp47=zh-TW,bcp47-language=zh,bcp47-region=TW,bcp47-script=Hant}%
       \xpg@info{Option: Chinese, variant=traditional}%
    \or
       % traditional:
       \chinese@traditionaltrue
-      \SetLanguageKeys{chinese}{bcp47=zh-TW}%
+      \SetLanguageKeys{chinese}{bcp47=zh-TW,bcp47-language=zh,bcp47-region=TW,bcp47-script=Hant}%
       \xpg@info{Option: Chinese, variant=traditional}%
    \fi
 }{\xpg@warning{Unknown Chinese variant `#1'}}

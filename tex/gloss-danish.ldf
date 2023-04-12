@@ -3,6 +3,8 @@
 \ProvidesFile{gloss-danish.ldf}[polyglossia: module for Danish]
 \PolyglossiaSetup{danish}{
   bcp47=da,
+  bcp47-language=da,
+  bcp47-script=Latn,
   hyphennames={danish},
   hyphenmins={2,3},
   langtag=DAN,

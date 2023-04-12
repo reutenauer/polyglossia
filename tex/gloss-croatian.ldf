@@ -3,6 +3,8 @@
 \ProvidesFile{gloss-croatian.ldf}[polyglossia: module for Croatian]
 \PolyglossiaSetup{croatian}{
   bcp47=hr,
+  bcp47-language=hr,
+  bcp47-script=Latn,
   langtag=HRV,
   hyphennames={croatian},
   hyphenmins={2,2}, % aligned with https://ctan.org/pkg/hrhyph patterns and http://lebesgue.math.hr/~nenad/Diplomski/Maja_Ribaric_2011.pdf

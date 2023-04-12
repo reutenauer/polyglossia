@@ -4,6 +4,9 @@
 
 \PolyglossiaSetup{armenian}{
   bcp47=hy,
+  bcp47-language=hy,
+  bcp47-script=Armn,
+  bcp47-region=AM,
   script=Armenian,
   scripttag=armn,
   langtag=HYE,
@@ -32,7 +35,13 @@
 \newif\if@armenian@numerals
 \@armenian@numeralsfalse
 \define@key{armenian}{numerals}[armenian]{%
-  \ifstrequal{#1}{arabic}{\@armenian@numeralsfalse}{\@armenian@numeralstrue}%
+  \ifstrequal{#1}{arabic}{%
+     \@armenian@numeralsfalse%
+     \SetLanguageKeys{armenian}{bcp47-extension-u=nu-latn}%
+   }{%
+     \@armenian@numeralstrue%
+     \SetLanguageKeys{armenian}{bcp47-extension-u={}}%
+   }%
 }
 
 % Register default options

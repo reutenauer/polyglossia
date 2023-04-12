@@ -3,6 +3,9 @@
 \ProvidesFile{gloss-basque.ldf}[polyglossia: module for Basque]
 \PolyglossiaSetup{basque}{
   bcp47=eu,
+  bcp47-language=eu,
+  bcp47-region=ES,
+  bcp47-script=Latn,
   hyphennames={basque},
   hyphenmins={2,2},
   langtag=EUQ,

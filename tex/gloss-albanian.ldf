@@ -4,6 +4,8 @@
 
 \PolyglossiaSetup{albanian}{
   bcp47=sq,
+  bcp47-language=sq,
+  bcp47-script=Latn,
   hyphennames={albanian},
   langtag=SQI,
   hyphenmins={2,2},

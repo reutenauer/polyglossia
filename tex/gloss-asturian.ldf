@@ -6,6 +6,8 @@
 \ProvidesFile{gloss-asturian.ldf}[polyglossia: module for Asturian]
 \PolyglossiaSetup{asturian}{
   bcp47=ast,
+  bcp47-language=ast,
+  bcp47-script=Latn,
   hyphennames={asturian,catalan},
   hyphenmins={2,2},
   langtag=AST,

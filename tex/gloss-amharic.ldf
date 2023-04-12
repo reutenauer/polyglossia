@@ -3,6 +3,8 @@
 \ProvidesFile{gloss-amharic.ldf}[polyglossia: module for Amharic]
 \PolyglossiaSetup{amharic}{
   bcp47=am,
+  bcp47-language=am,
+  bcp47-script=Ethi,
   script=Ethiopic,
   scripttag=ethi,
   langtag=AMH,

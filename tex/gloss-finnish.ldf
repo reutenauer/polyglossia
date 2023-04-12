@@ -3,6 +3,9 @@
 \ProvidesFile{gloss-finnish.ldf}[polyglossia: module for Finnish]
 \PolyglossiaSetup{finnish}{
   bcp47=fi,
+  bcp47-language=fi,
+  bcp47-region=FI,
+  bcp47-script=Latn,
   hyphennames={finnish},
   hyphenmins={2,2},
   langtag=FIN,

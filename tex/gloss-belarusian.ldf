@@ -6,6 +6,10 @@
 
 \PolyglossiaSetup{belarusian}{
   bcp47=be,
+  bcp47-language=be,
+  bcp47-region=BY,
+  bcp47-variant=1959acad,
+  bcp47-script=Cyrl,
   script=Cyrillic,
   scripttag=cyrl,
   langtag=BEL,
@@ -26,15 +30,15 @@
    \ifcase\xpg@nr\relax
       % modern:
       \def\belarusian@spelling{modern}%
-      \SetLanguageKeys{belarusian}{bcp47=be}%
+      \SetLanguageKeys{belarusian}{bcp47=be,bcp47-variant=1959acad}%
    \or
       % classic:
       \def\belarusian@spelling{tarask}%
-      \SetLanguageKeys{belarusian}{bcp47=be-tarask}%
+      \SetLanguageKeys{belarusian}{bcp47=be-tarask,bcp47-variant=tarask}%
    \or
       % tarask:
       \def\belarusian@spelling{tarask}%
-      \SetLanguageKeys{belarusian}{bcp47=be-tarask}%
+      \SetLanguageKeys{belarusian}{bcp47=be-tarask,bcp47-variant=tarask}%
    \fi
 }{\xpg@warning{Unknown Belarusian spelling `#1'}}
 

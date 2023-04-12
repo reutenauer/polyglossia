@@ -6,4 +6,6 @@
 
 \xpg@load@master@language{arabic}
 
+\SetLanguageKeys{arabic}{bcp47=ar-PS,bcp47-language=ar,bcp47-region=PS}%
+
 \endinput

@@ -3,6 +3,9 @@
 \ProvidesFile{gloss-galician.ldf}[polyglossia: module for Galician]
 \PolyglossiaSetup{galician}{
   bcp47=gl,
+  bcp47-language=gl,
+  bcp47-region=ES,
+  bcp47-script=Latn,
   hyphennames={galician},
   hyphenmins={2,2},
   langtag=GAL,

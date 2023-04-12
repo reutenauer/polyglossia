@@ -5,6 +5,8 @@
 \RequireBidi
 \PolyglossiaSetup{divehi}{
   bcp47=dv,
+  bcp47-language=dv,
+  bcp47-script=Thaa,
   script=Thaana,
   scripttag=thaa,
   langtag=DIV,% TODO Support DHV as well?

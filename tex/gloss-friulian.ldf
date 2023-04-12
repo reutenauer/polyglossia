@@ -4,6 +4,8 @@
 
 \PolyglossiaSetup{friulian}{%
   bcp47=fur,
+  bcp47-language=fur,
+  bcp47-script=Latn,
   language=Friulian,
   babelname=friulan,
   hyphennames={friulan,furlan},

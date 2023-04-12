@@ -3,6 +3,8 @@
 \ProvidesFile{gloss-catalan.ldf}[polyglossia: module for Catalan]
 \PolyglossiaSetup{catalan}{
   bcp47=ca,
+  bcp47-language=ca,
+  bcp47-script=Latn,
   hyphennames={catalan},
   hyphenmins={2,2},
   langtag=CAT,

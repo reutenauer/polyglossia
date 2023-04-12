@@ -4,6 +4,9 @@
 
 \PolyglossiaSetup{czech}{
   bcp47=cz,
+  bcp47-language=cz,
+  bcp47-region=CZ,
+  bcp47-script=Latn,
   hyphennames={czech},
   hyphenmins={2,2},
   langtag=CSY,

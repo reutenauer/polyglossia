@@ -4,6 +4,10 @@
 
 \PolyglossiaSetup{german}{
   bcp47=de-DE,
+  bcp47-language=de,
+  bcp47-region=DE,
+  bcp47-variant=1996,
+  bcp47-script=Latn,
   hyphenmins={2,2},
   frenchspacing=true,
   fontsetup=true,
@@ -93,43 +97,43 @@
   \if@german@oldspelling
      \if@swiss@locale
          \if@german@blackletter
-           \SetLanguageKeys{german}{babelname=swissgerman,bcp47=de-Latf-CH-1901}%
+           \SetLanguageKeys{german}{babelname=swissgerman,bcp47=de-Latf-CH-1901,bcp47-language=de,bcp47-region=CH,bcp47-variant=1901,bcp47-script=Latf}%
          \else
-           \SetLanguageKeys{german}{babelname=swissgerman,bcp47=de-CH-1901}%
+           \SetLanguageKeys{german}{babelname=swissgerman,bcp47=de-CH-1901,bcp47-language=de,bcp47-region=CH,bcp47-variant=1901,bcp47-script=Latn}%
          \fi
      \else
      \if@austrian@locale
          \if@german@blackletter
-            \SetLanguageKeys{german}{babelname=austrian,bcp47=de-Latf-AT-1901}%
+            \SetLanguageKeys{german}{babelname=austrian,bcp47=de-Latf-AT-1901,bcp47-language=de,bcp47-region=AT,bcp47-variant=1901,bcp47-script=Latf}%
          \else
-            \SetLanguageKeys{german}{babelname=austrian,bcp47=de-AT-1901}%
+            \SetLanguageKeys{german}{babelname=austrian,bcp47=de-AT-1901,bcp47-language=de,bcp47-region=AT,bcp47-variant=1901,bcp47-script=Latn}%
          \fi
      \else
          \if@german@blackletter
-            \SetLanguageKeys{german}{babelname=german,bcp47=de-Latf-DE-1901}%
+            \SetLanguageKeys{german}{babelname=german,bcp47=de-Latf-DE-1901,bcp47-script=Latf,bcp47-language=de,bcp47-region=DE,bcp47-variant=1901,bcp47-script=Latf}%
          \else
-            \SetLanguageKeys{german}{babelname=german,bcp47=de-DE-1901}%
+            \SetLanguageKeys{german}{babelname=german,bcp47=de-DE-1901,bcp47-language=de,bcp47-region=DE,bcp47-variant=1901,bcp47-script=Latn}%
          \fi
      \fi\fi
   \else
      \if@swiss@locale
          \if@german@blackletter
-           \SetLanguageKeys{german}{babelname=nswissgerman,bcp47=de-Latf-CH}%
+           \SetLanguageKeys{german}{babelname=nswissgerman,bcp47=de-Latf-CH,bcp47-language=de,bcp47-region=CH,bcp47-variant=1996,bcp47-script=Latf}%
          \else
-           \SetLanguageKeys{german}{babelname=nswissgerman,bcp47=de-CH}%
+           \SetLanguageKeys{german}{babelname=nswissgerman,bcp47=de-CH,bcp47-language=de,bcp47-region=CH,bcp47-variant=1996,bcp47-script=Latn}%
          \fi
      \else
      \if@austrian@locale
          \if@german@blackletter
-           \SetLanguageKeys{german}{babelname=naustrian,bcp47=de-Latf-AT}%
+           \SetLanguageKeys{german}{babelname=naustrian,bcp47=de-Latf-AT,bcp47-language=de,bcp47-region=AT,bcp47-variant=1996,bcp47-script=Latf}%
          \else
-           \SetLanguageKeys{german}{babelname=naustrian,bcp47=de-AT}%
+           \SetLanguageKeys{german}{babelname=naustrian,bcp47=de-AT,bcp47-language=de,bcp47-region=AT,bcp47-variant=1996,bcp47-script=Latn}%
          \fi
      \else
          \if@german@blackletter
-           \SetLanguageKeys{german}{babelname=ngerman,bcp47=de-Latf-DE}%
+           \SetLanguageKeys{german}{babelname=ngerman,bcp47=de-Latf-DE,bcp47-language=de,bcp47-region=DE,bcp47-variant=1996,bcp47-script=Latf}%
          \else
-           \SetLanguageKeys{german}{babelname=ngerman,bcp47=de-DE}%
+           \SetLanguageKeys{german}{babelname=ngerman,bcp47=de-DE,bcp47-language=de,bcp47-region=DE,bcp47-variant=1996,bcp47-script=Latn}%
          \fi
      \fi\fi
   \fi

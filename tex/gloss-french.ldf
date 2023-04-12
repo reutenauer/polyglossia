@@ -4,6 +4,9 @@
 
 \PolyglossiaSetup{french}{%
   bcp47=fr-FR,
+  bcp47-language=fr,
+  bcp47-region=FR,
+  bcp47-script=Latn,
   language=French,
   script=Latin,
   langtag=FRA,
@@ -28,12 +31,12 @@
    \ifcase\xpg@nr\relax
       % french:
       \def\french@variant{french}%
-      \SetLanguageKeys{french}{babelname=french,bcp47=fr-FR}%
+      \SetLanguageKeys{french}{babelname=french,bcp47=fr-FR,bcp47-language=fr,bcp47-region=FR}%
       \french@thincolonspacefalse
    \or
       % canadian:
       \def\french@variant{canadien}%
-      \SetLanguageKeys{french}{babelname=canadien,bcp47=fr-CA}%
+      \SetLanguageKeys{french}{babelname=canadien,bcp47=fr-CA,bcp47-language=fr,bcp47-region=CA}%
       \xpg@ifdefined{canadien}{}%
       {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
         I will use the standard patterns for French instead}%
@@ -42,7 +45,7 @@
    \or
       % acadian:
       \def\french@variant{acadian}%
-      \SetLanguageKeys{french}{babelname=canadien,bcp47=fr-CA}%
+      \SetLanguageKeys{french}{babelname=canadien,bcp47=fr-CA,bcp47-language=fr,bcp47-region=CA}%
       \xpg@ifdefined{acadian}{}%
       {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
         I will use the standard patterns for French instead}%
@@ -51,7 +54,7 @@
    \or
       % swiss:
       \def\french@variant{swissfrench}%
-      \SetLanguageKeys{french}{babelname=french,bcp47=fr-CH}%
+      \SetLanguageKeys{french}{babelname=french,bcp47=fr-CH,bcp47-language=fr,bcp47-region=CH}%
       \adddialect\l@swissfrench\l@french\relax%
       \french@thincolonspacetrue
    \fi

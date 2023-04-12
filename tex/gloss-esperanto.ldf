@@ -3,6 +3,8 @@
 \ProvidesFile{gloss-esperanto.ldf}[polyglossia: module for Esperanto]
 \PolyglossiaSetup{esperanto}{
   bcp47=eo,
+  bcp47-language=eo,
+  bcp47-script=Latn,
   hyphennames={esperanto},
   hyphenmins={2,2},
   langtag=NTO,

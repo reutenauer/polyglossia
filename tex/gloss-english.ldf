@@ -4,6 +4,9 @@
 
 \PolyglossiaSetup{english}{
   bcp47=en-US,
+  bcp47-language=en,
+  bcp47-region=US,
+  bcp47-script=Latn,
   hyphennames={english,american,usenglish,USenglish},
   hyphenmins={2,3},
   langtag=ENG,
@@ -47,35 +50,35 @@
       \british@hyphentrue
       \british@dateformattrue
       \english@ordinalmonthdaytrue
-      \SetLanguageKeys{english}{babelname=british,bcp47=en-GB}%
+      \SetLanguageKeys{english}{babelname=british,bcp47=en-GB,bcp47-language=en,bcp47-region=GB}%
       \xpg@info{Option: English, variant=british}%
    \or
       % british:
       \british@hyphentrue
       \british@dateformattrue
       \english@ordinalmonthdaytrue
-      \SetLanguageKeys{english}{babelname=british,bcp47=en-GB}%
+      \SetLanguageKeys{english}{babelname=british,bcp47=en-GB,bcp47-language=en,bcp47-region=GB}%
       \xpg@info{Option: english variant=british}%
    \or
       % us:
       \british@hyphenfalse
       \british@dateformatfalse
       \english@ordinalmonthdayfalse
-      \SetLanguageKeys{english}{babelname=american,bcp47=en-US}%
+      \SetLanguageKeys{english}{babelname=american,bcp47=en-US,bcp47-language=en,bcp47-region=US}%
       \xpg@info{Option: English, variant=american}%
    \or
       % american:
       \british@hyphenfalse
       \british@dateformatfalse
       \english@ordinalmonthdayfalse
-      \SetLanguageKeys{english}{babelname=american,bcp47=en-US}%
+      \SetLanguageKeys{english}{babelname=american,bcp47=en-US,bcp47-language=en,bcp47-region=US}%
       \xpg@info{Option: English, variant=american}%
    \or
       % usmax:
       \british@hyphenfalse
       \british@dateformatfalse
       \english@ordinalmonthdayfalse
-      \SetLanguageKeys{english}{babelname=american,bcp47=en-US}%
+      \SetLanguageKeys{english}{babelname=american,bcp47=en-US,bcp47-language=en,bcp47-region=US}%
       \xpg@info{Option: english variant=american (with additional patterns)}%
       \xpg@ifdefined{usenglishmax}{}%
          {\xpg@warning{No hyphenation patterns were loaded for "US English Max"\MessageBreak
@@ -90,7 +93,7 @@
       \british@hyphentrue
       \british@dateformattrue
       \english@ordinalmonthdayfalse
-      \SetLanguageKeys{english}{babelname=australian,bcp47=en-AU}%
+      \SetLanguageKeys{english}{babelname=australian,bcp47=en-AU,bcp47-language=en,bcp47-region=AU}%
       \xpg@info{Option: English, variant=australian}%
       \adddialect\l@australian\l@english%
    \or
@@ -100,7 +103,7 @@
       \british@hyphentrue
       \british@dateformattrue
       \english@ordinalmonthdayfalse
-      \SetLanguageKeys{english}{babelname=newzealand,bcp47=en-NZ}%
+      \SetLanguageKeys{english}{babelname=newzealand,bcp47=en-NZ,bcp47-language=en,bcp47-region=NZ}%
       \xpg@info{Option: English, variant=newzealand}%
       \adddialect\l@newzealand\l@english%
    \or
@@ -109,7 +112,7 @@
       \british@hyphenfalse
       \british@dateformatfalse
       \english@ordinalmonthdayfalse
-      \SetLanguageKeys{english}{babelname=canadian,bcp47=en-CA}%
+      \SetLanguageKeys{english}{babelname=canadian,bcp47=en-CA,bcp47-language=en,bcp47-region=CA}%
       \xpg@info{Option: English, variant=american}%
       \adddialect\l@canadian\l@english%
    \fi
