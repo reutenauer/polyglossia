@@ -2447,10 +2447,42 @@ Example: ¦\charifavailable{1E9E}{SS}¦ prints the capital version of the German
 (\ie \charifavailable{1E9E}{SS}), else it prints the substitution digraph SS.
 
 
-\section{Accessing language information}
+\section{Accessing language information}\label{sec:langinfo}
 
-The following is specifically relevant to package authors who need information about the languages in use.
-In order to get such information, \pkg{polyglossia} provides the following macros:
+The following is specifically relevant to package authors who need information about the languages in use
+and the details of the respective locale.
+In order to get such information, the recommended way is to use the \Cmd{\BCPdata\marg{type}}\new{1.61}
+command to get (parts of) the BCP-47 language tag. This command is used by the \LaTeX\ kernel as of 6/2023,
+and the syntax is standardized at least between \pkg{babel} and \pkg{polyglossia}.
+
+\cmd\BCPdata\ supports the following \marg{type} arguments:
+\begin{itemize}
+	\item \xpgoption{language} The language subtag (\eg \texttt{de})
+	\item \xpgoption{region} The region subtag (\eg \texttt{AT})
+	\item \xpgoption{script} The script subtag (\eg \texttt{Latn})
+	\item \xpgoption{variant} The variant subtag (\eg \texttt{1901} for German old spelling)
+	\item \xpgoption{extension-t} The subtag indicating transformation between languages or scripts
+	      (\eg, \texttt{en-t-ja}: English transformed to Japanese)
+	\item \xpgoption{extension-u} The subtag indicating additional locale information (\eg \texttt{ar-u-nu-latn}:
+	      Arabic with Latin Numbering)
+	\item \xpgoption{extension-x} The private usespace subtag (\eg \texttt{la-x-classic} for classic Latin)
+	\item \xpgoption{casing} is a special semantic value which returns whatever is considered suitable
+	           for casing commands such as \cmd\MakeUppercase. In many cases, this is identical to \texttt{language} but
+	           it could also be something more specific such as \texttt{el-x-iota} or \texttt{ckb-Latn} if this is
+	           needed for proper casing. Note that this information is retrieved by the \LaTeX\ kernel for casing as
+	           of 06/2023.
+	\item \xpgoption{tag} returns the registered full tag (identical to \cmd\languageid\ below). This however omits
+	       certain subtags if these are considered obvious (\eg for German, only \texttt{de-DE} is returned, although
+	       script [\texttt{Latn}] and variant [\texttt{1996}] are defined as well).
+\end{itemize}
+If a subtag is not defined for a given language, and empty string is returned.
+
+The values above return information for the language currently in use. If you need to access information for the 
+main language of the document, prepend \xpgoption{main.} to the respective argument (\eg \xpgoption{main.language}). This works
+for all supported arguments.
+
+Next to \cmd\BCPdata, \pkg{polyglossia} provides the following legacy macros which are partly unique to \pkg{polyglossia},
+partly re-implementations of legacy \pkg{babel} commands:
 
 \begin{itemize}
 	\item \Cmd\languagename\ stores the currently active (polyglossia) language name.
@@ -2506,6 +2538,12 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Turn ¦^¦ shorthand off in aux file for Latin (\TXI{582})
 	\item Fix stacking of nested languages and resulting bug in TOC language assignment (\TXI{585})
 	\item Fix ¦\greeknumeral{6}¦ (\TXI{587})
+\end{itemize}
+
+\subsubsection*{New features}
+\begin{itemize}
+	\item Introduce \cmd\BCPdata, a standardized way to access language information
+	(see sec.~\ref{sec:langinfo}).
 \end{itemize}
 
 \subsection*{1.60 (2023/02/11)}
