@@ -2461,11 +2461,11 @@ and the syntax is standardized at least between \pkg{babel} and \pkg{polyglossia
 	\item \xpgoption{region} The region subtag (\eg \texttt{AT})
 	\item \xpgoption{script} The script subtag (\eg \texttt{Latn})
 	\item \xpgoption{variant} The variant subtag (\eg \texttt{1901} for German old spelling)
-	\item \xpgoption{extension-t} The subtag indicating transformation between languages or scripts
-	      (\eg, \texttt{en-t-ja}: English transformed to Japanese)
-	\item \xpgoption{extension-u} The subtag indicating additional locale information (\eg \texttt{ar-u-nu-latn}:
+	\item \xpgoption{extension.t} The subtag indicating transformation between languages or scripts
+	      (\eg \texttt{ja} as in \texttt{en-t-ja}: English transformed to Japanese)
+	\item \xpgoption{extension.u} The subtag indicating additional locale information (\eg \texttt{nu-latn} as in \texttt{ar-u-nu-latn}:
 	      Arabic with Latin Numbering)
-	\item \xpgoption{extension-x} The private usespace subtag (\eg \texttt{la-x-classic} for classic Latin)
+	\item \xpgoption{extension.x} The private usespace subtag (\eg \texttt{classic} as in \texttt{la-x-classic} for classic Latin)
 	\item \xpgoption{casing} is a special semantic value which returns whatever is considered suitable
 	           for casing commands such as \cmd\MakeUppercase. In many cases, this is identical to \texttt{language} but
 	           it could also be something more specific such as \texttt{el-x-iota} or \texttt{ckb-Latn} if this is
@@ -2475,7 +2475,7 @@ and the syntax is standardized at least between \pkg{babel} and \pkg{polyglossia
 	       certain subtags if these are considered obvious (\eg for German, only \texttt{de-DE} is returned, although
 	       script [\texttt{Latn}] and variant [\texttt{1996}] are defined as well).
 \end{itemize}
-If a subtag is not defined for a given language, and empty string is returned.
+If a subtag is not defined for a given language, an empty string is returned.
 
 The values above return information for the language currently in use. If you need to access information for the 
 main language of the document, prepend \xpgoption{main.} to the respective argument (\eg \xpgoption{main.language}). This works
