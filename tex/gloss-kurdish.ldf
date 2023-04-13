@@ -13,6 +13,9 @@
 
 \PolyglossiaSetup{kurdish}{
   bcp47=ckb,
+  bcp47-language=ckb,
+  bcp47-script=Arab,
+  bcp47-casing=ckb-Arab,
   script=Arabic,
   direction=RL,
   scripttag=arab,
@@ -79,9 +82,9 @@
      \@western@numeralstrue%
      \if@kurdish@kurmanji
          \def\kurdish@pattern{kurmanji}%
-         \SetLanguageKeys{kurdish}{script=Latin,direction=LR,scripttag=latn,babelname=kurmanji,bcp47=kmr-Latn}%
+         \SetLanguageKeys{kurdish}{script=Latin,direction=LR,scripttag=latn,babelname=kurmanji,bcp47=kmr-Latn,bcp47-language=kmr,bcp47-script=Latn,bcp47-casing=kmr-Latn}%
      \else
-         \SetLanguageKeys{kurdish}{script=Latin,direction=LR,scripttag=latn,babelname=kurdish,bcp47=ckb-Arab}%
+         \SetLanguageKeys{kurdish}{script=Latin,direction=LR,scripttag=latn,babelname=kurdish,bcp47=ckb-Arab,bcp47-language=ckb,bcp47-script=Arab,bcp47-casing=ckb-Arab}%
      \fi
      \def\kurdish@script{latin}
      \xpg@fontsetup@latin{kurdish}%
@@ -89,20 +92,20 @@
      \if@kurdish@arabic% Arabic explicitly set
         \if@kurdish@kurmanji
             \if@force@western@numerals\else\@western@numeralsfalse\fi%
-            \SetLanguageKeys{kurdish}{script=Arabic,direction=RL,scripttag=arab,babelname=kurmanji,bcp47=kmr-Arab}%
+            \SetLanguageKeys{kurdish}{script=Arabic,direction=RL,scripttag=arab,babelname=kurmanji,bcp47=kmr-Arab,bcp47-language=kmr,bcp47-script=Arab,bcp47-casing=kmr-Arab}%
             \def\kurdish@script{arabic}%
         \else
-            \SetLanguageKeys{kurdish}{script=Arabic,direction=RL,scripttag=arab,babelname=kurdish,bcp47=ckb-Arab}%
+            \SetLanguageKeys{kurdish}{script=Arabic,direction=RL,scripttag=arab,babelname=kurdish,bcp47=ckb-Arab,bcp47-language=ckb,bcp47-script=Arab,bcp47-casing=ckb-Arab}%
         \fi
         \xpg@fontsetup@nonlatin{kurdish}%
      \else% sorani=Arabic, kurmanji=Latin
         \if@kurdish@kurmanji
             \@western@numeralstrue%
-            \SetLanguageKeys{kurdish}{script=Latin,direction=LR,scripttag=latn,babelname=kurmanji,bcp47=kmr-Latn}%
+            \SetLanguageKeys{kurdish}{script=Latin,direction=LR,scripttag=latn,babelname=kurmanji,bcp47=kmr-Latn,bcp47-language=kmr,bcp47-script=Latn,bcp47-casing=kmr-Latn}%
             \xpg@fontsetup@latin{kurdish}%
             \def\kurdish@script{latin}
         \else
-            \SetLanguageKeys{kurdish}{script=Arabic,direction=RL,scripttag=arab,babelname=kurdish,bcp47=ckb-Arab}%
+            \SetLanguageKeys{kurdish}{script=Arabic,direction=RL,scripttag=arab,babelname=kurdish,bcp47=ckb-Arab,bcp47-language=ckb,bcp47-script=Arab,bcp47-casing=ckb-Arab}%
             \xpg@fontsetup@nonlatin{kurdish}%
         \fi
      \fi

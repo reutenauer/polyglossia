@@ -9,6 +9,8 @@
 
 \PolyglossiaSetup{urdu}{
   bcp47=ur,
+  bcp47-language=ur,
+  bcp47-script=Arab,
   script=Arabic,
   direction=RL,
   scripttag=arab,
@@ -26,8 +28,12 @@
 \def\tmp@western{western}
 \define@key{urdu}{numerals}[eastern]{%
 	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@western\@western@numeralstrue%
-	  \else\@western@numeralsfalse%
+	\ifx\@tmpa\tmp@western
+	  \@western@numeralstrue%
+          \SetLanguageKeys{urdu}{bcp47-extension-u=nu-latn}%
+	\else
+	  \@western@numeralsfalse%
+          \SetLanguageKeys{urdu}{bcp47-extension-u=nu-arab}%
 	\fi}
 
 %% TODO USE boolkey instead !!!

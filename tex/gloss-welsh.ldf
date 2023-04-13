@@ -4,6 +4,8 @@
 
 \PolyglossiaSetup{welsh}{
   bcp47=cy,
+  bcp47-language=cy,
+  bcp47-script=Latn,
   hyphennames={welsh},
   hyphenmins={2,3},
   langtag=WEL,

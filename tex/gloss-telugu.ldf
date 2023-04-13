@@ -6,6 +6,8 @@
 
 \PolyglossiaSetup{telugu}{
   bcp47=te,
+  bcp47-language=te,
+  bcp47-script=Telu,
   script=Telugu,
   scripttag=telu,
   langtag=TEL,

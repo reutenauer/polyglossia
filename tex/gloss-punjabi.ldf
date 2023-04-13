@@ -9,6 +9,8 @@
 \RequirePackage{gurmukhidigits}
 \PolyglossiaSetup{punjabi}{
   bcp47=pa,
+  bcp47-language=pa,
+  bcp47-script=Guru,
   script=Gurmukhi,
   scripttag=gur,
   langtag=pan,
@@ -32,9 +34,11 @@
    \ifcase\xpg@nr\relax
       % Gurmukhi:
       \punjabi@gurmukhi@numeralstrue%
+      \SetLanguageKeys{punjabi}{bcp47-extension-u=nu-guru}%
    \or
       % Western:
       \punjabi@gurmukhi@numeralsfalse%
+      \SetLanguageKeys{punjabi}{bcp47-extension-u=nu-latn}%
    \fi
    \xpg@info{Option: Punjabi, numerals=\xpg@val}%
 }{\xpg@warning{Unknown Punjabi numeral `#1'}}

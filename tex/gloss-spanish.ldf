@@ -4,6 +4,9 @@
 
 \PolyglossiaSetup{spanish}{
   bcp47=es-ES,
+  bcp47-language=es,
+  bcp47-region=ES,
+  bcp47-script=Latn,
   hyphennames={spanish},
   hyphenmins={2,2},
   totalhyphenmin=5,
@@ -28,11 +31,11 @@
    \ifcase\xpg@nr\relax
       % spanish:
       \@spanish@mexicofalse%
-      \SetLanguageKeys{spanish}{babelname=spanish,bcp47=es-ES}%
+      \SetLanguageKeys{spanish}{babelname=spanish,bcp47=es-ES,bcp47-region=ES}%
    \or
       % mexican:
       \@spanish@mexicotrue%
-      \SetLanguageKeys{spanish}{babelname=spanishmx,bcp47=es-MX}%
+      \SetLanguageKeys{spanish}{babelname=spanishmx,bcp47=es-MX,bcp47-region=MX}%
    \fi
    \xpg@info{Option: spanish, variant=\xpg@val}%
 }{\xpg@warning{Unknown spanish variant `#1'}}

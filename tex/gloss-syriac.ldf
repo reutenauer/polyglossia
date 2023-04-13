@@ -7,6 +7,8 @@
 
 \PolyglossiaSetup{syriac}{
   bcp47=syr,
+  bcp47-language=syr,
+  bcp47-script=Syrc,
   script=Syriac,
   scripttag=syrc,
   langtag=SYR,
@@ -31,9 +33,11 @@
 	  \let\syriacnumber\abjadsyriac
 	\else
 	  \ifx\@tmpa\tmp@eastern
-      \@eastern@numeralstrue
+              \@eastern@numeralstrue
+              \SetLanguageKeys{syriac}{bcp47-extension-u=nu-syrc}%
 	  \else
-      \@eastern@numeralsfalse
+              \@eastern@numeralsfalse
+              \SetLanguageKeys{syriac}{bcp47-extension-u=nu-latn}%
  	  \fi
   \fi}
 

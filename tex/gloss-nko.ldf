@@ -3,6 +3,8 @@
 \ProvidesFile{gloss-nko.ldf}[Polyglossia: module for N’Ko]
 \PolyglossiaSetup{nko}{%
   bcp47=nko,
+  bcp47-language=nko,
+  bcp47-script=Nkoo,
   script=N'ko,
   scripttag=nko~,
   langtag=NKO,

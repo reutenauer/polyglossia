@@ -4,13 +4,15 @@
 
 \PolyglossiaSetup{korean}{
   bcp47=ko,
-    script=Hangul,
-    scripttag=hang,
-    language=Korean,
-    langtag=KOR,
-    hyphennames={nohyphenation},
-    frenchspacing=true,
-    fontsetup=true
+  bcp47-language=ko,
+  bcp47-script=Kore,
+  script=Hangul,
+  scripttag=hang,
+  language=Korean,
+  langtag=KOR,
+  hyphennames={nohyphenation},
+  frenchspacing=true,
+  fontsetup=true
 }
 
 % BCP-47 compliant aliases

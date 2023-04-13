@@ -8,6 +8,8 @@
 
 \PolyglossiaSetup{ukrainian}{%
   bcp47=uk,
+  bcp47-language=uk,
+  bcp47-script=Cyrl,
   script=Cyrillic,
   scripttag=cyrl,
   langtag=UKR,
@@ -29,18 +31,22 @@
       % arabic:
       \cyrillic@numeralsfalse%
       \cyrillic@asbuk@numeralsfalse%
+      \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-latn}%
    \or
       % cyrillic:
       \cyrillic@numeralstrue%
       \cyrillic@asbuk@numeralsfalse%
+      \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-cyrl}%
    \or
       % cyrillic-trad:
       \cyrillic@numeralstrue%
       \cyrillic@asbuk@numeralsfalse%
+      \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-cyrl}%
    \or
       % cyrillic-alph:
       \cyrillic@numeralstrue%
       \cyrillic@asbuk@numeralstrue%
+      \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-cyrl}%
    \fi
    \xpg@info{Option: Ukrainian, numerals=\xpg@val}%
 }{\xpg@warning{Unknown Ukrainian numerals value `#1'}}

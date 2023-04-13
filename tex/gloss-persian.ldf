@@ -8,6 +8,8 @@
 \RequirePackage{hijrical}
 \PolyglossiaSetup{persian}{
   bcp47=fa,
+  bcp47-language=fa,
+  bcp47-script=Arab,
   babelname=farsi,
   script=Arabic,
   direction=RL,
@@ -28,8 +30,12 @@
 \def\tmp@western{western}
 \define@key{persian}{numerals}[eastern]{%
   \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@western\@western@numeralstrue\else%
+  \ifx\@tmpa\tmp@western%
+     \@western@numeralstrue%
+    \SetLanguageKeys{persian}{bcp47-extension-u=nu-latn}%
+  \else%
     \@western@numeralsfalse%
+    \SetLanguageKeys{persian}{bcp47-extension-u=nu-arab}%
   \fi}
 
 %this is needed for \abjad in arabicnumbers.sty

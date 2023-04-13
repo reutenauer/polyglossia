@@ -6,6 +6,9 @@
 
 \PolyglossiaSetup{russian}{
   bcp47=ru,
+  bcp47-language=ru,
+  bcp47-variant=luna1918,
+  bcp47-script=Cyrl,
   script=Cyrillic,
   scripttag=cyrl,
   langtag=RUS,
@@ -26,8 +29,8 @@
 \newif\if@russian@modern
 \define@key{russian}{spelling}[modern]{%
   \ifstrequal{#1}{old}%
-    {\@russian@modernfalse\SetLanguageKeys{russian}{bcp47=ru-petr1708}}%
-    {\@russian@moderntrue\SetLanguageKeys{russian}{bcp47=ru}}%
+    {\@russian@modernfalse\SetLanguageKeys{russian}{bcp47=ru-petr1708,bcp47-variant=petr1708}}%
+    {\@russian@moderntrue\SetLanguageKeys{russian}{bcp47=ru,bcp47-variant=luna1918}}%
 }
 
 \def\captionsrussian{%
@@ -45,18 +48,22 @@
       % arabic:
       \cyrillic@numeralsfalse%
       \cyrillic@asbuk@numeralsfalse%
+      \SetLanguageKeys{russian}{bcp47-extension-u=nu-latn}%
    \or
       % cyrillic:
       \cyrillic@numeralstrue%
       \cyrillic@asbuk@numeralsfalse%
+      \SetLanguageKeys{russian}{bcp47-extension-u=nu-cyrl}%
    \or
       % cyrillic-trad:
       \cyrillic@numeralstrue%
       \cyrillic@asbuk@numeralsfalse%
+      \SetLanguageKeys{russian}{bcp47-extension-u=nu-cyrl}%
    \or
       % cyrillic-alph:
       \cyrillic@numeralstrue%
       \cyrillic@asbuk@numeralstrue%
+      \SetLanguageKeys{russian}{bcp47-extension-u=nu-cyrl}%
    \fi
    \xpg@info{Option: Russian, numerals=\xpg@val}%
 }{\xpg@warning{Unknown Russian numerals value `#1'}}

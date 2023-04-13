@@ -12,6 +12,8 @@
 %%%%
 \PolyglossiaSetup{thai}{
   bcp47=th,
+  bcp47-language=th,
+  bcp47-script=Thai,
   script=Thai,
   scripttag=thai,
   langtag=THA,
@@ -29,8 +31,13 @@
 \def\tmp@thai{thai}
 \define@key{thai}{numerals}[arabic]{%
 	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@thai\@thai@numeralstrue\else
-	  \@thai@numeralsfalse\fi
+	\ifx\@tmpa\tmp@thai
+	  \@thai@numeralstrue%
+          \SetLanguageKeys{thai}{bcp47-extension-u=nu-thai}%
+	\else
+	  \@thai@numeralsfalse%
+          \SetLanguageKeys{thai}{bcp47-extension-u=nu-latn}%
+	\fi
 }
 
 % Register default options

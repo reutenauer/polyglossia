@@ -4,6 +4,8 @@
 
 \PolyglossiaSetup{sami}{
   bcp47=se,
+  bcp47-language=se,
+  bcp47-script=Latn,
   babelname=samin,
   hyphennames={samin},
   hyphenmins={2,2},

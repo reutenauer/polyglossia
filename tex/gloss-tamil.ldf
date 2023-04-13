@@ -6,6 +6,8 @@
 
 \PolyglossiaSetup{tamil}{
   bcp47=ta,
+  bcp47-language=ta,
+  bcp47-script=Taml,
   script=Tamil,
   scripttag=taml,
   langtag=TAM,

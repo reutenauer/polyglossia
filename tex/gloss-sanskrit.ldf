@@ -6,6 +6,9 @@
 
 \PolyglossiaSetup{sanskrit}{
   bcp47=sa-Deva,
+  bcp47-language=sa,
+  bcp47-script=Deva,
+  bcp47-casing=sa-Deva,
   langtag=SAN,
   hyphennames={sanskrit,prakrit},
   hyphenmins={1,3},
@@ -34,25 +37,25 @@
 \define@key{sanskrit}{script}[Devanagari]{\setkeys{sanskrit}{Script=#1}}
 
 \def\fontsetup@sanskrit@Devanagari{%
-  \SetLanguageKeys{sanskrit}{scripttag=deva,script=Devanagari,bcp47=sa-Deva}
+  \SetLanguageKeys{sanskrit}{scripttag=deva,script=Devanagari,bcp47=sa-Deva,bcp47-language=sa,bcp47-script=Deva,bcp47-casing=sa-Deva}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Gujarati{%
-  \SetLanguageKeys{sanskrit}{scripttag=gujr,script=Gujarati,bcp47=sa-Gujr}
+  \SetLanguageKeys{sanskrit}{scripttag=gujr,script=Gujarati,bcp47=sa-Gujr,bcp47-language=sa,bcp47-script=Gujr,bcp47-casing=sa-Gujr}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Malayalam{%
-  \SetLanguageKeys{sanskrit}{scripttag=mlym,script=Malayalam,bcp47=sa-Mlym}
+  \SetLanguageKeys{sanskrit}{scripttag=mlym,script=Malayalam,bcp47=sa-Mlym,bcp47-language=sa,bcp47-script=Mlym,bcp47-casing=sa-Mlym}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Bengali{%
-  \SetLanguageKeys{sanskrit}{scripttag=beng,script=Bengali,bcp47=sa-Beng}
+  \SetLanguageKeys{sanskrit}{scripttag=beng,script=Bengali,bcp47=sa-Beng,bcp47-language=sa,bcp47-script=Beng,bcp47-casing=sa-Beng}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Kannada{%
-  \SetLanguageKeys{sanskrit}{scripttag=knda,script=Kannada,bcp47=sa-Knda}
+  \SetLanguageKeys{sanskrit}{scripttag=knda,script=Kannada,bcp47=sa-Knda,bcp47-language=sa,bcp47-script=Knda,bcp47-casing=sa-Knda}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Telugu{%
-  \SetLanguageKeys{sanskrit}{scripttag=telu,script=Telugu,bcp47=sa-Relu}
+  \SetLanguageKeys{sanskrit}{scripttag=telu,script=Telugu,bcp47=sa-Relu,bcp47-language=sa,bcp47-script=Relu,bcp47-casing=sa-Relu}
   \xpg@fontsetup@nonlatin{sanskrit}}
 \def\fontsetup@sanskrit@Latin{%
-  \SetLanguageKeys{sanskrit}{scripttag=latn,script=Latin,bcp47=sa-Latn}
+  \SetLanguageKeys{sanskrit}{scripttag=latn,script=Latin,bcp47=sa-Latn,bcp47-language=sa,bcp47-script=Latn,bcp47-casing=sa-Latn}
   \xpg@fontsetup@latin{sanskrit}}
 
 
@@ -62,9 +65,11 @@
    \ifcase\xpg@nr\relax
       % Devanagari:
       \sanskrit@devanagari@numeralstrue%
+      \SetLanguageKeys{sanskrit}{bcp47-extension-u=nu-deva}%
    \or
       % Western:
       \sanskrit@devanagari@numeralsfalse%
+      \SetLanguageKeys{sanskrit}{bcp47-extension-u=nu-latn}%
    \fi
    \xpg@info{Option: Sanskrit, numerals=\xpg@val}%
 }{\xpg@warning{Unknown Sanskrit numeral `#1'}}

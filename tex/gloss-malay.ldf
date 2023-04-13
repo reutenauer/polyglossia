@@ -6,6 +6,8 @@
 
 \PolyglossiaSetup{malay}{%
   bcp47=id,
+  bcp47-language=id,
+  bcp47-script=Latn,
   language=Malay,
   langtag=MLY,
   hyphennames={malay,melayu,bahasam,bahasai,indonesian,indon,bahasa},
@@ -38,7 +40,7 @@
       \malay@melayutrue
    \fi
    \ifmalay@melayu
-      \SetLanguageKeys{malay}{language=Malay,langtag=MLY,babelname=bahasam,bcp47=zsm}%
+      \SetLanguageKeys{malay}{language=Malay,langtag=MLY,babelname=bahasam,bcp47=zsm,bcp47-language=zsm}%
       \xpg@fontsetup@latin{malay}%
       % Check if \l@malay is defined. If not, try to set it to some variety
       % (specific order as in the csv list below), or null language if everything fails
@@ -56,7 +58,7 @@
         }%
       }%
    \else
-      \SetLanguageKeys{malay}{language=Indonesian,langtag=IND,babelname=bahasa,bcp47=id}%
+      \SetLanguageKeys{malay}{language=Indonesian,langtag=IND,babelname=bahasa,bcp47=id,bcp47-language=id}%
       \xpg@fontsetup@latin{malay}%
       % Check if \l@indonesian is defined. If not, try to set it to some variety
       % (specific order as in the csv list below), or null language if everything fails

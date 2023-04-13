@@ -5,6 +5,8 @@
 \makeatletter
 \PolyglossiaSetup{piedmontese}{
   bcp47=pms,
+  bcp47-language=pms,
+  bcp47-script=Latn,
   hyphennames={piedmontese},
   hyphenmins={2,2},
   langtag=PMS,

@@ -4,6 +4,8 @@
 %% Translations provided by Nazar Annagurban <nazartm at gmail dot com>
 \PolyglossiaSetup{turkmen}{
   bcp47=tk,
+  bcp47-language=tk,
+  bcp47-script=Latn,
   hyphennames={turkmen},
   hyphenmins={2,2},
   langtag=TKM,

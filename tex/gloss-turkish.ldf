@@ -4,6 +4,8 @@
 \RequirePackage{hijrical}
 \PolyglossiaSetup{turkish}{
   bcp47=tr,
+  bcp47-language=tr,
+  bcp47-script=Latn,
   hyphennames={turkish},
   hyphenmins={2,2},
   langtag=TRK,

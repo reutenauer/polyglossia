@@ -4,6 +4,8 @@
 \makeatletter
 \PolyglossiaSetup{romansh}{%
   bcp47=rm,
+  bcp47-language=rm,
+  bcp47-script=Latn,
   hyphennames={romansh},
   hyphenmins={2,2},
   langtag=RMS,

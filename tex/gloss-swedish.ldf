@@ -4,6 +4,8 @@
 
 \PolyglossiaSetup{swedish}{
   bcp47=sv,
+  bcp47-language=sv,
+  bcp47-script=Latn,
   hyphennames={swedish},
   hyphenmins={2,2},
   langtag=SVE,

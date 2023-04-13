@@ -3,6 +3,8 @@
 \ProvidesFile{gloss-norwegian.ldf}[polyglossia: module for Norwegian]
 \PolyglossiaSetup{norwegian}{
   bcp47=nn,
+  bcp47-language=nn,
+  bcp47-script=Latn,
   hyphennames={nynorsk},
   langtag=NYN,
   hyphenmins={2,2},
@@ -22,12 +24,12 @@
    \ifcase\xpg@nr\relax
       % nynorsk:
       \def\norwegian@variant{nynorsk}%
-      \SetLanguageKeys{norwegian}{langtag=NYN,babelname=nynorsk,bcp47=nn}%
+      \SetLanguageKeys{norwegian}{langtag=NYN,babelname=nynorsk,bcp47=nn,bcp47-language=nn}%
       \xpg@fontsetup@latin{norwegian}%
    \or
       % bokmal:
       \def\norwegian@variant{norsk}%
-      \SetLanguageKeys{norwegian}{langtag=NOR,babelname=norsk,bcp47=nb}%
+      \SetLanguageKeys{norwegian}{langtag=NOR,babelname=norsk,bcp47=nb,bcp47-language=nb}%
       \xpg@fontsetup@latin{norwegian}%
    \fi
    \xpg@info{Option: norwegian, variant=\xpg@val}%

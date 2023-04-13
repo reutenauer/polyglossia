@@ -5,6 +5,8 @@
 
 \PolyglossiaSetup{vietnamese}{
   bcp47=vi,
+  bcp47-language=vi,
+  bcp47-script=Latn,
   hyphennames={nohyphenation},
   hyphenmins={2,2},
   langtag=VIT,

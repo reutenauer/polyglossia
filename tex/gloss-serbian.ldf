@@ -10,6 +10,9 @@
 
 \PolyglossiaSetup{serbian}{
   bcp47=sr-Latn,
+  bcp47-language=sr,
+  bcp47-script=Latn,
+  bcp47-casing=sr-Latn,
   langtag=SRB,
   hyphennames={serbian},
   hyphenmins={2,2},
@@ -39,12 +42,12 @@
    \ifcase\xpg@nr\relax
       % cyrillic:
       \@serbian@cyrtrue
-      \SetLanguageKeys{serbian}{scripttag=cyrl,script=Cyrillic,babelname=serbianc,bcp47=sr-Cyrl}
+      \SetLanguageKeys{serbian}{scripttag=cyrl,script=Cyrillic,babelname=serbianc,bcp47=sr-Cyrl,bcp47-language=sr,bcp47-script=Cyrl,bcp47-casing=sr-Cyrl}
       \xpg@fontsetup@nonlatin{serbian}%
    \or
       % latin:
       \@serbian@cyrfalse
-      \SetLanguageKeys{serbian}{scripttag=latn,script=Latin,babelname=serbian,bcp47=sr-Latn}
+      \SetLanguageKeys{serbian}{scripttag=latn,script=Latin,babelname=serbian,bcp47=sr-Latn,bcp47-language=sr,bcp47-script=Latn,bcp47-casing=sr-Latn}
       \xpg@fontsetup@latin{serbian}%
       %TODO \def\serbian@language{\language=\l@serbianlat}%
       % or should we use Croatian patterns as a fallback for the time being???
@@ -61,18 +64,22 @@
       % arabic:
       \cyrillic@numeralsfalse%
       \cyrillic@asbuk@numeralsfalse%
+      \SetLanguageKeys{serbian}{bcp47-extension-u=nu-latn}%
    \or
       % cyrillic:
       \cyrillic@numeralstrue%
       \cyrillic@asbuk@numeralsfalse%
+      \SetLanguageKeys{serbian}{bcp47-extension-u=nu-cyrl}%
    \or
       % cyrillic-trad:
       \cyrillic@numeralstrue%
       \cyrillic@asbuk@numeralsfalse%
+      \SetLanguageKeys{serbian}{bcp47-extension-u=nu-cyrl}%
    \or
       % cyrillic-alph:
       \cyrillic@numeralstrue%
       \cyrillic@asbuk@numeralstrue%
+      \SetLanguageKeys{serbian}{bcp47-extension-u=nu-cyrl}%
    \fi
    \xpg@info{Option: Serbian, numerals=\xpg@val}%
 }{\xpg@warning{Unknown Serbian numerals value `#1'}}

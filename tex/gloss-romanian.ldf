@@ -4,6 +4,8 @@
 
 \PolyglossiaSetup{romanian}{
   bcp47=ro,
+  bcp47-language=ro,
+  bcp47-script=Latn,
   hyphennames={romanian},
   hyphenmins={2,2},
   langtag=ROM,

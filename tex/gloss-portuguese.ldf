@@ -4,6 +4,9 @@
 
 \PolyglossiaSetup{portuguese}{
   bcp47=pt-PT,
+  bcp47-language=pt,
+  bcp47-region=PT,
+  bcp47-script=Latn,
   babelname=portuges,
   hyphennames={portuges,portuguese},
   hyphenmins={2,3},
@@ -29,11 +32,11 @@
    \ifcase\xpg@nr\relax
       % portuguese:
       \def\portuguese@variant{portuges}%
-      \SetLanguageKeys{portuguese}{babelname=portuges,bcp47=pt-PT}%
+      \SetLanguageKeys{portuguese}{babelname=portuges,bcp47=pt-PT,bcp47-language=pt,bcp47-region=PT}%
    \or
       % brazilian:
       \def\portuguese@variant{brazil}%
-      \SetLanguageKeys{portuguese}{babelname=brazil,bcp47=pt-BR}%
+      \SetLanguageKeys{portuguese}{babelname=brazil,bcp47=pt-BR,bcp47-language=pt,bcp47-region=BR}%
       % There are no specific brazil patterns
       \adddialect\l@brazil\l@portuges\relax%
    \fi

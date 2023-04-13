@@ -3,6 +3,8 @@
 \ProvidesFile{gloss-macedonian.ldf}[polyglossia: module for Macedonian]
 \PolyglossiaSetup{macedonian}{
   bcp47=mk,
+  bcp47-language=mk,
+  bcp47-script=Cyrl,
   script=Cyrillic,
   scripttag=cyrl,
   langtag=MKD,

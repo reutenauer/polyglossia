@@ -4,6 +4,8 @@
 
 \PolyglossiaSetup{polish}{
   bcp47=pl,
+  bcp47-language=pl,
+  bcp47-script=Latn,
   hyphennames={polish},
   hyphenmins={2,2},
   langtag=PLK,

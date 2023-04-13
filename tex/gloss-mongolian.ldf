@@ -6,6 +6,8 @@
 
 \PolyglossiaSetup{mongolian}{
   bcp47=mn,
+  bcp47-language=mn,
+  bcp47-script=Cyrl,
   script=Cyrillic,
   scripttag=cyrl,
   langtag=MNG,

@@ -4,6 +4,8 @@
 
 \PolyglossiaSetup{slovenian}{
   bcp47=sl,
+  bcp47-language=sl,
+  bcp47-script=Latn,
   hyphennames={slovenian,slovene},
   babelname=slovene,
   hyphenmins={2,2},

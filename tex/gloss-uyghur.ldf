@@ -6,6 +6,8 @@
 \RequireBidi
 \PolyglossiaSetup{uyghur}{
   bcp47=ug,
+  bcp47-language=ug,
+  bcp47-script=Arab,
   script=Arabic,
   direction=RL,
   scripttag=arab,

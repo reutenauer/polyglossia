@@ -4,6 +4,8 @@
 
 \PolyglossiaSetup{slovak}{
   bcp47=sk,
+  bcp47-language=sk,
+  bcp47-script=Latn,
   hyphennames={slovak},
   hyphenmins={2,2},
   langtag=SKY,

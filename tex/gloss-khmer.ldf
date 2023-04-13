@@ -3,6 +3,9 @@
 \ProvidesFile{gloss-khmer.ldf}[polyglossia: module for Khmer]
 \PolyglossiaSetup{khmer}{
   bcp47=km,
+  bcp47-language=km,
+  bcp47-region=KH,
+  bcp47-script=Khmr,
   script=Khmer,%
   scripttag=khmr,%
   langtag=KHM,%
@@ -14,8 +17,13 @@
 \def\tmp@khmer{khmer}
 \define@key{khmer}{numerals}[arabic]{%
   \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@khmer\@khmer@numeralstrue%
-  \else\@khmer@numeralsfalse\fi%
+  \ifx\@tmpa\tmp@khmer%
+    \@khmer@numeralstrue%
+    \SetLanguageKeys{khmer}{bcp47-extension-u=nu-khmr}%
+  \else%
+    \@khmer@numeralsfalse%
+    \SetLanguageKeys{khmer}{bcp47-extension-u=nu-latn}%
+   \fi%
 }
 \setkeys{khmer}{numerals}
 \def\captionskhmer{%

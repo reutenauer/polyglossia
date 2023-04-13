@@ -4,6 +4,9 @@
 
 \PolyglossiaSetup{japanese}{
 	bcp47=ja,
+	bcp47-language=ja,
+	bcp47-region=JP,
+	bcp47-script=Hrkt,
 	script=CJK,
 	language=Japanese,
 	langtag=JAN,

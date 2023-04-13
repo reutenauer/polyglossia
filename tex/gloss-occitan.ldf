@@ -21,6 +21,8 @@
 
 \PolyglossiaSetup{occitan}{
   bcp47=oc,
+  bcp47-language=oc,
+  bcp47-script=Latn,
   hyphennames={occitan},
   langtag=OCI,
   hyphenmins={2,2},

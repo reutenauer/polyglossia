@@ -22,6 +22,9 @@
 
 \PolyglossiaSetup{kannada}{
   bcp47=kn,
+  bcp47-language=kn,
+  bcp47-region=IN,
+  bcp47-script=Knda,
   script=Kannada,
   scripttag=knda,
   langtag=KAN,
