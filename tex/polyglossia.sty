@@ -2544,8 +2544,11 @@
      \seq_get_left:NN \l_tmpa_seq \l_tmpb_tl
      \seq_get_right:NN \l_tmpa_seq \l_tmpc_tl
      % Execute passed command with language and maybe options
+     % and re-set stored language's keys
      \tl_if_empty:NTF \l_tmpb_tl {\cs_if_exist_use:c{#1}{\l_tmpc_tl}}
-                                 {\cs_if_exist_use:c{#1}[\l_tmpb_tl]{\l_tmpc_tl}}
+                                 {\exp_args:Nne \setkeys{\l_tmpc_tl}{\l_tmpb_tl}
+                                  \cs_if_exist_use:c{#1}[\l_tmpb_tl]{\l_tmpc_tl}
+                                 }
   }
   {}
 }
