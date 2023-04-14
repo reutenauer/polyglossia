@@ -6,6 +6,8 @@
 
 \PolyglossiaSetup{malayalam}{
   bcp47=ml,
+  bcp47-language=ml,
+  bcp47-script=Mlym,
   script=Malayalam,
   scripttag=mlym,
   langtag=MAL, %FIXME there is also MLR for "Malayalam Reformed"

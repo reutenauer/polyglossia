@@ -4,6 +4,8 @@
 
 \PolyglossiaSetup{lao}{
   bcp47=lo,
+  bcp47-language=lo,
+  bcp47-script=Laoo,
   script=Lao,
   scripttag=lao,
   langtag=LAO,
