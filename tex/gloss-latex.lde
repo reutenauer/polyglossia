@@ -3,6 +3,10 @@
 \ProvidesLanguageDefinitionExtension{gloss-latex}{2023/02/11}{v1.60}{polyglossia: module for default language}
 
 \PolyglossiaSetup{latex}{
+  bcp47=en-US,
+  bcp47-language=en,
+  bcp47-region=US,
+  bcp47-script=Latn,
   hyphennames={english},
   hyphenmins={2,3},
   langtag=ENG,
