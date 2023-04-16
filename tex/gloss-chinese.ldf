@@ -28,9 +28,9 @@
 \newif\ifchinese@numerals
 \define@key{chinese}{numerals}[arabic]{%
    \ifstrequal{#1}{chinese}%
-      {\chinese@numeralstrue}%
+      {\chinese@numeralstrue%
        \SetLanguageKeys{chinese}{bcp47-extension-u=nu-hant}%
-      {\chinese@numeralsfalse%
+      }{\chinese@numeralsfalse%
        \SetLanguageKeys{chinese}{bcp47-extension-u=nu-latn}%
       }%
 }
