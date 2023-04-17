@@ -2061,8 +2061,8 @@
       \cs_if_exist_use:c{date@bbl@\babelname}%
       \polyglossia@lang@settextdirection:nn{#3}{#4}%
     \group_end:
-    % Reset the language's/script's font families
-    \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#3/lcscript}}{latin}{}{\resetfontlatin}%
+    % Reset the language's/script's font families if the embedding script is latin
+    \str_if_eq:eeTF{\prop_item:Ne{\polyglossia@langsetup}{\languagename/lcscript}}{latin}{\resetfontlatin}{}%
   }
 }
 \cs_generate_variant:Nn \__xpg_textlanguage:nnnn {nnen}
