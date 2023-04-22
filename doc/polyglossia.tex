@@ -156,7 +156,7 @@
 \hyphenation{Kha-li-ghi Reu-ten-auer new-zea-land}
 \GetFileInfo{polyglossia.sty}
 
-\title{{\textgreek{\xpgtitlefont\color{lightblue}\MakeUppercase{Πολυγλωσσία}}}
+\title{{\textgreek{\xpgtitlefont\color{lightblue}\MakeUppercase[lang=el]{Πολυγλωσσία}}}
 \\[16pt]
 \color{xpgblue}Polyglossia: Modern multilingual typesetting with \XeLaTeX\ and \LuaLaTeX}
 \author{\TA{François Charette} \and \TA{Arthur Reutenauer}\thanks{Current maintainer}
@@ -2530,6 +2530,13 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \section{Revision history}
 
 \bgroup\footnotesize
+\subsection*{1.62 (2023/04/22)}
+
+\subsubsection*{Bug fixes}
+\begin{itemize}
+	\item \cmd\BCPdata\ was not fully expandable as required. Now it is.
+\end{itemize}
+
 \subsection*{1.61 (2023/04/16)}
 
 \subsubsection*{Bug fixes}

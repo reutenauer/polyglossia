@@ -1,6 +1,6 @@
 --
 -- polyglossia-punct.lua
--- part of polyglossia v1.61 -- 2023/04/16
+-- part of polyglossia v1.62 -- 2023/04/22
 --
 
 require('polyglossia-punct')
