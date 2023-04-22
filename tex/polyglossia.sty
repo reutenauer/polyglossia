@@ -1533,12 +1533,43 @@
   % Store babelname of current language (for external packages such as biblatex)
   \cs_gset_eq:NN \babelname \mainbabelname
   \cs_gset_eq:cc{#2@gbabelname}{babelname}%
-  % Store BCP-47 id of main language
-  \cs_gset_nopar:cpe {mainbcp47id} { \prop_item:Nn  \polyglossia@langsetup {#2/bcp47} }
-  \cs_gset_eq:cc {bcp47id} {mainbcp47id}
-  \cs_gset_eq:cc{#2@gbcp47id}{bcp47id}
-
- \sys_if_engine_luatex:T
+  % Store BCP-47 ID and subtags of main language:
+  % 1. store main.* (sub)tags
+  \cs_gset_nopar:cpe {bcp47.main.tag} { \prop_item:Nn  \polyglossia@langsetup { #2 / bcp47 } }
+  \cs_gset_nopar:cpe {bcp47.main.language} { \prop_item:Nn  \polyglossia@langsetup { #2 / bcp47-language } }
+  \cs_gset_nopar:cpe {bcp47.main.region} { \prop_item:Nn  \polyglossia@langsetup { #2 / bcp47-region } }
+  \cs_gset_nopar:cpe {bcp47.main.script} { \prop_item:Nn  \polyglossia@langsetup { #2 / bcp47-script } }
+  \cs_gset_nopar:cpe {bcp47.main.variant} { \prop_item:Nn  \polyglossia@langsetup { #2 / bcp47-variant } }
+  \cs_gset_nopar:cpe {bcp47.main.extension.t} { \prop_item:Nn  \polyglossia@langsetup { #2 / bcp47extension-t } }
+  \cs_gset_nopar:cpe {bcp47.main.extension.u} { \prop_item:Nn  \polyglossia@langsetup { #2 / bcp47-extension-u } }
+  \cs_gset_nopar:cpe {bcp47.main.extension.x} { \prop_item:Nn  \polyglossia@langsetup { #2 / bcp47-extension-x } }
+  % For casing, we fall back to language if bcp47-casing is not explicitly set
+  \cs_set_nopar:cpx {tmpcasing} { \prop_item:Ne \polyglossia@langsetup { #2 / bcp47-casing } }
+  \str_if_empty:NTF \tmpcasing
+           { \cs_gset_nopar:cpe {bcp47.main.casing} { \prop_item:Nn  \polyglossia@langsetup {#2 / bcp47-language} } }
+           { \cs_gset_nopar:cpe {bcp47.main.casing} { \tmpcasing } }
+  % 2. Store lang (sub)tags
+  \cs_gset_eq:cc {bcp47.tag} {bcp47.main.tag}
+  \cs_gset_eq:cc {bcp47.language} {bcp47.main.language}
+  \cs_gset_eq:cc {bcp47.region} {bcp47.main.region}
+  \cs_gset_eq:cc {bcp47.script} {bcp47.main.script}
+  \cs_gset_eq:cc {bcp47.variant} {bcp47.main.variant}
+  \cs_gset_eq:cc {bcp47.extension.t} {bcp47.main.extension.t}
+  \cs_gset_eq:cc {bcp47.extension.u} {bcp47.main.extension.u}
+  \cs_gset_eq:cc {bcp47.extension.x} {bcp47.main.extension.x}
+  \cs_gset_eq:cc {bcp47.casing} {bcp47.main.casing}
+  % 3. Store global language BCP47 settings (with default subtags as set by main language options)
+  \cs_gset_eq:cc{#2@g.bcp47.tag}{bcp47.tag}
+  \cs_gset_eq:cc{#2@g.bcp47.language}{bcp47.language}
+  \cs_gset_eq:cc{#2@g.bcp47.region}{bcp47.region}
+  \cs_gset_eq:cc{#2@g.bcp47.script}{bcp47.script}
+  \cs_gset_eq:cc{#2@g.bcp47.variant}{bcp47.variant}
+  \cs_gset_eq:cc{#2@g.bcp47.extension.t}{bcp47.extension.t}
+  \cs_gset_eq:cc{#2@g.bcp47.extension.u}{bcp47.extension.u}
+  \cs_gset_eq:cc{#2@g.bcp47.extension.x}{bcp47.extension.x}
+  \cs_gset_eq:cc{#2@g.bcp47.casing}{bcp47.casing}
+  % Set luatex main language
+  \sys_if_engine_luatex:T
    {
      \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
    }
@@ -1559,8 +1590,8 @@
 {
     \str_case:nnF {#1}
       {
-        {bcp-47}    { \csuse{bcp47id} }
-        {bcp47}     { \csuse{bcp47id} }
+        {bcp-47}    { \csuse{bcp47.tag} }
+        {bcp47}     { \csuse{bcp47.tag} }
       }
       {
         \xpg@error{Invalid~ \string\languageid\space argument:~ #1}
@@ -1573,8 +1604,8 @@
 {
     \str_case:nnF {#1}
       {
-        {bcp-47}    { \csuse{mainbcp47id} }
-        {bcp47}     { \csuse{mainbcp47id} }
+        {bcp-47}    { \csuse{bcp47.main.tag} }
+        {bcp47}     { \csuse{bcp47.main.tag} }
       }
       {
         \xpg@error{Invalid~ \string\mainlanguageid\space argument:~ #1}
@@ -1598,47 +1629,22 @@
 % See https://github.com/latex3/latex2e/issues/1035
 \DeclareExpandableDocumentCommand \BCPdata {m}
 {
-    \tl_set:Nn \l_tmpa_tl {#1}
-    % Check whether we have main.*
-    \str_if_in:nnTF {#1} { main. }
-        {
-          % split main.var and strip main.
-          \seq_set_split:Nnx \l_tmpa_seq {.} \l_tmpa_tl
-          \seq_get_right:NN \l_tmpa_seq \l_tmpa_tl
-          \str_set_eq:NN \l_tmpa_str \mainlanguagename
-        }
-        {
-          \str_set_eq:NN \l_tmpa_str \languagename
-        }
-    % return value for argument or error
-    \str_case_e:nnF { \l_tmpa_tl }
-      {
-        {language}     { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47-language } }
-        {region}       { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47-region } }
-        {script}       { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47-script } }
-        {variant}      { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47-variant } }
-        {extension.t}  { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47extension-t } }
-        {extension.u}  { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47-extension-u } }
-        {extension.x}  { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47-extension-x } }
-        {tag}          { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47 } }
-        {casing}       {  % For casing, we fall back to language if bcp47-casing is not explicitly set
-                          \cs_set_nopar:cpx {tmpcasing} { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47-casing } }
-                          \str_if_empty:NTF \tmpcasing
-                                           { \prop_item:Ne \polyglossia@langsetup { \l_tmpa_str / bcp47-language } }
-                                           { \tmpcasing }
-                       }
-      }
-      {
-        \xpg@error{Invalid~ \string\BCPdata\space argument:~ #1}
-      }
+   \cs_if_exist_use:cF{bcp47.#1}
+        { \xpg@error{Invalid~ \string\BCPdata\space argument:~ #1} }
 }
-
-
 
 % main babel name
 \cs_new_nopar:Npn \mainlanguagename {}
 \cs_new_nopar:Npn \mainbabelname {}
-\cs_new_nopar:cpn {mainbcp47id} {}
+\cs_new_nopar:cpn {bcp47.main.tag} {}
+\cs_new_nopar:cpn {bcp47.main.language} {}
+\cs_new_nopar:cpn {bcp47.main.region} {}
+\cs_new_nopar:cpn {bcp47.main.script} {}
+\cs_new_nopar:cpn {bcp47.main.variant} {}
+\cs_new_nopar:cpn {bcp47.main.extension.t} {}
+\cs_new_nopar:cpn {bcp47.main.extension.u} {}
+\cs_new_nopar:cpn {bcp47.main.extension.x} {}
+\cs_new_nopar:cpn {bcp47.main.casing} {}
 \cs_new_nopar:Npn \mainlanguagevariant {}%
 % Store main language variant for external packages
 \define@key{xpg@main@langvariant}{variant}{%
@@ -1670,6 +1676,85 @@
     {\xpg_alias_base_lang:n{#2}}%
 }
 
+\cs_new:Nn \__xpg_store_bcp_info:nn
+{
+  % Store BCP-47 ID and subtags of current language
+  \tl_if_blank:nTF {#1}{%
+    % tag (e.g., en-US)
+    \ifcsundef{#2@g.bcp47.tag}{%
+       \csedef{bcp47.tag}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47 } }%
+    }{%
+       \csedef{bcp47.tag}{\csuse{#2@g.bcp47.tag}}%
+    }%
+    % language (e.g., en)
+    \ifcsundef{#2@g.bcp47.language}{%
+       \csedef{bcp47.language}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-language } }%
+    }{%
+       \csedef{bcp47.language}{\csuse{#2@g.bcp47.language}}%
+    }%
+    % region (e.g., US)
+    \ifcsundef{#2@g.bcp47.region}{%
+       \csedef{bcp47.region}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-region } }%
+    }{%
+       \csedef{bcp47.region}{\csuse{#2@g.bcp47.region}}%
+    }%
+    % script (e.g., Latn)
+    \ifcsundef{#2@g.bcp47.script}{%
+       \csedef{bcp47.script}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-script } }%
+    }{%
+       \csedef{bcp47.script}{\csuse{#2@g.bcp47.script}}%
+    }%
+    % variant (e.g., 1996)
+    \ifcsundef{#2@g.bcp47.variant}{%
+       \csedef{bcp47.variant}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-variant } }%
+    }{%
+       \csedef{bcp47.variant}{\csuse{#2@g.bcp47.variant}}%
+    }%
+    % extension.t (tranformation)
+    \ifcsundef{#2@g.bcp47.extension.t}{%
+       \csedef{bcp47.extension.t}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-t } }%
+    }{%
+       \csedef{bcp47.extension.t}{\csuse{#2@g.bcp47.extension.t}}%
+    }%
+    % extension.u (additional locale information)
+    \ifcsundef{#2@g.bcp47.extension.u}{%
+       \csedef{bcp47.extension.u}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-u } }%
+    }{%
+       \csedef{bcp47.extension.u}{\csuse{#2@g.bcp47.extension.u}}%
+    }%
+    % extension.x (private use area)
+    \ifcsundef{#2@g.bcp47.extension.x}{%
+       \csedef{bcp47.extension.x}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-x } }%
+    }{%
+       \csedef{bcp47.extension.x}{\csuse{#2@g.bcp47.extension.x}}%
+    }%
+    % casing
+    \ifcsundef{#2@g.bcp47.casing}{%
+       % For casing, we fall back to language if bcp47-casing is not explicitly set
+       \cs_set_nopar:cpx {tmpcasing} { \prop_item:Ne \polyglossia@langsetup { #2 / bcp47-casing } }
+       \str_if_empty:NTF \tmpcasing
+           { \cs_gset_eq:cc {bcp47.casing} {bcp47.language} }
+           { \csedef{bcp47.casing}{ \tmpcasing } }
+    }{%
+       \csedef{bcp47.casing}{\csuse{#2@g.bcp47.casing}}%
+    }%
+  }{%
+    \csedef{bcp47.tag}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47 } }%
+    \csedef{bcp47.language}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-language } }%
+    \csedef{bcp47.region}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-region } }%
+    \csedef{bcp47.script}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-script } }%
+    \csedef{bcp47.variant}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-variant } }%
+    \csedef{bcp47.extension.t}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-t } }%
+    \csedef{bcp47.extension.u}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-u } }%
+    \csedef{bcp47.extension.x}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-x } }%
+    % For casing, we fall back to language if bcp47-casing is not explicitly set
+    \cs_set_nopar:cpx {tmpcasing} { \prop_item:Ne \polyglossia@langsetup { #2 / bcp47-casing } }
+    \str_if_empty:NTF \tmpcasing
+         { \cs_gset_eq:cc {bcp47.casing} {bcp47.language} }
+         { \csedef{bcp47.casing}{ \tmpcasing } }
+  }%
+}
+
 \cs_new:Nn \polyglossia@reset@default@language:nn
 {
   \polyglossia@error@iflangnotloaded:n{#2}
@@ -1698,15 +1783,7 @@
     \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
   }%
   % Store BCP-47 id of current language
-  \tl_if_blank:nTF {#1}{%
-    \ifcsundef{#2@gbcp47id}{%
-       \csedef{bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
-    }{%
-       \csedef{bcp47id}{\csuse{#2@gbcp47id}}%
-    }%
-  }{%
-    \csedef{bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
-  }%
+  \__xpg_store_bcp_info:nn {#1}{#2}
 }
 \cs_generate_variant:Nn \polyglossia@reset@default@language:nn {
   ee, ef, en, eo, ex,
@@ -1936,15 +2013,7 @@
     \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
   }%
   % Store BCP-47 id of current language
-  \tl_if_blank:nTF {#1}{%
-    \ifcsundef{#2@gbcp47id}{%
-       \csedef{bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
-    }{%
-       \csedef{bcp47id}{\csuse{#2@gbcp47id}}%
-    }%
-  }{%
-    \csedef{bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
-  }%
+  \__xpg_store_bcp_info:nn {#1}{#2}
 }
 
 % joint code of \foreignlanguage, otherlanguage*
@@ -2318,15 +2387,7 @@
      \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
    }%
    % Store BCP-47 id of current language
-   \tl_if_blank:nTF {#1}{%
-     \ifcsundef{#2@gbcp47id}{%
-        \csedef{bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
-     }{%
-        \csedef{bcp47id}{\csuse{#2@gbcp47id}}%
-     }%
-   }{%
-     \csedef{bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
-   }%
+   \__xpg_store_bcp_info:nn {#1}{#2}%
    \@select@language[#1]{#2}%
     % Write to the aux
    \xpg@set@language@only@aux[#1]{#2}%
@@ -2597,18 +2658,17 @@
   \bgroup
   \polyglossia@error@iflangnotloaded:n{\xpg@tmp@lang}
   \exp_args:Nne \setkeys{\xpg@tmp@lang}{\xpg@tmp@opts}%
-  % Store BCP-47 id of language
+  % Store bcp47.tag@hypenmins
   \tl_if_blank:nTF {\xpg@tmp@opts}{%
-    \ifcsundef{\csname xpg@tmp@lang\endcsname @gbcp47id}{%
-       \csedef{tmp@bcp47id}{\prop_item:Ne{\polyglossia@langsetup}{\xpg@tmp@lang /bcp47}}%
+    \ifcsundef{\csname xpg@tmp@lang\endcsname @g.bcp47.tag}{%
+       \csedef{tmp@bcp47.tag}{\prop_item:Ne{\polyglossia@langsetup}{ \xpg@tmp@lang / bcp47 }}%
     }{%
-       \csedef{tmp@bcp47id}{\csuse{#2@gbcp47id}}%
+       \csedef{tmp@bcp47.tag}{\csuse{#2@g.bcp47.tag}}%
     }%
   }{%
-    \csedef{tmp@bcp47id}{\prop_item:Ne{\polyglossia@langsetup}{\xpg@tmp@lang /bcp47}}%
+    \csedef{tmp@bcp47.tag}{\prop_item:Ne{\polyglossia@langsetup}{ \xpg@tmp@lang / bcp47 }}%
   }%
-  \xpg@warning{id: \csuse{tmp@bcp47id}}%
-  \csgdef{\csname tmp@bcp47id\endcsname @hyphenmins}{{#3}{#4}}%
+  \csgdef{\csname tmp@bcp47.tag\endcsname @hyphenmins}{{#3}{#4}}%
   \egroup
 }
 
@@ -2617,24 +2677,24 @@
   \bgroup
   \polyglossia@error@iflangnotloaded:n{#2}
   \exp_args:Nne \setkeys{#2}{#1}%
-  % Store BCP-47 id of language
+  % Use bcp47.tag@hypenmins
   \tl_if_blank:nTF {#1}{%
-    \ifcsundef{#2@gbcp47id}{%
-       \csxdef{tmp@bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
+    \ifcsundef{#2@g.bcp47.tag}{%
+       \csxdef{tmp@bcp47.tag}{\prop_item:Nn{\polyglossia@langsetup}{ #2 / bcp47 }}%
     }{%
-       \csxdef{tmp@bcp47id}{\csuse{#2@gbcp47id}}%
+       \csxdef{tmp@bcp47.tag}{\csuse{#2@g.bcp47.tag}}%
     }%
   }{%
-    \csxdef{tmp@bcp47id}{\prop_item:Nn{\polyglossia@langsetup}{#2/bcp47}}%
+    \csxdef{tmp@bcp47.tag}{\prop_item:Nn{\polyglossia@langsetup}{ #2 / bcp47 }}%
   }%
   \egroup
-  \ifcsundef{\csname tmp@bcp47id\endcsname @hyphenmins}{%
+  \ifcsundef{\csname tmp@bcp47.tag\endcsname @hyphenmins}{%
      \ifcsundef{#2hyphenmins}{}%
         {%
           \expandafter\expandafter\expandafter\set@hyphenmins\csname #2hyphenmins\endcsname\relax%
         }
    }{%
-      \edef\tmpa{\csuse{\csname tmp@bcp47id\endcsname @hyphenmins}}%
+      \edef\tmpa{\csuse{\csname tmp@bcp47.tag\endcsname @hyphenmins}}%
       \expandafter\expandafter\expandafter\set@hyphenmins\tmpa\relax%
    }
    \sys_if_engine_luatex:T{
