@@ -27,13 +27,13 @@
 
 % BCP-47 compliant aliases
 \setlanguagealias*{kurdish}{ku}
-\setlanguagealias*[variant=kurmanji,script=Latin]{kurdish}{kmr-Latn}
+\setlanguagealias*[variant=kurmanji,script=latin]{kurdish}{kmr-Latn}
 \setlanguagealias*[variant=sorani]{kurdish}{ckb}
-\setlanguagealias*[variant=kurmanji,script=Arabic]{kurdish}{kmr-Arab}
-\setlanguagealias*[script=Latin]{kurdish}{ku-Latn}
-\setlanguagealias*[variant=sorani,script=Arabic]{kurdish}{ckb-Arab}
-\setlanguagealias*[variant=sorani,script=Latin]{kurdish}{ckb-Latn}
-\setlanguagealias*[script=Arabic]{kurdish}{ku-Arab}
+\setlanguagealias*[variant=kurmanji,script=arabic]{kurdish}{kmr-Arab}
+\setlanguagealias*[script=latin]{kurdish}{ku-Latn}
+\setlanguagealias*[variant=sorani,script=arabic]{kurdish}{ckb-Arab}
+\setlanguagealias*[variant=sorani,script=latin]{kurdish}{ckb-Latn}
+\setlanguagealias*[script=arabic]{kurdish}{ku-Arab}
 \setlanguagealias*[variant=kurmanji]{kurdish}{kmr}
 
 % Babel aliases
@@ -57,13 +57,13 @@
 
 \newif\if@kurdish@latin
 \newif\if@kurdish@arabic
-\define@choicekey*+{kurdish}{script}[\xpg@val\xpg@nr]{Arabic,Latin}{%
+\define@choicekey*+{kurdish}{script}[\xpg@val\xpg@nr]{arabic,latin}{%
    \ifcase\xpg@nr\relax
-      % Arabic:
+      % arabic:
       \@kurdish@latinfalse%
       \@kurdish@arabictrue%
    \or
-      % Latin:
+      % latin:
       \@kurdish@latintrue%
       \@kurdish@arabicfalse%
    \fi
@@ -78,7 +78,7 @@
 \def\kurdish@pattern{nohyphenation}
 
 \def\kurdish@set@variety{%
-  \if@kurdish@latin% Latin explicitly set
+  \if@kurdish@latin% latin explicitly set
      \@western@numeralstrue%
      \if@kurdish@kurmanji
          \def\kurdish@pattern{kurmanji}%
@@ -89,7 +89,7 @@
      \def\kurdish@script{latin}
      \xpg@fontsetup@latin{kurdish}%
   \else
-     \if@kurdish@arabic% Arabic explicitly set
+     \if@kurdish@arabic% arabic explicitly set
         \if@kurdish@kurmanji
             \if@force@western@numerals\else\@western@numeralsfalse\fi%
             \SetLanguageKeys{kurdish}{script=Arabic,direction=RL,scripttag=arab,babelname=kurmanji,bcp47=kmr-Arab,bcp47-language=kmr,bcp47-script=Arab,bcp47-casing=kmr-Arab}%
@@ -98,7 +98,7 @@
             \SetLanguageKeys{kurdish}{script=Arabic,direction=RL,scripttag=arab,babelname=kurdish,bcp47=ckb-Arab,bcp47-language=ckb,bcp47-script=Arab,bcp47-casing=ckb-Arab}%
         \fi
         \xpg@fontsetup@nonlatin{kurdish}%
-     \else% sorani=Arabic, kurmanji=Latin
+     \else% sorani=arabic, kurmanji=latin
         \if@kurdish@kurmanji
             \@western@numeralstrue%
             \SetLanguageKeys{kurdish}{script=Latin,direction=LR,scripttag=latn,babelname=kurmanji,bcp47=kmr-Latn,bcp47-language=kmr,bcp47-script=Latn,bcp47-casing=kmr-Latn}%
@@ -137,7 +137,7 @@
 %TODO add option for CALENDAR
 
 % Register default options
-\xpg@initialize@gloss@options{kurdish}{variant=sorani,locale=default,script=Arabic,abjadjimnotail=false,numerals=eastern}
+\xpg@initialize@gloss@options{kurdish}{variant=sorani,locale=default,script=arabic,abjadjimnotail=false,numerals=eastern}
 
 \def\kurdish@language{%
    \polyglossia@setup@language@patterns{\kurdish@pattern}%

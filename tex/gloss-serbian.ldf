@@ -27,11 +27,11 @@
 
 % BCP-47 compliant aliases
 \setlanguagealias*{serbian}{sr}
-\setlanguagealias*[script=Cyrillic]{serbian}{sr-Cyrl}
-\setlanguagealias*[script=Latin]{serbian}{sr-Latn}
+\setlanguagealias*[script=cyrillic]{serbian}{sr-Cyrl}
+\setlanguagealias*[script=latin]{serbian}{sr-Latn}
 
 % Babel aliases
-\setlanguagealias[script=Cyrillic]{serbian}{serbianc}
+\setlanguagealias[script=cyrillic]{serbian}{serbianc}
 
 \ifluatex
   \RequirePackage{luavlna}
@@ -55,7 +55,7 @@
    \xpg@info{Option: Serbian, script=\xpg@val}%
 }{\xpg@warning{Unknown Serbian script `#1'}}
 
-\define@key{serbian}{script}[Cyrillic]{\setkeys{serbian}{Script=#1}}
+\define@key{serbian}{script}[cyrillic]{\setkeys{serbian}{Script=#1}}
 
 \newif\ifcyrillic@numerals
 \newif\ifcyrillic@asbuk@numerals
@@ -89,7 +89,7 @@
 \setkeys{serbian}{Script,numerals}
 
 % Register default options
-\xpg@initialize@gloss@options{serbian}{script=Cyrillic,numerals=arabic,splithyphens=true}
+\xpg@initialize@gloss@options{serbian}{script=cyrillic,numerals=arabic,splithyphens=true}
 
 \def\captionsserbian{%
    \if@serbian@cyr\captionsserbian@cyr\else\captionsserbian@lat\fi

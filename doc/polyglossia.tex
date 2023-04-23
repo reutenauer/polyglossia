@@ -1415,8 +1415,8 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 \paragraph*{Options:}
 \begin{itemize}
 	\item \xpgchoicekey{variant}{\xpgvalue{kurmanji} or \xpgpresetvalue{sorani}}
-	\item \xpgchoicekey{script}{\xpgvalue{Arabic} or \xpgvalue{Latin}}
-		Defaults are \xpgvalue{Arabic} for Sorani and \xpgvalue{Latin} for Kurmanji.
+	\item \xpgchoicekey{script}{\xpgvalue{arabic} or \xpgvalue{latin}}
+		Defaults are \xpgvalue{arabic} for Sorani and \xpgvalue{latin} for Kurmanji.
 	\item \xpgchoicekey{numerals}{\xpgvalue{western} or \xpgvalue{eastern}}
 		Defaults are \xpgvalue{western} for Latin and \xpgvalue{eastern} for Arabic script, depending
 		on the selection above.
@@ -1841,18 +1841,18 @@ Currently support for Sami is limited to Northern Sami.
 \subsection{sanskrit}\label{sanskrit}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey[1.0.2]{script}{\xpgpresetvalue{Devanagari}, \xpgvalue{Gujarati},
-	\xpgvalue{Malayalam}, \xpgvalue{Bengali}, \xpgvalue{Kannada}, \xpgvalue{Telugu}, \xpgvalue{Latin}}
+	\item \xpgchoicekey[1.0.2]{script}{\xpgpresetvalue{devanagari}, \xpgvalue{gujarati},
+	\xpgvalue{malayalam}, \xpgvalue{bengali}, \xpgvalue{kannada}, \xpgvalue{telugu}, \xpgvalue{latin}}
 		The value is passed to \pkg{fontspec} should the respective
 		\cmd{\⟨script⟩font} not be defined.  This can be useful if you typeset Sanskrit
 		texts in scripts other than Devanagari.
-	\item \xpgchoicekey[1.45]{numerals}{\xpgpresetvalue{Devanagari} or \xpgvalue{Western}}
+	\item \xpgchoicekey[1.45]{numerals}{\xpgpresetvalue{devanagari} or \xpgvalue{western}}
 	\end{itemize}
 
 \subsection{serbian}\label{serbian}
 \paragraph*{Options:}
 	\begin{itemize}
-	\item \xpgchoicekey{script}{\xpgpresetvalue{Cyrillic} or \xpgvalue{Latin}}
+	\item \xpgchoicekey{script}{\xpgpresetvalue{cyrillic} or \xpgvalue{latin}}
 	\item \xpgboolkeytrue[1.54]{splithyphens}
 			According to Serbian typesetting conventions, if a word with a hard hyphen (such as
 			\emph{калцијум-карбонат}) is hyphenated at this hyphen, a second hyphenation character is to be
@@ -2530,6 +2530,14 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \section{Revision history}
 
 \bgroup\footnotesize
+\subsection*{1.63 (forthcoming)}
+
+\subsubsection*{Interface changes}
+\begin{itemize}
+	\item All language options are now lowercase by default (though the mechanism is case-insensitive anyway).
+	Changes cover Kurdish, Sanskrit, Serbian.
+\end{itemize}
+
 \subsection*{1.62 (2023/04/22)}
 
 \subsubsection*{Bug fixes}

@@ -19,55 +19,55 @@
 
 % BCP-47 compliant aliases
 \setlanguagealias*{sanskrit}{sa}
-\setlanguagealias*[script=Devanagari]{sanskrit}{sa-Deva}
-\setlanguagealias*[script=Malayalam]{sanskrit}{sa-Mlym}
-\setlanguagealias*[script=Telugu]{sanskrit}{sa-Telu}
-\setlanguagealias*[script=Bengali]{sanskrit}{sa-Beng}
-\setlanguagealias*[script=Kannada]{sanskrit}{sa-Knda}
-\setlanguagealias*[script=Gujarati]{sanskrit}{sa-Gujr}
-\setlanguagealias*[script=Latin]{sanskrit}{sa-Latn}
+\setlanguagealias*[script=devanagari]{sanskrit}{sa-Deva}
+\setlanguagealias*[script=malayalam]{sanskrit}{sa-Mlym}
+\setlanguagealias*[script=telugu]{sanskrit}{sa-Telu}
+\setlanguagealias*[script=bengali]{sanskrit}{sa-Beng}
+\setlanguagealias*[script=kannada]{sanskrit}{sa-Knda}
+\setlanguagealias*[script=gujarati]{sanskrit}{sa-Gujr}
+\setlanguagealias*[script=latin]{sanskrit}{sa-Latn}
 
-\define@key{sanskrit}{Script}[Devanagari]{%
+\define@key{sanskrit}{Script}[devanagari]{%
   \ifcsdef{fontsetup@sanskrit@#1}%
     {\csname fontsetup@sanskrit@#1\endcsname}%
     {\xpg@error{`#1' is not a valid script for Sanskrit}%
   }%
 }
 
-\define@key{sanskrit}{script}[Devanagari]{\setkeys{sanskrit}{Script=#1}}
+\define@key{sanskrit}{script}[devanagari]{\setkeys{sanskrit}{Script=#1}}
 
-\def\fontsetup@sanskrit@Devanagari{%
+\def\fontsetup@sanskrit@devanagari{%
   \SetLanguageKeys{sanskrit}{scripttag=deva,script=Devanagari,bcp47=sa-Deva,bcp47-language=sa,bcp47-script=Deva,bcp47-casing=sa-Deva}
   \xpg@fontsetup@nonlatin{sanskrit}}
-\def\fontsetup@sanskrit@Gujarati{%
+\def\fontsetup@sanskrit@gujarati{%
   \SetLanguageKeys{sanskrit}{scripttag=gujr,script=Gujarati,bcp47=sa-Gujr,bcp47-language=sa,bcp47-script=Gujr,bcp47-casing=sa-Gujr}
   \xpg@fontsetup@nonlatin{sanskrit}}
-\def\fontsetup@sanskrit@Malayalam{%
+\def\fontsetup@sanskrit@malayalam{%
   \SetLanguageKeys{sanskrit}{scripttag=mlym,script=Malayalam,bcp47=sa-Mlym,bcp47-language=sa,bcp47-script=Mlym,bcp47-casing=sa-Mlym}
   \xpg@fontsetup@nonlatin{sanskrit}}
-\def\fontsetup@sanskrit@Bengali{%
+\def\fontsetup@sanskrit@bengali{%
   \SetLanguageKeys{sanskrit}{scripttag=beng,script=Bengali,bcp47=sa-Beng,bcp47-language=sa,bcp47-script=Beng,bcp47-casing=sa-Beng}
   \xpg@fontsetup@nonlatin{sanskrit}}
-\def\fontsetup@sanskrit@Kannada{%
+\def\fontsetup@sanskrit@kannada{%
   \SetLanguageKeys{sanskrit}{scripttag=knda,script=Kannada,bcp47=sa-Knda,bcp47-language=sa,bcp47-script=Knda,bcp47-casing=sa-Knda}
   \xpg@fontsetup@nonlatin{sanskrit}}
-\def\fontsetup@sanskrit@Telugu{%
+\def\fontsetup@sanskrit@telugu{%
   \SetLanguageKeys{sanskrit}{scripttag=telu,script=Telugu,bcp47=sa-Relu,bcp47-language=sa,bcp47-script=Relu,bcp47-casing=sa-Relu}
   \xpg@fontsetup@nonlatin{sanskrit}}
-\def\fontsetup@sanskrit@Latin{%
+\def\fontsetup@sanskrit@latin{%
   \SetLanguageKeys{sanskrit}{scripttag=latn,script=Latin,bcp47=sa-Latn,bcp47-language=sa,bcp47-script=Latn,bcp47-casing=sa-Latn}
   \xpg@fontsetup@latin{sanskrit}}
 
 
 \newif\ifsanskrit@devanagari@numerals
 \sanskrit@devanagari@numeralstrue
-\define@choicekey*+{sanskrit}{numerals}[\xpg@val\xpg@nr]{Devanagari,Western}[Devanagari]{%
+\define@choicekey*+{sanskrit}{numerals}[\xpg@val\xpg@nr]{devanagari,western}[devanagari]{%
    \ifcase\xpg@nr\relax
-      % Devanagari:
+      % devanagari:
       \sanskrit@devanagari@numeralstrue%
       \SetLanguageKeys{sanskrit}{bcp47-extension-u=nu-deva}%
    \or
-      % Western:
+      % western:
       \sanskrit@devanagari@numeralsfalse%
       \SetLanguageKeys{sanskrit}{bcp47-extension-u=nu-latn}%
    \fi
@@ -76,7 +76,7 @@
 
 
 % Register default options
-\xpg@initialize@gloss@options{sanskrit}{script=Devanagari,numerals=Devanagari}
+\xpg@initialize@gloss@options{sanskrit}{script=devanagari,numerals=devanagari}
 
 % Use \providecommand here as the ldf file might
 % be reloaded via BCP.
