@@ -2532,6 +2532,12 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \bgroup\footnotesize
 \subsection*{1.63 (forthcoming)}
 
+\subsubsection*{Bug fixes}
+\begin{itemize}
+	\item Language options are now lowercased before they are handled. This fixes errors when
+	      using the options in \cmd{\MakeUppercase} context (\eg in headings).
+\end{itemize}
+
 \subsubsection*{Interface changes}
 \begin{itemize}
 	\item All language options are now lowercase by default (though the mechanism is case-insensitive anyway).

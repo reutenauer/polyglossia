@@ -1983,7 +1983,8 @@
 % where \text<alias> would cause clashes
 % (e.g., \textit)
 \newcommand\textlang[3][]{%
-  \__xpg_textlanguage:een {#1} {#2} {#3}
+  \xpg@str@lowercase{\xpg@tmp@lang}{#2}%
+  \__xpg_textlanguage:een {#1} {\xpg@tmp@lang} {#3}
 }%
 
 % Alias to {<lang>}, but more suitable
@@ -2016,6 +2017,23 @@
   \__xpg_store_bcp_info:nn {#1}{#2}
 }
 
+% Expandable lowercasing. We use this to assure keyval
+% options are lowercased (also when used in \MakeUppercase
+% contexts e.g. in headings)
+% Macro adapted from tudscr.sty
+\newcommand*\xpg@str@lowercase[2]{%
+  \protected@edef#1{%
+    \lowercase{\def\noexpand#1{#2}}%
+  }#1%
+}
+
+% lowercase options before passing to setkeys
+\cs_new:Nn \polyglossia@set@keys:nn
+{
+    \xpg@str@lowercase{\xpg@tmp@opts}{#2}%
+    \exp_args:Nne \setkeys{#1}{\xpg@tmp@opts}%
+}
+
 % joint code of \foreignlanguage, otherlanguage*
 % and \text<lang>
 % #1 option
@@ -2023,7 +2041,7 @@
 \newcommand{\xpg@otherlanguage}[2][]
 {%
   \polyglossia@error@iflangnotloaded:n{#2}
-  \exp_args:Nne \setkeys{#2}{#1}%
+  \polyglossia@set@keys:nn{#2}{#1}%
   \polyglossia@setforeignlanguage[#1]{#2}
   % Hook for external packages such as biblatex
   \polyglossia@language@switched%
@@ -2212,7 +2230,7 @@
     \clist_map_inline:nn { #2 } {%
       \xpg@parsevariantkeyvalue##1=#3:#1\relax
     }%
-    \exp_args:Nne \setkeys{#1}{#2}%
+    \polyglossia@set@keys:nn{#1}{#2}%
   }
 }
 
@@ -2614,7 +2632,7 @@
      % Execute passed command with language and maybe options
      % and re-set stored language's keys
      \tl_if_empty:NTF \l_tmpb_tl {\cs_if_exist_use:c{#1}{\l_tmpc_tl}}
-                                 {\exp_args:Nne \setkeys{\l_tmpc_tl}{\l_tmpb_tl}
+                                 {\polyglossia@set@keys:nn{\l_tmpc_tl}{\l_tmpb_tl}
                                   \cs_if_exist_use:c{#1}[\l_tmpb_tl]{\l_tmpc_tl}
                                  }
   }
@@ -2657,7 +2675,7 @@
   \edef\xpg@tmp@lang{\xpg_alias_base_lang:n{#2}}
   \bgroup
   \polyglossia@error@iflangnotloaded:n{\xpg@tmp@lang}
-  \exp_args:Nne \setkeys{\xpg@tmp@lang}{\xpg@tmp@opts}%
+  \polyglossia@set@keys:nn{\xpg@tmp@lang}{\xpg@tmp@opts}%
   % Store bcp47.tag@hypenmins
   \tl_if_blank:nTF {\xpg@tmp@opts}{%
     \ifcsundef{\csname xpg@tmp@lang\endcsname @g.bcp47.tag}{%
@@ -2676,7 +2694,7 @@
 \newcommand*\use@localhyphenmins[2][]{%
   \bgroup
   \polyglossia@error@iflangnotloaded:n{#2}
-  \exp_args:Nne \setkeys{#2}{#1}%
+  \polyglossia@set@keys:nn{#2}{#1}%
   % Use bcp47.tag@hypenmins
   \tl_if_blank:nTF {#1}{%
     \ifcsundef{#2@g.bcp47.tag}{%
