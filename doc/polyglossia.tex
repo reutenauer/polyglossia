@@ -1252,6 +1252,14 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 	\item \xpgchoicekey{spelling}{\xpgpresetvalue{new} (= \xpgvalue{1996}) or \xpgvalue{old} (= \xpgvalue{1901})}
 		Indicates whether hyphenation patterns for traditional (1901) or reformed
 		(1996) orthography should be used. The latter is the default.
+	\item \xpgboolkeyfalse[1.63]{capitaleszett}
+	     If this is set to true, \cmd{\MakeUppercase} will upcase the eszett character ⟨ß⟩ to the
+	     capital counterpart ⟨\charifavailable{1E9E}{SS}⟩ that has been introduced to Unicode in 2008 and
+	     standardized in German regulations in 2017, rather than ⟨SS⟩. Note that this feature requires
+	     \LaTeX\ kernel 2023/06 at least and a font that contains the respective glyph.
+	\item \xpgchoicekey[1.2.0]{script}{\xpgpresetvalue{latin} or \xpgvalue{blackletter}\new{1.46} (= \xpgvalue{fraktur})}
+	     Setting ¦script=blackletter¦ adapts the captions for typesetting German in blackletter type, using the `long s' ⟨ſ\kern1.5pt⟩
+	     where appropriate.
 	\item \xpgboolkeyfalse[1.0.3]{babelshorthands}
 		If this is turned on, all shorthands defined in \pkg{babel}
 		for fine-tuning hyphenation and micro-typography of German words are activated.
@@ -1279,9 +1287,6 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		\item[¦"<¦] for French-style left double quotes («)
 		\item[¦">¦] for French-style right double quotes (»).
 		\end{shorthands}
-	\item \xpgchoicekey[1.2.0]{script}{\xpgpresetvalue{latin} or \xpgvalue{blackletter}\new{1.46} (= \xpgvalue{fraktur})}
-		Setting ¦script=blackletter¦ adapts the captions for typesetting German in blackletter type (using the long s (ſ)
-		where appropriate).
 	\end{itemize}
 
 \subsection{greek}\label{greek}
@@ -2536,7 +2541,12 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \begin{itemize}
 	\item Language options are now lowercased before they are handled. This fixes errors when
 	      using the options in \cmd{\MakeUppercase} context (\eg in headings).
-	\item Fix casing value for medieval Latin (this concerns u and V casing).
+	\item Fix casing value for medieval Latin (this concerns ⟨u⟩ and ⟨V⟩ casing).
+\end{itemize}
+
+\subsubsection*{New features}
+\begin{itemize}
+	\item New option \xpgoption{capitaleszett} for German.
 \end{itemize}
 
 \subsubsection*{Interface changes}

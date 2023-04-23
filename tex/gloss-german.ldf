@@ -155,6 +155,17 @@
    \xpg@info{Option: German, script=\xpg@val}%
 }{\xpg@warning{Unknown German script `#1'}}
 
+\define@boolkey{german}[german@]{capitaleszett}[true]{%
+  \ifgerman@capitaleszett
+     % MakeUppercase capitalizes the eszett (U+00DF) with U+1E9E
+     \SetLanguageKeys{german}{bcp47-casing=de-x-eszett,bcp47-extension-x=eszett}
+  \else
+     % Capitalize eszett as <SS>
+     \SetLanguageKeys{german}{bcp47-casing=de,bcp47-extension-x={}}
+  \fi
+}
+
+
 % Option defunc'ed, as both XeTeX and LuaTeX meanwhile
 % use the experimental German hyphenation patterns by default.
 \define@boolkey{german}[german@]{latesthyphen}[true]{}
