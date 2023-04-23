@@ -102,6 +102,16 @@
    }%
 }
 
+\define@boolkey{greek}[greek@]{capitaliota}[true]{%
+  \ifgreek@capitaliota
+     % \MakeUppercase converts the ypogegrammeni (subscript muted iota) to capital iota
+     \SetLanguageKeys{greek}{bcp47-casing=el-x-iota,bcp47-extension-x=iota}
+  \else
+     % \MakeUppercase retains the subscript versions (default)
+     \SetLanguageKeys{greek}{bcp47-casing=el,bcp47-extension-x={}}
+  \fi
+}
+
 \define@boolkey{greek}{attic}[true]{\xpg@warning{Greek option `attic' is no longer required.}}
 
 % Register default options

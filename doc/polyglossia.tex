@@ -1294,7 +1294,10 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 	\begin{itemize}
 	\item \xpgchoicekey{variant}{\xpgpresetvalue{monotonic} (= \xpgvalue{mono}), \xpgvalue{polytonic} (= \xpgvalue{poly}), or \xpgvalue{ancient}}
 	\item \xpgchoicekey{numerals}{\xpgpresetvalue{greek} or \xpgvalue{arabic}}
-	\item \xpgboolkeyfalse{attic}
+	\item \xpgboolkeyfalse[1.63]{capitaliota}
+		If this is set to true, \cmd{\MakeUppercase} will upcase the \emph{ypogegrammeni} (subscript muted iota) to capital iota.
+		By default (and with this option set to \xpgvalue{false}), \cmd{\MakeUppercase} retains the subscript versions.
+		Note that this feature requires	\LaTeX\ kernel 2023/06 at least.
 	\end{itemize}
 \paragraph*{Commands:}
 	\begin{itemize}
@@ -2547,6 +2550,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \subsubsection*{New features}
 \begin{itemize}
 	\item New option \xpgoption{capitaleszett} for German.
+	\item New option \xpgoption{capitaliota} for Greek.
 \end{itemize}
 
 \subsubsection*{Interface changes}
