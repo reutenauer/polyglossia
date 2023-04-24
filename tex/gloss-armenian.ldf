@@ -44,6 +44,18 @@
    }%
 }
 
+\define@boolkey{armenian}[armenian@]{capitalyiwn}[true]{%
+  \ifarmenian@capitalyiwn
+     % MakeUppercase capitalizes the ligature of letters ech and yiwn (U+0587)
+     % to capital ech and yiwn (also the output if Armenian is not selected at all)
+     \SetLanguageKeys{armenian}{bcp47-casing=hy-x-yiwn,bcp47-extension-x=yiwn}
+  \else
+     % Capitalize ech and yiwn ligature to capital ech and vew,
+     % following Armenian spelling reform
+     \SetLanguageKeys{armenian}{bcp47-casing=hy,bcp47-extension-x={}}
+  \fi
+}
+
 % Register default options
 \xpg@initialize@gloss@options{armenian}{numerals=armenian,variant=western}
 

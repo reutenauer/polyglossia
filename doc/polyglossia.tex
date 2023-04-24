@@ -876,8 +876,14 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 \subsection{armenian}\label{armenian}
 \paragraph*{Options:}
 \begin{itemize}
-  \item \xpgchoicekey[1.45]{variant}{\xpgvalue{eastern} or \xpgpresetvalue{western}}
+	\item \xpgchoicekey[1.45]{variant}{\xpgvalue{eastern} or \xpgpresetvalue{western}}
 	\item \xpgchoicekey[1.45]{numerals}{\xpgvalue{armenian} or \xpgpresetvalue{arabic}}
+	\item \xpgboolkeyfalse[1.63]{capitalyiwn}
+		If this is set to true, \cmd{\MakeUppercase} will upcase the ligature of letters ech and yiwn to capital
+		ech and yiwn. This conforms to the output outside Armenian language selection.
+		By default (and with this option set to \xpgvalue{false}), \cmd{\MakeUppercase} upcases the ech and yiwn
+		ligature to capital ech and \emph{vew}, adhering to Armenian reformed spelling regulations.
+		Note that this feature requires	\LaTeX\ kernel 2023/06 at least.
 \end{itemize}
 
 \subsection[belarusian]{belarusian\new{1.46}}\label{belarusian}
@@ -2549,6 +2555,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 
 \subsubsection*{New features}
 \begin{itemize}
+	\item New option \xpgoption{capitalyiwn} for Armenian.
 	\item New option \xpgoption{capitaleszett} for German.
 	\item New option \xpgoption{capitaliota} for Greek.
 \end{itemize}
