@@ -2551,6 +2551,10 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Language options are now lowercased before they are handled. This fixes errors when
 	      using the options in \cmd{\MakeUppercase} context (\eg in headings).
 	\item Fix casing value for medieval Latin (this concerns ⟨u⟩ and ⟨V⟩ casing).
+	\item Remove hacks in some gloss files where \cmd\MakeUppercase\ has been redefined to a no-op
+		since the respective scripts do not have uppercasing. As \cmd\MakeUppercase\ is now locale-aware,
+		these hacks are no longer needed. This concerns Arabic, Divehi, Hebrew, Hindi, Kurdish,
+		Persian, Punjabi, Syriac, and Urdu.
 \end{itemize}
 
 \subsubsection*{New features}

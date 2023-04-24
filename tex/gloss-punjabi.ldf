@@ -97,16 +97,4 @@
     \space\punjabinumber\year}%
 }
 
-% Save original \MakeUppercase definition
-\let\xpg@save@MakeUppercase\MakeUppercase
-
-\def\blockextras@punjabi{%
-  \def\MakeUppercase##1{##1}%
-}
-
-\def\noextras@punjabi{%
-   % restore original \MakeUppercase definition
-   \let\MakeUppercase\xpg@save@MakeUppercase%
-}
-
 \endinput
