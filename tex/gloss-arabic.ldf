@@ -192,7 +192,7 @@
 
 \def\arabicnumber#1{%
   \ifeastern@numerals
-    \@ensure@dir{\arabicdigits{\number#1}}%
+    \@ensure@LTR{\arabicdigits{\number#1}}%
   \else
     \number#1%
   \fi}
