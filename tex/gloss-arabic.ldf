@@ -115,6 +115,13 @@
 \define@key{arabic}{hijricorrection}[0]{%
   \gdef\@hijri@correction{#1}}%
 
+\newif\ifarabic@customsep\arabic@customsepfalse
+\def\xpg@sepmark{}
+\define@key{arabic}{sectionsep}[.]{%
+   \arabic@customseptrue%
+   \gdef\xpg@sepmark{#1}%
+}
+
 % Register default options
 \xpg@initialize@gloss@options{arabic}{locale=default,calendar=gregorian,numerals=mashriq,hijricorrection=0,abjadjimnotail=false}
 % Register alias options
@@ -272,6 +279,94 @@
 
 \def\noarabic@globalnumbers{%
    \let\@arabic\xpg@save@arabic%
+}
+
+\def\arabic@xetex@capsformat{%
+  \let\xpg@save@sepmark\@SepMark%
+  \SepMark{\xpg@sepmark}
+}
+
+\def\noarabic@xetex@capsformat{%
+   \ifcsdef{xpg@save@sepmark}{%
+     \SepMark{\xpg@save@sepmark}
+   }{}%
+}
+
+\def\arabic@luatex@capsformat{%
+  %
+  % change chapter and part headings
+  \ifarabic@customsep
+     \ifcsdef{chapter}{%
+        \let\xpg@save@thesection\thesection%
+        \renewcommand*\thesection{\thechapter\xpg@sepmark\@arabic\c@section}
+        \let\xpg@save@theequation\theequation%
+        \renewcommand*\theequation{%
+	    \ifnum \c@chapter>\z@ \thechapter\xpg@sepmark\fi\@arabic\c@equation}
+        \let\xpg@save@thefigure\thefigure%
+	\renewcommand*\thefigure{%
+	    \ifnum\c@chapter>\z@\thechapter\xpg@sepmark\fi\@arabic\c@figure}
+        \let\xpg@save@thetable\thetable%
+	\renewcommand*\thetable{%
+	    \ifnum\c@chapter>\z@\thechapter\xpg@sepmark\fi\@arabic\c@table}
+     }{}
+     \let\xpg@save@thesubsection\thesubsection%
+     \renewcommand\thesubsection
+	{\thesection\xpg@sepmark\@arabic\c@subsection}
+     \let\xpg@save@thesubsubsection\thesubsubsection%
+     \renewcommand\thesubsubsection{\thesubsection\xpg@sepmark\@arabic\c@subsubsection}
+     \let\xpg@save@theparagraph\theparagraph%
+     \renewcommand\theparagraph
+         {\thesubsubsection\xpg@sepmark\@arabic\c@paragraph}
+     \let\xpg@save@thesubparagraph\thesubparagraph%
+     \renewcommand\thesubparagraph{\theparagraph\xpg@sepmark\@arabic\c@subparagraph}
+  \fi% (end \ifarabic@customsep)
+}
+
+\def\noarabic@luatex@capsformat{%
+   \ifcsdef{xpg@save@thesection}{%
+        \let\thesection\xpg@save@thesection%
+   }{}%
+   \ifcsdef{xpg@save@theequation}{%
+        \let\theequation\xpg@save@theequation%
+   }{}%
+   \ifcsdef{xpg@save@thefigure}{%
+        \let\thefigure\xpg@save@thefigure%
+   }{}%
+   \ifcsdef{xpg@save@thetable}{%
+        \let\thetable\xpg@save@thetable%
+   }{}%
+   \ifcsdef{xpg@save@thesubsection}{%
+        \let\thesubsection\xpg@save@thesubsection%
+   \ifcsdef{xpg@save@thesubsubsection}{%
+        \let\thesubsubsection\xpg@save@thesubsubsection%
+   }{}%
+   }{}%
+   \ifcsdef{xpg@save@theparagraph}{%
+        \let\theparagraph\xpg@save@theparagraph%
+   }{}%
+   \ifcsdef{xpg@save@thesubparagraph}{%
+        \let\thesubparagraph\xpg@save@thesubparagraph%
+   }{}%
+}
+
+\def\blockextras@arabic{%
+   \ifarabic@customsep
+      \ifxetex
+        \arabic@xetex@capsformat
+      \else
+        \arabic@luatex@capsformat
+      \fi   
+   \fi
+}
+%
+\def\noextras@arabic{%
+    \ifarabic@customsep
+      \ifxetex
+        \noarabic@xetex@capsformat
+      \else
+        \noarabic@luatex@capsformat
+      \fi   
+   \fi
 }
 
 \endinput

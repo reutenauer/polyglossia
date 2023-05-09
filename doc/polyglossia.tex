@@ -854,6 +854,11 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		Jordan, Lebanon and Palestine.
 	\item \xpgchoicekey{numerals}{\xpgpresetvalue{mashriq} or \xpgvalue{maghrib}}
 		The latter is the default when \xpgvalue{locale=algeria}, \xpgvalue{tunisia}, or \xpgvalue{morocco}.
+	\item \xpgcodekey[1.63]{sectionsep}¦.¦
+		This option allows to customize the separator between chapters, sections, and subsections (a dot by default),
+		\eg \xpgoption{sectionsep=-}.
+		This might be useful particularly with \xpgoption{numerals=mashriq}, as the dot looks too similar to the zero
+		in many fonts.
 	\item \xpgboolkeyfalse[1.50]{abjadalph}
 	     Set this to true if you want the alphabetic counters to be output using \cmd\abjadalph\ rather than \cmd\abjad.
 	     Note that this limits the counter scope to 28 (see \cmd\abjadalph\ below).
@@ -2563,6 +2568,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item New option \xpgoption{capitalyiwn} for Armenian.
 	\item New option \xpgoption{capitaleszett} for German.
 	\item New option \xpgoption{capitaliota} for Greek.
+	\item New option \xpgoption{sectionsep} for Arabic (\TXI{589}).
 \end{itemize}
 
 \subsubsection*{Interface changes}
