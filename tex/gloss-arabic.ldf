@@ -41,21 +41,27 @@
 \define@boolkey{arabic}[arabic@]{abjadalph}[true]{}
 
 \newif\ifeastern@numerals
-\def\tmp@mashriq{mashriq}
-\def\tmp@maghrib{maghrib}
-\define@key{arabic}{numerals}[mashriq]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@mashriq%
-    \eastern@numeralstrue%
-  \else
-    \ifx\@tmpa\tmp@maghrib\eastern@numeralsfalse\fi%
-  \fi}
+\define@choicekey*+{arabic}{numerals}[\xpg@val\xpg@nr]{mashriq,maghrib,eastern,western}[mashriq]{%
+   \ifcase\xpg@nr\relax
+      % mashriq:
+      \eastern@numeralstrue%
+   \or
+      % maghrib:
+      \eastern@numeralsfalse
+   \or
+      % eastern:
+      \eastern@numeralstrue%
+   \or
+      % western:
+      \eastern@numeralsfalse
+   \fi
+   \xpg@info{Option: Arabic, numerals=\xpg@val}%
+}{\xpg@warning{Unknown Arabic numeral option `#1'}}
 
 %this is needed for \abjad in arabicnumbers.sty
-\def\tmp@true{true}
-\define@key{arabic}{abjadjimnotail}[true]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@true\abjad@jim@notailtrue%
+\define@boolkey{arabic}[arabic@]{abjadjimnotail}[true]{%
+  \ifarabic@abjadjimnotail
+    \abjad@jim@notailtrue%
   \else
     \abjad@jim@notailfalse
   \fi}
@@ -101,16 +107,20 @@
  }{\xpg@warning{Unknown Arabic locale `#1'}}
 
 \newif\if@hijrical
-\def\tmp@hijri{hijri}
-\def\tmp@islamic{islamic}
-\define@key{arabic}{calendar}[gregorian]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@hijri\@hijricaltrue%
-  \else
-    \ifx\@tmpa\tmp@islamic\@hijricaltrue%
-    \else\@hijricalfalse%
-    \fi
-  \fi}
+\define@choicekey*+{arabic}{calendar}[\xpg@val\xpg@nr]{gregorian,hijri,islamic}[gregorian]{%
+   \ifcase\xpg@nr\relax
+      % gregorian:
+      \@hijricalfalse
+   \or
+      % hijri:
+      \@hijricaltrue
+   \or
+      % islamic:
+      \@hijricaltrue
+   \fi
+   \xpg@info{Option: Arabic, calendar=\xpg@val}%
+}{\xpg@warning{Unknown Arabic calendar option `#1'}}
+
 
 \define@key{arabic}{hijricorrection}[0]{%
   \gdef\@hijri@correction{#1}}%

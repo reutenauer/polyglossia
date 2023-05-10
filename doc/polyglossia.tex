@@ -852,13 +852,17 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		as well as the form of the numerals (unless overridden by the following option). Recommended settings are
 		\xpgvalue{default} for Egypt, Sudan, Yemen and the Gulf states, and \xpgvalue{mashriq} for Iraq, Syria,
 		Jordan, Lebanon and Palestine.
-	\item \xpgchoicekey{numerals}{\xpgpresetvalue{mashriq} or \xpgvalue{maghrib}}
-		The latter is the default when \xpgvalue{locale=algeria}, \xpgvalue{tunisia}, or \xpgvalue{morocco}.
+	\item \xpgchoicekey{numerals}{\xpgpresetvalue{mashriq} (=~\xpgvalue{eastern}\new{1.63}) or \xpgvalue{maghrib}
+		(=~\xpgvalue{western}\new{1.63})}
+		Use Eastern Arabic (a.k.a.\ Indic-Arabic) numerals (\xpgvalue{mashriq} or \xpgvalue{eastern}) or Western numerals
+		(\xpgvalue{maghrib} or \xpgvalue{western}).
+		The latter is the default when \xpgvalue{locale=algeria}, \xpgvalue{tunisia}, or \xpgvalue{morocco}, the former
+		is the default with all other Arabic locales.
 	\item \xpgcodekey[1.63]{sectionsep}¦.¦
 		This option allows to customize the separator between chapters, sections, and subsections (a dot by default),
 		\eg \xpgoption{sectionsep=-}.
-		This might be useful particularly with \xpgoption{numerals=mashriq}, as the dot looks too similar to the zero
-		in many fonts.
+		This might be useful particularly with \xpgoption{numerals=mashriq} or \xpgoption{eastern}, as the dot looks
+		too similar to the zero	in many fonts.
 	\item \xpgboolkeyfalse[1.50]{abjadalph}
 	     Set this to true if you want the alphabetic counters to be output using \cmd\abjadalph\ rather than \cmd\abjad.
 	     Note that this limits the counter scope to 28 (see \cmd\abjadalph\ below).
@@ -2560,7 +2564,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 		since the respective scripts do not have uppercasing. As \cmd\MakeUppercase\ is now locale-aware,
 		these hacks are no longer needed. This concerns Arabic, Divehi, Hebrew, Hindi, Kurdish,
 		Persian, Punjabi, Syriac, and Urdu.
-	\item Fix Mashriq Arabic numbering direction with \LuaLaTeX\ (amends previous fix to \TXI{213}).
+	\item Fix Eastern (Mashriq) Arabic numbering direction with \LuaLaTeX\ (amends previous fix to \TXI{213}).
 \end{itemize}
 
 \subsubsection*{New features}
@@ -2569,6 +2573,8 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item New option \xpgoption{capitaleszett} for German.
 	\item New option \xpgoption{capitaliota} for Greek.
 	\item New option \xpgoption{sectionsep} for Arabic (\TXI{589}).
+	\item Add aliases \xpgvalue{eastern} (=~\xpgvalue{mashriq}) and \xpgvalue{western} (=~\xpgvalue{maghrib})
+	      to Arabic \xpgoption{numerals}.
 \end{itemize}
 
 \subsubsection*{Interface changes}
