@@ -25,21 +25,21 @@
 \def\syriacnumber#1{\@syriacnumber{#1}}%
 
 \newif\if@eastern@numerals
-\def\tmp@eastern{eastern}
-\def\tmp@abjad{abjad}
-\define@key{syriac}{numerals}[western]{%
-	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@abjad
-	  \let\syriacnumber\abjadsyriac
-	\else
-	  \ifx\@tmpa\tmp@eastern
-              \@eastern@numeralstrue
-              \SetLanguageKeys{syriac}{bcp47-extension-u=nu-syrc}%
-	  \else
-              \@eastern@numeralsfalse
-              \SetLanguageKeys{syriac}{bcp47-extension-u=nu-latn}%
- 	  \fi
-  \fi}
+\define@choicekey*+{syriac}{numerals}[\xpg@val\xpg@nr]{eastern,western,abjad}[eastern]{%
+   \ifcase\xpg@nr\relax
+      % eastern:
+      \@eastern@numeralstrue
+      \SetLanguageKeys{syriac}{bcp47-extension-u=nu-syrc}%
+   \or
+      % western:
+      \@eastern@numeralsfalse
+      \SetLanguageKeys{syriac}{bcp47-extension-u=nu-latn}%
+   \or
+      % abjad:
+      \let\syriacnumber\abjadsyriac%
+   \fi
+   \xpg@info{Option: Syriac, numerals=\xpg@val}%
+}{\xpg@warning{Unknown Syriac numerals option `#1'}}
 
 \newif\ifsyriac@customsep\syriac@customsepfalse
 \def\xpg@sepmark{}

@@ -112,13 +112,18 @@
   \fi
 }
 
-\def\tmp@western{western}
-\define@key{kurdish}{numerals}[eastern]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@western\@western@numeralstrue\@force@western@numeralstrue\else%
-    \@western@numeralsfalse%
-  \fi%
-}
+\newif\if@western@numerals
+\define@choicekey*+{kurdish}{numerals}[\xpg@val\xpg@nr]{eastern,western}[eastern]{%
+   \ifcase\xpg@nr\relax
+      % eastern:
+      \@western@numeralsfalse%
+   \or
+      % western:
+      \@western@numeralstrue%
+      \@force@western@numeralstrue%
+   \fi
+   \xpg@info{Option: Kurdish, numerals=\xpg@val}%
+}{\xpg@warning{Unknown Kurdish numerals option `#1'}}
 
 \newif\ifkurdish@customsep\kurdish@customsepfalse
 \def\xpg@sepmark{}
@@ -128,10 +133,9 @@
 }
 
 %this is needed for \abjad in arabicnumbers.sty
-\def\tmp@true{true}
-\define@key{kurdish}{abjadjimnotail}[true]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@true\abjad@jim@notailtrue%
+\define@boolkey{kurdish}[kurdish@]{abjadjimnotail}[true]{%
+  \ifkurdish@abjadjimnotail
+    \abjad@jim@notailtrue%
   \else
     \abjad@jim@notailfalse
   \fi%

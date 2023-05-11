@@ -56,7 +56,7 @@
       \eastern@numeralsfalse
    \fi
    \xpg@info{Option: Arabic, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Arabic numeral option `#1'}}
+}{\xpg@warning{Unknown Arabic numerals option `#1'}}
 
 %this is needed for \abjad in arabicnumbers.sty
 \define@boolkey{arabic}[arabic@]{abjadjimnotail}[true]{%

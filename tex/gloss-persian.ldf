@@ -27,16 +27,18 @@
 \setlanguagealias{persian}{farsi}
 
 \newif\if@western@numerals
-\def\tmp@western{western}
-\define@key{persian}{numerals}[eastern]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@western%
-     \@western@numeralstrue%
-    \SetLanguageKeys{persian}{bcp47-extension-u=nu-latn}%
-  \else%
-    \@western@numeralsfalse%
-    \SetLanguageKeys{persian}{bcp47-extension-u=nu-arab}%
-  \fi}
+\define@choicekey*+{persian}{numerals}[\xpg@val\xpg@nr]{eastern,western}[eastern]{%
+   \ifcase\xpg@nr\relax
+      % eastern:
+      \@western@numeralsfalse%
+      \SetLanguageKeys{persian}{bcp47-extension-u=nu-arab}%
+   \or
+      % western:
+      \@western@numeralstrue%
+      \SetLanguageKeys{persian}{bcp47-extension-u=nu-latn}%
+   \fi
+   \xpg@info{Option: Persian, numerals=\xpg@val}%
+}{\xpg@warning{Unknown Persian numerals option `#1'}}
 
 \newif\ifpersian@customsep\persian@customsepfalse
 \def\xpg@sepmark{}
@@ -46,10 +48,9 @@
 }
 
 %this is needed for \abjad in arabicnumbers.sty
-\def\tmp@true{true}
-\define@key{persian}{abjadjimnotail}[true]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@true\abjad@jim@notailtrue%
+\define@boolkey{persian}[persian@]{abjadjimnotail}[true]{%
+  \ifpersian@abjadjimnotail
+    \abjad@jim@notailtrue%
   \else
     \abjad@jim@notailfalse
   \fi}

@@ -25,16 +25,18 @@
 \setlanguagealias*{urdu}{ur}
 
 \newif\if@western@numerals
-\def\tmp@western{western}
-\define@key{urdu}{numerals}[eastern]{%
-	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@western
-	  \@western@numeralstrue%
-          \SetLanguageKeys{urdu}{bcp47-extension-u=nu-latn}%
-	\else
-	  \@western@numeralsfalse%
-          \SetLanguageKeys{urdu}{bcp47-extension-u=nu-arab}%
-	\fi}
+\define@choicekey*+{urdu}{numerals}[\xpg@val\xpg@nr]{eastern,western}[eastern]{%
+   \ifcase\xpg@nr\relax
+      % eastern:
+      \@western@numeralsfalse%
+      \SetLanguageKeys{urdu}{bcp47-extension-u=nu-arab}%
+   \or
+      % western:
+      \@western@numeralstrue%
+      \SetLanguageKeys{urdu}{bcp47-extension-u=nu-latn}%
+   \fi
+   \xpg@info{Option: Urdu, numerals=\xpg@val}%
+}{\xpg@warning{Unknown Urdu numerals option `#1'}}
 
 \newif\ifurdu@customsep\urdu@customsepfalse
 \def\xpg@sepmark{}
@@ -43,23 +45,26 @@
    \gdef\xpg@sepmark{#1}%
 }
 
-%% TODO USE boolkey instead !!!
 %this is needed for \abjad in arabicnumbers.sty
-\def\tmp@true{true}
-\define@key{urdu}{abjadjimnotail}[true]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@true\abjad@jim@notailtrue%
+\define@boolkey{urdu}[urdu@]{abjadjimnotail}[true]{%
+  \ifurdu@abjadjimnotail
+    \abjad@jim@notailtrue%
   \else
     \abjad@jim@notailfalse
-  \fi}
+  \fi%
+}
 
 \newif\if@hijrical
-\def\tmp@hijri{hijri}
-\define@key{urdu}{calendar}[gregorian]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@hijri\@hijricaltrue%
-    \else\@hijricalfalse%
-  \fi}
+\define@choicekey*+{urdu}{calendar}[\xpg@val\xpg@nr]{gregorian,hijri}[gregorian]{%
+   \ifcase\xpg@nr\relax
+      % gregorian:
+      \@hijricalfalse
+   \or
+      % hijri:
+      \@hijricaltrue
+   \fi
+   \xpg@info{Option: Urdu, calendar=\xpg@val}%
+}{\xpg@warning{Unknown Urdu calendar option `#1'}}
 
 \define@key{urdu}{hijricorrection}[0]{%
   \gdef\@hijri@correction{#1}}%
