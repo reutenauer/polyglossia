@@ -111,7 +111,7 @@
     \number#1%
   \else
     %%FIXME use farsidigits instead???
-    \protect\arabicdigits{\number#1}%
+    \@ensure@LTR{\protect\arabicdigits{\number#1}}%
   \fi}
 
 \def\urdu@numbers{%

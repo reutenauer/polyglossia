@@ -127,10 +127,10 @@
       %%% else we try \arabicfont if defined (and give a warning), 
       %%% else we fall back to the Western numerals.
       \xpg@if@char@available{0661}%
-          {\protect\arabicdigits{\number#1}}%
-          {\arabicdigits{\number#1}
+          {\@ensure@LTR{\protect\arabicdigits{\number#1}}}%
+          {\@ensure@LTR{\arabicdigits{\number#1}}
            \ifcsdef{arabicfont}%
-	     {\protect\arabicdigits{\number#1}%
+	     {\@ensure@LTR{\protect\arabicdigits{\number#1}}%
 	      \xpg@warning{You have specified the option numerals=eastern for Syriac, but the Syriac font does not contain the appropriate glyphs:
                            I am using \string\arabicfont instead}}%
 	     {\number#1%%% <---changed from \RL{\protect\reset@font\protect\number#1}%

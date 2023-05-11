@@ -350,8 +350,8 @@
     \number#1%
   \else
     \xpg@if@char@available{06F0}%
-          {\farsidigits{\number#1}}%
-          {\arabicdigits{\number#1}}%
+          {\@ensure@LTR{\farsidigits{\number#1}}}%
+          {\@ensure@LTR{\arabicdigits{\number#1}}}%
   \fi
 }
 
