@@ -268,7 +268,7 @@ that are explained in section \ref{specific} below.
 	\TX{belarusian}	& \TX{french}	& \TX{kurdish}	& \TX{punjabi}	& turkish		\\
 	\TX{bengali}	& friulian		& \TX{lao}		& romanian		& turkmen		\\
 	bosnian			& \TX{gaelic}	& \TX{latin}	& romansh		& \TX{ukrainian}\\
-	breton			& galician		& latvian		& \TX{russian}	& urdu			\\
+	breton			& galician		& latvian		& \TX{russian}	& \TX{urdu}		\\
 	bulgarian		& \TX{georgian}	& lithuanian	& \TX{sami}		& \TX{uyghur}	\\
 	\TX{catalan}	& \TX{german}	& macedonian	& \TX{sanskrit}	& vietnamese	\\
 	\TX{chinese}	& \TX{greek}	& \TX{malay}	& \TX{serbian}	& \TX{welsh}	\\
@@ -1443,6 +1443,11 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 	\item \xpgchoicekey{numerals}{\xpgvalue{western} or \xpgvalue{eastern}}
 		Defaults are \xpgvalue{western} for Latin and \xpgvalue{eastern} for Arabic script, depending
 		on the selection above.
+	\item \xpgcodekey[1.63]{sectionsep}¦.¦
+		This option allows to customize the separator between chapters, sections, and subsections (a dot by default),
+		\eg \xpgoption{sectionsep=-}.
+		This might be useful particularly with \xpgoption{numerals=eastern}, as the dot looks too similar to the zero
+		in many fonts.
 	\item \xpgboolkeyfalse{abjadjimnotail}
 		Set this to true if you want the \textit{abjad} form of the number three to
 		be \textarabic{ج‍} – as in the manuscript tradition – instead of the
@@ -1691,6 +1696,11 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 \paragraph*{Options:}
 \begin{itemize}
 	\item \xpgchoicekey{numerals}{\xpgvalue{western} or \xpgpresetvalue{eastern}}
+	\item \xpgcodekey[1.63]{sectionsep}¦.¦
+		This option allows to customize the separator between chapters, sections, and subsections (a dot by default),
+		\eg \xpgoption{sectionsep=-}.
+		This might be useful particularly with \xpgoption{numerals=eastern}, as the dot looks too similar to the zero
+		in many fonts.
 	\item \xpgboolkeyfalse[1.0.3]{abjadjimnotail}
 		Set this to \xpgvalue{true} if you want the \textit{abjad} form of the number three to
 		be \textarabic{ج‍} – as in the manuscript tradition – instead of the
@@ -2004,6 +2014,11 @@ Currently support for Sami is limited to Northern Sami.
 	\item \xpgchoicekey[1.0.1]{numerals}{\xpgpresetvalue{western} (\ie 1234567890), \xpgvalue{eastern}
 		(for which the Oriental Arabic numerals are used: \textarabic{١٢٣٤٥٦٧٨٩٠}), or
 		\xpgvalue{abjad}}
+	\item \xpgcodekey[1.63]{sectionsep}¦.¦
+		This option allows to customize the separator between chapters, sections, and subsections (a dot by default),
+		\eg \xpgoption{sectionsep=-}.
+		This might be useful particularly with \xpgoption{numerals=eastern}, as the dot looks too similar to the zero
+		in many fonts.
 	\end{itemize}
 \paragraph*{Commands:}
 	\begin{itemize}
@@ -2097,6 +2112,21 @@ The macros \cmd\Prob , \cmd\Variance , \cmd\NOD , \cmd\nod , \cmd\NOK , \cmd\nok
 \cmd\nsk , \cmd\Proj\ print some rare
 Ukrainian mathematical symbols.
 
+\subsection{urdu}\label{urdu}
+\paragraph*{Options:}
+\begin{itemize}
+	\item \xpgchoicekey{calendar}{\xpgpresetvalue{gregorian} or \xpgvalue{hijri}}
+	\item \xpgchoicekey{numerals}{\xpgvalue{western} or \xpgpresetvalue{eastern}}
+	\item \xpgcodekey[1.63]{sectionsep}¦.¦
+		This option allows to customize the separator between chapters, sections, and subsections (a dot by default),
+		\eg \xpgoption{sectionsep=-}.
+		This might be useful particularly with \xpgoption{numerals=eastern}, as the dot looks too similar to the zero
+		in many fonts.
+	\item \xpgboolkeyfalse{abjadjimnotail}
+		Set this to \xpgvalue{true} if you want the \textit{abjad} form of the number three to
+		be \textarabic{ج‍} – as in the manuscript tradition – instead of the
+		modern usage \textarabic{ج}.
+\end{itemize}	
 
 \subsection{uyghur}\label{uyghur}
 \paragraph*{Options:}
@@ -2573,7 +2603,8 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item New option \xpgoption{capitalyiwn} for Armenian.
 	\item New option \xpgoption{capitaleszett} for German.
 	\item New option \xpgoption{capitaliota} for Greek.
-	\item New option \xpgoption{sectionsep} for Arabic (\TXI{589}).
+	\item New option \xpgoption{sectionsep} for Arabic, Kurdish, Persian,
+		  Syriac, and Urdu (\TXI{589}).
 	\item Add aliases \xpgvalue{eastern} (=~\xpgvalue{mashriq}) and \xpgvalue{western} (=~\xpgvalue{maghrib})
 	      to Arabic \xpgoption{numerals}.
 \end{itemize}

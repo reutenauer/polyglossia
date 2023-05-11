@@ -41,6 +41,13 @@
  	  \fi
   \fi}
 
+\newif\ifsyriac@customsep\syriac@customsepfalse
+\def\xpg@sepmark{}
+\define@key{syriac}{sectionsep}[.]{%
+   \syriac@customseptrue%
+   \gdef\xpg@sepmark{#1}%
+}
+
 % Register default options
 \xpg@initialize@gloss@options{syriac}{numerals=western}
 	
@@ -165,6 +172,94 @@
 
 \def\nosyriac@globalnumbers{%
   \let\@arabic\xpg@save@arabic%
+}
+
+\def\syriac@xetex@capsformat{%
+  \let\xpg@save@sepmark\@SepMark%
+  \SepMark{\xpg@sepmark}
+}
+
+\def\nosyriac@xetex@capsformat{%
+   \ifcsdef{xpg@save@sepmark}{%
+     \SepMark{\xpg@save@sepmark}
+   }{}%
+}
+
+\def\syriac@luatex@capsformat{%
+  %
+  % change chapter and part headings
+  \ifsyriac@customsep
+     \ifcsdef{chapter}{%
+        \let\xpg@save@thesection\thesection%
+        \renewcommand*\thesection{\thechapter\xpg@sepmark\@arabic\c@section}
+        \let\xpg@save@theequation\theequation%
+        \renewcommand*\theequation{%
+	    \ifnum \c@chapter>\z@ \thechapter\xpg@sepmark\fi\@arabic\c@equation}
+        \let\xpg@save@thefigure\thefigure%
+	\renewcommand*\thefigure{%
+	    \ifnum\c@chapter>\z@\thechapter\xpg@sepmark\fi\@arabic\c@figure}
+        \let\xpg@save@thetable\thetable%
+	\renewcommand*\thetable{%
+	    \ifnum\c@chapter>\z@\thechapter\xpg@sepmark\fi\@arabic\c@table}
+     }{}
+     \let\xpg@save@thesubsection\thesubsection%
+     \renewcommand\thesubsection
+	{\thesection\xpg@sepmark\@arabic\c@subsection}
+     \let\xpg@save@thesubsubsection\thesubsubsection%
+     \renewcommand\thesubsubsection{\thesubsection\xpg@sepmark\@arabic\c@subsubsection}
+     \let\xpg@save@theparagraph\theparagraph%
+     \renewcommand\theparagraph
+         {\thesubsubsection\xpg@sepmark\@arabic\c@paragraph}
+     \let\xpg@save@thesubparagraph\thesubparagraph%
+     \renewcommand\thesubparagraph{\theparagraph\xpg@sepmark\@arabic\c@subparagraph}
+  \fi% (end \ifsyriac@customsep)
+}
+
+\def\nosyriac@luatex@capsformat{%
+   \ifcsdef{xpg@save@thesection}{%
+        \let\thesection\xpg@save@thesection%
+   }{}%
+   \ifcsdef{xpg@save@theequation}{%
+        \let\theequation\xpg@save@theequation%
+   }{}%
+   \ifcsdef{xpg@save@thefigure}{%
+        \let\thefigure\xpg@save@thefigure%
+   }{}%
+   \ifcsdef{xpg@save@thetable}{%
+        \let\thetable\xpg@save@thetable%
+   }{}%
+   \ifcsdef{xpg@save@thesubsection}{%
+        \let\thesubsection\xpg@save@thesubsection%
+   \ifcsdef{xpg@save@thesubsubsection}{%
+        \let\thesubsubsection\xpg@save@thesubsubsection%
+   }{}%
+   }{}%
+   \ifcsdef{xpg@save@theparagraph}{%
+        \let\theparagraph\xpg@save@theparagraph%
+   }{}%
+   \ifcsdef{xpg@save@thesubparagraph}{%
+        \let\thesubparagraph\xpg@save@thesubparagraph%
+   }{}%
+}
+
+\def\blockextras@syriac{%
+   \ifsyriac@customsep
+      \ifxetex
+        \syriac@xetex@capsformat
+      \else
+        \syriac@luatex@capsformat
+      \fi   
+   \fi
+}
+%
+\def\noextras@syriac{%
+    \ifsyriac@customsep
+      \ifxetex
+        \nosyriac@xetex@capsformat
+      \else
+        \nosyriac@luatex@capsformat
+      \fi   
+   \fi
 }
 
 \endinput
