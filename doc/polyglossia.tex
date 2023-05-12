@@ -846,6 +846,12 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 \paragraph*{Options:}
 	\begin{itemize}
 	\item \xpgchoicekey{calendar}{\xpgpresetvalue{gregorian} or \xpgvalue{islamic} (= \xpgvalue{hijri})}
+	\item \xpgoptkey{hijricorrection}{integer}[0]
+	    If \xpgvalue{calendar=hijri} or \xpgvalue{calendar=islamic} is selected, \cmd{\today} will output the date
+	    according to the lunar Islamic (Hijra) calendar. This option allows to shift the day of the output with respect
+	    to the current date. Both positive and negative integer values are allowed (negative decrease the day value).
+	    This corresponds to the optional argument of the \cmd{\Hijritoday} command which can be used to output Hijri
+	    dates irrespective of the \xpgvalue{calendar} option (see sec.~\ref{sec:hijrical}).
 	\item \xpgchoicekey{locale}{\xpgpresetvalue{default}, \xpgvalue{mashriq}, \xpgvalue{libya},
 		\xpgvalue{algeria}, \xpgvalue{tunisia}, \xpgvalue{morocco}, \xpgvalue{mauritania}}
 		This setting influences the spelling of the month names for the Gregorian calendar,
@@ -867,7 +873,8 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 	     Set this to true if you want the alphabetic counters to be output using \cmd\abjadalph\ rather than \cmd\abjad.
 	     Note that this limits the counter scope to 28 (see \cmd\abjadalph\ below).
 	\item \xpgboolkeyfalse[1.0.3]{abjadjimnotail}
-    Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript tradition – instead of the modern usage \textarabic{ج}.
+	    Set this to true if you want the \textit{abjad} form of the number three to be \textarabic{ج‍} – as in the manuscript
+	    tradition – instead of the modern usage \textarabic{ج}.
 	\end{itemize}
 \paragraph*{Commands:}
 	\begin{itemize}
@@ -2116,6 +2123,12 @@ Ukrainian mathematical symbols.
 \paragraph*{Options:}
 \begin{itemize}
 	\item \xpgchoicekey{calendar}{\xpgpresetvalue{gregorian} or \xpgvalue{hijri}}
+	\item \xpgoptkey{hijricorrection}{integer}[0]
+		If \xpgvalue{calendar=hijri} is selected, \cmd{\today} will output the date
+		according to the lunar Islamic (Hijra) calendar. This option allows to shift the day of the output with respect
+		to the current date. Both positive and negative integer values are allowed (negative decrease the day value).
+		This corresponds to the optional argument of the \cmd{\Hijritoday} command which can be used to output Hijri
+		dates irrespective of the \xpgvalue{calendar} option (see sec.~\ref{sec:hijrical}).
 	\item \xpgchoicekey{numerals}{\xpgvalue{western} or \xpgpresetvalue{eastern}}
 	\item \xpgcodekey[1.63]{sectionsep}¦.¦
 		This option allows to customize the separator between chapters, sections, and subsections (a dot by default),
@@ -2451,7 +2464,7 @@ The command \Cmd\Hebrewtoday\ formats the current date in the Hebrew calendar
 (depending of the current writing direction this will automatically set either
 in Hebrew script or in roman transliteration).
 
-\subsection{Islamic calendar (hijrical.sty)}
+\subsection{Islamic calendar (hijrical.sty)}\label{sec:hijrical}
 This package computes dates in the lunar Islamic (Hijra) calendar.\footnote{ %
 	It makes use of the arithmetical algorithm in chapter 6 of
 	Reingold \& Gershowitz, \textit{Calendrical calculation: the Millenium edition}
