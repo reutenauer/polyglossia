@@ -67,7 +67,7 @@
 }{\xpg@warning{Unknown Urdu calendar option `#1'}}
 
 \define@key{urdu}{hijricorrection}[0]{%
-  \gdef\@hijri@correction{#1}}%
+  \gdef\urdu@hijri@correction{#1}}%
 
 % This should set the defaults
 \setkeys{urdu}{calendar,numerals,hijricorrection}
@@ -111,7 +111,7 @@
 \def\dateurdu{%
   \def\today{%
     \if@hijrical
-     \Hijritoday[\@hijri@correction]%
+     \Hijritoday[\urdu@hijri@correction]%
     \else
       \@ensure@RTL{\urdunumber\day؍\space\urdugregmonth{\month}%
          \space\urdunumber\year}%

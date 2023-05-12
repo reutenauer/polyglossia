@@ -123,7 +123,7 @@
 
 
 \define@key{arabic}{hijricorrection}[0]{%
-  \gdef\@hijri@correction{#1}}%
+  \gdef\arabic@hijri@correction{#1}}%
 
 \newif\ifarabic@customsep\arabic@customsepfalse
 \def\xpg@sepmark{}
@@ -190,7 +190,7 @@
 \def\datearabic{%
  \def\today{%
   \if@hijrical%
-    \Hijritoday[\@hijri@correction]%
+    \Hijritoday[\arabic@hijri@correction]%
   \else%
     \if@RTL%
        \arabicnumber\day\space\@@arabic@month{\month}%
