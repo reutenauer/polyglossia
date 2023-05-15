@@ -472,6 +472,7 @@ Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 	fi               & finnish     &                                                    \tabularnewline
 	fr               & french      &                                                    \tabularnewline
 	fr-CA            & french      & variant=canadian                                   \tabularnewline
+	fr-CA-u-sd-canb  & french      & variant=acadian                                    \tabularnewline
 	fr-CH            & french      & variant=swiss                                      \tabularnewline
 	fr-FR            & french      & variant=french [\emph{default}]                    \tabularnewline
 	fur              & friulian    &                                                    \tabularnewline
@@ -1148,7 +1149,7 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 \subsection{french}\label{french}
 \paragraph*{Options:}
 	\begin{itemize}
-		\item \xpgchoicekey{variant}{\xpgpresetvalue{french} or \xpgvalue{canadian} (=~\xpgvalue{acadian})\new{1.45}, \xpgvalue{swiss}\new{1.47}}
+		\item \xpgchoicekey{variant}{\xpgpresetvalue{french}, \xpgvalue{canadian}, \xpgvalue{acadian}\new{1.45} or \xpgvalue{swiss}\new{1.47}}
 			Currently, the only difference between the four variants is that \xpgvalue{swiss}
 			uses \xpgvalue{thincolonspace=true} by default since this conforms to the Swiss
 			conventions.
@@ -2609,6 +2610,10 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 		Persian, Punjabi, Syriac, and Urdu.
 	\item Fix Eastern (Mashriq) Arabic numbering direction with \LuaLaTeX\ for Arabic, Kurdish, Persian,
 		Syriac, and Urdu (amends previous fix to \TXI{213}).
+	\item French \xpgoption{variant=acadian} refers to the Canadian French subvariety as spoken in the Acadian
+	     region (as opposed to Quebec French). To differentiate it we now use a subtag (\texttt{fr-CA-u-sd-canb})
+	     which can also be used to access the language. Note that Quebec French is currently connected with \texttt{fr-CA},
+	     not the more specific \texttt{fr-CA-u-sd-caqc}, although the u specifier is returned if requested via \cmd\BCPdata.
 \end{itemize}
 
 \subsubsection*{New features}
@@ -2625,7 +2630,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \subsubsection*{Interface changes}
 \begin{itemize}
 	\item All language options are now lowercase by default (though the mechanism is case-insensitive anyway).
-	Changes cover Kurdish, Sanskrit, Serbian.
+		  Changes cover Kurdish, Sanskrit, Serbian.
 \end{itemize}
 
 \subsection*{1.62 (2023/04/22)}

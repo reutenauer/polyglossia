@@ -19,11 +19,12 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{french}{fr}
 \setlanguagealias*[variant=french]{french}{fr-FR}
+\setlanguagealias*[variant=acadian]{french}{fr-CA-u-sd-canb}
 \setlanguagealias*[variant=canadian]{french}{fr-CA}
 \setlanguagealias*[variant=swiss]{french}{fr-CH}
 
 % Babel aliases
-\setlanguagealias[variant=acadian]{french}{acadien}
+\setlanguagealias[variant=acadian]{french}{acadian}
 \setlanguagealias[variant=canadian]{french}{canadien}
 
 \def\french@variant{french}
@@ -36,7 +37,7 @@
    \or
       % canadian:
       \def\french@variant{canadien}%
-      \SetLanguageKeys{french}{babelname=canadien,bcp47=fr-CA,bcp47-language=fr,bcp47-region=CA}%
+      \SetLanguageKeys{french}{babelname=canadien,bcp47=fr-CA,bcp47-language=fr,bcp47-region=CA,bcp47-extension-u=sd-caqc}%
       \xpg@ifdefined{canadien}{}%
       {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
         I will use the standard patterns for French instead}%
@@ -45,9 +46,9 @@
    \or
       % acadian:
       \def\french@variant{acadian}%
-      \SetLanguageKeys{french}{babelname=canadien,bcp47=fr-CA,bcp47-language=fr,bcp47-region=CA}%
+      \SetLanguageKeys{french}{babelname=acadian,bcp47=fr-CA-u-sd-canb,bcp47-language=fr,bcp47-region=CA,bcp47-extension-u=sd-canb}%
       \xpg@ifdefined{acadian}{}%
-      {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
+      {\xpg@warning{No hyphenation patterns were loaded for "French (Canada, Acadian)"\MessageBreak
         I will use the standard patterns for French instead}%
       \adddialect\l@acadian\l@french\relax}%
       \french@thincolonspacefalse

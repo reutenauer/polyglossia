@@ -1,0 +1,9 @@
+% Language definition file (part of polyglossia v1.62 -- 2023/04/22)
+%
+\ProvidesFile{gloss-fr-CA-u-sd-canb.ldf}[polyglossia: module for fr-CA-u-sd-canb (Canadian French, Acadian subvariety)]
+
+% We provide this as a bcp47-compliant alias
+
+\xpg@load@master@language{french}
+
+\endinput
