@@ -1893,6 +1893,8 @@ Currently support for Sami is limited to Northern Sami.
 \subsection{serbian}\label{serbian}
 \paragraph*{Options:}
 	\begin{itemize}
+	\item \xpgchoicekey[1.63]{variant}{\xpgpresetvalue{ekavian} or \xpgvalue{ijekavian}}
+	        With \xpgvalue{ijekavian}, the different spelling is reflected in some caption strings.
 	\item \xpgchoicekey{script}{\xpgpresetvalue{cyrillic} or \xpgvalue{latin}}
 	\item \xpgboolkeyfalse[1.63]{datei}
 	        If this is \xpgvalue{true}, the sixth and seventh month of the year are written in the date
@@ -2642,6 +2644,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	      to Arabic \xpgoption{numerals}.
 	\item New date commands \cmd{\today*}, \cmd{\todayGen}, \cmd{\todayArabic}, and \cmd{\todayRoman} (all with
 	      starred counterparts) for Serbian (\TXI{524}).
+	\item Implement basic support for \xpgoption{variant=ijekavian} in Serbian.
 \end{itemize}
 
 \subsubsection*{Interface changes}
