@@ -1894,6 +1894,10 @@ Currently support for Sami is limited to Northern Sami.
 \paragraph*{Options:}
 	\begin{itemize}
 	\item \xpgchoicekey{script}{\xpgpresetvalue{cyrillic} or \xpgvalue{latin}}
+	\item \xpgboolkeyfalse[1.63]{datei}
+	        If this is \xpgvalue{true}, the sixth and seventh month of the year are written in the date
+	        with the trailing \meta{i} or \meta{и} (\ie \emph{juni}, \emph{juli} or \emph{јуни}, \emph{јули}
+	        rather than \emph{jun}, \emph{jul} or \emph{јун}, \emph{јул}).
 	\item \xpgboolkeytrue[1.54]{splithyphens}
 			According to Serbian typesetting conventions, if a word with a hard hyphen (such as
 			\emph{калцијум-карбонат}) is hyphenated at this hyphen, a second hyphenation character is to be
@@ -1921,6 +1925,14 @@ Currently support for Sami is limited to Northern Sami.
           numbers up to 999\,999.\\
           \Eg ¦\textserbian{\AsbukTrad{page}}¦ produces \textrussian{\AsbukTrad{page}}.
     \item \Cmd\asbukTrad: same as \cmd\AsbukTrad\ but in lowercase.
+    \item \Cmd{\today*}: as opposed to the unstarred counterpart, this does not end the date with a punctuation.
+    \item \Cmd{\todayGen}: outputs the date with months in genitive inflection. This form is suggested when the date
+          is integrated into a sentence (as opposed to a standalone date statement). The starred form \Cmd{\todayGen*}
+          omits the trailing punctuation.
+    \item \Cmd{\todayArabic}: outputs the date with months in Arabic number. The starred form \Cmd{\todayArabic*} omits
+    	  the trailing punctuation.
+	\item \Cmd{\todayRoman}: outputs the date with months in Roman number. The starred form \Cmd{\todayRoman*} omits
+	      the trailing punctuation.
 \end{itemize}
 
 
@@ -2623,10 +2635,13 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item New option \xpgoption{capitalyiwn} for Armenian.
 	\item New option \xpgoption{capitaleszett} for German.
 	\item New option \xpgoption{capitaliota} for Greek.
+	\item New option \xpgoption{datei} for Serbian.
 	\item New option \xpgoption{sectionsep} for Arabic, Kurdish, Persian,
 		  Syriac, and Urdu (\TXI{589}).
 	\item Add aliases \xpgvalue{eastern} (=~\xpgvalue{mashriq}) and \xpgvalue{western} (=~\xpgvalue{maghrib})
 	      to Arabic \xpgoption{numerals}.
+	\item New date commands \cmd{\today*}, \cmd{\todayGen}, \cmd{\todayArabic}, and \cmd{\todayRoman} (all with
+	      starred counterparts) for Serbian (\TXI{524}).
 \end{itemize}
 
 \subsubsection*{Interface changes}

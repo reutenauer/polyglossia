@@ -86,6 +86,8 @@
 
 \define@boolkey{serbian}[serbian@]{splithyphens}[true]{}
 
+\define@boolkey{serbian}[serbian@]{datei}[true]{}
+
 \setkeys{serbian}{Script,numerals}
 
 % Register default options
@@ -128,11 +130,45 @@
    \def\glossaryname{Rečnik nepoznatih reči}%
 }
 
-\def\dateserbian@lat{%
-   \def\today{\number\day .~\ifcase\month\or
-    januar\or februar\or mart\or april\or maj\or
-    jun\or jul\or avgust\or septembar\or oktobar\or novembar\or
-    decembar\fi \space \number\year.}%
+\def\month@serbian@lat{%
+  \ifcase\month\or
+    januar\or
+    februar\or
+    mart\or
+    april\or
+    maj\or
+    \ifserbian@datei juni\else jun\fi\or
+    \ifserbian@datei juli\else jul\fi\or
+    avgust\or
+    septembar\or
+    oktobar\or
+    novembar\or
+    decembar%
+  \fi%
+}%
+
+\def\month@serbian@lat@gen{%
+  \ifcase\month\or
+    januara\or
+    februara\or
+    marta\or
+    aprila\or
+    maja\or
+    juna\or
+    jula\or
+    avgusta\or
+    septembra\or
+    oktobra\or
+    novembra\or
+    decembra%
+  \fi%
+}%
+
+\def\dateserbian@lat{%  
+    \def\today{\number\day.~\month@serbian@lat\ \number\year\@ifstar{}{.}}%
+    \def\todayRoman{\number\day.~\@Roman\month~\number\year\@ifstar{}{.}}%
+    \def\todayGen{\number\day.~\month@serbian@lat@gen\ \number\year\@ifstar{}{.}}%
+    \def\todayArabic{\number\day.~\number\month.~\number\year\@ifstar{}{.}}%
 }
 
 \def\captionsserbian@cyr{%
@@ -163,11 +199,45 @@
    \def\glossaryname{Речник непознатих речи}%
 }
 
-\def\dateserbian@cyr{%
-   \def\today{\number\day .~\ifcase\month\or
-    јануар\or фебруар\or март\or април\or мај\or
-    јун\or јул\or август\or септембар\or октобар\or новембар\or
-    децембар\fi \space \number\year.}%
+\def\month@serbian@cyr{%
+  \ifcase\month\or
+    јануар\or
+    фебруар\or
+    март\or
+    април\or
+    мај\or
+    \ifserbian@datei јуни\else јун\fi\or
+    \ifserbian@datei јули\else јул\fi\or
+    август\or
+    септембар\or
+    октобар\or
+    новембар\or
+    децембар%
+  \fi%
+}%
+
+\def\month@serbian@cyr@gen{%
+  \ifcase\month\or
+    јануара\or
+    фебруара\or
+    марта\or
+    априла\or
+    маја\or
+    јуна\or
+    јула\or
+    августа\or
+    септембра\or
+    октобра\or
+    новембра\or
+    децембра%
+  \fi%
+}%
+
+\def\dateserbian@cyr{%  
+    \def\today{\number\day.~\month@serbian@cyr\ \number\year\@ifstar{}{.}}%
+    \def\todayRoman{\number\day.~\@Roman\month~\number\year\@ifstar{}{.}}%
+    \def\todayGen{\number\day.~\month@serbian@cyr@gen\ \number\year\@ifstar{}{.}}%
+    \def\todayArabic{\number\day.~\number\month.~\number\year\@ifstar{}{.}}%
 }
 
 % Use \providecommand here as the ldf file might
