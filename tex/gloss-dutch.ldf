@@ -17,8 +17,10 @@
 
 \define@boolkey{dutch}[dutch@]{babelshorthands}[true]{}
 
+\define@boolkey{dutch}[dutch@]{tremahyphenation}[true]{}
+
 % Register default options
-\xpg@initialize@gloss@options{dutch}{babelshorthands=false}
+\xpg@initialize@gloss@options{dutch}{babelshorthands=false,tremahyphenation=true}
 
 \ifsystem@babelshorthands
   \setkeys{dutch}{babelshorthands=true}
@@ -74,6 +76,82 @@
   \def\-{\discretionary{-}{}{}}% << original def in latex.ltx
 }
 
+%
+% Support proper hyphenation of tremata: after hyphenation,
+% the trema is omitted, e.g. geëxecuteerd > ge-executeerd
+% We support this by making the respective letters active.
+%
+% Save catcodes of trema characters for later restorage
+\chardef\xpg@saved@auml@catcode\catcode`ä
+\chardef\xpg@saved@euml@catcode\catcode`ë
+\chardef\xpg@saved@iuml@catcode\catcode`ï
+\chardef\xpg@saved@ouml@catcode\catcode`ö
+\chardef\xpg@saved@uuml@catcode\catcode`ü
+\chardef\xpg@saved@Auml@catcode\catcode`Ä
+\chardef\xpg@saved@Euml@catcode\catcode`Ë
+\chardef\xpg@saved@Iuml@catcode\catcode`Ï
+\chardef\xpg@saved@Ouml@catcode\catcode`Ö
+\chardef\xpg@saved@Uuml@catcode\catcode`Ü
+
+% activate trema characters
+\def\dutch@@tremahyph{%
+    \catcode`ä = \active
+    \catcode`ë = \active
+    \catcode`ï = \active
+    \catcode`ö = \active
+    \catcode`ü = \active
+    \catcode`Ä = \active
+    \catcode`Ë = \active
+    \catcode`Ï = \active
+    \catcode`Ö = \active
+    \catcode`Ü = \active
+}
+
+% restore previous catcode of trema characters
+\def\nodutch@@tremahyph{%
+    \catcode`ä = \xpg@saved@auml@catcode
+    \catcode`ë = \xpg@saved@euml@catcode
+    \catcode`ï = \xpg@saved@iuml@catcode
+    \catcode`ö = \xpg@saved@ouml@catcode
+    \catcode`ü = \xpg@saved@uuml@catcode
+    \catcode`Ä = \xpg@saved@Auml@catcode
+    \catcode`Ë = \xpg@saved@Euml@catcode
+    \catcode`Ï = \xpg@saved@Iuml@catcode
+    \catcode`Ö = \xpg@saved@Ouml@catcode
+    \catcode`Ü = \xpg@saved@Uuml@catcode
+}
+
+\bgroup
+\dutch@@tremahyph
+\gdef\dutch@tremahyph{%
+    \dutch@@tremahyph%
+    \def ä{\textormath{\xpg@trema{a}}{\ddot a}}%
+    \def ë{\textormath{\xpg@trema{e}}{\ddot e}}%
+    \def ï{\textormath{\xpg@trema{i}}{\ddot i}}%
+    \def ö{\textormath{\xpg@trema{o}}{\ddot o}}%
+    \def ü{\textormath{\xpg@trema{u}}{\ddot u}}%
+    \def Ä{\textormath{\xpg@trema{A}}{\ddot A}}%
+    \def Ë{\textormath{\xpg@trema{E}}{\ddot E}}%
+    \def Ï{\textormath{\xpg@trema{I}}{\ddot I}}%
+    \def Ö{\textormath{\xpg@trema{O}}{\ddot O}}%
+    \def Ü{\textormath{\xpg@trema{U}}{\ddot U}}%
+}
+
+\gdef\nodutch@tremahyph{%
+    \let ä\relax%
+    \let ë\relax%
+    \let ï\relax%
+    \let ö\relax%
+    \let ü\relax%
+    \let Ä\relax%
+    \let Ë\relax%
+    \let Ï\relax%
+    \let Ö\relax%
+    \let Ü\relax%
+    \nodutch@@tremahyph%
+}
+\egroup
+
 \def\captionsdutch{%
     \def\prefacename{Voorwoord}%
     \def\refname{Referenties}%
@@ -108,14 +186,17 @@
 
 \def\noextras@dutch{%
   \ifdutch@babelshorthands\nodutch@shorthands\fi%
+  \ifdutch@tremahyphenation\nodutch@tremahyph\fi%
 }
 
 \def\blockextras@dutch{%
   \ifdutch@babelshorthands\dutch@shorthands\else\nodutch@shorthands\fi%
+  \ifdutch@tremahyphenation\dutch@tremahyph\else\nodutch@tremahyph\fi%
 }
 
 \def\inlineextras@dutch{%
   \ifdutch@babelshorthands\dutch@shorthands\else\nodutch@shorthands\fi%
+  \ifdutch@tremahyphenation\dutch@tremahyph\else\nodutch@tremahyph\fi%
 }
 
 \endinput

@@ -1087,6 +1087,11 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 \subsection{dutch}\label{dutch}
 \paragraph*{Options:}
 \begin{itemize}
+  \item \xpgboolkeytrue[1.63]{tremahyphenation}
+        Following Dutch orthography, words with tremata (such as \emph{geëxecuteerd}) lose the trema on hyphenation
+        before the trematized letter (\emph{ge-executeerd}). This is achieved by \pkg{polyglossia} by making those
+        letters active. If you set this option to false, this mechanism is deactivated (and the hyphenation wrong,
+        but you can still use the babelshorthands mentioned below).
   \item \xpgboolkeyfalse[1.1.1]{babelshorthands}
 		If this is turned on, the following shorthands defined for fine-tuning hyphenation and
 		micro-typography of Dutch words are activated:
@@ -2649,7 +2654,9 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item New date commands \cmd{\today*}, \cmd{\todayGen}, \cmd{\todayArabic}, and \cmd{\todayRoman} (all with
 	      starred counterparts) for Serbian (\TXI{524}).
 	\item Implement basic support for \xpgoption{variant=ijekavian} in Serbian.
-	\item Add shorthands ¦"a¦, ¦"e¦, ¦"i¦, ¦"o¦, ¦"u¦, ¦"y¦, and ¦"Y¦ to Dutch.
+	\item Dutch now hyphenates properly on letters with tremata. The new option, \xpgoption{tremahyphenation},
+		  is provided to opt-out this feature.
+	\item Add shorthands ¦"a¦, ¦"e¦, ¦"i¦, ¦"o¦, ¦"u¦, ¦"A¦, ¦"E¦, ¦"I¦, ¦"O¦, ¦"U¦, ¦"y¦, and ¦"Y¦ to Dutch.
 \end{itemize}
 
 \subsubsection*{Interface changes}
