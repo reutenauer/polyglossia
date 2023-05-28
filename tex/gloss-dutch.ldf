@@ -32,9 +32,20 @@
   \shorthandoff{"}%
 }{}
 
+\def\xpg@trema#1{\allowhyphens\discretionary{-}{#1}{\"{#1}}\allowhyphens}
+
 \def\dutch@shorthands{%
   \bbl@activate{"}%
   \def\language@group{dutch}%
+  \declare@shorthand{dutch}{"a}{\textormath{\xpg@trema{a}}{\ddot a}}%
+  \declare@shorthand{dutch}{"e}{\textormath{\xpg@trema{e}}{\ddot e}}%
+  \declare@shorthand{dutch}{"i}{%
+     \textormath{\allowhyphens\discretionary{-}{i}{\"{\i}}\allowhyphens}%
+                {\ddot \imath}}%
+  \declare@shorthand{dutch}{"o}{\textormath{\xpg@trema{o}}{\ddot o}}%
+  \declare@shorthand{dutch}{"u}{\textormath{\xpg@trema{u}}{\ddot u}}%
+  \declare@shorthand{dutch}{"y}{\textormath{\ij{}}{\ddot y}}%
+  \declare@shorthand{dutch}{"Y}{\textormath{\IJ{}}{\ddot Y}}%
   \declare@shorthand{dutch}{"-}{\nobreak-\bbl@allowhyphens}%
   \declare@shorthand{dutch}{"~}{\textormath{\leavevmode\hbox{-}}{-}}%
   \declare@shorthand{dutch}{"|}{%

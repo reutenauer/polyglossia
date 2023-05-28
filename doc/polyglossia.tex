@@ -1091,6 +1091,10 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		If this is turned on, the following shorthands defined for fine-tuning hyphenation and
 		micro-typography of Dutch words are activated:
 		\begin{shorthands}
+		\item[¦"a¦]\new{1.63} an \meta{ä} (a with trema) which is hyphenated as \meta{-a} as required by the Dutch standards.
+		            Also implemented for the other vowels (e, i, o, u).
+		\item[¦"y¦]\new{1.63} the \ij\ ligature.
+		\item[¦"Y¦]\new{1.63} the \IJ\ ligature.
 		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
 			        in the hyphenation patterns (as opposed to \cmd\- in default \TeX).
 		\item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
@@ -2645,6 +2649,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item New date commands \cmd{\today*}, \cmd{\todayGen}, \cmd{\todayArabic}, and \cmd{\todayRoman} (all with
 	      starred counterparts) for Serbian (\TXI{524}).
 	\item Implement basic support for \xpgoption{variant=ijekavian} in Serbian.
+	\item Add shorthands ¦"a¦, ¦"e¦, ¦"i¦, ¦"o¦, ¦"u¦, ¦"y¦, and ¦"Y¦ to Dutch.
 \end{itemize}
 
 \subsubsection*{Interface changes}
