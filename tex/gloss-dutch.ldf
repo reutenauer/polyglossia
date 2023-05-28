@@ -40,7 +40,7 @@
 }
 
 \def\xpg@imtrema{%
-  \textormath{\allowhyphens\discretionary{-}{I}{\"{\I}}\allowhyphens}%
+  \textormath{\allowhyphens\discretionary{-}{I}{\"{I}}\allowhyphens}%
                 {\ddot I}%
 }
 
