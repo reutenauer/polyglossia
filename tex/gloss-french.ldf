@@ -88,24 +88,7 @@
   \let\xpg@orig@makefntext\@makefntext
 }
 
-\define@boolkey{french}[french@]{frenchfootnote}[true]{%
-  \AfterPreamble{%
-    \iffrench@frenchfootnote
-      \ifdefstring{\xpg@main@language}{french}{%
-         \ifx\@makefntext\undefined\else
-             \long\def\french@makefntext##1{%
-                \parindent1em \noindent\quad%
-                \ifx\@thefnmark\empty\else%
-                \@thefnmark.\space\fi ##1%
-             }
-             \let\@makefntext\french@makefntext
-         \fi
-      }{\xpg@warning{Option 'frenchfootnote' only supported if French is main language!}}%
-    \else
-       \let\@makefntext\xpg@orig@makefntext
-    \fi
-  }%
-}
+\define@boolkey{french}[french@]{frenchfootnote}[true]{}
 
 \define@boolkey{french}[french@]{autospacing}[true]{}
 \french@autospacingtrue
@@ -176,20 +159,7 @@
   \def\french@itemiv{#1}
 }
 
-\define@boolkey{french}[french@]{frenchitemlabels}[true]{%
-  \AfterPreamble{%
-    \iffrench@frenchitemlabels
-      \ifdefstring{\xpg@main@language}{french}{%
-         \renewcommand{\labelitemi}{\french@itemi}%
-         \renewcommand{\labelitemii}{\french@itemii}%
-         \renewcommand{\labelitemiii}{\french@itemiii}%
-         \renewcommand{\labelitemiv}{\french@itemiv}%
-      }{\xpg@warning{Option 'frenchitemlabels' only supported if French is main language!}}%
-    \else
-       \let\@makefntext\xpg@orig@makefntext
-    \fi
-  }%
-}
+\define@boolkey{french}[french@]{frenchitemlabels}[true]{}
 
 % Register default options
 \xpg@initialize@gloss@options{french}{variant=french,autospacing=true,thincolonspace=false,
@@ -466,6 +436,50 @@
    }% (end \ifdefined\titleformat)
 }
 
+\newif\if@xpg@french@footnote@set
+\@xpg@french@footnote@setfalse
+\def\set@french@footnote{%
+  % Set French footnote once if requested
+  \if@xpg@french@footnote@set%
+  \else%
+   \iffrench@frenchfootnote%
+      \ifdefstring{\xpg@main@language}{french}{%
+         \ifx\@makefntext\undefined\else%
+             \long\def\french@makefntext##1{%
+                \parindent1em \noindent\quad%
+                \ifx\@thefnmark\empty\else%
+                \@thefnmark.\space\fi ##1%
+             }%
+             \let\@makefntext\french@makefntext%
+         \fi%
+      }{\xpg@warning{Option 'frenchfootnote' only supported if French is main language!}}%
+    \else%
+       \let\@makefntext\xpg@orig@makefntext%
+    \fi%
+    \@xpg@french@footnote@settrue%
+  \fi%
+}
+
+\newif\if@xpg@french@itemlabels@set
+\@xpg@french@itemlabels@setfalse
+\def\set@french@itemlabels{%
+  % Set French itemlabels once if requested
+  \if@xpg@french@itemlabels@set%
+  \else%
+     \iffrench@frenchitemlabels
+      \ifdefstring{\xpg@main@language}{french}{%
+         \renewcommand{\labelitemi}{\french@itemi}%
+         \renewcommand{\labelitemii}{\french@itemii}%
+         \renewcommand{\labelitemiii}{\french@itemiii}%
+         \renewcommand{\labelitemiv}{\french@itemiv}%
+      }{\xpg@warning{Option 'frenchitemlabels' only supported if French is main language!}}%
+    \else
+       \let\@makefntext\xpg@orig@makefntext
+    \fi
+    \@xpg@french@itemlabels@settrue%
+  \fi%
+}
+
 \def\noextras@french{%
    \nofrench@punctuation%
    \nofrench@fontsetup%
@@ -473,11 +487,17 @@
 }
 
 \def\blockextras@french{%
-   \iffrench@autospacing
+   % Set French itemlabels and footnote,
+   % if so requested, once in the document body
+   \ifx\@onlypreamble\@notprerr%
+     \set@french@footnote%
+     \set@french@itemlabels%
+   \fi%
+   \iffrench@autospacing%
       \french@punctuation%
-   \fi
+   \fi%
    \french@fontsetup%
-   \iffrench@frenchpart
+   \iffrench@frenchpart%
      \french@capsformat%
    \fi%
 }
