@@ -106,14 +106,14 @@
 \def\bbl@L#1#2{\Lgem}
 
 \def\catalan@shorthands{%
-  \bbl@activate{"}%
+  \xpg@activate@shorthands%
   \def\language@group{catalan}%
   \declare@shorthand{catalan}{"l}{\lgem{}}
   \declare@shorthand{catalan}{"L}{\Lgem{}}
 }
 
 \def\nocatalan@shorthands{%
-    \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+    \xpg@deactivate@shorthands%
 }
 
 \def\captionscatalan{%

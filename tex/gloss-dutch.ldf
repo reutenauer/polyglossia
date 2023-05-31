@@ -47,7 +47,7 @@
 }
 
 \def\dutch@shorthands{%
-  \bbl@activate{"}%
+  \xpg@activate@shorthands%
   \def\language@group{dutch}%
   \declare@shorthand{dutch}{"a}{\textormath{\xpg@trema{a}}{\ddot a}}%
   \declare@shorthand{dutch}{"e}{\textormath{\xpg@trema{e}}{\ddot e}}%
@@ -72,7 +72,7 @@
 }
 
 \def\nodutch@shorthands{%
-  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \xpg@deactivate@shorthands%
   \def\-{\discretionary{-}{}{}}% << original def in latex.ltx
 }
 

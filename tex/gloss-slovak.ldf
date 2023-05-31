@@ -62,7 +62,7 @@
 }
 
 \def\slovak@shorthands{%
-  \bbl@activate{"}%
+  \xpg@activate@shorthands%
   \def\language@group{slovak}%
   \declare@shorthand{slovak}{"=}{\slovak@splhyphen}%
   \declare@shorthand{slovak}{""}{\hskip\z@skip}%
@@ -81,7 +81,7 @@
 }
 
 \def\noslovak@shorthands{%
-  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \xpg@deactivate@shorthands%
 }
 
 \ifxetex

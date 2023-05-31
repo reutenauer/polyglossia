@@ -34,7 +34,7 @@
 }{}
 
 \def\afrikaans@shorthands{%
-  \bbl@activate{"}%
+  \xpg@activate@shorthands%
   \def\language@group{afrikaans}%
   \declare@shorthand{afrikaans}{"-}{\nobreak-\bbl@allowhyphens}
   \declare@shorthand{afrikaans}{"~}{\textormath{\leavevmode\hbox{-}}{-}}
@@ -47,7 +47,7 @@
 }
 
 \def\noafrikaans@shorthands{%
-  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \xpg@deactivate@shorthands%
 }
 
 \def\captionsafrikaans{%

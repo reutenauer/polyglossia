@@ -73,7 +73,7 @@
 }{}
 
 \def\ukrainian@shorthands{%
-  \bbl@activate{"}%
+  \xpg@activate@shorthands%
   \def\language@group{ukrainian}%
 %  \declare@shorthand{ukrainian}{"`}{„}%
 %  \declare@shorthand{ukrainian}{"'}{“}%
@@ -113,7 +113,7 @@
 }
 
 \def\noukrainian@shorthands{%
-  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \xpg@deactivate@shorthands%
 }
 
 \def\captionsukrainian{%

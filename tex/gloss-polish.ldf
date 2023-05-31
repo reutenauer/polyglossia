@@ -63,7 +63,7 @@
 }
 
 \def\polish@shorthands{%
-  \bbl@activate{"}%
+  \xpg@activate@shorthands%
   \def\language@group{polish}%
   \declare@shorthand{polish}{"=}{\polish@splhyphen}%
   \declare@shorthand{polish}{""}{\hskip\z@skip}%
@@ -82,7 +82,7 @@
 }
 
 \def\nopolish@shorthands{%
-  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \xpg@deactivate@shorthands%
 }
 
 \ifxetex

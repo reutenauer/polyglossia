@@ -86,7 +86,7 @@
 }
 
 \def\portuguese@shorthands{%
-  \bbl@activate{"}%
+  \xpg@activate@shorthands%
   \def\language@group{portuguese}%
   \declare@shorthand{portuguese}{"=}{\portuguese@splhyphen}%
   \declare@shorthand{portuguese}{""}{\hskip\z@skip}%
@@ -103,7 +103,7 @@
 }
 
 \def\noportuguese@shorthands{%
-  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \xpg@deactivate@shorthands%
 }
 
 \ifxetex

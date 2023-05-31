@@ -106,7 +106,7 @@
 }{}
 
 \def\russian@shorthands{%
-  \bbl@activate{"}%
+  \xpg@activate@shorthands%
   \def\language@group{russian}%
 %  \declare@shorthand{russian}{"`}{„}%
 %  \declare@shorthand{russian}{"'}{“}%
@@ -144,7 +144,7 @@
 }
 
 \def\norussian@shorthands{%
-  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \xpg@deactivate@shorthands%
 }
 
 

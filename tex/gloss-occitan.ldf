@@ -49,7 +49,7 @@
 }{}
 
 \def\occitan@shorthands{%
-  \bbl@activate{"}%
+  \xpg@activate@shorthands%
   \def\language@group{occitan}%
   \declare@shorthand{occitan}{"}{%
     \relax\ifmmode
@@ -86,9 +86,11 @@
       \fi
     \fi
   \fi
-  \xpgoc@@next}
+  \xpgoc@@next%
+}
+
 \def\nooccitan@shorthands{%
-  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \xpg@deactivate@shorthands%
 }
 \def\captionsoccitan{%
    \def\refname{Referéncias}%

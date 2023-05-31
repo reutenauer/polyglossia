@@ -64,7 +64,7 @@
 }
 
 \def\czech@shorthands{%
-  \bbl@activate{"}%
+  \xpg@activate@shorthands%
   \def\language@group{czech}%
   \declare@shorthand{czech}{"=}{\czech@splithyphen}%
   \declare@shorthand{czech}{"`}{„}%
@@ -74,7 +74,7 @@
 }
 
 \def\noczech@shorthands{%
-  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \xpg@deactivate@shorthands%
 }
 
 \ifxetex

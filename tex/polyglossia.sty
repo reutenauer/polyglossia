@@ -2820,6 +2820,24 @@
   \polyglossia@enable@local@marks:
 }
 
+% Control shorthand (de-)activation
+% This checks that the " char is only deactivated
+% if we have activated it ourselves and hence keeps
+% activation of other packages if no shorthands are used.
+\newif\if@xpg@shorthandsactive
+\@xpg@shorthandsactivefalse
+\newcommand*\xpg@activate@shorthands{%
+  \bbl@activate{"}%
+  \@xpg@shorthandsactivetrue%
+}
+
+\newcommand*\xpg@deactivate@shorthands{%
+  \if@xpg@shorthandsactive%
+     \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+     \@xpg@shorthandsactivefalse%
+  \fi%
+}
+
 % compatibility
 \newif\ifsystem@babelshorthands
 \bool_if:nTF \l_polyglossia_babelshorthands_bool {

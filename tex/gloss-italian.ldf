@@ -38,7 +38,7 @@
 }{}
 
 \def\italian@shorthands{%
-  \bbl@activate{"}%
+  \xpg@activate@shorthands%
   \def\language@group{italian}%
   \declare@shorthand{italian}{"}{%
     \relax\ifmmode
@@ -78,7 +78,7 @@
   \xpgit@@next}
 
 \def\noitalian@shorthands{%
-  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \xpg@deactivate@shorthands%
 }
 %%% CHANGES END %%%
 

@@ -85,7 +85,7 @@
 }{}
 
 \def\belarusian@shorthands{%
-  \bbl@activate{"}%
+  \xpg@activate@shorthands%
   \def\language@group{belarusian}%
   \declare@shorthand{belarusian}{"`}{„}%
   \declare@shorthand{belarusian}{"'}{“}%
@@ -124,7 +124,7 @@
 }
 
 \def\nobelarusian@shorthands{%
-  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \xpg@deactivate@shorthands%
 }
 
 % Taken from babel-belarusian

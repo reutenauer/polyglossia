@@ -32,7 +32,7 @@
 }{}
 
 \def\piedmontese@shorthands{%
-  \bbl@activate{"}%
+  \xpg@activate@shorthands%
   \def\language@group{piedmontese}%
   \declare@shorthand{piedmontese}{"}{%
     \relax\ifmmode
@@ -62,7 +62,7 @@
 \xpgpms@@next}
 
 \def\nopiedmontese@shorthands{%
-  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \xpg@deactivate@shorthands%
 }
 \@namedef{captions\CurrentOption}{%
     \def\prefacename{Prefassion}%

@@ -69,7 +69,7 @@
 }{}
 
 \def\mongolian@shorthands{%
-  \bbl@activate{"}%
+  \xpg@activate@shorthands%
   \def\language@group{mongolian}%
   \declare@shorthand{mongolian}{"`}{„}%
   \declare@shorthand{mongolian}{"'}{“}%
@@ -108,7 +108,7 @@
 }
 
 \def\nomongolian@shorthands{%
-  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \xpg@deactivate@shorthands%
 }
 
 % Taken from babel-mongolian

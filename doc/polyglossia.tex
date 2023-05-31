@@ -2639,6 +2639,9 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	     Note that Quebec French is currently connected with \texttt{fr-CA}, not the more specific
 	     \texttt{fr-CA-u-sd-caqc}, although the u extension is returned if requested via \cmd\BCPdata.
 	     In practice, the Canadian subvarieties of French are identical currently, anyway.
+	\item Do not blindly de-activate the quote character in languages that provide shorthands if the
+	     shorthands are not used. This allows to activate the character with other packages such as
+	     \pkg{csquotes} (\TXI{592}). 
 \end{itemize}
 
 \subsubsection*{New features}

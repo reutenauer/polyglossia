@@ -77,7 +77,7 @@
 }
 
 \def\croatian@shorthands{%
-  \bbl@activate{"}%
+  \xpg@activate@shorthands%
   \def\language@group{croatian}%
   \declare@shorthand{croatian}{"=}{\penalty\@M-\hskip\z@skip}%
   \declare@shorthand{croatian}{""}{\hskip\z@skip}%
@@ -102,7 +102,7 @@
 }
 
 \def\nocroatian@shorthands{%
-  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \xpg@deactivate@shorthands%
 }
 
 \ifxetex

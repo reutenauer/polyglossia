@@ -36,7 +36,7 @@
 }{}
 
 \def\finnish@shorthands{%
-  \bbl@activate{"}%
+  \xpg@activate@shorthands%
   \def\language@group{finnish}%
   \declare@shorthand{finnish}{"-}{\nobreak-\bbl@allowhyphens}
   \declare@shorthand{finnish}{"|}{\textormath{\penalty\@M\discretionary{-}{}{\kern.03em}}{}}%
@@ -48,7 +48,7 @@
 }
 
 \def\nofinnish@shorthands{%
-  \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
+  \xpg@deactivate@shorthands%
 }
 
 \def\captionsfinnish{%
