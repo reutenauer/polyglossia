@@ -670,7 +670,7 @@
 \cs_new:Npn \polyglossia_latin_shorthands:
   {
     \def \language@group {latin}
-    \bbl@activate {"}
+    \xpg@activate@shorthands ["]
     \declare@shorthand {latin} {"}
       {
         \mode_if_math:TF
@@ -684,7 +684,7 @@
     % The ' shorthand is normally turned off to avoid problems with the unicode-math
     % package. We have to turn it on here.
     \shorthandon {'}
-    \bbl@activate {'}
+    \xpg@activate@shorthands [']
     \declare@shorthand {latin} {'}
       {
         \mode_if_math:TF
@@ -988,8 +988,8 @@
 
 \cs_new:Npn \polyglossia_latin_no_shorthands:
   {
-    \bbl@deactivate {"}
-    \bbl@deactivate {'}
+    \xpg@deactivate@shorthands ["]
+    \xpg@deactivate@shorthands [']
   }
 
 \cs_new:Npn \polyglossia_latin_no_prosodic_shorthands:
