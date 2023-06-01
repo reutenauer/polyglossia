@@ -114,9 +114,9 @@
   \if@korean@swapheadings
     % With titlesec
     \ifcsdef{titleformat}{%
-      \ifcsdef{H@old@part}{% Hyperref
-        \let\xpg@save@part@format\H@old@part
-        \patchcmd{\H@old@part}%
+      \ifcsdef{NR@part}{% Hyperref (nameref)
+        \let\xpg@save@part@format\NR@part
+        \patchcmd{\NR@part}%
                  {\partname\nobreakspace\thepart}%
                  {\koreanTHEname\nobreakspace \thepart\nobreakspace \partname}%
                  {}%
@@ -155,9 +155,9 @@
             \IfChapterUsesPrefixLine
             {%
               \ifx\@chapapp\korean@appendix@chapapp
-                \chapappifchapterprefix\nobreakspace \thechapter\autodot
+                \chapapp\nobreakspace \thechapter\autodot
               \else
-                \koreanTHEname\nobreakspace \thechapter\nobreakspace \chapappifchapterprefix{}%
+                \koreanTHEname\nobreakspace \thechapter\nobreakspace \chapapp\autodot
               \fi
             }%
             {\thechapter\autodot\enskip}%
@@ -185,9 +185,9 @@
                   {\chapnamefont\koreanTHEname\chapternamenum}{}}%
             \fi
           }{}%
-          \ifcsdef{H@old@part}{% Hyperref
-            \let\xpg@save@part@format\H@old@part
-            \patchcmd{\H@old@part}%
+          \ifcsdef{NR@part}{% Hyperref (nameref)
+            \let\xpg@save@part@format\NR@part
+            \patchcmd{\NR@part}%
                      {\printpartname \partnamenum \printpartnum}%
                      {\printkoreanpartthe \printpartnum\partnamenum \printpartname}%
                      {}%
@@ -224,9 +224,9 @@
                      {}%
                      {\xpg@warning{Failed to patch chapter for Korean}}%
           }{}%
-          \ifcsdef{H@old@part}{% Hyperref
-            \let\xpg@save@part@format\H@old@part
-            \patchcmd{\H@old@part}%
+          \ifcsdef{NR@part}{% Hyperref (nameref)
+            \let\xpg@save@part@format\NR@part
+            \patchcmd{\NR@part}%
                      {\partname\nobreakspace\thepart}%
                      {\koreanTHEname\nobreakspace \thepart\nobreakspace \partname}%
                      {}%
@@ -258,9 +258,9 @@
         \IfChapterUsesPrefixLine
         {%
           \ifx\@chapapp\korean@appendix@chapapp
-            \chapappifchapterprefix\ \thechapter\autodot
+            \chapapp\ \thechapter\autodot
           \else
-            \koreanTHEname\ \thechapter\ \chapappifchapterprefix{}%
+            \koreanTHEname\ \thechapter\ \chapapp\autodot
           \fi
         }%
         {\thechapter\autodot}%
@@ -310,8 +310,8 @@
   \ifcsdef{titleformat}{%
     % With titlesec
     \ifcsdef{xpg@save@part@format}{%
-      \ifcsdef{H@old@part}{%
-        \let\H@old@part\xpg@save@part@format
+      \ifcsdef{NR@part}{%
+        \let\NR@part\xpg@save@part@format
       }{%
         \let\@part\xpg@save@part@format
       }%
@@ -333,8 +333,8 @@
     }{%
       % With memoir and standard classes
       \ifcsdef{xpg@save@part@format}{%
-        \ifcsdef{H@old@part}{%
-          \let\H@old@part\xpg@save@part@format
+        \ifcsdef{NR@part}{%
+          \let\NR@part\xpg@save@part@format
         }{%
           \let\@part\xpg@save@part@format
         }%
