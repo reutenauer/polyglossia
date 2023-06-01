@@ -44,6 +44,8 @@ pdf="$root/doc/polyglossia.pdf"
 pdfsrc="$root/doc/polyglossia.tex"
 pdfbasename=${pdf%.pdf}
 
+latexengine=xelatex
+
 cd $root
 source ./env
 
@@ -60,9 +62,9 @@ if [[ ! -f $pdf || $pdf -ot $pdfsrc  ]] ; then
 	cd $root/doc 
         echo "Environment: TEXINPUTS=$TEXINPUTS"
         echo "bidi.sty: `kpsewhich bidi.sty`"
-	xelatex $pdfsrc || exit 1
-	xelatex $pdfsrc 
-	xelatex $pdfsrc 
+	$latexengine $pdfsrc || exit 1
+	$latexengine $pdfsrc 
+	$latexengine $pdfsrc 
         cp -f $pdf $pgroot/generated
   rm -f $pdfbasename.{aux,toc,lof,lot,lop,log,out,nav,bbl,blg,ind,idx,glo,ilg,dvi}
   for doc in example-arabic example-thai example-chinese example-japanese example-korean examples; do
@@ -72,10 +74,10 @@ if [[ ! -f $pdf || $pdf -ot $pdfsrc  ]] ; then
     # and quite frankly I don’t know what it’s good for.
     # First of all, the last bit should be echo "Failed to compile ..."
     # but I won’t bother
-    # xelatex $doc.tex || exit 1 && "Failed to compile $doc.tex"
-    xelatex $doc.tex || exit 1
-    xelatex $doc.tex
-    xelatex $doc.tex
+    # $latexengine $doc.tex || exit 1 && "Failed to compile $doc.tex"
+    $latexengine $doc.tex || exit 1
+    $latexengine $doc.tex
+    $latexengine $doc.tex
     rm -f $doc.{log,aux,toc}
     cp -f $doc.pdf $pgroot/generated
     cd $root
