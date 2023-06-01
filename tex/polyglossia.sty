@@ -2821,21 +2821,27 @@
 }
 
 % Control shorthand (de-)activation
-% This checks that the " char is only deactivated
+% This checks that the shorthand char is only deactivated
 % if we have activated it ourselves and hence keeps
 % activation of other packages if no shorthands are used.
-\newif\if@xpg@shorthandsactive
-\@xpg@shorthandsactivefalse
-\newcommand*\xpg@activate@shorthands{%
-  \bbl@activate{"}%
-  \@xpg@shorthandsactivetrue%
+\seq_new:N \__xpg_active_shorthands
+
+\DeclareDocumentCommand \xpg@activate@shorthands { O{"} }
+{
+  \seq_if_in:NnF \__xpg_active_shorthands { #1 }
+    {
+     \bbl@activate{#1}
+     \seq_gpush:Nn \__xpg_active_shorthands { #1 }
+    }
 }
 
-\newcommand*\xpg@deactivate@shorthands{%
-  \if@xpg@shorthandsactive%
-     \@ifundefined{initiate@active@char}{}{\bbl@deactivate{"}}%
-     \@xpg@shorthandsactivefalse%
-  \fi%
+\DeclareDocumentCommand \xpg@deactivate@shorthands { O{"} }
+{
+  \seq_if_in:NnT \__xpg_active_shorthands { #1 }
+    {
+     \cs_if_exist:cT{initiate@active@char}{\bbl@deactivate{#1}}
+     \seq_remove_all:Nn \__xpg_active_shorthands {#1}
+    }
 }
 
 % compatibility
