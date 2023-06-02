@@ -37,56 +37,79 @@
 % this file imported from xgreek fixes the \lccode and \uccode of Greek letters:
 \input{xgreek-fixes.def}
 
-\def\tmp@mono{mono}
-\def\tmp@monotonic{monotonic}
-\def\tmp@poly{poly}
-\def\tmp@polytonic{polytonic}
-\def\tmp@ancient{ancient}
-\def\tmp@ancientgreek{ancientgreek}
-
 \def\greek@variant{monogreek}
 
-\define@key{greek}{variant}[monotonic]{%
-  \def\@tmpa{#1}%
-  \xpg@ifdefined{greek}{}{%
+\newif\if@greek@ancient\@greek@ancientfalse
+\newif\if@greek@poly\@greek@polyfalse
+
+\define@choicekey*+{greek}{variant}[\xpg@val\xpg@nr]{monotonic,mono,polytonic,poly,ancient,ancientgreek}[monotonic]{%
+   \xpg@ifdefined{greek}{}{%
       \xpg@nopatterns{greek}%
       \adddialect\l@greek\l@nohyphenation
-  }%
-  \ifx\@tmpa\tmp@poly\def\@tmpa{polytonic}\fi
-  \ifx\@tmpa\tmp@ancientgreek\def\@tmpa{ancient}\fi
-  \ifx\@tmpa\tmp@polytonic%
-    \xpg@ifdefined{polygreek}{}%
-      {\xpg@warning{No hyphenation patterns were loaded for Polytonic Greek\MessageBreak
-	            I will use the patterns loaded for \string\l@greek\space instead}%
-      \adddialect\l@polygreek\l@greek\relax}%
-    \def\greek@variant{polygreek}%
-    \def\captionsgreek{\polygreekcaptions}%
-    \def\dategreek{\datepolygreek}%
-    \SetLanguageKeys{greek}{babelname=polutonikogreek,bcp47=el-polyton,bcp47-language=el,bcp47-variant=polyton}%
-    \xpg@info{Option: Polytonic Greek}%
-  \else
-    \ifx\@tmpa\tmp@ancient
-      \xpg@ifdefined{ancientgreek}{}%
-        {\xpg@warning{No hyphenation patterns were loaded for Ancient Greek\MessageBreak
-	              I will use the patterns loaded for \string\l@greek\space instead}%
-         \adddialect\l@ancientgreek\l@greek\relax}%
-      \def\greek@variant{ancientgreek}%
-      \def\captionsgreek{\ancientgreekcaptions}%
-      \def\dategreek{\dateancientgreek}%
-      \SetLanguageKeys{greek}{babelname=greek,bcp47=grc,bcp47-language=grc,bcp47-variant={}}%
-      \xpg@info{Option: Ancient Greek}%
-    \else %monotonic
-      \xpg@ifdefined{monogreek}{}%
-        {\xpg@warning{No hyphenation patterns were loaded for Monotonic Greek\MessageBreak
-	              I will use the patterns loaded for \string\l@greek\space instead}%
-         \adddialect\l@monogreek\l@greek\relax}%
-      \def\greek@variant{monogreek}% monotonic
-      \def\captionsgreek{\monogreekcaptions}%
-      \def\dategreek{\datemonogreek}%
-      \SetLanguageKeys{greek}{babelname=greek,bcp47=el-monoton,bcp47-language=el,bcp47-variant=polyton}%
-      \xpg@info{Option: Monotonic Greek}%
-    \fi
-  \fi}
+   }%
+   \ifcase\xpg@nr\relax
+      % monotonic:
+      \@greek@polyfalse
+      \@greek@ancientfalse
+   \or
+      % mono:
+      \@greek@polyfalse
+      \@greek@ancientfalse
+   \or
+      % polytonic:
+      \@greek@polytrue
+      \@greek@ancientfalse
+   \or
+      % poly:
+      \@greek@polytrue
+      \@greek@ancientfalse
+   \or
+      % ancient:
+      \@greek@polyfalse
+      \@greek@ancienttrue
+   \or
+      % ancientgreek:
+      \@greek@polyfalse
+      \@greek@ancienttrue
+   \fi
+   \greek@set@langdata
+   \xpg@info{Option: Greek, variant=\xpg@val}%
+}{\xpg@warning{Unknown Greek variant `#1'}}
+
+
+\def\greek@set@langdata{%
+   \if@greek@ancient
+       \xpg@ifdefined{ancientgreek}{}%
+           {\xpg@warning{No hyphenation patterns were loaded for Ancient Greek\MessageBreak
+	                 I will use the patterns loaded for \string\l@greek\space instead}%
+            \adddialect\l@ancientgreek\l@greek\relax}%
+       \def\greek@variant{ancientgreek}%
+       \def\captionsgreek{\ancientgreekcaptions}%
+       \def\dategreek{\dateancientgreek}%
+       \SetLanguageKeys{greek}{babelname=greek,bcp47=grc,bcp47-language=grc,bcp47-variant={}}%
+   \else
+      \if@greek@poly
+          \xpg@ifdefined{polygreek}{}%
+              {\xpg@warning{No hyphenation patterns were loaded for Polytonic Greek\MessageBreak
+	                    I will use the patterns loaded for \string\l@greek\space instead}%
+               \adddialect\l@polygreek\l@greek\relax}%
+          \def\greek@variant{polygreek}%
+          \def\captionsgreek{\polygreekcaptions}%
+          \def\dategreek{\datepolygreek}%
+          \SetLanguageKeys{greek}{babelname=polutonikogreek,bcp47=el-polyton,bcp47-language=el,bcp47-variant=polyton}%
+      \else% monotonic greek
+          \xpg@ifdefined{monogreek}{}%
+              {\xpg@warning{No hyphenation patterns were loaded for Monotonic Greek\MessageBreak
+	                    I will use the patterns loaded for \string\l@greek\space instead}%
+               \adddialect\l@monogreek\l@greek\relax}%
+          \def\greek@variant{monogreek}% monotonic
+          \def\captionsgreek{\monogreekcaptions}%
+          \def\dategreek{\datemonogreek}%
+          \SetLanguageKeys{greek}{babelname=greek,bcp47=el-monoton,bcp47-language=el,bcp47-variant=monoton}%
+      \fi%   
+   \fi%
+}
+
 
 \def\greek@language{%
   \polyglossia@setup@language@patterns{\greek@variant}%
@@ -94,14 +117,19 @@
 
 
 \newif\if@greek@numerals
-\define@key{greek}{numerals}[greek]{%
-  \ifstrequal{#1}{arabic}{%
-   \@greek@numeralsfalse%
-    \SetLanguageKeys{greek}{bcp47-extension-u=nu-latn}%
-   }{\@greek@numeralstrue%
-    \SetLanguageKeys{greek}{bcp47-extension-u=nu-grek}%
-   }%
-}
+\define@choicekey*+{greek}{numerals}[\xpg@val\xpg@nr]{greek,arabic}[greek]{%
+   \ifcase\xpg@nr\relax
+      % greek:
+      \@greek@numeralstrue%
+      \SetLanguageKeys{greek}{bcp47-extension-u=nu-grek}%
+   \or
+      % arabic:
+      \@greek@numeralsfalse%
+      \SetLanguageKeys{greek}{bcp47-extension-u=nu-latn}%
+   \fi
+   \xpg@info{Option: Greek, numerals=\xpg@val}%
+}{\xpg@warning{Unknown Greek numerals value `#1'}}
+
 
 \define@boolkey{greek}[greek@]{capitaliota}[true]{%
   \ifgreek@capitaliota
