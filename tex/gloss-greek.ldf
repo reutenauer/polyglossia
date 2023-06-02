@@ -8,6 +8,7 @@
   bcp47-variant=monoton,
   bcp47-script=Grek,
   bcp47-extension-u=nu-grek,
+  bcp47-casing=el,
   script=Greek,
   scripttag=grek,
   langtag=ELL,
