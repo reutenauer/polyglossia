@@ -76,4 +76,7 @@
   \fi\fi\fi
 }
 
+\newcommand*\Alphfinal[1]{\expandafter\@Alphfinal\csname c@#1\endcsname}
+\providecommand*{\@Alphfinal}[1]{\Hebrewnumeralfinal{#1}}
+
 \endinput
