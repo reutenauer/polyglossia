@@ -2414,15 +2414,19 @@
 \newcommand*{\xpg@set@language@only@aux}[2][]{%
     % Write to the aux
    \if@filesw%
-      \protected@write\@auxout{}{\protect\xpglanginauxtrue}%
       \ifx#1\\\\%
-          \protected@write\@auxout{}{\protect\selectlanguage*{#2}}%
-          \addtocontents{toc}{\protect\selectlanguage*{#2}}%
+          \addtocontents{toc}{%
+             \protect\xpglanginauxtrue
+             \protect\selectlanguage*{#2}
+             \protect\xpglanginauxfalse
+           }%
        \else
-          \protected@write\@auxout{}{\protect\selectlanguage*[#1]{#2}}%
-          \addtocontents{toc}{\protect\selectlanguage*[#1]{#2}}%
+          \addtocontents{toc}{%
+             \protect\xpglanginauxtrue
+             \protect\selectlanguage*[#1]{#2}
+             \protect\xpglanginauxfalse
+           }%
        \fi
-       \protected@write\@auxout{}{\protect\xpglanginauxfalse}%
    \fi
 }
 
