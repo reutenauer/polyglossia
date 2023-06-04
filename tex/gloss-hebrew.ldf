@@ -122,15 +122,15 @@
   \let\xpg@orig@DigitsDotDashInterCharToks\DigitsDotDashInterCharToks%
 
   \def\hebrew@ltr@numbers{%
-       \renewcommand*{\DigitsDotDashInterCharToks}{}%
+    \renewcommand*{\DigitsDotDashInterCharToks}{}%
   }
 
   \def\nohebrew@ltr@numbers{%
-      % Restore bidi's \DigitsDotDashInterCharToks
-      \let\DigitsDotDashInterCharToks\xpg@orig@DigitsDotDashInterCharToks%
+    % Restore bidi's \DigitsDotDashInterCharToks
+    \let\DigitsDotDashInterCharToks\xpg@orig@DigitsDotDashInterCharToks%
   }
 \else
-  % Only dummy commands for LuaTeX
+  % Only dummy commands (nothing to do here) for LuaTeX
   \def\hebrew@ltr@numbers{}
   \def\nohebrew@ltr@numbers{}
 \fi%
