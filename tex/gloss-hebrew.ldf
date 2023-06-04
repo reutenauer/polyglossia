@@ -116,24 +116,24 @@
 }
 
 \ifxetex
+  % Bidi inserts an RTL mark (0x200f) between number and number separator (- .),
+  % forcing numbers to RTL. This is wrong for Hebrew.
+  % So we defunc the respective command with XeTeX.
   \let\xpg@orig@DigitsDotDashInterCharToks\DigitsDotDashInterCharToks%
-\fi
 
-\def\hebrew@ltr@numbers{%
-    \ifxetex
-       % Bidi inserts an RTL mark (0x200f) between number and number separator (- .),
-       % forcing numbers to RTL. This is wrong for Hebrew.
-       % So we defunc the respective command.
+  \def\hebrew@ltr@numbers{%
        \renewcommand*{\DigitsDotDashInterCharToks}{}%
-    \fi%
-}
+  }
 
-\def\nohebrew@ltr@numbers{%
-    \ifxetex
+  \def\nohebrew@ltr@numbers{%
       % Restore bidi's \DigitsDotDashInterCharToks
       \let\DigitsDotDashInterCharToks\xpg@orig@DigitsDotDashInterCharToks%
-    \fi%
-}
+  }
+\else
+  % Only dummy commands for LuaTeX
+  \def\hebrew@ltr@numbers{}
+  \def\nohebrew@ltr@numbers{}
+\fi%
 
 \def\hebrew@numbers{%
    \let\@alph\hebrewnumeral%
@@ -146,7 +146,7 @@
   \let\@alph\latin@alph%
   \let\@Alph\latin@Alph%
   % Restore previous bidi numbers definition
-  \nohebrew@ltr@numbers
+  \nohebrew@ltr@numbers%
 }
 
 \def\hebrew@globalnumbers{%
