@@ -40,9 +40,10 @@
   \shorthandoff{"}%
 }{}
 
+\edef\xpg@hyphen@char{-}
 \def\slovak@@splhyphen#1{%
   \def\slovak@sh@tmp{%
-       \if\slovak@sh@next-#1%
+       \ifx\slovak@sh@next\xpg@hyphen@char#1%
        \else\expandafter\slovak@@@splhyphen{#1}\fi%
      }%
      \futurelet\slovak@sh@next\slovak@sh@tmp%

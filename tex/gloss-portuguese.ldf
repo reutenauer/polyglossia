@@ -64,9 +64,10 @@
   \shorthandoff{"}%
 }{}
 
+\edef\xpg@hyphen@char{-}
 \def\portuguese@@splhyphen#1{%
   \def\portuguese@sh@tmp{%
-       \if\portuguese@sh@next-#1%
+       \ifx\portuguese@sh@next\xpg@hyphen@char#1%
        \else\expandafter\portuguese@@@splhyphen{#1}\fi%
      }%
      \futurelet\portuguese@sh@next\portuguese@sh@tmp%

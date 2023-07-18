@@ -55,9 +55,10 @@
   \shorthandoff{"}%
 }{}
 
+\edef\xpg@hyphen@char{-}
 \def\croatian@@splhyphen#1{%
   \def\croatian@sh@tmp{%
-       \if\croatian@sh@next-#1%
+       \ifx\croatian@sh@next\xpg@hyphen@char#1%
        \else\expandafter\croatian@@@splhyphen{#1}\fi%
      }%
      \futurelet\croatian@sh@next\croatian@sh@tmp%

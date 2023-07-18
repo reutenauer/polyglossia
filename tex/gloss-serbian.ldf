@@ -325,9 +325,10 @@
    \let\@Alph\latin@Alph
 }
 
+\edef\xpg@hyphen@char{-}
 \def\serbian@@splhyphen#1{%
   \def\serbian@sh@tmp{%
-       \if\serbian@sh@next-#1%
+       \ifx\serbian@sh@next\xpg@hyphen@charx#1%
        \else\expandafter\serbian@@@splhyphen{#1}\fi%
      }%
      \futurelet\serbian@sh@next\serbian@sh@tmp%
