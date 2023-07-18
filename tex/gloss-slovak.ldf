@@ -40,7 +40,7 @@
   \shorthandoff{"}%
 }{}
 
-\edef\xpg@hyphen@char{-}
+\def\xpg@hyphen@char{-}
 \def\slovak@@splhyphen#1{%
   \def\slovak@sh@tmp{%
        \ifx\slovak@sh@next\xpg@hyphen@char#1%

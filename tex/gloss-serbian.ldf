@@ -325,7 +325,7 @@
    \let\@Alph\latin@Alph
 }
 
-\edef\xpg@hyphen@char{-}
+\def\xpg@hyphen@char{-}
 \def\serbian@@splhyphen#1{%
   \def\serbian@sh@tmp{%
        \ifx\serbian@sh@next\xpg@hyphen@charx#1%
