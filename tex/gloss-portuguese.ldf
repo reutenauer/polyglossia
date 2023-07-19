@@ -64,7 +64,7 @@
   \shorthandoff{"}%
 }{}
 
-\def\xpg@hyphen@char{-}
+\let\xpg@hyphen@char-
 \def\portuguese@@splhyphen#1{%
   \def\portuguese@sh@tmp{%
        \ifx\portuguese@sh@next\xpg@hyphen@char#1%

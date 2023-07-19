@@ -41,7 +41,7 @@
   \shorthandoff{"}%
 }{}
 
-\def\xpg@hyphen@char{-}
+\let\xpg@hyphen@char-
 \def\polish@@splhyphen#1{%
   \def\polish@sh@tmp{%
        \ifx\polish@sh@next\xpg@hyphen@char#1%
