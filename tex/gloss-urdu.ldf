@@ -1,4 +1,4 @@
-% Language definition file (part of polyglossia v1.63 -- 2023/06/10)
+% Language definition file (part of polyglossia v1.64 -- 2023/07/21)
 %
 %%% Adapted from a file contributed by Kamal Abdali
 \ProvidesFile{gloss-urdu.ldf}[polyglossia: module for Urdu]
