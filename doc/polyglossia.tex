@@ -3436,7 +3436,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 				      Raised by \TA{Vadim Rodionov} on the XeTeX mailing list.
 				\item Deleted ¦\bgroup¦ and ¦\egroup¦ tokens from the definition of ¦otherlanguage*¦; they serve no purpose
 				      (we are already inside an environment) and conflict with \pkg{csquotes}. Noticed by \TA{P. Lehman}.
-				\item Changed the calls of ¦\input¦ to ¦\xpg@input,¦ which inputs the required file and resets the catcode
+				\item Changed the calls of \verb|\input| to ¦\xpg@input¦, which inputs the required file and resets the catcode
 				      of ¦@¦ to the same value as it had before the input. Since each ¦.ldf¦ file starts with ¦\makeatletter¦,
 				      the old behaviour would leave a category 11 @, which is wrong.
 				\item Added ¦\csuse{date#2}¦ to the definition of ¦otherlanguage*¦.
