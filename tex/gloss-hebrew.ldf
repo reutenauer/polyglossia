@@ -133,7 +133,7 @@
   % Only dummy commands (nothing to do here) for LuaTeX
   \def\hebrew@ltr@numbers{}
   \def\nohebrew@ltr@numbers{}
-\fi%
+\fi
 
 \def\hebrew@numbers{%
    \let\@alph\hebrewnumeral
