@@ -43,12 +43,12 @@
 }
 
 %% This is for compatibility with Babel-aware package:
-\def\languageshorthands#1{\relax} %this is for scrlttr2 class
-\def\bbl@cs#1{\csname bbl@#1\endcsname}%
+\def\languageshorthands#1{\relax} % this is for scrlttr2 class
+\def\bbl@cs#1{\csname bbl@#1\endcsname}
 \AtEndPreamble{\let\bbl@set@language\xpg@set@language@aux} %for biblatex
 \AtEndPreamble{\let\bbl@main@language\xpg@main@language} %for biblatex
 \AtEndPreamble{
-  \providecommand\texorpdfstring[2]{#1}% dummy command if hyperref is not loaded
+  \providecommand\texorpdfstring[2]{#1} % dummy command if hyperref is not loaded
 }
 
 \sys_if_engine_luatex:T{
@@ -110,32 +110,32 @@
 }
 
 %% custom message macros
-\providecommand*{\xpg@error}[1]{%
-   \PackageError{polyglossia}{#1}{}%
+\providecommand*{\xpg@error}[1]{
+   \PackageError{polyglossia}{#1}{}
 }
 
-\providecommand*{\xpg@warning}[1]{%
-   \PackageWarning{polyglossia}{#1}%
+\providecommand*{\xpg@warning}[1]{
+   \PackageWarning{polyglossia}{#1}
 }
 
-\providecommand*{\xpg@info}[1]{%
-   \PackageInfo{polyglossia}%
-   {#1\@gobble}%
+\providecommand*{\xpg@info}[1]{
+   \PackageInfo{polyglossia}
+   {#1\@gobble}
 } %% the \@gobble is to prevent displaying the line nr
 
 %TODO change all instances of \xpg@nopatterns in gloss-*.ldf files
-\providecommand*{\xpg@nopatterns@fallback}[2][nohyphenation]{%
+\providecommand*{\xpg@nopatterns@fallback}[2][nohyphenation]{
    \xpg@warning{No~ hyphenation~ patterns~ were~ loaded~ for~ `#2'\MessageBreak
-         I~ will~ use~ \string\language=\string\l@ #1\space instead}%
+         I~ will~ use~ \string\language=\string\l@ #1\space instead}
    \expandafter\adddialect\csname l@#2\expandafter\endcsname\csname l@#1\endcsname\relax}
 
-\providecommand*{\xpg@nopatterns}[1]{%
+\providecommand*{\xpg@nopatterns}[1]{
    \xpg@warning{No~ hyphenation~ patterns~ were~ loaded~ for~ `#1'\MessageBreak
-         I~ will~ use~ \string\language=\string\l@nohyphenation\space instead}%
+         I~ will~ use~ \string\language=\string\l@nohyphenation\space instead}
    %%TODO? \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax
    }
 
-\def\xpg@ill@value#1#2{%
+\def\xpg@ill@value#1#2{
   \xpg@warning{Illegal~ value~ (#1)~ for~ #2}}
 
 % error out if lang is not loaded
@@ -177,7 +177,7 @@
 \def\@@ensure@maindir#1{\ifcsundef{@ensure@maindir}{#1}{\@ensure@maindir{#1}}}
 
 %% Used by the language definitions files for right-to-left languages
-\def\RequireBidi{%
+\def\RequireBidi{
   \str_case_e:nnF{\c_sys_engine_str}{
     {luatex}{\ifx\@onlypreamble\@notprerr\else\RequirePackage{luabidi}\fi}
     {xetex}{\ifx\@onlypreamble\@notprerr\else\RequirePackage{bidi}\fi}
@@ -205,66 +205,63 @@
 % (lua)bidi commands to change directionality for paragraphs
 % and inline text.
 % overwritten with correct package
-\cs_new_nopar:Nn{\polyglossia@setpardirection:n}{%
+\cs_new_nopar:Nn{\polyglossia@setpardirection:n}{
   \__xpg_if_LR_str:nF {#1}
   {
     \xpg@error{right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}
   }
 }
-\cs_new_nopar:Nn{\polyglossia@settextdirection:n}{%
+\cs_new_nopar:Nn{\polyglossia@settextdirection:n}{
   \__xpg_if_LR_str:nF {#1}
   {
     \xpg@error{right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}
   }
 }
-\__xpg_at_package_hook:nnn{bidi}{package/bidi/after}{%
-  \ExplSyntaxOn%
-  \cs_gset_nopar:Nn{\polyglossia@setpardirection:n}{%
-    \__xpg_if_LR_str:nTF{#1}%
-    {%
-      \setLR%
-    }%
-    {%
-      \setRL%
-    }%
-  }%
-  \cs_gset_nopar:Nn{\polyglossia@settextdirection:n}{%
-    \__xpg_if_LR_str:nTF{#1}%
-    {%
-      \LRE%
-    }%
-    {%
-      \RLE%
-    }%
-  }%
-  \ExplSyntaxOff%
+\__xpg_at_package_hook:nnn{bidi}{package/bidi/after}{
+  \cs_gset_nopar:Nn{\polyglossia@setpardirection:n}{
+    \__xpg_if_LR_str:nTF{#1}
+    {
+      \setLR
+    }
+    {
+      \setRL
+    }
+  }
+  \cs_gset_nopar:Nn{\polyglossia@settextdirection:n}{
+    \__xpg_if_LR_str:nTF{#1}
+    {
+      \LRE
+    }
+    {
+      \RLE
+    }
+  }
+  \ExplSyntaxOff
 }
-\__xpg_at_package_hook:nnn{luabidi}{package/luabidi/after}{%
-  \ExplSyntaxOn%
-  \cs_gset_nopar:Nn{\polyglossia@setpardirection:n}{%
-    \__xpg_if_LR_str:nTF{#1}%
-    {%
-      \setLR%
-    }%
-    {%
-      \setRL%
-    }%
-  }%
-  \cs_gset_nopar:Nn{\polyglossia@settextdirection:n}{%
-    \__xpg_if_LR_str:nTF{#1}%
-    {%
-      \LRE%
-    }%
-    {%
-      \RLE%
-    }%
-  }%
-  \ExplSyntaxOff%
+\__xpg_at_package_hook:nnn{luabidi}{package/luabidi/after}{
+  \cs_gset_nopar:Nn{\polyglossia@setpardirection:n}{
+    \__xpg_if_LR_str:nTF{#1}
+    {
+      \setLR
+    }
+    {
+      \setRL
+    }
+  }
+  \cs_gset_nopar:Nn{\polyglossia@settextdirection:n}{
+    \__xpg_if_LR_str:nTF{#1}
+    {
+      \LRE
+    }
+    {
+      \RLE
+    }
+  }
 }
 
 % emulate \RTLmain
 \cs_new_nopar:Nn \__xpg_setRTLmain: {}
-\str_case_e:nnF{\c_sys_engine_str}{%
+\str_case_e:nnF{\c_sys_engine_str}{
   {luatex}{\cs_gset:Nn \__xpg_setRTLmain: {\setRTLmain}}
   {xetex}{\cs_gset:Nn \__xpg_setRTLmain: {\@RTLmaintrue\setnonlatin}}
 }
@@ -277,7 +274,7 @@
 }
 
 %% compatibility with babel
-\let\addto\gappto% gappto is defined in etoolbox
+\let\addto\gappto % gappto is defined in etoolbox
 
 %% NEW EXPERIMENTAL SETUP INTERFACE FOR GLOSS FILES
 %% options currently available:
@@ -296,21 +293,21 @@
 %% TODO: localnumeral = <csname>
 %%       or even better localdigits = {0123456789} for fully automatic setup
 \newif\if@xpg@language@really@defined@
-\newcommand*\PolyglossiaSetup[2]{%
-  \polyglossia@keys_define_lang:n{#1}%
-  \keys_set:nn { polyglossia / #1 } { #2 }%
+\newcommand*\PolyglossiaSetup[2]{
+  \polyglossia@keys_define_lang:n{#1}
+  \keys_set:nn { polyglossia / #1 } { #2 }
   \prop_log:N{\polyglossia@langsetup}
   \polyglossia_setup_hyphen:n {#1}
   %define booleans etoolbox style and set defaults
   %% TODO ? \providetoggle{#1@setup@done}%
   % we initialize these so that we can use \gappto below
-  \csgdef{init@extras@#1}{}%
-  \csgdef{init@noextras@#1}{}% we don't use this yet: remove?
+  \csgdef{init@extras@#1}{}
+  \csgdef{init@noextras@#1}{} % we don't use this yet: remove?
   % here we do the fontsetup:
   \polyglossia@lang@autosetupfont:n{#1}
-  %% TODO? \toggletrue{#1@setup@done}%
+  %% TODO? \toggletrue{#1@setup@done}
   % reinit \do
-  \def\do##1{\setotherlanguage{##1}}%
+  \def\do##1{\setotherlanguage{##1}}
   % register base alias
   \xpg_language_alias { #1 } { #1 }
 }
@@ -330,15 +327,15 @@
   \boolfalse{havehyphen}
   % for each hyphen in the set until we find one that works
   \clist_map_inline:Nn \l_tmpa_clist {
-    \ifbool{havehyphen}{}{%
+    \ifbool{havehyphen}{}{
        % check if language hyphenname is defined
-      \__xpg_check_if_exist_l@:NF{#1}{%
+      \__xpg_check_if_exist_l@:NF{#1}{
           % if not, first consider nohyphenation
           \str_if_eq:nnTF{##1}{nohyphenation}
-            {%
+            {
                \cs_gset_eq:cc{l@#1}{l@##1}
                \global\booltrue{havehyphen}
-            }{%
+            }{
                % then test if hyphenation is defined
                \xpg@ifdefined{##1}{
                   % test if language hyphenation is nohyphenation
@@ -348,25 +345,25 @@
                       % ...and load
                       \xpg@set@hyphenation@patterns{##1}
                       \global\booltrue{havehyphen}
-                  }%
-                }{}%
-           }%
-       }%
-    }%
-  }%
+                  }
+                }{}
+           }
+       }
+    }
+  }
   % if l@#1 does not yet exist,
   % we assign it to nohyphenation
   % we do this here in case and if the hyphennames key was omitted
-  \ifbool{havehyphen}{}{%
-    \xpg@ifdefined{#1}{}%
+  \ifbool{havehyphen}{}{
+    \xpg@ifdefined{#1}{}
     {
       \xpg@nopatterns{#1}
       \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax
-    }%
-  }%
-  \csdef{#1@language}{%
-    \polyglossia@setup@language@patterns{#1}%
-  }%
+    }
+  }
+  \csdef{#1@language}{
+    \polyglossia@setup@language@patterns{#1}
+  }
   % setup hyphenmins
   \clist_set:Ne \l_tmpa_clist
     { \prop_item:Nn \polyglossia@langsetup {#1 / hyphenmins} }
@@ -381,10 +378,10 @@
     }
 }
 
-\newcommand*\polyglossia@setup@language@patterns[1]{%
-  \ifbool{xpg@hyphenation@disabled}{%
-    \xdef\xpg@lastlanguage{\the\csname l@#1\endcsname}%
-  }{%
+\newcommand*\polyglossia@setup@language@patterns[1]{
+  \ifbool{xpg@hyphenation@disabled}{
+    \xdef\xpg@lastlanguage{\the\csname l@#1\endcsname}
+  }{
     % first, test if \l@#1 exists
     % without that, \csname l@#1\endcsname will be defined as \relax
     \cs_if_exist:cTF {l@#1}
@@ -397,14 +394,14 @@
             \xpg@set@hyphenation@patterns{#1}
           }
       }
-      {%
+      {
         % Since this function is sometimes called from the gloss files
         % directly, we need to check whether the requested hyphenname exists.
-        \xpg@ifdefined{#1}{}%
-        {%
+        \xpg@ifdefined{#1}{}
+        {
           \xpg@nopatterns{#1}
           \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax%
-        }%
+        }
         \xpg@set@hyphenation@patterns{#1}
       }
   }
@@ -817,7 +814,7 @@
 % \localnumeral{numeral} use local language
 \NewExpandableDocumentCommand{\Localnumeral}{som}
 {
-  \IfBooleanTF{#1}%
+  \IfBooleanTF{#1}
     {% starred: take counter
       \exp_args:Nc \polyglossia_i_localnumeral:nnnnn {c@#3}
          {\mainlanguagename} {\languagename} {\IfNoValueTF {#2}{lang=local}{#2}} {Localnumeral}
@@ -885,37 +882,37 @@
   \prop_log:N{\polyglossia@langsetup}
   \prop_log:N{\__xpg_alias}
 }
-\def\xpg@lastlanguage{0}%
+\def\xpg@lastlanguage{0}
 
-\providebool{xpg@hyphenation@disabled}%
+\providebool{xpg@hyphenation@disabled}
 \boolfalse{xpg@hyphenation@disabled}
 
-\def\xpg@disablehyphenation{%
-  \ifx\@onlypreamble\@notprerr%
-     \xpg@@disablehyphenation%
-  \else%
+\def\xpg@disablehyphenation{
+  \ifx\@onlypreamble\@notprerr
+     \xpg@@disablehyphenation
+  \else
      % if this is used in the preamble, we have to postpone
      % the execution until the main language has been set (#125).
      \cs_gset_nopar:Nn \polyglossia@AtBeginDocument@hyphenation: {
-        \xpg@@disablehyphenation%
-     }%
-  \fi%
+        \xpg@@disablehyphenation
+     }
+  \fi
 }
 
-\def\xpg@@disablehyphenation{%
-  \ifbool{xpg@hyphenation@disabled}{}{%
-    \booltrue{xpg@hyphenation@disabled}%
-    \xdef\xpg@lastlanguage{\the\language}%
+\def\xpg@@disablehyphenation{
+  \ifbool{xpg@hyphenation@disabled}{}{
+    \booltrue{xpg@hyphenation@disabled}
+    \xdef\xpg@lastlanguage{\the\language}
     % We do not call \xpg@set@hyphenation@patterns here to avoid a warning message.
     % "nohyphenation" is not listed in language.dat.lua.
-    \language=\l@nohyphenation%
-  }%
+    \language=\l@nohyphenation
+  }
 }
 
-\def\xpg@enablehyphenation{%
-  \ifbool{xpg@hyphenation@disabled}{%
-    \boolfalse{xpg@hyphenation@disabled}%
-    \language=\csname xpg@lastlanguage\endcsname%
+\def\xpg@enablehyphenation{
+  \ifbool{xpg@hyphenation@disabled}{
+    \boolfalse{xpg@hyphenation@disabled}
+    \language=\csname xpg@lastlanguage\endcsname
   }{}%
 }
 
@@ -929,7 +926,7 @@
 \cs_new:Nn \polyglossia@lang@autosetupfont:n {
   \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/fontsetup}}{true}
   {
-    \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/lcscript}}{latin}%
+    \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/lcscript}}{latin}
          {\xpg@fontsetup@latin{#1}}
          {\xpg@fontsetup@nonlatin{#1}}
   }
@@ -950,12 +947,12 @@
   }
   {
     \str_if_eq:nnTF{#2}{Turkish}{
-      \fontspec_if_language:nTF {TRK}%
+      \fontspec_if_language:nTF {TRK}
       {
         \addfontfeature{Language=Turkish}
       }
       {
-        \fontspec_if_language:nTF {TUR}%
+        \fontspec_if_language:nTF {TUR}
         {
           \addfontfeature{Language=Turkish}
         }{}
@@ -1009,49 +1006,49 @@
 }
 \cs_generate_variant:Nn  \polyglossia@addfontfeature@script:nnn { non , nno, noo , nVn, nnV, nVV , nxn, nnx, nxx}
 
-\def\xpg@fontsetup@latin#1{%
+\def\xpg@fontsetup@latin#1{
   \begingroup
-  \csgdef{#1@font@rm}{%
+  \csgdef{#1@font@rm}{
     \cs_if_exist_use:cF{#1font}{
       \rmfamilylatin
       \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
                                               {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
     }
   }
-  \csgdef{#1@font@sf}{%
+  \csgdef{#1@font@sf}{
     \cs_if_exist_use:cF{#1fontsf}{
       \sffamilylatin
       \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
                                               {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
-    }%
-  }%
-  \csgdef{#1@font@tt}{%
+    }
+  }
+  \csgdef{#1@font@tt}{
     \cs_if_exist_use:cF{#1fonttt}{
       \ttfamilylatin
       \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
                                               {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
-    }%
-  }%
+    }
+  }
   \endgroup
 }
 
-\def\xpg@fontsetup@nonlatin#1{%
+\def\xpg@fontsetup@nonlatin#1{
   \begingroup
-  \csgdef{#1@font@rm}{%
+  \csgdef{#1@font@rm}{
     \cs_if_exist_use:cF{#1font}
       {
-       \providetoggle{#1@use@script@font}%
+       \providetoggle{#1@use@script@font}
        \str_if_eq:nnTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
-        {\rmfamilylatin}%
+        {\rmfamilylatin}
         {\cs_if_exist_use:cTF{\prop_item:Nn{\polyglossia@langsetup}{#1/lcscript} font}
           {
-             \toggletrue{#1@use@script@font}%
+             \toggletrue{#1@use@script@font}
            }
            {
              \rmfamilylatin
            }
        }
-       \iftoggle{#1@use@script@font}{}{%
+       \iftoggle{#1@use@script@font}{}{
            \polyglossia@addfontfeature@script:nxx{rm}
                                                  {\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
                                                  {\prop_item:Nn{\polyglossia@langsetup}{#1/script}}
@@ -1059,23 +1056,23 @@
        \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
                                               {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
       }%
-      \def\familytype{rm}%
+      \def\familytype{rm}
   }%
-  \csgdef{#1@font@sf}{%
-    \cs_if_exist_use:cF{#1fontsf}%
+  \csgdef{#1@font@sf}{
+    \cs_if_exist_use:cF{#1fontsf}
       {
-       \providetoggle{#1@use@script@fontsf}%
+       \providetoggle{#1@use@script@fontsf}
        \str_if_eq:nnTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
-        {\sffamilylatin}%
+        {\sffamilylatin}
         {\cs_if_exist_use:cTF{\prop_item:Nn{\polyglossia@langsetup}{#1/lcscript} fontsf}
           {
-             \toggletrue{#1@use@script@fontsf}%
+             \toggletrue{#1@use@script@fontsf}
            }
            {
              \sffamilylatin
            }
        }
-       \iftoggle{#1@use@script@fontsf}{}{%
+       \iftoggle{#1@use@script@fontsf}{}{
            \polyglossia@addfontfeature@script:nxx{sf}
                                                  {\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
                                                  {\prop_item:Nn{\polyglossia@langsetup}{#1/script}}
@@ -1083,32 +1080,32 @@
        \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
                                               {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
       }%
-      \def\familytype{sf}%
+      \def\familytype{sf}
   }%
-  \csgdef{#1@font@tt}{%
-    \cs_if_exist_use:cF{#1fonttt}%
+  \csgdef{#1@font@tt}{
+    \cs_if_exist_use:cF{#1fonttt}
       {
-       \providetoggle{#1@use@script@fonttt}%
+       \providetoggle{#1@use@script@fonttt}
        \str_if_eq:nnTF{\prop_item:Nn{\polyglossia@langsetup}{#1/script}}{\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
-       {\ttfamilylatin}%
+       {\ttfamilylatin}
        {\cs_if_exist_use:cTF{\prop_item:Nn{\polyglossia@langsetup}{#1/lcscript} fonttt}
            {
-             \toggletrue{#1@use@script@fonttt}%
+             \toggletrue{#1@use@script@fonttt}
            }
            {
              \ttfamilylatin
            }
        }
-       \iftoggle{#1@use@script@fonttt}{}{%
+       \iftoggle{#1@use@script@fonttt}{}{
            \polyglossia@addfontfeature@script:nxx{tt}
                                                  {\prop_item:Nn{\polyglossia@langsetup}{#1/scripttag}}
                                                  {\prop_item:Nn{\polyglossia@langsetup}{#1/script}}
-       }%
+       }
        \polyglossia@addfontfeature@language:xx{\prop_item:Nn{\polyglossia@langsetup}{#1/langtag}}
                                               {\prop_item:Nn{\polyglossia@langsetup}{#1/language}}
-      }%
-      \def\familytype{tt}%
-  }%
+      }
+      \def\familytype{tt}
+  }
   \endgroup
 }
 
@@ -1119,33 +1116,33 @@
 \cs_new_nopar:Nn {\polyglossia@local@marks:n} {}
 \cs_new_nopar:Nn {\polyglossia@enable@local@marks:}
 {
-      \xpg@info{Option:~ localmarks}%
+      \xpg@info{Option:~ localmarks}
       \cs_gset_nopar:Nn \polyglossia@local@marks:n
       {%
-         \def\xpg@tmp@lang{##1}%
-         \DeclareRobustCommand\markboth[2]{%
+         \def\xpg@tmp@lang{##1}
+         \DeclareRobustCommand\markboth[2]{
             \begingroup
                \let\label\relax \let\index\relax \let\glossary\relax
                \unrestored@protected@xdef\@themark
                {%
-                {\lowercase{\foreignlanguage{\xpg@tmp@lang}}{\protect\@@ensure@maindir{####1}}}%
-                {\lowercase{\foreignlanguage{\xpg@tmp@lang}}{\protect\@@ensure@maindir{####2}}}%
+                {\lowercase{\foreignlanguage{\xpg@tmp@lang}}{\protect\@@ensure@maindir{####1}}}
+                {\lowercase{\foreignlanguage{\xpg@tmp@lang}}{\protect\@@ensure@maindir{####2}}}
                }%
-               \@temptokena \expandafter{\@themark}%
-               \mark{\the\@temptokena}%
+               \@temptokena \expandafter{\@themark}
+               \mark{\the\@temptokena}
             \endgroup
-            \if@nobreak\ifvmode\nobreak\fi\fi%
+            \if@nobreak\ifvmode\nobreak\fi\fi
          }%
-         \DeclareRobustCommand\markright[1]{%
+         \DeclareRobustCommand\markright[1]{
             \begingroup
                \let\label\relax \let\index\relax \let\glossary\relax
                \expandafter\@markright\@themark
-               {\lowercase{\foreignlanguage{\xpg@tmp@lang}}{\protect\@@ensure@maindir{####1}}}%
-               \@temptokena \expandafter{\@themark}%
-               \mark{\the\@temptokena}%
+               {\lowercase{\foreignlanguage{\xpg@tmp@lang}}{\protect\@@ensure@maindir{####1}}}
+               \@temptokena \expandafter{\@themark}
+               \mark{\the\@temptokena}
             \endgroup
-            \if@nobreak\ifvmode\nobreak\fi\fi%
-         }%
+            \if@nobreak\ifvmode\nobreak\fi\fi
+         }
 % This part seems wrong (see #396 for explanation). Remove after a while.
 %         \def\@markright####1####2####3{%
 %            \@temptokena{\protect\@@ensure@maindir{####1}}%
@@ -1159,7 +1156,7 @@
 
 
 % Easy way out – Arthur, 2012-08-01
-\ifcsdef{newXeTeXintercharclass}{%
+\ifcsdef{newXeTeXintercharclass}{
 % to reset the intercharclass of a character to "normal"
 \newXeTeXintercharclass\xpg@normalclass %TODO
 }{}
@@ -1183,10 +1180,10 @@
 
 
 %we call this macro when a gloss file is not found for a given language
-\def\xpg@nogloss#1{%
+\def\xpg@nogloss#1{
    \xpg@warning{Neither~ file~ gloss-#1.ldf~ nor file~ gloss-#1.lde~ exists!\MessageBreak
-   I~ will~ nevertheless~ try~ to~ use~ hyphenation~ patterns~ for~ #1.}%
-  \PolyglossiaSetup{#1}{hyphenmins={2,3},hyphennames={#1},fontsetup=true}%
+   I~ will~ nevertheless~ try~ to~ use~ hyphenation~ patterns~ for~ #1.}
+  \PolyglossiaSetup{#1}{hyphenmins={2,3},hyphennames={#1},fontsetup=true}
   % the above amounts to:
   %\ifcsundef{l@#1}%
   %  {\expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}%
@@ -1194,13 +1191,13 @@
   %\csdef{#1@language}{\language=\csname l@#1\endcsname}%
 }
 
-\newcommand{\xpg@input}[1]{%
+\newcommand{\xpg@input}[1]{
   % Store catcode of @ before making at letter
   \chardef\xpg@saved@at@catcode\catcode`\@
   \makeatletter
-  \input{#1}%
+  \input{#1}
   % restore former @ catcode
-  \catcode`\@=\xpg@saved@at@catcode%
+  \catcode`\@=\xpg@saved@at@catcode
 }
 
 %% Load a lde file
@@ -1292,7 +1289,7 @@
                           {#1}
       }
   }
-  \polyglossia@register@language:nn{}{#1}%
+  \polyglossia@register@language:nn{}{#1}
   \seq_gput_right:Nn \__xpg_langs_loaded {#1}
 }
 
@@ -1306,14 +1303,14 @@
     \newenvironment {\prop_item:Nn{\polyglossia@langsetup}{#1/envname}} [1] []
     {
       \begin{otherlanguage}[##1]{#1}
-    }%
+    }
     {
       \end{otherlanguage}
-    }%
+    }
     \exp_args:Nc \newcommand {text#1} [2][]
-    {%
-      \__xpg_textlanguage:een{##1}{#1}{##2}%
-    }%
+    {
+      \__xpg_textlanguage:een{##1}{#1}{##2}
+    }
   }
 }
 \cs_generate_variant:Nn \xpg_define_language_commands:n {e}
@@ -1445,7 +1442,7 @@
     {
       \end{otherlanguage}
     }
-  }%
+  }
   \tl_clear_new:N \__xpg_alias_option_tl
   \prop_clear_new:N \__xpg_language_alias_prop
   \keys_set_known:nnN{polyglossia/alias} {#2} \__xpg_alias_option_tl
@@ -1498,22 +1495,22 @@
     \exp_args:Nnx \seq_gput_right:Nn \__xpg_langs_loaded {#2}
   }
   \polyglossia@set@default@language:ee {\xpg_alias_add_to_option_i:nn{#2}{#1}}
-    {\xpg_alias_base_lang:n{#2}}%
+    {\xpg_alias_base_lang:n{#2}}
 }
 
 
 \cs_new:Nn \polyglossia@set@default@language:nn
 {
-  \gdef\xpg@main@language{#2}%
+  \gdef\xpg@main@language{#2}
   \tl_if_blank:nTF {#1}
   {
     \cs_gset_nopar:Npn \mainlanguagevariant {}
   }
-  {%
+  {
      % Register the language options
-     \polyglossia@set@lang@options:nnn {#2} {#1} {@xpg@main@langvariant}%
-  }%
-  \csgdef{#2@gvar}{\mainlanguagevariant}%
+     \polyglossia@set@lang@options:nnn {#2} {#1} {@xpg@main@langvariant}
+  }
+  \csgdef{#2@gvar}{\mainlanguagevariant}
   %% The following settings are for the default language and script
   % this tells bidi.sty or luabidi.sty that the document is RTL
   \__xpg_if_LR_str:eF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}
@@ -1524,8 +1521,8 @@
     \selectbackgroundlanguage{#2}
     \selectlanguage[#1]{#2}%
   }
-  \xpg@info{Default~ language~ is~ #2}%
-  \polyglossia@set@language@name[#1]{#2}%
+  \xpg@info{Default~ language~ is~ #2}
+  \polyglossia@set@language@name[#1]{#2}
 
   \cs_gset_nopar:Npn \mainlanguagename {#2}
   % Store babelname of main language (for external packages such as biblatex)
@@ -1647,112 +1644,112 @@
 \cs_new_nopar:cpn {bcp47.main.casing} {}
 \cs_new_nopar:Npn \mainlanguagevariant {}%
 % Store main language variant for external packages
-\define@key{xpg@main@langvariant}{variant}{%
-  \cs_gset_nopar:Npn \mainlanguagevariant {#1}%
+\define@key{xpg@main@langvariant}{variant}{
+  \cs_gset_nopar:Npn \mainlanguagevariant {#1}
 }
 
 \cs_new_nopar:Npn \babelname {}
-\def\languagevariant{}%
+\def\languagevariant{}
 % Store current language variant for external packages
-\define@key{xpg@set@langvariant}{variant}{%
-  \def\languagevariant{#1}%
+\define@key{xpg@set@langvariant}{variant}{
+  \def\languagevariant{#1}
 }
 
 \newcommand*\polyglossia@set@language@name[2][]{
-  \def\languagename{#2}%
-  \tl_if_blank:nTF {#1}{%
+  \def\languagename{#2}
+  \tl_if_blank:nTF {#1}{
      \ifcsundef{#2@gvar}{\def\languagevariant{}}{\def\languagevariant{\csuse{#2@gvar}}}
-   }{%
+   }{
      % Register the language options
-     \polyglossia@set@lang@options:nnn {#2} {#1} {@xpg@set@langvariant}%
-     \cs_set_eq:cc{#2@gvar}{languagevariant}%
+     \polyglossia@set@lang@options:nnn {#2} {#1} {@xpg@set@langvariant}
+     \cs_set_eq:cc{#2@gvar}{languagevariant}
   }%
 }
 
 
-\newcommand*{\resetdefaultlanguage}[2][]{%
+\newcommand*{\resetdefaultlanguage}[2][]{
   \polyglossia@reset@default@language:nn
     {\xpg_alias_add_to_option_i:nn{#2}{#1}}
-    {\xpg_alias_base_lang:n{#2}}%
+    {\xpg_alias_base_lang:n{#2}}
 }
 
 \cs_new:Nn \__xpg_store_bcp_info:nn
 {
   % Store BCP-47 ID and subtags of current language
-  \tl_if_blank:nTF {#1}{%
+  \tl_if_blank:nTF {#1}{
     % tag (e.g., en-US)
-    \ifcsundef{#2@g.bcp47.tag}{%
-       \csedef{bcp47.tag}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47 } }%
-    }{%
-       \csedef{bcp47.tag}{\csuse{#2@g.bcp47.tag}}%
-    }%
+    \ifcsundef{#2@g.bcp47.tag}{
+       \csedef{bcp47.tag}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47 } }
+    }{
+       \csedef{bcp47.tag}{\csuse{#2@g.bcp47.tag}}
+    }
     % language (e.g., en)
-    \ifcsundef{#2@g.bcp47.language}{%
-       \csedef{bcp47.language}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-language } }%
-    }{%
-       \csedef{bcp47.language}{\csuse{#2@g.bcp47.language}}%
-    }%
+    \ifcsundef{#2@g.bcp47.language}{
+       \csedef{bcp47.language}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-language } }
+    }{
+       \csedef{bcp47.language}{\csuse{#2@g.bcp47.language}}
+    }
     % region (e.g., US)
     \ifcsundef{#2@g.bcp47.region}{%
-       \csedef{bcp47.region}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-region } }%
-    }{%
+       \csedef{bcp47.region}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-region } }
+    }{
        \csedef{bcp47.region}{\csuse{#2@g.bcp47.region}}%
-    }%
+    }
     % script (e.g., Latn)
-    \ifcsundef{#2@g.bcp47.script}{%
-       \csedef{bcp47.script}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-script } }%
-    }{%
-       \csedef{bcp47.script}{\csuse{#2@g.bcp47.script}}%
-    }%
+    \ifcsundef{#2@g.bcp47.script}{
+       \csedef{bcp47.script}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-script } }
+    }{
+       \csedef{bcp47.script}{\csuse{#2@g.bcp47.script}}
+    }
     % variant (e.g., 1996)
-    \ifcsundef{#2@g.bcp47.variant}{%
-       \csedef{bcp47.variant}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-variant } }%
-    }{%
-       \csedef{bcp47.variant}{\csuse{#2@g.bcp47.variant}}%
-    }%
+    \ifcsundef{#2@g.bcp47.variant}{
+       \csedef{bcp47.variant}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-variant } }
+    }{
+       \csedef{bcp47.variant}{\csuse{#2@g.bcp47.variant}}
+    }
     % extension.t (tranformation)
     \ifcsundef{#2@g.bcp47.extension.t}{%
-       \csedef{bcp47.extension.t}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-t } }%
-    }{%
-       \csedef{bcp47.extension.t}{\csuse{#2@g.bcp47.extension.t}}%
-    }%
+       \csedef{bcp47.extension.t}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-t } }
+    }{
+       \csedef{bcp47.extension.t}{\csuse{#2@g.bcp47.extension.t}}
+    }
     % extension.u (additional locale information)
     \ifcsundef{#2@g.bcp47.extension.u}{%
-       \csedef{bcp47.extension.u}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-u } }%
-    }{%
-       \csedef{bcp47.extension.u}{\csuse{#2@g.bcp47.extension.u}}%
-    }%
+       \csedef{bcp47.extension.u}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-u } }
+    }{
+       \csedef{bcp47.extension.u}{\csuse{#2@g.bcp47.extension.u}}
+    }
     % extension.x (private use area)
-    \ifcsundef{#2@g.bcp47.extension.x}{%
-       \csedef{bcp47.extension.x}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-x } }%
-    }{%
-       \csedef{bcp47.extension.x}{\csuse{#2@g.bcp47.extension.x}}%
-    }%
+    \ifcsundef{#2@g.bcp47.extension.x}{
+       \csedef{bcp47.extension.x}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-x } }
+    }{
+       \csedef{bcp47.extension.x}{\csuse{#2@g.bcp47.extension.x}}
+    }
     % casing
-    \ifcsundef{#2@g.bcp47.casing}{%
+    \ifcsundef{#2@g.bcp47.casing}{
        % For casing, we fall back to language if bcp47-casing is not explicitly set
        \cs_set_nopar:cpx {tmpcasing} { \prop_item:Ne \polyglossia@langsetup { #2 / bcp47-casing } }
        \str_if_empty:NTF \tmpcasing
            { \cs_gset_eq:cc {bcp47.casing} {bcp47.language} }
            { \csedef{bcp47.casing}{ \tmpcasing } }
-    }{%
-       \csedef{bcp47.casing}{\csuse{#2@g.bcp47.casing}}%
-    }%
-  }{%
-    \csedef{bcp47.tag}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47 } }%
-    \csedef{bcp47.language}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-language } }%
-    \csedef{bcp47.region}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-region } }%
-    \csedef{bcp47.script}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-script } }%
-    \csedef{bcp47.variant}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-variant } }%
-    \csedef{bcp47.extension.t}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-t } }%
-    \csedef{bcp47.extension.u}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-u } }%
-    \csedef{bcp47.extension.x}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-x } }%
+    }{
+       \csedef{bcp47.casing}{\csuse{#2@g.bcp47.casing}}
+    }
+  }{
+    \csedef{bcp47.tag}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47 } }
+    \csedef{bcp47.language}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-language } }
+    \csedef{bcp47.region}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-region } }
+    \csedef{bcp47.script}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-script } }
+    \csedef{bcp47.variant}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-variant } }
+    \csedef{bcp47.extension.t}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-t } }
+    \csedef{bcp47.extension.u}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-u } }
+    \csedef{bcp47.extension.x}{ \prop_item:Nn{ \polyglossia@langsetup}{ #2 / bcp47-extension-x } }
     % For casing, we fall back to language if bcp47-casing is not explicitly set
     \cs_set_nopar:cpx {tmpcasing} { \prop_item:Ne \polyglossia@langsetup { #2 / bcp47-casing } }
     \str_if_empty:NTF \tmpcasing
          { \cs_gset_eq:cc {bcp47.casing} {bcp47.language} }
          { \csedef{bcp47.casing}{ \tmpcasing } }
-  }%
+  }
 }
 
 \cs_new:Nn \polyglossia@reset@default@language:nn
@@ -1774,14 +1771,14 @@
   \selectbackgroundlanguage{#2}%
   % Store babelname of current language (for external packages such as biblatex)
   \tl_if_blank:nTF {#1}{%
-    \ifcsundef{#2@gbabelname}{%
-       \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
-    }{%
-       \edef\babelname{\csuse{#2@gbabelname}}%
-    }%
-  }{%
-    \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
-  }%
+    \ifcsundef{#2@gbabelname}{
+       \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}
+    }{
+       \edef\babelname{\csuse{#2@gbabelname}}
+    }
+  }{
+    \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}
+  }
   % Store BCP-47 id of current language
   \__xpg_store_bcp_info:nn {#1}{#2}
 }
@@ -1794,30 +1791,30 @@
 }
 
 % This saves the normalfont for the latin script since we may change normalfont in other scripts
-\let\normalfontlatin=\normalfont%
+\let\normalfontlatin=\normalfont
 
 % Provide default fonts (as set with \setmainfont, \setsansfont and \setmonofont)
 % for Latin scripts and as a fallback for non-Latin scripts.
-\DeclareRobustCommand\xpg@defaultfont@rm{%
-   \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}%
-   \fontfamily\rmdefault%
-   \ifdefined\UseHook\UseHook{rmfamily}\fi%
-   \selectfont%
+\DeclareRobustCommand\xpg@defaultfont@rm{
+   \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}
+   \fontfamily\rmdefault
+   \ifdefined\UseHook\UseHook{rmfamily}\fi
+   \selectfont
 }
-\DeclareRobustCommand\xpg@defaultfont@sf{%
-   \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}%
-   \fontfamily\sfdefault%
-   \ifdefined\UseHook\UseHook{sffamily}\fi%
-   \selectfont%
+\DeclareRobustCommand\xpg@defaultfont@sf{
+   \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}
+   \fontfamily\sfdefault
+   \ifdefined\UseHook\UseHook{sffamily}\fi
+   \selectfont
 }
-\DeclareRobustCommand\xpg@defaultfont@tt{%
-   \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}%
-   \fontfamily\ttdefault%
-   \ifdefined\UseHook\UseHook{ttfamily}\fi%
-   \selectfont%
+\DeclareRobustCommand\xpg@defaultfont@tt{
+   \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}
+   \fontfamily\ttdefault
+   \ifdefined\UseHook\UseHook{ttfamily}\fi
+   \selectfont
 }
 
-\def\xpg@patch@fontfamilies{%
+\def\xpg@patch@fontfamilies{
   % This robustifies the redefinitions of \<xx>family (suggestion by Enrico Gregorio)
   % e.g. to prevent expansion of the \familytype redefinition in auxiliary files
   \csgappto{rmfamily~}{\def\familytype{rm}}
@@ -1828,79 +1825,79 @@
 % These switches activate the default fonts
 % Note that a simple \let\rmfamilylatin=\rmfamily
 % does not work reliably (see #24)
-\cs_gset_eq:cc{rmfamilylatin}{xpg@defaultfont@rm}%
-\cs_gset_eq:cc{sffamilylatin}{xpg@defaultfont@sf}%
-\cs_gset_eq:cc{ttfamilylatin}{xpg@defaultfont@tt}%
+\cs_gset_eq:cc{rmfamilylatin}{xpg@defaultfont@rm}
+\cs_gset_eq:cc{sffamilylatin}{xpg@defaultfont@sf}
+\cs_gset_eq:cc{ttfamilylatin}{xpg@defaultfont@tt}
 
-\def\xpg@set@familydefault{%
+\def\xpg@set@familydefault{
   % We need the \edef route here in order
   % to detect both \renewcommand and \let
   % changes.
-  \edef\tempa{\familydefault}%
-  \edef\tempb{\sfdefault}%
-  \ifcsequal{tempa}{tempb}%
+  \edef\tempa{\familydefault}
+  \edef\tempb{\sfdefault}
+  \ifcsequal{tempa}{tempb}
      {\def\familytype{sf}}
-     {\edef\tempb{\ttdefault}%
-      \ifcsequal{tempa}{tempb}%
+     {\edef\tempb{\ttdefault}
+      \ifcsequal{tempa}{tempb}
          {\def\familytype{tt}}
          {\def\familytype{rm}}}
-  \xpg@patch@fontfamilies%
+  \xpg@patch@fontfamilies
   % This (re-)saves the normalfont for the latin script since we may
   % change normalfont in other scripts
-  \let\normalfontlatin=\normalfont%
+  \let\normalfontlatin=\normalfont
   % And for all cases, we also reset \<xx>familylatin
-  \cs_gset_eq:cc{rmfamilylatin}{xpg@defaultfont@rm}%
-  \cs_gset_eq:cc{sffamilylatin}{xpg@defaultfont@sf}%
-  \cs_gset_eq:cc{ttfamilylatin}{xpg@defaultfont@tt}%
+  \cs_gset_eq:cc{rmfamilylatin}{xpg@defaultfont@rm}
+  \cs_gset_eq:cc{sffamilylatin}{xpg@defaultfont@sf}
+  \cs_gset_eq:cc{ttfamilylatin}{xpg@defaultfont@tt}
 }
 
-\def\resetfontlatin{%
-  \DeclareRobustCommand\rmfamily{\xpg@defaultfont@rm}%
-  \DeclareRobustCommand\sffamily{\xpg@defaultfont@sf}%
-  \DeclareRobustCommand\ttfamily{\xpg@defaultfont@tt}%
-  \xpg@patch@fontfamilies%
-  \global\let\normalfont=\normalfontlatin%
+\def\resetfontlatin{
+  \DeclareRobustCommand\rmfamily{\xpg@defaultfont@rm}
+  \DeclareRobustCommand\sffamily{\xpg@defaultfont@sf}
+  \DeclareRobustCommand\ttfamily{\xpg@defaultfont@tt}
+  \xpg@patch@fontfamilies
+  \global\let\normalfont=\normalfontlatin
 }
 
-\def\selectfontfamilylatin{%
-  \def\tmp@tt{tt}\def\tmp@sf{sf}%
-  \ifx\familytype\tmp@tt%
-    \ttfamilylatin%
-    \else\ifx\familytype\tmp@sf%
-      \sffamilylatin%
+\def\selectfontfamilylatin{
+  \def\tmp@tt{tt}\def\tmp@sf{sf}
+  \ifx\familytype\tmp@tt
+    \ttfamilylatin
+    \else\ifx\familytype\tmp@sf
+      \sffamilylatin
       \else\rmfamilylatin\fi\fi}
 
-\def\xpg@select@fontfamily#1{%
-  \def\tmp@tt{tt}\def\tmp@sf{sf}%
+\def\xpg@select@fontfamily#1{
+  \def\tmp@tt{tt}\def\tmp@sf{sf}
   \ifx\familytype\tmp@tt
-    \__xpg_use_or_warn:c{#1@font@tt}%
+    \__xpg_use_or_warn:c{#1@font@tt}
   \else\ifx\familytype\tmp@sf
-    \__xpg_use_or_warn:c{#1@font@sf}%
+    \__xpg_use_or_warn:c{#1@font@sf}
       \else\__xpg_use_or_warn:c{#1@font@rm}\fi\fi}
 
-\def\xpg@set@normalfont#1{%
-  \letcs{\rmfamily}{#1@font@rm}%
-  \letcs{\sffamily}{#1@font@sf}%
-  \letcs{\ttfamily}{#1@font@tt}%
-  \robustify\rmfamily%
-  \robustify\sffamily%
-  \robustify\ttfamily%
-  \gdef\normalfont{\protect\xpg@select@fontfamily{#1}%
-                   \fontseries{\seriesdefault}\selectfont%
+\def\xpg@set@normalfont#1{
+  \letcs{\rmfamily}{#1@font@rm}
+  \letcs{\sffamily}{#1@font@sf}
+  \letcs{\ttfamily}{#1@font@tt}
+  \robustify\rmfamily
+  \robustify\sffamily
+  \robustify\ttfamily
+  \gdef\normalfont{\protect\xpg@select@fontfamily{#1}
+                   \fontseries{\seriesdefault}\selectfont
                    \fontshape{\shapedefault}
-                   \ifdefined\UseHook\UseHook{normalfont}\fi%
-                   \selectfont}%
-  \gdef\reset@font{\protect\normalfont}%
+                   \ifdefined\UseHook\UseHook{normalfont}\fi
+                   \selectfont}
+  \gdef\reset@font{\protect\normalfont}
 }
 
 \let\@@fterindentfalse\@afterindentfalse
-\def\french@indent{%
+\def\french@indent{
     \let\@afterindentfalse\@afterindenttrue
-    \@afterindenttrue%
+    \@afterindenttrue
 }
-\def\nofrench@indent{%
+\def\nofrench@indent{
     \let\@afterindentfalse\@@fterindentfalse
-    \@afterindentfalse%
+    \@afterindentfalse
 }
 
 \cs_new_nopar:Npn \selectbackgroundlanguage #1
@@ -1911,8 +1908,8 @@
 {
   \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/lcscript}}{latin}
                    {}
-                   {\xpg@set@normalfont{#1}}%
-  \csuse{#1@globalnumbers}%
+                   {\xpg@set@normalfont{#1}}
+  \csuse{#1@globalnumbers}
 }
 \cs_generate_variant:Nn \polyglossia@select@background@language:n {e}
 %  Declare secondary language #2 with language options #1
@@ -1920,7 +1917,7 @@
 {
   \seq_if_in:NxF \__xpg_langs_loaded {#2}
   {
-    \polyglossia_load_lang_definition:ee {#1} {#2}%
+    \polyglossia_load_lang_definition:ee {#1} {#2}
     % define environment and command if not alias
     \str_if_eq:eeT {\prop_item:Ne \__xpg_alias {#2/target}} {#2} {
        \use:c{\prop_item:Ne{\polyglossia@langsetup}
@@ -1928,23 +1925,23 @@
              {#2}
     }
     \polyglossia@set@other@language:ee {\xpg_alias_add_to_option_i:nn{#2}{#1}}
-      {\xpg_alias_base_lang:n{#2}}%
+      {\xpg_alias_base_lang:n{#2}}
     \exp_args:Nnx \seq_gput_right:Nn \__xpg_langs_loaded {#2}
   }
 }
 
 \cs_new:Nn \polyglossia@set@other@language:nn
 {
-  \polyglossia@register@language:nn{#1}{#2}%
+  \polyglossia@register@language:nn{#1}{#2}
   % If a variant is set, store it.
   \gdef\otherlanguagevariant{}
   % Register the language options
-  \polyglossia@set@lang@options:nnn {#2} {#1} {@xpg@other@langvariant}%
+  \polyglossia@set@lang@options:nnn {#2} {#1} {@xpg@other@langvariant}
 
-  \csgdef{#2@gvar}{\otherlanguagevariant}%
+  \csgdef{#2@gvar}{\otherlanguagevariant}
   \prop_get:NxNT \polyglossia@langsetup {#2/babelname} \l_tmpa_tl
     { \xdef\otherlanguagebabelname{\l_tmpa_tl} }
-  \cs_gset_eq:cc{#2@gbabelname}{otherlanguagebabelname}%
+  \cs_gset_eq:cc{#2@gbabelname}{otherlanguagebabelname}
 }
 \cs_generate_variant:Nn  \polyglossia@set@other@language:nn {
   ee, ef, en, eo, ex,
@@ -1956,25 +1953,25 @@
 
 
 % Store main language variant for external packages
-\define@key{xpg@other@langvariant}{variant}{%
-  \gdef\otherlanguagevariant{#1}%
+\define@key{xpg@other@langvariant}{variant}{
+  \gdef\otherlanguagevariant{#1}
 }
 
-\newcommand\setotherlanguages[1]{%
-  \def\do##1{\setotherlanguage{##1}}%
-   \exp_args:Nx\docsvlist{#1}}%
+\newcommand\setotherlanguages[1]{
+  \def\do##1{\setotherlanguage{##1}}
+   \exp_args:Nx\docsvlist{#1}}
 
 \def\common@language{% FIXME is this really needed???
-  \ifbool{xpg@hyphenation@disabled}{%
-    \xdef\xpg@lastlanguage{\z@}%
-  }{%
+  \ifbool{xpg@hyphenation@disabled}{
+    \xdef\xpg@lastlanguage{\z@}
+  }{
     \language=\z@
-  }%
+  }
   \lefthyphenmin=\tw@
   \righthyphenmin=\thr@@}
 
-\def\xpg@initial@setup{%
-  \common@language%
+\def\xpg@initial@setup{
+  \common@language
 }
 
 
@@ -1982,8 +1979,8 @@
 % for specific (esp. tag-based) aliases
 % where \text<alias> would cause clashes
 % (e.g., \textit)
-\newcommand\textlang[3][]{%
-  \xpg@str@lowercase{\xpg@tmp@lang}{#2}%
+\newcommand\textlang[3][]{
+  \xpg@str@lowercase{\xpg@tmp@lang}{#2}
   \__xpg_textlanguage:een {#1} {\xpg@tmp@lang} {#3}
 }%
 
@@ -1991,28 +1988,28 @@
 % for specific (esp. tag-based) aliases
 % where {<alias>} would cause clashes
 % (e.g., \fi)
-\newenvironment{lang}[2][]{%
-  \begin{otherlanguage}[#1]{#2}%
-}{%
+\newenvironment{lang}[2][]{
+  \begin{otherlanguage}[#1]{#2}
+}{
   \end{otherlanguage}
-}%
+}
 
 \providecommand{\foreignlanguage}{}
 
 % wrapper for foreignlanguage and otherlanguage*
 \newcommand*\polyglossia@setforeignlanguage[2][]{
   \select@@language[#1]{#2}
-  \polyglossia@register@language:nn{#1}{#2}%
+  \polyglossia@register@language:nn{#1}{#2}
   % Store babelname of current language (for external packages such as biblatex)
-  \tl_if_blank:nTF {#1}{%
-    \ifcsundef{#2@gbabelname}{%
-       \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
-    }{%
-       \edef\babelname{\csuse{#2@gbabelname}}%
-    }%
-  }{%
-    \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
-  }%
+  \tl_if_blank:nTF {#1}{
+    \ifcsundef{#2@gbabelname}{
+       \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}
+    }{
+       \edef\babelname{\csuse{#2@gbabelname}}
+    }
+  }{
+    \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}
+  }
   % Store BCP-47 id of current language
   \__xpg_store_bcp_info:nn {#1}{#2}
 }
@@ -2021,17 +2018,17 @@
 % options are lowercased (also when used in \MakeUppercase
 % contexts e.g. in headings)
 % Macro adapted from tudscr.sty
-\newcommand*\xpg@str@lowercase[2]{%
-  \protected@edef#1{%
-    \lowercase{\def\noexpand#1{#2}}%
-  }#1%
+\newcommand*\xpg@str@lowercase[2]{
+  \protected@edef#1{
+    \lowercase{\def\noexpand#1{#2}}
+  }#1
 }
 
 % lowercase options before passing to setkeys
 \cs_new:Nn \polyglossia@set@keys:nn
 {
-    \xpg@str@lowercase{\xpg@tmp@opts}{#2}%
-    \exp_args:Nne \setkeys{#1}{\xpg@tmp@opts}%
+    \xpg@str@lowercase{\xpg@tmp@opts}{#2}
+    \exp_args:Nne \setkeys{#1}{\xpg@tmp@opts}
 }
 
 % joint code of \foreignlanguage, otherlanguage*
@@ -2039,17 +2036,17 @@
 % #1 option
 % #2 language
 \newcommand{\xpg@otherlanguage}[2][]
-{%
+{
   \polyglossia@error@iflangnotloaded:n{#2}
-  \polyglossia@set@keys:nn{#2}{#1}%
+  \polyglossia@set@keys:nn{#2}{#1}
   \polyglossia@setforeignlanguage[#1]{#2}
   % Hook for external packages such as biblatex
-  \polyglossia@language@switched%
+  \polyglossia@language@switched
   % buggy restoration heure
-  \csuse{inlineextras@#2}%
+  \csuse{inlineextras@#2}
   % This is a hook for external packages which want to access variants
   % via babelname (such as biblatex)
-  \cs_if_exist_use:c{inlineextras@bbl@\babelname}%
+  \cs_if_exist_use:c{inlineextras@bbl@\babelname}
 }
 
 \renewcommand{\foreignlanguage}[3][]
@@ -2061,7 +2058,7 @@
 % used in captions
 \newcommand{\setforeignlanguage}[2][]
 {
-  \polyglossia@setforeignlanguage[#1]{#2}%
+  \polyglossia@setforeignlanguage[#1]{#2}
 }
 
 % internal wrapper for foreign language
@@ -2076,8 +2073,8 @@
     \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
   }{
     \group_begin:
-      \xpg@otherlanguage[\xpg_alias_add_to_option_i:nn{#2}{#1}]{#3}%
-      \polyglossia@lang@settextdirection:nn{#3}{#4}%
+      \xpg@otherlanguage[\xpg_alias_add_to_option_i:nn{#2}{#1}]{#3}
+      \polyglossia@lang@settextdirection:nn{#3}{#4}
     \group_end:
   }
 }
@@ -2103,7 +2100,7 @@
   {
     \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
   }{
-    \xpg@otherlanguage[\xpg_alias_add_to_option_i:nn{#2}{#1}]{#3}%
+    \xpg@otherlanguage[\xpg_alias_add_to_option_i:nn{#2}{#1}]{#3}
     \polyglossia@lang@settextdirection:nn{#3}%
     \bgroup
   }
@@ -2141,15 +2138,15 @@
   {
     \group_begin:
       \bool_set_true:N \__xpg_inline_lang
-      \xpg@otherlanguage[#1]{#3}%
-      \csuse{date#3}%
+      \xpg@otherlanguage[#1]{#3}
+      \csuse{date#3}
       % This is a hook for external packages which want to access variants
       % via babelname (such as biblatex)
-      \cs_if_exist_use:c{date@bbl@\babelname}%
-      \polyglossia@lang@settextdirection:nn{#3}{#4}%
+      \cs_if_exist_use:c{date@bbl@\babelname}
+      \polyglossia@lang@settextdirection:nn{#3}{#4}
     \group_end:
     % Reset the language's/script's font families if the embedding script is latin
-    \str_if_eq:eeTF{\prop_item:Ne{\polyglossia@langsetup}{\languagename/lcscript}}{latin}{\resetfontlatin}{}%
+    \str_if_eq:eeTF{\prop_item:Ne{\polyglossia@langsetup}{\languagename/lcscript}}{latin}{\resetfontlatin}{}
   }
 }
 \cs_generate_variant:Nn \__xpg_textlanguage:nnnn {nnen}
@@ -2158,9 +2155,9 @@
 \newcommand\pghyphenation[3][]{
   \bgroup
   \polyglossia@error@iflangnotloaded:n{#2}
-  \setkeys{#2}{#1}%
-  \select@@language[#1]{#2}%
-  \hyphenation{#3}%
+  \setkeys{#2}{#1}
+  \select@@language[#1]{#2}
+  \hyphenation{#3}
   \egroup
 }
 
@@ -2169,8 +2166,8 @@
 % (for instance biblatex):
 \newcommand*{\xpg@hook@setlanguage}{}
 
-\def\xpg@pop@language@i#1#2{%
-  \xpg@set@language@aux[#1]{#2}%
+\def\xpg@pop@language@i#1#2{
+  \xpg@set@language@aux[#1]{#2}
   \xpg@hook@setlanguage
   \let\emp@langname\@undefined}
 
@@ -2201,20 +2198,20 @@
     \group_insert_after:N \xpg@pop@language
   }
   % Register the language options
-  \polyglossia@set@lang@options:nnn {#3} {#2} {@xpg@set@langvariant}%
+  \polyglossia@set@lang@options:nnn {#3} {#2} {@xpg@set@langvariant}
   % The starred variant does not write to the aux
   \IfBooleanTF#1{%
-    \xpg@set@language@nonaux[#2]{#3}%
+    \xpg@set@language@nonaux[#2]{#3}
   }
-  {%
-    \xpg@set@language@aux[#2]{#3}%
-  }%
+  {
+    \xpg@set@language@aux[#2]{#3}
+  }
   \sys_if_engine_luatex:T
   {
     \directlua{polyglossia.select_language('\luatexluaescapestring{\string#3}',
-      \the\csname l@#3\endcsname)}%
+      \the\csname l@#3\endcsname)}
   }
-  \polyglossia@register@language:nn{#2}{#3}%
+  \polyglossia@register@language:nn{#2}{#3}
 }
 \cs_generate_variant:Nn \polyglossia@select@language:nnn {
  nee, nne
@@ -2227,18 +2224,18 @@
   \tl_if_blank:nF {#2}
   {
     % If the optional argument sets a value for the key “variant”, copy it to xpg@langvariant
-    \clist_map_inline:nn { #2 } {%
+    \clist_map_inline:nn { #2 } {
       \xpg@parsevariantkeyvalue##1=#3:#1\relax
     }%
-    \polyglossia@set@keys:nn{#1}{#2}%
+    \polyglossia@set@keys:nn{#1}{#2}
   }
 }
 
 % Initialize default language options, so that
 % \iflanguageoption has the info it needs also
 % for default settings
-\newcommand*\xpg@initialize@gloss@options[2]{%
-   \polyglossia@set@lang@options:nnn {#1} {#2} {@xpg@set@langvariant}%
+\newcommand*\xpg@initialize@gloss@options[2]{
+   \polyglossia@set@lang@options:nnn {#1} {#2} {@xpg@set@langvariant}
 }
 
 % Record synonymous keyvals such as variant=us and variant=american
@@ -2254,11 +2251,11 @@
 
 % Patch xkeyval to record default values of keys
 \pretocmd{\XKV@define@default}{%
-   \csgdef{xpg@default@opt@\XKV@header #1}{#2}%
+   \csgdef{xpg@default@opt@\XKV@header #1}{#2}
 }{}{\xpg@warning{Patching xkeyval failed!}}
 
 % Helper to get and register option keyvals
-\def\xpg@parsevariantkeyvalue#1=#2@#3:#4\relax{%
+\def\xpg@parsevariantkeyvalue#1=#2@#3:#4\relax{
    \def\@tmpa{#1}
    \def\@tmpb{variant}
    % variant values are stored in specific macros
@@ -2267,8 +2264,8 @@
    \ifx\@tmpa\@tmpb\setkeys{#3}{#1=#2}\fi
    \tl_if_empty:nTF{#2}
       {
-        \ifcsdef{xpg@default@opt@KV@#4@#1}%
-           {\xpg@store@opt@keyval#1:\csuse{xpg@default@opt@KV@#4@#1}=:#4\relax}%
+        \ifcsdef{xpg@default@opt@KV@#4@#1}
+           {\xpg@store@opt@keyval#1:\csuse{xpg@default@opt@KV@#4@#1}=:#4\relax}
            {}%
       }
       { \xpg@store@opt@keyval#1:#2:#4\relax }
@@ -2276,7 +2273,7 @@
 
 % Store option keys and values
 % This strips trailing '=' from values.
-\def\xpg@store@opt@keyval#1:#2=:#3\relax{%
+\def\xpg@store@opt@keyval#1:#2=:#3\relax{
    \prop_if_exist:cF { xpg@current@options@#3 }
       { \prop_new:c {xpg@current@options@#3} }
    \prop_put:cnn { xpg@current@options@#3 }
@@ -2313,36 +2310,36 @@
 }
 
 % Test if option value is set
-\newcommand*\iflanguageoption[5]{%
-  \polyglossia@check@option@value:NNNTF{#1}{#2}{#3}{#4}{#5}%
+\newcommand*\iflanguageoption[5]{
+  \polyglossia@check@option@value:NNNTF{#1}{#2}{#3}{#4}{#5}
 }
 
 
 % Append any variant to csv list of variants
-\define@key{xpg@langvariant}{variant}{%
+\define@key{xpg@langvariant}{variant}{
   \clist_if_in:NeF \xpg@vloaded {#1}{
     \clist_gput_right:Ne \xpg@vloaded {#1}
   }
 }
 
 % Test if language is loaded
-\newcommand*\iflanguageloaded[3]{%
-   \AddToHook{begindocument/end}{%
-     \clist_if_in:NeTF \xpg@loaded{#1}{#2}{#3}%
-   }%
+\newcommand*\iflanguageloaded[3]{
+   \AddToHook{begindocument/end}{
+     \clist_if_in:NeTF \xpg@loaded{#1}{#2}{#3}
+   }
 }
 
 % Same for babellanguage is loaded
-\newcommand*\ifbabellanguageloaded[3]{%
-  \AddToHook{begindocument/end}{%
-     \clist_if_in:NeTF \xpg@bloaded{#1}{#2}{#3}%
-  }%
+\newcommand*\ifbabellanguageloaded[3]{
+  \AddToHook{begindocument/end}{
+     \clist_if_in:NeTF \xpg@bloaded{#1}{#2}{#3}
+  }
 }
 
 % Same for languageid
 \DeclareDocumentCommand \iflanguageidloaded {mmmm}
 {
-  \AddToHook{begindocument/end}{%
+  \AddToHook{begindocument/end}{
     \str_case:nnTF {#1}
       {
         {bcp-47}    { \clist_if_in:NeTF \xpg@bcp@loaded{#2}{#3}{#4} }
@@ -2379,73 +2376,73 @@
 }
 
 % Test if a char (by char code) is available in the current font
-\newcommand*\xpg@if@char@available[3]{%
-  \polyglossia@check@if@char@available:NTF{#1}{#2}{#3}%
+\newcommand*\xpg@if@char@available[3]{
+  \polyglossia@check@if@char@available:NTF{#1}{#2}{#3}
 }
 
-\newcommand*\charifavailable[2]{%
-   \xpg@if@char@available{#1}{\char"#1}{#2}%
-}
-
-
-\newcommand*{\xpg@set@language@nonaux}[2][]{%
-   \@select@language[#1]{#2}%
+\newcommand*\charifavailable[2]{
+   \xpg@if@char@available{#1}{\char"#1}{#2}
 }
 
 
-\newcommand*{\xpg@set@language@aux}[2][]{%
+\newcommand*{\xpg@set@language@nonaux}[2][]{
+   \@select@language[#1]{#2}
+}
+
+
+\newcommand*{\xpg@set@language@aux}[2][]{
    % Store babelname of current language (for external packages such as biblatex)
-   \tl_if_blank:nTF {#1}{%
-     \ifcsundef{#2@gbabelname}{%
-        \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
-     }{%
-        \edef\babelname{\csuse{#2@gbabelname}}%
-     }%
-   }{%
-     \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}%
-   }%
+   \tl_if_blank:nTF {#1}{
+     \ifcsundef{#2@gbabelname}{
+        \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}
+     }{
+        \edef\babelname{\csuse{#2@gbabelname}}
+     }
+   }{
+     \edef\babelname{\prop_item:Nn{\polyglossia@langsetup}{#2/babelname}}
+   }
    % Store BCP-47 id of current language
-   \__xpg_store_bcp_info:nn {#1}{#2}%
-   \@select@language[#1]{#2}%
+   \__xpg_store_bcp_info:nn {#1}{#2}
+   \@select@language[#1]{#2}
     % Write to the aux
-   \xpg@set@language@only@aux[#1]{#2}%
+   \xpg@set@language@only@aux[#1]{#2}
 }
 
-\newcommand*{\xpg@set@language@only@aux}[2][]{%
+\newcommand*{\xpg@set@language@only@aux}[2][]{
     % Write to the aux (toc files)
-   \if@filesw%
-      \ifx#1\\\\%
-          \addtocontents{toc}{\protect\selectlanguage*{#2}}%
+   \if@filesw
+      \ifx#1\\\\
+          \addtocontents{toc}{\protect\selectlanguage*{#2}}
        \else
-          \addtocontents{toc}{\protect\selectlanguage*[#1]{#2}}%
+          \addtocontents{toc}{\protect\selectlanguage*[#1]{#2}}
        \fi
    \fi
 }
 
-\AtBeginDocument{%
+\AtBeginDocument{
    % Tell polyglossia that we are in an aux file
-   \if@filesw%
-      \addtocontents{toc}{\protect\xpginauxfiletrue}%
-      \addtocontents{lof}{\protect\xpginauxfiletrue}%
-      \addtocontents{lot}{\protect\xpginauxfiletrue}%
-   \fi%
+   \if@filesw
+      \addtocontents{toc}{\protect\xpginauxfiletrue}
+      \addtocontents{lof}{\protect\xpginauxfiletrue}
+      \addtocontents{lot}{\protect\xpginauxfiletrue}
+   \fi
 }
 
-\AtEndDocument{%
+\AtEndDocument{
    % Tell polyglossia that we are no longer in an aux file
-   \if@filesw%
-      \addtocontents{toc}{\protect\xpginauxfilefalse}%
-      \addtocontents{lof}{\protect\xpginauxfilefalse}%
-      \addtocontents{lot}{\protect\xpginauxfilefalse}%
-   \fi%
+   \if@filesw
+      \addtocontents{toc}{\protect\xpginauxfilefalse}
+      \addtocontents{lof}{\protect\xpginauxfilefalse}
+      \addtocontents{lot}{\protect\xpginauxfilefalse}
+   \fi
 }
 
 % Since captions might float to other language regions,
 % we need to change the language here (#542)
-\AddToHook{cmd/caption/before}{%
-    \ifhmode\unskip\fi%
-    \addtocontents{lof}{\protect\setforeignlanguage{\languagename}}%
-    \addtocontents{lot}{\protect\setforeignlanguage{\languagename}}%
+\AddToHook{cmd/caption/before}{
+    \ifhmode\unskip\fi
+    \addtocontents{lof}{\protect\setforeignlanguage{\languagename}}
+    \addtocontents{lot}{\protect\setforeignlanguage{\languagename}}
 }
 
 % The bidi package swaps the output stream within RTL tables
@@ -2454,14 +2451,14 @@
 % We therefore patch bidi and insert a bool that tells us
 % whether we are in such a table.
 \newbool{xpg@inbiditable}
-\AtBeginDocument{%
-  \@ifpackageloaded{bidi}{%
-     \patchcmd{\@tabular}%
-               {\if@RTLtab}%
-               {\if@RTLtab\booltrue{xpg@inbiditable}}%
-               {}% success
-               {\xpg@warning{Patching bidi table failed!}}%
-  }{}%
+\AtBeginDocument{
+  \@ifpackageloaded{bidi}{
+     \patchcmd{\@tabular}
+               {\if@RTLtab}
+               {\if@RTLtab\booltrue{xpg@inbiditable}}
+               {} % success
+               {\xpg@warning{Patching bidi table failed!}}
+  }{}
 }
 
 % check if language is defined
@@ -2484,7 +2481,7 @@
     }
 }
 
-\def\polyglossia@luatex@load@lang#1{%
+\def\polyglossia@luatex@load@lang#1{
   % if \l@#1 is not properly defined, call lua function newloader(#1),
   % and assign the returned number to \l@#1
   \__xpg_check_if_exist_l@:NF {#1}
@@ -2496,34 +2493,34 @@
 
 % This check is also used by biblatex, so don't
 % rename silently.
-\newcommand\xpg@ifdefined[3]{%
+\newcommand\xpg@ifdefined[3]{
   % With luatex, we first need to define \l@#1.
   \sys_if_engine_luatex:T
   {
-    \polyglossia@luatex@load@lang{#1}%
+    \polyglossia@luatex@load@lang{#1}
   }
-  \__xpg_check_if_exist_l@:NTF{#1}{#2}{#3}%
-}%
+  \__xpg_check_if_exist_l@:NTF{#1}{#2}{#3}
+}
 
 % Set \bbl@hyphendata@\the\language, which is (lua)babel's
 % hyphenation pattern hook
 % FIXME Clarifiy why/when this is needed.
-\newcommand*\xpg@set@bbl@hyphendata[1]{%
+\newcommand*\xpg@set@bbl@hyphendata[1]{
   \sys_if_engine_luatex:T
   {
-    \ifcsdef{bbl@hyphendata@#1}{}{%
-      \global\@namedef{bbl@hyphendata@\the\language}{}%
-    }%
+    \ifcsdef{bbl@hyphendata@#1}{}{
+      \global\@namedef{bbl@hyphendata@\the\language}{}
+    }
   }
 }
 
 % Set hyphenation patterns for a given language. This does the right
 % thing both for XeTeX and LuaTeX
-\newcommand*\xpg@set@hyphenation@patterns[1]{%
+\newcommand*\xpg@set@hyphenation@patterns[1]{
   \str_case_e:nnF{\c_sys_engine_str}{
       {luatex}
         {
-          \polyglossia@luatex@load@lang{#1}%
+          \polyglossia@luatex@load@lang{#1}
           \language=\csname l@#1\endcsname
         }
       {xetex}
@@ -2533,7 +2530,7 @@
     }
     {
       \xpg@warning{You’re~running~a~TeX~engine~that~is~not~LuaTeX~or~XeTeX.\MessageBreak
-        That~is~almost~guaranteed~to~cause~problems.}%
+        That~is~almost~guaranteed~to~cause~problems.}
     }
 }
 
@@ -2546,20 +2543,20 @@
    \select@@language[#1]{#2}%
    % Hook for external packages such as biblatex
    \polyglossia@language@switched%
-   \polyglossia@lang@setpardirection:n{#2}%
+   \polyglossia@lang@setpardirection:n{#2}
    \csuse{captions#2}%
    \csuse{date#2}%
    % These are hooks for external packages which want to access variants
    % via babelname (such as biblatex)
-   \cs_if_exist_use:c{captions@bbl@\babelname}%
-   \cs_if_exist_use:c{date@bbl@\babelname}%
-   \polyglossia@local@marks:n{#2}%
+   \cs_if_exist_use:c{captions@bbl@\babelname}
+   \cs_if_exist_use:c{date@bbl@\babelname}
+   \polyglossia@local@marks:n{#2}
    \csuse{init@extras@#2}%
-   \polyglossia@lang@indentfirst:n{#2}%
+   \polyglossia@lang@indentfirst:n{#2}
    \csuse{blockextras@#2}%
    % This is a hook for external packages which want to access variants
    % via babelname (such as biblatex)
-   \cs_if_exist_use:c{blockextras@bbl@\babelname}%
+   \cs_if_exist_use:c{blockextras@bbl@\babelname}
  }
 
 % hook for compatibility with biblatex
@@ -2584,22 +2581,22 @@
 \newcommand{\select@@language}[2][]{%
   % disable the extras and number settings of the previous language
   \cs_if_exist:cT{languagename}
-  {%
-    \noextrascurrent{\languagename}%
-    \cs_if_exist_use:c{no\languagename @numbers}%
+  {
+    \noextrascurrent{\languagename}
+    \cs_if_exist_use:c{no\languagename @numbers}
     \sys_if_engine_xetex:T{
       \__xpg_if_LR_str:eTF{\prop_item:Ne{\polyglossia@langsetup}{\languagename/direction}}
       {
         \__xpg_if_LR_str:eF{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}
-          {\setnonlatin}% LTR -> RTL
-      }%
-      {%
+          {\setnonlatin} % LTR -> RTL
+      }
+      {
         \__xpg_if_LR_str:eT{\prop_item:Nn{\polyglossia@langsetup}{#2/direction}}
-          {\setlatin}% RTL -> LTR
+          {\setlatin} % RTL -> LTR
       }
     }
-  }%
-  \polyglossia@set@language@name[#1]{#2}%
+  }
+  \polyglossia@set@language@name[#1]{#2}
   % Set the language's/script's font families
   \str_if_eq:eeT{\prop_item:Nn{\polyglossia@langsetup}{#2/lcscript}} {latin}
   {
@@ -2608,12 +2605,12 @@
   \bool_if:NF \__xpg_inline_lang
   { % This for non-inline font switches
     % in case a \<lang>font is defined
-    \xpg@set@normalfont{#2}%
+    \xpg@set@normalfont{#2}
   }
-  \xpg@select@fontfamily{#2}%
-  \__xpg_use_or_warn:c{#2@language}%
-  \cs_if_exist_use:c{#2@numbers}%
-  \use@localhyphenmins[#1]{#2}%
+  \xpg@select@fontfamily{#2}
+  \__xpg_use_or_warn:c{#2@language}
+  \cs_if_exist_use:c{#2@numbers}
+  \use@localhyphenmins[#1]{#2}
   \polyglossia@lang@frenchspacing:n{#2}
 }
 
@@ -2654,7 +2651,7 @@
 }
 
 \renewenvironment{otherlanguage}[2][]
-{%
+{
   % Get real current (pre-switch) options (incl. defaults)
   \clist_clear_new:N \l_xpg_current_options
   \prop_map_inline:cn {xpg@current@options@\languagename}
@@ -2662,25 +2659,25 @@
       \clist_put_right:Nn \l_xpg_current_options {##1=##2}
   }
   % Store current (pre-switch) options and language on stack
-  \polyglossia@stack@language:nx{\clist_use:Nn \l_xpg_current_options {,}}{\languagename}%
-  \selectlanguage[#1]{#2}%
+  \polyglossia@stack@language:nx{\clist_use:Nn \l_xpg_current_options {,}}{\languagename}
+  \selectlanguage[#1]{#2}
 }
-{%
+{
    % restore previous language in aux file and remove closed one from stack
-   \polyglossia@unstack@language:n{xpg@set@language@only@aux}%
+   \polyglossia@unstack@language:n{xpg@set@language@only@aux}
 }
 
-\newcommand{\setlocalhyphenmins}[3]{%
-   \xpg@ifdefined{#1}{%
-      \expandafter\ifx\csname l@#1\endcsname\l@nohyphenation%
-        \xpg@warning{\string\setlocalhyphenmin\space~ useless~ for~ unhyphenated~ language~ #1}%
+\newcommand{\setlocalhyphenmins}[3]{
+   \xpg@ifdefined{#1}{
+      \expandafter\ifx\csname l@#1\endcsname\l@nohyphenation
+        \xpg@warning{\string\setlocalhyphenmin\space~ useless~ for~ unhyphenated~ language~ #1}
       \else
-      \providehyphenmins{#1}{#2#3}%
+      \providehyphenmins{#1}{#2#3}
       \fi
-   }{%
-     \xpg@warning{\string\setlocalhyphenmin\space~ useless~ for~ unknown~ language~ #1}%
-   }%
-}%
+   }{
+     \xpg@warning{\string\setlocalhyphenmin\space~ useless~ for~ unknown~ language~ #1}
+   }
+}
 
 % \setlanghyphenmins[options]{lang}{l}{r}
 \newcommand*\setlanghyphenmins[4][]{%
@@ -2689,54 +2686,54 @@
   \edef\xpg@tmp@lang{\xpg_alias_base_lang:n{#2}}
   \bgroup
   \polyglossia@error@iflangnotloaded:n{\xpg@tmp@lang}
-  \polyglossia@set@keys:nn{\xpg@tmp@lang}{\xpg@tmp@opts}%
+  \polyglossia@set@keys:nn{\xpg@tmp@lang}{\xpg@tmp@opts}
   % Store bcp47.tag@hypenmins
   \tl_if_blank:nTF {\xpg@tmp@opts}{%
-    \ifcsundef{\csname xpg@tmp@lang\endcsname @g.bcp47.tag}{%
-       \csedef{tmp@bcp47.tag}{\prop_item:Ne{\polyglossia@langsetup}{ \xpg@tmp@lang / bcp47 }}%
-    }{%
-       \csedef{tmp@bcp47.tag}{\csuse{#2@g.bcp47.tag}}%
-    }%
-  }{%
-    \csedef{tmp@bcp47.tag}{\prop_item:Ne{\polyglossia@langsetup}{ \xpg@tmp@lang / bcp47 }}%
-  }%
-  \csgdef{\csname tmp@bcp47.tag\endcsname @hyphenmins}{{#3}{#4}}%
+    \ifcsundef{\csname xpg@tmp@lang\endcsname @g.bcp47.tag}{
+       \csedef{tmp@bcp47.tag}{\prop_item:Ne{\polyglossia@langsetup}{ \xpg@tmp@lang / bcp47 }}
+    }{
+       \csedef{tmp@bcp47.tag}{\csuse{#2@g.bcp47.tag}}
+    }
+  }{
+    \csedef{tmp@bcp47.tag}{\prop_item:Ne{\polyglossia@langsetup}{ \xpg@tmp@lang / bcp47 }}
+  }
+  \csgdef{\csname tmp@bcp47.tag\endcsname @hyphenmins}{{#3}{#4}}
   \egroup
 }
 
 % \use@localhypenmins[options]{lang}
-\newcommand*\use@localhyphenmins[2][]{%
+\newcommand*\use@localhyphenmins[2][]{
   \bgroup
   \polyglossia@error@iflangnotloaded:n{#2}
-  \polyglossia@set@keys:nn{#2}{#1}%
+  \polyglossia@set@keys:nn{#2}{#1}
   % Use bcp47.tag@hypenmins
-  \tl_if_blank:nTF {#1}{%
-    \ifcsundef{#2@g.bcp47.tag}{%
-       \csxdef{tmp@bcp47.tag}{\prop_item:Nn{\polyglossia@langsetup}{ #2 / bcp47 }}%
-    }{%
-       \csxdef{tmp@bcp47.tag}{\csuse{#2@g.bcp47.tag}}%
-    }%
-  }{%
-    \csxdef{tmp@bcp47.tag}{\prop_item:Nn{\polyglossia@langsetup}{ #2 / bcp47 }}%
-  }%
+  \tl_if_blank:nTF {#1}{
+    \ifcsundef{#2@g.bcp47.tag}{
+       \csxdef{tmp@bcp47.tag}{\prop_item:Nn{\polyglossia@langsetup}{ #2 / bcp47 }}
+    }{
+       \csxdef{tmp@bcp47.tag}{\csuse{#2@g.bcp47.tag}}
+    }
+  }{
+    \csxdef{tmp@bcp47.tag}{\prop_item:Nn{\polyglossia@langsetup}{ #2 / bcp47 }}
+  }
   \egroup
-  \ifcsundef{\csname tmp@bcp47.tag\endcsname @hyphenmins}{%
-     \ifcsundef{#2hyphenmins}{}%
-        {%
-          \expandafter\expandafter\expandafter\set@hyphenmins\csname #2hyphenmins\endcsname\relax%
+  \ifcsundef{\csname tmp@bcp47.tag\endcsname @hyphenmins}{
+     \ifcsundef{#2hyphenmins}{}
+        {
+          \expandafter\expandafter\expandafter\set@hyphenmins\csname #2hyphenmins\endcsname\relax
         }
-   }{%
-      \edef\tmpa{\csuse{\csname tmp@bcp47.tag\endcsname @hyphenmins}}%
-      \expandafter\expandafter\expandafter\set@hyphenmins\tmpa\relax%
+   }{
+      \edef\tmpa{\csuse{\csname tmp@bcp47.tag\endcsname @hyphenmins}}
+      \expandafter\expandafter\expandafter\set@hyphenmins\tmpa\relax
    }
    \sys_if_engine_luatex:T{
      % Set \totalhyphenmin if specified
      \prop_get:NxNTF \polyglossia@langsetup {#2/totalhyphenmin} \l_tmpa_tl
      {
         \xpg@info{totalhyphenmin: '\l_tmpa_tl'}
-        \expandafter\hyphenationmin \l_tmpa_tl%
-     }%
-     {}%
+        \expandafter\hyphenationmin \l_tmpa_tl
+     }
+     {}
    }
 }
 
@@ -2748,26 +2745,26 @@
 % As opposed to the one inherited from switch.def/babel, our environment
 % supports language options and aliases.
 \renewenvironment{hyphenrules}[2][]
-{%
+{
   % Check for real language name and options
   \edef\xpg@tmp@opts{\xpg_alias_add_to_option_i:nn{#2}{#1}}
   \edef\xpg@tmp@lang{\xpg_alias_base_lang:n{#2}}
   % Register the language options
-  \polyglossia@set@lang@options:nnn {\xpg@tmp@lang} {\xpg@tmp@opts} {@xpg@set@langvariant}%
+  \polyglossia@set@lang@options:nnn {\xpg@tmp@lang} {\xpg@tmp@opts} {@xpg@set@langvariant}
   % Now switch patterns
-  \__xpg_use_or_warn:c{\use:c{xpg@tmp@lang}@language}%
+  \__xpg_use_or_warn:c{\use:c{xpg@tmp@lang}@language}
   % And activate hyphenmins
-  \use@localhyphenmins[\xpg@tmp@opts]{\xpg@tmp@lang}%
+  \use@localhyphenmins[\xpg@tmp@opts]{\xpg@tmp@lang}
 }
 {}
 
-\AtEndPreamble{%
-   \@ifpackageloaded{bidi}{%
-      \providecommand*{\aemph}[1]{$\overline{\hboxR{#1}}$}%
-   }{}%
-   \@ifpackageloaded{luabidi}{%
-      \providecommand*{\aemph}[1]{$\overline{\hbox{\RL{#1}}}$}%
-   }{}%
+\AtEndPreamble{
+   \@ifpackageloaded{bidi}{
+      \providecommand*{\aemph}[1]{$\overline{\hboxR{#1}}$}
+   }{}
+   \@ifpackageloaded{luabidi}{
+      \providecommand*{\aemph}[1]{$\overline{\hbox{\RL{#1}}}$}
+   }{}
 }
 
 
@@ -2823,11 +2820,11 @@
 }
 
 \bool_if:nF \l_polyglossia_verbose_bool {
-   \gdef\@latex@info#1{\relax}% no latex info
-   \gdef\@font@info#1{\relax}% no latex font info
-   \gdef\@font@warning#1{\relax}% no latex font warnings
-   \gdef\zf@PackageInfo#1{\relax}% no fontspec info
-   \gdef\xpg@info#1{\relax}% no polyglossia info
+   \gdef\@latex@info#1{\relax} % no latex info
+   \gdef\@font@info#1{\relax} % no latex font info
+   \gdef\@font@warning#1{\relax} % no latex font warnings
+   \gdef\zf@PackageInfo#1{\relax} % no fontspec info
+   \gdef\xpg@info#1{\relax} % no polyglossia info
 }
 
 \bool_if:nT \l_polyglossia_localmarks_bool {
@@ -2868,8 +2865,8 @@
 
 %
 % FIXME these should also be loaded \AtEndOfPackage !!!
-\def\xpg@option#1#2{%
-  \ifcsundef{xpg@main@language}{\setdefaultlanguage}{\setotherlanguage}%
+\def\xpg@option#1#2{
+  \ifcsundef{xpg@main@language}{\setdefaultlanguage}{\setotherlanguage}
     [#1]{#2}}
 \ExplSyntaxOff
 
