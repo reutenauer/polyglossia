@@ -33,10 +33,10 @@
 \define@choicekey*+{hebrew}{calendar}[\xpg@val\xpg@nr]{hebrew,gregorian}[gregorian]{%
    \ifcase\xpg@nr\relax
       % hebrew:
-      \@calendar@hebrewtrue%
+      \@calendar@hebrewtrue
    \or
       % gregorian:
-      \@calendar@hebrewfalse%
+      \@calendar@hebrewfalse
    \fi
    \xpg@info{Option: Hebrew, calendar=\xpg@val}%
 }{\xpg@warning{Unknown Hebrew calendar `#1'}}
@@ -45,11 +45,11 @@
 \define@choicekey*+{hebrew}{numerals}[\xpg@val\xpg@nr]{hebrew,arabic}[arabic]{%
    \ifcase\xpg@nr\relax
       % hebrew:
-      \@hebrew@numeralstrue%
+      \@hebrew@numeralstrue
       \SetLanguageKeys{hebrew}{bcp47-extension-u=nu-hebr}%
    \or
       % arabic:
-      \@hebrew@numeralsfalse%
+      \@hebrew@numeralsfalse
       \SetLanguageKeys{hebrew}{bcp47-extension-u=nu-latn}%
    \fi
    \xpg@info{Option: Hebrew, numerals=\xpg@val}%
@@ -81,18 +81,18 @@
   \def\psname{נ.ב.}%
   \def\seename{ראה}%
   \def\alsoname{ראה גם}% check
-  \def\proofname{הוכחה}
+  \def\proofname{הוכחה}%
   \def\glossaryname{מילון מונחים}% check
 }
 \def\datehebrew{%
   \def\today{%
-    \if@calendar@hebrew%
-      \hebrewtoday%
-    \else%
-      \hebrewnumber\day%
-      \space ב\hebrewgregmonth{\month}\space%
-      \hebrewnumber\year%
-     \fi%
+    \if@calendar@hebrew
+      \hebrewtoday
+    \else
+      \hebrewnumber\day
+      \space ב\hebrewgregmonth{\month}\space
+      \hebrewnumber\year
+     \fi
   }%
 }
 
@@ -119,7 +119,7 @@
   % Bidi inserts an RTL mark (0x200f) between number and number separator (- .),
   % forcing numbers to RTL. This is wrong for Hebrew.
   % So we defunc the respective command with XeTeX.
-  \let\xpg@orig@DigitsDotDashInterCharToks\DigitsDotDashInterCharToks%
+  \let\xpg@orig@DigitsDotDashInterCharToks\DigitsDotDashInterCharToks
 
   \def\hebrew@ltr@numbers{%
     \renewcommand*{\DigitsDotDashInterCharToks}{}%
@@ -127,7 +127,7 @@
 
   \def\nohebrew@ltr@numbers{%
     % Restore bidi's \DigitsDotDashInterCharToks
-    \let\DigitsDotDashInterCharToks\xpg@orig@DigitsDotDashInterCharToks%
+    \let\DigitsDotDashInterCharToks\xpg@orig@DigitsDotDashInterCharToks
   }
 \else
   % Only dummy commands (nothing to do here) for LuaTeX
@@ -136,31 +136,31 @@
 \fi%
 
 \def\hebrew@numbers{%
-   \let\@alph\hebrewnumeral%
-   \let\@Alph\Hebrewnumeral%
+   \let\@alph\hebrewnumeral
+   \let\@Alph\Hebrewnumeral
    % Prevent bidi from setting the numbers RTL
-   \hebrew@ltr@numbers%
+   \hebrew@ltr@numbers
 }
 
 \def\nohebrew@numbers{%
-  \let\@alph\latin@alph%
-  \let\@Alph\latin@Alph%
+  \let\@alph\latin@alph
+  \let\@Alph\latin@Alph
   % Restore previous bidi numbers definition
-  \nohebrew@ltr@numbers%
+  \nohebrew@ltr@numbers
 }
 
 \def\hebrew@globalnumbers{%
-   \let\@arabic\hebrewnumber%
+   \let\@arabic\hebrewnumber
    \renewcommand\thefootnote{\localnumeral*{footnote}}%
    % Prevent bidi from setting the numbers RTL
-   \hebrew@ltr@numbers%
+   \hebrew@ltr@numbers
 }
 
 % Store original definition
 \let\xpg@save@arabic\@arabic
 
 \def\nohebrew@globalnumbers{%
-  \let\@arabic\xpg@save@arabic%
+  \let\@arabic\xpg@save@arabic
 }
 
 \endinput
