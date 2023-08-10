@@ -1333,7 +1333,7 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 	\end{itemize}
 \paragraph*{Commands:}
 	\begin{itemize}
-	\item \Cmd\Greeknumber and \Cmd\greeknumber \ (see section \ref{abjad}).
+	\item \Cmd\Greeknumeral (= \Cmd\Greeknumber) and \Cmd\greeknumeral (= \Cmd\greeknumber) \ (see section \ref{abjad}).
 	\item The command \Cmd\atticnumeral (= \Cmd\atticnum) (activated with
 	  the option ¦attic=true¦), displays numbers using the acrophonic
           numbering system (defined in the Unicode range
@@ -2620,6 +2620,20 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \section{Revision history}
 
 \bgroup\footnotesize
+\subsection*{1.65 (forthcoming)}
+
+\subsubsection*{Bug fixes}
+\begin{itemize}
+	\item Fix spurious space in Hebrew captions (\TXP{601}).
+\end{itemize}
+
+\subsubsection*{Documentation improvements}
+\begin{itemize}
+	\item Refer to \cmd{\greeknumeral} and \cmd{\Greeknumeral} rather than to
+	      the synonyms \cmd{\greeknumber} and \cmd{\Greeknumber} (\TXI{602}).
+\end{itemize}
+
+
 \subsection*{1.64 (2023/07/21)}
 
 \subsubsection*{Bug fixes}
