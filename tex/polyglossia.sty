@@ -2148,10 +2148,10 @@
       \polyglossia@lang@settextdirection:nn{#3}{#4}
     \group_end:
     % Reset the language's/script's font families if the embedding script is latin
-    \str_if_eq:eeTF{\prop_item:Ne{\polyglossia@langsetup}{\languagename/lcscript}}{latin}
-         {\resetfontlatin
-          \xpg@set@normalfont{\xpg@save@languagename}}
-         {}
+    \str_if_eq:eeT{\prop_item:Ne{\polyglossia@langsetup}{\xpg@save@languagename/lcscript}}{latin}
+         {\resetfontlatin}
+    % In case a \<lang>font is defined, re-activate that
+    \xpg@set@normalfont{\xpg@save@languagename}
   }
 }
 \cs_generate_variant:Nn \__xpg_textlanguage:nnnn {nnen}
