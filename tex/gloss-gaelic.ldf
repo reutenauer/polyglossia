@@ -1,4 +1,4 @@
-% Language definition file (part of polyglossia v1.64 -- 2023/07/21)
+% Language definition file (part of polyglossia v1.65 -- 2023/10/01)
 %
 \ProvidesFile{gloss-gaelic.ldf}[polyglossia: module for Gaelic]
 
