@@ -1,0 +1,16 @@
+; FC ... 
+LHSName	"Digits"
+RHSName	"OdiaDigits"
+
+pass(Unicode)
+U+0030 <> U+0B66 ;
+U+0031 <> U+0B67 ;
+U+0032 <> U+0B68 ;
+U+0033 <> U+0B69 ;
+U+0034 <> U+0B6A ;
+U+0035 <> U+0B6B ;
+U+0036 <> U+0B6C ;
+U+0037 <> U+0B6D ;
+U+0038 <> U+0B6E ;
+U+0039 <> U+0B6F ;
+
