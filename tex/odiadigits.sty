@@ -1,0 +1,13 @@
+\ProvidesPackage{odiadigits}
+  [2023/09/14 v.01%
+   Formatting of Odia digits]
+
+\def\odiadigits#1{\expandafter\@odia@digits #1@}
+\def\@odia@digits#1{%
+  \ifx @#1% terminate
+  \else
+    \ifcase#1୦\or୧\or୨\or୩\or୪\or୫\or୬\or୭\or୮\or୯\fi
+    \expandafter\@odia@digits
+  \fi
+}
+\endinput
