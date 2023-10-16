@@ -23,7 +23,7 @@
 }
 
 % BCP-47 compliant aliases
-\setlanguagealias*{odia}{bn}
+\setlanguagealias*{odia}{or}
 
 
 %Adapted from gloss-bengali.ldf 
