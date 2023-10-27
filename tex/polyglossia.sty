@@ -416,7 +416,7 @@
        .code:n = {
           \prop_gput:Nnn{\polyglossia@langsetup}{#1/script}{##1}
           \prop_gput:Nnx{\polyglossia@langsetup}{#1/lcscript}
-               {\tl_if_empty:nF{##1}{\str_lowercase:n##1}}
+               {\tl_if_empty:nF{##1}{\str_lowercase:n{##1}}}
     },
     #1 / script
        .value_required:n = true,
