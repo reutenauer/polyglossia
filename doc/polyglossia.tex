@@ -254,29 +254,29 @@ that are explained in section \ref{specific} below.
 
 \begin{table}[ht]\centering
 \caption{\label{tab:lang}Languages currently supported in \pkg{polyglossia}}
-% Produced with tools/insert-language-list.rb -- JS, 2022-11-23
-% Edited by hand -- JS, 2022-11-23
+% Produced with tools/insert-language-list.rb -- JS, 2023-11-06
 \begin{tabular}{lllll}
 	\toprule
-	\TX{afrikaans}	& danish		& icelandic		& nko			& \TX{spanish}	\\
-	albanian		& divehi		& interlingua	& \TX{norwegian}& swedish		\\
-	amharic			& \TX{dutch}	& \TX{italian}	& occitan		& \TX{syriac}	\\
-	\TX{arabic}		& \TX{english}	& japanese		& \TX{persian}	& tamil			\\
-	\TX{armenian}	& \TX{esperanto}& kannada		& piedmontese	& telugu		\\
-	asturian		& estonian		& khmer			& \TX{polish}	& \TX{thai}		\\
-	basque			& \TX{finnish}	& \TX{korean}	&\TX{portuguese}& \TX{tibetan}	\\
-	\TX{belarusian}	& \TX{french}	& \TX{kurdish}	& \TX{punjabi}	& turkish		\\
-	\TX{bengali}	& friulian		& \TX{lao}		& romanian		& turkmen		\\
-	bosnian			& \TX{gaelic}	& \TX{latin}	& romansh		& \TX{ukrainian}\\
-	breton			& galician		& latvian		& \TX{russian}	& \TX{urdu}		\\
-	bulgarian		& \TX{georgian}	& lithuanian	& \TX{sami}		& \TX{uyghur}	\\
-	\TX{catalan}	& \TX{german}	& macedonian	& \TX{sanskrit}	& vietnamese	\\
-	\TX{chinese}	& \TX{greek}	& \TX{malay}	& \TX{serbian}	& \TX{welsh}	\\
-	coptic			& \TX{hebrew}	& malayalam		& \TX{slovak}	& 				\\
-	\TX{croatian}	& \TX{hindi}	& \TX{marathi}	& \TX{slovenian}& 				\\
-	\TX{czech}		& \TX{hungarian}& \TX{mongolian}& \TX{sorbian}	& 				\\
+	\TX{afrikaans} & danish       & icelandic          & nko    & \TX{sorbian}\\
+	albanian         & divehi       & interlingua & \TX{norwegian} & \TX{spanish}\\
+	amharic        & \TX{dutch} & \TX{italian} & occitan        & swedish       \\
+	\TX{arabic} & \TX{english} & japanese         & \TX{odia}          & \TX{syriac}\\
+	\TX{armenian} & \TX{esperanto} & kannada        & \TX{persian} & tamil     \\
+	asturian         & estonian         & khmer      & piedmontese & telugu      \\
+	basque       & \TX{finnish} & \TX{korean} & \TX{polish} & \TX{thai}         \\
+	\TX{belarusian} & \TX{french} & \TX{kurdish} & \TX{portuguese} & \TX{tibetan}\\
+	\TX{bengali} & friulian         & \TX{lao}         & \TX{punjabi} & turkish       \\
+	bosnian        & \TX{gaelic} & \TX{latin} & romanian         & turkmen       \\
+	breton       & galician         & latvian        & romansh        & \TX{ukrainian}\\
+	bulgarian          & \TX{georgian} & lithuanian & \TX{russian} & \TX{urdu}         \\
+	\TX{catalan} & \TX{german} & macedonian & \TX{sami}          & \TX{uyghur}\\
+	\TX{chinese} & \TX{greek} & \TX{malay} & \TX{sanskrit} & vietnamese\\
+	coptic       & \TX{hebrew} & malayalam          & \TX{serbian} & \TX{welsh}\\
+	\TX{croatian} & \TX{hindi} & \TX{marathi} & \TX{slovak} & \\
+	\TX{czech} & \TX{hungarian} & \TX{mongolian} & \TX{slovenian} & \\
 	\bottomrule
 \end{tabular}
+
 \end{table}
 
 \paragraph{Version Notes} The support for Amharic\new{1.0.1} should be considered an experimental attempt to
@@ -302,6 +302,8 @@ been renamed (\emph{farsi}\textrightarrow\emph{persian}, \emph{friulan}\textrigh
 compatibility reasons.
 Version 1.46\new{1.46} introduces support for Afrikaans, Belarusian, Bosnian and Georgian.
 Version 1.52\new{1.52} introduces support for Uyghur.
+Version 1.59\new{1.59} adds support for (simplified and traditional) Chinese and for Punjabi.
+Version 1.66\new{1.66} introduces support for Odia.
 
 
 \subsection{Relation to and use of Babel language names}\label{sec:babelnames}
@@ -517,6 +519,7 @@ Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 	nl               & dutch       &                                                    \tabularnewline
 	nn               & norwegian   & variant=nynorsk [\emph{default}]                   \tabularnewline
 	oc               & occitan     &                                                    \tabularnewline
+	or               & odia        & changecounternumbering=false, numerals=Devanagari [\emph{default}] \tabularnewline
 	pa               & punjabi     & numerals=gurmukhi                                  \tabularnewline
 	pl               & polish      &                                                    \tabularnewline
 	pms              & piedmontese &                                                    \tabularnewline
@@ -1709,6 +1712,14 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 	\item \xpgchoicekey[1.45]{variant}{\xpgvalue{bokmal} or \xpgpresetvalue{nynorsk}}
 \end{itemize}
 
+\subsection[odia]{odia\new{1.66}}\label{odia}
+\paragraph*{Options:}
+\begin{itemize}
+	\item \xpgchoicekey{numerals}{\xpgvalue{western}, \xpgpresetvalue{devanagari}, or \xpgvalue{odia}}
+	\item \xpgboolkeyfalse{changecounternumbering}
+	Use specified numerals for headings and page numbers.
+\end{itemize}
+
 \subsection{persian}\label{persian}
 \paragraph*{Options:}
 \begin{itemize}
@@ -2345,6 +2356,7 @@ Currently, the following macros are provided:
 	\item \Cmd\khmerdigits
 	\item \Cmd\laodigits
 	\item \Cmd\nkodigits
+	\item \Cmd\odiadigits
 	\item \Cmd\thaidigits
 	\item \Cmd\tibetandigits
 \end{itemize}
@@ -2625,6 +2637,12 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \subsubsection*{Bug fixes}
 \begin{itemize}
 	\item Fix OpenType language and script tags in Chinese (\TXI{606}).
+\end{itemize}
+
+\subsubsection*{New Features}
+\begin{itemize}
+\item Add support for Odia, provided by \TA{Abhisek Jena}.
+\item New auxiliary package ¦odiadigits¦
 \end{itemize}
 
 \subsection*{1.65 (2023/10/01)}
@@ -3644,7 +3662,7 @@ And of course my gratitude also goes to \TA{Jonathan Kew}, the formidable author
 \section{More acknowledgements (by the current development team)}
 Many thanks to all the people who have contributed bugfixes and new features to \pkg{polyglossia}
 since we took over.
-In alphabetical order: \TA{Ignas Anikevicius}, \TA{Sina Ahmadi}, \TA{Wouter Bolsterlee}, \TA{Christian Buhtz},
+In alphabetical order: \TA{Abhisek Jena}, \TA{Ignas Anikevicius}, \TA{Sina Ahmadi}, \TA{Wouter Bolsterlee}, \TA{Christian Buhtz},
 \TA{Zgarbul Andrey}, \TA{Oleg Domanov}, user \TA{fakhriaunur}, \TA{Udi Fogiel}, \TA{Philipp Gesang}, \TA{Kevin Godby},
 \TA{Enrico Gregorio}, \TA{Khaled Hosny}, \TA{Najib Idrissi}, user \TA{julroy67}, \TA{Dohyun Kim}, \TA{Phil Kime},
 \TA{Mike Kroutikov}, \TA{Ivan Kokan}, \TA{Caleb Maclennan}, \TA{Gyula Magyarkuti}, \TA{José Mancera}, \TA{Miquel Ortega},
