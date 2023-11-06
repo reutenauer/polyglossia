@@ -1,0 +1,152 @@
+% Language definition file
+%
+% Translations provided by ଅଶୋକ ଦାସ୍ <das@pas.rochester.edu> and ଅଭିଷେକ ଜେନା <avisekjena@gmail.com>
+% TODO implement Odia calendar
+
+\ProvidesFile{gloss-odia.ldf}[polyglossia: module for Odia]
+
+\RequirePackage{devanagaridigits}
+\RequirePackage{odiadigits}
+
+\PolyglossiaSetup{odia}{
+  bcp47=or,
+  bcp47-language=or,
+  bcp47-script=Orya,
+  script=Odia,
+  scripttag=odia,
+  langtag=ODI,
+  hyphennames={odia},
+  hyphenmins={2,2},%CHECK
+  fontsetup=true,
+  localnumeral=odianumerals
+  %TODO nouppercase=true,
+}
+
+% BCP-47 compliant aliases
+\setlanguagealias*{odia}{or}
+
+
+%Adapted from gloss-bengali.ldf 
+
+\newif\ifodia@devanagari@numerals
+\newif\ifodia@odia@numerals
+\define@choicekey*+{odia}{numerals}[\xpg@val\xpg@nr]{Devanagari,Odia,Western}[Devanagari]{%
+   \ifcase\xpg@nr\relax
+      % Devanagari:
+      \odia@odia@numeralsfalse%
+      \odia@devanagari@numeralstrue%
+      \SetLanguageKeys{odia}{bcp47=or,bcp47-language=or,bcp47-extension-u=nu-deva}%
+   \or
+      % Odia:
+      \odia@odia@numeralstrue%
+      \odia@devanagari@numeralsfalse%
+   \or
+      % Western:
+      \odia@odia@numeralsfalse%
+      \odia@devanagari@numeralsfalse%
+      \SetLanguageKeys{odia}{bcp47=or,bcp47-language=or,bcp47-extension-u=nu-latn}%
+   \fi
+   \xpg@info{Option: Odia, numerals=\xpg@val}%
+}{\xpg@warning{Unknown Odia numeral `#1'}}
+
+\def\extras@odia{}
+\def\noextras@odia{}
+
+\define@boolkey{odia}[odia@]{changecounternumbering}[true]{}
+
+% Register default options
+\xpg@initialize@gloss@options{odia}{changecounternumbering=false,numerals=Devanagari}
+
+\def\captionsodia{%
+  \def\refname{ସନ୍ଦର୍ଭ}%
+  \def\abstractname{ସାରାଂଶ}%
+  \def\bibname{ସୂଚନା}%
+  \def\prefacename{ପ୍ରାରମ୍ଭ}%
+  \def\chaptername{ଅଧ୍ୟାୟ}%
+  \def\appendixname{ପରିଶିଷ୍ଟ}%
+  \def\contentsname{ସୁଚୀ ପତ୍ର}%
+  \def\listfigurename{ପ୍ରତିଛବି ତାଲିକା}%
+  \def\listtablename{ଟେବୁଲ ତାଲିକା}%
+  \def\indexname{ସୂଚକାଙ୍କ}%
+  \def\figurename{ପ୍ରତିଛବି}%
+  \def\tablename{ଟେବୁଲ୍}%
+  \def\partname{ବିଭାଗ}%
+  \def\pagename{ପୃଷ୍ଠା}%
+  \def\seename{ଦେଖନ୍ତୁ}%
+  \def\alsoname{ଅଧିକ ଦେଖନ୍ତୁ}%
+  \def\enclname{ସଂଲଗ୍ନ}%
+  \def\ccname{କପି କରନ୍ତୁ}%
+  \def\headtoname{ପ୍ରତି}%
+  \def\proofname{ପ୍ରମାଣ}%
+  \def\glossaryname{ଶବ୍ଦର ଶବ୍ଦକୋଷ}%
+}
+\def\dateodia{%
+  \def\odiamonth{%
+    \ifcase\month\or
+      ଜାନୁଆରୀ\or
+      ଫେବୃଆରୀ\or
+      ମାର୍ଚ୍ଚ\or
+      ଏପ୍ରିଲ୍\or
+      ମେ\or
+      ଜୁନ୍\or
+      ଜୁଲାଇ\or
+      ଅଗଷ୍ଟ\or
+      ସେପ୍ଟେମ୍ବର\or
+      ଅକ୍ଟୋବର\or
+      ନଭେମ୍ବର\or
+      ଡିସେମ୍ବର\fi}%
+  \def\today{\odianumber\day\space\odiamonth\space\odianumber\year}%
+}
+
+\newcommand{\odianumerals}[2]{\odianumber{#2}}
+
+\def\odianumber#1{%
+  \ifodia@devanagari@numerals
+    \devanagaridigits{\number#1}%
+  \else
+    \ifodia@odia@numerals
+      \odiadigits{\number#1}%
+    \else % Assumed Western
+      \number#1%
+    \fi
+  \fi%
+}
+
+\def\odia@globalnumbers{%
+   \ifodia@changecounternumbering
+     \let\@arabic\odianumber%
+     \renewcommand\thefootnote{\localnumeral*{footnote}}%
+  \fi
+}
+
+%Adapted from gloss-marathi.ldf 
+
+\def\odia@akshar#1{\ifcase#1\or ଅ\or ଆ\or ଇ\or ଈ\or ଉ\or ଊ\or ଋ\or ଏ\or ଐ\or ଓ\or ଔ\else\@ctrerr\fi}
+
+\def\odia@alph#1{%
+    \ifcase#1\or କ\or ଖ\or ଗ\or ଘ\or ଙ\or ଚ\or ଛ\or ଜ\or ଝ\or ଞ\or ଟ\or ଠ\or ଡ\or ଢ\or ଣ\or ତ\or ଥ\or ଦ%
+       \or ଧ\or ନ\or ପ\or ଫ\or ବ\or ଭ\or ମ\or ଯ\or ର\or ଲ\or ଳ\or ଶ\or ସ\or ଷ\or ହ\or କ୍ଷ \else\@ctrerr%
+    \fi%
+}
+
+\def\odia@numbers{%
+  \let\@alph\odia@alph
+  \let\@Alph\devanagari@letter
+  \let\@roman\odia@akshar
+  \let\@Roman\devanagari@letter
+}
+
+
+% Store original definition
+\let\xpg@save@arabic\@arabic
+
+\def\noodia@globalnumbers{%
+  \let\@arabic\xpg@save@arabic%
+}
+
+
+
+\def\blockextras@odia{\extras@odia}
+\def\inlineextras@odia{\extras@odia}
+
+\endinput

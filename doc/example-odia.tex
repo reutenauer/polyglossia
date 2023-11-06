@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{titletoc}
+
+\setdefaultlanguage{odia}
+\setmainfont[Script=Odia]{Noto Sans Oriya}
+\newfontfamily\odiafont[Script=Odia]{Noto Sans Oriya}
+\setdefaultlanguage[numerals=odia,changecounternumbering=true]{odia}
+
+\setotherlanguage{english}
+\newfontfamily\englishfont{Times New Roman}
+
+
+
+\setcounter{page}{1}\renewcommand{\thepage}{\alph{page}} %Not mandatory. Added to demonstrate the numbering using odia alphabets
+
+% If not mentioned or mentioned \arabic, it uses odia digits
+% If mentioned \alph, it uses series କ, ଖ, ଗ, ଘ .. 
+% If mentioned \roman, it uses series ଅ, ଆ, ଇ, ଈ ..
+
+
+\begin{document}
+
+
+\begin{titlepage}
+\begin{center}
+\Huge\bfseries ଉଦାହରଣ\\
+\textenglish {Example}
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+ 
+
+\section {\abstractname}
+ଏହି ପୃଷ୍ଠାଟି ଉଦ୍ଦେଶ୍ୟମୂଳକ ଭାବେ ଖାଲି ରଖାଯାଇଛି
+\clearpage
+\section{ଉଦ୍ଦେଶ୍ୟ}
+ଏହି ପୃଷ୍ଠାଟି ଉଦ୍ଦେଶ୍ୟମୂଳକ ଭାବେ ଖାଲି ରଖାଯାଇଛି
+\clearpage
+\section{ବିଶେଷ ଧନ୍ୟବାଦ}
+ଏହି ପୃଷ୍ଠାଟି ଉଦ୍ଦେଶ୍ୟମୂଳକ ଭାବେ ଖାଲି ରଖାଯାଇଛି
+\clearpage
+
+\setcounter{page}{1}\renewcommand{\thepage}{\arabic{page}} %Not mandatory. Added to demonstrate switching of numbering from odia alphabets to odia digits
+
+\section{ଓଡ଼ିଆ ଭାଷା}
+
+\subsection{ଓଡ଼ିଆ କଥିତ ଅଞ୍ଚଳ}
+\subsection{ଉତ୍ସ}
+\subsection{ଇତିହାସ}
+ଓଡ଼ିଆ ଏକ ଭାରତୀୟ ଭାଷା । ମୂଳ ଓଡ଼ିଆ ଭାଷା ପାଲି ଓ ଔଡ୍ରୀ ପ୍ରାକୃତରୁ ସିଧା ସୃଷ୍ଟି ହୋଇଥିବା ଭାଷା ବିଜ୍ଞାନୀମାନେ ପ୍ରମାଣ ଦିଅନ୍ତି, ଏହି ଭାଷା ଭାରତରରେ ୨,୫୦୦ ବର୍ଷରୁ ଅଧିକ ବର୍ଷ ଆଗରୁ କୁହାଯାଉଥିଲା ଓ ବୌଦ୍ଧ ଧର୍ମର ତିପିଟକ ଓ ଜୈନ ଧର୍ମଗ୍ରନ୍ଥର ମୂଳ ଭାଷା ଥିଲା । ଓଡ଼ିଆ ବାକି ଭାରତୀୟ ଭାଷାମାନଙ୍କ ତୁଳନାରେ ଖୁବ କମ ପାରସୀ ଓ ଆରବୀ ଭାଷାଦ୍ୱାରା ପ୍ରାଭାବିତ ।\footnote{ ଉତ୍ସ: ଉଇକିପିଡ଼ିଆ}
+
+ଇଂଲଣ୍ଡର କୁଇନଟେସେନସିଆଲଙ୍କ ଭାଷା ବିଭାଗର ମତରେ ଧଉଳିଠାରୁ ମିଳିଥିବା ଅଶୋକଙ୍କ ସମୟର ଶିଳାଲେଖ, ଜଉଗଡ଼ର ଶିଳାଲେଖ ଆଉ ଖାରବେଳଙ୍କ ବେଳରେ ତିଆରି ଖଣ୍ଡଗିରି ଓ ହାତୀଗୁମ୍ଫାର ଶିଳାଲେଖ ଓଡ଼ିଆ ଭାଷାର ମୂଳ ଇତିହାସ ଉପରେ ସୂଚନା ଦିଏ। ହାତିଗୁମ୍ଫାର ଶିଳାଲେଖରୁ ଜଣା ଯାଏ ଯେ ଆଧୁନିକ ଓଡ଼ିଆ ଭାଷାର ମୂଳ ପାଳି ଭାଷାରୁ । ହାତିଗୁମ୍ଫାର ଶିଳାଲେଖରେ ଲେଖା ଭାଷା ହେଉଛି ପାଳି ଆଉ ଲିପି ହେଉଛି ବ୍ରାହ୍ମୀ, ତେବେ ଏହି ଶିଳାଲେଖ ହିଁ ପ୍ରମାଣ କରିଦିଏ ଯେ ଓଡ଼ିଆ ଭାଷା ଅନ୍ୟ ଭାଷାଠାରୁ ପୁରାତନ। ସଂସ୍କୃତ ଭାଷାର ପ୍ରଭାବରେ ପୁରୁଣା ପାଳି ଭାଷାରେ ଅନେକ ଜାଗାରେ ଶବ୍ଦ ସବୁ ବଦଳି ଯାଇଛି । ତେବେ ଓଡ଼ିଆରେ ବିଦେଶୀ ଭାଷାର ପ୍ରଭାବ ଖୁବ କମ ଦେଖାଯାଏ ଯାହାକି ଅନ୍ୟ ଭାରତୀୟ ଭାଷାଠାରୁ ଖୁବ ଗୌଣ । ପ୍ରଫେସର ଓଲଡେନବର୍ଗଙ୍କ ମତରେ ପାଳି ଭାଷା ହିଁ ଓଡ଼ିଆ ଭାଷାର ମୂଳ ।
+
+ଓଡ଼ିଆ ଶବ୍ଦର ବ୍ୟବହାର ୭ମ ଶତାବ୍ଦୀର ତାଳପତ୍ରରେ ଦେଖିବାକୁ ମିଳେ। ବିଶେଷକରି ନେପାଳ ରାଜଦରବାରରୁ ସଂଗୃହୀତ ବୌଦ୍ଧ ଆଚାର୍ଯ୍ୟଙ୍କଦ୍ୱାରା ରଚିତ ଚର୍ଯ୍ୟାସାହିତ୍ୟ ହେଉଛି ପ୍ରାଚୀନ ଓଡ଼ିଆ ଶବ୍ଦାବଳୀର ଗନ୍ତାଘର। ସେହିପରି ଭଦ୍ରକରୁ ପ୍ରାପ୍ତ ମହାରାଜ ଗଣଙ୍କ ୯ମ ଶତାବ୍ଦୀରେ ଲିଖିତ ଶିଳାଲେଖରେ 'ଦେବ କହି ଭକତି କରୁଣ ବୋଲନ୍ତି ଭୋ କୁମାର ଶେଣ' ହେଉଛି ଓଡ଼ିଆ ଭାଷାରେ ରଚିତ ସ୍ୱୟଂସଂପୂର୍ଣ୍ଣ ଓଡ଼ିଆ ଶବ୍ଦ। ଓଡ଼ିଆ ଶବ୍ଦ କୁମ୍ଭାର \textenglish {/kumbha:rɔ/} ର ବ୍ୟବହାର ତମ୍ବାପଟାରେ ଲେଖାଥିବାର ଦେଖିବାକୁ ମିଳେ । ସେମିତି ୯୯୧ ସନର ଲେଖ ଓ ୭୧୫ ସନର ଲେଖରେ ଓଡ଼ିଆ ଶବ୍ଦ ଭିତୁରୁ \textenglish {/bhituru/} ଆଉ ପନ୍ଦର \textenglish {/pɔndɔrɔ/} ପ୍ରଭୃତିର ବ୍ୟବହାର ଦେଖିବାକୁ ମିଳେ।
+\subsection{ଶାସ୍ତ୍ରୀୟ ମାନ୍ୟତା}
+\subsection{ଓଡ଼ିଆ କଥନ}
+\subsection{ଓଡ଼ିଆ ଲିପି}
+\subsection{କମ୍ପ୍ୟୁଟରରେ ଓଡ଼ିଆ}
+\subsection{ଓଡ଼ିଆ ଭାଷାର ସରକାରୀକରଣ}
+\subsection{ଇଉନିକୋଡ଼ରେ ଓଡ଼ିଆ}
+\subsection{ଆଧାର}
+
+
+\bigskip
+\today
+
+
+
+\end{document}
