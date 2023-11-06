@@ -10,8 +10,8 @@
 
 \PolyglossiaSetup{odia}{
   bcp47=or,
-  %bcp47-language=or,
-  %bcp47-script=Odia,
+  bcp47-language=or,
+  bcp47-script=Orya,
   script=Odia,
   scripttag=odia,
   langtag=ODI,
@@ -109,13 +109,6 @@
     \fi
   \fi%
 }
-
-% Backwards compatibility. This command was never documented, but
-% some people might use it nevertheless (see #381).
-% This takes a counter. 
-% Adapted from gloss-bengali.ldf 
-\newcommand\odianumeral[1]{\localnumeral*[lang=odia]{#1}}
-
 
 \def\odia@globalnumbers{%
    \ifodia@changecounternumbering
