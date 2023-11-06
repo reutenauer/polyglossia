@@ -35,6 +35,7 @@
       % Devanagari:
       \odia@odia@numeralsfalse%
       \odia@devanagari@numeralstrue%
+      \SetLanguageKeys{odia}{bcp47=or,bcp47-language=or,bcp47-extension-u=nu-deva}%
    \or
       % Odia:
       \odia@odia@numeralstrue%
@@ -43,6 +44,7 @@
       % Western:
       \odia@odia@numeralsfalse%
       \odia@devanagari@numeralsfalse%
+      \SetLanguageKeys{odia}{bcp47=or,bcp47-language=or,bcp47-extension-u=nu-latn}%
    \fi
    \xpg@info{Option: Odia, numerals=\xpg@val}%
 }{\xpg@warning{Unknown Odia numeral `#1'}}
