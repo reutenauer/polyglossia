@@ -2061,6 +2061,22 @@
   \polyglossia@setforeignlanguage[#1]{#2}
 }
 
+% Store embedding language when an embedded language is switched to
+\cs_new_nopar:Nn \__xpg_setmatrixlang:
+{
+   \global\let\xpg@save@languagename\languagename
+}
+
+% When an embedded language is closed, reset to the embedding language
+\cs_new_nopar:Nn \__xpg_resetmatrixlang:
+{
+  % Reset the language's/script's font families if the embedding script is latin
+  \str_if_eq:eeT{\prop_item:Ne{\polyglossia@langsetup}{\xpg@save@languagename/lcscript}}{latin}
+       {\resetfontlatin}
+  % In case a \<lang>font is defined, re-activate that
+  \xpg@set@normalfont{\xpg@save@languagename}
+}
+
 % internal wrapper for foreign language
 % #1 option
 % #2 alias
@@ -2072,10 +2088,12 @@
   {
     \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
   }{
+    \__xpg_setmatrixlang:
     \group_begin:
       \xpg@otherlanguage[\xpg_alias_add_to_option_i:nn{#2}{#1}]{#3}
       \polyglossia@lang@settextdirection:nn{#3}{#4}
     \group_end:
+    \__xpg_resetmatrixlang:
   }
 }
 \cs_generate_variant:Nn \__xpg_foreignlanguage:nnnn {eeen}
@@ -2086,9 +2104,13 @@
 
 \renewenvironment{otherlanguage*}[2][]
 {%
+  \__xpg_setmatrixlang:
   \__xpg_otherlanguage:eee {#1} {#2} {\xpg_alias_base_lang:n{#2}}
 }
-{\egroup}
+{
+  \egroup
+  \__xpg_resetmatrixlang:
+}
 
 % internal wrapper
 % #1 option
@@ -2136,8 +2158,7 @@
     \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
   }
   {
-    % Store embedding language name
-    \global\let\xpg@save@languagename\languagename
+    \__xpg_setmatrixlang:
     \group_begin:
       \bool_set_true:N \__xpg_inline_lang
       \xpg@otherlanguage[#1]{#3}
@@ -2147,11 +2168,7 @@
       \cs_if_exist_use:c{date@bbl@\babelname}
       \polyglossia@lang@settextdirection:nn{#3}{#4}
     \group_end:
-    % Reset the language's/script's font families if the embedding script is latin
-    \str_if_eq:eeT{\prop_item:Ne{\polyglossia@langsetup}{\xpg@save@languagename/lcscript}}{latin}
-         {\resetfontlatin}
-    % In case a \<lang>font is defined, re-activate that
-    \xpg@set@normalfont{\xpg@save@languagename}
+    \__xpg_resetmatrixlang:
   }
 }
 \cs_generate_variant:Nn \__xpg_textlanguage:nnnn {nnen}
