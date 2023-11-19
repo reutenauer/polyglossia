@@ -2629,6 +2629,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \noindent Finally, if you want to know whether a specific language option has been set, you can use\new{1.47}
 \displaycmd{\iflanguageoption\marg{lang}\marg{key}\marg{value}\marg{true}\marg{false}}{\iflanguageoption}
 
+
 \section{Revision history}
 
 \bgroup\footnotesize
@@ -2637,7 +2638,9 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \subsubsection*{Bug fixes}
 \begin{itemize}
 	\item Fix OpenType language and script tags in Chinese (\TXI{606}).
-	\item Fix resetting of font properties when local font is closed (\TXI{607}).
+	\item Fix resetting of language specifications at the end of a local font
+	      set with \pkg{babel} legacy means (\cmd{\foreignlanguage} or \texttt{otherlanguage*}
+	      environment) (\TXI{607}).
 \end{itemize}
 
 \subsubsection*{New Features}
