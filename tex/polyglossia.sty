@@ -2062,19 +2062,22 @@
 }
 
 % Store embedding language when an embedded language is switched to
-\cs_new_nopar:Nn \__xpg_setmatrixlang:
+\cs_new_nopar:Nn \__xpg_store_matrixlang:
 {
-   \global\let\xpg@save@languagename\languagename
+   \cs_gset_eq:NN \__xpg_current_matrixlang \languagename
 }
 
 % When an embedded language is closed, reset to the embedding language
-\cs_new_nopar:Nn \__xpg_resetmatrixlang:
+\cs_new_nopar:Nn \__xpg_reset_to_matrixlang:
 {
+  % if matrix lang has not been stored, use main language
+  \tl_if_blank:nT { \__xpg_current_matrixlang }
+                  { \cs_set_eq:NN \__xpg_current_matrixlang \mainlanguagename }
   % Reset the language's/script's font families if the embedding script is latin
-  \str_if_eq:eeT{\prop_item:Ne{\polyglossia@langsetup}{\xpg@save@languagename/lcscript}}{latin}
+  \str_if_eq:eeT{\prop_item:Ne{\polyglossia@langsetup}{\__xpg_current_matrixlang/lcscript}}{latin}
        {\resetfontlatin}
   % In case a \<lang>font is defined, re-activate that
-  \xpg@set@normalfont{\xpg@save@languagename}
+  \xpg@set@normalfont{\__xpg_current_matrixlang}
 }
 
 % internal wrapper for foreign language
@@ -2088,12 +2091,12 @@
   {
     \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
   }{
-    \__xpg_setmatrixlang:
+    \__xpg_store_matrixlang:
     \group_begin:
       \xpg@otherlanguage[\xpg_alias_add_to_option_i:nn{#2}{#1}]{#3}
       \polyglossia@lang@settextdirection:nn{#3}{#4}
     \group_end:
-    \__xpg_resetmatrixlang:
+    \__xpg_reset_to_matrixlang:
   }
 }
 \cs_generate_variant:Nn \__xpg_foreignlanguage:nnnn {eeen}
@@ -2104,12 +2107,12 @@
 
 \renewenvironment{otherlanguage*}[2][]
 {%
-  \__xpg_setmatrixlang:
+  \__xpg_store_matrixlang:
   \__xpg_otherlanguage:eee {#1} {#2} {\xpg_alias_base_lang:n{#2}}
 }
 {
   \egroup
-  \__xpg_resetmatrixlang:
+  \__xpg_reset_to_matrixlang:
 }
 
 % internal wrapper
@@ -2158,7 +2161,7 @@
     \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
   }
   {
-    \__xpg_setmatrixlang:
+    \__xpg_store_matrixlang:
     \group_begin:
       \bool_set_true:N \__xpg_inline_lang
       \xpg@otherlanguage[#1]{#3}
@@ -2168,7 +2171,7 @@
       \cs_if_exist_use:c{date@bbl@\babelname}
       \polyglossia@lang@settextdirection:nn{#3}{#4}
     \group_end:
-    \__xpg_resetmatrixlang:
+    \__xpg_reset_to_matrixlang:
   }
 }
 \cs_generate_variant:Nn \__xpg_textlanguage:nnnn {nnen}
