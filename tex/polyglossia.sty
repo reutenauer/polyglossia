@@ -32,10 +32,9 @@
 \cs_generate_variant:Nn  \cs_gset_nopar:Npn {Npe}
 \cs_generate_variant:Nn  \cs_gset_nopar:Npn {cpe}
 \cs_generate_variant:Nn  \tl_set:Nn {Ne}
-\cs_generate_variant:Nn  \str_foldcase:n {e}
 \prg_generate_conditional_variant:Nnn \file_if_exist:n {e} {TF, T, F, p}
 \prg_generate_conditional_variant:Nnn \tl_if_blank:n {e} {TF, T, F, p}
-\prg_generate_conditional_variant:Nnn \clist_if_in:Nn {Ne} {TF, T, F, p}
+\prg_generate_conditional_variant:Nnn \clist_if_in:Nn {Ne} {TF, T, F}
 \prg_generate_conditional_variant:Nnn \prop_if_in:Nn {Ne} {TF, T, F, p}
 % correct a bug in tracklang
 \__xpg_at_package_hook:nnn{tracklang}{file/tracklang.sty/after}{%
@@ -434,7 +433,7 @@
     #1 / language
        .value_required:n = true,
     #1 / language
-        .initial:x = {\str_upper_case:n#1},
+        .initial:x = {\str_uppercase:n#1},
     % the language tag
     #1 / langtag
        .code:n = {\prop_gput:Nnn{\polyglossia@langsetup}{#1/langtag}{##1}},
