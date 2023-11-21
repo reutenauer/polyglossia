@@ -13,6 +13,10 @@
   fontsetup=true,%
   localnumeral=khmernumerals%
 }
+
+% BCP-47 compliant aliases
+\setlanguagealias*{khmer}{km}
+
 \newif\if@khmer@numerals
 \def\tmp@khmer{khmer}
 \define@key{khmer}{numerals}[arabic]{%
@@ -25,7 +29,9 @@
     \SetLanguageKeys{khmer}{bcp47-extension-u=nu-latn}%
    \fi%
 }
+
 \setkeys{khmer}{numerals}
+
 \def\captionskhmer{%
   \def\prefacename{អារម្ភកថា}%
   \def\refname{ឯកសារយោង}%
