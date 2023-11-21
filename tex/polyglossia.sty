@@ -11,7 +11,7 @@
 \RequirePackage{l3keys2e}
 \RequirePackage{xparse}
 
-% fontspec now uses LaTeX3 packages such as expl3, so we need this:
+% We employ LaTeX3 syntax
 \ExplSyntaxOn
 
 % Execute code #3 if package #1 has been loaded already, else
@@ -236,7 +236,6 @@
       \RLE
     }
   }
-  \ExplSyntaxOff
 }
 \__xpg_at_package_hook:nnn{luabidi}{package/luabidi/after}{
   \cs_gset_nopar:Nn{\polyglossia@setpardirection:n}{
