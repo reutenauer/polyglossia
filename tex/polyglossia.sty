@@ -1979,9 +1979,13 @@
 % where \text<alias> would cause clashes
 % (e.g., \textit)
 \newcommand\textlang[3][]{
-  \xpg@str@lowercase{\xpg@tmp@lang}{#2}
-  \__xpg_textlanguage:een {#1} {\xpg@tmp@lang} {#3}
-}%
+  \__xpg_textlanguage:een {#1} {#2} {#3}
+}
+
+% prevent the language tag in \textlang 
+% (second argument) from being affected
+% inside case changing commands (e.g. \MakeUppercase)
+\tl_put_right:Nn \l_text_case_exclude_arg_tl { \textlang }
 
 % Alias to {<lang>}, but more suitable
 % for specific (esp. tag-based) aliases
