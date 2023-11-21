@@ -236,7 +236,6 @@
       \RLE
     }
   }
-  \ExplSyntaxOff
 }
 \__xpg_at_package_hook:nnn{luabidi}{package/luabidi/after}{
   \cs_gset_nopar:Nn{\polyglossia@setpardirection:n}{
@@ -1980,9 +1979,9 @@
 % where \text<alias> would cause clashes
 % (e.g., \textit)
 \newcommand\textlang[3][]{
-  \xpg@str@lowercase{\xpg@tmp@lang}{#2}
-  \__xpg_textlanguage:een {#1} {\xpg@tmp@lang} {#3}
-}%
+  \xpg@str@lowercase{\xpg@tmp@opts}{#1}
+  \__xpg_textlanguage:een {\xpg@tmp@opts} {#2} {#3}
+}
 
 % Alias to {<lang>}, but more suitable
 % for specific (esp. tag-based) aliases
