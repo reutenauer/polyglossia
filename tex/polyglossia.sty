@@ -3,7 +3,6 @@
   {polyglossia} {2023/10/01} {v1.65}
   {Modern multilingual typesetting with XeLaTeX and LuaLaTeX}
 \RequirePackage{etoolbox}
-\RequirePackage{makecmds}
 \RequirePackage{xkeyval}[2008/08/13]
 % Will raise error if used with anything else than XeTeX or LuaTeX
 \RequirePackage{fontspec}[2010/06/08]% v2.0
@@ -2640,8 +2639,6 @@
 
 \let\xpg@pop@language\relax
 
-\provideenvironment{otherlanguage}{}{}
-
 %
 % Keep track of the active (nested) languages and options
 %
@@ -2673,22 +2670,22 @@
   {}
 }
 
-\renewenvironment{otherlanguage}[2][]
-{
-  % Get real current (pre-switch) options (incl. defaults)
-  \clist_clear_new:N \l_xpg_current_options
-  \prop_map_inline:cn {xpg@current@options@\languagename}
+\DeclareDocumentEnvironment { otherlanguage } { O{} m }
   {
-      \clist_put_right:Nn \l_xpg_current_options {##1=##2}
+    % Get real current (pre-switch) options (incl. defaults)
+    \clist_clear_new:N \l_xpg_current_options
+    \prop_map_inline:cn {xpg@current@options@\languagename}
+      {
+        \clist_put_right:Nn \l_xpg_current_options {##1=##2}
+      }
+    % Store current (pre-switch) options and language on stack
+    \polyglossia@stack@language:nx{\clist_use:Nn \l_xpg_current_options {,}}{\languagename}
+    \selectlanguage[#1]{#2}
   }
-  % Store current (pre-switch) options and language on stack
-  \polyglossia@stack@language:nx{\clist_use:Nn \l_xpg_current_options {,}}{\languagename}
-  \selectlanguage[#1]{#2}
-}
-{
-   % restore previous language in aux file and remove closed one from stack
-   \polyglossia@unstack@language:n{xpg@set@language@only@aux}
-}
+  {
+    % restore previous language in aux file and remove closed one from stack
+    \polyglossia@unstack@language:n{xpg@set@language@only@aux}
+  }
 
 \newcommand{\setlocalhyphenmins}[3]{
    \xpg@ifdefined{#1}{
@@ -2763,23 +2760,21 @@
 % Babel previously compiled in hyphenrules into the kernel (via hyphen.cfg)
 % but this is no longer the case. In any case, we roll our own one now
 % and possibly overwrite babel's.
-\provideenvironment{hyphenrules}{}{}
-
 % As opposed to the one inherited from switch.def/babel, our environment
 % supports language options and aliases.
-\renewenvironment{hyphenrules}[2][]
-{
-  % Check for real language name and options
-  \edef\xpg@tmp@opts{\xpg_alias_add_to_option_i:nn{#2}{#1}}
-  \edef\xpg@tmp@lang{\xpg_alias_base_lang:n{#2}}
-  % Register the language options
-  \polyglossia@set@lang@options:nnn {\xpg@tmp@lang} {\xpg@tmp@opts} {@xpg@set@langvariant}
-  % Now switch patterns
-  \__xpg_use_or_warn:c{\use:c{xpg@tmp@lang}@language}
-  % And activate hyphenmins
-  \use@localhyphenmins[\xpg@tmp@opts]{\xpg@tmp@lang}
-}
-{}
+\DeclareDocumentEnvironment { hyphenrules } { O{} m }
+  {
+    % Check for real language name and options
+    \edef\xpg@tmp@opts{\xpg_alias_add_to_option_i:nn{#2}{#1}}
+    \edef\xpg@tmp@lang{\xpg_alias_base_lang:n{#2}}
+    % Register the language options
+    \polyglossia@set@lang@options:nnn {\xpg@tmp@lang} {\xpg@tmp@opts} {@xpg@set@langvariant}
+    % Now switch patterns
+    \__xpg_use_or_warn:c{\use:c{xpg@tmp@lang}@language}
+    % And activate hyphenmins
+    \use@localhyphenmins[\xpg@tmp@opts]{\xpg@tmp@lang}
+  }
+  { }
 
 \AddToHook{begindocument/before}{
    \@ifpackageloaded{bidi}{
