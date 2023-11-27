@@ -15,22 +15,7 @@
   \@ifpackageloaded{#1}{#3}{\AddToHook{#2}{#3}}%
 }
 
-% safe according to expl3 bug #960
-\cs_generate_variant:Nn \prop_item:Nn { Ne, Nf, No, Nx }
-\cs_generate_variant:Nn \clist_set:Nn { Ne, Nf, No, Nx }
-\cs_generate_variant:Nn \clist_gput_right:Nn {Ne}
-\cs_generate_variant:Nn  \prop_get:NnN {NeN}
-\cs_generate_variant:Nn  \prop_gput:Nnn {Nne, Nee, Nen}
-\cs_generate_variant:Nn  \cs_gset:Npn {Npe}
-\cs_generate_variant:Nn  \cs_new:Nn {Ne}
-\cs_generate_variant:Nn  \cs_new_nopar:Nn {Ne}
-\cs_generate_variant:Nn  \cs_gset_nopar:Npn {Npe}
-\cs_generate_variant:Nn  \cs_gset_nopar:Npn {cpe}
-\cs_generate_variant:Nn  \tl_set:Nn {Ne}
-\prg_generate_conditional_variant:Nnn \file_if_exist:n {e} {TF, T, F, p}
-\prg_generate_conditional_variant:Nnn \tl_if_blank:n {e} {TF, T, F, p}
-\prg_generate_conditional_variant:Nnn \clist_if_in:Nn {Ne} {TF, T, F}
-\prg_generate_conditional_variant:Nnn \prop_if_in:Nn {Ne} {TF, T, F, p}
+\prg_generate_conditional_variant:Nnn \clist_if_in:Nn {Ne} {TF, T, F} % check if needed
 % correct a bug in tracklang
 \__xpg_at_package_hook:nnn{tracklang}{file/tracklang.sty/after}{%
   \@ifpackagelater{tracklang}{2019/08/30}{}{\global\def\AddTrackedLangage{\AddTrackedLanguage}}
@@ -1233,7 +1218,7 @@
 
 % try to load a language file
 \cs_new:Nn \polyglossia_load_lang_definition:nn {
-  \file_if_exist:eTF{gloss-#2.lde}
+  \file_if_exist:nTF{gloss-#2.lde}
   {
     \RequireLanguageDefinitionExtension[#1]{#2}
     \setkeys{#2}{#1}
@@ -1266,7 +1251,7 @@
 
 % load a master language from an alias file
 \newcommand*\xpg@load@master@language[1] {
-  \file_if_exist:eTF{gloss-#1.lde}
+  \file_if_exist:nTF{gloss-#1.lde}
   {
     \RequireLanguageDefinitionExtension{#1}
   }
