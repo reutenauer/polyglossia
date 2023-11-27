@@ -34,34 +34,6 @@ local function set_default_language(lang, id)
     polyglossia.default_language = lang
 end
 
-local byte = utf8.codepoint -- use standard module of lua 5.3
-
-local check_char
-
-if luaotfload and luaotfload.aux and luaotfload.aux.font_has_glyph then
-    local font_has_glyph = luaotfload.aux.font_has_glyph
-    function check_char(chr)
-        local codepoint = tonumber(chr) or byte(chr)
-        if font_has_glyph(font.current(), codepoint) then
-            tex.sprint('1')
-        else
-            tex.sprint('0')
-        end
-    end
-else
-    function check_char(chr) -- always in current font
-        local fontid    = font.current()
-        local fontdata  = font.getfont(fontid) or font.fonts[fontid]
-        local chardata  = fontdata.characters
-        local codepoint = tonumber(chr) or byte(chr)
-        if chardata and chardata[codepoint] then
-            tex.sprint('1')
-        else
-            tex.sprint('0')
-        end
-    end
-end
-
 local function load_tibt_eol()
     require('polyglossia-tibt')
 end
