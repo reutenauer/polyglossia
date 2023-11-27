@@ -153,7 +153,6 @@ end
 
 polyglossia.select_language = select_language
 polyglossia.set_default_language = set_default_language
-polyglossia.check_char = check_char
 polyglossia.load_tibt_eol = load_tibt_eol
 polyglossia.newloader = newloader
 polyglossia.newloader_loaded_languages = newloader_loaded_languages
