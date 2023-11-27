@@ -25,9 +25,9 @@
 \def\languageshorthands#1{\relax} % this is for scrlttr2 class
 \def\bbl@cs#1{\csname bbl@#1\endcsname}
 \AddToHook{begindocument/before}{
-  \let\bbl@set@language\xpg@set@language@aux% for biblatex
-  \let\bbl@main@language\xpg@main@language%   for biblatex
-  \providecommand\texorpdfstring[2]{#1}%      dummy command if hyperref is not loaded
+  \let\bbl@set@language\xpg@set@language@aux  % for biblatex
+  \let\bbl@main@language\xpg@main@language    % for biblatex
+  \providecommand\texorpdfstring[2]{#1}       % dummy command if hyperref is not loaded
 }
 
 \sys_if_engine_luatex:T{
@@ -284,8 +284,6 @@
   % here we do the fontsetup:
   \polyglossia@lang@autosetupfont:n{#1}
   %% TODO? \toggletrue{#1@setup@done}
-  % reinit \do
-  \def\do##1{\setotherlanguage{##1}}
   % register base alias
   \xpg_language_alias { #1 } { #1 }
 }
@@ -1935,9 +1933,10 @@
   \gdef\otherlanguagevariant{#1}
 }
 
-\newcommand\setotherlanguages[1]{
-  \def\do##1{\setotherlanguage{##1}}
-   \exp_args:Ne\docsvlist{#1}}
+\NewDocumentCommand \setotherlanguages { m }
+  {
+   \clist_map_function:eN { #1 } \setotherlanguage
+  }
 
 \def\common@language{% FIXME is this really needed???
   \ifbool{xpg@hyphenation@disabled}{
