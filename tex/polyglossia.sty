@@ -1,18 +1,14 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{polyglossia}[2023/10/01 v1.65
-  Modern multilingual typesetting with XeLaTeX and LuaLaTeX]
+\ProvidesExplPackage
+  {polyglossia} {2023/10/01} {v1.65}
+  {Modern multilingual typesetting with XeLaTeX and LuaLaTeX}
 \RequirePackage{etoolbox}
 \RequirePackage{makecmds}
 \RequirePackage{xkeyval}[2008/08/13]
 % Will raise error if used with anything else than XeTeX or LuaTeX
 \RequirePackage{fontspec}[2010/06/08]% v2.0
 \RequirePackage{iftex}
-\RequirePackage{expl3}
 \RequirePackage{l3keys2e}
-\RequirePackage{xparse}
-
-% We employ LaTeX3 syntax
-\ExplSyntaxOn
 
 % Execute code #3 if package #1 has been loaded already, else
 % add to package hook #2
@@ -2895,6 +2891,5 @@
 \def\xpg@option#1#2{
   \ifcsundef{xpg@main@language}{\setdefaultlanguage}{\setotherlanguage}
     [#1]{#2}}
-\ExplSyntaxOff
 
 \endinput

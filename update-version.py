@@ -12,8 +12,8 @@ new_date = "2023/10/01"
 # Replace version and date in all files
 def replacetext():
     for dname, dirs, files in os.walk("tex/"):
-        search_text = "\{polyglossia\}\[\d\d\d\d/\d\d/\d\d v\d\.\d+"
-        replace_text = "{polyglossia}[" + new_date + " v" + new_version
+        search_text = "\{polyglossia\} \{\d\d\d\d/\d\d/\d\d\} \{v\d.\d\d+\}"
+        replace_text = "{polyglossia} {" + new_date + "} {v" + new_version + "}"
         for fname in files:
             if fname != "polyglossia.sty":
                 continue
