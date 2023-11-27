@@ -274,7 +274,6 @@
 \newcommand*\PolyglossiaSetup[2]{
   \polyglossia@keys_define_lang:n{#1}
   \keys_set:nn { polyglossia / #1 } { #2 }
-  \prop_log:N{\polyglossia@langsetup}
   \polyglossia_setup_hyphen:n {#1}
   %define booleans etoolbox style and set defaults
   %% TODO ? \providetoggle{#1@setup@done}%
@@ -854,10 +853,6 @@
       }
 }
 
-\AtEndDocument{
-  \prop_log:N{\polyglossia@langsetup}
-  \prop_log:N{\__xpg_alias}
-}
 \def\xpg@lastlanguage{0}
 
 \providebool{xpg@hyphenation@disabled}
@@ -1291,9 +1286,6 @@
 }
 \cs_generate_variant:Nn \xpg_define_language_commands:n {e}
 
-\AtBeginDocument{
-  \prop_log:N{\__xpg_alias}
-}
 
 % resolve alias property #1 lang #2 item
 \cs_new:Nn \xpg_alias_prop_item:nn {
