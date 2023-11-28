@@ -156,16 +156,12 @@
 \def\@@ensure@maindir#1{\ifcsundef{@ensure@maindir}{#1}{\@ensure@maindir{#1}}}
 
 %% Used by the language definitions files for right-to-left languages
-\def\RequireBidi{
-  \str_case_e:nnF{\c_sys_engine_str}{
-    {luatex}{\ifx\@onlypreamble\@notprerr\else\RequirePackage{luabidi}\fi}
-    {xetex}{\ifx\@onlypreamble\@notprerr\else\RequirePackage{bidi}\fi}
-  }
+\def\RequireBidi
   {
-    \xpg@warning{You’re running a TeX engine that is not LuaTeX or XeTeX.\MessageBreak
-      That is almost guaranteed to cause problems.}
+    \sys_if_engine_luatex:TF
+      {\ifx\@onlypreamble\@notprerr\else\RequirePackage{luabidi}\fi}
+      {\ifx\@onlypreamble\@notprerr\else\RequirePackage{bidi}\fi}
   }
-}
 
 % if #1 is LR run #2 else #3
 \prg_set_conditional:Nnn \__xpg_if_LR_str:n {p, T, F, TF}
@@ -238,18 +234,9 @@
 }
 
 % emulate \RTLmain
-\cs_new_nopar:Nn \__xpg_setRTLmain: {}
-\str_case_e:nnF{\c_sys_engine_str}{
-  {luatex}{\cs_gset:Nn \__xpg_setRTLmain: {\setRTLmain}}
-  {xetex}{\cs_gset:Nn \__xpg_setRTLmain: {\@RTLmaintrue\setnonlatin}}
-}
-{
-  \cs_gset:Nn \__xpg_setRTLmain:
-  {
-    \xpg@warning{You’re~ running a~ TeX~ engine~ that~ is~ not~ LuaTeX~ or~ XeTeX.\MessageBreak
-      That~ is~ almost~ guaranteed~ to~ cause~ problems.}
-  }
-}
+\sys_if_engine_luatex:TF
+  { \cs_new_nopar:Nn \__xpg_setRTLmain: { \setRTLmain } }
+  { \cs_new_nopar:Nn \__xpg_setRTLmain: { \@RTLmaintrue\setnonlatin } }
 
 %% compatibility with babel
 \let\addto\gappto % gappto is defined in etoolbox
@@ -996,8 +983,7 @@
 
 %% when no patterns are available, we use \l@nohyphenation, assigned to 255
 %%  (suggestion by Enrico Gregorio)
-\str_case_e:nn{\c_sys_engine_str}{
-  {luatex}
+\sys_if_engine_luatex:TF
     {
       \@ifundefined{l@nohyphenation}
         {\chardef\l@nohyphenation=\directlua{
@@ -1005,12 +991,9 @@
         }
         {}
     }
-  {xetex}
     {
       \@ifundefined{l@nohyphenation}{\chardef\l@nohyphenation=255 }{}
     }
-}
-
 
 %we call this macro when a gloss file is not found for a given language
 \def\xpg@nogloss#1{
@@ -2352,23 +2335,9 @@
 % Set hyphenation patterns for a given language. This does the right
 % thing both for XeTeX and LuaTeX
 \newcommand*\xpg@set@hyphenation@patterns[1]{
-  \str_case_e:nnF{\c_sys_engine_str}{
-      {luatex}
-        {
-          \polyglossia@luatex@load@lang{#1}
-          \language=\csname l@#1\endcsname
-        }
-      {xetex}
-        {
-          \language=\csname l@#1\endcsname
-        }
-    }
-    {
-      \xpg@warning{You’re~running~a~TeX~engine~that~is~not~LuaTeX~or~XeTeX.\MessageBreak
-        That~is~almost~guaranteed~to~cause~problems.}
-    }
+  \sys_if_engine_luatex:T { \polyglossia@luatex@load@lang{#1} }
+  \language=\csname l@#1\endcsname
 }
-
 
 \newcommand*\@select@language[2][]{
    % hook for compatibility with biblatex
