@@ -618,186 +618,48 @@
    \polyglossia@Clang@@arabic{#2}
 }
 
-% print using main language
-% #2 is the numeral to print
-% #3 is the mainlanguage (should be expanded)
-% #4 is the current language (should be expanded)
-% #1 is the option list (should be expanded)
-% #5 is the name of the field to use
-\cs_new:Nn \polyglossia_localnumeral_mainlang:nnnnn {
-  \foreignlanguage{#3}{\use:c {\prop_item:Nn \polyglossia@langsetup  {#3/#5}} {#1} {#2}}
-}
+\tl_new:N \l__xpg_localnumeral_tl
 
-
-% print using local language
-% #2 is the numeral to print
-% #3 is the mainlanguage (should be expanded)
-% #4 is the current language (should be expanded)
-% #1 is the option list (should be expanded)
-% #5 is the name of the field to use
-\cs_new:Nn \polyglossia_localnumeral_locallang:nnnnn {
-  \use:c {\prop_item:Nn \polyglossia@langsetup  {#4/#5}} {#1} {#2}
-}
-
-% this function try to resolve some simple parameter about lang
-% call #2 then branching if found
-% call parameter #3 if not found
-% (use curing)
-\cs_new:Npn \polyglossia_localnumeral_callshortcutorlong:nF #1#2 {
-  \str_case:nnF{#1}{
-    {lang=local}{\polyglossia_localnumeral_locallang:nnnnn}
-  }
-  {#2}
-}
-
-\cs_new:Npn \polyglossia_iii_map_csv_field_split_kv_iii_localnumeral:w  #1 = #2 \q_stop {
-  \str_case:nnF{#2}{
-    {local}  {\clist_map_break:n{\use_i:nn \polyglossia_localnumeral_locallang:nnnnn }}
-    {default}{\clist_map_break:n{\use_i:nn \polyglossia_localnumeral_locallang:nnnnn }}
-    {*}      {\clist_map_break:n{\use_i:nn\polyglossia_localnumeral_mainlang:nnnnn   }}
-    {main}   {\clist_map_break:n{\use_i:nn\polyglossia_localnumeral_mainlang:nnnnn   }}
-  }{
-    \clist_map_break:n{ \use_i_ii:nnn \polyglossia_localnumeral_langlang:nnnnnn {{#2}} }
-  }
-}
-
-
-% call the language
-% #3 is the numeral to print
-% #4 is the mainlanguage (should be expanded)
-% #5 is the current language (should be expanded)
-% #2 is the option list (should be expanded)
-% #6 is the name of the field to use
-% #1 is the language used
-\cs_new:Nn \polyglossia_localnumeral_langlang:nnnnnn {
-   \foreignlanguage{#1}{\use:c {\prop_item:Nn \polyglossia@langsetup  {#1/#6}} {#2} {#3}}
-}
-
-
-% check if empty value
-\cs_new:Npn \polyglossia_iii_map_csv_field_split_kv_ii_localnumeral:w  #1 #2 = #3 \q_stop {
-  \quark_if_no_value:NTF {#3}
+\keys_define:nn { polyglossia / localnumeral }
   {
-    \clist_map_break:n{\use_i:nn \polyglossia_localnumeral_locallang:nnnnn}
+	lang .choice:, 
+	lang / main .code:n =  \tl_set:Ne \l__xpg_localnumeral_tl { \mainlanguagename } ,
+	lang / local .code:n = \tl_set:Ne \l__xpg_localnumeral_tl { \languagename } ,
+	lang / unknown .code:n = \tl_set:Nn \l__xpg_localnumeral_tl { #1 } ,
   }
+  
+\cs_new:Npn \__xpg_localnumeral:nnn #1 #2 #3
   {
-    \polyglossia_iii_map_csv_field_split_kv_iii_localnumeral:w #1 \q_stop
-  }
-}
+	\group_begin:
+	\keys_set:ne { polyglossia / localnumeral } { #2 }
+	\foreignlanguage { \l__xpg_localnumeral_tl } 
+	  { \use:c { \prop_item:Ne \polyglossia@langsetup
+	  { \l__xpg_localnumeral_tl / #3 } } { } { #1 } }
+	\group_end:
 
-\cs_new:Npn \polyglossia_iii_map_csv_field_split_kv_i_localnumeral:nw #1 #2 = #3 \q_stop {
-  % parse only lang tag
-  \tl_trim_spaces_apply:nN {#2} \str_if_eq:nnT {lang}
+  }
+
+\NewDocumentCommand \localnumeral { s ={ lang } O{ local } m }
   {
-    % if empty value
-    \quark_if_nil:nTF{#3}
-    {
-      \clist_map_break:n{\use_i:nn \polyglossia_localnumeral_locallang:nnnn}
-    }
-    {
-      % here we know what we have an equal sign
-      \polyglossia_iii_map_csv_field_split_kv_ii_localnumeral:w {#1} #1 \q_no_value \q_stop
-    }
+    \IfBooleanTF { #1 }
+	  {
+		\exp_args:Nc \__xpg_localnumeral:nnn { c@#3 } { #2 } { localnumeral }
+	  }
+	  {
+		\__xpg_localnumeral:nnn { #3 } { #2 } { localnumeral }
+	  }
   }
-}
 
-% map function 
-\cs_new:Nn \polyglossia_iii_map_csv_localnumeral:n {
-  % fast case is do nothing is empty 
-  \tl_if_empty:nF{#1}
+\NewDocumentCommand \Localnumeral { s ={ lang } O{ local } m }
   {
-    \polyglossia_iii_map_csv_field_split_kv_i_localnumeral:nw {#1} #1 = \q_nil \q_stop
+    \IfBooleanTF { #1 }
+	  {
+		\exp_args:Nc \__xpg_localnumeral:nnn { c@#3 } { #2 } { Localnumeral }
+	  }
+	  {
+		\__xpg_localnumeral:nnn { #3 } { #2 } { Localnumeral }
+	  }
   }
-}
-
-
-% treat option is empty and option is lang=local
-% #2 number
-% #3 mainlanguage
-% #4 locallanguage
-% #5 field to call
-% #1 option
-% strip space to option
-\cs_new:Nn \polyglossia_iii_localnumeral:nnnnn {
-  \tl_if_blank:nTF{#1}
-  {
-    \polyglossia_localnumeral_mainlang:nnnnn
-  }
-  {
-    \str_if_eq:nnTF{#1}{lang=local}
-    {
-      \polyglossia_localnumeral_locallang:nnnnn
-    }
-    {
-      % use postscript like trick push to stack {#1} {#2} {#3} {#4}
-      \polyglossia_localnumeral_callshortcutorlong:nF {#1}
-      {
-        % same trick here if found we emit  \use_i:nn
-        % thus discarding the default choice that is not lang specified thus local
-        \clist_map_function:nN {#1} {\polyglossia_iii_map_csv_localnumeral:n}
-        \polyglossia_localnumeral_locallang:nnnnn
-      }
-    }
-    {#1} {#2} {#3} {#4} {#5}
-  }
-}
-
-
-% internal helper useful for oeee and onnn
-% #1 number
-% #2 mainlanguage
-% #3 locallanguage
-% #4 option
-% #5 field to call
-% strip space to option
-\cs_new:Nn \polyglossia_ii_localnumeral:nnnnn {
-  \tl_trim_spaces_apply:nN {#4} \polyglossia_iii_localnumeral:nnnnn {#1}{#2}{#3}{#5}
-}
-\cs_generate_variant:Nn \polyglossia_ii_localnumeral:nnnnn {
-  eeenn, eeeon, eeeen
-}
-
-% convert the counter to value
-% #1 counter
-% #2 mainlanguage
-% #3 locallanguage
-% #4 option
-\cs_new:Nn \polyglossia_i_localnumeral:nnnnn
-{
-  \polyglossia_ii_localnumeral:eeeen {\int_value:w #1} {#2} {#3} {#4} {#5}
-}
-
-% print number usage \localnumeral[option]{numeral}
-% or \localnumeral*[option]{counter}
-% \Localnumeral[]{numeral} use main language
-% \localnumeral{numeral} use local language
-\NewExpandableDocumentCommand{\localnumeral}{som}
-{
-  \IfBooleanTF{#1}%
-    {% starred: take counter
-      \exp_args:Nc \polyglossia_i_localnumeral:nnnnn {c@#3}
-         {\mainlanguagename} {\languagename} {\IfNoValueTF {#2}{lang=local}{#2}} {localnumeral}
-    }{% unstarred: take number
-      \polyglossia_ii_localnumeral:eeeen {\int_eval:n{#3}}
-         {\mainlanguagename} {\languagename} {\IfNoValueTF {#2}{lang=local}{#2}} {localnumeral}
-    }
-}
-
-% print number usage \Localnumeral[option]{numeral}
-% or \Localnumeral*[option]{counter}
-% \Localnumeral[]{numeral} use main language
-% \localnumeral{numeral} use local language
-\NewExpandableDocumentCommand{\Localnumeral}{som}
-{
-  \IfBooleanTF{#1}
-    {% starred: take counter
-      \exp_args:Nc \polyglossia_i_localnumeral:nnnnn {c@#3}
-         {\mainlanguagename} {\languagename} {\IfNoValueTF {#2}{lang=local}{#2}} {Localnumeral}
-    }{% unstarred: take number
-      \polyglossia_ii_localnumeral:eeeon {\int_eval:n{#3}}
-         {\mainlanguagename} {\languagename} {\IfNoValueTF {#2}{lang=local}{#2}} {Localnumeral}
-    }
-}
 
 \cs_new_nopar:Nn{\polyglossia@lang@frenchspacing:n}{
   \prop_get:NeNTF \polyglossia@langsetup {#1/frenchspacing} \l_tmpa_tl
