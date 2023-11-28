@@ -268,7 +268,7 @@
   \csgdef{init@extras@#1}{}
   \csgdef{init@noextras@#1}{} % we don't use this yet: remove?
   % here we do the fontsetup:
-  \polyglossia@lang@autosetupfont:n{#1}
+  \xpg__auto_setupfont:n { #1 }
   %% TODO? \toggletrue{#1@setup@done}
   % register base alias
   \xpg_language_alias { #1 } { #1 }
@@ -517,50 +517,17 @@
     #1 / totalhyphenmin
       .value_required:n = false,
     % frenchspacing
-    #1 / frenchspacing
-    .code:n = {
-        \str_case_e:nnTF{##1}{
-            {true}{}
-            {false}{}
-          }
-          {}
-          {\xpg@error{frenchspacing~should~be~true~or~false. Is~ "##1"~ for~ language~ "#1"}}
-        \prop_gput:Nnn{\polyglossia@langsetup}{#1/frenchspacing}{##1}
-    },
-    #1 / frenchspacing
-      .default:n = true,
-    #1 / frenchspacing
-      .initial:n = false,
+    #1 / frenchspacing  .bool_gset:c g__xpg_#1_fs_bool ,
+    #1 / frenchspacing  .default:n = true ,
+    #1 / frenchspacing  .initial:n = false ,
     % indent first line
-    #1 / indentfirst
-    .code:n = {
-      \str_case_e:nnTF{##1}{
-            {true}{}
-            {false}{}
-          }
-          {}
-          {\xpg@error{indentfirst~should~be~true~or~false. Is~ "##1"~ for~ language "#1"}}
-      \prop_gput:Nnn{\polyglossia@langsetup}{#1/indentfirst}{##1}
-    },
-    #1 / indentfirst
-      .default:n = true,
-    #1 / indentfirst
-      .initial:n = false,
+    #1 / indentfirst  .bool_gset:c g__xpg_#1_if_bool ,
+    #1 / indentfirst  .default:n = true ,
+    #1 / indentfirst  .initial:n = false ,
     % fontsetup
-    #1 / fontsetup
-      .code:n = {
-         \str_case_e:nnTF{##1}{
-            {true}{}
-            {false}{}
-          }
-          {}
-          {\xpg@error{fontsetup~should~be~true~or~false. Is "##1"~ for~ language~ "#1"}}
-       \prop_gput:Nnn{\polyglossia@langsetup}{#1/fontsetup}{##1}
-       },
-    #1 / fontsetup
-      .default:n = true,
-    #1 / fontsetup
-      .initial:n = false,
+    #1 / fontsetup  .bool_gset:c g__xpg_#1_fontsetup_bool ,
+    #1 / fontsetup  .default:n = true ,
+    #1 / fontsetup  .initial:n = false ,
     % environment name
     #1 / envname
        .code:n = {
@@ -648,36 +615,17 @@
 	  }
   }
 
-\cs_new_nopar:Nn{\polyglossia@lang@frenchspacing:n}{
-  \prop_get:NeNTF \polyglossia@langsetup {#1/frenchspacing} \l_tmpa_tl
-      {
-        \str_case_e:nnF{\l_tmpa_tl}{
-          {true}{\frenchspacing}
-          {false}{\nonfrenchspacing}
-        }
-        {\xpg@error{frenchspacing~should~be~true~or~false. Is~"\l_tmpa_ttl"~ for~ language~ "#1"}}
-      }
-      {
-        \xpg@error{Could~ not~ retrieve~ key~ frenchspacing~ for~ language~ "#1"}
-        \prop_show:N{\polyglossia@langsetup}
-      }
-}
+\cs_new_nopar:Npn \xpg__french_spacing:n #1
+  { 
+    \bool_if:cTF { g__xpg_#1_fs_bool } 
+	{ \frenchspacing } { \nonfrenchspacing }
+  }
 
-\cs_new_nopar:Nn{\polyglossia@lang@indentfirst:n}{
-  \prop_get:NeNTF \polyglossia@langsetup {#1/indentfirst} \l_tmpa_tl
-      {
-        \str_case_e:nnF{\l_tmpa_tl}{
-          {true}{\french@indent}
-          {false}{\nofrench@indent}
-        }
-        {\xpg@error{indentfirst~should~be~true~or~false. Is~"\l_tmpa_ttl"~ for~ language~ "#1"}}
-      }
-      {
-        \xpg@error{Could~ not~ retrieve~ key~ indentfirst~ for~ language~ "#1"}
-        \prop_show:N{\polyglossia@langsetup}
-      }
-}
-
+\cs_new_nopar:Npn \xpg__indent_first:n #1
+  {
+	\bool_if:cTF { g__xpg_#1_if_bool }
+	{ \french@indent } { \nofrench@indent }
+  }
 
 \cs_new:Nn{\polyglossia@lang@setpardirection:n}{
   \prop_get:NeNTF \polyglossia@langsetup {#1/direction} \l_tmpa_tl
@@ -743,8 +691,8 @@
 %\def\xpg@fontsetup@none#1{\csgdef{#1@font}{\ifcsdef{#1font}{\csname #1font\endcsname}{}}} %<-- simplistic
 %\def\xpg@fontsetup@custom#1{\csuse{#1@font}}
 
-\cs_new:Nn \polyglossia@lang@autosetupfont:n {
-  \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/fontsetup}}{true}
+\cs_new:Npn \xpg__auto_setupfont:n #1 {
+  \bool_if:cTF { g__xpg_#1_fontsetup_bool }
   {
     \str_if_eq:eeTF{\prop_item:Nn{\polyglossia@langsetup}{#1/lcscript}}{latin}
          {\xpg@fontsetup@latin{#1}}
@@ -2356,7 +2304,7 @@
    \cs_if_exist_use:c{date@bbl@\babelname}
    \polyglossia@local@marks:n{#2}
    \csuse{init@extras@#2}%
-   \polyglossia@lang@indentfirst:n{#2}
+   \xpg__indent_first:n { #2 }
    \csuse{blockextras@#2}%
    % This is a hook for external packages which want to access variants
    % via babelname (such as biblatex)
@@ -2415,7 +2363,7 @@
   \__xpg_use_or_warn:c{#2@language}
   \cs_if_exist_use:c{#2@numbers}
   \use@localhyphenmins[#1]{#2}
-  \polyglossia@lang@frenchspacing:n{#2}
+  \xpg__french_spacing:n { #2 }
 }
 
 
