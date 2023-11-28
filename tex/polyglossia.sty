@@ -7,7 +7,6 @@
 % Will raise error if used with anything else than XeTeX or LuaTeX
 \RequirePackage{fontspec}[2010/06/08]% v2.0
 \RequirePackage{iftex}
-\RequirePackage{l3keys2e}
 
 % Execute code #3 if package #1 has been loaded already, else
 % add to package hook #2
@@ -2783,7 +2782,7 @@
 % load by default latex
 \setmainlanguage{latex}
 % then process key in order to overwrite
-\ProcessKeysOptions{polyglossia}
+\ProcessKeyOptions[polyglossia]
 
 % Set the LuaTeX renderer. As opposed to fontspec, we use Harfbuzz by default.
 % This can be changed via the luatexrenderer package option.
