@@ -273,8 +273,12 @@
   \xpg_language_alias { #1 } { #1 }
 }
 
-% Adjust language key setting after initial setup
-% This is needed, e.g., for languages with varying script
+% Adjust language key setting after initial setup.
+% Principally any key can be altered this way.
+% The command is mainly used in gloss file where
+% different options (variant, script, etc.) result
+% in different babel names, bcp47 specification,
+% or OpenType language or script tags.
 \DeclareDocumentCommand \SetLanguageKeys { m m }
 {
   \clist_map_inline:nn { #1 } { \keys_set:nn { polyglossia / ##1 } { #2 } }
