@@ -1259,19 +1259,17 @@
   % The starred version does not define commands and environments
   \IfBooleanF {#1}
   {
-    \exp_args:Nc \providecommand {text#4} [2][] {}
-    \exp_args:Nc \renewcommand {text#4} [2][]
-    {
-      \__xpg_textlanguage:een{##1}{#4}{##2}
-    }
-    \exp_args:Nc \providecommand {#4} {}
-    \exp_args:Ne  \renewenvironment {#4}
-    {
-      \begin{otherlanguage}{#4}
-    }
-    {
-      \end{otherlanguage}
-    }
+    \exp_args:Nc \DeclareDocumentCommand {text#4} { O{} m }
+      {
+        \__xpg_textlanguage:een {##1} {#4} {##2}
+      }
+    \DeclareDocumentEnvironment { #4 }
+      {
+        \begin{otherlanguage}{#4}
+      }
+      {
+        \end{otherlanguage}
+      }
   }
   \tl_clear_new:N \__xpg_alias_option_tl
   \prop_clear_new:N \__xpg_language_alias_prop
@@ -1324,7 +1322,7 @@
     }
     \seq_gput_right:Ne \__xpg_langs_loaded {#2}
   }
-  \polyglossia@set@default@language:ee {\xpg_alias_add_to_option_i:nn{#2}{#1}}
+   \exp_args:Nee \polyglossia@set@default@language:nn {\xpg_alias_add_to_option_i:nn{#2}{#1}}
     {\xpg_alias_base_lang:n{#2}}
 }
 
@@ -1398,18 +1396,11 @@
   % Set luatex main language
   \sys_if_engine_luatex:T
    {
-     \directlua{polyglossia.set_default_language('\luatexluaescapestring{\string#2}')}%
+     \directlua{polyglossia.set_default_language('\luaescapestring{\string#2}')}%
    }
 }
-\cs_generate_variant:Nn\polyglossia@set@default@language:nn {
-  ee, ef, en, eo, ex,
-  fe, ff, fn, fo, fx,
-  ne, nf,     no, nx,
-  oe, of, on, oo, ox,
-  xe, xf, xn, xo, xx
-}
 
-\let\setmainlanguage=\setdefaultlanguage
+\DeclareCommandCopy \setmainlanguage \setdefaultlanguage
 
 % Returns the language ID of the current language
 % Currently supported: bcp-47
@@ -2068,7 +2059,7 @@
   }
   \sys_if_engine_luatex:T
   {
-    \directlua{polyglossia.select_language('\luatexluaescapestring{\string#3}',
+    \directlua{polyglossia.select_language('\luaescapestring{\string#3}',
       \the\csname l@#3\endcsname)}
   }
   \polyglossia@register@language:nn{#2}{#3}
