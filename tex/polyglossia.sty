@@ -516,15 +516,15 @@
     #1 / totalhyphenmin
       .value_required:n = false,
     % frenchspacing
-    #1 / frenchspacing  .bool_gset:c g__xpg_#1_fs_bool ,
+    #1 / frenchspacing  .bool_gset:c = g__xpg_#1_fs_bool ,
     #1 / frenchspacing  .default:n = true ,
     #1 / frenchspacing  .initial:n = false ,
     % indent first line
-    #1 / indentfirst  .bool_gset:c g__xpg_#1_if_bool ,
+    #1 / indentfirst  .bool_gset:c = g__xpg_#1_if_bool ,
     #1 / indentfirst  .default:n = true ,
     #1 / indentfirst  .initial:n = false ,
     % fontsetup
-    #1 / fontsetup  .bool_gset:c g__xpg_#1_fontsetup_bool ,
+    #1 / fontsetup  .bool_gset:c = g__xpg_#1_fontsetup_bool ,
     #1 / fontsetup  .default:n = true ,
     #1 / fontsetup  .initial:n = false ,
     % environment name
