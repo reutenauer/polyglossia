@@ -576,12 +576,14 @@
 }
 
 \tl_new:N \l__xpg_localnumeral_tl
+\bool_new:N \l__xpg_localnumeral_bool
 
 \keys_define:nn { polyglossia / localnumeral }
   {
 	lang .choice:, 
-	lang / main .code:n =  \tl_set:Ne \l__xpg_localnumeral_tl { \mainlanguagename } ,
-	lang / local .code:n = \tl_set:Ne \l__xpg_localnumeral_tl { \languagename } ,
+	lang / main .code:n =  \tl_set:Nn \l__xpg_localnumeral_tl { \mainlanguagename } ,
+	lang / local .code:n = \tl_set:Nn \l__xpg_localnumeral_tl { \languagename } 
+							\bool_set_true:N \l__xpg_localnumeral_bool ,
 	lang / unknown .code:n = \tl_set:Nn \l__xpg_localnumeral_tl { #1 } ,
   }
   
@@ -589,11 +591,10 @@
   {
 	\group_begin:
 	\keys_set:ne { polyglossia / localnumeral } { #2 }
-	\foreignlanguage { \l__xpg_localnumeral_tl } 
+	\bool_if:NF \l__xpg_localnumeral_bool { \foreignlanguage { \l__xpg_localnumeral_tl } }
 	  { \use:c { \prop_item:Ne \polyglossia@langsetup
 	  { \l__xpg_localnumeral_tl / #3 } } { } { #1 } }
 	\group_end:
-
   }
 
 \NewDocumentCommand \localnumeral { s ={ lang } O{ local } m }
