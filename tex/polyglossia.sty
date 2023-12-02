@@ -2147,6 +2147,10 @@
 	\fi:
   }
 
+\newcommand*\xpg@if@char@available[3]{
+  \__polyglossia_if_char:NTF{#1}{#2}{#3}
+}
+
 % Test if a char (by char code) is available in the current font
 \NewExpandableDocumentCommand \charifavailable { m m }
   {
