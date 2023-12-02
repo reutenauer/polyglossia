@@ -1,5 +1,5 @@
 % !TEX encoding = UTF-8 Unicode
-% Language definition file (part of polyglossia v1.65 -- 2023/10/01)
+% Language definition file (part of polyglossia v1.66 -- 2023/12/02)
 %
 \ProvidesFile{gloss-italian.ldf}[polyglossia: module for Italian]
 \PolyglossiaSetup{italian}{
