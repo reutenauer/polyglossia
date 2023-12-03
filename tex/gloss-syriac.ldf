@@ -133,7 +133,7 @@
       %%% we test for the presence of one of ١٢٣٤٥٦٧٨٩٠ in the Syriac font, 
       %%% else we try \arabicfont if defined (and give a warning), 
       %%% else we fall back to the Western numerals.
-      \xpg@if@char@available{0661}%
+      \IfCharIsAvailableTF{0661}%
           {\@ensure@LTR{\protect\arabicdigits{\number#1}}}%
           {\@ensure@LTR{\arabicdigits{\number#1}}
            \ifcsdef{arabicfont}%

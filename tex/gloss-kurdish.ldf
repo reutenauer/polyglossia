@@ -360,7 +360,7 @@
   \if@western@numerals
     \number#1%
   \else
-    \xpg@if@char@available{06F0}%
+    \IfCharIsAvailableTF{06F0}%
           {\@ensure@LTR{\farsidigits{\number#1}}}%
           {\@ensure@LTR{\arabicdigits{\number#1}}}%
   \fi

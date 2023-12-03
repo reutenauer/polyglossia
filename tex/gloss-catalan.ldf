@@ -46,7 +46,7 @@
   \else
     \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
     \setbox0\hbox{l}%
-    \xpg@if@char@available{00B7}%
+    \IfCharIsAvailableTF{00B7}%
           {\setbox2\hbox{\char"00B7}\setbox1\hbox{l}}%
           {\setbox2\hbox{.}\setbox1\hbox{l\/}}%
     \setbox3\hbox{.}%
@@ -74,7 +74,7 @@
   \else
     \leftllkern=0pt\rightllkern=0pt\raiselldim=0pt%
     \setbox0\hbox{L}%
-    \xpg@if@char@available{00B7}%
+    \IfCharIsAvailableTF{00B7}%
           {\setbox2\hbox{\char"00B7}\setbox1\hbox{L}}%
           {\setbox2\hbox{.}\setbox1\hbox{L\/}}%
     \setbox3\hbox{.}%

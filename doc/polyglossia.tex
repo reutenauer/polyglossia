@@ -2548,6 +2548,10 @@ the current font. If so, the character is printed, if not, the \meta{substitutio
 Example: ¦\charifavailable{1E9E}{SS}¦ prints the capital version of the German letter ⟨ß⟩ if available
 (\ie \charifavailable{1E9E}{SS}), else it prints the substitution digraph SS.
 
+With the test\new{1.66} \displaycmd{\IfCharIsAvailableTF\marg{char code}\marg{true condition}\marg{false condition}}{\IfCharIsAvailableTF}
+you can test for the availability of a character and execute different code depending whether or not this is the case
+(this replaces the undocument internal command \cmd{\xpg@if@char@available}).
+
 
 \section{Accessing language information}\label{sec:langinfo}
 
@@ -2651,6 +2655,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \begin{itemize}
 \item Add support for Odia, provided by \TA{Avisek Jena} and \TA{Ashok Das}.
 \item New auxiliary package ¦odiadigits¦
+\item Add auxiliary command \cmd{\IfCharIsAvailableTF} to complement \cmd{\charifavailable}.
 \end{itemize}
 
 \subsection*{1.65 (2023/10/01)}
