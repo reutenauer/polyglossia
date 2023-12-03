@@ -1822,18 +1822,23 @@
   \polyglossia@setforeignlanguage[#1]{#2}
 }
 
+% Stack to store matrix languages
+\seq_new:N \__xpg_current_matrixlang_stack
+
 % Store embedding language when an embedded language is switched to
 \cs_new_nopar:Nn \__xpg_store_matrixlang:
 {
-   \cs_gset_eq:NN \__xpg_current_matrixlang \languagename
+   \seq_put_left:Nn \__xpg_current_matrixlang_stack \languagename
 }
 
 % When an embedded language is closed, reset to the embedding language
+% and remove stored matrix language from stack
 \cs_new_nopar:Nn \__xpg_reset_to_matrixlang:
 {
-  % if matrix lang has not been stored, use main language
-  \tl_if_blank:nT { \__xpg_current_matrixlang }
-                  { \cs_set_eq:NN \__xpg_current_matrixlang \mainlanguagename }
+  % if stack is empty, use main language
+  \seq_pop_left:NNTF \__xpg_current_matrixlang_stack \l_tmpa_tl
+     { \cs_set_eq:NN \__xpg_current_matrixlang \l_tmpa_tl }
+     { \cs_set_eq:NN \__xpg_current_matrixlang \mainlanguagename }
   % Reset the language's/script's font families if the embedding script is latin
   \str_if_eq:eeT{\prop_item:Ne{\polyglossia@langsetup}{\__xpg_current_matrixlang/lcscript}}{latin}
        {\resetfontlatin}
