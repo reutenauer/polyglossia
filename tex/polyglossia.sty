@@ -1828,7 +1828,7 @@
 % Store embedding language when an embedded language is switched to
 \cs_new_nopar:Nn \__xpg_store_matrixlang:
 {
-   \seq_put_left:Nn \__xpg_current_matrixlang_stack \languagename
+   \seq_gput_left:Nn \__xpg_current_matrixlang_stack \languagename
 }
 
 % When an embedded language is closed, reset to the embedding language
@@ -1836,7 +1836,7 @@
 \cs_new_nopar:Nn \__xpg_reset_to_matrixlang:
 {
   % if stack is empty, use main language
-  \seq_pop_left:NNTF \__xpg_current_matrixlang_stack \l_tmpa_tl
+  \seq_gpop_left:NNTF \__xpg_current_matrixlang_stack \l_tmpa_tl
      { \cs_set_eq:NN \__xpg_current_matrixlang \l_tmpa_tl }
      { \cs_set_eq:NN \__xpg_current_matrixlang \mainlanguagename }
   % Reset the language's/script's font families if the embedding script is latin
