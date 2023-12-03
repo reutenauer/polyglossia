@@ -1843,7 +1843,7 @@
   \str_if_eq:eeT{\prop_item:Ne{\polyglossia@langsetup}{\__xpg_current_matrixlang/lcscript}}{latin}
        {\resetfontlatin}
   % In case a \<lang>font is defined, re-activate that
-  \xpg@set@normalfont{\__xpg_current_matrixlang}
+  \exp_args:Ne \xpg@set@normalfont{\__xpg_current_matrixlang}
 }
 
 % internal wrapper for foreign language
