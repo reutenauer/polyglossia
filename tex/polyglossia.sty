@@ -2162,9 +2162,9 @@
 
 % Test if a char (by char code) is available in the current font
 % if so, do #2, else do #3
-\NewDocumentCommand \IfCharIsAvailableTF { m m m }
+\NewExpandableDocumentCommand \IfCharIsAvailableTF { m m m }
   {
-    \__polyglossia_if_char:NTF{#1}{#2}{#3}
+    \__polyglossia_if_char:NTF { #1 } { #2 } { #3 }
   }
 
 
