@@ -473,8 +473,6 @@
          \renewcommand{\labelitemiii}{\french@itemiii}%
          \renewcommand{\labelitemiv}{\french@itemiv}%
       }{\xpg@warning{Option 'frenchitemlabels' only supported if French is main language!}}%
-    \else
-       \let\@makefntext\xpg@orig@makefntext
     \fi
     \@xpg@french@itemlabels@settrue%
   \fi%
