@@ -1069,10 +1069,10 @@
     \exp_args:Ne
     \newenvironment {\prop_item:Nn{\polyglossia@langsetup}{#1/envname}} [1] []
     {
-      \begin{otherlanguage}[##1]{#1}
+      \otherlanguage [ ##1 ] { #1 }
     }
     {
-      \end{otherlanguage}
+      \endotherlanguage
     }
     \exp_args:Nc \newcommand {text#1} [2][]
     {
@@ -1199,10 +1199,10 @@
       }
     \DeclareDocumentEnvironment { #4 } { }
       {
-        \begin{otherlanguage}{#4}
+        \otherlanguage { #4 }
       }
       {
-        \end{otherlanguage}
+        \endotherlanguage
       }
   }
   \tl_clear_new:N \__xpg_alias_option_tl
