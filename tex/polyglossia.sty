@@ -256,7 +256,6 @@
 %% TODO: localalph = {<alph_csname>,<Alph_csname>}
 %% TODO: localnumeral = <csname>
 %%       or even better localdigits = {0123456789} for fully automatic setup
-\newif\if@xpg@language@really@defined@
 \newcommand*\PolyglossiaSetup[2]{
   \polyglossia@keys_define_lang:n{#1}
   \keys_set:nn { polyglossia / #1 } { #2 }
