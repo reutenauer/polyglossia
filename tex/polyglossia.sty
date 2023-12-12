@@ -1030,13 +1030,7 @@
     }
   }
 }
-\cs_generate_variant:Nn \polyglossia_load_lang_definition:nn {
-  ee, ef, en, eo, ex,
-  fe, ff, fn, fo, fx,
-  ne, nf,     no, nx,
-  oe, of, on, oo, ox,
-  xe, xf, xn, xo, xx
-}
+\cs_generate_variant:Nn \polyglossia_load_lang_definition:nn { ee }
 
 % load a master language from an alias file
 \newcommand*\xpg@load@master@language[1] {
@@ -1067,14 +1061,14 @@
   \str_if_eq:eeT {\prop_item:Ne \__xpg_alias {#1/target}} {#1}
   {
     \exp_args:Ne
-    \newenvironment {\prop_item:Nn{\polyglossia@langsetup}{#1/envname}} [1] []
+    \NewDocumentEnvironment {\prop_item:Nn{\polyglossia@langsetup}{#1/envname}} { O{} }
     {
       \otherlanguage [ ##1 ] { #1 }
     }
     {
       \endotherlanguage
     }
-    \exp_args:Nc \newcommand {text#1} [2][]
+    \exp_args:Nc \NewDocumentCommand {text#1} { O{} m }
     {
       \__xpg_textlanguage:een{##1}{#1}{##2}
     }
@@ -1537,13 +1531,6 @@
   % Store BCP-47 id of current language
   \__xpg_store_bcp_info:nn {#1}{#2}
 }
-\cs_generate_variant:Nn \polyglossia@reset@default@language:nn {
-  ee, ef, en, eo, ex,
-  fe, ff, fn, fo, fx,
-  ne, nf,     no, nx,
-  oe, of, on, oo, ox,
-  xe, xf, xn, xo, xx
-}
 
 % This saves the normalfont for the latin script since we may change normalfont in other scripts
 \let\normalfontlatin=\normalfont
@@ -1698,13 +1685,7 @@
     { \xdef\otherlanguagebabelname{\l_tmpa_tl} }
   \cs_gset_eq:cc{#2@gbabelname}{otherlanguagebabelname}
 }
-\cs_generate_variant:Nn  \polyglossia@set@other@language:nn {
-  ee, ef, en, eo, ex,
-  fe, ff, fn, fo, fx,
-  ne, nf,     no, nx,
-  oe, of, on, oo, ox,
-  xe, xf, xn, xo, xx
-}
+\cs_generate_variant:Nn  \polyglossia@set@other@language:nn { ee }
 
 
 % Store main language variant for external packages
@@ -1748,13 +1729,7 @@
 % for specific (esp. tag-based) aliases
 % where {<alias>} would cause clashes
 % (e.g., \fi)
-\newenvironment{lang}[2][]{
-  \begin{otherlanguage}[#1]{#2}
-}{
-  \end{otherlanguage}
-}
-
-\providecommand{\foreignlanguage}{}
+\DeclareEnvironmentCopy { lang } { otherlanguage }
 
 % wrapper for foreignlanguage and otherlanguage*
 \newcommand*\polyglossia@setforeignlanguage[2][]{
@@ -1809,10 +1784,10 @@
   \cs_if_exist_use:c{inlineextras@bbl@\babelname}
 }
 
-\renewcommand{\foreignlanguage}[3][]
-{
-  \__xpg_foreignlanguage:eeen {#1} {#2} {\xpg_alias_base_lang:n{#2}} {#3}
-}
+\DeclareDocumentCommand { \foreignlanguage } { O{} m m }
+  {
+	\__xpg_foreignlanguage:eeen {#1} {#2} {\xpg_alias_base_lang:n{#2}} {#3}
+  }
 
 % Direct access to polyglossia@setforeignlanguage
 % used in captions
@@ -1868,17 +1843,14 @@
 
 
 % otherlanguage* is the environment equivalent of \foreignlanguage
-\expandafter\providecommand\csname otherlanguage*\endcsname{}
-
-\renewenvironment{otherlanguage*}[2][]
-{%
-  \__xpg_store_matrixlang:
-  \__xpg_otherlanguage:eee {#1} {#2} {\xpg_alias_base_lang:n{#2}}
-}
-{
-  \egroup
-  \__xpg_reset_to_matrixlang:
-}
+\DeclareDocumentEnvironment { otherlanguage* } { O{} m }
+  {
+	\__xpg_store_matrixlang:
+	\__xpg_otherlanguage:eee { #1 } { #2 } { \xpg_alias_base_lang:n { #2 } }
+  }{
+	\group_end:
+	\__xpg_reset_to_matrixlang:
+  }
 
 % internal wrapper
 % #1 option
@@ -1895,9 +1867,7 @@
     \bgroup
   }
 }
-\cs_generate_variant:Nn \__xpg_otherlanguage:nnn {
-  eee
-}
+\cs_generate_variant:Nn \__xpg_otherlanguage:nnn { eee }
 
 % use by \text<lang> and \textlang. Equivalent to \foreignlanguage,
 % except that dates are localized.
@@ -2003,9 +1973,7 @@
   }
   \polyglossia@register@language:nn{#2}{#3}
 }
-\cs_generate_variant:Nn \polyglossia@select@language:nnn {
- nee, nne
-}
+\cs_generate_variant:Nn \polyglossia@select@language:nnn { nee, nne }
 
 
 % set lang option #2 for lang #1
