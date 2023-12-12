@@ -2228,22 +2228,6 @@
     \addtocontents{lot}{\protect\setforeignlanguage{\languagename}}
 }
 
-% The bidi package swaps the output stream within RTL tables
-% (to get the column order right). This also swaps group
-% delimiters inserted to the aux files via otherlanguage (see #354).
-% We therefore patch bidi and insert a bool that tells us
-% whether we are in such a table.
-\newbool{xpg@inbiditable}
-\AtBeginDocument{
-  \@ifpackageloaded{bidi}{
-     \patchcmd{\@tabular}
-               {\if@RTLtab}
-               {\if@RTLtab\booltrue{xpg@inbiditable}}
-               {} % success
-               {\xpg@warning{Patching bidi table failed!}}
-  }{}
-}
-
 % check if language is defined
 \prg_set_conditional:Npnn \__xpg_check_if_exist_l@:N #1 { p , T , F , TF }{
   \cs_if_exist:cTF {l@#1}
