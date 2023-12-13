@@ -925,13 +925,6 @@
       }%
 }
 
-
-% Easy way out – Arthur, 2012-08-01
-\ifcsdef{newXeTeXintercharclass}{
-% to reset the intercharclass of a character to "normal"
-\newXeTeXintercharclass\xpg@normalclass %TODO
-}{}
-
 %% when no patterns are available, we use \l@nohyphenation, assigned to 255
 %%  (suggestion by Enrico Gregorio)
 \sys_if_engine_luatex:TF
