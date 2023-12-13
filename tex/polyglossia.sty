@@ -884,45 +884,37 @@
 
 %% ensure localization of \markright and \markboth commands
 %%% THIS IS NOW DISABLED BY DEFAULT
-\cs_new_nopar:Nn {\polyglossia@local@marks:n} {}
-\cs_new_nopar:Nn {\polyglossia@enable@local@marks:}
+\cs_new_nopar:Nn \polyglossia@local@marks:n { }
+\cs_new_nopar:Nn \polyglossia@enable@local@marks:
 {
-      \xpg@info{Option:~ localmarks}
-      \cs_gset_nopar:Nn \polyglossia@local@marks:n
-      {%
-         \def\xpg@tmp@lang{##1}
-         \DeclareRobustCommand\markboth[2]{
-            \begingroup
-               \let\label\relax \let\index\relax \let\glossary\relax
-               \unrestored@protected@xdef\@themark
-               {%
-                {\lowercase{\foreignlanguage{\xpg@tmp@lang}}{\protect\@@ensure@maindir{####1}}}
-                {\lowercase{\foreignlanguage{\xpg@tmp@lang}}{\protect\@@ensure@maindir{####2}}}
-               }%
-               \@temptokena \expandafter{\@themark}
-               \mark{\the\@temptokena}
-            \endgroup
-            \if@nobreak\ifvmode\nobreak\fi\fi
-         }%
-         \DeclareRobustCommand\markright[1]{
-            \begingroup
-               \let\label\relax \let\index\relax \let\glossary\relax
-               \expandafter\@markright\@themark
-               {\lowercase{\foreignlanguage{\xpg@tmp@lang}}{\protect\@@ensure@maindir{####1}}}
-               \@temptokena \expandafter{\@themark}
-               \mark{\the\@temptokena}
-            \endgroup
-            \if@nobreak\ifvmode\nobreak\fi\fi
-         }
-% This part seems wrong (see #396 for explanation). Remove after a while.
-%         \def\@markright####1####2####3{%
-%            \@temptokena{\protect\@@ensure@maindir{####1}}%
-%            \unrestored@protected@xdef\@themark{%
-%               {\the\@temptokena}%
-%               {\protect\@@ensure@maindir{####3}}%
-%            }%
-%         }%
-      }%
+  \xpg@info{Option:~ localmarks}
+  \cs_gset_nopar:Nn \polyglossia@local@marks:n
+  {
+	 \def\xpg@tmp@lang{##1}
+	 \DeclareRobustCommand\markboth[2]{
+		\begingroup
+		   \let\label\relax \let\index\relax \let\glossary\relax
+		   \unrestored@protected@xdef\@themark
+		   {
+			{\lowercase{\foreignlanguage{\xpg@tmp@lang}}{\protect\@@ensure@maindir{####1}}}
+			{\lowercase{\foreignlanguage{\xpg@tmp@lang}}{\protect\@@ensure@maindir{####2}}}
+		   }
+		   \@temptokena \expandafter{\@themark}
+		   \mark{\the\@temptokena}
+		\endgroup
+		\if@nobreak\ifvmode\nobreak\fi\fi
+	 }
+	 \DeclareRobustCommand\markright[1]{
+		\begingroup
+		   \let\label\relax \let\index\relax \let\glossary\relax
+		   \expandafter\@markright\@themark
+		   {\lowercase{\foreignlanguage{\xpg@tmp@lang}}{\protect\@@ensure@maindir{####1}}}
+		   \@temptokena \expandafter{\@themark}
+		   \mark{\the\@temptokena}
+		\endgroup
+		\if@nobreak\ifvmode\nobreak\fi\fi
+	 }
+  }
 }
 
 %% when no patterns are available, we use \l@nohyphenation, assigned to 255
