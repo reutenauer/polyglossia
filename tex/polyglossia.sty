@@ -1050,15 +1050,10 @@
 
 
 % get base language
-\cs_new:Nn \xpg_alias_base_lang:n {
-  \str_if_eq:eeTF { \prop_item:Ne \__xpg_alias {#1/target} } { #1 }
+\cs_new:Nn \xpg_alias_base_lang:n
   {
-    #1
+    \prop_item:Ne \__xpg_alias {#1/target}
   }
-  {
-    \xpg_alias_base_lang:n {  \prop_item:Ne \__xpg_alias {#1/target} }
-  }
-}
 \cs_generate_variant:Nn \xpg_alias_base_lang:n {e}
 
 \keys_define:nn { polyglossia/alias }
