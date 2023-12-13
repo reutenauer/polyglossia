@@ -29,10 +29,17 @@
   \providecommand\texorpdfstring[2]{#1}       % dummy command if hyperref is not loaded
 }
 
-\sys_if_engine_luatex:T{
-  \RequirePackage{luatexbase} % already included by fontspec, but needed here
-  \RequireLuaModule{polyglossia}
-}
+%% when no patterns are available, we use \l@nohyphenation, assigned to 255
+%%  (suggestion by Enrico Gregorio)
+%% \l@nohyphenation is defined in polyglossia.lua
+\sys_if_engine_luatex:TF
+  {
+	\RequirePackage{luatexbase} % already included by fontspec, but needed here
+	\RequireLuaModule{polyglossia}
+  }{
+	\cs_if_free:cT { l@nohyphenation } 
+	   {\chardef\l@nohyphenation=255 }
+  }
 
 % Which version of XeTeX do we use? What is the boudary class? 4095 or 255
 \@ifundefined{e@alloc@intercharclass@top}
@@ -916,20 +923,6 @@
 	 }
   }
 }
-
-%% when no patterns are available, we use \l@nohyphenation, assigned to 255
-%%  (suggestion by Enrico Gregorio)
-\sys_if_engine_luatex:TF
-    {
-      \@ifundefined{l@nohyphenation}
-        {\chardef\l@nohyphenation=\directlua{
-           tex.sprint(polyglossia.newloader_loaded_languages.nohyphenation)}\relax
-        }
-        {}
-    }
-    {
-      \@ifundefined{l@nohyphenation}{\chardef\l@nohyphenation=255 }{}
-    }
 
 %we call this macro when a gloss file is not found for a given language
 \def\xpg@nogloss#1{
@@ -2195,8 +2188,7 @@
   % and assign the returned number to \l@#1
   \__xpg_check_if_exist_l@:NF {#1}
   {
-    \expandafter\chardef\csname l@#1\endcsname=
-    \directlua{ tex.sprint(polyglossia.newloader'#1') }\relax
+    \directlua { token.set_char('l@#1', polyglossia.newloader'#1') }
   }
 }
 

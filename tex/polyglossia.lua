@@ -32,6 +32,7 @@ end
 
 -- predefined l@nohyphenation or LuaTeX's maximum value for \language
 local nohyphid = luatexbase.registernumber'l@nohyphenation' or 16383
+token.set_char('l@nohyphenation', nohyphid)
 
 -- key `nohyphenation` is for .sty file when possibly undefined l@nohyphenation
 local newloader_loaded_languages = { nohyphenation = nohyphid }
