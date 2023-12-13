@@ -26,14 +26,6 @@ end
 polyglossia = polyglossia or {}
 local polyglossia = polyglossia
 
-local function select_language(lang, id)
-    polyglossia.current_language = lang
-end
-
-local function set_default_language(lang, id)
-    polyglossia.default_language = lang
-end
-
 local function load_tibt_eol()
     require('polyglossia-tibt')
 end
@@ -151,11 +143,6 @@ local function newloader(langentry)
     end
 end
 
-polyglossia.select_language = select_language
-polyglossia.set_default_language = set_default_language
 polyglossia.load_tibt_eol = load_tibt_eol
 polyglossia.newloader = newloader
 polyglossia.newloader_loaded_languages = newloader_loaded_languages
--- global variables:
--- polyglossia.default_language
--- polyglossia.current_language

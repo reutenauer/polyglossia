@@ -1321,11 +1321,6 @@
   \cs_gset_eq:cc{#2@g.bcp47.extension.u}{bcp47.extension.u}
   \cs_gset_eq:cc{#2@g.bcp47.extension.x}{bcp47.extension.x}
   \cs_gset_eq:cc{#2@g.bcp47.casing}{bcp47.casing}
-  % Set luatex main language
-  \sys_if_engine_luatex:T
-   {
-     \directlua{polyglossia.set_default_language('\luaescapestring{\string#2}')}%
-   }
 }
 
 \DeclareCommandCopy \setmainlanguage \setdefaultlanguage
@@ -1965,11 +1960,6 @@
   }
   {
     \xpg@set@language@aux[#2]{#3}
-  }
-  \sys_if_engine_luatex:T
-  {
-    \directlua{polyglossia.select_language('\luaescapestring{\string#3}',
-      \the\csname l@#3\endcsname)}
   }
   \polyglossia@register@language:nn{#2}{#3}
 }
