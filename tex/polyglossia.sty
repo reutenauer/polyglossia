@@ -300,7 +300,7 @@
   \clist_map_inline:Nn \l_tmpa_clist {
     \ifbool{havehyphen}{}{
        % check if language hyphenname is defined
-      \__xpg_check_if_exist_l@:NF{#1}{
+      \__xpg_check_if_exist_l@:nF{#1}{
           % if not, first consider nohyphenation
           \str_if_eq:nnTF{##1}{nohyphenation}
             {
@@ -2164,29 +2164,19 @@
 }
 
 % check if language is defined
-\prg_set_conditional:Npnn \__xpg_check_if_exist_l@:N #1 { p , T , F , TF }{
-  \cs_if_exist:cTF {l@#1}
-    {
-      \cs_if_eq:cNTF {l@#1} \l@nohyphenation
-        {
-          \prg_return_false:
-        }
-        {
-          % it's possible that sometimes \csname l@#1\endcsname becomes \relax
-          \cs_if_eq:cNTF {l@#1} \relax
-            { \prg_return_false: }
-            { \prg_return_true: }
-        }
-    }
-    {
-      \prg_return_false:
-    }
-}
+\prg_set_conditional:Npnn \__xpg_check_if_exist_l@:n #1 { F, TF }
+  {
+	\bool_lazy_and:nnTF 
+	  { \cs_if_exist_p:c { l@#1 }  }
+	  { ! (\cs_if_eq_p:cc { l@#1 } { l@nohyphenation }) }
+	  { \prg_return_true: }
+      { \prg_return_false: }
+  }
 
 \def\polyglossia@luatex@load@lang#1{
   % if \l@#1 is not properly defined, call lua function newloader(#1),
   % and assign the returned number to \l@#1
-  \__xpg_check_if_exist_l@:NF {#1}
+  \__xpg_check_if_exist_l@:nF {#1}
   {
     \directlua { token.set_char('l@#1', polyglossia.newloader'#1') }
   }
@@ -2200,7 +2190,7 @@
   {
     \polyglossia@luatex@load@lang{#1}
   }
-  \__xpg_check_if_exist_l@:NTF{#1}{#2}{#3}
+  \__xpg_check_if_exist_l@:nTF{#1}{#2}{#3}
 }
 
 % Set \bbl@hyphendata@\the\language, which is (lua)babel's
