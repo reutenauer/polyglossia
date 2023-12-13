@@ -34,11 +34,9 @@ def replacetext():
     for dname, dirs, files in os.walk("tex/"):
         search_text = "Language definition file \(part of polyglossia v\d\.\d+ \-\- \d\d\d\d/\d\d/\d\d"
         replace_text = "Language definition file (part of polyglossia v" + new_version + " -- " + new_date
-        search_text_lde = "\{\d\d\d\d/\d\d/\d\d\}\{v\d\.\d+\}"
-        replace_text_lde = "{" + new_date + "}{v" + new_version + "}" 
         for fname in files:
             extension = os.path.splitext(fname)[1]
-            if extension != ".ldf" and extension != ".lde":
+            if extension != ".ldf":
                 continue
             fpath = os.path.join(dname, fname)
             file = ""
@@ -52,13 +50,10 @@ def replacetext():
             if file == file_new:
                 print("No version string found, or version already updated, in " + fname + "!")
 
-            # Also consider Bastien's experimental macro
-            file_new = re.sub(search_text_lde, replace_text_lde, file_new)
-
             with open(fpath, "w") as f:
                 f.write(file_new)
     # Report success
-    print("ldf and lde versions updated")
+    print("ldf versions updated")
     
     for dname, dirs, files in os.walk("tex/"):
         search_text = "part of polyglossia v\d\.\d+ \-\- \d\d\d\d/\d\d/\d\d"

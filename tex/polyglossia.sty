@@ -926,7 +926,7 @@
 
 %we call this macro when a gloss file is not found for a given language
 \def\xpg@nogloss#1{
-   \xpg@warning{Neither~ file~ gloss-#1.ldf~ nor file~ gloss-#1.lde~ exists!\MessageBreak
+   \xpg@warning{File~ gloss-#1.ldf~ do~ not~  exists!\MessageBreak
    I~ will~ nevertheless~ try~ to~ use~ hyphenation~ patterns~ for~ #1.}
   \PolyglossiaSetup{#1}{hyphenmins={2,3},hyphennames={#1},fontsetup=true}
   % the above amounts to:
@@ -945,80 +945,29 @@
   \catcode`\@=\xpg@saved@at@catcode
 }
 
-%% Load a lde file
-\cs_new_nopar:Nn \__xpg_gloss_ext: {lde}
-\cs_new_nopar:Ne \__xpg_saved_@pkgextension: {\@pkgextension}
-
-\msg_new:nnn { polyglossia } { directloadgloss }
-{
-  You~ should~ not~ load~ directly~ the~ gloss~ file. ~
-  You~ must~ use~ `\string\setotherlanguage\{#1\}' or  `\string\setmainlanguage\{#1\}'.
-}
-\msg_redirect_name:nnn { polyglossia } { directloadgloss } { critical }
-\NewDocumentCommand{\__xpg_ProvidesLanguageDefinitionExtension_error}{m m m m}
-{
-  \msg_critical:nn { polyglossia } { directloadgloss }
-}
-% ProvideExplPackage but for language file
-\cs_new_eq:NN \ProvidesLanguageDefinitionExtension \__xpg_ProvidesLanguageDefinitionExtension_error
-\cs_new_eq:NN \__xpg_saved_ProvidesExplPackage \ProvidesExplPackage
-\NewDocumentCommand{\__xpg_ProvidesLanguageDefinitionExtension}{m m m m}
-{
-  \__xpg_saved_ProvidesExplPackage{#1}{#2}{#3}{#4}
-  \cs_gset_eq:NN \@pkgextension \__xpg_saved_@pkgextension:
-  \cs_gset_eq:NN \ProvidesLanguageDefinitionExtension \__xpg_ProvidesLanguageDefinitionExtension_error
-}
-
-
-% wrapper for loading a gle file
-\NewDocumentCommand{\RequireLanguageDefinitionExtension}{O{} m}
-{
-  \cs_gset_eq:NN \__xpg_saved_@pkgextension: \@pkgextension
-  \cs_gset_eq:NN \__xpg_saved_ProvidesExplPackage \ProvidesExplPackage
-  \cs_gset_eq:NN \@pkgextension \__xpg_gloss_ext:
-  \cs_gset_eq:NN \ProvidesLanguageDefinitionExtension \__xpg_ProvidesLanguageDefinitionExtension
-  \RequirePackage[#1]{gloss-#2}
-  % be paranoiac restore
-  \cs_gset_eq:NN \@pkgextension \__xpg_saved_@pkgextension:
-  \cs_gset_eq:NN \__xpg_ProvidesLanguageDefinitionExtension_error \ProvideLanguageDefinitionExtension
-}
-
 % try to load a language file
 \cs_new:Nn \polyglossia_load_lang_definition:nn {
-  \file_if_exist:nTF{gloss-#2.lde}
-  {
-    \RequireLanguageDefinitionExtension[#1]{#2}
-    \setkeys{#2}{#1}
-  }
-  {
-    \file_if_exist:nTF{gloss-#2.ldf}
-    {
-      % Temporarily force catcode of ~ to 13 since babelsh.def
-      % requires it. This is needed particularly with LaTeX3
-      % packages which force \ExplSyntaxOn (#425)
-      \protected\edef\xpg@restore@tilde@catcode{\catcode 126 = \the\catcode 126\relax}
-      \catcode 126 = 13
-      \xpg@input{gloss-#2.ldf}
-      \setkeys{#2}{#1}
-      % restore former ~ catcode
-      \xpg@restore@tilde@catcode
-    }
-    {
-      \xpg@nogloss{#2}
-    }
-  }
+	\file_if_exist:nTF{gloss-#2.ldf}
+	{
+	  % Temporarily force catcode of ~ to 13 since babelsh.def
+	  % requires it. This is needed particularly with LaTeX3
+	  % packages which force \ExplSyntaxOn (#425)
+	  \protected\edef\xpg@restore@tilde@catcode{\catcode 126 = \the\catcode 126\relax}
+	  \catcode 126 = 13
+	  \xpg@input{gloss-#2.ldf}
+	  \setkeys{#2}{#1}
+	  % restore former ~ catcode
+	  \xpg@restore@tilde@catcode
+	}
+	{
+	  \xpg@nogloss{#2}
+	}
 }
 \cs_generate_variant:Nn \polyglossia_load_lang_definition:nn { ee }
 
 % load a master language from an alias file
 \newcommand*\xpg@load@master@language[1] {
-  \file_if_exist:nTF{gloss-#1.lde}
-  {
-    \RequireLanguageDefinitionExtension{#1}
-  }
-  {
-    \xpg@input{gloss-#1.ldf}
-  }
+  \xpg@input{gloss-#1.ldf}
   \seq_if_in:NeF \__xpg_langs_loaded {#1}
   {
     % define environment and command if not alias

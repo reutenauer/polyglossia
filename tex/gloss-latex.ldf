@@ -1,6 +1,6 @@
 % Language definition file (part of polyglossia v1.66 -- 2023/12/11)
 %
-\ProvidesLanguageDefinitionExtension{gloss-latex}{2023/12/11}{v1.66}{polyglossia: module for default language}
+\ProvidesFile{gloss-latex.ldf}[polyglossia: module for default language]
 
 \PolyglossiaSetup{latex}{
   bcp47=en-US,
