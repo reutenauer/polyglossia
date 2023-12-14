@@ -2064,7 +2064,7 @@
 \newcommand*{\xpg@set@language@only@aux}[2][]{
     % Write to the aux (toc files)
    \if@filesw
-        \addtocontents{toc}{\protect\selectlanguage*[#1]{#2}}
+        \addtocontents{toc}{\selectlanguage*[#1]{#2}}
    \fi
 }
 
@@ -2453,11 +2453,5 @@
 }{
   \system@babelshorthandsfalse
 }
-
-%
-% FIXME these should also be loaded \AtEndOfPackage !!!
-\def\xpg@option#1#2{
-  \ifcsundef{xpg@main@language}{\setdefaultlanguage}{\setotherlanguage}
-    [#1]{#2}}
 
 \endinput
