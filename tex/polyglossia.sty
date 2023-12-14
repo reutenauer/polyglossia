@@ -1848,41 +1848,32 @@
   \xpg@hook@setlanguage
   \let\emp@langname\@undefined}
 
-\newif\ifxpginauxfile\xpginauxfilefalse
-
 \DeclareDocumentCommand \selectlanguage {s O{} m}
-{
-  \tl_if_blank:eTF {\xpg_alias_base_lang:n{#3}}
   {
-    \ifxpginauxfile
-      \msg_show:nnn { polyglossia } { languagenolongerloaded } {#3}
-    \else
-      \msg_show:nnn { polyglossia } { languagenotloaded } {#3}
-    \fi
+    \tl_if_blank:eTF {\xpg_alias_base_lang:n{#3}}
+      {
+	    \IfBooleanTF { #1 }
+          { \msg_show:nnn { polyglossia } { languagenolongerloaded } {#3} }
+          { \msg_show:nnn { polyglossia } { languagenotloaded } {#3} }
+      }{
+        \polyglossia@select@language:nee {#1}
+          { \xpg_alias_add_to_option_i:nn{#3}{#2} }
+          { \xpg_alias_base_lang:n{#3} }
+      }
   }
-  {
-    \polyglossia@select@language:nee {#1}
-      {\xpg_alias_add_to_option_i:nn{#3}{#2}}
-      {\xpg_alias_base_lang:n{#3}}
-  }
-}
 
 \cs_new:Nn \polyglossia@select@language:nnn
 {
-  \IfBooleanF {#1}
-  {
-    \cs_set_nopar:Npx \xpg@pop@language { \exp_not:N \xpg@pop@language@i {#2} {#3} }
-    \group_insert_after:N \xpg@pop@language
-  }
+  \IfBooleanTF { #1 }   % The starred variant does not write to the aux
+    {
+	  \xpg@set@language@nonaux[#2]{#3}
+    }{
+      \cs_set_nopar:Npe \xpg@pop@language { \exp_not:N \xpg@pop@language@i {#2} {#3} }
+      \group_insert_after:N \xpg@pop@language
+	  \xpg@set@language@aux[#2]{#3}
+    }
   % Register the language options
   \polyglossia@set@lang@options:nnn {#3} {#2} {@xpg@set@langvariant}
-  % The starred variant does not write to the aux
-  \IfBooleanTF#1{%
-    \xpg@set@language@nonaux[#2]{#3}
-  }
-  {
-    \xpg@set@language@aux[#2]{#3}
-  }
   \polyglossia@register@language:nn{#2}{#3}
 }
 \cs_generate_variant:Nn \polyglossia@select@language:nnn { nee, nne }
@@ -2073,29 +2064,14 @@
 \newcommand*{\xpg@set@language@only@aux}[2][]{
     % Write to the aux (toc files)
    \if@filesw
-      \ifx#1\\\\
-          \addtocontents{toc}{\protect\selectlanguage*{#2}}
-       \else
-          \addtocontents{toc}{\protect\selectlanguage*[#1]{#2}}
-       \fi
+        \addtocontents{toc}{\protect\selectlanguage*[#1]{#2}}
    \fi
 }
 
 \AtBeginDocument{
-   % Tell polyglossia that we are in an aux file
    \if@filesw
-      \addtocontents{toc}{\protect\xpginauxfiletrue}
-      \addtocontents{lof}{\protect\xpginauxfiletrue}
-      \addtocontents{lot}{\protect\xpginauxfiletrue}
-   \fi
-}
-
-\AtEndDocument{
-   % Tell polyglossia that we are no longer in an aux file
-   \if@filesw
-      \addtocontents{toc}{\protect\xpginauxfilefalse}
-      \addtocontents{lof}{\protect\xpginauxfilefalse}
-      \addtocontents{lot}{\protect\xpginauxfilefalse}
+		\immediate\write\@mainaux
+		{\ProvideDocumentCommand\selectlanguage{sO{}m}{}}
    \fi
 }
 
