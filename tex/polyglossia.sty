@@ -697,10 +697,6 @@
 \let\disablehyphenation\xpg@disablehyphenation
 \let\enablehyphenation\xpg@enablehyphenation
 
-%\def\xpg@fontsetup#1{\xpg@csifdef@warn{xpg@fontsetup@#1}}
-%\def\xpg@fontsetup@none#1{\csgdef{#1@font}{\ifcsdef{#1font}{\csname #1font\endcsname}{}}} %<-- simplistic
-%\def\xpg@fontsetup@custom#1{\csuse{#1@font}}
-
 \cs_new:Npn \xpg__auto_setupfont:n #1 {
   \bool_if:cTF { g__xpg_#1_fontsetup_bool }
   {
