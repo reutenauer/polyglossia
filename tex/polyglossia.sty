@@ -2378,7 +2378,7 @@
      .meta:n = { localmarks = false },
    
   babelshorthands
-     .bool_set:N = \l_polyglossia_babelshorthands_bool,
+     .legacy_if_set:n = system@babelshorthands, % compatibility
   babelshorthands
      .default:n = true,
 
@@ -2444,14 +2444,6 @@
      \cs_if_exist:cT{initiate@active@char}{\bbl@deactivate{#1}}
      \seq_remove_all:Nn \__xpg_active_shorthands {#1}
     }
-}
-
-% compatibility
-\newif\ifsystem@babelshorthands
-\bool_if:nTF \l_polyglossia_babelshorthands_bool {
-  \system@babelshorthandstrue
-}{
-  \system@babelshorthandsfalse
 }
 
 \endinput
