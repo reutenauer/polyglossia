@@ -772,7 +772,7 @@
            }
         \xpg@error{
           The~ current~ latin ~ \l_ffamily_tl\space font~ does~ not~ contain~ the~"#3"~ script!\MessageBreak
-          Please~ define~\csname\tl_if_empty:nF{#3}{\str_lowercase:n#3}font\l_ffamilysh_tl\endcsname~
+          Please~ define~\csname\tl_if_empty:nF{#3}{\str_lowercase:n{#3}}font\l_ffamilysh_tl\endcsname~
           with~ \string\newfontfamily\space command
           }
         }
