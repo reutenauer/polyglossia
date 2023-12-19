@@ -716,7 +716,7 @@
   \bool_if:nTF{\tl_if_empty_p:n{#1} || \tl_if_empty_p:n{#2}}
   {
     % maybe an error ?
-    \xpg@warning{Asking~ to~ add~ empty~ feature~to~ latin~ font~
+    \xpg@warning{Asking~ to~ add~ empty~ feature~to~ main~ font~
       (Language="#2"~ to~ langtag~ "#1")}
   }
   {
@@ -748,7 +748,7 @@
   \bool_if:nTF{\tl_if_empty_p:n{#2} || \tl_if_empty_p:n{#3}}
   {
     % maybe an error ?
-    \xpg@warning{Asking~ to~ add~ empty~ feature~to~ latin~ font
+    \xpg@warning{Asking~ to~ add~ empty~ feature~to~ main~ font
                  (Script="#3"~ to~ scripttag~ "#2")}
   }
   {
@@ -770,8 +770,23 @@
            {
              \tl_set:Nn \l_ffamily_tl { monospace }
            }
+        % Strip font family name for error message
+        \tl_set:Ne \l_tmpa_tl { \fontname\font }
+        \sys_if_engine_luatex:T
+        {
+           % With LuaTeX, family name is divided by colon
+           % from the OpenType parameters. Replace with slash
+           % for the following split
+           \regex_replace_once:nnN { : } { / } \l_tmpa_tl
+        }
+        % split family name from the rest which we don't want
+        % to output
+        \seq_set_split:Nne \l_tmpa_seq { / } \l_tmpa_tl
+        \seq_get_left:NN \l_tmpa_seq \l_fname_tl
+        % Strip off preceding quote
+        \tl_replace_once:Nnn \l_fname_tl { " } { }
         \xpg@error{
-          The~ current~ latin ~ \l_ffamily_tl\space font~ does~ not~ contain~ the~"#3"~ script!\MessageBreak
+          The~ current~ main ~ \l_ffamily_tl\space font,~ \l_fname_tl,~ does~ not~ contain~ the~"#3"~ script!\MessageBreak
           Please~ define~\csname\tl_if_empty:nF{#3}{\str_lowercase:n{#3}}font\l_ffamilysh_tl\endcsname~
           with~ \string\newfontfamily\space command
           }
