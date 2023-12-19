@@ -755,30 +755,30 @@
     \fontspec_if_script:nTF{#2}
        {\addfontfeature{Script=#3}}
        {
-        \tl_set:Nn \l_ffamily_tl {}
-        \tl_set:Nn \l_ffamilysh_tl { #1 }
+        \tl_set:Nn \xpg_ffamily_tl {}
+        \tl_set:Nn \xpg_ffamilysh_tl { #1 }
         \str_if_eq:nnT { #1 } { rm }
            {
-             \tl_set:Nn \l_ffamily_tl { roman }
-             \tl_set:Nn \l_ffamilysh_tl {}
+             \tl_set:Nn \xpg_ffamily_tl { roman }
+             \tl_set:Nn \xpg_ffamilysh_tl {}
            }
         \str_if_eq:nnT { #1 } { sf }
            {
-             \tl_set:Nn \l_ffamily_tl { sans~ serif }
+             \tl_set:Nn \xpg_ffamily_tl { sans~ serif }
            }
         \str_if_eq:nnT { #1 } { tt }
            {
-             \tl_set:Nn \l_ffamily_tl { monospace }
+             \tl_set:Nn \xpg_ffamily_tl { monospace }
            }
         % Strip font family name for error message
         % Courtesy of egreg, https://tex.stackexchange.com/a/613996
-        \str_set:Nx \l_fname_str { \fontname\font }
-        \regex_replace_once:nnN { \:.* } { } \l_fname_str
-        \regex_replace_once:nnN { \A \[(.*)\] \Z } { \1 } \l_fname_str
-        \regex_replace_once:nnN { \.[^\.]* \Z } { } \l_fname_str
+        \str_set:Nx \xpg_fname_str { \fontname\font }
+        \regex_replace_once:nnN { \:.* } { } \xpg_fname_str
+        \regex_replace_once:nnN { \A \[(.*)\] \Z } { \1 } \xpg_fname_str
+        \regex_replace_once:nnN { \.[^\.]* \Z } { } \xpg_fname_str
         \xpg@error{
-          The~ current~ main ~ \l_ffamily_tl\space font,~ \l_fname_str,~ does~ not~ contain~ the~"#3"~ script!\MessageBreak
-          Please~ define~\csname\tl_if_empty:nF{#3}{\str_lowercase:n{#3}}font\l_ffamilysh_tl\endcsname~
+          The~ current~ main ~ \xpg_ffamily_tl\space font,~ \xpg_fname_str,~ does~ not~ contain~ the~"#3"~ script!\MessageBreak
+          Please~ define~\csname\tl_if_empty:nF{#3}{\str_lowercase:n{#3}}font\xpg_ffamilysh_tl\endcsname~
           with~ \string\newfontfamily\space command
           }
         }
