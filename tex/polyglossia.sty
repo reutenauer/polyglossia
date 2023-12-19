@@ -773,9 +773,17 @@
         % Strip font family name for error message
         % Courtesy of egreg, https://tex.stackexchange.com/a/613996
         \str_set:Nx \xpg_fname_str { \fontname\font }
+        % Remove all after :
         \regex_replace_once:nnN { \:.* } { } \xpg_fname_str
-        \regex_replace_once:nnN { \A \[(.*)\] \Z } { \1 } \xpg_fname_str
+        % ... and all after /
+        \regex_replace_once:nnN { /.* } { } \xpg_fname_str
+        % ... and brackets
+        \regex_replace_once:nnN { \[ } { } \xpg_fname_str
+        \regex_replace_once:nnN { \] } { } \xpg_fname_str
+        % ... and extensions
         \regex_replace_once:nnN { \.[^\.]* \Z } { } \xpg_fname_str
+        % ... and, finally, quotation marks
+        \regex_replace_once:nnN { " } { } \xpg_fname_str
         \xpg@error{
           The~ current~ main ~ \xpg_ffamily_tl\space font,~ \xpg_fname_str,~ does~ not~ contain~ the~"#3"~ script!\MessageBreak
           Please~ define~\csname\tl_if_empty:nF{#3}{\str_lowercase:n{#3}}font\xpg_ffamilysh_tl\endcsname~
