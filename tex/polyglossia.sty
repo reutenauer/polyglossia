@@ -1981,7 +1981,8 @@
 }
 
 % Test if option value is set
-\newcommand*\iflanguageoption[5]{
+\DeclareDocumentCommand \iflanguageoption { m m m m }
+{
   \polyglossia@check@option@value:NNNTF{#1}{#2}{#3}{#4}{#5}
 }
 
@@ -1994,21 +1995,23 @@
 }
 
 % Test if language is loaded
-\newcommand*\iflanguageloaded[3]{
+\DeclareDocumentCommand \iflanguageloaded { m m m }
+{
    \AddToHook{begindocument/end}{
      \clist_if_in:NeTF \xpg@loaded{#1}{#2}{#3}
    }
 }
 
 % Same for babellanguage is loaded
-\newcommand*\ifbabellanguageloaded[3]{
+\DeclareDocumentCommand \ifbabellanguageloaded { m m m }
+{
   \AddToHook{begindocument/end}{
      \clist_if_in:NeTF \xpg@bloaded{#1}{#2}{#3}
   }
 }
 
 % Same for languageid
-\DeclareDocumentCommand \iflanguageidloaded {mmmm}
+\DeclareDocumentCommand \iflanguageidloaded { m m m m }
 {
   \AddToHook{begindocument/end}{
     \str_case:nnTF {#1}
