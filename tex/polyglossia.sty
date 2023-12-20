@@ -2465,16 +2465,16 @@
    \AddToHook{begindocument/before}{
        % Load the involved languages if necessary
        % Error if they do not exist
-       \cs_set:Nn \xpg_tmpa_lang: { \xpg_alias_base_lang:n{#1} }
-       \clist_if_in:NeF \xpg@loaded {\xpg_tmpa_lang:}{
-           \file_if_exist:nTF{gloss-\xpg_tmpa_lang:.ldf}
+       \tl_set:Nn \xpg_tmpa_lang_tl { \xpg_alias_base_lang:n{#1} }
+       \clist_if_in:NeF \xpg@loaded {\xpg_tmpa_lang_tl}{
+           \file_if_exist:nTF{gloss-\xpg_tmpa_lang_tl .ldf}
               { \setotherlanguage{#1} }
               { \xpg@error{ Source~ language~ #1,~ used~ in~
                             \string\inheritbabelshorthands,~ does~ not~ exist } }
        }
-       \cs_set:Nn \xpg_tmpb_lang: { \xpg_alias_base_lang:n{#2} }
-       \clist_if_in:NeF \xpg@loaded {\xpg_tmpb_lang:}{
-           \file_if_exist:nTF{gloss-\xpg_tmpb_lang:.ldf}
+       \tl_set:Nn \xpg_tmpb_lang_tl { \xpg_alias_base_lang:n{#2} }
+       \clist_if_in:NeF \xpg@loaded {\xpg_tmpb_lang_tl}{
+           \file_if_exist:nTF{gloss-\xpg_tmpb_lang_tl .ldf}
               { \setotherlanguage{#2} }
               { \xpg@error{ Target~ language~ #2,~ used~ in~
                             \string\inheritbabelshorthands,~ does~ not~ exist } }
@@ -2482,9 +2482,9 @@
        % Test whether the requested shorthands exist
        \bool_if_exist:NF \xpg_no_shorthands_bool
            { \bool_new:N \xpg_no_shorthands_bool }
-       \cs_if_exist:cF { \xpg_tmpa_lang: @shorthands }
+       \cs_if_exist:cF { \xpg_tmpa_lang_tl @shorthands }
                        { \bool_set_true:N \xpg_no_shorthands_bool }
-       \cs_if_exist:cF { no\xpg_tmpa_lang: @shorthands }
+       \cs_if_exist:cF { no\xpg_tmpa_lang_tl @shorthands }
                        { \bool_set_true:N \xpg_no_shorthands_bool }
        \bool_if:nT { \xpg_no_shorthands_bool }
                    {
@@ -2493,9 +2493,9 @@
        % If so, apply:
        \bool_if:nF { \xpg_no_shorthands_bool }
        {
-           \exp_args:Ncc \addto { blockextras@\xpg_tmpb_lang: } { \xpg_tmpa_lang: @shorthands }
-           \exp_args:Ncc \addto { inlineextras@\xpg_tmpb_lang: } { \xpg_tmpa_lang: @shorthands }
-           \exp_args:Ncc \addto { noextras@\xpg_tmpb_lang: } { no\xpg_tmpa_lang: @shorthands }
+           \exp_args:Ncc \addto { blockextras@\xpg_tmpb_lang_tl } { \xpg_tmpa_lang_tl @shorthands }
+           \exp_args:Ncc \addto { inlineextras@\xpg_tmpb_lang_tl } { \xpg_tmpa_lang_tl @shorthands }
+           \exp_args:Ncc \addto { noextras@\xpg_tmpb_lang_tl } { no\xpg_tmpa_lang_tl @shorthands }
        }
    }
 }
@@ -2509,9 +2509,9 @@
        \languageshorthands{none}
     }
     {
-       \cs_set:Nn \xpg_tmpa_lang: { \xpg_alias_base_lang:n{#1} }
-       \iflanguageloaded{\xpg_tmpa_lang:}{
-           \use:c{\xpg_tmpa_lang: @shorthands}
+       \tl_set:Nn \xpg_tmpa_lang_tl { \xpg_alias_base_lang:n{#1} }
+       \iflanguageloaded{\xpg_tmpa_lang_tl}{
+           \use:c{\xpg_tmpa_lang_tl @shorthands}
        }{
            \xpg@error{ Language~ #1,~ requested~ in~
                        \string\startbabelshorthands,~ is~ not~ loaded }
