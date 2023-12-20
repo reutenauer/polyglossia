@@ -2500,4 +2500,23 @@
    }
 }
 
+% Activate shorthands of a (loaded) language inline
+\NewDocumentCommand \startbabelshorthands { m }
+{
+    \str_if_eq:nnTF { #1 } { none }
+    {
+       % "none" deactivates any shorthands
+       \languageshorthands{none}
+    }
+    {
+       \cs_set:Nn \xpg_tmpa_lang: { \xpg_alias_base_lang:n{#1} }
+       \iflanguageloaded{\xpg_tmpa_lang:}{
+           \use:c{\xpg_tmpa_lang: @shorthands}
+       }{
+           \xpg@error{ Language~ #1,~ requested~ in~
+                       \string\startbabelshorthands,~ is~ not~ loaded }
+       }
+    }
+}
+
 \endinput
