@@ -8,16 +8,13 @@
 \RequirePackage{fontspec}[2010/06/08]% v2.0
 \RequirePackage{iftex}
 
-% Execute code #3 if package #1 has been loaded already, else
-% add to package hook #2
-\cs_new_nopar:Nn \__xpg_at_package_hook:nnn{
-  \IfPackageLoadedTF{#1}{#3}{\AddToHook{#2}{#3}}%
-}
-
 \prg_generate_conditional_variant:Nnn \clist_if_in:Nn {Ne} {TF, T, F} % check if needed
+
 % correct a bug in tracklang
-\__xpg_at_package_hook:nnn{tracklang}{file/tracklang.sty/after}{%
-  \IfPackageAtLeastTF{tracklang}{2019/08/30}{}{\global\def\AddTrackedLangage{\AddTrackedLanguage}}
+\AddToHook{package/tracklang/after}{%
+  \IfPackageAtLeastTF{tracklang}{2019/08/30}
+      {}
+      {\global\def\AddTrackedLangage{\AddTrackedLanguage}}
 }
 
 %% This is for compatibility with Babel-aware package:
@@ -198,7 +195,7 @@
     \xpg@error{right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}
   }
 }
-\__xpg_at_package_hook:nnn{bidi}{package/bidi/after}{
+\AddToHook{package/bidi/after}{
   \cs_gset_nopar:Nn{\polyglossia@setpardirection:n}{
     \__xpg_if_LR_str:nTF{#1}
     {
@@ -218,7 +215,7 @@
     }
   }
 }
-\__xpg_at_package_hook:nnn{luabidi}{package/luabidi/after}{
+\AddToHook{package/luabidi/after}{
   \cs_gset_nopar:Nn{\polyglossia@setpardirection:n}{
     \__xpg_if_LR_str:nTF{#1}
     {
