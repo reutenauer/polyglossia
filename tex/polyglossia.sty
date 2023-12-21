@@ -60,12 +60,12 @@
 \def\latinAlph#1{\expandafter\latin@Alph\csname c@#1\endcsname}
 
 % select language hook
-\cs_new_nopar:Nn \polyglossia@AtBeginDocument@selectlanguage: {}
+\cs_new_nopar:Nn \xpg_at_begin_document_selectlanguage: {}
 % \disablehyphenation hook
-\cs_new_nopar:Nn \polyglossia@AtBeginDocument@hyphenation: {}
+\cs_new_nopar:Nn \xpg_at_begin_document_hyphenation: {}
 
 % hook to be executed at begin of document
-\cs_new_nopar:Nn \polyglossia@AtBeginDocument: {
+\cs_new_nopar:Nn \xpg_at_begin_document: {
   % save various command
   \let\latin@alph\@alph   % TODO rename when we have the C locale
   \let\latin@Alph\@Alph   % TODO rename when we have the C locale
@@ -78,17 +78,17 @@
   \xpg@set@familydefault
 }
 
-\AtBeginDocument{
-  \polyglossia@AtBeginDocument:
+\AddToHook{begindocument}{
+  \xpg_at_begin_document:
 }
 
 % The following needs to go after any \AtBeginDocument (also of packages
 % loaded after \set[main|other]language
-\AfterEndPreamble{
+\AddToHook{begindocument/end}{
   % now we have the C locale definition: select the language
-  \polyglossia@AtBeginDocument@selectlanguage:
+  \xpg_at_begin_document_selectlanguage:
   % If hyphenation disabling has been requested in preamble, do it now
-  \polyglossia@AtBeginDocument@hyphenation:
+  \xpg_at_begin_document_hyphenation:
 }
 
 %% custom message macros
@@ -159,7 +159,7 @@
 \def\@@ensure@maindir#1{\ifcsundef{@ensure@maindir}{#1}{\@ensure@maindir{#1}}}
 
 %% Used by the language definitions files for right-to-left languages
-\def\RequireBidi
+\NewDocumentCommand \RequireBidi {}
   {
     \sys_if_engine_luatex:TF
       {\ifx\@onlypreamble\@notprerr\else\RequirePackage{luabidi}\fi}
@@ -668,7 +668,7 @@
   \else
      % if this is used in the preamble, we have to postpone
      % the execution until the main language has been set (#125).
-     \cs_gset_nopar:Nn \polyglossia@AtBeginDocument@hyphenation: {
+     \cs_gset_nopar:Nn \xpg_at_begin_document_hyphenation: {
         \xpg@@disablehyphenation
      }
   \fi
@@ -1202,7 +1202,7 @@
   {
     \__xpg_setRTLmain:
   }
-  \cs_gset_nopar:Nn \polyglossia@AtBeginDocument@selectlanguage: {
+  \cs_gset_nopar:Nn \xpg_at_begin_document_selectlanguage: {
     \selectbackgroundlanguage{#2}
     \selectlanguage[#1]{#2}%
   }
