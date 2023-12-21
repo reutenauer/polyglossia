@@ -630,9 +630,9 @@ calls will overwrite previous ones (and also the shorthand that might be defined
 
 If you want to enable the shorthands of a specific language inline, also when the language itself
 is not active (but loaded in the preamble), you can do so by means of\new{1.67}
-\displaycmd{\startbabelshorthands\marg{language}}{\startbabelshorthands}
+\displaycmd{\usebabelshorthands\marg{language}}{\usebabelshorthands}
 The effect of this is local to groups. If you want to disable any active shorthands, you can use
-¦\startbabelshorthands{none}¦.
+¦\usebabelshorthands{none}¦.
 
 \section{Language-switching commands}\label{languageswitching}
 
@@ -2686,7 +2686,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \subsubsection*{New Features}
 \begin{itemize}
 	\item Add \cmd{\inheritbabelshorthands} (\TXI{604}).
-	\item Add \cmd{\startbabelshorthands}.
+	\item Add \cmd{\usebabelshorthands}.
 \end{itemize}
 
 \subsubsection*{Internal work}
