@@ -19,7 +19,6 @@
 
 %% This is for compatibility with Babel-aware package:
 \def\languageshorthands#1{\relax} % this is for scrlttr2 class
-\def\bbl@cs#1{\csname bbl@#1\endcsname}
 \AddToHook{begindocument/before}{
   \let\bbl@set@language\xpg@set@language@aux  % for biblatex
   \let\bbl@main@language\xpg@main@language    % for biblatex
