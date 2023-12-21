@@ -17,12 +17,15 @@
       {\global\def\AddTrackedLangage{\AddTrackedLanguage}}
 }
 
-%% This is for compatibility with Babel-aware package:
-\def\languageshorthands#1{\relax} % this is for scrlttr2 class
+%% The following is for compatibility with Babel-aware package:
+% \languageshorthands is provided by babelsh.def, which is
+% only loaded by some glosses, but some classes presuppose
+% it is there generally
+\ProvideDocumentCommand \languageshorthands { m } {}
 \AddToHook{begindocument/before}{
-  \let\bbl@set@language\xpg@set@language@aux  % for biblatex
-  \let\bbl@main@language\xpg@main@language    % for biblatex
-  \providecommand\texorpdfstring[2]{#1}       % dummy command if hyperref is not loaded
+  \cs_gset_eq:NN \bbl@set@language \xpg@set@language@aux  % for biblatex
+  \cs_gset_eq:NN \bbl@main@language \xpg@main@language    % for biblatex
+  \ProvideDocumentCommand \texorpdfstring { m m } { #1 }  % dummy command if hyperref is not loaded
 }
 
 %% when no patterns are available, we use \l@nohyphenation, assigned to 255
