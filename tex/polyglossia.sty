@@ -57,9 +57,16 @@
 % list of loaded languages (bcp-47 id)
 \clist_new:N \xpg@bcp@loaded
 
-% counter in latin
-\def\latinalph#1{\expandafter\latin@alph\csname c@#1\endcsname}
-\def\latinAlph#1{\expandafter\latin@Alph\csname c@#1\endcsname}
+% output counter as lower-case latin letter
+\DeclareExpandableDocumentCommand \latinalph { m }
+{
+    \exp_args:Nc \latin@alph {c@#1}
+}
+% output counter as upper-case latin letter
+\DeclareExpandableDocumentCommand \latinAlph { m }
+{
+    \exp_args:Nc \latin@Alph {c@#1}
+}
 
 % select language hook
 \cs_new_nopar:Nn \xpg_at_begin_document_selectlanguage: {}
