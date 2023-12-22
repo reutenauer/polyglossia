@@ -1575,9 +1575,9 @@
     \@afterindentfalse
 }
 
-\cs_new_nopar:Npn \selectbackgroundlanguage #1
-{%
   \polyglossia@select@background@language:n {\xpg_alias_base_lang:n{#1}}
+\DeclareDocumentCommand \selectbackgroundlanguage { m }
+{
 }
 \cs_new:Nn \polyglossia@select@background@language:n
 {
