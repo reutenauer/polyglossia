@@ -1357,7 +1357,7 @@
    }{
      % Register the language options
      \__xpg_set_language_options:nnn {#2} {#1} {@xpg@set@langvariant}
-     \cs_set_eq:cc{#2@gvar}{languagevariant}
+     \cs_set_eq:cc{#2@var}{languagevariant}
   }%
 }
 
@@ -1474,6 +1474,16 @@
   }{
     \edef\babelname{\prop_item:Nn{\g_xpg_langsetup_prop}{#2/babelname}}
   }
+  % Store variant
+  \tl_if_blank:nTF {#1}
+  {
+    \cs_gset_nopar:Npn \mainlanguagevariant {}
+  }
+  {
+     % Register the language options
+     \__xpg_set_language_options:nnn {#2} {#1} {@xpg@main@langvariant}
+  }
+  \csgdef{#2@gvar}{\mainlanguagevariant}
   % Store BCP-47 id of current language
   \__xpg_store_bcp_info:nn {#1}{#2}
 }
