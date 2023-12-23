@@ -112,7 +112,7 @@
 \endinput
 
 % TODO ? this is set in babel:
-\gappto\blockextrasfinnish{%
+\addto\blockextrasfinnish{%
   \babel@savevariable\hyphenpenalty\hyphenpenalty=30%
   \babel@savevariable\exhyphenpenalty\exhyphenpenalty=30%
   \babel@savevariable\doublehyphendemerits\doublehyphendemerits=5000%
