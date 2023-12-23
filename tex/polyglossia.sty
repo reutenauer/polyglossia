@@ -1843,7 +1843,7 @@
 \cs_generate_variant:Nn \__xpg_textlanguage:nnn {een}
 
 % Track whether we are in an inline lang (\text...) switch
-\bool_new:N \__xpg_inline_lang
+\bool_new:N \l__xpg_inline_lang_bool
 
 % use by \text<lang> and \textlang. Equivalent to \foreignlanguage,
 % except that dates are localized.
@@ -1860,7 +1860,7 @@
   {
     \__xpg_store_matrixlang:
     \group_begin:
-      \bool_set_true:N \__xpg_inline_lang
+      \bool_set_true:N \l__xpg_inline_lang_bool
       \xpg_otherlanguage:nn{#1}{#3}
       \csuse{date#3}
       % This is a hook for external packages which want to access variants
@@ -2249,7 +2249,7 @@
   {
     \resetfontlatin
   }
-  \bool_if:NF \__xpg_inline_lang
+  \bool_if:NF \l__xpg_inline_lang_bool
   { % This for non-inline font switches
     % in case a \<lang>font is defined
     \xpg@set@normalfont{#2}
