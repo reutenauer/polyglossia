@@ -1895,6 +1895,8 @@
 
 \cs_new:Nn \__xpg_select_language:nnn
 {
+  % Register the language options
+  \__xpg_set_language_options:nnn {#3} {#2} {@xpg@set@langvariant}
   \IfBooleanTF { #1 }   % The starred variant does not write to the aux
     {
 	  \xpg@set@language@nonaux[#2]{#3}
@@ -1903,8 +1905,6 @@
       \group_insert_after:N \xpg@pop@language
 	  \xpg@set@language@aux[#2]{#3}
     }
-  % Register the language options
-  \__xpg_set_language_options:nnn {#3} {#2} {@xpg@set@langvariant}
   \__xpg_register_language:nn{#2}{#3}
 }
 \cs_generate_variant:Nn \__xpg_select_language:nnn { nee, nne }
