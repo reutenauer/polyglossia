@@ -157,7 +157,10 @@
 }
 \msg_redirect_name:nnn { polyglossia } { languagenolongerloaded } { warning }
 
-% 
+\msg_new:nnn { polyglossia } { unknownlocalnumeral }
+{
+  Unknown~ key~ #1~ in~ \string\localnumeral.
+}
 
 %% use macro if defined, else warn that it is not
 \cs_new_nopar:Nn \__xpg_use_or_warn:N
@@ -603,29 +606,32 @@
    \polyglossia@Clang@@arabic{#2}
 }
 
-\tl_new:N \l__xpg_localnumeral_tl
-\bool_new:N \l__xpg_localnumeral_bool
-
-\keys_define:nn { polyglossia / localnumeral }
+\cs_new:Npn \__xpg_localnumeral_parse:nn #1 #2
   {
-	lang .choice:, 
-	lang / main .code:n =  \tl_set:Nn \l__xpg_localnumeral_tl { \mainlanguagename } ,
-	lang / local .code:n = \tl_set:Nn \l__xpg_localnumeral_tl { \languagename } 
-							\bool_set_true:N \l__xpg_localnumeral_bool ,
-	lang / unknown .code:n = \tl_set:Nn \l__xpg_localnumeral_tl { #1 } ,
+    \str_if_eq:eeF { #1 } { lang } { \msg_error:nn { module } { my-message } }
+	\str_case:enF { #2 } 
+		 {
+			{ local } { }
+			{ main } { \foreignlanguage { \mainlanguagename } }
+		 }
+		 { \foreignlanguage { #2 } }
   }
   
 \cs_new:Npn \__xpg_localnumeral:nnn #1 #2 #3
   {
-	\group_begin:
-	\keys_set:ne { polyglossia / localnumeral } { #2 }
-	\bool_if:NF \l__xpg_localnumeral_bool { \foreignlanguage { \l__xpg_localnumeral_tl } }
-	  { \use:c { \prop_item:Ne \g_xpg_langsetup_prop
-	  { \l__xpg_localnumeral_tl / #3 } } { } { #1 } }
-	\group_end:
+    \use:e
+	  {
+		\keyval_parse:nnn
+	  	  { \msg_error:nn { module } { my-message } }
+	  	  {
+			\__xpg_localnumeral_parse:nn
+	  	  } { #2 }
+	  }
+	{ \use:c { \prop_item:Ne \g_xpg_langsetup_prop
+	{ \languagename / #3 } } { } { #1 } } 
   }
-
-\NewDocumentCommand \localnumeral { s ={ lang } O{ local } m }
+  
+\NewExpandableDocumentCommand \localnumeral { s ={ lang } O{ local } m }
   {
     \IfBooleanTF { #1 }
 	  {
@@ -636,7 +642,7 @@
 	  }
   }
 
-\NewDocumentCommand \Localnumeral { s ={ lang } O{ local } m }
+\NewExpandableDocumentCommand \Localnumeral { s ={ lang } O{ local } m }
   {
     \IfBooleanTF { #1 }
 	  {
@@ -646,11 +652,6 @@
 		\__xpg_localnumeral:nnn { #3 } { #2 } { Localnumeral }
 	  }
   }
-
-% Prevent case changing of counter name in the starred variant #622
-\tl_put_right:Nn \l_text_case_exclude_arg_tl { \Localnumeral }
-\tl_put_right:Nn \l_text_case_exclude_arg_tl { \localnumeral }
-
 
 \cs_new_nopar:Npn \__xpg_french_spacing:n #1
   { 
