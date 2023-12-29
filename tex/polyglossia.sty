@@ -631,7 +631,7 @@
 	{ \languagename / #3 } } { } { #1 } } 
   }
   
-\NewExpandableDocumentCommand \localnumeral { s ={ lang } O{ local } m }
+\NewExpandableDocumentCommand \localnumeral { s O{ lang=local } m }
   {
     \IfBooleanTF { #1 }
 	  {
@@ -642,7 +642,7 @@
 	  }
   }
 
-\NewExpandableDocumentCommand \Localnumeral { s ={ lang } O{ local } m }
+\NewExpandableDocumentCommand \Localnumeral { s O{ lang=local } m }
   {
     \IfBooleanTF { #1 }
 	  {
