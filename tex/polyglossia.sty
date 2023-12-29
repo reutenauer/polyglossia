@@ -647,6 +647,11 @@
 	  }
   }
 
+% Prevent case changing of counter name in the starred variant #622
+\tl_put_right:Nn \l_text_case_exclude_arg_tl { \Localnumeral }
+\tl_put_right:Nn \l_text_case_exclude_arg_tl { \localnumeral }
+
+
 \cs_new_nopar:Npn \__xpg_french_spacing:n #1
   { 
     \bool_if:cTF { g__xpg_#1_fs_bool } 
