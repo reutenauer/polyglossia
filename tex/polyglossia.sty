@@ -615,7 +615,7 @@
 \cs_new:Npn \__xpg_localnumeral_parse:nn #1 #2
   {
     \str_if_eq:eeF { #1 } { lang } { \msg_error:nnn { polyglossia } { unknownlocalnumeral } { #1 } }
-	\str_case:enF { #2 } 
+	\exp_args:Ne \str_case:nnF { #2 }
 		 {
 			{ local } { }
 			{ main } { \foreignlanguage { \mainlanguagename } }
