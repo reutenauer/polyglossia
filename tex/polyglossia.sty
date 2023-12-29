@@ -1775,6 +1775,9 @@
 	\__xpg_foreignlanguage:eeen {#1} {#2} {\xpg_alias_base_lang:n{#2}} {#3}
   }
 
+% prevent case changing of language name in \foreignlanguage
+\tl_put_right:Nn \l_text_case_exclude_arg_tl { \foreignlanguage }
+
 % Direct access to polyglossia@setforeignlanguage
 % used in captions
 \newcommand{\setforeignlanguage}[2][]
