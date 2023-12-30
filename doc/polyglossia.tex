@@ -1175,10 +1175,14 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		If this is turned on, the following shorthands for fine-tuning hyphenation
 		and micro-typography of Finnish words are activated:
 		\begin{shorthands}
-		\item[¦"-¦] adds a hyphenation point that does still allow for hyphenation at the points preset
-                    in the hyphenation patterns (as opposed to \cmd\-).
-        \item[\texttt{"\textasciitilde}] for a hyphen sign without a breakpoint. Useful for
-                    cases where the hyphen should stick at the following syllable.
+		\item[¦"-¦] adds an explicit hyphen without a breakpoint, allowing for hyphenation at the
+		            other points preset in the hyphenation patterns. Useful for
+		            cases where the hyphen should stick at the following syllable
+		            (\eg ¦pakastekaapit ja "-arkut¦).
+		\item[\texttt{"=}] for a hyphen sign without a breakpoint that does also remove all other
+		            breakpoints in the word (as opposed to ¦"-¦).
+        \item[\texttt{"\textasciitilde}] functionally equivalent to ¦"-¦ (provided for backwards
+                   compatibility reasons).
         \item[¦"|¦] disables a ligature at this position.
         \item[¦""¦] allows for a line break at this position (without hyphenation sign).
         \item[¦"/¦] a slash that allows for a subsequent line break. As opposed to \cmd\slash,
@@ -2690,6 +2694,11 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \begin{itemize}
 	\item Add \cmd{\inheritbabelshorthands} (\TXI{604}).
 	\item Add \cmd{\usebabelshorthands}.
+\end{itemize}
+
+\subsubsection*{Documentation improvements}
+\begin{itemize}
+	\item Fix documentation of Finnish shorthands (\TXI{623}).
 \end{itemize}
 
 \subsubsection*{Internal work}
