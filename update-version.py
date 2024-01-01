@@ -105,7 +105,7 @@ def replacetext():
         udate = new_date.split("/")
         search_text = "THE POLYGLOSSIA PACKAGE v\d\.\d+"
         replace_text = "THE POLYGLOSSIA PACKAGE v" + new_version
-        search_ctext = "(\-\d\d\d\d) ([Arthur|Bastien|Jürgen])"
+        search_ctext = "(\-\d\d\d\d) ([Arthur|Udi|Jürgen])"
         replace_ctext = "-" + new_date[:4] + r" \2"
         # Reading the file data and store
         # it in a file variable
