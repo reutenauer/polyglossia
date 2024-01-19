@@ -1353,6 +1353,11 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		           \eg ¦(pseudo"~)""wissenschaftlich¦.
 		\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to \cmd\slash, hyphenation at the breakpoints
 		           preset in the hyphenation patterns is still allowed.
+		\item[¦"*¦]\new{2.0} An asterisk which assures the word can still be hyphenated at its defined breakpoints.
+		            Useful if you want to employ gender-sensitive writing (,gender star`).					
+		            Similar shorthands are available for the alternative gender-sensitive spellings, ¦":¦ and ¦"_¦.
+		\item[¦"x¦]\new{2.0} Inserts a gender mark which assures the word can still be hyphenated at its defined breakpoints.
+	                This is predefined to ¦*¦ but can be globally redefined by redefining the macro \cmd\mkgender\ (see below).
 		\end{shorthands}
 
 		There are also four shorthands for quotation signs:
@@ -1363,6 +1368,11 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		\item[¦">¦] for French-style right double quotes (»).
 		\end{shorthands}
 	\end{itemize}
+	\paragraph*{Commands:}
+	\begin{itemize}
+		\item \Cmd\mkgender\new{2.0} Defines which gender mark is output by the babelshorthand ¦"x¦.
+		      Predefined to ¦\def\mkgender{*}¦.
+    \end{itemize}
 
 \subsection{greek}\label{greek}
 \paragraph*{Options:}
@@ -2694,6 +2704,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \begin{itemize}
 	\item Add \cmd{\inheritbabelshorthands} (\TXI{604}).
 	\item Add \cmd{\usebabelshorthands}.
+	\item Add shorthands for German gender-sensitive writing.
 \end{itemize}
 
 \subsubsection*{Documentation improvements}

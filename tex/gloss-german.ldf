@@ -231,6 +231,11 @@
   \declare@shorthand{german}{"/}{\textormath
     {\bbl@allowhyphens\discretionary{/}{}{/}\bbl@allowhyphens}{}}%
   \def\ck{\allowhyphens\discretionary{k-}{k}{ck}\allowhyphens}%
+  \def\mkgender{*}%
+  \declare@shorthand{german}{":}{\nobreak:\bbl@allowhyphens}%
+  \declare@shorthand{german}{"*}{\nobreak*\bbl@allowhyphens}%
+  \declare@shorthand{german}{"_}{\nobreak\_\bbl@allowhyphens}%
+  \declare@shorthand{german}{"x}{\nobreak\mkgender\bbl@allowhyphens}%
 }
 
 \def\nogerman@shorthands{%
