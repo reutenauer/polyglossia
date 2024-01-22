@@ -1188,14 +1188,24 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
         \item[¦"/¦] a slash that allows for a subsequent line break. As opposed to \cmd\slash,
                   hyphenation at the breakpoints preset in the hyphenation patterns is still allowed.
 		\end{shorthands}
-  \item \xpgboolkeyfalse[1.54]{schoolhyphens}
-	    If this is set to true, alternative (experimental) hyphenation patterns are used rather than the
-	    default Finnish patterns. These (so-called `School') patterns allow hyphenation at
+  \item \xpgchoicekey[2.0]{hyphens}{\xpgpresetvalue{default}, \xpgvalue{babel}, \xpgvalue{school}}
+        Hyphenation in Finnish is peculiar since there are many rather long words. In order to select a suitable
+        hyphenation pattern, three different options are provided:
+        \begin{itemize}
+        \item The \xpgvalue{default} patterns as used by \LaTeX\ are rather strict and try to prevent hyphenation
+        at points which are valid but considered sub-optimal from an ortho-typographic point of view
+        (\eg hyphenation between two vowels), with the drawback that simple words are sometimes not being
+        hyphenated at points where this would be valid, and lines might become unevenly spaced.
+        \item The \pkg{babel} support for Finnish by default tweaks some hyphenation-related values
+        (such as \cmd\hyphenpenalty) for Finnish. If you want to replicate this with \pkg{polyglossia},
+        select \xpgvalue{babel} (this still uses the default patterns).
+        \item The \xpgvalue{school} setting, finally, employs alternative (experimental) hyphenation patterns
+	    rather than the default Finnish patterns. These (so-called `School') patterns allow hyphenation at
 	    all valid points, including hyphenation points that are considered sub-optimal from an
-	    ortho-typographic point of view (e.\,g., hyphenation between two vowels).
-	    The default patterns try to prevent such hyphenation, with the drawback that simple words
-	    are sometimes not being hyphenated at points where this would be valid.
+	    ortho-typographic point of view.\footnote{This equals the previous boolean option \xpgoption{schoolhyphens},
+	    which is still supported for backwards compatibility.}
 	    See \url{https://github.com/hyphenation/basic-finnish} for details.
+	    \end{itemize}
 \end{itemize}
 
 \subsection{french}\label{french}
@@ -2705,6 +2715,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Add \cmd{\inheritbabelshorthands} (\TXI{604}).
 	\item Add \cmd{\usebabelshorthands}.
 	\item Add shorthands for German gender-sensitive writing.
+	\item Implement \pkg{babel}-style hyphenation for Finnish.
 \end{itemize}
 
 \subsubsection*{Documentation improvements}

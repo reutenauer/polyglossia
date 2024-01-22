@@ -18,10 +18,37 @@
 
 \define@boolkey{finnish}[finnish@]{babelshorthands}[true]{}
 
-\define@boolkey{finnish}[finnish@]{schoolhyphens}[true]{}
+\newif\if@finnish@schoolhyphens
+\newif\if@finnish@babelhyphens
+\define@choicekey*+{finnish}{hyphens}[\xpg@val\xpg@nr]{default,school,babel}[default]{%
+   \ifcase\xpg@nr\relax
+      % default:
+      \@finnish@schoolhyphensfalse
+      \@finnish@babelhyphensfalse
+   \or
+      % school:
+      \@finnish@schoolhyphenstrue
+      \@finnish@babelhyphensfalse
+   \or
+      % babel:
+      \@finnish@schoolhyphensfalse
+      \@finnish@babelhyphenstrue
+   \fi
+   \xpg@info{Option: Finnish, hyphens=\xpg@val}%
+}{\xpg@warning{Unknown Finnish hyphens `#1'}}
+
+% backwards compatibility
+\define@boolkey{finnish}[finnish@]{schoolhyphens}[true]{%
+  \iffinnish@schoolhyphens
+      \@finnish@schoolhyphenstrue
+      \@finnish@babelhyphensfalse
+  \else
+      \@finnish@schoolhyphensfalse
+  \fi
+}
 
 % Register default options
-\xpg@initialize@gloss@options{finnish}{babelshorthands=false,schoolhyphens=false}
+\xpg@initialize@gloss@options{finnish}{babelshorthands=false,hyphens=default}
 
 \ifsystem@babelshorthands
   \setkeys{finnish}{babelshorthands=true}
@@ -77,7 +104,7 @@
 }
 
 \def\finnish@language{%
-  \iffinnish@schoolhyphens
+  \if@finnish@schoolhyphens
       \xpg@ifdefined{schoolfinnish}{%
          \polyglossia@setup@language@patterns{schoolfinnish}%
       }{%
@@ -88,6 +115,28 @@
   \else
       \polyglossia@setup@language@patterns{finnish}%
   \fi
+}
+
+% activate babel-style hyphen settings if requested
+\AtBeginDocument{%
+    \if@finnish@babelhyphens
+	\let\xpg@save@hyphenpenalty\hyphenpenalty%
+	\let\xpg@save@exhyphenpenalty\exhyphenpenalty%
+	\let\xpg@save@doublehyphendemerits\doublehyphendemerits%
+	\let\xpg@save@finalhyphendemerits\finalhyphendemerits%
+	\addto\blockextras@finnish{%
+	  \hyphenpenalty=30%
+	  \exhyphenpenalty=30%
+	  \doublehyphendemerits=5000%
+	  \finalhyphendemerits=5000%
+	}%
+	\addto\noextras@finnish{%
+	  \let\hyphenpenalty\xpg@save@hyphenpenalty%
+	  \let\exhyphenpenalty\xpg@save@exhyphenpenalty%
+	  \let\doublehyphendemerits\xpg@save@doublehyphendemerits%
+	  \let\finalhyphendemerits\xpg@save@finalhyphendemerits%
+	}%
+    \fi
 }
 
 \def\datefinnish{%
@@ -111,10 +160,3 @@
 
 \endinput
 
-% TODO ? this is set in babel:
-\addto\blockextrasfinnish{%
-  \babel@savevariable\hyphenpenalty\hyphenpenalty=30%
-  \babel@savevariable\exhyphenpenalty\exhyphenpenalty=30%
-  \babel@savevariable\doublehyphendemerits\doublehyphendemerits=5000%
-  \babel@savevariable\finalhyphendemerits\finalhyphendemerits=5000%
-}
