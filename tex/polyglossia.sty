@@ -2326,6 +2326,8 @@
   {
     % Get real current (pre-switch) options (incl. defaults)
     \clist_clear_new:N \l_xpg_current_options
+    \prop_if_exist:cF { xpg@current@options@\languagename }
+	{ \prop_new:c {xpg@current@options@\languagename} }
     \prop_map_inline:cn {xpg@current@options@\languagename}
       {
         \clist_put_right:Nn \l_xpg_current_options {##1=##2}
