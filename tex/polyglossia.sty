@@ -1770,7 +1770,7 @@
   \cs_if_exist_use:c{inlineextras@bbl@\babelname}
 }
 
-\DeclareDocumentCommand { \foreignlanguage } { O{} m m }
+\DeclareDocumentCommand { \foreignlanguage } { O{} m +m }
   {
 	\__xpg_foreignlanguage:eeen {#1} {#2} {\xpg_alias_base_lang:n{#2}} {#3}
   }
@@ -1837,7 +1837,7 @@
 	\__xpg_store_matrixlang:
 	\__xpg_otherlanguage:eee { #1 } { #2 } { \xpg_alias_base_lang:n { #2 } }
   }{
-	\group_end:
+	\egroup% \group_end: does not work here!
 	\__xpg_reset_to_matrixlang:
   }
 
@@ -1853,7 +1853,7 @@
   }{
     \xpg_otherlanguage:nn{ \xpg_alias_add_to_option_i:nn{#2}{#1} }{ #3 }
     \__xpg_lang_set_text_direction:nn{#3}%
-    \bgroup
+    \bgroup% \group_begin: does not work here!
   }
 }
 \cs_generate_variant:Nn \__xpg_otherlanguage:nnn { eee }
