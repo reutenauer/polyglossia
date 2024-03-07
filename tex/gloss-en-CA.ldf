@@ -1,4 +1,4 @@
-% Language definition file (part of polyglossia v2.0 -- 2024/02/17)
+% Language definition file (part of polyglossia v2.1 -- 2024/03/07)
 %
 \ProvidesFile{gloss-en-CA.ldf}[polyglossia: module for en-CA (Canadan English)]
 

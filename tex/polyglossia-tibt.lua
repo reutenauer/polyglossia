@@ -1,6 +1,6 @@
 --
 -- polyglossia-tibt.lua
--- part of polyglossia v2.0 -- 2024/02/17
+-- part of polyglossia v2.1 -- 2024/03/07
 --
 
 require('polyglossia') -- just in case...
