@@ -317,33 +317,35 @@
   \clist_map_inline:nn { #1 } { \keys_set:nn { polyglossia / ##1 } { #2 } }
 }
 
-
+\bool_new:N \l__xpg_have_hyphen_bool
 % setup hyphennames from a str list of hyphen
 \cs_new:Nn \__xpg_setup_hyphen:n
 {
   \clist_set:Ne{\l_tmpa_clist}{\prop_item:Nn \g_xpg_langsetup_prop {#1 / hyphennames}}
-  \providebool{havehyphen}
-  \boolfalse{havehyphen}
+  \bool_set_false:N \l__xpg_have_hyphen_bool
   % for each hyphen in the set until we find one that works
   \clist_map_inline:Nn \l_tmpa_clist {
-    \ifbool{havehyphen}{}{
+    \bool_if:NF \l__xpg_have_hyphen_bool
+    {
        % check if language hyphenname is defined
       \__xpg_check_if_exist_l@:nF{#1}{
           % if not, first consider nohyphenation
           \str_if_eq:nnTF{##1}{nohyphenation}
             {
                \cs_gset_eq:cc{l@#1}{l@##1}
-               \global\booltrue{havehyphen}
+               \bool_gset_true:N \l__xpg_have_hyphen_bool
             }{
                % then test if hyphenation is defined
                \xpg@ifdefined{##1}{
                   % test if language hyphenation is nohyphenation
-                  \cs_if_eq:cNF{l@#1}{\l@nohyphenation}{\global\booltrue{havehyphen}}{%
+                  \cs_if_eq:cNF{l@#1}{\l@nohyphenation}
+                    { \bool_gset_true:N \l__xpg_have_hyphen_bool }
+                    {%
                       % if false define language to hyphenation if it is not equal...
                       \str_if_eq:nnF{#1}{##1}{\cs_gset_eq:cc{l@#1}{l@##1}}
                       % ...and load
                       \xpg@set@hyphenation@patterns{##1}
-                      \global\booltrue{havehyphen}
+                      \bool_gset_true:N \l__xpg_have_hyphen_bool
                   }
                 }{}
            }
@@ -353,7 +355,8 @@
   % if l@#1 does not yet exist,
   % we assign it to nohyphenation
   % we do this here in case and if the hyphennames key was omitted
-  \ifbool{havehyphen}{}{
+  \bool_if:NF \l__xpg_have_hyphen_bool
+  {
     \xpg@ifdefined{#1}{}
     {
       \xpg@nopatterns{#1}
