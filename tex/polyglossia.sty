@@ -80,15 +80,14 @@
 \cs_new_nopar:Nn \__xpg_at_begin_document:
 {
   % save various command
-  \let\latin@alph\@alph   % TODO rename when we have the C locale
-  \let\latin@Alph\@Alph   % TODO rename when we have the C locale
+  \cs_gset_eq:cc{latin@alph}{@alph}% TODO rename when we have the C locale
+  \cs_gset_eq:cc{latin@Alph}{@Alph}% TODO rename when we have the C locale
   % push to C language gloss
-  \let\polyglossia@Clang@@arabic\@arabic
-  \let\polyglossia@Clang@arabic\arabic
+  \cs_gset_eq:cc{xpg_Clang_arabic}{@arabic}
   
   \xpg_initial_setup:
   % apply \familydefault changes
-  \xpg@set@familydefault
+  \xpg_set_familydefault:
 }
 
 \AddToHook{begindocument}{
@@ -589,14 +588,14 @@
             \prop_gput:Nnn{\g_xpg_langsetup_prop}{#1/Localnumeral}{##1}
          },
     #1 / localnumeral.value_required:n = true,
-    #1 / localnumeral.initial:n = {polyglossia@C@localnumeral},
+    #1 / localnumeral.initial:n = {xpg_C_localnumeral:nn},
     % uppercased
     #1 / Localnumeral
          . code:n =  {
             \prop_gput:Nnn{\g_xpg_langsetup_prop}{#1/Localnumeral}{##1}
          },
     #1 / Localnumeral.value_required:n = true,
-    #1 / Localnumeral.initial:n = {polyglossia@C@localnumeral},
+    #1 / Localnumeral.initial:n = {xpg_C_localnumeral:nn},
     % environment define command (by default create the environment)
     #1 / DefineCommandsCmd
        .code:n = {\prop_gput:Nnn{\g_xpg_langsetup_prop}{#1/DefineCommandsCmd}{##1}},
@@ -608,8 +607,9 @@
 }
 
 % TODO move to C module
-\newcommand*{\polyglossia@C@localnumeral}[2]{
-   \polyglossia@Clang@@arabic{#2}
+\cs_new:Nn \xpg_C_localnumeral:nn
+{
+   \xpg_Clang_arabic{#2}
 }
 
 \cs_new:Npn \__xpg_localnumeral_parse:nn #1 #2
@@ -1538,12 +1538,13 @@
    \selectfont
 }
 
-\def\xpg@patch@fontfamilies{
+\cs_new:Nn \__xpg_patch_fontfamilies:
+{
   % This robustifies the redefinitions of \<xx>family (suggestion by Enrico Gregorio)
   % e.g. to prevent expansion of the \familytype redefinition in auxiliary files
-  \csgappto{rmfamily~}{\def\familytype{rm}}
-  \csgappto{sffamily~}{\def\familytype{sf}}
-  \csgappto{ttfamily~}{\def\familytype{tt}}
+  \tl_gput_right:Nn {\rmfamily~} {\tl_set:Nn \familytype {rm}}
+  \tl_gput_right:Nn {\sffamily~} {\tl_set:Nn \familytype {sf}}
+  \tl_gput_right:Nn {\ttfamily~} {\tl_set:Nn \familytype {tt}}
 }
 
 % These switches activate the default fonts
@@ -1553,22 +1554,21 @@
 \cs_gset_eq:cc{sffamilylatin}{xpg@defaultfont@sf}
 \cs_gset_eq:cc{ttfamilylatin}{xpg@defaultfont@tt}
 
-\def\xpg@set@familydefault{
-  % We need the \edef route here in order
-  % to detect both \renewcommand and \let
-  % changes.
-  \edef\tempa{\familydefault}
-  \edef\tempb{\sfdefault}
-  \ifcsequal{tempa}{tempb}
-     {\def\familytype{sf}}
-     {\edef\tempb{\ttdefault}
-      \ifcsequal{tempa}{tempb}
-         {\def\familytype{tt}}
-         {\def\familytype{rm}}}
-  \xpg@patch@fontfamilies
+\cs_new:Nn \xpg_set_familydefault:
+{
+  \tl_set:Nx \l_tmpa_tl \familydefault
+  \tl_set:Nx \l_tmpb_tl \sfdefault
+  \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
+     { \tl_set:Nn \familytype {sf} }
+     { \tl_set_eq:NN \l_tmpb_tl \ttdefault
+       \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
+           { \tl_set:Nn \familytype {tt} }
+           { \tl_set:Nn \familytype {rm} }
+     }
+  \__xpg_patch_fontfamilies:
   % This (re-)saves the normalfont for the latin script since we may
   % change normalfont in other scripts
-  \let\normalfontlatin=\normalfont
+  \cs_gset_eq:cc{normalfontlatin}{normalfont}
   % And for all cases, we also reset \<xx>familylatin
   \cs_gset_eq:cc{rmfamilylatin}{xpg@defaultfont@rm}
   \cs_gset_eq:cc{sffamilylatin}{xpg@defaultfont@sf}
@@ -1579,7 +1579,7 @@
   \DeclareRobustCommand\rmfamily{\xpg@defaultfont@rm}
   \DeclareRobustCommand\sffamily{\xpg@defaultfont@sf}
   \DeclareRobustCommand\ttfamily{\xpg@defaultfont@tt}
-  \xpg@patch@fontfamilies
+  \__xpg_patch_fontfamilies:
   \global\let\normalfont=\normalfontlatin
 }
 
