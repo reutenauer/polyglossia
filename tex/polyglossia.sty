@@ -290,7 +290,8 @@
 %% TODO: localalph = {<alph_csname>,<Alph_csname>}
 %% TODO: localnumeral = <csname>
 %%       or even better localdigits = {0123456789} for fully automatic setup
-\newcommand*\PolyglossiaSetup[2]{
+\NewDocumentCommand \PolyglossiaSetup { m m }
+{
   \__xpg_keys_define_lang:n{#1}
   \keys_set:nn { polyglossia / #1 } { #2 }
   \__xpg_setup_hyphen:n {#1}
@@ -414,7 +415,8 @@
 
 \cs_new_protected:Npn \__xpg_keys_define_lang:n #1
 {
-  \keys_define:nn {polyglossia}{
+  \keys_define:nn {polyglossia}
+  {
     % the script font
     #1 / script
        .code:n = {
