@@ -12,7 +12,8 @@
 \prg_generate_conditional_variant:Nnn \clist_if_in:Nn {Ne} {TF, T, F} % check if needed
 
 % correct a bug in tracklang
-\AddToHook{package/tracklang/after}{%
+\hook_gput_code:nnn {package/tracklang/after} {.}
+{
   \IfPackageAtLeastTF{tracklang}{2019/08/30}
       {}
       {\cs_gset_eq:NN \AddTrackedLangage \AddTrackedLanguage}
@@ -24,7 +25,8 @@
 % it is there generally. So let's provide a stub:
 \ProvideDocumentCommand \languageshorthands { m } {}
 % These have to be provided at the end of the preamble
-\AddToHook{begindocument/before}{
+\hook_gput_code:nnn {begindocument/before} {.}
+{
   \cs_gset_eq:NN \bbl@set@language \xpg@set@language@aux  % for biblatex
   \cs_gset_eq:NN \bbl@main@language \xpg@main@language    % for biblatex
   \ProvideDocumentCommand \texorpdfstring { m m } { #1 }  % dummy command if hyperref is not loaded
@@ -90,7 +92,8 @@
   \xpg_set_familydefault:
 }
 
-\AddToHook{begindocument}{
+\hook_gput_code:nnn {begindocument} {.}
+{
   \__xpg_at_begin_document:
 }
 
@@ -98,7 +101,8 @@
 % loaded after \set[main|other]language
 % Track whether the main language has been set
 \bool_new:N \g_xpg_main_lang_set_bool
-\AddToHook{begindocument/end}{
+\hook_gput_code:nnn {begindocument/end} {.}
+{
   % now we have the C locale definition: select the language
   \__xpg_at_begin_document_selectlanguage:
   \bool_gset_true:N \g_xpg_main_lang_set_bool
@@ -221,7 +225,8 @@
     \xpg@error{right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}
   }
 }
-\AddToHook{package/bidi/after}{
+\hook_gput_code:nnn {package/bidi/after} {.}
+{
   \cs_gset_nopar:Nn \__xpg_set_par_direction:n
   {
     \__xpg_if_LR_str:nTF{#1}
@@ -243,7 +248,8 @@
     }
   }
 }
-\AddToHook{package/luabidi/after}{
+\hook_gput_code:nnn {package/luabidi/after} {.}
+{
   \cs_gset_nopar:Nn \__xpg_set_par_direction:n
   {
     \__xpg_if_LR_str:nTF{#1}
@@ -2067,7 +2073,8 @@
 % Test if language is loaded
 \DeclareDocumentCommand \iflanguageloaded { m m m }
 {
-   \AddToHook{begindocument/end}{
+   \hook_gput_code:nnn {begindocument/end} {.}
+   {
      \clist_if_in:NeTF \xpg@loaded{#1}{#2}{#3}
    }
 }
@@ -2075,7 +2082,8 @@
 % Same for babellanguage is loaded
 \DeclareDocumentCommand \ifbabellanguageloaded { m m m }
 {
-  \AddToHook{begindocument/end}{
+  \hook_gput_code:nnn {begindocument/end} {.}
+  {
      \clist_if_in:NeTF \xpg@bloaded{#1}{#2}{#3}
   }
 }
@@ -2083,7 +2091,8 @@
 % Same for languageid
 \DeclareDocumentCommand \iflanguageidloaded { m m m m }
 {
-  \AddToHook{begindocument/end}{
+  \hook_gput_code:nnn {begindocument/end} {.}
+  {
     \str_case:nnTF {#1}
       {
         {bcp-47}    { \clist_if_in:NeTF \xpg@bcp@loaded{#2}{#3}{#4} }
@@ -2151,16 +2160,18 @@
    \fi
 }
 
-\AtBeginDocument{
+\hook_gput_code:nnn {begindocument} {.}
+{
    \if@filesw
-		\immediate\write\@mainaux
-		{\ProvideDocumentCommand\selectlanguage{sO{}m}{}}
+	\immediate\write\@mainaux
+	{\ProvideDocumentCommand\selectlanguage{sO{}m}{}}
    \fi
 }
 
 % Since captions might float to other language regions,
 % we need to change the language here (#542)
-\AddToHook{cmd/caption/before}{
+\hook_gput_code:nnn {cmd/caption/before} {.}
+{
     \ifhmode\unskip\fi
     \addtocontents{lof}{\protect\setforeignlanguage{\languagename}}
     \addtocontents{lot}{\protect\setforeignlanguage{\languagename}}
@@ -2435,7 +2446,8 @@
   }
   { }
 
-\AddToHook{begindocument/before}{
+\hook_gput_code:nnn {begindocument/before} {.}
+{
    \IfPackageLoadedTF{bidi}{
       \providecommand*{\aemph}[1]{$\overline{\hboxR{#1}}$}
    }{}
@@ -2535,7 +2547,8 @@
 % Inherit shorthands in other languages
 \NewDocumentCommand \inheritbabelshorthands { m m }
 {
-   \AddToHook{begindocument/before}{
+   \hook_gput_code:nnn {begindocument/before} {.}
+   {
        % Load the involved languages if necessary
        % Error if they do not exist
        \tl_set:Nn \l__xpg_tmpa_lang_tl { \xpg_alias_base_lang:n{#1} }
