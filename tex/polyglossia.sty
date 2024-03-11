@@ -183,11 +183,19 @@
 
 
 %% ensure directionality if bidi is loaded, else ignore
-\def\@@ensure@dir#1{\ifcsundef{@ensure@dir}{#1}{\@ensure@dir{#1}}}
-\def\@@ensure@maindir#1{\ifcsundef{@ensure@maindir}{#1}{\@ensure@maindir{#1}}}
+%%% FIXME still used?
+\cs_new_nopar:Npn \@@ensure@dir #1
+{
+  \cs_if_exist_use:c{@ensure@dir}{#1}
+}
+
+\cs_new_nopar:Npn \@@ensure@maindir #1
+{
+  \cs_if_exist_use:c{@ensure@maindir}{#1}
+}
 
 %% Used by the language definitions files for right-to-left languages
-\NewDocumentCommand \RequireBidi {}
+\cs_new_nopar:Npn \RequireBidi
 {
     \sys_if_engine_luatex:TF
       {\ifx\@onlypreamble\@notprerr\else\RequirePackage{luabidi}\fi}
