@@ -1736,7 +1736,13 @@
 % for specific (esp. tag-based) aliases
 % where {<alias>} would cause clashes
 % (e.g., \fi)
-\DeclareEnvironmentCopy { lang } { otherlanguage }
+\DeclareDocumentEnvironment { lang } { O{} +m }
+{
+  \otherlanguage [ #1 ] { #2 }
+}
+{
+  \endotherlanguage
+}
 
 % wrapper for foreignlanguage and otherlanguage*
 \newcommand*\polyglossia@setforeignlanguage[2][]{
