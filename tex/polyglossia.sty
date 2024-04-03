@@ -1732,18 +1732,6 @@
 % inside case changing commands (e.g. \MakeUppercase)
 \tl_put_right:Nn \l_text_case_exclude_arg_tl { \textlang }
 
-% Alias to {<lang>}, but more suitable
-% for specific (esp. tag-based) aliases
-% where {<alias>} would cause clashes
-% (e.g., \fi)
-\DeclareDocumentEnvironment { lang } { O{} m }
-{
-  \otherlanguage [ #1 ] { #2 }
-}
-{
-  \endotherlanguage
-}
-
 % wrapper for foreignlanguage and otherlanguage*
 \newcommand*\polyglossia@setforeignlanguage[2][]{
   \select@@language[#1]{#2}
@@ -2372,6 +2360,12 @@
     % restore previous language in aux file and remove closed one from stack
     \__xpg_unstack_language:n{xpg@set@language@only@aux}
   }
+
+% Alias to {<lang>}, but more suitable
+% for specific (esp. tag-based) aliases
+% where {<alias>} would cause clashes
+% (e.g., \fi)
+\DeclareEnvironmentCopy { lang } { otherlanguage }
 
 \newcommand{\setlocalhyphenmins}[3]{
    \xpg@ifdefined{#1}{
