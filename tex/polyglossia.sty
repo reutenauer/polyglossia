@@ -1563,9 +1563,9 @@
 {
   % This robustifies the redefinitions of \<xx>family (suggestion by Enrico Gregorio)
   % e.g. to prevent expansion of the \familytype redefinition in auxiliary files
-  \tl_gput_right:Nn {\rmfamily~} {\tl_set:Nn \familytype {rm}}
-  \tl_gput_right:Nn {\sffamily~} {\tl_set:Nn \familytype {sf}}
-  \tl_gput_right:Nn {\ttfamily~} {\tl_set:Nn \familytype {tt}}
+  \tl_gput_right:cn {rmfamily~} {\tl_set:Nn \familytype {rm}}
+  \tl_gput_right:cn {sffamily~} {\tl_set:Nn \familytype {sf}}
+  \tl_gput_right:cn {ttfamily~} {\tl_set:Nn \familytype {tt}}
 }
 
 % These switches activate the default fonts
