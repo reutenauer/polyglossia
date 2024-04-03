@@ -23,8 +23,10 @@
     ]{hyperref}
 \usepackage{array}
 \usepackage{metalogo}
-\let\XeTeX\undefined
-\let\XeLaTeX\undefined
+\ifxetex
+  \let\XeTeX\undefined
+  \let\XeLaTeX\undefined
+\fi
 \usepackage[babelshorthands]{polyglossia}
 \usepackage{farsical}
 %
