@@ -286,7 +286,7 @@
   { \cs_new_nopar:Nn \__xpg_setRTLmain: { \@RTLmaintrue\setnonlatin } }
 
 %% compatibility with babel
-\let\addto\gappto % gappto is defined in etoolbox
+\cs_gset_eq:cc{addto}{tl_gput_right:Nn}
 
 %% NEW EXPERIMENTAL SETUP INTERFACE FOR GLOSS FILES
 %% options currently available:
