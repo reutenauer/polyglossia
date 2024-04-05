@@ -861,21 +861,24 @@
 
 \def\xpg@fontsetup@latin#1{
   \begingroup
-  \csgdef{#1@font@rm}{
+  \cs_gset:cpn{#1@font@rm}
+  {
     \cs_if_exist_use:cF{#1font}{
       \rmfamilylatin
       \__xpg_add_font_feature_language:xx{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/langtag}}
                                          {\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
     }
   }
-  \csgdef{#1@font@sf}{
+  \cs_gset:cpn{#1@font@sf}
+  {
     \cs_if_exist_use:cF{#1fontsf}{
       \sffamilylatin
       \__xpg_add_font_feature_language:xx{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/langtag}}
                                          {\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
     }
   }
-  \csgdef{#1@font@tt}{
+  \cs_gset:cpn{#1@font@tt}
+  {
     \cs_if_exist_use:cF{#1fonttt}{
       \ttfamilylatin
       \__xpg_add_font_feature_language:xx{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/langtag}}
@@ -892,7 +895,8 @@
 
 \def\xpg@fontsetup@nonlatin#1{
   \begingroup
-  \csgdef{#1@font@rm}{
+  \cs_gset:cpn{#1@font@rm}
+  {
     \cs_if_exist_use:cF{#1font}
       {
        \str_if_eq:nnTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/script}}{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
@@ -916,7 +920,8 @@
       }%
       \tl_set:Nn \familytype {rm}
   }%
-  \csgdef{#1@font@sf}{
+  \cs_gset:cpn{#1@font@sf}
+  {
     \cs_if_exist_use:cF{#1fontsf}
       {
        \str_if_eq:nnTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/script}}{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
@@ -940,7 +945,8 @@
       }%
       \tl_set:Nn \familytype {sf}
   }%
-  \csgdef{#1@font@tt}{
+  \cs_gset:cpn{#1@font@tt}
+  {
     \cs_if_exist_use:cF{#1fonttt}
       {
        \str_if_eq:nnTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/script}}{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
@@ -1269,7 +1275,7 @@
      % Register the language options
      \__xpg_set_language_options:nnn {#2} {#1} {@xpg@main@langvariant}
   }
-  \csgdef{#2@gvar}{\mainlanguagevariant}
+  \cs_gset:cpn {#2@gvar} {\mainlanguagevariant}
   %% The following settings are for the default language and script
   % this tells bidi.sty or luabidi.sty that the document is RTL
   \__xpg_if_LR_str:eF{\prop_item:Nn{\g_xpg_langsetup_prop}{#2/direction}}
@@ -1535,7 +1541,7 @@
      % Register the language options
      \__xpg_set_language_options:nnn {#2} {#1} {@xpg@main@langvariant}
   }
-  \csgdef{#2@gvar}{\mainlanguagevariant}
+  \cs_gset:cpn {#2@gvar} {\mainlanguagevariant}
   % Store BCP-47 id of current language
   \__xpg_store_bcp_info:nn {#1}{#2}
 }
@@ -1689,7 +1695,7 @@
   % Register the language options
   \__xpg_set_language_options:nnn {#2} {#1} {@xpg@other@langvariant}
 
-  \csgdef{#2@gvar}{\otherlanguagevariant}
+  \cs_gset:cpn {#2@gvar} {\otherlanguagevariant}
   \prop_get:NeNT \g_xpg_langsetup_prop {#2/babelname} \l_tmpa_tl
     { \xdef\otherlanguagebabelname{\l_tmpa_tl} }
   \cs_gset_eq:cc{#2@gbabelname}{otherlanguagebabelname}
@@ -2020,9 +2026,8 @@
    \ifx\@tmpa\@tmpb\setkeys{#3}{#1=#2}\fi
    \tl_if_empty:nTF{#2}
       {
-        \ifcsdef{xpg@default@opt@KV@#4@#1}
-           {\xpg@store@opt@keyval#1:\csuse{xpg@default@opt@KV@#4@#1}=:#4\relax}
-           {}%
+        \cs_if_exist:cT {xpg@default@opt@KV@#4@#1}
+           {\xpg@store@opt@keyval#1:\use:c{xpg@default@opt@KV@#4@#1}=:#4\relax}
       }
       { \xpg@store@opt@keyval#1:#2:#4\relax }
 }%
@@ -2222,11 +2227,13 @@
 % Set \bbl@hyphendata@\the\language, which is (lua)babel's
 % hyphenation pattern hook
 % FIXME Clarifiy why/when this is needed.
-\newcommand*\xpg@set@bbl@hyphendata[1]{
+\cs_new:Nn \xpg_set_bbl_hyphendata:n
+{
   \sys_if_engine_luatex:T
   {
-    \ifcsdef{bbl@hyphendata@#1}{}{
-      \global\@namedef{bbl@hyphendata@\the\language}{}
+    \cs_if_exist:cF {bbl@hyphendata@#1}
+    {
+      \cs_gset:cpn {bbl@hyphendata@\the\language} {}
     }
   }
 }
@@ -2241,7 +2248,7 @@
 \newcommand*\@select@language[2][]{
    % hook for compatibility with biblatex
    \select@language{#2}
-   \xpg@set@bbl@hyphendata{\the\language}
+   \xpg_set_bbl_hyphendata:n{\the\language}
    \xpg_initial_setup:
    \select@@language[#1]{#2}%
    % Hook for external packages such as biblatex
@@ -2405,7 +2412,7 @@
   }{
     \csedef{tmp@bcp47.tag}{\prop_item:Ne{\g_xpg_langsetup_prop}{ \xpg@tmp@lang / bcp47 }}
   }
-  \csgdef{\csname tmp@bcp47.tag\endcsname @hyphenmins}{{#3}{#4}}
+  \cs_gset:cpn{\csname tmp@bcp47.tag\endcsname @hyphenmins}{{#3}{#4}}
   \egroup
 }
 
