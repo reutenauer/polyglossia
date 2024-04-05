@@ -46,7 +46,7 @@
 
 % Which version of XeTeX do we use? What is the boudary class? 4095 or 255
 \cs_if_exist:cTF { e@alloc@intercharclass@top }
-  { \let\xpg@boundaryclass=\e@alloc@intercharclass@top }
+  { \cs_gset_eq:NN \xpg@boundaryclass \e@alloc@intercharclass@top }
   { \chardef\xpg@boundaryclass=\@cclv }
 
 % Useful for getting list of loaded languages and variants. Like babel's bbl@loaded
@@ -909,7 +909,7 @@
        \__xpg_add_font_feature_language:xx{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/langtag}}
                                           {\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
       }%
-      \def\familytype{rm}
+      \tl_set:Nn \familytype {rm}
   }%
   \csgdef{#1@font@sf}{
     \cs_if_exist_use:cF{#1fontsf}
@@ -933,7 +933,7 @@
        \__xpg_add_font_feature_language:xx{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/langtag}}
                                           {\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
       }%
-      \def\familytype{sf}
+      \tl_set:Nn \familytype {sf}
   }%
   \csgdef{#1@font@tt}{
     \cs_if_exist_use:cF{#1fonttt}
@@ -957,7 +957,7 @@
        \__xpg_add_font_feature_language:xx{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/langtag}}
                                           {\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
       }
-      \def\familytype{tt}
+      \tl_set:Nn \familytype {tt}
   }
   \endgroup
 }
@@ -2042,13 +2042,16 @@
             \prop_get:cnNTF {xpg@alias@keyvals@#1@#3} {#2} \l_tmpb_tl
                {
                 \clist_set:Ne{\l_tmpa_clist}{\l_tmpb_tl}
-                \providetoggle{xpgvalfound}
-                \togglefalse{xpgvalfound}
+                \bool_if_exist:NF \l__xpg_val_found_bool
+                       { \bool_new:N \l__xpg_val_found_bool }
+                \bool_set_false:N \l__xpg_val_found_bool
                 \clist_map_inline:Nn \l_tmpa_clist {
                    \str_if_eq:eeT{##1}{\l_tmpa_tl}
-                      { \toggletrue{xpgvalfound} }
+                      { \bool_set_true:N \l__xpg_val_found_bool }
                 }
-                \iftoggle{xpgvalfound}{\prg_return_true:}{\prg_return_false:}
+                \bool_if:nTF \l__xpg_val_found_bool
+                       { \prg_return_true: }
+                       { \prg_return_false: }
               }
               {
                 \prg_return_false:
