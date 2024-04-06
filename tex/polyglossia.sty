@@ -726,7 +726,7 @@
 \cs_new_nopar:Npn \__xpg_indent_first:n #1
   {
 	\bool_if:cTF { g__xpg_#1_if_bool }
-	{ \french@indent } { \nofrench@indent }
+	{ \__xpg_french_indent: } { \__xpg_no_french_indent: }
   }
 
 \cs_new:Nn \__xpg_lang_set_par_direction:n
@@ -1700,12 +1700,12 @@
 }
 
 \cs_gset_eq:cc { @@fterindentfalse } { @afterindentfalse }
-\cs_new_nopar:Npn \french@indent
+\cs_new_nopar:Nn \__xpg_french_indent:
 {
     \cs_set_eq:cc { @afterindentfalse } { @afterindenttrue }
     \@afterindenttrue
 }
-\cs_new_nopar:Npn \nofrench@indent
+\cs_new_nopar:Nn \__xpg_no_french_indent:
 {
     \cs_set_eq:cc { @afterindentfalse } { @@fterindentfalse }
     \@afterindentfalse
