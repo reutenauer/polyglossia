@@ -863,7 +863,7 @@
 
 \def\xpg@fontsetup@latin#1{
   \begingroup
-  \cs_gset:cpn {#1@font@rm}
+  \cs_gset_protected_nopar:cpn {#1@font@rm}
   {
     \cs_if_exist_use:cF{#1font}{
       \rmfamilylatin
@@ -871,7 +871,7 @@
                                          {\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
     }
   }
-  \cs_gset:cpn {#1@font@sf}
+  \cs_gset_protected_nopar:cpn {#1@font@sf}
   {
     \cs_if_exist_use:cF{#1fontsf}{
       \sffamilylatin
@@ -879,7 +879,7 @@
                                          {\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
     }
   }
-  \cs_gset:cpn {#1@font@tt}
+  \cs_gset_protected_nopar:cpn {#1@font@tt}
   {
     \cs_if_exist_use:cF{#1fonttt}{
       \ttfamilylatin
@@ -897,7 +897,7 @@
 
 \def\xpg@fontsetup@nonlatin#1{
   \begingroup
-  \cs_gset:cpn {#1@font@rm}
+  \cs_gset_protected_nopar:cpn {#1@font@rm}
   {
     \cs_if_exist_use:cF{#1font}
       {
@@ -922,7 +922,7 @@
       }%
       \tl_set:Nn \familytype {rm}
   }%
-  \cs_gset:cpn {#1@font@sf}
+  \cs_gset_protected_nopar:cpn {#1@font@sf}
   {
     \cs_if_exist_use:cF{#1fontsf}
       {
@@ -947,7 +947,7 @@
       }%
       \tl_set:Nn \familytype {sf}
   }%
-  \cs_gset:cpn {#1@font@tt}
+  \cs_gset_protected_nopar:cpn {#1@font@tt}
   {
     \cs_if_exist_use:cF{#1fonttt}
       {
@@ -1648,24 +1648,20 @@
     \__xpg_use_or_warn:c{#1@font@sf}
       \else\__xpg_use_or_warn:c{#1@font@rm}\fi\fi}
 
-\def\xpg@set@normalfont#1{
-  \letcs{\rmfamily}{#1@font@rm}
-  \letcs{\sffamily}{#1@font@sf}
-  \letcs{\ttfamily}{#1@font@tt}
-  \robustify\rmfamily
-  \robustify\sffamily
-  \robustify\ttfamily
-  \gdef\normalfont{\protect\xpg@select@fontfamily{#1}
-                   \fontseries{\seriesdefault}\selectfont
-                   \fontshape{\shapedefault}
-                   \ifdefined\UseHook\UseHook{normalfont}\fi
-                   \selectfont}
-  \gdef\reset@font{\protect\normalfont}
+\cs_new_nopar:Nn \xpg_set_normalfont:n
+{
+  \cs_gset_eq:cc { rmfamily } { #1@font@rm }
+  \cs_gset_eq:cc { sffamily } { #1@font@sf }
+  \cs_gset_eq:cc { ttfamily } { #1@font@tt }
+  \cs_gset_nopar:Npn \normalfont 
+      { \protect\xpg@select@fontfamily{#1}
+        \fontseries{\seriesdefault}\selectfont
+        \fontshape{\shapedefault}
+        \ifdefined\UseHook\UseHook{normalfont}\fi
+        \selectfont
+      }
+  \cs_gset_nopar:Npn \reset@font {\protect\normalfont}
 }
-
-\let\@@fterindentfalse\@afterindentfalse
-\def\french@indent{
-    \let\@afterindentfalse\@afterindenttrue
     \@afterindenttrue
 }
 \def\nofrench@indent{
@@ -1850,7 +1846,7 @@
   \str_if_eq:eeT{\prop_item:Ne{\g_xpg_langsetup_prop}{\__xpg_current_matrixlang/lcscript}}{latin}
        {\resetfontlatin}
   % In case a \<lang>font is defined, re-activate that
-  \exp_args:Ne \xpg@set@normalfont{\__xpg_current_matrixlang}
+  \exp_args:Ne \xpg_set_normalfont:n{\__xpg_current_matrixlang}
 }
 
 % internal wrapper for foreign language
@@ -2335,7 +2331,7 @@
   \bool_if:NF \l__xpg_inline_lang_bool
   { % This for non-inline font switches
     % in case a \<lang>font is defined
-    \xpg@set@normalfont{#2}
+    \xpg_set_normalfont:n{#2}
   }
   \xpg@select@fontfamily{#2}
   \__xpg_use_or_warn:c{#2@language}
