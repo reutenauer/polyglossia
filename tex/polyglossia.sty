@@ -2523,14 +2523,14 @@
 \DeclareDocumentEnvironment { hyphenrules } { O{} m }
   {
     % Check for real language name and options
-    \edef\xpg@tmp@opts{\xpg_alias_add_to_option_i:nn{#2}{#1}}
-    \edef\xpg@tmp@lang{\xpg_alias_base_lang:n{#2}}
+    \tl_set:Nx \l_tmp_opts_tl { \xpg_alias_add_to_option_i:nn{#2}{#1} }
+    \tl_set:Nx \l_tmp_lang_tl { \xpg_alias_base_lang:n{#2} }
     % Register the language options
-    \__xpg_set_language_options:nnn {\xpg@tmp@lang} {\xpg@tmp@opts} {@xpg@set@langvariant}
+    \__xpg_set_language_options:nnn { \l_tmp_lang_tl } { \l_tmp_opts_tl } {@xpg@set@langvariant}
     % Now switch patterns
-    \__xpg_use_or_warn:c{\use:c{xpg@tmp@lang}@language}
+    \__xpg_use_or_warn:c{\use:c{l_tmp_lang_tl}@language}
     % And activate hyphenmins
-    \use@localhyphenmins[\xpg@tmp@opts]{\xpg@tmp@lang}
+    \use@localhyphenmins[\l_tmp_opts_tl]{\l_tmp_lang_tl}
   }
   { }
 
