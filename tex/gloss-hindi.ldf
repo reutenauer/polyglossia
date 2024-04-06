@@ -25,8 +25,7 @@
 
 \ifx\l@hindi\@undefined%
   \ifx\l@sanskrit\@undefined%
-    \xpg@nopatterns{Hindi}%
-    \adddialect\l@hindi\l@nohyphenation%
+    \XPGNoPatternsFallback{hindi}%
   \else
     \xpg@warning{No hyphenation patterns were loaded for Hindi\MessageBreak
     I will use the patterns for Sanskrit instead}

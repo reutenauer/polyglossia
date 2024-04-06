@@ -44,8 +44,7 @@
 
 \define@choicekey*+{greek}{variant}[\xpg@val\xpg@nr]{monotonic,mono,polytonic,poly,ancient,ancientgreek}[monotonic]{%
    \xpg@ifdefined{greek}{}{%
-      \xpg@nopatterns{greek}%
-      \adddialect\l@greek\l@nohyphenation
+      \XPGNoPatternsFallback{greek}%
    }%
    \ifcase\xpg@nr\relax
       % monotonic:
