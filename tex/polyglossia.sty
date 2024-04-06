@@ -821,23 +821,23 @@
       (Language="#2"~ to~ langtag~ "#1")}
   }
   {
-    \str_if_eq:nnTF{#2}{Turkish}{
+    \str_if_eq:nnTF{#2}{Turkish}
+    {
       \fontspec_if_language:nTF {TRK}
       {
         \addfontfeature{Language=Turkish}
       }
       {
-        \fontspec_if_language:nTF {TUR}
+        \fontspec_if_language:nT {TUR}
         {
           \addfontfeature{Language=Turkish}
-        }{}
+        }
       }
     }{
-      \fontspec_if_language:nTF{#1}
+      \fontspec_if_language:nT{#1}
       {
         \addfontfeature{Language=#2}
       }
-      {}
     }
   }
 }
