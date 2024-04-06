@@ -2261,7 +2261,8 @@
       { \prg_return_false: }
   }
 
-\def\polyglossia@luatex@load@lang#1{
+\cs_new_nopar:Nn \__xpg_luatex_load_lang:n
+{
   % if \l@#1 is not properly defined, call lua function newloader(#1),
   % and assign the returned number to \l@#1
   \__xpg_check_if_exist_l@:nF {#1}
@@ -2276,7 +2277,7 @@
   % With luatex, we first need to define \l@#1.
   \sys_if_engine_luatex:T
   {
-    \polyglossia@luatex@load@lang{#1}
+    \__xpg_luatex_load_lang:n {#1}
   }
   \__xpg_check_if_exist_l@:nTF{#1}{#2}{#3}
 }
@@ -2298,7 +2299,7 @@
 % Set hyphenation patterns for a given language. This does the right
 % thing both for XeTeX and LuaTeX
 \newcommand*\xpg@set@hyphenation@patterns[1]{
-  \sys_if_engine_luatex:T { \polyglossia@luatex@load@lang{#1} }
+  \sys_if_engine_luatex:T { \__xpg_luatex_load_lang:n {#1} }
   \language=\csname l@#1\endcsname
 }
 
