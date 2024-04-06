@@ -1405,7 +1405,7 @@
 }
 
 \cs_new_nopar:Npn \babelname {}
-\def\languagevariant{}
+\cs_new_nopar:Npn \languagevariant {}
 % Store current language variant for external packages
 \define@key{xpg@set@langvariant}{variant}{
   \def\languagevariant{#1}
@@ -1564,7 +1564,7 @@
 }
 
 % This saves the normalfont for the latin script since we may change normalfont in other scripts
-\let\normalfontlatin=\normalfont
+\cs_gset_eq:cc { normalfontlatin } { normalfont }
 
 % Provide default fonts (as set with \setmainfont, \setsansfont and \setmonofont)
 % for Latin scripts and as a fallback for non-Latin scripts.
@@ -1629,7 +1629,7 @@
   \DeclareRobustCommand\sffamily{\xpg@defaultfont@sf}
   \DeclareRobustCommand\ttfamily{\xpg@defaultfont@tt}
   \__xpg_patch_fontfamilies:
-  \global\let\normalfont=\normalfontlatin
+  \cs_gset_eq:cc { normalfont } { normalfontlatin }
 }
 
 \def\selectfontfamilylatin{
@@ -1662,10 +1662,16 @@
       }
   \cs_gset_nopar:Npn \reset@font {\protect\normalfont}
 }
+
+\cs_gset_eq:cc { @@fterindentfalse } { @afterindentfalse }
+\cs_new_nopar:Npn \french@indent
+{
+    \cs_set_eq:cc { @afterindentfalse } { @afterindenttrue }
     \@afterindenttrue
 }
-\def\nofrench@indent{
-    \let\@afterindentfalse\@@fterindentfalse
+\cs_new_nopar:Npn \nofrench@indent
+{
+    \cs_set_eq:cc { @afterindentfalse } { @@fterindentfalse }
     \@afterindentfalse
 }
 
@@ -1704,7 +1710,7 @@
 {
   \__xpg_register_language:nn{#1}{#2}
   % If a variant is set, store it.
-  \gdef\otherlanguagevariant{}
+  \cs_gset:Npn \otherlanguagevariant {}
   % Register the language options
   \__xpg_set_language_options:nnn {#2} {#1} {@xpg@other@langvariant}
 
@@ -1718,7 +1724,7 @@
 
 % Store main language variant for external packages
 \define@key{xpg@other@langvariant}{variant}{
-  \gdef\otherlanguagevariant{#1}
+  \cs_gset:Npn \otherlanguagevariant { #1 }
 }
 
 \NewDocumentCommand \setotherlanguages { m }
