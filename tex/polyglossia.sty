@@ -110,7 +110,11 @@
   \__xpg_at_begin_document_hyphenation:
 }
 
-%% custom message macros
+%
+% MESSAGES
+%
+
+% message templates
 \msg_new:nnn { polyglossia } { general } { #1 }
 
 \msg_new:nnn { polyglossia } { languagenotloaded }
@@ -139,15 +143,19 @@
 {
   Illegal~ value~ (#1)~ for~ #2.
 }
-\msg_redirect_name:nnn { polyglossia } { illvalue } { warning }
 
 \msg_new:nnn { polyglossia } { nopatterns }
 {
   No~ hyphenation~ patterns~ were~ loaded~ for~ `#2' \iow_newline:
-  I~ will~ use~ \string\language=\string\l@ #1\space instead
+  I~ will~ use~ \string\language=\string\l@ #1\space instead.
 }
-\msg_redirect_name:nnn { polyglossia } { nopatterns } { warning }
 
+\msg_new:nnn { polyglossia } { undefcmd }
+{
+  \tl_to_str:N {#1} ~ is~ not~ defined!
+}
+
+%% custom message macros
 \cs_new_nopar:Nn \xpg_error_msg:n
 {
    \msg_error:nnn { polyglossia } { general } { #1 }
@@ -182,6 +190,16 @@
   }
 }
 
+%% use macro if defined, else warn that it is not
+\cs_new_nopar:Nn \__xpg_use_or_warn:N
+{
+  \cs_if_exist_use:NF {#1}
+  {
+    \msg_error:nnn { polyglossia } { undefcmd } { #1 }
+  }
+}
+\cs_generate_variant:Nn \__xpg_use_or_warn:N {c}
+
 % gloss message interface
 \cs_set_eq:cc { xpg@error }      { xpg_error_msg:n }
 \cs_set_eq:cc { xpg@warning }    { xpg_warning_msg:n }
@@ -194,16 +212,11 @@
    \expandafter\adddialect\csname l@#2\expandafter\endcsname\csname l@#1\endcsname\relax
 }
 
-
-%% use macro if defined, else warn that it is not
-\cs_new_nopar:Nn \__xpg_use_or_warn:N
 {
-  \cs_if_exist_use:NF {#1}
-  {
-    \xpg_warning_msg:n {  \tl_to_str:N {#1} ~ is~ not~ defined }
-  }
 }
-\cs_generate_variant:Nn \__xpg_use_or_warn:N {c}
+
+%
+% END MESSAGES
 
 
 %% ensure directionality if bidi is loaded, else ignore
