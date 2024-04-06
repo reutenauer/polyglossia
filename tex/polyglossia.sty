@@ -206,13 +206,19 @@
 \cs_set_eq:cc { xpg@info }       { xpg_info_msg:n }
 \cs_set_eq:cc { xpg@ill@value }  { xpg_ill_value_msg:nn }
 
+
 \NewDocumentCommand \XPGNoPatternsFallback { O{ nohyphenation } m }
 {
    \msg_warning:nnnn { polyglossia } { nopatterns } { #1 } { #2 }
-   \expandafter\adddialect\csname l@#2\expandafter\endcsname\csname l@#1\endcsname\relax
+   \exp_args:Ncc \adddialect {l@#2} {l@#1}
 }
 
+\NewDocumentCommand \CheckHyphenationPatterns { m }
 {
+   \xpg@ifdefined{#1}{}
+    {
+      \XPGNoPatternsFallback{#1}
+    }
 }
 
 %
@@ -331,7 +337,7 @@
 %% language : the name of the language (as understood by fontspec)
 %% hyphennames : the different hyphenation patterns to try (comma separated list)
 %%%   TODO: if pattern is prefixed by !, then it should be loaded as a fallback,
-%%%%        with \XPGNoPatternsFallback - i.e. with a warning: e.g. sanskrit for hindi,
+%%%%        with \CheckHyphenationPatterns - i.e. with a warning: e.g. sanskrit for hindi,
 %%%%        or catalan for asturian. – Also for languages with variants!
 %%%%        (English and German, etc.)
 %% script : the name of the script (as understood by fontspec) – default is Latin
@@ -412,11 +418,7 @@
   % we do this here in case and if the hyphennames key was omitted
   \bool_if:NF \l__xpg_have_hyphen_bool
   {
-    \xpg@ifdefined{#1}{}
-    {
-      \xpg_no_patterns_msg:n{#1}
-      \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax
-    }
+    \CheckHyphenationPatterns{#1}
   }
   \cs_gset:cpn {#1@language}
   {
@@ -456,11 +458,7 @@
       {
         % Since this function is sometimes called from the gloss files
         % directly, we need to check whether the requested hyphenname exists.
-        \xpg@ifdefined{#1}{}
-        {
-          \xpg_no_patterns_msg:n{#1}
-          \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax%
-        }
+        \CheckHyphenationPatterns{#1}
         \xpg@set@hyphenation@patterns{#1}
       }
   }
