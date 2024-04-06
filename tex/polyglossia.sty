@@ -163,12 +163,6 @@
    \msg_info:nnn { polyglossia } { general } { #1 }
 }
 
-\NewDocumentCommand \XPGNoPatternsFallback { O{ nohyphenation } m }
-{
-   \msg_warning:nnnn { polyglossia } { nopatterns } { #1 } { #2 }
-   \expandafter\adddialect\csname l@#2\expandafter\endcsname\csname l@#1\endcsname\relax
-}
-
 \cs_new_nopar:Nn \xpg_no_patterns_msg:n
 {
    \msg_warning:nnnn { polyglossia } { nopatterns } { nohyphenation } { #1 }
@@ -193,6 +187,12 @@
 \cs_set_eq:cc { xpg@warning }    { xpg_warning_msg:n }
 \cs_set_eq:cc { xpg@info }       { xpg_info_msg:n }
 \cs_set_eq:cc { xpg@ill@value }  { xpg_ill_value_msg:nn }
+
+\NewDocumentCommand \XPGNoPatternsFallback { O{ nohyphenation } m }
+{
+   \msg_warning:nnnn { polyglossia } { nopatterns } { #1 } { #2 }
+   \expandafter\adddialect\csname l@#2\expandafter\endcsname\csname l@#1\endcsname\relax
+}
 
 
 %% use macro if defined, else warn that it is not
