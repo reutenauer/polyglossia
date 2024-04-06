@@ -1462,7 +1462,8 @@
 }
 
 
-\newcommand*{\resetdefaultlanguage}[2][]{
+\NewDocumentCommand \resetdefaultlanguage { O{} m }
+{
   \__xpg_reset_default_language:nn
     {\xpg_alias_add_to_option_i:nn{#2}{#1}}
     {\xpg_alias_base_lang:n{#2}}
@@ -1789,7 +1790,8 @@
 % for specific (esp. tag-based) aliases
 % where \text<alias> would cause clashes
 % (e.g., \textit)
-\newcommand\textlang[3][]{
+\NewDocumentCommand \textlang { O{} m +m }
+{
   \__xpg_textlanguage:een {#1} {#2} {#3}
 }
 
@@ -1862,7 +1864,7 @@
 
 % Direct access to polyglossia@setforeignlanguage
 % used in captions
-\newcommand{\setforeignlanguage}[2][]
+\NewDocumentCommand \setforeignlanguage { O{} m }
 {
   \polyglossia@setforeignlanguage[#1]{#2}
 }
