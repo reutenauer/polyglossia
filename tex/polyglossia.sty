@@ -2379,7 +2379,7 @@
   \xpg@select@fontfamily{#2}
   \__xpg_use_or_warn:c{#2@language}
   \cs_if_exist_use:c{#2@numbers}
-  \use@localhyphenmins[#1]{#2}
+  \__xpg_use_localhyphenmins:nn { #1 }{ #2 }
   \__xpg_french_spacing:n { #2 }
 }
 
@@ -2440,15 +2440,18 @@
 % (e.g., \fi)
 \DeclareEnvironmentCopy { lang } { otherlanguage }
 
-\newcommand{\setlocalhyphenmins}[3]{
-   \xpg@ifdefined{#1}{
-      \expandafter\ifx\csname l@#1\endcsname\l@nohyphenation
-        \xpg_warning_msg:n{\string\setlocalhyphenmin\space~ useless~ for~ unhyphenated~ language~ #1}
-      \else
-      \providehyphenmins{#1}{#2#3}
-      \fi
+\NewDocumentCommand \setlocalhyphenmins { m m m }
+{
+   \xpg@ifdefined{#1}
+   {
+      \cs_if_eq:ccTF { l@#1 } { l@nohyphenation }
+      {
+        \xpg_warning_msg:n {\string\setlocalhyphenmin\space~ useless~ for~ unhyphenated~ language~ #1}
+      }{
+        \providehyphenmins{#1}{#2#3}
+      }
    }{
-     \xpg_warning_msg:n{\string\setlocalhyphenmin\space~ useless~ for~ unknown~ language~ #1}
+     \xpg_warning_msg:n {\string\setlocalhyphenmin\space~ useless~ for~ unknown~ language~ #1}
    }
 }
 
@@ -2477,13 +2480,15 @@
   \c_group_end_token
 }
 
-% \use@localhypenmins[options]{lang}
-\newcommand*\use@localhyphenmins[2][]{
-  \bgroup
-  \xpg_error_if_lang_not_loaded:n{#2}
-  \__xpg_set_keys:nn{#2}{#1}
+% \__xpg_use_localhyphenmins:nn {options}{lang}
+\cs_new_nopar:Nn \__xpg_use_localhyphenmins:nn
+{
+  \c_group_begin_token
+  \xpg_error_if_lang_not_loaded:n {#2}
+  \__xpg_set_keys:nn {#2} {#1}
   % Use bcp47.tag@hypenmins
-  \tl_if_blank:nTF {#1}{
+  \tl_if_blank:nTF {#1}
+  {
     \cs_if_exist:cTF{#2@g.bcp47.tag}
     {
        \cs_gset_nopar:cpe {tmp@bcp47.tag} { \use:c{#2@g.bcp47.tag} }
@@ -2493,25 +2498,24 @@
   }{
     \cs_gset_nopar:cpe {tmp@bcp47.tag} { \prop_item:Nn{\g_xpg_langsetup_prop}{ #2 / bcp47 } }
   }
-  \egroup
+  \c_group_end_token
   \cs_if_exist:cTF {\csname tmp@bcp47.tag\endcsname @hyphenmins}
    {
       \edef\tmpa{\csuse{\csname tmp@bcp47.tag\endcsname @hyphenmins}}
-      \expandafter\expandafter\expandafter\set@hyphenmins\tmpa\relax
    }{
      \cs_if_exist:cT{#2hyphenmins}
         {
           \expandafter\expandafter\expandafter\set@hyphenmins\csname #2hyphenmins\endcsname\relax
         }
    }
-   \sys_if_engine_luatex:T{
+   \sys_if_engine_luatex:T
+   {
      % Set \totalhyphenmin if specified
-     \prop_get:NeNTF \g_xpg_langsetup_prop {#2/totalhyphenmin} \l_tmpa_tl
+     \prop_get:NeNT \g_xpg_langsetup_prop {#2/totalhyphenmin} \l_tmpb_tl
      {
-        \xpg_info_msg:n{totalhyphenmin: '\l_tmpa_tl'}
-        \expandafter\hyphenationmin \l_tmpa_tl
+        \xpg_info_msg:n {totalhyphenmin: '\l_tmpb_tl'}
+        \expandafter\hyphenationmin \l_tmpb_tl
      }
-     {}
    }
 }
 
@@ -2530,7 +2534,7 @@
     % Now switch patterns
     \__xpg_use_or_warn:c{\use:c{l_tmp_lang_tl}@language}
     % And activate hyphenmins
-    \use@localhyphenmins[\l_tmp_opts_tl]{\l_tmp_lang_tl}
+    \__xpg_use_localhyphenmins:nn { \l_tmp_opts_tl } { \l_tmp_lang_tl }
   }
   { }
 
