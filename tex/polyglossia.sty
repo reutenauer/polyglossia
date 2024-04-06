@@ -158,17 +158,17 @@
 %% custom message macros
 \cs_new_nopar:Nn \xpg_error_msg:n
 {
-   \msg_error:nnn { polyglossia } { general } { #1 }
+   \exp_args:Nnne \msg_error:nnn { polyglossia } { general } { #1 }
 }
 
 \cs_new_nopar:Nn \xpg_warning_msg:n
 {
-   \msg_warning:nnn { polyglossia } { general } { #1 }
+   \exp_args:Nnne \msg_warning:nnn { polyglossia } { general } { #1 }
 }
 
 \cs_new_nopar:Nn \xpg_info_msg:n
 {
-   \msg_info:nnn { polyglossia } { general } { #1 }
+   \exp_args:Nnne \msg_info:nnn { polyglossia } { general } { #1 }
 }
 
 \cs_new_nopar:Nn \xpg_no_patterns_msg:n
