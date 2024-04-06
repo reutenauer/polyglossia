@@ -2536,11 +2536,13 @@
 
 \hook_gput_code:nnn {begindocument/before} {.}
 {
-   \IfPackageLoadedTF{bidi}{
-      \providecommand*{\aemph}[1]{$\overline{\hboxR{#1}}$}
+   \IfPackageLoadedTF{bidi}
+   {
+      \ProvideDocumentCommand \aemph { m } { $\overline{\hboxR{#1}}$ }
    }{}
-   \IfPackageLoadedTF{luabidi}{
-      \providecommand*{\aemph}[1]{$\overline{\hbox{\RL{#1}}}$}
+   \IfPackageLoadedTF{luabidi}
+   {
+      \ProvideDocumentCommand \aemph { m } { $\overline{\hbox{\RL{#1}}}$ }
    }{}
 }
 
