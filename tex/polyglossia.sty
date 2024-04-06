@@ -2453,26 +2453,28 @@
 }
 
 % \setlanghyphenmins[options]{lang}{l}{r}
-\newcommand*\setlanghyphenmins[4][]{%
+\NewDocumentCommand \setlanghyphenmins { O{} m m m }
+{
   % Check for real language name and options
-  \edef\xpg@tmp@opts{\xpg_alias_add_to_option_i:nn{#2}{#1}}
-  \edef\xpg@tmp@lang{\xpg_alias_base_lang:n{#2}}
-  \bgroup
-  \xpg_error_if_lang_not_loaded:n{\xpg@tmp@lang}
-  \__xpg_set_keys:nn{\xpg@tmp@lang}{\xpg@tmp@opts}
+  \tl_set:Nx \l_tmp_opts_tl { \xpg_alias_add_to_option_i:nn{#2}{#1} }
+  \tl_set:Nx \l_tmp_lang_tl { \xpg_alias_base_lang:n{#2} }
+  \c_group_begin_token
+  \xpg_error_if_lang_not_loaded:n{\l_tmp_lang_tl}
+  \__xpg_set_keys:nn{\l_tmp_lang_tl}{ \l_tmp_opts_tl }
   % Store bcp47.tag@hypenmins
-  \tl_if_blank:nTF {\xpg@tmp@opts}{%
-    \cs_if_exist:cTF{\csname xpg@tmp@lang\endcsname @g.bcp47.tag}
+  \tl_if_blank:nTF { \l_tmp_opts_tl }
+  {
+    \cs_if_exist:cTF{\csname l_tmp_lang_tl\endcsname @g.bcp47.tag}
     {
        \cs_set_nopar:cpe {tmp@bcp47.tag} { \use:c{#2@g.bcp47.tag} }
     }{
-       \cs_set_nopar:cpe {tmp@bcp47.tag} { \prop_item:Ne{\g_xpg_langsetup_prop}{ \xpg@tmp@lang / bcp47 } }
+       \cs_set_nopar:cpe {tmp@bcp47.tag} { \prop_item:Ne{\g_xpg_langsetup_prop}{ \l_tmp_lang_tl / bcp47 } }
     }
   }{
-    \cs_set_nopar:cpe {tmp@bcp47.tag} { \prop_item:Ne{\g_xpg_langsetup_prop}{ \xpg@tmp@lang / bcp47 } }
+    \cs_set_nopar:cpe {tmp@bcp47.tag} { \prop_item:Ne{\g_xpg_langsetup_prop}{ \l_tmp_lang_tl / bcp47 } }
   }
   \cs_gset:cpn {\csname tmp@bcp47.tag\endcsname @hyphenmins} {{#3}{#4}}
-  \egroup
+  \c_group_end_token
 }
 
 % \use@localhypenmins[options]{lang}
