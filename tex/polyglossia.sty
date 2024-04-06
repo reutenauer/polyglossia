@@ -111,46 +111,11 @@
 }
 
 %% custom message macros
-\providecommand*{\xpg@error}[1]{
-   \PackageError{polyglossia}{#1}{}
-}
-
-\providecommand*{\xpg@warning}[1]{
-   \PackageWarning{polyglossia}{#1}
-}
-
-\providecommand*{\xpg@info}[1]{
-   \PackageInfo{polyglossia}
-   {#1\@gobble}
-} %% the \@gobble is to prevent displaying the line nr
-
-%TODO change all instances of \xpg@nopatterns in gloss-*.ldf files
-\providecommand*{\xpg@nopatterns@fallback}[2][nohyphenation]{
-   \xpg@warning{No~ hyphenation~ patterns~ were~ loaded~ for~ `#2'\MessageBreak
-         I~ will~ use~ \string\language=\string\l@ #1\space instead}
-   \expandafter\adddialect\csname l@#2\expandafter\endcsname\csname l@#1\endcsname\relax}
-
-\providecommand*{\xpg@nopatterns}[1]{
-   \xpg@warning{No~ hyphenation~ patterns~ were~ loaded~ for~ `#1'\MessageBreak
-         I~ will~ use~ \string\language=\string\l@nohyphenation\space instead}
-   %%TODO? \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax
-   }
-
-\def\xpg@ill@value#1#2{
-  \xpg@warning{Illegal~ value~ (#1)~ for~ #2}}
-
-% error out if lang is not loaded
-\cs_new_nopar:Nn \xpg_error_if_lang_not_loaded:n
-{
-  \seq_if_in:NeF \__xpg_langs_loaded {#1}
-  {
-    \xpg@error{language~ #1~ is~ not~ loaded.~ Please~ load~ it~ before~ using~ it.}
-  }
-}
+\msg_new:nnn { polyglossia } { general } { #1 }
 
 \msg_new:nnn { polyglossia } { languagenotloaded }
 {
-  The~ language~ #1~ is~ not~ loaded.~ You~ should~ load~ it.
+  The~ language~ #1~ is~ not~ loaded.~ You~ must~ load~ it~ in~ order~ to~ use~ it.
 }
 \msg_redirect_name:nnn { polyglossia } { languagenotloaded } { critical }
 
@@ -167,8 +132,70 @@
 
 \msg_new:nnn { polyglossia } { localnumeralemptyvalue }
 {
-  Keys~ of~ \string\localnumeral~ must~ have~ value.
+  Keys~ of~ \string\localnumeral~ must~ have~ a~ value.
 }
+
+\msg_new:nnn { polyglossia } { illvalue }
+{
+  Illegal~ value~ (#1)~ for~ #2.
+}
+\msg_redirect_name:nnn { polyglossia } { illvalue } { warning }
+
+\msg_new:nnn { polyglossia } { nopatterns }
+{
+  No~ hyphenation~ patterns~ were~ loaded~ for~ `#2' \iow_newline:
+  I~ will~ use~ \string\language=\string\l@ #1\space instead
+}
+\msg_redirect_name:nnn { polyglossia } { nopatterns } { warning }
+
+\cs_new_nopar:Nn \xpg_error_msg:n
+{
+   \msg_error:nnn { polyglossia } { general } { #1 }
+}
+
+\cs_new_nopar:Nn \xpg_warning_msg:n
+{
+   \msg_warning:nnn { polyglossia } { general } { #1 }
+}
+
+\cs_new_nopar:Nn \xpg_info_msg:n
+{
+   \msg_info:nnn { polyglossia } { general } { #1 }
+}
+
+%TODO change all instances of \xpg@nopatterns in gloss-*.ldf files
+%\NewDocumentCommand \XPGNoPatternsFallback { O{ nohyphenation } m }
+%{
+%   \msg_warning:nnnn { polyglossia } { nopatterns } { #1 } { #2 }
+%   \expandafter\adddialect\csname l@#2\expandafter\endcsname\csname l@#1\endcsname\relax
+%}
+
+\cs_new_nopar:Nn \xpg_no_patterns_msg:n
+{
+   \msg_warning:nnnn { polyglossia } { nopatterns } { nohyphenation } { #1 }
+   %%TODO? \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax
+}
+
+\cs_new_nopar:Nn \xpg_ill_value_msg:nn
+{
+  \msg_warning:nnnn { polyglossia } { illvalue } { #1 } { #2 }
+}
+
+% error out if lang is not loaded
+\cs_new_nopar:Nn \xpg_error_if_lang_not_loaded:n
+{
+  \seq_if_in:NeF \__xpg_langs_loaded {#1}
+  {
+    \msg_error:nnn { polyglossia } { languagenotloaded } { #1 }
+  }
+}
+
+% gloss message interface
+\cs_set_eq:cc { xpg@error }      { xpg_error_msg:n }
+\cs_set_eq:cc { xpg@warning }    { xpg_warning_msg:n }
+\cs_set_eq:cc { xpg@info }       { xpg_info_msg:n }
+\cs_set_eq:cc { xpg@nopatterns } { xpg_no_patterns_msg:n }
+\cs_set_eq:cc { xpg@ill@value }  { xpg_ill_value_msg:nn }
 
 
 %% use macro if defined, else warn that it is not
@@ -176,7 +203,7 @@
 {
   \cs_if_exist_use:NF {#1}
   {
-    \xpg@warning {  \tl_to_str:N {#1} ~ is~ not~ defined }
+    \xpg_warning_msg:n {  \tl_to_str:N {#1} ~ is~ not~ defined }
   }
 }
 \cs_generate_variant:Nn \__xpg_use_or_warn:N {c}
@@ -211,7 +238,7 @@
     {RL}{\prg_return_false:}
   }
   {
-    \xpg@error{Unknown~ direction~#1}
+    \xpg_error_msg:n {Unknown~ direction~#1}
     \prg_return_false:
   }
 }
@@ -224,14 +251,14 @@
 {
   \__xpg_if_LR_str:nF {#1}
   {
-    \xpg@error{right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}
+    \xpg_error_msg:n {right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}
   }
 }
 \cs_new_nopar:Nn \__xpg_set_text_direction:n
 {
   \__xpg_if_LR_str:nF {#1}
   {
-    \xpg@error{right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}
+    \xpg_error_msg:n {right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}
   }
 }
 \hook_gput_code:nnn {package/bidi/after} {.}
@@ -294,7 +321,7 @@
 %% language : the name of the language (as understood by fontspec)
 %% hyphennames : the different hyphenation patterns to try (comma separated list)
 %%%   TODO: if pattern is prefixed by !, then it should be loaded as a fallback,
-%%%%        with \xpg@nopatterns@fallback - i.e. with a warning: e.g. sanskrit for hindi,
+%%%%        with \XPGNoPatternsFallback - i.e. with a warning: e.g. sanskrit for hindi,
 %%%%        or catalan for asturian. – Also for languages with variants!
 %%%%        (English and German, etc.)
 %% script : the name of the script (as understood by fontspec) – default is Latin
@@ -377,7 +404,7 @@
   {
     \xpg@ifdefined{#1}{}
     {
-      \xpg@nopatterns{#1}
+      \xpg_no_patterns_msg:n{#1}
       \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax
     }
   }
@@ -421,7 +448,7 @@
         % directly, we need to check whether the requested hyphenname exists.
         \xpg@ifdefined{#1}{}
         {
-          \xpg@nopatterns{#1}
+          \xpg_no_patterns_msg:n{#1}
           \expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax%
         }
         \xpg@set@hyphenation@patterns{#1}
@@ -547,8 +574,8 @@
              {LR}{}
              {RL}{\RequireBidi}
            }
-           {\prop_gput:Nnn{\g_xpg_langsetup_prop}{#1/direction}{##1}}
-           {\xpg@error{Unknown~ direction~ "##1"~ for~ language~ "#1"}}
+           { \prop_gput:Nnn{\g_xpg_langsetup_prop}{#1/direction}{##1} }
+           { \xpg_error_msg:n {Unknown~ direction~ "##1"~ for~ language~ "#1"} }
        },
     #1 / direction
       .value_required:n = true,
@@ -559,7 +586,7 @@
     .code:n = {
       % check syntax
       \int_compare:nNnF { \clist_count:n {##1} } = {2}
-        {\xpg@error{hypenmins~should~be~a~list~of~two~entries,~got~"##1"}}
+        { \xpg_error_msg:n {hypenmins~should~be~a~list~of~two~entries,~got~"##1"} }
       % set prop
       \prop_gput:Nnn \g_xpg_langsetup_prop {#1/hyphenmins} {##1}
     },
@@ -572,7 +599,7 @@
     .code:n = {
       % check syntax
       \int_compare:nNnF { \clist_count:n {##1} } = {1}
-        {\xpg@error{totalhyphenhypenmin~should~be~a~single~entry,~got~"##1"}}
+        { \xpg_error_msg:n {totalhyphenhypenmin~should~be~a~single~entry,~got~"##1"} }
       % set prop
       \prop_gput:Nnn \g_xpg_langsetup_prop {#1/totalhyphenmin} {##1}
     },
@@ -701,7 +728,7 @@
         \__xpg_set_par_direction:n{\l_tmpa_tl}
       }
       {
-        \xpg@error{Could~ not~ retrieve~ key~ direction~ for~ language~ "#1"}
+        \xpg_error_msg:n {Could~ not~ retrieve~ key~ direction~ for~ language~ "#1"}
         \prop_show:N{\g_xpg_langsetup_prop}
       }
 }
@@ -714,7 +741,7 @@
         \__xpg_set_text_direction:n{\l_tmpa_tl}{#2}
       }
       {
-        \xpg@error{Could~ not~ retrieve~ key~ direction~ for~ language~ "#1"}
+        \xpg_error_msg:n {Could~ not~ retrieve~ key~ direction~ for~ language~ "#1"}
         \prop_show:N{\g_xpg_langsetup_prop}
       }
 }
@@ -770,7 +797,7 @@
          {\xpg@fontsetup@nonlatin{#1}}
   }
   {
-    \xpg@info{Skipping~ automatic~ font~ setup~ for~ language~ #1}
+    \xpg_info_msg:n{Skipping~ automatic~ font~ setup~ for~ language~ #1}
   }
 }
 
@@ -782,7 +809,7 @@
   \bool_if:nTF{\tl_if_empty_p:n{#1} || \tl_if_empty_p:n{#2}}
   {
     % maybe an error ?
-    \xpg@warning{Asking~ to~ add~ empty~ feature~to~ main~ font~
+    \xpg_warning_msg:n{Asking~ to~ add~ empty~ feature~to~ main~ font~
       (Language="#2"~ to~ langtag~ "#1")}
   }
   {
@@ -815,7 +842,7 @@
   \bool_if:nTF{\tl_if_empty_p:n{#2} || \tl_if_empty_p:n{#3}}
   {
     % maybe an error ?
-    \xpg@warning{Asking~ to~ add~ empty~ feature~to~ main~ font
+    \xpg_warning_msg:n{Asking~ to~ add~ empty~ feature~to~ main~ font
                  (Script="#3"~ to~ scripttag~ "#2")}
   }
   {
@@ -851,10 +878,11 @@
         \regex_replace_once:nnN { \.[^\.]* \Z } { } \xpg_fname_str
         % ... and, finally, quotation marks
         \regex_replace_once:nnN { " } { } \xpg_fname_str
-        \xpg@error{
-          The~ current~ main ~ \xpg_ffamily_tl\space font,~ \xpg_fname_str,~ does~ not~ contain~ the~"#3"~ script!\MessageBreak
-          Please~ define~\csname\tl_if_empty:nF{#3}{\str_lowercase:n{#3}}font\xpg_ffamilysh_tl\endcsname~
-          with~ \string\newfontfamily\space command
+        \xpg_error_msg:n
+          {
+            The~ current~ main ~ \xpg_ffamily_tl\space font,~ \xpg_fname_str,~ does~ not~ contain~ the~"#3"~ script! \iow_newline:
+            Please~ define~\csname\tl_if_empty:nF{#3}{\str_lowercase:n{#3}}font\xpg_ffamilysh_tl\endcsname~
+            with~ \string\newfontfamily\space command
           }
         }
   }
@@ -982,7 +1010,7 @@
 \cs_new_nopar:Nn \__xpg_local_marks:n { }
 \cs_new_nopar:Nn \__xpg_enable_local_marks:
 {
-  \xpg@info{Option:~ localmarks}
+  \xpg_info_msg:n{Option:~ localmarks}
   \cs_gset_nopar:Nn \__xpg_local_marks:n
   {
 	 \def\xpg@tmp@lang{##1}
@@ -1014,7 +1042,7 @@
 
 %we call this macro when a gloss file is not found for a given language
 \def\xpg@nogloss#1{
-   \xpg@warning{File~ gloss-#1.ldf~ do~ not~  exists!\MessageBreak
+   \xpg_warning_msg:n{File~ gloss-#1.ldf~ do~ not~  exists!\MessageBreak
    I~ will~ nevertheless~ try~ to~ use~ hyphenation~ patterns~ for~ #1.}
   \PolyglossiaSetup{#1}{hyphenmins={2,3},hyphennames={#1},fontsetup=true}
   % the above amounts to:
@@ -1289,7 +1317,7 @@
     \selectbackgroundlanguage{#2}
     \selectlanguage[#1]{#2}%
   }
-  \xpg@info{Default~ language~ is~ #2}
+  \xpg_info_msg:n{Default~ language~ is~ #2}
   \polyglossia@set@language@name[#1]{#2}
 
   \cs_gset_nopar:Npn \mainlanguagename {#2}
@@ -1347,7 +1375,7 @@
         {bcp47}     { \use:c{bcp47.tag} }
       }
       {
-        \xpg@error{Invalid~ \string\languageid\space argument:~ #1}
+        \xpg_error_msg:n {Invalid~ \string\languageid\space argument:~ #1}
       }
 }
 
@@ -1361,7 +1389,7 @@
         {bcp47}     { \use:c{bcp47.main.tag} }
       }
       {
-        \xpg@error{Invalid~ \string\mainlanguageid\space argument:~ #1}
+        \xpg_error_msg:n {Invalid~ \string\mainlanguageid\space argument:~ #1}
       }
 }
 % Kernel command to access to BCP-47 data.
@@ -1383,7 +1411,7 @@
 \DeclareExpandableDocumentCommand \BCPdata {m}
 {
    \cs_if_exist_use:cF{bcp47.#1}
-        { \xpg@error{Invalid~ \string\BCPdata\space argument:~ #1} }
+        { \xpg_error_msg:n {Invalid~ \string\BCPdata\space argument:~ #1} }
 }
 
 % main babel name
@@ -2034,7 +2062,7 @@
 % Patch xkeyval to record default values of keys
 \pretocmd{\XKV@define@default}{%
    \csgdef{xpg@default@opt@\XKV@header #1}{#2}
-}{}{\xpg@warning{Patching xkeyval failed!}}
+}{}{\xpg_warning_msg:n{Patching xkeyval failed!}}
 
 % Helper to get and register option keyvals
 \def\xpg@parsevariantkeyvalue#1=#2@#3:#4\relax{
@@ -2137,7 +2165,7 @@
       }
       {}
       {
-        \xpg@error{Invalid~ \string\iflanguageidloaded\space argument:~ #1}
+        \xpg_error_msg:n {Invalid~ \string\iflanguageidloaded\space argument:~ #1}
       }
    }%
 }
@@ -2406,12 +2434,12 @@
 \newcommand{\setlocalhyphenmins}[3]{
    \xpg@ifdefined{#1}{
       \expandafter\ifx\csname l@#1\endcsname\l@nohyphenation
-        \xpg@warning{\string\setlocalhyphenmin\space~ useless~ for~ unhyphenated~ language~ #1}
+        \xpg_warning_msg:n{\string\setlocalhyphenmin\space~ useless~ for~ unhyphenated~ language~ #1}
       \else
       \providehyphenmins{#1}{#2#3}
       \fi
    }{
-     \xpg@warning{\string\setlocalhyphenmin\space~ useless~ for~ unknown~ language~ #1}
+     \xpg_warning_msg:n{\string\setlocalhyphenmin\space~ useless~ for~ unknown~ language~ #1}
    }
 }
 
@@ -2469,7 +2497,7 @@
      % Set \totalhyphenmin if specified
      \prop_get:NeNTF \g_xpg_langsetup_prop {#2/totalhyphenmin} \l_tmpa_tl
      {
-        \xpg@info{totalhyphenmin: '\l_tmpa_tl'}
+        \xpg_info_msg:n{totalhyphenmin: '\l_tmpa_tl'}
         \expandafter\hyphenationmin \l_tmpa_tl
      }
      {}
@@ -2552,7 +2580,7 @@
 \sys_if_engine_luatex:T{
   \str_if_eq:eeF{\g_xpg_luatex_renderer_str}{none}
   {
-    \xpg@info{Setting~ LuaTeX~ font~ renderer~ to~ \g_xpg_luatex_renderer_str}
+    \xpg_info_msg:n{Setting~ LuaTeX~ font~ renderer~ to~ \g_xpg_luatex_renderer_str}
     \exp_args:Ne \defaultfontfeatures{Renderer=\g_xpg_luatex_renderer_str}
   }
 }
@@ -2562,7 +2590,7 @@
    \gdef\@font@info#1{\relax} % no latex font info
    \gdef\@font@warning#1{\relax} % no latex font warnings
    \gdef\zf@PackageInfo#1{\relax} % no fontspec info
-   \gdef\xpg@info#1{\relax} % no polyglossia info
+   \gdef\xpg_info_msg:n#1{\relax} % no polyglossia info
 }
 
 \bool_if:nT \g_xpg_localmarks_bool {
@@ -2604,14 +2632,14 @@
        \clist_if_in:NeF \xpg@loaded {\l__xpg_tmpa_lang_tl}{
            \file_if_exist:nTF{gloss-\l__xpg_tmpa_lang_tl .ldf}
               { \setotherlanguage{#1} }
-              { \xpg@error{ Source~ language~ #1,~ used~ in~
+              { \xpg_error_msg:n { Source~ language~ #1,~ used~ in~
                             \string\inheritbabelshorthands,~ does~ not~ exist } }
        }
        \tl_set:Nn \l__xpg_tmpb_lang_tl { \xpg_alias_base_lang:n{#2} }
        \clist_if_in:NeF \xpg@loaded {\l__xpg_tmpb_lang_tl}{
            \file_if_exist:nTF{gloss-\l__xpg_tmpb_lang_tl .ldf}
               { \setotherlanguage{#2} }
-              { \xpg@error{ Target~ language~ #2,~ used~ in~
+              { \xpg_error_msg:n { Target~ language~ #2,~ used~ in~
                             \string\inheritbabelshorthands,~ does~ not~ exist } }
        }
        % Test whether the requested shorthands exist
@@ -2623,7 +2651,7 @@
                        { \bool_set_true:N \l__xpg_no_shorthands_bool }
        \bool_if:nT { \l__xpg_no_shorthands_bool }
                    {
-                      \xpg@error{ No~ babel~ shorthands~ exist~ for~ language~ #1 }
+                      \xpg_error_msg:n { No~ babel~ shorthands~ exist~ for~ language~ #1 }
                    }
        % If so, apply:
        \bool_if:nF { \l__xpg_no_shorthands_bool }
@@ -2648,7 +2676,7 @@
        \iflanguageloaded{\l__xpg_tmpa_lang_tl}{
            \use:c{\l__xpg_tmpa_lang_tl @shorthands}
        }{
-           \xpg@error{ Language~ #1,~ requested~ in~
+           \xpg_error_msg:n { Language~ #1,~ requested~ in~
                        \string\startbabelshorthands,~ is~ not~ loaded }
        }
     }
