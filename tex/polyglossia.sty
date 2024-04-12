@@ -330,7 +330,12 @@
   { \cs_new_nopar:Nn \__xpg_setRTLmain: { \@RTLmaintrue\setnonlatin } }
 
 %% compatibility with babel
-\cs_gset_eq:cc{ addto }{ tl_gput_right:Nn }
+\cs_new:Npn \addto #1 #2
+{
+  \cs_if_exist:NTF { #1 }
+     { \tl_gput_right:Nn { #1 }{ #2 } }
+     { \msg_warning:nnn { polyglossia } { undefcmd } { #1 } }
+}
 
 %% NEW EXPERIMENTAL SETUP INTERFACE FOR GLOSS FILES
 %% options currently available:
