@@ -330,7 +330,7 @@
   { \cs_new_nopar:Nn \__xpg_setRTLmain: { \@RTLmaintrue\setnonlatin } }
 
 %% compatibility with babel
-\cs_new:Npn \addto #1 #2
+\cs_set:Npn \addto #1 #2
 {
   \cs_if_exist:NF { #1 }
      { \cs_new:Npn { #1 } {} }
