@@ -1584,12 +1584,12 @@
   \tl_if_blank:nTF {#1}{%
     \cs_if_exist:cTF {#2@gbabelname}
     {
-       \cs_gset_nopar:cpe  \babelname { \use:c{#2@gbabelname} }
+       \cs_gset_nopar:Npe  \babelname { \use:c{#2@gbabelname} }
     }{
-       \cs_gset_nopar:cpe \babelname { \prop_item:Nn{\g_xpg_langsetup_prop}{#2/babelname} }
+       \cs_gset_nopar:Npe \babelname { \prop_item:Nn{\g_xpg_langsetup_prop}{#2/babelname} }
     }
   }{
-    \cs_gset_nopar:cpe \babelname { \prop_item:Nn{\g_xpg_langsetup_prop}{#2/babelname} }
+    \cs_gset_nopar:Npe \babelname { \prop_item:Nn{\g_xpg_langsetup_prop}{#2/babelname} }
   }
   % Store variant
   \tl_if_blank:nTF {#1}
@@ -1813,12 +1813,12 @@
   \tl_if_blank:nTF {#1}{
     \cs_if_exist:cTF{#2@gbabelname}
     {
-       \cs_gset_nopar:cpe \babelname { \use:c{#2@gbabelname} }
+       \cs_gset_nopar:Npe \babelname { \use:c{#2@gbabelname} }
     }{
-       \cs_gset_nopar:cpe \babelname { \prop_item:Nn{\g_xpg_langsetup_prop}{#2/babelname} }
+       \cs_gset_nopar:Npe \babelname { \prop_item:Nn{\g_xpg_langsetup_prop}{#2/babelname} }
     }
   }{
-    \cs_gset_nopar:cpe \babelname { \prop_item:Nn{\g_xpg_langsetup_prop}{#2/babelname} }
+    \cs_gset_nopar:Npe \babelname { \prop_item:Nn{\g_xpg_langsetup_prop}{#2/babelname} }
   }
   % Store BCP-47 id of current language
   \__xpg_store_bcp_info:nn {#1}{#2}
@@ -2217,15 +2217,16 @@
 
 \newcommand*{\xpg@set@language@aux}[2][]{
    % Store babelname of current language (for external packages such as biblatex)
-   \tl_if_blank:nTF {#1}{
+   \tl_if_blank:nTF {#1}
+   {
      \cs_if_exist:cTF {#2@gbabelname}
      {
-        \cs_gset_nopar:cpe \babelname{ \use:c{#2@gbabelname} }
+        \cs_gset_nopar:Npe \babelname { \use:c{#2@gbabelname} }
      }{
-        \cs_gset_nopar:cpe \babelname { \prop_item:Nn{\g_xpg_langsetup_prop}{#2/babelname} }
+        \cs_gset_nopar:Npe \babelname { \prop_item:Nn{\g_xpg_langsetup_prop}{#2/babelname} }
      }
    }{
-     \cs_gset_nopar:cpe \babelname { \prop_item:Nn{\g_xpg_langsetup_prop}{#2/babelname} }
+     \cs_gset_nopar:Npe \babelname { \prop_item:Nn{\g_xpg_langsetup_prop}{#2/babelname} }
    }
    % Store BCP-47 id of current language
    \__xpg_store_bcp_info:nn {#1}{#2}
