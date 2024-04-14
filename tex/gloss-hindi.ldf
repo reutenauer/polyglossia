@@ -34,7 +34,7 @@
 \fi
 
 \def\hindi@language{%
-  \PolyglossiaSetupLangPatterns{hindi}%
+  \SetupPolyglossiaLangPatterns{hindi}%
 }
 
 \newif\ifhindi@devanagari@numerals

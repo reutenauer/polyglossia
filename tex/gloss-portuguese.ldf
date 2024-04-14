@@ -131,7 +131,7 @@
 }
 
 \def\portuguese@language{%
-   \PolyglossiaSetupLangPatterns{\portuguese@variant}%
+   \SetupPolyglossiaLangPatterns{\portuguese@variant}%
 }%
 
 \def\captionsportuguese@portuges{%

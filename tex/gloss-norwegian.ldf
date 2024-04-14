@@ -41,7 +41,7 @@
 
 
 \def\norwegian@language{%
-   \PolyglossiaSetupLangPatterns{\norwegian@variant}%
+   \SetupPolyglossiaLangPatterns{\norwegian@variant}%
 }%
 
 \def\captionsnorwegian@nynorsk{%

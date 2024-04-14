@@ -79,7 +79,7 @@
 
 
 \def\sorbian@language{%
-   \PolyglossiaSetupLangPatterns{\sorbian@variant}%
+   \SetupPolyglossiaLangPatterns{\sorbian@variant}%
 }%
 
 

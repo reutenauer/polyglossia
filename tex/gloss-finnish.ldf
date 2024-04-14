@@ -106,14 +106,14 @@
 \def\finnish@language{%
   \if@finnish@schoolhyphens
       \xpg@ifdefined{schoolfinnish}{%
-         \PolyglossiaSetupLangPatterns{schoolfinnish}%
+         \SetupPolyglossiaLangPatterns{schoolfinnish}%
       }{%
            \xpg@warning{Finnish 'School' hyphenation patterns (schoolfinnish) not available.\MessageBreak
 	                I will use the standard patterns for Finnish instead}%
-	   \PolyglossiaSetupLangPatterns{finnish}%
+	   \SetupPolyglossiaLangPatterns{finnish}%
      }%
   \else
-      \PolyglossiaSetupLangPatterns{finnish}%
+      \SetupPolyglossiaLangPatterns{finnish}%
   \fi
 }
 
