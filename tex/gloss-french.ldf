@@ -38,19 +38,19 @@
       % canadian:
       \def\french@variant{canadien}%
       \SetLanguageKeys{french}{babelname=canadien,bcp47=fr-CA,bcp47-language=fr,bcp47-region=CA,bcp47-extension-u=sd-caqc}%
-      \xpg@ifdefined{canadien}{}%
-      {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
-        I will use the standard patterns for French instead}%
-      \adddialect\l@canadien\l@french\relax}%
+      \IfLanguageDefinedF{canadien}%
+        {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
+          I will use the standard patterns for French instead}%
+         \adddialect\l@canadien\l@french\relax}%
       \french@thincolonspacefalse
    \or
       % acadian:
       \def\french@variant{acadian}%
       \SetLanguageKeys{french}{babelname=acadian,bcp47=fr-CA-u-sd-canb,bcp47-language=fr,bcp47-region=CA,bcp47-extension-u=sd-canb}%
-      \xpg@ifdefined{acadian}{}%
-      {\xpg@warning{No hyphenation patterns were loaded for "French (Canada, Acadian)"\MessageBreak
-        I will use the standard patterns for French instead}%
-      \adddialect\l@acadian\l@french\relax}%
+      \IfLanguageDefinedF{acadian}%
+        {\xpg@warning{No hyphenation patterns were loaded for "French (Canada, Acadian)"\MessageBreak
+          I will use the standard patterns for French instead}%
+         \adddialect\l@acadian\l@french\relax}%
       \french@thincolonspacefalse
    \or
       % swiss:

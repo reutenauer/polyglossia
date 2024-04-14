@@ -76,7 +76,7 @@
 
 \def\greek@set@langdata{%
    \if@greek@ancient
-       \xpg@ifdefined{ancientgreek}{}%
+       \IfLanguageDefinedF{ancientgreek}%
            {\xpg@warning{No hyphenation patterns were loaded for Ancient Greek\MessageBreak
 	                 I will use the patterns loaded for \string\l@greek\space instead}%
             \adddialect\l@ancientgreek\l@greek\relax}%
@@ -86,7 +86,7 @@
        \SetLanguageKeys{greek}{babelname=greek,bcp47=grc,bcp47-language=grc,bcp47-variant={}}%
    \else
       \if@greek@poly
-          \xpg@ifdefined{polygreek}{}%
+          \IfLanguageDefinedF{polygreek}%
               {\xpg@warning{No hyphenation patterns were loaded for Polytonic Greek\MessageBreak
 	                    I will use the patterns loaded for \string\l@greek\space instead}%
                \adddialect\l@polygreek\l@greek\relax}%
@@ -95,7 +95,7 @@
           \def\dategreek{\datepolygreek}%
           \SetLanguageKeys{greek}{babelname=polutonikogreek,bcp47=el-polyton,bcp47-language=el,bcp47-variant=polyton}%
       \else% monotonic greek
-          \xpg@ifdefined{monogreek}{}%
+          \IfLanguageDefinedF{monogreek}%
               {\xpg@warning{No hyphenation patterns were loaded for Monotonic Greek\MessageBreak
 	                    I will use the patterns loaded for \string\l@greek\space instead}%
                \adddialect\l@monogreek\l@greek\relax}%

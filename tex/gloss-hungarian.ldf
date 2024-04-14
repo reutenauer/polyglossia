@@ -71,7 +71,7 @@
 
 \def\hungarian@language{%
    \SetupPolyglossiaLangPatterns{hungarian}%
-   \xpg@ifdefined{hungarian}{\adddialect\l@magyar\l@hungarian}{}%
+   \IfLanguageDefinedT{hungarian}{\adddialect\l@magyar\l@hungarian}%
 }%
 
 \def\captionshungarian{%

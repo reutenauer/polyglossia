@@ -68,7 +68,7 @@
 
 \cs_new:Npn \polyglossia_latin_use_modern_patterns:
   {
-    \xpg@ifdefined {latin}
+    \IfLanguageDefinedTF {latin}
       {
         \def \latin@language
           {
@@ -96,7 +96,7 @@
 \cs_new:Npn \polyglossia_latin_set_patterns:n #1
 % #1 may be "classiclatin" or "liturgicallatin"
   {
-    \xpg@ifdefined {#1}
+    \IfLanguageDefinedTF {#1}
       {
         \def \latin@language
           {

@@ -44,14 +44,13 @@
       \SetupLatinPolyglossiaFont{malay}%
       % Check if \l@malay is defined. If not, try to set it to some variety
       % (specific order as in the csv list below), or null language if everything fails
-      \xpg@ifdefined{malay}{}{%
+      \IfLanguageDefinedF{malay}{%
         \def\do##1{%
-            \xpg@ifdefined{##1}%
+            \IfLanguageDefinedT{##1}%
               {\csletcs{l@malay}{l@##1}\listbreak}%
-              {}%
         }%
         \docsvlist{melayu,bahasam,bahasai,indonesian,indon,bahasa}
-        \xpg@ifdefined{malay}{}{%
+        \IfLanguageDefinedF{malay}{%
                  \xpg@warning{No hyphenation patterns for Malay (Malaysian) found\MessageBreak
                               I will use the 'null' language instead}%
                  \adddialect\l@malay0%
@@ -62,14 +61,13 @@
       \SetupLatinPolyglossiaFont{malay}%
       % Check if \l@indonesian is defined. If not, try to set it to some variety
       % (specific order as in the csv list below), or null language if everything fails
-      \xpg@ifdefined{indonesian}{}{%
+      \IfLanguageDefinedF{indonesian}{%
         \def\do##1{%
-           \xpg@ifdefined{##1}%
+           \IfLanguageDefinedT{##1}%
               {\csletcs{l@indonesian}{l@##1}\listbreak}%
-              {}%
         }%
         \docsvlist{indon,bahasai,bahasam,malay,melayu,bahasa}
-        \xpg@ifdefined{indonesian}{}{%
+        \IfLanguageDefinedF{indonesian}{%
                  \xpg@warning{No hyphenation patterns for Malay (Indonesian) found\MessageBreak
                               I will use the 'null' language instead}%
                  \adddialect\l@indonesian0

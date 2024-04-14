@@ -105,7 +105,7 @@
 
 \def\finnish@language{%
   \if@finnish@schoolhyphens
-      \xpg@ifdefined{schoolfinnish}{%
+      \IfLanguageDefinedTF{schoolfinnish}{%
          \SetupPolyglossiaLangPatterns{schoolfinnish}%
       }{%
            \xpg@warning{Finnish 'School' hyphenation patterns (schoolfinnish) not available.\MessageBreak

@@ -82,7 +82,7 @@
       % swiss:
       \@swiss@localetrue%
       \@austrian@localefalse%
-      \xpg@ifdefined{swissgerman}{}%
+      \IfLanguageDefinedF{swissgerman}%
          {%
            \xpg@warning{No hyphenation patterns were loaded for "Swiss German (Old Spelling)"\MessageBreak
 	                I will use the standard patterns for German (old spelling) instead}%

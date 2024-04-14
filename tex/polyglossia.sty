@@ -215,7 +215,7 @@
 
 \NewDocumentCommand \CheckHyphenationPatterns { m }
 {
-   \xpg@ifdefined{#1}{}
+   \xpg_if_language_defined:nF {#1}
     {
       \XPGNoPatternsFallback{#1}
     }
@@ -406,30 +406,34 @@
   \clist_set:Ne{\l_tmpa_clist}{\prop_item:Nn \g_xpg_langsetup_prop {#1 / hyphennames}}
   \bool_set_false:N \l__xpg_have_hyphen_bool
   % for each hyphen in the set until we find one that works
-  \clist_map_inline:Nn \l_tmpa_clist {
+  \clist_map_inline:Nn \l_tmpa_clist
+  {
     \bool_if:NF \l__xpg_have_hyphen_bool
     {
        % check if language hyphenname is defined
-      \__xpg_check_if_exist_l@:nF{#1}{
+      \__xpg_pattern_check_if_exists:nF{#1}
+      {
           % if not, first consider nohyphenation
           \str_if_eq:nnTF{##1}{nohyphenation}
             {
                \cs_gset_eq:cc{l@#1}{l@##1}
                \bool_gset_true:N \l__xpg_have_hyphen_bool
-            }{
+            }
+            {
                % then test if hyphenation is defined
-               \xpg@ifdefined{##1}{
+               \xpg_if_language_defined:nT {##1}
+               {
                   % test if language hyphenation is nohyphenation
                   \cs_if_eq:cNTF{l@#1}{\l@nohyphenation}
                     { \bool_gset_true:N \l__xpg_have_hyphen_bool }
-                    {%
+                    {
                       % if false define language to hyphenation if it is not equal...
                       \str_if_eq:nnF{#1}{##1}{\cs_gset_eq:cc{l@#1}{l@##1}}
                       % ...and load
                       \xpg_set_hyphenation_patterns:n {##1}
                       \bool_gset_true:N \l__xpg_have_hyphen_bool
-                  }
-                }{}
+                    }
+               }
            }
        }
     }
@@ -2279,7 +2283,7 @@
 }
 
 % check if language is defined
-\prg_set_conditional:Npnn \__xpg_check_if_exist_l@:n #1 { F, TF }
+\prg_set_conditional:Npnn \__xpg_pattern_check_if_exists:n #1 { F, TF }
   {
 	\bool_lazy_and:nnTF 
 	  { \cs_if_exist_p:c { l@#1 }  }
@@ -2292,22 +2296,32 @@
 {
   % if \l@#1 is not properly defined, call lua function newloader(#1),
   % and assign the returned number to \l@#1
-  \__xpg_check_if_exist_l@:nF {#1}
+  \__xpg_pattern_check_if_exists:nF {#1}
   {
     \directlua { token.set_char('l@#1', polyglossia.newloader'#1') }
   }
 }
 
-% This check is also used by biblatex, so don't
-% rename silently.
-\newcommand\xpg@ifdefined[3]{
+% check if language is defined
+\prg_set_conditional:Npnn \xpg_if_language_defined:n #1 { T, F, TF }
+{
   % With luatex, we first need to define \l@#1.
   \sys_if_engine_luatex:T
   {
     \__xpg_luatex_load_lang:n {#1}
   }
-  \__xpg_check_if_exist_l@:nTF{#1}{#2}{#3}
+  \__xpg_pattern_check_if_exists:nTF{#1}
+        { \prg_return_true: }
+        { \prg_return_false: } 
 }
+
+% Aliases for gloss files
+\cs_gset_eq:cc { IfLanguageDefinedTF } { xpg_if_language_defined:nTF }
+\cs_gset_eq:cc { IfLanguageDefinedT }  { xpg_if_language_defined:nT }
+\cs_gset_eq:cc { IfLanguageDefinedF }  { xpg_if_language_defined:nF }
+
+% This old term is used by biblatex, so don't drop!
+\cs_gset_eq:cc { xpg@ifdefined } { xpg_if_language_defined:nTF }
 
 % Set \bbl@hyphendata@\the\language, which is (lua)babel's
 % hyphenation pattern hook
@@ -2470,7 +2484,7 @@
 
 \NewDocumentCommand \setlocalhyphenmins { m m m }
 {
-   \xpg@ifdefined{#1}
+   \xpg_if_language_defined:nTF{#1}
    {
       \cs_if_eq:ccTF { l@#1 } { l@nohyphenation }
       {
