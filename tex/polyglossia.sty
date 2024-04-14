@@ -420,7 +420,7 @@
                % then test if hyphenation is defined
                \xpg@ifdefined{##1}{
                   % test if language hyphenation is nohyphenation
-                  \cs_if_eq:cNF{l@#1}{\l@nohyphenation}
+                  \cs_if_eq:cNTF{l@#1}{\l@nohyphenation}
                     { \bool_gset_true:N \l__xpg_have_hyphen_bool }
                     {%
                       % if false define language to hyphenation if it is not equal...
