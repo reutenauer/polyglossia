@@ -426,7 +426,7 @@
                       % if false define language to hyphenation if it is not equal...
                       \str_if_eq:nnF{#1}{##1}{\cs_gset_eq:cc{l@#1}{l@##1}}
                       % ...and load
-                      \xpg@set@hyphenation@patterns{##1}
+                      \xpg_set_hyphenation_patterns:n {##1}
                       \bool_gset_true:N \l__xpg_have_hyphen_bool
                   }
                 }{}
@@ -473,14 +473,14 @@
             \language=\l@nohyphenation
           }
           {
-            \xpg@set@hyphenation@patterns{#1}
+            \xpg_set_hyphenation_patterns:n {#1}
           }
       }
       {
         % Since this function is sometimes called from the gloss files
         % directly, we need to check whether the requested hyphenname exists.
         \CheckHyphenationPatterns{#1}
-        \xpg@set@hyphenation@patterns{#1}
+        \xpg_set_hyphenation_patterns:n {#1}
       }
   }
 }
@@ -802,7 +802,7 @@
   {
     \bool_gset_true:N \g__xpg_hyphenation_disabled_bool
     \tl_gset:Ne \g__xpg_lastlanguage_tl { \the\language }
-    % We do not call \xpg@set@hyphenation@patterns here to avoid a warning message.
+    % We do not call \xpg_set_hyphenation_patterns:n here to avoid a warning message.
     % "nohyphenation" is not listed in language.dat.lua.
     \language=\l@nohyphenation
   }
@@ -2322,7 +2322,8 @@
 
 % Set hyphenation patterns for a given language. This does the right
 % thing both for XeTeX and LuaTeX
-\newcommand*\xpg@set@hyphenation@patterns[1]{
+\cs_new:Nn \xpg_set_hyphenation_patterns:n
+{
   \sys_if_engine_luatex:T { \__xpg_luatex_load_lang:n {#1} }
   \language=\csname l@#1\endcsname
 }
