@@ -313,15 +313,15 @@
 \def\german@language{%
   \if@german@oldspelling
       \if@swiss@locale
-          \polyglossia@setup@language@patterns{swissgerman}%
+          \PolyglossiaSetupLangPatterns{swissgerman}%
       \else
-          \polyglossia@setup@language@patterns{german}%
+          \PolyglossiaSetupLangPatterns{german}%
       \fi
       \if@austrian@locale
          \adddialect\l@austrian\l@german%
       \fi
   \else
-      \polyglossia@setup@language@patterns{ngerman}%
+      \PolyglossiaSetupLangPatterns{ngerman}%
       \if@austrian@locale
          \adddialect\l@naustrian\l@ngerman%
       \fi

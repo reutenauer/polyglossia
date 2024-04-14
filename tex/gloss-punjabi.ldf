@@ -25,7 +25,7 @@
 
 \def\punjabi@language{%
   % patterns are spelled panjabi
-  \polyglossia@setup@language@patterns{panjabi}%
+  \PolyglossiaSetupLangPatterns{panjabi}%
 }
 
 \newif\ifpunjabi@gurmukhi@numerals

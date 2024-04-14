@@ -72,7 +72,7 @@
       {
         \def \latin@language
           {
-            \polyglossia@setup@language@patterns {latin}
+            \PolyglossiaSetupLangPatterns {latin}
             \str_case:Vn \l_polyglossia_latin_variant_str
               {
                 {classic}      { \adddialect \l@classiclatin \l@latin }
@@ -100,7 +100,7 @@
       {
         \def \latin@language
           {
-            \polyglossia@setup@language@patterns {#1}
+            \PolyglossiaSetupLangPatterns {#1}
             \str_case:Vn \l_polyglossia_latin_variant_str
               {
                 {classic}      {

@@ -109,7 +109,7 @@
 
 
 \def\greek@language{%
-  \polyglossia@setup@language@patterns{\greek@variant}%
+  \PolyglossiaSetupLangPatterns{\greek@variant}%
 }
 
 

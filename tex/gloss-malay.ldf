@@ -84,7 +84,7 @@
 
 
 \def\malay@language{%
-   \polyglossia@setup@language@patterns{\malay@variant}%
+   \PolyglossiaSetupLangPatterns{\malay@variant}%
 }%
 
 

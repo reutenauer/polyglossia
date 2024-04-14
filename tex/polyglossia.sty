@@ -443,7 +443,7 @@
   }
   \cs_gset:cpn {#1@language}
   {
-    \polyglossia@setup@language@patterns{#1}
+    \PolyglossiaSetupLangPatterns{#1}
   }
   % setup hyphenmins
   \clist_set:Ne \l_tmpa_clist
@@ -459,7 +459,8 @@
     }
 }
 
-\newcommand*\polyglossia@setup@language@patterns[1]{
+\NewDocumentCommand \PolyglossiaSetupLangPatterns { m }
+{
   \bool_if:NTF \g__xpg_hyphenation_disabled_bool
   {
     \tl_gset:Ne \g__xpg_lastlanguage_tl {\the\csname l@#1\endcsname}

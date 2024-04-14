@@ -151,7 +151,7 @@
 \xpg@initialize@gloss@options{kurdish}{variant=sorani,locale=default,script=arabic,abjadjimnotail=false,numerals=eastern}
 
 \def\kurdish@language{%
-   \polyglossia@setup@language@patterns{\kurdish@pattern}%
+   \PolyglossiaSetupLangPatterns{\kurdish@pattern}%
 }%
 
 \def\kurdishNativemonth#1{\ifcase#1%

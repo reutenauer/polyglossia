@@ -151,7 +151,7 @@
 \fi
 
 \def\english@language{%
-   \polyglossia@setup@language@patterns{\english@variant}%
+   \PolyglossiaSetupLangPatterns{\english@variant}%
 }%
 
 \def\captionsenglish{%

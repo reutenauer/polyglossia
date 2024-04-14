@@ -40,7 +40,7 @@
 
 
 %\def\sami@language{%
-%   \polyglossia@setup@language@patterns{\sami@variant}%
+%   \PolyglossiaSetupLangPatterns{\sami@variant}%
 %}%
 
 \def\captionssami@northern{%
