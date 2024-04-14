@@ -43,11 +43,11 @@
    \ifcase\xpg@nr\relax
       % cyrillic:
       \@serbian@cyrtrue
-      \xpg@fontsetup@nonlatin{serbian}%
+      \SetupNonLatinPolyglossiaFont{serbian}%
    \or
       % latin:
       \@serbian@cyrfalse
-      \xpg@fontsetup@latin{serbian}%
+      \SetupLatinPolyglossiaFont{serbian}%
       %TODO \def\serbian@language{\language=\l@serbianlat}%
       % or should we use Croatian patterns as a fallback for the time being???
    \fi

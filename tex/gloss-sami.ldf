@@ -28,12 +28,12 @@
 %      % northern:
 %      \def\sami@variant{samin}%
 %      \SetLanguageKeys{sami}{language=Northern Sami,langtag=NSM}%
-%      \xpg@fontsetup@latin{sami}%
+%      \SetupLatinPolyglossiaFont{sami}%
 %   \or
 %      % other:
 %      \def\sami@variant{}%
 %      \SetLanguageKeys{sami}{language= Sami,langtag=}%
-%      \xpg@fontsetup@latin{sami}%
+%      \SetupLatinPolyglossiaFont{sami}%
 %   \fi
 %   \xpg@info{Option: sami, variant=\xpg@val}%
 %}{\xpg@warning{Unknown sami variant `#1'}}

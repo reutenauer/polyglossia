@@ -31,7 +31,7 @@
       % upper:
       \def\sorbian@variant{usorbian}%
       \SetLanguageKeys{sorbian}{language=Upper Sorbian,langtag=USB,babelname=uppersorbian,bcp47=hsb,bcp47-language=hsb}%
-      \xpg@fontsetup@latin{sorbian}%
+      \SetupLatinPolyglossiaFont{sorbian}%
       % Check if \l@usorbian is defined. If not, try to set it to some variety
       % (specific order as in the csv list below), or null language if everything fails
       \xpg@ifdefined{usorbian}{}{%
@@ -51,7 +51,7 @@
       % lower:
       \def\sorbian@variant{lsorbian}%
       \SetLanguageKeys{sorbian}{language=Lower Sorbian,langtag=LSB,babelname=lowersorbian,bcp47=dsb,bcp47-language=dsb}%
-      \xpg@fontsetup@latin{sorbian}%
+      \SetupLatinPolyglossiaFont{sorbian}%
       % Check if \l@lsorbian is defined. If not, try to set it to some variety
       % (specific order as in the csv list below), or null language if everything fails
       \xpg@ifdefined{lsorbian}{}{%

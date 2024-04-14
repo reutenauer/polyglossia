@@ -815,7 +815,7 @@
   {
     \bool_gset_false:N \g__xpg_hyphenation_disabled_bool
     \language=\tl_use:N{\g__xpg_lastlanguage_tl}
-  }%
+  }
 }
 
 \cs_new:Npn \__xpg_auto_setupfont:n #1
@@ -823,8 +823,8 @@
   \bool_if:cTF { g__xpg_#1_fontsetup_bool }
   {
     \str_if_eq:eeTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/lcscript}}{latin}
-         {\xpg@fontsetup@latin{#1}}
-         {\xpg@fontsetup@nonlatin{#1}}
+         {\SetupLatinPolyglossiaFont{#1}}
+         {\SetupNonLatinPolyglossiaFont{#1}}
   }
   {
     \xpg_info_msg:n{Skipping~ automatic~ font~ setup~ for~ language~ #1}
@@ -919,8 +919,9 @@
 }
 \cs_generate_variant:Nn  \__xpg_add_font_feature_script:nnn { non , nno, noo , nVn, nnV, nVV , nxn, nnx, nxx}
 
-\def\xpg@fontsetup@latin#1{
-  \begingroup
+\NewDocumentCommand \SetupLatinPolyglossiaFont { m }
+{
+  \group_begin:
   \cs_gset_protected_nopar:cpn {#1@font@rm}
   {
     \cs_if_exist_use:cF{#1font}{
@@ -945,7 +946,7 @@
                                          {\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
     }
   }
-  \endgroup
+  \group_end:
 }
 
 % track the script fonts in use
@@ -953,8 +954,9 @@
 \seq_new:N \__xpg_used_script_fonts_sf
 \seq_new:N \__xpg_used_script_fonts_tt
 
-\def\xpg@fontsetup@nonlatin#1{
-  \begingroup
+\NewDocumentCommand \SetupNonLatinPolyglossiaFont { m }
+{
+  \group_begin:
   \cs_gset_protected_nopar:cpn {#1@font@rm}
   {
     \cs_if_exist_use:cF{#1font}
@@ -974,12 +976,12 @@
            \__xpg_add_font_feature_script:nxx{rm}
                                              {\prop_item:Nn{\g_xpg_langsetup_prop}{#1/scripttag}}
                                              {\prop_item:Nn{\g_xpg_langsetup_prop}{#1/script}}
-       }%
+       }
        \__xpg_add_font_feature_language:xx{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/langtag}}
                                           {\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
-      }%
+      }
       \tl_set:Nn \familytype {rm}
-  }%
+  }
   \cs_gset_protected_nopar:cpn {#1@font@sf}
   {
     \cs_if_exist_use:cF{#1fontsf}
@@ -999,12 +1001,12 @@
            \__xpg_add_font_feature_script:nxx{sf}
                                              {\prop_item:Nn{\g_xpg_langsetup_prop}{#1/scripttag}}
                                              {\prop_item:Nn{\g_xpg_langsetup_prop}{#1/script}}
-       }%
+       }
        \__xpg_add_font_feature_language:xx{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/langtag}}
                                           {\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
-      }%
+      }
       \tl_set:Nn \familytype {sf}
-  }%
+  }
   \cs_gset_protected_nopar:cpn {#1@font@tt}
   {
     \cs_if_exist_use:cF{#1fonttt}
@@ -1030,7 +1032,7 @@
       }
       \tl_set:Nn \familytype {tt}
   }
-  \endgroup
+  \group_end:
 }
 
 %%% END OF PolyglossiaSetup
