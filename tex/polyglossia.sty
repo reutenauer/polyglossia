@@ -1077,9 +1077,12 @@
 }
 
 %we call this macro when a gloss file is not found for a given language
-\def\xpg@nogloss#1{
-   \xpg_warning_msg:n{File~ gloss-#1.ldf~ do~ not~  exists!\MessageBreak
-   I~ will~ nevertheless~ try~ to~ use~ hyphenation~ patterns~ for~ #1.}
+\cs_new_nopar:Nn \__xpg_no_gloss:n
+{
+   \xpg_warning_msg:n
+      {File~ gloss-#1.ldf~ do~ not~  exists! \iow_newline:
+       I~ will~ nevertheless~ try~ to~ use~ hyphenation~ patterns~ for~ #1.}
+
   \PolyglossiaSetup{#1}{hyphenmins={2,3},hyphennames={#1},fontsetup=true}
   % the above amounts to:
   %\ifcsundef{l@#1}%
@@ -1088,13 +1091,14 @@
   %\csdef{#1@language}{\language=\csname l@#1\endcsname}%
 }
 
-\newcommand{\xpg@input}[1]{
+\cs_new_nopar:Nn \xpg_input:n
+{
   % Store catcode of @ before making at letter
-  \chardef\xpg@saved@at@catcode\catcode`\@
+  \chardef \__xpg_saved_at_catcode \catcode`\@
   \makeatletter
   \input{#1}
   % restore former @ catcode
-  \catcode`\@=\xpg@saved@at@catcode
+  \catcode`\@=\__xpg_saved_at_catcode
 }
 
 % try to load a language file
@@ -1107,20 +1111,20 @@
 	  % packages which force \ExplSyntaxOn (#425)
 	  \protected\edef\xpg@restore@tilde@catcode{\catcode 126 = \the\catcode 126\relax}
 	  \catcode 126 = 13
-	  \xpg@input{gloss-#2.ldf}
+	  \xpg_input:n {gloss-#2.ldf}
 	  \setkeys{#2}{#1}
 	  % restore former ~ catcode
 	  \xpg@restore@tilde@catcode
 	}
 	{
-	  \xpg@nogloss{#2}
+	  \__xpg_no_gloss:n {#2}
 	}
 }
 \cs_generate_variant:Nn \__xpg_load_lang_definition:nn { ee }
 
 % load a master language from an alias file
 \newcommand*\xpg@load@master@language[1] {
-  \xpg@input{gloss-#1.ldf}
+  \xpg_input:n {gloss-#1.ldf}
   \seq_if_in:NeF \__xpg_langs_loaded {#1}
   {
     % define environment and command if not alias
