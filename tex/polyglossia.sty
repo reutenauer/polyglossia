@@ -1834,7 +1834,8 @@
 \tl_put_right:Nn \l_text_case_exclude_arg_tl { \textlang }
 
 % wrapper for foreignlanguage and otherlanguage*
-\newcommand*\polyglossia@setforeignlanguage[2][]{
+\cs_new_nopar:Nn \xpg_set_foreign_language:nn
+{
   \xpg_select_language:nn { #1 } { #2 }
   \__xpg_register_language:nn{#1}{#2}
   % Store babelname of current language (for external packages such as biblatex)
@@ -1877,7 +1878,7 @@
 {
   \xpg_error_if_lang_not_loaded:n{#2}
   \__xpg_set_keys:nn{#2}{#1}
-  \polyglossia@setforeignlanguage[#1]{#2}
+  \xpg_set_foreign_language:nn { #1 } { #2 }
   % Hook for external packages such as biblatex
   \polyglossia@language@switched
   % buggy restoration heure
@@ -1895,11 +1896,11 @@
 % prevent case changing of language name in \foreignlanguage
 \tl_put_right:Nn \l_text_case_exclude_arg_tl { \foreignlanguage }
 
-% Direct access to polyglossia@setforeignlanguage
+% Direct access to \xpg_set_foreign_language:nn
 % used in captions
 \NewDocumentCommand \setforeignlanguage { O{} m }
 {
-  \polyglossia@setforeignlanguage[#1]{#2}
+  \xpg_set_foreign_language:nn { #1 } { #2 }
 }
 
 % Stack to store matrix languages
