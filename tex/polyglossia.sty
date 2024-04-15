@@ -2033,7 +2033,7 @@
 % Hook that other package authors can use
 % (for instance biblatex):
 % Do not rename!
-\newcommand*{\xpg@hook@setlanguage}{}
+\cs_set_nopar:Npn \xpg@hook@setlanguage {}
 
 \def\xpg@pop@language@i#1#2{
   \xpg@set@language@aux[#1]{#2}
@@ -2381,11 +2381,11 @@
 % (probably no longer used due to the
 %  more general hook that follows, but
 %  we keep it for backwards comp.)
-\def\select@language#1{}
+\cs_new:Npn \select@language #1 {}
 
 % Hook for external packages such as biblatex
 % do not rename!
-\def\polyglossia@language@switched{}
+\cs_new:Npn \polyglossia@language@switched {}
 
 % remove all custumization for language #1
 \cs_new:Npn \noextrascurrent #1
@@ -2435,7 +2435,7 @@
 }
 
 
-\let\xpg@pop@language\relax
+\cs_gset_eq:cc { xpg@pop@language } { relax }
 
 %
 % Keep track of the active (nested) languages and options
