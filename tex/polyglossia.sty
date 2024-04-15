@@ -28,7 +28,7 @@
 \hook_gput_code:nnn {begindocument/before} {.}
 {
   \cs_gset_eq:NN \bbl@set@language \xpg_set_language_aux:nn  % for biblatex
-  \cs_gset_eq:NN \bbl@main@language \xpg@main@language    % for biblatex
+  \cs_gset_eq:NN \bbl@main@language \xpg_main_language_tl    % for biblatex
   \ProvideDocumentCommand \texorpdfstring { m m } { #1 }  % dummy command if hyperref is not loaded
 }
 
@@ -1347,7 +1347,7 @@
 
 \cs_new:Nn \__xpg_set_default_language:nn
 {
-  \gdef\xpg@main@language{#2}
+  \tl_gset:Nn \xpg_main_language_tl {#2}
   \tl_if_blank:nTF {#1}
   {
     \cs_gset_nopar:Npn \mainlanguagevariant {}
@@ -1606,12 +1606,12 @@
 {
   \xpg_error_if_lang_not_loaded:n{#2}
   % disable globalnumbers of previously defined default language
-  \use:c{no\xpg@main@language @globalnumbers}
-  \use:c{noextras@\xpg@main@language}
+  \use:c{no\xpg_main_language_tl @globalnumbers}
+  \use:c{noextras@\xpg_main_language_tl}
   % This is a hook for external packages which want to access variants
   % via babelname (such as biblatex)
   \cs_if_exist_use:c{noextras@bbl@\mainbabelname}
-  \use:c{init@noextras@\xpg@main@language}
+  \use:c{init@noextras@\xpg_main_language_tl}
   \xpg_set_language_name:nn { #1 } { #2 }
   \__xpg_if_LR_str:eF{\prop_item:Ne{\g_xpg_langsetup_prop}{#2/direction}}
   {
@@ -2177,6 +2177,19 @@
        \prg_return_false:
      }
 }
+
+\prg_set_conditional:Npnn \xpg_if_main_language:n #1 { T, F, TF }
+{
+   \str_if_eq:VnTF \xpg_main_language_tl { #1 }
+        { \prg_return_true: }
+        { \prg_return_false: }
+}
+
+\cs_set_eq:NN \IfMainLanguageTF \xpg_if_main_language:nTF
+
+\cs_set_eq:NN \IfMainLanguageT \xpg_if_main_language:nT
+
+\cs_set_eq:NN \IfMainLanguageF \xpg_if_main_language:nF
 
 % Test if option value is set
 \DeclareDocumentCommand \iflanguageoption { m m m m m }

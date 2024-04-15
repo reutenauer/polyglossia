@@ -340,7 +340,7 @@
 
 \cs_new:Npn \polyglossia_latin_apply_footnote_option:
   {
-    \str_if_eq:VnTF \xpg@main@language {latin}
+    \IfMainLanguageTF {latin}
       {
         \cs_if_exist:NT \@makefntext
           {
@@ -643,7 +643,7 @@
 
 \AtBeginDocument
   {
-    \str_if_eq:VnTF \xpg@main@language {latin}
+    \IfMainLanguageTF {latin}
       {
         \iflatin@prosodicshorthands
         \else

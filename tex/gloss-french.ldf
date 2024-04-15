@@ -443,7 +443,7 @@
   \if@xpg@french@footnote@set%
   \else%
    \iffrench@frenchfootnote%
-      \ifdefstring{\xpg@main@language}{french}{%
+      \IfMainLanguageTF{french}{%
          \ifx\@makefntext\undefined\else%
              \long\def\french@makefntext##1{%
                 \parindent1em \noindent\quad%
@@ -467,7 +467,7 @@
   \if@xpg@french@itemlabels@set%
   \else%
      \iffrench@frenchitemlabels
-      \ifdefstring{\xpg@main@language}{french}{%
+      \IfMainLanguageTF{french}{%
          \renewcommand{\labelitemi}{\french@itemi}%
          \renewcommand{\labelitemii}{\french@itemii}%
          \renewcommand{\labelitemiii}{\french@itemiii}%
