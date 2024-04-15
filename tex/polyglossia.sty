@@ -141,7 +141,12 @@
 
 \msg_new:nnn { polyglossia } { illvalue }
 {
-  Illegal~ value~ (#1)~ for~ #2.
+  Illegal~ value~ (#1)~ for~ #2!
+}
+
+\msg_new:nnn { polyglossia } { illarg }
+{
+  Invalid~ argument~ (#1)~ for~ #2!
 }
 
 \msg_new:nnn { polyglossia } { nopatterns }
@@ -179,6 +184,11 @@
 \cs_new_nopar:Nn \xpg_ill_value_msg:nn
 {
   \msg_warning:nnnn { polyglossia } { illvalue } { #1 } { #2 }
+}
+
+\cs_new_nopar:Nn \xpg_ill_arg_msg:nn
+{
+  \msg_error:nnnn { polyglossia } { illarg } { #1 } { #2 }
 }
 
 % error out if lang is not loaded
@@ -1415,7 +1425,7 @@
         {bcp47}     { \use:c{bcp47.tag} }
       }
       {
-        \xpg_error_msg:n {Invalid~ \string\languageid\space argument:~ #1}
+        \xpg_ill_arg_msg:nn { #1 } { \languageid }
       }
 }
 
@@ -1429,7 +1439,7 @@
         {bcp47}     { \use:c{bcp47.main.tag} }
       }
       {
-        \xpg_error_msg:n {Invalid~ \string\mainlanguageid\space argument:~ #1}
+        \xpg_ill_arg_msg:nn { #1 } { \mainlanguageid }
       }
 }
 % Kernel command to access to BCP-47 data.
@@ -1451,7 +1461,7 @@
 \DeclareExpandableDocumentCommand \BCPdata {m}
 {
    \cs_if_exist_use:cF{bcp47.#1}
-        { \xpg_error_msg:n {Invalid~ \string\BCPdata\space argument:~ #1} }
+        { \xpg_ill_arg_msg:nn { #1 } { \BCPdata } }
 }
 
 % main babel name
@@ -1466,7 +1476,7 @@
 \cs_new_nopar:cpn {bcp47.main.extension.u} {}
 \cs_new_nopar:cpn {bcp47.main.extension.x} {}
 \cs_new_nopar:cpn {bcp47.main.casing} {}
-\cs_new_nopar:Npn \mainlanguagevariant {}%
+\cs_new_nopar:Npn \mainlanguagevariant {}
 % Store main language variant for external packages
 \define@key{xpg@main@langvariant}{variant}{
   \cs_gset_nopar:Npn \mainlanguagevariant {#1}
@@ -2210,7 +2220,7 @@
       }
       {}
       {
-        \xpg_error_msg:n {Invalid~ \string\iflanguageidloaded\space argument:~ #1}
+        \xpg_ill_arg_msg:nn { #1 } { \iflanguageidloaded }
       }
    }%
 }
