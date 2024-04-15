@@ -1367,7 +1367,8 @@
     \selectbackgroundlanguage{#2}
     \selectlanguage[#1]{#2}%
   }
-  \xpg_info_msg:n{Default~ language~ is~ #2}
+  \str_if_eq:eeF { #2 } { latex }
+      { \xpg_info_msg:n{Default~ language~ is~ #2} }
   \xpg_set_language_name:nn { #1 } { #2 }
 
   \cs_gset_nopar:Npn \mainlanguagename {#2}
@@ -2667,12 +2668,13 @@
   }
 }
 
-\bool_if:nF \g_xpg_verbose_bool {
-   \gdef\@latex@info#1{\relax} % no latex info
-   \gdef\@font@info#1{\relax} % no latex font info
-   \gdef\@font@warning#1{\relax} % no latex font warnings
-   \gdef\zf@PackageInfo#1{\relax} % no fontspec info
-   \gdef\xpg_info_msg:n#1{\relax} % no polyglossia info
+\bool_if:nF \g_xpg_verbose_bool
+{
+   \cs_gset_nopar:Npn \@latex@info #1 { \relax } % no latex info
+   \cs_gset_nopar:Npn \@font@info #1 { \relax } % no latex font info
+   \cs_gset_nopar:Npn \@font@warning #1 { \relax } % no latex font warnings
+   \msg_redirect_module:nnn { fontspec } { info } { none } % no fontspec info
+   \msg_redirect_module:nnn { polyglossia } { info } { none } % no polyglossia info
 }
 
 \bool_if:nT \g_xpg_localmarks_bool {
