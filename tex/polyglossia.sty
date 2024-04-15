@@ -27,7 +27,7 @@
 % These have to be provided at the end of the preamble
 \hook_gput_code:nnn {begindocument/before} {.}
 {
-  \cs_gset_eq:NN \bbl@set@language \xpg@set@language@aux  % for biblatex
+  \cs_gset_eq:NN \bbl@set@language \xpg_set_language_aux:nn  % for biblatex
   \cs_gset_eq:NN \bbl@main@language \xpg@main@language    % for biblatex
   \ProvideDocumentCommand \texorpdfstring { m m } { #1 }  % dummy command if hyperref is not loaded
 }
@@ -2045,8 +2045,9 @@
 % Do not rename!
 \cs_set_nopar:Npn \xpg@hook@setlanguage {}
 
-\def\xpg@pop@language@i#1#2{
-  \xpg@set@language@aux[#1]{#2}
+\cs_set_nopar:Npn \__xpg_pop_language_i_#1_#2
+{
+  \xpg_set_language_aux:nn { #1 } { #2 }
   \xpg@hook@setlanguage
   \let\emp@langname\@undefined}
 
@@ -2070,11 +2071,11 @@
   \__xpg_set_language_options:nnn {#3} {#2} {@xpg@set@langvariant}
   \IfBooleanTF { #1 }   % The starred variant does not write to the aux
     {
-	  \xpg@set@language@nonaux[#2]{#3}
+	  \xpg_set_language_nonaux:nn { #2 } { #3 }
     }{
-      \cs_set_nopar:Npe \xpg@pop@language { \exp_not:N \xpg@pop@language@i {#2} {#3} }
-      \group_insert_after:N \xpg@pop@language
-	  \xpg@set@language@aux[#2]{#3}
+      \cs_set_nopar:Ne \xpg_pop_language: { \exp_not:N \__xpg_pop_language_i_{#2}_{#3} }
+      \group_insert_after:N \xpg_pop_language:
+	  \xpg_set_language_aux:nn { #2 } { #3 }
     }
   \__xpg_register_language:nn{#2}{#3}
 }
@@ -2250,12 +2251,14 @@
   }
 
 
-\newcommand*{\xpg@set@language@nonaux}[2][]{
+\cs_new_nopar:Nn \xpg_set_language_nonaux:nn
+{
    \__xpg_start_language:nn { #1 } { #2 }
 }
 
 
-\newcommand*{\xpg@set@language@aux}[2][]{
+\cs_new_nopar:Nn \xpg_set_language_aux:nn
+{
    % Store babelname of current language (for external packages such as biblatex)
    \tl_if_blank:nTF {#1}
    {
@@ -2272,10 +2275,11 @@
    \__xpg_store_bcp_info:nn { #1 } { #2 }
    \__xpg_start_language:nn { #1 } { #2 }
     % Write to the aux
-   \xpg@set@language@only@aux[#1]{#2}
+   \xpg_set_language_only_aux:nn { #1 } { #2 }
 }
 
-\newcommand*{\xpg@set@language@only@aux}[2][]{
+\cs_new_nopar:Nn \xpg_set_language_only_aux:nn
+{
     % Write to the aux (toc files)
    \if@filesw
         \addtocontents{toc}{\selectlanguage*[#1]{#2}}
@@ -2445,7 +2449,7 @@
 }
 
 
-\cs_gset_eq:cc { xpg@pop@language } { relax }
+\cs_undefine:N \xpg_pop_language:
 
 %
 % Keep track of the active (nested) languages and options
@@ -2470,7 +2474,7 @@
      % and re-set stored language's keys
      \tl_if_empty:NTF \l_tmpb_tl {\cs_if_exist_use:c{#1}{\l_tmpc_tl}}
                                  {\__xpg_set_keys:nn{\l_tmpc_tl}{\l_tmpb_tl}
-                                  \cs_if_exist_use:c{#1}[\l_tmpb_tl]{\l_tmpc_tl}
+                                  \cs_if_exist_use:c {#1} {\l_tmpb_tl } { \l_tmpc_tl }
                                  }
   }
   {}
@@ -2492,7 +2496,7 @@
   }
   {
     % restore previous language in aux file and remove closed one from stack
-    \__xpg_unstack_language:n{xpg@set@language@only@aux}
+    \__xpg_unstack_language:n{xpg_set_language_only_aux:nn}
   }
 
 % Alias to {<lang>}, but more suitable
