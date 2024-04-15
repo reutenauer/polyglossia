@@ -1358,7 +1358,7 @@
     \selectlanguage[#1]{#2}%
   }
   \xpg_info_msg:n{Default~ language~ is~ #2}
-  \polyglossia@set@language@name[#1]{#2}
+  \xpg_set_language_name:nn { #1 } { #2 }
 
   \cs_gset_nopar:Npn \mainlanguagename {#2}
   % Store babelname of main language (for external packages such as biblatex)
@@ -1479,8 +1479,9 @@
   \def\languagevariant{#1}
 }
 
-\newcommand*\polyglossia@set@language@name[2][]{
-  \def\languagename{#2}
+\cs_new:Nn \xpg_set_language_name:nn
+{
+  \cs_set:Npn \languagename { #2 }
   \tl_if_blank:nTF { #1 }
    {
      \cs_if_exist:cTF{#2@gvar}
@@ -1598,9 +1599,9 @@
   \use:c{noextras@\xpg@main@language}
   % This is a hook for external packages which want to access variants
   % via babelname (such as biblatex)
-  \polyglossia@set@language@name[#1]{#2}%
   \cs_if_exist_use:c{noextras@bbl@\mainbabelname}
   \use:c{init@noextras@\xpg@main@language}
+  \xpg_set_language_name:nn { #1 } { #2 }
   \__xpg_if_LR_str:eF{\prop_item:Ne{\g_xpg_langsetup_prop}{#2/direction}}
   {
     \@rlmaintrue\@rl@footnotetrue
@@ -2411,7 +2412,7 @@
       }
     }
   }
-  \polyglossia@set@language@name[#1]{#2}
+  \xpg_set_language_name:nn { #1 } { #2 }
   % Set the language's/script's font families
   \str_if_eq:eeT{\prop_item:Nn{\g_xpg_langsetup_prop}{#2/lcscript}} {latin}
   {
