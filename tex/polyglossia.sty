@@ -1835,7 +1835,7 @@
 
 % wrapper for foreignlanguage and otherlanguage*
 \newcommand*\polyglossia@setforeignlanguage[2][]{
-  \select@@language[#1]{#2}
+  \xpg_select_language:nn { #1 } { #2 }
   \__xpg_register_language:nn{#1}{#2}
   % Store babelname of current language (for external packages such as biblatex)
   \tl_if_blank:nTF {#1}{
@@ -2022,7 +2022,7 @@
   \bgroup
   \xpg_error_if_lang_not_loaded:n { #2 }
   \setkeys{#2}{#1}
-  \select@@language[#1]{#2}
+  \xpg_select_language:nn { #1 } { #2 }
   \hyphenation{#3}
   \egroup
 }
@@ -2355,7 +2355,7 @@
    \select@language { #2 }
    \xpg_set_bbl_hyphendata:n {\the\language}
    \xpg_initial_setup:
-   \select@@language[#1]{#2}%
+   \xpg_select_language:nn { #1 } { #2 }
    % Hook for external packages such as biblatex
    \polyglossia@language@switched
    \__xpg_lang_set_par_direction:n {#2}
@@ -2394,7 +2394,8 @@
 }
 
 % Common code for `\select@language' and `\foreignlanguage'.
-\newcommand{\select@@language}[2][]{%
+\cs_new:Nn \xpg_select_language:nn
+{
   % disable the extras and number settings of the previous language
   \cs_if_exist:cT{languagename}
   {
