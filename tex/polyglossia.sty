@@ -2240,7 +2240,7 @@
 
 
 \newcommand*{\xpg@set@language@nonaux}[2][]{
-   \@select@language[#1]{#2}
+   \__xpg_start_language:nn { #1 } { #2 }
 }
 
 
@@ -2258,8 +2258,8 @@
      \cs_gset_nopar:Npe \babelname { \prop_item:Nn{\g_xpg_langsetup_prop}{#2/babelname} }
    }
    % Store BCP-47 id of current language
-   \@select@language[#1]{#2}
    \__xpg_store_bcp_info:nn { #1 } { #2 }
+   \__xpg_start_language:nn { #1 } { #2 }
     % Write to the aux
    \xpg@set@language@only@aux[#1]{#2}
 }
@@ -2351,7 +2351,8 @@
   \language=\csname l@#1\endcsname
 }
 
-\newcommand*\@select@language[2][]{
+\cs_new:Nn \__xpg_start_language:nn
+{
    % hook for compatibility with biblatex
    \select@language { #2 }
    \xpg_set_bbl_hyphendata:n {\the\language}
