@@ -2019,13 +2019,14 @@
 \cs_generate_variant:Nn \__xpg_textlanguage:nnnn {nnen}
 
 % Define language-specific hyphenation exceptions
-\newcommand\pghyphenation[3][]{
-  \bgroup
+\NewDocumentCommand \pghyphenation {O{} m m}
+{
+  \c_group_begin_token
   \xpg_error_if_lang_not_loaded:n { #2 }
   \setkeys{#2}{#1}
   \xpg_select_language:nn { #1 } { #2 }
   \hyphenation{#3}
-  \egroup
+  \c_group_end_token
 }
 
 
