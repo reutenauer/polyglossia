@@ -360,16 +360,16 @@
 
 \define@boolkey {latin} [latin@] {ecclesiasticfootnotes} [true]
   {
-    \token_if_eq_meaning:NNTF \@onlypreamble \@notprerr
-      {
-        % within the document
-        \polyglossia_latin_apply_footnote_option:
-      }
+    \xpg_if_in_preamble:TF
       {
         % within the preamble
         % The application of the option has to be postponed as the main
         % language may be undefined when the option is called.
         \AtBeginDocument { \polyglossia_latin_apply_footnote_option: }
+      }
+      {
+        % within the document
+        \polyglossia_latin_apply_footnote_option:
       }
   }
 

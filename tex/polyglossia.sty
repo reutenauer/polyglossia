@@ -248,7 +248,7 @@
 }
 
 % if we are in the document preamble run T else F
-\prg_set_conditional:Nnn \__xpg_if_in_preamble: {T, F, TF}
+\prg_set_conditional:Nnn \xpg_if_in_preamble: {T, F, TF}
 {
   \cs_if_eq:NNTF { \@onlypreamble } { \@notprerr }
   {
@@ -262,7 +262,7 @@
 %% Used by the language definitions files for right-to-left languages
 \cs_new_nopar:Npn \RequireBidi
 {
-  \__xpg_if_in_preamble:T
+  \xpg_if_in_preamble:T
   {
     \sys_if_engine_luatex:TF
       { \RequirePackage{luabidi} }
