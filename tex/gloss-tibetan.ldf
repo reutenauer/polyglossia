@@ -62,7 +62,7 @@
 }
 
 % Register default options
-\xpg@initialize@gloss@options{tibetan}{numerals=tibetan}
+\InitializeGlossOptions{tibetan}{numerals=tibetan}
 
 % some are known, but very few
 % a few come from "Standardizing Tibetan Terms of Information Technology"

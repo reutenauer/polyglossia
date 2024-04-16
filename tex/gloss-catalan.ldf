@@ -24,7 +24,7 @@
 \fi
 
 % Register default options
-\xpg@initialize@gloss@options{catalan}{babelshorthands=false}
+\InitializeGlossOptions{catalan}{babelshorthands=false}
 
 \ifcsundef{initiate@active@char}{%
   \input{babelsh.def}%

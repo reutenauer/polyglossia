@@ -29,7 +29,7 @@
 }
 
 % Register default options
-\xpg@initialize@gloss@options{lao}{numerals=arabic}
+\InitializeGlossOptions{lao}{numerals=arabic}
 
 % Translations provided by Brian Wilson <bountonw at gmail.com>
 \def\captionslao{%

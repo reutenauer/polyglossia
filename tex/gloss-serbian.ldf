@@ -120,7 +120,7 @@
 \setkeys{serbian}{Script,numerals}
 
 % Register default options
-\xpg@initialize@gloss@options{serbian}{script=cyrillic,numerals=arabic,splithyphens=true}
+\InitializeGlossOptions{serbian}{script=cyrillic,numerals=arabic,splithyphens=true}
 
 \def\captionsserbian{%
    \if@serbian@cyr\captionsserbian@cyr\else\captionsserbian@lat\fi

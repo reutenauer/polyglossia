@@ -72,7 +72,7 @@
 
 
 % Register default options
-\xpg@initialize@gloss@options{spanish}{variant=spanish,spanishoperators=none}
+\InitializeGlossOptions{spanish}{variant=spanish,spanishoperators=none}
 
 \let\xpg@save@lim\lim
 \let\xpg@save@limsup\limsup

@@ -133,7 +133,7 @@
 }
 
 % Register default options
-\xpg@initialize@gloss@options{arabic}{locale=default,calendar=gregorian,numerals=mashriq,hijricorrection=0,abjadjimnotail=false}
+\InitializeGlossOptions{arabic}{locale=default,calendar=gregorian,numerals=mashriq,hijricorrection=0,abjadjimnotail=false}
 % Register alias options
 \xpg@set@alias@values{arabic}{calendar}{islamic}{hijri}
 

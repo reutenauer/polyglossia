@@ -44,7 +44,7 @@
 }{\xpg@warning{Unknown Punjabi numeral `#1'}}
 
 % Register default options
-\xpg@initialize@gloss@options{punjabi}{numerals=gurmukhi}
+\InitializeGlossOptions{punjabi}{numerals=gurmukhi}
 
 \newcommand{\punjabinumerals}[2]{\punjabinumber{#2}}
 

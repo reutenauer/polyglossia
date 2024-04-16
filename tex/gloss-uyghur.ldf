@@ -77,7 +77,7 @@
 }{\xpg@warning{Unknown Uyghur chapterformat value `#1'}}
 
 % Register default options
-\xpg@initialize@gloss@options{uyghur}{swapstrings=all,chapterformat=ordinal}
+\InitializeGlossOptions{uyghur}{swapstrings=all,chapterformat=ordinal}
 
 
 \def\captionsuyghur{%

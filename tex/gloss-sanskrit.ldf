@@ -76,7 +76,7 @@
 
 
 % Register default options
-\xpg@initialize@gloss@options{sanskrit}{script=devanagari,numerals=devanagari}
+\InitializeGlossOptions{sanskrit}{script=devanagari,numerals=devanagari}
 
 % Use \providecommand here as the ldf file might
 % be reloaded via BCP.

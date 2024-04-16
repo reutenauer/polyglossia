@@ -22,7 +22,7 @@
 \define@boolkey{slovenian}[slovenian@]{localalph}[true]{}
 
 % Register default options
-\xpg@initialize@gloss@options{slovenian}{localalph=false}
+\InitializeGlossOptions{slovenian}{localalph=false}
 
 
 \def\captionsslovenian{%

@@ -48,7 +48,7 @@
 }
 
 % Register default options
-\xpg@initialize@gloss@options{finnish}{babelshorthands=false,hyphens=default}
+\InitializeGlossOptions{finnish}{babelshorthands=false,hyphens=default}
 
 \ifsystem@babelshorthands
   \setkeys{finnish}{babelshorthands=true}

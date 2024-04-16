@@ -20,7 +20,7 @@
 \define@boolkey{dutch}[dutch@]{tremahyphenation}[true]{}
 
 % Register default options
-\xpg@initialize@gloss@options{dutch}{babelshorthands=false,tremahyphenation=true}
+\InitializeGlossOptions{dutch}{babelshorthands=false,tremahyphenation=true}
 
 \ifsystem@babelshorthands
   \setkeys{dutch}{babelshorthands=true}

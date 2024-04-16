@@ -54,7 +54,7 @@
 \define@boolkey{mongolian}[mongolian@]{babelshorthands}[true]{}
 
 % Register default options
-\xpg@initialize@gloss@options{mongolian}{babelshorthands=false,numerals=arabic}
+\InitializeGlossOptions{mongolian}{babelshorthands=false,numerals=arabic}
 
 \ifsystem@babelshorthands
   \setkeys{mongolian}{babelshorthands=true}

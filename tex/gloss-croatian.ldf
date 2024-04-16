@@ -40,7 +40,7 @@
 \define@boolkey{croatian}[croatian@]{localalph}[true]{}
 
 % Register default options
-\xpg@initialize@gloss@options{croatian}{babelshorthands=false,disabledigraphs=false,
+\InitializeGlossOptions{croatian}{babelshorthands=false,disabledigraphs=false,
                                         splithyphens=true,localalph=true}
 
 \ifsystem@babelshorthands

@@ -65,7 +65,7 @@
 
 % Register default options
 % forceheadinpunctuatin is recommended, but the default value is false for compatibility reasons
-\xpg@initialize@gloss@options{hungarian}{swapstrings=all,
+\InitializeGlossOptions{hungarian}{swapstrings=all,
                                          forceheadingpunctuation=false}
 
 

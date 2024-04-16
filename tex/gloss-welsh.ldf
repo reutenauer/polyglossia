@@ -29,7 +29,7 @@
 }{\xpg@warning{Unknown date value `#1'}}
 
 % Register default options
-\xpg@initialize@gloss@options{welsh}{date=short}
+\InitializeGlossOptions{welsh}{date=short}
 
 \def\captionswelsh{%
   \def\refname{Cyfeiriadau}%

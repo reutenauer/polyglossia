@@ -50,7 +50,7 @@
 \define@boolkey{bengali}[bengali@]{changecounternumbering}[true]{}
 
 % Register default options
-\xpg@initialize@gloss@options{bengali}{changecounternumbering=false,numerals=Devanagari}
+\InitializeGlossOptions{bengali}{changecounternumbering=false,numerals=Devanagari}
 
 \def\captionsbengali{%
   \def\refname{তথ্যসূত্রসমূহ}%

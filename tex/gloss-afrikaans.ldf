@@ -19,7 +19,7 @@
 \define@boolkey{afrikaans}[afrikaans@]{babelshorthands}[true]{}
 
 % Register default options
-\xpg@initialize@gloss@options{afrikaans}{babelshorthands=false}
+\InitializeGlossOptions{afrikaans}{babelshorthands=false}
 
 \ifsystem@babelshorthands
   \setkeys{afrikaans}{babelshorthands=true}

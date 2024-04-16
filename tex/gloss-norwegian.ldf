@@ -37,7 +37,7 @@
 
 
 % Register default options
-\xpg@initialize@gloss@options{norwegian}{variant=nynorsk}
+\InitializeGlossOptions{norwegian}{variant=nynorsk}
 
 
 \def\norwegian@language{%

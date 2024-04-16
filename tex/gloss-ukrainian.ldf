@@ -56,7 +56,7 @@
 \define@boolkey{ukrainian}[ukrainian@]{mathfunctions}[true]{}
 
 % Register default options
-\xpg@initialize@gloss@options{ukrainian}{numerals=arabic,mathfunctions=true}
+\InitializeGlossOptions{ukrainian}{numerals=arabic,mathfunctions=true}
 
 \define@boolkey{ukrainian}[ukrainian@]{babelshorthands}[true]{}
 

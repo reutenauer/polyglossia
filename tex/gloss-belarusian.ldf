@@ -68,7 +68,7 @@
 \define@boolkey{belarusian}[belarusian@]{babelshorthands}[true]{}
 
 % Register default options
-\xpg@initialize@gloss@options{belarusian}{babelshorthands=false,numerals=arabic,spelling=modern}
+\InitializeGlossOptions{belarusian}{babelshorthands=false,numerals=arabic,spelling=modern}
 % Register alias options
 \xpg@set@alias@values{belarusian}{spelling}{classic}{tarask}
 

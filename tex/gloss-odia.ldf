@@ -55,7 +55,7 @@
 \define@boolkey{odia}[odia@]{changecounternumbering}[true]{}
 
 % Register default options
-\xpg@initialize@gloss@options{odia}{changecounternumbering=false,numerals=Devanagari}
+\InitializeGlossOptions{odia}{changecounternumbering=false,numerals=Devanagari}
 
 \def\captionsodia{%
   \def\refname{ସନ୍ଦର୍ଭ}%

@@ -42,7 +42,7 @@
 }{\xpg@warning{Unknown Marathi numerals value `#1'}}
 
 % Register default options
-\xpg@initialize@gloss@options{marathi}{numerals=Devanagari}
+\InitializeGlossOptions{marathi}{numerals=Devanagari}
 
 \newcommand{\marathinumerals}[2]{\marathinumber{#2}}
 

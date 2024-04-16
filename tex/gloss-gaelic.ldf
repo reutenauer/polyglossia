@@ -38,7 +38,7 @@
 }{\xpg@warning{Unknown gaelic variant `#1'}}
 
 % Register default options
-\xpg@initialize@gloss@options{gaelic}{variant=irish}
+\InitializeGlossOptions{gaelic}{variant=irish}
 
 \def\captionsgaelic@irish{%
    \def\refname{Tagairtí}%

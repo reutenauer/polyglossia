@@ -58,7 +58,7 @@
 \setkeys{hebrew}{numerals}
 
 % Register default options
-\xpg@initialize@gloss@options{hebrew}{numerals=arabic,calendar=gregorian,marcheshvan=false,fullyear=false}
+\InitializeGlossOptions{hebrew}{numerals=arabic,calendar=gregorian,marcheshvan=false,fullyear=false}
 
 \def\captionshebrew{%
   \def\prefacename{מבוא}%

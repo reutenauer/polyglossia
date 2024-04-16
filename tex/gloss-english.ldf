@@ -127,7 +127,7 @@
 }{\xpg@warning{Unknown English variant `#1'}}
 
 % Register default options
-\xpg@initialize@gloss@options{english}{variant=us,ordinalmonthday=false}
+\InitializeGlossOptions{english}{variant=us,ordinalmonthday=false}
 % Register alias options
 \xpg@set@alias@values{english}{variant}{us}{american}
 \xpg@set@alias@values{english}{variant}{uk}{british}

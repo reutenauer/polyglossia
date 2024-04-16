@@ -2103,7 +2103,8 @@
 % Initialize default language options, so that
 % \iflanguageoption has the info it needs also
 % for default settings
-\newcommand*\xpg@initialize@gloss@options[2]{
+\NewDocumentCommand \InitializeGlossOptions { m m }
+{
    \__xpg_set_language_options:nnn {#1} {#2} {@xpg@set@langvariant}
 }
 

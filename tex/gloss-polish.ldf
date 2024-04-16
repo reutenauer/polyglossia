@@ -27,7 +27,7 @@
 \define@boolkey{polish}[polish@]{vlna}[true]{}
 
 % Register default options
-\xpg@initialize@gloss@options{polish}{babelshorthands=false,splithyphens=true,vlna=true}
+\InitializeGlossOptions{polish}{babelshorthands=false,splithyphens=true,vlna=true}
 
 \ifsystem@babelshorthands
   \setkeys{polish}{babelshorthands=true}

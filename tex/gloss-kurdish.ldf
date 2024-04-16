@@ -148,7 +148,7 @@
 %TODO add option for CALENDAR
 
 % Register default options
-\xpg@initialize@gloss@options{kurdish}{variant=sorani,locale=default,script=arabic,abjadjimnotail=false,numerals=eastern}
+\InitializeGlossOptions{kurdish}{variant=sorani,locale=default,script=arabic,abjadjimnotail=false,numerals=eastern}
 
 \def\kurdish@language{%
    \SetupPolyglossiaLangPatterns{\kurdish@pattern}%

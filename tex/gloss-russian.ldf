@@ -85,7 +85,7 @@
 \define@boolkey{russian}[russian@]{mathfunctions}[true]{}
 
 % Register default options
-\xpg@initialize@gloss@options{russian}{babelshorthands=false,
+\InitializeGlossOptions{russian}{babelshorthands=false,
                                        spelling=modern,
                                        numerals=arabic,
                                        indentfirst=true,

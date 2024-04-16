@@ -48,7 +48,7 @@
 \define@boolkey{portuguese}[portuguese@]{splithyphens}[true]{}
 
 % Register default options
-\xpg@initialize@gloss@options{portuguese}{variant=portuguese,
+\InitializeGlossOptions{portuguese}{variant=portuguese,
       babelshorthands=false,
       splithyphens=true}
 

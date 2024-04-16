@@ -141,7 +141,7 @@
 \define@boolkey{greek}{attic}[true]{\xpg@warning{Greek option `attic' is no longer required.}}
 
 % Register default options
-\xpg@initialize@gloss@options{greek}{variant=monotonic,numerals=greek}
+\InitializeGlossOptions{greek}{variant=monotonic,numerals=greek}
 % Register alias options
 \xpg@set@alias@values{greek}{variant}{monotonic}{mono}
 \xpg@set@alias@values{greek}{variant}{polytonic}{poly}

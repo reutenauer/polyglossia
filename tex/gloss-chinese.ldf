@@ -62,8 +62,8 @@
 }{\xpg@warning{Unknown Chinese variant `#1'}}
 
 % Register default options
-\xpg@initialize@gloss@options{chinese}{variant=cn,numerals=arabic}
-%\xpg@initialize@gloss@options{chinese}{variant=tw,numerals=arabic}
+\InitializeGlossOptions{chinese}{variant=cn,numerals=arabic}
+%\InitializeGlossOptions{chinese}{variant=tw,numerals=arabic}
 % Register alias options
 \xpg@set@alias@values{chinese}{variant}{cn}{simplified}
 \xpg@set@alias@values{chinese}{variant}{tw}{traditional}

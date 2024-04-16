@@ -53,7 +53,7 @@
 }{\xpg@warning{Unknown Hindi numeral `#1'}}
 
 % Register default options
-\xpg@initialize@gloss@options{hindi}{numerals=devanagari}
+\InitializeGlossOptions{hindi}{numerals=devanagari}
 
 \newcommand{\hindinumerals}[2]{\hindinumber{#2}}
 

@@ -73,7 +73,7 @@
 \define@boolkey{sorbian}[sorbian@]{olddate}[true]{}
 
 % Register default options
-\xpg@initialize@gloss@options{sorbian}{variant=upper,olddate=false}
+\InitializeGlossOptions{sorbian}{variant=upper,olddate=false}
 
 
 \def\sorbian@language{%

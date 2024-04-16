@@ -57,7 +57,7 @@
 }
 
 % Register default options
-\xpg@initialize@gloss@options{armenian}{numerals=armenian,variant=western}
+\InitializeGlossOptions{armenian}{numerals=armenian,variant=western}
 
 % Taken from ArmTeX. Audit!
 \def\captionsarmenian{%

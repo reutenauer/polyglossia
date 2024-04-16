@@ -49,7 +49,7 @@
 }
 
 % Register default options
-\xpg@initialize@gloss@options{syriac}{numerals=western}
+\InitializeGlossOptions{syriac}{numerals=western}
 	
 %\define@key{polyglossia}{syriaclocale}[default]{%
 %	\def\@syriac@locale{#1}}

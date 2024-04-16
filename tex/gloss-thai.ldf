@@ -41,7 +41,7 @@
 }
 
 % Register default options
-\xpg@initialize@gloss@options{thai}{numerals=arabic}
+\InitializeGlossOptions{thai}{numerals=arabic}
 
 \def\captionsthai{%
    \def\refname{หนังสืออ้างอิง}%
