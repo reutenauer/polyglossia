@@ -4,6 +4,6 @@
 
 % We provide this gloss for babel compatibility.
 
-\xpg@load@master@language{kurdish}
+\InheritGlossFile{kurdish}
 
 \endinput

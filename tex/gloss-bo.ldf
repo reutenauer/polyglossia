@@ -4,6 +4,6 @@
 
 % We provide this as a bcp47-compliant alias
 
-\xpg@load@master@language{tibetan}
+\InheritGlossFile{tibetan}
 
 \endinput

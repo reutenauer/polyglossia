@@ -4,7 +4,7 @@
 
 % We only provide this gloss for babel compatibility.
 
-\xpg@load@master@language{friulian}
+\InheritGlossFile{friulian}
 
 \endinput
 

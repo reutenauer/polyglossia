@@ -1133,7 +1133,8 @@
 \cs_generate_variant:Nn \__xpg_load_lang_definition:nn { ee }
 
 % load a master language from an alias file
-\newcommand*\xpg@load@master@language[1] {
+\NewDocumentCommand \InheritGlossFile { m }
+{
   \xpg_input:n {gloss-#1.ldf}
   \seq_if_in:NeF \__xpg_langs_loaded {#1}
   {

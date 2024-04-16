@@ -5,6 +5,6 @@
 % We only provide this gloss for babel compatibility. Since usorbian is 
 % a sorbian variety, we use 'sorbian' with variant 'upper' now.
 
-\xpg@load@master@language{sorbian}
+\InheritGlossFile{sorbian}
 
 \endinput

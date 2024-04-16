@@ -3,6 +3,6 @@
 \ProvidesFile{gloss-ug.ldf}[polyglossia: module for ug (Uyghur)]
 % BCP 47 tag for Uyghur
 
-\xpg@load@master@language{uyghur}
+\InheritGlossFile{uyghur}
 
 \endinput

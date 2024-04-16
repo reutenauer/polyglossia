@@ -5,6 +5,6 @@
 % We only provide this gloss for babel compatibility. Since irish is 
 % a gaelic variety, we use 'gaelic' with variant 'irish' now.
 
-\xpg@load@master@language{gaelic}
+\InheritGlossFile{gaelic}
 
 \endinput

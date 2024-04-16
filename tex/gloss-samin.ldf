@@ -5,6 +5,6 @@
 % We only provide this gloss for babel compatibility. Since samin is 
 % a sami variety, we use 'sami' with variant 'northern' now.
 
-\xpg@load@master@language{sami}
+\InheritGlossFile{sami}
 
 \endinput

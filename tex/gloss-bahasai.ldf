@@ -5,6 +5,6 @@
 % We only provide this gloss for babel compatibility. Since bahasai is 
 % a malay variety, we use 'malay' with variant 'indonesian' now.
 
-\xpg@load@master@language{malay}
+\InheritGlossFile{malay}
 
 \endinput

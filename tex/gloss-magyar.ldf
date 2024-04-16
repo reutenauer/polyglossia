@@ -4,6 +4,6 @@
 
 % We only provide this gloss for babel compatibility.
 
-\xpg@load@master@language{hungarian}
+\InheritGlossFile{hungarian}
 
 \endinput

@@ -6,6 +6,6 @@
 % 'brazil' was selected in accordance with babel.
 % Since brazil is a variety of portuguese, we use 'portuguese' now.
 
-\xpg@load@master@language{portuguese}
+\InheritGlossFile{portuguese}
 
 \endinput

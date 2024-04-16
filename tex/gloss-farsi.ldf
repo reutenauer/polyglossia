@@ -5,6 +5,6 @@
 % We only provide this gloss for babel compatibility.
 % The proper English language name is Persian.
 
-\xpg@load@master@language{persian}
+\InheritGlossFile{persian}
 
 \endinput
