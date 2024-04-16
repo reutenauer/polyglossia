@@ -1104,27 +1104,29 @@
 \cs_new_nopar:Nn \xpg_input:n
 {
   % Store catcode of @ before making at letter
-  \chardef \__xpg_saved_at_catcode \catcode`\@
-  \makeatletter
+  \cs_set_protected_nopar:Npx \__xpg_restore_at_catcode:
+      { \char_set_catcode:nn { `@ } { \char_value_catcode:n {`\@ } } }
+  \char_set_catcode_letter:N @
   \file_input:n { #1 }
   % restore former @ catcode
-  \catcode`\@=\__xpg_saved_at_catcode
+  \__xpg_restore_at_catcode:
 }
 
 % try to load a language file
 \cs_new:Nn \__xpg_load_lang_definition:nn
 {
-	\file_if_exist:nTF{gloss-#2.ldf}
+    \file_if_exist:nTF{gloss-#2.ldf}
 	{
-	  % Temporarily force catcode of ~ to 13 since babelsh.def
+	  % Temporarily force catcode of ~ to 13 (active) since babelsh.def
 	  % requires it. This is needed particularly with LaTeX3
 	  % packages which force \ExplSyntaxOn (#425)
-	  \protected\edef\xpg@restore@tilde@catcode{\catcode 126 = \the\catcode 126\relax}
-	  \catcode 126 = 13
+	  \cs_gset_protected:Npx \__xpg_restore_tilde_catcode:
+               { \char_set_catcode:nn { 126 } { \char_value_catcode:n { 126 } } }
+          \char_set_catcode_active:n { 126 }
 	  \xpg_input:n {gloss-#2.ldf}
-	  \setkeys{#2}{#1}
+	  \setkeys { #2 } { #1 }
 	  % restore former ~ catcode
-	  \xpg@restore@tilde@catcode
+	  \__xpg_restore_tilde_catcode:
 	}
 	{
 	  \__xpg_no_gloss:n {#2}
