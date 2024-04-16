@@ -2693,9 +2693,9 @@
 
 \bool_if:nF \g_xpg_verbose_bool
 {
-   \cs_set_eq:NN \@latex@info \scan_stop: % no latex info
-   \cs_set_eq:NN \@font@info \scan_stop: % no latex font info
-   \cs_set_eq:NN \@font@warning \scan_stop: % no latex font warnings
+   \cs_gset_nopar:Npn \@latex@info #1 { \relax } % no latex info
+   \cs_gset_nopar:Npn \@font@info #1 { \relax } % no latex font info
+   \cs_gset_nopar:Npn \@font@warning #1 { \relax } % no latex font warnings
    \msg_redirect_module:nnn { fontspec } { info } { none } % no fontspec info
    \msg_redirect_module:nnn { polyglossia } { info } { none } % no polyglossia info
 }
