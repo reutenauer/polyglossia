@@ -1865,21 +1865,12 @@
   \__xpg_store_bcp_info:nn {#1}{#2}
 }
 
-% Expandable lowercasing. We use this to assure keyval
-% options are lowercased (also when used in \MakeUppercase
-% contexts e.g. in headings)
-% Macro adapted from tudscr.sty
-\newcommand*\xpg@str@lowercase[2]{
-  \protected@edef#1{
-    \lowercase{\def\noexpand#1{#2}}
-  }#1
-}
-
 % lowercase options before passing to setkeys
 \cs_new:Nn \__xpg_set_keys:nn
 {
-    \xpg@str@lowercase{\xpg@tmp@opts}{#2}
-    \exp_args:Nne \setkeys{#1}{\xpg@tmp@opts}
+    % \text_lowercase:n fully expands
+    % (as opposed to \str_lowercase:n)
+    \exp_args:Nne \setkeys{ #1 }{ \text_lowercase:n {#2} }
 }
 
 % joint code of \foreignlanguage, otherlanguage*
