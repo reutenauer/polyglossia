@@ -1722,13 +1722,15 @@
   \cs_gset_eq:cc { normalfont } { normalfontlatin }
 }
 
-\def\selectfontfamilylatin{
-  \def\tmp@tt{tt}\def\tmp@sf{sf}
-  \ifx\familytype\tmp@tt
-    \ttfamilylatin
-    \else\ifx\familytype\tmp@sf
-      \sffamilylatin
-      \else\rmfamilylatin\fi\fi}
+\cs_set_nopar:Npn \selectfontfamilylatin
+{
+  \str_if_eq:nnTF \familytype { tt }
+    { \ttfamilylatin }
+    { \str_if_eq:nnTF \familytype { sf }
+        { \sffamilylatin }
+        { \rmfamilylatin }
+    }
+}
 
 \def\xpg@select@fontfamily#1{
   \def\tmp@tt{tt}\def\tmp@sf{sf}
