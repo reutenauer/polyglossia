@@ -1732,13 +1732,15 @@
     }
 }
 
-\def\xpg@select@fontfamily#1{
-  \def\tmp@tt{tt}\def\tmp@sf{sf}
-  \ifx\familytype\tmp@tt
-    \__xpg_use_or_warn:c{#1@font@tt}
-  \else\ifx\familytype\tmp@sf
-    \__xpg_use_or_warn:c{#1@font@sf}
-      \else\__xpg_use_or_warn:c{#1@font@rm}\fi\fi}
+\cs_set_nopar:Nn \xpg_select_fontfamily:n
+{
+  \str_if_eq:nnTF \familytype { tt }
+    { \__xpg_use_or_warn:c { #1@font@tt } }
+    { \str_if_eq:nnTF \familytype { sf }
+        { \__xpg_use_or_warn:c { #1@font@sf } }
+        { \__xpg_use_or_warn:c { #1@font@rm } }
+    }
+}
 
 \cs_new_nopar:Nn \xpg_set_normalfont:n
 {
@@ -1746,10 +1748,10 @@
   \cs_gset_eq:cc { sffamily } { #1@font@sf }
   \cs_gset_eq:cc { ttfamily } { #1@font@tt }
   \cs_gset_nopar:Npn \normalfont 
-      { \protect\xpg@select@fontfamily{#1}
+      { \protect \xpg_select_fontfamily:n {#1}
         \fontseries{\seriesdefault}\selectfont
         \fontshape{\shapedefault}
-        \ifdefined\UseHook\UseHook{normalfont}\fi
+        \cs_if_exist_use:NT \UseHook { {normalfont} }
         \selectfont
       }
   \cs_gset_nopar:Npn \reset@font {\protect\normalfont}
@@ -2462,7 +2464,7 @@
     % in case a \<lang>font is defined
     \xpg_set_normalfont:n{#2}
   }
-  \xpg@select@fontfamily{#2}
+  \xpg_select_fontfamily:n { #2 }
   \__xpg_use_or_warn:c{#2@language}
   \cs_if_exist_use:c{#2@numbers}
   \__xpg_use_localhyphenmins:nn { #1 }{ #2 }
