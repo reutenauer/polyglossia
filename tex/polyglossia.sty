@@ -1652,22 +1652,27 @@
 
 % Provide default fonts (as set with \setmainfont, \setsansfont and \setmonofont)
 % for Latin scripts and as a fallback for non-Latin scripts.
-\DeclareRobustCommand\xpg@defaultfont@rm{
+\cs_set_protected:Nn \xpg_defaultfont_rm:
+{
    \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}
    \fontfamily\rmdefault
-   \ifdefined\UseHook\UseHook{rmfamily}\fi
+   \cs_if_exist_use:NT \UseHook { {rmfamily} }
    \selectfont
 }
-\DeclareRobustCommand\xpg@defaultfont@sf{
+
+\cs_set_protected:Nn \xpg_defaultfont_sf:
+{
    \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}
    \fontfamily\sfdefault
-   \ifdefined\UseHook\UseHook{sffamily}\fi
+   \cs_if_exist_use:NT \UseHook { {sffamily} }
    \selectfont
 }
-\DeclareRobustCommand\xpg@defaultfont@tt{
+
+\cs_set_protected:Nn \xpg_defaultfont_tt:
+{
    \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}
    \fontfamily\ttdefault
-   \ifdefined\UseHook\UseHook{ttfamily}\fi
+   \cs_if_exist_use:NT \UseHook { {ttfamily} }
    \selectfont
 }
 
@@ -1683,9 +1688,9 @@
 % These switches activate the default fonts
 % Note that a simple \let\rmfamilylatin=\rmfamily
 % does not work reliably (see #24)
-\cs_gset_eq:cc{rmfamilylatin}{xpg@defaultfont@rm}
-\cs_gset_eq:cc{sffamilylatin}{xpg@defaultfont@sf}
-\cs_gset_eq:cc{ttfamilylatin}{xpg@defaultfont@tt}
+\cs_gset_eq:cc{rmfamilylatin}{xpg_defaultfont_rm:}
+\cs_gset_eq:cc{sffamilylatin}{xpg_defaultfont_sf:}
+\cs_gset_eq:cc{ttfamilylatin}{xpg_defaultfont_tt:}
 
 \cs_new:Nn \xpg_set_familydefault:
 {
@@ -1703,15 +1708,16 @@
   % change normalfont in other scripts
   \cs_gset_eq:cc{ normalfontlatin }{ normalfont }
   % And for all cases, we also reset \<xx>familylatin
-  \cs_gset_eq:cc{ rmfamilylatin }{ xpg@defaultfont@rm }
-  \cs_gset_eq:cc{ sffamilylatin }{ xpg@defaultfont@sf }
-  \cs_gset_eq:cc{ ttfamilylatin }{ xpg@defaultfont@tt }
+  \cs_gset_eq:cc{ rmfamilylatin }{ xpg_defaultfont_rm: }
+  \cs_gset_eq:cc{ sffamilylatin }{ xpg_defaultfont_sf: }
+  \cs_gset_eq:cc{ ttfamilylatin }{ xpg_defaultfont_tt: }
 }
 
-\def\resetfontlatin{
-  \DeclareRobustCommand\rmfamily{\xpg@defaultfont@rm}
-  \DeclareRobustCommand\sffamily{\xpg@defaultfont@sf}
-  \DeclareRobustCommand\ttfamily{\xpg@defaultfont@tt}
+\cs_set_nopar:Npn \resetfontlatin
+{
+  \cs_set_protected:Npn \rmfamily { \xpg_defaultfont_rm: }
+  \cs_set_protected:Npn \sffamily { \xpg_defaultfont_sf: }
+  \cs_set_protected:Npn \ttfamily { \xpg_defaultfont_tt: }
   \__xpg_patch_fontfamilies:
   \cs_gset_eq:cc { normalfont } { normalfontlatin }
 }
