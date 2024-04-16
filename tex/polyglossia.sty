@@ -1106,7 +1106,7 @@
   % Store catcode of @ before making at letter
   \chardef \__xpg_saved_at_catcode \catcode`\@
   \makeatletter
-  \input{#1}
+  \file_input:n { #1 }
   % restore former @ catcode
   \catcode`\@=\__xpg_saved_at_catcode
 }
