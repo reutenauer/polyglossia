@@ -143,8 +143,8 @@
 % Register default options
 \InitializeGlossOptions{greek}{variant=monotonic,numerals=greek}
 % Register alias options
-\xpg@set@alias@values{greek}{variant}{monotonic}{mono}
-\xpg@set@alias@values{greek}{variant}{polytonic}{poly}
+\SetLanguageAliasValues{greek}{variant}{monotonic}{mono}
+\SetLanguageAliasValues{greek}{variant}{polytonic}{poly}
 
 \def\monogreekcaptions{%
    \def\refname{Αναφορές}%

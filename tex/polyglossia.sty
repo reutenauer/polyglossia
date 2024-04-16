@@ -2109,8 +2109,9 @@
 }
 
 % Record synonymous keyvals such as variant=us and variant=american
-% Syntax: \xpg@set@alias@values{<lang>}{<key>}{<val>}{<alias vals, comma-separated>}
-\newcommand*\xpg@set@alias@values[4]{%
+% Syntax: \SetLanguageAliasValues{<lang>}{<key>}{<val>}{<alias vals, comma-separated>}
+\NewDocumentCommand \SetLanguageAliasValues { m m m m }
+{
    \prop_if_exist:cF { xpg@alias@keyvals@#1@#3 }
       { \prop_new:c {xpg@alias@keyvals@#1@#3} }
    \prop_put:cnn { xpg@alias@keyvals@#1@#3 }
