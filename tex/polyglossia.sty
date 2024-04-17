@@ -2601,7 +2601,8 @@
   \c_group_end_token
   \cs_if_exist:cTF {\csname tmp@bcp47.tag\endcsname @hyphenmins}
    {
-      \edef\tmpa{\csuse{\csname tmp@bcp47.tag\endcsname @hyphenmins}}
+      \tl_set:Ne \l_tmpa_tl { \use:c{\csname tmp@bcp47.tag\endcsname @hyphenmins} }
+      \expandafter \set@hyphenmins \l_tmpa_tl
    }{
      \cs_if_exist:cT{#2hyphenmins}
         {
