@@ -7,9 +7,8 @@ module = "polyglossia"
 stdengine    = "xetex"
 checkengines = {"xetex","luatex"}
 
-sourcefiles = {"tex/*.def", "tex/*.ldf", "tex/*.sty", "tex/*.tex", 
-		"tex/*.lde", "tex/*.lua", "fontmapping/*.map"}
-installfiles = {"*.def", "*.ldf", "*.sty", "*.tex", "*.lde", "*.lua", "*.map", "*.tec"}
+sourcefiles = {"tex/*.def", "tex/*.ldf", "tex/*.sty", "tex/*.lua", "fontmapping/*.map"}
+installfiles = {"*.def", "*.ldf", "*.sty", "*.lua", "*.map", "*.tec"}
 tdslocations = {
 	"fonts/misc/xetex/fontmapping/" .. module .. "/" .. "*.map",
 	"fonts/misc/xetex/fontmapping/" .. module .. "/" .. "*.tec"

@@ -579,7 +579,7 @@ print DTX <<_END
 % \\typeout{* To finish the installation you have to move the following}
 % \\typeout{* file into a directory searched by TeX:}
 % \\typeout{*}
-% \\typeout{* \\space\\space all *.sty, *.lua, *.def, *.lde and *.ldf files}
+% \\typeout{* \\space\\space all *.sty, *.lua, *.def and *.ldf files}
 % \\typeout{*}
 % \\typeout{* You also need to compile the *.map files with teckit_compile}
 % \\typeout{* and place the resulting *.tec files under}
