@@ -1,0 +1,7 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\begin{document}
+\START
+\expandafter\ShowCommand\csname rmfamily \endcsname
+\END

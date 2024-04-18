@@ -1,0 +1,26 @@
+name: Automated testing
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  l3build:
+    runs-on: ubuntu-latest
+    steps:
+      # Boilerplate
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      # We need Ghostscript for XeTeX tests.
+      - run: sudo apt-get update && sudo apt-get install ghostscript
+      - name: Install TeX Live
+        uses: zauguin/install-texlive@v3
+        with:
+          packages: >
+            l3build latex latex-bin xetex luatex latex-bin-devfontspec luatexbase etoolbox xkeyval
+      - name: Install Polyglossia
+        run: l3build install
+      - name: Check test files
+        run: l3build check
