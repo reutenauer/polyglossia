@@ -10,21 +10,18 @@ local remove_from_callback = luatexbase.remove_from_callback
 local priority_in_callback = luatexbase.priority_in_callback
 
 local next, type = next, type
-
-local nodes, fonts, node = nodes, fonts, node
-
-local nodecodes          = nodes.nodecodes --- <= preloaded node.types()
+local node = node
 
 local insert_node_before = node.insert_before
 local insert_node_after  = node.insert_after
-local remove_node        = nodes.remove
+local remove_node        = node.remove
 local copy_node          = node.copy
 local has_attribute      = node.has_attribute
 
 local end_of_math        = node.end_of_math
 if not end_of_math then -- luatex < .76
   local traverse_nodes = node.traverse_id
-  local math_code      = nodecodes.math
+  local math_code      = node.id('math_char')
   local end_of_math = function (n)
     for n in traverse_nodes(math_code, n.next) do
       return n
@@ -32,10 +29,10 @@ if not end_of_math then -- luatex < .76
   end
 end
 
--- node types as of April 2013
-local glyph_code         = nodecodes.glyph
-local penalty_code       = nodecodes.penalty
-local kern_code          = nodecodes.kern
+-- node types as of April 2024
+local glyph_code         = node.id('glyph')
+local penalty_code       = node.id('penalty')
+local kern_code          = node.id('kern')
 
 -- we make a new node, so that we can copy it later on
 local penalty_node  = node.new(penalty_code)
