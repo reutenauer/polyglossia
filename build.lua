@@ -7,16 +7,13 @@ module = "polyglossia"
 stdengine    = "xetex"
 checkengines = {"xetex","luatex"}
 
+sourcefiledir = "tex"
 docfiledir = "doc"
-sourcefiles = {"fontmapping/*.map", "tex/*"}
+sourcefiles = {"*.def", "*.ldf", "*.sty", "*.lua", "**/*.map"}
 installfiles = {"*.def", "*.ldf", "*.sty", "*.lua", "*.map", "*.tec"}
 tdslocations = {
 	"fonts/misc/xetex/fontmapping/" .. module .. "/" .. "*.map",
 	"fonts/misc/xetex/fontmapping/" .. module .. "/" .. "*.tec",
-	"tex/latex/" .. module .. "/" .. "*.ldf",
-	"tex/latex/" .. module .. "/" .. "*.def",
-	"tex/latex/" .. module .. "/" .. "*.sty",
-	"tex/latex/" .. module .. "/" .. "*.lua"
 	}
 unpackfiles = {"*.map"}
 unpackexe = "teckit_compile"
