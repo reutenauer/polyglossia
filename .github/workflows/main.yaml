@@ -19,7 +19,7 @@ jobs:
         uses: zauguin/install-texlive@v3
         with:
           packages: >
-            l3build latex latex-bin xetex luatex latex-bin-dev fontspec luatexbase etoolbox xkeyval scheme-basic hyph-utf8 frhyph
+            l3build latex latex-bin xetex luatex latex-bin-dev fontspec luatexbase etoolbox xkeyval
       - name: Install Polyglossia
         run: l3build install
       - name: Check test files
