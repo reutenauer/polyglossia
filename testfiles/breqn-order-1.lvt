@@ -1,0 +1,11 @@
+\input{regression-test.tex}
+\documentclass{article}
+\START
+\usepackage{breqn}
+\usepackage{polyglossia}
+\setmainlanguage{german}
+\setotherlanguage{english}
+\begin{document}
+Hallo, Welt!
+\textenglish{Hello, World!}
+\END

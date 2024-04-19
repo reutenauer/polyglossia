@@ -1,0 +1,8 @@
+\input{regression-test.tex}
+\documentclass{article}
+\START
+\usepackage{amsthm}
+\usepackage{polyglossia}
+\begin{document}
+\begin{proof}Left to the reader.\end{proof}
+\END
