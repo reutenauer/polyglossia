@@ -7,14 +7,22 @@ module = "polyglossia"
 stdengine    = "xetex"
 checkengines = {"xetex","luatex"}
 
-sourcefiles = {"tex/*.def", "tex/*.ldf", "tex/*.sty", "tex/*.lua", "fontmapping/*.map"}
+docfiledir = "doc"
+sourcefiles = {"fontmapping/*.map", "tex/*"}
 installfiles = {"*.def", "*.ldf", "*.sty", "*.lua", "*.map", "*.tec"}
 tdslocations = {
 	"fonts/misc/xetex/fontmapping/" .. module .. "/" .. "*.map",
-	"fonts/misc/xetex/fontmapping/" .. module .. "/" .. "*.tec"
+	"fonts/misc/xetex/fontmapping/" .. module .. "/" .. "*.tec",
+	"tex/latex/" .. module .. "/" .. "*.ldf",
+	"tex/latex/" .. module .. "/" .. "*.def",
+	"tex/latex/" .. module .. "/" .. "*.sty",
+	"tex/latex/" .. module .. "/" .. "*.lua"
 	}
 unpackfiles = {"*.map"}
 unpackexe = "teckit_compile"
+packtdszip = true
+typesetexe = "xelatex"
+typesetfiles = {"polyglossia.tex"}
 
 tagfiles = {"tex/polyglossia.sty", "tex/*.ldf", "tex/*.lua", "doc/polyglossia.tex", "README.md"}
 function update_tag(file,content,tagname,tagdate)
