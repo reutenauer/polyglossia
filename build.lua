@@ -6,7 +6,8 @@ module = "polyglossia"
 
 stdengine    = "xetex"
 checkengines = {"xetex","luatex"}
-
+checkruns = 2
+checkconfigs = {"build","config-lua"}
 sourcefiledir = "tex"
 docfiledir = "doc"
 sourcefiles = {"*.def", "*.ldf", "*.sty", "*.lua", "**/*.map"}

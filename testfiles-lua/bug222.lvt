@@ -1,6 +1,8 @@
+\input{regression-test.tex}
 \documentclass{article}
 \usepackage{polyglossia}
 \setmainlanguage{french}
 \begin{document}
-Test : test.
-\end{document}
+\START
+Test : test.\par
+\END

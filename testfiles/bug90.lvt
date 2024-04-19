@@ -1,0 +1,9 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\begin{document}
+\START
+\tableofcontents
+\section{\bfseries\sffamily TODO}
+\vfill\break
+\END

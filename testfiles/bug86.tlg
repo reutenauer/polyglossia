@@ -1,0 +1,27 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\vbox(18.94+0.10999)x345.0
+.\hbox(6.94+0.10999)x345.0, glue set 299.8fil
+..\hbox(0.0+0.0)x15.0
+..\TU/lmr/m/n/10 Dansk.
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 5.12001
+.\hbox(6.77+0.10999)x345.0, glue set 304.12fil
+..\hbox(0.0+0.0)x15.0
+..\TU/lmr/m/n/10 Test.
+..\glue 4.44 plus 4.99498 minus 0.37
+..\write1{\@writefile{toc}{\selectlanguage *[]{danish}}}
+..\write1{\@writefile{toc}{\selectlanguage *[]{danish}}}
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+! OK.
+<to be read again> 
+                   \begingroup 
+l. ...\START\showbox0\END

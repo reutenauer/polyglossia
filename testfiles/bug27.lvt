@@ -1,0 +1,15 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+\begin{document}
+\makeatletter
+\setbox0=\vbox{\verb|00:11:43:D4:86:A0|
+
+\texttt{00:11:43:D4:86:A0}
+
+\nofrench@punctuation
+\verb|00:11:43:D4:86:A0|}
+\START\showbox0\END
+
+

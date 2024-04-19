@@ -1,16 +1,13 @@
+\input{regression-test.tex}
 \documentclass{article}
-
 \usepackage{polyglossia}
-
 \setdefaultlanguage{danish}
 \setotherlanguage[variant=british]{english}
-
 \begin{document}
-
+\setbox0=\vbox{%
 Dansk.
 
 \begin{english}
   Test.
-\end{english}
-
-\end{document}
+\end{english}}
+\START\showbox0\END
