@@ -1,15 +1,12 @@
-\documentclass{minimal}
-
+\input{regression-test.tex}
+\documentclass{article}
 \usepackage{polyglossia}
 \setmainlanguage[calendar=hebrew,marcheshvan=true]{hebrew}
-\newfontfamily\hebrewfont[Script=Hebrew]{SBL Hebrew}
-
+\newfontfamily\hebrewfont[Script=Hebrew]{David CLM}
 \begin{document}
-
 \day=17
 \month=10
 \year=2012
 % Should be א במרחשון תשעג
-\today
-
-\end{document}
+\setbox0=\hbox{\today}
+\START\showbox0\END

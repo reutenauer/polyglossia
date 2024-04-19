@@ -1,0 +1,10 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage[marcheshvan]{hebrewcal}
+\begin{document}
+\day=17
+\month=10
+\year=2012
+% Should be Marcheshvan 1, 5773
+\setbox0=\hbox{\hebrewtoday}
+\START\showbox0\END
