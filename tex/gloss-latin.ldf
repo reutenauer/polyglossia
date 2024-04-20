@@ -611,7 +611,7 @@
 \fi
 
 \ExplSyntaxOff % babelsh.def does not support expl3 syntax
-\ifcsundef{initiate@active@char}{\input{babelsh.def}}{}
+\if@undefined{initiate@active@char}{\input{babelsh.def}}{}
 \ExplSyntaxOn
 
 \initiate@active@char {"}

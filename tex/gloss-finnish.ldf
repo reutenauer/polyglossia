@@ -56,7 +56,7 @@
   \setkeys{finnish}{babelshorthands=false}
 \fi
 
-\ifcsundef{initiate@active@char}{%
+\@ifundefined{initiate@active@char}{%
     \input{babelsh.def}%
     \initiate@active@char{"}%
     \shorthandoff{"}%

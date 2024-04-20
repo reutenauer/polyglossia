@@ -27,7 +27,7 @@
   \setkeys{afrikaans}{babelshorthands=false}
 \fi
 
-\ifcsundef{initiate@active@char}{%
+\if@undefined{initiate@active@char}{%
   \input{babelsh.def}%
   \initiate@active@char{"}%
   \shorthandoff{"}%

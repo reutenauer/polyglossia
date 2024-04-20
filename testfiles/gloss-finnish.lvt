@@ -1,0 +1,8 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage{finnish}
+\begin{document}
+\year=2012\month=8\day=17
+\setbox0=\hbox{\today.}
+\START\showbox0\END

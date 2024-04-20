@@ -26,7 +26,7 @@
 % Register default options
 \InitializeGlossOptions{catalan}{babelshorthands=false}
 
-\ifcsundef{initiate@active@char}{%
+\if@undefined{initiate@active@char}{%
   \input{babelsh.def}%
   \initiate@active@char{"}%
   \shorthandoff{"}%

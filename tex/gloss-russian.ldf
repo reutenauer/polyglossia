@@ -99,7 +99,7 @@
   \setkeys{russian}{babelshorthands=false}
 \fi
 
-\ifcsundef{initiate@active@char}{%
+\if@undefined{initiate@active@char}{%
   \input{babelsh.def}%
   \initiate@active@char{"}%
   \shorthandoff{"}%
@@ -155,7 +155,7 @@
    \def\bibname{Литература}%
    \def\chaptername{Глава}%
    \def\appendixname{Приложение}%
-   \ifcsundef{thechapter}%
+   \if@undefined{thechapter}%
      {\def\contentsname{Содержание}}%
      {\def\contentsname{Оглавление}}%
    \def\listfigurename{Список иллюстраций}%
@@ -198,7 +198,7 @@
    \def\bibname{Библіографія}%
    \def\chaptername{Глава}%
    \def\appendixname{Приложеніе}%
-   \ifcsundef{thechapter}%
+   \if@undefined{thechapter}%
      {\def\contentsname{Содержаніе}}%
      {\def\contentsname{Оглавленіе}}%
    \def\listfigurename{Списокъ иллюстрацій}%
