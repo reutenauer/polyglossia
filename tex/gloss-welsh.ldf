@@ -15,7 +15,8 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{welsh}{cy}
 
-\providebool{welsh@formaldate}
+\@ifundefined{ifwelsh@formaldate}%
+  {\newif\ifwelsh@formaldate}{}
 
 \define@choicekey*+{welsh}{date}[\xpg@val\xpg@nr]{long,short}[short]{%
    \ifcase\xpg@nr\relax

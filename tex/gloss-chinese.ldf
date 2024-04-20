@@ -22,11 +22,14 @@
 \setlanguagealias*[variant=simplified]{chinese}{zh-CN}
 \setlanguagealias*[variant=traditional]{chinese}{zh-TW}
 
-\providebool{chinese@traditional}
+\@ifundefined{ifchinese@traditional}%
+  {\newif\ifchinese@traditional}{}
 
 \def\chinese@variant{chinese}
 
-\newif\ifchinese@numerals
+\@ifundefined{ifchinese@numerals}%
+  {\newif\ifchinese@numerals}{}
+
 \define@key{chinese}{numerals}[arabic]{%
    \ifstrequal{#1}{chinese}%
       {\chinese@numeralstrue%

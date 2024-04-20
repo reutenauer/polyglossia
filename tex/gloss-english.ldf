@@ -30,9 +30,12 @@
 \setlanguagealias[variant=canadian]{english}{canadian}
 \setlanguagealias[variant=newzealand]{english}{newzealand}
 
-\providebool{british@hyphen}
-\providebool{english@ordinalmonthday}
-\providebool{british@dateformat}
+\@ifundefined{ifbritish@hyphen}%
+  {\newif\ifbritish@hyphen}{}
+\@ifundefined{ifenglish@ordinalmonthday}%
+  {\newif\ifenglish@ordinalmonthday}{}
+\@ifundefined{ifbritish@dateformat}%
+  {\newif\ifbritish@dateformat}{}
 
 % US English (\l@english) is default
 % Initialize its settings

@@ -26,7 +26,8 @@
 % Backwards compat. alias
 \setlanguagealias[variant=malaysian]{malay}{bahasam}
 
-\providebool{malay@melayu}
+\@ifundefined{ifmalay@melayu}%
+  {\newif\ifmalay@melayu}{}
 \malay@melayufalse
 \def\malay@variant{malay}
 \define@choicekey*+{malay}{variant}[\xpg@val\xpg@nr]{indonesian,malaysian}[malaysian]{%
