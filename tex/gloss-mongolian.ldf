@@ -62,7 +62,7 @@
   \setkeys{mongolian}{babelshorthands=false}
 \fi
 
-\if@undefined{initiate@active@char}{%
+\@ifundefined{initiate@active@char}{%
   \input{babelsh.def}%
   \initiate@active@char{"}%
   \shorthandoff{"}%
@@ -119,7 +119,7 @@
    \def\bibname{Номзүй}%
    \def\chaptername{Бүлэг}%
    \def\appendixname{Хавсралт}%
-   \if@undefined{thechapter}%
+   \@ifundefined{thechapter}%
      {\def\contentsname{Агуулга}}%
      {\def\contentsname{Гарчиг}}%
    \def\listfigurename{Зургийн жагсаалт}%

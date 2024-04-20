@@ -34,7 +34,7 @@
   \setkeys{slovak}{babelshorthands=false}
 \fi
 
-\if@undefined{initiate@active@char}{%
+\@ifundefined{initiate@active@char}{%
   \input{babelsh.def}%
   \initiate@active@char{"}%
   \shorthandoff{"}%
