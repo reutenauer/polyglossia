@@ -2719,6 +2719,17 @@
   \__xpg_enable_local_marks:
 }
 
+% common code to initiate babelshordhands in glosses
+\cs_new:Npn \InitializeBabelShorthands
+{
+  \cs_if_exist:cF {initiate@active@char}
+  {
+    \file_input:n {babelsh.def}
+    \initiate@active@char{"}
+    \shorthandoff{"}
+  }
+}
+
 % Control shorthand (de-)activation
 % This checks that the shorthand char is only deactivated
 % if we have activated it ourselves and hence keeps

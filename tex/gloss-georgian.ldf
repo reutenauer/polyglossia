@@ -41,11 +41,7 @@
   \setkeys{georgian}{babelshorthands=false}
 \fi
 
-\@ifundefined{initiate@active@char}{%
-  \input{babelsh.def}%
-  \initiate@active@char{"}%
-  \shorthandoff{"}%
-}{}
+\InitializeBabelShorthands
 
 \def\georgian@shorthands{%
   \xpg@activate@shorthands%

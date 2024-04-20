@@ -28,11 +28,7 @@
   \setkeys{dutch}{babelshorthands=false}
 \fi
 
-\@ifundefined{initiate@active@char}{%
-  \input{babelsh.def}%
-  \initiate@active@char{"}%
-  \shorthandoff{"}%
-}{}
+\InitializeBabelShorthands
 
 \def\xpg@trema#1{\allowhyphens\discretionary{-}{#1}{\"{#1}}\allowhyphens}
 

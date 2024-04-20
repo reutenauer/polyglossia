@@ -36,11 +36,7 @@
   \setkeys{czech}{babelshorthands=false}
 \fi
 
-\@ifundefined{initiate@active@char}{%
-  \input{babelsh.def}%
-  \initiate@active@char{"}%
-  \shorthandoff{"}%
-}{}
+\InitializeBabelShorthands
 
 \def\czech@@splithyphen#1{%
   \def\czech@sh@tmp{%

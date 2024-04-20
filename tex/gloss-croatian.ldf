@@ -49,11 +49,7 @@
   \setkeys{croatian}{babelshorthands=false}
 \fi
 
-\@ifundefined{initiate@active@char}{%
-  \input{babelsh.def}%
-  \initiate@active@char{"}%
-  \shorthandoff{"}%
-}{}
+\InitializeBabelShorthands
 
 \let\xpg@hyphen@char-
 \def\croatian@@splhyphen#1{%

@@ -62,11 +62,7 @@
   \setkeys{mongolian}{babelshorthands=false}
 \fi
 
-\@ifundefined{initiate@active@char}{%
-  \input{babelsh.def}%
-  \initiate@active@char{"}%
-  \shorthandoff{"}%
-}{}
+\InitializeBabelShorthands
 
 \def\mongolian@shorthands{%
   \xpg@activate@shorthands%

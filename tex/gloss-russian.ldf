@@ -99,11 +99,7 @@
   \setkeys{russian}{babelshorthands=false}
 \fi
 
-\@ifundefined{initiate@active@char}{%
-  \input{babelsh.def}%
-  \initiate@active@char{"}%
-  \shorthandoff{"}%
-}{}
+\InitializeBabelShorthands
 
 \def\russian@shorthands{%
   \xpg@activate@shorthands%

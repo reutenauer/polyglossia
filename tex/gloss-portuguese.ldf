@@ -58,11 +58,7 @@
   \setkeys{portuguese}{babelshorthands=false}
 \fi
 
-\@ifundefined{initiate@active@char}{%
-  \input{babelsh.def}%
-  \initiate@active@char{"}%
-  \shorthandoff{"}%
-}{}
+\InitializeBabelShorthands
 
 \let\xpg@hyphen@char-
 \def\portuguese@@splhyphen#1{%

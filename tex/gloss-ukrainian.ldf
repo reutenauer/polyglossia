@@ -66,11 +66,7 @@
   \setkeys{ukrainian}{babelshorthands=false}
 \fi
 
-\@ifundefined{initiate@active@char}{%
-  \input{babelsh.def}%
-  \initiate@active@char{"}%
-  \shorthandoff{"}%
-}{}
+\InitializeBabelShorthands
 
 \def\ukrainian@shorthands{%
   \xpg@activate@shorthands%

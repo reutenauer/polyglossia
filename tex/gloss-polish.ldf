@@ -35,11 +35,7 @@
   \setkeys{polish}{babelshorthands=false}
 \fi
 
-\@ifundefined{initiate@active@char}{%
-  \input{babelsh.def}%
-  \initiate@active@char{"}%
-  \shorthandoff{"}%
-}{}
+\InitializeBabelShorthands
 
 \let\xpg@hyphen@char-
 \def\polish@@splhyphen#1{%

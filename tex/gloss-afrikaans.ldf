@@ -27,11 +27,7 @@
   \setkeys{afrikaans}{babelshorthands=false}
 \fi
 
-\@ifundefined{initiate@active@char}{%
-  \input{babelsh.def}%
-  \initiate@active@char{"}%
-  \shorthandoff{"}%
-}{}
+\InitializeBabelShorthands
 
 \def\afrikaans@shorthands{%
   \xpg@activate@shorthands%

@@ -34,11 +34,7 @@
   \setkeys{slovak}{babelshorthands=false}
 \fi
 
-\@ifundefined{initiate@active@char}{%
-  \input{babelsh.def}%
-  \initiate@active@char{"}%
-  \shorthandoff{"}%
-}{}
+\InitializeBabelShorthands
 
 \let\xpg@hyphen@char-
 \def\slovak@@splhyphen#1{%
