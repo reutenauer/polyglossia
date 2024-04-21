@@ -1,0 +1,19 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setdefaultlanguage[variant=sorani,script=Arabic,numerals=eastern]{kurdish}
+\newfontfamily\arabicfont[Script=Arabic,Scale=1]{Amiri}[%
+UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  Extension = .ttf,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic
+]
+\title{بەڵگەیەک بۆ نموونە}
+\author{نێوی من}
+\date{\today}
+\begin{document}
+\setbox0=\vbox{\maketitle}
+\START\showbox0\END
+
+

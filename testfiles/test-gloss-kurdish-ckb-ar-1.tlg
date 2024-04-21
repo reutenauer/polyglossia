@@ -1,0 +1,99 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\vbox(129.78221+0.0)x345.0
+.\glue 0.0 plus 1.0fil
+.\penalty -10000
+.\glue 0.0 plus 1.0fil
+.\penalty -10000
+.\hbox(0.0+0.0)x0.0
+.\glue 20.0
+.\glue -20.0
+.\penalty -51
+.\glue 20.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 5.68768
+.\hbox(16.31232+4.89023)x345.0, glue set 119.57137fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\beginR
+..\hbox(0.0+0.0)x0.0
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0
+...\glue 5.0
+..\penalty 0
+..\TU/Amiri(0)/m/n/17.28 بەڵگەیەک
+..\glue 5.04576 plus 2.52287 minus 1.68192
+..\TU/Amiri(0)/m/n/17.28 بۆ
+..\glue 5.04576 plus 2.52287 minus 1.68192
+..\TU/Amiri(0)/m/n/17.28 نموونە
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\endR
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\glue 15.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\lineskip) 6.0
+.\hbox(9.79996+4.20004)x345.0, glue set 149.418fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\beginR
+..\hbox(0.0+0.0)x0.0
+..\hbox(9.79996+4.20004)x46.16402
+...\beginR
+...\mathon
+...\vbox(9.79996+4.20004)x46.16402
+....\hbox(9.79996+4.20004)x46.16402
+.....\beginR
+.....\vbox(9.79996+4.20004)x46.16402
+......\hbox(9.79996+4.20004)x46.16402
+.......\glue(\tabskip) 0.0
+.......\hbox(9.79996+4.20004)x46.16402
+........\rule(9.79996+4.20004)x0.0
+........\glue 6.0
+........\glue 0.0 plus 1.0fil
+........\glue 0.00002
+........\TU/Amiri(0)/m/n/12 نێوی
+........\glue 3.504 plus 1.752 minus 1.168
+........\TU/Amiri(0)/m/n/12 من
+........\glue 0.0 plus 1.0fil
+........\glue 6.0
+.......\glue(\tabskip) 0.0
+.....\endR
+...\mathoff
+...\endR
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\endR
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\glue 10.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\lineskip) 1.0
+.\hbox(8.724+3.16798)x345.0, glue set 131.34601fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\beginR
+..\hbox(0.0+0.0)x0.0
+..\beginL
+..\TU/Amiri(0)/m/n/12 ۲۰
+..\endL
+..\TU/Amiri(0)/m/n/12 ی
+..\glue 3.504 plus 1.752 minus 1.168
+..\TU/Amiri(0)/m/n/12 ئایاری
+..\glue 3.504 plus 1.752 minus 1.168
+..\beginL
+..\TU/Amiri(0)/m/n/12 ۲۰۱۶
+..\endL
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\endR
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+.\glue 15.0
+! OK.
+<to be read again> 
+                   \begingroup 
+l. ...\START\showbox0\END

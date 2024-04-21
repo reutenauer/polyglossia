@@ -1,0 +1,135 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\vbox(131.7142+0.0)x345.0, direction TRT
+.\glue 0.0 plus 1.0fil
+.\penalty -10000
+.\glue 0.0 plus 1.0fil
+.\penalty -10000
+.\hbox(0.0+0.0)x0.0, direction TRT
+.\glue 20.0
+.\glue -20.0
+.\penalty -51
+.\glue 20.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 5.68768
+.\hbox(16.31232+4.89024)x345.0, glue set 119.57138fil, direction TRT
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TRT
+...\glue 0.0
+...\glue 0.0
+...\glue -5.0
+...\hbox(0.0+0.0)x0.0, direction TRT
+...\glue 5.0
+..\penalty 0
+..\TU/Amiri(0)/m/n/17.28 ب
+..\TU/Amiri(0)/m/n/17.28 ە
+..\pdfliteral page <lua data reference ...>
+..\TU/Amiri(0)/m/n/17.28 ڵ
+..\TU/Amiri(0)/m/n/17.28 
+..\pdfliteral page <lua data reference ...>
+..\TU/Amiri(0)/m/n/17.28 گ
+..\TU/Amiri(0)/m/n/17.28 ە
+..\TU/Amiri(0)/m/n/17.28 ی
+..\TU/Amiri(0)/m/n/17.28 ە
+..\kern-4.21632 (font)
+..\TU/Amiri(0)/m/n/17.28 ک
+..\glue(\spaceskip) 5.04576 plus 2.52287 minus 1.68192
+..\TU/Amiri(0)/m/n/17.28 ب
+..\TU/Amiri(0)/m/n/17.28 ۆ
+..\glue(\spaceskip) 5.04576 plus 2.52287 minus 1.68192
+..\TU/Amiri(0)/m/n/17.28 ن
+..\TU/Amiri(0)/m/n/17.28 م
+..\TU/Amiri(0)/m/n/17.28 و
+..\TU/Amiri(0)/m/n/17.28 و
+..\TU/Amiri(0)/m/n/17.28 ن
+..\TU/Amiri(0)/m/n/17.28 ە
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\glue 15.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\lineskip) 6.0
+.\hbox(9.79996+6.132)x345.0, glue set 152.54999fil, direction TRT
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TRT
+..\hbox(9.79996+6.132)x39.90002, direction TRT
+...\mathon
+...\begindir TLT
+...\vbox(9.79996+6.132)x39.90002, direction TLT
+....\hbox(9.79996+6.132)x39.90002, direction TLT
+.....\glue(\tabskip) 0.0
+.....\hbox(9.79996+6.132)x39.90002, direction TLT
+......\rule(9.79996+4.20004)x0.0
+......\glue 6.0
+......\glue 0.0 plus 1.0fil
+......\glue 0.00002
+......\TU/Amiri(0)/m/n/12 ن
+......\TU/Amiri(0)/m/n/12 ێ
+......\TU/Amiri(0)/m/n/12 و
+......\kern0.996 (font)
+......\TU/Amiri(0)/m/n/12 ی
+......\glue(\spaceskip) 3.504 plus 1.752 minus 1.168
+......\TU/Amiri(0)/m/n/12 م
+......\TU/Amiri(0)/m/n/12 ن
+......\glue 0.0 plus 1.0fil
+......\glue 6.0
+.....\glue(\tabskip) 0.0
+...\enddir TLT
+...\mathoff
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\glue 10.0
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\lineskip) 1.0
+.\hbox(8.724+3.168)x345.0, glue set 131.346fil, direction TRT
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x0.0, direction TRT
+..\begindir TLT
+..\TU/Amiri(0)/m/n/12 ۲
+..\TU/Amiri(0)/m/n/12 ۰
+..\enddir TLT
+..\TU/Amiri(0)/m/n/12 ی
+..\glue(\spaceskip) 3.504 plus 1.752 minus 1.168
+..\TU/Amiri(0)/m/n/12 ئ
+..\TU/Amiri(0)/m/n/12 ا
+..\TU/Amiri(0)/m/n/12 ی
+..\TU/Amiri(0)/m/n/12 ا
+..\TU/Amiri(0)/m/n/12 ر
+..\TU/Amiri(0)/m/n/12 ی
+..\glue(\spaceskip) 3.504 plus 1.752 minus 1.168
+..\begindir TLT
+..\TU/Amiri(0)/m/n/12 ۲
+..\TU/Amiri(0)/m/n/12 ۰
+..\TU/Amiri(0)/m/n/12 ۱
+..\TU/Amiri(0)/m/n/12 ۶
+..\enddir TLT
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\penalty -51
+.\glue 10.0 plus 3.0 minus 5.0
+.\glue 15.0
+! OK.
+<to be read again> 
+\begingroup 
+l. ...\START\showbox0\END
