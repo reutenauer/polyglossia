@@ -9,7 +9,8 @@ fontspec
 luatexbase
 etoolbox
 xkeyval
-tools
+tools # for calc
+luavlna # some glossaries use that
 luabidi 
 bidi
 # bidi dependencies
