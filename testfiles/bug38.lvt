@@ -1,8 +1,8 @@
+\input{regression-test.tex}
 \documentclass{article}
-
 \usepackage{polyglossia}
 \setmainlanguage{german}
-
 \begin{document}
-blub
-\end{document}
+\setbox0=\hbox{blub}
+\START\showbox0\END
+
