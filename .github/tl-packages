@@ -81,4 +81,5 @@ hyphen-welsh
 # fonts
 culmus
 # math packages
-breqn amscls
+breqn
+amscls

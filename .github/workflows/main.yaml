@@ -18,7 +18,6 @@ jobs:
       - name: Install TeX Live
         uses: zauguin/install-texlive@v3
         with:
-          packages: >
             package_file: .github/tl-packages
       - name: Install Polyglossia
         run: l3build install
