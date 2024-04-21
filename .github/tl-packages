@@ -11,6 +11,7 @@ etoolbox
 xkeyval
 tools # for calc
 luavlna # some glossaries use that
+kvoptions
 luabidi 
 bidi
 # bidi dependencies
