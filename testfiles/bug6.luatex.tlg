@@ -1,0 +1,41 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\vbox(20.5+0.0)x345.0, direction TLT
+.\hbox(0.0+0.0)x345.0, glue set 330.0fil, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x15.0, direction TLT
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty 10000
+.\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.\glue(\baselineskip) 4.5
+.\hbox(7.5+2.5)x345.0, direction TLT
+..\kern152.2223 (font)
+..\hbox(6.44444+0.83333)x40.5554, direction TLT
+...\OT1/cmr/m/n/10 1
+...\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+...\OT1/cmr/m/n/10 +
+...\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+...\OT1/cmr/m/n/10 2
+...\glue(\thickmuskip) 2.77771 plus 2.77771
+...\OT1/cmr/m/n/10 =
+...\glue(\thickmuskip) 2.77771 plus 2.77771
+...\OT1/cmr/m/n/10 3
+..\kern139.44229 (font)
+..\hbox(7.5+2.5)x12.78, direction TLT
+...\hbox(7.5+2.5)x12.78, direction TLT
+....\TU/lmr/m/n/10 (
+....\TU/lmr/m/n/10 1
+....\TU/lmr/m/n/10 )
+.\penalty 0
+.\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+! OK.
+<to be read again> 
+\begingroup 
+l. ...\START\showbox0\END
