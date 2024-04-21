@@ -1,0 +1,16 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage{farsi}
+\setotherlanguage{english}
+\newfontfamily\farsifont[Script=Arabic]{Amiri}[%
+ UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  Extension = .ttf,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic]
+\begin{document}
+\START
+\footnote{این یک زیرنویس است.}
+\vfill\break
+\END

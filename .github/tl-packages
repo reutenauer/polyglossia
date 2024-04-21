@@ -85,7 +85,8 @@ hyphen-ukrainian
 hyphen-uppersorbian
 hyphen-welsh
 # fonts
-culmus
+culmus # Hebrew
+amiri  # Arabic
 # math packages
 amsmath
 breqn
