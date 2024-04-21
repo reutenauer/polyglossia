@@ -1,3 +1,4 @@
+\input{regression-test.tex}
 \documentclass{article}
 \usepackage{breqn}
 \usepackage{polyglossia}
@@ -11,9 +12,10 @@
   BoldItalicFont = *-BoldItalic]
 \begin{document}
 \begin{english}
+\global\setbox0=\vbox{%
 \begin{dmath}
 % Vafa: No equation number, in addition you get incorrect parentheses around equation number. I can not comment on the first issue but second issue is because polyglossia package does not make use of \if@Latin boolean of bidi package. This boolean should be true for LTR scripts (like english) and false for RTL scripts (like Persian).
 1+2=3
-\end{dmath}
+\end{dmath}}
 \end{english}
-\end{document}
+\START\showbox0\END
