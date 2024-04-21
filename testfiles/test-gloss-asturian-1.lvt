@@ -1,20 +1,12 @@
-\documentclass{minimal}
-
+\input{regression-test.tex}
+\documentclass{article}
 \usepackage{polyglossia}
 \setmainlanguage{asturian}
-
-\year=2012
-\month=8
-\day=17
-
+\year=2012\month=8\day=17
 \lccode"2019="2019
 \begin{document}
-
-\today.
-
-% This is Catalan, but I’m testing hyphenation here (we use Catalan as a
-% fallback).  Arthur, London, 2012-08-17.
-\begin{minipage}{1sp}
+\setbox0=\hbox{\today.}
+\setbox2=\vbox{\hsize=1sp
 \obeylines
 Si et donàs la sua corona
 un rei, i el ceptre de plata
@@ -23,7 +15,5 @@ i son tron enjoiellat,
 ¿per a ser rei deixaries
 tes balades amoroses
 ni tes muntanyes frondoses
-ni ton joiós Llobregat?
-\end{minipage}
-
-\end{document}
+ni ton joiós Llobregat?}
+\START\showbox0\showbox2\END
