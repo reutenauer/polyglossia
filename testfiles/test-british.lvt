@@ -1,0 +1,10 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage[variant=british]{english}
+\year=2012\month=8\day=17
+\begin{document}
+\setbox0=\hbox{\today.}
+\setbox2=\vbox{\hsize=1sp
+\hskip1sp biography}
+\START\showbox0\showbox2\END
