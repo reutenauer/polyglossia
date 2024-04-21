@@ -1,47 +1,45 @@
+\input{regression-test.tex}
 \documentclass{book}
-
-\usepackage{fontspec}
-
-\setmainfont{Times New Roman}
-
 \usepackage{polyglossia}
-\setmainlanguage{greek}
-\setotherlanguage{english}
-
-
+\setmainfont{NewCM10}[%
+UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  Extension = .otf,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic]
+\setmainlanguage{english}
+\setotherlanguage{greek}
 \begin{document}
-
 \begin{english}
-\chapter{First}
+\global\setbox0=\vbox{%
 \begin{enumerate}
   \item saf
   \begin{enumerate}
     \item safsdafdsaf
     \item safsdafdsaf
   \end{enumerate}
-\end{enumerate}
+\end{enumerate}}
 \end{english}
 
 \begin{greek}
-\chapter{Second}
+\global\setbox2=\vbox{%
 \begin{enumerate}
   \item saf
   \begin{enumerate}
     \item safsdafdsaf
     \item safsdafdsaf
   \end{enumerate}
-\end{enumerate}
+\end{enumerate}}
 \end{greek}
 
 \begin{english}
-\chapter{Third}
+\global\setbox4=\vbox{%
 \begin{enumerate}
   \item saf
   \begin{enumerate}
     \item safsdafdsaf
     \item safsdafdsaf
   \end{enumerate}
-\end{enumerate}
+\end{enumerate}}
 \end{english}
-
-\end{document}
+\START\showbox0\showbox2\showbox4\END

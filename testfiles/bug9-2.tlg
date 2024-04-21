@@ -1,0 +1,250 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\vbox(65.54999+0.0)x345.0
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue -10.0 plus -4.0 minus -5.0
+.\glue 6.0 plus 2.0 minus 4.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\hbox(7.05+0.10999)x320.0, glue set 308.0fil, shifted 25.0
+..\hbox(6.66+0.0)x0.0
+...\glue 0.0
+...\glue -20.0
+...\glue -5.0
+...\hbox(6.66+0.0)x20.0, glue set 20.0fil
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.66+0.0)x0.0, glue set - 7.78fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/NewCM10(0)/m/n/10 1.
+...\glue 5.0
+..\penalty 0
+..\TU/NewCM10(0)/m/n/10 saf
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 8.0 plus 4.0 minus 2.0
+.\glue -8.0 plus -4.0 minus -2.0
+.\glue 6.0 plus 3.0 minus 1.0
+.\glue(\parskip) 2.0 plus 1.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.39001
+.\hbox(7.5+2.49998)x298.00003, glue set 250.88004fil, shifted 46.99997
+..\hbox(7.5+2.49998)x0.0
+...\glue 0.0
+...\glue -16.99997
+...\glue -5.0
+...\hbox(7.5+2.49998)x16.99997, glue set 16.99997fil
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(7.5+2.49998)x0.0, glue set - 12.78fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/NewCM10(0)/m/n/10 (a)
+...\glue 5.0
+..\penalty 0
+..\TU/NewCM10(0)/m/n/10 safsdafdsaf
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 2.0 plus 1.0 minus 1.0
+.\glue(\parskip) 2.0 plus 1.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 2.00002
+.\hbox(7.5+2.49998)x298.00003, glue set 250.88004fil, shifted 46.99997
+..\hbox(7.5+2.49998)x0.0
+...\glue 0.0
+...\glue -16.99997
+...\glue -5.0
+...\hbox(7.5+2.49998)x16.99997, glue set 16.99997fil
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(7.5+2.49998)x0.0, glue set - 13.34fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/NewCM10(0)/m/n/10 (b)
+...\glue 5.0
+..\penalty 0
+..\TU/NewCM10(0)/m/n/10 safsdafdsaf
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 4.0 plus 2.0 minus 1.0
+.\glue -4.0 plus -2.0 minus -1.0
+.\glue 8.0 plus 3.0 minus 2.0
+.\glue -10.49998 plus -3.0 minus -2.0
+.\penalty -51
+.\glue 2.49998
+.\glue 8.0 plus 3.0 minus 2.0
+.\glue -8.0 plus -3.0 minus -2.0
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+<to be read again> 
+                   \showbox 
+l. ...\START\showbox0\showbox
+                            2\showbox4\END
+> \box...=
+\vbox(65.79999+0.0)x345.0
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue -10.0 plus -4.0 minus -5.0
+.\glue 6.0 plus 2.0 minus 4.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\hbox(7.05+0.10999)x320.0, glue set 308.0fil, shifted 25.0
+..\hbox(6.66+0.0)x0.0
+...\glue 0.0
+...\glue -20.0
+...\glue -5.0
+...\hbox(6.66+0.0)x20.0, glue set 20.0fil
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.66+0.0)x0.0, glue set - 7.78fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/NewCM10(1)/m/n/10 1.
+...\glue 5.0
+..\penalty 0
+..\TU/NewCM10(1)/m/n/10 saf
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 8.0 plus 4.0 minus 2.0
+.\glue -8.0 plus -4.0 minus -2.0
+.\glue 6.0 plus 3.0 minus 1.0
+.\glue(\parskip) 2.0 plus 1.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.39001
+.\hbox(7.5+2.49998)x298.00003, glue set 250.88004fil, shifted 46.99997
+..\hbox(7.5+2.49998)x0.0
+...\glue 0.0
+...\glue -16.99997
+...\glue -5.0
+...\hbox(7.5+2.49998)x16.99997, glue set 16.99997fil
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(7.5+2.49998)x0.0, glue set - 15.56fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/NewCM10(1)/m/n/10 (αʹ)
+...\glue 5.0
+..\penalty 0
+..\TU/NewCM10(1)/m/n/10 safsdafdsaf
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 2.0 plus 1.0 minus 1.0
+.\glue(\parskip) 2.0 plus 1.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 2.00002
+.\hbox(7.5+2.74998)x298.00003, glue set 250.88004fil, shifted 46.99997
+..\hbox(7.5+2.74998)x0.0
+...\glue 0.0
+...\glue -16.99997
+...\glue -5.0
+...\hbox(7.5+2.74998)x16.99997, glue set 16.99997fil
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(7.5+2.74998)x0.0, glue set - 15.56fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/NewCM10(1)/m/n/10 (βʹ)
+...\glue 5.0
+..\penalty 0
+..\TU/NewCM10(1)/m/n/10 safsdafdsaf
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 4.0 plus 2.0 minus 1.0
+.\glue -4.0 plus -2.0 minus -1.0
+.\glue 8.0 plus 3.0 minus 2.0
+.\glue -10.74998 plus -3.0 minus -2.0
+.\penalty -51
+.\glue 2.74998
+.\glue 8.0 plus 3.0 minus 2.0
+.\glue -8.0 plus -3.0 minus -2.0
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+<to be read again> 
+                   \showbox 
+l. ...\START\showbox0\showbox2\showbox
+                                     4\END
+> \box...=
+\vbox(65.54999+0.0)x345.0
+.\penalty -51
+.\glue 10.0 plus 4.0 minus 5.0
+.\glue -10.0 plus -4.0 minus -5.0
+.\glue 6.0 plus 2.0 minus 4.0
+.\glue(\parskip) 4.0 plus 2.0 minus 1.0
+.\glue(\parskip) 0.0
+.\hbox(7.05+0.10999)x320.0, glue set 308.0fil, shifted 25.0
+..\hbox(6.66+0.0)x0.0
+...\glue 0.0
+...\glue -20.0
+...\glue -5.0
+...\hbox(6.66+0.0)x20.0, glue set 20.0fil
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(6.66+0.0)x0.0, glue set - 7.78fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/NewCM10(0)/m/n/10 1.
+...\glue 5.0
+..\penalty 0
+..\TU/NewCM10(0)/m/n/10 saf
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 8.0 plus 4.0 minus 2.0
+.\glue -8.0 plus -4.0 minus -2.0
+.\glue 6.0 plus 3.0 minus 1.0
+.\glue(\parskip) 2.0 plus 1.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.39001
+.\hbox(7.5+2.49998)x298.00003, glue set 250.88004fil, shifted 46.99997
+..\hbox(7.5+2.49998)x0.0
+...\glue 0.0
+...\glue -16.99997
+...\glue -5.0
+...\hbox(7.5+2.49998)x16.99997, glue set 16.99997fil
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(7.5+2.49998)x0.0, glue set - 12.78fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/NewCM10(0)/m/n/10 (a)
+...\glue 5.0
+..\penalty 0
+..\TU/NewCM10(0)/m/n/10 safsdafdsaf
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 2.0 plus 1.0 minus 1.0
+.\glue(\parskip) 2.0 plus 1.0 minus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 2.00002
+.\hbox(7.5+2.49998)x298.00003, glue set 250.88004fil, shifted 46.99997
+..\hbox(7.5+2.49998)x0.0
+...\glue 0.0
+...\glue -16.99997
+...\glue -5.0
+...\hbox(7.5+2.49998)x16.99997, glue set 16.99997fil
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(7.5+2.49998)x0.0, glue set - 13.34fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/NewCM10(0)/m/n/10 (b)
+...\glue 5.0
+..\penalty 0
+..\TU/NewCM10(0)/m/n/10 safsdafdsaf
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -51
+.\glue 4.0 plus 2.0 minus 1.0
+.\glue -4.0 plus -2.0 minus -1.0
+.\glue 8.0 plus 3.0 minus 2.0
+.\glue -10.49998 plus -3.0 minus -2.0
+.\penalty -51
+.\glue 2.49998
+.\glue 8.0 plus 3.0 minus 2.0
+.\glue -8.0 plus -3.0 minus -2.0
+.\glue 10.0 plus 3.0 minus 5.0
+! OK.
+<to be read again> 
+                   \begingroup 
+l. ...\START\showbox0\showbox2\showbox4\END
