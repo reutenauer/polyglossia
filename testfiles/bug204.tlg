@@ -1,0 +1,102 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\vbox(78.83+0.10999)x345.0
+.\hbox(6.83+2.04999)x345.0, glue set 153.52fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\beginL
+..\hbox(0.0+0.0)x0.0
+..\beginL
+..\TU/lmr/m/n/10 Bonjour.
+..\endL
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\endL
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 3.01001
+.\hbox(6.94+0.10999)x345.0, glue set 159.86fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\beginL
+..\hbox(0.0+0.0)x0.0
+..\TU/lmr/m/n/10 Hello.
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\endL
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.62001
+.\hbox(7.27+3.42998)x345.0, glue set 122.25499fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\beginL
+..\hbox(0.0+0.0)x0.0
+..\beginR
+..\TU/Amiri(0)/m/n/10 مرحبا.
+..\endR
+..\glue 4.44 plus 4.99498 minus 0.37
+..\setlanguage0 (hyphenmin 2,3)
+..\TU/lmr/m/n/10 Wrong
+..\glue 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 direction.
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\endL
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 1.30002
+.\hbox(7.27+3.42998)x345.0, glue set 161.18001fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\beginL
+..\hbox(0.0+0.0)x0.0
+..\beginR
+..\TU/Amiri(0)/m/n/10 مرحبا.
+..\endR
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\endL
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 1.63002
+.\hbox(6.94+0.10999)x345.0, glue set 159.86fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\beginL
+..\hbox(0.0+0.0)x0.0
+..\TU/lmr/m/n/10 Hello.
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\endL
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.95001
+.\hbox(6.94+0.10999)x345.0, glue set 159.86fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\beginL
+..\hbox(0.0+0.0)x0.0
+..\beginL
+..\TU/lmr/m/n/10 Hello.
+..\endL
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\endL
+..\glue(\rightskip) 0.0 plus 1.0fil
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 4.95001
+.\hbox(6.94+0.10999)x345.0, glue set 159.86fil
+..\glue(\leftskip) 0.0 plus 1.0fil
+..\beginL
+..\hbox(0.0+0.0)x0.0
+..\TU/lmr/m/n/10 Hello.
+..\penalty 10000
+..\glue(\parfillskip) 0.0
+..\endL
+..\glue(\rightskip) 0.0 plus 1.0fil
+! OK.
+<to be read again> 
+                   \begingroup 
+l. ...\START\showbox0\END

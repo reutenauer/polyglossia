@@ -1,0 +1,28 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setotherlanguage{arabic}
+\setotherlanguage{french}
+\newfontfamily\arabicfont[Script=Arabic]{Amiri}[%
+ UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  Extension = .ttf,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic]
+\begin{document}
+\setbox0=\vbox{\centering
+\foreignlanguage{french}{Bonjour.}
+
+Hello.
+
+\foreignlanguage{arabic}{مرحبا.} Wrong direction.
+
+\textarabic{مرحبا.}
+
+Hello.
+
+\textenglish{Hello.}
+
+Hello.}
+\START\showbox0\END
