@@ -1,0 +1,32 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\hbox(6.98+2.06)x98.37, direction TLT
+.\TU/lmr/m/n/10 b
+.\kern0.28 (font)
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 g
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 m
+.\TU/lmr/m/n/10 ^^e1
+.\TU/lmr/m/n/10 n
+.\kern-0.28 (font)
+.\TU/lmr/m/n/10 u
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 6
+.\TU/lmr/m/n/10 .
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 b
+.\TU/lmr/m/n/10 .
+.\glue(\spaceskip) 4.44 plus 4.99498 minus 0.37
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 0
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 .
+! OK.
+<to be read again> 
+\begingroup 
+l. ...\START\showbox0\END

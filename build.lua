@@ -7,7 +7,7 @@ module = "polyglossia"
 stdengine    = "xetex"
 checkengines = {"xetex","luatex"}
 checkruns = 2
-checkconfigs = {"build","config-lua"}
+checkconfigs = {"build","configfiles/config-lua","configfiles/config-autogen"}
 sourcefiledir = "tex"
 docfiledir = "doc"
 sourcefiles = {"*.def", "*.ldf", "*.sty", "*.lua", "**/*.map"}
@@ -54,3 +54,38 @@ function update_tag(file,content,tagname,tagdate)
   end
   return content
 end
+
+function gen_test_from_gloss()
+	local testdoc = [[
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage{%s}
+\begin{document}
+\day=6
+\month=8
+\year=2012
+\setbox0=\hbox{\today.}
+\START\showbox0\END
+			]]
+	local gloss_files = filelist("./tex", "gloss-*.ldf")
+	for file = 1, #gloss_files do
+		local file_name = gloss_files[file]
+		local gloss_name = jobname(file_name)
+		local language = gloss_name:sub(7)
+		if fileexists('testfiles/test-gloss-' .. language .. '.lvt') and 
+			not false then else -- change to true to overwrite existing tests
+		f = io.open('testfiles/test-gloss-' .. language .. '.lvt', 'w')
+    		f:write(string.format(testdoc, language))
+    		f:close()
+    		print(language .. ": " .. file .. "/" .. #gloss_files)
+    		run('.', 'l3build save test-gloss-' .. language)
+    		run('.', 'l3build save -e luatex test-gloss-' .. language)
+	end end
+	return 0
+end
+
+--option_list["force"] = { desc  = "overwrite existing tests with gentest", -- does not work... why?
+--			type = "boolean"}
+target_list["gentest"] = { func = gen_test_from_gloss, 
+			desc = "generate minimal test files from gloss fies"}

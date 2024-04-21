@@ -1,0 +1,18 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\hbox(1.06+0.0)x37.44
+.\beginL
+.\TU/lmr/m/n/10 ٦
+.\endL
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 أغسطس
+.\glue 3.33 plus 1.665 minus 1.11
+.\beginL
+.\TU/lmr/m/n/10 ٢٠١٢
+.\endL
+.\TU/lmr/m/n/10 .
+! OK.
+<to be read again> 
+                   \begingroup 
+l. ...\START\showbox0\END

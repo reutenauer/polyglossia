@@ -1,0 +1,33 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\hbox(1.06+0.0)x34.64003, direction TRT
+.\begindir TLT
+.\TU/lmr/m/n/10 ٦
+.\TU/lmr/m/n/10 󰀀
+.\enddir TLT
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 أ
+.\TU/lmr/m/n/10 󰀀
+.\TU/lmr/m/n/10 غ
+.\TU/lmr/m/n/10 󰀀
+.\TU/lmr/m/n/10 ش
+.\TU/lmr/m/n/10 󰀀
+.\TU/lmr/m/n/10 ت
+.\TU/lmr/m/n/10 󰀀
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\begindir TLT
+.\TU/lmr/m/n/10 ٢
+.\TU/lmr/m/n/10 󰀀
+.\TU/lmr/m/n/10 ٠
+.\TU/lmr/m/n/10 󰀀
+.\TU/lmr/m/n/10 ١
+.\TU/lmr/m/n/10 󰀀
+.\TU/lmr/m/n/10 ٢
+.\TU/lmr/m/n/10 󰀀
+.\enddir TLT
+.\TU/lmr/m/n/10 .
+! OK.
+<to be read again> 
+\begingroup 
+l. ...\START\showbox0\END

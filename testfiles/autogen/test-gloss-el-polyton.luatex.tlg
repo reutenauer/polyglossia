@@ -1,0 +1,37 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\hbox(7.16+0.22)x64.34003, direction TLT
+.\TU/lmr/m/n/10 6
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 Α
+.\TU/lmr/m/n/10 υ
+.\TU/lmr/m/n/10 󰀀
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 γ
+.\TU/lmr/m/n/10 󰀀
+.\TU/lmr/m/n/10 ο
+.\TU/lmr/m/n/10 󰀀
+.\TU/lmr/m/n/10 ύ
+.\TU/lmr/m/n/10 󰀀
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 σ
+.\TU/lmr/m/n/10 󰀀
+.\TU/lmr/m/n/10 τ
+.\TU/lmr/m/n/10 󰀀
+.\TU/lmr/m/n/10 ο
+.\TU/lmr/m/n/10 󰀀
+.\TU/lmr/m/n/10 υ
+.\TU/lmr/m/n/10 󰀀
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 0
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 .
+! OK.
+<to be read again> 
+\begingroup 
+l. ...\START\showbox0\END
