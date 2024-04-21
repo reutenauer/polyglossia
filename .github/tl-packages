@@ -1,0 +1,84 @@
+# the test suit tools
+l3build
+# format generation
+latex-bin
+xetex
+luatex
+# polyglossia dependencies
+fontspec
+luatexbase
+etoolbox
+xkeyval
+luabidi 
+bidi
+# bidi dependencies
+zref
+ltxcmds
+infwarerr
+kvsetkeys
+kvdefinekeys
+# hyphenation patterns
+hyphen-afrikaans
+hyphen-ancientgreek
+hyphen-arabic
+hyphen-armenian
+hyphen-basque
+hyphen-belarusian
+hyphen-bulgarian
+hyphen-catalan
+hyphen-chinese
+hyphen-churchslavonic
+hyphen-coptic
+hyphen-croatian
+hyphen-czech
+hyphen-danish
+hyphen-dutch
+hyphen-english
+hyphen-esperanto
+hyphen-estonian
+hyphen-ethiopic
+hyphen-farsi
+hyphen-finnish
+hyphen-french
+hyphen-friulan
+hyphen-galician
+hyphen-georgian
+hyphen-german
+hyphen-greek
+hyphen-hungarian
+hyphen-icelandic
+hyphen-indic
+hyphen-indonesian
+hyphen-interlingua
+hyphen-irish
+hyphen-italian
+hyphen-kurmanji
+hyphen-latin
+hyphen-latvian
+hyphen-lithuanian
+hyphen-macedonian
+hyphen-mongolian
+hyphen-norwegian
+hyphen-occitan
+hyphen-piedmontese
+hyphen-polish
+hyphen-portuguese
+hyphen-romanian
+hyphen-romansh
+hyphen-russian
+hyphen-sanskrit
+hyphen-serbian
+hyphen-slovak
+hyphen-slovenian
+hyphen-spanish
+hyphen-swedish
+hyphen-thai
+hyphen-turkish
+hyphen-turkmen
+hyphen-ukrainian
+hyphen-uppersorbian
+hyphen-welsh
+# fonts
+culmus
+# math packages
+breqn amscls
