@@ -1,0 +1,14 @@
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setotherlanguage{italian}
+\pghyphenation{italian}{n-e-l m-e-z-z-o d-e-l c-a-m-m-i-n d-i n-o-s-t-r-a v-i-t-a}
+\begin{document}
+\setbox0=\vbox{\hsize=1sp
+Nel mezzo del cammin di nostra vita}
+\selectlanguage{italian}
+\lefthyphenmin=1
+\righthyphenmin=1
+\setbox2=\vbox{\hsize=1sp
+\hskip1sp Nel mezzo del cammin di nostra vita}
+\START\showbox0\shobox2\END
