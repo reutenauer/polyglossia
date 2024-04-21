@@ -87,8 +87,7 @@ hyphen-welsh
 # fonts
 culmus # Hebrew
 amiri  # Arabic
-metafont
-mfware
+amsfonts
 # math packages
 amsmath
 breqn
