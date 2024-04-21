@@ -2,13 +2,13 @@
 \documentclass{article}
 \usepackage{polyglossia}
 \setmainlanguage[calendar=hebrew,marcheshvan=true]{hebrew}
-\setmainfont[DavidCLM]{
+\setmainfont{DavidCLM}[
   UprightFont = *-Medium,
   BoldFont = *-Bold,
   Ligatures = Discretionary,
   Extension = .otf,
   ItalicFont = *-MediumItalic,
-  BoldItalicFont = *-BoldItalic,}
+  BoldItalicFont = *-BoldItalic]
 \begin{document}
 \day=17
 \month=10
