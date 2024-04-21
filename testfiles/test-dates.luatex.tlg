@@ -1,0 +1,95 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\hbox(6.98+2.06)x118.05, direction TLT
+.\TU/lmr/m/n/10 N
+.\TU/lmr/m/n/10 g
+.\TU/lmr/m/n/10 ^^e0
+.\kern-0.28 (font)
+.\TU/lmr/m/n/10 y
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 9
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 h
+.\TU/lmr/m/n/10 ^^e1
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 g
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 4
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 ă
+.\TU/lmr/m/n/10 m
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 0
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 2
+! OK.
+<to be read again> 
+\showbox 
+l. ...\START\showbox0\showbox
+                          2\showbox4\END
+> \box...=
+\hbox(6.94+2.06)x87.86, direction TLT
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 l
+.\TU/lmr/m/n/10 s
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 9
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 d
+.\TU/lmr/m/n/10 a
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 a
+.\kern-0.28 (font)
+.\TU/lmr/m/n/10 v
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 i
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 g
+.\TU/lmr/m/n/10 l
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 0
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 2
+! OK.
+<to be read again> 
+\showbox 
+l. ...\START\showbox0\showbox2\showbox
+                                   4\END
+> \box...=
+\hbox(7.16+0.22)x86.15, direction TLT
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 9
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 d
+.\TU/lmr/m/n/10 i
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 A
+.\kern-1.11 (font)
+.\TU/lmr/m/n/10 v
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 l
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 d
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 l
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 0
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 2
+! OK.
+<to be read again> 
+\begingroup 
+l. ...\START\showbox0\showbox2\showbox4\END

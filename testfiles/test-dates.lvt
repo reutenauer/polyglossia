@@ -1,23 +1,16 @@
-\documentclass{minimal}
-
+\input{regression-test.tex}
+\documentclass{article}
 \usepackage{polyglossia}
 \setmainlanguage{english}
-
 \setotherlanguage{vietnamese}
 \setotherlanguage{romansh}
 \setotherlanguage{friulan}
-
 \begin{document}
-
-\day=29
-\month=4
-\year=2012
-
+\day=29\month=4\year=2012
 % Should be Ngày 29 tháng 4 năm 2012
-\textvietnamese{\today}
+\setbox0=\hbox{\textvietnamese{\today}}
 % ils 29 da avrigl 2012
-\textromansh{\today}
+\setbox2=\hbox{\textromansh{\today}}
 % 29 di Avril dal 2012
-\textfriulan{\today}
-
-\end{document}
+\setbox4=\hbox{\textfriulan{\today}}
+\START\showbox0\showbox2\showbox4\END

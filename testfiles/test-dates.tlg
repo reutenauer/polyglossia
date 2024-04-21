@@ -1,0 +1,54 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\hbox(6.98+2.05998)x118.05
+.\TU/lmr/m/n/10 Ng^^e0y
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 29
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 th^^e1ng
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 4
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 năm
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 2012
+! OK.
+<to be read again> 
+                   \showbox 
+l. ...\START\showbox0\showbox
+                            2\showbox4\END
+> \box...=
+\hbox(6.94+2.05998)x87.86
+.\TU/lmr/m/n/10 ils
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 29
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 da
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 avrigl
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 2012
+! OK.
+<to be read again> 
+                   \showbox 
+l. ...\START\showbox0\showbox2\showbox
+                                     4\END
+> \box...=
+\hbox(7.16+0.21999)x86.15
+.\TU/lmr/m/n/10 29
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 di
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 Avril
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 dal
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 2012
+! OK.
+<to be read again> 
+                   \begingroup 
+l. ...\START\showbox0\showbox2\showbox4\END
