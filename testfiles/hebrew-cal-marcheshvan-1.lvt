@@ -5,7 +5,6 @@
 \setmainfont{DavidCLM}[
   UprightFont = *-Medium,
   BoldFont = *-Bold,
-  Ligatures = Discretionary,
   Extension = .otf,
   ItalicFont = *-MediumItalic,
   BoldItalicFont = *-BoldItalic]
