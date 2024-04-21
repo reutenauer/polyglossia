@@ -1,0 +1,10 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\begin{document}
+\day=6
+\month=8
+\year=2012
+\setbox0=\hbox{Aujourd'hui : \today.}
+\START\showbox0\END
