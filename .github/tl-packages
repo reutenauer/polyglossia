@@ -9,6 +9,7 @@ fontspec
 luatexbase
 etoolbox
 xkeyval
+tools
 luabidi 
 bidi
 # bidi dependencies
