@@ -90,3 +90,4 @@ culmus
 amsmath
 breqn
 amscls
+epstopdf-pkg # for breqn in luatex
