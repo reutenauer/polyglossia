@@ -17,6 +17,9 @@ ltxcmds
 infwarerr
 kvsetkeys
 kvdefinekeys
+pdftexcmds
+etexcmds
+auxhook
 # hyphenation patterns
 hyphen-afrikaans
 hyphen-ancientgreek
