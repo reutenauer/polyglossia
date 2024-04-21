@@ -1,0 +1,17 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage{german}
+\year=2012\month=8\day=17
+\begin{document}
+\setbox0=\hbox{Heute is den \today.}
+\setbox2=\vbox{\hsize=1sp
+Si et donàs la sua corona
+un rei, i el ceptre de plata
+i son mantell d’escarlata
+i son tron enjoiellat,
+¿per a ser rei deixaries
+tes balades amoroses
+ni tes muntanyes frondoses
+ni ton joiós Llobregat?}
+\START\showbox0\showbox2\END

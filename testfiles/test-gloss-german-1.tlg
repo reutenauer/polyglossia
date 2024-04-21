@@ -1,0 +1,257 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\hbox(7.16+2.05998)x131.49
+.\TU/lmr/m/n/10 Heute
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 is
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 den
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 17.
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 August
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 2012.
+! OK.
+<to be read again> 
+                   \showbox 
+l. ...\START\showbox0\showbox
+                            2\END
+> \box...=
+\vbox(631.05+2.05998)x0.00002
+.\hbox(7.05+0.21999)x0.00002
+..\hbox(0.0+0.0)x15.0
+..\TU/lmr/m/n/10 Si
+..\glue(\rightskip) 0.0
+.\penalty 150
+.\glue(\baselineskip) 5.63002
+.\hbox(6.15+0.10999)x0.00002
+..\TU/lmr/m/n/10 et
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 4.91002
+.\hbox(6.98+0.10999)x0.00002
+..\TU/lmr/m/n/10 don^^e0s
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 4.95001
+.\hbox(6.94+0.10999)x0.00002
+..\TU/lmr/m/n/10 la
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 7.41002
+.\hbox(4.48+0.10999)x0.00002
+..\TU/lmr/m/n/10 sua
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 7.41002
+.\hbox(4.48+0.10999)x0.00002
+..\TU/lmr/m/n/10 co-
+..\glue(\rightskip) 0.0
+.\penalty 100
+.\glue(\baselineskip) 7.41002
+.\hbox(4.48+0.10999)x0.00002
+..\TU/lmr/m/n/10 ro-
+..\glue(\rightskip) 0.0
+.\penalty 100
+.\glue(\baselineskip) 7.41002
+.\hbox(4.48+0.10999)x0.00002
+..\TU/lmr/m/n/10 na
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 7.47002
+.\hbox(4.42+0.10999)x0.00002
+..\TU/lmr/m/n/10 un
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 5.32
+.\hbox(6.57+1.92998)x0.00002
+..\TU/lmr/m/n/10 rei,
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 3.50002
+.\hbox(6.57+0.0)x0.00002
+..\TU/lmr/m/n/10 i
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 5.06
+.\hbox(6.94+0.10999)x0.00002
+..\TU/lmr/m/n/10 el
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 5.74002
+.\hbox(6.15+1.93999)x0.00002
+..\TU/lmr/m/n/10 cept-
+..\glue(\rightskip) 0.0
+.\penalty 100
+.\glue(\baselineskip) 5.58002
+.\hbox(4.48+0.10999)x0.00002
+..\TU/lmr/m/n/10 re
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 4.95001
+.\hbox(6.94+0.10999)x0.00002
+..\TU/lmr/m/n/10 de
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 4.95001
+.\hbox(6.94+1.93999)x0.00002
+..\TU/lmr/m/n/10 pla-
+..\glue(\rightskip) 0.0
+.\penalty 100
+.\glue(\baselineskip) 3.91002
+.\hbox(6.15+0.10999)x0.00002
+..\TU/lmr/m/n/10 ta
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 5.32
+.\hbox(6.57+0.0)x0.00002
+..\TU/lmr/m/n/10 i
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 7.52
+.\hbox(4.48+0.10999)x0.00002
+..\TU/lmr/m/n/10 son
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 7.41002
+.\hbox(4.48+0.10999)x0.00002
+..\TU/lmr/m/n/10 man-
+..\glue(\rightskip) 0.0
+.\penalty 100
+.\glue(\baselineskip) 4.95001
+.\hbox(6.94+0.10999)x0.00002
+..\TU/lmr/m/n/10 tell
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 4.95001
+.\hbox(6.94+0.10999)x0.00002
+..\TU/lmr/m/n/10 d’escarlata
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 5.32
+.\hbox(6.57+0.0)x0.00002
+..\TU/lmr/m/n/10 i
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 7.52
+.\hbox(4.48+0.10999)x0.00002
+..\TU/lmr/m/n/10 son
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 5.74002
+.\hbox(6.15+0.10999)x0.00002
+..\TU/lmr/m/n/10 tron
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 7.41002
+.\hbox(4.48+0.10999)x0.00002
+..\TU/lmr/m/n/10 en-
+..\glue(\rightskip) 0.0
+.\penalty 100
+.\glue(\baselineskip) 4.95001
+.\hbox(6.94+2.04999)x0.00002
+..\TU/lmr/m/n/10 joiel-
+..\glue(\rightskip) 0.0
+.\penalty 100
+.\glue(\baselineskip) 3.01001
+.\hbox(6.94+1.92998)x0.00002
+..\TU/lmr/m/n/10 lat,
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 5.07002
+.\hbox(5.0+2.04999)x0.00002
+..\TU/lmr/m/n/10 ^^bfper
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 5.47002
+.\hbox(4.48+0.10999)x0.00002
+..\TU/lmr/m/n/10 a
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 7.41002
+.\hbox(4.48+0.10999)x0.00002
+..\TU/lmr/m/n/10 ser
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 5.32
+.\hbox(6.57+0.10999)x0.00002
+..\TU/lmr/m/n/10 rei
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 4.95001
+.\hbox(6.94+0.10999)x0.00002
+..\TU/lmr/m/n/10 deix-
+..\glue(\rightskip) 0.0
+.\penalty 100
+.\glue(\baselineskip) 5.32
+.\hbox(6.57+0.10999)x0.00002
+..\TU/lmr/m/n/10 aries
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 5.74002
+.\hbox(6.15+0.10999)x0.00002
+..\TU/lmr/m/n/10 tes
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 4.95001
+.\hbox(6.94+0.10999)x0.00002
+..\TU/lmr/m/n/10 ba-
+..\glue(\rightskip) 0.0
+.\penalty 100
+.\glue(\baselineskip) 4.95001
+.\hbox(6.94+0.10999)x0.00002
+..\TU/lmr/m/n/10 lades
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 7.41002
+.\hbox(4.48+0.10999)x0.00002
+..\TU/lmr/m/n/10 amo-
+..\glue(\rightskip) 0.0
+.\penalty 100
+.\glue(\baselineskip) 7.41002
+.\hbox(4.48+0.10999)x0.00002
+..\TU/lmr/m/n/10 ro-
+..\glue(\rightskip) 0.0
+.\penalty 100
+.\glue(\baselineskip) 7.41002
+.\hbox(4.48+0.10999)x0.00002
+..\TU/lmr/m/n/10 ses
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 5.32
+.\hbox(6.57+0.0)x0.00002
+..\TU/lmr/m/n/10 ni
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 5.85
+.\hbox(6.15+0.10999)x0.00002
+..\TU/lmr/m/n/10 tes
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 7.47002
+.\hbox(4.42+0.10999)x0.00002
+..\TU/lmr/m/n/10 mun-
+..\glue(\rightskip) 0.0
+.\penalty 100
+.\glue(\baselineskip) 5.74002
+.\hbox(6.15+2.04999)x0.00002
+..\TU/lmr/m/n/10 tanyes
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 2.90001
+.\hbox(7.05+0.10999)x0.00002
+..\TU/lmr/m/n/10 fron-
+..\glue(\rightskip) 0.0
+.\penalty 100
+.\glue(\baselineskip) 4.95001
+.\hbox(6.94+0.10999)x0.00002
+..\TU/lmr/m/n/10 do-
+..\glue(\rightskip) 0.0
+.\penalty 100
+.\glue(\baselineskip) 7.41002
+.\hbox(4.48+0.10999)x0.00002
+..\TU/lmr/m/n/10 ses
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 5.32
+.\hbox(6.57+0.0)x0.00002
+..\TU/lmr/m/n/10 ni
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 5.85
+.\hbox(6.15+0.10999)x0.00002
+..\TU/lmr/m/n/10 ton
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 4.91002
+.\hbox(6.98+2.04999)x0.00002
+..\TU/lmr/m/n/10 joi^^f3s
+..\glue(\rightskip) 0.0
+.\glue(\baselineskip) 3.01001
+.\hbox(6.94+0.10999)x0.00002
+..\TU/lmr/m/n/10 Llob-
+..\glue(\rightskip) 0.0
+.\penalty 100
+.\glue(\baselineskip) 7.41002
+.\hbox(4.48+0.10999)x0.00002
+..\TU/lmr/m/n/10 re-
+..\glue(\rightskip) 0.0
+.\penalty 250
+.\glue(\baselineskip) 4.84001
+.\hbox(7.05+2.05998)x0.00002
+..\TU/lmr/m/n/10 gat?
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+! OK.
+<to be read again> 
+                   \begingroup 
+l. ...\START\showbox0\showbox2\END
