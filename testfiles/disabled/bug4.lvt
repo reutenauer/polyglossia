@@ -1,0 +1,14 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage{farsi}
+\setmainfont[Script=Arabic]{Amiri}[%
+ UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  Extension = .ttf,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic]
+\begin{document}
+% THis yields (from left to right) the three characters ۱, 3, ۲.  Not good.
+\setbox0=\hbox{\farsidigits{1{23}}}
+\START\showbox0\END
