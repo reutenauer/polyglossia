@@ -247,12 +247,12 @@ LaTeX Info: Redefining \addtolength on input line ....
 ) (gloss-german.ldf
 File: gloss-german.ldf polyglossia: module for German
 Module polyglossia Info: Language data for german
-(polyglossia)            hyphenation^^I
-(polyglossia)            patterns^^Ihyph-de-1901.pat.txt
-(polyglossia)            synonyms^^I
+(polyglossia)            loader^^Iloadhyph-de-1901.tex
 (polyglossia)            lefthyphenmin^^I2
+(polyglossia)            patterns^^Ihyph-de-1901.pat.txt
+(polyglossia)            hyphenation^^I
 (polyglossia)            righthyphenmin^^I2
-(polyglossia)            loader^^Iloadhyph-de-1901.tex on input line ...
+(polyglossia)            synonyms^^I on input line ...
 Module polyglossia Info: Language german was not yet loaded; created with id 2 on input line ...
 Package polyglossia Info: Option: German, spelling=new
 Package polyglossia Info: Option: German, script=latin
@@ -308,10 +308,10 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line ..
 File: epstopdf-sys.cfg ....-..-.. v... Configuration of (r)epstopdf for TeX Live
 ))
 Module polyglossia Info: Language data for ngerman
-(polyglossia)            hyphenation^^I
-(polyglossia)            patterns^^Ihyph-de-1996.pat.txt
-(polyglossia)            synonyms^^I
+(polyglossia)            loader^^Iloadhyph-de-1996.tex
 (polyglossia)            lefthyphenmin^^I2
+(polyglossia)            patterns^^Ihyph-de-1996.pat.txt
+(polyglossia)            hyphenation^^I
 (polyglossia)            righthyphenmin^^I2
-(polyglossia)            loader^^Iloadhyph-de-1996.tex on input line ...
+(polyglossia)            synonyms^^I on input line ...
 Module polyglossia Info: Language ngerman was not yet loaded; created with id 3 on input line ...
