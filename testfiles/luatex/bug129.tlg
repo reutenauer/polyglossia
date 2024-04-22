@@ -1,0 +1,42 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+4
+8
+Lua module: polyglossia ....-..-.. 1.3 Polyglossia
+9
+Module polyglossia Info: Language data for spanish
+(polyglossia)            patterns^^Ihyph-es.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-es.tex
+(polyglossia)            hyphenation^^I
+(polyglossia)            synonyms^^Iespanol
+(polyglossia)            lefthyphenmin^^I2 on input line ...
+Module polyglossia Info: Language spanish was not yet loaded; created with id 10 on input line ...
+11
+Module polyglossia Info: Language data for italian
+(polyglossia)            patterns^^Ihyph-it.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-it.tex
+(polyglossia)            hyphenation^^I
+(polyglossia)            synonyms^^I
+(polyglossia)            lefthyphenmin^^I2 on input line ...
+Module polyglossia Info: Language italian was not yet loaded; created with id 12 on input line ...
+13
+Module polyglossia Info: Language data for german
+(polyglossia)            patterns^^Ihyph-de-1901.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-de-1901.tex
+(polyglossia)            hyphenation^^I
+(polyglossia)            synonyms^^I
+(polyglossia)            lefthyphenmin^^I2 on input line ...
+Module polyglossia Info: Language german was not yet loaded; created with id 14 on input line ...
+15
+Module polyglossia Info: Language data for turkish
+(polyglossia)            patterns^^Ihyph-tr.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-tr.tex
+(polyglossia)            hyphenation^^I
+(polyglossia)            synonyms^^I
+(polyglossia)            lefthyphenmin^^I2 on input line ...
+Module polyglossia Info: Language turkish was not yet loaded; created with id 16 on input line ...
+17
