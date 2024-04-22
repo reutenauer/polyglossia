@@ -4,7 +4,12 @@
 \usepackage{xltxtra,url,amsmath}
 \setmainfont{Linux Libertine O}
 \defaultfontfeatures{Scale=MatchLowercase}
-\newfontfamily\arabicfont[Script=Arabic]{Amiri}
+\newfontfamily\arabicfont[Script=Arabic]{Amiri}[%
+ UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  Extension = .ttf,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic]
 \newfontfamily\arabicfonttt[Script=Arabic,Scale=.75]{DejaVu Sans Mono}
 \newfontfamily\farsifont[Script=Arabic,Scale=1.1,WordSpace=2]{IranNastaliq}
 \let\XeTeX\undefined

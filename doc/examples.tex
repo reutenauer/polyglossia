@@ -16,7 +16,12 @@
 \setmainfont{Linux Libertine O}
 \defaultfontfeatures{Scale=MatchLowercase}
 \setmonofont{Inconsolata}
-\newfontfamily\arabicfont[Script=Arabic]{Amiri}
+\newfontfamily\arabicfont[Script=Arabic]{Amiri}[%
+ UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  Extension = .ttf,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic]
 \newfontfamily\syriacfont[Script=Syriac]{Serto Jerusalem}
 \newfontfamily\hebrewfont[Script=Hebrew]{Ezra SIL}
 \newfontfamily\sanskritfont[Script=Devanagari]{Sanskrit 2003}
