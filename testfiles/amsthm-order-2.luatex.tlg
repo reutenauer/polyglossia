@@ -44,14 +44,6 @@ Package: fontspec-luatex ....-..-.. v... Font selection for XeLaTeX and LuaLaTeX
 Package: fontenc ....-..-.. v... Standard LaTeX package
 ) (../fontspec.cfg))) (../iftex.sty
 Package: iftex ....-..-.. v... TeX engine tests
-) (../luatexbase.sty
-Package: luatexbase ....-..-.. v... luatexbase interface to LuaTeX 
-(../ctablestack.sty
-Package: ctablestack ....-..-.. v... Catcode table stable support
-\@catcodetablestackcnt=\count...
-)
-\CatcodeTableOther=\catcodetable...
-\CatcodeTableExpl=\catcodetable...
 )
 Lua module: polyglossia ....-..-.. 1.3 Polyglossia (gloss-latex.ldf
 File: gloss-latex.ldf polyglossia: module for default language

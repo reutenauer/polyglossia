@@ -7,6 +7,7 @@ require('polyglossia') -- just in case...
 
 local add_to_callback = luatexbase.add_to_callback
 local remove_from_callback = luatexbase.remove_from_callback
+local declare_callback_rule = luatexbase.declare_callback_rule
 local priority_in_callback = luatexbase.priority_in_callback
 
 local next, type = next, type
@@ -63,7 +64,6 @@ local function process(head)
                 end
             end
         elseif id == math_code then
-            -- warning: this is a feature of luatex > 0.76
             start = end_of_math(start) -- weird, can return nil .. no math end?
         end
         if start then
@@ -76,15 +76,13 @@ end
 local callback_name = "pre_linebreak_filter"
 
 local function activate()
-  if not priority_in_callback (callback_name, "polyglossia-tibt.process") then
-    add_to_callback(callback_name, process, "polyglossia-tibt.process", 1)
-  end
+    add_to_callback(callback_name, process, "polyglossia-tibt.process")
+    declare_callback_rule(callback_name,
+    "polyglossia-tibt.process", "before", "luaotfload.node_processor")
 end
 
 local function desactivate()
-  if priority_in_callback (callback_name, "polyglossia-tibt.process") then
-    remove_from_callback(callback_name, "polyglossia-tibt.process")
-  end
+	remove_from_callback(callback_name, "polyglossia-tibt.process")
 end
 
 polyglossia.activate_tibt_eol    = activate

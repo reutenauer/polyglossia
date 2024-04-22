@@ -6,8 +6,7 @@
 require('polyglossia') -- just in case...
 
 local add_to_callback      = luatexbase.add_to_callback
-local remove_from_callback = luatexbase.remove_from_callback
-local priority_in_callback = luatexbase.priority_in_callback
+local declare_callback_rule = luatexbase.declare_callback_rule
 local new_attribute        = luatexbase.new_attribute
 
 local node = node
@@ -331,12 +330,15 @@ local function activate(lang)
     -- important to be able to intermix languages with different spacings
     -- in one paragraph.
     tex.setattribute(punct_attr, id)
-    for _, callback_name in ipairs{ "pre_linebreak_filter", "hpack_filter" } do
-        if not priority_in_callback(callback_name, "polyglossia-punct.process") then
-            add_to_callback(callback_name, process, "polyglossia-punct.process", 1)
-        end
-    end
 end
+
+add_to_callback("pre_linebreak_filter",process,"polyglossia-punct.process")
+add_to_callback("hpack_filter",process,"polyglossia-punct.process")
+declare_callback_rule("pre_linebreak_filter",
+    "polyglossia-punct.process", "before", "luaotfload.node_processor")
+declare_callback_rule("hpack_filter",
+    "polyglossia-punct.process", "before", "luaotfload.node_processor")
+
 
 local function deactivate()
     tex.setattribute(punct_attr, -0x7FFFFFFF) -- this value means "unset"

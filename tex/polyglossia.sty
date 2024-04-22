@@ -40,8 +40,7 @@
 %% \l@nohyphenation is defined in polyglossia.lua
 \sys_if_engine_luatex:TF
   {
-	\RequirePackage{luatexbase} % already included by fontspec, but needed here
-	\RequireLuaModule{polyglossia}
+	\lua_load_module:n{polyglossia}
   }{
 	\cs_if_free:cT { l@nohyphenation } 
 	   { \chardef\l@nohyphenation=255 }
