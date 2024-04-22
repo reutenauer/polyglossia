@@ -76,7 +76,7 @@ local function newloader(langentry)
             end
 
             -- language info will be written into the .log file
-            local s = { "Language data for " .. langentry }
+            local s = { }
             for k, v in pairs(langdata) do
                 if type(v) == 'table' then -- for 'synonyms'
                     s[#s+1] = k .. "\t" .. table.concat(v,',')
@@ -84,7 +84,10 @@ local function newloader(langentry)
                     s[#s+1] = k .. "\t" .. tostring(v)
                 end
             end
-            log_info(table.concat(s,"\n"))
+            local a = {}
+	    for _,n in pairs(s) do table.insert(a, n) end
+            table.sort(a)
+            log_info("Language data for " .. langentry .. "\n" .. table.concat(a,"\n"))
 
             --
             -- LaTeX's \newlanguage increases language register (count19),
