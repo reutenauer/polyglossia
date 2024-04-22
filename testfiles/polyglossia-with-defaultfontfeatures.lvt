@@ -1,0 +1,14 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage{russian}
+\defaultfontfeatures{Scale=MatchLowercase}
+\setmainfont{NewCM10}[%
+UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  Extension = .otf,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic]
+\begin{document}
+\setbox0=\hbox{Привет Мир!}
+\START\showbox0\END
