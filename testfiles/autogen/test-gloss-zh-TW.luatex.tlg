@@ -1,5 +1,15 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-zh-TW.ldf
+File: gloss-zh-TW.ldf polyglossia: module for zh-TW (Chinese)
+(gloss-chinese.ldf
+File: gloss-chinese.ldf polyglossia: module for Chinese
+Package polyglossia Info: Option: Chinese, variant=simplified
+\c@TempJNum=\count...
+))
+Package polyglossia Info: Option: Chinese, variant=traditional
+Package polyglossia Info: Default language is chinese
+Package polyglossia Info: Option: Chinese, variant=traditional
 > \box...=
 \hbox(6.66+0.22)x49.5136, direction TLT
 .\TU/lmr/m/n/10 2
@@ -23,4 +33,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

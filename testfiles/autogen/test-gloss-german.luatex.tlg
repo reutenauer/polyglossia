@@ -1,5 +1,28 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-german.ldf
+File: gloss-german.ldf polyglossia: module for German
+Module polyglossia Info: Language data for german
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-de-1901.tex
+(polyglossia)            patterns^^Ihyph-de-1901.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language german was not yet loaded; created with id 2 on input line ...
+Package polyglossia Info: Option: German, spelling=new
+Package polyglossia Info: Option: German, script=latin
+Package polyglossia Info: Option: German, variant=german
+Package polyglossia Info: Option: German, variant=german
+Package polyglossia Info: Option: German, spelling=new
+Package polyglossia Info: Option: German, script=latin
+(babelsh.def
+File: babelsh.def ....-..-.. Babel common definitions for shorthands
+ Taken verbatim from babel files (....-..-.. v...)
+)
+Package babel Info: Making " an active character on input line ....
+)
+Package polyglossia Info: Default language is german
 > \box...=
 \hbox(7.16+2.06)x68.39, direction TLT
 .\TU/lmr/m/n/10 6
@@ -23,4 +46,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

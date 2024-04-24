@@ -1,5 +1,11 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-gl.ldf
+File: gloss-gl.ldf polyglossia: module for gl (Galician)
+(gloss-galician.ldf
+File: gloss-galician.ldf polyglossia: module for Galician
+))
+Package polyglossia Info: Default language is galician
 > \box...=
 \hbox(6.94+2.05998)x88.93001
 .\TU/lmr/m/n/10 6
@@ -16,4 +22,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

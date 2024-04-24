@@ -1,5 +1,19 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-kn.ldf
+File: gloss-kn.ldf polyglossia: module for kn (Kannada)
+(gloss-kannada.ldf
+File: gloss-kannada.ldf polyglossia: module for Kannada
+Module polyglossia Info: Language data for kannada
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I1
+(polyglossia)            loader^^Iloadhyph-kn.tex
+(polyglossia)            patterns^^Ihyph-kn.pat.txt
+(polyglossia)            righthyphenmin^^I1
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language kannada was not yet loaded; created with id 2 on input line ...
+))
+Package polyglossia Info: Default language is kannada
 > \box...=
 \hbox(1.06+0.0)x40.24004, direction TLT
 .\TU/lmr/m/n/10 ೬
@@ -32,4 +46,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

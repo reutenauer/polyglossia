@@ -1,5 +1,17 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-interlingua.ldf
+File: gloss-interlingua.ldf polyglossia: module for Interlingua
+Module polyglossia Info: Language data for interlingua
+(polyglossia)            hyphenation^^Ihyph-ia.hyp.txt
+(polyglossia)            lefthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-ia.tex
+(polyglossia)            patterns^^Ihyph-ia.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language interlingua was not yet loaded; created with id 2 on input line ...
+)
+Package polyglossia Info: Default language is interlingua
 > \box...=
 \hbox(6.94+2.06)x92.27, direction TLT
 .\TU/lmr/m/n/10 l
@@ -31,4 +43,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

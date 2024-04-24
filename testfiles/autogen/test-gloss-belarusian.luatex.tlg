@@ -1,5 +1,26 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-belarusian.ldf
+File: gloss-belarusian.ldf polyglossia: module for Belarusian
+(xpg-cyrillicnumbers.sty
+Package: xpg-cyrillicnumbers ....-..-.. v... Formatting of Cyrillic alphabetic numbers
+)
+Module polyglossia Info: Language data for belarusian
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-be.tex
+(polyglossia)            patterns^^Ihyph-be.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language belarusian was not yet loaded; created with id 2 on input line ...
+Package polyglossia Info: Option: Belarusian, numerals=arabic
+(babelsh.def
+File: babelsh.def ....-..-.. Babel common definitions for shorthands
+ Taken verbatim from babel files (....-..-.. v...)
+)
+Package babel Info: Making " an active character on input line ....
+)
+Package polyglossia Info: Default language is belarusian
 > \box...=
 \hbox(6.66+0.22)x60.15002, direction TLT
 .\TU/lmr/m/n/10 6
@@ -33,4 +54,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

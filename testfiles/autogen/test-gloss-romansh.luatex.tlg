@@ -1,5 +1,17 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-romansh.ldf
+File: gloss-romansh.ldf polyglossia: module for Romansh
+Module polyglossia Info: Language data for romansh
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-rm.tex
+(polyglossia)            patterns^^Ihyph-rm.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language romansh was not yet loaded; created with id 2 on input line ...
+)
+Package polyglossia Info: Default language is romansh
 > \box...=
 \hbox(6.94+0.22)x84.55, direction TLT
 .\TU/lmr/m/n/10 i
@@ -29,4 +41,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

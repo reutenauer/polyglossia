@@ -59,28 +59,32 @@ function gen_test_from_gloss()
 	local testdoc = [[
 \input{regression-test.tex}
 \documentclass{article}
+\AddToHook{package/bidi/before}{\let\xpgorigtypeout\typeout
+\def\typeout#1{\let\typeout\xpgorigtypeout}}
 \usepackage{polyglossia}
+\START
 \setmainlanguage{%s}
+\OMIT
 \begin{document}
 \day=6
 \month=8
 \year=2012
 \setbox0=\hbox{\today.}
-\START\showbox0\END
+\TIMO\showbox0\END
 			]]
 	local gloss_files = filelist("./tex", "gloss-*.ldf")
 	for file = 1, #gloss_files do
 		local file_name = gloss_files[file]
 		local gloss_name = jobname(file_name)
 		local language = gloss_name:sub(7)
-		if fileexists('testfiles/test-gloss-' .. language .. '.lvt') and 
-			not false then else -- change to true to overwrite existing tests
-		f = io.open('testfiles/test-gloss-' .. language .. '.lvt', 'w')
+		if fileexists('testfiles/autogen/test-gloss-' .. language .. '.lvt') and
+			not true then else -- change to true to overwrite existing tests
+		f = io.open('testfiles/autogen/test-gloss-' .. language .. '.lvt', 'w')
     		f:write(string.format(testdoc, language))
     		f:close()
     		print(language .. ": " .. file .. "/" .. #gloss_files)
-    		run('.', 'l3build save test-gloss-' .. language)
-    		run('.', 'l3build save -e luatex test-gloss-' .. language)
+    		run('.', 'l3build save -cconfigfiles/config-autogen test-gloss-' .. language)
+    		run('.', 'l3build save -e luatex -cconfigfiles/config-autogen test-gloss-' .. language)
 	end end
 	return 0
 end

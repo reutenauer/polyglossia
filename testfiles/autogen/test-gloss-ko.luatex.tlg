@@ -1,5 +1,21 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-ko.ldf
+File: gloss-ko.ldf polyglossia: module for ko (Korean)
+(gloss-korean.ldf
+File: gloss-korean.ldf polyglossia: module for Korean
+Package polyglossia Info: Option: Korean, swapstrings=all
+\xpg@attr@korean=\attribute...
+\xpg@attr@autojosa=\attribute...
+Removing  `luaotfload.node_processor' from `pre_linebreak_filter'.
+Inserting `polyglossia.lang_korean' in `pre_linebreak_filter'.
+Inserting `luaotfload.node_processor' in `pre_linebreak_filter'.
+Removing  `luaotfload.node_processor' from `hpack_filter'.
+Removing  `luaotfload.harf.finalize_hlist' from `hpack_filter'.
+Inserting `polyglossia.lang_korean' in `hpack_filter'.
+Inserting `luaotfload.node_processor' in `hpack_filter'.
+Inserting `luaotfload.harf.finalize_hlist' in `hpack_filter'.))
+Package polyglossia Info: Default language is korean
 > \box...=
 \hbox(6.66+0.22)x47.84001, direction TLT
 .\TU/lmr/m/n/10 2
@@ -20,4 +36,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

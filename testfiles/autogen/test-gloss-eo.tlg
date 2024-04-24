@@ -1,5 +1,11 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-eo.ldf
+File: gloss-eo.ldf polyglossia: module for eo (Esperanto)
+(gloss-esperanto.ldf
+File: gloss-esperanto.ldf polyglossia: module for Esperanto
+))
+Package polyglossia Info: Default language is esperanto
 > \box...=
 \hbox(6.94+2.05998)x94.5
 .\TU/lmr/m/n/10 6–a
@@ -14,4 +20,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

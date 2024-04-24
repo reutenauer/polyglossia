@@ -1,5 +1,12 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-albanian.ldf
+File: gloss-albanian.ldf polyglossia: module for Albanian
+Package polyglossia Warning: No hyphenation patterns were loaded for `albanian'
+(polyglossia)                I will use \language=\l@nohyphenation instead.
+\l@albanian = a dialect from \language\l@nohyphenation 
+)
+Package polyglossia Info: Default language is albanian
 > \box...=
 \hbox(7.05+0.21999)x60.96
 .\TU/lmr/m/n/10 6
@@ -11,4 +18,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

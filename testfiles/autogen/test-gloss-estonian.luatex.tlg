@@ -1,5 +1,17 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-estonian.ldf
+File: gloss-estonian.ldf polyglossia: module for Estonian
+Module polyglossia Info: Language data for estonian
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-et.tex
+(polyglossia)            patterns^^Ihyph-et.pat.txt
+(polyglossia)            righthyphenmin^^I3
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language estonian was not yet loaded; created with id 2 on input line ...
+)
+Package polyglossia Info: Default language is estonian
 > \box...=
 \hbox(6.66+2.06)x80.06, direction TLT
 .\TU/lmr/m/n/10 6
@@ -26,4 +38,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

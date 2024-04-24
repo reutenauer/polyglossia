@@ -1,5 +1,24 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-sanskrit.ldf
+File: gloss-sanskrit.ldf polyglossia: module for Sanskrit
+(devanagaridigits.sty
+Package: devanagaridigits ....-..-.. v... Formatting of Devanagari digits
+)
+Module polyglossia Info: Language data for sanskrit
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I1
+(polyglossia)            loader^^Iloadhyph-sa.tex
+(polyglossia)            patterns^^Ihyph-sa.pat.txt
+(polyglossia)            righthyphenmin^^I3
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language sanskrit was not yet loaded; created with id 2 on input line ...
+Package polyglossia Info: Skipping automatic font setup for language sanskrit
+Package polyglossia Info: Option: Sanskrit, numerals=devanagari
+Lua-only attribute polyglossia_punct = 4
+Inserting `polyglossia-punct.process' in `pre_linebreak_filter'.
+Inserting `polyglossia-punct.process' in `hpack_filter'.)
+Package polyglossia Info: Default language is sanskrit
 > \box...=
 \hbox(7.16+2.06)x68.39, direction TLT
 .\TU/lmr/m/n/10 A
@@ -23,4 +42,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

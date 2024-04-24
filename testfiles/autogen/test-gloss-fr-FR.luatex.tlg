@@ -1,5 +1,25 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-fr-FR.ldf
+File: gloss-fr-FR.ldf polyglossia: module for fr-FR (France's French)
+(gloss-french.ldf
+File: gloss-french.ldf polyglossia: module for French
+Module polyglossia Info: Language data for french
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-fr.tex
+(polyglossia)            patterns^^Ihyph-fr.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            synonyms^^Ipatois,francais on input line ...
+Module polyglossia Info: Language french was not yet loaded; created with id 2 on input line ...
+Lua-only attribute polyglossia_punct = 4
+Inserting `polyglossia-punct.process' in `pre_linebreak_filter'.
+Inserting `polyglossia-punct.process' in `hpack_filter'.
+Package polyglossia Info: Option: French, variant=french
+))
+Package polyglossia Info: Option: French, variant=french
+Package polyglossia Info: Default language is french
+Package polyglossia Info: Option: French, variant=french
 > \box...=
 \hbox(6.92+0.22)x53.89, direction TLT
 .\TU/lmr/m/n/10 6
@@ -17,4 +37,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

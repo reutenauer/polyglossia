@@ -1,5 +1,15 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-norsk.ldf
+File: gloss-norsk.ldf polyglossia: module for Norwegian (Bokmal)
+(gloss-norwegian.ldf
+File: gloss-norwegian.ldf polyglossia: module for Norwegian
+Package polyglossia Info: Skipping automatic font setup for language norwegian
+Package polyglossia Info: Option: norwegian, variant=nynorsk
+))
+Package polyglossia Info: Option: norwegian, variant=bokmal
+Package polyglossia Info: Default language is norwegian
+Package polyglossia Info: Option: norwegian, variant=bokmal
 > \box...=
 \hbox(6.66+2.05998)x66.17
 .\TU/lmr/m/n/10 6.
@@ -11,4 +21,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

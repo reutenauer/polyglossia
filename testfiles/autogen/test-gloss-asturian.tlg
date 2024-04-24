@@ -1,5 +1,9 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-asturian.ldf
+File: gloss-asturian.ldf polyglossia: module for Asturian
+)
+Package polyglossia Info: Default language is asturian
 > \box...=
 \hbox(6.94+2.05998)x84.5
 .\TU/lmr/m/n/10 6
@@ -14,4 +18,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

@@ -1,5 +1,22 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-occitan.ldf
+File: gloss-occitan.ldf polyglossia: module for Occitan
+Module polyglossia Info: Language data for occitan
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-oc.tex
+(polyglossia)            patterns^^Ihyph-oc.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language occitan was not yet loaded; created with id 2 on input line ...
+(babelsh.def
+File: babelsh.def ....-..-.. Babel common definitions for shorthands
+ Taken verbatim from babel files (....-..-.. v...)
+)
+Package babel Info: Making " an active character on input line ....
+)
+Package polyglossia Info: Default language is occitan
 > \box...=
 \hbox(6.94+2.06)x78.94, direction TLT
 .\TU/lmr/m/n/10 6
@@ -24,4 +41,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

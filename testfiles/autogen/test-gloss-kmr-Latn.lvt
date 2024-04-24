@@ -1,11 +1,15 @@
 \input{regression-test.tex}
 \documentclass{article}
+\AddToHook{package/bidi/before}{\let\xpgorigtypeout\typeout
+\def\typeout#1{\let\typeout\xpgorigtypeout}}
 \usepackage{polyglossia}
+\START
 \setmainlanguage{kmr-Latn}
+\OMIT
 \begin{document}
 \day=6
 \month=8
 \year=2012
 \setbox0=\hbox{\today.}
-\START\showbox0\END
+\TIMO\showbox0\END
 			

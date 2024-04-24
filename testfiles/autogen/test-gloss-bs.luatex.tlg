@@ -1,5 +1,20 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-bs.ldf
+File: gloss-bs.ldf polyglossia: module for bs (Bosnian)
+(gloss-bosnian.ldf
+File: gloss-bosnian.ldf polyglossia: module for Bosnian
+Module polyglossia Warning: Language bosnian not found in language.dat.lua on input line ...
+Module polyglossia Info: Language data for croatian
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-hr.tex
+(polyglossia)            patterns^^Ihyph-hr.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language croatian was not yet loaded; created with id 2 on input line ...
+))
+Package polyglossia Info: Default language is bosnian
 > \box...=
 \hbox(6.66+2.06)x68.95, direction TLT
 .\TU/lmr/m/n/10 6
@@ -22,4 +37,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

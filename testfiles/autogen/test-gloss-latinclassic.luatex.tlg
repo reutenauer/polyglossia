@@ -1,0 +1,44 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+(gloss-latinclassic.ldf
+File: gloss-latinclassic.ldf polyglossia: module for classic Latin
+(gloss-latin.ldf
+File: gloss-latin.ldf polyglossia: module for Latin
+Module polyglossia Info: Language data for latin
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-la.tex
+(polyglossia)            patterns^^Ihyph-la.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language latin was not yet loaded; created with id 2 on input line ...
+Lua-only attribute polyglossia_punct = 4
+Inserting `polyglossia-punct.process' in `pre_linebreak_filter'.
+Inserting `polyglossia-punct.process' in `hpack_filter'.
+Package polyglossia Info: Activating Latin language variant "modern" on line ....
+Package polyglossia Info: Activating hyphenation patterns for modern Latin on line ....
+(babelsh.def
+File: babelsh.def ....-..-.. Babel common definitions for shorthands
+ Taken verbatim from babel files (....-..-.. v...)
+)
+Package babel Info: Making " an active character on input line ....
+Package babel Info: Making ' an active character on input line ....
+Package babel Info: Making ^ an active character on input line ....
+Package babel Info: Making = an active character on input line ....
+))
+! Package polyglossia Error: Unknown direction 
+Type <return> to continue.
+ ...                                              
+l. ...\setmainlanguage{latinclassic}
+LaTeX does not know anything more about this error, sorry.
+Try typing <return> to proceed.
+If that doesn't work, type X <return> to quit.
+! Undefined control sequence.
+\__xpg_setRTLmain: ->\setRTLmain 
+l. ...\setmainlanguage{latinclassic}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+Package polyglossia Info: Default language is 

@@ -1,5 +1,11 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-lt.ldf
+File: gloss-lt.ldf polyglossia: module for lt (Lithuanian)
+(gloss-lithuanian.ldf
+File: gloss-lithuanian.ldf polyglossia: module for Lithuanian
+))
+Package polyglossia Info: Default language is lithuanian
 > \box...=
 \hbox(6.94+2.05998)x101.71
 .\TU/lmr/m/n/10 2012
@@ -18,4 +24,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

@@ -1,5 +1,16 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-uyghur.ldf
+File: gloss-uyghur.ldf polyglossia: module for Uyghur
+(../luabidi.sty
+Package: luabidi ....-..-.. v... Bidirectional typesetting in LuaTeX
+(../luabidi-footnotes.def
+\footnoterulewidth=\skip...
+))
+Package polyglossia Info: Option: Uyghur, swapstrings=all
+Package polyglossia Info: Option: Uyghur, chapterformat=ordinal
+)
+Package polyglossia Info: Default language is uyghur
 > \box...=
 \hbox(6.66+0.22)x68.57004, direction TRT
 .\TU/lmr/m/n/10 2
@@ -40,4 +51,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

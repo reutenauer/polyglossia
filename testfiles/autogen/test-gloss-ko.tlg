@@ -1,5 +1,30 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-ko.ldf
+File: gloss-ko.ldf polyglossia: module for ko (Korean)
+(gloss-korean.ldf
+File: gloss-korean.ldf polyglossia: module for Korean
+Package polyglossia Info: Option: Korean, swapstrings=all
+\XeTeXcharclassID=\XeTeXcharclass1
+\XeTeXcharclassOP=\XeTeXcharclass2
+\XeTeXcharclassCL=\XeTeXcharclass3
+(../load-unicode-xetex-classes.tex 
+load-unicode-xetex-classes.tex v... (....-..-..)
+Reading Unicode east Asian character class data
+# LineBreak-15.1.0.txt 
+# Date: ....-..-.., 13:19:22 GMT [KW] 
+# EastAsianWidth-15.1.0.txt 
+# Date: ....-..-.., 23:34:08 GMT 
+)
+\XPGKOcharclassMD=\XeTeXcharclass4
+\XPGKOcharclassFS=\XeTeXcharclass5
+\XPGKOcharclassLD=\XeTeXcharclass6
+\XPGKOcharclassEX=\XeTeXcharclass7
+\XPGKOcharclassAO=\XeTeXcharclass8
+\XPGKOcharclassAC=\XeTeXcharclass9
+\XPGKOcharclassAA=\XeTeXcharclass10
+))
+Package polyglossia Info: Default language is korean
 > \box...=
 \hbox(6.66+0.21999)x47.84001
 .\TU/lmr/m/n/10 2012년
@@ -10,4 +35,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

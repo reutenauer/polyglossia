@@ -1,5 +1,9 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-friulian.ldf
+File: gloss-friulian.ldf polyglossia: module for Friulian
+)
+Package polyglossia Info: Default language is friulian
 > \box...=
 \hbox(7.16+0.21999)x87.0
 .\TU/lmr/m/n/10 6
@@ -14,4 +18,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

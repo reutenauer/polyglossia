@@ -1,5 +1,17 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-romanian.ldf
+File: gloss-romanian.ldf polyglossia: module for Romanian
+Module polyglossia Info: Language data for romanian
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-ro.tex
+(polyglossia)            patterns^^Ihyph-ro.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language romanian was not yet loaded; created with id 2 on input line ...
+)
+Package polyglossia Info: Default language is romanian
 > \box...=
 \hbox(6.66+2.06)x63.39, direction TLT
 .\TU/lmr/m/n/10 6
@@ -22,4 +34,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

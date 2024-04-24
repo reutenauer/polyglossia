@@ -1,5 +1,17 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-fi.ldf
+File: gloss-fi.ldf polyglossia: module for fi (Finnish)
+(gloss-finnish.ldf
+File: gloss-finnish.ldf polyglossia: module for Finnish
+Package polyglossia Info: Option: Finnish, hyphens=default
+(babelsh.def
+File: babelsh.def ....-..-.. Babel common definitions for shorthands
+ Taken verbatim from babel files (....-..-.. v...)
+)
+Package babel Info: Making " an active character on input line ....
+))
+Package polyglossia Info: Default language is finnish
 > \box...=
 \hbox(6.94+0.21999)x74.73
 .\TU/lmr/m/n/10 6.
@@ -11,4 +23,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

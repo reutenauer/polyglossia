@@ -1,5 +1,35 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-he.ldf
+File: gloss-he.ldf polyglossia: module for he (Hebrew)
+(gloss-hebrew.ldf
+File: gloss-hebrew.ldf polyglossia: module for Hebrew
+(../luabidi.sty
+Package: luabidi ....-..-.. v... Bidirectional typesetting in LuaTeX
+(../luabidi-footnotes.def
+\footnoterulewidth=\skip...
+)) (hebrewcal.sty
+Package: hebrewcal ....-..-.. v... Hebrew calendar for polyglossia (adapted from hebcal.sty in Babel)
+(cal-util.def
+\c@tmpA=\count...
+\c@tmpB=\count...
+\c@tmpC=\count...
+\c@tmpD=\count...
+\c@tmpE=\count...
+\c@tmpF=\count...
+)
+\hebrewday=\count...
+\hebrewmonth=\count...
+\hebrewyear=\count...
+\@common=\count...
+)
+Package polyglossia Info: Option: Hebrew, numerals=arabic
+Package polyglossia Info: Option: Hebrew, numerals=arabic
+Package polyglossia Info: Option: Hebrew, calendar=gregorian
+(babel-hebrewalph.def
+File: babel-hebrewalph.def ....-..-.. Expandable definitions for Hebrew numerals
+)))
+Package polyglossia Info: Default language is hebrew
 > \box...=
 \hbox(6.66+0.22)x57.37003, direction TRT
 .\TU/lmr/m/n/10 6
@@ -28,4 +58,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

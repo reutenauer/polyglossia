@@ -1,5 +1,14 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-dutch.ldf
+File: gloss-dutch.ldf polyglossia: module for Dutch
+(babelsh.def
+File: babelsh.def ....-..-.. Babel common definitions for shorthands
+ Taken verbatim from babel files (....-..-.. v...)
+)
+Package babel Info: Making " an active character on input line ....
+)
+Package polyglossia Info: Default language is dutch
 > \box...=
 \hbox(6.66+2.05998)x72.89
 .\TU/lmr/m/n/10 6
@@ -11,4 +20,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

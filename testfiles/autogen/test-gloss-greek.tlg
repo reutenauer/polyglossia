@@ -1,5 +1,13 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-greek.ldf
+File: gloss-greek.ldf polyglossia: module for Greek
+(xgreek-fixes.def)
+Package polyglossia Info: Option: Greek, variant=monotonic
+Package polyglossia Info: Option: Greek, numerals=greek
+\@attic@num=\count...
+)
+Package polyglossia Info: Default language is greek
 > \box...=
 \hbox(7.16+0.21999)x64.34
 .\TU/lmr/m/n/10 6
@@ -10,4 +18,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

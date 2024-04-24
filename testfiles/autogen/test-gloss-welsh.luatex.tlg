@@ -1,5 +1,18 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-welsh.ldf
+File: gloss-welsh.ldf polyglossia: module for Welsh
+Module polyglossia Info: Language data for welsh
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-cy.tex
+(polyglossia)            patterns^^Ihyph-cy.pat.txt
+(polyglossia)            righthyphenmin^^I3
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language welsh was not yet loaded; created with id 2 on input line ...
+Package polyglossia Info: Option: Welsh, date=short
+)
+Package polyglossia Info: Default language is welsh
 > \box...=
 \hbox(7.16+0.22)x66.16, direction TLT
 .\TU/lmr/m/n/10 6
@@ -20,4 +33,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

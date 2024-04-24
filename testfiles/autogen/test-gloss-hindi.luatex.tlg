@@ -1,5 +1,21 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-hindi.ldf
+File: gloss-hindi.ldf polyglossia: module for Hindi
+(devanagaridigits.sty
+Package: devanagaridigits ....-..-.. v... Formatting of Devanagari digits
+)
+Module polyglossia Info: Language data for hindi
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I1
+(polyglossia)            loader^^Iloadhyph-hi.tex
+(polyglossia)            patterns^^Ihyph-hi.pat.txt
+(polyglossia)            righthyphenmin^^I1
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language hindi was not yet loaded; created with id 2 on input line ...
+Package polyglossia Info: Option: Hindi, numerals=devanagari
+)
+Package polyglossia Info: Default language is hindi
 > \box...=
 \hbox(1.06+0.0)x37.44003, direction TLT
 .\TU/lmr/m/n/10 ६
@@ -30,4 +46,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

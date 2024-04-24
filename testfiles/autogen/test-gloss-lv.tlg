@@ -1,5 +1,11 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-lv.ldf
+File: gloss-lv.ldf polyglossia: module for lv (Latvian)
+(gloss-latvian.ldf
+File: gloss-latvian.ldf polyglossia: module for Latvian
+))
+Package polyglossia Info: Default language is latvian
 > \box...=
 \hbox(6.94+2.05998)x94.51343
 .\TU/lmr/m/n/10 2012.
@@ -12,4 +18,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

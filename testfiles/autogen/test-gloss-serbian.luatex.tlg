@@ -1,5 +1,36 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-serbian.ldf
+File: gloss-serbian.ldf polyglossia: module for Serbian
+(xpg-cyrillicnumbers.sty
+Package: xpg-cyrillicnumbers ....-..-.. v... Formatting of Cyrillic alphabetic numbers
+)
+Module polyglossia Info: Language data for serbian
+(polyglossia)            hyphenation^^Ihyph-sh-latn.hyp.txt,hyph-sh-cyrl.hyp.txt
+(polyglossia)            lefthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-sr-latn.tex
+(polyglossia)            patterns^^Ihyph-sh-latn.pat.txt,hyph-sh-cyrl.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language serbian was not yet loaded; created with id 2 on input line ...
+Package polyglossia Info: Skipping automatic font setup for language serbian
+(../luavlna.sty
+Package: luavlna ....-..-.. luavlna
+(../kvoptions.sty
+Package: kvoptions ....-..-.. v... Key value format for package options (HO)
+(../ltxcmds.sty
+Package: ltxcmds ....-..-.. v... LaTeX kernel commands for general use (HO)
+) (../kvsetkeys.sty
+Package: kvsetkeys ....-..-.. v... Key value parser (HO)
+)) (../luavlna.tex
+Inserting `LuaVlna' in `pre_linebreak_filter'.
+Inserting `allow hyphen breaks' in `hyphenate'.))
+Package polyglossia Info: Option: Serbian, script=cyrillic
+Package polyglossia Info: Option: Serbian, numerals=arabic
+Package polyglossia Info: Option: Serbian, script=cyrillic
+Package polyglossia Info: Option: Serbian, numerals=arabic
+)
+Package polyglossia Info: Default language is serbian
 > \box...=
 \hbox(6.66+0.22)x56.80002, direction TLT
 .\TU/lmr/m/n/10 6
@@ -30,4 +61,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

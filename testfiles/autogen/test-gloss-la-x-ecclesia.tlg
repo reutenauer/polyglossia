@@ -1,5 +1,29 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-la-x-ecclesia.ldf
+File: gloss-la-xecclesiastic.ldf polyglossia: module for la-xecclesiastic (Latin)
+(gloss-latin.ldf
+File: gloss-latin.ldf polyglossia: module for Latin
+\g_polyglossia_latin_question_exclamation_class=\XeTeXcharclass1
+\g_polyglossia_latin_colon_semicolon_class=\XeTeXcharclass2
+\g_polyglossia_latin_opening_guillemet_class=\XeTeXcharclass3
+\g_polyglossia_latin_closing_guillemet_class=\XeTeXcharclass4
+\g_polyglossia_latin_opening_bracket_class=\XeTeXcharclass5
+\g_polyglossia_latin_closing_bracket_class=\XeTeXcharclass6
+Package polyglossia Info: Activating Latin language variant "modern" on line ....
+Package polyglossia Info: Activating hyphenation patterns for modern Latin on line ....
+(babelsh.def
+File: babelsh.def ....-..-.. Babel common definitions for shorthands
+ Taken verbatim from babel files (....-..-.. v...)
+)
+Package babel Info: Making " an active character on input line ....
+Package babel Info: Making ' an active character on input line ....
+Package babel Info: Making ^ an active character on input line ....
+Package babel Info: Making = an active character on input line ....
+))
+Package polyglossia Info: Activating Latin language variant "ecclesiastic" on line ....
+Package polyglossia Info: Default language is latin
+Package polyglossia Info: Activating Latin language variant "ecclesiastic" on line ....
 > \box...=
 \hbox(6.83+2.05998)x85.62
 .\TU/lmr/m/n/10 VI
@@ -10,4 +34,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

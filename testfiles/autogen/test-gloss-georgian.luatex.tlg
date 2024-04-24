@@ -1,5 +1,22 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-georgian.ldf
+File: gloss-georgian.ldf polyglossia: module for Georgian
+Module polyglossia Info: Language data for georgian
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I1
+(polyglossia)            loader^^Iloadhyph-ka.tex
+(polyglossia)            patterns^^Ihyph-ka.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language georgian was not yet loaded; created with id 2 on input line ...
+(babelsh.def
+File: babelsh.def ....-..-.. Babel common definitions for shorthands
+ Taken verbatim from babel files (....-..-.. v...)
+)
+Package babel Info: Making " an active character on input line ....
+)
+Package polyglossia Info: Default language is georgian
 > \box...=
 \hbox(6.66+0.22)x62.95003, direction TLT
 .\TU/lmr/m/n/10 6
@@ -35,4 +52,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

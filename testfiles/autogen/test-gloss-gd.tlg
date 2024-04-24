@@ -1,5 +1,14 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-gd.ldf
+File: gloss-gd.ldf polyglossia: module for gd (Gaelic)
+(gloss-gaelic.ldf
+File: gloss-gaelic.ldf polyglossia: module for Gaelic
+Package polyglossia Info: Option: gaelic, variant=irish
+))
+Package polyglossia Info: Option: gaelic, variant=scottish
+Package polyglossia Info: Default language is gaelic
+Package polyglossia Info: Option: gaelic, variant=scottish
 > \box...=
 \hbox(6.98+0.21999)x74.09001
 .\TU/lmr/m/n/10 6
@@ -10,4 +19,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

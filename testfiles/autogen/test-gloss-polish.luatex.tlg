@@ -1,5 +1,32 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-polish.ldf
+File: gloss-polish.ldf polyglossia: module for Polish
+Module polyglossia Info: Language data for polish
+(polyglossia)            hyphenation^^Ihyph-pl.hyp.txt
+(polyglossia)            lefthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-pl.tex
+(polyglossia)            patterns^^Ihyph-pl.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language polish was not yet loaded; created with id 2 on input line ...
+(../luavlna.sty
+Package: luavlna ....-..-.. luavlna
+(../kvoptions.sty
+Package: kvoptions ....-..-.. v... Key value format for package options (HO)
+(../ltxcmds.sty
+Package: ltxcmds ....-..-.. v... LaTeX kernel commands for general use (HO)
+) (../kvsetkeys.sty
+Package: kvsetkeys ....-..-.. v... Key value parser (HO)
+)) (../luavlna.tex
+Inserting `LuaVlna' in `pre_linebreak_filter'.
+Inserting `allow hyphen breaks' in `hyphenate'.)) (babelsh.def
+File: babelsh.def ....-..-.. Babel common definitions for shorthands
+ Taken verbatim from babel files (....-..-.. v...)
+)
+Package babel Info: Making " an active character on input line ....
+)
+Package polyglossia Info: Default language is polish
 > \box...=
 \hbox(6.66+1.94)x68.42, direction TLT
 .\TU/lmr/m/n/10 6
@@ -23,4 +50,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

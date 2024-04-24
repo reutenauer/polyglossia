@@ -1,5 +1,20 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-hy.ldf
+File: gloss-hy.ldf polyglossia: module for hy (Armenian)
+(gloss-armenian.ldf
+File: gloss-armenian.ldf polyglossia: module for Armenian
+Module polyglossia Info: Language data for armenian
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I1
+(polyglossia)            loader^^Iloadhyph-hy.tex
+(polyglossia)            patterns^^Ihyph-hy.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language armenian was not yet loaded; created with id 2 on input line ...
+Package polyglossia Info: Option: Armenian, variant=western
+))
+Package polyglossia Info: Default language is armenian
 > \box...=
 \hbox(6.66+1.93)x53.49002, direction TLT
 .\TU/lmr/m/n/10 Օ
@@ -27,4 +42,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

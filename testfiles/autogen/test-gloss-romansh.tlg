@@ -1,5 +1,9 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-romansh.ldf
+File: gloss-romansh.ldf polyglossia: module for Romansh
+)
+Package polyglossia Info: Default language is romansh
 > \box...=
 \hbox(6.94+0.21999)x84.55
 .\TU/lmr/m/n/10 ils
@@ -17,4 +21,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

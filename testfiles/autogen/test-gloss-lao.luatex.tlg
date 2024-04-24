@@ -1,5 +1,14 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-lao.ldf
+File: gloss-lao.ldf polyglossia: module for Lao
+Module polyglossia Warning: Language lao not found in language.dat.lua on input line ...
+Module polyglossia Warning: Language lao not found in language.dat.lua on input line ...
+Package polyglossia Warning: No hyphenation patterns were loaded for `lao'
+(polyglossia)                I will use \language=\l@nohyphenation instead.
+\l@lao = a dialect from \language\l@nohyphenation 
+)
+Package polyglossia Info: Default language is lao
 > \box...=
 \hbox(6.66+0.22)x48.44002, direction TLT
 .\TU/lmr/m/n/10 6
@@ -23,4 +32,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

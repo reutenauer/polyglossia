@@ -1,5 +1,9 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-swedish.ldf
+File: gloss-swedish.ldf polyglossia: module for Swedish
+)
+Package polyglossia Info: Default language is swedish
 > \box...=
 \hbox(6.66+2.05998)x66.17
 .\TU/lmr/m/n/10 6
@@ -11,4 +15,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

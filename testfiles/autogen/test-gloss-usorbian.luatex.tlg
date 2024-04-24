@@ -1,5 +1,24 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-usorbian.ldf
+File: gloss-usorbian.ldf polyglossia: module for Upper Sorbian
+(gloss-sorbian.ldf
+File: gloss-sorbian.ldf polyglossia: module for Sorbian
+Module polyglossia Warning: Language usorbian not found in language.dat.lua on input line ...
+Module polyglossia Info: Language data for uppersorbian
+(polyglossia)            hyphenation^^Ihyph-hsb.hyp.txt
+(polyglossia)            lefthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-hsb.tex
+(polyglossia)            patterns^^Ihyph-hsb.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language uppersorbian was not yet loaded; created with id 2 on input line ...
+Module polyglossia Warning: Language usorbian not found in language.dat.lua on input line ...
+Package polyglossia Info: Option: sorbian, variant=upper
+))
+Package polyglossia Info: Option: sorbian, variant=upper
+Package polyglossia Info: Default language is sorbian
+Package polyglossia Info: Option: sorbian, variant=upper
 > \box...=
 \hbox(6.66+2.06)x72.55, direction TLT
 .\TU/lmr/m/n/10 6
@@ -25,4 +44,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

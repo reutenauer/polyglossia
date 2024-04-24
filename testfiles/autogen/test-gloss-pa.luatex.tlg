@@ -1,5 +1,19 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-pa.ldf
+File: gloss-pa.ldf polyglossia: module for pa (Punjabi)
+(gloss-punjabi.ldf
+File: gloss-punjabi.ldf polyglossia: module for Panjabi/Punjabi/pa-Gurmukhi
+(gurmukhidigits.sty
+Package: gurmukhidigits ....-..-.. v... Formatting of Gurmukhi digits
+)
+Module polyglossia Warning: Language punjabi not found in language.dat.lua on input line ...
+Package polyglossia Warning: No hyphenation patterns were loaded for `punjabi'
+(polyglossia)                I will use \language=\l@nohyphenation instead.
+\l@punjabi = a dialect from \language\l@nohyphenation 
+Package polyglossia Info: Option: Punjabi, numerals=gurmukhi
+))
+Package polyglossia Info: Default language is punjabi
 > \box...=
 \hbox(6.66+0.22)x45.64001, direction TLT
 .\TU/lmr/m/n/10 6
@@ -21,4 +35,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

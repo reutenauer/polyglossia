@@ -1,5 +1,23 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-fr-CA.ldf
+File: gloss-fr-CA.ldf polyglossia: module for fr-CA (Canadian French)
+(gloss-french.ldf
+File: gloss-french.ldf polyglossia: module for French
+\french@openbrackets=\XeTeXcharclass1
+\french@closebrackets=\XeTeXcharclass2
+\french@questionexclamation=\XeTeXcharclass3
+\french@punctthin=\XeTeXcharclass4
+\french@punctthick=\XeTeXcharclass5
+\french@punctguillstart=\XeTeXcharclass6
+\french@punctguillend=\XeTeXcharclass7
+Package polyglossia Info: Option: French, variant=french
+))
+Package polyglossia Warning: No hyphenation patterns were loaded for "French (Canada)"\MessageBreak I will use the standard patterns for French instead
+\l@canadien = a dialect from \language\l@french 
+Package polyglossia Info: Option: French, variant=canadian
+Package polyglossia Info: Default language is french
+Package polyglossia Info: Option: French, variant=canadian
 > \box...=
 \hbox(6.92+0.21999)x53.89
 .\TU/lmr/m/n/10 6
@@ -10,4 +28,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

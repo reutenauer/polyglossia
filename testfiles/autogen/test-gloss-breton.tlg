@@ -1,5 +1,14 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-breton.ldf
+File: gloss-breton.ldf polyglossia: module for Breton
+Package polyglossia Warning: No hyphenation patterns were loaded for `breton'
+(polyglossia)                I will use \language=\l@nohyphenation instead.
+\l@breton = a dialect from \language\l@nohyphenation 
+\breton@punctthin=\XeTeXcharclass1
+\breton@punctthick=\XeTeXcharclass2
+)
+Package polyglossia Info: Default language is breton
 > \box...=
 \hbox(6.8+0.21999)x78.24
 .\TU/lmr/m/n/10 6
@@ -14,4 +23,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

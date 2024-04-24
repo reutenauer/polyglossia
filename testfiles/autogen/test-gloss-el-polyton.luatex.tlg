@@ -1,5 +1,45 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-el-polyton.ldf
+File: gloss-el-polyton.ldf polyglossia: module for el-polyton (Greek)
+(gloss-greek.ldf
+File: gloss-greek.ldf polyglossia: module for Greek
+Module polyglossia Info: Language data for greek
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I1
+(polyglossia)            loader^^Iloadhyph-el-polyton.tex
+(polyglossia)            patterns^^Ihyph-el-polyton.pat.txt
+(polyglossia)            righthyphenmin^^I1
+(polyglossia)            synonyms^^Ipolygreek on input line ...
+Module polyglossia Info: Language greek was not yet loaded; created with id 2 on input line ...
+(xgreek-fixes.def)
+Module polyglossia Info: Language data for monogreek
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I1
+(polyglossia)            loader^^Iloadhyph-el-monoton.tex
+(polyglossia)            patterns^^Ihyph-el-monoton.pat.txt
+(polyglossia)            righthyphenmin^^I1
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language monogreek was not yet loaded; created with id 3 on input line ...
+Package polyglossia Info: Option: Greek, variant=monotonic
+Package polyglossia Info: Option: Greek, numerals=greek
+\@attic@num=\count...
+))
+! Package xkeyval Error: `varant' undefined in families `greek'.
+See the xkeyval package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+l. ...\setmainlanguage{el-polyton}
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+Package polyglossia Info: Default language is greek
+! Package xkeyval Error: `varant' undefined in families `greek'.
+See the xkeyval package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+l. ...\setmainlanguage{el-polyton}
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 > \box...=
 \hbox(7.16+0.22)x64.34003, direction TLT
 .\TU/lmr/m/n/10 6
@@ -34,4 +74,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

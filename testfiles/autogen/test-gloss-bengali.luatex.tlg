@@ -1,5 +1,23 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-bengali.ldf
+File: gloss-bengali.ldf polyglossia: module for Bengali
+(devanagaridigits.sty
+Package: devanagaridigits ....-..-.. v... Formatting of Devanagari digits
+) (bengalidigits.sty
+Package: bengalidigits ....-..-.. v.02Formatting of Bengali digits
+)
+Module polyglossia Info: Language data for bengali
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I1
+(polyglossia)            loader^^Iloadhyph-bn.tex
+(polyglossia)            patterns^^Ihyph-bn.pat.txt
+(polyglossia)            righthyphenmin^^I1
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language bengali was not yet loaded; created with id 2 on input line ...
+Package polyglossia Info: Option: Bengali, numerals=devanagari
+)
+Package polyglossia Info: Default language is bengali
 > \box...=
 \hbox(1.06+0.0)x37.44003, direction TLT
 .\TU/lmr/m/n/10 ६
@@ -30,4 +48,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

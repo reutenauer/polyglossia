@@ -1,5 +1,22 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-scottish.ldf
+File: gloss-scottish.ldf polyglossia: module for Scottish Gaelic
+(gloss-gaelic.ldf
+File: gloss-gaelic.ldf polyglossia: module for Gaelic
+Module polyglossia Info: Language data for irish
+(polyglossia)            hyphenation^^Ihyph-ga.hyp.txt
+(polyglossia)            lefthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-ga.tex
+(polyglossia)            patterns^^Ihyph-ga.pat.txt
+(polyglossia)            righthyphenmin^^I3
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language irish was not yet loaded; created with id 2 on input line ...
+Package polyglossia Info: Option: gaelic, variant=irish
+))
+Package polyglossia Info: Option: gaelic, variant=scottish
+Package polyglossia Info: Default language is gaelic
+Package polyglossia Info: Option: gaelic, variant=scottish
 > \box...=
 \hbox(6.98+0.22)x74.09, direction TLT
 .\TU/lmr/m/n/10 6
@@ -25,4 +42,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

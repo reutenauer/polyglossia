@@ -1,5 +1,16 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-newzealand.ldf
+File: gloss-newzealand.ldf polyglossia: module for Newzealand English
+(gloss-english.ldf
+File: gloss-english.ldf polyglossia: module for English
+Package polyglossia Info: Option: English, variant=american
+))
+Package polyglossia Info: Option: English, variant=newzealand
+\l@newzealand = a dialect from \language\l@english 
+Package polyglossia Info: Default language is english
+Package polyglossia Info: Option: English, variant=newzealand
+\l@newzealand = a dialect from \language\l@english 
 > \box...=
 \hbox(7.16+2.05998)x65.61
 .\TU/lmr/m/n/10 6
@@ -10,4 +21,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
                    \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

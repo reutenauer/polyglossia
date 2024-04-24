@@ -1,0 +1,4 @@
+\input{regression-test.tex}
+\START
+\RequirePackage{polyglossia}
+\END

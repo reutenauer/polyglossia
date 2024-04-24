@@ -1,5 +1,23 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-mr.ldf
+File: gloss-mr.ldf polyglossia: module for mr (Marathi)
+(gloss-marathi.ldf
+File: gloss-marathi.ldf polyglossia: module for Marathi
+(devanagaridigits.sty
+Package: devanagaridigits ....-..-.. v... Formatting of Devanagari digits
+)
+Module polyglossia Info: Language data for marathi
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I1
+(polyglossia)            loader^^Iloadhyph-mr.tex
+(polyglossia)            patterns^^Ihyph-mr.pat.txt
+(polyglossia)            righthyphenmin^^I1
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language marathi was not yet loaded; created with id 2 on input line ...
+Package polyglossia Info: Option: Marathi, numerals=devanagari
+))
+Package polyglossia Info: Default language is marathi
 > \box...=
 \hbox(1.06+0.0)x37.44003, direction TLT
 .\TU/lmr/m/n/10 ६
@@ -30,4 +48,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END

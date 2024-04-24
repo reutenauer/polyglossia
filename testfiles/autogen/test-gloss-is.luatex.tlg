@@ -1,5 +1,19 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+(gloss-is.ldf
+File: gloss-is.ldf polyglossia: module for is (Icelandic)
+(gloss-icelandic.ldf
+File: gloss-icelandic.ldf polyglossia: module for Icelandic
+Module polyglossia Info: Language data for icelandic
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-is.tex
+(polyglossia)            patterns^^Ihyph-is.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language icelandic was not yet loaded; created with id 2 on input line ...
+))
+Package polyglossia Info: Default language is icelandic
 > \box...=
 \hbox(6.98+2.06)x60.61, direction TLT
 .\TU/lmr/m/n/10 6
@@ -22,4 +36,4 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \begingroup 
-l. ...\START\showbox0\END
+l. ...\TIMO\showbox0\END
