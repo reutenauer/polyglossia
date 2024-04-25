@@ -16,44 +16,53 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{finnish}{fi}
 
-\define@boolkey{finnish}[finnish@]{babelshorthands}[true]{}
-
 \newif\if@finnish@schoolhyphens
 \newif\if@finnish@babelhyphens
-\define@choicekey*+{finnish}{hyphens}[\xpg@val\xpg@nr]{default,school,babel}[default]{%
-   \ifcase\xpg@nr\relax
-      % default:
-      \@finnish@schoolhyphensfalse
-      \@finnish@babelhyphensfalse
-   \or
-      % school:
-      \@finnish@schoolhyphenstrue
-      \@finnish@babelhyphensfalse
-   \or
-      % babel:
-      \@finnish@schoolhyphensfalse
-      \@finnish@babelhyphenstrue
-   \fi
-   \xpg@info{Option: Finnish, hyphens=\xpg@val}%
-}{\xpg@warning{Unknown Finnish hyphens `#1'}}
 
-% backwards compatibility
-\define@boolkey{finnish}[finnish@]{schoolhyphens}[true]{%
-  \iffinnish@schoolhyphens
-      \@finnish@schoolhyphenstrue
-      \@finnish@babelhyphensfalse
-  \else
-      \@finnish@schoolhyphensfalse
-  \fi
-}
+\DeclareKeys[finnish]
+  {
+    babelshorthands.if = finnish@babelshorthands,
+    babelshorthands.default:n = true,
+    hyphens.choices:nn = { default, school, babel }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % default:
+          \@finnish@schoolhyphensfalse
+          \@finnish@babelhyphensfalse
+        \or
+          % school:
+          \@finnish@schoolhyphenstrue
+          \@finnish@babelhyphensfalse
+        \or
+          % babel:
+          \@finnish@schoolhyphensfalse
+          \@finnish@babelhyphenstrue
+        \fi
+        \xpg@info{Option: Finnish, hyphens=#1}%
+      },
+    hyphens.default:n = default,
+    hyphens/unknown.code = \xpg@warning{Unknown Finnish hyphens `#1'},
+    schoolhyphens.choices:nn = { true, false }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % true:
+          \@finnish@schoolhyphenstrue
+          \@finnish@babelhyphensfalse
+        \or
+          % false:
+          \@finnish@schoolhyphensfalse
+        \fi
+      },
+    schoolhyphens.default:n = true
+  }
 
 % Register default options
 \InitializeGlossOptions{finnish}{babelshorthands=false,hyphens=default}
 
 \ifsystem@babelshorthands
-  \setkeys{finnish}{babelshorthands=true}
+  \SetKeys[finnish]{babelshorthands=true}
 \else
-  \setkeys{finnish}{babelshorthands=false}
+  \SetKeys[finnish]{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands
