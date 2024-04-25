@@ -37,7 +37,7 @@
 }
 
 \ifluatex
-  \newluatexattribute\xpg@tibteol %
+  \newattribute\xpg@tibteol %
   \directlua{polyglossia.load_tibt_eol()}%
 \fi
 
