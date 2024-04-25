@@ -21,19 +21,23 @@
   \RequirePackage{luavlna}
 \fi
 
-\define@boolkey{czech}[czech@]{babelshorthands}[true]{}
-
-\define@boolkey{czech}[czech@]{splithyphens}[true]{}
-
-\define@boolkey{czech}[czech@]{vlna}[true]{}
+\DeclareKeys[czech]
+  {
+    babelshorthands.if = czech@babelshorthands,
+    babelshorthands.default:n = true,
+    splithyphens.if = czech@splithyphens,
+    splithyphens.default:n = true,
+    vlna.if = czech@vlna,
+    vlna.default:n = true
+  }
 
 % Register default options
 \InitializeGlossOptions{czech}{babelshorthands=false,splithyphens=true,vlna=true}
 
 \ifsystem@babelshorthands
-  \setkeys{czech}{babelshorthands=true}
+  \SetKeys[czech]{babelshorthands=true}
 \else
-  \setkeys{czech}{babelshorthands=false}
+  \SetKeys[czech]{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands
