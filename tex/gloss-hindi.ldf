@@ -39,18 +39,25 @@
 
 \newif\ifhindi@devanagari@numerals
 \hindi@devanagari@numeralstrue
-\define@choicekey*+{hindi}{numerals}[\xpg@val\xpg@nr]{Devanagari,Western}[Devanagari]{%
-   \ifcase\xpg@nr\relax
-      % Devanagari:
-      \hindi@devanagari@numeralstrue%
-      \SetLanguageKeys{hindi}{bcp47-extension-u=nu-deva}%
-   \or
-      % Western:
-      \hindi@devanagari@numeralsfalse%
-      \SetLanguageKeys{hindi}{bcp47-extension-u=nu-latn}%
-   \fi
-   \xpg@info{Option: Hindi, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Hindi numeral `#1'}}
+
+\DeclareKeys[hindi]
+  {
+    numerals.choices:nn = { devanagari, western }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % devanagari:
+          \hindi@devanagari@numeralstrue%
+          \SetLanguageKeys{hindi}{bcp47-extension-u=nu-deva}%
+        \or
+          % western:
+          \hindi@devanagari@numeralsfalse%
+          \SetLanguageKeys{hindi}{bcp47-extension-u=nu-latn}%
+        \fi
+        \xpg@info{Option: Hindi, numerals=#1}%
+      },
+    numerals.default:n = devanagari,
+    numerals/unknown.code = \xpg@warning{Unknown Hindi numeral `#1'}
+  }
 
 % Register default options
 \InitializeGlossOptions{hindi}{numerals=devanagari}
