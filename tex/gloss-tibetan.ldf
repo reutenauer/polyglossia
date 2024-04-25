@@ -24,17 +24,15 @@
 \setlanguagealias*{tibetan}{bo}
 
 \newif\if@tibetan@numerals
-\def\tmp@tibetan{tibetan}
-\define@key{tibetan}{numerals}[tibetan]{%
-	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@tibetan
-	   \@tibetan@numeralstrue%
-           \SetLanguageKeys{tibetan}{bcp47-extension-u=nu-tibt}%
-	\else
-	  \@tibetan@numeralsfalse%
-           \SetLanguageKeys{tibetan}{bcp47-extension-u=nu-latn}%
-	\fi%
-}
+\DeclareKeys[tibetan]
+  {
+    numerals.choice:,
+    numerals/tibetan.code = \@tibetan@numeralstrue
+    	   \SetLanguageKeys{tibetan}{bcp47-extension-u=nu-tibt},
+    numerals/arabic.code = \@tibetan@numeralsfalse
+           \SetLanguageKeys{tibetan}{bcp47-extension-u=nu-latn},
+    numerals.default:n = tibetan
+  }
 
 \ifluatex
   \newattribute\xpg@tibteol %
