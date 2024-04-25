@@ -28,18 +28,24 @@
 \newif\ifmarathi@devanagari@numerals
 \marathi@devanagari@numeralstrue
 
-\define@choicekey*+{marathi}{numerals}[\xpg@val\xpg@nr]{Western,Devanagari}[Devanagari]{%
-   \ifcase\xpg@nr\relax
-      % Western:
-      \marathi@devanagari@numeralsfalse%
-      \SetLanguageKeys{marathi}{bcp47-extension-u=nu-latn}%
-   \or
-      % Devanagari:
-      \marathi@devanagari@numeralstrue%
-      \SetLanguageKeys{marathi}{bcp47-extension-u=nu-deva}%
-   \fi
-   \xpg@info{Option: Marathi, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Marathi numerals value `#1'}}
+\DeclareKeys[marathi]
+  {
+    numerals.choices:nn = { western, devanagari }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % Western:
+          \marathi@devanagari@numeralsfalse%
+          \SetLanguageKeys{marathi}{bcp47-extension-u=nu-latn}%
+        \or
+          % Devanagari:
+          \marathi@devanagari@numeralstrue%
+          \SetLanguageKeys{marathi}{bcp47-extension-u=nu-deva}%
+        \fi
+        \xpg@info{Option: Marathi, numerals=#1}%
+      },
+    numerals.default:n = devanagari,
+    numerals/unknown.code = \xpg@warning{Unknown Marathi numerals value `#1'}
+  }
 
 % Register default options
 \InitializeGlossOptions{marathi}{numerals=Devanagari}
