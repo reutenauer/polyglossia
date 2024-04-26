@@ -27,14 +27,6 @@
 \setlanguagealias*[script=gujarati]{sanskrit}{sa-Gujr}
 \setlanguagealias*[script=latin]{sanskrit}{sa-Latn}
 
-\define@key{sanskrit}{Script}[devanagari]{%
-  \@ifundefined{fontsetup@sanskrit@#1}%
-    {\xpg@error{`#1' is not a valid script for Sanskrit}}%
-    {\csname fontsetup@sanskrit@#1\endcsname}%
-}
-
-\define@key{sanskrit}{script}[devanagari]{\setkeys{sanskrit}{Script=#1}}
-
 \def\fontsetup@sanskrit@devanagari{%
   \SetLanguageKeys{sanskrit}{scripttag=deva,script=Devanagari,bcp47=sa-Deva,bcp47-language=sa,bcp47-script=Deva,bcp47-casing=sa-Deva}
   \SetupNonLatinPolyglossiaFont{sanskrit}}
@@ -60,19 +52,29 @@
 
 \newif\ifsanskrit@devanagari@numerals
 \sanskrit@devanagari@numeralstrue
-\define@choicekey*+{sanskrit}{numerals}[\xpg@val\xpg@nr]{devanagari,western}[devanagari]{%
-   \ifcase\xpg@nr\relax
-      % devanagari:
-      \sanskrit@devanagari@numeralstrue%
-      \SetLanguageKeys{sanskrit}{bcp47-extension-u=nu-deva}%
-   \or
-      % western:
-      \sanskrit@devanagari@numeralsfalse%
-      \SetLanguageKeys{sanskrit}{bcp47-extension-u=nu-latn}%
-   \fi
-   \xpg@info{Option: Sanskrit, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Sanskrit numeral `#1'}}
 
+\DeclareKeys[sanskrit]
+  {
+    script.code = \@ifundefined{fontsetup@sanskrit@#1}%
+      {\xpg@error{`#1' is not a valid script for Sanskrit}}%
+      {\csname fontsetup@sanskrit@#1\endcsname},
+    script.default:n = devanagari,
+    numerals.choices:nn = { devanagari, western }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % devanagari:
+          \sanskrit@devanagari@numeralstrue%
+          \SetLanguageKeys{sanskrit}{bcp47-extension-u=nu-deva}%
+        \or
+          % western:
+          \sanskrit@devanagari@numeralsfalse%
+          \SetLanguageKeys{sanskrit}{bcp47-extension-u=nu-latn}%
+        \fi
+        \xpg@info{Option: Sanskrit, numerals=#1}%
+      },
+    numerals.default:n = devanagari,
+    numerals/unknown.code = \xpg@warning{Unknown Sanskrit numeral `#1'}
+  }
 
 % Register default options
 \InitializeGlossOptions{sanskrit}{script=devanagari,numerals=devanagari}
