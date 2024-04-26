@@ -25,44 +25,51 @@
 \@ifundefined{ifchinese@traditional}%
   {\newif\ifchinese@traditional}{}
 
-\def\chinese@variant{chinese}
-
 \@ifundefined{ifchinese@numerals}%
   {\newif\ifchinese@numerals}{}
 
-\define@key{chinese}{numerals}[arabic]{%
-   \ifstrequal{#1}{chinese}%
-      {\chinese@numeralstrue%
-       \SetLanguageKeys{chinese}{bcp47-extension-u=nu-hant}%
-      }{\chinese@numeralsfalse%
-       \SetLanguageKeys{chinese}{bcp47-extension-u=nu-latn}%
-      }%
-}
-
-
-\define@choicekey*+{chinese}{variant}[\xpg@val\xpg@nr]{cn,simplified,tw,traditional}[cn]{%
-   \ifcase\xpg@nr\relax
-      % cn:
-      \chinese@traditionalfalse
-      \SetLanguageKeys{chinese}{language={Chinese Simplified},langtag=ZHS,bcp47=zh-CN,bcp47-language=zh,bcp47-region=CN,bcp47-script=Hans}%
-      \xpg@info{Option: Chinese, variant=simplified}%
-   \or
-      % simplified:
-      \chinese@traditionalfalse
-      \SetLanguageKeys{chinese}{language={Chinese Simplified},langtag=ZHS,bcp47=zh-CN,bcp47-language=zh,bcp47-region=CN,bcp47-script=Hans}%
-      \xpg@info{Option: Chinese, variant=simplified}%
-   \or
-      % tw:
-      \chinese@traditionaltrue
-      \SetLanguageKeys{chinese}{language={Chinese Traditional},langtag=ZHT,bcp47=zh-TW,bcp47-language=zh,bcp47-region=TW,bcp47-script=Hant}%
-      \xpg@info{Option: Chinese, variant=traditional}%
-   \or
-      % traditional:
-      \chinese@traditionaltrue
-      \SetLanguageKeys{chinese}{language={Chinese Traditional},langtag=ZHT,bcp47=zh-TW,bcp47-language=zh,bcp47-region=TW,bcp47-script=Hant}%
-      \xpg@info{Option: Chinese, variant=traditional}%
-   \fi
-}{\xpg@warning{Unknown Chinese variant `#1'}}
+\DeclareKeys[chinese]
+  {
+    variant.choices:nn = { cn, simplified, tw, traditional }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % cn:
+          \chinese@traditionalfalse
+          \SetLanguageKeys{chinese}{language={Chinese Simplified},langtag=ZHS,bcp47=zh-CN,bcp47-language=zh,bcp47-region=CN,bcp47-script=Hans}%
+          \xpg@info{Option: Chinese, variant=simplified}%
+        \or
+          % simplified:
+          \chinese@traditionalfalse
+          \SetLanguageKeys{chinese}{language={Chinese Simplified},langtag=ZHS,bcp47=zh-CN,bcp47-language=zh,bcp47-region=CN,bcp47-script=Hans}%
+          \xpg@info{Option: Chinese, variant=simplified}%
+        \or
+          % tw:
+          \chinese@traditionaltrue
+          \SetLanguageKeys{chinese}{language={Chinese Traditional},langtag=ZHT,bcp47=zh-TW,bcp47-language=zh,bcp47-region=TW,bcp47-script=Hant}%
+          \xpg@info{Option: Chinese, variant=traditional}%
+        \or
+          % traditional:
+          \chinese@traditionaltrue
+          \SetLanguageKeys{chinese}{language={Chinese Traditional},langtag=ZHT,bcp47=zh-TW,bcp47-language=zh,bcp47-region=TW,bcp47-script=Hant}%
+          \xpg@info{Option: Chinese, variant=traditional}%
+        \fi
+      },
+    variant.default:n = cn,
+    variant/unknown.code = \xpg@warning{Unknown Chinese variant `#1'},
+    numerals.choices:nn = { arabic, chinese }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % arabic:
+          \chinese@numeralsfalse
+          \SetLanguageKeys{chinese}{bcp47-extension-u=nu-latn}%
+        \or
+          \chinese@numeralstrue
+          \SetLanguageKeys{chinese}{bcp47-extension-u=nu-hant}%
+        \fi
+      },
+    numerals.default:n = arabic,
+    numerals/unknown.code = \xpg@warning{Unknown Chinese numerals value `#1'}
+  }
 
 % Register default options
 \InitializeGlossOptions{chinese}{variant=cn,numerals=arabic}
