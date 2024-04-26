@@ -20,19 +20,23 @@
   \RequirePackage{luavlna}
 \fi
 
-\define@boolkey{polish}[polish@]{babelshorthands}[true]{}
-
-\define@boolkey{polish}[polish@]{splithyphens}[true]{}
-
-\define@boolkey{polish}[polish@]{vlna}[true]{}
+\DeclareKeys[polish]
+  {
+    babelshorthands.if = polish@babelshorthands,
+    babelshorthands.default:n = true,
+    splithyphens.if = polish@splithyphens,
+    splithyphens.default:n = true,
+    vlna.if = polish@babelshorthands,
+    vlna.default:n = true,
+  }
 
 % Register default options
 \InitializeGlossOptions{polish}{babelshorthands=false,splithyphens=true,vlna=true}
 
 \ifsystem@babelshorthands
-  \setkeys{polish}{babelshorthands=true}
+  \SetKeys[polish]{babelshorthands=true}
 \else
-  \setkeys{polish}{babelshorthands=false}
+  \SetKeys[polish]{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands
