@@ -19,19 +19,23 @@
   \RequirePackage{luavlna}
 \fi
 
-\define@boolkey{slovak}[slovak@]{babelshorthands}[true]{}
-
-\define@boolkey{slovak}[slovak@]{splithyphens}[true]{}
-
-\define@boolkey{slovak}[slovak@]{vlna}[true]{}
+\DeclareKeys[slovak]
+  {
+    babelshorthands.if = slovak@babelshorthands,
+    babelshorthands.default:n = true,
+    splithyphens.if = slovak@splithyphens,
+    splithyphens.default:n = true,
+    vlna.if = slovak@babelshorthands,
+    vlna.default:n = true,
+  }
 
 % Register default options
 \InitializeGlossOptions{slovak}{babelshorthands=false,splithyphens=true,vlna=true}
 
 \ifsystem@babelshorthands
-  \setkeys{slovak}{babelshorthands=true}
+  \SetKeys[slovak]{babelshorthands=true}
 \else
-  \setkeys{slovak}{babelshorthands=false}
+  \SetKeys[slovak]{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands
