@@ -47,51 +47,11 @@
 
 \newif\if@german@oldspelling
 \@german@oldspellingfalse
-\define@choicekey*+{german}{spelling}[\xpg@val\xpg@nr]{new,old,1901,1996}[new]{%
-   \ifcase\xpg@nr\relax
-      % new:
-      \@german@oldspellingfalse
-   \or
-      % old:
-      \@german@oldspellingtrue
-   \or
-      % 1901:
-      \@german@oldspellingtrue
-   \or
-      % 1996:
-      \@german@oldspellingfalse
-   \fi
-   \german@set@babelname%
-   \xpg@info{Option: German, spelling=\xpg@val}%
-}{\xpg@warning{Unknown German spelling `#1'}}
 
 \newif\if@austrian@locale
 \@austrian@localefalse
 \newif\if@swiss@locale
 \@swiss@localefalse
-\define@choicekey*+{german}{variant}[\xpg@val\xpg@nr]{german,austrian,swiss}[german]{%
-   \ifcase\xpg@nr\relax
-      % german:
-      \@swiss@localefalse%
-      \@austrian@localefalse%
-   \or
-      % austrian:
-      \@austrian@localetrue%
-      \@swiss@localefalse%
-   \or
-      % swiss:
-      \@swiss@localetrue%
-      \@austrian@localefalse%
-      \IfLanguageDefinedF{swissgerman}%
-         {%
-           \xpg@warning{No hyphenation patterns were loaded for "Swiss German (Old Spelling)"\MessageBreak
-	                I will use the standard patterns for German (old spelling) instead}%
-	                \adddialect\l@swissgerman\l@german\relax%
-         }%
-   \fi
-   \german@set@babelname%
-   \xpg@info{Option: German, variant=\xpg@val}%
-}{\xpg@warning{Unknown German variant `#1'}}
 
 \def\german@set@babelname{%
   \if@german@oldspelling
@@ -140,39 +100,91 @@
 }
 
 \newif\if@german@blackletter
-\define@choicekey*+{german}{script}[\xpg@val\xpg@nr]{latin,blackletter,fraktur}[latin]{%
-   \ifcase\xpg@nr\relax
-      % latin:
-      \@german@blackletterfalse%
-   \or
-      % blackletter:
-      \@german@blacklettertrue%
-   \or
-      % fraktur:
-      \@german@blacklettertrue%
-   \fi
-   \german@set@babelname%
-   \xpg@info{Option: German, script=\xpg@val}%
-}{\xpg@warning{Unknown German script `#1'}}
 
-\define@boolkey{german}[german@]{capitaleszett}[true]{%
-  \ifgerman@capitaleszett
-     % MakeUppercase capitalizes the eszett (U+00DF) with U+1E9E
-     \SetLanguageKeys{german}{bcp47-casing=de-x-eszett,bcp47-extension-x=eszett}
-  \else
-     % Capitalize eszett as <SS>
-     \SetLanguageKeys{german}{bcp47-casing=de,bcp47-extension-x={}}
-  \fi
-}
+\DeclareKeys[german]
+  {
+    babelshorthands.if = german@babelshorthands,
+    babelshorthands.default:n = true,
+    latesthyphen.if = german@latesthyphen,
+    latesthyphen.default:n = true,
+    capitaleszett.choices:nn = { true, false }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % true: MakeUppercase capitalizes the eszett (U+00DF) with U+1E9E
+          \SetLanguageKeys{german}{bcp47-casing=de-x-eszett,bcp47-extension-x=eszett}%
+        \or
+          % false: Capitalize eszett as <SS>
+          \SetLanguageKeys{german}{bcp47-casing=de,bcp47-extension-x={}}%
+        \fi
+      },
+    capitaleszett.default:n = true,
+    script.choices:nn = { latin, blackletter, fraktur }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % latin:
+          \@german@blackletterfalse
+        \or
+          % blackletter:
+          \@german@blacklettertrue
+        \or
+          % fraktur:
+          \@german@blacklettertrue
+        \fi
+        \german@set@babelname
+        \xpg@info{Option: German, script=#1}%
+      },
+    script.default:n = latin,
+    script/unknown.code = \xpg@warning{Unknown German script `#1'},
+    spelling.choices:nn = { new, old, 1901, 1996 }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+            % new:
+          \@german@oldspellingfalse
+        \or
+          % old:
+          \@german@oldspellingtrue
+        \or
+          % 1901:
+          \@german@oldspellingtrue
+        \or
+          % 1996:
+          \@german@oldspellingfalse
+        \fi
+        \german@set@babelname
+        \xpg@info{Option: German, spelling=#1}%
+      },
+    spelling.default:n = new,
+    spelling/unknown.code = \xpg@warning{Unknown German spelling `#1'},
+    variant.choices:nn = { german, austrian, swiss }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % german:
+          \@swiss@localefalse
+          \@austrian@localefalse
+        \or
+          % austrian:
+          \@austrian@localetrue
+          \@swiss@localefalse
+        \or
+          % swiss:
+          \@swiss@localetrue
+          \@austrian@localefalse
+          \IfLanguageDefinedF{swissgerman}
+             {%
+               \xpg@warning{No hyphenation patterns were loaded for "Swiss German (Old Spelling)"\MessageBreak
+	                    I will use the standard patterns for German (old spelling) instead}%
+	                   \adddialect\l@swissgerman\l@german\relax%
+             }%
+        \fi
+        \german@set@babelname
+        \xpg@info{Option: German, variant=#1}%
+      },
+    variant.default:n = german,
+    variant/unknown.code = \xpg@warning{Unknown German variant `#1'}
+  }
+  
 
-
-% Option defunc'ed, as both XeTeX and LuaTeX meanwhile
-% use the experimental German hyphenation patterns by default.
-\define@boolkey{german}[german@]{latesthyphen}[true]{}
-
-\define@boolkey{german}[german@]{babelshorthands}[true]{}
-
-\setkeys{german}{spelling,script,variant}
+\SetKeys[german]{spelling,script,variant}
 
 % Register default options
 \InitializeGlossOptions{german}{variant=german,spelling=new,script=latin,babelshorthands=false}
@@ -182,9 +194,9 @@
 \SetLanguageAliasValues{german}{script}{blackletter}{fraktur}
 
 \ifsystem@babelshorthands
-  \setkeys{german}{babelshorthands=true}
+  \SetKeys[german]{babelshorthands=true}
 \else
-  \setkeys{german}{babelshorthands=false}
+  \SetKeys[german]{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands
