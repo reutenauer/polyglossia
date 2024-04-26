@@ -27,27 +27,34 @@
 
 \newif\ifbengali@devanagari@numerals
 \newif\ifbengali@bengali@numerals
-\define@choicekey*+{bengali}{numerals}[\xpg@val\xpg@nr]{Devanagari,Bengali,Western}[Devanagari]{%
-   \ifcase\xpg@nr\relax
-      % Devanagari:
-      \bengali@bengali@numeralsfalse%
-      \bengali@devanagari@numeralstrue%
-   \or
-      % Bengali:
-      \bengali@bengali@numeralstrue%
-      \bengali@devanagari@numeralsfalse%
-   \or
-      % Western:
-      \bengali@bengali@numeralsfalse%
-      \bengali@devanagari@numeralsfalse%
-   \fi
-   \xpg@info{Option: Bengali, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Bengali numeral `#1'}}
 
 \def\extras@bengali{}
 \def\noextras@bengali{}
 
-\define@boolkey{bengali}[bengali@]{changecounternumbering}[true]{}
+\DeclareKeys[bengali]
+  {
+    changecounternumbering.if = bengali@babelshorthands,
+    changecounternumbering.default:n = true,
+    numerals.choices:nn = { devanagari, bengali, western }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % Devanagari:
+          \bengali@bengali@numeralsfalse
+          \bengali@devanagari@numeralstrue
+        \or
+          % Bengali:
+          \bengali@bengali@numeralstrue
+          \bengali@devanagari@numeralsfalse
+        \or
+          % Western:
+          \bengali@bengali@numeralsfalse
+          \bengali@devanagari@numeralsfalse
+        \fi
+        \xpg@info{Option: Bengali, numerals=#1}%
+      },
+    numerals.default:n = devanagari,
+    numerals/unknown.code = \xpg@warning{Unknown Bengali numeral `#1'}
+  }
 
 % Register default options
 \InitializeGlossOptions{bengali}{changecounternumbering=false,numerals=Devanagari}
