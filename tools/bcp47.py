@@ -330,7 +330,7 @@ bcp472opts = {
     "de-DE" : "variant=german,spelling=new",
     "dsb" : "variant=lower",
     "el-monoton" : "variant=monotonic",
-    "el-polyton" : "varant=polytonic",
+    "el-polyton" : "variant=polytonic",
     "en-AU" : "variant=australian",
     "en-CA" : "variant=canadian",
     "en-NZ" : "variant=newzealand",
