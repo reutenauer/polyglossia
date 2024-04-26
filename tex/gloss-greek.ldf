@@ -42,38 +42,6 @@
 \newif\if@greek@ancient\@greek@ancientfalse
 \newif\if@greek@poly\@greek@polyfalse
 
-\define@choicekey*+{greek}{variant}[\xpg@val\xpg@nr]{monotonic,mono,polytonic,poly,ancient,ancientgreek}[monotonic]{%
-   \CheckHyphenationPatterns{greek}%
-   \ifcase\xpg@nr\relax
-      % monotonic:
-      \@greek@polyfalse
-      \@greek@ancientfalse
-   \or
-      % mono:
-      \@greek@polyfalse
-      \@greek@ancientfalse
-   \or
-      % polytonic:
-      \@greek@polytrue
-      \@greek@ancientfalse
-   \or
-      % poly:
-      \@greek@polytrue
-      \@greek@ancientfalse
-   \or
-      % ancient:
-      \@greek@polyfalse
-      \@greek@ancienttrue
-   \or
-      % ancientgreek:
-      \@greek@polyfalse
-      \@greek@ancienttrue
-   \fi
-   \greek@set@langdata
-   \xpg@info{Option: Greek, variant=\xpg@val}%
-}{\xpg@warning{Unknown Greek variant `#1'}}
-
-
 \def\greek@set@langdata{%
    \if@greek@ancient
        \IfLanguageDefinedF{ancientgreek}%
@@ -114,31 +82,78 @@
 
 
 \newif\if@greek@numerals
-\define@choicekey*+{greek}{numerals}[\xpg@val\xpg@nr]{greek,arabic}[greek]{%
-   \ifcase\xpg@nr\relax
-      % greek:
-      \@greek@numeralstrue%
-      \SetLanguageKeys{greek}{bcp47-extension-u=nu-grek}%
-   \or
-      % arabic:
-      \@greek@numeralsfalse%
-      \SetLanguageKeys{greek}{bcp47-extension-u=nu-latn}%
-   \fi
-   \xpg@info{Option: Greek, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Greek numerals value `#1'}}
 
-
-\define@boolkey{greek}[greek@]{capitaliota}[true]{%
-  \ifgreek@capitaliota
-     % \MakeUppercase converts the ypogegrammeni (subscript muted iota) to capital iota
-     \SetLanguageKeys{greek}{bcp47-casing=el-x-iota,bcp47-extension-x=iota}
-  \else
-     % \MakeUppercase retains the subscript versions (default)
-     \SetLanguageKeys{greek}{bcp47-casing=el,bcp47-extension-x={}}
-  \fi
-}
-
-\define@boolkey{greek}{attic}[true]{\xpg@warning{Greek option `attic' is no longer required.}}
+\DeclareKeys[greek]
+  {
+    variant.choices:nn = { monotonic, mono,polytonic, poly,ancient, ancientgreek }
+      {
+        \CheckHyphenationPatterns{greek}%
+        \ifcase\UseName{l_keys_choice_int}\or
+          % monotonic:
+          \@greek@polyfalse
+          \@greek@ancientfalse
+        \or
+          % mono:
+          \@greek@polyfalse
+          \@greek@ancientfalse
+        \or
+          % polytonic:
+          \@greek@polytrue
+          \@greek@ancientfalse
+        \or
+          % poly:
+          \@greek@polytrue
+          \@greek@ancientfalse
+        \or
+          % ancient:
+          \@greek@polyfalse
+          \@greek@ancienttrue
+        \or
+          % ancientgreek:
+          \@greek@polyfalse
+          \@greek@ancienttrue
+        \fi
+        \greek@set@langdata
+        \xpg@info{Option: Greek, variant=#1}%
+      },
+    variant.default:n = monotonic,
+    variant/unknown.code = \xpg@warning{Unknown Greek variant `#1'},
+    numerals.choices:nn = { greek, arabic }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % greek:
+          \@greek@numeralstrue
+          \SetLanguageKeys{greek}{bcp47-extension-u=nu-grek}%
+        \or
+          % arabic:
+          \@greek@numeralsfalse
+          \SetLanguageKeys{greek}{bcp47-extension-u=nu-latn}%
+        \fi
+        \xpg@info{Option: Greek, numerals=#1}%
+      },
+    numerals.default:n = greek,
+    numerals/unknown.code = \xpg@warning{Unknown Greek numerals value `#1'},
+    capitaliota.choices:nn = { true, false }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % true:
+          \@greek@capitaliotatrue
+          % \MakeUppercase converts the ypogegrammeni (subscript muted iota) to capital iota
+          \SetLanguageKeys{greek}{bcp47-casing=el-x-iota,bcp47-extension-x=iota}%
+        \or
+          % false:
+          \@greek@capitaliotafalse
+          % \MakeUppercase retains the subscript versions (default)
+          \SetLanguageKeys{greek}{bcp47-casing=el,bcp47-extension-x={}}%
+        \fi
+      },
+    capitaliota.default:n = true,
+    attic.choices:nn = { true, false }
+      { 
+        \xpg@warning{Greek option `attic' is no longer required.}
+      },
+    capitaliota.default:n = true,
+  }
 
 % Register default options
 \InitializeGlossOptions{greek}{variant=monotonic,numerals=greek}
