@@ -26,44 +26,49 @@
 
 \newif\ifcyrillic@numerals
 \newif\ifcyrillic@asbuk@numerals
-\define@choicekey*+{ukrainian}{numerals}[\xpg@val\xpg@nr]{arabic,cyrillic,cyrillic-trad,cyrillic-alph}[arabic]{%
-   \ifcase\xpg@nr\relax
-      % arabic:
-      \cyrillic@numeralsfalse%
-      \cyrillic@asbuk@numeralsfalse%
-      \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-latn}%
-   \or
-      % cyrillic:
-      \cyrillic@numeralstrue%
-      \cyrillic@asbuk@numeralsfalse%
-      \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-cyrl}%
-   \or
-      % cyrillic-trad:
-      \cyrillic@numeralstrue%
-      \cyrillic@asbuk@numeralsfalse%
-      \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-cyrl}%
-   \or
-      % cyrillic-alph:
-      \cyrillic@numeralstrue%
-      \cyrillic@asbuk@numeralstrue%
-      \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-cyrl}%
-   \fi
-   \xpg@info{Option: Ukrainian, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Ukrainian numerals value `#1'}}
 
-
-% Define some math functions
-\define@boolkey{ukrainian}[ukrainian@]{mathfunctions}[true]{}
+\DeclareKeys[ukrainian]
+  {
+    babelshorthands.if = ukrainian@babelshorthands,
+    babelshorthands.default:n = true,
+    mathfunctions.if = ukrainian@mathfunctions,
+    mathfunctions.default:n = true,
+    numerals.choices:nn = { arabic, cyrillic, cyrillic-trad, cyrillic-alph }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % arabic:
+          \cyrillic@numeralsfalse
+          \cyrillic@asbuk@numeralsfalse
+          \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-latn}%
+        \or
+          % cyrillic:
+          \cyrillic@numeralstrue
+          \cyrillic@asbuk@numeralsfalse
+          \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-cyrl}%
+        \or
+          % cyrillic-trad:
+          \cyrillic@numeralstrue
+          \cyrillic@asbuk@numeralsfalse
+          \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-cyrl}%
+        \or
+          % cyrillic-alph:
+          \cyrillic@numeralstrue
+          \cyrillic@asbuk@numeralstrue
+          \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-cyrl}%
+        \fi
+        \xpg@info{Option: Ukrainian, numerals=#1}%
+      },
+    numerals.default:n = arabic,
+    numerals/unknown.code = \xpg@warning{Unknown Ukrainian numerals value `#1'}
+  }
 
 % Register default options
 \InitializeGlossOptions{ukrainian}{numerals=arabic,mathfunctions=true}
 
-\define@boolkey{ukrainian}[ukrainian@]{babelshorthands}[true]{}
-
 \ifsystem@babelshorthands
-  \setkeys{ukrainian}{babelshorthands=true}
+  \SetKeys[ukrainian]{babelshorthands=true}
 \else
-  \setkeys{ukrainian}{babelshorthands=false}
+  \SetKeys[ukrainian]{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands
