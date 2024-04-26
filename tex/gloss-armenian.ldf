@@ -21,40 +21,48 @@
 
 \newif\if@eastern@armenian
 \@eastern@armenianfalse
-\define@choicekey*+{armenian}{variant}[\xpg@val\xpg@nr]{western,eastern}[western]{%
-   \ifcase\xpg@nr\relax
-      % western:
-      \@eastern@armenianfalse%
-   \or
-      % eastern:
-      \@eastern@armeniantrue%
-   \fi
-   \xpg@info{Option: Armenian, variant=\xpg@val}%
-}{\xpg@warning{Unknown Armenian variant `#1'}}
 
 \newif\if@armenian@numerals
 \@armenian@numeralsfalse
-\define@key{armenian}{numerals}[armenian]{%
-  \ifstrequal{#1}{arabic}{%
-     \@armenian@numeralsfalse%
-     \SetLanguageKeys{armenian}{bcp47-extension-u=nu-latn}%
-   }{%
-     \@armenian@numeralstrue%
-     \SetLanguageKeys{armenian}{bcp47-extension-u={}}%
-   }%
-}
 
-\define@boolkey{armenian}[armenian@]{capitalyiwn}[true]{%
-  \ifarmenian@capitalyiwn
-     % MakeUppercase capitalizes the ligature of letters ech and yiwn (U+0587)
-     % to capital ech and yiwn (also the output if Armenian is not selected at all)
-     \SetLanguageKeys{armenian}{bcp47-casing=hy-x-yiwn,bcp47-extension-x=yiwn}
-  \else
-     % Capitalize ech and yiwn ligature to capital ech and vew,
-     % following Armenian spelling reform
-     \SetLanguageKeys{armenian}{bcp47-casing=hy,bcp47-extension-x={}}
-  \fi
-}
+\DeclareKeys[belarusian]
+  {
+    variant.choices:nn = { western, eastern }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % western:
+          \@eastern@armenianfalse
+        \or
+          % eastern:
+          \@eastern@armeniantrue
+        \fi
+        \xpg@info{Option: Armenian, variant=#1}%
+      },
+    variant.default:n = western,
+    variant/unknown.code = \xpg@warning{Unknown Armenian variant `#1'},
+    numerals.choices:nn = { armenian, arabic }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          \@armenian@numeralstrue
+          \SetLanguageKeys{armenian}{bcp47-extension-u={}}%
+        \or
+          \@armenian@numeralsfalse
+          \SetLanguageKeys{armenian}{bcp47-extension-u=nu-latn}%
+        \fi
+      },
+    numerals.default:n = armenian,
+    capitalyiwn.choices:nn = { true, false }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % true:
+          \SetLanguageKeys{armenian}{bcp47-casing=hy-x-yiwn,bcp47-extension-x=yiwn}%
+        \or
+          % false:
+          \SetLanguageKeys{armenian}{bcp47-casing=hy,bcp47-extension-x={}}%
+        \fi
+      },
+    capitalyiwn.default:n = true
+  }
 
 % Register default options
 \InitializeGlossOptions{armenian}{numerals=armenian,variant=western}
