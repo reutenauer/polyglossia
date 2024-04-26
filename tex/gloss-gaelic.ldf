@@ -22,20 +22,27 @@
 \setlanguagealias[variant=scottish]{gaelic}{scottish}
 
 \def\gaelic@variant{irish}
-\define@choicekey*+{gaelic}{variant}[\xpg@val\xpg@nr]{irish,scottish}[irish]{%
-   \ifcase\xpg@nr\relax
-      % irish:
-      \gdef\gaelic@variant{irish}%
-      \SetLanguageKeys{gaelic}{language=Irish,langtag=IRI,babelname=irish,bcp47=ga,bcp47-language=ga}%
-      \SetupLatinPolyglossiaFont{gaelic}%
-   \or
-      % scottish:
-      \gdef\gaelic@variant{scottish}%
-      \SetLanguageKeys{gaelic}{language=Gaelic,langtag=GAE,babelname=scottish,bcp47=gd,bcp47-language=gd}%
-      \SetupLatinPolyglossiaFont{gaelic}%
-   \fi
-   \xpg@info{Option: gaelic, variant=\xpg@val}%
-}{\xpg@warning{Unknown gaelic variant `#1'}}
+
+\DeclareKeys[gaelic]
+  {
+    variant.choices:nn = { irish, scottish }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % irish:
+          \gdef\gaelic@variant{irish}%
+          \SetLanguageKeys{gaelic}{language=Irish,langtag=IRI,babelname=irish,bcp47=ga,bcp47-language=ga}%
+          \SetupLatinPolyglossiaFont{gaelic}%
+        \or
+          % scottish:
+          \gdef\gaelic@variant{scottish}%
+          \SetLanguageKeys{gaelic}{language=Gaelic,langtag=GAE,babelname=scottish,bcp47=gd,bcp47-language=gd}%
+          \SetupLatinPolyglossiaFont{gaelic}%
+        \fi
+        \xpg@info{Option: gaelic, variant=#1}%
+      },
+    variant.default:n = irish,
+    variant/unknown.code = \xpg@warning{Unknown gaelic variant `#1'}
+  }
 
 % Register default options
 \InitializeGlossOptions{gaelic}{variant=irish}
