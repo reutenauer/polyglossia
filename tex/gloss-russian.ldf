@@ -27,11 +27,6 @@
 \setlanguagealias*[spelling=old]{russian}{ru-petr1708}
 
 \newif\if@russian@modern
-\define@key{russian}{spelling}[modern]{%
-  \ifstrequal{#1}{old}%
-    {\@russian@modernfalse\SetLanguageKeys{russian}{bcp47=ru-petr1708,bcp47-variant=petr1708}}%
-    {\@russian@moderntrue\SetLanguageKeys{russian}{bcp47=ru,bcp47-variant=luna1918}}%
-}
 
 \def\captionsrussian{%
    \if@russian@modern\captionsrussian@modern\else\captionsrussian@old\fi%
@@ -43,46 +38,67 @@
 
 \newif\ifcyrillic@numerals
 \newif\ifcyrillic@asbuk@numerals
-\define@choicekey*+{russian}{numerals}[\xpg@val\xpg@nr]{arabic,cyrillic,cyrillic-trad,cyrillic-alph}[arabic]{%
-   \ifcase\xpg@nr\relax
-      % arabic:
-      \cyrillic@numeralsfalse%
-      \cyrillic@asbuk@numeralsfalse%
-      \SetLanguageKeys{russian}{bcp47-extension-u=nu-latn}%
-   \or
-      % cyrillic:
-      \cyrillic@numeralstrue%
-      \cyrillic@asbuk@numeralsfalse%
-      \SetLanguageKeys{russian}{bcp47-extension-u=nu-cyrl}%
-   \or
-      % cyrillic-trad:
-      \cyrillic@numeralstrue%
-      \cyrillic@asbuk@numeralsfalse%
-      \SetLanguageKeys{russian}{bcp47-extension-u=nu-cyrl}%
-   \or
-      % cyrillic-alph:
-      \cyrillic@numeralstrue%
-      \cyrillic@asbuk@numeralstrue%
-      \SetLanguageKeys{russian}{bcp47-extension-u=nu-cyrl}%
-   \fi
-   \xpg@info{Option: Russian, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Russian numerals value `#1'}}
 
-\define@boolkey{russian}[russian@]{indentfirst}[true]{%
-  \ifrussian@indentfirst
-      \SetLanguageKeys{russian}{indentfirst=true}%
-  \else
-      \SetLanguageKeys{russian}{indentfirst=false}%
-  \fi%
-}
-
-\define@boolkey{russian}[russian@]{babelshorthands}[true]{}
-
-% Force punctuation after heading number
-\define@boolkey{russian}[russian@]{forceheadingpunctuation}[true]{}
-
-% Define some math functions
-\define@boolkey{russian}[russian@]{mathfunctions}[true]{}
+\DeclareKeys[russian]
+  {
+    babelshorthands.if = russian@babelshorthands,
+    babelshorthands.default:n = true,
+    forceheadingpunctuation.if = russian@forceheadingpunctuation,
+    forceheadingpunctuation.default:n = true,
+    mathfunctions.if = russian@mathfunctions,
+    mathfunctions.default:n = true,
+    spelling.choices:nn = { modern, old }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % modern:
+          \@russian@moderntrue
+          \SetLanguageKeys{russian}{bcp47=ru,bcp47-variant=luna1918}%
+        \or
+          % old:
+          \@russian@modernfalse
+          \SetLanguageKeys{russian}{bcp47=ru-petr1708,bcp47-variant=petr1708}%
+        \fi
+      },
+    spelling.default:n = modern,
+    numerals.choices:nn = { arabic, cyrillic, cyrillic-trad, cyrillic-alph }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % arabic:
+          \cyrillic@numeralsfalse
+          \cyrillic@asbuk@numeralsfalse
+          \SetLanguageKeys{russian}{bcp47-extension-u=nu-latn}%
+        \or
+          % cyrillic:
+          \cyrillic@numeralstrue
+          \cyrillic@asbuk@numeralsfalse
+          \SetLanguageKeys{russian}{bcp47-extension-u=nu-cyrl}%
+        \or
+          % cyrillic-trad:
+          \cyrillic@numeralstrue
+          \cyrillic@asbuk@numeralsfalse
+          \SetLanguageKeys{russian}{bcp47-extension-u=nu-cyrl}%
+        \or
+          % cyrillic-alph:
+          \cyrillic@numeralstrue
+          \cyrillic@asbuk@numeralstrue
+          \SetLanguageKeys{russian}{bcp47-extension-u=nu-cyrl}%
+        \fi
+        \xpg@info{Option: Russian, numerals=#1}%
+      },
+    numerals.default:n = arabic,
+    numerals/unknown.code = \xpg@warning{Unknown Russian numerals value `#1'},
+    indentfirst.choices:nn = { true, false }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % true:
+          \SetLanguageKeys{russian}{indentfirst=true}%
+        \or
+          % false:
+          \SetLanguageKeys{russian}{indentfirst=false}%
+        \fi
+      },
+    indentfirst.default:n = true,
+  }
 
 % Register default options
 \InitializeGlossOptions{russian}{babelshorthands=false,
@@ -94,9 +110,9 @@
 
 
 \ifsystem@babelshorthands
-  \setkeys{russian}{babelshorthands=true}
+  \SetKeys[russian]{babelshorthands=true}
 \else
-  \setkeys{russian}{babelshorthands=false}
+  \SetKeys[russian]{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands
