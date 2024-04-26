@@ -28,24 +28,31 @@
 \fi
 
 \def\portuguese@variant{portuges}
-\define@choicekey*+{portuguese}{variant}[\xpg@val\xpg@nr]{portuguese,brazilian}[portuguese]{%
-   \ifcase\xpg@nr\relax
-      % portuguese:
-      \def\portuguese@variant{portuges}%
-      \SetLanguageKeys{portuguese}{babelname=portuges,bcp47=pt-PT,bcp47-language=pt,bcp47-region=PT}%
-   \or
-      % brazilian:
-      \def\portuguese@variant{brazil}%
-      \SetLanguageKeys{portuguese}{babelname=brazil,bcp47=pt-BR,bcp47-language=pt,bcp47-region=BR}%
-      % There are no specific brazil patterns
-      \adddialect\l@brazil\l@portuges\relax%
-   \fi
-   \xpg@info{Option: portuguese, variant=\xpg@val}%
-}{\xpg@warning{Unknown portuguese variant `#1'}}
 
-\define@boolkey{portuguese}[portuguese@]{babelshorthands}[true]{}
-
-\define@boolkey{portuguese}[portuguese@]{splithyphens}[true]{}
+\DeclareKeys[portuguese]
+  {
+    babelshorthands.if = portuguese@babelshorthands,
+    babelshorthands.default:n = true,
+    splithyphens.if = portuguese@splithyphens,
+    babelshorthands.default:n = true,
+    variant.choices:nn = { portuguese, brazilian }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % portuguese:
+          \def\portuguese@variant{portuges}%
+          \SetLanguageKeys{portuguese}{babelname=portuges,bcp47=pt-PT,bcp47-language=pt,bcp47-region=PT}%
+        \or
+          % brazilian:
+          \def\portuguese@variant{brazil}%
+          \SetLanguageKeys{portuguese}{babelname=brazil,bcp47=pt-BR,bcp47-language=pt,bcp47-region=BR}%
+          % There are no specific brazil patterns
+          \adddialect\l@brazil\l@portuges\relax%
+        \fi
+        \xpg@info{Option: portuguese, variant=#1}%
+      },
+    variant.default:n = portuguese,
+    variant/unknown.code = \xpg@warning{Unknown portuguese variant `#1'},
+  }
 
 % Register default options
 \InitializeGlossOptions{portuguese}{variant=portuguese,
@@ -53,9 +60,9 @@
       splithyphens=true}
 
 \ifsystem@babelshorthands
-  \setkeys{portuguese}{babelshorthands=true}
+  \SetKeys[portuguese]{babelshorthands=true}
 \else
-  \setkeys{portuguese}{babelshorthands=false}
+  \SetKeys[portuguese]{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands
