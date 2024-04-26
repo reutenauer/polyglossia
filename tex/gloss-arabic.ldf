@@ -38,36 +38,42 @@
 \setlanguagealias*[locale=default]{arabic}{apd}
 \setlanguagealias*[locale=mashriq]{arabic}{ar-PS}
 
-\define@boolkey{arabic}[arabic@]{abjadalph}[true]{}
-
 \newif\ifeastern@numerals
-\define@choicekey*+{arabic}{numerals}[\xpg@val\xpg@nr]{mashriq,maghrib,eastern,western}[mashriq]{%
-   \ifcase\xpg@nr\relax
-      % mashriq:
-      \eastern@numeralstrue%
-   \or
-      % maghrib:
-      \eastern@numeralsfalse
-   \or
-      % eastern:
-      \eastern@numeralstrue%
-   \or
-      % western:
-      \eastern@numeralsfalse
-   \fi
-   \xpg@info{Option: Arabic, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Arabic numerals option `#1'}}
+\newif\if@hijrical
+\newif\ifarabic@customsep\arabic@customsepfalse
 
-%this is needed for \abjad in arabicnumbers.sty
-\define@boolkey{arabic}[arabic@]{abjadjimnotail}[true]{%
-  \ifarabic@abjadjimnotail
-    \abjad@jim@notailtrue%
-  \else
-    \abjad@jim@notailfalse
-  \fi}
-
-\define@choicekey*+{arabic}{locale}[\xpg@val\xpg@nr]{default,mashriq,libya,algeria,tunisia,morocco,mauritania}[default]{%
-   \ifcase\xpg@nr\relax
+\DeclareKeys[arabic]
+  {
+    hijricorrection.code = \gdef\arabic@hijri@correction{#1},
+    hijricorrection.default:n = 0,
+    sectionsep.code = \gdef\xpg@sepmark{#1}\arabic@customseptrue,
+    sectionsep.default:n = .,
+    abjadalph.if = arabic@abjadalph,
+    abjadalph.default:n = true,
+    abjadjimnotail.if = abjad@jim@notail,
+    abjadjimnotail.default:n = true,
+    numerals.choices:nn = { mashriq, maghrib, eastern, western }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % mashriq:
+          \eastern@numeralstrue%
+        \or
+          % maghrib:
+          \eastern@numeralsfalse
+        \or
+          % eastern:
+          \eastern@numeralstrue%
+        \or
+          % western:
+          \eastern@numeralsfalse
+        \fi
+        \xpg@info{Option: Arabic, numerals=#1}%
+      },
+    numerals.default:n = mashriq,
+    numerals/unknown.code = \xpg@warning{Unknown Arabic numerals option `#1'},
+    locale.choices:nn = { default, mashriq, libya, algeria, tunisia, morocco, mauritania }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
       % default:
       \eastern@numeralstrue%
       \SetLanguageKeys{arabic}{bcp47=ar-YE,bcp47-language=ar}%
@@ -103,34 +109,27 @@
       \SetLanguageKeys{arabic}{bcp47=ar-MR,bcp47-language=ar,bcp47-region=MR}%
       \xpg@info{Option: arabic, locale=mauritania}%
    \fi
-   \gdef\@@arabic@month{\@arabic@month{#1}}
- }{\xpg@warning{Unknown Arabic locale `#1'}}
-
-\newif\if@hijrical
-\define@choicekey*+{arabic}{calendar}[\xpg@val\xpg@nr]{gregorian,hijri,islamic}[gregorian]{%
-   \ifcase\xpg@nr\relax
-      % gregorian:
-      \@hijricalfalse
-   \or
-      % hijri:
-      \@hijricaltrue
-   \or
-      % islamic:
-      \@hijricaltrue
-   \fi
-   \xpg@info{Option: Arabic, calendar=\xpg@val}%
-}{\xpg@warning{Unknown Arabic calendar option `#1'}}
-
-
-\define@key{arabic}{hijricorrection}[0]{%
-  \gdef\arabic@hijri@correction{#1}}%
-
-\newif\ifarabic@customsep\arabic@customsepfalse
-\def\xpg@sepmark{}
-\define@key{arabic}{sectionsep}[.]{%
-   \arabic@customseptrue%
-   \gdef\xpg@sepmark{#1}%
-}
+   \gdef\@@arabic@month{\@arabic@month{#1}}%
+      },
+    locale.default:n = default,
+    locale/unknown.code = \xpg@warning{Unknown Arabic locale `#1'},
+    calendar.choices:nn = { gregorian, hijri, islamic }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % gregorian:
+          \@hijricalfalse
+        \or
+          % hijri:
+          \@hijricaltrue
+        \or
+          % islamic:
+          \@hijricaltrue
+        \fi
+        \xpg@info{Option: Arabic, calendar=#1}%
+      },
+    calendar.default:n = gregorian,
+    calendar/unknown.code = \xpg@warning{Unknown Arabic calendar option `#1'}
+  }
 
 % Register default options
 \InitializeGlossOptions{arabic}{locale=default,calendar=gregorian,numerals=mashriq,hijricorrection=0,abjadjimnotail=false}
