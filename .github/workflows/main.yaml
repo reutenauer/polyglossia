@@ -19,7 +19,5 @@ jobs:
         uses: zauguin/install-texlive@v3
         with:
             package_file: .github/tl-packages
-      - name: Install Polyglossia
-        run: l3build install
       - name: Check test files
-        run: l3build check
+        run: l3build check --show-log-on-error -q -H
