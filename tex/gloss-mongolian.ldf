@@ -30,36 +30,43 @@
 
 \newif\ifcyrillic@numerals
 \newif\ifcyrillic@asbuk@numerals
-\define@choicekey*+{mongolian}{numerals}[\xpg@val\xpg@nr]{arabic,cyrillic,cyrillic-trad,cyrillic-alph}[arabic]{%
-   \ifcase\xpg@nr\relax
-      % arabic:
-      \cyrillic@numeralsfalse%
-      \cyrillic@asbuk@numeralsfalse%
-   \or
-      % cyrillic:
-      \cyrillic@numeralstrue%
-      \cyrillic@asbuk@numeralsfalse%
-   \or
-      % cyrillic-trad:
-      \cyrillic@numeralstrue%
-      \cyrillic@asbuk@numeralsfalse%
-   \or
-      % cyrillic-alph:
-      \cyrillic@numeralstrue%
-      \cyrillic@asbuk@numeralstrue%
-   \fi
-   \xpg@info{Option: Mongolian, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Mongolian numerals value `#1'}}
 
-\define@boolkey{mongolian}[mongolian@]{babelshorthands}[true]{}
+\DeclareKeys[mongolian]
+  {
+    babelshorthands.if = mongolian@babelshorthands,
+    babelshorthands.default:n = true,
+    numerals.choices:nn = { arabic,cyrillic,cyrillic-trad,cyrillic-alph }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % arabic:
+          \cyrillic@numeralsfalse
+          \cyrillic@asbuk@numeralsfalse
+        \or
+          % cyrillic:
+          \cyrillic@numeralstrue
+          \cyrillic@asbuk@numeralsfalse
+        \or
+          % cyrillic-trad:
+          \cyrillic@numeralstrue
+          \cyrillic@asbuk@numeralsfalse
+        \or
+          % cyrillic-alph:
+          \cyrillic@numeralstrue
+          \cyrillic@asbuk@numeralstrue
+        \fi
+        \xpg@info{Option: Mongolian, numerals=#1}%
+      },
+    numerals.default:n = arabic,
+    numerals/unknown.code = \xpg@warning{Unknown Mongolian numerals value `#1'}
+  }
 
 % Register default options
 \InitializeGlossOptions{mongolian}{babelshorthands=false,numerals=arabic}
 
 \ifsystem@babelshorthands
-  \setkeys{mongolian}{babelshorthands=true}
+  \SetKeys[mongolian]{babelshorthands=true}
 \else
-  \setkeys{mongolian}{babelshorthands=false}
+  \SetKeys[mongolian]{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands
