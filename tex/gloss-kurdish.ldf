@@ -41,36 +41,9 @@
 
 \newif\if@kurdish@kurmanji
 \def\kurdish@variant{sorani}
-\define@choicekey*+{kurdish}{variant}[\xpg@val\xpg@nr]{sorani,kurmanji}[sorani]{%
-   \ifcase\xpg@nr\relax
-      % sorani:
-      \def\kurdish@variant{sorani}%
-      \@kurdish@kurmanjifalse%
-   \or
-      % kurmanji:
-      \def\kurdish@variant{kurmanji}%
-      \@kurdish@kurmanjitrue%
-   \fi
-   \kurdish@set@variety%
-   \xpg@info{Option: kurdish, variant=\xpg@val}%
-}{\xpg@warning{Unknown Kurdish variant `#1'}}
 
 \newif\if@kurdish@latin
 \newif\if@kurdish@arabic
-\define@choicekey*+{kurdish}{script}[\xpg@val\xpg@nr]{arabic,latin}{%
-   \ifcase\xpg@nr\relax
-      % arabic:
-      \@kurdish@latinfalse%
-      \@kurdish@arabictrue%
-   \or
-      % latin:
-      \@kurdish@latintrue%
-      \@kurdish@arabicfalse%
-   \fi
-   \kurdish@set@variety%
-   \xpg@info{Option: kurdish, script=\xpg@val}%
-}{\xpg@warning{Unknown Kurdish script `#1'}}
-
 
 \newif\if@western@numerals
 \newif\if@force@western@numerals
@@ -113,39 +86,66 @@
 }
 
 \newif\if@western@numerals
-\define@choicekey*+{kurdish}{numerals}[\xpg@val\xpg@nr]{eastern,western}[eastern]{%
-   \ifcase\xpg@nr\relax
-      % eastern:
-      \@western@numeralsfalse%
-   \or
-      % western:
-      \@western@numeralstrue%
-      \@force@western@numeralstrue%
-   \fi
-   \xpg@info{Option: Kurdish, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Kurdish numerals option `#1'}}
 
 \newif\ifkurdish@customsep\kurdish@customsepfalse
 \def\xpg@sepmark{}
-\define@key{kurdish}{sectionsep}[.]{%
-   \kurdish@customseptrue%
-   \gdef\xpg@sepmark{#1}%
-}
-
-%this is needed for \abjad in arabicnumbers.sty
-\define@boolkey{kurdish}[kurdish@]{abjadjimnotail}[true]{%
-  \ifkurdish@abjadjimnotail
-    \abjad@jim@notailtrue%
-  \else
-    \abjad@jim@notailfalse
-  \fi%
-}
-
-% NOT YET USED
-\define@key{kurdish}{locale}[default]{%
-  \def\@kurdish@locale{#1}}
 
 %TODO add option for CALENDAR
+
+\DeclareKeys[kurdish]
+  {
+    variant.choices:nn = { sorani, kurmanji }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % sorani:
+          \def\kurdish@variant{sorani}%
+          \@kurdish@kurmanjifalse
+        \or
+          % kurmanji:
+          \def\kurdish@variant{kurmanji}%
+          \@kurdish@kurmanjitrue
+        \fi
+        \kurdish@set@variety
+        \xpg@info{Option: kurdish, variant=#1}%
+      },
+    variant.default:n = sorani,
+    variant/unknown.code = \xpg@warning{Unknown Kurdish variant `#1'},
+    script.choices:nn = { arabic, latin }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % arabic:
+          \@kurdish@latinfalse
+          \@kurdish@arabictrue
+        \or
+          % latin:
+          \@kurdish@latintrue
+          \@kurdish@arabicfalse
+        \fi
+        \kurdish@set@variety
+        \xpg@info{Option: kurdish, script=#1}%
+      },
+    script.default:n = sorani,
+    script/unknown.code = \xpg@warning{Unknown Kurdish script `#1'},
+    numerals.choices:nn = { eastern, western }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % eastern:
+          \@western@numeralsfalse%
+        \or
+          % western:
+          \@western@numeralstrue%
+          \@force@western@numeralstrue%
+        \fi
+        \xpg@info{Option: Kurdish, numerals=#1}%
+      },
+    numerals.default:n = eastern,
+    numerals/unknown.code = \xpg@warning{Unknown Kurdish numerals value `#1'},
+    sectionsep.code = \gdef\xpg@sepmark{#1}\kurdish@customseptrue,
+    sectionsep.default:n = .,
+    abjadjimnotail.if = abjad@jim@notail,
+    abjadjimnotail.default:n = true,
+    locale.store = \@kurdish@locale
+  }
 
 % Register default options
 \InitializeGlossOptions{kurdish}{variant=sorani,locale=default,script=arabic,abjadjimnotail=false,numerals=eastern}
