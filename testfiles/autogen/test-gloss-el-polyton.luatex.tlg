@@ -25,27 +25,23 @@ Package polyglossia Info: Option: Greek, variant=monotonic
 Package polyglossia Info: Option: Greek, numerals=greek
 \@attic@num=\count...
 ))
-! Package xkeyval Error: `varant' undefined in families `greek'.
-See the xkeyval package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-l. ...\setmainlanguage{el-polyton}
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+Module polyglossia Info: Language data for polygreek
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I1
+(polyglossia)            loader^^Iloadhyph-el-polyton.tex
+(polyglossia)            patterns^^Ihyph-el-polyton.pat.txt
+(polyglossia)            righthyphenmin^^I1
+(polyglossia)            synonyms^^Ipolygreek on input line ...
+Module polyglossia Info: Language polygreek was not yet loaded; created with id 4 on input line ...
+Package polyglossia Info: Option: Greek, variant=polytonic
 Package polyglossia Info: Default language is greek
-! Package xkeyval Error: `varant' undefined in families `greek'.
-See the xkeyval package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-l. ...\setmainlanguage{el-polyton}
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+Package polyglossia Info: Option: Greek, variant=polytonic
 > \box...=
 \hbox(7.16+0.22)x64.34003, direction TLT
 .\TU/lmr/m/n/10 6
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 Α
-.\TU/lmr/m/n/10 υ
+.\TU/lmr/m/n/10 ὐ
 .\TU/lmr/m/n/10 󰀀
 .\discretionary (penalty 50)
 ..< \TU/lmr/m/n/10 -
@@ -53,7 +49,7 @@ If that doesn't work, type  X <return>  to quit.
 .\TU/lmr/m/n/10 󰀀
 .\TU/lmr/m/n/10 ο
 .\TU/lmr/m/n/10 󰀀
-.\TU/lmr/m/n/10 ύ
+.\TU/lmr/m/n/10 ύ
 .\TU/lmr/m/n/10 󰀀
 .\discretionary (penalty 50)
 ..< \TU/lmr/m/n/10 -

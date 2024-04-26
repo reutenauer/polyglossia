@@ -9,26 +9,14 @@ Package polyglossia Info: Option: Greek, variant=monotonic
 Package polyglossia Info: Option: Greek, numerals=greek
 \@attic@num=\count...
 ))
-! Package xkeyval Error: `varant' undefined in families `greek'.
-See the xkeyval package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-l. ...\setmainlanguage{el-polyton}
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+Package polyglossia Info: Option: Greek, variant=polytonic
 Package polyglossia Info: Default language is greek
-! Package xkeyval Error: `varant' undefined in families `greek'.
-See the xkeyval package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-l. ...\setmainlanguage{el-polyton}
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+Package polyglossia Info: Option: Greek, variant=polytonic
 > \box...=
 \hbox(7.16+0.21999)x64.34
 .\TU/lmr/m/n/10 6
 .\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 Αυγούστου
+.\TU/lmr/m/n/10 Αὐγούστου
 .\glue 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 2012.
 ! OK.
