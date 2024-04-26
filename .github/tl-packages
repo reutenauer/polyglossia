@@ -6,9 +6,7 @@ xetex
 luatex
 # polyglossia dependencies
 fontspec
-luatexbase
 etoolbox
-xkeyval
 tools # for calc
 luavlna # some glossaries use that
 kvoptions
@@ -16,6 +14,7 @@ luabidi
 bidi
 # bidi dependencies
 zref
+xkeyval
 ltxcmds
 infwarerr
 kvsetkeys
