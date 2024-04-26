@@ -1,6 +1,6 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-(../polyglossia.sty
+(polyglossia.sty
 Package: polyglossia ....-..-.. v... Modern multilingual typesetting with XeLaTeX and LuaLaTeX
 (../etoolbox.sty
 Package: etoolbox ....-..-.. v... e-TeX tools for LaTeX (JAW)
@@ -37,7 +37,7 @@ Package: fontenc ....-..-.. v... Standard LaTeX package
 luaotfload | db : Font names database loaded from ../luaotfload-names.luc.gz) (../fontspec.cfg))) (../iftex.sty
 Package: iftex ....-..-.. v... TeX engine tests
 )
-Lua module: polyglossia ....-..-.. 1.3 Polyglossia (../gloss-latex.ldf
+Lua module: polyglossia ....-..-.. 1.3 Polyglossia (gloss-latex.ldf
 File: gloss-latex.ldf polyglossia: module for default language
 )
 Package polyglossia Info: Setting LuaTeX font renderer to Harfbuzz

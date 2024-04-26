@@ -29,7 +29,7 @@
 \newif\ifcyrillic@numerals
 \newif\ifcyrillic@asbuk@numerals
 
-\DeclareKeys[belarusian]
+\DeclareKeys[korean]
   {
     babelshorthands.if = belarusian@babelshorthands,
     babelshorthands.default:n = true,
