@@ -30,18 +30,25 @@
 
 \newif\ifpunjabi@gurmukhi@numerals
 \punjabi@gurmukhi@numeralstrue
-\define@choicekey*+{punjabi}{numerals}[\xpg@val\xpg@nr]{Gurmukhi,Western}[Gurmukhi]{%
-   \ifcase\xpg@nr\relax
-      % Gurmukhi:
-      \punjabi@gurmukhi@numeralstrue%
-      \SetLanguageKeys{punjabi}{bcp47-extension-u=nu-guru}%
-   \or
-      % Western:
-      \punjabi@gurmukhi@numeralsfalse%
-      \SetLanguageKeys{punjabi}{bcp47-extension-u=nu-latn}%
-   \fi
-   \xpg@info{Option: Punjabi, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Punjabi numeral `#1'}}
+
+\DeclareKeys[punjabi]
+  {
+    numerals.choices:nn = { gurmukhi, western }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % Gurmukhi:
+          \punjabi@gurmukhi@numeralstrue%
+          \SetLanguageKeys{punjabi}{bcp47-extension-u=nu-guru}%
+        \or
+          % Western:
+          \punjabi@gurmukhi@numeralsfalse%
+          \SetLanguageKeys{punjabi}{bcp47-extension-u=nu-latn}%
+        \fi
+        \xpg@info{Option: Punjabi, numerals=#1}%
+      },
+    numerals.default:n = gurmukhi,
+    numerals/unknown.code = \xpg@warning{Unknown Punjabi numeral `#1'}
+  }
 
 % Register default options
 \InitializeGlossOptions{punjabi}{numerals=gurmukhi}
