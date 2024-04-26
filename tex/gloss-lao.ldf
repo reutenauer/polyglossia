@@ -22,11 +22,21 @@
 
 \newif\if@lao@numerals
 \def\tmp@lao{lao}
-\define@key{lao}{numerals}[arabic]{%
-	\def\@tmpa{#1}%
-	\ifx\@tmpa\tmp@lao\@lao@numeralstrue\else
-	  \@lao@numeralsfalse\fi
-}
+
+\DeclareKeys[lao]
+  {
+    numerals.choices:nn = { arabic, lao }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % arabic:
+          \@lao@numeralsfalse
+        \or
+          % lao:
+          \@lao@numeralstrue
+        \fi
+      },
+    numerals.default:n = arabic
+  }
 
 % Register default options
 \InitializeGlossOptions{lao}{numerals=arabic}
