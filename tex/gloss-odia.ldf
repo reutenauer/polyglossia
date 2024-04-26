@@ -30,29 +30,35 @@
 
 \newif\ifodia@devanagari@numerals
 \newif\ifodia@odia@numerals
-\define@choicekey*+{odia}{numerals}[\xpg@val\xpg@nr]{Devanagari,Odia,Western}[Devanagari]{%
-   \ifcase\xpg@nr\relax
-      % Devanagari:
-      \odia@odia@numeralsfalse%
-      \odia@devanagari@numeralstrue%
-      \SetLanguageKeys{odia}{bcp47=or,bcp47-language=or,bcp47-extension-u=nu-deva}%
-   \or
-      % Odia:
-      \odia@odia@numeralstrue%
-      \odia@devanagari@numeralsfalse%
-   \or
-      % Western:
-      \odia@odia@numeralsfalse%
-      \odia@devanagari@numeralsfalse%
-      \SetLanguageKeys{odia}{bcp47=or,bcp47-language=or,bcp47-extension-u=nu-latn}%
-   \fi
-   \xpg@info{Option: Odia, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Odia numeral `#1'}}
-
 \def\extras@odia{}
 \def\noextras@odia{}
 
-\define@boolkey{odia}[odia@]{changecounternumbering}[true]{}
+\DeclareKeys[odia]
+  {
+    changecounternumbering.if = odia@changecounternumbering,
+    changecounternumbering.default:n = true,
+    numerals.choices:nn = { devanagari, odia, western }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % Devanagari:
+          \odia@odia@numeralsfalse%
+          \odia@devanagari@numeralstrue%
+          \SetLanguageKeys{odia}{bcp47=or,bcp47-language=or,bcp47-extension-u=nu-deva}%
+        \or
+          % Odia:
+          \odia@odia@numeralstrue%
+          \odia@devanagari@numeralsfalse%
+        \or
+          % Western:
+          \odia@odia@numeralsfalse%
+          \odia@devanagari@numeralsfalse%
+          \SetLanguageKeys{odia}{bcp47=or,bcp47-language=or,bcp47-extension-u=nu-latn}%
+        \fi
+        \xpg@info{Option: Odia, numerals=#1}%
+      },
+    numerals.default:n = devanagari,
+    numerals/unknown.code = \xpg@warning{Unknown Odia numeral `#1'}
+  }
 
 % Register default options
 \InitializeGlossOptions{odia}{changecounternumbering=false,numerals=Devanagari}
