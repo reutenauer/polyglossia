@@ -25,52 +25,50 @@
 \setlanguagealias*{urdu}{ur}
 
 \newif\if@western@numerals
-\define@choicekey*+{urdu}{numerals}[\xpg@val\xpg@nr]{eastern,western}[eastern]{%
-   \ifcase\xpg@nr\relax
-      % eastern:
-      \@western@numeralsfalse%
-      \SetLanguageKeys{urdu}{bcp47-extension-u=nu-arab}%
-   \or
-      % western:
-      \@western@numeralstrue%
-      \SetLanguageKeys{urdu}{bcp47-extension-u=nu-latn}%
-   \fi
-   \xpg@info{Option: Urdu, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Urdu numerals option `#1'}}
-
 \newif\ifurdu@customsep\urdu@customsepfalse
 \def\xpg@sepmark{}
-\define@key{urdu}{sectionsep}[.]{%
-   \urdu@customseptrue%
-   \gdef\xpg@sepmark{#1}%
-}
-
-%this is needed for \abjad in arabicnumbers.sty
-\define@boolkey{urdu}[urdu@]{abjadjimnotail}[true]{%
-  \ifurdu@abjadjimnotail
-    \abjad@jim@notailtrue%
-  \else
-    \abjad@jim@notailfalse
-  \fi%
-}
-
 \newif\if@hijrical
-\define@choicekey*+{urdu}{calendar}[\xpg@val\xpg@nr]{gregorian,hijri}[gregorian]{%
-   \ifcase\xpg@nr\relax
-      % gregorian:
-      \@hijricalfalse
-   \or
-      % hijri:
-      \@hijricaltrue
-   \fi
-   \xpg@info{Option: Urdu, calendar=\xpg@val}%
-}{\xpg@warning{Unknown Urdu calendar option `#1'}}
 
-\define@key{urdu}{hijricorrection}[0]{%
-  \gdef\urdu@hijri@correction{#1}}%
+\DeclareKeys[urdu]
+  {
+    abjadjimnotail.if = abjad@jim@notail,
+    abjadjimnotail.default:n = true,
+    sectionsep.code = \gdef\xpg@sepmark{#1}\urdu@customseptrue,
+    sectionsep.default:n = .,
+    hijricorrection.code = \gdef\urdu@hijri@correction{#1},
+    hijricorrection.default:n = 0,
+    calendar.choices:nn = { gregorian, hijri }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % gregorian:
+          \@hijricalfalse
+        \or
+          % hijri:
+          \@hijricaltrue
+        \fi
+        \xpg@info{Option: Urdu, calendar=#1}%
+      },
+    calendar.default:n = gregorian,
+    calendar/unknown.code = \xpg@warning{Unknown Urdu calendar option `#1'},
+    numerals.choices:nn = { eastern, western }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % eastern:
+          \@western@numeralsfalse%
+          \SetLanguageKeys{urdu}{bcp47-extension-u=nu-arab}%
+        \or
+          % western:
+          \@western@numeralstrue%
+          \SetLanguageKeys{urdu}{bcp47-extension-u=nu-latn}%
+        \fi
+        \xpg@info{Option: Urdu, numerals=#1}%
+      },
+    numerals.default:n = eastern,
+    numerals/unknown.code = \xpg@warning{Unknown Urdu numerals option `#1'}
+  }
 
 % This should set the defaults
-\setkeys{urdu}{calendar,numerals,hijricorrection}
+\SetKeys[urdu]{calendar,numerals,hijricorrection}
 
 \def\urdugregmonth#1{\ifcase#1%
   \or جنوری\or فروری\or مارچ\or اپریل\or مئی\or جون\or جولائی\or اگست\or  ستمبر\or اکتوبر\or نومبر\or دسمبر\fi}
