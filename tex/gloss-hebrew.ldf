@@ -24,38 +24,49 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{hebrew}{he}
 
-% hebrewcal options
-\define@key{hebrew}{marcheshvan}[true]{\setkeys{hebrewcal}{marcheshvan=#1}}
-\define@key{hebrew}{transliteration}[alt]{\setkeys{hebrewcal}{transliteration=#1}}
-\define@key{hebrew}{fullyear}[true]{\setkeys{hebrewcal}{fullyear=#1}}
-
 \newif\if@calendar@hebrew
-\define@choicekey*+{hebrew}{calendar}[\xpg@val\xpg@nr]{hebrew,gregorian}[gregorian]{%
-   \ifcase\xpg@nr\relax
-      % hebrew:
-      \@calendar@hebrewtrue
-   \or
-      % gregorian:
-      \@calendar@hebrewfalse
-   \fi
-   \xpg@info{Option: Hebrew, calendar=\xpg@val}%
-}{\xpg@warning{Unknown Hebrew calendar `#1'}}
-
 \newif\if@hebrew@numerals
-\define@choicekey*+{hebrew}{numerals}[\xpg@val\xpg@nr]{hebrew,arabic}[arabic]{%
-   \ifcase\xpg@nr\relax
-      % hebrew:
-      \@hebrew@numeralstrue
-      \SetLanguageKeys{hebrew}{bcp47-extension-u=nu-hebr}%
-   \or
-      % arabic:
-      \@hebrew@numeralsfalse
-      \SetLanguageKeys{hebrew}{bcp47-extension-u=nu-latn}%
-   \fi
-   \xpg@info{Option: Hebrew, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Hebrew numerals value `#1'}}
 
-\setkeys{hebrew}{numerals}
+\DeclareKeys[hebrew]
+  {
+    marcheshvan.code = \setkeys{hebrewcal}{marcheshvan=#1},
+    marcheshvan.default:n = true,
+    transliteration.code = \setkeys{hebrewcal}{transliteration=#1},
+    transliteration.default:n = alt,
+    fullyear.code = \setkeys{hebrewcal}{fullyear=#1},
+    fullyear.default:n = true,
+    calendar.choices:nn = { hebrew, gregorian }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % hebrew:
+          \@calendar@hebrewtrue
+        \or
+          % gregorian:
+          \@calendar@hebrewfalse
+        \fi
+        \xpg@info{Option: Hebrew, calendar=#1}%
+      },
+    calendar.default:n = gregorian,
+    calendar/unknown.code = \xpg@warning{Unknown Hebrew calendar `#1'},
+    numerals.choices:nn = { hebrew, arabic }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % hebrew:
+          \@hebrew@numeralstrue
+          \SetLanguageKeys{hebrew}{bcp47-extension-u=nu-hebr}%
+        \or
+          % arabic:
+          \@hebrew@numeralsfalse
+          \SetLanguageKeys{hebrew}{bcp47-extension-u=nu-latn}%
+        \fi
+        \xpg@info{Option: Hebrew, numerals=#1}%
+      },
+    numerals.default:n = arabic,
+    numerals/unknown.code = \xpg@warning{Unknown Hebrew numerals value `#1'}
+  }
+
+
+\SetKeys[hebrew]{numerals}
 
 % Register default options
 \InitializeGlossOptions{hebrew}{numerals=arabic,calendar=gregorian,marcheshvan=false,fullyear=false}
