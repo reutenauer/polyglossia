@@ -155,9 +155,12 @@
 \def\arabicgregmonth@mauritania#1{\ifcase#1%
   \or يناير\or فبراير\or مارس\or إبريل\or مايو\or يونيو\or يوليو\or أغشت\or شتمبر\or أكتوبر\or نوفمبر\or دجمبر\fi}
 
-\def\@arabic@month#1{\ifcsdef{arabicgregmonth@#1}{\expandafter\csname arabicgregmonth@#1\endcsname}%
-{\xpg@warning{Option `locale=#1' is not defined for Arabic: using `default' instead}%
-\arabicgregmonth@default}}
+\def\@arabic@month#1{%
+  \@ifundefined{arabicgregmonth@#1}%
+     {\xpg@warning{Option `locale=#1' is not defined for Arabic: using `default' instead}%
+      \arabicgregmonth@default}%
+     {\expandafter\csname arabicgregmonth@#1\endcsname}%
+}
 
 %\Hijritoday is now locale-aware and will format the date with this macro:
 \DefineFormatHijriDate{arabic}{\@ensure@RTL{\arabicnumber{\value{Hijriday}}%
@@ -297,16 +300,16 @@
 }
 
 \def\noarabic@xetex@capsformat{%
-   \ifcsdef{xpg@save@sepmark}{%
+   \ifcsname xpg@save@sepmark\endcsname%
      \SepMark{\xpg@save@sepmark}
-   }{}%
+   \fi%
 }
 
 \def\arabic@luatex@capsformat{%
   %
   % change chapter and part headings
   \ifarabic@customsep
-     \ifcsdef{chapter}{%
+     \ifcsname chapter\endcsname%
         \let\xpg@save@thesection\thesection%
         \renewcommand*\thesection{\thechapter\xpg@sepmark\@arabic\c@section}
         \let\xpg@save@theequation\theequation%
@@ -318,7 +321,7 @@
         \let\xpg@save@thetable\thetable%
 	\renewcommand*\thetable{%
 	    \ifnum\c@chapter>\z@\thechapter\xpg@sepmark\fi\@arabic\c@table}
-     }{}
+     \fi%
      \let\xpg@save@thesubsection\thesubsection%
      \renewcommand\thesubsection
 	{\thesection\xpg@sepmark\@arabic\c@subsection}
@@ -333,30 +336,30 @@
 }
 
 \def\noarabic@luatex@capsformat{%
-   \ifcsdef{xpg@save@thesection}{%
+   \ifcsname xpg@save@thesection\endcsname%
         \let\thesection\xpg@save@thesection%
-   }{}%
-   \ifcsdef{xpg@save@theequation}{%
+   \fi%
+   \ifcsname xpg@save@theequation\endcsname%
         \let\theequation\xpg@save@theequation%
-   }{}%
-   \ifcsdef{xpg@save@thefigure}{%
+   \fi%
+   \ifcsname xpg@save@thefigure\endcsname%
         \let\thefigure\xpg@save@thefigure%
-   }{}%
-   \ifcsdef{xpg@save@thetable}{%
+   \fi%
+   \ifcsname xpg@save@thetable\endcsname%
         \let\thetable\xpg@save@thetable%
-   }{}%
-   \ifcsdef{xpg@save@thesubsection}{%
+   \fi%
+   \ifcsname xpg@save@thesubsection\endcsname%
         \let\thesubsection\xpg@save@thesubsection%
-   \ifcsdef{xpg@save@thesubsubsection}{%
+      \ifcsname xpg@save@thesubsubsection\endcsname%
         \let\thesubsubsection\xpg@save@thesubsubsection%
-   }{}%
-   }{}%
-   \ifcsdef{xpg@save@theparagraph}{%
+      \fi%
+   \fi%
+   \ifcsname xpg@save@theparagraph\endcsname%
         \let\theparagraph\xpg@save@theparagraph%
-   }{}%
-   \ifcsdef{xpg@save@thesubparagraph}{%
+   \fi%
+   \ifcsname xpg@save@thesubparagraph\endcsname%
         \let\thesubparagraph\xpg@save@thesubparagraph%
-   }{}%
+   \fi%
 }
 
 \def\blockextras@arabic{%

@@ -28,10 +28,9 @@
 \setlanguagealias*[script=latin]{sanskrit}{sa-Latn}
 
 \define@key{sanskrit}{Script}[devanagari]{%
-  \ifcsdef{fontsetup@sanskrit@#1}%
+  \@ifundefined{fontsetup@sanskrit@#1}%
+    {\xpg@error{`#1' is not a valid script for Sanskrit}}%
     {\csname fontsetup@sanskrit@#1\endcsname}%
-    {\xpg@error{`#1' is not a valid script for Sanskrit}%
-  }%
 }
 
 \define@key{sanskrit}{script}[devanagari]{\setkeys{sanskrit}{Script=#1}}
