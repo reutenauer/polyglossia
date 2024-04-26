@@ -15,17 +15,21 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{dutch}{nl}
 
-\define@boolkey{dutch}[dutch@]{babelshorthands}[true]{}
-
-\define@boolkey{dutch}[dutch@]{tremahyphenation}[true]{}
+\DeclareKeys[dutch]
+  {
+    babelshorthands.if = dutch@babelshorthands,
+    babelshorthands.default:n = true,
+    tremahyphenation.if = dutch@tremahyphenation,
+    tremahyphenation.default:n = true
+  }
 
 % Register default options
 \InitializeGlossOptions{dutch}{babelshorthands=false,tremahyphenation=true}
 
 \ifsystem@babelshorthands
-  \setkeys{dutch}{babelshorthands=true}
+  \SetKeys[dutch]{babelshorthands=true}
 \else
-  \setkeys{dutch}{babelshorthands=false}
+  \SetKeys[dutch]{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands
