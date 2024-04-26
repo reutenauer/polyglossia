@@ -20,33 +20,37 @@
   \RequirePackage{luavlna}
 \fi
 
-\define@boolkey{croatian}[croatian@]{babelshorthands}[true]{}
-
-\define@boolkey{croatian}[croatian@]{disabledigraphs}[true]{}
-
-% Alias kept for backwards compatibility. Please do not remove
-\define@boolkey{croatian}[croatian@]{disableligatures}[true]{%
-   \xpg@warning{The option disableligatures is deprected.\MessageBreak
-                Please use disabledigraphs instead}%
-   \ifcroatian@disableligatures
-      \croatian@disabledigraphstrue
-   \else
-      \croatian@disabledigraphsfalse
-   \fi
-}
-
-\define@boolkey{croatian}[croatian@]{splithyphens}[true]{}
-
-\define@boolkey{croatian}[croatian@]{localalph}[true]{}
+\DeclareKeys[croatian]
+  {
+    babelshorthands.if = croatian@babelshorthands,
+    babelshorthands.default:n = true,
+    disabledigraphs.if = croatian@disabledigraphs,
+    disabledigraphs.default:n = true,
+    splithyphens.if = croatian@splithyphens,
+    splithyphens.default:n = true,
+    localalph.if = croatian@localalph,
+    localalph.default:n = true,
+    disableligatures.choices:nn = { true, false }
+      {
+        \xpg@warning{The option disableligatures is deprected.\MessageBreak
+               Please use disabledigraphs instead}%
+        \ifcase\UseName{l_keys_choice_int}\or
+          \croatian@disabledigraphstrue
+        \or
+          \croatian@disabledigraphsfalse
+        \fi
+      },
+    disableligatures.default:n = true,
+  }
 
 % Register default options
 \InitializeGlossOptions{croatian}{babelshorthands=false,disabledigraphs=false,
                                         splithyphens=true,localalph=true}
 
 \ifsystem@babelshorthands
-  \setkeys{croatian}{babelshorthands=true}
+  \SetKeys[croatian]{babelshorthands=true}
 \else
-  \setkeys{croatian}{babelshorthands=false}
+  \SetKeys[croatian]{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands
