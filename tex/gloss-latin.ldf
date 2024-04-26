@@ -358,22 +358,6 @@
       }
   }
 
-\define@boolkey {latin} [latin@] {ecclesiasticfootnotes} [true]
-  {
-    \xpg_if_in_preamble:TF
-      {
-        % within the preamble
-        % The application of the option has to be postponed as the main
-        % language may be undefined when the option is called.
-        \AtBeginDocument { \polyglossia_latin_apply_footnote_option: }
-      }
-      {
-        % within the document
-        \polyglossia_latin_apply_footnote_option:
-      }
-  }
-
-
 %%%%% Language variants: classic, medieval, modern, and ecclesiastic
 
 \str_new:N \l_polyglossia_latin_variant_str
@@ -436,58 +420,6 @@
     \polyglossia_latin_use_modern_patterns:
   }
 
-\define@key{latin}{variant}
-  {
-    \str_case:nnF {#1}
-      {
-        {classic}
-        {
-          \msg_info:nnn {polyglossia} {latin / language variant} {classic}
-          \polyglossia_latin_classic_settings:
-        }
-        {medieval}
-        {
-          \msg_info:nnn {polyglossia} {latin / language variant} {medieval}
-          \polyglossia_latin_medieval_settings:
-        }
-        {modern}
-        {
-          \msg_info:nnn {polyglossia} {latin / language variant} {modern}
-          \polyglossia_latin_modern_settings:
-        }
-        {ecclesiastic}
-        {
-          \msg_info:nnn {polyglossia} {latin / language variant} {ecclesiastic}
-          \polyglossia_latin_ecclesiastic_settings:
-        }
-      }
-      {
-        \msg_warning:nnn {polyglossia} {latin / illegal language variant} {#1}
-      }
-  }
-
-
-%%%%% Boolean options concerning spelling
-
-\define@boolkey{latin}[latin@]{usej}[true]
-  {
-    \iflatin@usej
-      \bool_set_true:N \l_polyglossia_latin_use_j_bool
-    \else
-      \bool_set_false:N \l_polyglossia_latin_use_j_bool
-    \fi
-  }
-
-\define@boolkey{latin}[latin@]{capitalizemonth}[true]
-  {
-    \iflatin@capitalizemonth
-      \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
-    \else
-      \bool_set_false:N \l_polyglossia_latin_capitalize_month_bool
-    \fi
-  }
-
-
 %%%%% Hyphenation variants: classic, liturgical, and modern
 
 \msg_new:nnn {polyglossia} {latin / hyphenation variant}
@@ -499,23 +431,6 @@
   {
     The~Latin~hyphenation~variant~"#1"~is~undefined~\msg_line_context:.
   }
-
-\define@key {latin} {hyphenation}
-  {
-    \str_case:nnTF {#1}
-      {
-        {classic}    { \polyglossia_latin_set_patterns:n {classiclatin} }
-        {liturgical} { \polyglossia_latin_set_patterns:n {liturgicallatin} }
-        {modern}     { \polyglossia_latin_use_modern_patterns: }
-      }
-      {
-        \msg_info:nnn {polyglossia} {latin / hyphenation variant} {#1}
-      }
-      {
-        \msg_warning:nnn {polyglossia} {latin / illegal hyphenation variant} {#1}
-      }
-  }
-
 
 %%%%% Latin captions and date
 
@@ -588,15 +503,92 @@
       }
   }
 
-
-%%%%% Latin shorthands
-
-\define@boolkey{latin}[latin@]{babelshorthands}[true]
+\DeclareKeys[latin]
   {
-  }
-
-\define@boolkey{latin}[latin@]{prosodicshorthands}[true]
-  {
+    babelshorthands.if = latin@babelshorthands,
+    babelshorthands.default:n = true,
+    prosodicshorthands.if = latin@babelshorthands,
+    prosodicshorthands.default:n = true,
+    usej.bool_set:N = \l_polyglossia_latin_use_j_bool,
+    capitalizemonth.bool_set:N = \l_polyglossia_latin_capitalize_month_bool,
+    hyphenation.code = 
+    	\str_case:nnTF {#1}
+      {
+        {classic}    { \polyglossia_latin_set_patterns:n {classiclatin} }
+        {liturgical} { \polyglossia_latin_set_patterns:n {liturgicallatin} }
+        {modern}     { \polyglossia_latin_use_modern_patterns: }
+      }
+      {
+        \msg_info:nnn {polyglossia} {latin / hyphenation variant} {#1}
+      }
+      {
+        \msg_warning:nnn {polyglossia} {latin / illegal hyphenation variant} {#1}
+      },
+    variant.code = 
+    	  \str_case:nnF {#1}
+      {
+        {classic}
+        {
+          \msg_info:nnn {polyglossia} {latin / language variant} {classic}
+          \polyglossia_latin_classic_settings:
+        }
+        {medieval}
+        {
+          \msg_info:nnn {polyglossia} {latin / language variant} {medieval}
+          \polyglossia_latin_medieval_settings:
+        }
+        {modern}
+        {
+          \msg_info:nnn {polyglossia} {latin / language variant} {modern}
+          \polyglossia_latin_modern_settings:
+        }
+        {ecclesiastic}
+        {
+          \msg_info:nnn {polyglossia} {latin / language variant} {ecclesiastic}
+          \polyglossia_latin_ecclesiastic_settings:
+        }
+      }
+      {
+        \msg_warning:nnn {polyglossia} {latin / illegal language variant} {#1}
+      },
+    ecclesiasticfootnotes.choices:nn = { true, false }
+      { 
+        \xpg_if_in_preamble:TF
+          {
+            % within the preamble
+            % The application of the option has to be postponed as the main
+            % language may be undefined when the option is called.
+            \AtBeginDocument { \polyglossia_latin_apply_footnote_option: }
+          }
+          {
+            % within the document
+            \polyglossia_latin_apply_footnote_option:
+          }
+      },
+    ecclesiasticfootnotes.default:n = true,
+    numerals.choices:nn = { arabic, cyrillic, cyrillic-trad, cyrillic-alph }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % arabic:
+          \cyrillic@numeralsfalse
+          \cyrillic@asbuk@numeralsfalse
+        \or
+          % cyrillic:
+          \cyrillic@numeralstrue
+          \cyrillic@asbuk@numeralsfalse
+        \or
+          % cyrillic-trad:
+          \cyrillic@numeralstrue
+          \cyrillic@asbuk@numeralsfalse
+        \or
+          % cyrillic-alph:
+          \cyrillic@numeralstrue
+          \cyrillic@asbuk@numeralstrue
+        \fi
+        \xpg@info{Option: Belarusian, numerals=#1}%
+      },
+    numerals.default:n = arabic,
+    numerals/unknown.code = \xpg@warning{Unknown Belarusian numerals value `#1'}
   }
 
 % Register default options
@@ -605,9 +597,9 @@
                                      usej=false,capitalizemonth=true}
 
 \ifsystem@babelshorthands
-  \setkeys{latin}{babelshorthands=true}
+  \SetKeys[latin]{babelshorthands=true}
 \else
-  \setkeys{latin}{babelshorthands=false}
+  \SetKeys[latin]{babelshorthands=false}
 \fi
 
 \ExplSyntaxOff % babelsh.def does not support expl3 syntax
