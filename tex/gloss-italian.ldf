@@ -18,17 +18,19 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{italian}{it}
 
-
-%%% CHANGES START %%% by Enrico Gregorio
-\define@boolkey{italian}[italian@]{babelshorthands}[true]{}
+\DeclareKeys[italian]
+  {
+    babelshorthands.if = italian@babelshorthands,
+    babelshorthands.default:n = true,
+  }
 
 % Register default options
 \InitializeGlossOptions{italian}{babelshorthands=false}
 
 \ifsystem@babelshorthands
-  \setkeys{italian}{babelshorthands=true}
+  \SetKeys[italian]{babelshorthands=true}
 \else
-  \setkeys{italian}{babelshorthands=false}
+  \SetKeys[italian]{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands
