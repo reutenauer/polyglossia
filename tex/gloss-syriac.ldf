@@ -22,31 +22,35 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{syriac}{syr}
 
-\def\syriacnumber#1{\@syriacnumber{#1}}%
+\def\syriacnumber#1{\@syriacnumber{#1}}
 
 \newif\if@eastern@numerals
-\define@choicekey*+{syriac}{numerals}[\xpg@val\xpg@nr]{eastern,western,abjad}[eastern]{%
-   \ifcase\xpg@nr\relax
-      % eastern:
-      \@eastern@numeralstrue
-      \SetLanguageKeys{syriac}{bcp47-extension-u=nu-syrc}%
-   \or
-      % western:
-      \@eastern@numeralsfalse
-      \SetLanguageKeys{syriac}{bcp47-extension-u=nu-latn}%
-   \or
-      % abjad:
-      \let\syriacnumber\abjadsyriac%
-   \fi
-   \xpg@info{Option: Syriac, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Syriac numerals option `#1'}}
-
 \newif\ifsyriac@customsep\syriac@customsepfalse
 \def\xpg@sepmark{}
-\define@key{syriac}{sectionsep}[.]{%
-   \syriac@customseptrue%
-   \gdef\xpg@sepmark{#1}%
-}
+
+\DeclareKeys[syriac]
+  {
+    sectionsep.code = \gdef\xpg@sepmark{#1}\syriac@customseptrue,
+    sectionsep.default:n = .,
+    numerals.choices:nn = { eastern, western, abjad }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % eastern:
+          \@eastern@numeralstrue
+          \SetLanguageKeys{syriac}{bcp47-extension-u=nu-syrc}%
+        \or
+          % western:
+          \@eastern@numeralsfalse
+          \SetLanguageKeys{syriac}{bcp47-extension-u=nu-latn}%
+        \or
+          % abjad:
+          \let\syriacnumber\abjadsyriac
+        \fi
+        \xpg@info{Option: Syriac, numerals=#1}%
+      },
+    numerals.default:n = eastern,
+    numerals/unknown.code = \xpg@warning{Unknown Syriac numerals option `#1'}
+  }
 
 % Register default options
 \InitializeGlossOptions{syriac}{numerals=western}
