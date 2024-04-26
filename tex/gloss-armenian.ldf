@@ -25,7 +25,7 @@
 \newif\if@armenian@numerals
 \@armenian@numeralsfalse
 
-\DeclareKeys[belarusian]
+\DeclareKeys[armenian]
   {
     variant.choices:nn = { western, eastern }
       { 
