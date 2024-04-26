@@ -20,21 +20,27 @@
 \setlanguagealias[variant=nynorsk]{norwegian}{nynorsk}
 
 \def\norwegian@variant{nynorsk}
-\define@choicekey*+{norwegian}{variant}[\xpg@val\xpg@nr]{nynorsk,bokmal}[nynorsk]{%
-   \ifcase\xpg@nr\relax
-      % nynorsk:
-      \def\norwegian@variant{nynorsk}%
-      \SetLanguageKeys{norwegian}{langtag=NYN,babelname=nynorsk,bcp47=nn,bcp47-language=nn}%
-      \SetupLatinPolyglossiaFont{norwegian}%
-   \or
-      % bokmal:
-      \def\norwegian@variant{norsk}%
-      \SetLanguageKeys{norwegian}{langtag=NOR,babelname=norsk,bcp47=nb,bcp47-language=nb}%
-      \SetupLatinPolyglossiaFont{norwegian}%
-   \fi
-   \xpg@info{Option: norwegian, variant=\xpg@val}%
-}{\xpg@warning{Unknown norwegian variant `#1'}}
 
+\DeclareKeys[norwegian]
+  {
+    variant.choices:nn = { nynorsk, bokmal }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % nynorsk:
+          \def\norwegian@variant{nynorsk}%
+          \SetLanguageKeys{norwegian}{langtag=NYN,babelname=nynorsk,bcp47=nn,bcp47-language=nn}%
+          \SetupLatinPolyglossiaFont{norwegian}%
+        \or
+          % bokmal:
+          \def\norwegian@variant{norsk}%
+          \SetLanguageKeys{norwegian}{langtag=NOR,babelname=norsk,bcp47=nb,bcp47-language=nb}%
+          \SetupLatinPolyglossiaFont{norwegian}%
+        \fi
+        \xpg@info{Option: norwegian, variant=#1}%
+      },
+    variant.default:n = nynorsk,
+    variant/unknown.code = \xpg@warning{Unknown norwegian variant `#1'}
+  }
 
 % Register default options
 \InitializeGlossOptions{norwegian}{variant=nynorsk}
