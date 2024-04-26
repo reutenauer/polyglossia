@@ -72,7 +72,7 @@
         \fi
         \xpg@info{Option: Belarusian, numerals=#1}%
       },
-    numerals.default:n = modern,
+    numerals.default:n = arabic,
     numerals/unknown.code = \xpg@warning{Unknown Belarusian numerals value `#1'}
   }
 
