@@ -16,7 +16,10 @@ Module polyglossia Info: Language croatian was not yet loaded; created with id 2
 Package: luavlna ....-..-.. luavlna
 (../kvoptions.sty
 Package: kvoptions ....-..-.. v... Key value format for package options (HO)
-(../ltxcmds.sty
+(../keyval.sty
+Package: keyval ....-..-.. v... key=value parser (DPC)
+\KV@toks@=\toks...
+) (../ltxcmds.sty
 Package: ltxcmds ....-..-.. v... LaTeX kernel commands for general use (HO)
 ) (../kvsetkeys.sty
 Package: kvsetkeys ....-..-.. v... Key value parser (HO)
