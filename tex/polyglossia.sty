@@ -3,10 +3,11 @@
   {polyglossia} {2024/03/07} {v2.1}
   {Modern multilingual typesetting with XeLaTeX and LuaLaTeX}
 
-% TODO check for possible uses in the gloss files,
-%      and remove if none is left
+% TODO Handle remaining uses in the gloss files (\patchcmd, \ifcsdef)
+%      and the remainders here (all xkeyval-related),
+%      and remove package call afterwards
 \RequirePackage{etoolbox}
-% TODO remove after the chcange to l3 keys
+% TODO remove after the change to l3 keys
 \RequirePackage{xkeyval}[2008/08/13]
 % Will raise error if used with anything else than XeTeX or LuaTeX
 \RequirePackage{fontspec}[2010/06/08]% v2.0
