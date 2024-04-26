@@ -18,27 +18,35 @@
 \setlanguagealias*{georgian}{ka}
 
 \newif\ifgeorgian@numerals
-\define@key{georgian}{numerals}[arabic]{%
-   \ifstrequal{#1}{georgian}%
-      {\georgian@numeralstrue%
-       \SetLanguageKeys{georgian}{bcp47-extension-u=nu-geor}%
-      }%
-      {\georgian@numeralsfalse%
-       \SetLanguageKeys{georgian}{bcp47-extension-u=nu-latn}%
-      }%
-}
 
-\define@boolkey{georgian}[georgian@]{babelshorthands}[true]{}
-
-\define@boolkey{georgian}[georgian@]{oldmonthnames}[true]{}
+\DeclareKeys[georgian]
+  {
+    babelshorthands.if = georgian@babelshorthands,
+    babelshorthands.default:n = true,
+    oldmonthnames.if = georgian@oldmonthnames,
+    oldmonthnames.default:n = true,
+    numerals.choices:nn = { arabic, georgian }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % arabic:
+          \georgian@numeralsfalse
+          \SetLanguageKeys{georgian}{bcp47-extension-u=nu-latn}%
+        \or
+          % georgian:
+          \georgian@numeralstrue
+          \SetLanguageKeys{georgian}{bcp47-extension-u=nu-geor}%
+        \fi
+      },
+    numerals.default:n = arabic
+  }
 
 % Register default options
 \InitializeGlossOptions{georgian}{babelshorthands=false,oldmonthnames=false,numerals=arabic}
 
 \ifsystem@babelshorthands
-  \setkeys{georgian}{babelshorthands=true}
+  \SetKeys[georgian]{babelshorthands=true}
 \else
-  \setkeys{georgian}{babelshorthands=false}
+  \SetKeys[georgian]{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands
