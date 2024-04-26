@@ -30,53 +30,60 @@
   {\newif\ifmalay@melayu}{}
 \malay@melayufalse
 \def\malay@variant{malay}
-\define@choicekey*+{malay}{variant}[\xpg@val\xpg@nr]{indonesian,malaysian}[malaysian]{%
-   \ifcase\xpg@nr\relax
-      % indonesian:
-      \def\malay@variant{indonesian}%
-      \malay@melayufalse
-   \or
-      % malaysian:
-      \def\malay@variant{malay}%
-      \malay@melayutrue
-   \fi
-   \ifmalay@melayu
-      \SetLanguageKeys{malay}{language=Malay,langtag=MLY,babelname=bahasam,bcp47=zsm,bcp47-language=zsm}%
-      \SetupLatinPolyglossiaFont{malay}%
-      % Check if \l@malay is defined. If not, try to set it to some variety
-      % (specific order as in the csv list below), or null language if everything fails
-      \IfLanguageDefinedF{malay}{%
-        \def\do##1{%
-            \IfLanguageDefinedT{##1}%
-              {\csletcs{l@malay}{l@##1}\listbreak}%
-        }%
-        \docsvlist{melayu,bahasam,bahasai,indonesian,indon,bahasa}
-        \IfLanguageDefinedF{malay}{%
-                 \xpg@warning{No hyphenation patterns for Malay (Malaysian) found\MessageBreak
-                              I will use the 'null' language instead}%
-                 \adddialect\l@malay0%
-        }%
-      }%
-   \else
-      \SetLanguageKeys{malay}{language=Indonesian,langtag=IND,babelname=bahasa,bcp47=id,bcp47-language=id}%
-      \SetupLatinPolyglossiaFont{malay}%
-      % Check if \l@indonesian is defined. If not, try to set it to some variety
-      % (specific order as in the csv list below), or null language if everything fails
-      \IfLanguageDefinedF{indonesian}{%
-        \def\do##1{%
-           \IfLanguageDefinedT{##1}%
-              {\csletcs{l@indonesian}{l@##1}\listbreak}%
-        }%
-        \docsvlist{indon,bahasai,bahasam,malay,melayu,bahasa}
-        \IfLanguageDefinedF{indonesian}{%
-                 \xpg@warning{No hyphenation patterns for Malay (Indonesian) found\MessageBreak
-                              I will use the 'null' language instead}%
-                 \adddialect\l@indonesian0
-        }%
-      }%
-   \fi
-   \xpg@info{Option: malay, variant=\xpg@val}%
-}{\xpg@warning{Unknown malay variant `#1'}}
+
+\DeclareKeys[malay]
+  {
+    variant.choices:nn = { indonesian, malaysian }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % indonesian:
+          \def\malay@variant{indonesian}%
+          \malay@melayufalse
+        \or
+          % malaysian:
+          \def\malay@variant{malay}%
+          \malay@melayutrue
+        \fi
+        \ifmalay@melayu
+          \SetLanguageKeys{malay}{language=Malay,langtag=MLY,babelname=bahasam,bcp47=zsm,bcp47-language=zsm}%
+          \SetupLatinPolyglossiaFont{malay}%
+          % Check if \l@malay is defined. If not, try to set it to some variety
+          % (specific order as in the csv list below), or null language if everything fails
+          \IfLanguageDefinedF{malay}{%
+            \def\do####1{%
+                \IfLanguageDefinedT{####1}%
+                  {\csletcs{l@malay}{l@####1}\listbreak}%
+            }%
+            \docsvlist{melayu,bahasam,bahasai,indonesian,indon,bahasa}
+            \IfLanguageDefinedF{malay}{%
+                     \xpg@warning{No hyphenation patterns for Malay (Malaysian) found\MessageBreak
+                                  I will use the 'null' language instead}%
+                     \adddialect\l@malay0%
+            }%
+          }%
+       \else
+          \SetLanguageKeys{malay}{language=Indonesian,langtag=IND,babelname=bahasa,bcp47=id,bcp47-language=id}%
+          \SetupLatinPolyglossiaFont{malay}%
+          % Check if \l@indonesian is defined. If not, try to set it to some variety
+          % (specific order as in the csv list below), or null language if everything fails
+          \IfLanguageDefinedF{indonesian}{%
+            \def\do####1{%
+               \IfLanguageDefinedT{####1}%
+                  {\csletcs{l@indonesian}{l@####1}\listbreak}%
+            }%
+            \docsvlist{indon,bahasai,bahasam,malay,melayu,bahasa}
+            \IfLanguageDefinedF{indonesian}{%
+                     \xpg@warning{No hyphenation patterns for Malay (Indonesian) found\MessageBreak
+                                  I will use the 'null' language instead}%
+                     \adddialect\l@indonesian0
+            }%
+          }%
+       \fi
+       \xpg@info{Option: malay, variant=#1}%
+      },
+    variant.default:n = malaysian,
+    variant/unknown.code = \xpg@warning{Unknown malay variant `#1'},
+  }
 
 % Register default options
 \InitializeGlossOptions{malay}{variant=malaysian}
