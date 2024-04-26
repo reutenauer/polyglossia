@@ -28,6 +28,8 @@
 \@ifundefined{ifchinese@numerals}%
   {\newif\ifchinese@numerals}{}
 
+\def\chinese@variant{chinese}
+
 \DeclareKeys[chinese]
   {
     variant.choices:nn = { cn, simplified, tw, traditional }
