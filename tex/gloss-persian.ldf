@@ -27,39 +27,35 @@
 \setlanguagealias{persian}{farsi}
 
 \newif\if@western@numerals
-\define@choicekey*+{persian}{numerals}[\xpg@val\xpg@nr]{eastern,western}[eastern]{%
-   \ifcase\xpg@nr\relax
-      % eastern:
-      \@western@numeralsfalse%
-      \SetLanguageKeys{persian}{bcp47-extension-u=nu-arab}%
-   \or
-      % western:
-      \@western@numeralstrue%
-      \SetLanguageKeys{persian}{bcp47-extension-u=nu-latn}%
-   \fi
-   \xpg@info{Option: Persian, numerals=\xpg@val}%
-}{\xpg@warning{Unknown Persian numerals option `#1'}}
-
 \newif\ifpersian@customsep\persian@customsepfalse
 \def\xpg@sepmark{}
-\define@key{persian}{sectionsep}[.]{%
-   \persian@customseptrue%
-   \gdef\xpg@sepmark{#1}%
-}
-
-%this is needed for \abjad in arabicnumbers.sty
-\define@boolkey{persian}[persian@]{abjadjimnotail}[true]{%
-  \ifpersian@abjadjimnotail
-    \abjad@jim@notailtrue%
-  \else
-    \abjad@jim@notailfalse
-  \fi}
-
-% NOT YET USED
-\define@key{persian}{locale}[default]{%
-  \def\@persian@locale{#1}}
 
 %TODO add option for CALENDAR
+
+\DeclareKeys[persian]
+  {
+    sectionsep.code = \gdef\xpg@sepmark{#1}\persian@customseptrue,
+    sectionsep.default:n = .,
+    abjadjimnotail.if = abjad@jim@notail,
+    abjadjimnotail.default:n = true,
+    locale.store = \@persian@locale,
+    locale.default:n = default,
+    numerals.choices:nn = { eastern, western }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % eastern:
+          \@western@numeralsfalse%
+          \SetLanguageKeys{persian}{bcp47-extension-u=nu-arab}%
+        \or
+          % western:
+          \@western@numeralstrue%
+          \SetLanguageKeys{persian}{bcp47-extension-u=nu-latn}%
+        \fi
+        \xpg@info{Option: Persian, numerals=#1}%
+      },
+    numerals.default:n = eastern,
+    numerals/unknown.code = \xpg@warning{Unknown Persian numerals option `#1'}
+  }
 
 % Register default options
 \InitializeGlossOptions{persian}{locale=default,numerals=eastern,abjadjimnotail=false}
