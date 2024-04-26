@@ -27,49 +27,57 @@
 
 \newif\if@spanish@mexico
 \@spanish@mexicofalse
-\define@choicekey*+{spanish}{variant}[\xpg@val\xpg@nr]{spanish,mexican}[spanish]{%
-   \ifcase\xpg@nr\relax
-      % spanish:
-      \@spanish@mexicofalse%
-      \SetLanguageKeys{spanish}{babelname=spanish,bcp47=es-ES,bcp47-region=ES}%
-   \or
-      % mexican:
-      \@spanish@mexicotrue%
-      \SetLanguageKeys{spanish}{babelname=spanishmx,bcp47=es-MX,bcp47-region=MX}%
-   \fi
-   \xpg@info{Option: spanish, variant=\xpg@val}%
-}{\xpg@warning{Unknown spanish variant `#1'}}
 
 % Localized math operators à la babel
 \newif\ifspanish@accentedoperators
 \newif\ifspanish@spacedoperators
 \newif\ifspanish@locoperators
 
-\define@choicekey*+{spanish}{spanishoperators}[\xpg@val\xpg@nr]{all,accented,spaced,none}[all]{%
-   \ifcase\xpg@nr\relax
-      % all:
-      \spanish@locoperatorstrue%
-      \spanish@accentedoperatorstrue%
-      \spanish@spacedoperatorstrue%
-   \or
-      % accented:
-      \spanish@locoperatorsfalse%
-      \spanish@accentedoperatorstrue%
-      \spanish@spacedoperatorsfalse%
-   \or
-      % spaced:
-      \spanish@locoperatorsfalse%
-      \spanish@accentedoperatorsfalse%
-      \spanish@spacedoperatorstrue%
-   \or
-      % none:
-      \spanish@locoperatorsfalse%
-      \spanish@accentedoperatorsfalse%
-      \spanish@spacedoperatorsfalse%
-   \fi
-   \xpg@info{Option: Spanish, spanishoperators=\xpg@val}%
-}{\xpg@warning{Unknown spanishoperators value `#1'}}
-
+\DeclareKeys[spanish]
+  {
+    variant.choices:nn = { spanish, mexican }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % spanish:
+          \@spanish@mexicofalse
+          \SetLanguageKeys{spanish}{babelname=spanish,bcp47=es-ES,bcp47-region=ES}%
+        \or
+          % mexican:
+          \@spanish@mexicotrue
+          \SetLanguageKeys{spanish}{babelname=spanishmx,bcp47=es-MX,bcp47-region=MX}%
+        \fi
+        \xpg@info{Option: spanish, variant=#1}%
+      },
+    variant.default:n = spanish,
+    variant/unknown.code = \xpg@warning{Unknown spanish variant `#1'},
+    spanishoperators.choices:nn = { all, accented, spaced, none }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % all:
+          \spanish@locoperatorstrue
+          \spanish@accentedoperatorstrue
+          \spanish@spacedoperatorstrue
+        \or
+          % accented:
+          \spanish@locoperatorsfalse
+          \spanish@accentedoperatorstrue
+          \spanish@spacedoperatorsfalse
+        \or
+          % spaced:
+          \spanish@locoperatorsfalse
+          \spanish@accentedoperatorsfalse
+          \spanish@spacedoperatorstrue
+        \or
+          % none:
+          \spanish@locoperatorsfalse
+          \spanish@accentedoperatorsfalse
+          \spanish@spacedoperatorsfalse
+        \fi
+   \xpg@info{Option: Spanish, spanishoperators=#1}%
+      },
+    spanishoperators.default:n = all,
+    spanishoperators/unknown.code = \xpg@warning{Unknown spanishoperators value `#1'}
+  }
 
 % Register default options
 \InitializeGlossOptions{spanish}{variant=spanish,spanishoperators=none}
