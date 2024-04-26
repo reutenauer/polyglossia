@@ -18,16 +18,22 @@
 \@ifundefined{ifwelsh@formaldate}%
   {\newif\ifwelsh@formaldate}{}
 
-\define@choicekey*+{welsh}{date}[\xpg@val\xpg@nr]{long,short}[short]{%
-   \ifcase\xpg@nr\relax
-      % long:
-      \welsh@formaldatetrue
-   \or
-      % accented:
-      \welsh@formaldatefalse
-   \fi
-   \xpg@info{Option: Welsh, date=\xpg@val}%
-}{\xpg@warning{Unknown date value `#1'}}
+\DeclareKeys[welsh]
+  {
+    date.choices:nn = { long, short }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % long:
+          \welsh@formaldatetrue
+        \or
+          % accented:
+          \welsh@formaldatefalse
+        \fi
+        \xpg@info{Option: Welsh, date=#1}%
+      },
+    date.default:n = short,
+    date/unknown.code = \xpg@warning{Unknown date value `#1'},
+  }
 
 % Register default options
 \InitializeGlossOptions{welsh}{date=short}
