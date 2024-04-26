@@ -28,40 +28,6 @@
 \setlanguagealias[variant=canadian]{french}{canadien}
 
 \def\french@variant{french}
-\define@choicekey*+{french}{variant}[\xpg@val\xpg@nr]{french,canadian,acadian,swiss}[french]{%
-   \ifcase\xpg@nr\relax
-      % french:
-      \def\french@variant{french}%
-      \SetLanguageKeys{french}{babelname=french,bcp47=fr-FR,bcp47-language=fr,bcp47-region=FR}%
-      \french@thincolonspacefalse
-   \or
-      % canadian:
-      \def\french@variant{canadien}%
-      \SetLanguageKeys{french}{babelname=canadien,bcp47=fr-CA,bcp47-language=fr,bcp47-region=CA,bcp47-extension-u=sd-caqc}%
-      \IfLanguageDefinedF{canadien}%
-        {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
-          I will use the standard patterns for French instead}%
-         \adddialect\l@canadien\l@french\relax}%
-      \french@thincolonspacefalse
-   \or
-      % acadian:
-      \def\french@variant{acadian}%
-      \SetLanguageKeys{french}{babelname=acadian,bcp47=fr-CA-u-sd-canb,bcp47-language=fr,bcp47-region=CA,bcp47-extension-u=sd-canb}%
-      \IfLanguageDefinedF{acadian}%
-        {\xpg@warning{No hyphenation patterns were loaded for "French (Canada, Acadian)"\MessageBreak
-          I will use the standard patterns for French instead}%
-         \adddialect\l@acadian\l@french\relax}%
-      \french@thincolonspacefalse
-   \or
-      % swiss:
-      \def\french@variant{swissfrench}%
-      \SetLanguageKeys{french}{babelname=french,bcp47=fr-CH,bcp47-language=fr,bcp47-region=CH}%
-      \adddialect\l@swissfrench\l@french\relax%
-      \french@thincolonspacetrue
-   \fi
-   \xpg@info{Option: French, variant=\xpg@val}%
-}{\xpg@warning{Unknown French variant `#1'}}
-
 
 \def\french@language{%
    \SetupPolyglossiaLangPatterns{\french@variant}%
@@ -88,47 +54,9 @@
   \let\xpg@orig@makefntext\@makefntext
 }
 
-\define@boolkey{french}[french@]{frenchfootnote}[true]{}
-
-\define@boolkey{french}[french@]{autospacing}[true]{}
-\french@autospacingtrue
-
-\define@boolkey{french}[french@]{frenchpart}[true]{}
-\french@frenchparttrue
-
-\newif\iffrench@autospaceguillemets
-\define@boolkey{french}[french@]{autospaceguillemets}[true]{}
-\french@autospaceguillemetstrue
-
-\newif\iffrench@thincolonspace
-\define@boolkey{french}[french@]{thincolonspace}[true]{}
-\french@thincolonspacefalse
-
-% Backwards compatibility
-\define@boolkey{french}[french@]{automaticspacesaroundguillemets}[true]{%
-   \iffrench@automaticspacesaroundguillemets
-       \setkeys{french}{autospaceguillemets=true}%
-   \else
-       \setkeys{french}{autospaceguillemets=false}%
-   \fi
-}
-
 % name is for compatibility with babel
 \let\french@ttfamilyORI\ttfamily
 \DeclareRobustCommand\french@ttfamilyFB{\nofrench@punctuation\french@ttfamilyORI}
-
-% Allow to switch on autospacing in ttfamily context
-\define@boolkey{french}[french@]{autospacetypewriter}[true]{}
-\french@autospacetypewriterfalse
-
-% This is how babel-french has it
-\define@boolkey{french}[french@]{OriginalTypewriter}[true]{%
-   \iffrench@OriginalTypewriter
-       \setkeys{french}{autospacetypewriter=false}%
-   \else
-       \setkeys{french}{autospacetypewriter=true}%
-   \fi
-}
 
 % Configuration of item labels
 \def\french@itemi{\textemdash}
@@ -136,30 +64,80 @@
 \def\french@itemiii{\textemdash}
 \def\french@itemiv{\textemdash}
 
-\define@key{french}{itemlabels}[\textemdash]{%
-  \def\french@itemi{#1}
-  \def\french@itemii{#1}
-  \def\french@itemiii{#1}
-  \def\french@itemiv{#1}
-}
+\newif\iffrench@autospacetypewriter
+\french@autospacetypewriterfalse
+\newif\iffrench@autospacing
+\french@autospacingtrue
+\newif\iffrench@frenchpart
+\french@frenchparttrue
+\newif\iffrench@autospaceguillemets
+\french@autospaceguillemetstrue
 
-\define@key{french}{itemlabeli}[\textemdash]{%
-  \def\french@itemi{#1}
-}
-
-\define@key{french}{itemlabelii}[\textemdash]{%
-  \def\french@itemii{#1}
-}
-
-\define@key{french}{itemlabeliii}[\textemdash]{%
-  \def\french@itemiii{#1}
-}
-
-\define@key{french}{itemlabeliv}[\textemdash]{%
-  \def\french@itemiv{#1}
-}
-
-\define@boolkey{french}[french@]{frenchitemlabels}[true]{}
+\DeclareKeys[french]
+  {
+    variant.choices:nn = { french, canadian, acadian, swiss }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % french:
+          \def\french@variant{french}%
+          \SetLanguageKeys{french}{babelname=french,bcp47=fr-FR,bcp47-language=fr,bcp47-region=FR}%
+          \french@thincolonspacefalse
+        \or
+          % canadian:
+          \def\french@variant{canadien}%
+          \SetLanguageKeys{french}{babelname=canadien,bcp47=fr-CA,bcp47-language=fr,bcp47-region=CA,bcp47-extension-u=sd-caqc}%
+          \IfLanguageDefinedF{canadien}%
+            {\xpg@warning{No hyphenation patterns were loaded for "French (Canada)"\MessageBreak
+              I will use the standard patterns for French instead}%
+             \adddialect\l@canadien\l@french\relax}%
+          \french@thincolonspacefalse
+       \or
+          % acadian:
+          \def\french@variant{acadian}%
+          \SetLanguageKeys{french}{babelname=acadian,bcp47=fr-CA-u-sd-canb,bcp47-language=fr,bcp47-region=CA,bcp47-extension-u=sd-canb}%
+          \IfLanguageDefinedF{acadian}%
+            {\xpg@warning{No hyphenation patterns were loaded for "French (Canada, Acadian)"\MessageBreak
+              I will use the standard patterns for French instead}%
+             \adddialect\l@acadian\l@french\relax}%
+          \french@thincolonspacefalse
+        \or
+          % swiss:
+          \def\french@variant{swissfrench}%
+          \SetLanguageKeys{french}{babelname=french,bcp47=fr-CH,bcp47-language=fr,bcp47-region=CH}%
+          \adddialect\l@swissfrench\l@french\relax%
+          \french@thincolonspacetrue
+        \fi
+        \xpg@info{Option: French, variant=#1}%
+      },
+    variant.default:n = french,
+    variant/unknown.code = \xpg@warning{Unknown French variant `#1'},
+    frenchfootnote.if = french@frenchfootnote,
+    frenchfootnote.default:n = true,
+    autospacing.if = french@autospacing,
+    autospacing.default:n = true,
+    frenchpart.if = french@frenchpart,
+    frenchpart.default:n = true,
+    autospaceguillemets.if = french@autospaceguillemets,
+    autospaceguillemets.default:n = true,
+    thincolonspace.if = french@thincolonspace,
+    thincolonspace.default:n = true,
+    automaticspacesaroundguillemets.meta:n = {autospaceguillemets=#1},
+    autospacetypewriter.if = french@autospacetypewriter,
+    autospacetypewriter.default:n = true,
+    originaltypewriter.meta:n = {autospacetypewriter=#1},
+    itemlabeli.store = \french@itemi,
+    itemlabelii.store = \french@itemii,
+    itemlabeliii.store = \french@itemiii,
+    itemlabeliv.store = \french@itemiv,
+    frenchitemlabels.if = french@frenchitemlabels,
+    frenchitemlabels.default:n = true,
+    itemlabels.code = 
+      \def\french@itemi{#1}%
+      \def\french@itemii{#1}%
+      \def\french@itemiii{#1}%
+      \def\french@itemiv{#1},
+    itemlabels.default:n = \textemdash
+  }
 
 % Register default options
 \InitializeGlossOptions{french}{variant=french,autospacing=true,thincolonspace=false,
