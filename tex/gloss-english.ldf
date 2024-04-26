@@ -44,11 +44,13 @@
 \english@ordinalmonthdayfalse
 \british@dateformatfalse
 
-% Option ordinalmonthday
-\define@boolkey{english}[english@]{ordinalmonthday}[true]{}
-
-\define@choicekey*+{english}{variant}[\xpg@val\xpg@nr]{uk,british,us,american,usmax,australian,newzealand,canadian}[us]{%
-   \ifcase\xpg@nr\relax
+\DeclareKeys[english]
+  {
+    ordinalmonthday.if = english@ordinalmonthday,
+    ordinalmonthday.default:n = true,
+    variant.choices:nn = { uk, british, us, american, usmax, australian, newzealand, canadian }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
       % uk:
       \british@hyphentrue
       \british@dateformattrue
@@ -127,7 +129,10 @@
          }%
       \def\english@variant{ukenglish}%
    \fi
-}{\xpg@warning{Unknown English variant `#1'}}
+      },
+    variant.default:n = us,
+    variant/unknown.code = \xpg@warning{Unknown English variant `#1'},
+  }
 
 % Register default options
 \InitializeGlossOptions{english}{variant=us,ordinalmonthday=false}
