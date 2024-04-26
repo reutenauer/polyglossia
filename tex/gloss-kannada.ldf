@@ -53,12 +53,18 @@
 \def\tmp@western{Western}
 \newif\ifkannada@numerals
 \kannada@numeralstrue
-
-\define@key{kannada}{numerals}[Kannada]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@western
-    \kannada@numeralsfalse
-  \fi}
+  
+\DeclareKeys[kannada]
+  {
+    numerals.choices:nn = { kannada, western }
+      {
+        \ifcase\UseName{l_keys_choice_int}\or
+          \kannada@numeralstrue
+        \or
+          \kannada@numeralsfalse
+        \fi
+      }
+  }
 
   
 \def\captionskannada{%
