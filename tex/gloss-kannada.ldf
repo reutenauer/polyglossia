@@ -64,7 +64,7 @@
           \kannada@numeralsfalse
         \fi
       },
-    numerals,default:n = kannada
+    numerals.default:n = kannada
   }
 
   
