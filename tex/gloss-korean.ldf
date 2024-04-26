@@ -18,37 +18,45 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{korean}{ko}
 
-% variant : plain (0), classic (1), or modern (2)
-\define@choicekey{korean}{variant}[\xpg@val\xpg@nr]{plain,classic,modern}[plain]{%
-    \let\xpg@korean@variant\xpg@nr
-}
-% captions : hangul (0) or hanja (1)
-\define@choicekey{korean}{captions}[\xpg@val\xpg@nr]{hangul,hanja}[hangul]{%
-    \let\xpg@korean@captions\xpg@nr
-}
-% swapstrings: all (0), headings (1), headers (2), or none (3)
 \newif\if@korean@swapheadings
 \newif\if@korean@swapheaders
-\define@choicekey*+{korean}{swapstrings}[\xpg@val\xpg@nr]{all,headings,headers,none}[all]{%
-   \ifcase\xpg@nr\relax
-      % all:
-      \@korean@swapheadingstrue%
-      \@korean@swapheaderstrue%
-   \or
-      % headings:
-      \@korean@swapheadingstrue%
-      \@korean@swapheadersfalse%
-   \or
-      % headers:
-      \@korean@swapheadingsfalse%
-      \@korean@swapheaderstrue%
-   \or
-      % none:
-      \@korean@swapheadingsfalse%
-      \@korean@swapheadersfalse%
-   \fi
-   \xpg@info{Option: Korean, swapstrings=\xpg@val}%
-}{\xpg@warning{Unknown Korean swapstrings value `#1'}}
+
+\DeclareKeys[korean]
+  {
+    variant.choices:nn = { plain, classic, modern }
+      { 
+        \edef\xpg@korean@variant{\the\numexpr\UseName{l_keys_choice_int}-1\relax}
+      },
+    variant.default:n = plain,
+    captions.choices:nn = { hangul, hanja }
+      { 
+        \edef\xpg@korean@captions{\the\numexpr\UseName{l_keys_choice_int}-1\relax}
+      },
+    captions.default:n = hangul,
+    swapstrings.choices:nn = { all, headings, headers, none }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % all:
+          \@korean@swapheadingstrue
+          \@korean@swapheaderstrue
+        \or
+          % headings:
+          \@korean@swapheadingstrue
+          \@korean@swapheadersfalse
+        \or
+          % headers:
+          \@korean@swapheadingsfalse
+          \@korean@swapheaderstrue
+        \or
+          % none:
+          \@korean@swapheadingsfalse
+          \@korean@swapheadersfalse
+        \fi
+        \xpg@info{Option: Korean, swapstrings=#1}%
+      },
+    swapstrings.default:n = all,
+    swapstrings/unknown.code = \xpg@warning{Unknown Korean swapstrings value `#1'}
+  }
 
 % Register default options
 \InitializeGlossOptions{korean}{variant=plain,swapstrings=all,captions=hangul}
