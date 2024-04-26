@@ -19,18 +19,25 @@
 
 \newif\if@khmer@numerals
 \def\tmp@khmer{khmer}
-\define@key{khmer}{numerals}[arabic]{%
-  \def\@tmpa{#1}%
-  \ifx\@tmpa\tmp@khmer%
-    \@khmer@numeralstrue%
-    \SetLanguageKeys{khmer}{bcp47-extension-u=nu-khmr}%
-  \else%
-    \@khmer@numeralsfalse%
-    \SetLanguageKeys{khmer}{bcp47-extension-u=nu-latn}%
-   \fi%
-}
 
-\setkeys{khmer}{numerals}
+\DeclareKeys[khmer]
+  {
+    numerals.choices:nn = { khmer, arabic }
+      { 
+        \ifcase\UseName{l_keys_choice_int}\or
+          % khmer:
+          \@khmer@numeralstrue
+          \SetLanguageKeys{khmer}{bcp47-extension-u=nu-khmr}%
+        \or
+          % arabic:
+          \@khmer@numeralsfalse
+          \SetLanguageKeys{khmer}{bcp47-extension-u=nu-latn}%
+        \fi
+      },
+    numerals.default:n = arabic
+  }
+
+\SetKeys[khmer]{numerals}
 
 \def\captionskhmer{%
   \def\prefacename{អារម្ភកថា}%
