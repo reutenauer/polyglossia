@@ -4,22 +4,7 @@ Don't change this file in any respect.
 File: gloss-bo.ldf polyglossia: module for bo (Tibetan)
 (gloss-tibetan.ldf
 File: gloss-tibetan.ldf polyglossia: module for Tibetan
-! Undefined control sequence.
-l. ...  \newluatexattribute
-                        \xpg@tibteol %
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-! Undefined control sequence.
-l. ...  \newluatexattribute\xpg@tibteol
-                                     %
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
+\xpg@tibteol=\attribute...
 ))
 Package polyglossia Info: Default language is tibetan
 > \box...=
