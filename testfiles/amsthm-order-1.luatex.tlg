@@ -16,15 +16,7 @@ Package: polyglossia ....-..-.. v... Modern multilingual typesetting with XeLaTe
 (../etoolbox.sty
 Package: etoolbox ....-..-.. v... e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count...
-) (../xkeyval.sty
-Package: xkeyval ....-..-.. v... package option processing (HA)
-(../xkeyval.tex (../xkvutils.tex
-\XKV@toks=\toks...
-\XKV@tempa@toks=\toks...
-(../keyval.tex))
-\XKV@depth=\count...
-File: xkeyval.tex ....-..-.. v... key=value parser (HA)
-)) (../fontspec.sty (../xparse.sty (../expl3.sty
+) (../fontspec.sty (../xparse.sty (../expl3.sty
 Package: expl3 ....-..-.. L3 programming layer (loader) 
 (../l3backend-luatex.def
 File: l3backend-luatex.def ....-..-.. L3 backend support: PDF output (LuaTeX)
