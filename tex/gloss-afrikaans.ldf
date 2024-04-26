@@ -16,15 +16,18 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{afrikaans}{af}
 
-\define@boolkey{afrikaans}[afrikaans@]{babelshorthands}[true]{}
-
+\DeclareKeys[afrikaans]
+  {
+    babelshorthands.if = afrikaans@babelshorthands,
+    babelshorthands.default:n = true,
+  }
 % Register default options
 \InitializeGlossOptions{afrikaans}{babelshorthands=false}
 
 \ifsystem@babelshorthands
-  \setkeys{afrikaans}{babelshorthands=true}
+  \SetKeys[afrikaans]{babelshorthands=true}
 \else
-  \setkeys{afrikaans}{babelshorthands=false}
+  \SetKeys[afrikaans]{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands
