@@ -1880,7 +1880,7 @@
 {
     % \text_lowercase:n fully expands
     % (as opposed to \str_lowercase:n)
-    \keys_set:ne{ #1 }{ \text_lowercase:n {#2} }
+   \exp_args:Ne \keys_set:ne{ #1 }{ \text_lowercase:n {#2} }
 }
 
 % joint code of \foreignlanguage, otherlanguage*
