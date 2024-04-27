@@ -502,12 +502,12 @@
         \int_to_Roman:n { \year }
       }
   }
-
+\newif\latin@ecclesiasticfootnotes
 \DeclareKeys[latin]
   {
     babelshorthands.if = latin@babelshorthands,
     babelshorthands.default:n = true,
-    prosodicshorthands.if = latin@babelshorthands,
+    prosodicshorthands.if = latin@prosodicshorthands,
     prosodicshorthands.default:n = true,
     usej.bool_set:N = \l_polyglossia_latin_use_j_bool,
     capitalizemonth.bool_set:N = \l_polyglossia_latin_capitalize_month_bool,
@@ -553,6 +553,11 @@
       },
     ecclesiasticfootnotes.choices:nn = { true, false }
       { 
+        \ifcase\UseName{l_keys_choice_int}\or
+           \latin@ecclesiasticfootnotesture
+        \else
+          \latin@ecclesiasticfootnotesfalse
+        \fi
         \xpg_if_in_preamble:TF
           {
             % within the preamble
