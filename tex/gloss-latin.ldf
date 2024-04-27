@@ -502,7 +502,7 @@
         \int_to_Roman:n { \year }
       }
   }
-\newif\latin@ecclesiasticfootnotes
+\newif\iflatin@ecclesiasticfootnotes
 \DeclareKeys[latin]
   {
     babelshorthands.if = latin@babelshorthands,
