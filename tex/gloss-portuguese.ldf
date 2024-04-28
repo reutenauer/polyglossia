@@ -34,7 +34,7 @@
     babelshorthands.if = portuguese@babelshorthands,
     babelshorthands.default:n = true,
     splithyphens.if = portuguese@splithyphens,
-    babelshorthands.default:n = true,
+    splithyphens.default:n = true,
     variant.choices:nn = { portuguese, brazilian }
       { 
         \ifcase\UseName{l_keys_choice_int}\or
