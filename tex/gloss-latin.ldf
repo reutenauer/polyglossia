@@ -319,7 +319,8 @@
 % Save original footnote definition
 % Do this at the end of the preamble to catch other
 % packages' footnote changes (#391)
-\AtEndPreamble{%
+\hook_gput_code:nnn { begindocument / before } {.}
+{
   \cs_if_exist:NT \@makefntext
     {
       \cs_set_eq:NN \polyglossia_latin_original_footnote:n \@makefntext
@@ -1014,7 +1015,7 @@
 
 \let \xpgla@savedvalues \empty
 
-\AtEndPreamble
+\hook_gput_code:nnn { begindocument / before } {.}
   {
     \edef \xpgla@savedvalues
       {
