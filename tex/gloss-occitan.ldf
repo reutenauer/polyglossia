@@ -138,7 +138,7 @@
    \def\today{\occitanday\space \occitanmonth\space de~\number\year}%
 }
 \let\xpgoc@savedvalues\empty
-\AtEndPreamble{% the user or the class might define different values
+\AddToHook{begindocument/before}{% the user or the class might define different values
   \edef\xpgoc@savedvalues{%
     \clubpenalty=\the\clubpenalty\space
     \@clubpenalty=\the\@clubpenalty\space

@@ -50,7 +50,7 @@
 % Save original footnote definition
 % Do this at the end of the preamble to catch other
 % packages' footnote changes (#391)
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \let\xpg@orig@makefntext\@makefntext
 }
 

@@ -93,7 +93,7 @@
       ëd luj\or d'agost\or dë stèmber\or d'otóber\or ëd novèmber\or dë dzèmber%
       \fi\space dal\space\number\year}}
       
-\AtEndPreamble{% 
+\AddToHook{begindocument/before}{% 
   \edef\xpgpms@savedvalues{%
     \clubpenalty=\the\clubpenalty\space
     \@clubpenalty=\the\@clubpenalty\space

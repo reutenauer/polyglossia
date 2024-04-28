@@ -52,7 +52,7 @@
       Lui\or Avost\or Setembar\or Otobar\or Novembar\or Dicembar%
       \fi\space dal\space\number\year}}
 
-\AtEndPreamble{% the user or the class might define different values
+\AddToHook{begindocument/before}{% the user or the class might define different values
   \edef\xpgfu@savedvalues{%
     \clubpenalty=\the\clubpenalty\space
     \@clubpenalty=\the\@clubpenalty\space
