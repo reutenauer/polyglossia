@@ -33,6 +33,9 @@
 \bool_new:N \l_polyglossia_latin_use_v_bool
 \bool_new:N \l_polyglossia_latin_use_ligatures_bool
 \bool_new:N \l_polyglossia_latin_capitalize_month_bool
+\bool_new:N \l_polyglossia_latin_babelshorthands_bool
+\bool_new:N \l_polyglossia_latin_prosodic_shorthands_bool
+\bool_new:N \l_polyglossia_latin_ecclesiastic_footnotes_bool
 
 \cs_new:Npn \polyglossia_latin_classical_character_codes:
   {
@@ -344,17 +347,20 @@
       {
         \cs_if_exist:NT \@makefntext
           {
-            \iflatin@ecclesiasticfootnotes
+            \bool_if:NTF \l_polyglossia_latin_ecclesiastic_footnotes_bool
+             {
               \let \@makefntext \polyglossia_latin_variant_footnote:n
-            \else
+             }
+             {
               \let \@makefntext \polyglossia_latin_original_footnote:n
-            \fi
+             }
           }
       }
       {
-        \iflatin@ecclesiasticfootnotes
-          \msg_warning:nn {polyglossia} {latin / ineffective footnote option}
-        \fi
+        \bool_if:NT \l_polyglossia_latin_ecclesiastic_footnotes_bool
+          {
+            \msg_warning:nn {polyglossia} {latin / ineffective footnote option}
+          }
       }
   }
 
@@ -502,12 +508,12 @@
         \int_to_Roman:n { \year }
       }
   }
-\newif\iflatin@ecclesiasticfootnotes
+
 \DeclareKeys[latin]
   {
-    babelshorthands.if = latin@babelshorthands,
+    babelshorthands.bool_set:N = \l_polyglossia_latin_babelshorthands_bool,
     babelshorthands.default:n = true,
-    prosodicshorthands.if = latin@prosodicshorthands,
+    prosodicshorthands.bool_set:N = \l_polyglossia_latin_prosodic_shorthands_bool,
     prosodicshorthands.default:n = true,
     usej.bool_set:N = \l_polyglossia_latin_use_j_bool,
     capitalizemonth.bool_set:N = \l_polyglossia_latin_capitalize_month_bool,
@@ -554,9 +560,9 @@
     ecclesiasticfootnotes.choices:nn = { true, false }
       { 
         \ifcase\UseName{l_keys_choice_int}\or
-           \latin@ecclesiasticfootnotesture
+           \bool_set_true:N \l_polyglossia_latin_ecclesiastic_footnotes_bool
         \else
-          \latin@ecclesiasticfootnotesfalse
+          \bool_set_false:N \l_polyglossia_latin_ecclesiastic_footnotes_bool
         \fi
         \xpg_if_in_preamble:TF
           {
@@ -642,11 +648,11 @@
   {
     \IfMainLanguageTF {latin}
       {
-        \iflatin@prosodicshorthands
-        \else
+        \bool_if:NF \l_polyglossia_latin_prosodic_shorthands_bool
+         {
           \shorthandoff {=}
           \shorthandoff* {^}
-        \fi
+         }
       }
       {
         % The following command should not be called if the main language
@@ -1021,12 +1027,14 @@
 
 \def \noextras@latin
   {
-    \iflatin@babelshorthands
+    \bool_if:NT \l_polyglossia_latin_babelshorthands_bool
+     {
       \polyglossia_latin_no_shorthands:
-    \fi
-    \iflatin@prosodicshorthands
+     }
+    \bool_if:NT \l_polyglossia_latin_prosodic_shorthands_bool
+     {
       \polyglossia_latin_no_prosodic_shorthands:
-    \fi
+     }
     \xpgla@savedvalues
     \polyglossia_latin_no_punctuation_spacing:
     \polyglossia_latin_modern_character_codes:
@@ -1042,16 +1050,20 @@
       {
         \polyglossia_latin_punctuation_spacing:
       }
-    \iflatin@babelshorthands
+    \bool_if:NTF \l_polyglossia_latin_babelshorthands_bool
+     {
       \polyglossia_latin_shorthands:
-    \else
+     }
+     {
       \polyglossia_latin_no_shorthands:
-    \fi
-    \iflatin@prosodicshorthands
+     }
+    \bool_if:NTF \l_polyglossia_latin_prosodic_shorthands_bool
+     {
       \polyglossia_latin_prosodic_shorthands:
-    \else
+     }
+     { 
       \polyglossia_latin_no_prosodic_shorthands:
-    \fi
+     }
   }
 
 \def \blockextras@latin
