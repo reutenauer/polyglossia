@@ -33,7 +33,7 @@
 
 \DeclareKeys[bengali]
   {
-    changecounternumbering.if = bengali@babelshorthands,
+    changecounternumbering.if = bengali@changecounternumbering,
     changecounternumbering.default:n = true,
     numerals.choices:nn = { devanagari, bengali, western }
       { 

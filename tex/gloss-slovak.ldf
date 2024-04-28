@@ -25,7 +25,7 @@
     babelshorthands.default:n = true,
     splithyphens.if = slovak@splithyphens,
     splithyphens.default:n = true,
-    vlna.if = slovak@babelshorthands,
+    vlna.if = slovak@vlna,
     vlna.default:n = true,
   }
 

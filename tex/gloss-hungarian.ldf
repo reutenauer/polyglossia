@@ -28,8 +28,8 @@
 
 \DeclareKeys[hungarian]
   {
-    forceheadingpunctuation.if = hungarian@forceheadingpunctuatio,
-    babelshorthands.default:n = true,
+    forceheadingpunctuation.if = hungarian@forceheadingpunctuation,
+    forceheadingpunctuation.default:n = true,
     swapstrings.choices:nn = { all, captions, headings, headers, hheaders, none }
       { 
         \ifcase\UseName{l_keys_choice_int}\or

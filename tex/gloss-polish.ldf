@@ -26,7 +26,7 @@
     babelshorthands.default:n = true,
     splithyphens.if = polish@splithyphens,
     splithyphens.default:n = true,
-    vlna.if = polish@babelshorthands,
+    vlna.if = polish@vlna,
     vlna.default:n = true,
   }
 
