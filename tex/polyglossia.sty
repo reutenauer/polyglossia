@@ -2091,7 +2091,7 @@
 % set lang option #2 for lang #1
 \cs_new:Nn \__xpg_set_language_options:nnn
 {
-  \xpg__keyval_parser:nnn { #2 } { #1 } { #3 }
+  \exp_args:Nee \xpg__keyval_parser:nnn { #2 } { #1 } { #3 }
   \__xpg_set_keys:nn{#1}{#2}
 }
 
@@ -2476,7 +2476,7 @@
      \seq_get_right:NN \l_tmpa_seq \l_tmpc_tl
      % Execute passed command with language and maybe options
      % and re-set stored language's keys
-     \tl_if_empty:NTF \l_tmpb_tl { \cs_if_exist_use:c { # 1} { } { \l_tmpc_tl } }
+     \tl_if_empty:NTF \l_tmpb_tl { \cs_if_exist_use:c { #1 } { } { \l_tmpc_tl } }
                                  {
                                   \__xpg_set_keys:nn { \l_tmpc_tl } { \l_tmpb_tl }
                                   \cs_if_exist_use:c { #1 } { \l_tmpb_tl } { \l_tmpc_tl }
