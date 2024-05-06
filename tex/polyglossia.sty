@@ -562,7 +562,12 @@
        .initial:n = {},
     % the BCP-47 script tag
     #1 / bcp47-script
-       .code:n = {\prop_gput:Nnn{\g_xpg_langsetup_prop}{#1/bcp47-script}{##1}},
+       .code:n =
+         {
+           \prop_gput:Nnn{\g_xpg_langsetup_prop}{#1/bcp47-script}{##1}
+           \prop_gput:Nne{\g_xpg_langsetup_prop}{#1/lc-bcp47-script}
+               {\tl_if_empty:nF{##1}{\str_lowercase:n{##1}}}
+         },
     #1 / bcp47-script
        .value_required:n = true,
     #1 / bcp47-script
@@ -880,8 +885,8 @@
 }
 \cs_generate_variant:Nn  \__xpg_add_font_feature_language:nn { on , no, oo , Vn, nV, VV , xn, nx, xx}
 
-% add fontfeature Script=#2 to scripttag #1
-% do nothing if #1 or #2 is empty
+% add fontfeature Script=#3 to scripttag #2 for family #1
+% do nothing if #2 or #3 is empty
 \cs_new:Nn \__xpg_add_font_feature_script:nnn
 {
   \bool_if:nTF{\tl_if_empty_p:n{#2} || \tl_if_empty_p:n{#3}}
@@ -939,24 +944,30 @@
   \group_begin:
   \cs_gset_protected_nopar:cpn {#1@font@rm}
   {
-    \cs_if_exist_use:cF{#1font}{
-      \rmfamilylatin
+    \cs_if_exist_use:cF{#1font}
+    {
+      \cs_if_exist_use:cF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/lc-bcp47-script} font}
+         { \rmfamilylatin }
       \__xpg_add_font_feature_language:xx{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/langtag}}
                                          {\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
     }
   }
   \cs_gset_protected_nopar:cpn {#1@font@sf}
   {
-    \cs_if_exist_use:cF{#1fontsf}{
-      \sffamilylatin
+    \cs_if_exist_use:cF{#1fontsf}
+    {
+      \cs_if_exist_use:cF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/lc-bcp47-script} fontsf}
+         { \sffamilylatin }
       \__xpg_add_font_feature_language:xx{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/langtag}}
                                          {\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
     }
   }
   \cs_gset_protected_nopar:cpn {#1@font@tt}
   {
-    \cs_if_exist_use:cF{#1fonttt}{
-      \ttfamilylatin
+    \cs_if_exist_use:cF{#1fonttt}
+    {
+      \cs_if_exist_use:cF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/lc-bcp47-script} fonttt}
+         { \ttfamilylatin }
       \__xpg_add_font_feature_language:xx{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/langtag}}
                                          {\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
     }
@@ -976,16 +987,16 @@
   {
     \cs_if_exist_use:cF{#1font}
       {
-       \str_if_eq:nnTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/script}}{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
-        {\rmfamilylatin}
-        {\cs_if_exist_use:cTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/lcscript} font}
+       \cs_if_exist_use:cTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/lc-bcp47-script} font}
+          { \seq_gput_right:Ne \__xpg_used_script_fonts_rm {#1} }
           {
-             \seq_gput_right:Ne \__xpg_used_script_fonts_rm {#1}
-           }
-           {
-             \rmfamilylatin
-           }
-       }
+             \str_if_eq:nnTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/script}}{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
+               { \rmfamilylatin }
+               { \cs_if_exist_use:cTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/lcscript} font}
+                   { \seq_gput_right:Ne \__xpg_used_script_fonts_rm {#1} }
+                   { \rmfamilylatin }
+              }
+          }
        \seq_if_in:NeF \__xpg_used_script_fonts_rm {#1}
        {
            \__xpg_add_font_feature_script:nxx{rm}
@@ -1001,16 +1012,16 @@
   {
     \cs_if_exist_use:cF{#1fontsf}
       {
-       \str_if_eq:nnTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/script}}{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
-        {\sffamilylatin}
-        {\cs_if_exist_use:cTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/lcscript} fontsf}
+        \cs_if_exist_use:cTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/lc-bcp47-script} fontsf}
+          { \seq_gput_right:Ne \__xpg_used_script_fonts_sf {#1} }
           {
-             \seq_gput_right:Ne \__xpg_used_script_fonts_sf {#1}
-           }
-           {
-             \sffamilylatin
-           }
-       }
+             \str_if_eq:nnTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/script}}{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
+                { \sffamilylatin }
+                { \cs_if_exist_use:cTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/lcscript} fontsf}
+                    { \seq_gput_right:Ne \__xpg_used_script_fonts_sf {#1} }
+                    { \sffamilylatin }
+                }
+          }
        \seq_if_in:NeF \__xpg_used_script_fonts_sf {#1}
        {
            \__xpg_add_font_feature_script:nxx{sf}
@@ -1026,16 +1037,16 @@
   {
     \cs_if_exist_use:cF{#1fonttt}
       {
-       \str_if_eq:nnTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/script}}{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
-       {\ttfamilylatin}
-       {\cs_if_exist_use:cTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/lcscript} fonttt}
-           {
-             \seq_gput_right:Ne \__xpg_used_script_fonts_tt {#1}
-           }
-           {
-             \ttfamilylatin
-           }
-       }
+        \cs_if_exist_use:cTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/lc-bcp47-script} fonttt}
+          { \seq_gput_right:Ne \__xpg_used_script_fonts_tt {#1} }
+          {
+            \str_if_eq:nnTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/script}}{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/language}}
+                { \ttfamilylatin }
+                { \cs_if_exist_use:cTF{\prop_item:Nn{\g_xpg_langsetup_prop}{#1/lcscript} fonttt}
+                    { \seq_gput_right:Ne \__xpg_used_script_fonts_tt {#1} }
+                    { \ttfamilylatin }
+                }
+          }
        \seq_if_in:NeF \__xpg_used_script_fonts_tt {#1}
        {
            \__xpg_add_font_feature_script:nxx{tt}

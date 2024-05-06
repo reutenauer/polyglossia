@@ -781,13 +781,25 @@ see sec.~\ref{sec:langtags}).
 
 \section{Font setup}
 
-With polyglossia it is possible to associate a specific font with any script or language
+With \pkg{polyglossia} it is possible to associate a specific font with any script or language
 that occurs in the document. That font should always be defined as
-\cmd{\⟨script⟩font}\ or \cmd{\⟨language⟩font}.
+\cmd{\⟨script⟩font}\ or \cmd{\⟨language⟩font}. Note that ¦⟨language⟩¦ points to the \pkg{polyglossia}
+language name, ¦⟨script⟩¦ might point either to an OpenType script name as defined by \pkg{fontspec}
+(\eg ¦Latin¦) \new{2.2}or a BCP-47 script tag (\eg ¦Latn¦), though the script is fully lower-cased
+in the \cmd{\⟨script⟩font}\ command.
+
 For instance, if the default font defined by \cmd\setmainfont\
 does not support Greek, then one can define the font used to display Greek with:\\
-\centerline{ \cmd\newfontfamily\cmd{\greekfont[Script=Greek,\meta{…}]\marg{font}}. }
-Note that polyglossia will use the font defined as is, so assure to do all necessary settings
+\centerline{\cmd\newfontfamily\cmd{\greekfont[Script=Greek,\meta{…}]\marg{font}}}
+%
+If you want to setup a blackletter font specifically for the German blackletter script variant,
+you might do so by:\\
+\centerline{\cmd\newfontfamily\cmd{\latffont[\meta{…}]\marg{font}}}
+%
+Setting up a font specifically for traditional Chinese is possible via:\\
+\centerline{\cmd\newfontfamily\cmd{\hantfont[Script=CJK,\meta{…}]\marg{font}}}
+%
+Note that \pkg{polyglossia} will use the font defined as is, so assure to do all necessary settings
 (please refer to the \pkg{fontspec} documentation for details).
 For instance, if \cmd\arabicfont\ is explicitly defined, then the option ¦Script=Arabic¦ should
 be included in that definition.
@@ -797,10 +809,12 @@ it can be defined by means of \new{1.2.0}
 \cmd{\⟨script⟩fontsf} or \cmd{\⟨language⟩fontsf} and \cmd{\⟨script⟩fonttt} or \cmd{\⟨language⟩fonttt}, respectively.
 
 Whenever a new language is activated, \pkg{polyglossia} will first check whether
-a font has been defined for that language or – for languages in non-Latin scripts –
-for the script it uses. If it is not defined, it will use the currently active font
-and – in the case of OpenType fonts – will attempt to turn on the appropriate
-OpenType tags for the script and language used, in case these are available in
+a font has been defined for that language. If this is not the case, it will check whether a font associated
+with the BCP-47 script tag of the current language is defined. If this also isn't the case, \pkg{polyglossia}
+will finally check (but this only for languages in non-Latin scripts) whether there is a font associated
+with the OpenType script tag. If none of these fonts is defined, \pkg{polyglossia} will use the currently
+active font as defined by ¦\setmainfont¦, ¦\setsansfont¦ or ¦\setmonofont¦ and – in the case of OpenType fonts –
+will attempt to turn on the appropriate OpenType tags for the script and language used, in case these are available in
 the font, by means of \pkg{fontspec}’s \cmd\addfontfeature. If the current font
 does not appear to support the script of that language, an error message is
 displayed.
@@ -2713,6 +2727,12 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \subsubsection*{Bug fixes}
 \begin{itemize}
 	\item Fix \texttt{lang} environment (\TXI{633}).
+\end{itemize}
+
+\subsubsection*{New Features}
+\begin{itemize}
+	\item Add possibility to associate a font to a language/variant with reference to
+	      a BCP-47 script tag (\TXI{636}). 
 \end{itemize}
 
 \subsubsection*{Internal work}
