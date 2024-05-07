@@ -101,7 +101,7 @@
 
 \newif\if@german@blackletter
 
-\DeclareKeys[german]
+\DeclareKeys[polyglossia/gloss/german]
   {
     babelshorthands.if = german@babelshorthands,
     babelshorthands.default:n = true,
@@ -184,7 +184,7 @@
   }
   
 
-\SetKeys[german]{spelling,script,variant}
+\SetGlossOptions{german}{spelling,script,variant}
 
 % Register default options
 \InitializeGlossOptions{german}{variant=german,spelling=new,script=latin,babelshorthands=false}
@@ -194,9 +194,9 @@
 \SetLanguageAliasValues{german}{script}{blackletter}{fraktur}
 
 \ifsystem@babelshorthands
-  \SetKeys[german]{babelshorthands=true}
+  \SetGlossOptions{german}{babelshorthands=true}
 \else
-  \SetKeys[german]{babelshorthands=false}
+  \SetGlossOptions{german}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

@@ -44,7 +44,7 @@
 \english@ordinalmonthdayfalse
 \british@dateformatfalse
 
-\DeclareKeys[english]
+\DeclareKeys[polyglossia/gloss/english]
   {
     ordinalmonthday.if = english@ordinalmonthday,
     ordinalmonthday.default:n = true,

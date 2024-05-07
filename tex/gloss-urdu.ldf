@@ -29,7 +29,7 @@
 \def\xpg@sepmark{}
 \newif\if@hijrical
 
-\DeclareKeys[urdu]
+\DeclareKeys[polyglossia/gloss/urdu]
   {
     abjadjimnotail.if = abjad@jim@notail,
     abjadjimnotail.default:n = true,
@@ -68,7 +68,7 @@
   }
 
 % This should set the defaults
-\SetKeys[urdu]{calendar,numerals,hijricorrection}
+\SetGlossOptions{urdu}{calendar,numerals,hijricorrection}
 
 \def\urdugregmonth#1{\ifcase#1%
   \or جنوری\or فروری\or مارچ\or اپریل\or مئی\or جون\or جولائی\or اگست\or  ستمبر\or اکتوبر\or نومبر\or دسمبر\fi}

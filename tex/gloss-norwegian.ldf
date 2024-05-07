@@ -21,7 +21,7 @@
 
 \def\norwegian@variant{nynorsk}
 
-\DeclareKeys[norwegian]
+\DeclareKeys[polyglossia/gloss/norwegian]
   {
     variant.choices:nn = { nynorsk, bokmal }
       { 

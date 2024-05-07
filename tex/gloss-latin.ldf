@@ -510,7 +510,7 @@
       }
   }
 
-\DeclareKeys[latin]
+\DeclareKeys[polyglossia/gloss/latin]
   {
     babelshorthands.bool_set:N = \l_polyglossia_latin_babelshorthands_bool,
     babelshorthands.default:n = true,
@@ -609,9 +609,9 @@
                                      usej=false,capitalizemonth=true}
 
 \ifsystem@babelshorthands
-  \SetKeys[latin]{babelshorthands=true}
+  \SetGlossOptions{latin}{babelshorthands=true}
 \else
-  \SetKeys[latin]{babelshorthands=false}
+  \SetGlossOptions{latin}{babelshorthands=false}
 \fi
 
 \ExplSyntaxOff % babelsh.def does not support expl3 syntax

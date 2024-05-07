@@ -20,7 +20,7 @@
   \RequirePackage{luavlna}
 \fi
 
-\DeclareKeys[croatian]
+\DeclareKeys[polyglossia/gloss/croatian]
   {
     babelshorthands.if = croatian@babelshorthands,
     babelshorthands.default:n = true,
@@ -48,9 +48,9 @@
                                         splithyphens=true,localalph=true}
 
 \ifsystem@babelshorthands
-  \SetKeys[croatian]{babelshorthands=true}
+  \SetGlossOptions{croatian}{babelshorthands=true}
 \else
-  \SetKeys[croatian]{babelshorthands=false}
+  \SetGlossOptions{croatian}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

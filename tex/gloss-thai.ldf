@@ -30,7 +30,7 @@
 \newif\if@thai@numerals
 \def\tmp@thai{thai}
 
-\DeclareKeys[thai]
+\DeclareKeys[polyglossia/gloss/thai]
   {
     numerals.choices:nn = { arabic, thai }
       { 

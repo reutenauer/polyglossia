@@ -29,7 +29,7 @@
 \newif\ifcyrillic@numerals
 \newif\ifcyrillic@asbuk@numerals
 
-\DeclareKeys[belarusian]
+\DeclareKeys[polyglossia/gloss/belarusian]
   {
     babelshorthands.if = belarusian@babelshorthands,
     babelshorthands.default:n = true,
@@ -82,9 +82,9 @@
 \SetLanguageAliasValues{belarusian}{spelling}{classic}{tarask}
 
 \ifsystem@babelshorthands
-  \SetKeys[belarusian]{babelshorthands=true}
+  \SetGlossOptions{belarusian}{babelshorthands=true}
 \else
-  \SetKeys[belarusian]{babelshorthands=false}
+  \SetGlossOptions{belarusian}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

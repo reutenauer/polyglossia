@@ -92,7 +92,7 @@
 
 %TODO add option for CALENDAR
 
-\DeclareKeys[kurdish]
+\DeclareKeys[polyglossia/gloss/kurdish]
   {
     variant.choices:nn = { sorani, kurmanji }
       { 

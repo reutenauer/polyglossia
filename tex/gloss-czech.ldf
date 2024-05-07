@@ -21,7 +21,7 @@
   \RequirePackage{luavlna}
 \fi
 
-\DeclareKeys[czech]
+\DeclareKeys[polyglossia/gloss/czech]
   {
     babelshorthands.if = czech@babelshorthands,
     babelshorthands.default:n = true,
@@ -35,9 +35,9 @@
 \InitializeGlossOptions{czech}{babelshorthands=false,splithyphens=true,vlna=true}
 
 \ifsystem@babelshorthands
-  \SetKeys[czech]{babelshorthands=true}
+  \SetGlossOptions{czech}{babelshorthands=true}
 \else
-  \SetKeys[czech]{babelshorthands=false}
+  \SetGlossOptions{czech}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

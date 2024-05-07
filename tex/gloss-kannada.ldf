@@ -54,7 +54,7 @@
 \newif\ifkannada@numerals
 \kannada@numeralstrue
   
-\DeclareKeys[kannada]
+\DeclareKeys[polyglossia/gloss/kannada]
   {
     numerals.choices:nn = { kannada, western }
       {

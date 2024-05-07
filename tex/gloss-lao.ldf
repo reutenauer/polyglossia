@@ -23,7 +23,7 @@
 \newif\if@lao@numerals
 \def\tmp@lao{lao}
 
-\DeclareKeys[lao]
+\DeclareKeys[polyglossia/gloss/lao]
   {
     numerals.choices:nn = { arabic, lao }
       { 

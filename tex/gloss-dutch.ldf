@@ -15,7 +15,7 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{dutch}{nl}
 
-\DeclareKeys[dutch]
+\DeclareKeys[polyglossia/gloss/dutch]
   {
     babelshorthands.if = dutch@babelshorthands,
     babelshorthands.default:n = true,
@@ -27,9 +27,9 @@
 \InitializeGlossOptions{dutch}{babelshorthands=false,tremahyphenation=true}
 
 \ifsystem@babelshorthands
-  \SetKeys[dutch]{babelshorthands=true}
+  \SetGlossOptions{dutch}{babelshorthands=true}
 \else
-  \SetKeys[dutch]{babelshorthands=false}
+  \SetGlossOptions{dutch}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

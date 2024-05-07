@@ -60,7 +60,7 @@
    \fi%
 }
 
-\DeclareKeys[serbian]
+\DeclareKeys[polyglossia/gloss/serbian]
   {
     splithyphens.if = serbian@splithyphens,
     splithyphens.default:n = true,
@@ -127,7 +127,7 @@
     numerals/unknown.code = \xpg@warning{Unknown Serbian numerals value `#1'}
   }
 
-\SetKeys[serbian]{script,numerals}
+\SetGlossOptions{serbian}{script,numerals}
 
 % Register default options
 \InitializeGlossOptions{serbian}{script=cyrillic,numerals=arabic,splithyphens=true}

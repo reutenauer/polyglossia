@@ -20,7 +20,7 @@
 \newif\if@khmer@numerals
 \def\tmp@khmer{khmer}
 
-\DeclareKeys[khmer]
+\DeclareKeys[polyglossia/gloss/khmer]
   {
     numerals.choices:nn = { khmer, arabic }
       { 
@@ -37,7 +37,7 @@
     numerals.default:n = arabic
   }
 
-\SetKeys[khmer]{numerals}
+\SetGlossOptions{khmer}{numerals}
 
 \def\captionskhmer{%
   \def\prefacename{អារម្ភកថា}%

@@ -23,7 +23,7 @@
 
 \def\gaelic@variant{irish}
 
-\DeclareKeys[gaelic]
+\DeclareKeys[polyglossia/gloss/gaelic]
   {
     variant.choices:nn = { irish, scottish }
       { 

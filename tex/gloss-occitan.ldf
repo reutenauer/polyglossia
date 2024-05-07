@@ -34,16 +34,16 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{occitan}{oc}
 
-\DeclareKeys[occitan]
+\DeclareKeys[polyglossia/gloss/occitan]
   {
     babelshorthands.if = occitan@babelshorthands,
     babelshorthands.default:n = true
   }
 
 \ifsystem@babelshorthands
-  \SetKeys[occitan]{babelshorthands=true}
+  \SetGlossOptions{occitan}{babelshorthands=true}
 \else
-  \SetKeys[occitan]{babelshorthands=false}
+  \SetGlossOptions{occitan}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

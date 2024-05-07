@@ -31,7 +31,7 @@
 \newif\ifpunjabi@gurmukhi@numerals
 \punjabi@gurmukhi@numeralstrue
 
-\DeclareKeys[punjabi]
+\DeclareKeys[polyglossia/gloss/punjabi]
   {
     numerals.choices:nn = { gurmukhi, western }
       { 

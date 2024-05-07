@@ -31,7 +31,7 @@
 \def\extras@bengali{}
 \def\noextras@bengali{}
 
-\DeclareKeys[bengali]
+\DeclareKeys[polyglossia/gloss/bengali]
   {
     changecounternumbering.if = bengali@changecounternumbering,
     changecounternumbering.default:n = true,

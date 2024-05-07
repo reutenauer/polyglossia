@@ -73,7 +73,7 @@
 \newif\iffrench@autospaceguillemets
 \french@autospaceguillemetstrue
 
-\DeclareKeys[french]
+\DeclareKeys[polyglossia/gloss/french]
   {
     variant.choices:nn = { french, canadian, acadian, swiss }
       { 

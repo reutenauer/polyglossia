@@ -1147,7 +1147,7 @@
                { \char_set_catcode:nn { 126 } { \char_value_catcode:n { 126 } } }
           \char_set_catcode_active:n { 126 }
 	  \xpg_input:n {gloss-#2.ldf}
-	  \keys_set:nn { #2 } { #1 }
+	  \SetGlossOptions { #2 } { #1 }
 	  % restore former ~ catcode
 	  \__xpg_restore_tilde_catcode:
 	}
@@ -1887,11 +1887,11 @@
 }
 
 % lowercase options before passing to setkeys
-\cs_new:Nn \__xpg_set_keys:nn
+\NewDocumentCommand \SetGlossOptions { m m }
 {
     % \text_lowercase:n fully expands
     % (as opposed to \str_lowercase:n)
-   \exp_args:Ne \keys_set:ne{ #1 }{ \text_lowercase:n {#2} }
+   \exp_args:Ne \keys_set:ne{ polyglossia / gloss / #1 }{ \text_lowercase:n {#2} }
 }
 
 % joint code of \foreignlanguage, otherlanguage*
@@ -1901,7 +1901,7 @@
 \cs_new:Nn \xpg_otherlanguage:nn
 {
   \xpg_error_if_lang_not_loaded:n{#2}
-  \__xpg_set_keys:nn{#2}{#1}
+  \SetGlossOptions{#2}{#1}
   \xpg_set_foreign_language:nn { #1 } { #2 }
   % Hook for external packages such as biblatex
   \polyglossia@language@switched
@@ -2047,7 +2047,7 @@
 {
   \c_group_begin_token
   \xpg_error_if_lang_not_loaded:n { #2 }
-  \keys_set:nn{#2}{#1}
+  \SetGlossOptions{#2}{#1}
   \xpg_select_language:nn { #1 } { #2 }
   \hyphenation{#3}
   \c_group_end_token
@@ -2103,7 +2103,7 @@
 \cs_new:Nn \__xpg_set_language_options:nnn
 {
   \exp_args:Nee \xpg__keyval_parser:nnn { #2 } { #1 } { #3 }
-  \__xpg_set_keys:nn{#1}{#2}
+  \SetGlossOptions{#1}{#2}
 }
 
 % Initialize default language options, so that
@@ -2489,7 +2489,7 @@
      % and re-set stored language's keys
      \tl_if_empty:NTF \l_tmpb_tl { \cs_if_exist_use:c { #1 } { } { \l_tmpc_tl } }
                                  {
-                                  \__xpg_set_keys:nn { \l_tmpc_tl } { \l_tmpb_tl }
+                                  \SetGlossOptions { \l_tmpc_tl } { \l_tmpb_tl }
                                   \cs_if_exist_use:c { #1 } { \l_tmpb_tl } { \l_tmpc_tl }
                                  }
   }
@@ -2544,7 +2544,7 @@
   \tl_set:Nx \l_tmp_lang_tl { \xpg_alias_base_lang:n{#2} }
   \c_group_begin_token
   \xpg_error_if_lang_not_loaded:n{\l_tmp_lang_tl}
-  \__xpg_set_keys:nn{\l_tmp_lang_tl}{ \l_tmp_opts_tl }
+  \SetGlossOptions{\l_tmp_lang_tl}{ \l_tmp_opts_tl }
   % Store bcp47.tag@hypenmins
   \tl_if_blank:nTF { \l_tmp_opts_tl }
   {
@@ -2566,7 +2566,7 @@
 {
   \c_group_begin_token
   \xpg_error_if_lang_not_loaded:n {#2}
-  \__xpg_set_keys:nn {#2} {#1}
+  \SetGlossOptions {#2} {#1}
   % Use bcp47.tag@hypenmins
   \tl_if_blank:nTF {#1}
   {
@@ -2662,7 +2662,8 @@
      .value_required:n = true,
 }
 
-\keys_set:nn { polyglossia } {
+\keys_set:nn { polyglossia }
+{
   localmarks = false,
   verbose = true,
   babelshorthands = false,

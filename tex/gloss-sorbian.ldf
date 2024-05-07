@@ -27,7 +27,7 @@
 
 \def\sorbian@variant{usorbian}
 
-\DeclareKeys[sorbian]
+\DeclareKeys[polyglossia/gloss/sorbian]
   {
     olddate.if = sorbian@olddate,
     olddate.default:n = true,

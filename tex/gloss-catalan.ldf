@@ -16,15 +16,15 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{catalan}{ca}
 
-\DeclareKeys[catalan]
+\DeclareKeys[polyglossia/gloss/catalan]
   {
     babelshorthands.if = catalan@babelshorthands,
     babelshorthands.default:n = true,
   }
 \ifsystem@babelshorthands
-  \SetKeys[catalan]{babelshorthands=true}
+  \SetGlossOptions{catalan}{babelshorthands=true}
 \else
-  \SetKeys[catalan]{babelshorthands=false}
+  \SetGlossOptions{catalan}{babelshorthands=false}
 \fi
 
 % Register default options

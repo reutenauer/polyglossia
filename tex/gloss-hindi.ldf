@@ -40,7 +40,7 @@
 \newif\ifhindi@devanagari@numerals
 \hindi@devanagari@numeralstrue
 
-\DeclareKeys[hindi]
+\DeclareKeys[polyglossia/gloss/hindi]
   {
     numerals.choices:nn = { devanagari, western }
       { 

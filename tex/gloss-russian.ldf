@@ -39,7 +39,7 @@
 \newif\ifcyrillic@numerals
 \newif\ifcyrillic@asbuk@numerals
 
-\DeclareKeys[russian]
+\DeclareKeys[polyglossia/gloss/russian]
   {
     babelshorthands.if = russian@babelshorthands,
     babelshorthands.default:n = true,
@@ -110,9 +110,9 @@
 
 
 \ifsystem@babelshorthands
-  \SetKeys[russian]{babelshorthands=true}
+  \SetGlossOptions{russian}{babelshorthands=true}
 \else
-  \SetKeys[russian]{babelshorthands=false}
+  \SetGlossOptions{russian}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

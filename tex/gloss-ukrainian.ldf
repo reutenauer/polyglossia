@@ -27,7 +27,7 @@
 \newif\ifcyrillic@numerals
 \newif\ifcyrillic@asbuk@numerals
 
-\DeclareKeys[ukrainian]
+\DeclareKeys[polyglossia/gloss/ukrainian]
   {
     babelshorthands.if = ukrainian@babelshorthands,
     babelshorthands.default:n = true,
@@ -66,9 +66,9 @@
 \InitializeGlossOptions{ukrainian}{numerals=arabic,mathfunctions=true}
 
 \ifsystem@babelshorthands
-  \SetKeys[ukrainian]{babelshorthands=true}
+  \SetGlossOptions{ukrainian}{babelshorthands=true}
 \else
-  \SetKeys[ukrainian]{babelshorthands=false}
+  \SetGlossOptions{ukrainian}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

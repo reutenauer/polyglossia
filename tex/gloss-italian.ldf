@@ -18,7 +18,7 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{italian}{it}
 
-\DeclareKeys[italian]
+\DeclareKeys[polyglossia/gloss/italian]
   {
     babelshorthands.if = italian@babelshorthands,
     babelshorthands.default:n = true,
@@ -28,9 +28,9 @@
 \InitializeGlossOptions{italian}{babelshorthands=false}
 
 \ifsystem@babelshorthands
-  \SetKeys[italian]{babelshorthands=true}
+  \SetGlossOptions{italian}{babelshorthands=true}
 \else
-  \SetKeys[italian]{babelshorthands=false}
+  \SetGlossOptions{italian}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

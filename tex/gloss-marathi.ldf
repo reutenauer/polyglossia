@@ -28,7 +28,7 @@
 \newif\ifmarathi@devanagari@numerals
 \marathi@devanagari@numeralstrue
 
-\DeclareKeys[marathi]
+\DeclareKeys[polyglossia/gloss/marathi]
   {
     numerals.choices:nn = { western, devanagari }
       { 

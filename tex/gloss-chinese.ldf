@@ -30,7 +30,7 @@
 
 \def\chinese@variant{chinese}
 
-\DeclareKeys[chinese]
+\DeclareKeys[polyglossia/gloss/chinese]
   {
     variant.choices:nn = { cn, simplified, tw, traditional }
       { 

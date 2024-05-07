@@ -83,7 +83,7 @@
 
 \newif\if@greek@numerals
 
-\DeclareKeys[greek]
+\DeclareKeys[polyglossia/gloss/greek]
   {
     variant.choices:nn = { monotonic, mono,polytonic, poly,ancient, ancientgreek }
       {

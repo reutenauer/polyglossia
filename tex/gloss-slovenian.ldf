@@ -19,7 +19,7 @@
 % Babel aliases
 \setlanguagealias{slovenian}{slovene}
 
-\DeclareKeys[slovenian]
+\DeclareKeys[polyglossia/gloss/slovenian]
   {
     localalph.if = slovenian@localalph,
     localalph.default:n = true

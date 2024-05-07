@@ -19,7 +19,7 @@
 \newif\if@finnish@schoolhyphens
 \newif\if@finnish@babelhyphens
 
-\DeclareKeys[finnish]
+\DeclareKeys[polyglossia/gloss/finnish]
   {
     babelshorthands.if = finnish@babelshorthands,
     babelshorthands.default:n = true,
@@ -60,9 +60,9 @@
 \InitializeGlossOptions{finnish}{babelshorthands=false,hyphens=default}
 
 \ifsystem@babelshorthands
-  \SetKeys[finnish]{babelshorthands=true}
+  \SetGlossOptions{finnish}{babelshorthands=true}
 \else
-  \SetKeys[finnish]{babelshorthands=false}
+  \SetGlossOptions{finnish}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

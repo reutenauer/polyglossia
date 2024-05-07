@@ -29,7 +29,7 @@
 
 \def\portuguese@variant{portuges}
 
-\DeclareKeys[portuguese]
+\DeclareKeys[polyglossia/gloss/portuguese]
   {
     babelshorthands.if = portuguese@babelshorthands,
     babelshorthands.default:n = true,
@@ -60,9 +60,9 @@
       splithyphens=true}
 
 \ifsystem@babelshorthands
-  \SetKeys[portuguese]{babelshorthands=true}
+  \SetGlossOptions{portuguese}{babelshorthands=true}
 \else
-  \SetKeys[portuguese]{babelshorthands=false}
+  \SetGlossOptions{portuguese}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

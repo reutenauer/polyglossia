@@ -28,7 +28,7 @@
 \newif\ifsyriac@customsep\syriac@customsepfalse
 \def\xpg@sepmark{}
 
-\DeclareKeys[syriac]
+\DeclareKeys[polyglossia/gloss/syriac]
   {
     sectionsep.code = \gdef\xpg@sepmark{#1}\syriac@customseptrue,
     sectionsep.default:n = .,

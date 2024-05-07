@@ -31,7 +31,7 @@
 \newif\ifcyrillic@numerals
 \newif\ifcyrillic@asbuk@numerals
 
-\DeclareKeys[mongolian]
+\DeclareKeys[polyglossia/gloss/mongolian]
   {
     babelshorthands.if = mongolian@babelshorthands,
     babelshorthands.default:n = true,
@@ -64,9 +64,9 @@
 \InitializeGlossOptions{mongolian}{babelshorthands=false,numerals=arabic}
 
 \ifsystem@babelshorthands
-  \SetKeys[mongolian]{babelshorthands=true}
+  \SetGlossOptions{mongolian}{babelshorthands=true}
 \else
-  \SetKeys[mongolian]{babelshorthands=false}
+  \SetGlossOptions{mongolian}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

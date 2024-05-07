@@ -42,7 +42,7 @@
 \newif\if@hijrical
 \newif\ifarabic@customsep\arabic@customsepfalse
 
-\DeclareKeys[arabic]
+\DeclareKeys[polyglossia/gloss/arabic]
   {
     hijricorrection.code = \gdef\arabic@hijri@correction{#1},
     hijricorrection.default:n = 0,

@@ -31,7 +31,7 @@
 \malay@melayufalse
 \def\malay@variant{malay}
 
-\DeclareKeys[malay]
+\DeclareKeys[polyglossia/gloss/malay]
   {
     variant.choices:nn = { indonesian, malaysian }
       { 

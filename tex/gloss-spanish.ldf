@@ -33,7 +33,7 @@
 \newif\ifspanish@spacedoperators
 \newif\ifspanish@locoperators
 
-\DeclareKeys[spanish]
+\DeclareKeys[polyglossia/gloss/spanish]
   {
     variant.choices:nn = { spanish, mexican }
       { 

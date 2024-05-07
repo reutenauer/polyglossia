@@ -20,7 +20,7 @@
   \RequirePackage{luavlna}
 \fi
 
-\DeclareKeys[polish]
+\DeclareKeys[polyglossia/gloss/polish]
   {
     babelshorthands.if = polish@babelshorthands,
     babelshorthands.default:n = true,
@@ -34,9 +34,9 @@
 \InitializeGlossOptions{polish}{babelshorthands=false,splithyphens=true,vlna=true}
 
 \ifsystem@babelshorthands
-  \SetKeys[polish]{babelshorthands=true}
+  \SetGlossOptions{polish}{babelshorthands=true}
 \else
-  \SetKeys[polish]{babelshorthands=false}
+  \SetGlossOptions{polish}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

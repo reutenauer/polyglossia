@@ -19,7 +19,7 @@
 
 \newif\ifgeorgian@numerals
 
-\DeclareKeys[georgian]
+\DeclareKeys[polyglossia/gloss/georgian]
   {
     babelshorthands.if = georgian@babelshorthands,
     babelshorthands.default:n = true,
@@ -44,9 +44,9 @@
 \InitializeGlossOptions{georgian}{babelshorthands=false,oldmonthnames=false,numerals=arabic}
 
 \ifsystem@babelshorthands
-  \SetKeys[georgian]{babelshorthands=true}
+  \SetGlossOptions{georgian}{babelshorthands=true}
 \else
-  \SetKeys[georgian]{babelshorthands=false}
+  \SetGlossOptions{georgian}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

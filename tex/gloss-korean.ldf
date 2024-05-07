@@ -21,7 +21,7 @@
 \newif\if@korean@swapheadings
 \newif\if@korean@swapheaders
 
-\DeclareKeys[korean]
+\DeclareKeys[polyglossia/gloss/korean]
   {
     variant.choices:nn = { plain, classic, modern }
       { 

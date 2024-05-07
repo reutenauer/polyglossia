@@ -27,7 +27,7 @@
 \newif\if@calendar@hebrew
 \newif\if@hebrew@numerals
 
-\DeclareKeys[hebrew]
+\DeclareKeys[polyglossia/gloss/hebrew]
   {
     marcheshvan.code = \setkeys{hebrewcal}{marcheshvan=#1},
     marcheshvan.default:n = true,
@@ -66,7 +66,7 @@
   }
 
 
-\SetKeys[hebrew]{numerals}
+\SetGlossOptions{hebrew}{numerals}
 
 % Register default options
 \InitializeGlossOptions{hebrew}{numerals=arabic,calendar=gregorian,marcheshvan=false,fullyear=false}

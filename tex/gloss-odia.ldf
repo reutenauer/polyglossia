@@ -33,7 +33,7 @@
 \def\extras@odia{}
 \def\noextras@odia{}
 
-\DeclareKeys[odia]
+\DeclareKeys[polyglossia/gloss/odia]
   {
     changecounternumbering.if = odia@changecounternumbering,
     changecounternumbering.default:n = true,

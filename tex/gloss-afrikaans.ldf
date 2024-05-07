@@ -16,7 +16,7 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{afrikaans}{af}
 
-\DeclareKeys[afrikaans]
+\DeclareKeys[polyglossia/gloss/afrikaans]
   {
     babelshorthands.if = afrikaans@babelshorthands,
     babelshorthands.default:n = true,
@@ -25,9 +25,9 @@
 \InitializeGlossOptions{afrikaans}{babelshorthands=false}
 
 \ifsystem@babelshorthands
-  \SetKeys[afrikaans]{babelshorthands=true}
+  \SetGlossOptions{afrikaans}{babelshorthands=true}
 \else
-  \SetKeys[afrikaans]{babelshorthands=false}
+  \SetGlossOptions{afrikaans}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

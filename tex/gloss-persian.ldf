@@ -32,7 +32,7 @@
 
 %TODO add option for CALENDAR
 
-\DeclareKeys[persian]
+\DeclareKeys[polyglossia/gloss/persian]
   {
     sectionsep.code = \gdef\xpg@sepmark{#1}\persian@customseptrue,
     sectionsep.default:n = .,

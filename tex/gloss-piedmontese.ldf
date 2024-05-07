@@ -17,16 +17,16 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{piedmontese}{pms}
 
-\DeclareKeys[piedmontese]
+\DeclareKeys[polyglossia/gloss/piedmontese]
   {
     babelshorthands.if = piedmontese@babelshorthands,
     babelshorthands.default:n = true
   }
 
 \ifsystem@babelshorthands
-  \SetKeys[piedmontese]{babelshorthands=true}
+  \SetGlossOptions{piedmontese}{babelshorthands=true}
 \else
-  \SetKeys[piedmontese]{babelshorthands=false}
+  \SetGlossOptions{piedmontese}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

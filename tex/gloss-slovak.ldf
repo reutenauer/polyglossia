@@ -19,7 +19,7 @@
   \RequirePackage{luavlna}
 \fi
 
-\DeclareKeys[slovak]
+\DeclareKeys[polyglossia/gloss/slovak]
   {
     babelshorthands.if = slovak@babelshorthands,
     babelshorthands.default:n = true,
@@ -33,9 +33,9 @@
 \InitializeGlossOptions{slovak}{babelshorthands=false,splithyphens=true,vlna=true}
 
 \ifsystem@babelshorthands
-  \SetKeys[slovak]{babelshorthands=true}
+  \SetGlossOptions{slovak}{babelshorthands=true}
 \else
-  \SetKeys[slovak]{babelshorthands=false}
+  \SetGlossOptions{slovak}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

@@ -53,7 +53,7 @@
 \newif\ifsanskrit@devanagari@numerals
 \sanskrit@devanagari@numeralstrue
 
-\DeclareKeys[sanskrit]
+\DeclareKeys[polyglossia/gloss/sanskrit]
   {
     script.code = \@ifundefined{fontsetup@sanskrit@#1}%
       {\xpg@error{`#1' is not a valid script for Sanskrit}}%

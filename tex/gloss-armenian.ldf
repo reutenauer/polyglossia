@@ -25,7 +25,7 @@
 \newif\if@armenian@numerals
 \@armenian@numeralsfalse
 
-\DeclareKeys[armenian]
+\DeclareKeys[polyglossia/gloss/armenian]
   {
     variant.choices:nn = { western, eastern }
       { 

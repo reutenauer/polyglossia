@@ -18,7 +18,7 @@
 \@ifundefined{ifwelsh@formaldate}%
   {\newif\ifwelsh@formaldate}{}
 
-\DeclareKeys[welsh]
+\DeclareKeys[polyglossia/gloss/welsh]
   {
     date.choices:nn = { long, short }
       { 

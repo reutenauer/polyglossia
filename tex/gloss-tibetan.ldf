@@ -24,7 +24,7 @@
 \setlanguagealias*{tibetan}{bo}
 
 \newif\if@tibetan@numerals
-\DeclareKeys[tibetan]
+\DeclareKeys[polyglossia/gloss/tibetan]
   {
     numerals.choice:,
     numerals/tibetan.code = \@tibetan@numeralstrue
