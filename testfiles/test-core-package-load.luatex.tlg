@@ -16,7 +16,7 @@ Inserting `l3color' in `luaotfload.parse_color'.
 Package: xparse ....-..-.. L3 Experimental document command parser
 )
 Package: fontspec ....-..-.. v... Font selection for XeLaTeX and LuaLaTeX
-Lua module: fontspec ....-..-.. 2.9a Font selection for XeLaTeX and LuaLaTeX (../fontspec-luatex.sty
+Lua module: fontspec ....-..-.. 2.9c Font selection for XeLaTeX and LuaLaTeX (../fontspec-luatex.sty
 Package: fontspec-luatex ....-..-.. v... Font selection for XeLaTeX and LuaLaTeX
 \l__fontspec_script_int=\count...
 \l__fontspec_language_int=\count...
