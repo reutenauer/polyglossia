@@ -24,17 +24,17 @@
 \DeclareKeys[polyglossia/gloss/korean]
   {
     variant.choices:nn = { plain, classic, modern }
-      { 
+      {
         \edef\xpg@korean@variant{\the\numexpr\UseName{l_keys_choice_int}-1\relax}
       },
     variant.default:n = plain,
     captions.choices:nn = { hangul, hanja }
-      { 
+      {
         \edef\xpg@korean@captions{\the\numexpr\UseName{l_keys_choice_int}-1\relax}
       },
     captions.default:n = hangul,
     swapstrings.choices:nn = { all, headings, headers, none }
-      { 
+      {
         \ifcase\UseName{l_keys_choice_int}\or
           % all:
           \@korean@swapheadingstrue
@@ -429,13 +429,13 @@
         \XeTeXinterchartokenstate\z@
         \XeTeXlinebreakpenalty\z@
         \XeTeXlinebreakskip\z@skip
-        \XeTeXlinebreaklocale "en"
+        \XeTeXlinebreaklocale ""
         \noextras@korean@common
     }
 \else % luatex
-    \def\inlineextras@korean{\xpg@attr@korean\xpg@korean@variant\relax}
+    \def\inlineextras@korean{\xpg@attr@cjkspacing\xpg@korean@variant\relax}
     \def\noextras@korean{%
-        \unsetattribute\xpg@attr@korean
+        \unsetattribute\xpg@attr@cjkspacing
         \noextras@korean@common
     }
 \fi
@@ -455,7 +455,7 @@
     \let\newattribute\newluatexattribute
     \let\unsetattribute\unsetluatexattribute
 \fi
-\newattribute\xpg@attr@korean
+\newattribute\xpg@attr@cjkspacing
 \newattribute\xpg@attr@autojosa
 % user commands for Josa
 % Josa : particles in Korean grammar that immediately follow a noun or pronoun.
