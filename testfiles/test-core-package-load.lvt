@@ -1,4 +1,22 @@
 \input{regression-test.tex}
+\ifdefined\directlua
+\directlua{
+   local function provides_module(info)
+      if not (info and info.name) then
+         luatexbase.module_error("luatexbase","Missing module name for provides_module")
+      end
+      local function spaced(text)
+         return text and (" " .. text) or ""
+      end
+      texio.write_nl("log",
+         "Lua module: " .. info.name
+         .. spaced(info.date)
+         .. spaced(info.description)
+      )
+      end
+   luatexbase.provides_module = provides_module
+}
+\fi
 \START
 \RequirePackage{polyglossia}
 \END
