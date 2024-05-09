@@ -142,20 +142,8 @@
 
 \ifxetex
    % Check if \l@english is defined. If not, try to set it to some variety
-   % (specific order as in the csv list below), or null language if everything fails
-   \IfLanguageDefinedF{english}{%
-      \def\do##1{%
-         \IfLanguageDefinedTF{#1}%
-            {\csletcs{l@english}{l@#1}\listbreak}%
-            {%
-               \xpg@warning{No hyphenation patterns for English found"\MessageBreak
-                            I will use the 'null' language instead}%
-               \adddialect\l@english0
-            }%
-      }%
-      \docsvlist{british, american, usenglishmax, australian, newzealand}
-      \IfLanguageDefinedTF{english}{}{}
-   }%
+   % (specific order as in the csv list), or null language if everything fails
+   \TryPatternWithFallback{english}{british, american, usenglishmax, australian, newzealand}
 \fi
 
 \def\english@language{%

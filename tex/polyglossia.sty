@@ -2356,6 +2356,35 @@
 \cs_gset_eq:cc { IfLanguageDefinedT }  { xpg_if_language_defined:nT }
 \cs_gset_eq:cc { IfLanguageDefinedF }  { xpg_if_language_defined:nF }
 
+% Check if patterns for language #1 is defined. If not, try
+% the comma-separated list of fallbacks in #2
+\NewDocumentCommand \TryPatternWithFallback { m m }
+{
+   \xpg_if_language_defined:nF { #1 }
+     {
+        \clist_clear_new:N \l_xpg_lang_patterns
+        \clist_set:Ne \l_xpg_lang_patterns { #2 }
+        \bool_set_false:N \l_tmpa_bool
+        \clist_map_inline:Nn \l_xpg_lang_patterns
+          {
+             \xpg_if_language_defined:nT { #1 }
+                {
+                   \xpg_info_msg:n{Using~ hyphenation~ pattern~ '##1'~ for~ #1}
+                   \cs_gset_eq:cc { l@#1 }  { l@##1 }
+                   \bool_set_true:N \l_tmpa_bool
+                   \clist_map_break:
+                }
+          }
+        \bool_if:NF \l_tmpa_bool
+           {
+            \xpg_warning_msg:n
+              {No~ hyphenation~ patterns~ for~ #1~ found \iow_newline:
+               I~ will~ use~ the~ 'null'~ language~ instead!}
+               \exp_args:Nc \adddialect {l@#1} 0
+           }
+     }
+}
+
 % This old term is used by biblatex, so don't drop!
 \cs_gset_eq:cc { xpg@ifdefined } { xpg_if_language_defined:nTF }
 
