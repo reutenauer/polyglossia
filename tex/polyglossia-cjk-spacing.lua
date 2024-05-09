@@ -1,5 +1,5 @@
 --
--- polyglossia-korean.lua
+-- polyglossia-cjk-spacing.lua
 -- part of polyglossia v2.1 -- 2024/03/07
 --
 
@@ -11,10 +11,13 @@ local penalty_id = node.id"penalty"
 local disc_id  = node.id"disc"
 
 --
--- attr_korean: variant = plain (0), classic (1), modern (2)
+-- attr_cjk: variant = plain: 0, JP/classic: 1, KR/modern: 2, SC: 3, TC: 4
 --
-local attr_korean = luatexbase.attributes["xpg@attr@korean"]
-local attr_josa   = luatexbase.attributes["xpg@attr@autojosa"]
+local attr_cjk = luatexbase.attributes["xpg@attr@cjkspacing"]
+--
+-- attr_josa: ONLY For Korean. DO NOT declare \newattribute for other langs
+--
+local attr_josa = luatexbase.attributes["xpg@attr@autojosa"]
 
 --
 -- characters after which linebreak is not allowed
@@ -244,8 +247,28 @@ local charclass = setmetatable({
 }, { __index = function() return 0 end })
 
 --
+-- get character class
+--      var : variant = plain, JP/classic, KR/modern, SC, TC
+--      c   : codepoint
+--
+local function get_charclass (var, c)
+    if var < 3 then
+        return charclass[c]
+    elseif var == 3 then
+        -- SC : these are left aligned
+        return (c == 0xFF01 or c == 0xFF1F) and 4 -- FULLWIDTH EXCLAMATION/QUESTION MARK
+        or     (c == 0xFF1A or c == 0xFF1B) and 2 -- FULLWIDTH COLON/SEMICOLON
+        or     charclass[c]
+    end
+    -- TC : these are center aligned
+    return (c == 0x3001 or c == 0xFF0C) and 3 -- IDEOGRAPHIC/FULLWIDTH COMMA
+    or     (c == 0x3002 or c == 0xFF0E) and 3 -- IDEOGRAPHIC/FULLWIDTH FULL STOP -- 5 ?
+    or     charclass[c]
+end
+
+--
 -- table for spacing between char classes
---   1 stands for 0.5*fontsize when variant=classic
+--   1 stands for 0.5*fontsize when variant = JP/classic or SC or TC
 --
 local intercharclass = { [0] =
     { [0] = nil,    {1,1},  nil,    {.5,.5} },
@@ -277,7 +300,7 @@ end
 
 --
 -- return 0.5*fontsize of given fontid
---   space: true if variant=modern; then 0.5*interword_space
+--   space: true if variant=KR/modern; then 0.5*interword_space
 --
 local function get_font_size (fid, space)
     local size = font.getparameters(fid)
@@ -291,7 +314,7 @@ end
 
 --
 -- charclass 1 thru 4 will be packed in \hbox to 0.5em{\hss? curr \hss?}
---   when variant=classic/modern
+--   when variant ~= plain
 --
 local function glyph_to_box (head, curr, class)
     local g, h = curr
@@ -320,7 +343,7 @@ end
 --
 -- insert spacing defined as charclass[a][b] between a and b
 --   f:    fontid
---   var:  variant = plain, classic, modern
+--   var:  variant = plain, JP/classic, KR/modern, SC, TC
 --   cc:   charclass of current char
 --   nc:   charclass of next char
 --   nobr: linebreak is not allowed
@@ -340,11 +363,11 @@ end
 --
 -- insert inter-character spacing in other normal cases
 --   f:   fontid
---   var: variant = plain, classic, modern
+--   var: variant = plain, JP/classic, KR/modern, SC, TC
 --   x:   true between cjk and non-cjk (a little more spacing)
 --
 local function insert_penalty_glue (head, curr, f, var, x)
-    if var ~= 1 then
+    if var == 0 or var == 2 then
         local penalty = get_new_penalty(50)
         head, curr = node.insert_after(head, curr, penalty)
     end
@@ -362,14 +385,14 @@ end
 -- main process for linebreak and inter-character spacing
 --   lb: true if pre_linebreak_filter
 --
-local function korean_break (head, lb)
+local function cjk_break (head, lb)
     local curr = head
     while curr do
-        if curr.id == glyph_id then
-            local var = node.has_attribute(curr, attr_korean)
+        if curr.id == glyph_id and attr_cjk then
+            local var = node.has_attribute(curr, attr_cjk)
             if var then
                 local c, f = curr.char or 0, curr.font or 0
-                local cc, cjkc = charclass[c], is_cjk(c)
+                local cc, cjkc = get_charclass(var, c), is_cjk(c)
 
                 -- compress cjk punctuations when charclass is 1 thru 4
                 if var > 0 and cc > 0 and cc < 5 then
@@ -379,7 +402,7 @@ local function korean_break (head, lb)
                 local next = curr.next
                 if next and next.id == glyph_id then
                     local n = next.char or 0
-                    local nc = charclass[n]
+                    local nc = get_charclass(var, n)
                     local nobr = nobr_before[n] or nobr_after[c]
 
                     -- insert spacing as of intercharclass
@@ -420,7 +443,7 @@ end
 local function reorder_tm (head)
     local curr, tone = node.slide(head)
     while curr do
-        if curr.id == glyph_id and node.has_attribute(curr, attr_korean) then
+        if curr.id == glyph_id and node.has_attribute(curr, attr_cjk) then
             local f = font.getfont(curr.font) or font.fonts[curr.font]
             if f and f.hb then -- harfbuzz do the right thing
                 tone = nil
@@ -571,39 +594,13 @@ end
 --   As char value of glyphs can be changed by opentype GSUB process,
 --   we have to occupy the first position among callback functions.
 --
-local prepend_to_callback
-if luatexbase.base_add_to_callback then
-    prepend_to_callback = function(name, func, desc)
-        luatexbase.add_to_callback(name, func, desc, 1)
-    end
-else
-    prepend_to_callback = function(name, func, desc)
-        local t = { {func, desc} }
-        for _,v in ipairs(luatexbase.callback_descriptions(name)) do
-            table.insert(t, {luatexbase.remove_from_callback(name, v)})
-        end
-        for _,v in ipairs(t) do
-            luatexbase.add_to_callback(name, v[1], v[2])
-        end
-    end
-end
-
-prepend_to_callback ("pre_linebreak_filter",
-    function(head)
-        head = auto_josa(head)
-        head = korean_break(head, true)
-        head = reorder_tm(head)
-        return head
-    end,
-    "polyglossia.lang_korean")
-
-prepend_to_callback ("hpack_filter",
-    function(head)
-        head = auto_josa(head)
-        head = korean_break(head)
-        head = reorder_tm(head)
-        return head
-    end,
-    "polyglossia.lang_korean")
+luatexbase.add_to_callback( "pre_shaping_filter",
+function(head)
+    if attr_josa then head = auto_josa(head) end
+    head = cjk_break(head, true)
+    if attr_josa then head = reorder_tm(head) end
+    return head
+end,
+"polyglossia.lang_cjk_spacing")
 
 -- vim:ft=lua:tw=0:sw=4:ts=4:expandtab
