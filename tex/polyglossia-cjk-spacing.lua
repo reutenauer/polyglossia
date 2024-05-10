@@ -594,13 +594,22 @@ end
 --   As char value of glyphs can be changed by opentype GSUB process,
 --   we have to occupy the first position among callback functions.
 --
-luatexbase.add_to_callback( "pre_shaping_filter",
+luatexbase.add_to_callback( "pre_linebreak_filter",
 function(head)
     if attr_josa then head = auto_josa(head) end
     head = cjk_break(head, true)
     if attr_josa then head = reorder_tm(head) end
     return head
 end,
-"polyglossia.lang_cjk_spacing")
+"polyglossia.lang_cjk_spacing", 1)
+
+luatexbase.add_to_callback( "hpack_filter",
+function(head)
+    if attr_josa then head = auto_josa(head) end
+    head = cjk_break(head)
+    if attr_josa then head = reorder_tm(head) end
+    return head
+end,
+"polyglossia.lang_cjk_spacing", 1)
 
 -- vim:ft=lua:tw=0:sw=4:ts=4:expandtab
