@@ -3,16 +3,9 @@ Don't change this file in any respect.
 (gloss-korean.ldf
 File: gloss-korean.ldf polyglossia: module for Korean
 Package polyglossia Info: Option: Korean, swapstrings=all
-\xpg@attr@korean=\attribute...
+\xpg@attr@cjkspacing=\attribute...
 \xpg@attr@autojosa=\attribute...
-Removing  `luaotfload.node_processor' from `pre_linebreak_filter'.
-Inserting `polyglossia.lang_korean' in `pre_linebreak_filter'.
-Inserting `luaotfload.node_processor' in `pre_linebreak_filter'.
-Removing  `luaotfload.node_processor' from `hpack_filter'.
-Removing  `luaotfload.harf.finalize_hlist' from `hpack_filter'.
-Inserting `polyglossia.lang_korean' in `hpack_filter'.
-Inserting `luaotfload.node_processor' in `hpack_filter'.
-Inserting `luaotfload.harf.finalize_hlist' in `hpack_filter'.)
+Inserting `polyglossia.lang_cjk_spacing' in `pre_shaping_filter'.)
 Package polyglossia Info: Default language is korean
 > \box...=
 \hbox(6.66+0.22)x47.84001, direction TLT
@@ -20,16 +13,24 @@ Package polyglossia Info: Default language is korean
 .\TU/lmr/m/n/10 0
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 2
+.\penalty 50
+.\glue 0.0 plus 0.5 minus 0.1
 .\TU/lmr/m/n/10 년
 .\TU/lmr/m/n/10 󰀀
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 8
+.\penalty 50
+.\glue 0.0 plus 0.5 minus 0.1
 .\TU/lmr/m/n/10 월
 .\TU/lmr/m/n/10 󰀀
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 6
+.\penalty 50
+.\glue 0.0 plus 0.5 minus 0.1
 .\TU/lmr/m/n/10 일
 .\TU/lmr/m/n/10 󰀀
+.\penalty 10000
+.\glue 0.0 plus 0.5 minus 0.1
 .\TU/lmr/m/n/10 .
 ! OK.
 <to be read again> 
