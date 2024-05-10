@@ -2369,7 +2369,7 @@
           {
              \xpg_if_language_defined:nT { ##1 }
                 {
-                   \xpg_info_msg:n{Using~ hyphenation~ pattern~ '##1'~ for~ #1}
+                   %\xpg_info_msg:n{Using~ hyphenation~ pattern~ '##1'~ for~ #1}
                    \cs_gset_eq:cc { l@#1 }  { l@##1 }
                    \bool_set_true:N \l_tmpa_bool
                    \clist_map_break:
