@@ -476,7 +476,7 @@
 \protected\def\로{\으 로}
 \def\xpg@reset@josa {\global\let\xpg@josa@zwang\z@}\xpg@reset@josa
 % load lua file for korean
-\directlua{ require "polyglossia-korean" }
+\directlua{ require "polyglossia-cjk-spacing" }
 \endinput\fi
 
 % XeTeX
