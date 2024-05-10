@@ -66,9 +66,9 @@ local nobr_after = {
 -- characters before which linebreak is not allowed
 --   (currently, not much differences among the followings)
 --   1: normal chars
---   2: hangul jamo vowels and trailing consonants
+--   2: hangul jamo vowels and trailing consonants plus combinings
 --   3: kana small letters
---   0: dashes (supress visible spacing)
+--   0: dashes (suppress visible spacing after this char)
 --
 local nobr_before = setmetatable({
     [0x21] = 1, -- ! EXCLAMATION MARK
@@ -79,7 +79,7 @@ local nobr_before = setmetatable({
     [0x2D] = 0, -- - HYPHEN-MINUS
     [0x2E] = 1, -- . FULL STOP
     [0x2F] = 0, -- / SOLIDUS
-    [0x3A] = 0, -- : COLON
+    [0x3A] = 1, -- : COLON
     [0x3B] = 1, -- ; SEMICOLON
     [0x3E] = 1, -- > GREATER-THAN SIGN
     [0x3F] = 1, -- ? QUESTION MARK
@@ -127,10 +127,10 @@ local nobr_before = setmetatable({
     [0x308E] = 3, -- ゎ HIRAGANA LETTER SMALL WA
     [0x3095] = 3, -- ゕ HIRAGANA LETTER SMALL KA
     [0x3096] = 3, -- ゖ HIRAGANA LETTER SMALL KE
-    [0x3099] = 1, --  COMBINING KATAKANA-HIRAGANA VOICED SOUND MARK
-    [0x309A] = 1, --  COMBINING KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
-    [0x309B] = 1, -- ゛ KATAKANA-HIRAGANA VOICED SOUND MARK
-    [0x309C] = 1, -- ゜ KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
+    [0x3099] = 2, --  COMBINING KATAKANA-HIRAGANA VOICED SOUND MARK
+    [0x309A] = 2, --  COMBINING KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
+    [0x309B] = 2, -- ゛ KATAKANA-HIRAGANA VOICED SOUND MARK
+    [0x309C] = 2, -- ゜ KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
     [0x309D] = 1, -- ゝ HIRAGANA ITERATION MARK
     [0x309E] = 1, -- ゞ HIRAGANA VOICED ITERATION MARK
     [0x30A0] = 1, -- ゠ KATAKANA-HIRAGANA DOUBLE HYPHEN
@@ -179,18 +179,18 @@ local nobr_before = setmetatable({
     [0xFF63] = 1, -- ｣ HALFWIDTH RIGHT CORNER BRACKET
     [0xFF64] = 1, -- ､ HALFWIDTH IDEOGRAPHIC COMMA
     [0xFF65] = 1, -- ･ HALFWIDTH KATAKANA MIDDLE DOT
-    [0xFF9E] = 1, -- ﾞ HALFWIDTH KATAKANA VOICED SOUND MARK
-    [0xFF9F] = 1, -- ﾟ HALFWIDTH KATAKANA SEMI-VOICED SOUND MARK
+    [0xFF9E] = 2, -- ﾞ HALFWIDTH KATAKANA VOICED SOUND MARK
+    [0xFF9F] = 2, -- ﾟ HALFWIDTH KATAKANA SEMI-VOICED SOUND MARK
 }, { __index = function(_,c)
         if c >= 0x1160  and c <= 0x11FF  then return 2 end
         if c >= 0xD7B0  and c <= 0xD7FF  then return 2 end
-        if c >= 0x302A  and c <= 0x302F  then return 1 end
+        if c >= 0x302A  and c <= 0x302F  then return 2 end -- tone marks
         if c >= 0x31F0  and c <= 0x31FF  then return 3 end
         if c >= 0xFF67  and c <= 0xFF70  then return 3 end
-        if c >= 0xFE00  and c <= 0xFE0F  then return 1 end
+        if c >= 0xFE00  and c <= 0xFE0F  then return 2 end -- variation selectors
         if c >= 0xFE10  and c <= 0xFE19 and not (c == 0xFE17) then return 1 end
         if c >= 0xFE50  and c <= 0xFE58  then return 1 end
-        if c >= 0xE0100 and c <= 0xE01EF then return 1 end
+        if c >= 0xE0100 and c <= 0xE01EF then return 2 end -- variation selecters
     end
 })
 
@@ -208,6 +208,7 @@ local function is_cjk (c)
     or     c >= 0xFF00  and c <= 0xFFEF
     or     c >= 0x1F100 and c <= 0x1F2FF
     or     c >= 0x20000 and c <= 0x2FA1F
+    or     c >= 0x30000 and c <= 0x323AF
     or     nobr_after[c]  and c > 0x2014
     or     nobr_before[c] and c > 0x2014
 end
@@ -362,12 +363,16 @@ end
 
 --
 -- insert inter-character spacing in other normal cases
---   f:   fontid
---   var: variant = plain, JP/classic, KR/modern, SC, TC
---   x:   true between cjk and non-cjk (a little more spacing)
+--   f:    fontid
+--   var:  variant = plain, JP/classic, KR/modern, SC, TC
+--   nobr: no linebreak
+--   x:    true between cjk and non-cjk (a little more spacing)
 --
-local function insert_penalty_glue (head, curr, f, var, x)
-    if var == 0 or var == 2 then
+local function insert_penalty_glue (head, curr, f, var, nobr, x)
+    if nobr then
+        local penalty = get_new_penalty(10000)
+        head, curr = node.insert_after(head, curr, penalty)
+    elseif var == 0 or var == 2 then
         local penalty = get_new_penalty(50)
         head, curr = node.insert_after(head, curr, penalty)
     end
@@ -383,9 +388,8 @@ end
 
 --
 -- main process for linebreak and inter-character spacing
---   lb: true if pre_linebreak_filter
 --
-local function cjk_break (head, lb)
+local function cjk_break (head)
     local curr = head
     while curr do
         if curr.id == glyph_id and attr_cjk then
@@ -410,19 +414,19 @@ local function cjk_break (head, lb)
                         head, curr = insert_cjk_penalty_glue(head, curr, f, var, cc, nc, nobr)
 
                     -- or insert spacing when linebreak is allowed
-                    elseif not nobr then
+                    else
                         local cjkn = is_cjk(n)
 
                         -- if curr or next is cjk char
                         if cjkc or cjkn then
 
                             -- if between cjk and non-cjk
-                            if var > 0 and not (cjkc and cjkn) and nobr_before[c] ~= 0 then
-                                head, curr = insert_penalty_glue(head, curr, f, var, true)
+                            if var > 0 and not (cjkc and cjkn) and not nobr and nobr_before[c] ~= 0 then
+                                head, curr = insert_penalty_glue(head, curr, f, var, nobr, true)
 
-                            -- or under pre_linebreak_filter
-                            elseif lb then
-                                head, curr = insert_penalty_glue(head, curr, f, var)
+                            -- cjk+cjk except combinings or nobr cjk+noncjk or after dashes
+                            elseif nobr_before[n] ~= 2 then
+                                head, curr = insert_penalty_glue(head, curr, f, var, nobr)
                             end
                         end
                     end
@@ -594,22 +598,13 @@ end
 --   As char value of glyphs can be changed by opentype GSUB process,
 --   we have to occupy the first position among callback functions.
 --
-luatexbase.add_to_callback( "pre_linebreak_filter",
-function(head)
-    if attr_josa then head = auto_josa(head) end
-    head = cjk_break(head, true)
-    if attr_josa then head = reorder_tm(head) end
-    return head
-end,
-"polyglossia.lang_cjk_spacing", 1)
-
-luatexbase.add_to_callback( "hpack_filter",
+luatexbase.add_to_callback( "pre_shaping_filter",
 function(head)
     if attr_josa then head = auto_josa(head) end
     head = cjk_break(head)
     if attr_josa then head = reorder_tm(head) end
     return head
 end,
-"polyglossia.lang_cjk_spacing", 1)
+"polyglossia.lang_cjk_spacing")
 
 -- vim:ft=lua:tw=0:sw=4:ts=4:expandtab
