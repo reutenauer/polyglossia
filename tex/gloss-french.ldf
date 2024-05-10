@@ -317,100 +317,100 @@
 \def\french@capsformat{%
    % Change part heading
    % With titlesec
-   \ifcsdef{titleformat}{%
-     \ifcsdef{NR@part}{% Hyperref (nameref)
-        \let\xpg@save@part@format\NR@part%
-        \patchcmd{\NR@part}%
-                  {\partname\nobreakspace\thepart}%
-                  {\xpg@french@part\nobreakspace\partname}%
-                  {}%
-                  {\xpg@warning{Failed to patch part for French}}%
-     }{% not hyperref
-       \ifcsdef{@part}{%
-          \let\xpg@save@part@format\@part%
-          \patchcmd{\@part}%
-                    {\partname\nobreakspace\thepart}%
-                    {\xpg@french@part\nobreakspace\partname}%
-                    {}%
-                    {\xpg@warning{Failed to patch part for French}}%
-       }{}%
-     }%
-   }{% (not \ifdefined\titleformat)
+   \@ifundefined{titleformat}{%
      % With KOMA
-     \ifcsdef{sectionformat}{%
-        \ifcsdef{partformat}{%
-          \let\xpg@save@part@format\partformat%
-          \renewcommand{\partformat}{\xpg@french@part~\partname}%
-        }{}%
-     }{%  (not \ifdefined\sectionformat)
+     \@ifundefined{sectionformat}{%
        % With memoir
-       \ifcsdef{@memptsize}{%
-         \ifcsdef{NR@part}{% Hyperref (nameref)
-           \let\xpg@save@part@format\NR@part%
-           \patchcmd{\NR@part}{\printpartname \partnamenum \printpartnum}%
-                            {\partnamefont\xpg@french@part\partnamenum\printpartname}%
-                            {}%
-                            {\xpg@warning{Failed to patch part for French}}%
-          }{% not hyperref
-            \ifcsdef{@part}{%
-              \let\xpg@save@part@format\@part%
-              \patchcmd{\@part}{\printpartname \partnamenum \printpartnum}%
-                               {\partnamefont\xpg@french@part\partnamenum\printpartname}%
-                               {}%
-                               {\xpg@warning{Failed to patch part for French}}%
-             }{}%
-          }%
-       }{%  (not \ifdefined\@memptsize)
+       \@ifundefined{@memptsize}{%  (not \ifdefined\@memptsize)
          % With standard classes
-         \ifcsdef{NR@part}{% Hyperref
+         \@ifundefined{NR@part}{% not hyperref
+            \@ifundefined{@part}{}{%
+              \let\xpg@save@part@format\@part%
+              \patchcmd{\@part}%
+                       {\partname\nobreakspace\thepart}%
+                       {\xpg@french@part\nobreakspace\partname}%
+                       {}%
+                       {\@ifundefined{part}{}{\xpg@warning{Failed to patch part for French}}}%
+            }%  (end \ifdefined \@part)
+         }{% Hyperref
            \let\xpg@save@part@format\NR@part%
            \patchcmd{\NR@part}%
                     {\partname\nobreakspace\thepart}%
                     {\xpg@french@part\nobreakspace\partname}%
                     {}%
                     {\xpg@warning{Failed to patch part for French}}%
-         }{% not hyperref
-            \ifcsdef{@part}{%
+         }%  (end \ifdefined\NR@part)
+       }{%
+         \@ifundefined{NR@part}{% not hyperref
+            \@ifundefined{@part}{}{%
               \let\xpg@save@part@format\@part%
-              \patchcmd{\@part}%
-                       {\partname\nobreakspace\thepart}%
-                       {\xpg@french@part\nobreakspace\partname}%
-                       {}%
-                       {\ifcsdef{part}{\xpg@warning{Failed to patch part for French}}{}}%
-            }{}%  (end \ifdefined \NR@part)
-         }%  (end \ifdefined\@part)
+              \patchcmd{\@part}{\printpartname \partnamenum \printpartnum}%
+                               {\partnamefont\xpg@french@part\partnamenum\printpartname}%
+                               {}%
+                               {\xpg@warning{Failed to patch part for French}}%
+             }%
+          }{% Hyperref (nameref)
+           \let\xpg@save@part@format\NR@part%
+           \patchcmd{\NR@part}{\printpartname \partnamenum \printpartnum}%
+                            {\partnamefont\xpg@french@part\partnamenum\printpartname}%
+                            {}%
+                            {\xpg@warning{Failed to patch part for French}}%
+          }%
        }% (end \ifdefined\@memptsize)
+     }{%  (\ifdefined\sectionformat)
+        \@ifundefined{partformat}{}{%
+          \let\xpg@save@part@format\partformat%
+          \renewcommand{\partformat}{\xpg@french@part~\partname}%
+        }%
      }% (end \ifdefined\sectionformat)
+   }{%  (\ifdefined\titleformat)
+     \@ifundefined{NR@part}{% not hyperref
+       \@ifundefined{@part}{}{%
+          \let\xpg@save@part@format\@part%
+          \patchcmd{\@part}%
+                    {\partname\nobreakspace\thepart}%
+                    {\xpg@french@part\nobreakspace\partname}%
+                    {}%
+                    {\xpg@warning{Failed to patch part for French}}%
+       }%
+     }{% Hyperref (nameref)
+        \let\xpg@save@part@format\NR@part%
+        \patchcmd{\NR@part}%
+                  {\partname\nobreakspace\thepart}%
+                  {\xpg@french@part\nobreakspace\partname}%
+                  {}%
+                  {\xpg@warning{Failed to patch part for French}}%
+     }%
    }% (end \ifdefined\titleformat)
 }
 
 \def\nofrench@capsformat{%
    % Reset chapter and part heading
-   \ifcsdef{titleformat}{%
-      % With titlesec
-     \ifcsdef{xpg@save@part@format}{%
-        \ifcsdef{NR@part}{%
-            \let\NR@part\xpg@save@part@format%
-        }{%
-            \let\@part\xpg@save@part@format%
-        }%
-     }{}%
-   }{% (not \ifdefined\titleformat)
-     \ifcsdef{sectionformat}{%
-        % With KOMA
-        \ifcsdef{xpg@save@part@format}{%
-           \let\partformat\xpg@save@part@format
-        }{}%
-     }{%
+   \@ifundefined{titleformat}{%
+     \@ifundefined{sectionformat}{%
         % With memoir and standard classes
-        \ifcsdef{xpg@save@part@format}{%
-           \ifcsdef{NR@part}{%
-              \let\NR@part\xpg@save@part@format%
-           }{%
+        \@ifundefined{xpg@save@part@format}{}{%
+           \@ifundefined{NR@part}{%
               \let\@part\xpg@save@part@format%
+           }{%
+              \let\NR@part\xpg@save@part@format%
            }%
-        }{}%
+        }%
+     }{%
+        % With KOMA
+        \@ifundefined{xpg@save@part@format}{}{%
+           \let\partformat\xpg@save@part@format
+        }%
      }% (end \ifdefined\sectionformat)
+   }{% (\ifdefined\titleformat)
+      % With titlesec
+     \@ifundefined{xpg@save@part@format}{}{%
+        \@ifundefined{NR@part}{%
+            \let\@part\xpg@save@part@format%
+        }{%
+            \let\NR@part\xpg@save@part@format%
+        }%
+     }%
    }% (end \ifdefined\titleformat)
 }
 

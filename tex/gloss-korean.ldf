@@ -121,60 +121,48 @@
   % change chapter and part headings
   \if@korean@swapheadings
     % With titlesec
-    \ifcsdef{titleformat}{%
-      \ifcsdef{NR@part}{% Hyperref (nameref)
-        \let\xpg@save@part@format\NR@part
-        \patchcmd{\NR@part}%
-                 {\partname\nobreakspace\thepart}%
-                 {\koreanTHEname\nobreakspace \thepart\nobreakspace \partname}%
-                 {}%
-                 {\xpg@warning{Failed to patch part for Korean}}%
-      }{% not hyperref
-        \ifcsdef{@part}{%
-            \let\xpg@save@part@format\@part
-            \patchcmd{\@part}%
+    \@ifundefined{titleformat}{%
+      % With KOMA
+      \@ifundefined{sectionformat}{%
+        % With memoir
+        \@ifundefined{@memptsize}{%
+          % With standard classes
+          \@ifundefined{@makechapterhead}{}{%
+            \let\xpg@save@chap@format\@makechapterhead
+            \patchcmd{\@makechapterhead}%
+                     {\@chapapp\space \thechapter}%
+                     {%
+                       \ifx\@chapapp\korean@appendix@chapapp
+                         \appendixname\space \thechapter
+                       \else
+                         \koreanTHEname\space \thechapter\space \@chapapp
+                       \fi
+                     }%
+                     {}%
+                     {\xpg@warning{Failed to patch chapter for Korean}}%
+          }%
+          \@ifundefined{NR@part}{% not hyperref
+            \@ifundefined{@part}{}{%
+              \ifpatchable{\@part}%
+                   {\partname\nobreakspace\thepart}%
+                   {\let\xpg@save@part@format\@part
+                    \patchcmd{\@part}%
+                             {\partname\nobreakspace\thepart}%
+                             {\koreanTHEname\nobreakspace \thepart\nobreakspace \partname}%
+                             {}%
+                             {\@ifundefined{part}{}{\xpg@warning{Failed to patch part for Korean}}}}%
+                   {}%
+            }%  (end \ifdefined\@part)
+          }{% Hyperref (nameref)
+            \let\xpg@save@part@format\NR@part
+            \patchcmd{\NR@part}%
                      {\partname\nobreakspace\thepart}%
                      {\koreanTHEname\nobreakspace \thepart\nobreakspace \partname}%
                      {}%
                      {\xpg@warning{Failed to patch part for Korean}}%
-        }{}%
-      }
-      \ifcsdef{chapter}{%
-        \titleformat\chapter[display]%
-          {\@ifundefined{ttl@fil}{\raggedright}{\ttl@fil}\ttl@fonts\ttl@sizes6}%
-          {%
-            \ifx\@chapapp\korean@appendix@chapapp
-              \appendixname\space \thechapter
-            \else
-              \koreanTHEname\space \thechapter\space \@chapapp
-            \fi
-          }{.8\baselineskip}{\ttl@sizes\z@\ttl@passexplicit}%
-      }{}%
-    }{% (not \ifdefined\titleformat)
-      % With KOMA
-      \ifcsdef{sectionformat}{%
-        \ifcsdef{partformat}{%
-          \let\xpg@save@part@format\partformat
-          \renewcommand*{\partformat}{\koreanTHEname~\thepart~\partname}%
-        }{}%
-        \ifcsdef{chapterformat}{%
-          \let\xpg@save@chap@format\chapterformat
-          \renewcommand*{\chapterformat}{\mbox{%
-            \IfChapterUsesPrefixLine
-            {%
-              \ifx\@chapapp\korean@appendix@chapapp
-                \chapapp\nobreakspace \thechapter\autodot
-              \else
-                \koreanTHEname\nobreakspace \thechapter\nobreakspace \chapapp\autodot
-              \fi
-            }%
-            {\thechapter\autodot\enskip}%
-          }}%
-        }{}%
-      }{% (not \ifdefined\sectionformat)
-        % With memoir
-        \ifcsdef{@memptsize}{%
-          \ifcsdef{@makechapterhead}{%
+          }% (end not hyperref)
+        }{% (\ifdefined\@memptsize)
+          \@ifundefined{@makechapterhead}{}{%
             \let\xpg@save@chap@format\@makechapterhead
             \patchcmd{\@makechapterhead}%
                      {\printchaptername \chapternamenum \printchapternum}%
@@ -192,19 +180,9 @@
                 \ifpatchable\printchaptername\@chapapp
                   {\chapnamefont\koreanTHEname\chapternamenum}{}}%
             \fi
-          }{}%
-          \ifcsdef{NR@part}{% Hyperref (nameref)
-            \let\xpg@save@part@format\NR@part
-            \patchcmd{\NR@part}%
-                     {\printpartname \partnamenum \printpartnum}%
-                     {\printkoreanpartthe \printpartnum\partnamenum \printpartname}%
-                     {}%
-                     {\xpg@warning{Failed to patch part for Korean}}%
-            \ifdefined\printkoreanpartthe\else
-              \def\printkoreanpartthe{\partnamefont\koreanTHEname\partnamenum}%
-            \fi
-          }{% not hyperref
-            \ifcsdef{@part}{%
+          }%
+          \@ifundefined{NR@part}{% not hyperref
+            \@ifundefined{@part}{}{%
               \let\xpg@save@part@format\@part
               \patchcmd{\@part}%
                        {\printpartname \partnamenum \printpartnum}%
@@ -214,84 +192,77 @@
               \ifdefined\printkoreanpartthe\else
                 \def\printkoreanpartthe{\partnamefont\koreanTHEname\partnamenum}%
               \fi
-            }{}%
-          }%
-        }{% (not \ifdefined\@memptsize)
-          % With standard classes
-          \ifcsdef{@makechapterhead}{%
-            \let\xpg@save@chap@format\@makechapterhead
-            \patchcmd{\@makechapterhead}%
-                     {\@chapapp\space \thechapter}%
-                     {%
-                       \ifx\@chapapp\korean@appendix@chapapp
-                         \appendixname\space \thechapter
-                       \else
-                         \koreanTHEname\space \thechapter\space \@chapapp
-                       \fi
-                     }%
-                     {}%
-                     {\xpg@warning{Failed to patch chapter for Korean}}%
-          }{}%
-          \ifcsdef{NR@part}{% Hyperref (nameref)
+            }%
+          }{% Hyperref (nameref)
             \let\xpg@save@part@format\NR@part
             \patchcmd{\NR@part}%
+                     {\printpartname \partnamenum \printpartnum}%
+                     {\printkoreanpartthe \printpartnum\partnamenum \printpartname}%
+                     {}%
+                     {\xpg@warning{Failed to patch part for Korean}}%
+            \ifdefined\printkoreanpartthe\else
+              \def\printkoreanpartthe{\partnamefont\koreanTHEname\partnamenum}%
+            \fi
+          }%
+        }% (end \ifdefined\@memptsize)
+      }{% (\ifdefined\sectionformat)
+        \@ifundefined{partformat}{}{%
+          \let\xpg@save@part@format\partformat
+          \renewcommand*{\partformat}{\koreanTHEname~\thepart~\partname}%
+        }%
+        \@ifundefined{chapterformat}{}{%
+          \let\xpg@save@chap@format\chapterformat
+          \renewcommand*{\chapterformat}{\mbox{%
+            \IfChapterUsesPrefixLine
+            {%
+              \ifx\@chapapp\korean@appendix@chapapp
+                \chapapp\nobreakspace \thechapter\autodot
+              \else
+                \koreanTHEname\nobreakspace \thechapter\nobreakspace \chapapp\autodot
+              \fi
+            }%
+            {\thechapter\autodot\enskip}%
+          }}%
+        }%
+      }% (end \ifdefined\sectionformat)
+    }{% (\ifdefined\titleformat)
+      \@ifundefined{NR@part}{% not hyperref
+        \@ifundefined{@part}{}{%
+            \let\xpg@save@part@format\@part
+            \patchcmd{\@part}%
                      {\partname\nobreakspace\thepart}%
                      {\koreanTHEname\nobreakspace \thepart\nobreakspace \partname}%
                      {}%
                      {\xpg@warning{Failed to patch part for Korean}}%
-          }{% not hyperref
-            \ifcsdef{@part}{%
-              \ifpatchable{\@part}%
-                   {\partname\nobreakspace\thepart}%
-                   {\let\xpg@save@part@format\@part
-                    \patchcmd{\@part}%
-                             {\partname\nobreakspace\thepart}%
-                             {\koreanTHEname\nobreakspace \thepart\nobreakspace \partname}%
-                             {}%
-                             {\ifcsdef{part}{\xpg@warning{Failed to patch part for Korean}}{}}}%
-                   {}%
-            }{}%  (end \ifdefined\@part)
-          }% (end not hyperref)
-        }% (end \ifdefined\@memptsize)
-      }% (end \ifdefined\sectionformat)
+        }%
+      }{% Hyperref (nameref)
+        \let\xpg@save@part@format\NR@part
+        \patchcmd{\NR@part}%
+                 {\partname\nobreakspace\thepart}%
+                 {\koreanTHEname\nobreakspace \thepart\nobreakspace \partname}%
+                 {}%
+                 {\xpg@warning{Failed to patch part for Korean}}%
+      }%
+      \@ifundefined{chapter}{}{%
+        \titleformat\chapter[display]%
+          {\@ifundefined{ttl@fil}{\raggedright}{\ttl@fil}\ttl@fonts\ttl@sizes6}%
+          {%
+            \ifx\@chapapp\korean@appendix@chapapp
+              \appendixname\space \thechapter
+            \else
+              \koreanTHEname\space \thechapter\space \@chapapp
+            \fi
+          }{.8\baselineskip}{\ttl@sizes\z@\ttl@passexplicit}%
+      }%
     }% (end \ifdefined\titleformat)
   \fi % (end \if@korean@swapheadings)
   %
   % Change running headers
   \if@korean@swapheaders
-    \ifcsdef{chapterformat}{%
-      % With KOMA
-      \let\xpg@save@chaptermark@format\chaptermarkformat
-      \renewcommand*\chaptermarkformat{%
-        \IfChapterUsesPrefixLine
-        {%
-          \ifx\@chapapp\korean@appendix@chapapp
-            \chapapp\ \thechapter\autodot
-          \else
-            \koreanTHEname\ \thechapter\ \chapapp\autodot
-          \fi
-        }%
-        {\thechapter\autodot}%
-        \enskip
-      }%
-    }{% (not \ifdefined\chapterformat)
-      \ifcsdef{@memptsize}{%
-        % With memoir
-        \let\xpg@save@chaptermark@format\chaptermark
-        \patchcmd{\chaptermark}%
-                 {\@chapapp\ \@nameuse{thechapter}}%
-                 {%
-                   \ifx\@chapapp\korean@appendix@chapapp
-                     \appendixname\ \@nameuse{thechapter}%
-                   \else
-                     \koreanTHEname\ \@nameuse{thechapter}\ \@chapapp
-                   \fi
-                 }%
-                 {}%
-                 {\xpg@warning{Failed to patch chaptermark for Korean}}%
-      }{% (not \ifdefined\@memptsize)
+    \@ifundefined{chapterformat}{%
+      \@ifundefined{@memptsize}{%
         % With standard classes
-        \ifcsdef{chaptermark}{%
+        \@ifundefined{chaptermark}{}{%
           \ifpatchable{\chaptermark}%
                {\@chapapp\ \thechapter}%
                {\let\xpg@save@chaptermark@format\chaptermark
@@ -307,65 +278,94 @@
                          {}%
                          {\xpg@warning{Failed to patch chaptermark for Korean}}}%
                {}%
-        }{}% (end \ifdefined\chaptermark)
+        }% (end \ifdefined\chaptermark)
+      }{% (\ifdefined\@memptsize)
+        % With memoir
+        \let\xpg@save@chaptermark@format\chaptermark
+        \patchcmd{\chaptermark}%
+                 {\@chapapp\ \@nameuse{thechapter}}%
+                 {%
+                   \ifx\@chapapp\korean@appendix@chapapp
+                     \appendixname\ \@nameuse{thechapter}%
+                   \else
+                     \koreanTHEname\ \@nameuse{thechapter}\ \@chapapp
+                   \fi
+                 }%
+                 {}%
+                 {\xpg@warning{Failed to patch chaptermark for Korean}}%
       }% (end \ifdefined\@memptsize)
+    }{% (\ifdefined\chapterformat)
+      % With KOMA
+      \let\xpg@save@chaptermark@format\chaptermarkformat
+      \renewcommand*\chaptermarkformat{%
+        \IfChapterUsesPrefixLine
+        {%
+          \ifx\@chapapp\korean@appendix@chapapp
+            \chapapp\ \thechapter\autodot
+          \else
+            \koreanTHEname\ \thechapter\ \chapapp\autodot
+          \fi
+        }%
+        {\thechapter\autodot}%
+        \enskip
+      }%
     }% (end \ifdefined\chapterformat)
   \fi % (end \if@korean@swapheaders)
 }
 
 \def\nokorean@headingsformat{%
   % Reset chapter and part heading
-  \ifcsdef{titleformat}{%
-    % With titlesec
-    \ifcsdef{xpg@save@part@format}{%
-      \ifcsdef{NR@part}{%
-        \let\NR@part\xpg@save@part@format
-      }{%
-        \let\@part\xpg@save@part@format
+  \@ifundefined{titleformat}{%
+    \@ifundefined{sectionformat}{%
+      % With memoir and standard classes
+      \@ifundefined{xpg@save@part@format}{}{%
+        \@ifundefined{NR@part}{%
+          \let\@part\xpg@save@part@format
+        }{%
+          \let\NR@part\xpg@save@part@format
+        }%
       }%
-    }{}%
-    \ifcsdef{chapter}{%
+      \@ifundefined{xpg@save@chap@format}{}{%
+        \let\@makechapterhead\xpg@save@chap@format
+      }%
+    }{%
+      % With KOMA
+      \@ifundefined{xpg@save@part@format}{}{%
+        \let\partformat\xpg@save@part@format
+      }%
+      \@ifundefined{xpg@save@chap@format}{}{%
+        \let\chapterformat\xpg@save@chap@format
+      }%
+    }% (end \ifdefined\sectionformat)
+  }{% (\ifdefined\titleformat)
+    % With titlesec
+    \@ifundefined{xpg@save@part@format}{}{%
+      \@ifundefined{NR@part}{%
+        \let\@part\xpg@save@part@format
+      }{%
+        \let\NR@part\xpg@save@part@format
+      }%
+    }%
+    \@ifundefined{chapter}{}{%
       \titleformat\chapter[display]%
         {\@ifundefined{ttl@fil}{\raggedright}{\ttl@fil}\ttl@fonts\ttl@sizes6}%
         {\@chapapp\space\thechapter}{.8\baselineskip}{\ttl@sizes\z@\ttl@passexplicit}%
-    }{}%
-  }{% (not \ifdefined\titleformat)
-    \ifcsdef{sectionformat}{%
-      % With KOMA
-      \ifcsdef{xpg@save@part@format}{%
-        \let\partformat\xpg@save@part@format
-      }{}%
-      \ifcsdef{xpg@save@chap@format}{%
-        \let\chapterformat\xpg@save@chap@format
-      }{}%
-    }{%
-      % With memoir and standard classes
-      \ifcsdef{xpg@save@part@format}{%
-        \ifcsdef{NR@part}{%
-          \let\NR@part\xpg@save@part@format
-        }{%
-          \let\@part\xpg@save@part@format
-        }%
-      }{}%
-      \ifcsdef{xpg@save@chap@format}{%
-        \let\@makechapterhead\xpg@save@chap@format
-      }{}%
-    }% (end \ifdefined\sectionformat)
+    }%
   }% (end \ifdefined\titleformat)
   %
   % Reset headers
-  \ifcsdef{chaptermarkformat}{%
-    % With KOMA
-    \ifcsdef{xpg@save@chaptermark@format}{%
-      \let\chaptermarkformat\xpg@save@chaptermark@format
-    }{}%
-  }{%
-    \ifcsdef{chaptermark}{%
+  \@ifundefined{chaptermarkformat}{%
+    \@ifundefined{chaptermark}{}{%
       % With memoir and standard classes
-      \ifcsdef{xpg@save@chaptermark@format}{%
+      \@ifundefined{xpg@save@chaptermark@format}{}{%
         \let\chaptermark\xpg@save@chaptermark@format
-      }{}%
-    }{}% (end \ifdefined\chaptermark)
+      }%
+    }% (end \ifdefined\chaptermark)
+  }{%
+    % With KOMA
+    \@ifundefined{xpg@save@chaptermark@format}{}{%
+      \let\chaptermarkformat\xpg@save@chaptermark@format
+    }%
   }% (end \ifdefined\chapterformat)
 }
 

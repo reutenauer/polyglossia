@@ -134,107 +134,127 @@
   % change chapter and part headings
   \if@uyghur@swapheadings
      % With titlesec
-     \ifcsdef{titleformat}{%
-       \ifcsdef{H@old@part}{% Hyperref
-            \let\xpg@save@part@format\H@old@part%
-            \patchcmd{\H@old@part}%
-                      {\partname\nobreakspace\thepart}%
-                      {\the@uyghur@part\nobreakspace\partname}%
-                      {}%
-                      {\xpg@warning{Failed to patch part for Uyghur}}%
-       }{% not hyperref
-         \ifcsdef{@part}{%
-            \let\xpg@save@part@format\@part%
-            \patchcmd{\@part}%
-                      {\partname\nobreakspace\thepart}%
-                      {\the@uyghur@part\nobreakspace\partname}%
-                      {}%
-                      {\xpg@warning{Failed to patch part for Uyghur}}%
-         }{}%
-       }
-       \ifcsdef{chapter}{%
-          \titleformat\chapter[display]%
-             {\@ifundefined{ttl@fil}{\raggedright}{\ttl@fil}\ttl@fonts\ttl@sizes6}
-             {\the@uyghur@chapter\space\@chapapp}{.8\baselineskip}{\ttl@sizes\z@\ttl@passexplicit}
-       }{}%
-     }{% (not \ifdefined\titleformat)
+     \@ifundefined{titleformat}{%
        % With KOMA
-       \ifcsdef{sectionformat}{%
-          \ifcsdef{partformat}{%
-            \let\xpg@save@part@format\partformat%
-            \renewcommand{\partformat}{\the@uyghur@part~\partname}%
-          }{}%
-          \ifcsdef{chapterformat}{%
-            \let\xpg@save@chap@format\chapterformat%
-            \renewcommand{\chapterformat}{\mbox{\the@uyghur@chapter%
-                                          \IfUsePrefixLine{\nobreakspace\chapapp}{\enskip}}}%
-          }{}%
-       }{%  (not \ifdefined\sectionformat)
+       \@ifundefined{sectionformat}{%
          % With memoir
-         \ifcsdef{@memptsize}{%
-           \ifcsdef{@makechapterhead}{%
-              \let\xpg@save@chap@format\@makechapterhead%
-              \patchcmd{\@makechapterhead}{\printchaptername \chapternamenum \printchapternum}%
-                       {\chapnumfont\the@uyghur@chapter\chapternamenum\printchaptername}%
-                       {}%
-                       {\xpg@warning{Failed to patch chapter for Uyghur}}%
-           }{}%
-           \ifcsdef{H@old@part}{% Hyperref
-                \let\xpg@save@part@format\H@old@part%
-                \patchcmd{\H@old@part}{\printpartname \partnamenum \printpartnum}%
-                                 {\chapnumfont\the@uyghur@part\partnamenum\printpartname}%
-                                 {}%
-                                 {\xpg@warning{Failed to patch part for Uyghur}}%
-           }{% not hyperref
-             \ifcsdef{@part}{%
-                \let\xpg@save@part@format\@part%
-                \patchcmd{\@part}{\printpartname \partnamenum \printpartnum}%
-                                 {\chapnumfont\the@uyghur@part\partnamenum\printpartname}%
-                                 {}%
-                                 {\xpg@warning{Failed to patch part for Uyghur}}%
-             }{}%
-           }%
-         }{%  (not \ifdefined\@memptsize)
+         \@ifundefined{@memptsize}{%
            % With standard classes
-            \ifcsdef{@makechapterhead}{%
+            \@ifundefined{@makechapterhead}{}{%
               \let\xpg@save@chap@format\@makechapterhead%
               \patchcmd{\@makechapterhead}%
                        {\@chapapp\space \thechapter}%
                        {\the@uyghur@chapter\space \@chapapp}%
                        {}%
                        {\xpg@warning{Failed to patch chapter for Uyghur}}%
-            }{}%
-            \ifcsdef{H@old@part}{% Hyperref
+            }%
+            \@ifundefined{H@old@part}{% not hyperref
+              \@ifundefined{@part}{}{%
+                \let\xpg@save@part@format\@part%
+                \patchcmd{\@part}%
+                         {\partname\nobreakspace\thepart}%
+                         {\the@uyghur@part\nobreakspace\partname}%
+                         {}%
+                         {\@ifundefined{part}{}{\xpg@warning{Failed to patch part for Uyghur}}}%
+              }%  (end \ifdefined\@part)
+            }{% Hyperref
               \let\xpg@save@part@format\H@old@part%
               \patchcmd{\H@old@part}%
                        {\partname\nobreakspace\thepart}%
                        {\the@uyghur@part\nobreakspace\partname}%
                        {}%
                        {\xpg@warning{Failed to patch part for Uyghur}}%            
-            }{% not hyperref
-              \ifcsdef{@part}{%
-                \let\xpg@save@part@format\@part%
-                \patchcmd{\@part}%
-                         {\partname\nobreakspace\thepart}%
-                         {\the@uyghur@part\nobreakspace\partname}%
-                         {}%
-                         {\ifcsdef{part}{\xpg@warning{Failed to patch part for Uyghur}}{}}%
-              }{}%  (end \ifdefined\@part)
             }% (end not hyperref)
-          }% (end \ifdefined\@memptsize)
-        }% (end \ifdefined\sectionformat)
+          }{%  (\ifdefined\@memptsize)
+           \@ifundefined{@makechapterhead}{}{%
+              \let\xpg@save@chap@format\@makechapterhead%
+              \patchcmd{\@makechapterhead}{\printchaptername \chapternamenum \printchapternum}%
+                       {\chapnumfont\the@uyghur@chapter\chapternamenum\printchaptername}%
+                       {}%
+                       {\xpg@warning{Failed to patch chapter for Uyghur}}%
+           }%
+           \@ifundefined{H@old@part}{% not hyperref
+             \@ifundefined{@part}{}{%
+                \let\xpg@save@part@format\@part%
+                \patchcmd{\@part}{\printpartname \partnamenum \printpartnum}%
+                                 {\chapnumfont\the@uyghur@part\partnamenum\printpartname}%
+                                 {}%
+                                 {\xpg@warning{Failed to patch part for Uyghur}}%
+             }%
+           }{% Hyperref
+                \let\xpg@save@part@format\H@old@part%
+                \patchcmd{\H@old@part}{\printpartname \partnamenum \printpartnum}%
+                                 {\chapnumfont\the@uyghur@part\partnamenum\printpartname}%
+                                 {}%
+                                 {\xpg@warning{Failed to patch part for Uyghur}}%
+           }%
+         }% (end \ifdefined\@memptsize)
+        }{%  (\ifdefined\sectionformat)
+          \@ifundefined{partformat}{}{%
+            \let\xpg@save@part@format\partformat%
+            \renewcommand{\partformat}{\the@uyghur@part~\partname}%
+          }%
+          \@ifundefined{chapterformat}{}{%
+            \let\xpg@save@chap@format\chapterformat%
+            \renewcommand{\chapterformat}{\mbox{\the@uyghur@chapter%
+                                          \IfUsePrefixLine{\nobreakspace\chapapp}{\enskip}}}%
+          }%
+       }% (end \ifdefined\sectionformat)
+     }{% (\ifdefined\titleformat)
+       \@ifundefined{H@old@part}{% not hyperref
+         \@ifundefined{@part}{}{%
+            \let\xpg@save@part@format\@part%
+            \patchcmd{\@part}%
+                      {\partname\nobreakspace\thepart}%
+                      {\the@uyghur@part\nobreakspace\partname}%
+                      {}%
+                      {\xpg@warning{Failed to patch part for Uyghur}}%
+         }%
+       }{% Hyperref
+            \let\xpg@save@part@format\H@old@part%
+            \patchcmd{\H@old@part}%
+                      {\partname\nobreakspace\thepart}%
+                      {\the@uyghur@part\nobreakspace\partname}%
+                      {}%
+                      {\xpg@warning{Failed to patch part for Uyghur}}%
+       }%
+       \@ifundefined{chapter}{}{%
+          \titleformat\chapter[display]%
+             {\@ifundefined{ttl@fil}{\raggedright}{\ttl@fil}\ttl@fonts\ttl@sizes6}
+             {\the@uyghur@chapter\space\@chapapp}{.8\baselineskip}{\ttl@sizes\z@\ttl@passexplicit}
+       }%
      }% (end \ifdefined\titleformat)
   \fi% (end \if@uyghur@swapheadings)
   %
   % Change running headers
   \if@uyghur@swapheaders
-    \ifcsdef{chapterformat}{%
-      % With KOMA
-      \let\xpg@save@chaptermark@format\chaptermarkformat%
-      \renewcommand*\chaptermarkformat{%
-         \the@uyghur@chapter\ \IfChapterUsesPrefixLine{\chapapp\enskip}{}}
-    }{% (not \ifdefined\chapterformat)
-      \ifcsdef{@memptsize}{%
+    \@ifundefined{chapterformat}{%
+      \@ifundefined{@memptsize}{%
+        % With standard classes
+        \@ifundefined{chaptermark}{}{%
+          \ifpatchable{\chaptermark}%
+               {\@chapapp\ \thechapter.}%
+               {\let\xpg@save@chaptermark@format\chaptermark%
+                \patchcmd{\chaptermark}%
+                    {\@chapapp\ \thechapter.}%
+                    {\the@uyghur@chapter\ \@chapapp}%
+                    {}%
+                    {\xpg@warning{Failed to patch chaptermark for Uyghur}}}%
+               {}%
+        }% (end \ifdefined\sectionmark)
+        \@ifundefined{sectionmark}{}{%
+             \ifpatchable{\sectionmark}%
+                  {\thesection.}%
+                  {\let\xpg@save@sectionmark@format\sectionmark%
+                   \patchcmd{\sectionmark}%
+                      {\thesection.}%
+                      {\thesection}%
+                      {}%
+                      {\xpg@warning{Failed to patch sectionmark for Uyghur}}%
+                  }%
+                  {}%
+       }% (end \ifdefined\chaptermark)
+     }{% (\ifdefined\@memptsize)
         % With memoir
         \let\xpg@save@chaptermark@format\chaptermark%
         \renewcommand*\chaptermark[1]{%
@@ -245,33 +265,14 @@
               }{}%
             \fi
             ##1}}{}}%
-      }{% (not \ifdefined\@memptsize)
-        % With standard classes
-        \ifcsdef{chaptermark}{%
-          \ifpatchable{\chaptermark}%
-               {\@chapapp\ \thechapter.}%
-               {\let\xpg@save@chaptermark@format\chaptermark%
-                \patchcmd{\chaptermark}%
-                    {\@chapapp\ \thechapter.}%
-                    {\the@uyghur@chapter\ \@chapapp}%
-                    {}%
-                    {\xpg@warning{Failed to patch chaptermark for Uyghur}}}%
-               {}%
-        }{}% (end \ifdefined\sectionmark)
-                \ifcsdef{sectionmark}{%
-          \ifpatchable{\sectionmark}%
-               {\thesection.}%
-               {\let\xpg@save@sectionmark@format\sectionmark%
-                \patchcmd{\sectionmark}%
-                    {\thesection.}%
-                    {\thesection}%
-                    {}%
-                    {\xpg@warning{Failed to patch sectionmark for Uyghur}}}%
-               {}%
-        }{}% (end \ifdefined\chaptermark)
       }% (end \ifdefined\@memptsize)
+   }{% (\ifdefined\chapterformat)
+      % With KOMA
+      \let\xpg@save@chaptermark@format\chaptermarkformat%
+      \renewcommand*\chaptermarkformat{%
+         \the@uyghur@chapter\ \IfChapterUsesPrefixLine{\chapapp\enskip}{}}
     }% (end \ifdefined\chapterformat)
-  \fi% (end \if@uyghur@swapheaders)
+ \fi% (end \if@uyghur@swapheaders)
 }
 
 \def\nouyghur@capsformat{%
@@ -281,62 +282,62 @@
    \let\fnum@figure\xpg@save@fnum@figure%
    %
    % Reset chapter and part heading
-   \ifcsdef{titleformat}{%
-      % With titlesec
-     \ifcsdef{xpg@save@part@format}{%
-        \ifcsdef{H@old@part}{%
-            \let\H@old@part\xpg@save@part@format%
-        }{%
-            \let\@part\xpg@save@part@format%
+   \@ifundefined{titleformat}{%
+     \@ifundefined{sectionformat}{%
+        % With memoir and standard classes
+        \@ifundefined{xpg@save@part@format}{}{%
+           \@ifundefined{H@old@part}{%
+               \let\@part\xpg@save@part@format%
+           }{%
+               \let\H@old@part\xpg@save@part@format%
+           }%
         }%
-     }{}%
-     \ifcsdef{chapter}{%
+        \@ifundefined{xpg@save@chap@format}{}{%
+          \let\@makechapterhead\xpg@save@chap@format
+        }%
+     }{%
+        % With KOMA
+        \@ifundefined{xpg@save@part@format}{}{%
+           \let\partformat\xpg@save@part@format
+        }%
+        \@ifundefined{xpg@save@chap@format}{}{%
+           \let\chapterformat\xpg@save@chap@format
+        }%
+     }% (end \ifdefined\sectionformat)
+   }{% (\ifdefined\titleformat)
+      % With titlesec
+     \@ifundefined{xpg@save@part@format}{}{%
+        \@ifundefined{H@old@part}{%
+            \let\@part\xpg@save@part@format%
+        }{%
+            \let\H@old@part\xpg@save@part@format%
+        }%
+     }%
+     \@ifundefined{chapter}{}{%
         \titleformat\chapter[display]%
           {\@ifundefined{ttl@fil}{\raggedright}{\ttl@fil}\ttl@fonts\ttl@sizes6}
           {\@chapapp\space\thechapter}{.8\baselineskip}{\ttl@sizes\z@\ttl@passexplicit}
-     }{}%
-   }{% (not \ifdefined\titleformat)
-     \ifcsdef{sectionformat}{%
-        % With KOMA
-        \ifcsdef{xpg@save@part@format}{%
-           \let\partformat\xpg@save@part@format
-        }{}%
-        \ifcsdef{xpg@save@chap@format}{%
-           \let\chapterformat\xpg@save@chap@format
-        }{}%
-     }{%
-        % With memoir and standard classes
-        \ifcsdef{xpg@save@part@format}{%
-           \ifcsdef{H@old@part}{%
-               \let\H@old@part\xpg@save@part@format%
-           }{%
-               \let\@part\xpg@save@part@format%
-           }%
-        }{}%
-        \ifcsdef{xpg@save@chap@format}{%
-          \let\@makechapterhead\xpg@save@chap@format
-        }{}%
-     }% (end \ifdefined\sectionformat)
+     }%
    }% (end \ifdefined\titleformat)
   %
   % Reset headers
-  \ifcsdef{chaptermarkformat}{%
-     % With KOMA
-     \ifcsdef{xpg@save@chaptermark@format}{%
-       \let\chaptermarkformat\xpg@save@chaptermark@format%
-     }{}%
-  }{%
-     \ifcsdef{chaptermark}{%
+  \@ifundefined{chaptermarkformat}{%
+     \@ifundefined{chaptermark}{}{%
        % With memoir and standard classes
-       \ifcsdef{xpg@save@chaptermark@format}{%
+       \@ifundefined{xpg@save@chaptermark@format}{}{%
          \let\chaptermark\xpg@save@chaptermark@format%
-       }{}%
-     }{}% (end \ifdefined\chaptermark)
-     \ifcsdef{sectionmark}{%
-       \ifcsdef{xpg@save@sectionmark@format}{%
+       }%
+     }% (end \ifdefined\chaptermark)
+     \@ifundefined{sectionmark}{}{%
+       \@ifundefined{xpg@save@sectionmark@format}{}{%
          \let\sectionmark\xpg@save@sectionmark@format%
-       }{}%
-     }{}% (end \ifdefined\sectionmark)
+       }%
+     }% (end \ifdefined\sectionmark)
+  }{%
+     % With KOMA
+     \@ifundefined{xpg@save@chaptermark@format}{}{%
+       \let\chaptermarkformat\xpg@save@chaptermark@format%
+     }%
   }% (end \ifdefined\chapterformat)
 }
 
@@ -372,22 +373,22 @@
 \let\the@uyghur@chapter\thechapter
 
 \def\uyghur@chapterformat{%
-   \ifcsdef{part}{%
+   \@ifundefined{part}{}{%
       \if@uyghur@ordchapter%
         \renewcommand{\the@uyghur@part}{\uyghurord{part}}%
       \fi%
       \if@uyghur@romchapter%
         \renewcommand{\the@uyghur@part}{\Roman{part}}%
       \fi%
-   }{}%
-   \ifcsdef{chapter}{%
+   }%
+   \@ifundefined{chapter}{}{%
       \if@uyghur@ordchapter%
         \renewcommand{\the@uyghur@chapter}{\uyghurord{chapter}}%
       \fi%
       \if@uyghur@romchapter%
         \renewcommand{\the@uyghur@chapter}{\Roman{chapter}}%
       \fi%
-   }{}%
+   }%
 }
 
 \def\uyghur@numbers{%
