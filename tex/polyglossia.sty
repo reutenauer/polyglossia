@@ -1149,7 +1149,9 @@
 	  % restore former ~ catcode
 	  \__xpg_restore_tilde_catcode:
 	  \tl_new:c { xpg_#2_defualt_options_tl }
-          \keys_precompile:nnc { polyglossia / gloss / #2 } { #1 } 
+	  \prop_put_from_keyval:Nn \xpg__tmp_default_options_prop { #1 }
+          \keys_precompile:nec { polyglossia / gloss / #2 } 
+                               { \prop_to_keyval:N \xpg__tmp_default_options_prop } 
                                { xpg_#2_defualt_options_tl }
 	  \use:c { xpg_#2_defualt_options_tl }
 	}
@@ -1157,7 +1159,8 @@
 	  \__xpg_no_gloss:n {#2}
 	}
 }
-\cs_generate_variant:Nn \keys_precompile:nnN { nnc }
+\prop_new:N \xpg__tmp_default_options_prop
+\cs_generate_variant:Nn \keys_precompile:nnN { nec }
 \cs_generate_variant:Nn \__xpg_load_lang_definition:nn { ee }
 
 % load a master language from an alias file
@@ -2094,7 +2097,8 @@
     {
 	  \xpg_set_language_nonaux:nn { #2 } { #3 }
     }{
-      \cs_set_nopar:Ne \xpg_pop_language: { \exp_not:N \__xpg_pop_language:nn { #2 } { #3 } }
+      \cs_set_nopar:Ne \xpg_pop_language: { \exp_not:N 
+      \__xpg_pop_language:nn { #2 } { #3 } }
       \group_insert_after:N \xpg_pop_language:
 	  \xpg_set_language_aux:nn { #2 } { #3 }
     }
@@ -2115,6 +2119,7 @@
 % for default settings
 \NewDocumentCommand \InitializeGlossOptions { m m }
 {
+   \prop_set_from_keyval:Nn \xpg__tmp_default_options_prop { #2 }
    \__xpg_set_language_options:nnn {#1} {#2} { \cs_set:Npe \languagevariant }
 }
 
