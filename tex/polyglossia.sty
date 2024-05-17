@@ -1146,14 +1146,18 @@
                { \char_set_catcode:nn { 126 } { \char_value_catcode:n { 126 } } }
           \char_set_catcode_active:n { 126 }
 	  \xpg_input:n {gloss-#2.ldf}
-	  \SetGlossOptions { #2 } { #1 }
 	  % restore former ~ catcode
 	  \__xpg_restore_tilde_catcode:
+	  \tl_new:c { xpg_#2_defualt_options_tl }
+          \keys_precompile:nnc { polyglossia / gloss / #2 } { #1 } 
+                               { xpg_#2_defualt_options_tl }
+	  \use:c { xpg_#2_defualt_options_tl }
 	}
 	{
 	  \__xpg_no_gloss:n {#2}
 	}
 }
+\cs_generate_variant:Nn \keys_precompile:nnN { nnc }
 \cs_generate_variant:Nn \__xpg_load_lang_definition:nn { ee }
 
 % load a master language from an alias file
@@ -1890,6 +1894,7 @@
 {
     % \text_lowercase:n fully expands
     % (as opposed to \str_lowercase:n)
+   \use:c { xpg_#1_defualt_options_tl }
    \exp_args:Ne \keys_set:ne{ polyglossia / gloss / #1 }{ \text_lowercase:n {#2} }
 }
 
@@ -2493,54 +2498,10 @@
 
 \cs_undefine:N \xpg_pop_language:
 
-%
-% Keep track of the active (nested) languages and options
-%
-\clist_new:N \l_xpg_lang_stack
-
-\cs_new:Nn \__xpg_stack_language:nn
-{
-  \clist_gpush:Nn \l_xpg_lang_stack {#1:#2}
-}
-
-\cs_generate_variant:Nn \__xpg_stack_language:nn {nx}
-
-\cs_new:Nn \__xpg_unstack_language:n
-{
-  \clist_gpop:NNTF \l_xpg_lang_stack \l_tmpa_tl {
-     % Stored format = options:language => split:
-     \seq_set_split:Nne \l_tmpa_seq {:} \l_tmpa_tl
-     \seq_get_left:NN \l_tmpa_seq \l_tmpb_tl
-     \seq_get_right:NN \l_tmpa_seq \l_tmpc_tl
-     % Execute passed command with language and maybe options
-     % and re-set stored language's keys
-     \tl_if_empty:NTF \l_tmpb_tl { \cs_if_exist_use:c { #1 } { } { \l_tmpc_tl } }
-                                 {
-                                  \SetGlossOptions { \l_tmpc_tl } { \l_tmpb_tl }
-                                  \cs_if_exist_use:c { #1 } { \l_tmpb_tl } { \l_tmpc_tl }
-                                 }
-  }
-  {}
-}
-
 \DeclareDocumentEnvironment { otherlanguage } { O{} m }
   {
-    % Get real current (pre-switch) options (incl. defaults)
-    \clist_clear_new:N \l_xpg_current_options
-    \prop_if_exist:cF { xpg@current@options@\languagename }
-	{ \prop_new:c {xpg@current@options@\languagename} }
-    \prop_map_inline:cn {xpg@current@options@\languagename}
-      {
-        \clist_put_right:Nn \l_xpg_current_options {##1=##2}
-      }
-    % Store current (pre-switch) options and language on stack
-    \__xpg_stack_language:nx{\clist_use:Nn \l_xpg_current_options {,}}{\languagename}
     \selectlanguage[#1]{#2}
-  }
-  {
-    % restore previous language in aux file and remove closed one from stack
-    \__xpg_unstack_language:n{xpg_set_language_only_aux:nn}
-  }
+  } { }
 
 % Alias to {<lang>}, but more suitable
 % for specific (esp. tag-based) aliases
