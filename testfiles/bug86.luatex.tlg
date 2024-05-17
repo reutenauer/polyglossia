@@ -37,7 +37,6 @@ Don't change this file in any respect.
 ..\TU/lmr/m/n/10 .
 ..\glue(\spaceskip) 4.44 plus 4.99498 minus 0.37
 ..\write1{\@writefile{toc}{\selectlanguage *[]{danish}}}
-..\write1{\@writefile{toc}{\selectlanguage *[]{danish}}}
 ..\penalty 10000
 ..\glue(\parfillskip) 0.0 plus 1.0fil
 ..\glue(\rightskip) 0.0
