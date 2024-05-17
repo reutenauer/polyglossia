@@ -2097,8 +2097,7 @@
     {
 	  \xpg_set_language_nonaux:nn { #2 } { #3 }
     }{
-      \cs_set_nopar:Ne \xpg_pop_language: { \exp_not:N 
-      \__xpg_pop_language:nn { #2 } { #3 } }
+      \cs_set_nopar:Ne \xpg_pop_language: { \exp_not:N \__xpg_pop_language:nn { #2 } { #3 } }
       \group_insert_after:N \xpg_pop_language:
 	  \xpg_set_language_aux:nn { #2 } { #3 }
     }
