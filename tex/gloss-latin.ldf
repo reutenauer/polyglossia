@@ -577,30 +577,7 @@
             \polyglossia_latin_apply_footnote_option:
           }
       },
-    ecclesiasticfootnotes.default:n = true,
-    numerals.choices:nn = { arabic, cyrillic, cyrillic-trad, cyrillic-alph }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % arabic:
-          \cyrillic@numeralsfalse
-          \cyrillic@asbuk@numeralsfalse
-        \or
-          % cyrillic:
-          \cyrillic@numeralstrue
-          \cyrillic@asbuk@numeralsfalse
-        \or
-          % cyrillic-trad:
-          \cyrillic@numeralstrue
-          \cyrillic@asbuk@numeralsfalse
-        \or
-          % cyrillic-alph:
-          \cyrillic@numeralstrue
-          \cyrillic@asbuk@numeralstrue
-        \fi
-        \xpg@info{Option: Belarusian, numerals=#1}%
-      },
-    numerals.default:n = arabic,
-    numerals/unknown.code = \xpg@warning{Unknown Belarusian numerals value `#1'}
+    ecclesiasticfootnotes.default:n = true
   }
 
 % Register default options
