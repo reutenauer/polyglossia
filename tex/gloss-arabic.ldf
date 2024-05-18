@@ -39,6 +39,7 @@
 \setlanguagealias*[locale=mashriq]{arabic}{ar-PS}
 
 \newif\ifeastern@numerals
+\newif\ifabjad@alef
 \newif\if@hijrical
 \newif\ifarabic@customsep\arabic@customsepfalse
 
@@ -76,36 +77,43 @@
         \ifcase\UseName{l_keys_choice_int}\or
       % default:
       \eastern@numeralstrue%
+      \abjad@aleffalse%
       \SetLanguageKeys{arabic}{bcp47=ar-YE,bcp47-language=ar}%
       \xpg@info{Option: arabic, locale=default}%
    \or
       % mashriq:
       \eastern@numeralstrue%
+      \abjad@aleffalse%
       \SetLanguageKeys{arabic}{bcp47=ar-IQ,bcp47-language=ar}%
       \xpg@info{Option: arabic, locale=mashriq}%
    \or
       % libya:
       \eastern@numeralstrue%
+      \abjad@aleffalse%
       \SetLanguageKeys{arabic}{bcp47=ayl,bcp47-language=ar,bcp47-region=LY}%
       \xpg@info{Option: arabic, locale=libya}%
    \or
       % algeria:
       \eastern@numeralsfalse%
+      \abjad@aleftrue%
       \SetLanguageKeys{arabic}{bcp47=arq,bcp47-language=ar,bcp47-region=DZ,bcp47-extension-u=nu-latn}%
       \xpg@info{Option: arabic, locale=algeria}%
    \or
       % tunisia:
       \eastern@numeralsfalse%
+      \abjad@aleftrue%
       \SetLanguageKeys{arabic}{bcp47=aeb,bcp47-language=ar,bcp47-region=TN,bcp47-extension-u=nu-latn}%
       \xpg@info{Option: arabic, locale=tunisia}%
    \or
       % morocco:
       \eastern@numeralsfalse%
+      \abjad@aleftrue%
       \SetLanguageKeys{arabic}{bcp47=ary,bcp47-language=ar,bcp47-region=MA,bcp47-extension-u=nu-latn}%
       \xpg@info{Option: arabic, locale=morocco}%
    \or
       % mauritania:
       \eastern@numeralstrue%
+      \abjad@aleffalse%
       \SetLanguageKeys{arabic}{bcp47=ar-MR,bcp47-language=ar,bcp47-region=MR}%
       \xpg@info{Option: arabic, locale=mauritania}%
    \fi
@@ -233,6 +241,11 @@
 
 
 \def\abjadmaghribi#1{%
+\ifabjad@alef
+   \def\abjad@one{أ}%
+\else
+   \def\abjad@one{ا}%
+\fi%
 \ifnum#1>1999\xpg@ill@value{#1}{abjad}%
 \else
   \ifnum#1<\z@\space\xpg@ill@value{#1}{abjad}%

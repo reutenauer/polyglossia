@@ -43,13 +43,14 @@
 \fi
 }
 \def\abjad@zero{}
+\def\abjad@one{ا}
 \def\abjad@three{ج\ifabjad@jim@notail\char"200D\fi}
 \def\abj@num@i@iso#1{%
   \ifcase#1\or ا\or ب\or\abjad@three\or د%
            \or ه\char"200D\or و\or ز\or ح\or ط\fi%
   \ifnum#1=\z@\abjad@zero\fi}
 \def\abj@num@i#1{%
-  \ifcase#1\or ا\or ب\or\abjad@three\or د%
+  \ifcase#1\or\abjad@one\or ب\or\abjad@three\or د%
            \or ه\or و\or ز\or ح\or ط\fi%
   \ifnum#1=\z@\abjad@zero\fi}
 \def\abj@num@ii#1{%
