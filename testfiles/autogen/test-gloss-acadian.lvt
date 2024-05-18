@@ -4,7 +4,7 @@
 \def\typeout#1{\let\typeout\xpgorigtypeout}}
 \usepackage{polyglossia}
 \START
-\setmainlanguage{acadien}
+\setmainlanguage{acadian}
 \OMIT
 \begin{document}
 \day=6
