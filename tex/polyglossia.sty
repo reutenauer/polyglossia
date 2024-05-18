@@ -1159,18 +1159,18 @@
 % load a master language from an alias file
 \NewDocumentCommand \InheritGlossFile { m }
 {
-  \xpg_input:n {gloss-#1.ldf}
   \seq_if_in:NeF \__xpg_langs_loaded {#1}
   {
+    \xpg_input:n {gloss-#1.ldf}
     % define environment and command if not alias
     \str_if_eq:eeT {\prop_item:Ne \__xpg_alias {#1/target}} {#1} {
       \use:c{\prop_item:Nn{\g_xpg_langsetup_prop}
                           {#1/DefineCommandsCmd}}
                           {#1}
       }
+    \seq_gput_right:Nn \__xpg_langs_loaded {#1}
   }
   \__xpg_register_language:nn{}{#1}
-  \seq_gput_right:Nn \__xpg_langs_loaded {#1}
 }
 
 \prop_new:N \__xpg_alias
