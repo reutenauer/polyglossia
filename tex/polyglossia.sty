@@ -1139,7 +1139,7 @@
 {
     \file_if_exist:nTF{gloss-#2.ldf}
 	{
-	  \prop_set_from_keyval:Nn \xpg__tmpb_default_options_prop { #1 }
+	  \tl_set:Nn \xpg__tmp_default_options_tl { #1 }
 	  % Temporarily force catcode of ~ to 13 (active) since babelsh.def
 	  % requires it. This is needed particularly with LaTeX3
 	  % packages which force \ExplSyntaxOn (#425)
@@ -2116,11 +2116,9 @@
 % for default settings
 \NewDocumentCommand \InitializeGlossOptions { m m }
 {
-   \prop_put_from_keyval:Nn \xpg__tmpa_default_options_prop { #2 }
-   \prop_concat:NNN \xpg__tmpa_default_options_prop \xpg__tmpa_default_options_prop \xpg__tmpb_default_options_prop
    \tl_new:c { xpg_#1_default_options_tl }
    \keys_precompile:nec { polyglossia / gloss / #1 } 
-                        { \text_lowercase:n { \prop_to_keyval:N \xpg__tmpa_default_options_prop } } 
+                        { \text_lowercase:n { #2, \xpg__tmp_default_options_tl } } 
                         { xpg_#1_default_options_tl }
    %\cs_set_eq:cc { xpg@info } { use_none:n }
    %\cs_set_eq:NN \xpg_info_msg:n \use_none:n
@@ -2129,8 +2127,7 @@
    %\cs_set_eq:NN \xpg_info_msg:n \xpg_info_saved_msg:n
    \__xpg_set_language_options:nnn {#1} {#2} { \cs_set:Npe \languagevariant }
 }
-\prop_new:N \xpg__tmpa_default_options_prop
-\prop_new:N \xpg__tmpb_default_options_prop
+\tl_new:N \xpg__tmp_default_options_tl
 \cs_generate_variant:Nn \keys_precompile:nnN { nec }
 
 % Record synonymous keyvals such as variant=us and variant=american
