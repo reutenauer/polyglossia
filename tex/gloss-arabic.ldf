@@ -239,6 +239,17 @@
    \else\xpg@ill@value{#1}{arabic@abjad@alph}\fi%
 }
 
+% Redefine from arabicnumbers.sty
+\def\abj@num@i@iso#1{%
+\ifabjad@alef
+   \def\abjad@one{أ}%
+\else
+   \def\abjad@one{ا}%
+\fi%
+  \ifcase#1\or\abjad@one\or ب\or\abjad@three\or د%
+           \or ه\char"200D\or و\or ز\or ح\or ط\fi%
+  \ifnum#1=\z@\abjad@zero\fi%
+}
 
 \def\abjadmaghribi#1{%
 \ifabjad@alef
