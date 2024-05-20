@@ -39,7 +39,6 @@
 \setlanguagealias*[locale=mashriq]{arabic}{ar-PS}
 
 \newif\ifeastern@numerals
-\newif\ifabjad@alef
 \newif\if@hijrical
 \newif\ifarabic@customsep\arabic@customsepfalse
 
@@ -57,13 +56,13 @@
       { 
         \ifcase\UseName{l_keys_choice_int}\or
           % mashriq:
-          \eastern@numeralstrue%
+          \eastern@numeralstrue
         \or
           % maghrib:
           \eastern@numeralsfalse
         \or
           % eastern:
-          \eastern@numeralstrue%
+          \eastern@numeralstrue
         \or
           % western:
           \eastern@numeralsfalse
@@ -76,44 +75,44 @@
       { 
         \ifcase\UseName{l_keys_choice_int}\or
       % default:
-      \eastern@numeralstrue%
-      \abjad@aleffalse%
+      \eastern@numeralstrue
+      \def\abjad@one{ا}%
       \SetLanguageKeys{arabic}{bcp47=ar-YE,bcp47-language=ar}%
       \xpg@info{Option: arabic, locale=default}%
    \or
       % mashriq:
-      \eastern@numeralstrue%
-      \abjad@aleffalse%
+      \eastern@numeralstrue
+      \def\abjad@one{ا}%
       \SetLanguageKeys{arabic}{bcp47=ar-IQ,bcp47-language=ar}%
       \xpg@info{Option: arabic, locale=mashriq}%
    \or
       % libya:
-      \eastern@numeralstrue%
-      \abjad@aleffalse%
+      \eastern@numeralstrue
+      \def\abjad@one{ا}%
       \SetLanguageKeys{arabic}{bcp47=ayl,bcp47-language=ar,bcp47-region=LY}%
       \xpg@info{Option: arabic, locale=libya}%
    \or
       % algeria:
-      \eastern@numeralsfalse%
-      \abjad@aleftrue%
+      \eastern@numeralsfalse
+      \def\abjad@one{أ}%
       \SetLanguageKeys{arabic}{bcp47=arq,bcp47-language=ar,bcp47-region=DZ,bcp47-extension-u=nu-latn}%
       \xpg@info{Option: arabic, locale=algeria}%
    \or
       % tunisia:
-      \eastern@numeralsfalse%
-      \abjad@aleftrue%
+      \eastern@numeralsfalse
+      \def\abjad@one{أ}%
       \SetLanguageKeys{arabic}{bcp47=aeb,bcp47-language=ar,bcp47-region=TN,bcp47-extension-u=nu-latn}%
       \xpg@info{Option: arabic, locale=tunisia}%
    \or
       % morocco:
-      \eastern@numeralsfalse%
-      \abjad@aleftrue%
+      \eastern@numeralsfalse
+      \def\abjad@one{أ}%
       \SetLanguageKeys{arabic}{bcp47=ary,bcp47-language=ar,bcp47-region=MA,bcp47-extension-u=nu-latn}%
       \xpg@info{Option: arabic, locale=morocco}%
    \or
       % mauritania:
-      \eastern@numeralstrue%
-      \abjad@aleffalse%
+      \eastern@numeralstrue
+      \def\abjad@one{ا}%
       \SetLanguageKeys{arabic}{bcp47=ar-MR,bcp47-language=ar,bcp47-region=MR}%
       \xpg@info{Option: arabic, locale=mauritania}%
    \fi
@@ -199,18 +198,18 @@
 }
 \def\datearabic{%
  \def\today{%
-  \if@hijrical%
+  \if@hijrical
     \Hijritoday[\arabic@hijri@correction]%
   \else%
-    \if@RTL%
+    \if@RTL
        \arabicnumber\day\space\@@arabic@month{\month}%
         \space\arabicnumber\year%
     \else% in LR environment we format the gregorian date within \textenglish
        \iflanguageloaded{english}{\textenglish{\today}}%else US format
-       {\normalfontlatin\ifcase\month\or January\or February\or March\or April\or May\or June\or%
-       July\or August\or September\or October\or November\or December\fi%
+       {\normalfontlatin\ifcase\month\or January\or February\or March\or April\or May\or June\or
+       July\or August\or September\or October\or November\or December\fi
        \space\number\day,\space\number\year}%
-    \fi%
+    \fi
  \fi}}
 
 % Use \providecommand here as the ldf file might
@@ -236,27 +235,10 @@
    \or ح\or ط\or ي\or ك\or ل\or م\or ن%
    \or س\or ع\or ف\or ص\or ق\or ر\or ش%
    \or ت\or ث\or خ\or ذ\or ض\or ظ\or غ%
-   \else\xpg@ill@value{#1}{arabic@abjad@alph}\fi%
-}
-
-% Redefine from arabicnumbers.sty
-\def\abj@num@i@iso#1{%
-\ifabjad@alef
-   \def\abjad@one{أ}%
-\else
-   \def\abjad@one{ا}%
-\fi%
-  \ifcase#1\or\abjad@one\or ب\or\abjad@three\or د%
-           \or ه\char"200D\or و\or ز\or ح\or ط\fi%
-  \ifnum#1=\z@\abjad@zero\fi%
+   \else\xpg@ill@value{#1}{arabic@abjad@alph}\fi
 }
 
 \def\abjadmaghribi#1{%
-\ifabjad@alef
-   \def\abjad@one{أ}%
-\else
-   \def\abjad@one{ا}%
-\fi%
 \ifnum#1>1999\xpg@ill@value{#1}{abjad}%
 \else
   \ifnum#1<\z@\space\xpg@ill@value{#1}{abjad}%
@@ -278,111 +260,111 @@
 
 %maghribi س -> ص ص -> ض ش -> س ض -> ظ ظ -> غ غ -> ش
 \def\abj@maghribi@num@ii#1{%
-  \ifcase#1\or ي\or ك\or ل\or م\or ن%
+  \ifcase#1\abjad@zero\or ي\or ك\or ل\or م\or ن%
            \or ص\or ع\or ف\or ض\fi
-  \ifnum#1=\z@\abjad@zero\fi\abj@num@i}
+  \abj@num@i}
 \def\abj@maghribi@num@iii#1{%
   \ifcase#1\or ق\or ر\or س\or ت\or ث%
            \or خ\or ذ\or ظ\or غ\fi
-  \ifnum#1=\z@\fi\abj@maghribi@num@ii}
+  \abj@maghribi@num@ii}
 \def\abj@maghribi@num@iv#1{%
   \ifcase#1\or ش\fi
-  \ifnum#1=\z@\fi\abj@maghribi@num@iii}
+  \abj@maghribi@num@iii}
 
 \def\arabic@numbers{%
  \ifarabic@abjadalph
-   \let\@alph\abjadalph%
-   \let\@Alph\abjadalph%
+   \let\@alph\abjadalph
+   \let\@Alph\abjadalph
  \else
-   \let\@alph\abjad%
-   \let\@Alph\abjad%
+   \let\@alph\abjad
+   \let\@Alph\abjad
  \fi
 }
 
 \def\noarabic@numbers{%
-  \let\@alph\latin@alph%
-  \let\@Alph\latin@Alph%
+  \let\@alph\latin@alph
+  \let\@Alph\latin@Alph
 }
 
 % Store original definition
 \let\xpg@save@arabic\@arabic
 
 \def\arabic@globalnumbers{%
-  \let\@arabic\arabicnumber%
+  \let\@arabic\arabicnumber
   \renewcommand\thefootnote{\localnumeral*{footnote}}%
   \renewcommand\theequation{\localnumeral*{equation}}%
 }
 
 \def\noarabic@globalnumbers{%
-   \let\@arabic\xpg@save@arabic%
+   \let\@arabic\xpg@save@arabic
 }
 
 \def\arabic@xetex@capsformat{%
-  \let\xpg@save@sepmark\@SepMark%
+  \let\xpg@save@sepmark\@SepMark
   \SepMark{\xpg@sepmark}
 }
 
 \def\noarabic@xetex@capsformat{%
-   \ifcsname xpg@save@sepmark\endcsname%
+   \ifcsname xpg@save@sepmark\endcsname
      \SepMark{\xpg@save@sepmark}
-   \fi%
+   \fi
 }
 
 \def\arabic@luatex@capsformat{%
   %
   % change chapter and part headings
   \ifarabic@customsep
-     \ifcsname chapter\endcsname%
-        \let\xpg@save@thesection\thesection%
+     \ifcsname chapter\endcsname
+        \let\xpg@save@thesection\thesection
         \renewcommand*\thesection{\thechapter\xpg@sepmark\@arabic\c@section}
-        \let\xpg@save@theequation\theequation%
+        \let\xpg@save@theequation\theequation
         \renewcommand*\theequation{%
 	    \ifnum \c@chapter>\z@ \thechapter\xpg@sepmark\fi\@arabic\c@equation}
-        \let\xpg@save@thefigure\thefigure%
+        \let\xpg@save@thefigure\thefigure
 	\renewcommand*\thefigure{%
 	    \ifnum\c@chapter>\z@\thechapter\xpg@sepmark\fi\@arabic\c@figure}
-        \let\xpg@save@thetable\thetable%
+        \let\xpg@save@thetable\thetable
 	\renewcommand*\thetable{%
 	    \ifnum\c@chapter>\z@\thechapter\xpg@sepmark\fi\@arabic\c@table}
-     \fi%
-     \let\xpg@save@thesubsection\thesubsection%
+     \fi
+     \let\xpg@save@thesubsection\thesubsection
      \renewcommand\thesubsection
 	{\thesection\xpg@sepmark\@arabic\c@subsection}
-     \let\xpg@save@thesubsubsection\thesubsubsection%
+     \let\xpg@save@thesubsubsection\thesubsubsection
      \renewcommand\thesubsubsection{\thesubsection\xpg@sepmark\@arabic\c@subsubsection}
-     \let\xpg@save@theparagraph\theparagraph%
+     \let\xpg@save@theparagraph\theparagraph
      \renewcommand\theparagraph
          {\thesubsubsection\xpg@sepmark\@arabic\c@paragraph}
-     \let\xpg@save@thesubparagraph\thesubparagraph%
+     \let\xpg@save@thesubparagraph\thesubparagraph
      \renewcommand\thesubparagraph{\theparagraph\xpg@sepmark\@arabic\c@subparagraph}
-  \fi% (end \ifarabic@customsep)
+  \fi % (end \ifarabic@customsep)
 }
 
 \def\noarabic@luatex@capsformat{%
-   \ifcsname xpg@save@thesection\endcsname%
-        \let\thesection\xpg@save@thesection%
-   \fi%
-   \ifcsname xpg@save@theequation\endcsname%
-        \let\theequation\xpg@save@theequation%
-   \fi%
-   \ifcsname xpg@save@thefigure\endcsname%
-        \let\thefigure\xpg@save@thefigure%
-   \fi%
-   \ifcsname xpg@save@thetable\endcsname%
-        \let\thetable\xpg@save@thetable%
-   \fi%
-   \ifcsname xpg@save@thesubsection\endcsname%
-        \let\thesubsection\xpg@save@thesubsection%
-      \ifcsname xpg@save@thesubsubsection\endcsname%
-        \let\thesubsubsection\xpg@save@thesubsubsection%
-      \fi%
-   \fi%
-   \ifcsname xpg@save@theparagraph\endcsname%
-        \let\theparagraph\xpg@save@theparagraph%
-   \fi%
-   \ifcsname xpg@save@thesubparagraph\endcsname%
-        \let\thesubparagraph\xpg@save@thesubparagraph%
-   \fi%
+   \ifcsname xpg@save@thesection\endcsname
+        \let\thesection\xpg@save@thesection
+   \fi
+   \ifcsname xpg@save@theequation\endcsname
+        \let\theequation\xpg@save@theequation
+   \fi
+   \ifcsname xpg@save@thefigure\endcsname
+        \let\thefigure\xpg@save@thefigure
+   \fi
+   \ifcsname xpg@save@thetable\endcsname
+        \let\thetable\xpg@save@thetable
+   \fi
+   \ifcsname xpg@save@thesubsection\endcsname
+        \let\thesubsection\xpg@save@thesubsection
+      \ifcsname xpg@save@thesubsubsection\endcsname
+        \let\thesubsubsection\xpg@save@thesubsubsection
+      \fi
+   \fi
+   \ifcsname xpg@save@theparagraph\endcsname
+        \let\theparagraph\xpg@save@theparagraph
+   \fi
+   \ifcsname xpg@save@thesubparagraph\endcsname
+        \let\thesubparagraph\xpg@save@thesubparagraph
+   \fi
 }
 
 \def\blockextras@arabic{%
@@ -394,7 +376,7 @@
       \fi   
    \fi
 }
-%
+
 \def\noextras@arabic{%
     \ifarabic@customsep
       \ifxetex

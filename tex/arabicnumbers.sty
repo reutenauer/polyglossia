@@ -44,24 +44,22 @@
 }
 \def\abjad@zero{}
 \def\abjad@one{ا}
-\def\abjad@three{ج\ifabjad@jim@notail\char"200D\fi}
+\def\abjad@three{ج\ifabjad@jim@notail\Uchar"200D\fi}
 \def\abj@num@i@iso#1{%
-  \ifcase#1\or ا\or ب\or\abjad@three\or د%
-           \or ه\char"200D\or و\or ز\or ح\or ط\fi%
-  \ifnum#1=\z@\abjad@zero\fi}
+  \ifcase#1\abjad@zero\or \abjad@one\or ب\or\abjad@three\or د%
+           \or ه\Uchar"200D\or و\or ز\or ح\or ط\fi}
 \def\abj@num@i#1{%
-  \ifcase#1\or\abjad@one\or ب\or\abjad@three\or د%
-           \or ه\or و\or ز\or ح\or ط\fi%
-  \ifnum#1=\z@\abjad@zero\fi}
+  \ifcase#1\abjad@zero\or\abjad@one\or ب\or\abjad@three\or د%
+           \or ه\or و\or ز\or ح\or ط\fi}
 \def\abj@num@ii#1{%
   \ifcase#1\or ي\or ك\or ل\or م\or ن%
-           \or س\or ع\or ف\or ص\fi% 
-  \ifnum#1=\z@\fi\abj@num@i}
+           \or س\or ع\or ف\or ص\fi 
+  \abj@num@i}
 \def\abj@num@iii#1{%
   \ifcase#1\or ق\or ر\or ش\or ت\or ث%
-            \or خ\or ذ\or ض\or ظ\fi%
-  \ifnum#1=\z@\fi\abj@num@ii}
+            \or خ\or ذ\or ض\or ظ\fi
+  \abj@num@ii}
 \def\abj@num@iv#1{%
   \ifcase#1\or غ\fi
-  \ifnum#1=\z@\fi\abj@num@iii}
+  \abj@num@iii}
 \endinput
