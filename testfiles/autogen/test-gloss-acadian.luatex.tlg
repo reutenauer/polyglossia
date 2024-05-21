@@ -1,6 +1,6 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-(gloss-acadien.ldf
+(gloss-acadian.ldf
 File: gloss-acadien.ldf polyglossia: module for Canadian (Acadian) French
 (gloss-french.ldf
 File: gloss-french.ldf polyglossia: module for French
@@ -17,19 +17,27 @@ Inserting `polyglossia-punct.process' in `pre_linebreak_filter'.
 Inserting `polyglossia-punct.process' in `hpack_filter'.
 Package polyglossia Info: Option: French, variant=french
 ))
-! Package polyglossia Error: Unknown direction 
-Type <return> to continue.
- ...                                              
-l. ...\setmainlanguage{acadien}
-LaTeX does not know anything more about this error, sorry.
-Try typing <return> to proceed.
-If that doesn't work, type X <return> to quit.
-! Undefined control sequence.
-\__xpg_setRTLmain: ->\setRTLmain 
-l. ...\setmainlanguage{acadien}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-Package polyglossia Info: Default language is 
+Module polyglossia Warning: Language acadian not found in language.dat.lua on input line ...
+Package polyglossia Warning: No hyphenation patterns were loaded for "French (Canada, Acadian)"\MessageBreak I will use the standard patterns for French instead
+\l@acadian = a dialect from \language\l@french 
+Package polyglossia Info: Option: French, variant=acadian
+Package polyglossia Info: Default language is french
+Package polyglossia Info: Option: French, variant=acadian
+> \box...=
+\hbox(6.92+0.22)x53.89, direction TLT
+.\TU/lmr/m/n/10 6
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 ^^fb
+.\TU/lmr/m/n/10 t
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 0
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 .
+! OK.
+<to be read again> 
+\begingroup 
+l. ...\TIMO\showbox0\END

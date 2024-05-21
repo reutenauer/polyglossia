@@ -1886,16 +1886,19 @@
 }
 
 % lowercase options before passing to setkeys
-%\cs_set_eq:NN \xpg_info_saved_msg:n \xpg_info_msg:n
+\cs_set_eq:NN \xpg_info_saved_msg:n \xpg_info_msg:n
+\cs_set_eq:NN \xpg_info_saved_msg:nnn \msg_info:nnn 
 \NewDocumentCommand \SetGlossOptions { m m }
 {
     % \text_lowercase:n fully expands
     % (as opposed to \str_lowercase:n)
-   %\cs_set_eq:cc { xpg@info } { use_none:n }
-   %\cs_set_eq:NN \xpg_info_msg:n \use_none:n
+   \cs_set_eq:cc { xpg@info } { use_none:n }
+   \cs_set_eq:NN \xpg_info_msg:n \use_none:n
+   \cs_set_eq:NN \msg_info:nnn \use_none:nnn
    \use:c { xpg_#1_default_options_tl }
-   %\cs_set_eq:cc { xpg@info } { xpg_info_saved_msg:n }
-   %\cs_set_eq:NN \xpg_info_msg:n \xpg_info_saved_msg:n
+   \cs_set_eq:cc { xpg@info } { xpg_info_saved_msg:n }
+   \cs_set_eq:NN \xpg_info_msg:n \xpg_info_saved_msg:n
+   \cs_set_eq:NN \msg_info:nnn \xpg_info_saved_msg:nnn
    \exp_args:Ne \keys_set:ne{ polyglossia / gloss / #1 }{ \text_lowercase:n {#2} }
 }
 
@@ -2120,11 +2123,13 @@
    \keys_precompile:nec { polyglossia / gloss / #1 } 
                         { \text_lowercase:n { #2, \xpg__tmp_default_options_tl } } 
                         { xpg_#1_default_options_tl }
-   %\cs_set_eq:cc { xpg@info } { use_none:n }
-   %\cs_set_eq:NN \xpg_info_msg:n \use_none:n
+   \cs_set_eq:cc { xpg@info } { use_none:n }
+   \cs_set_eq:NN \xpg_info_msg:n \use_none:n
+   \cs_set_eq:NN \msg_info:nnn \use_none:nnn
    \use:c { xpg_#1_default_options_tl }
-   %\cs_set_eq:cc { xpg@info } { xpg_info_saved_msg:n }
-   %\cs_set_eq:NN \xpg_info_msg:n \xpg_info_saved_msg:n
+   \cs_set_eq:cc { xpg@info } { xpg_info_saved_msg:n }
+   \cs_set_eq:NN \xpg_info_msg:n \xpg_info_saved_msg:n
+   \cs_set_eq:NN \msg_info:nnn \xpg_info_saved_msg:nnn
    \__xpg_set_language_options:nnn {#1} {#2} { \cs_set:Npe \languagevariant }
 }
 \tl_new:N \xpg__tmp_default_options_tl
