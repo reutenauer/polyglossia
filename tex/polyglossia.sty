@@ -884,7 +884,7 @@
     }
   }
 }
-\cs_generate_variant:Nn  \__xpg_add_font_feature_language:nn { on , no, oo , Vn, nV, VV , xn, nx, xx}
+\cs_generate_variant:Nn  \__xpg_add_font_feature_language:nn { ee }
 
 % add fontfeature Script=#3 to scripttag #2 for family #1
 % do nothing if #2 or #3 is empty
@@ -938,7 +938,7 @@
         }
   }
 }
-\cs_generate_variant:Nn  \__xpg_add_font_feature_script:nnn { non , nno, noo , nVn, nnV, nVV , nxn, nnx, nxx}
+\cs_generate_variant:Nn  \__xpg_add_font_feature_script:nnn { nee }
 
 \NewDocumentCommand \SetupLatinPolyglossiaFont { m }
 {
@@ -948,7 +948,7 @@
     {
       \cs_if_exist_use:cF{\prop_item:Nn{\l_xpg_langsetup_prop}{#1/lc-bcp47-script} font}
          { \rmfamilylatin }
-      \__xpg_add_font_feature_language:xx{\prop_item:Nn{\l_xpg_langsetup_prop}{#1/langtag}}
+      \__xpg_add_font_feature_language:ee{\prop_item:Nn{\l_xpg_langsetup_prop}{#1/langtag}}
                                          {\prop_item:Nn{\l_xpg_langsetup_prop}{#1/language}}
     }
   }
@@ -958,7 +958,7 @@
     {
       \cs_if_exist_use:cF{\prop_item:Nn{\l_xpg_langsetup_prop}{#1/lc-bcp47-script} fontsf}
          { \sffamilylatin }
-      \__xpg_add_font_feature_language:xx{\prop_item:Nn{\l_xpg_langsetup_prop}{#1/langtag}}
+      \__xpg_add_font_feature_language:ee{\prop_item:Nn{\l_xpg_langsetup_prop}{#1/langtag}}
                                          {\prop_item:Nn{\l_xpg_langsetup_prop}{#1/language}}
     }
   }
@@ -968,7 +968,7 @@
     {
       \cs_if_exist_use:cF{\prop_item:Nn{\l_xpg_langsetup_prop}{#1/lc-bcp47-script} fonttt}
          { \ttfamilylatin }
-      \__xpg_add_font_feature_language:xx{\prop_item:Nn{\l_xpg_langsetup_prop}{#1/langtag}}
+      \__xpg_add_font_feature_language:ee{\prop_item:Nn{\l_xpg_langsetup_prop}{#1/langtag}}
                                          {\prop_item:Nn{\l_xpg_langsetup_prop}{#1/language}}
     }
   }
@@ -997,11 +997,11 @@
           }
        \seq_if_in:NeF \__xpg_used_script_fonts_rm {#1}
        {
-           \__xpg_add_font_feature_script:nxx{rm}
+           \__xpg_add_font_feature_script:nee{rm}
                                              {\prop_item:Nn{\l_xpg_langsetup_prop}{#1/scripttag}}
                                              {\prop_item:Nn{\l_xpg_langsetup_prop}{#1/script}}
        }
-       \__xpg_add_font_feature_language:xx{\prop_item:Nn{\l_xpg_langsetup_prop}{#1/langtag}}
+       \__xpg_add_font_feature_language:ee{\prop_item:Nn{\l_xpg_langsetup_prop}{#1/langtag}}
                                           {\prop_item:Nn{\l_xpg_langsetup_prop}{#1/language}}
       }
       \tl_set:Nn \familytype {rm}
@@ -1022,11 +1022,11 @@
           }
        \seq_if_in:NeF \__xpg_used_script_fonts_sf {#1}
        {
-           \__xpg_add_font_feature_script:nxx{sf}
+           \__xpg_add_font_feature_script:nee{sf}
                                              {\prop_item:Nn{\l_xpg_langsetup_prop}{#1/scripttag}}
                                              {\prop_item:Nn{\l_xpg_langsetup_prop}{#1/script}}
        }
-       \__xpg_add_font_feature_language:xx{\prop_item:Nn{\l_xpg_langsetup_prop}{#1/langtag}}
+       \__xpg_add_font_feature_language:ee{\prop_item:Nn{\l_xpg_langsetup_prop}{#1/langtag}}
                                           {\prop_item:Nn{\l_xpg_langsetup_prop}{#1/language}}
       }
       \tl_set:Nn \familytype {sf}
@@ -1047,11 +1047,11 @@
           }
        \seq_if_in:NeF \__xpg_used_script_fonts_tt {#1}
        {
-           \__xpg_add_font_feature_script:nxx{tt}
+           \__xpg_add_font_feature_script:nee{tt}
                                              {\prop_item:Nn{\l_xpg_langsetup_prop}{#1/scripttag}}
                                              {\prop_item:Nn{\l_xpg_langsetup_prop}{#1/script}}
        }
-       \__xpg_add_font_feature_language:xx{\prop_item:Nn{\l_xpg_langsetup_prop}{#1/langtag}}
+       \__xpg_add_font_feature_language:ee{\prop_item:Nn{\l_xpg_langsetup_prop}{#1/langtag}}
                                           {\prop_item:Nn{\l_xpg_langsetup_prop}{#1/language}}
       }
       \tl_set:Nn \familytype {tt}
