@@ -1,7 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-(gloss-latinmedieval.ldf
-File: gloss-latinmedieval.ldf polyglossia: module for medieval Latin
+(gloss-medievallatin.ldf
+File: gloss-medievallatin.ldf polyglossia: module for medieval Latin
 (gloss-latin.ldf
 File: gloss-latin.ldf polyglossia: module for Latin
 Module polyglossia Info: Language data for latin
@@ -26,19 +26,37 @@ Package babel Info: Making ' an active character on input line ....
 Package babel Info: Making ^ an active character on input line ....
 Package babel Info: Making = an active character on input line ....
 ))
-! Package polyglossia Error: Unknown direction 
-Type <return> to continue.
- ...                                              
-l. ...\setmainlanguage{latinmedieval}
-LaTeX does not know anything more about this error, sorry.
-Try typing <return> to proceed.
-If that doesn't work, type X <return> to quit.
-! Undefined control sequence.
-\__xpg_setRTLmain: ->\setRTLmain 
-l. ...\setmainlanguage{latinmedieval}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-Package polyglossia Info: Default language is 
+Package polyglossia Info: Activating Latin language variant "medieval" on line ....
+Package polyglossia Info: Default language is latin
+Package polyglossia Info: Activating Latin language variant "medieval" on line ....
+> \box...=
+\hbox(7.16+2.06)x87.84, direction TLT
+.\TU/lmr/m/n/10 V
+.\TU/lmr/m/n/10 I
+.\glue(\spaceskip) 3.33 plus 1.66331 minus 1.1111
+.\TU/lmr/m/n/10 A
+.\kern-0.28 (font)
+.\TU/lmr/m/n/10 u
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 g
+.\TU/lmr/m/n/10 u
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 i
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 M
+.\TU/lmr/m/n/10 M
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 X
+.\TU/lmr/m/n/10 I
+.\kern0.28 (font)
+.\TU/lmr/m/n/10 I
+.\TU/lmr/m/n/10 .
+! OK.
+<to be read again> 
+\begingroup 
+l. ...\TIMO\showbox0\END

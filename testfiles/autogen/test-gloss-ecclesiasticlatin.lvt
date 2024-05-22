@@ -4,7 +4,7 @@
 \def\typeout#1{\let\typeout\xpgorigtypeout}}
 \usepackage{polyglossia}
 \START
-\setmainlanguage{latinecclesiastic}
+\setmainlanguage{ecclesiasticlatin}
 \OMIT
 \begin{document}
 \day=6
