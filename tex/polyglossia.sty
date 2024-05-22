@@ -1662,7 +1662,7 @@
 }
 
 % This saves the normalfont for the latin script since we may change normalfont in other scripts
-\cs_gset_eq:cc { normalfontlatin } { normalfont }
+\cs_set_eq:cc { normalfontlatin } { normalfont }
 
 % Provide default fonts (as set with \setmainfont, \setsansfont and \setmonofont)
 % for Latin scripts and as a fallback for non-Latin scripts.
@@ -1694,17 +1694,17 @@
 {
   % This robustifies the redefinitions of \<xx>family (suggestion by Enrico Gregorio)
   % e.g. to prevent expansion of the \familytype redefinition in auxiliary files
-  \tl_gput_right:cn {rmfamily~} {\tl_set:Nn \familytype {rm}}
-  \tl_gput_right:cn {sffamily~} {\tl_set:Nn \familytype {sf}}
-  \tl_gput_right:cn {ttfamily~} {\tl_set:Nn \familytype {tt}}
+  \tl_put_right:cn {rmfamily~} {\tl_set:Nn \familytype {rm}}
+  \tl_put_right:cn {sffamily~} {\tl_set:Nn \familytype {sf}}
+  \tl_put_right:cn {ttfamily~} {\tl_set:Nn \familytype {tt}}
 }
 
 % These switches activate the default fonts
 % Note that a simple \let\rmfamilylatin=\rmfamily
 % does not work reliably (see #24)
-\cs_gset_eq:cc{rmfamilylatin}{xpg_defaultfont_rm:}
-\cs_gset_eq:cc{sffamilylatin}{xpg_defaultfont_sf:}
-\cs_gset_eq:cc{ttfamilylatin}{xpg_defaultfont_tt:}
+\cs_set_eq:cc{rmfamilylatin}{xpg_defaultfont_rm:}
+\cs_set_eq:cc{sffamilylatin}{xpg_defaultfont_sf:}
+\cs_set_eq:cc{ttfamilylatin}{xpg_defaultfont_tt:}
 
 \cs_new:Nn \xpg_set_familydefault:
 {
@@ -1720,30 +1720,11 @@
   \__xpg_patch_fontfamilies:
   % This (re-)saves the normalfont for the latin script since we may
   % change normalfont in other scripts
-  \cs_gset_eq:cc{ normalfontlatin }{ normalfont }
+  \cs_set_eq:cc{ normalfontlatin }{ normalfont }
   % And for all cases, we also reset \<xx>familylatin
-  \cs_gset_eq:cc{ rmfamilylatin }{ xpg_defaultfont_rm: }
-  \cs_gset_eq:cc{ sffamilylatin }{ xpg_defaultfont_sf: }
-  \cs_gset_eq:cc{ ttfamilylatin }{ xpg_defaultfont_tt: }
-}
-
-\cs_set_nopar:Npn \resetfontlatin
-{
-  \cs_set_protected:Npn \rmfamily { \xpg_defaultfont_rm: }
-  \cs_set_protected:Npn \sffamily { \xpg_defaultfont_sf: }
-  \cs_set_protected:Npn \ttfamily { \xpg_defaultfont_tt: }
-  \__xpg_patch_fontfamilies:
-  \cs_gset_eq:cc { normalfont } { normalfontlatin }
-}
-
-\cs_set_nopar:Npn \selectfontfamilylatin
-{
-  \str_if_eq:nnTF \familytype { tt }
-    { \ttfamilylatin }
-    { \str_if_eq:nnTF \familytype { sf }
-        { \sffamilylatin }
-        { \rmfamilylatin }
-    }
+  \cs_set_eq:cc{ rmfamilylatin }{ xpg_defaultfont_rm: }
+  \cs_set_eq:cc{ sffamilylatin }{ xpg_defaultfont_sf: }
+  \cs_set_eq:cc{ ttfamilylatin }{ xpg_defaultfont_tt: }
 }
 
 \cs_set_nopar:Nn \xpg_select_fontfamily:n
@@ -1758,17 +1739,17 @@
 
 \cs_new_nopar:Nn \xpg_set_normalfont:n
 {
-  \cs_gset_eq:cc { rmfamily } { #1@font@rm }
-  \cs_gset_eq:cc { sffamily } { #1@font@sf }
-  \cs_gset_eq:cc { ttfamily } { #1@font@tt }
-  \cs_gset_nopar:Npn \normalfont 
+  \cs_set_eq:cc { rmfamily } { #1@font@rm }
+  \cs_set_eq:cc { sffamily } { #1@font@sf }
+  \cs_set_eq:cc { ttfamily } { #1@font@tt }
+  \cs_set_nopar:Npn \normalfont 
       { \protect \xpg_select_fontfamily:n {#1}
         \fontseries{\seriesdefault}\selectfont
         \fontshape{\shapedefault}
         \cs_if_exist_use:NT \UseHook { {normalfont} }
         \selectfont
       }
-  \cs_gset_nopar:Npn \reset@font {\protect\normalfont}
+  \cs_set_nopar:Npn \reset@font {\protect\normalfont}
 }
 
 \cs_gset_eq:cc { @@fterindentfalse } { @afterindentfalse }
@@ -1935,30 +1916,6 @@
   \xpg_set_foreign_language:nn { #1 } { #2 }
 }
 
-% Stack to store matrix languages
-\seq_new:N \__xpg_current_matrixlang_stack
-
-% Store embedding language when an embedded language is switched to
-\cs_new_nopar:Nn \__xpg_store_matrixlang:
-{
-   \seq_gput_left:Nn \__xpg_current_matrixlang_stack \languagename
-}
-
-% When an embedded language is closed, reset to the embedding language
-% and remove stored matrix language from stack
-\cs_new_nopar:Nn \__xpg_reset_to_matrixlang:
-{
-  % if stack is empty, use main language
-  \seq_gpop_left:NNTF \__xpg_current_matrixlang_stack \l_tmpa_tl
-     { \cs_set_eq:NN \__xpg_current_matrixlang \l_tmpa_tl }
-     { \cs_set_eq:NN \__xpg_current_matrixlang \mainlanguagename }
-  % Reset the language's/script's font families if the embedding script is latin
-  \str_if_eq:eeT{\prop_item:Ne{\g_xpg_langsetup_prop}{\__xpg_current_matrixlang/lcscript}}{latin}
-       {\resetfontlatin}
-  % In case a \<lang>font is defined, re-activate that
-  \exp_args:Ne \xpg_set_normalfont:n{\__xpg_current_matrixlang}
-}
-
 % internal wrapper for foreign language
 % #1 option
 % #2 alias
@@ -1970,12 +1927,10 @@
   {
     \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
   }{
-    \__xpg_store_matrixlang:
     \group_begin:
       \xpg_otherlanguage:nn{ \xpg_alias_add_to_option_i:nn{#2}{#1} }{ #3 }
       \__xpg_lang_set_text_direction:nn{#3}{#4}
     \group_end:
-    \__xpg_reset_to_matrixlang:
   }
 }
 \cs_generate_variant:Nn \__xpg_foreignlanguage:nnnn {eeen}
@@ -1984,11 +1939,9 @@
 % otherlanguage* is the environment equivalent of \foreignlanguage
 \DeclareDocumentEnvironment { otherlanguage* } { O{} m }
   {
-	\__xpg_store_matrixlang:
 	\__xpg_otherlanguage:eee { #1 } { #2 } { \xpg_alias_base_lang:n { #2 } }
   }{
 	\c_group_end_token% \group_end: does not work here!
-	\__xpg_reset_to_matrixlang:
   }
 
 % internal wrapper
@@ -2035,7 +1988,6 @@
     \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
   }
   {
-    \__xpg_store_matrixlang:
     \group_begin:
       \bool_set_true:N \l__xpg_inline_lang_bool
       \xpg_otherlanguage:nn{#1}{#3}
@@ -2045,7 +1997,6 @@
       \cs_if_exist_use:c{date@bbl@\babelname}
       \__xpg_lang_set_text_direction:nn{#3}{#4}
     \group_end:
-    \__xpg_reset_to_matrixlang:
   }
 }
 \cs_generate_variant:Nn \__xpg_textlanguage:nnnn {nnen}
@@ -2495,11 +2446,6 @@
     }
   }
   \xpg_set_language_name:nn { #1 } { #2 }
-  % Set the language's/script's font families
-  \str_if_eq:eeT{\prop_item:Nn{\g_xpg_langsetup_prop}{#2/lcscript}} {latin}
-  {
-    \resetfontlatin
-  }
   \bool_if:NF \l__xpg_inline_lang_bool
   { % This for non-inline font switches
     % in case a \<lang>font is defined
