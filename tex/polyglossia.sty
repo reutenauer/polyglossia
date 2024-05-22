@@ -1505,8 +1505,8 @@
   \tl_if_blank:nTF { #1 }
    {
      \cs_if_exist:cTF{#2@gvar}
-          { \cs_gset:Npn \languagevariant {} }
           { \cs_gset:Npn \languagevariant {\use:c{#2@gvar}} }
+          { \cs_gset:Npn \languagevariant {} }
    }{
      % Register the language options
      \__xpg_set_language_options:nnn {#2} {#1} { \cs_set:Npe \languagevariant }
