@@ -12,14 +12,6 @@
 
 \prg_generate_conditional_variant:Nnn \clist_if_in:Nn {Ne} {TF, T, F} % check if needed
 
-% correct a bug in tracklang
-\hook_gput_code:nnn {package/tracklang/after} {.}
-{
-  \IfPackageAtLeastTF{tracklang}{2019/08/30}
-      {}
-      {\cs_gset_eq:NN \AddTrackedLangage \AddTrackedLanguage}
-}
-
 %% The following is for compatibility with Babel-aware package:
 % \languageshorthands is provided by babelsh.def, which is
 % only loaded by some glosses, but some classes presuppose
