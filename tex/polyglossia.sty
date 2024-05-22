@@ -1399,41 +1399,6 @@
   \xpg_set_language_name:nn { #1 } { #2 }
 
   \cs_gset_nopar:Npn \mainlanguagename {#2}
-  % Store BCP-47 ID and subtags of main language:
-  % 1. store main.* (sub)tags
-  \cs_gset_nopar:cpe {bcp47.main.tag} { \prop_item:Nn  \l_xpg_langsetup_prop { #2 / bcp47 } }
-  \cs_gset_nopar:cpe {bcp47.main.language} { \prop_item:Nn  \l_xpg_langsetup_prop { #2 / bcp47-language } }
-  \cs_gset_nopar:cpe {bcp47.main.region} { \prop_item:Nn  \l_xpg_langsetup_prop { #2 / bcp47-region } }
-  \cs_gset_nopar:cpe {bcp47.main.script} { \prop_item:Nn  \l_xpg_langsetup_prop { #2 / bcp47-script } }
-  \cs_gset_nopar:cpe {bcp47.main.variant} { \prop_item:Nn  \l_xpg_langsetup_prop { #2 / bcp47-variant } }
-  \cs_gset_nopar:cpe {bcp47.main.extension.t} { \prop_item:Nn  \l_xpg_langsetup_prop { #2 / bcp47extension-t } }
-  \cs_gset_nopar:cpe {bcp47.main.extension.u} { \prop_item:Nn  \l_xpg_langsetup_prop { #2 / bcp47-extension-u } }
-  \cs_gset_nopar:cpe {bcp47.main.extension.x} { \prop_item:Nn  \l_xpg_langsetup_prop { #2 / bcp47-extension-x } }
-  % For casing, we fall back to language if bcp47-casing is not explicitly set
-  \cs_set_nopar:cpx {tmpcasing} { \prop_item:Ne \l_xpg_langsetup_prop { #2 / bcp47-casing } }
-  \str_if_empty:NTF \tmpcasing
-           { \cs_gset_nopar:cpe {bcp47.main.casing} { \prop_item:Nn  \l_xpg_langsetup_prop {#2 / bcp47-language} } }
-           { \cs_gset_nopar:cpe {bcp47.main.casing} { \tmpcasing } }
-  % 2. Store lang (sub)tags
-  \cs_gset_eq:cc {bcp47.tag} {bcp47.main.tag}
-  \cs_gset_eq:cc {bcp47.language} {bcp47.main.language}
-  \cs_gset_eq:cc {bcp47.region} {bcp47.main.region}
-  \cs_gset_eq:cc {bcp47.script} {bcp47.main.script}
-  \cs_gset_eq:cc {bcp47.variant} {bcp47.main.variant}
-  \cs_gset_eq:cc {bcp47.extension.t} {bcp47.main.extension.t}
-  \cs_gset_eq:cc {bcp47.extension.u} {bcp47.main.extension.u}
-  \cs_gset_eq:cc {bcp47.extension.x} {bcp47.main.extension.x}
-  \cs_gset_eq:cc {bcp47.casing} {bcp47.main.casing}
-  % 3. Store global language BCP47 settings (with default subtags as set by main language options)
-  \cs_gset_eq:cc{#2@g.bcp47.tag}{bcp47.tag}
-  \cs_gset_eq:cc{#2@g.bcp47.language}{bcp47.language}
-  \cs_gset_eq:cc{#2@g.bcp47.region}{bcp47.region}
-  \cs_gset_eq:cc{#2@g.bcp47.script}{bcp47.script}
-  \cs_gset_eq:cc{#2@g.bcp47.variant}{bcp47.variant}
-  \cs_gset_eq:cc{#2@g.bcp47.extension.t}{bcp47.extension.t}
-  \cs_gset_eq:cc{#2@g.bcp47.extension.u}{bcp47.extension.u}
-  \cs_gset_eq:cc{#2@g.bcp47.extension.x}{bcp47.extension.x}
-  \cs_gset_eq:cc{#2@g.bcp47.casing}{bcp47.casing}
 }
 
 \DeclareCommandCopy \setmainlanguage \setdefaultlanguage
@@ -1482,21 +1447,55 @@
 % and main.* variants thereof
 % See https://github.com/latex3/latex2e/issues/1035
 \DeclareExpandableDocumentCommand \BCPdata {m}
-{
-   \cs_if_exist_use:cF{bcp47.#1}
+  {
+    \cs_if_exist_use:cF{bcp47.#1}
         { \xpg_ill_arg_msg:nn { #1 } { \BCPdata } }
-}
+  }
+
+\clist_map_inline:nn 
+  {  
+   language, region, script, variant,
+   extension.t, extension.u, extension.x
+  }{
+     \tl_set:Nn \l_tmpa_tl { #1 }
+     \tl_replace_once:Nnn \l_tmpa_tl { . } { - }
+     \cs_gset_nopar:cpe { bcp47.#1 }
+       {
+         \exp_not:n { \prop_item:Ne  \l_xpg_langsetup_prop } { \exp_not:N \languagename / bcp47-\l_tmpa_tl }
+       }
+     \cs_gset_nopar:cpe { bcp47.main.#1 }
+       {
+         \exp_not:n { \prop_item:Ne  \l_xpg_langsetup_prop } { \exp_not:N \mainlanguagename / bcp47-\l_tmpa_tl } 
+       }
+  }
+\cs_gset_nopar:cpn { bcp47.casing } 
+  {
+    \tl_if_empty:eTF { \prop_item:Ne  \l_xpg_langsetup_prop { \languagename / bcp47-casing } }
+      {
+        \prop_item:Ne  \l_xpg_langsetup_prop { \languagename / bcp47-language }
+      }{
+        \prop_item:Ne  \l_xpg_langsetup_prop { \languagename / bcp47-casing }
+      }
+  }
+\cs_gset_nopar:cpn { bcp47.main.casing } 
+  {
+    \tl_if_empty:eTF { \prop_item:Ne  \l_xpg_langsetup_prop { \mainlanguagename / bcp47-casing } }
+      {
+        \prop_item:Ne  \l_xpg_langsetup_prop { \mainlanguagename / bcp47-language }
+      }{
+        \prop_item:Ne  \l_xpg_langsetup_prop { \mainlanguagename / bcp47-casing }
+      }
+  }
+\cs_gset_nopar:cpn { bcp47.tag } 
+  {
+    \prop_item:Ne  \l_xpg_langsetup_prop { \languagename / bcp47 }
+  }
+\cs_gset_nopar:cpn { bcp47.main.tag } 
+  {
+    \prop_item:Ne  \l_xpg_langsetup_prop { \mainlanguagename / bcp47 }
+  }
 
 \cs_new_nopar:Npn \mainlanguagename {}
-\cs_new_nopar:cpn {bcp47.main.tag} {}
-\cs_new_nopar:cpn {bcp47.main.language} {}
-\cs_new_nopar:cpn {bcp47.main.region} {}
-\cs_new_nopar:cpn {bcp47.main.script} {}
-\cs_new_nopar:cpn {bcp47.main.variant} {}
-\cs_new_nopar:cpn {bcp47.main.extension.t} {}
-\cs_new_nopar:cpn {bcp47.main.extension.u} {}
-\cs_new_nopar:cpn {bcp47.main.extension.x} {}
-\cs_new_nopar:cpn {bcp47.main.casing} {}
 \cs_new_nopar:Npn \mainlanguagevariant {}
 \cs_new_nopar:Npn \languagevariant {}
 
@@ -1515,101 +1514,11 @@
   }%
 }
 
-
 \NewDocumentCommand \resetdefaultlanguage { O{} m }
 {
   \__xpg_reset_default_language:nn
     {\xpg_alias_add_to_option_i:nn{#2}{#1}}
     {\xpg_alias_base_lang:n{#2}}
-}
-
-\cs_new:Nn \__xpg_store_bcp_info:nn
-{
-  % Store BCP-47 ID and subtags of current language
-  \tl_if_blank:nTF {#1}
-  {
-    % tag (e.g., en-US)
-    \cs_if_exist:cTF{#2@g.bcp47.tag}
-    {
-       \cs_gset_nopar:cpe {bcp47.tag} { \use:c{#2@g.bcp47.tag} }
-    }{
-       \cs_gset_nopar:cpe {bcp47.tag} { \prop_item:Nn{ \l_xpg_langsetup_prop}{ #2 / bcp47 } }
-    }
-    % language (e.g., en)
-    \cs_if_exist:cTF{#2@g.bcp47.language}
-    {
-       \cs_gset_nopar:cpe {bcp47.language} { \use:c{#2@g.bcp47.language} }
-    }{
-       \cs_gset_nopar:cpe {bcp47.language} { \prop_item:Nn{ \l_xpg_langsetup_prop}{ #2 / bcp47-language } }
-    }
-    % region (e.g., US)
-    \cs_if_exist:cTF{#2@g.bcp47.region}
-    {
-       \cs_gset_nopar:cpe {bcp47.region} { \use:c{#2@g.bcp47.region} }
-    }{%
-       \cs_gset_nopar:cpe {bcp47.region} { \prop_item:Nn{ \l_xpg_langsetup_prop}{ #2 / bcp47-region } }
-    }
-    % script (e.g., Latn)
-    \cs_if_exist:cTF{#2@g.bcp47.script}
-    {
-       \cs_gset_nopar:cpe {bcp47.script} { \use:c{#2@g.bcp47.script} }
-    }{
-       \cs_gset_nopar:cpe {bcp47.script} { \prop_item:Nn{ \l_xpg_langsetup_prop}{ #2 / bcp47-script } }
-    }
-    % variant (e.g., 1996)
-    \cs_if_exist:cTF{#2@g.bcp47.variant}
-    {
-       \cs_gset_nopar:cpe {bcp47.variant} { \use:c{#2@g.bcp47.variant} }
-    }{
-       \cs_gset_nopar:cpe {bcp47.variant} { \prop_item:Nn{ \l_xpg_langsetup_prop}{ #2 / bcp47-variant } }
-    }
-    % extension.t (tranformation)
-    \cs_if_exist:cTF{#2@g.bcp47.extension.t}
-    {
-       \cs_gset_nopar:cpe {bcp47.extension.t} { \use:c{#2@g.bcp47.extension.t} }
-    }{
-       \cs_gset_nopar:cpe {bcp47.extension.t} { \prop_item:Nn{ \l_xpg_langsetup_prop}{ #2 / bcp47-extension-t } }
-    }
-    % extension.u (additional locale information)
-    \cs_if_exist:cTF{#2@g.bcp47.extension.u}
-    {
-       \cs_gset_nopar:cpe {bcp47.extension.u} { \use:c{#2@g.bcp47.extension.u} }
-    }{
-       \cs_gset_nopar:cpe {bcp47.extension.u} { \prop_item:Nn{ \l_xpg_langsetup_prop}{ #2 / bcp47-extension-u } }
-    }
-    % extension.x (private use area)
-    \cs_if_exist:cTF{#2@g.bcp47.extension.x}
-    {
-       \cs_gset_nopar:cpe {bcp47.extension.x} { \use:c{#2@g.bcp47.extension.x} }
-    }{
-       \cs_gset_nopar:cpe {bcp47.extension.x} { \prop_item:Nn{ \l_xpg_langsetup_prop}{ #2 / bcp47-extension-x } }
-    }
-    % casing
-    \cs_if_exist:cTF{#2@g.bcp47.casing}
-    {
-       \cs_gset_nopar:cpe {bcp47.casing} { \use:c{#2@g.bcp47.casing} }
-    }{
-       % For casing, we fall back to language if bcp47-casing is not explicitly set
-       \cs_set_nopar:cpx {tmpcasing} { \prop_item:Ne \l_xpg_langsetup_prop { #2 / bcp47-casing } }
-       \str_if_empty:NTF \tmpcasing
-           { \cs_gset_eq:cc {bcp47.casing} {bcp47.language} }
-           { \cs_gset_nopar:cpe {bcp47.casing} { \tmpcasing } }
-    }
-  }{
-    \cs_gset_nopar:cpe {bcp47.tag} { \prop_item:Nn{ \l_xpg_langsetup_prop}{ #2 / bcp47 } }
-    \cs_gset_nopar:cpe {bcp47.language} { \prop_item:Nn{ \l_xpg_langsetup_prop}{ #2 / bcp47-language } }
-    \cs_gset_nopar:cpe {bcp47.region} { \prop_item:Nn{ \l_xpg_langsetup_prop}{ #2 / bcp47-region } }
-    \cs_gset_nopar:cpe {bcp47.script} { \prop_item:Nn{ \l_xpg_langsetup_prop}{ #2 / bcp47-script } }
-    \cs_gset_nopar:cpe {bcp47.variant} { \prop_item:Nn{ \l_xpg_langsetup_prop}{ #2 / bcp47-variant } }
-    \cs_gset_nopar:cpe {bcp47.extension.t} { \prop_item:Nn{ \l_xpg_langsetup_prop}{ #2 / bcp47-extension-t } }
-    \cs_gset_nopar:cpe {bcp47.extension.u} { \prop_item:Nn{ \l_xpg_langsetup_prop}{ #2 / bcp47-extension-u } }
-    \cs_gset_nopar:cpe {bcp47.extension.x} { \prop_item:Nn{ \l_xpg_langsetup_prop}{ #2 / bcp47-extension-x } }
-    % For casing, we fall back to language if bcp47-casing is not explicitly set
-    \cs_set_nopar:cpx {tmpcasing} { \prop_item:Ne \l_xpg_langsetup_prop { #2 / bcp47-casing } }
-    \str_if_empty:NTF \tmpcasing
-         { \cs_gset_eq:cc {bcp47.casing} {bcp47.language} }
-         { \cs_gset_nopar:cpx {bcp47.casing} { \tmpcasing } }
-  }
 }
 
 \cs_new:Nn \__xpg_reset_default_language:nn
@@ -1639,8 +1548,6 @@
      \__xpg_set_language_options:nnn {#2} {#1} { \cs_gset:Npe \mainlanguagevariant }
   }
   \cs_gset:cpn {#2@gvar} {\mainlanguagevariant}
-  % Store BCP-47 id of current language
-  \__xpg_store_bcp_info:nn {#1}{#2}
 }
 
 % This saves the normalfont for the latin script since we may change normalfont in other scripts
@@ -1829,8 +1736,6 @@
 {
   \xpg_select_language:nn { #1 } { #2 }
   \__xpg_register_language:nn{#1}{#2}
-  % Store BCP-47 id of current language
-  \__xpg_store_bcp_info:nn {#1}{#2}
 }
 
 % lowercase options before passing to setkeys
@@ -2213,8 +2118,6 @@
 
 \cs_new_nopar:Nn \xpg_set_language_aux:nn
 {
-   % Store BCP-47 id of current language
-   \__xpg_store_bcp_info:nn { #1 } { #2 }
    \__xpg_start_language:nn { #1 } { #2 }
     % Write to the aux
    \xpg_set_language_only_aux:nn { #1 } { #2 }
@@ -2474,17 +2377,7 @@
   \xpg_error_if_lang_not_loaded:n {#2}
   \SetGlossOptions {#2} {#1}
   % Use bcp47.tag@hypenmins
-  \tl_if_blank:nTF {#1}
-  {
-    \cs_if_exist:cTF{#2@g.bcp47.tag}
-    {
-       \cs_gset_nopar:cpe {tmp@bcp47.tag} { \use:c{#2@g.bcp47.tag} }
-    }{
-       \cs_gset_nopar:cpe {tmp@bcp47.tag} { \prop_item:Nn{\l_xpg_langsetup_prop}{ #2 / bcp47 } }
-    }
-  }{
-    \cs_gset_nopar:cpe {tmp@bcp47.tag} { \prop_item:Nn{\l_xpg_langsetup_prop}{ #2 / bcp47 } }
-  }
+  \cs_gset_nopar:cpe {tmp@bcp47.tag} { \prop_item:Nn{\l_xpg_langsetup_prop}{ #2 / bcp47 } }
   \c_group_end_token
   \cs_if_exist:cTF {\csname tmp@bcp47.tag\endcsname @hyphenmins}
    {
