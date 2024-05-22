@@ -1662,7 +1662,7 @@
 {
    \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}
    \fontfamily\rmdefault
-   \cs_if_exist_use:NT \UseHook { {rmfamily} }
+   \hook_use:n { rmfamily }
    \selectfont
 }
 
@@ -1670,7 +1670,7 @@
 {
    \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}
    \fontfamily\sfdefault
-   \cs_if_exist_use:NT \UseHook { {sffamily} }
+   \hook_use:n { sffamily }
    \selectfont
 }
 
@@ -1678,7 +1678,7 @@
 {
    \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}
    \fontfamily\ttdefault
-   \cs_if_exist_use:NT \UseHook { {ttfamily} }
+   \hook_use:n { ttfamily } 
    \selectfont
 }
 
@@ -1738,7 +1738,7 @@
       { \protect \xpg_select_fontfamily:n {#1}
         \fontseries{\seriesdefault}\selectfont
         \fontshape{\shapedefault}
-        \cs_if_exist_use:NT \UseHook { {normalfont} }
+        \hook_use:n { normalfont }
         \selectfont
       }
   \cs_set_nopar:Npn \reset@font {\protect\normalfont}
