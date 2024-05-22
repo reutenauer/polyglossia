@@ -942,8 +942,7 @@
 
 \NewDocumentCommand \SetupLatinPolyglossiaFont { m }
 {
-  \group_begin:
-  \cs_gset_protected_nopar:cpn {#1@font@rm}
+  \cs_set_protected_nopar:cpn {#1@font@rm}
   {
     \cs_if_exist_use:cF{#1font}
     {
@@ -953,7 +952,7 @@
                                          {\prop_item:Nn{\l_xpg_langsetup_prop}{#1/language}}
     }
   }
-  \cs_gset_protected_nopar:cpn {#1@font@sf}
+  \cs_set_protected_nopar:cpn {#1@font@sf}
   {
     \cs_if_exist_use:cF{#1fontsf}
     {
@@ -963,7 +962,7 @@
                                          {\prop_item:Nn{\l_xpg_langsetup_prop}{#1/language}}
     }
   }
-  \cs_gset_protected_nopar:cpn {#1@font@tt}
+  \cs_set_protected_nopar:cpn {#1@font@tt}
   {
     \cs_if_exist_use:cF{#1fonttt}
     {
@@ -973,7 +972,6 @@
                                          {\prop_item:Nn{\l_xpg_langsetup_prop}{#1/language}}
     }
   }
-  \group_end:
 }
 
 % track the script fonts in use
@@ -983,8 +981,7 @@
 
 \NewDocumentCommand \SetupNonLatinPolyglossiaFont { m }
 {
-  \group_begin:
-  \cs_gset_protected_nopar:cpn {#1@font@rm}
+  \cs_set_protected_nopar:cpn {#1@font@rm}
   {
     \cs_if_exist_use:cF{#1font}
       {
@@ -1009,7 +1006,7 @@
       }
       \tl_set:Nn \familytype {rm}
   }
-  \cs_gset_protected_nopar:cpn {#1@font@sf}
+  \cs_set_protected_nopar:cpn {#1@font@sf}
   {
     \cs_if_exist_use:cF{#1fontsf}
       {
@@ -1034,7 +1031,7 @@
       }
       \tl_set:Nn \familytype {sf}
   }
-  \cs_gset_protected_nopar:cpn {#1@font@tt}
+  \cs_set_protected_nopar:cpn {#1@font@tt}
   {
     \cs_if_exist_use:cF{#1fonttt}
       {
@@ -1059,7 +1056,6 @@
       }
       \tl_set:Nn \familytype {tt}
   }
-  \group_end:
 }
 
 %%% END OF PolyglossiaSetup
