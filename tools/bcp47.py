@@ -7,7 +7,7 @@ import logging, sys
 
 # Dic 1: babelname : bcp47
 babelname2bcp47 = {
-    "acadien" : "fr-CA",
+    "acadian" : "fr-CA",
     "afrikaans" : "af",
     "albanian" : "sq",
     "american" : "en-US",
