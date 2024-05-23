@@ -1380,6 +1380,7 @@
 
 \cs_new:Nn \__xpg_set_default_language:nn
 {
+  \tl_gset:Nn \xpg_main_language_tl {#2}
   %% The following settings are for the default language and script
   % this tells bidi.sty or luabidi.sty that the document is RTL
   \__xpg_if_LR_str:eF{\prop_item:Nn{\l_xpg_langsetup_prop}{#2/direction}}
@@ -1712,19 +1713,11 @@
 }
 
 % lowercase options before passing to setkeys
-\cs_set_eq:NN \xpg_info_saved_msg:n \xpg_info_msg:n
-\cs_set_eq:NN \xpg_info_saved_msg:nnn \msg_info:nnn 
 \NewDocumentCommand \SetGlossOptions { m m }
 {
     % \text_lowercase:n fully expands
     % (as opposed to \str_lowercase:n)
-   \cs_set_eq:cc { xpg@info } { use_none:n }
-   \cs_set_eq:NN \xpg_info_msg:n \use_none:n
-   \cs_set_eq:NN \msg_info:nnn \use_none:nnn
    \use:c { xpg_#1_default_options_tl }
-   \cs_set_eq:cc { xpg@info } { xpg_info_saved_msg:n }
-   \cs_set_eq:NN \xpg_info_msg:n \xpg_info_saved_msg:n
-   \cs_set_eq:NN \msg_info:nnn \xpg_info_saved_msg:nnn
    \exp_args:Ne \keys_set:ne{ polyglossia / gloss / #1 }{ \text_lowercase:n {#2} }
 }
 
@@ -1928,13 +1921,7 @@
                            { xpg_#1_default_options_prop }
    \prop_concat:ccc { l_xpg_curropt_prop } { l_xpg_curropt_prop }
                     { xpg_#1_default_options_prop }
-   \cs_set_eq:cc { xpg@info } { use_none:n }
-   \cs_set_eq:NN \xpg_info_msg:n \use_none:n
-   \cs_set_eq:NN \msg_info:nnn \use_none:nnn
    \use:c { xpg_#1_default_options_tl }
-   \cs_set_eq:cc { xpg@info } { xpg_info_saved_msg:n }
-   \cs_set_eq:NN \xpg_info_msg:n \xpg_info_saved_msg:n
-   \cs_set_eq:NN \msg_info:nnn \xpg_info_saved_msg:nnn
    \__xpg_set_language_options:nn {#1} {#2}
 }
 \tl_new:N \xpg__tmp_default_options_tl
