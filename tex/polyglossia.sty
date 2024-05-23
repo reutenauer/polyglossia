@@ -1329,8 +1329,9 @@
   \clist_if_in:NeF \xpg@loaded {#2}{
     \clist_gput_right:Ne \xpg@loaded {#2}
   }
-  % Register the language options
-  \__xpg_set_language_options:nnn {#2} {#1} { \cs_set:Npe \languagevariant }
+  \group_begin:
+  % set language options
+  \__xpg_set_language_options:nn {#2} {#1}
   % register babelname
   \prop_get:NeN \l_xpg_langsetup_prop {#2/babelname} \l_tmpa_tl
   \clist_if_in:NeF \xpg@bloaded {\l_tmpa_tl}{
@@ -1341,7 +1342,15 @@
   \clist_if_in:NeF \xpg@bcp@loaded {\l_tmpa_tl}{
     \clist_gput_right:Ne \xpg@bcp@loaded {\l_tmpa_tl}
   }
+  % register variant
+  \prop_get:NnNT \l_xpg_curropt_prop {#2/variant} \l_tmpa_tl {
+  \clist_if_in:NeF \xpg@vloaded {\l_tmpa_tl}{
+    \clist_gput_right:Ne \xpg@vloaded {\l_tmpa_tl}
+  }}
+  \group_end:
 }
+
+\prop_new_linked:N \l_xpg_curropt_prop
 
 \DeclareDocumentCommand \setdefaultlanguage { O{} m }
 {
@@ -1363,6 +1372,7 @@
     }
     \seq_gput_right:Ne \__xpg_langs_loaded {#2}
   }
+  \cs_set_nopar:Npe \mainlanguagevariant { \prop_item:Ne \l_xpg_curropt_prop { \xpg_alias_base_lang:n{#2} / variant } }
    \exp_args:Nee \__xpg_set_default_language:nn {\xpg_alias_add_to_option_i:nn{#2}{#1}}
     {\xpg_alias_base_lang:n{#2}}
 }
@@ -1370,16 +1380,6 @@
 
 \cs_new:Nn \__xpg_set_default_language:nn
 {
-  \tl_gset:Nn \xpg_main_language_tl {#2}
-  \tl_if_blank:nTF {#1}
-  {
-    \cs_gset_nopar:Npn \mainlanguagevariant {}
-  }
-  {
-     % Register the language options
-     \__xpg_set_language_options:nnn {#2} {#1} { \cs_gset:Npe \mainlanguagevariant }
-  }
-  \cs_gset:cpn {#2@gvar} {\mainlanguagevariant}
   %% The following settings are for the default language and script
   % this tells bidi.sty or luabidi.sty that the document is RTL
   \__xpg_if_LR_str:eF{\prop_item:Nn{\l_xpg_langsetup_prop}{#2/direction}}
@@ -1388,11 +1388,11 @@
   }
   \cs_gset_nopar:Nn \__xpg_at_begin_document_selectlanguage: {
     \selectbackgroundlanguage{#2}
-    \selectlanguage[#1]{#2}%
+    \selectlanguage[#1]{#2}
   }
   \str_if_eq:eeF { #2 } { latex }
       { \xpg_info_msg:n{Default~ language~ is~ #2} }
-  \xpg_set_language_name:nn { #1 } { #2 }
+  \xpg_set_language_name:n { #2 }
 
   \cs_gset_nopar:Npn \mainlanguagename {#2}
 }
@@ -1491,23 +1491,14 @@
     \prop_item:Ne  \l_xpg_langsetup_prop { \mainlanguagename / bcp47 }
   }
 
-\cs_new_nopar:Npn \mainlanguagename {}
-\cs_new_nopar:Npn \mainlanguagevariant {}
-\cs_new_nopar:Npn \languagevariant {}
+\cs_new_nopar:Npn \languagevariant 
+  {
+    \prop_item:Ne  \l_xpg_curropt_prop { \languagename / variant }
+  }
 
-\cs_new:Nn \xpg_set_language_name:nn
+\cs_new:Nn \xpg_set_language_name:n
 {
-  \cs_set:Npn \languagename { #2 }
-  \tl_if_blank:nTF { #1 }
-   {
-     \cs_if_exist:cTF{#2@gvar}
-          { \cs_gset:Npn \languagevariant {\use:c{#2@gvar}} }
-          { \cs_gset:Npn \languagevariant {} }
-   }{
-     % Register the language options
-     \__xpg_set_language_options:nnn {#2} {#1} { \cs_set:Npe \languagevariant }
-     \cs_set_eq:cc{#2@var}{languagevariant}
-  }%
+  \cs_set:Npn \languagename { #1 }
 }
 
 \NewDocumentCommand \resetdefaultlanguage { O{} m }
@@ -1527,23 +1518,14 @@
   % via babelname (such as biblatex)
   \cs_if_exist_use:c{noextras@bbl@\mainbabelname}
   \use:c{init@noextras@\xpg_main_language_tl}
-  \xpg_set_language_name:nn { #1 } { #2 }
+  \xpg_set_language_name:n { #2 }
   \__xpg_if_LR_str:eF{\prop_item:Ne{\l_xpg_langsetup_prop}{#2/direction}}
   {
     \@rlmaintrue\@rl@footnotetrue
   }
   \selectlanguage[#1]{#2}
   \selectbackgroundlanguage{#2}
-  % Store variant
-  \tl_if_blank:nTF {#1}
-  {
-    \cs_gset_nopar:Npn \mainlanguagevariant {}
-  }
-  {
-     % Register the language options
-     \__xpg_set_language_options:nnn {#2} {#1} { \cs_gset:Npe \mainlanguagevariant }
-  }
-  \cs_gset:cpn {#2@gvar} {\mainlanguagevariant}
+  \cs_set_nopar:Npe \mainlanguagevariant { \prop_item:Ne \l_xpg_curropt_prop { \xpg_alias_base_lang:n{#2} / variant } }
 }
 
 % This saves the normalfont for the latin script since we may change normalfont in other scripts
@@ -1683,11 +1665,6 @@
 \cs_new:Nn \__xpg_set_otherlanguage:nn
 {
   \__xpg_register_language:nn{#1}{#2}
-  % If a variant is set, store it.
-  \cs_gset:Npn \otherlanguagevariant {}
-  % Register the language options
-  \__xpg_set_language_options:nnn {#2} {#1} { \cs_gset:Npe \otherlanguagevariant }
-  \cs_gset:cpn {#2@gvar} {\otherlanguagevariant}
 }
 \cs_generate_variant:Nn  \__xpg_set_otherlanguage:nn { ee }
 
@@ -1912,7 +1889,7 @@
 \cs_new:Nn \__xpg_select_language:nnn
 {
   % Register the language options
-  \__xpg_set_language_options:nnn {#3} {#2} { \cs_set:Npe \languagevariant }
+  \__xpg_set_language_options:nn {#3} {#2}
   \IfBooleanTF { #1 }   % The starred variant does not write to the aux
     {
 	  \xpg_set_language_nonaux:nn { #2 } { #3 }
@@ -1927,9 +1904,11 @@
 
 
 % set lang option #2 for lang #1
-\cs_new:Nn \__xpg_set_language_options:nnn
+\cs_new:Nn \__xpg_set_language_options:nn
 {
-  \exp_args:Nee \xpg__keyval_parser:nnn { #2 } { #1 } { #3 }
+  \prop_concat:ccc { l_xpg_curropt_prop } { l_xpg_curropt_prop }
+                   { xpg_#1_default_options_prop }
+  \xpg__keyval_parser:eeN { #2 } { #1 } \l_xpg_curropt_prop 
   \SetGlossOptions{#1}{#2}
 }
 
@@ -1939,9 +1918,14 @@
 \NewDocumentCommand \InitializeGlossOptions { m m }
 {
    \tl_new:c { xpg_#1_default_options_tl }
+   \prop_new:c { xpg_#1_default_options_prop }
    \keys_precompile:nec { polyglossia / gloss / #1 } 
                         { \text_lowercase:n { #2, \xpg__tmp_default_options_tl } } 
                         { xpg_#1_default_options_tl }
+   \xpg__keyval_parser:enc { #2, \xpg__tmp_default_options_tl } { #1 } 
+                           { xpg_#1_default_options_prop }
+   \prop_concat:ccc { l_xpg_curropt_prop } { l_xpg_curropt_prop }
+                    { xpg_#1_default_options_prop }
    \cs_set_eq:cc { xpg@info } { use_none:n }
    \cs_set_eq:NN \xpg_info_msg:n \use_none:n
    \cs_set_eq:NN \msg_info:nnn \use_none:nnn
@@ -1949,7 +1933,7 @@
    \cs_set_eq:cc { xpg@info } { xpg_info_saved_msg:n }
    \cs_set_eq:NN \xpg_info_msg:n \xpg_info_saved_msg:n
    \cs_set_eq:NN \msg_info:nnn \xpg_info_saved_msg:nnn
-   \__xpg_set_language_options:nnn {#1} {#2} { \cs_set:Npe \languagevariant }
+   \__xpg_set_language_options:nn {#1} {#2}
 }
 \tl_new:N \xpg__tmp_default_options_tl
 \cs_generate_variant:Nn \keys_precompile:nnN { nec }
@@ -1968,41 +1952,36 @@
       {#2}{#3}
 }
 
-\cs_new:Npn \xpg__keyval_parser:nnn #1 #2 #3 % #1 = key-vals, #2 = language, #3 = special command
+\cs_new:Npn \xpg__keyval_parser:nnN #1 #2 #3 % #1 = key-vals, #2 = language, #3 = prop
   {
     \keyval_parse:nnn 
       { \xpg__keyval_parser_default:nnn { #2 } { #3 } }
       { \xpg__keyval_parser_nondefault:nnnn { #2 } { #3 } }
       { #1 }
   }
+\cs_generate_variant:Nn \xpg__keyval_parser:nnN { eeN, enc }
   
-\cs_new:Npn \xpg__keyval_parser_default:nnn #1 #2 #3 % #1 = lang, #2 = special command, #3 = key
+\cs_new:Npn \xpg__keyval_parser_default:nnn #1 #2 #3 % #1 = lang, #2 = prop, #3 = key
   {
     \str_set:Nn \l_tempa_str { #1 / #3 }
     \str_concat:NNN \l_tempa_str \c__keys_default_root_str \l_tempa_str
-    \str_if_eq:eeT { variant } { #3 } { #2 { \use:c { \l_tempa_str } } }
-    \prop_if_exist:cF { xpg@current@options@#1 }
-      { \prop_new:c { xpg@current@options@#1 } }
-   \prop_put:cee { xpg@current@options@#1 }
-      { #3 } { \use:c { \l_tempa_str } }
+    \prop_put:Nne #2 { #1 / #3 } { \use:c { \l_tempa_str } }
   }
   
-\cs_new:Npn \xpg__keyval_parser_nondefault:nnnn #1 #2 #3 #4 % #1 = lang, #2 = special command, #3 = key, #4 = value
+\cs_new:Npn \xpg__keyval_parser_nondefault:nnnn #1 #2 #3 #4 % #1 = lang, #2 = prop, #3 = key, #4 = value
   {
-    \str_if_eq:eeT { variant } { #3 } { #2 { #4 } }
-    \prop_if_exist:cF { xpg@current@options@#1 }
-      { \prop_new:c { xpg@current@options@#1 } }
-   \prop_put:cee { xpg@current@options@#1 }
-      { #3 } { #4 }
+    \prop_put:Nnn #2 { #1 / #3 } { #4 }
   }
 
 \prg_set_conditional:Npnn \__xpg_check_option_value:NNN #1#2#3 { p , T , F , TF }
 {
-  \prop_get:cnNTF {xpg@current@options@#1} {#2} \l_tmpa_tl
+  \prop_get:NnNTF \l_xpg_curropt_prop { #1 / #2 } \l_tmpa_tl
      {
        \str_if_eq:eeTF{\l_tmpa_tl}{#3}
           {\prg_return_true:}
           {
+            \cs_if_exist:cTF {xpg@alias@keyvals@#1@#3} 
+            {
             \prop_get:cnNTF {xpg@alias@keyvals@#1@#3} {#2} \l_tmpb_tl
                {
                 \clist_set:Ne{\l_tmpa_clist}{\l_tmpb_tl}
@@ -2020,6 +1999,7 @@
               {
                 \prg_return_false:
               }
+            } { \prg_return_false: }
          }
      }
      {
@@ -2299,7 +2279,7 @@
       }
     }
   }
-  \xpg_set_language_name:nn { #1 } { #2 }
+  \xpg_set_language_name:n { #2 }
   \bool_if:NF \l__xpg_inline_lang_bool
   { % This for non-inline font switches
     % in case a \<lang>font is defined
@@ -2397,7 +2377,7 @@
     \tl_set:Nx \l_tmp_opts_tl { \xpg_alias_add_to_option_i:nn{#2}{#1} }
     \tl_set:Nx \l_tmp_lang_tl { \xpg_alias_base_lang:n{#2} }
     % Register the language options
-    \__xpg_set_language_options:nnn { \l_tmp_lang_tl } { \l_tmp_opts_tl } { \cs_set:Npe \languagevariant }
+    \__xpg_set_language_options:nn { \l_tmp_lang_tl } { \l_tmp_opts_tl }
     % Now switch patterns
     \__xpg_use_or_warn:c{\use:c{l_tmp_lang_tl}@language}
     % And activate hyphenmins
