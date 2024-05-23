@@ -1902,13 +1902,14 @@
 }
 \cs_generate_variant:Nn \__xpg_select_language:nnn { nee, nne }
 
-
-\prop_new:N \xpg_latex_default_options_prop
 % set lang option #2 for lang #1
 \cs_new:Nn \__xpg_set_language_options:nn
 {
+  \cs_if_exist:cT { xpg_#1_default_options_prop }
+  {
   \prop_concat:ccc { l_xpg_curropt_prop } { l_xpg_curropt_prop }
                    { xpg_#1_default_options_prop }
+  }
   \xpg__keyval_parser:eeN { #2 } { #1 } \l_xpg_curropt_prop 
   \SetGlossOptions{#1}{#2}
 }
