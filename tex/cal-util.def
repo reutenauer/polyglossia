@@ -45,7 +45,7 @@
 
 
 %% This is an algorithm from Reingold & Dershowitz, 
-%% Calendrical Calculations, The Millenium Edition
+%% Calendrical Calculations, The Millennium Edition
 %%
 \def\@FixedFromGregorian#1#2#3#4{%
  \setcounter{tmpA}{(#1-1)*365}%
