@@ -97,7 +97,7 @@ local function newloader(langentry)
             -- this possible situation, our newloader() function will
             -- unfortunately overwrite the language \lang@xyz.
             --
-            -- Threfore here we will compare LaTeX's \newlanguage number with
+            -- Therefore here we will compare LaTeX's \newlanguage number with
             -- LuaTeX's lang.new() id and select the bigger one for our new
             -- language object. Also we will update LaTeX's language register
             -- by this new id, so that another possible \newlanguage should not
@@ -112,7 +112,7 @@ local function newloader(langentry)
             local newlangid = math.max(langcnt, langid)
             -- set language register for possible \newlanguage
             tex.setcount('global', lang_register, newlangid)
-            -- get new lang object if needeed
+            -- get new lang object if needed
             if langid ~= newlangid then
                 langobject = lang.new(newlangid)
             end
