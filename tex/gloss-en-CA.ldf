@@ -1,6 +1,6 @@
 % Language definition file (part of polyglossia v2.1 -- 2024/03/07)
 %
-\ProvidesFile{gloss-en-CA.ldf}[polyglossia: module for en-CA (Canadan English)]
+\ProvidesFile{gloss-en-CA.ldf}[polyglossia: module for en-CA (Canadian English)]
 
 % We provide this as a bcp47-compliant alias
 
