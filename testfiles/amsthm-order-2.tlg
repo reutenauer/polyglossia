@@ -37,7 +37,9 @@ Package: fontspec-xetex ....-..-.. v... Font selection for XeLaTeX and LuaLaTeX
 Package: fontenc ....-..-.. v... Standard LaTeX package
 ) (../fontspec.cfg))) (../iftex.sty
 Package: iftex ....-..-.. v... TeX engine tests
-) (gloss-latex.ldf
+)
+\l_xpg_alias_keyvals_int=\count...
+(gloss-latex.ldf
 File: gloss-latex.ldf polyglossia: module for default language
 )) (../amsthm.sty
 Package: amsthm ....-..-.. v...

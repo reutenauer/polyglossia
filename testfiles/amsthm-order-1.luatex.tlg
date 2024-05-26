@@ -48,7 +48,9 @@ Package: fontenc ....-..-.. v... Standard LaTeX package
 ) (../fontspec.cfg))) (../iftex.sty
 Package: iftex ....-..-.. v... TeX engine tests
 )
-Lua module: polyglossia ....-..-.. Polyglossia (gloss-latex.ldf
+Lua module: polyglossia ....-..-.. Polyglossia
+\l_xpg_alias_keyvals_int=\count...
+(gloss-latex.ldf
 File: gloss-latex.ldf polyglossia: module for default language
 )
 Package polyglossia Info: Setting LuaTeX font renderer to Harfbuzz
