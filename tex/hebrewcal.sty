@@ -73,7 +73,7 @@
        \ifnum#1<5000
          \Hebrewnumeral{#1}%
        \else
-         \ifnum#1<6000 % current millenium, print without thousands
+         \ifnum#1<6000 % current millennium, print without thousands
            \@tempcnta=#1\relax
            \if@xpg@hebrew@fullyear\else\advance\@tempcnta by -5000\fi
            \Hebrewnumeral{\@tempcnta}%

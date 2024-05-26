@@ -32,7 +32,7 @@
     localalph.default:n = true,
     disableligatures.choices:nn = { true, false }
       {
-        \xpg@warning{The option disableligatures is deprected.\MessageBreak
+        \xpg@warning{The option disableligatures is deprecated.\MessageBreak
                Please use disabledigraphs instead}%
         \ifcase\UseName{l_keys_choice_int}\or
           \croatian@disabledigraphstrue

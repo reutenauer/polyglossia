@@ -36,7 +36,7 @@
 	   { \chardef\l@nohyphenation=255 }
   }
 
-% Which version of XeTeX do we use? What is the boudary class? 4095 or 255
+% Which version of XeTeX do we use? What is the boundary class? 4095 or 255
 \cs_if_exist:cTF { e@alloc@intercharclass@top }
   { \cs_gset_eq:NN \xpg@boundaryclass \e@alloc@intercharclass@top }
   { \chardef\xpg@boundaryclass=\@cclv }
@@ -2239,7 +2239,7 @@
 % do not rename!
 \cs_new:Npn \polyglossia@language@switched {}
 
-% remove all custumization for language #1
+% remove all customization for language #1
 \cs_new:Npn \noextrascurrent #1
 {
   \cs_if_exist_use:c{noextras@#1}%
