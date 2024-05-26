@@ -2,7 +2,6 @@ This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 (gloss-korean.ldf
 File: gloss-korean.ldf polyglossia: module for Korean
-Package polyglossia Info: Option: Korean, swapstrings=all
 \xpg@attr@cjkspacing=\attribute...
 \xpg@attr@autojosa=\attribute...
 Inserting `polyglossia.lang_cjk_spacing' in `pre_shaping_filter'.)

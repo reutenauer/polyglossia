@@ -12,25 +12,31 @@ Module polyglossia Info: Language data for german
 (polyglossia)            righthyphenmin^^I2
 (polyglossia)            synonyms^^I on input line ...
 Module polyglossia Info: Language german was not yet loaded; created with id 2 on input line ...
-Package polyglossia Info: Option: German, spelling=new
-Package polyglossia Info: Option: German, script=latin
-Package polyglossia Info: Option: German, variant=german
-Package polyglossia Info: Option: German, variant=german
-Package polyglossia Info: Option: German, spelling=new
-Package polyglossia Info: Option: German, script=latin
+! LaTeX Error: The key 'polyglossia/gloss/german/variant' is unknown and is being ignored.
+For immediate help type H <return>.
+ ...                                              
+l. ......ossOptions{german}{spelling,script,variant}
+The module 'polyglossia/gloss/german' does not have a key called 'polyglossia/gloss/german/variant'.
+Check that you have spelled the key name correctly.
+! LaTeX Error: The key 'polyglossia/gloss/german/variant' is unknown and is being ignored.
+For immediate help type H <return>.
+ ...                                              
+l. ......ing=new,script=latin,babelshorthands=false}
+The module 'polyglossia/gloss/german' does not have a key called 'polyglossia/gloss/german/variant'.
+Check that you have spelled the key name correctly.
+! LaTeX Error: The key 'polyglossia/gloss/german/variant' is unknown and is being ignored.
+For immediate help type H <return>.
+ ...                                              
+l. ......ing=new,script=latin,babelshorthands=false}
+The module 'polyglossia/gloss/german' does not have a key called 'polyglossia/gloss/german/variant'.
+Check that you have spelled the key name correctly.
 (babelsh.def
 File: babelsh.def ....-..-.. Babel common definitions for shorthands
  Taken verbatim from babel files (....-..-.. v...)
 )
 Package babel Info: Making " an active character on input line ....
 ))
-Package polyglossia Info: Option: German, variant=german
-Package polyglossia Info: Option: German, spelling=new
-Package polyglossia Info: Option: German, script=blackletter
 Package polyglossia Info: Default language is german
-Package polyglossia Info: Option: German, variant=german
-Package polyglossia Info: Option: German, spelling=new
-Package polyglossia Info: Option: German, script=blackletter
 > \box...=
 \hbox(7.16+2.06)x67.51, direction TLT
 .\TU/lmr/m/n/10 6

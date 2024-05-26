@@ -8,7 +8,6 @@ Package: gurmukhidigits ....-..-.. v... Formatting of Gurmukhi digits
 Package polyglossia Warning: No hyphenation patterns were loaded for `punjabi'
 (polyglossia)                I will use \language=\l@nohyphenation instead.
 \l@punjabi = a dialect from \language\l@nohyphenation 
-Package polyglossia Info: Option: Punjabi, numerals=gurmukhi
 )
 Package polyglossia Info: Default language is punjabi
 > \box...=

@@ -48,11 +48,8 @@ Module polyglossia Warning: Language malay not found in language.dat.lua on inpu
 Module polyglossia Warning: Language melayu not found in language.dat.lua on input line ...
 Module polyglossia Warning: Language bahasam not found in language.dat.lua on input line ...
 Module polyglossia Warning: Language bahasai not found in language.dat.lua on input line ...
-Package polyglossia Info: Option: malay, variant=malaysian
 ))
-Package polyglossia Info: Option: malay, variant=malaysian
 Package polyglossia Info: Default language is malay
-Package polyglossia Info: Option: malay, variant=malaysian
 > \box...=
 \hbox(7.05+2.06)x67.0, direction TLT
 .\TU/lmr/m/n/10 6

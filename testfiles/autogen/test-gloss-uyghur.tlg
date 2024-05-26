@@ -73,10 +73,7 @@ File: loadingorder-xetex-bidi.def ....-..-.. v... making sure that bidi is the l
 \bidi@digits=\count...
 \bidi@digits@charclass=\XeTeXcharclass1
 \bidi@sepmark@charclass=\XeTeXcharclass2
-)
-Package polyglossia Info: Option: Uyghur, swapstrings=all
-Package polyglossia Info: Option: Uyghur, chapterformat=ordinal
-)
+))
 Package polyglossia Info: Default language is uyghur
 > \box...=
 \hbox(6.66+0.21999)x68.57

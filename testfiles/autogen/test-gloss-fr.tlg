@@ -11,7 +11,6 @@ File: gloss-french.ldf polyglossia: module for French
 \french@punctthick=\XeTeXcharclass5
 \french@punctguillstart=\XeTeXcharclass6
 \french@punctguillend=\XeTeXcharclass7
-Package polyglossia Info: Option: French, variant=french
 ))
 Package polyglossia Info: Default language is french
 > \box...=

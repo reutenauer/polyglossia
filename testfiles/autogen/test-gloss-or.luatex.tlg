@@ -14,7 +14,6 @@ Module polyglossia Warning: Language odia not found in language.dat.lua on input
 Package polyglossia Warning: No hyphenation patterns were loaded for `odia'
 (polyglossia)                I will use \language=\l@nohyphenation instead.
 \l@odia = a dialect from \language\l@nohyphenation 
-Package polyglossia Info: Option: Odia, numerals=devanagari
 ))
 Package polyglossia Info: Default language is odia
 > \box...=

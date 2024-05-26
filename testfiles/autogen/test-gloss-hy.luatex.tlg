@@ -12,7 +12,6 @@ Module polyglossia Info: Language data for armenian
 (polyglossia)            righthyphenmin^^I2
 (polyglossia)            synonyms^^I on input line ...
 Module polyglossia Info: Language armenian was not yet loaded; created with id 2 on input line ...
-Package polyglossia Info: Option: Armenian, variant=western
 ))
 Package polyglossia Info: Default language is armenian
 > \box...=

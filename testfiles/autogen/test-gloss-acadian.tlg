@@ -11,13 +11,8 @@ File: gloss-french.ldf polyglossia: module for French
 \french@punctthick=\XeTeXcharclass5
 \french@punctguillstart=\XeTeXcharclass6
 \french@punctguillend=\XeTeXcharclass7
-Package polyglossia Info: Option: French, variant=french
 ))
-Package polyglossia Warning: No hyphenation patterns were loaded for "French (Canada, Acadian)"\MessageBreak I will use the standard patterns for French instead
-\l@acadian = a dialect from \language\l@french 
-Package polyglossia Info: Option: French, variant=acadian
 Package polyglossia Info: Default language is french
-Package polyglossia Info: Option: French, variant=acadian
 > \box...=
 \hbox(6.92+0.21999)x53.89
 .\TU/lmr/m/n/10 6

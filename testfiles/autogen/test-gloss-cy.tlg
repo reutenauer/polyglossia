@@ -4,8 +4,12 @@ Don't change this file in any respect.
 File: gloss-cy.ldf polyglossia: module for cy (Welsh)
 (gloss-welsh.ldf
 File: gloss-welsh.ldf polyglossia: module for Welsh
-Package polyglossia Info: Option: Welsh, date=short
-))
+Package polyglossia Warning: Unknown date value `short'
+Package polyglossia Warning: Unknown date value `short'
+Package polyglossia Warning: Unknown date value `short'
+)
+Package polyglossia Warning: Unknown date value `short'
+)
 Package polyglossia Info: Default language is welsh
 > \box...=
 \hbox(7.16+0.21999)x66.16

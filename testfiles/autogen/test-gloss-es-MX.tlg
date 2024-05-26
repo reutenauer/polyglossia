@@ -4,12 +4,8 @@ Don't change this file in any respect.
 File: gloss-es-MX.ldf polyglossia: module for es-MX (Mexican Spanish)
 (gloss-spanish.ldf
 File: gloss-spanish.ldf polyglossia: module for Spanish
-Package polyglossia Info: Option: spanish, variant=spanish
-Package polyglossia Info: Option: Spanish, spanishoperators=none
 ))
-Package polyglossia Info: Option: spanish, variant=mexican
 Package polyglossia Info: Default language is spanish
-Package polyglossia Info: Option: spanish, variant=mexican
 > \box...=
 \hbox(6.94+2.05998)x88.93001
 .\TU/lmr/m/n/10 6

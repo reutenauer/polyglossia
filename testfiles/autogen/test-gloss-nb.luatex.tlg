@@ -13,11 +13,8 @@ Module polyglossia Info: Language data for nynorsk
 (polyglossia)            synonyms^^I on input line ...
 Module polyglossia Info: Language nynorsk was not yet loaded; created with id 2 on input line ...
 Package polyglossia Info: Skipping automatic font setup for language norwegian
-Package polyglossia Info: Option: norwegian, variant=nynorsk
 ))
-Package polyglossia Info: Option: norwegian, variant=bokmal
 Package polyglossia Info: Default language is norwegian
-Package polyglossia Info: Option: norwegian, variant=bokmal
 > \box...=
 \hbox(6.66+2.06)x66.17, direction TLT
 .\TU/lmr/m/n/10 6

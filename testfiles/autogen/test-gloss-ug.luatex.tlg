@@ -8,10 +8,7 @@ File: gloss-uyghur.ldf polyglossia: module for Uyghur
 Package: luabidi ....-..-.. v... Bidirectional typesetting in LuaTeX
 (../luabidi-footnotes.def
 \footnoterulewidth=\skip...
-))
-Package polyglossia Info: Option: Uyghur, swapstrings=all
-Package polyglossia Info: Option: Uyghur, chapterformat=ordinal
-))
+))))
 Package polyglossia Info: Default language is uyghur
 > \box...=
 \hbox(6.66+0.22)x68.57004, direction TRT

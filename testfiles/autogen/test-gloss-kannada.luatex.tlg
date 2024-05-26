@@ -10,6 +10,14 @@ Module polyglossia Info: Language data for kannada
 (polyglossia)            righthyphenmin^^I1
 (polyglossia)            synonyms^^I on input line ...
 Module polyglossia Info: Language kannada was not yet loaded; created with id 2 on input line ...
+! Use of \??? doesn't match its definition.
+<argument> \???  
+      ! LaTeX Error: Misplaced '=' in key-value input on line ...
+l. ...  }
+If you say, e.g., `\def\a1{...}', then you must always
+put `1' after `\a', since control sequence names are
+made up of letters only. The macro here has not been
+followed by the required stuff, so I'm ignoring it.
 )
 Package polyglossia Info: Default language is kannada
 > \box...=

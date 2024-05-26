@@ -4,7 +4,6 @@ Don't change this file in any respect.
 File: gloss-ko.ldf polyglossia: module for ko (Korean)
 (gloss-korean.ldf
 File: gloss-korean.ldf polyglossia: module for Korean
-Package polyglossia Info: Option: Korean, swapstrings=all
 \xpg@attr@cjkspacing=\attribute...
 \xpg@attr@autojosa=\attribute...
 Inserting `polyglossia.lang_cjk_spacing' in `pre_shaping_filter'.))

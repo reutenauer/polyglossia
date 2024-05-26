@@ -6,9 +6,7 @@ File: gloss-hi.ldf polyglossia: module for hi (Hindi)
 File: gloss-hindi.ldf polyglossia: module for Hindi
 (devanagaridigits.sty
 Package: devanagaridigits ....-..-.. v... Formatting of Devanagari digits
-)
-Package polyglossia Info: Option: Hindi, numerals=devanagari
-))
+)))
 Package polyglossia Info: Default language is hindi
 > \box...=
 \hbox(1.06+0.0)x34.64

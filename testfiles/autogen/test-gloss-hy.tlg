@@ -4,7 +4,6 @@ Don't change this file in any respect.
 File: gloss-hy.ldf polyglossia: module for hy (Armenian)
 (gloss-armenian.ldf
 File: gloss-armenian.ldf polyglossia: module for Armenian
-Package polyglossia Info: Option: Armenian, variant=western
 ))
 Package polyglossia Info: Default language is armenian
 > \box...=

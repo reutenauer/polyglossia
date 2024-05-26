@@ -10,7 +10,6 @@ Package: luabidi ....-..-.. v... Bidirectional typesetting in LuaTeX
 Package: arabicnumbers ....-..-.. v... Formatting of Arabic and Farsi digits and of Arabic abjad numerals
 )
 Module polyglossia Warning: Language syriac not found in language.dat.lua on input line ...
-Package polyglossia Info: Option: Syriac, numerals=western
 )
 Package polyglossia Info: Default language is syriac
 > \box...=

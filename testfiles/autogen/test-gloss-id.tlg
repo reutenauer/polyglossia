@@ -31,12 +31,8 @@ Package: arabicnumbers ....-..-.. v... Formatting of Arabic and Farsi digits and
 \c@Hijriday=\count...
 \c@Hijrimonth=\count...
 \c@Hijriyear=\count...
-)
-Package polyglossia Info: Option: malay, variant=malaysian
-))
-Package polyglossia Info: Option: malay, variant=indonesian
+)))
 Package polyglossia Info: Default language is malay
-Package polyglossia Info: Option: malay, variant=indonesian
 > \box...=
 \hbox(7.16+2.05998)x69.83
 .\TU/lmr/m/n/10 6

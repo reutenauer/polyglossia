@@ -11,13 +11,8 @@ File: gloss-french.ldf polyglossia: module for French
 \french@punctthick=\XeTeXcharclass5
 \french@punctguillstart=\XeTeXcharclass6
 \french@punctguillend=\XeTeXcharclass7
-Package polyglossia Info: Option: French, variant=french
 ))
-\l@swissfrench = a dialect from \language\l@french 
-Package polyglossia Info: Option: French, variant=swiss
 Package polyglossia Info: Default language is french
-\l@swissfrench = a dialect from \language\l@french 
-Package polyglossia Info: Option: French, variant=swiss
 > \box...=
 \hbox(6.92+0.21999)x53.89
 .\TU/lmr/m/n/10 6

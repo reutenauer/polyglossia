@@ -75,16 +75,8 @@ Package: hijrical ....-..-.. v... Islamic calendar
 \c@Hijriday=\count...
 \c@Hijrimonth=\count...
 \c@Hijriyear=\count...
-)
-Package polyglossia Info: Option: kurdish, variant=sorani
-Package polyglossia Info: Option: kurdish, script=arabic
-Package polyglossia Info: Option: Kurdish, numerals=eastern
-))
-Package polyglossia Info: Option: kurdish, variant=kurmanji
-Package polyglossia Info: Option: kurdish, script=latin
+)))
 Package polyglossia Info: Default language is kurdish
-Package polyglossia Info: Option: kurdish, variant=kurmanji
-Package polyglossia Info: Option: kurdish, script=latin
 > \box...=
 \hbox(6.94+0.22)x61.11, direction TLT
 .\TU/lmr/m/n/10 6

@@ -2,7 +2,6 @@ This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 (gloss-chinese.ldf
 File: gloss-chinese.ldf polyglossia: module for Chinese
-Package polyglossia Info: Option: Chinese, variant=simplified
 \c@TempJNum=\count...
 )
 Package polyglossia Info: Default language is chinese

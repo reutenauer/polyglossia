@@ -5,12 +5,12 @@ File: gloss-canadian.ldf polyglossia: module for Canadian English
 (gloss-english.ldf
 File: gloss-english.ldf polyglossia: module for English
 Package polyglossia Info: Option: English, variant=american
-))
 Package polyglossia Info: Option: English, variant=american
-\l@canadian = a dialect from \language\l@english 
+Package polyglossia Info: Option: English, variant=american
+)
+Package polyglossia Info: Option: English, variant=american
+)
 Package polyglossia Info: Default language is english
-Package polyglossia Info: Option: English, variant=american
-\l@canadian = a dialect from \language\l@english 
 > \box...=
 \hbox(7.16+2.06)x68.39, direction TLT
 .\TU/lmr/m/n/10 A

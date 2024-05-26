@@ -13,6 +13,14 @@ Module polyglossia Info: Language data for greek
 (polyglossia)            synonyms^^Ipolygreek on input line ...
 Module polyglossia Info: Language greek was not yet loaded; created with id 2 on input line ...
 (xgreek-fixes.def)
+! Use of \??? doesn't match its definition.
+<argument> \???  
+      ! LaTeX Error: Misplaced '=' in key-value input on line ...
+l. ...  }
+If you say, e.g., `\def\a1{...}', then you must always
+put `1' after `\a', since control sequence names are
+made up of letters only. The macro here has not been
+followed by the required stuff, so I'm ignoring it.
 Module polyglossia Info: Language data for monogreek
 (polyglossia)            hyphenation^^I
 (polyglossia)            lefthyphenmin^^I1
@@ -21,10 +29,13 @@ Module polyglossia Info: Language data for monogreek
 (polyglossia)            righthyphenmin^^I1
 (polyglossia)            synonyms^^I on input line ...
 Module polyglossia Info: Language monogreek was not yet loaded; created with id 3 on input line ...
-Package polyglossia Info: Option: Greek, variant=monotonic
-Package polyglossia Info: Option: Greek, numerals=greek
+Package polyglossia Warning: Unknown Greek numerals value `greek'
+Package polyglossia Warning: Unknown Greek numerals value `greek'
+Package polyglossia Warning: Unknown Greek numerals value `greek'
 \@attic@num=\count...
-))
+)
+Package polyglossia Warning: Unknown Greek numerals value `greek'
+)
 Package polyglossia Info: Default language is greek
 > \box...=
 \hbox(7.16+0.22)x64.34003, direction TLT

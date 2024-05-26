@@ -73,9 +73,7 @@ Package: hijrical ....-..-.. v... Islamic calendar
 \c@Hijriday=\count...
 \c@Hijrimonth=\count...
 \c@Hijriyear=\count...
-)
-Package polyglossia Info: Option: Persian, numerals=eastern
-)
+))
 Package polyglossia Info: Default language is persian
 > \box...=
 \hbox(1.06+0.0)x31.84003, direction TRT

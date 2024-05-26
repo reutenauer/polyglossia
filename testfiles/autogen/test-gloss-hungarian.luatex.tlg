@@ -10,7 +10,6 @@ Module polyglossia Info: Language data for hungarian
 (polyglossia)            righthyphenmin^^I2
 (polyglossia)            synonyms^^I on input line ...
 Module polyglossia Info: Language hungarian was not yet loaded; created with id 2 on input line ...
-Package polyglossia Info: Option: Hungarian, swapstrings=all
 )
 Package polyglossia Info: Default language is hungarian
 > \box...=

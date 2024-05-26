@@ -87,11 +87,7 @@ Package: hebrewcal ....-..-.. v... Hebrew calendar for polyglossia (adapted from
 \hebrewmonth=\count...
 \hebrewyear=\count...
 \@common=\count...
-)
-Package polyglossia Info: Option: Hebrew, numerals=arabic
-Package polyglossia Info: Option: Hebrew, numerals=arabic
-Package polyglossia Info: Option: Hebrew, calendar=gregorian
-(babel-hebrewalph.def
+) (babel-hebrewalph.def
 File: babel-hebrewalph.def ....-..-.. Expandable definitions for Hebrew numerals
 ))
 Package polyglossia Info: Default language is hebrew

@@ -25,19 +25,13 @@ Package: ltxcmds ....-..-.. v... LaTeX kernel commands for general use (HO)
 Package: kvsetkeys ....-..-.. v... Key value parser (HO)
 )) (../luavlna.tex
 Inserting `LuaVlna' in `pre_linebreak_filter'.
-Inserting `allow hyphen breaks' in `hyphenate'.))
-Package polyglossia Info: Option: portuguese, variant=portuguese
-(babelsh.def
+Inserting `allow hyphen breaks' in `hyphenate'.)) (babelsh.def
 File: babelsh.def ....-..-.. Babel common definitions for shorthands
  Taken verbatim from babel files (....-..-.. v...)
 )
 Package babel Info: Making " an active character on input line ....
 ))
-\l@brazil = a dialect from \language\l@portuges 
-Package polyglossia Info: Option: portuguese, variant=brazilian
 Package polyglossia Info: Default language is portuguese
-\l@brazil = a dialect from \language\l@portuges 
-Package polyglossia Info: Option: portuguese, variant=brazilian
 > \box...=
 \hbox(6.94+2.06)x88.93001, direction TLT
 .\TU/lmr/m/n/10 6

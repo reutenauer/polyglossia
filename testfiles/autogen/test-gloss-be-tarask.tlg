@@ -6,9 +6,7 @@ File: gloss-be-tarask.ldf polyglossia: module for be-tarask (Belarusian)
 File: gloss-belarusian.ldf polyglossia: module for Belarusian
 (xpg-cyrillicnumbers.sty
 Package: xpg-cyrillicnumbers ....-..-.. v... Formatting of Cyrillic alphabetic numbers
-)
-Package polyglossia Info: Option: Belarusian, numerals=arabic
-(babelsh.def
+) (babelsh.def
 File: babelsh.def ....-..-.. Babel common definitions for shorthands
  Taken verbatim from babel files (....-..-.. v...)
 )

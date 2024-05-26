@@ -4,7 +4,6 @@ Don't change this file in any respect.
 File: gloss-fi.ldf polyglossia: module for fi (Finnish)
 (gloss-finnish.ldf
 File: gloss-finnish.ldf polyglossia: module for Finnish
-Package polyglossia Info: Option: Finnish, hyphens=default
 (babelsh.def
 File: babelsh.def ....-..-.. Babel common definitions for shorthands
  Taken verbatim from babel files (....-..-.. v...)

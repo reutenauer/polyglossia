@@ -4,7 +4,6 @@ Don't change this file in any respect.
 File: gloss-brazil.ldf polyglossia: module for Brazilian Portuguese
 (gloss-portuguese.ldf
 File: gloss-portuguese.ldf polyglossia: module for Portuguese
-Package polyglossia Info: Option: portuguese, variant=portuguese
 (babelsh.def
 File: babelsh.def ....-..-.. Babel common definitions for shorthands
  Taken verbatim from babel files (....-..-.. v...)
@@ -12,11 +11,7 @@ File: babelsh.def ....-..-.. Babel common definitions for shorthands
 Package babel Info: Making " an active character on input line ....
 \portuguese@hyphen=\XeTeXcharclass1
 ))
-\l@brazil = a dialect from \language\l@portuges 
-Package polyglossia Info: Option: portuguese, variant=brazilian
 Package polyglossia Info: Default language is portuguese
-\l@brazil = a dialect from \language\l@portuges 
-Package polyglossia Info: Option: portuguese, variant=brazilian
 > \box...=
 \hbox(6.94+2.05998)x88.93001
 .\TU/lmr/m/n/10 6

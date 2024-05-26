@@ -27,12 +27,7 @@ Package: ltxcmds ....-..-.. v... LaTeX kernel commands for general use (HO)
 Package: kvsetkeys ....-..-.. v... Key value parser (HO)
 )) (../luavlna.tex
 Inserting `LuaVlna' in `pre_linebreak_filter'.
-Inserting `allow hyphen breaks' in `hyphenate'.))
-Package polyglossia Info: Option: Serbian, script=cyrillic
-Package polyglossia Info: Option: Serbian, numerals=arabic
-Package polyglossia Info: Option: Serbian, script=cyrillic
-Package polyglossia Info: Option: Serbian, numerals=arabic
-)
+Inserting `allow hyphen breaks' in `hyphenate'.)))
 Package polyglossia Info: Default language is serbian
 > \box...=
 \hbox(6.66+0.22)x56.80002, direction TLT

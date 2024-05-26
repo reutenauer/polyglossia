@@ -2,7 +2,6 @@ This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 (gloss-sorbian.ldf
 File: gloss-sorbian.ldf polyglossia: module for Sorbian
-Package polyglossia Info: Option: sorbian, variant=upper
 )
 Package polyglossia Info: Default language is sorbian
 > \box...=

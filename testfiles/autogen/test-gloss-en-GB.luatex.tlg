@@ -5,18 +5,12 @@ File: gloss-en-GB.ldf polyglossia: module for en-GB (British English)
 (gloss-english.ldf
 File: gloss-english.ldf polyglossia: module for English
 Package polyglossia Info: Option: English, variant=american
-))
-Package polyglossia Info: Option: english variant=british
-Module polyglossia Info: Language data for ukenglish
-(polyglossia)            hyphenation^^Ihyph-en-gb.hyp.txt
-(polyglossia)            lefthyphenmin^^I2
-(polyglossia)            loader^^Iloadhyph-en-gb.tex
-(polyglossia)            patterns^^Ihyph-en-gb.pat.txt
-(polyglossia)            righthyphenmin^^I3
-(polyglossia)            synonyms^^Ibritish,UKenglish on input line ...
-Module polyglossia Info: Language ukenglish was not yet loaded; created with id 2 on input line ...
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: English, variant=american
+)
+Package polyglossia Info: Option: English, variant=american
+)
 Package polyglossia Info: Default language is english
-Package polyglossia Info: Option: english variant=british
 > \box...=
 \hbox(7.16+2.06)x75.06, direction TLT
 .\TU/lmr/m/n/10 6

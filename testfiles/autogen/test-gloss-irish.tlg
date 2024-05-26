@@ -4,11 +4,8 @@ Don't change this file in any respect.
 File: gloss-irish.ldf polyglossia: module for Irish
 (gloss-gaelic.ldf
 File: gloss-gaelic.ldf polyglossia: module for Gaelic
-Package polyglossia Info: Option: gaelic, variant=irish
 ))
-Package polyglossia Info: Option: gaelic, variant=irish
 Package polyglossia Info: Default language is gaelic
-Package polyglossia Info: Option: gaelic, variant=irish
 > \box...=
 \hbox(6.98+0.21999)x65.75
 .\TU/lmr/m/n/10 6

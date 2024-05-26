@@ -5,12 +5,12 @@ File: gloss-en-NZ.ldf polyglossia: module for en-NZ (Newzealand English)
 (gloss-english.ldf
 File: gloss-english.ldf polyglossia: module for English
 Package polyglossia Info: Option: English, variant=american
-))
-Package polyglossia Info: Option: English, variant=newzealand
-\l@newzealand = a dialect from \language\l@english 
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: English, variant=american
+)
+Package polyglossia Info: Option: English, variant=american
+)
 Package polyglossia Info: Default language is english
-Package polyglossia Info: Option: English, variant=newzealand
-\l@newzealand = a dialect from \language\l@english 
 > \box...=
 \hbox(7.16+2.05998)x65.61
 .\TU/lmr/m/n/10 6

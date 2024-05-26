@@ -12,12 +12,8 @@ Module polyglossia Info: Language data for spanish
 (polyglossia)            righthyphenmin^^I2
 (polyglossia)            synonyms^^Iespanol on input line ...
 Module polyglossia Info: Language spanish was not yet loaded; created with id 2 on input line ...
-Package polyglossia Info: Option: spanish, variant=spanish
-Package polyglossia Info: Option: Spanish, spanishoperators=none
 ))
-Package polyglossia Info: Option: spanish, variant=spanish
 Package polyglossia Info: Default language is spanish
-Package polyglossia Info: Option: spanish, variant=spanish
 > \box...=
 \hbox(6.94+2.06)x88.93001, direction TLT
 .\TU/lmr/m/n/10 6

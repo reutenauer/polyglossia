@@ -4,28 +4,25 @@ Don't change this file in any respect.
 File: gloss-mongolian.ldf polyglossia: module for Mongolian
 (xpg-cyrillicnumbers.sty
 Package: xpg-cyrillicnumbers ....-..-.. v... Formatting of Cyrillic alphabetic numbers
-)
-Package polyglossia Info: Option: Mongolian, numerals=arabic
-(babelsh.def
-File: babelsh.def ....-..-.. Babel common definitions for shorthands
- Taken verbatim from babel files (....-..-.. v...)
-)
-Package babel Info: Making " an active character on input line ....
-)
+))
+Runaway argument?
+{ babelshorthands.if = mongolian@babelshorthands, babelshorthands.def\ETC.
+! File ended while scanning use of \DeclareKeys .
+<inserted text> 
+                \par 
+l. ...\setmainlanguage{mongolian}
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
 Package polyglossia Info: Default language is mongolian
 > \box...=
-\hbox(6.66+0.21999)x74.63
-.\TU/lmr/m/n/10 2012
-.\penalty 10000
+\hbox(7.16+2.05998)x68.39
+.\TU/lmr/m/n/10 August
 .\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 оны
+.\TU/lmr/m/n/10 6,
 .\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 8-р
-.\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 сарын
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 6.
+.\TU/lmr/m/n/10 2012.
 ! OK.
 <to be read again> 
                    \begingroup 

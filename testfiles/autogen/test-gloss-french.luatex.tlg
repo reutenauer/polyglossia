@@ -12,9 +12,7 @@ Module polyglossia Info: Language data for french
 Module polyglossia Info: Language french was not yet loaded; created with id 2 on input line ...
 Lua-only attribute polyglossia_punct = 4
 Inserting `polyglossia-punct.process' in `pre_linebreak_filter'.
-Inserting `polyglossia-punct.process' in `hpack_filter'.
-Package polyglossia Info: Option: French, variant=french
-)
+Inserting `polyglossia-punct.process' in `hpack_filter'.)
 Package polyglossia Info: Default language is french
 > \box...=
 \hbox(6.92+0.22)x53.89, direction TLT

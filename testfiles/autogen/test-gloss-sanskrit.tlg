@@ -6,7 +6,6 @@ File: gloss-sanskrit.ldf polyglossia: module for Sanskrit
 Package: devanagaridigits ....-..-.. v... Formatting of Devanagari digits
 )
 Package polyglossia Info: Skipping automatic font setup for language sanskrit
-Package polyglossia Info: Option: Sanskrit, numerals=devanagari
 \sanskrit@questionexclamation=\XeTeXcharclass1
 \sanskrit@punctthin=\XeTeXcharclass2
 )

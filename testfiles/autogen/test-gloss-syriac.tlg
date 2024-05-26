@@ -75,9 +75,7 @@ File: loadingorder-xetex-bidi.def ....-..-.. v... making sure that bidi is the l
 \bidi@sepmark@charclass=\XeTeXcharclass2
 ) (arabicnumbers.sty
 Package: arabicnumbers ....-..-.. v... Formatting of Arabic and Farsi digits and of Arabic abjad numerals
-)
-Package polyglossia Info: Option: Syriac, numerals=western
-)
+))
 Package polyglossia Info: Default language is syriac
 > \box...=
 \hbox(6.66+0.21999)x40.04001

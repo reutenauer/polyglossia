@@ -4,7 +4,6 @@ Don't change this file in any respect.
 File: gloss-ko.ldf polyglossia: module for ko (Korean)
 (gloss-korean.ldf
 File: gloss-korean.ldf polyglossia: module for Korean
-Package polyglossia Info: Option: Korean, swapstrings=all
 \XeTeXcharclassID=\XeTeXcharclass1
 \XeTeXcharclassOP=\XeTeXcharclass2
 \XeTeXcharclassCL=\XeTeXcharclass3

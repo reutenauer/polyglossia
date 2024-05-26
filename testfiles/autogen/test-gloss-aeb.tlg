@@ -102,14 +102,8 @@ LaTeX Info: Redefining \addtolength on input line ....
 \c@Hijriday=\count...
 \c@Hijrimonth=\count...
 \c@Hijriyear=\count...
-)
-Package polyglossia Info: Option: arabic, locale=default
-Package polyglossia Info: Option: Arabic, calendar=gregorian
-Package polyglossia Info: Option: Arabic, numerals=mashriq
-))
-Package polyglossia Info: Option: arabic, locale=tunisia
+)))
 Package polyglossia Info: Default language is arabic
-Package polyglossia Info: Option: arabic, locale=tunisia
 > \box...=
 \hbox(6.66+0.21999)x42.84
 .\TU/lmr/m/n/10 6

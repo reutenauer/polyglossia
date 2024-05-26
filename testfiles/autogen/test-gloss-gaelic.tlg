@@ -2,7 +2,6 @@ This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 (gloss-gaelic.ldf
 File: gloss-gaelic.ldf polyglossia: module for Gaelic
-Package polyglossia Info: Option: gaelic, variant=irish
 )
 Package polyglossia Info: Default language is gaelic
 > \box...=

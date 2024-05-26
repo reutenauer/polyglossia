@@ -6,9 +6,7 @@ File: gloss-bengali.ldf polyglossia: module for Bengali
 Package: devanagaridigits ....-..-.. v... Formatting of Devanagari digits
 ) (bengalidigits.sty
 Package: bengalidigits ....-..-.. v.02Formatting of Bengali digits
-)
-Package polyglossia Info: Option: Bengali, numerals=devanagari
-)
+))
 Package polyglossia Info: Default language is bengali
 > \box...=
 \hbox(1.06+0.0)x34.64

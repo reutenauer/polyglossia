@@ -10,7 +10,6 @@ Module polyglossia Info: Language data for irish
 (polyglossia)            righthyphenmin^^I3
 (polyglossia)            synonyms^^I on input line ...
 Module polyglossia Info: Language irish was not yet loaded; created with id 2 on input line ...
-Package polyglossia Info: Option: gaelic, variant=irish
 )
 Package polyglossia Info: Default language is gaelic
 > \box...=

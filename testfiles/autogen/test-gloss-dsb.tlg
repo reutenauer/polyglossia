@@ -4,11 +4,8 @@ Don't change this file in any respect.
 File: gloss-dsb.ldf polyglossia: module for dsb (Sorbian)
 (gloss-sorbian.ldf
 File: gloss-sorbian.ldf polyglossia: module for Sorbian
-Package polyglossia Info: Option: sorbian, variant=upper
 ))
-Package polyglossia Info: Option: sorbian, variant=lower
 Package polyglossia Info: Default language is sorbian
-Package polyglossia Info: Option: sorbian, variant=lower
 > \box...=
 \hbox(6.66+2.05998)x72.55
 .\TU/lmr/m/n/10 6.

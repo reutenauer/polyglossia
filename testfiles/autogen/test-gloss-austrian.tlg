@@ -4,23 +4,31 @@ Don't change this file in any respect.
 File: gloss-austrian.ldf polyglossia: module for Austrian German (old spelling)
 (gloss-german.ldf
 File: gloss-german.ldf polyglossia: module for German
-Package polyglossia Info: Option: German, spelling=new
-Package polyglossia Info: Option: German, script=latin
-Package polyglossia Info: Option: German, variant=german
-Package polyglossia Info: Option: German, variant=german
-Package polyglossia Info: Option: German, spelling=new
-Package polyglossia Info: Option: German, script=latin
+! LaTeX Error: The key 'polyglossia/gloss/german/variant' is unknown and is being ignored.
+For immediate help type H <return>.
+ ...                                              
+l. ......sOptions{german}{spelling,script,variant}
+The module 'polyglossia/gloss/german' does not have a key called 'polyglossia/gloss/german/variant'.
+Check that you have spelled the key name correctly.
+! LaTeX Error: The key 'polyglossia/gloss/german/variant' is unknown and is being ignored.
+For immediate help type H <return>.
+ ...                                              
+l. ......g=new,script=latin,babelshorthands=false}
+The module 'polyglossia/gloss/german' does not have a key called 'polyglossia/gloss/german/variant'.
+Check that you have spelled the key name correctly.
+! LaTeX Error: The key 'polyglossia/gloss/german/variant' is unknown and is being ignored.
+For immediate help type H <return>.
+ ...                                              
+l. ......g=new,script=latin,babelshorthands=false}
+The module 'polyglossia/gloss/german' does not have a key called 'polyglossia/gloss/german/variant'.
+Check that you have spelled the key name correctly.
 (babelsh.def
 File: babelsh.def ....-..-.. Babel common definitions for shorthands
  Taken verbatim from babel files (....-..-.. v...)
 )
 Package babel Info: Making " an active character on input line ....
 ))
-Package polyglossia Info: Option: German, variant=austrian
-Package polyglossia Info: Option: German, spelling=old
 Package polyglossia Info: Default language is german
-Package polyglossia Info: Option: German, variant=austrian
-Package polyglossia Info: Option: German, spelling=old
 > \box...=
 \hbox(7.16+2.05998)x68.39
 .\TU/lmr/m/n/10 6.

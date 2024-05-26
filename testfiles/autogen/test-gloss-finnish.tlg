@@ -2,7 +2,6 @@ This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 (gloss-finnish.ldf
 File: gloss-finnish.ldf polyglossia: module for Finnish
-Package polyglossia Info: Option: Finnish, hyphens=default
 (babelsh.def
 File: babelsh.def ....-..-.. Babel common definitions for shorthands
  Taken verbatim from babel files (....-..-.. v...)

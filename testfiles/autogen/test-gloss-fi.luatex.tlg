@@ -12,7 +12,6 @@ Module polyglossia Info: Language data for finnish
 (polyglossia)            righthyphenmin^^I2
 (polyglossia)            synonyms^^I on input line ...
 Module polyglossia Info: Language finnish was not yet loaded; created with id 2 on input line ...
-Package polyglossia Info: Option: Finnish, hyphens=default
 (babelsh.def
 File: babelsh.def ....-..-.. Babel common definitions for shorthands
  Taken verbatim from babel files (....-..-.. v...)
