@@ -85,7 +85,7 @@
 
 \DeclareKeys[polyglossia/gloss/greek]
   {
-    variant.choice:,
+    variant.choices:nn = { monotonic, mono,polytonic, poly,ancient, ancientgreek }
       {%
         \CheckHyphenationPatterns{greek}%
         \ifcase\UseName{l_keys_choice_int}\or

@@ -62,7 +62,7 @@
         \eastern@numeralsfalse
       },
     numerals / eastern.code =
-      {
+      {%
         \eastern@numeralstrue
       },
     numerals / western.code =
