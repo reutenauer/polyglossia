@@ -158,7 +158,7 @@
       },
     spelling.default:n = new,
     spelling/unknown.code = \xpg@warning{Unknown German spelling `#1'},
-    variant.choice
+    variant.choice:,
     variant / german.code =
       {%
         \@swiss@localefalse

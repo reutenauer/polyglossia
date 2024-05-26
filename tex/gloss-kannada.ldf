@@ -56,7 +56,7 @@
   
 \DeclareKeys[polyglossia/gloss/kannada]
   {
-    numerals.choices:nn = { kannada, western }
+    numerals.choice:,
     numerals / kannada.code =
       {%
         \kannada@numeralstrue

@@ -4,24 +4,6 @@ Don't change this file in any respect.
 File: gloss-de-DE-Latf.ldf polyglossia: module for de-DE-Latf (Germany's German)
 (gloss-german.ldf
 File: gloss-german.ldf polyglossia: module for German
-! LaTeX Error: The key 'polyglossia/gloss/german/variant' is unknown and is being ignored.
-For immediate help type H <return>.
- ...                                              
-l. ......sOptions{german}{spelling,script,variant}
-The module 'polyglossia/gloss/german' does not have a key called 'polyglossia/gloss/german/variant'.
-Check that you have spelled the key name correctly.
-! LaTeX Error: The key 'polyglossia/gloss/german/variant' is unknown and is being ignored.
-For immediate help type H <return>.
- ...                                              
-l. ......g=new,script=latin,babelshorthands=false}
-The module 'polyglossia/gloss/german' does not have a key called 'polyglossia/gloss/german/variant'.
-Check that you have spelled the key name correctly.
-! LaTeX Error: The key 'polyglossia/gloss/german/variant' is unknown and is being ignored.
-For immediate help type H <return>.
- ...                                              
-l. ......g=new,script=latin,babelshorthands=false}
-The module 'polyglossia/gloss/german' does not have a key called 'polyglossia/gloss/german/variant'.
-Check that you have spelled the key name correctly.
 (babelsh.def
 File: babelsh.def ....-..-.. Babel common definitions for shorthands
  Taken verbatim from babel files (....-..-.. v...)
