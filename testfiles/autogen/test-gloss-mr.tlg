@@ -6,29 +6,7 @@ File: gloss-mr.ldf polyglossia: module for mr (Marathi)
 File: gloss-marathi.ldf polyglossia: module for Marathi
 (devanagaridigits.sty
 Package: devanagaridigits ....-..-.. v... Formatting of Devanagari digits
-)
-! LaTeX Error: No property given in definition of key 'numerals / devanagari'.
-For immediate help type H <return>.
- ...                                              
-l. ...  }
-This is a coding error.
-Inside \keys_define:nn each key name needs a property:
-    numerals / devanagari.<property>
-LaTeX did not find a '.' to indicate the start of a property.
-! LaTeX Error: No property given in definition of key 'code'.
-For immediate help type H <return>.
- ...                                              
-l. ...  }
-This is a coding error.
-Inside \keys_define:nn each key name needs a property:
-    code.<property>
-LaTeX did not find a '.' to indicate the start of a property.
-Package polyglossia Warning: Unknown Marathi numerals value `devanagari'
-Package polyglossia Warning: Unknown Marathi numerals value `devanagari'
-Package polyglossia Warning: Unknown Marathi numerals value `devanagari'
-)
-Package polyglossia Warning: Unknown Marathi numerals value `devanagari'
-)
+)))
 Package polyglossia Info: Default language is marathi
 > \box...=
 \hbox(1.06+0.0)x34.64

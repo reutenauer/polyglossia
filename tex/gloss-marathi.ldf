@@ -36,7 +36,7 @@
         \marathi@devanagari@numeralsfalse
         \SetLanguageKeys{marathi}{bcp47-extension-u=nu-latn}%
       },
-    numerals / devanagari,code =
+    numerals / devanagari.code =
       {%
         \marathi@devanagari@numeralstrue
         \SetLanguageKeys{marathi}{bcp47-extension-u=nu-deva}%
