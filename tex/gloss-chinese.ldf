@@ -74,8 +74,8 @@
 \InitializeGlossOptions{chinese}{variant=cn,numerals=arabic}
 %\InitializeGlossOptions{chinese}{variant=tw,numerals=arabic}
 % Register alias options
-\SetLanguageAliasValues{chinese}{variant}{cn}{simplified}
-\SetLanguageAliasValues{chinese}{variant}{tw}{traditional}
+\SetLanguageAliasValues{chinese}{variant}{cn,simplified}
+\SetLanguageAliasValues{chinese}{variant}{tw,traditional}
 
 
 \def\chinese@capsformat{%

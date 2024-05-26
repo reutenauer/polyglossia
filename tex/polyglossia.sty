@@ -1928,17 +1928,16 @@
 \cs_generate_variant:Nn \keys_precompile:nnN { nec }
 
 % Record synonymous keyvals such as variant=us and variant=american
-% Syntax: \SetLanguageAliasValues{<lang>}{<key>}{<val>}{<alias vals, comma-separated>}
-\NewDocumentCommand \SetLanguageAliasValues { m m m m }
+% Syntax: \SetLanguageAliasValues{<lang>}{<key>}{<alias vals, comma-separated>}
+\int_new:N \l_xpg_alias_keyvals_int
+\int_set:Nn \l_xpg_alias_keyvals_int { 2 }
+\NewDocumentCommand \SetLanguageAliasValues { m m m }
 {
-   \prop_if_exist:cF { xpg@alias@keyvals@#1@#3 }
-      { \prop_new:c {xpg@alias@keyvals@#1@#3} }
-   \prop_put:cnn { xpg@alias@keyvals@#1@#3 }
-      {#2}{#4}
-   \prop_if_exist:cF { xpg@alias@keyvals@#1@#4 }
-      { \prop_new:c {xpg@alias@keyvals@#1@#4} }
-   \prop_put:cnn { xpg@alias@keyvals@#1@#4 }
-      {#2}{#3}
+  \clist_map_inline:nn { #3 }
+    {
+      \int_const:cn { c_xpg_alias_keyvals_#1_#2_##1_int } { \l_xpg_alias_keyvals_int }
+    }
+  \int_incr:N \l_xpg_alias_keyvals_int
 }
 
 \cs_new:Npn \xpg__keyval_parser:nnN #1 #2 #3 % #1 = key-vals, #2 = language, #3 = prop
@@ -1963,38 +1962,16 @@
   }
 
 \prg_set_conditional:Npnn \__xpg_check_option_value:NNN #1#2#3 { p , T , F , TF }
-{
-  \prop_get:NnNTF \l_xpg_curropt_prop { #1 / #2 } \l_tmpa_tl
-     {
-       \str_if_eq:eeTF{\l_tmpa_tl}{#3}
-          {\prg_return_true:}
-          {
-            \cs_if_exist:cTF {xpg@alias@keyvals@#1@#3} 
-            {
-            \prop_get:cnNTF {xpg@alias@keyvals@#1@#3} {#2} \l_tmpb_tl
-               {
-                \clist_set:Ne{\l_tmpa_clist}{\l_tmpb_tl}
-                \bool_if_exist:NF \l__xpg_val_found_bool
-                       { \bool_new:N \l__xpg_val_found_bool }
-                \bool_set_false:N \l__xpg_val_found_bool
-                \clist_map_inline:Nn \l_tmpa_clist {
-                   \str_if_eq:eeT{##1}{\l_tmpa_tl}
-                      { \bool_set_true:N \l__xpg_val_found_bool }
-                }
-                \bool_if:nTF \l__xpg_val_found_bool
-                       { \prg_return_true: }
-                       { \prg_return_false: }
-              }
-              {
-                \prg_return_false:
-              }
-            } { \prg_return_false: }
-         }
-     }
-     {
-       \prg_return_false:
-     }
-}
+  {
+    \int_compare:nNnTF
+      {
+        \cs_if_exist_use:cF { c_xpg_alias_keyvals_#1_#2_#3_int } { 0 }
+      } = 
+      {
+        \cs_if_exist_use:cF { c_xpg_alias_keyvals_#1_#2_\prop_item:Nn \l_xpg_curropt_prop { #1 / #2 }_int } { 1 }
+      }
+      { \prg_return_true: } { \prg_return_false: }
+  }
 
 \prg_set_conditional:Npnn \xpg_if_main_language:n #1 { T, F, TF }
 {

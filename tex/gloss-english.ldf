@@ -137,8 +137,8 @@
 % Register default options
 \InitializeGlossOptions{english}{variant=us,ordinalmonthday=false}
 % Register alias options
-\SetLanguageAliasValues{english}{variant}{us}{american}
-\SetLanguageAliasValues{english}{variant}{uk}{british}
+\SetLanguageAliasValues{english}{variant}{us,american}
+\SetLanguageAliasValues{english}{variant}{uk,british}
 
 \ifxetex
    % Check if \l@english is defined. If not, try to set it to some variety

@@ -146,7 +146,7 @@
                                       itemlabels=\textemdash,itemlabeli=\textemdash,itemlabelii=\textemdash,
                                       itemlabeliii=\textemdash,itemlabeliv=\textemdash}
 % Register alias options
-\SetLanguageAliasValues{french}{variant}{canadian}{acadian}
+\SetLanguageAliasValues{french}{variant}{canadian,acadian}
 
 
 \def\french@fontsetup{%
