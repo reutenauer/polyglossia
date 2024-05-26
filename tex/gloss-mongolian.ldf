@@ -36,7 +36,6 @@
     babelshorthands.if = mongolian@babelshorthands,
     babelshorthands.default:n = true,
     numerals.choice:,
-      {%
     numerals / arabic.code =
       {%
         \cyrillic@numeralsfalse
