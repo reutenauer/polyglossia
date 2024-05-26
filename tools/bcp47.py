@@ -410,7 +410,7 @@ def generate_glosses():
         f = open(("gloss-%s.ldf" % key),"w+")
         f.write(("\\ProvidesFile{gloss-%s.ldf}[polyglossia: module for %s (%s)]" % (key,key,val)))
         f.write("\n\n% We provide this as a bcp47-compliant alias")
-        f.write(("\n\n\\xpg@load@master@language{%s}" % val))
+        f.write(("\n\n\\InheritGlossFile{%s}" % val))
         f.write("\n\n\\endinput\n")
         f.close()
 
