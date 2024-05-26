@@ -25,15 +25,14 @@
 
 \DeclareKeys[polyglossia/gloss/lao]
   {
-    numerals.choices:nn = { arabic, lao }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % arabic:
-          \@lao@numeralsfalse
-        \or
-          % lao:
-          \@lao@numeralstrue
-        \fi
+    numerals.choice:,
+    numerals / arabic.code =
+      {%
+        \@lao@numeralsfalse
+      },
+    numerals / lao.code =
+      {%
+        \@lao@numeralstrue
       },
     numerals.default:n = arabic
   }

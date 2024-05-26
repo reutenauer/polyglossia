@@ -30,18 +30,16 @@
 
 \DeclareKeys[polyglossia/gloss/marathi]
   {
-    numerals.choices:nn = { western, devanagari }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % Western:
-          \marathi@devanagari@numeralsfalse%
-          \SetLanguageKeys{marathi}{bcp47-extension-u=nu-latn}%
-        \or
-          % Devanagari:
-          \marathi@devanagari@numeralstrue%
-          \SetLanguageKeys{marathi}{bcp47-extension-u=nu-deva}%
-        \fi
-        \xpg@info{Option: Marathi, numerals=#1}%
+    numerals.choice:,
+    numerals / western.code =
+      {%
+        \marathi@devanagari@numeralsfalse
+        \SetLanguageKeys{marathi}{bcp47-extension-u=nu-latn}%
+      },
+    numerals / devanagari,code =
+      {%
+        \marathi@devanagari@numeralstrue
+        \SetLanguageKeys{marathi}{bcp47-extension-u=nu-deva}%
       },
     numerals.default:n = devanagari,
     numerals/unknown.code = \xpg@warning{Unknown Marathi numerals value `#1'}

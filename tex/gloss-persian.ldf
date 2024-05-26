@@ -40,18 +40,16 @@
     abjadjimnotail.default:n = true,
     locale.store = \@persian@locale,
     locale.default:n = default,
-    numerals.choices:nn = { eastern, western }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % eastern:
-          \@western@numeralsfalse%
+    numerals.choice:,
+    numerals / eastern.code =
+      {%
+          \@western@numeralsfalse
           \SetLanguageKeys{persian}{bcp47-extension-u=nu-arab}%
-        \or
-          % western:
-          \@western@numeralstrue%
+      },
+    numerals / western.code =
+      {%
+          \@western@numeralstrue
           \SetLanguageKeys{persian}{bcp47-extension-u=nu-latn}%
-        \fi
-        \xpg@info{Option: Persian, numerals=#1}%
       },
     numerals.default:n = eastern,
     numerals/unknown.code = \xpg@warning{Unknown Persian numerals option `#1'}

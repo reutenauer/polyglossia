@@ -23,35 +23,33 @@
   {
     babelshorthands.if = finnish@babelshorthands,
     babelshorthands.default:n = true,
-    hyphens.choices:nn = { default, school, babel }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % default:
-          \@finnish@schoolhyphensfalse
-          \@finnish@babelhyphensfalse
-        \or
-          % school:
-          \@finnish@schoolhyphenstrue
-          \@finnish@babelhyphensfalse
-        \or
-          % babel:
-          \@finnish@schoolhyphensfalse
-          \@finnish@babelhyphenstrue
-        \fi
-        \xpg@info{Option: Finnish, hyphens=#1}%
+    hyphens.choice:,
+    hyphens / default.code =
+      {%
+        \@finnish@schoolhyphensfalse
+        \@finnish@babelhyphensfalse
+      },
+    hyphens / school.code =
+      {%
+        \@finnish@schoolhyphenstrue
+        \@finnish@babelhyphensfalse
+      },
+    hyphens / babel.code =
+      {%
+        \@finnish@schoolhyphensfalse
+        \@finnish@babelhyphenstrue
       },
     hyphens.default:n = default,
     hyphens/unknown.code = \xpg@warning{Unknown Finnish hyphens `#1'},
-    schoolhyphens.choices:nn = { true, false }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % true:
-          \@finnish@schoolhyphenstrue
-          \@finnish@babelhyphensfalse
-        \or
-          % false:
-          \@finnish@schoolhyphensfalse
-        \fi
+    schoolhyphens.choice:,
+    schoolhyphens / true.code =
+      {%
+        \@finnish@schoolhyphenstrue
+        \@finnish@babelhyphensfalse
+      },
+    schoolhyphens / false.code =
+      {%
+        \@finnish@schoolhyphensfalse
       },
     schoolhyphens.default:n = true
   }

@@ -85,8 +85,8 @@
 
 \DeclareKeys[polyglossia/gloss/greek]
   {
-    variant.choices:nn = { monotonic, mono,polytonic, poly,ancient, ancientgreek }
-      {
+    variant.choice:,
+      {%
         \CheckHyphenationPatterns{greek}%
         \ifcase\UseName{l_keys_choice_int}\or
           % monotonic:
@@ -114,42 +114,38 @@
           \@greek@ancienttrue
         \fi
         \greek@set@langdata
-        \xpg@info{Option: Greek, variant=#1}%
       },
     variant.default:n = monotonic,
     variant/unknown.code = \xpg@warning{Unknown Greek variant `#1'},
-    numerals.choices:nn = { greek, arabic }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % greek:
-          \@greek@numeralstrue
-          \SetLanguageKeys{greek}{bcp47-extension-u=nu-grek}%
-        \or
-          % arabic:
-          \@greek@numeralsfalse
-          \SetLanguageKeys{greek}{bcp47-extension-u=nu-latn}%
-        \fi
-        \xpg@info{Option: Greek, numerals=#1}%
+    numerals.choice:,
+    numerals / greek.code =
+      {%      
+        \@greek@numeralstrue
+        \SetLanguageKeys{greek}{bcp47-extension-u=nu-grek}%
+      }
+    numerals / arabic.code =
+      {%
+        \@greek@numeralsfalse
+        \SetLanguageKeys{greek}{bcp47-extension-u=nu-latn}%
       },
     numerals.default:n = greek,
     numerals/unknown.code = \xpg@warning{Unknown Greek numerals value `#1'},
-    capitaliota.choices:nn = { true, false }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % true:
-          \@greek@capitaliotatrue
-          % \MakeUppercase converts the ypogegrammeni (subscript muted iota) to capital iota
-          \SetLanguageKeys{greek}{bcp47-casing=el-x-iota,bcp47-extension-x=iota}%
-        \or
-          % false:
-          \@greek@capitaliotafalse
-          % \MakeUppercase retains the subscript versions (default)
-          \SetLanguageKeys{greek}{bcp47-casing=el,bcp47-extension-x={}}%
-        \fi
+    capitaliota.choice:,
+    capitaliota / true.code =
+      {%
+        \@greek@capitaliotatrue
+        % \MakeUppercase converts the ypogegrammeni (subscript muted iota) to capital iota
+        \SetLanguageKeys{greek}{bcp47-casing=el-x-iota,bcp47-extension-x=iota}%
+      },
+    capitaliota / false.code =
+      {%
+        \@greek@capitaliotafalse
+        % \MakeUppercase retains the subscript versions (default)
+        \SetLanguageKeys{greek}{bcp47-casing=el,bcp47-extension-x={}}%
       },
     capitaliota.default:n = true,
     attic.choices:nn = { true, false }
-      { 
+      {%
         \xpg@warning{Greek option `attic' is no longer required.}
       },
     capitaliota.default:n = true,

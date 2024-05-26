@@ -57,12 +57,13 @@
 \DeclareKeys[polyglossia/gloss/kannada]
   {
     numerals.choices:nn = { kannada, western }
-      {
-        \ifcase\UseName{l_keys_choice_int}\or
-          \kannada@numeralstrue
-        \or
-          \kannada@numeralsfalse
-        \fi
+    numerals / kannada.code =
+      {%
+        \kannada@numeralstrue
+      },
+    numerals / western.code =
+      {%     
+        \kannada@numeralsfalse
       },
     numerals.default:n = kannada
   }

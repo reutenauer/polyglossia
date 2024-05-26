@@ -27,59 +27,60 @@
 
 \DeclareKeys[polyglossia/gloss/uyghur]
   {
-    chapterformat.choices:nn = { ordinal, roman, arabic }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % ordinal:
-          \@uyghur@ordchaptertrue
-          \@uyghur@romchapterfalse
-        \or
-          % roman:
-          \@uyghur@ordchapterfalse
-          \@uyghur@romchaptertrue
-        \or
-          % arabic:
-          \@uyghur@ordchapterfalse
-          \@uyghur@romchapterfalse
-        \fi
-        \xpg@info{Option: Uyghur, chapterformat=#1}%
+    chapterformat.choice:,
+    chapterformat / ordinal.code =
+      {%
+        \@uyghur@ordchaptertrue
+        \@uyghur@romchapterfalse
+      },
+    chapterformat / roman.code =
+      {%
+        \@uyghur@ordchapterfalse
+        \@uyghur@romchaptertrue
+      },
+    chapterformat / arabic.code =
+      {%
+        \@uyghur@ordchapterfalse
+        \@uyghur@romchapterfalse
       },
     chapterformat.default:n = ordinal,
     chapterformat/unknown.code = \xpg@warning{Unknown Uyghur chapterformat value `#1'},
-    swapstrings.choices:nn = { all, captions, headings, headers, hheaders, none }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % all:
-          \@uyghur@swapcaptionstrue
-          \@uyghur@swapheadingstrue
-          \@uyghur@swapheaderstrue
-        \or
-          % captions:
-          \@uyghur@swapcaptionstrue
-          \@uyghur@swapheadingsfalse
-          \@uyghur@swapheadersfalse
-        \or
-          % headings:
-          \@uyghur@swapcaptionsfalse
-          \@uyghur@swapheadingstrue
-          \@uyghur@swapheadersfalse
-        \or
-          % headers:
-          \@uyghur@swapcaptionsfalse
-          \@uyghur@swapheadingsfalse
-          \@uyghur@swapheaderstrue
-        \or
-          % hheaders:
-          \@uyghur@swapcaptionsfalse
-          \@uyghur@swapheadingstrue
-          \@uyghur@swapheaderstrue
-        \or
-          % none:
-          \@uyghur@swapcaptionsfalse
-          \@uyghur@swapheadingsfalse
-          \@uyghur@swapheadersfalse
-        \fi
-        \xpg@info{Option: Uyghur, swapstrings=#1}%
+    swapstrings.choice:,
+    swapstrings / all.code = 
+      {%
+        \@uyghur@swapcaptionstrue
+        \@uyghur@swapheadingstrue
+        \@uyghur@swapheaderstrue
+      },
+    swapstrings / captions.code = 
+      {%
+        \@uyghur@swapcaptionstrue
+        \@uyghur@swapheadingsfalse
+        \@uyghur@swapheadersfalse
+      },
+    swapstrings / headings.code =
+      {%
+        \@uyghur@swapcaptionsfalse
+        \@uyghur@swapheadingstrue
+        \@uyghur@swapheadersfalse
+      },
+    swapstrings / headers.code = 
+      {%
+        \@uyghur@swapcaptionsfalse
+        \@uyghur@swapheadingsfalse
+        \@uyghur@swapheaderstrue
+      },
+    swapstrings / hheaders.code = 
+      {%
+        \@uyghur@swapcaptionsfalse
+        \@uyghur@swapheadingstrue
+        \@uyghur@swapheaderstrue
+      },
+    swapstrings / none.code = 
+      {%
+        \@uyghur@swapcaptionsfalse
+        \@uyghur@swapheadingsfalse
+        \@uyghur@swapheadersfalse
       },
     swapstrings.default:n = all,
     swapstrings/unknown.code = \xpg@warning{Unknown Uyghur swapstrings value `#1'}

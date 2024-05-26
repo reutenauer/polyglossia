@@ -42,18 +42,16 @@
 
 \DeclareKeys[polyglossia/gloss/hindi]
   {
-    numerals.choices:nn = { devanagari, western }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % devanagari:
-          \hindi@devanagari@numeralstrue%
-          \SetLanguageKeys{hindi}{bcp47-extension-u=nu-deva}%
-        \or
-          % western:
-          \hindi@devanagari@numeralsfalse%
+    numerals.choice:,
+    numerals / devanagari.code =
+      {%
+        \hindi@devanagari@numeralstrue
+        \SetLanguageKeys{hindi}{bcp47-extension-u=nu-deva}%
+      },
+    numerals / western.code =
+      {%
+          \hindi@devanagari@numeralsfalse
           \SetLanguageKeys{hindi}{bcp47-extension-u=nu-latn}%
-        \fi
-        \xpg@info{Option: Hindi, numerals=#1}%
       },
     numerals.default:n = devanagari,
     numerals/unknown.code = \xpg@warning{Unknown Hindi numeral `#1'}

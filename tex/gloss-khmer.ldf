@@ -22,17 +22,16 @@
 
 \DeclareKeys[polyglossia/gloss/khmer]
   {
-    numerals.choices:nn = { khmer, arabic }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % khmer:
-          \@khmer@numeralstrue
-          \SetLanguageKeys{khmer}{bcp47-extension-u=nu-khmr}%
-        \or
-          % arabic:
-          \@khmer@numeralsfalse
-          \SetLanguageKeys{khmer}{bcp47-extension-u=nu-latn}%
-        \fi
+    numerals.choice:,
+    numerals / khmer.code =
+      {%
+        \@khmer@numeralstrue
+        \SetLanguageKeys{khmer}{bcp47-extension-u=nu-khmr}%
+      },
+    numerals / arabic.code =
+      {%
+        \@khmer@numeralsfalse
+        \SetLanguageKeys{khmer}{bcp47-extension-u=nu-latn}%
       },
     numerals.default:n = arabic
   }

@@ -27,39 +27,37 @@
 
 \DeclareKeys[polyglossia/gloss/armenian]
   {
-    variant.choices:nn = { western, eastern }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % western:
-          \@eastern@armenianfalse
-        \or
-          % eastern:
-          \@eastern@armeniantrue
-        \fi
-        \xpg@info{Option: Armenian, variant=#1}%
+    variant.choice:,
+    variant / western.code =
+      {%
+        \@eastern@armenianfalse
+      },
+    variant / eastern.code =
+      {%
+        \@eastern@armeniantrue
       },
     variant.default:n = western,
     variant/unknown.code = \xpg@warning{Unknown Armenian variant `#1'},
-    numerals.choices:nn = { armenian, arabic }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          \@armenian@numeralstrue
-          \SetLanguageKeys{armenian}{bcp47-extension-u={}}%
-        \or
-          \@armenian@numeralsfalse
-          \SetLanguageKeys{armenian}{bcp47-extension-u=nu-latn}%
-        \fi
+    numerals.choice:,
+    numerals / armenian.code =
+      {%
+        \@armenian@numeralstrue
+        \SetLanguageKeys{armenian}{bcp47-extension-u={}}%
+      },
+    numerals / arabic.code =
+      {%
+        \@armenian@numeralsfalse
+        \SetLanguageKeys{armenian}{bcp47-extension-u=nu-latn}%
       },
     numerals.default:n = armenian,
-    capitalyiwn.choices:nn = { true, false }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % true:
-          \SetLanguageKeys{armenian}{bcp47-casing=hy-x-yiwn,bcp47-extension-x=yiwn}%
-        \or
-          % false:
-          \SetLanguageKeys{armenian}{bcp47-casing=hy,bcp47-extension-x={}}%
-        \fi
+    capitalyiwn.choice:,
+    capitalyiwn / true.code =
+      {%
+        \SetLanguageKeys{armenian}{bcp47-casing=hy-x-yiwn,bcp47-extension-x=yiwn}%
+      },
+    capitalyiwn / false.code =
+      {%
+        \SetLanguageKeys{armenian}{bcp47-casing=hy,bcp47-extension-x={}}%
       },
     capitalyiwn.default:n = true
   }

@@ -32,21 +32,20 @@
   {
     sectionsep.code = \gdef\xpg@sepmark{#1}\syriac@customseptrue,
     sectionsep.default:n = .,
-    numerals.choices:nn = { eastern, western, abjad }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % eastern:
-          \@eastern@numeralstrue
-          \SetLanguageKeys{syriac}{bcp47-extension-u=nu-syrc}%
-        \or
-          % western:
-          \@eastern@numeralsfalse
-          \SetLanguageKeys{syriac}{bcp47-extension-u=nu-latn}%
-        \or
-          % abjad:
+    numerals.choice:,
+    numerals / eastern.code =
+      {%
+        \@eastern@numeralstrue
+        \SetLanguageKeys{syriac}{bcp47-extension-u=nu-syrc}%
+      },
+    numerals / western.code =
+      {%
+        \@eastern@numeralsfalse
+        \SetLanguageKeys{syriac}{bcp47-extension-u=nu-latn}%
+      },
+    numerals / abjad.code =
+      {%
           \let\syriacnumber\abjadsyriac
-        \fi
-        \xpg@info{Option: Syriac, numerals=#1}%
       },
     numerals.default:n = eastern,
     numerals/unknown.code = \xpg@warning{Unknown Syriac numerals option `#1'}

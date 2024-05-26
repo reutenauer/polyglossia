@@ -52,87 +52,89 @@
     abjadalph.default:n = true,
     abjadjimnotail.if = abjad@jim@notail,
     abjadjimnotail.default:n = true,
-    numerals.choices:nn = { mashriq, maghrib, eastern, western }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % mashriq:
-          \eastern@numeralstrue
-        \or
-          % maghrib:
-          \eastern@numeralsfalse
-        \or
-          % eastern:
-          \eastern@numeralstrue
-        \or
-          % western:
-          \eastern@numeralsfalse
-        \fi
-        \xpg@info{Option: Arabic, numerals=#1}%
+    numerals.choice:,
+    numerals / mashriq.code =
+      {%
+        \eastern@numeralstrue
+      },
+    numerals / maghrib.code =
+      {%
+        \eastern@numeralsfalse
+      },
+    numerals / eastern.code =
+      {
+        \eastern@numeralstrue
+      },
+    numerals / western.code =
+      {%
+        \eastern@numeralsfalse
       },
     numerals.default:n = mashriq,
     numerals/unknown.code = \xpg@warning{Unknown Arabic numerals option `#1'},
-    locale.choices:nn = { default, mashriq, libya, algeria, tunisia, morocco, mauritania }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-      % default:
-      \eastern@numeralstrue
-      \def\abjad@one{ا}%
-      \SetLanguageKeys{arabic}{bcp47=ar-YE,bcp47-language=ar}%
-      \xpg@info{Option: arabic, locale=default}%
-   \or
-      % mashriq:
-      \eastern@numeralstrue
-      \def\abjad@one{ا}%
-      \SetLanguageKeys{arabic}{bcp47=ar-IQ,bcp47-language=ar}%
-      \xpg@info{Option: arabic, locale=mashriq}%
-   \or
-      % libya:
-      \eastern@numeralstrue
-      \def\abjad@one{ا}%
-      \SetLanguageKeys{arabic}{bcp47=ayl,bcp47-language=ar,bcp47-region=LY}%
-      \xpg@info{Option: arabic, locale=libya}%
-   \or
-      % algeria:
-      \eastern@numeralsfalse
-      \def\abjad@one{أ}%
-      \SetLanguageKeys{arabic}{bcp47=arq,bcp47-language=ar,bcp47-region=DZ,bcp47-extension-u=nu-latn}%
-      \xpg@info{Option: arabic, locale=algeria}%
-   \or
-      % tunisia:
-      \eastern@numeralsfalse
-      \def\abjad@one{أ}%
-      \SetLanguageKeys{arabic}{bcp47=aeb,bcp47-language=ar,bcp47-region=TN,bcp47-extension-u=nu-latn}%
-      \xpg@info{Option: arabic, locale=tunisia}%
-   \or
-      % morocco:
-      \eastern@numeralsfalse
-      \def\abjad@one{أ}%
-      \SetLanguageKeys{arabic}{bcp47=ary,bcp47-language=ar,bcp47-region=MA,bcp47-extension-u=nu-latn}%
-      \xpg@info{Option: arabic, locale=morocco}%
-   \or
-      % mauritania:
-      \eastern@numeralstrue
-      \def\abjad@one{ا}%
-      \SetLanguageKeys{arabic}{bcp47=ar-MR,bcp47-language=ar,bcp47-region=MR}%
-      \xpg@info{Option: arabic, locale=mauritania}%
-   \fi
-   \gdef\@@arabic@month{\@arabic@month{#1}}%
+    locale.choice:,
+    locale / default.code =
+      {%
+        \eastern@numeralstrue
+        \def\abjad@one{ا}%
+        \SetLanguageKeys{arabic}{bcp47=ar-YE,bcp47-language=ar}%
+        \gdef\@@arabic@month{\@arabic@month{#1}}%
+      },
+    locale / mashriq.code =
+      {%
+        \eastern@numeralstrue
+        \def\abjad@one{ا}%
+        \SetLanguageKeys{arabic}{bcp47=ar-IQ,bcp47-language=ar}%
+        \gdef\@@arabic@month{\@arabic@month{#1}}%
+      },
+    locale / libya.code =
+      {%
+        \eastern@numeralstrue
+        \def\abjad@one{ا}%
+        \SetLanguageKeys{arabic}{bcp47=ayl,bcp47-language=ar,bcp47-region=LY}%
+        \gdef\@@arabic@month{\@arabic@month{#1}}%
+      },
+    locale / algeria.code =
+      {%
+        \eastern@numeralsfalse
+        \def\abjad@one{أ}%
+        \SetLanguageKeys{arabic}{bcp47=arq,bcp47-language=ar,bcp47-region=DZ,bcp47-extension-u=nu-latn}%
+        \gdef\@@arabic@month{\@arabic@month{#1}}%
+      },
+    locale / tunisia.code =
+      {%
+        \eastern@numeralsfalse
+        \def\abjad@one{أ}%
+        \SetLanguageKeys{arabic}{bcp47=aeb,bcp47-language=ar,bcp47-region=TN,bcp47-extension-u=nu-latn}%
+        \gdef\@@arabic@month{\@arabic@month{#1}}%
+      },
+    locale / morocco.code =
+      {%
+        \eastern@numeralsfalse
+        \def\abjad@one{أ}%
+        \SetLanguageKeys{arabic}{bcp47=ary,bcp47-language=ar,bcp47-region=MA,bcp47-extension-u=nu-latn}%
+        \gdef\@@arabic@month{\@arabic@month{#1}}%
+      },
+    locale / mauritania.code =
+      {%
+        \eastern@numeralstrue
+        \def\abjad@one{ا}%
+        \SetLanguageKeys{arabic}{bcp47=ar-MR,bcp47-language=ar,bcp47-region=MR}%
+        \gdef\@@arabic@month{\@arabic@month{#1}}%
       },
     locale.default:n = default,
     locale/unknown.code = \xpg@warning{Unknown Arabic locale `#1'},
-    calendar.choices:nn = { gregorian, hijri, islamic }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % gregorian:
-          \@hijricalfalse
-        \or
-          % hijri:
-          \@hijricaltrue
-        \or
-          % islamic:
-          \@hijricaltrue
-        \fi
-        \xpg@info{Option: Arabic, calendar=#1}%
+    calendar.choice:,
+    calendar / gregorian.code =
+      {%
+        \@hijricalfalse
+      },
+    calendar / hijri.code =
+      {%
+        \@hijricaltrue
+      },
+    calendar / islamic.code =
+      {%
+        \@hijricaltrue
       },
     calendar.default:n = gregorian,
     calendar/unknown.code = \xpg@warning{Unknown Arabic calendar option `#1'}

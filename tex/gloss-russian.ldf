@@ -47,55 +47,53 @@
     forceheadingpunctuation.default:n = true,
     mathfunctions.if = russian@mathfunctions,
     mathfunctions.default:n = true,
-    spelling.choices:nn = { modern, old }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % modern:
-          \@russian@moderntrue
-          \SetLanguageKeys{russian}{bcp47=ru,bcp47-variant=luna1918}%
-        \or
-          % old:
-          \@russian@modernfalse
-          \SetLanguageKeys{russian}{bcp47=ru-petr1708,bcp47-variant=petr1708}%
-        \fi
+    spelling.choice:,
+    spelling / modern.code =
+      {%
+        \@russian@moderntrue
+        \SetLanguageKeys{russian}{bcp47=ru,bcp47-variant=luna1918}%
+      },
+    spelling / old.code =
+      {%
+        \@russian@modernfalse
+        \SetLanguageKeys{russian}{bcp47=ru-petr1708,bcp47-variant=petr1708}%
       },
     spelling.default:n = modern,
-    numerals.choices:nn = { arabic, cyrillic, cyrillic-trad, cyrillic-alph }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % arabic:
-          \cyrillic@numeralsfalse
-          \cyrillic@asbuk@numeralsfalse
-          \SetLanguageKeys{russian}{bcp47-extension-u=nu-latn}%
-        \or
-          % cyrillic:
-          \cyrillic@numeralstrue
-          \cyrillic@asbuk@numeralsfalse
-          \SetLanguageKeys{russian}{bcp47-extension-u=nu-cyrl}%
-        \or
-          % cyrillic-trad:
-          \cyrillic@numeralstrue
-          \cyrillic@asbuk@numeralsfalse
-          \SetLanguageKeys{russian}{bcp47-extension-u=nu-cyrl}%
-        \or
-          % cyrillic-alph:
-          \cyrillic@numeralstrue
-          \cyrillic@asbuk@numeralstrue
-          \SetLanguageKeys{russian}{bcp47-extension-u=nu-cyrl}%
-        \fi
-        \xpg@info{Option: Russian, numerals=#1}%
+    numerals.choice:,
+    numerals / arabic.code =
+      {%
+        \cyrillic@numeralsfalse
+        \cyrillic@asbuk@numeralsfalse
+        \SetLanguageKeys{russian}{bcp47-extension-u=nu-latn}%
+      },
+    numerals / cyrillic.code =
+      {%
+        \cyrillic@numeralstrue
+        \cyrillic@asbuk@numeralsfalse
+        \SetLanguageKeys{russian}{bcp47-extension-u=nu-cyrl}%
+      },
+    numerals / cyrillic-trad.code =
+      {%
+        \cyrillic@numeralstrue
+        \cyrillic@asbuk@numeralsfalse
+        \SetLanguageKeys{russian}{bcp47-extension-u=nu-cyrl}%
+      },
+    numerals / cyrillic-alph.code =
+      {%
+        \cyrillic@numeralstrue
+        \cyrillic@asbuk@numeralstrue
+        \SetLanguageKeys{russian}{bcp47-extension-u=nu-cyrl}%
       },
     numerals.default:n = arabic,
     numerals/unknown.code = \xpg@warning{Unknown Russian numerals value `#1'},
-    indentfirst.choices:nn = { true, false }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % true:
-          \SetLanguageKeys{russian}{indentfirst=true}%
-        \or
-          % false:
-          \SetLanguageKeys{russian}{indentfirst=false}%
-        \fi
+    indentfirst.choice:,
+    indentfirst / true.code =
+      {%
+        \SetLanguageKeys{russian}{indentfirst=true}%
+      },
+    indentfirst / false.code =
+      {%
+        \SetLanguageKeys{russian}{indentfirst=false}%
       },
     indentfirst.default:n = true,
   }

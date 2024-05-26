@@ -66,62 +66,60 @@
     splithyphens.default:n = true,
     datei.if = serbian@datei,
     datei.default:n = true,
-    variant.choices:nn = { ekavian, ijekavian }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % ekavian:
-          \@serbian@ijekavianfalse%
-        \or
-          % ijekavian:
-          \@serbian@ijekaviantrue%
-        \fi
-        \serbian@set@languagekeys%
-        \xpg@info{Option: Serbian, variant=#1}%
+    variant.choice:,
+    variant / ekavian.code =
+      {%
+        \@serbian@ijekavianfalse
+        \serbian@set@languagekeys
+      },
+    variant / ijekavian.code =
+      {%
+        \@serbian@ijekaviantrue
+        \serbian@set@languagekeys
       },
     variant.default:n = ekavian,
     variant/unknown.code = \xpg@warning{Unknown Serbian variant `#1'},
-    script.choices:nn = { cyrillic, latin }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % cyrillic:
-          \@serbian@cyrtrue
-          \SetupNonLatinPolyglossiaFont{serbian}%
-        \or
-          % latin:
-          \@serbian@cyrfalse
-          \SetupLatinPolyglossiaFont{serbian}%
+    script.choice:,
+    script / cyrillic.code =
+      {%
+        \@serbian@cyrtrue
+        \SetupNonLatinPolyglossiaFont{serbian}%
+        \serbian@set@languagekeys
+      },
+    script / latin.code =
+      {%
+        \@serbian@cyrfalse
+        \SetupLatinPolyglossiaFont{serbian}%
           %TODO \def\serbian@language{\language=\l@serbianlat}%
           % or should we use Croatian patterns as a fallback for the time being???
-        \fi
-        \serbian@set@languagekeys%
-        \xpg@info{Option: Serbian, script=#1}%
+        \serbian@set@languagekeys
       },
     script.default:n = cyrillic,
     script/unknown.code = \xpg@warning{Unknown Serbian script `#1'},
-    numerals.choices:nn = { arabic, cyrillic, cyrillic-trad, cyrillic-alph }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % arabic:
-          \cyrillic@numeralsfalse
-          \cyrillic@asbuk@numeralsfalse
-          \SetLanguageKeys{serbian}{bcp47-extension-u=nu-latn}%
-        \or
-          % cyrillic:
-          \cyrillic@numeralstrue
-          \cyrillic@asbuk@numeralsfalse
-          \SetLanguageKeys{serbian}{bcp47-extension-u=nu-cyrl}%
-        \or
-          % cyrillic-trad:
-          \cyrillic@numeralstrue
-          \cyrillic@asbuk@numeralsfalse
-          \SetLanguageKeys{serbian}{bcp47-extension-u=nu-cyrl}%
-        \or
-          % cyrillic-alph:
-          \cyrillic@numeralstrue
-          \cyrillic@asbuk@numeralstrue
-          \SetLanguageKeys{serbian}{bcp47-extension-u=nu-cyrl}%
-        \fi
-        \xpg@info{Option: Serbian, numerals=#1}%
+    numerals.choice:,
+    numerals / arabic.code =
+      {%
+        \cyrillic@numeralsfalse
+        \cyrillic@asbuk@numeralsfalse
+        \SetLanguageKeys{serbian}{bcp47-extension-u=nu-latn}%
+      },
+    numerals / cyrillic.code =
+      {%
+        \cyrillic@numeralstrue
+        \cyrillic@asbuk@numeralsfalse
+        \SetLanguageKeys{serbian}{bcp47-extension-u=nu-cyrl}%
+      },
+    numerals / cyrillic-trad.code =
+      {%
+        \cyrillic@numeralstrue
+        \cyrillic@asbuk@numeralsfalse
+        \SetLanguageKeys{serbian}{bcp47-extension-u=nu-cyrl}%
+      },
+    numerals / cyrillic-alph.code =
+      {%
+        \cyrillic@numeralstrue
+        \cyrillic@asbuk@numeralstrue
+        \SetLanguageKeys{serbian}{bcp47-extension-u=nu-cyrl}%
       },
     numerals.default:n = arabic,
     numerals/unknown.code = \xpg@warning{Unknown Serbian numerals value `#1'}

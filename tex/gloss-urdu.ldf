@@ -37,31 +37,27 @@
     sectionsep.default:n = .,
     hijricorrection.code = \gdef\urdu@hijri@correction{#1},
     hijricorrection.default:n = 0,
-    calendar.choices:nn = { gregorian, hijri }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % gregorian:
-          \@hijricalfalse
-        \or
-          % hijri:
-          \@hijricaltrue
-        \fi
-        \xpg@info{Option: Urdu, calendar=#1}%
+    calendar.choice:,
+    calendar / gregorian.code =
+      {%
+        \@hijricalfalse
+      },
+    calendar / hijri.code =
+      {%
+        \@hijricaltrue
       },
     calendar.default:n = gregorian,
     calendar/unknown.code = \xpg@warning{Unknown Urdu calendar option `#1'},
-    numerals.choices:nn = { eastern, western }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % eastern:
-          \@western@numeralsfalse%
-          \SetLanguageKeys{urdu}{bcp47-extension-u=nu-arab}%
-        \or
-          % western:
-          \@western@numeralstrue%
-          \SetLanguageKeys{urdu}{bcp47-extension-u=nu-latn}%
-        \fi
-        \xpg@info{Option: Urdu, numerals=#1}%
+    numerals.choice:,
+    numerals / eastern.code =
+      {%
+        \@western@numeralsfalse
+        \SetLanguageKeys{urdu}{bcp47-extension-u=nu-arab}%
+      },
+    numerals / western.code =
+      {%
+        \@western@numeralstrue
+        \SetLanguageKeys{urdu}{bcp47-extension-u=nu-latn}%
       },
     numerals.default:n = eastern,
     numerals/unknown.code = \xpg@warning{Unknown Urdu numerals option `#1'}

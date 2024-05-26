@@ -75,15 +75,15 @@
 
 \DeclareKeys[polyglossia/gloss/french]
   {
-    variant.choices:nn = { french, canadian, acadian, swiss }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % french:
-          \def\french@variant{french}%
-          \SetLanguageKeys{french}{babelname=french,bcp47=fr-FR,bcp47-language=fr,bcp47-region=FR}%
-          \french@thincolonspacefalse
-        \or
-          % canadian:
+    variant.choice:,
+    variant / french.code = 
+      {%
+        \def\french@variant{french}%
+        \SetLanguageKeys{french}{babelname=french,bcp47=fr-FR,bcp47-language=fr,bcp47-region=FR}%
+        \french@thincolonspacefalse
+      },
+    variant / canadian.code = 
+      {%
           \def\french@variant{canadien}%
           \SetLanguageKeys{french}{babelname=canadien,bcp47=fr-CA,bcp47-language=fr,bcp47-region=CA,bcp47-extension-u=sd-caqc}%
           \IfLanguageDefinedF{canadien}%
@@ -91,8 +91,9 @@
               I will use the standard patterns for French instead}%
              \adddialect\l@canadien\l@french\relax}%
           \french@thincolonspacefalse
-       \or
-          % acadian:
+      },
+    variant / acadian.code =
+      {%
           \def\french@variant{acadian}%
           \SetLanguageKeys{french}{babelname=acadian,bcp47=fr-CA-u-sd-canb,bcp47-language=fr,bcp47-region=CA,bcp47-extension-u=sd-canb}%
           \IfLanguageDefinedF{acadian}%
@@ -100,14 +101,13 @@
               I will use the standard patterns for French instead}%
              \adddialect\l@acadian\l@french\relax}%
           \french@thincolonspacefalse
-        \or
-          % swiss:
+      },
+    variant / swiss.code =
+      {
           \def\french@variant{swissfrench}%
           \SetLanguageKeys{french}{babelname=french,bcp47=fr-CH,bcp47-language=fr,bcp47-region=CH}%
           \adddialect\l@swissfrench\l@french\relax%
           \french@thincolonspacetrue
-        \fi
-        \xpg@info{Option: French, variant=#1}%
       },
     variant.default:n = french,
     variant/unknown.code = \xpg@warning{Unknown French variant `#1'},

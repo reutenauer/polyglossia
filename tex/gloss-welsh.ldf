@@ -20,16 +20,14 @@
 
 \DeclareKeys[polyglossia/gloss/welsh]
   {
-    date.choices:nn = { long, short }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % long:
-          \welsh@formaldatetrue
-        \or
-          % accented:
-          \welsh@formaldatefalse
-        \fi
-        \xpg@info{Option: Welsh, date=#1}%
+    date.choice:,
+    date / long.code =
+      {%
+        \welsh@formaldatetrue
+      },
+    date / accented.code =
+      {%
+        \welsh@formaldatefalse
       },
     date.default:n = short,
     date/unknown.code = \xpg@warning{Unknown date value `#1'},

@@ -35,45 +35,43 @@
 
 \DeclareKeys[polyglossia/gloss/spanish]
   {
-    variant.choices:nn = { spanish, mexican }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % spanish:
-          \@spanish@mexicofalse
-          \SetLanguageKeys{spanish}{babelname=spanish,bcp47=es-ES,bcp47-region=ES}%
-        \or
-          % mexican:
-          \@spanish@mexicotrue
-          \SetLanguageKeys{spanish}{babelname=spanishmx,bcp47=es-MX,bcp47-region=MX}%
-        \fi
-        \xpg@info{Option: spanish, variant=#1}%
+    variant.choice:,
+    variant / spanish.code =
+      {%
+        \@spanish@mexicofalse
+        \SetLanguageKeys{spanish}{babelname=spanish,bcp47=es-ES,bcp47-region=ES}%
+      },
+    variant / mexican.code =
+      {%
+        \@spanish@mexicotrue
+        \SetLanguageKeys{spanish}{babelname=spanishmx,bcp47=es-MX,bcp47-region=MX}%
       },
     variant.default:n = spanish,
     variant/unknown.code = \xpg@warning{Unknown spanish variant `#1'},
-    spanishoperators.choices:nn = { all, accented, spaced, none }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % all:
-          \spanish@locoperatorstrue
-          \spanish@accentedoperatorstrue
-          \spanish@spacedoperatorstrue
-        \or
-          % accented:
-          \spanish@locoperatorsfalse
-          \spanish@accentedoperatorstrue
-          \spanish@spacedoperatorsfalse
-        \or
-          % spaced:
-          \spanish@locoperatorsfalse
-          \spanish@accentedoperatorsfalse
-          \spanish@spacedoperatorstrue
-        \or
-          % none:
-          \spanish@locoperatorsfalse
-          \spanish@accentedoperatorsfalse
-          \spanish@spacedoperatorsfalse
-        \fi
-   \xpg@info{Option: Spanish, spanishoperators=#1}%
+    spanishoperators.choice:,
+    spanishoperators / all.code =
+      {%
+        \spanish@locoperatorstrue
+        \spanish@accentedoperatorstrue
+        \spanish@spacedoperatorstrue
+      },
+    spanishoperators / accented.code =
+      {%
+        \spanish@locoperatorsfalse
+        \spanish@accentedoperatorstrue
+        \spanish@spacedoperatorsfalse
+      },
+    spanishoperators / spaced.code =
+      {%
+        \spanish@locoperatorsfalse
+        \spanish@accentedoperatorsfalse
+        \spanish@spacedoperatorstrue
+      },
+    spanishoperators / none.code =
+      {%
+        \spanish@locoperatorsfalse
+        \spanish@accentedoperatorsfalse
+        \spanish@spacedoperatorsfalse
       },
     spanishoperators.default:n = all,
     spanishoperators/unknown.code = \xpg@warning{Unknown spanishoperators value `#1'}

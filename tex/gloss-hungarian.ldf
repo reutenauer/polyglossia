@@ -30,40 +30,42 @@
   {
     forceheadingpunctuation.if = hungarian@forceheadingpunctuation,
     forceheadingpunctuation.default:n = true,
-    swapstrings.choices:nn = { all, captions, headings, headers, hheaders, none }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % all:
-          \@hungarian@swapcaptionstrue
-          \@hungarian@swapheadingstrue
-          \@hungarian@swapheaderstrue
-        \or
-          % captions:
-          \@hungarian@swapcaptionstrue
-          \@hungarian@swapheadingsfalse
-          \@hungarian@swapheadersfalse
-        \or
-          % headings:
-          \@hungarian@swapcaptionsfalse
-          \@hungarian@swapheadingstrue
-          \@hungarian@swapheadersfalse
-        \or
-          % headers:
-          \@hungarian@swapcaptionsfalse
-          \@hungarian@swapheadingsfalse
-          \@hungarian@swapheaderstrue
-        \or
-          % hheaders:
-          \@hungarian@swapcaptionsfalse
-          \@hungarian@swapheadingstrue
-          \@hungarian@swapheaderstrue
-        \or
-          % none:
-          \@hungarian@swapcaptionsfalse
-          \@hungarian@swapheadingsfalse
-          \@hungarian@swapheadersfalse
-        \fi
-        \xpg@info{Option: Hungarian, swapstrings=#1}%
+    swapstrings.choice:,
+    swapstrings / all.code =
+      {%
+        \@hungarian@swapcaptionstrue
+        \@hungarian@swapheadingstrue
+        \@hungarian@swapheaderstrue
+      },
+    swapstrings / captions.code =
+      {%
+        \@hungarian@swapcaptionstrue
+        \@hungarian@swapheadingsfalse
+        \@hungarian@swapheadersfalse
+      },
+    swapstrings / headings.code = 
+      {%
+        \@hungarian@swapcaptionsfalse
+        \@hungarian@swapheadingstrue
+        \@hungarian@swapheadersfalse
+      },
+    swapstrings / headers.code =
+      {%
+        \@hungarian@swapcaptionsfalse
+        \@hungarian@swapheadingsfalse
+        \@hungarian@swapheaderstrue
+      },
+    swapstrings / hheaders.code =
+      {%
+        \@hungarian@swapcaptionsfalse
+        \@hungarian@swapheadingstrue
+        \@hungarian@swapheaderstrue
+      },
+    swapstrings / none.code = 
+      {%
+        \@hungarian@swapcaptionsfalse
+        \@hungarian@swapheadingsfalse
+        \@hungarian@swapheadersfalse
       },
     swapstrings.default:n = all,
     swapstrings/unknown.code = \xpg@warning{Unknown Hungarian swapstrings value `#1'}

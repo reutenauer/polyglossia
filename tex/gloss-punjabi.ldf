@@ -33,18 +33,16 @@
 
 \DeclareKeys[polyglossia/gloss/punjabi]
   {
-    numerals.choices:nn = { gurmukhi, western }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % Gurmukhi:
-          \punjabi@gurmukhi@numeralstrue%
-          \SetLanguageKeys{punjabi}{bcp47-extension-u=nu-guru}%
-        \or
-          % Western:
-          \punjabi@gurmukhi@numeralsfalse%
-          \SetLanguageKeys{punjabi}{bcp47-extension-u=nu-latn}%
-        \fi
-        \xpg@info{Option: Punjabi, numerals=#1}%
+    numerals.choice:,
+    numerals / gurmukhi.code =
+      {%
+        \punjabi@gurmukhi@numeralstrue
+        \SetLanguageKeys{punjabi}{bcp47-extension-u=nu-guru}%
+      },
+    numerals / western.code =
+      {%
+        \punjabi@gurmukhi@numeralsfalse
+        \SetLanguageKeys{punjabi}{bcp47-extension-u=nu-latn}%
       },
     numerals.default:n = gurmukhi,
     numerals/unknown.code = \xpg@warning{Unknown Punjabi numeral `#1'}

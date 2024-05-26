@@ -49,7 +49,7 @@
     ordinalmonthday.if = english@ordinalmonthday,
     ordinalmonthday.default:n = true,
     variant.choices:nn = { uk, british, us, american, usmax, australian, newzealand, canadian }
-      { 
+      {%
         \ifcase\UseName{l_keys_choice_int}\or
       % uk:
       \british@hyphentrue

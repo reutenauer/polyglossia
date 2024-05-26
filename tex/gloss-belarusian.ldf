@@ -33,44 +33,44 @@
   {
     babelshorthands.if = belarusian@babelshorthands,
     babelshorthands.default:n = true,
-    spelling.choices:nn = { modern, classic, tarask }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % modern:
-          \def\belarusian@spelling{modern}%
-          \SetLanguageKeys{belarusian}{bcp47=be,bcp47-variant=1959acad}%
-        \or
-          % classic:
-          \def\belarusian@spelling{tarask}%
-          \SetLanguageKeys{belarusian}{bcp47=be-tarask,bcp47-variant=tarask}%
-        \or
-          % tarask:
-          \def\belarusian@spelling{tarask}%
-          \SetLanguageKeys{belarusian}{bcp47=be-tarask,bcp47-variant=tarask}%
-        \fi
+    spelling.choice:,
+    spelling / modern.code =
+      {%
+        \def\belarusian@spelling{modern}%
+        \SetLanguageKeys{belarusian}{bcp47=be,bcp47-variant=1959acad}%
+      },
+    spelling / classic.code =
+      {%
+        \def\belarusian@spelling{tarask}%
+        \SetLanguageKeys{belarusian}{bcp47=be-tarask,bcp47-variant=tarask}%
+      },
+    spelling / tarask.code =
+      {%
+        \def\belarusian@spelling{tarask}%
+        \SetLanguageKeys{belarusian}{bcp47=be-tarask,bcp47-variant=tarask}%
       },
     spelling.default:n = modern,
     spelling/unknown.code = \xpg@warning{Unknown Belarusian spelling `#1'},
-    numerals.choices:nn = { arabic, cyrillic, cyrillic-trad, cyrillic-alph }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % arabic:
-          \cyrillic@numeralsfalse
-          \cyrillic@asbuk@numeralsfalse
-        \or
-          % cyrillic:
-          \cyrillic@numeralstrue
-          \cyrillic@asbuk@numeralsfalse
-        \or
-          % cyrillic-trad:
-          \cyrillic@numeralstrue
-          \cyrillic@asbuk@numeralsfalse
-        \or
-          % cyrillic-alph:
-          \cyrillic@numeralstrue
-          \cyrillic@asbuk@numeralstrue
-        \fi
-        \xpg@info{Option: Belarusian, numerals=#1}%
+    numerals.choice:,
+    numerals / arabic.code =
+      {%
+        \cyrillic@numeralsfalse
+        \cyrillic@asbuk@numeralsfalse
+      },
+    numerals / cyrillic.code =
+      {%
+        \cyrillic@numeralstrue
+        \cyrillic@asbuk@numeralsfalse
+      },
+    numerals / cyrillic-trad.code =
+      {%
+        \cyrillic@numeralstrue
+        \cyrillic@asbuk@numeralsfalse
+      },
+    numerals / cyrillic-alph.code =
+      {%
+        \cyrillic@numeralstrue
+        \cyrillic@asbuk@numeralstrue
       },
     numerals.default:n = arabic,
     numerals/unknown.code = \xpg@warning{Unknown Belarusian numerals value `#1'}

@@ -33,30 +33,30 @@
     babelshorthands.default:n = true,
     mathfunctions.if = ukrainian@mathfunctions,
     mathfunctions.default:n = true,
-    numerals.choices:nn = { arabic, cyrillic, cyrillic-trad, cyrillic-alph }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % arabic:
-          \cyrillic@numeralsfalse
-          \cyrillic@asbuk@numeralsfalse
-          \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-latn}%
-        \or
-          % cyrillic:
-          \cyrillic@numeralstrue
-          \cyrillic@asbuk@numeralsfalse
-          \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-cyrl}%
-        \or
-          % cyrillic-trad:
-          \cyrillic@numeralstrue
-          \cyrillic@asbuk@numeralsfalse
-          \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-cyrl}%
-        \or
-          % cyrillic-alph:
-          \cyrillic@numeralstrue
-          \cyrillic@asbuk@numeralstrue
-          \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-cyrl}%
-        \fi
-        \xpg@info{Option: Ukrainian, numerals=#1}%
+    numerals.choice:,
+    numerals / arabic.code =
+      {%
+        \cyrillic@numeralsfalse
+        \cyrillic@asbuk@numeralsfalse
+        \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-latn}%
+      },
+    numerals / cyrillic.code =
+      {%  
+        \cyrillic@numeralstrue
+        \cyrillic@asbuk@numeralsfalse
+        \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-cyrl}%
+      },
+    numerals / cyrillic-trad.code =
+      {%
+        \cyrillic@numeralstrue
+        \cyrillic@asbuk@numeralsfalse
+        \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-cyrl}%
+      },
+    numerals / cyrillic-alph.code =
+      {%
+        \cyrillic@numeralstrue
+        \cyrillic@asbuk@numeralstrue
+        \SetLanguageKeys{ukrainian}{bcp47-extension-u=nu-cyrl}%
       },
     numerals.default:n = arabic,
     numerals/unknown.code = \xpg@warning{Unknown Ukrainian numerals value `#1'}

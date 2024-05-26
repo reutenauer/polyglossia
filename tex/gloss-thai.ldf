@@ -32,17 +32,16 @@
 
 \DeclareKeys[polyglossia/gloss/thai]
   {
-    numerals.choices:nn = { arabic, thai }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % arabic:
-          \@thai@numeralsfalse
-          \SetLanguageKeys{thai}{bcp47-extension-u=nu-latn}%
-        \or
-          % thai:
-          \@thai@numeralstrue
-          \SetLanguageKeys{thai}{bcp47-extension-u=nu-thai}%
-        \fi
+    numerals.choice:,
+    numerals / arabic.code =
+      {%
+        \@thai@numeralsfalse
+        \SetLanguageKeys{thai}{bcp47-extension-u=nu-latn}%
+      },
+    numerals / thai.code =
+      {%
+        \@thai@numeralstrue
+        \SetLanguageKeys{thai}{bcp47-extension-u=nu-thai}%
       },
     numerals.default:n = arabic,
   }

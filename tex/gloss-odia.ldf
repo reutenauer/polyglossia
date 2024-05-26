@@ -37,24 +37,23 @@
   {
     changecounternumbering.if = odia@changecounternumbering,
     changecounternumbering.default:n = true,
-    numerals.choices:nn = { devanagari, odia, western }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % Devanagari:
-          \odia@odia@numeralsfalse%
-          \odia@devanagari@numeralstrue%
-          \SetLanguageKeys{odia}{bcp47=or,bcp47-language=or,bcp47-extension-u=nu-deva}%
-        \or
-          % Odia:
-          \odia@odia@numeralstrue%
-          \odia@devanagari@numeralsfalse%
-        \or
-          % Western:
-          \odia@odia@numeralsfalse%
-          \odia@devanagari@numeralsfalse%
-          \SetLanguageKeys{odia}{bcp47=or,bcp47-language=or,bcp47-extension-u=nu-latn}%
-        \fi
-        \xpg@info{Option: Odia, numerals=#1}%
+    numerals.choice:,
+    numerals / devanagari.code =
+      {%
+        \odia@odia@numeralsfalse
+        \odia@devanagari@numeralstrue
+        \SetLanguageKeys{odia}{bcp47=or,bcp47-language=or,bcp47-extension-u=nu-deva}%
+      },
+    numerals / odia.code =
+      {%
+        \odia@odia@numeralstrue
+        \odia@devanagari@numeralsfalse
+      },
+    numerals / western.code =
+      {%
+        \odia@odia@numeralsfalse
+        \odia@devanagari@numeralsfalse
+        \SetLanguageKeys{odia}{bcp47=or,bcp47-language=or,bcp47-extension-u=nu-latn}%
       },
     numerals.default:n = devanagari,
     numerals/unknown.code = \xpg@warning{Unknown Odia numeral `#1'}

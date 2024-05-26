@@ -24,35 +24,35 @@
 \DeclareKeys[polyglossia/gloss/korean]
   {
     variant.choices:nn = { plain, classic, modern }
-      {
+      {%
         \edef\xpg@korean@variant{\the\numexpr\UseName{l_keys_choice_int}-1\relax}
       },
     variant.default:n = plain,
     captions.choices:nn = { hangul, hanja }
-      {
+      {%
         \edef\xpg@korean@captions{\the\numexpr\UseName{l_keys_choice_int}-1\relax}
       },
     captions.default:n = hangul,
-    swapstrings.choices:nn = { all, headings, headers, none }
-      {
-        \ifcase\UseName{l_keys_choice_int}\or
-          % all:
-          \@korean@swapheadingstrue
-          \@korean@swapheaderstrue
-        \or
-          % headings:
-          \@korean@swapheadingstrue
-          \@korean@swapheadersfalse
-        \or
-          % headers:
-          \@korean@swapheadingsfalse
-          \@korean@swapheaderstrue
-        \or
-          % none:
-          \@korean@swapheadingsfalse
-          \@korean@swapheadersfalse
-        \fi
-        \xpg@info{Option: Korean, swapstrings=#1}%
+    swapstrings.choice:,
+    swapstrings / all.code =
+      {%
+        \@korean@swapheadingstrue
+        \@korean@swapheaderstrue
+      },
+    swapstrings / headings.code =
+      {%
+        \@korean@swapheadingstrue
+        \@korean@swapheadersfalse
+      },
+    swapstrings / headers.code =
+      {%
+        \@korean@swapheadingsfalse
+        \@korean@swapheaderstrue
+      },
+    swapstrings / none.code =
+      {%
+        \@korean@swapheadingsfalse
+        \@korean@swapheadersfalse
       },
     swapstrings.default:n = all,
     swapstrings/unknown.code = \xpg@warning{Unknown Korean swapstrings value `#1'}

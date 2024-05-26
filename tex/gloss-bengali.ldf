@@ -35,22 +35,21 @@
   {
     changecounternumbering.if = bengali@changecounternumbering,
     changecounternumbering.default:n = true,
-    numerals.choices:nn = { devanagari, bengali, western }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % Devanagari:
-          \bengali@bengali@numeralsfalse
-          \bengali@devanagari@numeralstrue
-        \or
-          % Bengali:
-          \bengali@bengali@numeralstrue
-          \bengali@devanagari@numeralsfalse
-        \or
-          % Western:
-          \bengali@bengali@numeralsfalse
-          \bengali@devanagari@numeralsfalse
-        \fi
-        \xpg@info{Option: Bengali, numerals=#1}%
+    numerals.choice:,
+    numerals / devanagari.code =
+      {%
+        \bengali@bengali@numeralsfalse
+        \bengali@devanagari@numeralstrue
+      },
+    numerals / bengali.code =
+      {%
+        \bengali@bengali@numeralstrue
+        \bengali@devanagari@numeralsfalse
+      },
+    numerals / western.code =
+      {%
+        \bengali@bengali@numeralsfalse
+        \bengali@devanagari@numeralsfalse
       },
     numerals.default:n = devanagari,
     numerals/unknown.code = \xpg@warning{Unknown Bengali numeral `#1'}

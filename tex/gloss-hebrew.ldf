@@ -35,31 +35,27 @@
     transliteration.default:n = alt,
     fullyear.code = \setkeys{hebrewcal}{fullyear=#1},
     fullyear.default:n = true,
-    calendar.choices:nn = { hebrew, gregorian }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % hebrew:
-          \@calendar@hebrewtrue
-        \or
-          % gregorian:
-          \@calendar@hebrewfalse
-        \fi
-        \xpg@info{Option: Hebrew, calendar=#1}%
+    calendar.choice:,
+    calendar / hebrew.code =
+      {%
+        \@calendar@hebrewtrue
+      },
+    calendar / gregorian.code =
+      {%
+        \@calendar@hebrewfalse
       },
     calendar.default:n = gregorian,
     calendar/unknown.code = \xpg@warning{Unknown Hebrew calendar `#1'},
-    numerals.choices:nn = { hebrew, arabic }
-      { 
-        \ifcase\UseName{l_keys_choice_int}\or
-          % hebrew:
-          \@hebrew@numeralstrue
-          \SetLanguageKeys{hebrew}{bcp47-extension-u=nu-hebr}%
-        \or
-          % arabic:
-          \@hebrew@numeralsfalse
-          \SetLanguageKeys{hebrew}{bcp47-extension-u=nu-latn}%
-        \fi
-        \xpg@info{Option: Hebrew, numerals=#1}%
+    numerals.choice:,
+    numerals / hebrew.code =
+      {%
+        \@hebrew@numeralstrue
+        \SetLanguageKeys{hebrew}{bcp47-extension-u=nu-hebr}%
+      },
+    numerals / arabic.code =
+      {%
+        \@hebrew@numeralsfalse
+        \SetLanguageKeys{hebrew}{bcp47-extension-u=nu-latn}%
       },
     numerals.default:n = arabic,
     numerals/unknown.code = \xpg@warning{Unknown Hebrew numerals value `#1'}
