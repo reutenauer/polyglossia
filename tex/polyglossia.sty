@@ -1900,14 +1900,17 @@
 
 \prg_set_conditional:Npnn \__xpg_check_option_value:NNN #1#2#3 { p , T , F , TF }
   {
-    \int_compare:nNnTF
+    \bool_lazy_or:nnTF
       {
-        \cs_if_exist_use:cF { c_xpg_alias_keyvals_#1_#2_#3_int } { 0 }
-      } = 
-      {
-        \cs_if_exist_use:cF { c_xpg_alias_keyvals_#1_#2_\prop_item:Nn \l_xpg_curropt_prop { #1 / #2 }_int } { 1 }
-      }
-      { \prg_return_true: } { \prg_return_false: }
+        \str_if_eq_p:ee { \prop_item:Nn \l_xpg_curropt_prop { #1 / #2 } }  { #3 }
+      } {
+        \int_compare_p:nNn
+          {
+            \cs_if_exist_use:cF { c_xpg_alias_keyvals_#1_#2_#3_int } { 0 }
+          } = {
+            \cs_if_exist_use:cF { c_xpg_alias_keyvals_#1_#2_\prop_item:Nn \l_xpg_curropt_prop { #1 / #2 }_int } { 1 }
+          }
+      } { \prg_return_true: } { \prg_return_false: }
   }
 
 \prg_set_conditional:Npnn \xpg_if_main_language:n #1 { T, F, TF }
