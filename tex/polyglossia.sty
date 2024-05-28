@@ -1500,8 +1500,8 @@
 
 \cs_new:Nn \xpg_set_familydefault:
 {
-  \tl_set:Nx \l_tmpa_tl \familydefault
-  \tl_set:Nx \l_tmpb_tl \sfdefault
+  \tl_set:Ne \l_tmpa_tl { \familydefault }
+  \tl_set:Ne \l_tmpb_tl { \sfdefault }
   \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
      { \tl_set:Nn \familytype {sf} }
      { \tl_set_eq:NN \l_tmpb_tl \ttdefault
@@ -1529,13 +1529,27 @@
     }
 }
 
+\cs_set_protected:Npn \xpg_select_default_fontfamily:n #1
+  {
+    \tl_set:Ne \l_tmpa_tl { \familydefault }
+    \tl_set:Ne \l_tmpb_tl { \sfdefault }
+    \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
+       { \tl_set:Nn \familytype {sf} }
+       { \tl_set_eq:NN \l_tmpb_tl \ttdefault
+         \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
+             { \tl_set:Nn \familytype {tt} }
+             { \tl_set:Nn \familytype {rm} }
+       }
+     \xpg_select_fontfamily:n{#1}
+  }
+
 \cs_new_nopar:Nn \xpg_set_normalfont:n
 {
   \cs_set_eq:cc { rmfamily } { #1@font@rm }
   \cs_set_eq:cc { sffamily } { #1@font@sf }
   \cs_set_eq:cc { ttfamily } { #1@font@tt }
   \cs_set_nopar:Npn \normalfont 
-      { \protect \xpg_select_fontfamily:n {#1}
+      { \xpg_select_default_fontfamily:n {#1}
         \fontseries{\seriesdefault}\selectfont
         \fontshape{\shapedefault}
         \hook_use:n { normalfont }
