@@ -943,7 +943,7 @@
 %% TODO: probably can be cleaned a little more
 \cs_new_protected:Npn \__xpg_setup_font:nnnnn #1 #2 #3 #4 #5 % #1 = lang, #2 = family, #3 = family, #4 = gobble, #5 gobble
   {
-    \cs_set_protected_nopar:cpe { #1@font@#2 }
+    \cs_set_protected_nopar:cpn { #1@font@#2 }
       {
         \cs_if_exist_use:cF{ #1font#3 }
           {
