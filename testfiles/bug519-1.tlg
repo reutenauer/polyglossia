@@ -1,0 +1,37 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\hbox(7.16+2.21999)x366.09001
+.\write1{\@writefile{toc}{\selectlanguage *[]{russian}}}
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/NewCMSans10(1)/m/n/10 Should
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/NewCMSans10(1)/m/n/10 be
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/NewCMSans10(1)/m/n/10 sans.
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/NewCMMono10(1)/m/n/10 Should
+.\glue 5.25
+.\TU/NewCMMono10(1)/m/n/10 be
+.\glue 5.25
+.\TU/NewCMMono10(1)/m/n/10 monospaced.
+.\glue 5.25
+.\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+.\glue 5.25
+.\TU/NewCMMono10(0)/m/n/10 Sans,
+.\glue 5.25
+.\TU/NewCMMono10(0)/m/n/10 but
+.\glue 5.25
+.\TU/NewCMMono10(0)/m/n/10 should
+.\glue 5.25
+.\TU/NewCMMono10(0)/m/n/10 be
+.\glue 5.25
+.\TU/NewCMMono10(0)/m/n/10 monospaced?
+.\glue 5.25
+.\write1{\@writefile{toc}{\selectlanguage *[]{russian}}}
+.\glue 5.25
+.\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+! OK.
+<to be read again> 
+                   \begingroup 
+l. ...\START\showbox0\END

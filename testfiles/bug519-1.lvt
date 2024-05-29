@@ -1,0 +1,35 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage[quiet]{polyglossia}
+\setmainfont{NewCM10}[%
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  Extension = .otf,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic]
+\setsansfont{NewCMSans10}[%
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  Extension = .otf,
+  ItalicFont = *-Oblique,
+  BoldItalicFont = *-BoldOblique]
+\setmonofont{NewCMMono10}[%
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  Extension = .otf,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldOblique]
+\setdefaultlanguage{english}
+\setotherlanguage{russian}
+\begin{document}
+\setbox0=\hbox{%
+\sffamily
+\begin{russian}
+Should be sans.
+\ttfamily
+Should be monospaced.
+\begin{english}
+Sans, but should be monospaced?
+\end{english}
+\end{russian}}
+\START\showbox0\END

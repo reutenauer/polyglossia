@@ -1,0 +1,183 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+(bug334.toc)
+\tf@toc=\write...
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: english variant=british
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: english variant=british
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: english variant=british
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: english variant=british
+Package polyglossia Info: Option: english variant=british
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: english variant=british
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: english variant=british
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: english variant=british
+Package polyglossia Info: Option: English, variant=american
+Completed box being shipped out [1]
+\vbox(633.0+0.0)x407.0
+.\glue 16.0
+.\vbox(617.0+0.0)x345.0, shifted 62.0
+..\vbox(12.0+0.0)x345.0, glue set 12.0fil
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x345.0
+....\hbox(0.0+0.0)x345.0
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(550.0+0.0)x345.0, glue set 385.92583fill
+...\write-{}
+...\write1{\@writefile{toc}{\selectlanguage *[variant=british]{english}}}
+...\glue(\topskip) 0.0
+...\hbox(10.0512+0.17279)x345.0, glue set 281.68323fil
+....\hbox(0.0+0.0)x0.0
+.....\glue 0.0
+....\TU/lmr/bx/n/14.4 Contents
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 4.8872
+...\hbox(6.94+2.04999)x345.0, glue set 264.72fil
+....\hbox(0.0+0.0)x15.0
+....\TU/lmr/m/n/10 20th
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 May
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 2016
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty -10000
+....\glue(\rightskip) 0.0
+...\penalty 150
+...\glue(\baselineskip) 3.01001
+...\hbox(6.94+2.05998)x345.0, glue set 265.91fil
+....\TU/lmr/m/n/10 Language:
+....\glue 4.44 plus 3.32999 minus 0.555
+....\TU/lmr/m/n/10 english
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty -10000
+....\glue(\rightskip) 0.0
+...\glue(\baselineskip) 3.00002
+...\hbox(6.94+0.21999)x345.0, glue set 276.80998fil
+....\TU/lmr/m/n/10 Variant:
+....\glue 4.44 plus 3.32999 minus 0.555
+....\TU/lmr/m/n/10 british
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty -10000
+....\glue(\rightskip) 0.0
+...\penalty 150
+...\glue(\baselineskip) 4.84001
+...\hbox(6.94+0.10999)x345.0, glue set 284.20999fil
+....\TU/lmr/m/n/10 Babel:
+....\glue 4.44 plus 3.32999 minus 0.555
+....\TU/lmr/m/n/10 british
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 4.95001
+...\hbox(6.94+2.04999)x345.0, glue set 264.72fil
+....\hbox(0.0+0.0)x15.0
+....\TU/lmr/m/n/10 20th
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 May
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 2016
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty -10000
+....\glue(\rightskip) 0.0
+...\penalty 150
+...\glue(\baselineskip) 3.01001
+...\hbox(6.94+2.05998)x345.0, glue set 265.91fil
+....\TU/lmr/m/n/10 Language:
+....\glue 4.44 plus 3.32999 minus 0.555
+....\TU/lmr/m/n/10 english
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty -10000
+....\glue(\rightskip) 0.0
+...\glue(\baselineskip) 3.00002
+...\hbox(6.94+0.21999)x345.0, glue set 276.80998fil
+....\TU/lmr/m/n/10 Variant:
+....\glue 4.44 plus 3.32999 minus 0.555
+....\TU/lmr/m/n/10 british
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty -10000
+....\glue(\rightskip) 0.0
+...\penalty 150
+...\glue(\baselineskip) 4.84001
+...\hbox(6.94+0.10999)x345.0, glue set 284.20999fil
+....\TU/lmr/m/n/10 Babel:
+....\glue 4.44 plus 3.32999 minus 0.555
+....\TU/lmr/m/n/10 british
+....\write1{\@writefile{toc}{\selectlanguage *[variant=british]{english}}}
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\write1{\@writefile{toc}{\selectlanguage *[variant=american]{english}}}
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 5.06001
+...\hbox(6.83+2.04999)x345.0, glue set 271.39fil
+....\hbox(0.0+0.0)x15.0
+....\TU/lmr/m/n/10 May
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 20,
+....\glue 3.33 plus 2.08124 minus 0.888
+....\TU/lmr/m/n/10 2016
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty -10000
+....\glue(\rightskip) 0.0
+...\penalty 150
+...\glue(\baselineskip) 3.01001
+...\hbox(6.94+2.05998)x345.0, glue set 265.91fil
+....\TU/lmr/m/n/10 Language:
+....\glue 4.44 plus 3.32999 minus 0.555
+....\TU/lmr/m/n/10 english
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty -10000
+....\glue(\rightskip) 0.0
+...\glue(\baselineskip) 3.11002
+...\hbox(6.83+0.21999)x345.0, glue set 265.76999fil
+....\TU/lmr/m/n/10 Variant:
+....\glue 4.44 plus 3.32999 minus 0.555
+....\TU/lmr/m/n/10 american
+....\penalty 10000
+....\glue 0.0 plus 1.0fil
+....\penalty -10000
+....\glue(\rightskip) 0.0
+...\penalty 150
+...\glue(\baselineskip) 4.84001
+...\hbox(6.94+0.10999)x345.0, glue set 273.17fil
+....\TU/lmr/m/n/10 Babel:
+....\glue 4.44 plus 3.32999 minus 0.555
+....\TU/lmr/m/n/10 american
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue 0.0 plus 1.0fill
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 23.34
+..\hbox(6.66+0.0)x345.0
+...\hbox(6.66+0.0)x345.0, glue set 170.0fil
+....\glue 0.0 plus 1.0fil
+....\TU/lmr/m/n/10 1
+....\glue 0.0 plus 1.0fil

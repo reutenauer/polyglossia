@@ -1,0 +1,64 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\vbox(49.85439+0.0)x345.0, direction TLT
+.\write1{\@writefile{toc}{\selectlanguage *[]{french}}}
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\hbox(6.77+0.11)x345.0, glue set 267.35999fil, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x15.0, direction TLT
+..\TU/NewCM10(0)/m/n/10 T
+..\kern-0.83 (font)
+..\TU/NewCM10(0)/m/n/10 e
+..\TU/NewCM10(0)/m/n/10 s
+..\TU/NewCM10(0)/m/n/10 t
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/lmr/m/n/10 T
+..\kern-0.83 (font)
+..\TU/lmr/m/n/10 e
+..\TU/lmr/m/n/10 s
+..\TU/lmr/m/n/10 t
+..\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+..\TU/NewCM10(0)/m/n/10 T
+..\kern-0.83 (font)
+..\TU/NewCM10(0)/m/n/10 e
+..\TU/NewCM10(0)/m/n/10 s
+..\TU/NewCM10(0)/m/n/10 t
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\penalty -300
+.\glue 15.08499 plus 4.31 minus 0.86198
+.\glue(\parskip) 0.0 plus 1.0
+.\glue(\parskip) 0.0
+.\glue(\baselineskip) 8.17
+.\hbox(9.72+0.0864)x345.0, glue set 291.61923fil, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(9.43199+0.0)x22.68, direction TLT
+...\glue 0.0
+...\TU/NewCM10(0)/b/n/14.4 1
+...\glue 14.4
+..\TU/NewCM10(0)/b/n/14.4 T
+..\kern-1.3824 (font)
+..\TU/NewCM10(0)/b/n/14.4 e
+..\TU/NewCM10(0)/b/n/14.4 s
+..\TU/NewCM10(0)/b/n/14.4 t
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+.\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {1}Test}{\thepage }{}\protected@file@percent }}
+.\penalty 10000
+.\glue 9.913 plus 0.86198
+! OK.
+<to be read again> 
+\begingroup 
+l. ...\START\showbox0\END

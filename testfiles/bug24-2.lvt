@@ -1,0 +1,27 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage[quiet]{polyglossia}
+\setmainlanguage{hebrew}
+\setmainfont{DavidCLM}[
+  UprightFont = *-Medium,
+  BoldFont = *-Bold,
+  Extension = .otf,
+  ItalicFont = *-MediumItalic,
+  BoldItalicFont = *-BoldItalic]
+\setmonofont{MiriamMonoCLM}[
+  UprightFont = *-Book,
+  BoldFont = *-Bold,
+  Extension = .ttf,
+  ItalicFont = *-BookOblique,
+  BoldItalicFont = *-BoldOblique]
+\pagestyle{headings}
+\begin{document}
+\START
+\showoutput
+\section{כותרת}
+
+\ttfamily
+שלום.
+	
+\vfill\break
+\END

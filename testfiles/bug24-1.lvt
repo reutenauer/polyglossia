@@ -1,0 +1,15 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\pagestyle{headings}
+\begin{document}
+\START
+\showoutput
+\section{Title}
+
+\ttfamily
+Hello.
+	
+\vfill\break
+\END

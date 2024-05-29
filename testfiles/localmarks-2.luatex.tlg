@@ -1,0 +1,84 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+LaTeX Font Info:    Font shape `TU/DavidCLM(0)/m/sl' in size <10> not available
+(Font)              Font shape `TU/DavidCLM(0)/m/it' tried instead on input line ....
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: English, variant=american
+Completed box being shipped out [1]
+\vbox(633.0+0.0)x407.0, direction TLT
+.\glue 16.0
+.\vbox(617.0+0.0)x345.0, shifted 62.0, direction TLT
+..\vbox(12.0+0.0)x345.0, glue set 5.17fil, direction TLT
+...\glue 0.0 plus 1.0fil
+...\hbox(6.83+0.0)x345.0, direction TLT
+....\hbox(6.83+0.0)x345.0, glue set 294.84833fil, direction TLT
+.....\begindir TLT
+.....\TU/lmr/m/sl/10 1
+.....\glue 10.0
+.....\TU/lmr/m/sl/10 T
+.....\TU/lmr/m/sl/10 I
+.....\discretionary (penalty 50)
+......< \TU/lmr/m/sl/10 -
+.....\TU/lmr/m/sl/10 T
+.....\TU/lmr/m/sl/10 L
+.....\TU/lmr/m/sl/10 E
+.....\enddir TLT
+.....\glue 0.0 plus 1.0fil
+.....\TU/DavidCLM(0)/m/n/10 1
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(550.0+0.0)x345.0, glue set 515.95367fill, direction TLT
+...\write-{}
+...\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+...\glue(\topskip) 0.00641
+...\hbox(9.99359+0.0864)x345.0, glue set 288.52325fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(9.4464+0.0)x22.50719, direction TLT
+.....\glue 0.0
+.....\TU/lmr/bx/n/14.4 1
+.....\glue 14.4
+....\TU/lmr/bx/n/14.4 T
+....\TU/lmr/bx/n/14.4 i
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/14.4 -
+....\TU/lmr/bx/n/14.4 t
+....\TU/lmr/bx/n/14.4 l
+....\TU/lmr/bx/n/14.4 e
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\marks2{\MakeUppercase    []{1\hskip 1em\relax Title}}
+...\marks3{\MakeUppercase    []{1\hskip 1em\relax Title}}
+...\mark{{}{\foreignlanguage {english}{\protect \@@ensure@maindir {\MakeUppercase    []{1\hskip 1em\relax Title}}}}}
+...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {1}Title}{\thepage }{}\protected@file@percent }}
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\write1{\@writefile{toc}{\selectlanguage *[]{hebrew}}}
+...\penalty 10000
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 6.46361
+...\hbox(5.45+2.13333)x345.0, glue set 324.89166fil, direction TRT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\TU/DavidCLM(0)/m/n/10 מ
+....\TU/DavidCLM(0)/m/n/10 ב
+....\TU/DavidCLM(0)/m/n/10 ח
+....\TU/DavidCLM(0)/m/n/10 ן
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue 0.0 plus 1.0fill
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x345.0, direction TLT
+...\hbox(0.0+0.0)x345.0, direction TLT

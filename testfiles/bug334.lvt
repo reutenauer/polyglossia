@@ -1,0 +1,28 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage[variant=british]{english}
+\begin{document}
+\START
+\showoutput
+\tableofcontents
+
+\today\\
+Language: \languagename\\
+Variant: \languagevariant\\
+Babel: \babelname
+
+\begin{english}
+\today\\
+Language: \languagename\\
+Variant: \languagevariant\\
+Babel: \babelname
+\end{english}
+
+\selectlanguage[variant=american]{english}
+\today\\
+Language: \languagename\\
+Variant: \languagevariant\\
+Babel: \babelname
+\vfill\break
+\END

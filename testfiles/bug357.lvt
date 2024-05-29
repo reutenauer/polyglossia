@@ -1,0 +1,20 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\setotherlanguage[spelling=new]{german}
+\setotherlanguage{dutch}
+\begin{document}
+\START
+\showoutput
+foo \today\ \textbf{\babelname}
+
+\begin{german} foo \today\ \textbf{\babelname} \end{german}
+
+\begin{german}[spelling=new] foo \today\ \textbf{\babelname} \end{german}
+
+\begin{german}[variant=austrian] foo \today\ \textbf{\babelname} \end{german}
+
+\begin{german} foo \today\ \textbf{\babelname} \end{german}
+\vfill\break
+\END

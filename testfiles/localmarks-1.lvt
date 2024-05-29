@@ -1,0 +1,22 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage[localmarks]{polyglossia}
+\setdefaultlanguage{hebrew}
+\setotherlanguage{english}
+\newfontfamily\hebrewfont{DavidCLM}[
+  UprightFont = *-Medium,
+  BoldFont = *-Bold,
+  Extension = .otf,
+  ItalicFont = *-MediumItalic,
+  BoldItalicFont = *-BoldItalic]
+  \pagestyle{headings}
+\begin{document}
+\START
+\showoutput
+\section{כותרת}
+
+\selectlanguage{english}
+Test
+	
+\vfill\break
+\END

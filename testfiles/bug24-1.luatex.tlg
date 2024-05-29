@@ -1,0 +1,77 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+Completed box being shipped out [1]
+\vbox(633.0+0.0)x407.0, direction TLT
+.\glue 16.0
+.\vbox(617.0+0.0)x345.0, shifted 62.0, direction TLT
+..\vbox(12.0+0.0)x345.0, glue set 5.17fil, direction TLT
+...\glue 0.0 plus 1.0fil
+...\hbox(6.83+0.0)x345.0, direction TLT
+....\hbox(6.83+0.0)x345.0, glue set 293.89001fil, direction TLT
+.....\TU/lmr/m/sl/10 1
+.....\glue 10.0
+.....\TU/lmr/m/sl/10 T
+.....\TU/lmr/m/sl/10 I
+.....\discretionary (penalty 50)
+......< \TU/lmr/m/sl/10 -
+.....\TU/lmr/m/sl/10 T
+.....\TU/lmr/m/sl/10 L
+.....\TU/lmr/m/sl/10 E
+.....\glue 0.0 plus 1.0fil
+.....\TU/lmr/m/n/10 1
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(550.0+0.0)x345.0, glue set 518.02698fill, direction TLT
+...\write-{}
+...\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+...\glue(\topskip) 0.00641
+...\hbox(9.99359+0.0864)x345.0, glue set 288.52325fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(9.4464+0.0)x22.50719, direction TLT
+.....\glue 0.0
+.....\TU/lmr/bx/n/14.4 1
+.....\glue 14.4
+....\TU/lmr/bx/n/14.4 T
+....\TU/lmr/bx/n/14.4 i
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/14.4 -
+....\TU/lmr/bx/n/14.4 t
+....\TU/lmr/bx/n/14.4 l
+....\TU/lmr/bx/n/14.4 e
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\marks2{\MakeUppercase    []{1\hskip 1em\relax Title}}
+...\marks3{\MakeUppercase    []{1\hskip 1em\relax Title}}
+...\mark{{}{\MakeUppercase    []{1\hskip 1em\relax Title}}}
+...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {1}Title}{\thepage }{}\protected@file@percent }}
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 5.8036
+...\hbox(6.11+0.06)x345.0, glue set 313.5fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\TU/lmtt/m/n/10 H
+....\TU/lmtt/m/n/10 e
+....\TU/lmtt/m/n/10 l
+....\TU/lmtt/m/n/10 l
+....\TU/lmtt/m/n/10 o
+....\TU/lmtt/m/n/10 .
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue 0.0 plus 1.0fill
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x345.0, direction TLT
+...\hbox(0.0+0.0)x345.0, direction TLT

@@ -1,0 +1,17 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+\setotherlanguage{french}
+\newfontfamily\frenchfont{NewCM10}[%
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  Extension = .otf,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic]
+\begin{document}
+\setbox0=\vbox{%
+\selectlanguage{french}
+	 Test \textenglish{Test} Test
+	 \section{Test}}
+\START\showbox0\END

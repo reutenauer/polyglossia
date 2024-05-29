@@ -1,0 +1,257 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+Module polyglossia Info: Language data for ngerman
+(polyglossia)            hyphenation^^I
+(polyglossia)            lefthyphenmin^^I2
+(polyglossia)            loader^^Iloadhyph-de-1996.tex
+(polyglossia)            patterns^^Ihyph-de-1996.pat.txt
+(polyglossia)            righthyphenmin^^I2
+(polyglossia)            synonyms^^I on input line ...
+Module polyglossia Info: Language ngerman was not yet loaded; created with id 5 on input line ...
+Module polyglossia Info: Language ngerman already loaded; id is 5 on input line ...
+Module polyglossia Info: Language ngerman already loaded; id is 5 on input line ...
+\l@naustrian = a dialect from \language\l@ngerman 
+Module polyglossia Info: Language ngerman already loaded; id is 5 on input line ...
+Completed box being shipped out [1]
+\vbox(633.0+0.0)x407.0, direction TLT
+.\glue 16.0
+.\vbox(617.0+0.0)x345.0, shifted 62.0, direction TLT
+..\vbox(12.0+0.0)x345.0, glue set 12.0fil, direction TLT
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x345.0, direction TLT
+....\hbox(0.0+0.0)x345.0, direction TLT
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(550.0+0.0)x345.0, glue set 489.98999fill, direction TLT
+...\write-{}
+...\write1{\@writefile{toc}{\selectlanguage *[]{french}}}
+...\glue(\topskip) 2.95
+...\hbox(7.05+0.22)x345.0, glue set 226.14fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x15.0, direction TLT
+....\TU/lmr/m/n/10 f
+....\TU/lmr/m/n/10 o
+....\kern0.28 (font)
+....\TU/lmr/m/n/10 o
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 2
+....\TU/lmr/m/n/10 0
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 m
+....\TU/lmr/m/n/10 a
+....\TU/lmr/m/n/10 i
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 2
+....\TU/lmr/m/n/10 0
+....\TU/lmr/m/n/10 1
+....\TU/lmr/m/n/10 6
+....\kern0.0 (italic)
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/bx/n/10 f
+....\TU/lmr/bx/n/10 r
+....\TU/lmr/bx/n/10 e
+....\TU/lmr/bx/n/10 n
+....\TU/lmr/bx/n/10 c
+....\kern-0.32 (font)
+....\TU/lmr/bx/n/10 h
+....\kern0.0 (italic)
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\write1{\@writefile{toc}{\selectlanguage *[]{german}}}
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 4.73
+...\hbox(7.05+2.01)x345.0, glue set 206.56999fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x15.0, direction TLT
+....\TU/lmr/m/n/10 f
+....\TU/lmr/m/n/10 o
+....\kern0.28 (font)
+....\TU/lmr/m/n/10 o
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 2
+....\TU/lmr/m/n/10 0
+....\TU/lmr/m/n/10 .
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 M
+....\TU/lmr/m/n/10 a
+....\TU/lmr/m/n/10 i
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 2
+....\TU/lmr/m/n/10 0
+....\TU/lmr/m/n/10 1
+....\TU/lmr/m/n/10 6
+....\kern0.0 (italic)
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/bx/n/10 n
+....\TU/lmr/bx/n/10 g
+....\TU/lmr/bx/n/10 e
+....\TU/lmr/bx/n/10 r
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/10 -
+....\TU/lmr/bx/n/10 m
+....\TU/lmr/bx/n/10 a
+....\TU/lmr/bx/n/10 n
+....\kern0.0 (italic)
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\write1{\@writefile{toc}{\selectlanguage *[]{french}}}
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\write1{\@writefile{toc}{\selectlanguage *[spelling=new]{german}}}
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 2.94
+...\hbox(7.05+2.01)x345.0, glue set 206.56999fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x15.0, direction TLT
+....\TU/lmr/m/n/10 f
+....\TU/lmr/m/n/10 o
+....\kern0.28 (font)
+....\TU/lmr/m/n/10 o
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 2
+....\TU/lmr/m/n/10 0
+....\TU/lmr/m/n/10 .
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 M
+....\TU/lmr/m/n/10 a
+....\TU/lmr/m/n/10 i
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 2
+....\TU/lmr/m/n/10 0
+....\TU/lmr/m/n/10 1
+....\TU/lmr/m/n/10 6
+....\kern0.0 (italic)
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/bx/n/10 n
+....\TU/lmr/bx/n/10 g
+....\TU/lmr/bx/n/10 e
+....\TU/lmr/bx/n/10 r
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/10 -
+....\TU/lmr/bx/n/10 m
+....\TU/lmr/bx/n/10 a
+....\TU/lmr/bx/n/10 n
+....\kern0.0 (italic)
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\write1{\@writefile{toc}{\selectlanguage *[]{french}}}
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\write1{\@writefile{toc}{\selectlanguage *[variant=austrian]{german}}}
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 2.94
+...\hbox(7.05+0.22)x345.0, glue set 202.99fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x15.0, direction TLT
+....\TU/lmr/m/n/10 f
+....\TU/lmr/m/n/10 o
+....\kern0.28 (font)
+....\TU/lmr/m/n/10 o
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 2
+....\TU/lmr/m/n/10 0
+....\TU/lmr/m/n/10 .
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 M
+....\TU/lmr/m/n/10 a
+....\TU/lmr/m/n/10 i
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 2
+....\TU/lmr/m/n/10 0
+....\TU/lmr/m/n/10 1
+....\TU/lmr/m/n/10 6
+....\kern0.0 (italic)
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/bx/n/10 n
+....\TU/lmr/bx/n/10 a
+....\TU/lmr/bx/n/10 u
+....\TU/lmr/bx/n/10 s
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/10 -
+....\TU/lmr/bx/n/10 t
+....\TU/lmr/bx/n/10 r
+....\TU/lmr/bx/n/10 i
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/10 -
+....\TU/lmr/bx/n/10 a
+....\TU/lmr/bx/n/10 n
+....\kern0.0 (italic)
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\write1{\@writefile{toc}{\selectlanguage *[]{french}}}
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\write1{\@writefile{toc}{\selectlanguage *[]{german}}}
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 4.73
+...\hbox(7.05+2.01)x345.0, glue set 206.56999fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x15.0, direction TLT
+....\TU/lmr/m/n/10 f
+....\TU/lmr/m/n/10 o
+....\kern0.28 (font)
+....\TU/lmr/m/n/10 o
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 2
+....\TU/lmr/m/n/10 0
+....\TU/lmr/m/n/10 .
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 M
+....\TU/lmr/m/n/10 a
+....\TU/lmr/m/n/10 i
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 2
+....\TU/lmr/m/n/10 0
+....\TU/lmr/m/n/10 1
+....\TU/lmr/m/n/10 6
+....\kern0.0 (italic)
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/bx/n/10 n
+....\TU/lmr/bx/n/10 g
+....\TU/lmr/bx/n/10 e
+....\TU/lmr/bx/n/10 r
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/10 -
+....\TU/lmr/bx/n/10 m
+....\TU/lmr/bx/n/10 a
+....\TU/lmr/bx/n/10 n
+....\kern0.0 (italic)
+....\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+....\write1{\@writefile{toc}{\selectlanguage *[]{french}}}
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue 0.0 plus 1.0fill
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 23.34
+..\hbox(6.66+0.0)x345.0, direction TLT
+...\hbox(6.66+0.0)x345.0, glue set 170.0fil, direction TLT
+....\glue 0.0 plus 1.0fil
+....\TU/lmr/m/n/10 1
+....\glue 0.0 plus 1.0fil

@@ -1,0 +1,86 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\hbox(7.16+2.22)x366.09, direction TLT
+.\write1{\@writefile{toc}{\selectlanguage *[]{russian}}}
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/NewCMSans10(1)/m/n/10 S
+.\TU/NewCMSans10(1)/m/n/10 h
+.\TU/NewCMSans10(1)/m/n/10 o
+.\TU/NewCMSans10(1)/m/n/10 u
+.\TU/NewCMSans10(1)/m/n/10 l
+.\TU/NewCMSans10(1)/m/n/10 d
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/NewCMSans10(1)/m/n/10 b
+.\kern0.28 (font)
+.\TU/NewCMSans10(1)/m/n/10 e
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/NewCMSans10(1)/m/n/10 s
+.\TU/NewCMSans10(1)/m/n/10 a
+.\TU/NewCMSans10(1)/m/n/10 n
+.\TU/NewCMSans10(1)/m/n/10 s
+.\TU/NewCMSans10(1)/m/n/10 .
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/NewCMMono10(1)/m/n/10 S
+.\TU/NewCMMono10(1)/m/n/10 h
+.\TU/NewCMMono10(1)/m/n/10 o
+.\TU/NewCMMono10(1)/m/n/10 u
+.\TU/NewCMMono10(1)/m/n/10 l
+.\TU/NewCMMono10(1)/m/n/10 d
+.\glue(\spaceskip) 5.25
+.\TU/NewCMMono10(1)/m/n/10 b
+.\TU/NewCMMono10(1)/m/n/10 e
+.\glue(\spaceskip) 5.25
+.\TU/NewCMMono10(1)/m/n/10 m
+.\TU/NewCMMono10(1)/m/n/10 o
+.\TU/NewCMMono10(1)/m/n/10 n
+.\TU/NewCMMono10(1)/m/n/10 o
+.\TU/NewCMMono10(1)/m/n/10 s
+.\TU/NewCMMono10(1)/m/n/10 p
+.\TU/NewCMMono10(1)/m/n/10 a
+.\TU/NewCMMono10(1)/m/n/10 c
+.\TU/NewCMMono10(1)/m/n/10 e
+.\TU/NewCMMono10(1)/m/n/10 d
+.\TU/NewCMMono10(1)/m/n/10 .
+.\glue(\spaceskip) 5.25
+.\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+.\glue(\spaceskip) 5.25
+.\TU/NewCMMono10(0)/m/n/10 S
+.\TU/NewCMMono10(0)/m/n/10 a
+.\TU/NewCMMono10(0)/m/n/10 n
+.\TU/NewCMMono10(0)/m/n/10 s
+.\TU/NewCMMono10(0)/m/n/10 ,
+.\glue(\spaceskip) 5.25
+.\TU/NewCMMono10(0)/m/n/10 b
+.\TU/NewCMMono10(0)/m/n/10 u
+.\TU/NewCMMono10(0)/m/n/10 t
+.\glue(\spaceskip) 5.25
+.\TU/NewCMMono10(0)/m/n/10 s
+.\TU/NewCMMono10(0)/m/n/10 h
+.\TU/NewCMMono10(0)/m/n/10 o
+.\TU/NewCMMono10(0)/m/n/10 u
+.\TU/NewCMMono10(0)/m/n/10 l
+.\TU/NewCMMono10(0)/m/n/10 d
+.\glue(\spaceskip) 5.25
+.\TU/NewCMMono10(0)/m/n/10 b
+.\TU/NewCMMono10(0)/m/n/10 e
+.\glue(\spaceskip) 5.25
+.\TU/NewCMMono10(0)/m/n/10 m
+.\TU/NewCMMono10(0)/m/n/10 o
+.\TU/NewCMMono10(0)/m/n/10 n
+.\TU/NewCMMono10(0)/m/n/10 o
+.\TU/NewCMMono10(0)/m/n/10 s
+.\TU/NewCMMono10(0)/m/n/10 p
+.\TU/NewCMMono10(0)/m/n/10 a
+.\TU/NewCMMono10(0)/m/n/10 c
+.\TU/NewCMMono10(0)/m/n/10 e
+.\TU/NewCMMono10(0)/m/n/10 d
+.\TU/NewCMMono10(0)/m/n/10 ?
+.\glue(\spaceskip) 5.25
+.\write1{\@writefile{toc}{\selectlanguage *[]{russian}}}
+.\glue(\spaceskip) 5.25
+.\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+! OK.
+<to be read again> 
+\begingroup 
+l. ...\START\showbox0\END
