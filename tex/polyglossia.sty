@@ -986,10 +986,9 @@
 
 %% ensure localization of \markright and \markboth commands
 %%% THIS IS NOW DISABLED BY DEFAULT
-\cs_new_nopar:Nn \__xpg_local_marks:n { }
+\cs_set_eq:NN \__xpg_local_marks:n \use_none:n
 \cs_new_nopar:Nn \__xpg_enable_local_marks:
 {
-  \xpg_info_msg:n{Option:~ localmarks}
   \cs_gset_nopar:Nn \__xpg_local_marks:n
   {
 	 \DeclareDocumentCommand \markboth { m m }
@@ -2274,8 +2273,9 @@
   quiet
      .meta:n =  { verbose = false },
 
-  localmarks
-     .bool_set:N = \g_xpg_localmarks_bool,
+  localmarks .choice:,
+  localmarks / true .code:n = \__xpg_enable_local_marks:,
+  localmarks / false .code:n = \cs_set_eq:NN \__xpg_local_marks:n \use_none:n,
   localmarks
      .default:n = true,
   % compatibility
@@ -2323,10 +2323,6 @@
    \cs_gset_nopar:Npn \@font@warning #1 { \relax } % no latex font warnings
    \msg_redirect_module:nnn { fontspec } { info } { none } % no fontspec info
    \msg_redirect_module:nnn { polyglossia } { info } { none } % no polyglossia info
-}
-
-\bool_if:nT \g_xpg_localmarks_bool {
-  \__xpg_enable_local_marks:
 }
 
 % common code to initiate babelshordhands in glosses
