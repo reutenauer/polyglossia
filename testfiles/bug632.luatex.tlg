@@ -1,0 +1,65 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\hbox(6.94+2.06)x134.05, direction TLT
+.\TU/lmr/m/n/10 Z
+.\glue(\spaceskip) 3.33 plus 1.66331 minus 1.1111
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 e
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 i
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 ’
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 t
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 p
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 s
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 u
+.\TU/lmr/m/n/10 n
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 p
+.\TU/lmr/m/n/10 a
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 a
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 g
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 a
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 p
+.\TU/lmr/m/n/10 h
+.\TU/lmr/m/n/10 e
+! OK.
+<to be read again> 
+\showbox 
+l. ...\START\showbox0\showbox
+                          2\END
+> \box...=
+\hbox(6.94+0.11)x47.82, direction TLT
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 ’
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 t
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 u
+.\TU/lmr/m/n/10 t
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+! OK.
+<to be read again> 
+\begingroup 
+l. ...\START\showbox0\showbox2\END

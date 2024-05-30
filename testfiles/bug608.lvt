@@ -1,0 +1,10 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setotherlanguage[variant=austrian]{german}
+\setlanguagealias*[variant=austrian]{german}{AT}
+\begin{document}
+\setbox0=\hbox{\textAT{Das ist auf Österreichisch.}%
+\textlang{AT}{Das ist auf Österreichisch.}}
+\START\showbox0\END
+

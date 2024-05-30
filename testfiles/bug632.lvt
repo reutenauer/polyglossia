@@ -1,0 +1,13 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setotherlanguage{german}
+\begin{document}
+\setbox0=\hbox{Z \foreignlanguage{german}{ceci n'est pas un \par paragraphe}}
+\setbox2=\hbox{%
+\begin{otherlanguage*}{german}
+c'est tout
+\end{otherlanguage*}}
+\START\showbox0\showbox2\END
+

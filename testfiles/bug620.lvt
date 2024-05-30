@@ -1,0 +1,11 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage[frenchfootnote]{french}
+\begin{document}
+\START
+\showoutput
+French text\footnote{French footnote.}.
+\vfill\break
+\END
+

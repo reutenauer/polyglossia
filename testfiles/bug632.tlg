@@ -1,0 +1,31 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\hbox(6.94+2.05998)x134.05002
+.\TU/lmr/m/n/10 Z
+.\glue 3.33 plus 1.66331 minus 1.1111
+.\TU/lmr/m/n/10 ceci
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 n’est
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 pas
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 un
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 paragraphe
+! OK.
+<to be read again> 
+                   \showbox 
+l. ...\START\showbox0\showbox
+                            2\END
+> \box...=
+\hbox(6.94+0.10999)x47.82
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 c’est
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 tout
+.\glue 3.33 plus 1.665 minus 1.11
+! OK.
+<to be read again> 
+                   \begingroup 
+l. ...\START\showbox0\showbox2\END
