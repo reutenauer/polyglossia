@@ -3,5 +3,5 @@
 \usepackage{polyglossia}
 \begin{document}
 \START
-\expandafter\ShowCommand\rmfamily
+\ShowCommand\rmfamily
 \END

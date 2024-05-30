@@ -1,6 +1,6 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-> \cs_if_exist_use:cF=\long macro:
-#1->\cs_if_exist_use:cTF {#1}{}.
-<argument> \cs_if_exist_use:cF 
-l. ...\expandafter\ShowCommand\rmfamily
+> \rmfamily=\protected macro:
+->\cs_if_exist_use:cF {latexfont}{\cs_if_exist_use:cF {\prop_item:Nn \l_xpg_langsetup_prop {latex/lc-bcp47-script}font}{\use_ii:nn {\prop_item:Nn \l_xpg_langsetup_prop {latex/lcscript}font}{\use:c {rmfamilylatin}\use_none:n {\__xpg_add_font_feature_script:nee {rm}{\prop_item:Nn \l_xpg_langsetup_prop {latex/scripttag}}{\prop_item:Nn \l_xpg_langsetup_prop {latex/script}}}}}\__xpg_add_font_feature_language:ee {\prop_item:Nn \l_xpg_langsetup_prop {latex/langtag}}{\prop_item:Nn \l_xpg_langsetup_prop {latex/language}}}\tl_set:Nn \familytype {rm}.
+<argument> \rmfamily 
+l. ...\ShowCommand\rmfamily
