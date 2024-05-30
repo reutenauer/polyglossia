@@ -1,8 +1,5 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-Package polyglossia Info: Option: English, variant=american
-Package polyglossia Info: Option: English, variant=american
-Package polyglossia Info: Option: English, variant=american
 LaTeX Font Info:    Font shape `TU/NewCM10(0)/m/sl' in size <10> not available
 (Font)              Font shape `TU/NewCM10(0)/m/it' tried instead on input line ....
 Completed box being shipped out [1]
@@ -156,9 +153,6 @@ Completed box being shipped out [1]
 ..\glue(\baselineskip) 30.0
 ..\hbox(0.0+0.0)x345.0, direction TLT
 ...\hbox(0.0+0.0)x345.0, direction TLT
-Package polyglossia Info: Option: English, variant=american
-Package polyglossia Info: Option: English, variant=american
-Package polyglossia Info: Option: English, variant=american
 Completed box being shipped out [2]
 \vbox(633.0+0.0)x407.0, direction TLT
 .\glue 16.0

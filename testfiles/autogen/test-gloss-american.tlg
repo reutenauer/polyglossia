@@ -4,12 +4,7 @@ Don't change this file in any respect.
 File: gloss-american.ldf polyglossia: module for American English
 (gloss-english.ldf
 File: gloss-english.ldf polyglossia: module for English
-Package polyglossia Info: Option: English, variant=american
-Package polyglossia Info: Option: English, variant=american
-Package polyglossia Info: Option: English, variant=american
-)
-Package polyglossia Info: Option: English, variant=american
-)
+))
 Package polyglossia Info: Default language is english
 > \box...=
 \hbox(7.16+2.05998)x68.39

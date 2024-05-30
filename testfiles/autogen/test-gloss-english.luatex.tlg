@@ -2,9 +2,6 @@ This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 (gloss-english.ldf
 File: gloss-english.ldf polyglossia: module for English
-Package polyglossia Info: Option: English, variant=american
-Package polyglossia Info: Option: English, variant=american
-Package polyglossia Info: Option: English, variant=american
 )
 Package polyglossia Info: Default language is english
 > \box...=
