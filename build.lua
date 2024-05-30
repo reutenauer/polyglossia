@@ -89,7 +89,40 @@ function gen_test_from_gloss()
 	return 0
 end
 
+function gen_pdf_from_example()
+   local example_files = filelist("./doc", "*.tex")
+   local error_level = 0
+   error_level = mkdir("./build/genpdf")
+   for example = 1, #example_files do
+       local example_name = jobname(example_files[example])
+       if example_name == "polyglossia" then
+           error_level = error_level + (
+               tex("./../../doc/polyglossia", "./build/genpdf", "xelatex --interaction=nonstopmode") +
+               tex("./../../doc/polyglossia", "./build/genpdf", "xelatex --interaction=nonstopmode") +
+               tex("./../../doc/polyglossia", "./build/genpdf", "xelatex --interaction=nonstopmode")
+           )
+       else
+           error_level = error_level +
+               tex("./doc/" .. example_name, "./build/genpdf", "xelatex --interaction=nonstopmode")
+       end
+   end
+   error_level = error_level + cp("*.pdf", "./build/genpdf", "./generated")
+   return error_level
+end
+
+function pre_release()
+    gen_pdf_from_example()
+    call({"."}, "tag")
+    call({"."}, "ctan", {})
+    rm("./doc", "*.pdf")    
+end
+
 --option_list["force"] = { desc  = "overwrite existing tests with gentest", -- does not work... why?
 --			type = "boolean"}
 target_list["gentest"] = { func = gen_test_from_gloss, 
 			desc = "generate minimal test files from gloss fies"}
+target_list["prerelease"] = { func = pre_release, 
+			desc = "update tags, generate pdfs, build zip for ctan"}
+target_list["genpdf"] = { func = gen_pdf_from_example, 
+			desc = "generate pdf files in the generated directory from the files in the doc directory"}
+
