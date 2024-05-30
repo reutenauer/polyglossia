@@ -1,0 +1,17 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setotherlanguage{russian}
+\newfontfamily\cyrillicfont{NewCM10}[%
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  Extension = .otf,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic]
+\begin{document}
+\setbox0=\hbox{%
+The 1995 tax records, never before disclosed, reveal the extraordinary tax benefits that Mr. Trump, the Republican presidential nominee, derived \textsf{from the financial wreckage he left behind in the early 1990s through mismanagement} of three Atlantic City casinos, his ill-fated foray into the airline business and his ill-timed purchase of the Plaza Hotel in Manhattan. [ \languagename ]}
+\setbox2=\hbox{\begin{russian}Премьер-министр России Дмитрий Медведев заявил, что санкции не являются главной проблемой отечественной экономики. Такое мнение он высказал в интервью Первому каналу, \textsf{расшифровка которого опубликована в воскресенье}, 2 октября, на сайте правительства. [ \languagename ] \end{russian}}
+\START\showbox0\showbox2\END
+

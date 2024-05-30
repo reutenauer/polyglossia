@@ -1,0 +1,10 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\begin{document}
+\setbox0=\hbox{%
+\begin{english}[variant=british]analogue\end{english}%
+\begin{english}[variant=usmax]analog\end{english}}
+\START\showbox0\END
+

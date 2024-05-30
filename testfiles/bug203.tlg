@@ -1,0 +1,37 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\hbox(6.75+0.05998)x22.28
+.\TU/NewCM10(2)/b/n/10 Test
+! OK.
+<to be read again> 
+                   \showbox 
+l. ...\START\showbox0\showbox
+                            2\END
+> \box...=
+\hbox(7.5+2.49998)x381.43001
+.\TU/NewCM10(2)/m/n/10 ”[NewCM10
+.\kern 0.0
+.\discretionary replacing 1
+..\TU/NewCM10(2)/m/n/10 -
+.|\TU/NewCM10(2)/m/n/10 -
+.\TU/NewCM10(2)/m/n/10 -
+.\penalty 10000
+.\glue 0.0
+.\TU/NewCM10(2)/m/n/10 Regular.otf]/OT:script=cyrl;language=SRB;mapping=tex
+.\kern 0.0
+.\discretionary replacing 1
+..\TU/NewCM10(2)/m/n/10 -
+.|\TU/NewCM10(2)/m/n/10 -
+.\TU/NewCM10(2)/m/n/10 -
+.\penalty 10000
+.\glue 0.0
+.\TU/NewCM10(2)/m/n/10 text;”
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/NewCM10(2)/m/n/10 at
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/NewCM10(2)/m/n/10 10.0pt
+! OK.
+<to be read again> 
+                   \begingroup 
+l. ...\START\showbox0\showbox2\END

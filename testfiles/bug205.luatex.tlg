@@ -1,0 +1,243 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+(bug205.toc)
+\tf@toc=\write...
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: English, variant=american
+\l@naustrian = a dialect from \language\l@ngerman 
+Completed box being shipped out [1]
+\vbox(633.0+0.0)x407.0, direction TLT
+.\glue 16.0
+.\vbox(617.0+0.0)x345.0, shifted 62.0, direction TLT
+..\vbox(12.0+0.0)x345.0, glue set 12.0fil, direction TLT
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x345.0, direction TLT
+....\hbox(0.0+0.0)x345.0, direction TLT
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(550.0+0.0)x345.0, glue set 400.47003fill, direction TLT
+...\write-{}
+...\write1{\@writefile{toc}{\selectlanguage *[]{german}}}
+...\glue(\topskip) 0.00641
+...\hbox(9.99359+0.0864)x345.0, glue set 219.01443fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x0.0, direction TLT
+.....\glue 0.0
+....\TU/lmr/bx/n/14.4 I
+....\TU/lmr/bx/n/14.4 n
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/14.4 -
+....\TU/lmr/bx/n/14.4 h
+....\TU/lmr/bx/n/14.4 a
+....\TU/lmr/bx/n/14.4 l
+....\TU/lmr/bx/n/14.4 t
+....\TU/lmr/bx/n/14.4 s
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/14.4 -
+....\TU/lmr/bx/n/14.4 v
+....\kern-0.4464 (font)
+....\TU/lmr/bx/n/14.4 e
+....\TU/lmr/bx/n/14.4 r
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/14.4 -
+....\TU/lmr/bx/n/14.4 z
+....\TU/lmr/bx/n/14.4 e
+....\TU/lmr/bx/n/14.4 i
+....\TU/lmr/bx/n/14.4 c
+....\kern-0.4464 (font)
+....\TU/lmr/bx/n/14.4 h
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/14.4 -
+....\TU/lmr/bx/n/14.4 n
+....\TU/lmr/bx/n/14.4 i
+....\TU/lmr/bx/n/14.4 s
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+...\penalty -300
+...\glue 15.08499 plus 4.31 minus 0.86198
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 8.0352
+...\hbox(9.8784+2.88)x345.0, glue set 201.69128fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(9.4464+0.0)x22.50719, direction TLT
+.....\glue 0.0
+.....\TU/lmr/bx/n/14.4 1
+.....\glue 14.4
+....\TU/lmr/bx/n/14.4 J
+....\TU/lmr/bx/n/14.4 a
+....\TU/lmr/bx/n/14.4 n
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/14.4 -
+.....= \kern-0.4464 (font)
+....\TU/lmr/bx/n/14.4 u
+....\TU/lmr/bx/n/14.4 a
+....\TU/lmr/bx/n/14.4 r
+....\TU/lmr/bx/n/14.4 y
+....\glue(\spaceskip) 5.4 plus 2.7 minus 1.8
+....\TU/lmr/bx/n/14.4 1
+....\TU/lmr/bx/n/14.4 9
+....\TU/lmr/bx/n/14.4 ,
+....\glue(\spaceskip) 5.4 plus 3.37498 minus 1.44
+....\TU/lmr/bx/n/14.4 2
+....\TU/lmr/bx/n/14.4 0
+....\TU/lmr/bx/n/14.4 1
+....\TU/lmr/bx/n/14.4 8
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {1}\protect \today }{\thepage }{}\protected@file@percent }}
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\write1{\@writefile{toc}{\selectlanguage *[]{german}}}
+...\penalty 10000
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 5.2416
+...\hbox(9.8784+0.1728)x345.0, glue set 210.24487fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(9.4464+0.0)x22.50719, direction TLT
+.....\glue 0.0
+.....\TU/lmr/bx/n/14.4 2
+.....\glue 14.4
+....\TU/lmr/bx/n/14.4 1
+....\TU/lmr/bx/n/14.4 9
+....\TU/lmr/bx/n/14.4 .
+....\glue(\spaceskip) 5.4 plus 2.7 minus 1.8
+....\TU/lmr/bx/n/14.4 J
+....\TU/lmr/bx/n/14.4 a
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/14.4 -
+....\TU/lmr/bx/n/14.4 n
+....\kern-0.4464 (font)
+....\TU/lmr/bx/n/14.4 u
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/14.4 -
+....\TU/lmr/bx/n/14.4 a
+....\TU/lmr/bx/n/14.4 r
+....\glue(\spaceskip) 5.4 plus 2.7 minus 1.8
+....\TU/lmr/bx/n/14.4 2
+....\TU/lmr/bx/n/14.4 0
+....\TU/lmr/bx/n/14.4 1
+....\TU/lmr/bx/n/14.4 8
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {2}\protect \today }{\thepage }{}\protected@file@percent }}
+...\penalty 10000
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\write1{\@writefile{toc}{\selectlanguage *[variant=austrian]{german}}}
+...\penalty 10000
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 7.94879
+...\hbox(9.8784+0.1728)x345.0, glue set 210.28809fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(9.4464+0.1728)x22.50719, direction TLT
+.....\glue 0.0
+.....\TU/lmr/bx/n/14.4 3
+.....\glue 14.4
+....\TU/lmr/bx/n/14.4 1
+....\TU/lmr/bx/n/14.4 9
+....\TU/lmr/bx/n/14.4 .
+....\glue(\spaceskip) 5.4 plus 2.7 minus 1.8
+....\TU/lmr/bx/n/14.4 J
+....\TU/lmr/bx/n/14.4 ^^e4
+....\TU/lmr/bx/n/14.4 n
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/14.4 -
+....\TU/lmr/bx/n/14.4 n
+....\TU/lmr/bx/n/14.4 e
+....\TU/lmr/bx/n/14.4 r
+....\glue(\spaceskip) 5.4 plus 2.7 minus 1.8
+....\TU/lmr/bx/n/14.4 2
+....\TU/lmr/bx/n/14.4 0
+....\TU/lmr/bx/n/14.4 1
+....\TU/lmr/bx/n/14.4 8
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {3}\protect \today }{\thepage }{}\protected@file@percent }}
+...\penalty 10000
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\write1{\@writefile{toc}{\selectlanguage *[]{german}}}
+...\penalty 10000
+...\write1{\@writefile{toc}{\selectlanguage *[]{dutch}}}
+...\penalty 10000
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 8.0352
+...\hbox(9.79199+2.88)x345.0, glue set 213.65767fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(9.47519+0.0)x22.50719, direction TLT
+.....\glue 0.0
+.....\TU/lmr/bx/n/14.4 4
+.....\glue 14.4
+....\TU/lmr/bx/n/14.4 1
+....\TU/lmr/bx/n/14.4 9
+....\penalty 10000
+....\glue(\spaceskip) 5.4 plus 2.7 minus 1.8
+....\TU/lmr/bx/n/14.4 j
+....\TU/lmr/bx/n/14.4 a
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/14.4 -
+....\TU/lmr/bx/n/14.4 n
+....\kern-0.4464 (font)
+....\TU/lmr/bx/n/14.4 u
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/14.4 -
+....\TU/lmr/bx/n/14.4 a
+....\discretionary (penalty 50)
+.....< \TU/lmr/bx/n/14.4 -
+....\TU/lmr/bx/n/14.4 r
+....\TU/lmr/bx/n/14.4 i
+....\glue(\spaceskip) 5.4 plus 2.7 minus 1.8
+....\TU/lmr/bx/n/14.4 2
+....\TU/lmr/bx/n/14.4 0
+....\TU/lmr/bx/n/14.4 1
+....\TU/lmr/bx/n/14.4 8
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {4}\protect \today }{\thepage }{}\protected@file@percent }}
+...\penalty 10000
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\write1{\@writefile{toc}{\selectlanguage *[]{german}}}
+...\penalty 10000
+...\glue 0.0 plus 1.0fill
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 23.34
+..\hbox(6.66+0.0)x345.0, direction TLT
+...\hbox(6.66+0.0)x345.0, glue set 170.0fil, direction TLT
+....\glue 0.0 plus 1.0fil
+....\TU/lmr/m/n/10 1
+....\glue 0.0 plus 1.0fil

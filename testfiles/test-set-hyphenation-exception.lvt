@@ -1,3 +1,4 @@
+\input{regression-test.tex}
 \documentclass{article}
 \usepackage{polyglossia}
 \setmainlanguage{english}

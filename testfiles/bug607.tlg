@@ -1,0 +1,173 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: English, variant=american
+LaTeX Font Info:    Font shape `TU/NewCM10(0)/m/sl' in size <10> not available
+(Font)              Font shape `TU/NewCM10(0)/m/it' tried instead on input line ....
+Completed box being shipped out [1]
+\vbox(633.0+0.0)x407.0
+.\glue 16.0
+.\vbox(617.0+0.0)x345.0, shifted 62.0
+..\vbox(12.0+0.0)x345.0, glue set 4.95fil
+...\glue 0.0 plus 1.0fil
+...\hbox(7.05+0.21999)x345.0
+....\hbox(7.05+0.21999)x345.0, glue set 296.66fil
+.....\TU/NewCM10(0)/m/it/10 1
+.....\glue 10.0
+.....\TU/NewCM10(0)/m/it/10 ТЕСТ
+.....\glue 0.0 plus 1.0fil
+.....\TU/NewCM10(0)/m/n/10 1
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(550.0+0.0)x345.0, glue set 478.03595fil
+...\write-{}
+...\write1{\@writefile{toc}{\selectlanguage *[script=Cyrillic]{serbian}}}
+...\glue(\topskip) 0.1216
+...\hbox(9.8784+0.08638)x345.0, glue set 289.40161fil
+....\hbox(9.43199+0.0)x22.68
+.....\glue 0.0
+.....\TU/NewCM10(0)/b/n/14.4 1
+.....\glue 14.4
+....\TU/NewCM10(0)/b/n/14.4 Тест
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\marks2{\MakeUppercase    []{1\hskip 1em\relax Тест}}
+...\marks3{\MakeUppercase    []{1\hskip 1em\relax Тест}}
+...\mark{{}{\MakeUppercase    []{1\hskip 1em\relax Тест}}}
+...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {1}Тест}{\thepage }{}\protected@file@percent }}
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 4.97362
+...\hbox(6.94+0.10999)x345.0, glue set 272.62999fil
+....\hbox(0.0+0.0)x15.0
+....\TU/lmr/m/n/10 This
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 is
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 a
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 test
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty -51
+...\glue 8.0 plus 2.0 minus 4.0
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 5.03001
+...\hbox(6.86+2.04999)x345.0, glue set 233.30998fil
+....\TU/NewCM10(0)/b/n/10 Теорема
+....\kern 0.0
+....\glue 3.83 plus 1.915 minus 1.27666
+....\TU/NewCM10(0)/b/n/10 1
+....\kern 0.0
+....\TU/NewCM10(0)/b/n/10 .
+....\glue 5.0 plus 1.0 minus 1.0
+....\TU/NewCM10(0)/m/it/10 То
+....\glue 3.58 plus 1.79 minus 1.19333
+....\TU/NewCM10(0)/m/it/10 је
+....\glue 3.58 plus 1.79 minus 1.19333
+....\TU/NewCM10(0)/m/it/10 тест
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty -51
+...\glue 8.0 plus 2.0 minus 4.0
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 3.12001
+...\hbox(6.83+2.04999)x345.0, glue set 285.57999fil
+....\hbox(0.0+0.0)x15.0
+....\TU/NewCM10(0)/m/n/10 То
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/NewCM10(0)/m/n/10 је
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/NewCM10(0)/m/n/10 тест
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue -2.04999
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x345.0
+...\hbox(0.0+0.0)x345.0
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: English, variant=american
+Completed box being shipped out [2]
+\vbox(633.0+0.0)x407.0
+.\glue 16.0
+.\vbox(617.0+0.0)x345.0, shifted 62.0
+..\vbox(12.0+0.0)x345.0, glue set 4.95fil
+...\glue 0.0 plus 1.0fil
+...\hbox(7.05+0.21999)x345.0
+....\hbox(7.05+0.21999)x345.0, glue set 296.66fil
+.....\TU/NewCM10(0)/m/it/10 1
+.....\glue 10.0
+.....\TU/NewCM10(0)/m/it/10 ТЕСТ
+.....\glue 0.0 plus 1.0fil
+.....\TU/NewCM10(0)/m/n/10 2
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(550.0+0.0)x345.0, glue set 497.95001fill
+...\glue(\topskip) 3.06
+...\hbox(6.94+0.10999)x345.0, glue set 272.62999fil
+....\hbox(0.0+0.0)x15.0
+....\TU/lmr/m/n/10 This
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 is
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 a
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/lmr/m/n/10 test
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty -51
+...\glue 8.0 plus 2.0 minus 4.0
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 5.03001
+...\hbox(6.86+2.04999)x345.0, glue set 233.30998fil
+....\TU/NewCM10(0)/b/n/10 Теорема
+....\kern 0.0
+....\glue 3.83 plus 1.915 minus 1.27666
+....\TU/NewCM10(0)/b/n/10 2
+....\kern 0.0
+....\TU/NewCM10(0)/b/n/10 .
+....\glue 5.0 plus 1.0 minus 1.0
+....\TU/NewCM10(0)/m/it/10 То
+....\glue 3.58 plus 1.79 minus 1.19333
+....\TU/NewCM10(0)/m/it/10 је
+....\glue 3.58 plus 1.79 minus 1.19333
+....\TU/NewCM10(0)/m/it/10 тест
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty -51
+...\glue 8.0 plus 2.0 minus 4.0
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 3.12001
+...\hbox(6.83+2.04999)x345.0, glue set 285.57999fil
+....\hbox(0.0+0.0)x15.0
+....\TU/NewCM10(0)/m/n/10 То
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/NewCM10(0)/m/n/10 је
+....\glue 3.33 plus 1.665 minus 1.11
+....\TU/NewCM10(0)/m/n/10 тест
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue 0.0 plus 1.0fill
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x345.0
+...\hbox(0.0+0.0)x345.0

@@ -1,0 +1,133 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+(bug205.toc)
+\tf@toc=\write...
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: English, variant=american
+Package polyglossia Info: Option: English, variant=american
+\l@naustrian = a dialect from \language\l@ngerman 
+Completed box being shipped out [1]
+\vbox(633.0+0.0)x407.0
+.\glue 16.0
+.\vbox(617.0+0.0)x345.0, shifted 62.0
+..\vbox(12.0+0.0)x345.0, glue set 12.0fil
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x345.0
+....\hbox(0.0+0.0)x345.0
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(550.0+0.0)x345.0, glue set 400.47005fill
+...\write-{}
+...\write1{\@writefile{toc}{\selectlanguage *[]{german}}}
+...\glue(\topskip) 0.00641
+...\hbox(9.99359+0.08638)x345.0, glue set 219.01445fil
+....\hbox(0.0+0.0)x0.0
+.....\glue 0.0
+....\TU/lmr/bx/n/14.4 Inhaltsverzeichnis
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+...\penalty -300
+...\glue 15.08499 plus 4.31 minus 0.86198
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 8.03522
+...\hbox(9.8784+2.87999)x345.0, glue set 201.69127fil
+....\hbox(9.4464+0.0)x22.50719
+.....\glue 0.0
+.....\TU/lmr/bx/n/14.4 1
+.....\glue 14.4
+....\TU/lmr/bx/n/14.4 January
+....\glue 5.4 plus 2.7 minus 1.79999
+....\TU/lmr/bx/n/14.4 19,
+....\glue 5.4 plus 3.37498 minus 1.43999
+....\TU/lmr/bx/n/14.4 2018
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {1}\protect \today }{\thepage }{}\protected@file@percent }}
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\write1{\@writefile{toc}{\selectlanguage *[]{german}}}
+...\penalty 10000
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 5.24161
+...\hbox(9.8784+0.17279)x345.0, glue set 210.24487fil
+....\hbox(9.4464+0.0)x22.50719
+.....\glue 0.0
+.....\TU/lmr/bx/n/14.4 2
+.....\glue 14.4
+....\TU/lmr/bx/n/14.4 19.
+....\glue 5.4 plus 2.7 minus 1.79999
+....\TU/lmr/bx/n/14.4 Januar
+....\glue 5.4 plus 2.7 minus 1.79999
+....\TU/lmr/bx/n/14.4 2018
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {2}\protect \today }{\thepage }{}\protected@file@percent }}
+...\penalty 10000
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\write1{\@writefile{toc}{\selectlanguage *[variant=austrian]{german}}}
+...\penalty 10000
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 7.9488
+...\hbox(9.8784+0.17279)x345.0, glue set 210.28807fil
+....\hbox(9.4464+0.17279)x22.50719
+.....\glue 0.0
+.....\TU/lmr/bx/n/14.4 3
+.....\glue 14.4
+....\TU/lmr/bx/n/14.4 19.
+....\glue 5.4 plus 2.7 minus 1.79999
+....\TU/lmr/bx/n/14.4 J^^e4nner
+....\glue 5.4 plus 2.7 minus 1.79999
+....\TU/lmr/bx/n/14.4 2018
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {3}\protect \today }{\thepage }{}\protected@file@percent }}
+...\penalty 10000
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\write1{\@writefile{toc}{\selectlanguage *[]{german}}}
+...\penalty 10000
+...\write1{\@writefile{toc}{\selectlanguage *[]{dutch}}}
+...\penalty 10000
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\parskip) 0.0
+...\glue(\baselineskip) 8.03522
+...\hbox(9.79199+2.87999)x345.0, glue set 213.65765fil
+....\hbox(9.47519+0.0)x22.50719
+.....\glue 0.0
+.....\TU/lmr/bx/n/14.4 4
+.....\glue 14.4
+....\TU/lmr/bx/n/14.4 19
+....\penalty 10000
+....\glue 5.4 plus 2.7 minus 1.79999
+....\TU/lmr/bx/n/14.4 januari
+....\glue 5.4 plus 2.7 minus 1.79999
+....\TU/lmr/bx/n/14.4 2018
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {4}\protect \today }{\thepage }{}\protected@file@percent }}
+...\penalty 10000
+...\penalty 10000
+...\glue 9.913 plus 0.86198
+...\write1{\@writefile{toc}{\selectlanguage *[]{german}}}
+...\penalty 10000
+...\glue 0.0 plus 1.0fill
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 23.34
+..\hbox(6.66+0.0)x345.0
+...\hbox(6.66+0.0)x345.0, glue set 170.0fil
+....\glue 0.0 plus 1.0fil
+....\TU/lmr/m/n/10 1
+....\glue 0.0 plus 1.0fil

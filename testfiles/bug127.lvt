@@ -1,0 +1,9 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setdefaultlanguage[spelling=new]{german}
+\renewcommand*\familydefault{\sfdefault}
+\begin{document}
+\setbox0=\hbox{test}
+\START\showbox0\END
+

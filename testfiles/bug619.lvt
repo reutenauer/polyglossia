@@ -1,0 +1,14 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+\setotherlanguage{hebrew}
+\newfontfamily\hebrewfont{DavidCLM}[
+  UprightFont = *-Medium,
+  BoldFont = *-Bold,
+  Extension = .otf,
+  ItalicFont = *-MediumItalic,
+  BoldItalicFont = *-BoldItalic]
+\begin{document}
+\setbox0=\hbox{\texthebrew{\texthebrew{שלום}} \texttt{Hello}}
+\START\showbox0\END

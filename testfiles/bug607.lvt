@@ -1,0 +1,38 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{amsthm}
+\newtheorem{THM}{Теорема}
+\usepackage{polyglossia}
+\setdefaultlanguage[script=Cyrillic]{serbian}
+\setotherlanguage{english}
+\newfontfamily\cyrillicfont{NewCM10}[%
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  Extension = .otf,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic]
+\pagestyle{headings}
+\begin{document}
+\START
+\showoutput
+\section{Тест}
+
+\foreignlanguage{english}{This is a test}
+
+
+\begin{THM}
+	То је тест 
+\end{THM}
+	То је тест 
+
+
+\newpage
+\textenglish{This is a test}
+
+\begin{THM}
+	То је тест 
+\end{THM}
+	То је тест
+\vfill\break
+\END
+

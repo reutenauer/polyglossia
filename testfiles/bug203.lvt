@@ -1,0 +1,15 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage[Script=Cyrillic]{serbian}
+\setmainfont{NewCM10}[%
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  Extension = .otf,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic]
+\begin{document}
+\setbox0=\hbox{\itshape\normalfont\bfseries Test}
+\setbox2=\hbox{\fontname\font}
+\START\showbox0\showbox2\END
+
