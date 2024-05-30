@@ -1453,49 +1453,33 @@
 }
 
 % This saves the normalfont for the latin script since we may change normalfont in other scripts
-\cs_set_eq:cc { normalfontlatin } { normalfont }
+\DeclareCommandCopy \normalfontlatin \normalfont
 
 % Provide default fonts (as set with \setmainfont, \setsansfont and \setmonofont)
 % for Latin scripts and as a fallback for non-Latin scripts.
-\cs_set_protected:Nn \xpg_defaultfont_rm:
-{
-   \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}
-   \fontfamily\rmdefault
-   \hook_use:n { rmfamily }
-   \selectfont
-}
+\DeclareDocumentCommand \rmfamilylatin { }
+  {
+    \tl_if_empty:NF \g__fontspec_nfss_enc_tl { \fontencoding \g__fontspec_nfss_enc_tl }
+    \fontfamily \rmdefault
+    \hook_use:n { rmfamily }
+    \selectfont
+  }
 
-\cs_set_protected:Nn \xpg_defaultfont_sf:
-{
-   \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}
-   \fontfamily\sfdefault
-   \hook_use:n { sffamily }
-   \selectfont
-}
+\DeclareDocumentCommand \sffamilylatin { }
+  {
+    \tl_if_empty:NF \g__fontspec_nfss_enc_tl { \fontencoding \g__fontspec_nfss_enc_tl }
+    \fontfamily \sfdefault
+    \hook_use:n { sffamily }
+    \selectfont
+  }
 
-\cs_set_protected:Nn \xpg_defaultfont_tt:
-{
-   \tl_if_empty:NF{\g__fontspec_nfss_enc_tl}{\fontencoding{\g__fontspec_nfss_enc_tl}}
-   \fontfamily\ttdefault
-   \hook_use:n { ttfamily } 
-   \selectfont
-}
-
-\cs_new:Nn \__xpg_patch_fontfamilies:
-{
-  % This robustifies the redefinitions of \<xx>family (suggestion by Enrico Gregorio)
-  % e.g. to prevent expansion of the \familytype redefinition in auxiliary files
-  \tl_put_right:cn {rmfamily~} {\tl_set:Nn \familytype {rm}}
-  \tl_put_right:cn {sffamily~} {\tl_set:Nn \familytype {sf}}
-  \tl_put_right:cn {ttfamily~} {\tl_set:Nn \familytype {tt}}
-}
-
-% These switches activate the default fonts
-% Note that a simple \let\rmfamilylatin=\rmfamily
-% does not work reliably (see #24)
-\cs_set_eq:cc{rmfamilylatin}{xpg_defaultfont_rm:}
-\cs_set_eq:cc{sffamilylatin}{xpg_defaultfont_sf:}
-\cs_set_eq:cc{ttfamilylatin}{xpg_defaultfont_tt:}
+\DeclareDocumentCommand \ttfamilylatin { }
+  {
+    \tl_if_empty:NF \g__fontspec_nfss_enc_tl { \fontencoding \g__fontspec_nfss_enc_tl }
+    \fontfamily \ttdefault
+    \hook_use:n { ttfamily } 
+    \selectfont
+  }
 
 \cs_new:Nn \xpg_set_familydefault:
 {
@@ -1508,14 +1492,6 @@
            { \tl_set:Nn \familytype {tt} }
            { \tl_set:Nn \familytype {rm} }
      }
-  \__xpg_patch_fontfamilies:
-  % This (re-)saves the normalfont for the latin script since we may
-  % change normalfont in other scripts
-  \cs_set_eq:cc{ normalfontlatin }{ normalfont }
-  % And for all cases, we also reset \<xx>familylatin
-  \cs_set_eq:cc{ rmfamilylatin }{ xpg_defaultfont_rm: }
-  \cs_set_eq:cc{ sffamilylatin }{ xpg_defaultfont_sf: }
-  \cs_set_eq:cc{ ttfamilylatin }{ xpg_defaultfont_tt: }
 }
 
 \cs_set_nopar:Nn \xpg_select_fontfamily:n
@@ -1530,16 +1506,8 @@
 
 \cs_set_protected:Npn \xpg_select_default_fontfamily:n #1
   {
-    \tl_set:Ne \l_tmpa_tl { \familydefault }
-    \tl_set:Ne \l_tmpb_tl { \sfdefault }
-    \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
-       { \tl_set:Nn \familytype {sf} }
-       { \tl_set_eq:NN \l_tmpb_tl \ttdefault
-         \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
-             { \tl_set:Nn \familytype {tt} }
-             { \tl_set:Nn \familytype {rm} }
-       }
-     \xpg_select_fontfamily:n{#1}
+     \xpg_set_familydefault:
+     \xpg_select_fontfamily:n { #1 }
   }
 
 \cs_new_nopar:Nn \xpg_set_normalfont:n
@@ -1548,13 +1516,13 @@
   \cs_set_eq:cc { sffamily } { #1@font@sf }
   \cs_set_eq:cc { ttfamily } { #1@font@tt }
   \cs_set_nopar:Npn \normalfont 
-      { \xpg_select_default_fontfamily:n {#1}
-        \fontseries{\seriesdefault}\selectfont
-        \fontshape{\shapedefault}
-        \hook_use:n { normalfont }
-        \selectfont
-      }
-  \cs_set_nopar:Npn \reset@font {\protect\normalfont}
+    { 
+      \xpg_select_default_fontfamily:n {#1}
+      \fontseries \seriesdefault
+      \fontshape \shapedefault
+      \hook_use:n { normalfont }
+      \selectfont
+    }
 }
 
 \cs_gset_eq:cc { @@fterindentfalse } { @afterindentfalse }
