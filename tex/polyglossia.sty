@@ -574,7 +574,7 @@
 
 \cs_new_nopar:Npn \__xpg_french_spacing:n #1
   { 
-    \str_case_e:nnF { \prop_item:Nn \l_xpg_langsetup_prop { #1 / frenchspacing } }
+    \str_case_e:nn { \prop_item:Nn \l_xpg_langsetup_prop { #1 / frenchspacing } }
       {
         { true } { \frenchspacing }
         { false } { \nonfrenchspacing } 
@@ -583,7 +583,7 @@
 
 \cs_new_nopar:Npn \__xpg_indent_first:n #1
   {
-    \str_case_e:nnF { \prop_item:Nn \l_xpg_langsetup_prop { #1 / frenchspacing } }
+    \str_case_e:nn { \prop_item:Nn \l_xpg_langsetup_prop { #1 / frenchspacing } }
       {
         { true } { \__xpg_french_indent: }
         { false } { \__xpg_no_french_indent: } 
