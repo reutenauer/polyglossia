@@ -375,8 +375,8 @@
 %%       or even better localdigits = {0123456789} for fully automatic setup
 \NewDocumentCommand \PolyglossiaSetup { m m }
 {
-  \__xpg_keys_define_lang:n{#1}
-  \keys_set:nn { polyglossia / #1 } { #2 }
+  \__xpg_keys_define_lang:n { #1 }
+  \SetLanguageKeys { #1 } { #2 }
   \__xpg_setup_hyphen:n {#1}
   % we initialize this so that we can append below
   \cs_gset:cpn {init@extras@#1} {}
@@ -390,10 +390,16 @@
 % different options (variant, script, etc.) result
 % in different babel names, bcp47 specification,
 % or OpenType language or script tags.
+\cs_new:Npn \__xpg_update_langsetup:nnn #1 #2 #3
+  {
+    \prop_put:Nnn \l_xpg_langsetup_prop { #1 / #2 } { #3 }
+  }
 \DeclareDocumentCommand \SetLanguageKeys { m m }
-{
-  \clist_map_inline:nn { #1 } { \keys_set:nn { polyglossia / ##1 } { #2 } }
-}
+  {
+    \keyval_parse:nnn { \errorrrrrrrrrrr }
+      { \__xpg_update_langsetup:nnn { #1 } }
+      { #2 }
+  }
 
 \bool_new:N \l__xpg_have_hyphen_bool
 % setup hyphennames from a str list of hyphen
@@ -489,203 +495,19 @@
 \prop_new_linked:N \l_xpg_langsetup_prop
 
 \cs_new_protected:Npn \__xpg_keys_define_lang:n #1
-{
-  \keys_define:nn {polyglossia}
-  {
-    % the script font
-    #1 / script
-       .code:n = {
-          \prop_put:Nnn \l_xpg_langsetup_prop {#1/script}{##1}
-          \prop_put:Nne \l_xpg_langsetup_prop {#1/lcscript}
-               {\tl_if_empty:nF{##1}{\str_lowercase:n{##1}}}
-    },
-    #1 / script
-       .value_required:n = true,
-    #1 / script
-       .initial:n = latin,
-    % the opentype script tag
-    #1 / scripttag
-       .code:n = {\prop_put:Nnn \l_xpg_langsetup_prop {#1/scripttag}{##1}},
-    #1 / scripttag
-       .default:n = {},
-    #1 / scripttag
-      .initial:n = {},
-    % the language full name
-    #1 / language
-       .code:n = {\prop_put:Nnn \l_xpg_langsetup_prop {#1/language}{##1}},
-    #1 / language
-       .value_required:n = true,
-    #1 / language
-        .initial:x = {\str_uppercase:n#1},
-    % the language tag
-    #1 / langtag
-       .code:n = {\prop_put:Nnn \l_xpg_langsetup_prop {#1/langtag}{##1}},
-    #1 / langtag
-       .value_required:n = true,
-    #1 / langtag
-       .initial:n = {},
-    % the BCP-47 tag
-    #1 / bcp47
-       .code:n = {\prop_put:Nnn \l_xpg_langsetup_prop {#1/bcp47}{##1}},
-    #1 / bcp47
-       .value_required:n = true,
-    #1 / bcp47
-       .initial:n = {},
-    % the BCP-47 language tag
-    #1 / bcp47-language
-       .code:n = {\prop_put:Nnn \l_xpg_langsetup_prop {#1/bcp47-language}{##1}},
-    #1 / bcp47-language
-       .value_required:n = true,
-    #1 / bcp47-language
-       .initial:n = {},
-    % the BCP-47 region tag
-    #1 / bcp47-region
-       .code:n = {\prop_put:Nnn \l_xpg_langsetup_prop {#1/bcp47-region}{##1}},
-    #1 / bcp47-region
-       .value_required:n = false,
-    #1 / bcp47-region
-       .initial:n = {},
-    % the BCP-47 script tag
-    #1 / bcp47-script
-       .code:n =
-         {
-           \prop_put:Nnn \l_xpg_langsetup_prop {#1/bcp47-script}{##1}
-           \prop_put:Nne \l_xpg_langsetup_prop {#1/lc-bcp47-script}
-               {\tl_if_empty:nF{##1}{\str_lowercase:n{##1}}}
-         },
-    #1 / bcp47-script
-       .value_required:n = true,
-    #1 / bcp47-script
-       .initial:n = {},
-    % the BCP-47 variant tag
-    #1 / bcp47-variant
-       .code:n = {\prop_put:Nnn \l_xpg_langsetup_prop {#1/bcp47-variant}{##1}},
-    #1 / bcp47-variant
-       .value_required:n = false,
-    #1 / bcp47-variant
-       .initial:n = {},
-    % the BCP-47 extension-t tag
-    #1 / bcp47-extension-t
-       .code:n = {\prop_put:Nnn \l_xpg_langsetup_prop {#1/bcp47-extension-t}{##1}},
-    #1 / bcp47-extension-t
-       .value_required:n = false,
-    #1 / bcp47-extension-t
-       .initial:n = {},
-    % the BCP-47 extension-u tag
-    #1 / bcp47-extension-u
-       .code:n = {\prop_put:Nnn \l_xpg_langsetup_prop {#1/bcp47-extension-u}{##1}},
-    #1 / bcp47-extension-u
-       .value_required:n = false,
-    #1 / bcp47-extension-u
-       .initial:n = {},
-    % the BCP-47 extension-x tag
-    #1 / bcp47-extension-x
-       .code:n = {\prop_put:Nnn \l_xpg_langsetup_prop {#1/bcp47-extension-x}{##1}},
-    #1 / bcp47-extension-x
-       .value_required:n = false,
-    #1 / bcp47-extension-x
-       .initial:n = {},
-    % the BCP-47 casing alias
-    #1 / bcp47-casing
-       .code:n = {\prop_put:Nnn \l_xpg_langsetup_prop {#1/bcp47-casing}{##1}},
-    #1 / bcp47-casing
-       .value_required:n = false,
-    #1 / bcp47-casing
-       .initial:n = {},
-    % hyphennames
-    #1 / hyphennames
-    .code:n = {
-      \clist_set:Nn{\l_tmpa_clist}{##1}
-      \prop_put:Nne \l_xpg_langsetup_prop {#1/hyphennames}{\clist_use:Nn \l_tmpa_clist {,}}
-    },
-    #1 / hyphennames
-       .value_required:n = true,
-    #1 / hyphennames
-      .initial:x = {\c_empty_clist},
-    % direction
-    #1 / direction
-    .  code:n = {
-           \str_case_e:nnTF{##1}{
-             {LR}{}
-             {RL}{\RequireBidi}
-           }
-           { \prop_put:Nnn \l_xpg_langsetup_prop {#1/direction}{##1} }
-           { \xpg_error_msg:n {Unknown~ direction~ "##1"~ for~ language~ "#1"} }
-       },
-    #1 / direction
-      .value_required:n = true,
-    #1 / direction
-      .initial:n = {LR},
-    % minimal left and right hyphenation minima using
-    #1 / hyphenmins
-    .code:n = {
-      % check syntax
-      \int_compare:nNnF { \clist_count:n {##1} } = {2}
-        { \xpg_error_msg:n {hypenmins~should~be~a~list~of~two~entries,~got~"##1"} }
-      % set prop
-      \prop_put:Nnn \l_xpg_langsetup_prop {#1/hyphenmins} {##1}
-    },
-    #1 / hyphenmins
-      .value_required:n = true,
-    #1 / hyphenmins
-     .initial:n = {2,3},
-    % minimal length for hyphenation (LuaTeX only)
-    #1 / totalhyphenmin
-    .code:n = {
-      % check syntax
-      \int_compare:nNnF { \clist_count:n {##1} } = {1}
-        { \xpg_error_msg:n {totalhyphenhypenmin~should~be~a~single~entry,~got~"##1"} }
-      % set prop
-      \prop_put:Nnn \l_xpg_langsetup_prop {#1/totalhyphenmin} {##1}
-    },
-    #1 / totalhyphenmin
-      .value_required:n = false,
-    % frenchspacing
-    #1 / frenchspacing  .bool_gset:c = g__xpg_#1_fs_bool ,
-    #1 / frenchspacing  .default:n = true ,
-    #1 / frenchspacing  .initial:n = false ,
-    % indent first line
-    #1 / indentfirst  .bool_gset:c = g__xpg_#1_if_bool ,
-    #1 / indentfirst  .default:n = true ,
-    #1 / indentfirst  .initial:n = false ,
-    % environment name
-    #1 / envname
-       .code:n = {
-           \prop_put:Nnn \l_xpg_langsetup_prop {#1/envname}{##1}
-       },
-    #1/ envname.value_required:n = true,
-    #1/ envname.initial:n = {#1},
-    % babel name
-    #1 / babelname
-       .code:n = {
-           \prop_put:Nnn \l_xpg_langsetup_prop {#1/babelname}{##1}
-       },
-    #1/ babelname.value_required:n = true,
-    #1/ babelname.initial:n = {#1},
-    % default numerals
-    #1 / localnumeral
-         . code:n =  {
-            \prop_put:Nnn \l_xpg_langsetup_prop {#1/localnumeral}{##1}
-            \prop_put:Nnn \l_xpg_langsetup_prop {#1/Localnumeral}{##1}
-         },
-    #1 / localnumeral.value_required:n = true,
-    #1 / localnumeral.initial:n = {xpg_C_localnumeral:nn},
-    % uppercased
-    #1 / Localnumeral
-         . code:n =  {
-            \prop_put:Nnn \l_xpg_langsetup_prop {#1/Localnumeral}{##1}
-         },
-    #1 / Localnumeral.value_required:n = true,
-    #1 / Localnumeral.initial:n = {xpg_C_localnumeral:nn},
-    % environment define command (by default create the environment)
-    #1 / DefineCommandsCmd
-       .code:n = {\prop_put:Nnn \l_xpg_langsetup_prop {#1/DefineCommandsCmd}{##1}},
-    #1 / DefineCommandsCmd
-       .value_required:n = true,
-    #1 / DefineCommandsCmd
-      .initial:n = {xpg_define_language_commands:e}
+  {       
+    \prop_put:Nnn \l_xpg_langsetup_prop { #1 / script } { Latin }
+    \prop_put:Nnn \l_xpg_langsetup_prop { #1 / language } { \str_uppercase:n #1 }
+    \prop_put:Nnn \l_xpg_langsetup_prop { #1 / direction } { LR }
+    \prop_put:Nnn \l_xpg_langsetup_prop { #1 / hyphenmins } { 2, 3 }
+    \prop_put:Nnn \l_xpg_langsetup_prop { #1 / envname } { #1 }
+    \prop_put:Nnn \l_xpg_langsetup_prop { #1 / babelname } { #1 }
+    \prop_put:Nnn \l_xpg_langsetup_prop { #1 / DefineCommandsCmd } { xpg_define_language_commands:e }
+    \prop_put:Nnn \l_xpg_langsetup_prop { #1 / frenchspacing } { false }
+    \prop_put:Nnn \l_xpg_langsetup_prop { #1 / indentfirst } { false }
+    \prop_put:Nnn \l_xpg_langsetup_prop { #1 / localnumeral } { xpg_C_localnumeral:nn }
+    \prop_put:Nnn \l_xpg_langsetup_prop { #1 / Localnumeral } { xpg_C_localnumeral:nn }
   }
-}
 
 \DeclareExpandableDocumentCommand \babelname { }
   {
@@ -752,14 +574,20 @@
 
 \cs_new_nopar:Npn \__xpg_french_spacing:n #1
   { 
-    \bool_if:cTF { g__xpg_#1_fs_bool } 
-	{ \frenchspacing } { \nonfrenchspacing }
+    \str_case_e:nnF { \prop_item:Nn \l_xpg_langsetup_prop { #1 / frenchspacing } }
+      {
+        { true } { \frenchspacing }
+        { false } { \nonfrenchspacing } 
+      }
   }
 
 \cs_new_nopar:Npn \__xpg_indent_first:n #1
   {
-	\bool_if:cTF { g__xpg_#1_if_bool }
-	{ \__xpg_french_indent: } { \__xpg_no_french_indent: }
+    \str_case_e:nnF { \prop_item:Nn \l_xpg_langsetup_prop { #1 / frenchspacing } }
+      {
+        { true } { \__xpg_french_indent: }
+        { false } { \__xpg_no_french_indent: } 
+      }
   }
 
 \cs_new:Nn \__xpg_lang_set_par_direction:n
@@ -921,16 +749,16 @@
   {
     \cs_set_protected_nopar:cpn { #1family }
       {
-        \cs_if_exist_use:cF{ \languagename font#2 }
+        \cs_if_exist_use:cF { \languagename font#2 }
           {
-           \cs_if_exist_use:cF { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / lc-bcp47-script } font#2 }
+           \cs_if_exist_use:cF { \text_lowercase:n { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / bcp47-script } } font#2 }
               {
-                \str_if_eq:eeTF{ \prop_item:Ne \l_xpg_langsetup_prop { \languagename / lcscript } } { latin }
+                \str_if_eq:eeTF { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / script } } { Latin }
                 { \use_ii:nn } { \cs_if_exist_use:cF }
-                 { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / lcscript } font#2 }
+                 { \text_lowercase:n { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / script } } font#2 }
                   { 
                     \use:c { #1familylatin } 
-                    \str_if_eq:eeF{ \prop_item:Ne \l_xpg_langsetup_prop { \languagename / lcscript } } { latin }
+                    \str_if_eq:eeF { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / script } } { Latin }
                       {
                         \__xpg_add_font_feature_script:nee { #1 }
                             { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / scripttag } }

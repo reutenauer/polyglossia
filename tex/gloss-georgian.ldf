@@ -10,7 +10,8 @@
   scripttag=geor,
   langtag=KAT,
   hyphennames={georgian},
-   localnumeral=georgiannumerals
+  localnumeral=georgiannumerals,
+  Localnumeral=georgiannumerals
 }
 
 % BCP-47 compliant aliases

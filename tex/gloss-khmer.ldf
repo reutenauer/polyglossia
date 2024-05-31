@@ -10,7 +10,8 @@
   scripttag=khmr,
   langtag=KHM,
   hyphennames={nohyphenation},
-  localnumeral=khmernumerals
+  localnumeral=khmernumerals,
+  Localnumeral=khmernumerals
 }
 
 % BCP-47 compliant aliases

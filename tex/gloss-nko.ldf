@@ -8,9 +8,10 @@
   script=N'ko,
   scripttag=nko~,
   langtag=NKO,
-   hyphennames={nohyphenation},
+  hyphennames={nohyphenation},
   direction=RL,
-  localnumeral=nkonumerals
+  localnumeral=nkonumerals,
+  Localnumeral=nkonumerals
 }
 
 \RequirePackage{nkonumbers}%

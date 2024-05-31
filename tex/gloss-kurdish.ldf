@@ -21,7 +21,8 @@
   scripttag=arab,
   langtag=KUR,
   hyphennames={nohyphenation},
-   localnumeral=kurdishnumerals
+  localnumeral=kurdishnumerals,
+  Localnumeral=kurdishnumerals
 }
 
 % BCP-47 compliant aliases

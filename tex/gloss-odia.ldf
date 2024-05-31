@@ -17,7 +17,8 @@
   langtag=ODI,
   hyphennames={odia},
   hyphenmins={2,2},%CHECK
-   localnumeral=odianumerals
+  localnumeral=odianumerals,
+  Localnumeral=odianumerals
   %TODO nouppercase=true,
 }
 

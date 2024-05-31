@@ -13,7 +13,8 @@
   hyphennames={sanskrit,prakrit},
   hyphenmins={1,3},
   frenchspacing=true,
-  localnumeral=sanskritnumerals
+  localnumeral=sanskritnumerals,
+  Localnumeral=sanskritnumerals
 }
 
 % BCP-47 compliant aliases

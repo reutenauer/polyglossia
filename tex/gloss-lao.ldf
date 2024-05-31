@@ -11,7 +11,8 @@
   langtag=LAO,
   hyphennames={lao},
   hyphenmins={1,1},
-   localnumeral=laonumerals
+  localnumeral=laonumerals,
+  Localnumeral=laonumerals
   %TODO localalph={xxx@alph,xxx@Alph}
   %TODO localdigits=laonumber
 }

@@ -12,7 +12,8 @@
   langtag=HYE,
   hyphennames={armenian},
   hyphenmins={2,2},
-   localnumeral=armeniannumerals
+  localnumeral=armeniannumerals,
+  Localnumeral=armeniannumerals
 }
 
 % BCP-47 compliant aliases

@@ -17,7 +17,8 @@
   langtag=MAR,
   hyphennames={marathi},
   hyphenmins={2,2},%CHECK
-   localnumeral=marathinumerals
+  localnumeral=marathinumerals,
+  Localnumeral=marathinumerals
   %TODO nouppercase=true,
 }
 

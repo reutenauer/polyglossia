@@ -16,7 +16,8 @@
   scripttag=arab,
   langtag=URD,
   hyphennames={urdu,nohyphenation},
-   localnumeral=urdunumerals
+  localnumeral=urdunumerals,
+  Localnumeral=urdunumerals
   %TODO localalph={abjad,abjad}
 }
 

@@ -15,7 +15,8 @@
   scripttag=gur,
   langtag=pan,
 %%  hyphennames={panjabi,punjabi,gurmukhi}, TODO: implement fallback patterns (with ! prefix)
-   localnumeral=punjabinumerals
+  localnumeral=punjabinumerals,
+  Localnumeral=punjabinumerals
   %TODO nouppercase=true,
 }
 
