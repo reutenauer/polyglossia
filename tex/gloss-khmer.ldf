@@ -6,12 +6,11 @@
   bcp47-language=km,
   bcp47-region=KH,
   bcp47-script=Khmr,
-  script=Khmer,%
-  scripttag=khmr,%
-  langtag=KHM,%
-  hyphennames={nohyphenation},%
-  fontsetup=true,%
-  localnumeral=khmernumerals%
+  script=Khmer,
+  scripttag=khmr,
+  langtag=KHM,
+  hyphennames={nohyphenation},
+  localnumeral=khmernumerals
 }
 
 % BCP-47 compliant aliases

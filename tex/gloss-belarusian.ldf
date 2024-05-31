@@ -16,7 +16,6 @@
   hyphennames={belarusian},
   hyphenmins={2,2},
   frenchspacing=true,
-  fontsetup,
   localnumeral=belarusiannumerals,
   Localnumeral=Belarusiannumerals
 }

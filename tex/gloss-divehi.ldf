@@ -12,7 +12,6 @@
   langtag=DIV,% TODO Support DHV as well?
   direction=RL,
   hyphennames={nohyphenation},
-  fontsetup=true
 }
 
 % BCP-47 compliant aliases

@@ -12,7 +12,6 @@
   hyphenmins={2,2},
   langtag=LTH,
   indentfirst=true,
-  fontsetup=true
 }
 
 % BCP-47 compliant aliases

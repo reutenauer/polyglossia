@@ -12,7 +12,6 @@
   langtag=MLY,
   hyphennames={malay,melayu,bahasam,bahasai,indonesian,indon,bahasa},
   hyphenmins={2,2},
-  fontsetup=true
 }
 
 % BCP-47 compliant aliases

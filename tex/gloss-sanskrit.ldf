@@ -13,7 +13,6 @@
   hyphennames={sanskrit,prakrit},
   hyphenmins={1,3},
   frenchspacing=true,
-  fontsetup=false, % will be done below
   localnumeral=sanskritnumerals
 }
 
