@@ -15,7 +15,6 @@ Module polyglossia Info: Language data for serbian
 (polyglossia)            righthyphenmin^^I2
 (polyglossia)            synonyms^^I on input line ...
 Module polyglossia Info: Language serbian was not yet loaded; created with id 2 on input line ...
-Package polyglossia Info: Skipping automatic font setup for language serbian
 (../luavlna.sty
 Package: luavlna ....-..-.. luavlna
 (../kvoptions.sty

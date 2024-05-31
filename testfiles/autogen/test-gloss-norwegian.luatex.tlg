@@ -10,7 +10,6 @@ Module polyglossia Info: Language data for nynorsk
 (polyglossia)            righthyphenmin^^I2
 (polyglossia)            synonyms^^I on input line ...
 Module polyglossia Info: Language nynorsk was not yet loaded; created with id 2 on input line ...
-Package polyglossia Info: Skipping automatic font setup for language norwegian
 )
 Package polyglossia Info: Default language is norwegian
 > \box...=

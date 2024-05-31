@@ -1,6 +1,6 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 > \rmfamily=\protected macro:
-->\cs_if_exist_use:cF {latexfont}{\cs_if_exist_use:cF {\prop_item:Nn \l_xpg_langsetup_prop {latex/lc-bcp47-script}font}{\use_ii:nn {\prop_item:Nn \l_xpg_langsetup_prop {latex/lcscript}font}{\use:c {rmfamilylatin}\use_none:n {\__xpg_add_font_feature_script:nee {rm}{\prop_item:Nn \l_xpg_langsetup_prop {latex/scripttag}}{\prop_item:Nn \l_xpg_langsetup_prop {latex/script}}}}}\__xpg_add_font_feature_language:ee {\prop_item:Nn \l_xpg_langsetup_prop {latex/langtag}}{\prop_item:Nn \l_xpg_langsetup_prop {latex/language}}}\tl_set:Nn \familytype {rm}.
+->\cs_if_exist_use:cF {\languagename font}{\cs_if_exist_use:cF {\prop_item:Ne \l_xpg_langsetup_prop {\languagename /lc-bcp47-script}font}{\str_if_eq:eeTF {\prop_item:Ne \l_xpg_langsetup_prop {\languagename /lcscript}}{latin}{\use_ii:nn }{\cs_if_exist_use:cF }{\prop_item:Ne \l_xpg_langsetup_prop {\languagename /lcscript}font}{\use:c {rmfamilylatin}\str_if_eq:eeF {\prop_item:Ne \l_xpg_langsetup_prop {\languagename /lcscript}}{latin}{\__xpg_add_font_feature_script:nee {rm}{\prop_item:Ne \l_xpg_langsetup_prop {\languagename /scripttag}}{\prop_item:Ne \l_xpg_langsetup_prop {\languagename /script}}}}}\__xpg_add_font_feature_language:ee {\prop_item:Ne \l_xpg_langsetup_prop {\languagename /langtag}}{\prop_item:Ne \l_xpg_langsetup_prop {\languagename /language}}}\tl_set:Nn \familytype {rm}.
 <argument> \rmfamily 
 l. ...\ShowCommand\rmfamily

@@ -30,13 +30,11 @@
       {%
         \gdef\gaelic@variant{irish}%
         \SetLanguageKeys{gaelic}{language=Irish,langtag=IRI,babelname=irish,bcp47=ga,bcp47-language=ga}%
-        \SetupLatinPolyglossiaFont{gaelic}%
       },
     variant / scottish.code =
       {%
         \gdef\gaelic@variant{scottish}%
         \SetLanguageKeys{gaelic}{language=Gaelic,langtag=GAE,babelname=scottish,bcp47=gd,bcp47-language=gd}%
-        \SetupLatinPolyglossiaFont{gaelic}%
       },
     variant.default:n = irish,
     variant/unknown.code = \xpg@warning{Unknown gaelic variant `#1'}

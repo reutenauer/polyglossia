@@ -83,13 +83,11 @@
     script / cyrillic.code =
       {%
         \@serbian@cyrtrue
-        \SetupNonLatinPolyglossiaFont{serbian}%
         \serbian@set@languagekeys
       },
     script / latin.code =
       {%
         \@serbian@cyrfalse
-        \SetupLatinPolyglossiaFont{serbian}%
           %TODO \def\serbian@language{\language=\l@serbianlat}%
           % or should we use Croatian patterns as a fallback for the time being???
         \serbian@set@languagekeys

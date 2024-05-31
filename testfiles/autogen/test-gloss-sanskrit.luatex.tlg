@@ -13,7 +13,6 @@ Module polyglossia Info: Language data for sanskrit
 (polyglossia)            righthyphenmin^^I3
 (polyglossia)            synonyms^^I on input line ...
 Module polyglossia Info: Language sanskrit was not yet loaded; created with id 2 on input line ...
-Package polyglossia Info: Skipping automatic font setup for language sanskrit
 Lua-only attribute polyglossia_punct = 4
 Inserting `polyglossia-punct.process' in `pre_linebreak_filter'.
 Inserting `polyglossia-punct.process' in `hpack_filter'.)

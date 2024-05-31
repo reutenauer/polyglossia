@@ -379,13 +379,8 @@
   \__xpg_keys_define_lang:n{#1}
   \keys_set:nn { polyglossia / #1 } { #2 }
   \__xpg_setup_hyphen:n {#1}
-  %define booleans etoolbox style and set defaults
-  %% TODO ? \providetoggle{#1@setup@done}%
   % we initialize this so that we can append below
   \cs_gset:cpn {init@extras@#1} {}
-  % here we do the fontsetup:
-  \__xpg_auto_setupfont:n { #1 }
-  %% TODO? \toggletrue{#1@setup@done}
   % register base alias
   \xpg_language_alias { #1 } { #1 }
 }
@@ -839,20 +834,6 @@
   }
 }
 
-\cs_new:Npn \__xpg_auto_setupfont:n #1
-{
-  \bool_if:cTF { g__xpg_#1_fontsetup_bool }
-  {
-    \str_if_eq:eeTF{\prop_item:Nn{\l_xpg_langsetup_prop}{#1/lcscript}}{latin}
-         {\SetupLatinPolyglossiaFont{#1}}
-         {\SetupNonLatinPolyglossiaFont{#1}}
-  }
-  {
-    \xpg_info_msg:n{Skipping~ automatic~ font~ setup~ for~ language~ #1}
-  }
-}
-
-
 % add fontfeature Language=#2 to langtag #1
 % do nothing if #1 or #2 is empty
 \cs_new:Nn \__xpg_add_font_feature_language:nn
@@ -941,46 +922,38 @@
 \cs_generate_variant:Nn  \__xpg_add_font_feature_script:nnn { nee }
 
 %% TODO: probably can be cleaned a little more
-\cs_new_protected:Npn \__xpg_setup_font:nnnnn #1 #2 #3 #4 #5 % #1 = lang, #2 = family, #3 = family, #4 = gobble, #5 gobble
+\cs_new_protected:Npn \__xpg_setup_font:nn #1 #2 % #1 = family, #2 = family
   {
-    \cs_set_protected_nopar:cpn { #1@font@#2 }
+    \cs_set_protected_nopar:cpn { #1family }
       {
-        \cs_if_exist_use:cF{ #1font#3 }
+        \cs_if_exist_use:cF{ \languagename font#2 }
           {
-           \cs_if_exist_use:cF { \prop_item:Nn \l_xpg_langsetup_prop { #1 / lc-bcp47-script } font#3 }
+           \cs_if_exist_use:cF { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / lc-bcp47-script } font#2 }
               {
-                #4 { \prop_item:Nn \l_xpg_langsetup_prop { #1 / lcscript } font#3 }
+                \str_if_eq:eeTF{ \prop_item:Ne \l_xpg_langsetup_prop { \languagename / lcscript } } { latin }
+                { \use_ii:nn } { \cs_if_exist_use:cF }
+                 { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / lcscript } font#2 }
                   { 
-                    \use:c { #2familylatin } 
-                    #5
+                    \use:c { #1familylatin } 
+                    \str_if_eq:eeF{ \prop_item:Ne \l_xpg_langsetup_prop { \languagename / lcscript } } { latin }
                       {
-                        \__xpg_add_font_feature_script:nee { #2 }
-                            { \prop_item:Nn \l_xpg_langsetup_prop { #1 / scripttag } }
-                            { \prop_item:Nn \l_xpg_langsetup_prop { #1 / script } }
+                        \__xpg_add_font_feature_script:nee { #1 }
+                            { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / scripttag } }
+                            { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / script } }
                       }
                   }
               }
            \__xpg_add_font_feature_language:ee 
-               { \prop_item:Nn \l_xpg_langsetup_prop { #1 / langtag } }
-               { \prop_item:Nn \l_xpg_langsetup_prop { #1 / language } }
+               { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / langtag } }
+               { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / language } }
           }
-        \tl_set:Nn \familytype { #2 }
+        \tl_set:Nn \familytype { #1 }
       }
   }
 
-\NewDocumentCommand \SetupLatinPolyglossiaFont { m }
-  {
-    \__xpg_setup_font:nnnnn { #1 } { rm } { } { \use_ii:nn } { \use_none:n }
-    \__xpg_setup_font:nnnnn { #1 } { sf } { sf } { \use_ii:nn } { \use_none:n }
-    \__xpg_setup_font:nnnnn { #1 } { tt } { tt } { \use_ii:nn } { \use_none:n }
-  }
-
-\NewDocumentCommand \SetupNonLatinPolyglossiaFont { m }
-  {
-    \__xpg_setup_font:nnnnn { #1 } { rm } { } { \cs_if_exist_use:cF } { \use:n }
-    \__xpg_setup_font:nnnnn { #1 } { sf } { sf } { \cs_if_exist_use:cF } { \use:n }
-    \__xpg_setup_font:nnnnn { #1 } { tt } { tt } { \cs_if_exist_use:cF } { \use:n }
-  }
+\__xpg_setup_font:nn { rm } {    }
+\__xpg_setup_font:nn { sf } { sf }
+\__xpg_setup_font:nn { tt } { tt }
 
 %%% END OF PolyglossiaSetup
 
@@ -1481,48 +1454,39 @@
   }
 
 \cs_new:Nn \xpg_set_familydefault:
-{
-  \tl_set:Ne \l_tmpa_tl { \familydefault }
-  \tl_set:Ne \l_tmpb_tl { \sfdefault }
-  \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
-     { \tl_set:Nn \familytype {sf} }
-     { \tl_set_eq:NN \l_tmpb_tl \ttdefault
-       \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
-           { \tl_set:Nn \familytype {tt} }
-           { \tl_set:Nn \familytype {rm} }
-     }
-}
-
-\cs_set_nopar:Nn \xpg_select_fontfamily:n
-{
-  \str_if_eq:VnTF \familytype { tt }
-    { \__xpg_use_or_warn:c { #1@font@tt } }
-    { \str_if_eq:VnTF \familytype { sf }
-        { \__xpg_use_or_warn:c { #1@font@sf } }
-        { \__xpg_use_or_warn:c { #1@font@rm } }
-    }
-}
-
-\cs_set_protected:Npn \xpg_select_default_fontfamily:n #1
   {
-     \xpg_set_familydefault:
-     \xpg_select_fontfamily:n { #1 }
+    \tl_set:Ne \familytype
+      {
+        \str_case_e:nnF { \familydefault }
+          {
+            { \sfdefault } { sf }
+            { \ttdefault } { tt }
+          } { rm }
+      }
   }
 
-\cs_new_nopar:Nn \xpg_set_normalfont:n
-{
-  \cs_set_eq:cc { rmfamily } { #1@font@rm }
-  \cs_set_eq:cc { sffamily } { #1@font@sf }
-  \cs_set_eq:cc { ttfamily } { #1@font@tt }
-  \cs_set_nopar:Npn \normalfont 
-    { 
-      \xpg_select_default_fontfamily:n {#1}
-      \fontseries \seriesdefault
-      \fontshape \shapedefault
-      \hook_use:n { normalfont }
-      \selectfont
-    }
-}
+\cs_set_nopar:Npn \xpg_select_fontfamily:
+  {
+    \str_case:Vn \familytype 
+      {
+        { rm } { \rmfamily }
+        { sf } { \sffamily }
+        { tt } { \ttfamily }
+      }
+  }
+
+\hook_gput_code:nnn {begindocument/before} {.}
+  {
+    \cs_set_protected_nopar:Npn \normalfont 
+      { 
+        \xpg_set_familydefault:
+        \use:c { \familytype family }
+        \fontseries \seriesdefault
+        \fontshape \shapedefault
+        \hook_use:n { normalfont }
+        \selectfont
+      }
+  }
 
 \cs_gset_eq:cc { @@fterindentfalse } { @afterindentfalse }
 \cs_new_nopar:Nn \__xpg_french_indent:
@@ -1543,9 +1507,6 @@
 
 \cs_new:Nn \__xpg_select_background_language:n
 {
-  \str_if_eq:eeTF { \prop_item:Nn{\l_xpg_langsetup_prop}{#1/lcscript} } { latin }
-                   {}
-                   { \xpg_set_normalfont:n{#1} }
   \use:c{#1@globalnumbers}
 }
 \cs_generate_variant:Nn \__xpg_select_background_language:n {e}
@@ -2149,8 +2110,7 @@
     }
   }
   \xpg_set_language_name:n { #2 }
-  \xpg_set_normalfont:n { #2 }
-  \xpg_select_fontfamily:n { #2 }
+  \xpg_select_fontfamily:
   \__xpg_use_or_warn:c{#2@language}
   \cs_if_exist_use:c{#2@numbers}
   \__xpg_use_localhyphenmins:nn { #1 } { #2 }
