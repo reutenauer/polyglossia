@@ -743,11 +743,11 @@
       {
         \cs_if_exist_use:cF { \languagename font#2 }
           {
-           \cs_if_exist_use:cF { \text_lowercase:n { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / bcp47-script } } font#2 }
+           \cs_if_exist_use:cF { \str_lowercase:f { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / bcp47-script } } font#2 }
               {
                 \str_if_eq:eeTF { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / script } } { Latin }
                 { \use_ii:nn } { \cs_if_exist_use:cF }
-                 { \text_lowercase:n { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / script } } font#2 }
+                 { \str_lowercase:f { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / script } } font#2 }
                   { 
                     \use:c { #1familylatin } 
                     \str_if_eq:eeF { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / script } } { Latin }
@@ -1395,10 +1395,8 @@
 % lowercase options before passing to setkeys
 \NewDocumentCommand \SetGlossOptions { m m }
 {
-    % \text_lowercase:n fully expands
-    % (as opposed to \str_lowercase:n)
    \use:c { xpg_#1_default_options_tl }
-   \exp_args:Ne \keys_set:ne{ polyglossia / gloss / #1 }{ \text_lowercase:n {#2} }
+   \exp_args:Ne \keys_set:ne{ polyglossia / gloss / #1 }{ \str_lowercase:f { #2 } }
 }
 
 % joint code of \foreignlanguage, otherlanguage*
@@ -1591,7 +1589,7 @@
    \tl_new:c { xpg_#1_default_options_tl }
    \prop_new:c { xpg_#1_default_options_prop }
    \keys_precompile:nec { polyglossia / gloss / #1 } 
-                        { \text_lowercase:n { #2, \xpg__tmp_default_options_tl } } 
+                        {  #2, \xpg__tmp_default_options_tl } 
                         { xpg_#1_default_options_tl }
    \xpg__keyval_parser:enc { #2, \xpg__tmp_default_options_tl } { #1 } 
                            { xpg_#1_default_options_prop }
