@@ -47,7 +47,7 @@ Completed box being shipped out [1]
 ....\glue(\rightskip) 0.0
 ...\marks2{\MakeUppercase    []{1\hskip 1em\relax כותרת}}
 ...\marks3{\MakeUppercase    []{1\hskip 1em\relax כותרת}}
-...\mark{{}{\foreignlanguage {hebrew}{\protect \@@ensure@maindir {\MakeUppercase    []{1\hskip 1em\relax כותרת}}}}}
+...\mark{{}{\foreignlanguage {hebrew}{\MakeUppercase    []{1\hskip 1em\relax כותרת}}}}
 ...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {1}כותרת}{\thepage }{}\protected@file@percent }}
 ...\penalty 10000
 ...\glue 9.21916 plus 0.80165

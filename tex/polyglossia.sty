@@ -226,19 +226,6 @@
 %
 % END MESSAGES
 
-
-%% ensure directionality if bidi is loaded, else ignore
-%%% FIXME still used?
-\cs_new_nopar:Npn \@@ensure@dir #1
-{
-  \cs_if_exist_use:c{@ensure@dir}{#1}
-}
-
-\cs_new_nopar:Npn \@@ensure@maindir #1
-{
-  \cs_if_exist_use:c{@ensure@maindir}{#1}
-}
-
 % if we are in the document preamble run T else F
 \prg_set_conditional:Nnn \xpg_if_in_preamble: {T, F, TF}
 {
@@ -787,8 +774,8 @@
                 \cs_set_eq:cc { glossary } { relax }
                 \unrestored@protected@xdef\@themark
 		  {
-		     {\foreignlanguage{##1}{\protect\@@ensure@maindir{####1}}}
-		     {\foreignlanguage{##1}{\protect\@@ensure@maindir{####2}}}
+		     {\foreignlanguage{##1}{####1}}
+		     {\foreignlanguage{##1}{####2}}
 		  }
                 \@temptokena \expandafter{\@themark}
                 \mark_insert:nn{2e-left}{####1}
@@ -805,7 +792,7 @@
                \cs_set_eq:cc { index } { relax }
                \cs_set_eq:cc { glossary } { relax }
                \expandafter\@markright\@themark
-		   {\foreignlanguage{##1}{\protect\@@ensure@maindir{####1}}}
+		   {\foreignlanguage{##1}{####1}}
                \@temptokena \expandafter{\@themark}
                \mark_insert:nn{2e-right}{####1}
                \tl_if_empty:nF{####1}{ \mark_insert:nn{2e-right-nonempty}{####1} }

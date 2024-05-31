@@ -12,11 +12,9 @@ Completed box being shipped out [1]
 ....\hbox(6.66+0.29999)x345.0, glue set 303.20833fil
 .....\beginR
 .....\beginR
-.....\beginR
 .....\TU/DavidCLM(0)/m/it/10 1
 .....\glue 10.0
 .....\TU/DavidCLM(0)/m/it/10 כותרת
-.....\endR
 .....\endR
 .....\glue 0.0 plus 1.0fil
 .....\TU/lmr/m/n/10 1
@@ -40,7 +38,7 @@ Completed box being shipped out [1]
 ....\glue(\rightskip) 0.0
 ...\marks2{\MakeUppercase    []{1\hskip 1em\relax כותרת}}
 ...\marks3{\MakeUppercase    []{1\hskip 1em\relax כותרת}}
-...\mark{{}{\foreignlanguage {hebrew}{\protect \@@ensure@maindir {\MakeUppercase    []{1\hskip 1em\relax כותרת}}}}}
+...\mark{{}{\foreignlanguage {hebrew}{\MakeUppercase    []{1\hskip 1em\relax כותרת}}}}
 ...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {1}כותרת}{\thepage }{}\protected@file@percent }}
 ...\penalty 10000
 ...\glue 9.21916 plus 0.80165
