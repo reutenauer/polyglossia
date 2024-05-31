@@ -29,11 +29,11 @@
 
 \DeclareKeys[polyglossia/gloss/hebrew]
   {
-    marcheshvan.code = \setkeys{hebrewcal}{marcheshvan=#1},
+    marcheshvan.meta:nn = {hebrewcal}{marcheshvan=#1},
     marcheshvan.default:n = true,
-    transliteration.code = \setkeys{hebrewcal}{transliteration=#1},
+    transliteration.meta:nn = {hebrewcal}{transliteration=#1},
     transliteration.default:n = alt,
-    fullyear.code = \setkeys{hebrewcal}{fullyear=#1},
+    fullyear.meta:nn = {hebrewcal}{fullyear=#1},
     fullyear.default:n = true,
     calendar.choice:,
     calendar / hebrew.code =
@@ -60,9 +60,6 @@
     numerals.default:n = arabic,
     numerals/unknown.code = \xpg@warning{Unknown Hebrew numerals value `#1'}
   }
-
-
-\SetGlossOptions{hebrew}{numerals}
 
 % Register default options
 \InitializeGlossOptions{hebrew}{numerals=arabic,calendar=gregorian,marcheshvan=false,fullyear=false}

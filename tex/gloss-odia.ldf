@@ -60,7 +60,7 @@
   }
 
 % Register default options
-\InitializeGlossOptions{odia}{changecounternumbering=false,numerals=Devanagari}
+\InitializeGlossOptions{odia}{changecounternumbering=false,numerals=devanagari}
 
 \def\captionsodia{%
   \def\refname{ସନ୍ଦର୍ଭ}%
