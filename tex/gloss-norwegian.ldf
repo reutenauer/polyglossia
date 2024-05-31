@@ -9,8 +9,7 @@
   langtag=NYN,
   hyphenmins={2,2},
   frenchspacing=true,
-  fontsetup=false,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*[variant=bokmal]{norwegian}{nb}

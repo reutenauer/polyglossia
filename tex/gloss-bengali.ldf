@@ -17,8 +17,7 @@
   langtag=BEN,
   hyphennames={bengali},
   hyphenmins={2,2},%CHECK
-  fontsetup=true,
-  localnumeral=bengalinumerals
+   localnumeral=bengalinumerals
   %TODO nouppercase=true,
 }
 

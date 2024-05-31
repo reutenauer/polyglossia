@@ -9,8 +9,7 @@
   hyphenmins={2,2},
   langtag=NLD,
   frenchspacing=true,
-  fontsetup=true,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*{dutch}{nl}

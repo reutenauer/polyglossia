@@ -19,8 +19,7 @@
   hyphenmins={2,2},
   frenchspacing=true, % Правопис српскога језика, Матица српска, 2010. (измењено и допуњено, четврто издање): т. 188, под Обликовање ступца и пасуса
   indentfirst=true, % Правопис српскога језика, Матица српска, 2010. (измењено и допуњено, четврто издање): т. 188, под Обликовање ступца и пасуса
-  fontsetup=false,
-  localnumeral=serbiannumerals,
+   localnumeral=serbiannumerals,
   Localnumeral=Serbiannumerals,
   babelname=serbian
   %TODO localalph

@@ -10,8 +10,7 @@
   babelname=slovene,
   hyphenmins={2,2},
   langtag=SLV,
-  fontsetup=true,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*{slovenian}{sl}

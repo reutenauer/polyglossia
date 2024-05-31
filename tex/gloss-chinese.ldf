@@ -13,8 +13,7 @@
     langtag=ZHS,
     hyphennames={nohyphenation},
     frenchspacing=false,
-    fontsetup=true,
-    localnumeral=chinesenumerals
+       localnumeral=chinesenumerals
 }
 
 % BCP-47 compliant aliases

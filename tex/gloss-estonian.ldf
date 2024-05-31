@@ -10,8 +10,7 @@
   hyphenmins={2,2},
   langtag=ETI,
   frenchspacing=true,
-  fontsetup=true,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*{estonian}{et}

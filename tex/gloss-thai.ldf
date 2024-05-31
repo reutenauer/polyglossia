@@ -18,8 +18,7 @@
   scripttag=thai,
   langtag=THA,
   hyphennames={nohyphenation},
-  fontsetup=true,
-  localnumeral=thainumerals
+   localnumeral=thainumerals
   %TODO localalph={xxx@alph,xxx@Alph}
   %TODO localdigits=thainumber
 }

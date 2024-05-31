@@ -368,7 +368,6 @@
 %% hyphenmins : the hyphenmins for this language (comma-sep list of two integers)
 %% frenchspacing : boolean
 %% indentfirst : boolean
-%% fontsetup : boolean
 %% TODO: nouppercase : boolean (for scripts like Arabic, Devanagari, etc which have
 %%       no concept of uppercase/lowercase)
 %% TODO: localalph = {<alph_csname>,<Alph_csname>}
@@ -649,10 +648,6 @@
     #1 / indentfirst  .bool_gset:c = g__xpg_#1_if_bool ,
     #1 / indentfirst  .default:n = true ,
     #1 / indentfirst  .initial:n = false ,
-    % fontsetup
-    #1 / fontsetup  .bool_gset:c = g__xpg_#1_fontsetup_bool ,
-    #1 / fontsetup  .default:n = true ,
-    #1 / fontsetup  .initial:n = false ,
     % environment name
     #1 / envname
        .code:n = {
@@ -1008,7 +1003,7 @@
       {File~ gloss-#1.ldf~ do~ not~  exists! \iow_newline:
        I~ will~ nevertheless~ try~ to~ use~ hyphenation~ patterns~ for~ #1.}
 
-  \PolyglossiaSetup{#1}{hyphenmins={2,3},hyphennames={#1},fontsetup=true}
+  \PolyglossiaSetup{#1}{hyphenmins={2,3},hyphennames={#1}}
   % the above amounts to:
   %\ifcsundef{l@#1}%
   %  {\expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}%

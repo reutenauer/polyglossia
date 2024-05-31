@@ -11,8 +11,7 @@
   hyphennames={irish},
   hyphenmins={2,2},
   langtag=IRI,
-  fontsetup=true,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*[variant=irish]{gaelic}{ga}

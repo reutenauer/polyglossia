@@ -10,8 +10,7 @@
   hyphennames={english,american,usenglish,USenglish},
   hyphenmins={2,3},
   langtag=ENG,
-  fontsetup=true,
-  babelname=english
+   babelname=english
 }
 
 % BCP-47 compliant aliases

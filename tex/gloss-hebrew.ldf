@@ -15,8 +15,7 @@
   scripttag=hebr,
   langtag=IWR,
   hyphennames={nohyphenation},
-  fontsetup=true,
-  localnumeral=hebrewnumerals
+   localnumeral=hebrewnumerals
   %TODO localalph={hebrewnumeral,Hebrewnumeral}
   %digits = hebrewnumber
 }

@@ -13,8 +13,7 @@
   scripttag=arab,
   langtag=UYG,
   hyphennames={nohyphenation},
-  fontsetup=true,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*{uyghur}{ug}

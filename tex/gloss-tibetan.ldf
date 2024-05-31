@@ -15,8 +15,7 @@
   scripttag=tibt,
   langtag=TIB,
   hyphennames={nohyphenation},
-  fontsetup=true,
-  localnumeral=tibetannumerals
+   localnumeral=tibetannumerals
   %TODO localalph={xxx@alph,xxx@Alph}
 }
 

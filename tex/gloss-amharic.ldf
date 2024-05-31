@@ -10,8 +10,7 @@
   langtag=AMH,
   hyphennames={amharic,nohyphenation},
   %hyphenmins={2,2},
-  fontsetup=true,
-  %TODO localalph=ethnum
+   %TODO localalph=ethnum
 }
 
 % BCP-47 compliant aliases

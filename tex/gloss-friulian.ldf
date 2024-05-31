@@ -12,8 +12,7 @@
   hyphenmins={2,2},
   langtag=FRL,
   indentfirst=false,
-  fontsetup=true,
-  frenchspacing=true,
+   frenchspacing=true,
 }
 
 % BCP-47 compliant aliases

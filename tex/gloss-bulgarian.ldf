@@ -12,8 +12,7 @@
   hyphennames={bulgarian},
   hyphenmins={2,2},
   frenchspacing=true,
-  fontsetup
-  %TODO localalph=bulgarian@alph
+   %TODO localalph=bulgarian@alph
 }
 
 % BCP-47 compliant aliases

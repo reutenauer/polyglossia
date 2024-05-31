@@ -13,8 +13,7 @@
   langtag=MAL, %FIXME there is also MLR for "Malayalam Reformed"
   hyphennames={malayalam},
   hyphenmins={2,2}, %FIXME
-  fontsetup=true,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*{malayalam}{ml}

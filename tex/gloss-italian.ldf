@@ -12,8 +12,7 @@
   langtag=ITA,
   frenchspacing=true,
   indentfirst=true,
-  fontsetup=true,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*{italian}{it}

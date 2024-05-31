@@ -11,8 +11,7 @@
   hyphenmins={2,2},
   langtag=PMS,
   frenchspacing=true,
-  fontsetup=true,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*{piedmontese}{pms}

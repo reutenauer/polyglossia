@@ -11,8 +11,7 @@
   hyphennames={macedonian},
   hyphenmins={2,2},
   frenchspacing=true,
-  fontsetup
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*{macedonian}{mk}
