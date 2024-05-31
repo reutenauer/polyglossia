@@ -947,7 +947,7 @@
                { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / langtag } }
                { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / language } }
           }
-        \tl_set:Nn \familytype { #1 }
+        \tl_set:Nn \l_xpg_familytype_tl { #1 }
       }
   }
 
@@ -1455,7 +1455,7 @@
 
 \cs_new:Nn \xpg_set_familydefault:
   {
-    \tl_set:Ne \familytype
+    \tl_set:Ne \l_xpg_familytype_tl
       {
         \str_case_e:nnF { \familydefault }
           {
@@ -1467,7 +1467,7 @@
 
 \cs_set_nopar:Npn \xpg_select_fontfamily:
   {
-    \str_case:Vn \familytype 
+    \str_case:Vn \l_xpg_familytype_tl
       {
         { rm } { \rmfamily }
         { sf } { \sffamily }
@@ -1480,7 +1480,7 @@
     \cs_set_protected_nopar:Npn \normalfont 
       { 
         \xpg_set_familydefault:
-        \use:c { \familytype family }
+        \use:c { \l_xpg_familytype_tl family }
         \fontseries \seriesdefault
         \fontshape \shapedefault
         \hook_use:n { normalfont }
