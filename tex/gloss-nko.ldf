@@ -14,6 +14,7 @@
   Localnumeral=nkonumerals
 }
 
+\RequireBidi
 \RequirePackage{nkonumbers}%
 
 \newcommand{\nkonumerals}[2]{\nkonumber{#2}}
