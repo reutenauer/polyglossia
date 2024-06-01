@@ -8,7 +8,8 @@ local hbox_id  = node.id"hlist"
 local vbox_id  = node.id"vlist"
 local glue_id  = node.id"glue"
 local penalty_id = node.id"penalty"
-local disc_id  = node.id"disc"
+local whatsit_id = node.id"whatsit"
+local math_id  = node.id"math"
 
 --
 -- attr_cjk: variant = plain: 0, JP/classic: 1, KR/modern: 2, SC: 3, TC: 4
@@ -91,11 +92,11 @@ local nobr_before = setmetatable({
     [0xBB] = 1, -- » RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
     [0x2013] = 0, -- – EN DASH
     [0x2014] = 0, -- — EM DASH
-    [0x2015] = 1, -- ― HORIZONTAL BAR
+    [0x2015] = 0, -- ― HORIZONTAL BAR
     [0x2019] = 1, -- ’ RIGHT SINGLE QUOTATION MARK
     [0x201D] = 1, -- ” RIGHT DOUBLE QUOTATION MARK
-    [0x2025] = 1, -- ‥ TWO DOT LEADER
-    [0x2026] = 1, -- … HORIZONTAL ELLIPSIS
+    [0x2025] = 0, -- ‥ TWO DOT LEADER
+    [0x2026] = 0, -- … HORIZONTAL ELLIPSIS
     [0x232A] = 1, -- 〉 RIGHT-POINTING ANGLE BRACKET
     [0x3001] = 1, -- 、 IDEOGRAPHIC COMMA
     [0x3002] = 1, -- 。 IDEOGRAPHIC FULL STOP
@@ -150,9 +151,9 @@ local nobr_before = setmetatable({
     [0x30FC] = 1, -- ー KATAKANA-HIRAGANA PROLONGED SOUND MARK
     [0x30FD] = 1, -- ヽ KATAKANA ITERATION MARK
     [0x30FE] = 1, -- ヾ KATAKANA VOICED ITERATION MARK
-    [0xFE30] = 1, -- ︰ PRESENTATION FORM FOR VERTICAL TWO DOT LEADER
-    [0xFE31] = 1, -- ︱ PRESENTATION FORM FOR VERTICAL EM DASH
-    [0xFE32] = 1, -- ︲ PRESENTATION FORM FOR VERTICAL EN DASH
+    [0xFE30] = 0, -- ︰ PRESENTATION FORM FOR VERTICAL TWO DOT LEADER
+    [0xFE31] = 0, -- ︱ PRESENTATION FORM FOR VERTICAL EM DASH
+    [0xFE32] = 0, -- ︲ PRESENTATION FORM FOR VERTICAL EN DASH
     [0xFE36] = 1, -- ︶ PRESENTATION FORM FOR VERTICAL RIGHT PARENTHESIS
     [0xFE38] = 1, -- ︸ PRESENTATION FORM FOR VERTICAL RIGHT CURLY BRACKET
     [0xFE3A] = 1, -- ︺ PRESENTATION FORM FOR VERTICAL RIGHT TORTOISE SHELL BRACKET
@@ -392,10 +393,10 @@ end
 local function cjk_break (head)
     local curr = head
     while curr do
-        if curr.id == glyph_id and attr_cjk then
+        if attr_cjk and (curr.id == glyph_id or curr.id == math_id and curr.subtype == 1) then
             local var = node.has_attribute(curr, attr_cjk)
             if var then
-                local c, f = curr.char or 0, curr.font or 0
+                local c, f = curr.char or 0, curr.font
                 local cc, cjkc = get_charclass(var, c), is_cjk(c)
 
                 -- compress cjk punctuations when charclass is 1 thru 4
@@ -403,9 +404,20 @@ local function cjk_break (head)
                     head, curr = glyph_to_box(head, curr, cc)
                 end
 
-                local next = curr.next
-                if next and next.id == glyph_id then
+                local next = node.getnext(curr)
+                while next and next.id == whatsit_id do -- skip whatsit nodes
+                    curr, next = next, node.getnext(next)
+                end
+
+                if next and (next.id == glyph_id or next.id == math_id and next.subtype == 0) then
                     local n = next.char or 0
+                    f = f or next.font or 0 -- in case of curr == math_off
+
+                    -- skip combining. or dash+dash case to suppress stretching
+                    if nobr_before[n] == 2 or (nobr_before[c] == 0 and nobr_before[n] == 0) then
+                        goto skip_combining
+                    end
+
                     local nc = get_charclass(var, n)
                     local nobr = nobr_before[n] or nobr_after[c]
 
@@ -413,27 +425,28 @@ local function cjk_break (head)
                     if var > 0 and intercharclass[cc][nc] then
                         head, curr = insert_cjk_penalty_glue(head, curr, f, var, cc, nc, nobr)
 
-                    -- or insert spacing when linebreak is allowed
                     else
                         local cjkn = is_cjk(n)
 
                         -- if curr or next is cjk char
                         if cjkc or cjkn then
 
-                            -- if between cjk and non-cjk
-                            if var > 0 and not (cjkc and cjkn) and not nobr and nobr_before[c] ~= 0 then
-                                head, curr = insert_penalty_glue(head, curr, f, var, nobr, true)
-
-                            -- cjk+cjk except combinings or nobr cjk+noncjk or after dashes
-                            elseif nobr_before[n] ~= 2 then
+                            -- plain variant / cjk+cjk / nobr cjk+noncjk / after dash
+                            --      : insert a 0pt glue
+                            if var == 0 or (cjkc and cjkn) or nobr or nobr_before[c] == 0 then
                                 head, curr = insert_penalty_glue(head, curr, f, var, nobr)
+
+                            -- other cases: insert a small glue
+                            else
+                                head, curr = insert_penalty_glue(head, curr, f, var, nobr, true)
                             end
                         end
                     end
                 end
             end
         end
-        curr = curr.next
+        ::skip_combining::
+        curr = node.getnext(curr)
     end
     return head
 end
@@ -463,7 +476,7 @@ local function reorder_tm (head)
                 end
             end
         end
-        curr = curr.prev
+        curr = node.getprev(curr)
     end
     return head
 end
@@ -550,7 +563,7 @@ local function get_prev_char (p)
             local pc = get_prev_char(node.slide(p.head))
             if pc then return pc end
         end
-        p = p.prev
+        p = node.getprev(p)
     end
 end
 
@@ -565,10 +578,10 @@ local function auto_josa (head)
             if josa then
                 local cc = curr.char or 0
                 if josa == 0 then
-                    josa = josa_code[get_prev_char(curr.prev) or 0x30]
+                    josa = josa_code[get_prev_char(node.getprev(curr)) or 0x30]
                 end
                 if cc == 0xC774 then
-                    local n = curr.next
+                    local n = node.getnext(curr)
                     if n and n.char and n.char >= 0xAC00 and n.char <= 0xD7A3 then
                     else
                         cc = 0xAC00
@@ -587,7 +600,7 @@ local function auto_josa (head)
                 node.unset_attribute(curr, attr_josa)
             end
         end
-        curr = curr.next
+        curr = node.getnext(curr)
     end
     for _,v in ipairs(tofree) do node.free(v) end
     return head
