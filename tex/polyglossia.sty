@@ -1026,10 +1026,10 @@
   % set language options
   \__xpg_set_language_options:nn {#2} {#1}
   % register babelname
-  \prop_get:NeN \l_xpg_langsetup_prop { #2 / babelname } \l_tmpa_tl
+  \prop_get:NeNT \l_xpg_langsetup_prop { #2 / babelname } \l_tmpa_tl {
   \clist_if_in:NeF \xpg@bloaded {\l_tmpa_tl}{
     \clist_gput_right:Ne \xpg@bloaded {\l_tmpa_tl}
-  }
+  }}
   % register BCP-47 ID
   \prop_get:NeNT \l_xpg_langsetup_prop  { #2 / bcp47 } \l_tmpa_tl {
   \clist_if_in:NeF \xpg@bcp@loaded {\l_tmpa_tl}{
