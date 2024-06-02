@@ -226,106 +226,12 @@
 %
 % END MESSAGES
 
-% if we are in the document preamble run T else F
-\prg_set_conditional:Nnn \xpg_if_in_preamble: {T, F, TF}
-{
-  \cs_if_eq:NNTF { \@onlypreamble } { \@notprerr }
-  {
-    \prg_return_false:
-  }
-  {
-    \prg_return_true:
-  }
-}
-
 %% Used by the language definitions files for right-to-left languages
 \cs_new_nopar:Npn \RequireBidi
 {
-  \xpg_if_in_preamble:T
-  {
-    \sys_if_engine_luatex:TF
-      { \RequirePackage{luabidi} }
-      { \RequirePackage{bidi} }
-  }
-}
-
-% if #1 is LR run T else F
-\prg_set_conditional:Nnn \__xpg_if_LR_str:n {p, T, F, TF}
-{
-  \str_case_e:nnF{#1}
-  {
-    {LR}{\prg_return_true:}
-    {RL}{\prg_return_false:}
-  }
-  {
-    \xpg_error_msg:n {Unknown~ direction~#1}
-    \prg_return_false:
-  }
-}
-\prg_generate_conditional_variant:Nnn \__xpg_if_LR_str:n {e} {p, T, F, TF}
-
-% (lua)bidi commands to change directionality for paragraphs
-% and inline text.
-% overwritten with correct package
-\cs_new_nopar:Nn \__xpg_set_par_direction:n
-{
-  \__xpg_if_LR_str:nF {#1}
-  {
-    \xpg_error_msg:n {right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}
-  }
-}
-\cs_new_nopar:Nn \__xpg_set_text_direction:n
-{
-  \__xpg_if_LR_str:nF {#1}
-  {
-    \xpg_error_msg:n {right-to-left,~ but~ (lua)bidi~ package~ was~ not~ loaded!}
-  }
-}
-\hook_gput_code:nnn {package/bidi/after} {.}
-{
-  \cs_gset_nopar:Nn \__xpg_set_par_direction:n
-  {
-    \__xpg_if_LR_str:nTF{#1}
-    {
-      \setLR
-    }
-    {
-      \setRL
-    }
-  }
-  \cs_gset_nopar:Nn \__xpg_set_text_direction:n
-  {
-    \__xpg_if_LR_str:nTF{#1}
-    {
-      \LRE
-    }
-    {
-      \RLE
-    }
-  }
-}
-\hook_gput_code:nnn {package/luabidi/after} {.}
-{
-  \cs_gset_nopar:Nn \__xpg_set_par_direction:n
-  {
-    \__xpg_if_LR_str:nTF{#1}
-    {
-      \setLR
-    }
-    {
-      \setRL
-    }
-  }
-  \cs_gset_nopar:Nn \__xpg_set_text_direction:n
-  {
-    \__xpg_if_LR_str:nTF{#1}
-    {
-      \LRE
-    }
-    {
-      \RLE
-    }
-  }
+  \sys_if_engine_luatex:TF
+    { \RequirePackage{ luabidi } }
+    { \RequirePackage { bidi } }
 }
 
 % emulate \RTLmain
@@ -579,21 +485,15 @@
   }
 
 \cs_new:Nn \__xpg_lang_set_par_direction:n
-{
-  \prop_get:NeNT \l_xpg_langsetup_prop { #1 / direction } \l_tmpa_tl
-      {
-        \__xpg_set_par_direction:n { \l_tmpa_tl }
-      }
-}
+  {
+    \cs_if_exist_use:c { set \prop_item:Nn \l_xpg_langsetup_prop { #1 / direction } }
+  }
 
 
-\cs_new:Nn \__xpg_lang_set_text_direction:nn
-{
-  \prop_get:NeNT \l_xpg_langsetup_prop  { #1 / direction } \l_tmpa_tl
-      {
-        \__xpg_set_text_direction:n { \l_tmpa_tl } { #2 }
-      }
-}
+\cs_new:Nn \__xpg_lang_set_text_direction:n
+  {
+    \cs_if_exist_use:c { \prop_item:Nn \l_xpg_langsetup_prop { #1 / direction } E }
+  }
 
 \tl_new:N \g__xpg_lastlanguage_tl
 \tl_set:Nn \g__xpg_lastlanguage_tl { 0 }
@@ -1076,10 +976,10 @@
   \tl_gset:Nn \xpg_main_language_tl {#2}
   %% The following settings are for the default language and script
   % this tells bidi.sty or luabidi.sty that the document is RTL
-  \__xpg_if_LR_str:eF{\prop_item:Nn{\l_xpg_langsetup_prop}{#2/direction}}
-  {
-    \__xpg_setRTLmain:
-  }
+  \str_if_eq:eeT { \prop_item:Nn \l_xpg_langsetup_prop { #2 / direction } } { RL }
+    {
+      \__xpg_setRTLmain:
+    }
   \cs_gset_nopar:Nn \__xpg_at_begin_document_selectlanguage: {
     \selectbackgroundlanguage{#2}
     \selectlanguage[#1]{#2}
@@ -1213,10 +1113,10 @@
   \cs_if_exist_use:c{noextras@bbl@\mainbabelname}
   \use:c{init@noextras@\xpg_main_language_tl}
   \xpg_set_language_name:n { #2 }
-  \__xpg_if_LR_str:eF{\prop_item:Ne{\l_xpg_langsetup_prop}{#2/direction}}
-  {
-    \@rlmaintrue\@rl@footnotetrue
-  }
+  \str_if_eq:eeT { \prop_item:Ne \l_xpg_langsetup_prop { #2 / direction } } { RL }
+    {
+      \@rlmaintrue\@rl@footnotetrue
+    }
   \selectlanguage[#1]{#2}
   \selectbackgroundlanguage{#2}
   \cs_set_nopar:Npe \mainlanguagevariant { \prop_item:Ne \l_xpg_curropt_prop { \xpg_alias_base_lang:n{#2} / variant } }
@@ -1428,7 +1328,7 @@
   }{
     \group_begin:
       \xpg_otherlanguage:nn{ \xpg_alias_add_to_option_i:nn{#2}{#1} }{ #3 }
-      \__xpg_lang_set_text_direction:nn{#3}{#4}
+      \__xpg_lang_set_text_direction:n { #3 } { #4 }
     \group_end:
   }
 }
@@ -1454,8 +1354,8 @@
     \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
   }{
     \xpg_otherlanguage:nn{ \xpg_alias_add_to_option_i:nn{#2}{#1} }{ #3 }
-    \__xpg_lang_set_text_direction:nn{#3}%
-    \c_group_begin_token% \group_begin: does not work here!
+    \__xpg_lang_set_text_direction:n { #3 }
+    \c_group_begin_token % \group_begin: does not work here!
   }
 }
 \cs_generate_variant:Nn \__xpg_otherlanguage:nnn { eee }
@@ -1490,7 +1390,7 @@
       % This is a hook for external packages which want to access variants
       % via babelname (such as biblatex)
       \cs_if_exist_use:c{date@bbl@\babelname}
-      \__xpg_lang_set_text_direction:nn{#3}{#4}
+      \__xpg_lang_set_text_direction:n { #3 } { #4 }
     \group_end:
   }
 }
@@ -1878,37 +1778,32 @@
 
 % remove all customization for language #1
 \cs_new:Npn \noextrascurrent #1
-{
-  \cs_if_exist_use:c{noextras@#1}%
-  % This is a hook for external packages which want to access variants
-  % via babelname (such as biblatex)
-  \cs_if_exist_use:c{noextras@bbl@\babelname}
-}
+  {
+    \cs_if_exist_use:c { noextras@#1 }
+    % This is a hook for external packages which want to access variants
+    % via babelname (such as biblatex)
+    \cs_if_exist_use:c{noextras@bbl@\babelname}
+  }
 
 % Common code for `\select@language' and `\foreignlanguage'.
 \cs_new:Nn \xpg_select_language:nn
-{
-  % disable the extras and number settings of the previous language
-  \cs_if_exist:cT{languagename}
   {
-    \noextrascurrent{\languagename}
-    \cs_if_exist_use:c{no\languagename @numbers}
-    \sys_if_engine_xetex:T{
-      \__xpg_if_LR_str:eTF{\prop_item:Ne{\l_xpg_langsetup_prop}{\languagename/direction}}
+    % disable the extras and number settings of the previous language
+    \noextrascurrent { \languagename }
+    \cs_if_exist_use:c { no\languagename @numbers }
+    \str_if_eq:eeF { \prop_item:Ne \l_xpg_langsetup_prop { \languagename / direction } }
+      { \prop_item:Ne \l_xpg_langsetup_prop { #2 / direction } }
       {
-        \__xpg_if_LR_str:eF{\prop_item:Nn{\l_xpg_langsetup_prop}{#2/direction}}
-          {\setnonlatin} % LTR -> RTL
+        \str_case:en { \prop_item:Ne \l_xpg_langsetup_prop { #2 / direction } }
+          {
+            { LR } { \cs_if_exist_use:N \setlatin }
+            { RL } { \cs_if_exist_use:N \setnonlatin }
+          }  
       }
-      {
-        \__xpg_if_LR_str:eT{\prop_item:Nn{\l_xpg_langsetup_prop}{#2/direction}}
-          {\setlatin} % RTL -> LTR
-      }
-    }
-  }
   \xpg_set_language_name:n { #2 }
   \xpg_select_fontfamily:
-  \__xpg_use_or_warn:c{#2@language}
-  \cs_if_exist_use:c{#2@numbers}
+  \__xpg_use_or_warn:c { #2@language }
+  \cs_if_exist_use:c { #2@numbers }
   \__xpg_use_localhyphenmins:nn { #1 } { #2 }
   \__xpg_french_spacing:n { #2 }
 }
