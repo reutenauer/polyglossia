@@ -484,6 +484,7 @@
 \cs_new_protected:Npn \__xpg_keys_define_lang:n #1
   {       
     \prop_put:Nnn \l_xpg_langsetup_prop { #1 / script } { Latin }
+    \prop_put:Nnn \l_xpg_langsetup_prop { #1 / bcp47-script } { Latn }
     \prop_put:Nnn \l_xpg_langsetup_prop { #1 / language } { \str_uppercase:n #1 }
     \prop_put:Nnn \l_xpg_langsetup_prop { #1 / direction } { LR }
     \prop_put:Nnn \l_xpg_langsetup_prop { #1 / hyphenmins } { 2, 3 }
