@@ -806,18 +806,13 @@
 
 %we call this macro when a gloss file is not found for a given language
 \cs_new_nopar:Nn \__xpg_no_gloss:n
-{
-   \xpg_warning_msg:n
-      {File~ gloss-#1.ldf~ do~ not~  exists! \iow_newline:
-       I~ will~ nevertheless~ try~ to~ use~ hyphenation~ patterns~ for~ #1.}
+  {
+    \xpg_warning_msg:n
+       {File~ gloss-#1.ldf~ do~ not~  exists! \iow_newline:
+        I~ will~ nevertheless~ try~ to~ use~ hyphenation~ patterns~ for~ #1.}
 
-  \PolyglossiaSetup{#1}{hyphenmins={2,3},hyphennames={#1}}
-  % the above amounts to:
-  %\ifcsundef{l@#1}%
-  %  {\expandafter\adddialect\csname l@#1\endcsname\l@nohyphenation\relax}%
-  %  {\setlocalhyphenmins{#1}{2}{3}}%
-  %\csdef{#1@language}{\language=\csname l@#1\endcsname}%
-}
+    \PolyglossiaSetup{#1}{hyphennames={#1}}
+  }
 
 \cs_new_nopar:Nn \xpg_input:n
 {
