@@ -1424,43 +1424,33 @@
 \cs_set_nopar:Npn \xpg@hook@setlanguage {}
 
 \cs_set_nopar:Nn \__xpg_pop_language:nn
-{
-  \xpg_set_language_aux:nn { #1 } { #2 }
-  \xpg@hook@setlanguage
-% FIXME This seems to be a very old relict. 
-%       The macro is nowhere used. Probably remove.
-%  \let\emp@langname\@undefined
-}
-
-\DeclareDocumentCommand \selectlanguage {s O{} m}
   {
-    \tl_if_blank:eTF {\xpg_alias_base_lang:n{#3}}
+    \xpg_set_language_aux:nn { #1 } { #2 }
+    \xpg@hook@setlanguage
+  }
+
+\DeclareDocumentCommand \selectlanguage { O{} m }
+  {
+    \tl_if_blank:eTF {\xpg_alias_base_lang:n{#2}}
       {
-	\IfBooleanTF { #1 }
-          { \msg_show:nnn { polyglossia } { languagenolongerloaded } {#3} }
-          { \msg_show:nnn { polyglossia } { languagenotloaded } {#3} }
+        \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
       }{
-        \__xpg_select_language:nee {#1}
-          { \xpg_alias_add_to_option_i:nn{#3}{#2} }
-          { \xpg_alias_base_lang:n{#3} }
+        \__xpg_select_language:ee
+          { \xpg_alias_add_to_option_i:nn{#2}{#1} }
+          { \xpg_alias_base_lang:n{#2} }
       }
   }
 
-\cs_new:Nn \__xpg_select_language:nnn
-{
-  % Register the language options
-  \__xpg_set_language_options:nn {#3} {#2}
-  \IfBooleanTF { #1 }   % The starred variant does not write to the aux
-    {
-	  \xpg_set_language_nonaux:nn { #2 } { #3 }
-    }{
-      \cs_set_nopar:Ne \xpg_pop_language: { \exp_not:N \__xpg_pop_language:nn { #2 } { #3 } }
-      \group_insert_after:N \xpg_pop_language:
-	  \xpg_set_language_aux:nn { #2 } { #3 }
-    }
-  \__xpg_register_language:nn { #2 } { #3 }
-}
-\cs_generate_variant:Nn \__xpg_select_language:nnn { nee, nne }
+\cs_new:Nn \__xpg_select_language:nn
+  {
+    % Register the language options
+    \__xpg_set_language_options:nn {#2} {#1}
+    \cs_set_nopar:Ne \xpg_pop_language: { \exp_not:N \__xpg_pop_language:nn { #1 } { #2 } }
+    \group_insert_after:N \xpg_pop_language:
+    \xpg_set_language_aux:nn { #1 } { #2 }
+    \__xpg_register_language:nn { #1 } { #2 }
+  }
+\cs_generate_variant:Nn \__xpg_select_language:nn { ee }
 
 % set lang option #2 for lang #1
 \cs_new:Nn \__xpg_set_language_options:nn
@@ -1472,6 +1462,50 @@
   }
   \xpg__keyval_parser:eeN { #2 } { #1 } \l_xpg_curropt_prop 
   \SetGlossOptions{#1}{#2}
+}
+
+\cs_new_nopar:Nn \xpg_set_language_aux:nn
+{
+   \__xpg_start_language:nn { #1 } { #2 }
+    % Write to the aux
+   \xpg_set_language_only_aux:nn { #1 } { #2 }
+}
+
+\DeclareDocumentCommand \xpg@aux { m m }
+  {
+    \tl_if_blank:eTF {\xpg_alias_base_lang:n{#2}}
+      {
+        \msg_show:nnn { polyglossia } { languagenolongerloaded } {#2} 
+      }{
+        \__xpg_set_language_options:nn { #2 } { #1 }
+        \__xpg_start_language:nn { #1 } { #2 }
+        \__xpg_register_language:nn { #1 } { #2 }
+      }
+  }
+
+\cs_new_nopar:Nn \xpg_set_language_only_aux:nn
+{
+    % Write to the aux (toc files)
+   \if@filesw
+        \addtocontents{toc}{\xpg@aux{#1}{#2}}
+   \fi
+}
+
+\hook_gput_code:nnn {begindocument} {.}
+{
+   \if@filesw
+	\immediate\write\@mainaux
+	{\ProvideDocumentCommand\xpg@aux{mm}{}}
+   \fi
+}
+
+% Since captions might float to other language regions,
+% we need to change the language here (#542)
+\hook_gput_code:nnn {cmd/caption/before} {.}
+{
+    \ifhmode\unskip\fi
+    \addtocontents{lof}{\protect\setforeignlanguage{\languagename}}
+    \addtocontents{lot}{\protect\setforeignlanguage{\languagename}}
 }
 
 % Initialize default language options, so that
@@ -1620,45 +1654,6 @@
   {
     \__xpg_if_char:NTF { #1 } { #2 } { #3 }
   }
-
-
-\cs_new_nopar:Nn \xpg_set_language_nonaux:nn
-{
-   \__xpg_start_language:nn { #1 } { #2 }
-}
-
-
-\cs_new_nopar:Nn \xpg_set_language_aux:nn
-{
-   \__xpg_start_language:nn { #1 } { #2 }
-    % Write to the aux
-   \xpg_set_language_only_aux:nn { #1 } { #2 }
-}
-
-\cs_new_nopar:Nn \xpg_set_language_only_aux:nn
-{
-    % Write to the aux (toc files)
-   \if@filesw
-        \addtocontents{toc}{\selectlanguage*[#1]{#2}}
-   \fi
-}
-
-\hook_gput_code:nnn {begindocument} {.}
-{
-   \if@filesw
-	\immediate\write\@mainaux
-	{\ProvideDocumentCommand\selectlanguage{sO{}m}{}}
-   \fi
-}
-
-% Since captions might float to other language regions,
-% we need to change the language here (#542)
-\hook_gput_code:nnn {cmd/caption/before} {.}
-{
-    \ifhmode\unskip\fi
-    \addtocontents{lof}{\protect\setforeignlanguage{\languagename}}
-    \addtocontents{lot}{\protect\setforeignlanguage{\languagename}}
-}
 
 % check if language is defined
 \prg_set_conditional:Npnn \__xpg_pattern_check_if_exists:n #1 { F, TF }
