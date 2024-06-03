@@ -35,7 +35,8 @@ local nohyphid = luatexbase.registernumber'l@nohyphenation' or 16383
 token.set_char('l@nohyphenation', nohyphid)
 
 -- key `nohyphenation` is for .sty file when possibly undefined l@nohyphenation
-local newloader_loaded_languages = { nohyphenation = nohyphid }
+local nohyphobj = lang.new(nohyphid)
+local newloader_loaded_languages = { nohyphenation = nohyphobj }
 
 local newloader_available_languages = require'language.dat.lua'
 -- Suggestion by Dohyun Kim on #129
