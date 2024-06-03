@@ -14,7 +14,7 @@ Completed box being shipped out [1]
 ..\glue(\lineskip) 0.0
 ..\vbox(550.0+0.0)x345.0, glue set 385.92583fill
 ...\write-{}
-...\write1{\@writefile{toc}{\selectlanguage *[variant=british]{english}}}
+...\write1{\@writefile{toc}{\xpg@aux {variant=british}{english}}}
 ...\glue(\topskip) 0.0
 ...\hbox(10.0512+0.17279)x345.0, glue set 281.68323fil
 ....\hbox(0.0+0.0)x0.0
@@ -67,7 +67,7 @@ Completed box being shipped out [1]
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
-...\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+...\write1{\@writefile{toc}{\xpg@aux {}{english}}}
 ...\glue(\parskip) 0.0 plus 1.0
 ...\glue(\parskip) 0.0
 ...\glue(\baselineskip) 4.95001
@@ -107,11 +107,11 @@ Completed box being shipped out [1]
 ....\TU/lmr/m/n/10 Babel:
 ....\glue 4.44 plus 3.32999 minus 0.555
 ....\TU/lmr/m/n/10 british
-....\write1{\@writefile{toc}{\selectlanguage *[variant=british]{english}}}
+....\write1{\@writefile{toc}{\xpg@aux {variant=british}{english}}}
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
-...\write1{\@writefile{toc}{\selectlanguage *[variant=american]{english}}}
+...\write1{\@writefile{toc}{\xpg@aux {variant=american}{english}}}
 ...\glue(\parskip) 0.0 plus 1.0
 ...\glue(\parskip) 0.0
 ...\glue(\baselineskip) 5.06001

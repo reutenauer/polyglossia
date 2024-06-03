@@ -13,7 +13,7 @@ Completed box being shipped out [1]
 ..\glue(\lineskip) 0.0
 ..\vbox(550.0+0.0)x345.0, glue set 489.99002fill
 ...\write-{}
-...\write1{\@writefile{toc}{\selectlanguage *[]{french}}}
+...\write1{\@writefile{toc}{\xpg@aux {}{french}}}
 ...\glue(\topskip) 2.95
 ...\hbox(7.05+0.21999)x345.0, glue set 226.14fil
 ....\hbox(0.0+0.0)x15.0
@@ -31,7 +31,7 @@ Completed box being shipped out [1]
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
-...\write1{\@writefile{toc}{\selectlanguage *[]{german}}}
+...\write1{\@writefile{toc}{\xpg@aux {}{german}}}
 ...\glue(\parskip) 0.0 plus 1.0
 ...\glue(\parskip) 0.0
 ...\glue(\baselineskip) 4.73001
@@ -49,11 +49,11 @@ Completed box being shipped out [1]
 ....\TU/lmr/bx/n/10 ngerman
 ....\kern 0.0
 ....\glue 3.33 plus 1.665 minus 1.11
-....\write1{\@writefile{toc}{\selectlanguage *[]{french}}}
+....\write1{\@writefile{toc}{\xpg@aux {}{french}}}
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
-...\write1{\@writefile{toc}{\selectlanguage *[spelling=new]{german}}}
+...\write1{\@writefile{toc}{\xpg@aux {spelling=new}{german}}}
 ...\glue(\parskip) 0.0 plus 1.0
 ...\glue(\parskip) 0.0
 ...\glue(\baselineskip) 2.94002
@@ -71,11 +71,11 @@ Completed box being shipped out [1]
 ....\TU/lmr/bx/n/10 ngerman
 ....\kern 0.0
 ....\glue 3.33 plus 1.665 minus 1.11
-....\write1{\@writefile{toc}{\selectlanguage *[]{french}}}
+....\write1{\@writefile{toc}{\xpg@aux {}{french}}}
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
-...\write1{\@writefile{toc}{\selectlanguage *[variant=austrian]{german}}}
+...\write1{\@writefile{toc}{\xpg@aux {variant=austrian}{german}}}
 ...\glue(\parskip) 0.0 plus 1.0
 ...\glue(\parskip) 0.0
 ...\glue(\baselineskip) 2.94002
@@ -93,11 +93,11 @@ Completed box being shipped out [1]
 ....\TU/lmr/bx/n/10 naustrian
 ....\kern 0.0
 ....\glue 3.33 plus 1.665 minus 1.11
-....\write1{\@writefile{toc}{\selectlanguage *[]{french}}}
+....\write1{\@writefile{toc}{\xpg@aux {}{french}}}
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
-...\write1{\@writefile{toc}{\selectlanguage *[]{german}}}
+...\write1{\@writefile{toc}{\xpg@aux {}{german}}}
 ...\glue(\parskip) 0.0 plus 1.0
 ...\glue(\parskip) 0.0
 ...\glue(\baselineskip) 4.73001
@@ -115,7 +115,7 @@ Completed box being shipped out [1]
 ....\TU/lmr/bx/n/10 ngerman
 ....\kern 0.0
 ....\glue 3.33 plus 1.665 minus 1.11
-....\write1{\@writefile{toc}{\selectlanguage *[]{french}}}
+....\write1{\@writefile{toc}{\xpg@aux {}{french}}}
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0

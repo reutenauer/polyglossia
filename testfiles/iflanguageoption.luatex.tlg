@@ -4,7 +4,7 @@ Don't change this file in any respect.
 \hbox(6.8+0.0)x60.84, direction TLT
 .\TU/lmr/m/n/10 T
 .\TU/lmr/m/n/10 F
-.\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+.\write1{\@writefile{toc}{\xpg@aux {}{english}}}
 .\TU/lmr/m/n/10 F
 .\TU/lmr/m/n/10 F
 .\TU/lmr/m/n/10 T

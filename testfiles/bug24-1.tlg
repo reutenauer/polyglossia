@@ -17,7 +17,7 @@ Completed box being shipped out [1]
 ..\glue(\lineskip) 0.0
 ..\vbox(550.0+0.0)x345.0, glue set 518.02702fill
 ...\write-{}
-...\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+...\write1{\@writefile{toc}{\xpg@aux {}{english}}}
 ...\glue(\topskip) 0.00641
 ...\hbox(9.99359+0.08638)x345.0, glue set 288.52322fil
 ....\hbox(9.4464+0.0)x22.50719

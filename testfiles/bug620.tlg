@@ -16,7 +16,7 @@ Completed box being shipped out [1]
 ..\glue(\lineskip) 0.0
 ..\vbox(550.0+0.0)x345.0, glue set 524.24002fill
 ...\write-{}
-...\write1{\@writefile{toc}{\selectlanguage *[frenchfootnote]{french}}}
+...\write1{\@writefile{toc}{\xpg@aux {frenchfootnote}{french}}}
 ...\glue(\topskip) 1.72308
 ...\hbox(8.27692+0.10999)x345.0, glue set 272.567fil
 ....\hbox(0.0+0.0)x15.0

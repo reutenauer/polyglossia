@@ -471,7 +471,7 @@ l. ...\START\showbox0\showbox
                           2\END
 > \box...=
 \hbox(7.5+2.5)x1282.94032, direction TLT
-.\write1{\@writefile{toc}{\selectlanguage *[]{russian}}}
+.\write1{\@writefile{toc}{\xpg@aux {}{russian}}}
 .\TU/NewCM10(0)/m/n/10 П
 .\TU/NewCM10(0)/m/n/10 р
 .\TU/NewCM10(0)/m/n/10 е
@@ -844,7 +844,7 @@ l. ...\START\showbox0\showbox
 .\TU/NewCM10(0)/m/n/10 n
 .\TU/NewCM10(0)/m/n/10 ]
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
-.\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+.\write1{\@writefile{toc}{\xpg@aux {}{english}}}
 ! OK.
 <to be read again> 
 \begingroup 
