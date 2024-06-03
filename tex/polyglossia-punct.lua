@@ -5,8 +5,6 @@
 
 require('polyglossia') -- just in case...
 
-local add_to_callback      = luatexbase.add_to_callback
-local declare_callback_rule = luatexbase.declare_callback_rule
 local new_attribute        = luatexbase.new_attribute
 
 local node = node
@@ -332,13 +330,7 @@ local function activate(lang)
     tex.setattribute(punct_attr, id)
 end
 
-add_to_callback("pre_linebreak_filter",process,"polyglossia-punct.process")
-add_to_callback("hpack_filter",process,"polyglossia-punct.process")
-declare_callback_rule("pre_linebreak_filter",
-    "polyglossia-punct.process", "before", "luaotfload.node_processor")
-declare_callback_rule("hpack_filter",
-    "polyglossia-punct.process", "before", "luaotfload.node_processor")
-
+luatexbase.add_to_callback("pre_shaping_filter",process,"polyglossia-punct.process")
 
 local function deactivate()
     tex.setattribute(punct_attr, -0x7FFFFFFF) -- this value means "unset"
