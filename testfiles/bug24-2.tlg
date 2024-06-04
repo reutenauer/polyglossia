@@ -1,27 +1,23 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-LaTeX Font Info:    Font shape `TU/DavidCLM(0)/m/sl' in size <10> not available
-(Font)              Font shape `TU/DavidCLM(0)/m/it' tried instead on input line ....
 Completed box being shipped out [1]
 \vbox(633.0+0.0)x407.0
 .\glue 16.0
 .\vbox(617.0+0.0)x345.0, shifted 62.0
-..\vbox(12.0+0.0)x345.0, glue set 5.34fil
+..\vbox(12.0+0.0)x345.0, glue set 5.85834fil
 ...\glue 0.0 plus 1.0fil
-...\hbox(6.66+0.29999)x345.0
-....\hbox(6.66+0.29999)x345.0, glue set 303.20833fil
+...\hbox(6.14166+0.29999)x345.0
+....\hbox(6.14166+0.29999)x345.0, glue set 304.16666fil
 .....\beginR
-.....\beginR
-.....\TU/DavidCLM(0)/m/it/10 1
+.....\TU/DavidCLM(1)/m/it/10 1
 .....\glue 10.0
-.....\TU/DavidCLM(0)/m/it/10 כותרת
-.....\endR
+.....\TU/DavidCLM(1)/m/it/10 כותרת
 .....\glue 0.0 plus 1.0fil
-.....\TU/lmr/m/n/10 1
+.....\TU/DavidCLM(1)/m/n/10 1
 .....\endR
 ..\glue 25.0
 ..\glue(\lineskip) 0.0
-..\vbox(550.0+0.0)x345.0, glue set 518.67085fill
+..\vbox(550.0+0.0)x345.0, glue set 518.63086fill
 ...\write-{}
 ...\write1{\@writefile{toc}{\xpg@aux {}{hebrew}}}
 ...\glue(\topskip) 1.276
@@ -29,30 +25,28 @@ Completed box being shipped out [1]
 ....\beginR
 ....\hbox(8.724+0.0)x20.81999
 .....\glue 0.0
-.....\TU/DavidCLM(0)/b/n/14.4 1
+.....\TU/DavidCLM(1)/b/n/14.4 1
 .....\glue 14.4
-....\TU/DavidCLM(0)/b/n/14.4 כותרת
+....\TU/DavidCLM(1)/b/n/14.4 כותרת
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\endR
 ....\glue(\rightskip) 0.0
-...\marks2{\MakeUppercase    []{1\hskip 1em\relax כותרת}}
-...\marks3{\MakeUppercase    []{1\hskip 1em\relax כותרת}}
-...\mark{{}{\foreignlanguage {hebrew}{\MakeUppercase    []{1\hskip 1em\relax כותרת}}}}
+...\marks2{\__mark_id:n {1}\MakeUppercase    []{1\hskip 1em\relax כותרת}}
+...\marks3{\__mark_id:n {2}\MakeUppercase    []{1\hskip 1em\relax כותרת}}
+...\mark{{}{\MakeUppercase    []{1\hskip 1em\relax כותרת}}}
 ...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {1}כותרת}{\thepage }{}\protected@file@percent }}
 ...\penalty 10000
 ...\glue 9.21916 plus 0.80165
-...\write1{\@writefile{toc}{\xpg@aux {}{english}}}
-...\penalty 10000
 ...\glue(\parskip) 0.0 plus 1.0
 ...\glue(\parskip) 0.0
-...\glue(\baselineskip) 4.93001
-...\hbox(6.77+0.10999)x345.0, glue set 326.34fil
-....\beginL
-....\TU/lmr/m/n/10 Test
+...\glue(\baselineskip) 5.52002
+...\hbox(6.18+0.14998)x345.0, glue set 315.0fil
+....\beginR
+....\TU/MiriamMonoCLM(1)/m/n/10 שלום.
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
-....\endL
+....\endR
 ....\glue(\rightskip) 0.0
 ...\glue 0.0 plus 1.0fill
 ...\glue 0.0
