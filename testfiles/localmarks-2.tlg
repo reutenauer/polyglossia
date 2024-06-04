@@ -36,8 +36,8 @@ Completed box being shipped out [1]
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\endL
 ....\glue(\rightskip) 0.0
-...\marks2{\MakeUppercase    []{1\hskip 1em\relax Title}}
-...\marks3{\MakeUppercase    []{1\hskip 1em\relax Title}}
+...\marks2{\__mark_id:n {1}\MakeUppercase    []{1\hskip 1em\relax Title}}
+...\marks3{\__mark_id:n {2}\MakeUppercase    []{1\hskip 1em\relax Title}}
 ...\mark{{}{\foreignlanguage {english}{\protect \@@ensure@maindir {\MakeUppercase    []{1\hskip 1em\relax Title}}}}}
 ...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {1}Title}{\thepage }{}\protected@file@percent }}
 ...\penalty 10000
