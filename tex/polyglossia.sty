@@ -252,15 +252,16 @@
 }
 
 %% Used by the language definitions files for right-to-left languages
-\cs_new_nopar:Npn \RequireBidi
-{
-  \xpg_if_in_preamble:T
+\DeclareDocumentCommand \RequireBidi {}
   {
-    \sys_if_engine_luatex:TF
-      { \RequirePackage{luabidi} }
-      { \RequirePackage{bidi} }
+    \xpg_if_in_preamble:T
+      {
+        \sys_if_engine_luatex:TF
+          { \RequirePackage{luabidi} }
+          { \RequirePackage{bidi} }
+      }
+    \DeclareDocumentCommand \RequireBidi {} {}
   }
-}
 
 % if #1 is LR run T else F
 \prg_set_conditional:Nnn \__xpg_if_LR_str:n {p, T, F, TF}
