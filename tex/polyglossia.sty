@@ -1471,7 +1471,7 @@
    \xpg_set_language_only_aux:nn { #1 } { #2 }
 }
 
-\DeclareDocumentCommand \xpg@aux { m m }
+\cs_new_protected_nopar:Npn \xpg@aux #1 #2
   {
     \tl_if_blank:eTF {\xpg_alias_base_lang:n{#2}}
       {
