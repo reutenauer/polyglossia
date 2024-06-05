@@ -297,7 +297,7 @@
   {
     \prop_put:Nnn \l_xpg_langsetup_prop { #1 / #2 } { #3 }
   }
-\DeclareDocumentCommand \SetLanguageKeys { m m }
+\cs_set_protected:Npn \SetLanguageKeys #1 #2
   {
     \keyval_parse:nnn { \errorrrrrrrrrrr }
       { \__xpg_update_langsetup:nnn { #1 } }
@@ -1137,7 +1137,7 @@
 
 % Provide default fonts (as set with \setmainfont, \setsansfont and \setmonofont)
 % for Latin scripts and as a fallback for non-Latin scripts.
-\DeclareDocumentCommand \rmfamilylatin { }
+\cs_set_protected:Npn \rmfamilylatin
   {
     \tl_if_empty:NF \g__fontspec_nfss_enc_tl { \fontencoding \g__fontspec_nfss_enc_tl }
     \fontfamily \rmdefault
@@ -1145,7 +1145,7 @@
     \selectfont
   }
 
-\DeclareDocumentCommand \sffamilylatin { }
+\cs_set_protected:Npn \sffamilylatin
   {
     \tl_if_empty:NF \g__fontspec_nfss_enc_tl { \fontencoding \g__fontspec_nfss_enc_tl }
     \fontfamily \sfdefault
@@ -1153,7 +1153,7 @@
     \selectfont
   }
 
-\DeclareDocumentCommand \ttfamilylatin { }
+\cs_set_protected:Npn \ttfamilylatin
   {
     \tl_if_empty:NF \g__fontspec_nfss_enc_tl { \fontencoding \g__fontspec_nfss_enc_tl }
     \fontfamily \ttdefault
@@ -1286,7 +1286,7 @@
 }
 
 % lowercase options before passing to setkeys
-\NewDocumentCommand \SetGlossOptions { m m }
+\cs_new_protected_nopar:Npn \SetGlossOptions #1 #2
 {
    \use:c { xpg_#1_default_options_tl }
    \exp_args:Ne \keys_set:ne{ polyglossia / gloss / #1 }{ \str_lowercase:f { #2 } }
