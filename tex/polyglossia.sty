@@ -242,6 +242,8 @@
   \sys_if_engine_luatex:TF
     { \RequirePackage{ luabidi } }
     { \RequirePackage { bidi } }
+  \cs_set_eq:NN \xpg__text_LR: \@ensure@LTR
+  \cs_set_eq:NN \xpg__text_RL: \@ensure@RTL
 }
 
 % emulate \RTLmain
@@ -502,7 +504,7 @@
 
 \cs_new:Nn \__xpg_lang_set_text_direction:n
   {
-    \cs_if_exist_use:c { \prop_item:Nn \l_xpg_langsetup_prop { #1 / direction } E }
+    \cs_if_exist_use:c { xpg__text_ \l_xpg_langsetup_prop { #1 / direction } : }
   }
 
 \tl_new:N \g__xpg_lastlanguage_tl
