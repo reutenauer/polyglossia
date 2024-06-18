@@ -504,7 +504,7 @@
 
 \cs_new:Nn \__xpg_lang_set_text_direction:n
   {
-    \cs_if_exist_use:c { xpg__text_ \l_xpg_langsetup_prop { #1 / direction } : }
+    \cs_if_exist_use:c { xpg__text_ \prop_item:Nn \l_xpg_langsetup_prop { #1 / direction } : }
   }
 
 \tl_new:N \g__xpg_lastlanguage_tl
@@ -1351,9 +1351,7 @@
 \DeclareDocumentEnvironment { otherlanguage* } { O{} m }
   {
 	\__xpg_otherlanguage:eee { #1 } { #2 } { \xpg_alias_base_lang:n { #2 } }
-  }{
-	\c_group_end_token% \group_end: does not work here!
-  }
+  } { }
 
 % internal wrapper
 % #1 option
@@ -1366,8 +1364,7 @@
     \msg_show:nnn { polyglossia } { languagenotloaded } {#2}
   }{
     \xpg_otherlanguage:nn{ \xpg_alias_add_to_option_i:nn{#2}{#1} }{ #3 }
-    \__xpg_lang_set_text_direction:n { #3 }
-    \c_group_begin_token % \group_begin: does not work here!
+    \__xpg_lang_set_par_direction:n { #3 }
   }
 }
 \cs_generate_variant:Nn \__xpg_otherlanguage:nnn { eee }
