@@ -448,7 +448,6 @@ def generate_aliases():
                 print(line, end="")
 
 def generate_ids():
-    aliases = []
     for key in babelname2bcp47:
         val = babelname2bcp47[key]
         gloss = key
@@ -472,13 +471,10 @@ def generate_table():
     f.write("\\textbf{BCP-47 tag} & \\textbf{Polyglossia name} & \\textbf{Polyglossia options}\\\\\n")
     f.write("\\midrule\n")
     f.write("\\endhead\n")
-    aliases = []
     for key, gloss in sorted(bcp472lang.items()):
         val = key
-        fertig = False
         col1 = val
         col2 = gloss
-        glossval = gloss + ":" + val
         col3 = ""
         if val in bcp472opts:
             col3 = bcp472opts[val]
