@@ -5,7 +5,8 @@
 from __future__ import print_function
 
 import fileinput
-import logging, sys
+import logging
+import sys
 
 # Dic 1: babelname : bcp47
 babelname2bcp47 = {
@@ -430,8 +431,8 @@ def generate_aliases():
         glossval = gloss + ":" + val
         if val in bcp472opts:
             addition = ("\\setlanguagealias*[%s]{%s}{%s}" % (bcp472opts[val], gloss, val))
-        for line in fileinput.FileInput(file_path,inplace=1):
-            if not glossval in aliases and not fertig and "% BCP-47 compliant aliases\n" in line:
+        for line in fileinput.FileInput(file_path,inplace=True):
+            if glossval not in aliases and not fertig and "% BCP-47 compliant aliases\n" in line:
                 line = line.replace(line, line + addition + "\n")
                 logging.debug("replace line: %s" % line)
                 fertig = True
@@ -439,8 +440,8 @@ def generate_aliases():
             print(line, end="")
         if not fertig:
             addition = "% BCP-47 compliant aliases\n" + addition
-            for line in fileinput.FileInput(file_path,inplace=1):
-                if not glossval in aliases and not fertig and line == "}\n":
+            for line in fileinput.FileInput(file_path,inplace=True):
+                if glossval not in aliases and not fertig and line == "}\n":
                     line = line.replace(line, line + "\n" + addition)
                     logging.debug("replace line: %s" % line)
                     fertig = True
@@ -453,7 +454,7 @@ def generate_ids():
         gloss = key
         addition = ("  bcp47=%s,\n" % val)
         file_path = "../tex/" + ("gloss-%s.ldf" % gloss)
-        for line in fileinput.FileInput(file_path,inplace=1):
+        for line in fileinput.FileInput(file_path,inplace=True):
             if "\\PolyglossiaSetup{" in line:
                 line = line.replace(line, line + addition)
             print(line, end="")
