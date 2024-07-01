@@ -2,6 +2,8 @@
 # Below are mappings of the currently supported polyglossia languages
 # (+ babelnames) to bcp47 tags and of bcp-47 tags to *.ldf file names.
 
+from __future__ import print_function
+
 import fileinput
 import logging, sys
 
@@ -434,7 +436,7 @@ def generate_aliases():
                 logging.debug("replace line: %s" % line)
                 fertig = True
                 aliases.append(glossval)
-            print line,
+            print(line, end="")
         if not fertig:
             addition = "% BCP-47 compliant aliases\n" + addition
             for line in fileinput.FileInput(file_path,inplace=1):
@@ -443,7 +445,7 @@ def generate_aliases():
                     logging.debug("replace line: %s" % line)
                     fertig = True
                     aliases.append(glossval)
-                print line,
+                print(line, end="")
 
 def generate_ids():
     aliases = []
@@ -455,7 +457,7 @@ def generate_ids():
         for line in fileinput.FileInput(file_path,inplace=1):
             if "\\PolyglossiaSetup{" in line:
                 line = line.replace(line, line + addition)
-            print line,
+            print(line, end="")
 
 def generate_table():
     f = open("bcp47table.tex","w+")
