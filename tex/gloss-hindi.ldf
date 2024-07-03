@@ -78,6 +78,7 @@
      \def\contentsname{विषय सूची}%
      \def\enclname{}%
      \def\figurename{चित्र}% रेखाचित्र
+     \def\glossaryname{शब्दार्थ सूची}%
      \def\headpagename{पृष्ठ}%
      \def\headtoname{}%
      \def\indexname{सूची}%
@@ -89,6 +90,7 @@
      \def\pagename{पृष्ठ}%
      \def\partname{खण्ड}%
      \def\prefacename{प्रस्तावना}% प्राक्कथन
+     \def\proofname{प्रमाण}%
      \def\refname{हवाले}%
      \def\tablename{तालिका}%
      \def\seename{देखिए}%
