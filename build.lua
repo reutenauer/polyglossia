@@ -93,6 +93,8 @@ function gen_pdf_from_example()
    local example_files = filelist("./doc", "*.tex")
    local error_level = 0
    error_level = mkdir("./build/genpdf")
+   call({"."}, "unpack", {})
+   error_level = error_level + cp("*", "./build/unpacked", "./build/genpdf")
    for example = 1, #example_files do
        local example_name = jobname(example_files[example])
        if example_name == "polyglossia" then
