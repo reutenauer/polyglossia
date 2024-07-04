@@ -1141,6 +1141,7 @@
 % for Latin scripts and as a fallback for non-Latin scripts.
 \cs_set_protected:Npn \rmfamilylatin
   {
+    \tl_set:Nn \l_xpg_familytype_tl { rm }
     \tl_if_empty:NF \g__fontspec_nfss_enc_tl { \fontencoding \g__fontspec_nfss_enc_tl }
     \fontfamily \rmdefault
     \hook_use:n { rmfamily }
@@ -1149,6 +1150,7 @@
 
 \cs_set_protected:Npn \sffamilylatin
   {
+    \tl_set:Nn \l_xpg_familytype_tl { sf }
     \tl_if_empty:NF \g__fontspec_nfss_enc_tl { \fontencoding \g__fontspec_nfss_enc_tl }
     \fontfamily \sfdefault
     \hook_use:n { sffamily }
@@ -1157,6 +1159,7 @@
 
 \cs_set_protected:Npn \ttfamilylatin
   {
+    \tl_set:Nn \l_xpg_familytype_tl { tt }
     \tl_if_empty:NF \g__fontspec_nfss_enc_tl { \fontencoding \g__fontspec_nfss_enc_tl }
     \fontfamily \ttdefault
     \hook_use:n { ttfamily } 
