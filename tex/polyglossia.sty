@@ -549,6 +549,50 @@
   }
 }
 
+% This saves the normalfont for the latin script since we may change normalfont in other scripts
+\cs_set_eq:NN \normalfontlatin \normalfont
+
+% Provide default fonts (as set with \setmainfont, \setsansfont and \setmonofont)
+% for Latin scripts and as a fallback for non-Latin scripts.
+\cs_set_eq:NN \rmfamilylatin \rmfamily
+\cs_set_eq:NN \sffamilylatin \sffamily
+\cs_set_eq:NN \ttfamilylatin \ttfamily
+
+\cs_new:Nn \xpg_set_familydefault:
+  {
+    \tl_set:Ne \l_xpg_familytype_tl
+      {
+        \str_case_e:nnF { \familydefault }
+          {
+            { \sfdefault } { sf }
+            { \ttdefault } { tt }
+          } { rm }
+      }
+  }
+
+\cs_set_nopar:Npn \xpg_select_fontfamily:
+  {
+    \str_case:Vn \l_xpg_familytype_tl
+      {
+        { rm } { \rmfamily }
+        { sf } { \sffamily }
+        { tt } { \ttfamily }
+      }
+  }
+
+\hook_gput_code:nnn {begindocument/before} {.}
+  {
+    \cs_set_protected_nopar:Npn \normalfont
+      {
+        \xpg_set_familydefault:
+        \use:c { \l_xpg_familytype_tl family }
+        \fontseries \seriesdefault
+        \fontshape \shapedefault
+        \hook_use:n { normalfont }
+        \selectfont
+      }
+  }
+
 % add fontfeature Language=#2 to langtag #1
 % do nothing if #1 or #2 is empty
 \cs_new:Nn \__xpg_add_font_feature_language:nn
@@ -1133,73 +1177,6 @@
   \selectbackgroundlanguage{#2}
   \cs_set_nopar:Npe \mainlanguagevariant { \prop_item:Ne \l_xpg_curropt_prop { \xpg_alias_base_lang:n{#2} / variant } }
 }
-
-% This saves the normalfont for the latin script since we may change normalfont in other scripts
-\DeclareCommandCopy \normalfontlatin \normalfont
-
-% Provide default fonts (as set with \setmainfont, \setsansfont and \setmonofont)
-% for Latin scripts and as a fallback for non-Latin scripts.
-\cs_set_protected:Npn \rmfamilylatin
-  {
-    \tl_set:Nn \l_xpg_familytype_tl { rm }
-    \tl_if_empty:NF \g__fontspec_nfss_enc_tl { \fontencoding \g__fontspec_nfss_enc_tl }
-    \fontfamily \rmdefault
-    \hook_use:n { rmfamily }
-    \selectfont
-  }
-
-\cs_set_protected:Npn \sffamilylatin
-  {
-    \tl_set:Nn \l_xpg_familytype_tl { sf }
-    \tl_if_empty:NF \g__fontspec_nfss_enc_tl { \fontencoding \g__fontspec_nfss_enc_tl }
-    \fontfamily \sfdefault
-    \hook_use:n { sffamily }
-    \selectfont
-  }
-
-\cs_set_protected:Npn \ttfamilylatin
-  {
-    \tl_set:Nn \l_xpg_familytype_tl { tt }
-    \tl_if_empty:NF \g__fontspec_nfss_enc_tl { \fontencoding \g__fontspec_nfss_enc_tl }
-    \fontfamily \ttdefault
-    \hook_use:n { ttfamily } 
-    \selectfont
-  }
-
-\cs_new:Nn \xpg_set_familydefault:
-  {
-    \tl_set:Ne \l_xpg_familytype_tl
-      {
-        \str_case_e:nnF { \familydefault }
-          {
-            { \sfdefault } { sf }
-            { \ttdefault } { tt }
-          } { rm }
-      }
-  }
-
-\cs_set_nopar:Npn \xpg_select_fontfamily:
-  {
-    \str_case:Vn \l_xpg_familytype_tl
-      {
-        { rm } { \rmfamily }
-        { sf } { \sffamily }
-        { tt } { \ttfamily }
-      }
-  }
-
-\hook_gput_code:nnn {begindocument/before} {.}
-  {
-    \cs_set_protected_nopar:Npn \normalfont 
-      { 
-        \xpg_set_familydefault:
-        \use:c { \l_xpg_familytype_tl family }
-        \fontseries \seriesdefault
-        \fontshape \shapedefault
-        \hook_use:n { normalfont }
-        \selectfont
-      }
-  }
 
 \cs_gset_eq:cc { @@fterindentfalse } { @afterindentfalse }
 \cs_new_nopar:Nn \__xpg_french_indent:
