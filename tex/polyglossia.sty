@@ -555,8 +555,11 @@
 % Provide default fonts (as set with \setmainfont, \setsansfont and \setmonofont)
 % for Latin scripts and as a fallback for non-Latin scripts.
 \cs_set_eq:NN \rmfamilylatin \rmfamily
+\hook_gput_code:nnn { rmfamily } { . } { \tl_set:Nn \l_xpg_familytype_tl { rm } }
 \cs_set_eq:NN \sffamilylatin \sffamily
+\hook_gput_code:nnn { sffamily } { . } { \tl_set:Nn \l_xpg_familytype_tl { sf } }
 \cs_set_eq:NN \ttfamilylatin \ttfamily
+\hook_gput_code:nnn { ttfamily } { . } { \tl_set:Nn \l_xpg_familytype_tl { tt } }
 
 \cs_new:Nn \xpg_set_familydefault:
   {
