@@ -103,7 +103,7 @@ function gen_pdf_from_example()
            )
        else
            error_level = error_level +
-               tex("./doc/" .. example_name, "./build/genpdf", "xelatex --interaction=nonstopmode")
+               tex("./../../doc/" .. example_name, "./build/genpdf", "xelatex --interaction=nonstopmode")
        end
    end
    error_level = error_level + cp("*.pdf", "./build/genpdf", "./generated")
@@ -111,8 +111,8 @@ function gen_pdf_from_example()
 end
 
 function pre_release()
-    gen_pdf_from_example()
     call({"."}, "tag")
+    gen_pdf_from_example()
     call({"."}, "ctan", {})
     rm("./doc", "*.pdf")    
 end
