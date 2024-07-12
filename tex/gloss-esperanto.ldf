@@ -28,10 +28,10 @@
    \def\figurename{Figuro}%
    \def\tablename{Tabelo}%
    %\def\thepart{}%
-   %\def\partname{}%
+   \def\partname{Parto}%
    \def\pagename{Paĝo}%
    \def\seename{vidu}%
-   \def\alsoname{Parto}%
+   \def\alsoname{vidu ankaŭ}%
    \def\enclname{Aldono(j)}%
    \def\ccname{Kopie al}%
    \def\headtoname{Al}%

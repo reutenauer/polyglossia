@@ -60,15 +60,15 @@
    \def\figurename{Фигура}%
    \def\tablename{Таблица}%
    %\def\thepart{}%
-   %\def\partname{}%
+   \def\partname{Част}%
    \def\pagename{Стр.}%
    \def\seename{вж.}%
    \def\alsoname{вж.\ също и}%
    \def\enclname{Приложения}%
    \def\ccname{копия}%
-   %\def\headtoname{}%
-   \def\proofname{Proof}%
-   \def\glossaryname{Glossary}%
+   \def\headtoname{За}%
+   \def\proofname{Доказателство}%
+   \def\glossaryname{Притурка}%
 }
 
 \def\datebulgarian{%

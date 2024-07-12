@@ -213,7 +213,7 @@
    \def\contentsname{Obsah}%
    \def\listfigurename{Zoznam obrázkov}%
    \def\listtablename{Zoznam tabuliek}%
-   \def\indexname{Index}%
+   \def\indexname{Register}%
    \def\figurename{Obrázok}%
    \def\tablename{Tabuľka}%
    %\def\thepart{}%

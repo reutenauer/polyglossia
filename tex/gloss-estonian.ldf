@@ -37,7 +37,7 @@
    \def\ccname{Koopia(d)}%
    %\def\headtoname{}%
    \def\proofname{Korrektuur}%
-   \def\glossaryname{Glossary}% <-- need translation
+   \def\glossaryname{Sõnastik}%
    }
 \def\dateestonian{%
    \def\today{\number\day.\space\ifcase\month\or
