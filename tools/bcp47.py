@@ -2,8 +2,11 @@
 # Below are mappings of the currently supported polyglossia languages
 # (+ babelnames) to bcp47 tags and of bcp-47 tags to *.ldf file names.
 
+from __future__ import print_function
+
 import fileinput
-import logging, sys
+import logging
+import sys
 
 # Dic 1: babelname : bcp47
 babelname2bcp47 = {
@@ -32,8 +35,6 @@ babelname2bcp47 = {
     "canadien" : "fr-CA",
     "catalan" : "ca",
     "chinese" : "zh",
-    "chinese" : "zh-CN",
-    "chinese" : "zh-TW",
     "coptic" : "cop",
     "croatian" : "hr",
     "czech" : "cz",
@@ -249,8 +250,10 @@ bcp472lang = {
     "nl" : "dutch",
     "nn" : "norwegian",
     "oc" : "occitan",
+    "or": "odia",
     "pl" : "polish",
     "pms" : "piedmontese",
+    "pa" : "punjabi",
     "pt" : "portuguese",
     "pt-BR" : "portuguese",
     "pt-PT" : "portuguese",
@@ -262,7 +265,6 @@ bcp472lang = {
     "sa" : "sanskrit",
     "sa-Deva" : "sanskrit",
     "sa-Beng" : "sanskrit",
-    "sa-Deva" : "sanskrit",
     "sa-Gujr" : "sanskrit",
     "sa-Knda" : "sanskrit",
     "sa-Mlym" : "sanskrit",
@@ -281,6 +283,7 @@ bcp472lang = {
     "th" : "thai",
     "tk" : "turkmen",
     "tr" : "turkish",
+    "ug" : "uyghur",
     "uk" : "ukrainian",
     "ur" : "urdu",
     "vi" : "vietnamese",
@@ -428,34 +431,33 @@ def generate_aliases():
         glossval = gloss + ":" + val
         if val in bcp472opts:
             addition = ("\\setlanguagealias*[%s]{%s}{%s}" % (bcp472opts[val], gloss, val))
-        for line in fileinput.FileInput(file_path,inplace=1):
-            if not glossval in aliases and not fertig and "% BCP-47 compliant aliases\n" in line:
+        for line in fileinput.FileInput(file_path,inplace=True):
+            if glossval not in aliases and not fertig and "% BCP-47 compliant aliases\n" in line:
                 line = line.replace(line, line + addition + "\n")
                 logging.debug("replace line: %s" % line)
                 fertig = True
                 aliases.append(glossval)
-            print line,
+            print(line, end="")
         if not fertig:
             addition = "% BCP-47 compliant aliases\n" + addition
-            for line in fileinput.FileInput(file_path,inplace=1):
-                if not glossval in aliases and not fertig and line == "}\n":
+            for line in fileinput.FileInput(file_path,inplace=True):
+                if glossval not in aliases and not fertig and line == "}\n":
                     line = line.replace(line, line + "\n" + addition)
                     logging.debug("replace line: %s" % line)
                     fertig = True
                     aliases.append(glossval)
-                print line,
+                print(line, end="")
 
 def generate_ids():
-    aliases = []
     for key in babelname2bcp47:
         val = babelname2bcp47[key]
         gloss = key
         addition = ("  bcp47=%s,\n" % val)
         file_path = "../tex/" + ("gloss-%s.ldf" % gloss)
-        for line in fileinput.FileInput(file_path,inplace=1):
+        for line in fileinput.FileInput(file_path,inplace=True):
             if "\\PolyglossiaSetup{" in line:
                 line = line.replace(line, line + addition)
-            print line,
+            print(line, end="")
 
 def generate_table():
     f = open("bcp47table.tex","w+")
@@ -470,13 +472,10 @@ def generate_table():
     f.write("\\textbf{BCP-47 tag} & \\textbf{Polyglossia name} & \\textbf{Polyglossia options}\\\\\n")
     f.write("\\midrule\n")
     f.write("\\endhead\n")
-    aliases = []
     for key, gloss in sorted(bcp472lang.items()):
         val = key
-        fertig = False
         col1 = val
         col2 = gloss
-        glossval = gloss + ":" + val
         col3 = ""
         if val in bcp472opts:
             col3 = bcp472opts[val]
