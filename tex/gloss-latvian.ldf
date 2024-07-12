@@ -25,12 +25,12 @@
    \def\contentsname{Saturs}%
    \def\listfigurename{Attēlu saraksts}%
    \def\listtablename{Tabulu saraksts}%
-   \def\indexname{Index}%
+   \def\indexname{Priekšmetu rādītājs}%
    \def\figurename{Att.}%
    \def\tablename{Tabula}%
    \def\partname{Daļa}%
-   \def\enclname{encl}%
-   \def\ccname{cc}%
+   \def\enclname{Pielikumā}%
+   \def\ccname{Kopija(s)}%
    \def\headtoname{To}%
    \def\pagename{lpp.}%
    \def\seename{sk.}%
