@@ -1,4 +1,4 @@
 #!/bin/bash
 # -*- coding: iso-8859-15 -*-
 
-l3build prerelease --date 2024/06/04 2.2
+l3build prerelease --date 2024/07/15 2.2
