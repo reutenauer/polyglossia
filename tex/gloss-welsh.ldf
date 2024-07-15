@@ -25,7 +25,7 @@
       {%
         \welsh@formaldatetrue
       },
-    date / accented.code =
+    date / short.code =
       {%
         \welsh@formaldatefalse
       },
