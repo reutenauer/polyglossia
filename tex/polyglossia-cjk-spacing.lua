@@ -1,6 +1,6 @@
 --
 -- polyglossia-cjk-spacing.lua
--- part of polyglossia v2.1 -- 2024/03/07
+-- part of polyglossia v2.2 -- 2024/06/04
 --
 
 local glyph_id = node.id"glyph"
