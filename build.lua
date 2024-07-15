@@ -27,11 +27,11 @@ function update_tag(file,content,tagname,tagdate)
   if string.match(file, "%.ldf$") then
     return string.gsub(content,
       "%% Language definition file %(part of polyglossia v%d%.%d+ %-%- %d%d%d%d/%d%d/%d%d%)\n",
-      "%% Language definition file (part of polyglossia " .. tagname .. " -- " .. tagdate .. ")\n")
+      "%% Language definition file (part of polyglossia v" .. tagname .. " -- " .. tagdate .. ")\n")
   elseif string.match(file, "%.lua$") then
     return string.gsub(content,
       "\n%-%- part of polyglossia v%d%.%d+ %-%- %d%d%d%d/%d%d/%d%d\n",
-      "\n-- part of polyglossia " .. tagname .. " -- " .. tagdate .. "\n")
+      "\n-- part of polyglossia v" .. tagname .. " -- " .. tagdate .. "\n")
   elseif file == "polyglossia.tex" then
     return string.gsub(content,
       "\n\\subsection%*{%d%.%d %(forthcoming%)}\n",
@@ -39,11 +39,11 @@ function update_tag(file,content,tagname,tagdate)
   elseif file == "polyglossia.sty" then
     return string.gsub(content,
       "\n  {polyglossia} {%d%d%d%d/%d%d/%d%d} {v%d%.%d+}\n",
-      "\n  {polyglossia} {" .. tagdate .. "} {" .. tagname .. "}\n")
+      "\n  {polyglossia} {" .. tagdate .. "} {v" .. tagname .. "}\n")
   elseif file == "README.md" then
     content = string.gsub(content,
       "# THE POLYGLOSSIA PACKAGE v%d%.%d\n",
-      "# THE POLYGLOSSIA PACKAGE " .. tagname .. "\n")
+      "# THE POLYGLOSSIA PACKAGE v" .. tagname .. "\n")
     local names = {"Arthur", "Udi", "Jürgen"}
     for name = 1, #names do
       content  = string.gsub(content,
