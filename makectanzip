@@ -114,10 +114,11 @@ mkdir -p $TDS_tex
 mkdir -p $TDS_doc
 mkdir -p $TDS_map
 cp polyglossia.dtx $TDS_src/ || exit 1
+cp $root/tex/fontmapping/* $TDS_map/ || exit 1
+rm -r $root/tex/fontmapping/ || exit 1
 cp $root/tex/* $TDS_tex/ || exit 1
 cp $root/doc/* $TDS_doc/ || exit 1
 cp $root/README.md $TDS_doc/ || exit 1
-cp $root/fontmapping/* $TDS_map/ || exit 1
 
 echo "Update TECkit mappings ..."
 cd $TDS_map
