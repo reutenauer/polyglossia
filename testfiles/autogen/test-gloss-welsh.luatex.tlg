@@ -10,9 +10,6 @@ Module polyglossia Info: Language data for welsh
 (polyglossia)            righthyphenmin^^I3
 (polyglossia)            synonyms^^I on input line ...
 Module polyglossia Info: Language welsh was not yet loaded; created with id 2 on input line ...
-Package polyglossia Warning: Unknown date value `short'
-Package polyglossia Warning: Unknown date value `short'
-Package polyglossia Warning: Unknown date value `short'
 )
 Package polyglossia Info: Default language is welsh
 > \box...=
