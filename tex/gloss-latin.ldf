@@ -618,6 +618,7 @@
 % For the aux file:
 \protected@write \@auxout { }
   {
+    \ProvideDocumentCommand \shorthandoff{sm}{} % #643
     \shorthandoff {=}
     \shorthandoff* {^} % #582
   }
