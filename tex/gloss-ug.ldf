@@ -1,4 +1,4 @@
-% Language definition file (part of polyglossia v2.1 -- 2024/03/07)
+% Language definition file (part of polyglossia v2.2 -- 2024/07/15)
 %
 \ProvidesFile{gloss-ug.ldf}[polyglossia: module for ug (Uyghur)]
 % BCP 47 tag for Uyghur

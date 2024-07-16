@@ -10,6 +10,7 @@ checkruns = 2
 checkconfigs = {"build","configfiles/config-lua","configfiles/config-autogen"}
 sourcefiledir = "tex"
 docfiledir = "doc"
+flatten = false
 sourcefiles = {"*.def", "*.ldf", "*.sty", "*.lua", "**/*.map"}
 installfiles = {"*.def", "*.ldf", "*.sty", "*.lua", "*.map", "*.tec"}
 tdslocations = {
@@ -21,17 +22,18 @@ unpackexe = "teckit_compile"
 packtdszip = true
 typesetexe = "xelatex"
 typesetfiles = {"polyglossia.tex"}
+ctanzip = module
 
 tagfiles = {"tex/polyglossia.sty", "tex/*.ldf", "tex/*.lua", "doc/polyglossia.tex", "README.md"}
 function update_tag(file,content,tagname,tagdate)
   if string.match(file, "%.ldf$") then
     return string.gsub(content,
       "%% Language definition file %(part of polyglossia v%d%.%d+ %-%- %d%d%d%d/%d%d/%d%d%)\n",
-      "%% Language definition file (part of polyglossia " .. tagname .. " -- " .. tagdate .. ")\n")
+      "%% Language definition file (part of polyglossia v" .. tagname .. " -- " .. tagdate .. ")\n")
   elseif string.match(file, "%.lua$") then
     return string.gsub(content,
       "\n%-%- part of polyglossia v%d%.%d+ %-%- %d%d%d%d/%d%d/%d%d\n",
-      "\n-- part of polyglossia " .. tagname .. " -- " .. tagdate .. "\n")
+      "\n-- part of polyglossia v" .. tagname .. " -- " .. tagdate .. "\n")
   elseif file == "polyglossia.tex" then
     return string.gsub(content,
       "\n\\subsection%*{%d%.%d %(forthcoming%)}\n",
@@ -39,11 +41,11 @@ function update_tag(file,content,tagname,tagdate)
   elseif file == "polyglossia.sty" then
     return string.gsub(content,
       "\n  {polyglossia} {%d%d%d%d/%d%d/%d%d} {v%d%.%d+}\n",
-      "\n  {polyglossia} {" .. tagdate .. "} {" .. tagname .. "}\n")
+      "\n  {polyglossia} {" .. tagdate .. "} {v" .. tagname .. "}\n")
   elseif file == "README.md" then
     content = string.gsub(content,
       "# THE POLYGLOSSIA PACKAGE v%d%.%d\n",
-      "# THE POLYGLOSSIA PACKAGE " .. tagname .. "\n")
+      "# THE POLYGLOSSIA PACKAGE v" .. tagname .. "\n")
     local names = {"Arthur", "Udi", "Jürgen"}
     for name = 1, #names do
       content  = string.gsub(content,
@@ -97,13 +99,7 @@ function gen_pdf_from_example()
    error_level = error_level + cp("*", "./build/unpacked", "./build/genpdf")
    for example = 1, #example_files do
        local example_name = jobname(example_files[example])
-       if example_name == "polyglossia" then
-           error_level = error_level + (
-               tex("./../../doc/polyglossia", "./build/genpdf", "xelatex --interaction=nonstopmode") +
-               tex("./../../doc/polyglossia", "./build/genpdf", "xelatex --interaction=nonstopmode") +
-               tex("./../../doc/polyglossia", "./build/genpdf", "xelatex --interaction=nonstopmode")
-           )
-       else
+       if example_name ~= "polyglossia" then
            error_level = error_level +
                tex("./../../doc/" .. example_name, "./build/genpdf", "xelatex --interaction=nonstopmode")
        end
@@ -115,8 +111,10 @@ end
 function pre_release()
     call({"."}, "tag")
     gen_pdf_from_example()
-    call({"."}, "ctan", {})
-    rm("./doc", "*.pdf")    
+    call({"."}, "ctan", {config = options['config']})
+    cp("*.pdf", "./doc", "./generated")
+    rm("./doc", "*.pdf")
+    rm(".", "*.tds.zip")
 end
 
 --option_list["force"] = { desc  = "overwrite existing tests with gentest", -- does not work... why?
