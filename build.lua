@@ -22,7 +22,7 @@ unpackexe = "teckit_compile"
 packtdszip = true
 typesetexe = "xelatex"
 typesetfiles = {"polyglossia.tex"}
-ctanzip = ctanpkg
+ctanzip = module
 
 tagfiles = {"tex/polyglossia.sty", "tex/*.ldf", "tex/*.lua", "doc/polyglossia.tex", "README.md"}
 function update_tag(file,content,tagname,tagdate)
@@ -99,13 +99,7 @@ function gen_pdf_from_example()
    error_level = error_level + cp("*", "./build/unpacked", "./build/genpdf")
    for example = 1, #example_files do
        local example_name = jobname(example_files[example])
-       if example_name == "polyglossia" then
-           error_level = error_level + (
-               tex("./../../doc/polyglossia", "./build/genpdf", "xelatex --interaction=nonstopmode") +
-               tex("./../../doc/polyglossia", "./build/genpdf", "xelatex --interaction=nonstopmode") +
-               tex("./../../doc/polyglossia", "./build/genpdf", "xelatex --interaction=nonstopmode")
-           )
-       else
+       if example_name ~= "polyglossia" then
            error_level = error_level +
                tex("./../../doc/" .. example_name, "./build/genpdf", "xelatex --interaction=nonstopmode")
        end
@@ -117,7 +111,8 @@ end
 function pre_release()
     call({"."}, "tag")
     gen_pdf_from_example()
-    call({"."}, "ctan", {})
+    call({"."}, "ctan", {config = options['config']})
+    cp("*.pdf", "./doc", "./generated")
     rm("./doc", "*.pdf")
     rm(".", "*.tds.zip")
 end
