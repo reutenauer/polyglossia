@@ -1,4 +1,21 @@
 #!/bin/bash
 # -*- coding: iso-8859-15 -*-
 
-l3build prerelease --date 2024/07/15 2.2
+VERSION="2.2"
+RELDATE="2024/07/15"
+
+RUNTESTS=true
+
+if [ $# -eq 1 ]; then
+    # --notests
+    if [ $1 == "--notests" -o $1 == "-t" ]; then
+        RUNTESTS=false
+    fi
+fi
+
+if [ $RUNTESTS = true ]; then
+    l3build prerelease $EXTRAOPTS --date $RELDATE $VERSION
+else
+    echo "skipping tests!"
+    l3build prerelease -c configfiles/config-nil --date $RELDATE $VERSION
+fi
