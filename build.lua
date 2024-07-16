@@ -10,6 +10,7 @@ checkruns = 2
 checkconfigs = {"build","configfiles/config-lua","configfiles/config-autogen"}
 sourcefiledir = "tex"
 docfiledir = "doc"
+flatten = false
 sourcefiles = {"*.def", "*.ldf", "*.sty", "*.lua", "**/*.map"}
 installfiles = {"*.def", "*.ldf", "*.sty", "*.lua", "*.map", "*.tec"}
 tdslocations = {
@@ -21,6 +22,7 @@ unpackexe = "teckit_compile"
 packtdszip = true
 typesetexe = "xelatex"
 typesetfiles = {"polyglossia.tex"}
+ctanzip = ctanpkg
 
 tagfiles = {"tex/polyglossia.sty", "tex/*.ldf", "tex/*.lua", "doc/polyglossia.tex", "README.md"}
 function update_tag(file,content,tagname,tagdate)
@@ -116,7 +118,8 @@ function pre_release()
     call({"."}, "tag")
     gen_pdf_from_example()
     call({"."}, "ctan", {})
-    rm("./doc", "*.pdf")    
+    rm("./doc", "*.pdf")
+    rm(".", "*.tds.zip")
 end
 
 --option_list["force"] = { desc  = "overwrite existing tests with gentest", -- does not work... why?
