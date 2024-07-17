@@ -66,9 +66,9 @@
 
 %% Internal hooks
 % select language hook
-\cs_new_nopar:Nn \__xpg_at_begin_document_selectlanguage: {}
-% \disablehyphenation hook
-\cs_new_nopar:Nn \__xpg_at_begin_document_hyphenation: {}
+\hook_new:n { polyglossia / selectlanguage }
+% things to be done after the above
+\hook_new:n { polyglossia / selectlanguage / after }
 
 % hook to be executed at begin of document
 \cs_new_nopar:Nn \__xpg_at_begin_document:
@@ -96,10 +96,10 @@
 \hook_gput_code:nnn {begindocument/end} {.}
 {
   % now we have the C locale definition: select the language
-  \__xpg_at_begin_document_selectlanguage:
+  \hook_use:n { polyglossia / selectlanguage }
   \bool_gset_true:N \g_xpg_main_lang_set_bool
-  % If hyphenation disabling has been requested in preamble, do it now
-  \__xpg_at_begin_document_hyphenation:
+  % Do the things that need to be done after language selection
+  \hook_use:n { polyglossia / selectlanguage / after }
 }
 
 %
@@ -813,7 +813,8 @@
   {
      % we have to postpone the execution until the main language
      % has been set (#125).
-     \cs_gset_nopar:Nn \__xpg_at_begin_document_hyphenation: {
+     \hook_gput_code:nnn { polyglossia / selectlanguage / after } {.}
+     {
         \__xpg_disable_hyphenation:
      }
   }
@@ -1311,7 +1312,8 @@
   {
     \__xpg_setRTLmain:
   }
-  \cs_gset_nopar:Nn \__xpg_at_begin_document_selectlanguage: {
+  \hook_gput_code:nnn { polyglossia / selectlanguage } {.}
+  {
     \selectbackgroundlanguage{#2}
     \selectlanguage[#1]{#2}
   }
