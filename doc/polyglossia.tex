@@ -828,21 +828,24 @@ which override the hyphenation patterns for specified words. The command takes a
 list of words where hyphenation points are marked by a dash (if no dash is used, the respective word is not
 hyphenated at all):
 \begin{quote}
-\begin{minipage}{.7\textwidth}
 \begin{verbatim}
 \hyphenation{%
   po-ly-glos-sia
   LaTeX
 }
 \end{verbatim}
-\end{minipage}
 \end{quote}
 %
-These exceptions, however, apply to all languages. In addition to this, \pkg{polyglossia} provides
+These exceptions, however, apply only to the currently active language.
+
+In addition to this, \pkg{polyglossia} provides
 the command\new{1.45}
 \displaycmd{\pghyphenation\oarg{options}\marg{lang}\marg{exceptions}}{\pghyphenation}
 which can be used to define exceptions that only apply to a specific language or language variant,
-respectively.
+respectively.\footnote{More precisely, it applies to all languages or varieties that share the
+same hyphenation patterns. Hence, for instance, all variants of \xpgoption{german} with
+\xpgoption{spelling=new} will share the same exceptions, as opposed to \xpgoption{spelling=old}
+which uses different patterns.}
 
 \subsection{Hyphenation thresholds}
 
