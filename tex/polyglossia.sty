@@ -66,7 +66,7 @@
 
 %% Internal hooks
 % select language hook
-\hook_new:n { polyglossia / selectlanguage }
+\cs_new_nopar:Nn \__xpg_at_begin_document_selectlanguage: {}
 % things to be done after the above
 \hook_new:n { polyglossia / selectlanguage / after }
 
@@ -96,7 +96,7 @@
 \hook_gput_code:nnn {begindocument/end} {.}
 {
   % now we have the C locale definition: select the language
-  \hook_use:n { polyglossia / selectlanguage }
+  \__xpg_at_begin_document_selectlanguage:
   \bool_gset_true:N \g_xpg_main_lang_set_bool
   % Do the things that need to be done after language selection
   \hook_use_once:n { polyglossia / selectlanguage / after }
@@ -1312,7 +1312,7 @@
   {
     \__xpg_setRTLmain:
   }
-  \hook_gput_code:nnn { polyglossia / selectlanguage } {.}
+  \cs_gset_nopar:Nn \__xpg_at_begin_document_selectlanguage:
   {
     \selectbackgroundlanguage{#2}
     \selectlanguage[#1]{#2}
