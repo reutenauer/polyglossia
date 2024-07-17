@@ -70,8 +70,8 @@
 % things to be done after the above
 \hook_new:n { polyglossia / selectdefaultlanguage / after }
 
-% hook to be executed at begin of document
-\cs_new_nopar:Nn \__xpg_at_begin_document:
+% things to be executed at begin of document
+\hook_gput_code:nnn {begindocument} {.}
 {
   % save various command
   \cs_gset_eq:cc{latin@alph}{@alph}% TODO rename when we have the C locale
@@ -82,11 +82,6 @@
   \xpg_initial_setup:
   % apply \familydefault changes
   \xpg_set_familydefault:
-}
-
-\hook_gput_code:nnn {begindocument} {.}
-{
-  \__xpg_at_begin_document:
 }
 
 % The following needs to go after any \AtBeginDocument (also of packages
