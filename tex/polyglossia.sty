@@ -99,7 +99,7 @@
   \hook_use:n { polyglossia / selectlanguage }
   \bool_gset_true:N \g_xpg_main_lang_set_bool
   % Do the things that need to be done after language selection
-  \hook_use:n { polyglossia / selectlanguage / after }
+  \hook_use_once:n { polyglossia / selectlanguage / after }
 }
 
 %
@@ -1778,12 +1778,15 @@
 % Define language-specific hyphenation exceptions
 \NewDocumentCommand \pghyphenation {O{} m m}
 {
-  \c_group_begin_token
-  \xpg_error_if_lang_not_loaded:n { #2 }
-  \SetGlossOptions{#2}{#1}
-  \xpg_select_language:nn { #1 } { #2 }
-  \hyphenation{#3}
-  \c_group_end_token
+  \hook_gput_code:nnn { polyglossia / selectlanguage / after } {.}
+  {
+    \c_group_begin_token
+      \xpg_error_if_lang_not_loaded:n { #2 }
+      \SetGlossOptions{#2}{#1}
+      \xpg_select_language:nn { #1 } { #2 }
+      \hyphenation{#3}
+    \c_group_end_token
+  }
 }
 
 

@@ -843,6 +843,7 @@ the command\new{1.45}
 \displaycmd{\pghyphenation\oarg{options}\marg{lang}\marg{exceptions}}{\pghyphenation}
 which can be used to define exceptions that only apply to a specific language or language variant,
 respectively.
+Note that if used in preamble, the exceptions are only activated at document begin.
 
 \subsection{Hyphenation thresholds}
 
@@ -2728,6 +2729,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \begin{itemize}
 	\item Prevent the Latin gloss from writing undefined commands 
 	      to the aux file (\TXI{633}).
+	\item Fix use of \cmd\pghyphenation\ in preamble (\TXI{654}).
 \end{itemize}
 
 \subsection*{2.2 (2024/07/15)}
