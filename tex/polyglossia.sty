@@ -68,7 +68,7 @@
 % select language hook
 \cs_new_nopar:Nn \__xpg_at_begin_document_selectlanguage: {}
 % things to be done after the above
-\hook_new:n { polyglossia / selectlanguage / after }
+\hook_new:n { polyglossia / selectdefaultlanguage / after }
 
 % hook to be executed at begin of document
 \cs_new_nopar:Nn \__xpg_at_begin_document:
@@ -95,8 +95,8 @@
 {
   % now we have the C locale definition: select the language
   \__xpg_at_begin_document_selectlanguage:
-  % Do the things that need to be done after language selection
-  \hook_use_once:n { polyglossia / selectlanguage / after }
+  % Do the things that need to be done after default language selection
+  \hook_use_once:n { polyglossia / selectdefaultlanguage / after }
 }
 
 %
@@ -805,7 +805,7 @@
 {
    % we have to postpone the execution until the main language
    % has been set (#125).
-   \hook_gput_code:nnn { polyglossia / selectlanguage / after } {.}
+   \hook_gput_code:nnn { polyglossia / selectdefaultlanguage / after } {.}
    {
       \__xpg_disable_hyphenation:
    }
@@ -1769,7 +1769,7 @@
 % Define language-specific hyphenation exceptions
 \NewDocumentCommand \pghyphenation {O{} m m}
 {
-  \hook_gput_code:nnn { polyglossia / selectlanguage / after } {.}
+  \hook_gput_code:nnn { polyglossia / selectdefaultlanguage / after } {.}
   {
     \c_group_begin_token
       \xpg_error_if_lang_not_loaded:n { #2 }
