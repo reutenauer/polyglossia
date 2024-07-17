@@ -91,13 +91,10 @@
 
 % The following needs to go after any \AtBeginDocument (also of packages
 % loaded after \set[main|other]language
-% Track whether the main language has been set
-\bool_new:N \g_xpg_main_lang_set_bool
 \hook_gput_code:nnn {begindocument/end} {.}
 {
   % now we have the C locale definition: select the language
   \__xpg_at_begin_document_selectlanguage:
-  \bool_gset_true:N \g_xpg_main_lang_set_bool
   % Do the things that need to be done after language selection
   \hook_use_once:n { polyglossia / selectlanguage / after }
 }
@@ -806,18 +803,12 @@
 
 \DeclareDocumentCommand \disablehyphenation {}
 {
-  \bool_if:NTF \g_xpg_main_lang_set_bool
-  {
-     \__xpg_disable_hyphenation:
-  }
-  {
-     % we have to postpone the execution until the main language
-     % has been set (#125).
-     \hook_gput_code:nnn { polyglossia / selectlanguage / after } {.}
-     {
-        \__xpg_disable_hyphenation:
-     }
-  }
+   % we have to postpone the execution until the main language
+   % has been set (#125).
+   \hook_gput_code:nnn { polyglossia / selectlanguage / after } {.}
+   {
+      \__xpg_disable_hyphenation:
+   }
 }
 
 \cs_new:Nn \__xpg_disable_hyphenation:
