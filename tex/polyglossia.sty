@@ -1765,15 +1765,11 @@
 % Define language-specific hyphenation exceptions
 \NewDocumentCommand \pghyphenation {O{} m m}
 {
-  \hook_gput_code:nnn { polyglossia / selectdefaultlanguage / after } {.}
-  {
-    \c_group_begin_token
-      \xpg_error_if_lang_not_loaded:n { #2 }
-      \SetGlossOptions{#2}{#1}
-      \xpg_select_language:nn { #1 } { #2 }
-      \hyphenation{#3}
-    \c_group_end_token
-  }
+    \IfNoValueTF{#1}
+      { \begin{hyphenrules}{#2} }
+      { \begin{hyphenrules}[#1]{#2} }
+          \hyphenation{#3}
+        \end{hyphenrules}
 }
 
 
