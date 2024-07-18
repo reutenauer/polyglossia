@@ -1,0 +1,10 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\pghyphenation{german}{aa-aaa-a-aaaa}
+\begin{document}
+\START
+\showhyphens{aaaaaaaaaa}
+\END
+
