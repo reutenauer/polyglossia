@@ -1646,6 +1646,7 @@
     % (as opposed to \str_lowercase:n)
    \use:c { xpg_#1_default_options_tl }
    \exp_args:Ne \keys_set:ne{ polyglossia / gloss / #1 }{ \text_lowercase:n {#2} }
+   \tl_set:Ne \xpg__current_options_tl { #2 }
 }
 
 % joint code of \foreignlanguage, otherlanguage*
@@ -1845,6 +1846,7 @@
    \__xpg_set_language_options:nn {#1} {#2}
 }
 \tl_new:N \xpg__tmp_default_options_tl
+\tl_new:N \xpg__current_options_tl
 \cs_generate_variant:Nn \keys_precompile:nnN { nec }
 
 % Record synonymous keyvals such as variant=us and variant=american
@@ -2009,8 +2011,24 @@
 \hook_gput_code:nnn {cmd/caption/before} {.}
 {
     \ifhmode\unskip\fi
-    \addtocontents{lof}{\protect\setforeignlanguage{\languagename}}
-    \addtocontents{lot}{\protect\setforeignlanguage{\languagename}}
+    \tl_if_empty:NTF \xpg__current_options_tl
+       {
+         \addtocontents{lof}{\protect\IfMainLanguageTF{\languagename}%
+                                 {\setmainlanguage{\languagename}}%
+                                 {\setforeignlanguage{\languagename}}}
+         \addtocontents{lot}{\protect\IfMainLanguageTF{\languagename}%
+                                         {\setmainlanguage{\languagename}}%
+                                         {\setforeignlanguage{\languagename}}}
+       }
+       { 
+         \addtocontents{lof}{\protect\IfMainLanguageTF{\languagename}%
+                                  {\setmainlanguage[\xpg__current_options_tl]{\languagename}}%
+                                  {\setforeignlanguage[\xpg__current_options_tl]{\languagename}}}
+         \addtocontents{lot}{\protect\IfMainLanguageTF{\languagename}%
+                                  {\setmainlanguage[\xpg__current_options_tl]{\languagename}}%
+                                  {\setforeignlanguage[\xpg__current_options_tl]{\languagename}}}
+       }
+    
 }
 
 % check if language is defined
