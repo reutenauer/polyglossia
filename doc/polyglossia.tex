@@ -169,7 +169,7 @@
 \title{{\textgreek{\xpgtitlefont\color{lightblue}\MakeUppercase{Πολυγλωσσία}}}
 \\[16pt]
 \color{xpgblue}Polyglossia: Modern multilingual typesetting with \XeLaTeX\ and \LuaLaTeX}
-\author{\TA{François Charette} \and \TA{Arthur Reutenauer}\thanks{Current maintainer}
+\author{\TA{François Charette} \and \TA{Arthur Reutenauer}
 	    \and \TA{Udi Fogiel} \and \TA{Bastien Roucariès} \and \TA{Jürgen Spitzmüller}}
 \date{\filedate \qquad \fileversion\thanks{Please report bugs to \url{http://github.com/reutenauer/polyglossia/issues}}\\
 \footnotesize (\textsc{pdf} file generated on \today)}
@@ -2733,6 +2733,8 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	      to the aux file (\TXI{633}).
 	\item Fix use of \cmd\pghyphenation\ in preamble (\TXI{654}).
 	\item Fix handling of current language options if lists of figures/tables (\TXI{657}).
+	\item Fix definition of \cmd\cyrdash\ so that no linebreak is added when it is used at
+	      paragraph begin.
 \end{itemize}
 
 \subsection*{2.2 (2024/07/15)}

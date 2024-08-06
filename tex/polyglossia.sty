@@ -1675,13 +1675,6 @@
 % prevent case changing of language name in \foreignlanguage
 \tl_put_right:Nn \l_text_case_exclude_arg_tl { \foreignlanguage }
 
-% Direct access to \xpg_set_foreign_language:nn
-% used in captions
-\NewDocumentCommand \setforeignlanguage { O{} m }
-{
-  \xpg_set_foreign_language:nn { #1 } { #2 }
-}
-
 % internal wrapper for foreign language
 % #1 option
 % #2 alias
@@ -2004,31 +1997,23 @@
 	\immediate\write\@mainaux
 	{\ProvideDocumentCommand\selectlanguage{sO{}m}{}}
    \fi
-}
 
-% Since captions might float to other language regions,
-% we need to change the language here (#542)
-\hook_gput_code:nnn {cmd/caption/before} {.}
-{
-    \ifhmode\unskip\fi
-    \tl_if_empty:NTF \xpg__current_options_tl
-       {
-         \addtocontents{lof}{\protect\IfMainLanguageTF{\languagename}%
-                                 {\setmainlanguage{\languagename}}%
-                                 {\setforeignlanguage{\languagename}}}
-         \addtocontents{lot}{\protect\IfMainLanguageTF{\languagename}%
-                                         {\setmainlanguage{\languagename}}%
-                                         {\setforeignlanguage{\languagename}}}
-       }
-       { 
-         \addtocontents{lof}{\protect\IfMainLanguageTF{\languagename}%
-                                  {\setmainlanguage[\xpg__current_options_tl]{\languagename}}%
-                                  {\setforeignlanguage[\xpg__current_options_tl]{\languagename}}}
-         \addtocontents{lot}{\protect\IfMainLanguageTF{\languagename}%
-                                  {\setmainlanguage[\xpg__current_options_tl]{\languagename}}%
-                                  {\setforeignlanguage[\xpg__current_options_tl]{\languagename}}}
-       }
-    
+   % we need to redefine \@caption to intrude the currently active language
+   % for the lot/lof.
+   % Since captions might float to other language regions,
+   % we need to specify the language here (#542)
+   \cs_set_eq:cc { __xpg_save_caption:n } { @caption }
+
+   \RenewDocumentCommand \@caption {m o m}
+    {
+       \tl_if_empty:NTF \xpg__current_options_tl
+          {
+            \__xpg_save_caption:n { #1 } [ \protect\selectlanguage*{\languagename}#2 ] { #3 }
+          }
+          { 
+            \__xpg_save_caption:n { #1 } [ {\protect\selectlanguage*[\xpg__current_options_tl]{\languagename}#2} ] { #3 }
+          }
+   }
 }
 
 % check if language is defined
