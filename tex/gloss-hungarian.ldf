@@ -343,14 +343,14 @@
 % Hungarian needs 1) trailing dots in chapter headings; 2) trailing dot in section, subsection, etc, counters
 \def\@hungarian@forced@dot{}
 \def\xpg@save@autodot{}
-\ifdef{\KOMAScript}{%
+\ifdef{\KOMAClassName}{%
     \providecommand*\autodot{}%
     \let\xpg@save@autodot\autodot%
 }{}
 % The following is based on some ideas from gloss-russian.ldf
 \def\hungarian@sectsformat{%
   \ifhungarian@forceheadingpunctuation%
-   \ifdef{\KOMAScript}{%
+   \ifdef{\KOMAClassName}{%
       \renewcommand*\autodot{.}%
    }{%
       \def\@seccntformat##1{\csname pre##1\endcsname%
@@ -376,7 +376,7 @@
 %
 \def\nohungarian@sectsformat{%
   \ifhungarian@forceheadingpunctuation%
-    \ifdef{\KOMAScript}{%
+    \ifdef{\KOMAClassName}{%
        \let\autodot\xpg@save@autodot%
     }{%
        \def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel

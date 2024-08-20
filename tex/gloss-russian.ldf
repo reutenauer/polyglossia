@@ -247,14 +247,14 @@
 
 % Russian needs trailing dots in all headings
 \def\xpg@save@autodot{}
-\ifdef{\KOMAScript}{%
+\ifdef{\KOMAClassName}{%
     \providecommand*\autodot{}%
     \let\xpg@save@autodot\autodot%
-}
+}{}
 
 \def\russian@capsformat{%
   \ifrussian@forceheadingpunctuation%
-   \ifdef{\KOMAScript}{%
+   \ifdef{\KOMAClassName}{%
       \renewcommand*\autodot{.}%
    }{%
       % The following is based on some ideas from ruscor.sty
@@ -280,7 +280,7 @@
 
 \def\norussian@capsformat{%
   \ifrussian@forceheadingpunctuation%
-    \ifdef{\KOMAScript}{%
+    \ifdef{\KOMAClassName}{%
        \let\autodot\xpg@save@autodot%
     }{%
        \def\@seccntformat##1{\csname the##1\endcsname\quad}% = LaTeX kernel
