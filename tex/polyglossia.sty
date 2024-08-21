@@ -2004,7 +2004,7 @@
    % we need to specify the language here (#542)
    \cs_set_eq:cc { __xpg_save_caption:n } { @caption }
 
-   \RenewDocumentCommand \@caption {m o m}
+   \cs_gset:Npn \@caption #1 [#2] #3
     {
        \tl_if_empty:NTF \xpg__current_options_tl
           {
