@@ -907,6 +907,8 @@
         % Strip font family name for error message
         % Courtesy of egreg, https://tex.stackexchange.com/a/613996
         \str_set:Nx \xpg_fname_str { \fontname\font }
+	% Remove name: prefix
+        \regex_replace_once:nnN { name: } { } \xpg_fname_str
         % Remove all after :
         \regex_replace_once:nnN { \:.* } { } \xpg_fname_str
         % ... and all after /
