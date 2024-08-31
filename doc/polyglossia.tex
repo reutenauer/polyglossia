@@ -289,6 +289,8 @@ that are explained in section \ref{specific} below.
 
 \end{table}
 
+\paragraph{Nota bene} Support for Chinese and Japanese is very basic and only a proof of concept. There is yet no line breaking mechanism used with these languages (as opposed to Korean), so unless you implement your own rules, the output is not usable for production. We need volunteers who are familiar with these scripts to finish support. If you can help, please contact us.
+
 \paragraph{Version Notes} The support for Amharic\new{1.0.1} should be considered an experimental attempt to
 port the package \pkg{ethiop}; feedback is welcome.
 Version 1.1.1\new{1.1.1} added support for Asturian, %\footnote{ Provided by Kevin Godby and Xuacu Saturio.},
@@ -2736,6 +2738,8 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Fix definition of \cmd\cyrdash\ so that no linebreak is added when it is used at
 	      paragraph begin.
 	\item Fix test for KOMA class in Hungarian and Russian glosses (\TXP{447}).
+        \item Fix wrong missing Script warning.
+	\item Fix display of font name in package error.
 \end{itemize}
 
 \subsection*{2.2 (2024/07/15)}
