@@ -1996,29 +1996,23 @@
 }
 
 \hook_gput_code:nnn {begindocument} {.}
-{
-   \if@filesw
-	\immediate\write\@mainaux
-	{\ProvideDocumentCommand\selectlanguage{sO{}m}{}}
-   \fi
+  {
+    \if@filesw
+      \immediate\write\@mainaux
+          {\ProvideDocumentCommand\selectlanguage{sO{}m}{}}
+    \fi
 
-   % we need to redefine \@caption to intrude the currently active language
-   % for the lot/lof.
-   % Since captions might float to other language regions,
-   % we need to specify the language here (#542)
-   \cs_set_eq:cc { __xpg_save_caption:n } { @caption }
+    % we need to redefine \@caption to intrude the currently active language
+    % for the lot/lof.
+    % Since captions might float to other language regions,
+    % we need to specify the language here (#542)
+    \cs_set_eq:cc { __xpg_save_caption:n } { @caption }
 
-   \cs_gset:Npn \@caption #1 [#2] #3
-    {
-       \tl_if_empty:NTF \xpg__current_options_tl
-          {
-            \__xpg_save_caption:n { #1 } [ \protect\selectlanguage*{\languagename}#2 ] { #3 }
-          }
-          { 
-            \__xpg_save_caption:n { #1 } [ {\protect\selectlanguage*[\xpg__current_options_tl]{\languagename}#2} ] { #3 }
-          }
-   }
-}
+    \cs_set:Npn \@caption #1 [#2] #3
+      {
+            \__xpg_save_caption:n { #1 } [ { \selectlanguage*[\xpg__current_options_tl]{\languagename}#2} ] { #3 }
+      }
+  }
 
 % check if language is defined
 \prg_set_conditional:Npnn \__xpg_pattern_check_if_exists:n #1 { F, TF }
