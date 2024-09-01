@@ -945,11 +945,10 @@
                     \use:c { #2familylatin } 
                     #5
                       {
-                         \fontspec_font_if_exist:nT{\fontname\font}{
-                            \__xpg_add_font_feature_script:nee { #2 }
-                                { \prop_item:Nn \l_xpg_langsetup_prop { #1 / scripttag } }
-                                { \prop_item:Nn \l_xpg_langsetup_prop { #1 / script } }
-                         }
+                         
+                        \__xpg_add_font_feature_script:nee { #2 }
+                            { \prop_item:Nn \l_xpg_langsetup_prop { #1 / scripttag } }
+                            { \prop_item:Nn \l_xpg_langsetup_prop { #1 / script } }
                       }
                   }
               }
