@@ -25,12 +25,12 @@
   {
     variant.choices:nn = { plain, classic, modern }
       {%
-        \edef\xpg@korean@variant{\the\numexpr\UseName{l_keys_choice_int}-1\relax}
+        \edef\xpg@korean@variant{\the\numexpr\UseName{l_keys_choice_int}-1\relax}%
       },
     variant.default:n = plain,
     captions.choices:nn = { hangul, hanja }
       {%
-        \edef\xpg@korean@captions{\the\numexpr\UseName{l_keys_choice_int}-1\relax}
+        \edef\xpg@korean@captions{\the\numexpr\UseName{l_keys_choice_int}-1\relax}%
       },
     captions.default:n = hangul,
     swapstrings.choice:,

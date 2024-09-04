@@ -47,17 +47,17 @@
 \def\serbian@set@languagekeys{%
    \if@serbian@cyr
      \if@serbian@ijekavian
-        \SetLanguageKeys{serbian}{scripttag=cyrl,script=Cyrillic,babelname=serbianc,bcp47=sr-Cyrl-ijekavsk,bcp47-language=sr,bcp47-script=Cyrl,bcp47-variant=ijekavsk,bcp47-casing=sr-Cyrl}
+        \SetLanguageKeys{serbian}{scripttag=cyrl,script=Cyrillic,babelname=serbianc,bcp47=sr-Cyrl-ijekavsk,bcp47-language=sr,bcp47-script=Cyrl,bcp47-variant=ijekavsk,bcp47-casing=sr-Cyrl}%
      \else
-        \SetLanguageKeys{serbian}{scripttag=cyrl,script=Cyrillic,babelname=serbianc,bcp47=sr-Cyrl,bcp47-language=sr,bcp47-script=Cyrl,bcp47-variant=ekavsk,bcp47-casing=sr-Cyrl}
+        \SetLanguageKeys{serbian}{scripttag=cyrl,script=Cyrillic,babelname=serbianc,bcp47=sr-Cyrl,bcp47-language=sr,bcp47-script=Cyrl,bcp47-variant=ekavsk,bcp47-casing=sr-Cyrl}%
      \fi
    \else
      \if@serbian@ijekavian
-       \SetLanguageKeys{serbian}{scripttag=latn,script=Latin,babelname=serbian,bcp47=sr-Latn-ijekavsk,bcp47-language=sr,bcp47-script=Latn,bcp47-variant=ijekavsk,bcp47-casing=sr-Latn}
+       \SetLanguageKeys{serbian}{scripttag=latn,script=Latin,babelname=serbian,bcp47=sr-Latn-ijekavsk,bcp47-language=sr,bcp47-script=Latn,bcp47-variant=ijekavsk,bcp47-casing=sr-Latn}%
      \else
-       \SetLanguageKeys{serbian}{scripttag=latn,script=Latin,babelname=serbian,bcp47=sr-Latn,bcp47-language=sr,bcp47-script=Latn,bcp47-variant=ekavsk,bcp47-casing=sr-Latn}
+       \SetLanguageKeys{serbian}{scripttag=latn,script=Latin,babelname=serbian,bcp47=sr-Latn,bcp47-language=sr,bcp47-script=Latn,bcp47-variant=ekavsk,bcp47-casing=sr-Latn}%
      \fi
-   \fi%
+   \fi
 }
 
 \DeclareKeys[polyglossia/gloss/serbian]
