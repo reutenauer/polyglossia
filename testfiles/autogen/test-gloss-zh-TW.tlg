@@ -5,6 +5,7 @@ File: gloss-zh-TW.ldf polyglossia: module for zh-TW (Chinese)
 (gloss-chinese.ldf
 File: gloss-chinese.ldf polyglossia: module for Chinese
 \c@TempJNum=\count...
+\xpg@orig@XeTeXlinebreakskip=\skip...
 ))
 Package polyglossia Info: Default language is chinese
 > \box...=

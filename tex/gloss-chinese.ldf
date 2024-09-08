@@ -276,16 +276,45 @@
     }%
 }
 
+\ifluatex
+  \@ifundefined{xpg@attr@cjkspacing}{\newattribute\xpg@attr@cjkspacing}{}
+  \directlua{ require"polyglossia-cjk-spacing" }
+  \def\chinese@simplified@spacing {\xpg@attr@cjkspacing=\thr@@}  % chinese simplified
+  \def\chinese@traditional@spacing{\xpg@attr@cjkspacing=4\relax} % chinese traditional
+  \def\nochinese@spacing{\unsetattribute\xpg@attr@cjkspacing}
+\else
+  \@ifundefined{xpg@orig@XeTeXlinebreakskip}{\newskip\xpg@orig@XeTeXlinebreakskip}{}
+  \xpg@orig@XeTeXlinebreakskip=\XeTeXlinebreakskip
+  \def\chinese@simplified@spacing{%
+    \XeTeXlinebreaklocale "zh"
+    \XeTeXlinebreakskip = 0pt plus 0.1em minus 0.01em}
+  \let\chinese@traditional@spacing\chinese@simplified@spacing
+  \def\nochinese@spacing{%
+    \XeTeXlinebreakskip=\xpg@orig@XeTeXlinebreakskip
+    \XeTeXlinebreaklocale ""}
+\fi
+
 \def\noextras@chinese{%
     \chinese@capsformat%
+    \nochinese@spacing
 }
 
 \def\blockextras@chinese{%
     \chinese@capsformat%
+    \ifchinese@traditional
+      \chinese@traditional@spacing
+    \else
+      \chinese@simplified@spacing
+    \fi
 }
 
 \def\inlineextras@chinese{%
     \chinese@capsformat%
+    \ifchinese@traditional
+      \chinese@traditional@spacing
+    \else
+      \chinese@simplified@spacing
+    \fi
 }
 % Based on contributions of Toru Inagaki, Norio Iwase, François Charette
 

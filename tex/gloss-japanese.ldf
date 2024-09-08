@@ -215,16 +215,35 @@
 	}%
 }
 
+\ifluatex
+  \@ifundefined{xpg@attr@cjkspacing}{\newattribute\xpg@attr@cjkspacing}{}
+  \directlua{ require"polyglossia-cjk-spacing" }
+  \def\japanese@spacing{\xpg@attr@cjkspacing=\@ne}
+  \def\nojapanese@spacing{\unsetattribute\xpg@attr@cjkspacing}
+\else
+  \@ifundefined{xpg@orig@XeTeXlinebreakskip}{\newskip\xpg@orig@XeTeXlinebreakskip}{}
+  \xpg@orig@XeTeXlinebreakskip=\XeTeXlinebreakskip
+  \def\japanese@spacing{%
+    \XeTeXlinebreaklocale "ja"
+    \XeTeXlinebreakskip = 0pt plus 0.1em minus 0.01em}
+  \def\nojapanese@spacing{%
+    \XeTeXlinebreakskip=\xpg@orig@XeTeXlinebreakskip
+    \XeTeXlinebreaklocale ""}
+\fi
+
 \def\noextras@japanese{%
 	\japanese@capsformat%
+	\nojapanese@spacing
 }
 
 \def\blockextras@japanese{%
 	\japanese@capsformat%
+	\japanese@spacing
 }
 
 \def\inlineextras@japanese{%
 	\japanese@capsformat%
+	\japanese@spacing
 }
 % Based on contributions of Toru Inagaki, Norio Iwase, François Charette
 

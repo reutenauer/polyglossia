@@ -5,6 +5,7 @@ File: gloss-ja.ldf polyglossia: module for ja (Japanese)
 (gloss-japanese.ldf
 File: gloss-japanese.ldf polyglossia: module for Japanese
 \c@TempJNum=\count...
+\xpg@orig@XeTeXlinebreakskip=\skip...
 ))
 Package polyglossia Info: Default language is japanese
 > \box...=

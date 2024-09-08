@@ -3,7 +3,8 @@ Don't change this file in any respect.
 (gloss-chinese.ldf
 File: gloss-chinese.ldf polyglossia: module for Chinese
 \c@TempJNum=\count...
-)
+\xpg@attr@cjkspacing=\attribute...
+Inserting `polyglossia.lang_cjk_spacing' in `pre_shaping_filter'.)
 Package polyglossia Info: Default language is chinese
 > \box...=
 \hbox(6.66+0.22)x49.5136, direction TLT
@@ -24,6 +25,8 @@ Package polyglossia Info: Default language is chinese
 .\kern1.66672
 .\TU/lmr/m/n/10 日
 .\TU/lmr/m/n/10 󰀀
+.\penalty 10000
+.\glue 0.0 plus 0.5 minus 0.1
 .\TU/lmr/m/n/10 .
 ! OK.
 <to be read again> 
