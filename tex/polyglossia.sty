@@ -30,10 +30,27 @@
 %% \l@nohyphenation is defined in polyglossia.lua
 \sys_if_engine_luatex:TF
   {
-	\lua_load_module:n{polyglossia}
+    \lua_load_module:n{polyglossia}
+    \prg_new_conditional:Nnn \xpg_if_script:n { TF, T, F }
+      {
+        \fontspec_if_fontspec_font:TF
+          {
+            \lua_now:e
+              {
+                if~ luaotfload.aux.provides_script(font.current(), '#1')~ then~
+                  token.get_next()~
+                end
+              }
+            \use_iii:nnn \use_i:nn
+              { \prg_return_true: }
+              { \prg_return_false: }
+            }
+            { \prg_return_false: }
+      }
   }{
-	\cs_if_free:cT { l@nohyphenation } 
-	   { \chardef\l@nohyphenation=255 }
+    \cs_if_free:cT { l@nohyphenation }
+      { \chardef\l@nohyphenation=255 }
+    \prg_set_eq_conditional:NNn \xpg_if_script:n \fontspec_if_script:n { TF, T, F }
   }
 
 % Which version of XeTeX do we use? What is the boundary class? 4095 or 255
@@ -886,7 +903,7 @@
                  (Script="#3"~ to~ scripttag~ "#2")}
   }
   {
-    \fontspec_if_script:nTF{#2}
+    \xpg_if_script:nTF{#2}
        {\addfontfeature{Script=#3}}
        {
         \tl_set:Nn \xpg_ffamily_tl {}
