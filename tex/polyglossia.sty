@@ -38,14 +38,13 @@
             \lua_now:e
               {
                 if~ luaotfload.aux.provides_script(font.current(), '#1')~ then~
-                  token.get_next()~
+                  token.put_next(token.create('prg_return_true:'))~
+                else~
+                  token.put_next(token.create('prg_return_false:'))~
                 end
               }
-            \use_iii:nnn \use_i:nn
-              { \prg_return_true: }
-              { \prg_return_false: }
-            }
-            { \prg_return_false: }
+          }
+          { \prg_return_false: }
       }
   }{
     \cs_if_free:cT { l@nohyphenation }
