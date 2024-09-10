@@ -1422,6 +1422,9 @@
           { \xpg_alias_base_lang:n{#2} }
       }
   }
+  
+% prevent case changing of language name in \selectlanguage
+\tl_put_right:Nn \l_text_case_exclude_arg_tl { \selectlanguage }
 
 \cs_new:Nn \__xpg_select_language:nn
   {
