@@ -1274,7 +1274,7 @@
 \cs_new_protected_nopar:Npn \SetGlossOptions #1 #2
 {
    \use:c { xpg_#1_default_options_tl }
-   \exp_args:Ne \keys_set:ne{ polyglossia / gloss / #1 }{ \str_lowercase:f { #2 } }
+   \lowercase { \exp_args:Ne \keys_set:ne{ polyglossia / gloss / #1 }{ #2 } }
 }
 
 % joint code of \foreignlanguage, otherlanguage*
