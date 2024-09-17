@@ -20,6 +20,20 @@
 % BCP-47 compliant aliases
 \setlanguagealias*{japanese}{ja}
 
+\providecommand*\presection{}
+\providecommand*\presubsection{}
+\providecommand*\presubsubsection{}
+\providecommand*\postsection{}
+\providecommand*\postsubsection{}
+\providecommand*\postsubsubsection{}
+\let\xpg@save@presection\presection
+\let\xpg@save@presubsection\presubsection
+\let\xpg@save@presubsubsection\presubsubsection
+\let\xpg@save@postsection\postsection
+\let\xpg@save@postsubsection\postsubsection
+\let\xpg@save@postsubsubsection\postsubsubsection
+\let\xpg@save@seccntformat\@seccntformat
+
 \def\japanese@capsformat{%
 	\def\@seccntformat##1{%
 		\csname pre##1\endcsname%
@@ -32,6 +46,16 @@
 	\def\presection{第}%
 	\def\presubsection{第}%
 	\def\presubsubsection{第}%
+}
+
+\def\nojapanese@capsformat{%
+    \let\presection\xpg@save@presection%
+    \let\presubsection\xpg@save@presubsection%
+    \let\presubsubsection\xpg@save@presubsubsection%
+    \let\postsection\xpg@save@postsection%
+    \let\postsubsection\xpg@save@postsubsection%
+    \let\postsubsubsection\xpg@save@postsubsubsection%
+    \let\@seccntformat\xpg@save@seccntformat%
 }
 
 \def\captionsjapanese{%
@@ -232,18 +256,18 @@
 \fi
 
 \def\noextras@japanese{%
-	\japanese@capsformat%
-	\nojapanese@spacing
+  \nojapanese@capsformat%
+  \nojapanese@spacing%
 }
 
 \def\blockextras@japanese{%
-	\japanese@capsformat%
-	\japanese@spacing
+  \japanese@capsformat%
+  \japanese@spacing%
 }
 
 \def\inlineextras@japanese{%
-	\japanese@capsformat%
-	\japanese@spacing
+  \japanese@capsformat%
+  \japanese@spacing%
 }
 % Based on contributions of Toru Inagaki, Norio Iwase, François Charette
 

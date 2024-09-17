@@ -78,6 +78,20 @@
 \SetLanguageAliasValues{chinese}{variant}{tw,traditional}
 
 
+\providecommand*\presection{}
+\providecommand*\presubsection{}
+\providecommand*\presubsubsection{}
+\providecommand*\postsection{}
+\providecommand*\postsubsection{}
+\providecommand*\postsubsubsection{}
+\let\xpg@save@presection\presection
+\let\xpg@save@presubsection\presubsection
+\let\xpg@save@presubsubsection\presubsubsection
+\let\xpg@save@postsection\postsection
+\let\xpg@save@postsubsection\postsubsection
+\let\xpg@save@postsubsubsection\postsubsubsection
+\let\xpg@save@seccntformat\@seccntformat
+
 \def\chinese@capsformat{%
     \def\@seccntformat##1{%
         \csname pre##1\endcsname%
@@ -96,6 +110,16 @@
     \def\presection{第}%
     \def\presubsection{第}%
     \def\presubsubsection{第}%
+}
+
+\def\nochinese@capsformat{%
+    \let\presection\xpg@save@presection%
+    \let\presubsection\xpg@save@presubsection%
+    \let\presubsubsection\xpg@save@presubsubsection%
+    \let\postsection\xpg@save@postsection%
+    \let\postsubsection\xpg@save@postsubsection%
+    \let\postsubsubsection\xpg@save@postsubsubsection%
+    \let\@seccntformat\xpg@save@seccntformat%
 }
 
 \def\captionschinese{%
@@ -295,26 +319,26 @@
 \fi
 
 \def\noextras@chinese{%
-    \chinese@capsformat%
-    \nochinese@spacing
+    \nochinese@capsformat%
+    \nochinese@spacing%
 }
 
 \def\blockextras@chinese{%
     \chinese@capsformat%
     \ifchinese@traditional
-      \chinese@traditional@spacing
+      \chinese@traditional@spacing%
     \else
-      \chinese@simplified@spacing
-    \fi
+      \chinese@simplified@spacing%
+    \fi%
 }
 
 \def\inlineextras@chinese{%
     \chinese@capsformat%
     \ifchinese@traditional
-      \chinese@traditional@spacing
+      \chinese@traditional@spacing%
     \else
-      \chinese@simplified@spacing
-    \fi
+      \chinese@simplified@spacing%
+    \fi%
 }
 % Based on contributions of Toru Inagaki, Norio Iwase, François Charette
 
