@@ -1708,6 +1708,7 @@
       \xpg_otherlanguage:nn{ \xpg_alias_add_to_option_i:nn{#2}{#1} }{ #3 }
       \__xpg_lang_set_text_direction:nn{#3}{#4}
     \group_end:
+    \cs_if_exist_use:c{ nestedextras@\languagename }
   }
 }
 \cs_generate_variant:Nn \__xpg_foreignlanguage:nnnn {eeen}
@@ -1719,6 +1720,7 @@
 	\__xpg_otherlanguage:eee { #1 } { #2 } { \xpg_alias_base_lang:n { #2 } }
   }{
 	\c_group_end_token% \group_end: does not work here!
+	\cs_if_exist_use:c{ nestedextras@\languagename }
   }
 
 % internal wrapper
@@ -1770,6 +1772,7 @@
       \cs_if_exist_use:c{date@bbl@\babelname}
       \__xpg_lang_set_text_direction:nn{#3}{#4}
     \group_end:
+    \cs_if_exist_use:c{ nestedextras@\languagename }
   }
 }
 \cs_generate_variant:Nn \__xpg_textlanguage:nnnn {nnen}

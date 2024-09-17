@@ -248,11 +248,13 @@
   \@ifundefined{xpg@orig@XeTeXlinebreakskip}{\newskip\xpg@orig@XeTeXlinebreakskip}{}
   \xpg@orig@XeTeXlinebreakskip=\XeTeXlinebreakskip
   \def\japanese@spacing{%
-    \XeTeXlinebreaklocale "ja"
-    \XeTeXlinebreakskip = 0pt plus 0.1em minus 0.01em}
+    \XeTeXlinebreaklocale "ja"%
+    \XeTeXlinebreakskip = 0pt plus 0.1em minus 0.01em%
+  }
   \def\nojapanese@spacing{%
-    \XeTeXlinebreakskip=\xpg@orig@XeTeXlinebreakskip
-    \XeTeXlinebreaklocale ""}
+    \XeTeXlinebreakskip=\xpg@orig@XeTeXlinebreakskip%
+    \XeTeXlinebreaklocale ""%
+   }
 \fi
 
 \def\noextras@japanese{%
@@ -269,5 +271,14 @@
   \japanese@capsformat%
   \japanese@spacing%
 }
+
+\ifxetex
+  % \XeTeXlinebreaklocale is global,
+  % so we need to reset after nested language got closed
+  \def\nestedextras@japanese{%
+    \japanese@spacing%
+  }
+\fi
+
 % Based on contributions of Toru Inagaki, Norio Iwase, François Charette
 

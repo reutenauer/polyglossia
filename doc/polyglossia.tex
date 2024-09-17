@@ -2330,14 +2330,15 @@ Ukrainian mathematical symbols.
 	          \meta{lang} is activated locally via \cmd\text\meta{lang} command
 	\item \Cmd{\noextras@\meta{lang}} stores macros that are to be executed when the language
 	          \meta{lang} is closed
+	\item \Cmd{\nestedextras@\meta{lang}}\new{2.3} stores macros that are to be executed when a nested language
+	          is closed and \meta{lang} is the active language again. This is useful
+	          for settings that are only possible on global scale.
 \end{itemize}
 %
-In order to redefine internal macros, we recommend to use the command \cmd\gappto.
-For compatibility with \pkg{babel} the command \cmd\addto\ is also available
-to the same effect. For instance, to change the \cmd\chaptername\ for language ¦lingua¦,
-you can do this:
+In order to redefine internal macros, we recommend to use the command \cmd\addto.
+For instance, to change the \cmd\chaptername\ for language ¦lingua¦, you can do this:
 \begin{verbatim}
-\gappto\captionslingua{\def\chaptername{Caput}}
+\addto\captionslingua{\def\chaptername{Caput}}
 \end{verbatim}
 %
 Note that this needs to be done after the respective language has been loaded with

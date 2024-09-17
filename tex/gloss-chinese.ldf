@@ -310,12 +310,14 @@
   \@ifundefined{xpg@orig@XeTeXlinebreakskip}{\newskip\xpg@orig@XeTeXlinebreakskip}{}
   \xpg@orig@XeTeXlinebreakskip=\XeTeXlinebreakskip
   \def\chinese@simplified@spacing{%
-    \XeTeXlinebreaklocale "zh"
-    \XeTeXlinebreakskip = 0pt plus 0.1em minus 0.01em}
+    \XeTeXlinebreaklocale "zh"%
+    \XeTeXlinebreakskip = 0pt plus 0.1em minus 0.01em%
+  }
   \let\chinese@traditional@spacing\chinese@simplified@spacing
   \def\nochinese@spacing{%
-    \XeTeXlinebreakskip=\xpg@orig@XeTeXlinebreakskip
-    \XeTeXlinebreaklocale ""}
+    \XeTeXlinebreakskip=\xpg@orig@XeTeXlinebreakskip%
+    \XeTeXlinebreaklocale ""%
+  }
 \fi
 
 \def\noextras@chinese{%
@@ -340,5 +342,18 @@
       \chinese@simplified@spacing%
     \fi%
 }
+
+\ifxetex
+  % \XeTeXlinebreaklocale is global,
+  % so we need to reset after nested language got closed
+  \def\nestedextras@chinese{%
+    \ifchinese@traditional
+      \chinese@traditional@spacing%
+    \else
+      \chinese@simplified@spacing%
+    \fi%
+  }
+\fi
+
 % Based on contributions of Toru Inagaki, Norio Iwase, François Charette
 
