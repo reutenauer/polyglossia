@@ -435,7 +435,7 @@
     % \XeTeXlinebreaklocale is global,
     % so we need to reset after nested language got closed
     \def\nestedextras@korean{%
-      \XeTeXlinebreaklocale "ko"%
+      \XeTeXlinebreaklocale "ko"\relax
     }
 \else % luatex
     \def\inlineextras@korean{\xpg@attr@cjkspacing\xpg@korean@variant\relax}
