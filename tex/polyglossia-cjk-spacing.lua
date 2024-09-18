@@ -409,7 +409,9 @@ local function cjk_break (head)
                     curr, next = next, node.getnext(next)
                 end
 
-                if next and (next.id == glyph_id or next.id == math_id and next.subtype == 0) then
+                if next and node.has_attribute(next, attr_cjk)
+                    and (next.id == glyph_id or next.id == math_id and next.subtype == 0) then
+
                     local n = next.char or 0
                     f = f or next.font or 0 -- in case of curr == math_off
 
