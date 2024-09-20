@@ -28,25 +28,25 @@
 \setlanguagealias*[script=latin]{sanskrit}{sa-Latn}
 
 \def\fontsetup@sanskrit@devanagari{%
-  \SetLanguageKeys{sanskrit}{scripttag=deva,script=Devanagari,bcp47=sa-Deva,bcp47-language=sa,bcp47-script=Deva,bcp47-casing=sa-Deva}
+  \SetLanguageKeys{sanskrit}{scripttag=deva,script=Devanagari,bcp47=sa-Deva,bcp47-language=sa,bcp47-script=Deva,bcp47-casing=sa-Deva}%
   \SetupNonLatinPolyglossiaFont{sanskrit}}
 \def\fontsetup@sanskrit@gujarati{%
-  \SetLanguageKeys{sanskrit}{scripttag=gujr,script=Gujarati,bcp47=sa-Gujr,bcp47-language=sa,bcp47-script=Gujr,bcp47-casing=sa-Gujr}
+  \SetLanguageKeys{sanskrit}{scripttag=gujr,script=Gujarati,bcp47=sa-Gujr,bcp47-language=sa,bcp47-script=Gujr,bcp47-casing=sa-Gujr}%
   \SetupNonLatinPolyglossiaFont{sanskrit}}
 \def\fontsetup@sanskrit@malayalam{%
-  \SetLanguageKeys{sanskrit}{scripttag=mlym,script=Malayalam,bcp47=sa-Mlym,bcp47-language=sa,bcp47-script=Mlym,bcp47-casing=sa-Mlym}
+  \SetLanguageKeys{sanskrit}{scripttag=mlym,script=Malayalam,bcp47=sa-Mlym,bcp47-language=sa,bcp47-script=Mlym,bcp47-casing=sa-Mlym}%
   \SetupNonLatinPolyglossiaFont{sanskrit}}
 \def\fontsetup@sanskrit@bengali{%
-  \SetLanguageKeys{sanskrit}{scripttag=beng,script=Bengali,bcp47=sa-Beng,bcp47-language=sa,bcp47-script=Beng,bcp47-casing=sa-Beng}
+  \SetLanguageKeys{sanskrit}{scripttag=beng,script=Bengali,bcp47=sa-Beng,bcp47-language=sa,bcp47-script=Beng,bcp47-casing=sa-Beng}%
   \SetupNonLatinPolyglossiaFont{sanskrit}}
 \def\fontsetup@sanskrit@kannada{%
-  \SetLanguageKeys{sanskrit}{scripttag=knda,script=Kannada,bcp47=sa-Knda,bcp47-language=sa,bcp47-script=Knda,bcp47-casing=sa-Knda}
+  \SetLanguageKeys{sanskrit}{scripttag=knda,script=Kannada,bcp47=sa-Knda,bcp47-language=sa,bcp47-script=Knda,bcp47-casing=sa-Knda}%
   \SetupNonLatinPolyglossiaFont{sanskrit}}
 \def\fontsetup@sanskrit@telugu{%
-  \SetLanguageKeys{sanskrit}{scripttag=telu,script=Telugu,bcp47=sa-Relu,bcp47-language=sa,bcp47-script=Relu,bcp47-casing=sa-Relu}
+  \SetLanguageKeys{sanskrit}{scripttag=telu,script=Telugu,bcp47=sa-Relu,bcp47-language=sa,bcp47-script=Relu,bcp47-casing=sa-Relu}%
   \SetupNonLatinPolyglossiaFont{sanskrit}}
 \def\fontsetup@sanskrit@latin{%
-  \SetLanguageKeys{sanskrit}{scripttag=latn,script=Latin,bcp47=sa-Latn,bcp47-language=sa,bcp47-script=Latn,bcp47-casing=sa-Latn}
+  \SetLanguageKeys{sanskrit}{scripttag=latn,script=Latin,bcp47=sa-Latn,bcp47-language=sa,bcp47-script=Latn,bcp47-casing=sa-Latn}%
   \SetupLatinPolyglossiaFont{sanskrit}}
 
 
