@@ -1,4 +1,4 @@
-% Language definition file (part of polyglossia v2.2 -- 2024/07/15)
+% Language definition file (part of polyglossia v2.3 -- 2024/09/23)
 %
 \ProvidesFile{gloss-serbian.ldf}[polyglossia: module for Serbian]
 %TODO split into gloss-serbiancyr.ldf and gloss-serbianlat.ldf
