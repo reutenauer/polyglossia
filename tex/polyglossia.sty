@@ -21,7 +21,7 @@
 \hook_gput_code:nnn {begindocument/before} {.}
 {
   \cs_gset_eq:NN \bbl@set@language \xpg_set_language_aux:nn  % for biblatex
-  \cs_gset_eq:NN \bbl@main@language \xpg_main_language_tl    % for biblatex
+  \cs_gset_eq:NN \bbl@main@language \g_xpg_main_language_tl    % for biblatex
   \ProvideDocumentCommand \texorpdfstring { m m } { #1 }  % dummy command if hyperref is not loaded
 }
 
@@ -517,7 +517,7 @@
   }
 
 \tl_new:N \g__xpg_lastlanguage_tl
-\tl_set:Nn \g__xpg_lastlanguage_tl { 0 }
+\tl_gset:Nn \g__xpg_lastlanguage_tl { 0 }
 
 % Track whether hyphenation is disabled
 \bool_new:N \g__xpg_hyphenation_disabled_bool
@@ -689,6 +689,7 @@
 }
 \cs_generate_variant:Nn  \__xpg_add_font_feature_script:nnn { nee }
 
+\tl_new:N \l_xpg_familytype_tl
 \tl_set:Nn \l_xpg_familytype_tl {rm}
 
 %% TODO: probably can be cleaned a little more
@@ -1037,10 +1038,11 @@
     {\xpg_alias_base_lang:n{#2}}
 }
 
+\tl_new:N \g_xpg_main_language_tl
 
 \cs_new:Nn \__xpg_set_default_language:nn
 {
-  \tl_gset:Nn \xpg_main_language_tl {#2}
+  \tl_gset:Nn \g_xpg_main_language_tl {#2}
   %% The following settings are for the default language and script
   % this tells bidi.sty or luabidi.sty that the document is RTL
   \str_if_eq:eeT { \prop_item:Nn \l_xpg_langsetup_prop { #2 / direction } } { RL }
@@ -1174,12 +1176,12 @@
 {
   \xpg_error_if_lang_not_loaded:n{#2}
   % disable globalnumbers of previously defined default language
-  \use:c{no\xpg_main_language_tl @globalnumbers}
-  \use:c{noextras@\xpg_main_language_tl}
+  \use:c{no\g_xpg_main_language_tl @globalnumbers}
+  \use:c{noextras@\g_xpg_main_language_tl}
   % This is a hook for external packages which want to access variants
   % via babelname (such as biblatex)
   \cs_if_exist_use:c{noextras@bbl@\mainbabelname}
-  \use:c{init@noextras@\xpg_main_language_tl}
+  \use:c{init@noextras@\g_xpg_main_language_tl}
   \xpg_set_language_name:n { #2 }
   \str_if_eq:eeT { \prop_item:Ne \l_xpg_langsetup_prop { #2 / direction } } { RL }
     {
@@ -1581,7 +1583,7 @@
 
 \prg_set_conditional:Npnn \xpg_if_main_language:n #1 { T, F, TF }
 {
-   \str_if_eq:VnTF \xpg_main_language_tl { #1 }
+   \str_if_eq:VnTF \g_xpg_main_language_tl { #1 }
         { \prg_return_true: }
         { \prg_return_false: }
 }
@@ -1924,7 +1926,7 @@
 % keys for main package
 \keys_define:nn { polyglossia } {
   verbose
-     .bool_set:N = \g_xpg_verbose_bool,
+     .bool_gset:N = \g_xpg_verbose_bool,
   verbose
      .default:n = true,
   % compatibility
@@ -1946,7 +1948,7 @@
      .default:n = true,
 
   luatexrenderer
-     .str_set:N = \g_xpg_luatex_renderer_str,
+     .str_gset:N = \g_xpg_luatex_renderer_str,
   luatexrenderer
      .value_required:n = true,
 }
