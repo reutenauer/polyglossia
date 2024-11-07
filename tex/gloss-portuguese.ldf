@@ -11,8 +11,7 @@
   hyphennames={portuges,portuguese},
   hyphenmins={2,3},
   langtag=PTG,
-  fontsetup=true,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*[variant=portuguese]{portuguese}{pt-PT}

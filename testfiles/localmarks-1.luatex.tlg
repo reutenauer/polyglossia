@@ -25,7 +25,7 @@ Completed box being shipped out [1]
 ..\glue(\lineskip) 0.0
 ..\vbox(550.0+0.0)x345.0, glue set 518.67084fill, direction TRT
 ...\write-{}
-...\write1{\@writefile{toc}{\selectlanguage *[]{hebrew}}}
+...\write1{\@writefile{toc}{\xpg@aux {}{hebrew}}}
 ...\glue(\topskip) 1.276
 ...\hbox(8.724+0.3)x345.0, glue set 289.12802fil, direction TRT
 ....\localpar
@@ -47,11 +47,11 @@ Completed box being shipped out [1]
 ....\glue(\rightskip) 0.0
 ...\marks2{\__mark_id:n {1}\MakeUppercase    []{1\hskip 1em\relax כותרת}}
 ...\marks3{\__mark_id:n {2}\MakeUppercase    []{1\hskip 1em\relax כותרת}}
-...\mark{{}{\foreignlanguage {hebrew}{\protect \@@ensure@maindir {\MakeUppercase    []{1\hskip 1em\relax כותרת}}}}}
+...\mark{{}{\foreignlanguage {hebrew}{\MakeUppercase    []{1\hskip 1em\relax כותרת}}}}
 ...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {1}כותרת}{\thepage }{}\protected@file@percent }}
 ...\penalty 10000
 ...\glue 9.21916 plus 0.80165
-...\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+...\write1{\@writefile{toc}{\xpg@aux {}{english}}}
 ...\penalty 10000
 ...\glue(\parskip) 0.0 plus 1.0
 ...\glue(\parskip) 0.0

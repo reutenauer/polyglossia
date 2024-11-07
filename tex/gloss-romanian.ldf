@@ -9,8 +9,7 @@
   hyphennames={romanian},
   hyphenmins={2,2},
   langtag=ROM,
-  fontsetup=true,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*{romanian}{ro}

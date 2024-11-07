@@ -19,8 +19,7 @@
   hyphenmins={2,2},
   frenchspacing=true, % Правопис српскога језика, Матица српска, 2010. (измењено и допуњено, четврто издање): т. 188, под Обликовање ступца и пасуса
   indentfirst=true, % Правопис српскога језика, Матица српска, 2010. (измењено и допуњено, четврто издање): т. 188, под Обликовање ступца и пасуса
-  fontsetup=false,
-  localnumeral=serbiannumerals,
+   localnumeral=serbiannumerals,
   Localnumeral=Serbiannumerals,
   babelname=serbian
   %TODO localalph
@@ -83,13 +82,11 @@
     script / cyrillic.code =
       {%
         \@serbian@cyrtrue
-        \SetupNonLatinPolyglossiaFont{serbian}%
         \serbian@set@languagekeys
       },
     script / latin.code =
       {%
         \@serbian@cyrfalse
-        \SetupLatinPolyglossiaFont{serbian}%
           %TODO \def\serbian@language{\language=\l@serbianlat}%
           % or should we use Croatian patterns as a fallback for the time being???
         \serbian@set@languagekeys

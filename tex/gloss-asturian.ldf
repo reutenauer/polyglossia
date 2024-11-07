@@ -13,8 +13,7 @@
   langtag=AST,
   frenchspacing=true,
   indentfirst=true,
-  fontsetup=true,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*{asturian}{ast}

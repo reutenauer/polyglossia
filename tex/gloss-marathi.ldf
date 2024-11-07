@@ -17,8 +17,8 @@
   langtag=MAR,
   hyphennames={marathi},
   hyphenmins={2,2},%CHECK
-  fontsetup=true,
-  localnumeral=marathinumerals
+  localnumeral=marathinumerals,
+  Localnumeral=marathinumerals
   %TODO nouppercase=true,
 }
 
@@ -46,7 +46,7 @@
   }
 
 % Register default options
-\InitializeGlossOptions{marathi}{numerals=Devanagari}
+\InitializeGlossOptions{marathi}{numerals=devanagari}
 
 \newcommand{\marathinumerals}[2]{\marathinumber{#2}}
 

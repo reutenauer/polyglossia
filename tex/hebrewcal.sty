@@ -17,32 +17,30 @@
 %
 % OPTIONS
 %
-\RequirePackage{xkeyval}
+\DeclareKeys[hebrewcal]
+  {
+    marcheshvan.if = @xpg@hebrew@marcheshvan,
+    marcheshvan.default:n = true,
+    fullyear.if = @xpg@hebrew@fullyear,
+    fullyear.default:n = true,
+    transliteration.choice:,
+    transliteration / academy.code =
+      {%
+        \@hebrewcal@academytranstrue
+      },
+    transliteration / alt.code =
+      {%
+        \@hebrewcal@academytransfalse
+      },
+    transliteration.default:n = alt,
+    transliteration/unknown.code = \PackageWarning{hebrewcal}{Unknown transliteration option `#1'}%
+  }
 
-% marcheshvan=true|false
-\define@boolkey{hebrewcal}[@xpg@hebrew@]{marcheshvan}[true]{}
-
-% fullyear=true|false
-\define@boolkey{hebrewcal}[@xpg@hebrew@]{fullyear}[true]{}
-
-% transliteration=academy|alt
+\newif\@xpg@hebrew@marcheshvan
+\newif\@xpg@hebrew@marcheshvan
 \newif\if@hebrewcal@academytrans
-\@hebrewcal@academytransfalse
-\define@choicekey*+{hebrewcal}{transliteration}[\hcal@val\hcal@nr]{academy,alt}[alt]{%
-   \ifcase\hcal@nr\relax
-      % academy:
-     \@hebrewcal@academytranstrue
-   \or
-      % alt:
-      \@hebrewcal@academytransfalse
-   \fi
-   \PackageInfo{hebrewcal}{Setting transliteration=\hcal@val}%
-}{%
-  \PackageWarning{hebrewcal}{Unknown transliteration option `#1'}%
-}
 
-% Process
-\ProcessOptionsX*<hebrewcal>
+\ProcessKeyOptions[hebrewcal]
 %%
 %% END OPTIONS
 

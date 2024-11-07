@@ -16,8 +16,7 @@
   hyphennames={ukrainian},
   hyphenmins={2,2},
   frenchspacing=true,
-  fontsetup=true,
-  localnumeral=ukrainiannumerals,
+   localnumeral=ukrainiannumerals,
   Localnumeral=Ukrainiannumerals
 }
 

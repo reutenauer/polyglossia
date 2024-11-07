@@ -8,8 +8,7 @@
   hyphennames={esperanto},
   hyphenmins={2,2},
   langtag=NTO,
-  fontsetup=true,
-  %TODO localalph={esperanto@alph,esperanto@Alph}
+   %TODO localalph={esperanto@alph,esperanto@Alph}
 }
 
 % BCP-47 compliant aliases

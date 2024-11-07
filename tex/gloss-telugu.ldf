@@ -13,8 +13,7 @@
   langtag=TEL,
   hyphennames={telugu},
   hyphenmins={2,2}, %FIXME
-  fontsetup=true,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*{telugu}{te}

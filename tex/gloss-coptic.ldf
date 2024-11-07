@@ -11,7 +11,6 @@
   langtag=COP,
   hyphennames={coptic},
   hyphenmins={2,2},
-  fontsetup=true
 }
 
 % BCP-47 compliant aliases

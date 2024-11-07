@@ -10,8 +10,7 @@
   hyphennames={english},
   hyphenmins={2,3},
   langtag=ENG,
-  fontsetup=true,
-  % ignore command
+   % ignore command
   DefineCommandsCmd={use_none:n}
 }
 

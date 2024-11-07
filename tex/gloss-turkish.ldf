@@ -10,7 +10,6 @@
   hyphenmins={2,2},
   langtag=TRK,
   frenchspacing=true,
-  fontsetup=true
   }
 
 % TODO Add \ifluatex branch everywhere

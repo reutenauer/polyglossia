@@ -11,8 +11,7 @@
   language=Korean,
   langtag=KOR,
   hyphennames={nohyphenation},
-  frenchspacing=true,
-  fontsetup=true
+  frenchspacing=true
 }
 
 % BCP-47 compliant aliases
