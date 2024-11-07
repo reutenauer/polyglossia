@@ -27,7 +27,7 @@ Inserting `l3color' in `luaotfload.parse_color'.
 Package: xparse ....-..-.. L3 Experimental document command parser
 )
 Package: fontspec ....-..-.. v... Font selection for XeLaTeX and LuaLaTeX
-Lua module: fontspec ....-..-.. Font selection for XeLaTeX and LuaLaTeX (../fontspec-luatex.sty
+Lua module: fontspec ....-..-.. v... Font selection for XeLaTeX and LuaLaTeX (../fontspec-luatex.sty
 Package: fontspec-luatex ....-..-.. v... Font selection for XeLaTeX and LuaLaTeX
 \l__fontspec_script_int=\count...
 \l__fontspec_language_int=\count...
@@ -48,7 +48,7 @@ Package: fontenc ....-..-.. v... Standard LaTeX package
 ) (../fontspec.cfg))) (../iftex.sty
 Package: iftex ....-..-.. v... TeX engine tests
 )
-Lua module: polyglossia ....-..-.. Polyglossia
+Lua module: polyglossia ....-..-.. v... Polyglossia
 \l_xpg_alias_keyvals_int=\count...
 (gloss-latex.ldf
 File: gloss-latex.ldf polyglossia: module for default language
