@@ -1670,7 +1670,7 @@
   % and assign the returned number to \l@#1
   \__xpg_pattern_check_if_exists:nF {#1}
   {
-    \directlua { token.set_char('l@#1', polyglossia.newloader'#1') }
+    \directlua { token.set_char('l@#1', polyglossia.newloader'#1', 'global') }
   }
 }
 
