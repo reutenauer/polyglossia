@@ -1493,7 +1493,7 @@
      {
            % we might be outside of l3 catcode regime
            \tl_set_eq:NN \xpg@current@opts \xpg__current_options_tl
-           \__xpg_save_caption:n { #1 } [ { \selectlanguage*[\xpg@current@opts]{\languagename}#2 } ] { #3 }
+           \__xpg_save_caption:n { #1 } [ { \xpg@aux{\xpg@current@opts}{\languagename}#2 } ] { #3 }
      }
 }
 
