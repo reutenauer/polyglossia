@@ -59,7 +59,7 @@
 
 % Useful for getting list of loaded languages and variants. Like babel's bbl@loaded
 % all language loaded
-\seq_new:N \__xpg_langs_loaded
+\seq_new:N \g__xpg_langs_loaded_seq
 % list of loaded languages (polyglossia name)
 \clist_new:N \xpg@loaded
 % list of loaded variants
@@ -195,7 +195,7 @@
 % error out if lang is not loaded
 \cs_new_nopar:Nn \xpg_error_if_lang_not_loaded:n
 {
-  \seq_if_in:NeF \__xpg_langs_loaded {#1}
+  \seq_if_in:NeF \g__xpg_langs_loaded_seq {#1}
   {
     \msg_error:nnn { polyglossia } { languagenotloaded } { #1 }
   }
@@ -818,25 +818,25 @@
 % load a master language from an alias file
 \NewDocumentCommand \InheritGlossFile { m }
 {
-  \seq_if_in:NeF \__xpg_langs_loaded {#1}
+  \seq_if_in:NeF \g__xpg_langs_loaded_seq {#1}
   {
     \xpg_input:n {gloss-#1.ldf}
     % define environment and command if not alias
-    \str_if_eq:eeT {\prop_item:Ne \__xpg_alias {#1/target}} {#1} {
+    \str_if_eq:eeT {\prop_item:Ne \g__xpg_alias_prop {#1/target}} {#1} {
       \use:c{\prop_item:Nn{\l_xpg_langsetup_prop}
                           {#1/DefineCommandsCmd}}
                           {#1}
       }
-    \seq_gput_right:Nn \__xpg_langs_loaded {#1}
+    \seq_gput_right:Nn \g__xpg_langs_loaded_seq {#1}
   }
   \__xpg_register_language:nn{}{#1}
 }
 
-\prop_new_linked:N \__xpg_alias
+\prop_new_linked:N \g__xpg_alias_prop
 
 % define environment and command if not alias
 \cs_new:Nn \xpg_define_language_commands:n {
-  \str_if_eq:eeT {\prop_item:Ne \__xpg_alias {#1/target}} {#1}
+  \str_if_eq:eeT {\prop_item:Ne \g__xpg_alias_prop {#1/target}} {#1}
   {
     \exp_args:Ne
     \NewDocumentEnvironment {\prop_item:Nn{\l_xpg_langsetup_prop}{#1/envname}} { O{} }
@@ -857,21 +857,21 @@
 
 % resolve alias property #1 lang #2 item
 \cs_new:Nn \xpg_alias_prop_item:nn {
-  \prop_if_in:NeTF \__xpg_alias {#1/#2}
+  \prop_if_in:NeTF \g__xpg_alias_prop {#1/#2}
   {
-    \prop_item:Ne \__xpg_alias {#1/#2}
+    \prop_item:Ne \g__xpg_alias_prop {#1/#2}
   }
   {
-    \prop_if_in:NeTF \__xpg_alias {#1/target}
+    \prop_if_in:NeTF \g__xpg_alias_prop {#1/target}
     {
       % target to self fall back to language table
-      \str_if_eq:eeTF { \prop_item:Ne \__xpg_alias {#1/target} } { #1 }
+      \str_if_eq:eeTF { \prop_item:Ne \g__xpg_alias_prop {#1/target} } { #1 }
       {
         \prop_item:Nn{\l_xpg_langsetup_prop} {#1/#2}
       }
       % load alias by recursion
       {
-        \xpg_alias_prop_item:ee { \prop_item:Ne \__xpg_alias {#1/target} } {#2}
+        \xpg_alias_prop_item:ee { \prop_item:Ne \g__xpg_alias_prop {#1/target} } {#2}
       }
     }
     {
@@ -903,7 +903,7 @@
 % get base language
 \cs_new:Nn \xpg_alias_base_lang:n
   {
-    \prop_item:Ne \__xpg_alias {#1/target}
+    \prop_item:Ne \g__xpg_alias_prop {#1/target}
   }
 \cs_generate_variant:Nn \xpg_alias_base_lang:n {e}
 
@@ -928,27 +928,27 @@
 % #6 alias
 \DeclareDocumentCommand \xpg_language_alias { D(){} O{} m D(){} O{} m}
 {
-  \prop_gremove:Nn \__xpg_alias {#6/target}
-  \prop_gremove:Nn \__xpg_alias {#6/options}
-  \prop_gremove:Nn \__xpg_alias {#6/bcp47}
-  \prop_gremove:Nn \__xpg_alias {#6/babelname}
-  \prop_gremove:Nn \__xpg_alias {#6/variant}
-  \prop_gput:Nee \__xpg_alias {#6/target} {#3}
+  \prop_gremove:Nn \g__xpg_alias_prop {#6/target}
+  \prop_gremove:Nn \g__xpg_alias_prop {#6/options}
+  \prop_gremove:Nn \g__xpg_alias_prop {#6/bcp47}
+  \prop_gremove:Nn \g__xpg_alias_prop {#6/babelname}
+  \prop_gremove:Nn \g__xpg_alias_prop {#6/variant}
+  \prop_gput:Nee \g__xpg_alias_prop {#6/target} {#3}
   \tl_if_blank:eF {#1}
   {
-    \prop_gput:Nee \__xpg_alias {#6/variant} {#1}
+    \prop_gput:Nee \g__xpg_alias_prop {#6/variant} {#1}
   }
   \tl_if_blank:eF {#5}
   {
-    \prop_gput:Nee \__xpg_alias {#6/bcp47} {#5}
+    \prop_gput:Nee \g__xpg_alias_prop {#6/bcp47} {#5}
   }
   \tl_if_blank:eF {#4}
   {
-    \prop_gput:Nee \__xpg_alias {#6/babelname} {#1}
+    \prop_gput:Nee \g__xpg_alias_prop {#6/babelname} {#1}
   }
   \tl_if_blank:eF {#2}
   {
-    \prop_gput:Nee \__xpg_alias {#6/options} {#2}
+    \prop_gput:Nee \g__xpg_alias_prop {#6/options} {#2}
   }
 }
 
@@ -972,12 +972,12 @@
         \endotherlanguage
       }
   }
-  \tl_clear_new:N \__xpg_alias_option_tl
+  \tl_clear_new:N \g__xpg_alias_prop_option_tl
   \prop_clear_new:N \__xpg_language_alias_prop
-  \keys_set_known:nnN{polyglossia/alias} {#2} \__xpg_alias_option_tl
+  \keys_set_known:nnN{polyglossia/alias} {#2} \g__xpg_alias_prop_option_tl
   \xpg_language_alias
     (\prop_item:Nn \__xpg_language_alias_prop {variant})
-    % TODO not yet [\__xpg_alias_option_tl]
+    % TODO not yet [\g__xpg_alias_prop_option_tl]
     [#2]
     {#3}
     (\prop_item:Nn \__xpg_language_alias_prop {babelname})
@@ -1022,16 +1022,16 @@
       \clist_gput_right:Ne \xpg@loaded {\xpg_alias_base_lang:n{##2}}
     }
   }
-  \seq_if_in:NeF \__xpg_langs_loaded {#2}
+  \seq_if_in:NeF \g__xpg_langs_loaded_seq {#2}
   {
     \__xpg_load_lang_definition:nn{#1}{#2}
     % define environment and command if not alias
-    \str_if_eq:eeT {\prop_item:Ne \__xpg_alias {#2/target}} {#2} {
+    \str_if_eq:eeT {\prop_item:Ne \g__xpg_alias_prop {#2/target}} {#2} {
        \use:c{\prop_item:Ne{\l_xpg_langsetup_prop}
             {#2/DefineCommandsCmd}}
             {#2}
     }
-    \seq_gput_right:Ne \__xpg_langs_loaded {#2}
+    \seq_gput_right:Ne \g__xpg_langs_loaded_seq {#2}
   }
   \cs_set_nopar:Npe \mainlanguagevariant { \prop_item:Ne \l_xpg_curropt_prop { \xpg_alias_base_lang:n{#2} / variant } }
    \exp_args:Nee \__xpg_set_default_language:nn {\xpg_alias_add_to_option_i:nn{#2}{#1}}
@@ -1217,18 +1217,18 @@
 %  Declare secondary language #2 with language options #1
 \DeclareDocumentCommand \setotherlanguage { O{} m }
 {
-  \seq_if_in:NeF \__xpg_langs_loaded {#2}
+  \seq_if_in:NeF \g__xpg_langs_loaded_seq {#2}
   {
     \__xpg_load_lang_definition:ee {#1} {#2}
     % define environment and command if not alias
-    \str_if_eq:eeT {\prop_item:Ne \__xpg_alias {#2/target}} {#2} {
+    \str_if_eq:eeT {\prop_item:Ne \g__xpg_alias_prop {#2/target}} {#2} {
        \use:c{\prop_item:Ne{\l_xpg_langsetup_prop}
              {#2/DefineCommandsCmd}}
              {#2}
     }
     \__xpg_set_otherlanguage:ee {\xpg_alias_add_to_option_i:nn{#2}{#1}}
       {\xpg_alias_base_lang:n{#2}}
-    \seq_gput_right:Ne \__xpg_langs_loaded {#2}
+    \seq_gput_right:Ne \g__xpg_langs_loaded_seq {#2}
   }
 }
 
