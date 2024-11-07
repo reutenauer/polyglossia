@@ -208,9 +208,9 @@
       \XeTeXinterchartoks \z@ \french@questionexclamation = {\xpg@french@thinsp}%
       \XeTeXinterchartoks \z@ \french@punctthin = {\xpg@french@thinsp}%
       \XeTeXinterchartoks \z@ \french@punctthick = {\nobreakspace}%
-      \XeTeXinterchartoks \xpg@boundaryclass \french@questionexclamation = {\xpg@unskip\xpg@french@thinsp}%
-      \XeTeXinterchartoks \xpg@boundaryclass \french@punctthin = {\xpg@unskip\xpg@french@thinsp}%
-      \XeTeXinterchartoks \xpg@boundaryclass \french@punctthick = {\xpg@unskip\nobreakspace}%
+      \XeTeXinterchartoks \e@alloc@intercharclass@top \french@questionexclamation = {\xpg@unskip\xpg@french@thinsp}%
+      \XeTeXinterchartoks \e@alloc@intercharclass@top \french@punctthin = {\xpg@unskip\xpg@french@thinsp}%
+      \XeTeXinterchartoks \e@alloc@intercharclass@top \french@punctthick = {\xpg@unskip\nobreakspace}%
       \iffrench@autospaceguillemets
         \let\xpg@french@guillspace\xpg@french@thinsp%
         \XeTeXinterchartoks \french@punctguillstart \z@ = {\xpg@french@guillspace}% "«a" -> "«\,a"
@@ -218,8 +218,8 @@
  %      \XeTeXinterchartoks \z@ \french@punctguillstart = {\nobreakspace}% "a«" unchanged?
  %      \XeTeXinterchartoks \french@punctguillend \z@ = {\nobreakspace}% "»a" unchanged?
         \XeTeXinterchartoks \z@ \french@punctguillend = {\xpg@french@guillspace}% "a»" -> "a\,»"
-        \XeTeXinterchartoks \french@punctguillstart \xpg@boundaryclass = {\xpg@french@guillspace\ignorespaces}% "«  " -> "«\,"
-        \XeTeXinterchartoks \xpg@boundaryclass \french@punctguillend = {\xpg@unskip\xpg@french@guillspace}% "  »" -> "\,»"
+        \XeTeXinterchartoks \french@punctguillstart \e@alloc@intercharclass@top = {\xpg@french@guillspace\ignorespaces}% "«  " -> "«\,"
+        \XeTeXinterchartoks \e@alloc@intercharclass@top \french@punctguillend = {\xpg@unskip\xpg@french@guillspace}% "  »" -> "\,»"
         \XeTeXinterchartoks \french@closebrackets \french@punctguillend = {\xpg@french@guillspace}% ")»" -> ")\,»"
         \XeTeXinterchartoks \french@questionexclamation \french@punctguillend  = {\xpg@french@guillspace}% "?»" -> "?\,»"
         \XeTeXinterchartoks \french@punctthin \french@punctguillend  = {\xpg@french@guillspace}% ";»" -> ";\,»"

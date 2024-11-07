@@ -52,11 +52,6 @@
     \prg_set_eq_conditional:NNn \xpg_if_script:n \fontspec_if_script:n { TF, T, F }
   }
 
-% Which version of XeTeX do we use? What is the boundary class? 4095 or 255
-\cs_if_exist:cTF { e@alloc@intercharclass@top }
-  { \cs_gset_eq:NN \xpg@boundaryclass \e@alloc@intercharclass@top }
-  { \chardef\xpg@boundaryclass=\@cclv }
-
 % Useful for getting list of loaded languages and variants. Like babel's bbl@loaded
 % all language loaded
 \seq_new:N \g__xpg_langs_loaded_seq
