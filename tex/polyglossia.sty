@@ -25,9 +25,6 @@
   \ProvideDocumentCommand \texorpdfstring { m m } { #1 }  % dummy command if hyperref is not loaded
 }
 
-%% when no patterns are available, we use \l@nohyphenation, assigned to 255
-%%  (suggestion by Enrico Gregorio)
-%% \l@nohyphenation is defined in polyglossia.lua
 \sys_if_engine_luatex:TF
   {
     \lua_load_module:n{polyglossia}
