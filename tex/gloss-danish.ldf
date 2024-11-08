@@ -9,8 +9,7 @@
   hyphenmins={2,3},
   langtag=DAN,
   frenchspacing=true,
-  fontsetup=true,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*{danish}{da}

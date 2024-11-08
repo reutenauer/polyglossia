@@ -13,8 +13,8 @@
 	langtag=JAN,
 	hyphennames={nohyphenation},
 	frenchspacing=false,
-	fontsetup=true,
-	localnumeral=japanesenumerals
+	localnumeral=japanesenumerals,
+	Localnumeral=japanesenumerals
 }
 
 % BCP-47 compliant aliases

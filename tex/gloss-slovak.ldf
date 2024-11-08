@@ -9,8 +9,7 @@
   hyphennames={slovak},
   hyphenmins={2,2},
   langtag=SKY,
-  fontsetup=true,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*{slovak}{sk}

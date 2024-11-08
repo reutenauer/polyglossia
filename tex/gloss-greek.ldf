@@ -14,8 +14,7 @@
   langtag=ELL,
   frenchspacing=true,
   indentfirst=true,
-  fontsetup=true,
-  localnumeral=greeknumerals,
+   localnumeral=greeknumerals,
   Localnumeral=Greeknumerals
   %TODO localalph={greek@alph,greek@Alph}
 }

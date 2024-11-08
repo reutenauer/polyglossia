@@ -30,8 +30,8 @@
   langtag=KAN,
   hyphennames={kannada},
   hyphenmins={2,2}, 
-  fontsetup=true,
-  localnumeral=kannadanumerals
+  localnumeral=kannadanumerals,
+  Localnumeral=kannadanumerals
 }
 
 % BCP-47 compliant aliases

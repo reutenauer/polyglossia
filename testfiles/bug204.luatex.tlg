@@ -10,7 +10,6 @@ Don't change this file in any respect.
 ...\localleftbox=null
 ...\localrightbox=null
 ..\hbox(0.0+0.0)x0.0, direction TLT
-..\begindir TLT
 ..\TU/lmr/m/n/10 B
 ..\TU/lmr/m/n/10 o
 ..\TU/lmr/m/n/10 n
@@ -21,7 +20,6 @@ Don't change this file in any respect.
 ..\TU/lmr/m/n/10 u
 ..\TU/lmr/m/n/10 r
 ..\TU/lmr/m/n/10 .
-..\enddir TLT
 ..\penalty 10000
 ..\glue(\parfillskip) 0.0
 ..\glue(\rightskip) 0.0 plus 1.0fil
@@ -142,14 +140,12 @@ Don't change this file in any respect.
 ...\localleftbox=null
 ...\localrightbox=null
 ..\hbox(0.0+0.0)x0.0, direction TLT
-..\begindir TLT
 ..\TU/lmr/m/n/10 H
 ..\TU/lmr/m/n/10 e
 ..\TU/lmr/m/n/10 l
 ..\TU/lmr/m/n/10 l
 ..\TU/lmr/m/n/10 o
 ..\TU/lmr/m/n/10 .
-..\enddir TLT
 ..\penalty 10000
 ..\glue(\parfillskip) 0.0
 ..\glue(\rightskip) 0.0 plus 1.0fil

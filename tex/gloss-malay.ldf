@@ -12,7 +12,6 @@
   langtag=MLY,
   hyphennames={malay,melayu,bahasam,bahasai,indonesian,indon,bahasa},
   hyphenmins={2,2},
-  fontsetup=true
 }
 
 % BCP-47 compliant aliases
@@ -39,7 +38,6 @@
         \def\malay@variant{indonesian}%
         \malay@melayufalse
         \SetLanguageKeys{malay}{language=Indonesian,langtag=IND,babelname=bahasa,bcp47=id,bcp47-language=id}%
-        \SetupLatinPolyglossiaFont{malay}%
         % Check if \l@indonesian is defined. If not, try to set it to some variety
         % (specific order as in the csv list), or null language if everything fails
         \TryPatternWithFallback{indonesian}{indon,bahasai,bahasam,malay,melayu,bahasa}%
@@ -49,7 +47,6 @@
         \def\malay@variant{malay}%
         \malay@melayutrue
         \SetLanguageKeys{malay}{language=Malay,langtag=MLY,babelname=bahasam,bcp47=zsm,bcp47-language=zsm}%
-        \SetupLatinPolyglossiaFont{malay}%
         % Check if \l@malay is defined. If not, try to set it to some variety
         % (specific order as in the csv list), or null language if everything fails
         \TryPatternWithFallback{malay}{melayu,bahasam,bahasai,indonesian,indon,bahasa}%

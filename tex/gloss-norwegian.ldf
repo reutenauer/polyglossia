@@ -9,8 +9,7 @@
   langtag=NYN,
   hyphenmins={2,2},
   frenchspacing=true,
-  fontsetup=false,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*[variant=bokmal]{norwegian}{nb}
@@ -28,13 +27,11 @@
       {%
           \def\norwegian@variant{nynorsk}%
           \SetLanguageKeys{norwegian}{langtag=NYN,babelname=nynorsk,bcp47=nn,bcp47-language=nn}%
-          \SetupLatinPolyglossiaFont{norwegian}%
       },
     variant / bokmal.code =
       {%
           \def\norwegian@variant{norsk}%
           \SetLanguageKeys{norwegian}{langtag=NOR,babelname=norsk,bcp47=nb,bcp47-language=nb}%
-          \SetupLatinPolyglossiaFont{norwegian}%
       },
     variant.default:n = nynorsk,
     variant/unknown.code = \xpg@warning{Unknown norwegian variant `#1'}

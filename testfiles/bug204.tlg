@@ -6,9 +6,7 @@ Don't change this file in any respect.
 ..\glue(\leftskip) 0.0 plus 1.0fil
 ..\beginL
 ..\hbox(0.0+0.0)x0.0
-..\beginL
 ..\TU/lmr/m/n/10 Bonjour.
-..\endL
 ..\penalty 10000
 ..\glue(\parfillskip) 0.0
 ..\endL
@@ -77,9 +75,7 @@ Don't change this file in any respect.
 ..\glue(\leftskip) 0.0 plus 1.0fil
 ..\beginL
 ..\hbox(0.0+0.0)x0.0
-..\beginL
 ..\TU/lmr/m/n/10 Hello.
-..\endL
 ..\penalty 10000
 ..\glue(\parfillskip) 0.0
 ..\endL

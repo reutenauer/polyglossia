@@ -11,7 +11,6 @@
     bcp47-script = Latn,
     hyphenmins = {2,2},
     frenchspacing = true,
-    fontsetup = true,
     langtag = LAT
   }
 
@@ -219,7 +218,7 @@
             \polyglossia_latin_insert_punctuation_space:
           }
         % opening guillemet followed by a space
-        \XeTeXinterchartoks \g_polyglossia_latin_opening_guillemet_class \xpg@boundaryclass =
+        \XeTeXinterchartoks \g_polyglossia_latin_opening_guillemet_class \e@alloc@intercharclass@top =
           {
             \polyglossia_latin_replace_following_space:
           }
@@ -249,17 +248,17 @@
             \polyglossia_latin_insert_punctuation_space:
           }
         % space followed by a question or exclamation mark
-        \XeTeXinterchartoks \xpg@boundaryclass \g_polyglossia_latin_question_exclamation_class =
+        \XeTeXinterchartoks \e@alloc@intercharclass@top \g_polyglossia_latin_question_exclamation_class =
           {
             \polyglossia_latin_replace_preceding_space:
           }
         % space followed by a colon or semicolon
-        \XeTeXinterchartoks \xpg@boundaryclass \g_polyglossia_latin_colon_semicolon_class =
+        \XeTeXinterchartoks \e@alloc@intercharclass@top \g_polyglossia_latin_colon_semicolon_class =
           {
             \polyglossia_latin_replace_preceding_space:
           }
         % space followed by closing guillemet
-        \XeTeXinterchartoks \xpg@boundaryclass \g_polyglossia_latin_closing_guillemet_class =
+        \XeTeXinterchartoks \e@alloc@intercharclass@top \g_polyglossia_latin_closing_guillemet_class =
           {
             \polyglossia_latin_replace_preceding_space:
           }

@@ -14,7 +14,6 @@
   hyphennames={mongolian},
   hyphenmins={2,2},
   frenchspacing=true,
-  fontsetup,
   localnumeral=mongoliannumerals,
   Localnumeral=Mongoliannumerals
 }

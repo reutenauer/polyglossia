@@ -3,7 +3,7 @@ Don't change this file in any respect.
 > \box...=
 \hbox(6.8+0.0)x60.84
 .\TU/lmr/m/n/10 TF
-.\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+.\write1{\@writefile{toc}{\xpg@aux {}{english}}}
 .\TU/lmr/m/n/10 FFTTFFF
 ! OK.
 <to be read again> 

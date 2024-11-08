@@ -470,8 +470,8 @@ Don't change this file in any respect.
 l. ...\START\showbox0\showbox
                           2\END
 > \box...=
-\hbox(7.5+2.5)x1189.02043, direction TLT
-.\write1{\@writefile{toc}{\selectlanguage *[]{russian}}}
+\hbox(7.5+2.5)x1282.94032, direction TLT
+.\write1{\@writefile{toc}{\xpg@aux {}{russian}}}
 .\TU/NewCM10(0)/m/n/10 П
 .\TU/NewCM10(0)/m/n/10 р
 .\TU/NewCM10(0)/m/n/10 е
@@ -706,122 +706,82 @@ l. ...\START\showbox0\showbox
 .\TU/NewCM10(0)/m/n/10 ,
 .\kern0.0 (italic)
 .\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmss/m/n/10 р
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 а
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 с
-.\TU/lmss/m/n/10 󰀀
+.\TU/NewCMSans10(0)/m/n/10 р
+.\TU/NewCMSans10(0)/m/n/10 а
+.\TU/NewCMSans10(0)/m/n/10 с
 .\discretionary (penalty 50)
-..< \TU/lmss/m/n/10 -
-.\TU/lmss/m/n/10 ш
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 и
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 ф
-.\TU/lmss/m/n/10 󰀀
+..< \TU/NewCMSans10(0)/m/n/10 -
+.\TU/NewCMSans10(0)/m/n/10 ш
+.\TU/NewCMSans10(0)/m/n/10 и
+.\TU/NewCMSans10(0)/m/n/10 ф
 .\discretionary (penalty 50)
-..< \TU/lmss/m/n/10 -
-.\TU/lmss/m/n/10 р
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 о
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 в
-.\TU/lmss/m/n/10 󰀀
+..< \TU/NewCMSans10(0)/m/n/10 -
+.\TU/NewCMSans10(0)/m/n/10 р
+.\TU/NewCMSans10(0)/m/n/10 о
+.\TU/NewCMSans10(0)/m/n/10 в
 .\discretionary (penalty 50)
-..< \TU/lmss/m/n/10 -
-.\TU/lmss/m/n/10 к
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 а
-.\TU/lmss/m/n/10 󰀀
+..< \TU/NewCMSans10(0)/m/n/10 -
+.\TU/NewCMSans10(0)/m/n/10 к
+.\kern-0.28 (font)
+.\TU/NewCMSans10(0)/m/n/10 а
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
-.\TU/lmss/m/n/10 к
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 о
-.\TU/lmss/m/n/10 󰀀
+.\TU/NewCMSans10(0)/m/n/10 к
+.\kern-0.28 (font)
+.\TU/NewCMSans10(0)/m/n/10 о
 .\discretionary (penalty 50)
-..< \TU/lmss/m/n/10 -
-.\TU/lmss/m/n/10 т
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 о
-.\TU/lmss/m/n/10 󰀀
+..< \TU/NewCMSans10(0)/m/n/10 -
+.\TU/NewCMSans10(0)/m/n/10 т
+.\TU/NewCMSans10(0)/m/n/10 о
 .\discretionary (penalty 50)
-..< \TU/lmss/m/n/10 -
-.\TU/lmss/m/n/10 р
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 о
-.\TU/lmss/m/n/10 󰀀
+..< \TU/NewCMSans10(0)/m/n/10 -
+.\TU/NewCMSans10(0)/m/n/10 р
+.\TU/NewCMSans10(0)/m/n/10 о
 .\discretionary (penalty 50)
-..< \TU/lmss/m/n/10 -
-.\TU/lmss/m/n/10 г
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 о
-.\TU/lmss/m/n/10 󰀀
+..< \TU/NewCMSans10(0)/m/n/10 -
+.\TU/NewCMSans10(0)/m/n/10 г
+.\TU/NewCMSans10(0)/m/n/10 о
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
-.\TU/lmss/m/n/10 о
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 п
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 у
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 б
-.\TU/lmss/m/n/10 󰀀
+.\TU/NewCMSans10(0)/m/n/10 о
+.\TU/NewCMSans10(0)/m/n/10 п
+.\TU/NewCMSans10(0)/m/n/10 у
+.\TU/NewCMSans10(0)/m/n/10 б
 .\discretionary (penalty 50)
-..< \TU/lmss/m/n/10 -
-.\TU/lmss/m/n/10 л
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 и
-.\TU/lmss/m/n/10 󰀀
+..< \TU/NewCMSans10(0)/m/n/10 -
+.\TU/NewCMSans10(0)/m/n/10 л
+.\TU/NewCMSans10(0)/m/n/10 и
 .\discretionary (penalty 50)
-..< \TU/lmss/m/n/10 -
-.\TU/lmss/m/n/10 к
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 о
-.\TU/lmss/m/n/10 󰀀
+..< \TU/NewCMSans10(0)/m/n/10 -
+.\TU/NewCMSans10(0)/m/n/10 к
+.\kern-0.28 (font)
+.\TU/NewCMSans10(0)/m/n/10 о
 .\discretionary (penalty 50)
-..< \TU/lmss/m/n/10 -
-.\TU/lmss/m/n/10 в
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 а
-.\TU/lmss/m/n/10 󰀀
+..< \TU/NewCMSans10(0)/m/n/10 -
+.\TU/NewCMSans10(0)/m/n/10 в
+.\TU/NewCMSans10(0)/m/n/10 а
 .\discretionary (penalty 50)
-..< \TU/lmss/m/n/10 -
-.\TU/lmss/m/n/10 н
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 а
-.\TU/lmss/m/n/10 󰀀
+..< \TU/NewCMSans10(0)/m/n/10 -
+.\TU/NewCMSans10(0)/m/n/10 н
+.\TU/NewCMSans10(0)/m/n/10 а
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
-.\TU/lmss/m/n/10 в
-.\TU/lmss/m/n/10 󰀀
+.\TU/NewCMSans10(0)/m/n/10 в
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
-.\TU/lmss/m/n/10 в
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 о
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 с
-.\TU/lmss/m/n/10 󰀀
+.\TU/NewCMSans10(0)/m/n/10 в
+.\TU/NewCMSans10(0)/m/n/10 о
+.\TU/NewCMSans10(0)/m/n/10 с
 .\discretionary (penalty 50)
-..< \TU/lmss/m/n/10 -
-.\TU/lmss/m/n/10 к
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 р
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 е
-.\TU/lmss/m/n/10 󰀀
+..< \TU/NewCMSans10(0)/m/n/10 -
+.\TU/NewCMSans10(0)/m/n/10 к
+.\TU/NewCMSans10(0)/m/n/10 р
+.\TU/NewCMSans10(0)/m/n/10 е
 .\discretionary (penalty 50)
-..< \TU/lmss/m/n/10 -
-.\TU/lmss/m/n/10 с
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 е
-.\TU/lmss/m/n/10 󰀀
+..< \TU/NewCMSans10(0)/m/n/10 -
+.\TU/NewCMSans10(0)/m/n/10 с
+.\TU/NewCMSans10(0)/m/n/10 е
 .\discretionary (penalty 50)
-..< \TU/lmss/m/n/10 -
-.\TU/lmss/m/n/10 н
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 ь
-.\TU/lmss/m/n/10 󰀀
-.\TU/lmss/m/n/10 е
-.\TU/lmss/m/n/10 󰀀
+..< \TU/NewCMSans10(0)/m/n/10 -
+.\TU/NewCMSans10(0)/m/n/10 н
+.\TU/NewCMSans10(0)/m/n/10 ь
+.\TU/NewCMSans10(0)/m/n/10 е
 .\TU/NewCM10(0)/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
 .\TU/NewCM10(0)/m/n/10 2
@@ -884,7 +844,7 @@ l. ...\START\showbox0\showbox
 .\TU/NewCM10(0)/m/n/10 n
 .\TU/NewCM10(0)/m/n/10 ]
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
-.\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+.\write1{\@writefile{toc}{\xpg@aux {}{english}}}
 ! OK.
 <to be read again> 
 \begingroup 

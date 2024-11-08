@@ -4,7 +4,6 @@ Don't change this file in any respect.
 File: gloss-nb.ldf polyglossia: module for nb (Norwegian)
 (gloss-norwegian.ldf
 File: gloss-norwegian.ldf polyglossia: module for Norwegian
-Package polyglossia Info: Skipping automatic font setup for language norwegian
 ))
 Package polyglossia Info: Default language is norwegian
 > \box...=

@@ -14,9 +14,8 @@
   langtag=SYR,
   direction=RL,
   hyphennames={syriac,nohyphenation},
-  fontsetup=true,
-  localnumeral=syriacnumerals
-  %TODO localalph
+  localnumeral=syriacnumerals,
+  Localnumeral=syriacnumerals
 }
 
 % BCP-47 compliant aliases

@@ -16,7 +16,6 @@
   hyphenmins={2,2},
   frenchspacing=true,
   indentfirst=true,
-  fontsetup,
   localnumeral=russiannumerals,
   Localnumeral=Russiannumerals
 }

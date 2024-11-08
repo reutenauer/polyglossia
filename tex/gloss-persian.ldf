@@ -16,8 +16,8 @@
   scripttag=arab,
   langtag=FAR,
   hyphennames={nohyphenation},
-  fontsetup=true,
-  localnumeral=farsinumerals
+  localnumeral=farsinumerals,
+  Localnumeral=farsinumerals
 }
 
 % BCP-47 compliant aliases

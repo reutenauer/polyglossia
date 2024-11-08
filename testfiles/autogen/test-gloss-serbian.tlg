@@ -5,7 +5,6 @@ File: gloss-serbian.ldf polyglossia: module for Serbian
 (xpg-cyrillicnumbers.sty
 Package: xpg-cyrillicnumbers ....-..-.. v... Formatting of Cyrillic alphabetic numbers
 )
-Package polyglossia Info: Skipping automatic font setup for language serbian
 \serbian@hyphen=\XeTeXcharclass1
 \serbian@nonsyllabicpreposition=\XeTeXcharclass2
 )

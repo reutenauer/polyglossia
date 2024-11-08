@@ -15,9 +15,9 @@
   langtag=ARA,
   scripttag=arab,
   hyphennames={nohyphenation},
-  fontsetup=true,
   envname=Arabic,
-  localnumeral=arabicnumerals
+  localnumeral=arabicnumerals,
+  Localnumeral=arabicnumerals
   %TODO localalph={abjad,abjad}
 }
 

@@ -11,8 +11,7 @@
   hyphennames={hungarian,magyar},
   langtag=HUN,
   hyphenmins={2,2},
-  fontsetup=true,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*{hungarian}{hu}

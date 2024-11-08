@@ -123,8 +123,8 @@ Don't change this file in any respect.
 l. ...\START\showbox0\showbox
                             2\END
 > \box...=
-\hbox(7.5+2.49998)x1189.02013
-.\write1{\@writefile{toc}{\selectlanguage *[]{russian}}}
+\hbox(7.5+2.49998)x1282.94012
+.\write1{\@writefile{toc}{\xpg@aux {}{russian}}}
 .\TU/NewCM10(0)/m/n/10 Премьер-министр
 .\glue 3.33 plus 1.665 minus 1.11
 .\TU/NewCM10(0)/m/n/10 России
@@ -168,15 +168,15 @@ l. ...\START\showbox0\showbox
 .\TU/NewCM10(0)/m/n/10 каналу,
 .\kern 0.0
 .\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmss/m/n/10 расшифровка
+.\TU/NewCMSans10(0)/m/n/10 расшифровка
 .\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmss/m/n/10 которого
+.\TU/NewCMSans10(0)/m/n/10 которого
 .\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmss/m/n/10 опубликована
+.\TU/NewCMSans10(0)/m/n/10 опубликована
 .\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmss/m/n/10 в
+.\TU/NewCMSans10(0)/m/n/10 в
 .\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmss/m/n/10 воскресенье
+.\TU/NewCMSans10(0)/m/n/10 воскресенье
 .\TU/NewCM10(0)/m/n/10 ,
 .\glue 3.33 plus 1.665 minus 1.11
 .\TU/NewCM10(0)/m/n/10 2
@@ -193,7 +193,7 @@ l. ...\START\showbox0\showbox
 .\glue 3.33 plus 1.665 minus 1.11
 .\TU/NewCM10(0)/m/n/10 russian]
 .\glue 3.33 plus 1.665 minus 1.11
-.\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+.\write1{\@writefile{toc}{\xpg@aux {}{english}}}
 ! OK.
 <to be read again> 
                    \begingroup 

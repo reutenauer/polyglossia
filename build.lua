@@ -91,7 +91,7 @@ function gen_test_from_gloss()
 	return 0
 end
 
-function gen_pdf_from_example()
+function gen_pdf_from_example(build_maindoc)
    local example_files = filelist("./doc", "*.tex")
    local error_level = 0
    error_level = mkdir("./build/genpdf")
@@ -99,7 +99,13 @@ function gen_pdf_from_example()
    error_level = error_level + cp("*", "./build/unpacked", "./build/genpdf")
    for example = 1, #example_files do
        local example_name = jobname(example_files[example])
-       if example_name ~= "polyglossia" then
+       if example_name == "polyglossia" and build_maindoc then
+           error_level = error_level + (
+               tex("./../../doc/polyglossia", "./build/genpdf", "xelatex --interaction=nonstopmode") +
+               tex("./../../doc/polyglossia", "./build/genpdf", "xelatex --interaction=nonstopmode") +
+               tex("./../../doc/polyglossia", "./build/genpdf", "xelatex --interaction=nonstopmode")
+           )
+       else
            error_level = error_level +
                tex("./../../doc/" .. example_name, "./build/genpdf", "xelatex --interaction=nonstopmode")
        end
@@ -110,7 +116,7 @@ end
 
 function pre_release()
     call({"."}, "tag")
-    gen_pdf_from_example()
+    gen_pdf_from_example(false)
     call({"."}, "ctan", {config = options['config']})
     cp("*.pdf", "./doc", "./generated")
     rm("./doc", "*.pdf")

@@ -2,7 +2,7 @@ This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 > \box...=
 \hbox(7.16+2.22)x367.2, direction TLT
-.\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+.\write1{\@writefile{toc}{\xpg@aux {}{english}}}
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
 .\TU/NewCMSans10(0)/m/n/10 S
 .\TU/NewCMSans10(0)/m/n/10 h
@@ -43,7 +43,7 @@ Don't change this file in any respect.
 .\TU/NewCMMono10(0)/m/n/10 d
 .\TU/NewCMMono10(0)/m/n/10 .
 .\glue(\spaceskip) 5.25
-.\write1{\@writefile{toc}{\selectlanguage *[]{russian}}}
+.\write1{\@writefile{toc}{\xpg@aux {}{russian}}}
 .\glue(\spaceskip) 5.25
 .\TU/NewCMMono10(1)/m/n/10 S
 .\TU/NewCMMono10(1)/m/n/10 a
@@ -77,9 +77,9 @@ Don't change this file in any respect.
 .\TU/NewCMMono10(1)/m/n/10 d
 .\TU/NewCMMono10(1)/m/n/10 ?
 .\glue(\spaceskip) 5.25
-.\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+.\write1{\@writefile{toc}{\xpg@aux {}{english}}}
 .\glue(\spaceskip) 5.25
-.\write1{\@writefile{toc}{\selectlanguage *[]{russian}}}
+.\write1{\@writefile{toc}{\xpg@aux {}{russian}}}
 ! OK.
 <to be read again> 
 \begingroup 

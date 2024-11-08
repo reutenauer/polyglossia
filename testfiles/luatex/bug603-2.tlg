@@ -2,7 +2,7 @@ This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 > \box...=
 \vbox(48.15033+0.0)x345.0, direction TLT
-.\write1{\@writefile{toc}{\selectlanguage *[]{hebrew}}}
+.\write1{\@writefile{toc}{\xpg@aux {}{hebrew}}}
 .\glue(\parskip) 0.0 plus 1.0
 .\glue(\parskip) 0.0
 .\hbox(6.77+0.11)x345.0, glue set 273.97333fil, direction TRT

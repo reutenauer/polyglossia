@@ -14,7 +14,7 @@ Completed box being shipped out [1]
 ..\glue(\lineskip) 0.0
 ..\vbox(550.0+0.0)x345.0, glue set 385.92581fill, direction TLT
 ...\write-{}
-...\write1{\@writefile{toc}{\selectlanguage *[variant=british]{english}}}
+...\write1{\@writefile{toc}{\xpg@aux {variant=british}{english}}}
 ...\glue(\topskip) 0.0
 ...\hbox(10.0512+0.1728)x345.0, glue set 281.68323fil, direction TLT
 ....\localpar
@@ -144,7 +144,7 @@ Completed box being shipped out [1]
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
-...\write1{\@writefile{toc}{\selectlanguage *[]{english}}}
+...\write1{\@writefile{toc}{\xpg@aux {}{english}}}
 ...\glue(\parskip) 0.0 plus 1.0
 ...\glue(\parskip) 0.0
 ...\glue(\baselineskip) 4.95
@@ -245,11 +245,11 @@ Completed box being shipped out [1]
 ....\TU/lmr/m/n/10 i
 ....\TU/lmr/m/n/10 s
 ....\TU/lmr/m/n/10 h
-....\write1{\@writefile{toc}{\selectlanguage *[variant=british]{english}}}
+....\write1{\@writefile{toc}{\xpg@aux {variant=british}{english}}}
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
-...\write1{\@writefile{toc}{\selectlanguage *[variant=american]{english}}}
+...\write1{\@writefile{toc}{\xpg@aux {variant=american}{english}}}
 ...\glue(\parskip) 0.0 plus 1.0
 ...\glue(\parskip) 0.0
 ...\glue(\baselineskip) 5.06

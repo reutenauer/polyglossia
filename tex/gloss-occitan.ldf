@@ -28,8 +28,7 @@
   hyphenmins={2,2},
   frenchspacing=true,
   indentfirst=true,
-  fontsetup=true,
-}
+ }
 
 % BCP-47 compliant aliases
 \setlanguagealias*{occitan}{oc}

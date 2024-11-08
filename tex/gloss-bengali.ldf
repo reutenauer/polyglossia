@@ -17,8 +17,8 @@
   langtag=BEN,
   hyphennames={bengali},
   hyphenmins={2,2},%CHECK
-  fontsetup=true,
-  localnumeral=bengalinumerals
+  localnumeral=bengalinumerals,
+  Localnumeral=bengalinumerals
   %TODO nouppercase=true,
 }
 
@@ -56,7 +56,7 @@
   }
 
 % Register default options
-\InitializeGlossOptions{bengali}{changecounternumbering=false,numerals=Devanagari}
+\InitializeGlossOptions{bengali}{changecounternumbering=false,numerals=devanagari}
 
 \def\captionsbengali{%
   \def\refname{তথ্যসূত্রসমূহ}%
