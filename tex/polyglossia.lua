@@ -47,9 +47,7 @@ local newloader_loaded_languages = {  }
 local function newloader(langentry)
     local loaded_language = newloader_loaded_languages[langentry]
     if loaded_language then
-        local langid = lang.id(loaded_language)
-        log_info('Language %s already loaded; id is %i', langentry, langid)
-        return langid
+        return lang.id(loaded_language)
     else
         local langdata = newloader_available_languages[langentry]
         if langdata then
