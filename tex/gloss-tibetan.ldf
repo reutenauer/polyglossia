@@ -36,7 +36,7 @@
 
 \ifluatex
   \newattribute\xpg@tibteol %
-  \directlua{polyglossia.load_tibt_eol()}%
+  \directlua{require('polyglossia-tibt')}%
 \fi
 
 \def\tibetan@eol{%

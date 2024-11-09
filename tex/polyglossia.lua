@@ -26,18 +26,6 @@ end
 polyglossia = polyglossia or {}
 local polyglossia = polyglossia
 
-local function load_tibt_eol()
-    require('polyglossia-tibt')
-end
-
--- predefined l@nohyphenation or LuaTeX's maximum value for \language
-local nohyphid = luatexbase.registernumber'l@nohyphenation' or 16383
-token.set_char('l@nohyphenation', nohyphid)
-
--- key `nohyphenation` is for .sty file when possibly undefined l@nohyphenation
-local nohyphobj = lang.new(nohyphid)
-local newloader_loaded_languages = { nohyphenation = nohyphobj }
-
 local newloader_available_languages = require'language.dat.lua'
 -- Suggestion by Dohyun Kim on #129
 local t = { }
@@ -52,13 +40,14 @@ newloader_available_languages = t
 -- LaTeX's language register is \count19
 local lang_register = 19
 
+local nohyphid = luatexbase.registernumber'l@nohyphenation'
+local newloader_loaded_languages = {  }
+
 -- New hyphenation pattern loader: use language.dat.lua directly and the language identifiers
 local function newloader(langentry)
     local loaded_language = newloader_loaded_languages[langentry]
     if loaded_language then
-        local langid = lang.id(loaded_language)
-        log_info('Language %s already loaded; id is %i', langentry, langid)
-        return langid
+        return lang.id(loaded_language)
     else
         local langdata = newloader_available_languages[langentry]
         if langdata then
@@ -148,6 +137,5 @@ local function newloader(langentry)
     end
 end
 
-polyglossia.load_tibt_eol = load_tibt_eol
 polyglossia.newloader = newloader
 polyglossia.newloader_loaded_languages = newloader_loaded_languages
