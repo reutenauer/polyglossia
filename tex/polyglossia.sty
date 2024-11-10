@@ -236,22 +236,18 @@
 \prg_set_conditional:Nnn \xpg_if_in_preamble: {T, F, TF}
   {
     \cs_if_eq:NNTF { \@onlypreamble } { \@notprerr }
-      {
-        \prg_return_false:
-      }{
-        \prg_return_true:
-      }
+      { \prg_return_false: } { \prg_return_true: }
   }
 
 %% Used by the language definitions files for right-to-left languages
 \cs_new_nopar:Npn \RequireBidi
-{
-  \sys_if_engine_luatex:TF
-    { \RequirePackage{ luabidi } }
-    { \RequirePackage { bidi } }
-  \cs_set_eq:NN \xpg__text_LR: \@ensure@LTR
-  \cs_set_eq:NN \xpg__text_RL: \@ensure@RTL
-}
+  {
+    \sys_if_engine_luatex:TF
+      { \RequirePackage{ luabidi } }
+      { \RequirePackage { bidi } }
+    \cs_set_eq:NN \xpg__text_LR: \@ensure@LTR
+    \cs_set_eq:NN \xpg__text_RL: \@ensure@RTL
+  }
 
 % emulate \RTLmain
 \sys_if_engine_luatex:TF
@@ -1714,20 +1710,6 @@
 % This old term is used by biblatex, so don't drop!
 \cs_gset_eq:cc { xpg@ifdefined } { xpg_if_language_defined:nTF }
 
-% Set \bbl@hyphendata@\the\language, which is (lua)babel's
-% hyphenation pattern hook
-% FIXME Clarifiy why/when this is needed.
-\cs_new:Nn \xpg_set_bbl_hyphendata:n
-{
-  \sys_if_engine_luatex:T
-  {
-    \cs_if_exist:cF {bbl@hyphendata@#1}
-    {
-      \cs_gset:cpn {bbl@hyphendata@\the\language} {}
-    }
-  }
-}
-
 % Set hyphenation patterns for a given language. This does the right
 % thing both for XeTeX and LuaTeX
 \cs_new:Nn \xpg_set_hyphenation_patterns:n
@@ -1740,7 +1722,6 @@
 {
    % hook for compatibility with biblatex
    \select@language { #2 }
-   \xpg_set_bbl_hyphendata:n {\the\language}
    \xpg_initial_setup:
    \xpg_select_language:nn { #1 } { #2 }
    % Hook for external packages such as biblatex
