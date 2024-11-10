@@ -1224,17 +1224,11 @@
              {#2/DefineCommandsCmd}}
              {#2}
     }
-    \__xpg_set_otherlanguage:ee {\xpg_alias_add_to_option_i:nn{#2}{#1}}
+    \exp_args:Nee \__xpg_register_language:nn {\xpg_alias_add_to_option_i:nn{#2}{#1}}
       {\xpg_alias_base_lang:n{#2}}
     \seq_gput_right:Ne \g__xpg_langs_loaded_seq {#2}
   }
 }
-
-\cs_new:Nn \__xpg_set_otherlanguage:nn
-{
-  \__xpg_register_language:nn{#1}{#2}
-}
-\cs_generate_variant:Nn  \__xpg_set_otherlanguage:nn { ee }
 
 \NewDocumentCommand \setotherlanguages { m }
 {
@@ -1272,13 +1266,6 @@
 % inside case changing commands (e.g. \MakeUppercase)
 \tl_put_right:Nn \l_text_case_exclude_arg_tl { \textlang }
 
-% wrapper for foreignlanguage and otherlanguage*
-\cs_new_nopar:Nn \xpg_set_foreign_language:nn
-{
-  \xpg_select_language:nn { #1 } { #2 }
-  \__xpg_register_language:nn{#1}{#2}
-}
-
 % lowercase options before passing to setkeys
 \cs_new_protected_nopar:Npn \SetGlossOptions #1 #2
 {
@@ -1295,7 +1282,8 @@
 {
   \xpg_error_if_lang_not_loaded:n{#2}
   \SetGlossOptions{#2}{#1}
-  \xpg_set_foreign_language:nn { #1 } { #2 }
+  \xpg_select_language:nn { #1 } { #2 }
+  \__xpg_register_language:nn{#1}{#2}
   % Hook for external packages such as biblatex
   \polyglossia@language@switched
   % buggy restoration heure
