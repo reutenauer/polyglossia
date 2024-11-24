@@ -1499,7 +1499,7 @@
    \prop_concat:ccc { l_xpg_curropt_prop } { l_xpg_curropt_prop }
                     { xpg_#1_default_options_prop }
    \use:c { xpg_#1_default_options_tl }
-   \__xpg_set_language_options:nn {#1} {#2}
+   \tl_set:Ne \xpg__current_options_tl { #2, \xpg__tmp_default_options_tl }
 }
 \tl_new:N \xpg__tmp_default_options_tl
 \tl_new:N \xpg__current_options_tl
