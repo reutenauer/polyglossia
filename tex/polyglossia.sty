@@ -1156,7 +1156,7 @@
 
 \cs_new:Nn \xpg_set_language_name:n
 {
-  \cs_set:Npn \languagename { #1 }
+  \exp_args:NNe \cs_set:Npn \languagename { #1 }
 }
 
 \NewDocumentCommand \resetdefaultlanguage { O{} m }
