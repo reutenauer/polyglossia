@@ -1480,17 +1480,8 @@
      {
            % we might be outside of l3 catcode regime
            \tl_set_eq:NN \xpg@current@opts \xpg__current_options_tl
-           \__xpg_save_caption:n { #1 } [ { \selectlanguage*[\xpg@current@opts]{\languagename}#2 } ] { #3 }
+           \__xpg_save_caption:n { #1 } [ { \xpg@aux{\xpg@current@opts}{\languagename}#2 } ] { #3 }
      }
-}
-
-% Since captions might float to other language regions,
-% we need to change the language here (#542)
-\hook_gput_code:nnn {cmd/caption/before} {.}
-{
-    \ifhmode\unskip\fi
-    \addtocontents{lof}{\protect\setforeignlanguage{\languagename}}
-    \addtocontents{lot}{\protect\setforeignlanguage{\languagename}}
 }
 
 % Initialize default language options, so that
