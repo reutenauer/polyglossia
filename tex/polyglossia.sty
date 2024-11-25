@@ -1484,6 +1484,9 @@
      }
 }
 
+% we need to patch \@caption after the caption package
+\hook_gset_rule:nnnn { begindocument } { . } { after } { caption3 }
+
 % Initialize default language options, so that
 % \iflanguageoption has the info it needs also
 % for default settings
