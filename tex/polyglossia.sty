@@ -1778,8 +1778,7 @@
   \__xpg_french_spacing:n { #2 }
 }
 
-
-\cs_undefine:N \xpg_pop_language:
+\cs_set_eq:NN \xpg_pop_language: \c_empty_tl
 
 \DeclareDocumentEnvironment { otherlanguage } { O{} m }
   {
