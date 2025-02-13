@@ -403,20 +403,22 @@
         \ifcase\xpg@korean@variant\relax
             \XeTeXinterchartokenstate\z@
             \XeTeXlinebreakpenalty 50
+            \XeTeXlinebreakskip 0pt plus.05em minus .01em
         \or
             \setvariantkoreaninterchartoks
             \setvariantkoreancharclasses
             \def\XPGKOhalfdim{\dimexpr.5em\relax}%
             \XeTeXinterchartokenstate\@ne
             \XeTeXlinebreakpenalty \z@
+            \XeTeXlinebreakskip 0pt plus.1em minus .01em
         \else
             \setvariantkoreaninterchartoks
             \setvariantkoreancharclasses
             \def\XPGKOhalfdim{\dimexpr.5\fontdimen\tw@\font\relax}%
             \XeTeXinterchartokenstate\@ne
             \XeTeXlinebreakpenalty 50
+            \XeTeXlinebreakskip 0pt plus.05em minus .01em
         \fi
-        \XeTeXlinebreakskip 0pt plus.05em minus .01em
         \XeTeXlinebreaklocale "ko"
     }
     \def\noextras@korean{%
@@ -459,7 +461,9 @@
     \let\newattribute\newluatexattribute
     \let\unsetattribute\unsetluatexattribute
 \fi
-\newattribute\xpg@attr@cjkspacing
+\ifdefined\xpg@attr@cjkspacing\else
+    \newattribute\xpg@attr@cjkspacing
+\fi
 \newattribute\xpg@attr@autojosa
 % user commands for Josa
 % Josa : particles in Korean grammar that immediately follow a noun or pronoun.

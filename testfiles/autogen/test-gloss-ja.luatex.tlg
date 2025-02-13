@@ -28,7 +28,7 @@ Package polyglossia Info: Default language is japanese
 .\TU/lmr/m/n/10 日
 .\TU/lmr/m/n/10 󰀀
 .\penalty 10000
-.\glue 0.0 plus 0.5 minus 0.1
+.\glue 0.0 plus 1.0 minus 0.1
 .\TU/lmr/m/n/10 .
 ! OK.
 <to be read again> 

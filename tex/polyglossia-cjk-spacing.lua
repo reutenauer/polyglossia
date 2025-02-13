@@ -380,8 +380,10 @@ local function insert_penalty_glue (head, curr, f, var, nobr, x)
     local size, glue = get_font_size(f, x and var == 2)
     if x then
         glue = get_new_glue(size/2, size/4, size/8)
-    else
+    elseif var == 0 or var == 2 then
         glue = get_new_glue(0, size/10, size/50)
+    else
+        glue = get_new_glue(0, size/5, size/50)
     end
     head, curr = node.insert_after(head, curr, glue)
     return head, curr
