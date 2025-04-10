@@ -30,13 +30,14 @@
     vlna.default:n = true
   }
 
-% Register default options
-\InitializeGlossOptions{czech}{babelshorthands=false,splithyphens=true,vlna=true}
-
 \ifsystem@babelshorthands
   \SetGlossOptions{czech}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{czech}{babelshorthands=true,splithyphens=true,vlna=true}
 \else
   \SetGlossOptions{czech}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{czech}{babelshorthands=false,splithyphens=true,vlna=true}
 \fi
 
 \InitializeBabelShorthands

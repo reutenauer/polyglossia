@@ -39,13 +39,14 @@
     numerals.default:n = arabic
   }
 
-% Register default options
-\InitializeGlossOptions{georgian}{babelshorthands=false,oldmonthnames=false,numerals=arabic}
-
 \ifsystem@babelshorthands
   \SetGlossOptions{georgian}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{georgian}{babelshorthands=true,oldmonthnames=false,numerals=arabic}
 \else
   \SetGlossOptions{georgian}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{georgian}{babelshorthands=false,oldmonthnames=false,numerals=arabic}
 \fi
 
 \InitializeBabelShorthands

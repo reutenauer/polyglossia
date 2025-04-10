@@ -20,13 +20,15 @@
     babelshorthands.if = afrikaans@babelshorthands,
     babelshorthands.default:n = true,
   }
-% Register default options
-\InitializeGlossOptions{afrikaans}{babelshorthands=false}
 
 \ifsystem@babelshorthands
   \SetGlossOptions{afrikaans}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{afrikaans}{babelshorthands=true}
 \else
   \SetGlossOptions{afrikaans}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{afrikaans}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

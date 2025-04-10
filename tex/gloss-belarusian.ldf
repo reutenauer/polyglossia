@@ -75,16 +75,18 @@
     numerals/unknown.code = \xpg@warning{Unknown Belarusian numerals value `#1'}
   }
 
-% Register default options
-\InitializeGlossOptions{belarusian}{babelshorthands=false,numerals=arabic,spelling=modern}
-% Register alias options
-\SetLanguageAliasValues{belarusian}{spelling}{classic,tarask}
-
 \ifsystem@babelshorthands
   \SetGlossOptions{belarusian}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{belarusian}{babelshorthands=true,numerals=arabic,spelling=modern}
 \else
   \SetGlossOptions{belarusian}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{belarusian}{babelshorthands=false,numerals=arabic,spelling=modern}
 \fi
+
+% Register alias options
+\SetLanguageAliasValues{belarusian}{spelling}{classic,tarask}
 
 \InitializeBabelShorthands
 

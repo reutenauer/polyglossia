@@ -29,13 +29,14 @@
     vlna.default:n = true,
   }
 
-% Register default options
-\InitializeGlossOptions{polish}{babelshorthands=false,splithyphens=true,vlna=true}
-
 \ifsystem@babelshorthands
   \SetGlossOptions{polish}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{polish}{babelshorthands=true,splithyphens=true,vlna=true}
 \else
   \SetGlossOptions{polish}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{polish}{babelshorthands=false,splithyphens=true,vlna=true}
 \fi
 
 \InitializeBabelShorthands

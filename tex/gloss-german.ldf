@@ -189,18 +189,20 @@
 
 \SetGlossOptions{german}{spelling,script,variant}
 
-% Register default options
-\InitializeGlossOptions{german}{variant=german,spelling=new,script=latin,babelshorthands=false}
+\ifsystem@babelshorthands
+  \SetGlossOptions{german}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{german}{variant=german,spelling=new,script=latin,babelshorthands=true}
+\else
+  \SetGlossOptions{german}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{german}{variant=german,spelling=new,script=latin,babelshorthands=false}
+\fi
+
 % Register alias options
 \SetLanguageAliasValues{german}{spelling}{new,1996}
 \SetLanguageAliasValues{german}{spelling}{old,1901}
 \SetLanguageAliasValues{german}{script}{blackletter,fraktur}
-
-\ifsystem@babelshorthands
-  \SetGlossOptions{german}{babelshorthands=true}
-\else
-  \SetGlossOptions{german}{babelshorthands=false}
-\fi
 
 \InitializeBabelShorthands
 

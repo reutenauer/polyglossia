@@ -59,13 +59,14 @@
     numerals/unknown.code = \xpg@warning{Unknown Mongolian numerals value `#1'}
   }
 
-% Register default options
-\InitializeGlossOptions{mongolian}{babelshorthands=false,numerals=arabic}
-
 \ifsystem@babelshorthands
   \SetGlossOptions{mongolian}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{mongolian}{babelshorthands=true,numerals=arabic}
 \else
   \SetGlossOptions{mongolian}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{mongolian}{babelshorthands=false,numerals=arabic}
 \fi
 
 \InitializeBabelShorthands

@@ -24,8 +24,12 @@
 
 \ifsystem@babelshorthands
   \SetGlossOptions{piedmontese}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{piedmontese}{babelshorthands=true}
 \else
   \SetGlossOptions{piedmontese}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{piedmontese}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

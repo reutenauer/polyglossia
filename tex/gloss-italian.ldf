@@ -23,13 +23,14 @@
     babelshorthands.default:n = true,
   }
 
-% Register default options
-\InitializeGlossOptions{italian}{babelshorthands=false}
-
 \ifsystem@babelshorthands
   \SetGlossOptions{italian}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{italian}{babelshorthands=true}
 \else
   \SetGlossOptions{italian}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{italian}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

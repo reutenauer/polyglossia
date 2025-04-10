@@ -61,13 +61,14 @@
     numerals/unknown.code = \xpg@warning{Unknown Ukrainian numerals value `#1'}
   }
 
-% Register default options
-\InitializeGlossOptions{ukrainian}{numerals=arabic,mathfunctions=true}
-
 \ifsystem@babelshorthands
   \SetGlossOptions{ukrainian}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{ukrainian}{numerals=arabic,mathfunctions=true,babelshorthands=true}
 \else
   \SetGlossOptions{ukrainian}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{ukrainian}{numerals=arabic,mathfunctions=true,babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

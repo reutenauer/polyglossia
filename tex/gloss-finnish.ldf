@@ -53,13 +53,14 @@
     schoolhyphens.default:n = true
   }
 
-% Register default options
-\InitializeGlossOptions{finnish}{babelshorthands=false,hyphens=default}
-
 \ifsystem@babelshorthands
   \SetGlossOptions{finnish}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{finnish}{babelshorthands=true,hyphens=default}
 \else
   \SetGlossOptions{finnish}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{finnish}{babelshorthands=false,hyphens=default}
 \fi
 
 \InitializeBabelShorthands

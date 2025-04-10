@@ -22,12 +22,13 @@
   }
 \ifsystem@babelshorthands
   \SetGlossOptions{catalan}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{catalan}{babelshorthands=true}
 \else
   \SetGlossOptions{catalan}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{catalan}{babelshorthands=false}
 \fi
-
-% Register default options
-\InitializeGlossOptions{catalan}{babelshorthands=false}
 
 \InitializeBabelShorthands
 

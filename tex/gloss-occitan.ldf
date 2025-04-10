@@ -41,8 +41,12 @@
 
 \ifsystem@babelshorthands
   \SetGlossOptions{occitan}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{occitan}{babelshorthands=true}
 \else
   \SetGlossOptions{occitan}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{occitan}{babelshorthands=false}
 \fi
 
 \InitializeBabelShorthands

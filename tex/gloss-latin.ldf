@@ -579,15 +579,18 @@
     ecclesiasticfootnotes.default:n = true
   }
 
-% Register default options
-\InitializeGlossOptions{latin}{variant=modern,hyphenation=modern,babelshorthands=false,
-                                     prosodicshorthands=false,ecclesiasticfootnotes=false,
-                                     usej=false,capitalizemonth=true}
-
 \ifsystem@babelshorthands
   \SetGlossOptions{latin}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{latin}{variant=modern,hyphenation=modern,babelshorthands=true,
+                                 prosodicshorthands=false,ecclesiasticfootnotes=false,
+                                 usej=false,capitalizemonth=true}
 \else
   \SetGlossOptions{latin}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{latin}{variant=modern,hyphenation=modern,babelshorthands=false,
+                                 prosodicshorthands=false,ecclesiasticfootnotes=false,
+                                 usej=false,capitalizemonth=true}
 \fi
 
 \ExplSyntaxOff % babelsh.def does not support expl3 syntax

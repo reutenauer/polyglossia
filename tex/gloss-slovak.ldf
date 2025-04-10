@@ -28,13 +28,14 @@
     vlna.default:n = true,
   }
 
-% Register default options
-\InitializeGlossOptions{slovak}{babelshorthands=false,splithyphens=true,vlna=true}
-
 \ifsystem@babelshorthands
   \SetGlossOptions{slovak}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{slovak}{babelshorthands=true,splithyphens=true,vlna=true}
 \else
   \SetGlossOptions{slovak}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{slovak}{babelshorthands=false,splithyphens=true,vlna=true}
 \fi
 
 \InitializeBabelShorthands

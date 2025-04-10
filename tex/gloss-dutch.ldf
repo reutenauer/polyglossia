@@ -22,13 +22,14 @@
     tremahyphenation.default:n = true
   }
 
-% Register default options
-\InitializeGlossOptions{dutch}{babelshorthands=false,tremahyphenation=true}
-
 \ifsystem@babelshorthands
   \SetGlossOptions{dutch}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{dutch}{babelshorthands=true,tremahyphenation=true}
 \else
   \SetGlossOptions{dutch}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{dutch}{babelshorthands=false,tremahyphenation=true}
 \fi
 
 \InitializeBabelShorthands

@@ -97,19 +97,24 @@
     indentfirst.default:n = true,
   }
 
-% Register default options
-\InitializeGlossOptions{russian}{babelshorthands=false,
+\ifsystem@babelshorthands
+  \SetGlossOptions{russian}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{russian}{babelshorthands=true,
                                        spelling=modern,
                                        numerals=arabic,
                                        indentfirst=true,
                                        forceheadingpunctuation=true,
                                        mathfunctions=true}
-
-
-\ifsystem@babelshorthands
-  \SetGlossOptions{russian}{babelshorthands=true}
 \else
   \SetGlossOptions{russian}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{russian}{babelshorthands=false,
+                                       spelling=modern,
+                                       numerals=arabic,
+                                       indentfirst=true,
+                                       forceheadingpunctuation=true,
+                                       mathfunctions=true}
 \fi
 
 \InitializeBabelShorthands

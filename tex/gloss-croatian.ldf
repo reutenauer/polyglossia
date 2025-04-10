@@ -42,14 +42,20 @@
     disableligatures.default:n = true,
   }
 
-% Register default options
-\InitializeGlossOptions{croatian}{babelshorthands=false,disabledigraphs=false,
-                                        splithyphens=true,localalph=true}
-
 \ifsystem@babelshorthands
   \SetGlossOptions{croatian}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{croatian}{babelshorthands=true,
+                                    disabledigraphs=false,
+                                    splithyphens=true,
+                                    localalph=true}
 \else
   \SetGlossOptions{croatian}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{croatian}{babelshorthands=false,
+                                    disabledigraphs=false,
+                                    splithyphens=true,
+                                    localalph=true}
 \fi
 
 \InitializeBabelShorthands

@@ -51,15 +51,18 @@
     variant/unknown.code = \xpg@warning{Unknown portuguese variant `#1'},
   }
 
-% Register default options
-\InitializeGlossOptions{portuguese}{variant=portuguese,
-      babelshorthands=false,
-      splithyphens=true}
-
 \ifsystem@babelshorthands
   \SetGlossOptions{portuguese}{babelshorthands=true}
+  % Register default options
+  \InitializeGlossOptions{portuguese}{variant=portuguese,
+      babelshorthands=true,
+      splithyphens=true}
 \else
   \SetGlossOptions{portuguese}{babelshorthands=false}
+  % Register default options
+  \InitializeGlossOptions{portuguese}{variant=portuguese,
+      babelshorthands=false,
+      splithyphens=true}
 \fi
 
 \InitializeBabelShorthands
