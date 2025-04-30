@@ -36,24 +36,16 @@
 \bool_new:N \l_polyglossia_latin_prosodic_shorthands_bool
 \bool_new:N \l_polyglossia_latin_ecclesiastic_footnotes_bool
 
-\cs_new:Npn \polyglossia_latin_classical_character_codes:
-  {
-    \char_set_lccode:nn {`\V} {`\u}
-    \char_set_uccode:nn {`\u} {`\V}
-    \char_set_uccode:nn {`\ú} {`\V}
-    \char_set_uccode:nn {`\ū} {`\V}
-    \char_set_uccode:nn {`\ŭ} {`\V}
-  }
-
-\cs_new:Npn \polyglossia_latin_modern_character_codes:
-  {
-    \char_set_lccode:nn {`\V} {`\v}
-    \char_set_uccode:nn {`\u} {`\U}
-    \char_set_uccode:nn {`\ú} {`\Ú}
-    \char_set_uccode:nn {`\ū} {`\Ū}
-    \char_set_uccode:nn {`\ŭ} {`\Ŭ}
-  }
-
+\DeclareUppercaseMapping[la-x-classic]{`u}{V}
+\DeclareLowercaseMapping[la-x-classic]{`V}{u}
+% The mapping of u and V for medieval Latin is part of the l3text module,
+% which is part of the LaTeX format (see source3.pdf).
+\DeclareUppercaseMapping[la-x-classic]{`ú}{\a'{V}}
+\DeclareUppercaseMapping[la-x-classic]{`ū}{\a={V}}
+\DeclareUppercaseMapping[la-x-classic]{`ŭ}{\u{V}}
+\DeclareUppercaseMapping[la-x-medieval]{`ú}{\a'{V}}
+\DeclareUppercaseMapping[la-x-medieval]{`ū}{\a={V}}
+\DeclareUppercaseMapping[la-x-medieval]{`ŭ}{\u{V}}
 
 %%%%% Messages and commands concerning hyphenation
 
@@ -386,7 +378,7 @@
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
     \str_set:Nn \l_polyglossia_latin_variant_str {classic}
-    \SetLanguageKeys {latin} { babelname = classicallatin, bcp47 = la-x-classic, bcp47-extension-x = classic }
+    \SetLanguageKeys {latin} { babelname = classicallatin, bcp47 = la-x-classic, bcp47-extension-x = classic, bcp47-casing = la-x-classic }
     \polyglossia_latin_set_patterns:n {classiclatin}
   }
 
@@ -1018,15 +1010,10 @@
      }
     \xpgla@savedvalues
     \polyglossia_latin_no_punctuation_spacing:
-    \polyglossia_latin_modern_character_codes:
   }
 
 \cs_new:Npn \polyglossia_latin_inline_extras:
   {
-    \bool_if:NF \l_polyglossia_latin_use_v_bool
-      {
-        \polyglossia_latin_classical_character_codes:
-      }
     \bool_if:NT \l_polyglossia_latin_punctuation_spacing_bool
       {
         \polyglossia_latin_punctuation_spacing:
