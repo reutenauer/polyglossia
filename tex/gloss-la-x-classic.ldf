@@ -1,6 +1,6 @@
 % Language definition file (part of polyglossia v2.4 -- 2025/01/31)
 %
-\ProvidesFile{gloss-la-xclassic.ldf}[polyglossia: module for la-xclassic (Latin)]
+\ProvidesFile{gloss-la-x-classic.ldf}[polyglossia: module for la-x-classic (Latin)]
 
 % We provide this as a bcp47-compliant alias
 
