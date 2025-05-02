@@ -22,7 +22,9 @@
 
 % Babel aliases
 \setlanguagealias[variant=classic]{latin}{classicallatin}
+\setlanguagealias[variant=classic]{latin}{classiclatin}
 \setlanguagealias[variant=ecclesiastic]{latin}{ecclesiasticallatin}
+\setlanguagealias[variant=ecclesiastic]{latin}{ecclesiasticlatin}
 \setlanguagealias[variant=medieval]{latin}{medievallatin}
 
 
