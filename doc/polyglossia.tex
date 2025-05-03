@@ -349,9 +349,9 @@ brazil             & portuguese & variant=brazilian                   \\
 british            & english    & variant=british                     \\
 canadian           & english    & variant=canadian                    \\
 canadien           & french     & variant=canadian                    \\
-classiclatin       & latin      & variant=classic                     \\
+classicallatin     & latin      & variant=classic                     \\
 farsi              & persian    &                                     \\
-ecclesiasticlatin  & latin      & variant=ecclesiastic                \\
+ecclesiasticallatin& latin      & variant=ecclesiastic                \\
 friulan            & friulian   &                                     \\
 german\footnote{Due to the name conflict only available in \pkg{polyglossia} as \emph{germanb} (which is a \pkg{babel} synonym).}
                    & german     & spelling=old                        \\
@@ -2731,10 +2731,19 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 
 \subsection*{2.5 (forthcoming)}
 
+\subsubsection*{Interface and defaults changes}
+\begin{itemize}
+	\item The babelnames ¦classiclatin¦ and ¦ecclesiasticlatin¦ are changed to
+		¦classicallatin¦ and ¦ecclesiasticallatin¦. This reflects a change in the
+		\pkg{babel-latin} package.
+\end{itemize}
+
 \subsubsection*{Bug fixes}
 \begin{itemize}
 	\item Fix a bug with linebreaking in CJK languages (\TXP{675}).
 	\item Fix global setting of \xpgoption{babelshorthands} (\TXP{680}).
+	\item Fix mapping between upper and lower case for classic and medieval
+		Latin: \emph{u/V, ú/V́, ū/V̄, ŭ/V̆}.
 \end{itemize}
 
 \subsection*{2.4 (2025/01/31)}

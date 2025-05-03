@@ -21,7 +21,9 @@
 \setlanguagealias*[variant=medieval]{latin}{la-x-medieval}
 
 % Babel aliases
+\setlanguagealias[variant=classic]{latin}{classicallatin}
 \setlanguagealias[variant=classic]{latin}{classiclatin}
+\setlanguagealias[variant=ecclesiastic]{latin}{ecclesiasticallatin}
 \setlanguagealias[variant=ecclesiastic]{latin}{ecclesiasticlatin}
 \setlanguagealias[variant=medieval]{latin}{medievallatin}
 
@@ -36,24 +38,16 @@
 \bool_new:N \l_polyglossia_latin_prosodic_shorthands_bool
 \bool_new:N \l_polyglossia_latin_ecclesiastic_footnotes_bool
 
-\cs_new:Npn \polyglossia_latin_classical_character_codes:
-  {
-    \char_set_lccode:nn {`\V} {`\u}
-    \char_set_uccode:nn {`\u} {`\V}
-    \char_set_uccode:nn {`\ú} {`\V}
-    \char_set_uccode:nn {`\ū} {`\V}
-    \char_set_uccode:nn {`\ŭ} {`\V}
-  }
-
-\cs_new:Npn \polyglossia_latin_modern_character_codes:
-  {
-    \char_set_lccode:nn {`\V} {`\v}
-    \char_set_uccode:nn {`\u} {`\U}
-    \char_set_uccode:nn {`\ú} {`\Ú}
-    \char_set_uccode:nn {`\ū} {`\Ū}
-    \char_set_uccode:nn {`\ŭ} {`\Ŭ}
-  }
-
+\DeclareUppercaseMapping[la-x-classic]{`u}{V}
+\DeclareLowercaseMapping[la-x-classic]{`V}{u}
+% The mapping of u and V for medieval Latin is part of the l3text module,
+% which is part of the LaTeX format (see source3.pdf).
+\DeclareUppercaseMapping[la-x-classic]{`ú}{\a'{V}}
+\DeclareUppercaseMapping[la-x-classic]{`ū}{\a={V}}
+\DeclareUppercaseMapping[la-x-classic]{`ŭ}{\u{V}}
+\DeclareUppercaseMapping[la-x-medieval]{`ú}{\a'{V}}
+\DeclareUppercaseMapping[la-x-medieval]{`ū}{\a={V}}
+\DeclareUppercaseMapping[la-x-medieval]{`ŭ}{\u{V}}
 
 %%%%% Messages and commands concerning hyphenation
 
@@ -386,7 +380,7 @@
     \bool_set_true:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_false:N \l_polyglossia_latin_punctuation_spacing_bool
     \str_set:Nn \l_polyglossia_latin_variant_str {classic}
-    \SetLanguageKeys {latin} { babelname = classiclatin, bcp47 = la-x-classic, bcp47-extension-x = classic }
+    \SetLanguageKeys {latin} { babelname = classicallatin, bcp47 = la-x-classic, bcp47-extension-x = classic, bcp47-casing = la-x-classic }
     \polyglossia_latin_set_patterns:n {classiclatin}
   }
 
@@ -422,7 +416,7 @@
     \bool_set_false:N \l_polyglossia_latin_capitalize_month_bool
     \bool_set_true:N \l_polyglossia_latin_punctuation_spacing_bool
     \str_set:Nn \l_polyglossia_latin_variant_str {ecclesiastic}
-    \SetLanguageKeys {latin} { babelname = ecclesiasticlatin, bcp47 = la-x-ecclesia, bcp47-extension-x = ecclesia }
+    \SetLanguageKeys {latin} { babelname = ecclesiasticallatin, bcp47 = la-x-ecclesia, bcp47-extension-x = ecclesia }
     \polyglossia_latin_use_modern_patterns:
   }
 
@@ -517,8 +511,8 @@
     prosodicshorthands.default:n = true,
     usej.bool_set:N = \l_polyglossia_latin_use_j_bool,
     capitalizemonth.bool_set:N = \l_polyglossia_latin_capitalize_month_bool,
-    hyphenation.code = 
-    	\str_case:nnTF {#1}
+    hyphenation.code =
+      \str_case:nnTF {#1}
       {
         {classic}    { \polyglossia_latin_set_patterns:n {classiclatin} }
         {liturgical} { \polyglossia_latin_set_patterns:n {liturgicallatin} }
@@ -530,8 +524,8 @@
       {
         \msg_warning:nnn {polyglossia} {latin / illegal hyphenation variant} {#1}
       },
-    variant.code = 
-    	  \str_case:nnF {#1}
+    variant.code =
+      \str_case:nnF {#1}
       {
         {classic}
         {
@@ -558,7 +552,7 @@
         \msg_warning:nnn {polyglossia} {latin / illegal language variant} {#1}
       },
     ecclesiasticfootnotes.choices:nn = { true, false }
-      { 
+      {
         \ifcase\UseName{l_keys_choice_int}\or
            \bool_set_true:N \l_polyglossia_latin_ecclesiastic_footnotes_bool
         \else
@@ -1018,33 +1012,36 @@
      }
     \xpgla@savedvalues
     \polyglossia_latin_no_punctuation_spacing:
-    \polyglossia_latin_modern_character_codes:
+    \bool_if:NF \l_polyglossia_latin_use_v_bool
+      {
+        \char_set_lccode:nn {`\V} {`\v}
+      }
   }
 
 \cs_new:Npn \polyglossia_latin_inline_extras:
   {
     \bool_if:NF \l_polyglossia_latin_use_v_bool
       {
-        \polyglossia_latin_classical_character_codes:
+        \char_set_lccode:nn {`\V} {`\u}
       }
     \bool_if:NT \l_polyglossia_latin_punctuation_spacing_bool
       {
         \polyglossia_latin_punctuation_spacing:
       }
     \bool_if:NTF \l_polyglossia_latin_babelshorthands_bool
-     {
-      \polyglossia_latin_shorthands:
-     }
-     {
-      \polyglossia_latin_no_shorthands:
-     }
+      {
+        \polyglossia_latin_shorthands:
+      }
+      {
+        \polyglossia_latin_no_shorthands:
+      }
     \bool_if:NTF \l_polyglossia_latin_prosodic_shorthands_bool
-     {
-      \polyglossia_latin_prosodic_shorthands:
-     }
-     { 
-      \polyglossia_latin_no_prosodic_shorthands:
-     }
+      {
+        \polyglossia_latin_prosodic_shorthands:
+      }
+      {
+        \polyglossia_latin_no_prosodic_shorthands:
+      }
   }
 
 \def \blockextras@latin
@@ -1072,7 +1069,7 @@
 
 %%   Copyright (C) Claudio Beccari 2013-2016
 %%   Copyright (C) Élie Roux 2016-2019
-%%   Copyright (C) Keno Wehr 2019-2022
+%%   Copyright (C) Keno Wehr 2019-2025
 %%
 %%   Permission is hereby granted, free of charge, to any person obtaining
 %%   a copy of this software and associated documentation files
