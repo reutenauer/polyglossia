@@ -1,4 +1,4 @@
-% Language definition file (part of polyglossia v2.4 -- 2025/01/31)
+% Language definition file (part of polyglossia v2.5 -- 2025/05/12)
 %
 \ProvidesFile{gloss-romansh.ldf}[polyglossia: module for Romansh]
 \makeatletter

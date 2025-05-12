@@ -1,6 +1,6 @@
 --
 -- polyglossia.lua
--- part of polyglossia v2.4 -- 2025/01/31
+-- part of polyglossia v2.5 -- 2025/05/12
 --
 
 local module_name = "polyglossia"
