@@ -270,4 +270,10 @@
   \ifcroatian@localalph\let\alph\croatian@alph\let\Alph\croatian@Alph\fi%
 }
 
+\def\nestedextras@croatian{%
+ \ifluatex%
+  \ifcroatian@splithyphens\croatian@hyphens\else\nocroatian@hyphens\fi%
+ \fi%
+}
+
 \endinput

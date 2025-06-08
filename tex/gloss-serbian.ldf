@@ -386,6 +386,12 @@
 \def\inlineextras@serbian{%
   \ifserbian@splithyphens\serbian@hyphens\else\noserbian@hyphens\fi%
 }
+
+\def\nestedextras@serbian{%
+  \ifluatex%
+    \ifserbian@splithyphens\serbian@hyphens\else\noserbian@hyphens\fi%
+  \fi%
+}
  
 \def\noextras@serbian{%
    \ifcyrillic@numerals\noserbian@numbers\fi%

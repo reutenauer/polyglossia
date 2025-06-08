@@ -248,4 +248,11 @@
   \ifczech@splithyphens\czech@hyphens\else\noczech@hyphens\fi%
 }
 
+\def\nestedextras@czech{%
+ \ifluatex%
+  \ifczech@vlna\czech@vlna\else\noczech@vlna\fi%
+  \ifczech@splithyphens\czech@hyphens\else\noczech@hyphens\fi%
+ \fi%
+}
+
 \endinput

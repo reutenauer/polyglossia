@@ -248,4 +248,11 @@
   \ifpolish@splithyphens\polish@hyphens\else\nopolish@hyphens\fi%
 }
 
+\def\nestedextras@polish{%
+ \ifluatex%
+  \ifpolish@vlna\polish@vlna\else\nopolish@vlna\fi%
+  \ifpolish@splithyphens\polish@hyphens\else\nopolish@hyphens\fi%
+ \fi%
+}
+
 \endinput

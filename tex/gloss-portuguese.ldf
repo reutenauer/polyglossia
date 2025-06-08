@@ -222,5 +222,11 @@
   \ifportuguese@babelshorthands\portuguese@shorthands\else\noportuguese@shorthands\fi%
   \ifportuguese@splithyphens\portuguese@hyphens\else\noportuguese@hyphens\fi%
 }
+
+\def\nestedextras@portuguese{%
+  \ifluatex%
+    \ifportuguese@splithyphens\portuguese@hyphens\else\noportuguese@hyphens\fi%
+  \fi%
+}
      
 \endinput
