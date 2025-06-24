@@ -1427,11 +1427,15 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 \paragraph*{Commands:}
 	\begin{itemize}
 	\item \Cmd\Greeknumeral (= \Cmd\Greeknumber) and \Cmd\greeknumeral (= \Cmd\greeknumber) \ (see section \ref{abjad}).
-	\item The command \Cmd\atticnumeral (= \Cmd\atticnum) (activated with
-	  the option ¦attic=true¦), displays numbers using the acrophonic
+	\item The command \Cmd\atticnumeral (= \Cmd\atticnum) displays numbers using the acrophonic
           numbering system (defined in the Unicode range
-	  \textsf{U+10140–U+10174}).\footnote{ %
-	  	See the documentation of the \pkg{xgreek} package for more details.}
+	      \textsf{U+10140–U+10174}).
+	      Please refer to the documentation of the \pkg{xgreek} package for more details on Attic numbering.
+	 \item\new{2.6} The macros \Cmd\greeknumeralsix, \Cmd\greeknumeralSix, \Cmd\greeknumeralninety\ and
+	       \Cmd\greeknumeralNinety\ determine how the numbers 6 and 90 are represented in lower and
+	       uppercase output. By default, this is ϛ (lowercase 6), Ϛ (uppercase 6), ϟ (lowercase ninety),
+	       and \MakeUppercase{ϟ} (uppercase ninety). You can redefine the macros if you need other
+	       representations.
 	\end{itemize}
 
 \subsection{hebrew}\label{hebrew}
@@ -2735,6 +2739,11 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \begin{itemize}
 	\item Reset splithyphens and vlna state of embedding language after embedded language
 	      has been closed (\TXI{682}).
+\end{itemize}
+
+\subsubsection*{New Features}
+\begin{itemize}
+	\item Add possibility to customize the numbers 6 and 90 in Greek (\TXI{683}). 
 \end{itemize}
 
 \subsection*{2.5 (2025/05/12)}
