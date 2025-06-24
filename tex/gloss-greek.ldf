@@ -314,6 +314,12 @@
 \providecommand{\greeknumerals}[2]{\greeknumber{#2}}
 \providecommand{\Greeknumerals}[2]{\Greeknumber{#2}}
 
+% Placeholder for customizable numbers 6 and 90
+\providecommand*{\greeknumeralsix}{ϛ}
+\providecommand*{\greeknumeralSix}{Ϛ}
+\providecommand*{\greeknumeralninety}{ϟ}
+\providecommand*{\greeknumeralNinety}{\MakeUppercase{ϟ}}
+
 \protected\def\greeknumber#1{\expandafter\@greeknumber\expandafter{\number#1}}
 \def\@greeknumber#1{%
   \ifnum#1<\@ne\space\gr@ill@value{#1}%
@@ -367,10 +373,10 @@
 \let\greeknumeral=\greeknumber
 \let\Greeknumeral=\Greeknumber
 \def\gr@num@i#1{%
-  \ifcase#1\or α\or β\or γ\or δ\or ε\or ϛ\or ζ\or η\or θ\fi
+  \ifcase#1\or α\or β\or γ\or δ\or ε\or\greeknumeralsix\or ζ\or η\or θ\fi
   \ifnum#1=\z@\else\anw@true\fi\anw@print}
 \def\gr@num@ii#1{%
-  \ifcase#1\or ι\or κ\or λ\or μ\or ν\or ξ\or ο\or π\or ϟ\fi
+  \ifcase#1\or ι\or κ\or λ\or μ\or ν\or ξ\or ο\or π\or\greeknumeralninety\fi
   \ifnum#1=\z@\else\anw@true\fi\gr@num@i}
 \def\gr@num@iii#1{%
   \ifcase#1\or ρ\or σ\or τ\or υ\or φ\or χ\or ψ\or ω\or ϡ\fi
@@ -387,10 +393,10 @@
   ͵\ifcase#1\or ρ\or σ\or τ\or υ\or φ\or χ\or ψ\or ω\or ϡ\fi
   \gr@num@v}
 \def\gr@Num@i#1{%
-  \ifcase#1 \or Α\or Β\or Γ\or Δ\or Ε\or Ϛ\or Ζ\or Η\or θ\fi
+  \ifcase#1 \or Α\or Β\or Γ\or Δ\or Ε\or\greeknumeralSix\or Ζ\or Η\or θ\fi
   \ifnum#1=\z@\else\anw@true\fi\anw@print}
 \def\gr@Num@ii#1{%
-  \ifcase#1 \or Ι\or Κ\or Λ\or Μ\or Ν\or Ξ\or Ο\or Π\or \MakeUppercase{ϟ}\fi
+  \ifcase#1 \or Ι\or Κ\or Λ\or Μ\or Ν\or Ξ\or Ο\or Π\or\greeknumeralNinety\fi
   \ifnum#1=\z@\else\anw@true\fi\gr@Num@i}
 \def\gr@Num@iii#1{%
   \ifcase#1 \or Ρ\or Σ\or Τ\or Υ\or Φ\or Χ\or Ψ\or Ω\or \MakeUppercase{ϡ}\fi
