@@ -1423,6 +1423,11 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		If this is set to true, \cmd{\MakeUppercase} will upcase the \emph{ypogegrammeni} (subscript muted iota) to capital iota.
 		By default (and with this option set to \xpgvalue{false}), \cmd{\MakeUppercase} retains the subscript versions.
 		Note that this feature requires	\LaTeX\ kernel 2023/06 at least.
+	\item \xpgchoicekey[2.6]{koppa}{\xpgpresetvalue{modern} or \xpgvalue{archaic}}
+	    While modern Greek uses the letter koppa in its modern form (ϟ) to represent the number 90, classicists often prefer the
+	    archaic koppa variant (ϙ).
+	    \pkg{Polyglossia} uses by default the modern form in all variants (with \xpgoption{numerals=greek}).
+	    If you need the archaic form, use \xpgoption{koppa=archaic}.
 	\end{itemize}
 \paragraph*{Commands:}
 	\begin{itemize}
@@ -1434,7 +1439,8 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 	 \item\new{2.6} The macros \Cmd\greeknumeralsix, \Cmd\greeknumeralSix, \Cmd\greeknumeralninety\ and
 	       \Cmd\greeknumeralNinety\ determine how the numbers 6 and 90 are represented in lower and
 	       uppercase output. By default, this is ϛ (lowercase 6), Ϛ (uppercase 6), ϟ (lowercase ninety),
-	       and \MakeUppercase{ϟ} (uppercase ninety). You can redefine the macros if you need other
+	       and \MakeUppercase{ϟ} (uppercase ninety) -- or, with \xpgoption{koppa=arachaic}, ϙ (lowercase ninety),
+	       and \MakeUppercase{Ϙ} (uppercase ninety). You can redefine the macros if you need other
 	       representations.
 	\end{itemize}
 
@@ -2743,7 +2749,8 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 
 \subsubsection*{New Features}
 \begin{itemize}
-	\item Add possibility to customize the numbers 6 and 90 in Greek (\TXI{683}). 
+	\item Add \xpgoption{koppa} option to Greek (\TXI{683}).
+	\item Add possibility to customize the numbers 6 and 90 in Greek (\TXI{683}).
 \end{itemize}
 
 \subsection*{2.5 (2025/05/12)}

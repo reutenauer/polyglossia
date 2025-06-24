@@ -81,6 +81,7 @@
 
 
 \newif\if@greek@numerals
+\newif\if@greek@archaickoppa
 
 \DeclareKeys[polyglossia/gloss/greek]
   {
@@ -129,6 +130,17 @@
       },
     numerals.default:n = greek,
     numerals/unknown.code = \xpg@warning{Unknown Greek numerals value `#1'},
+    koppa.choice:,
+    koppa / archaic.code =
+      {%      
+        \@greek@archaickoppatrue
+      },
+    koppa / modern.code =
+      {%
+        \@greek@archaickoppafalse
+      },
+    koppa.default:n = modern,
+    koppa/unknown.code = \xpg@warning{Unknown Greek koppa value `#1'},
     capitaliota.choice:,
     capitaliota / true.code =
       {%
@@ -147,11 +159,10 @@
       {%
         \xpg@warning{Greek option `attic' is no longer required.}
       },
-    capitaliota.default:n = true,
   }
 
 % Register default options
-\InitializeGlossOptions{greek}{variant=monotonic,numerals=greek}
+\InitializeGlossOptions{greek}{variant=monotonic,numerals=greek,koppa=modern}
 % Register alias options
 \SetLanguageAliasValues{greek}{variant}{monotonic,mono}
 \SetLanguageAliasValues{greek}{variant}{polytonic,poly}
@@ -319,6 +330,10 @@
 \providecommand*{\greeknumeralSix}{Ϛ}
 \providecommand*{\greeknumeralninety}{ϟ}
 \providecommand*{\greeknumeralNinety}{\MakeUppercase{ϟ}}
+\if@greek@archaickoppa
+  \renewcommand*{\greeknumeralninety}{ϙ}
+  \renewcommand*{\greeknumeralNinety}{Ϙ}
+\fi
 
 \protected\def\greeknumber#1{\expandafter\@greeknumber\expandafter{\number#1}}
 \def\@greeknumber#1{%
