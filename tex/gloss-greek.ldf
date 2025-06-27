@@ -335,7 +335,7 @@
   \renewcommand*{\greeknumeralNinety}{Ϙ}
 \fi
 
-\protected\def\greeknumber#1{\expandafter\@greeknumber\expandafter{\number#1}}
+\protected\def\greeknumber#1{\expandafter\@greeknumber\expandafter{\number#1}{}}
 \def\@greeknumber#1{%
   \ifnum#1<\@ne\space\gr@ill@value{#1}%
   \else
@@ -360,7 +360,7 @@
     \fi
   \fi
 }
-\protected\def\Greeknumber#1{\expandafter\@Greeknumber\expandafter{\number#1}}
+\protected\def\Greeknumber#1{\expandafter\@Greeknumber\expandafter{\number#1}{}}
 \def\@Greeknumber#1{%
   \ifnum#1<\@ne\space\gr@ill@value{#1}%
   \else
