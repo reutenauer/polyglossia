@@ -8,18 +8,18 @@ Completed box being shipped out [1]
 ...\glue 0.0 plus 1.0fil
 ...\hbox(6.15+0.29167)x345.0, direction TRT
 ....\hbox(6.15+0.29167)x345.0, glue set 304.16663fil, direction TRT
-.....\TU/DavidCLM(1)/m/sl/10 1
+.....\TU/DavidCLM(1)/m/it/10 1
 .....\glue 10.0
-.....\TU/DavidCLM(1)/m/sl/10 כ
-.....\TU/DavidCLM(1)/m/sl/10 ו
-.....\TU/DavidCLM(1)/m/sl/10 ת
-.....\TU/DavidCLM(1)/m/sl/10 ר
-.....\TU/DavidCLM(1)/m/sl/10 ת
+.....\TU/DavidCLM(1)/m/it/10 כ
+.....\TU/DavidCLM(1)/m/it/10 ו
+.....\TU/DavidCLM(1)/m/it/10 ת
+.....\TU/DavidCLM(1)/m/it/10 ר
+.....\TU/DavidCLM(1)/m/it/10 ת
 .....\glue 0.0 plus 1.0fil
 .....\TU/DavidCLM(1)/m/n/10 1
 ..\glue 25.0
 ..\glue(\lineskip) 0.0
-..\vbox(550.0+0.0)x345.0, glue set 518.63086fill, direction TRT
+..\vbox(550.0+0.0)x345.0, glue set 518.78082fill, direction TRT
 ...\write-{}
 ...\write1{\@writefile{toc}{\xpg@aux {}{hebrew}}}
 ...\glue(\topskip) 1.276
@@ -41,9 +41,8 @@ Completed box being shipped out [1]
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
-...\marks2{\__mark_id:n {1}\MakeUppercase    []{1\hskip 1em\relax כותרת}}
-...\marks3{\__mark_id:n {2}\MakeUppercase    []{1\hskip 1em\relax כותרת}}
-...\mark{{}{\MakeUppercase    []{1\hskip 1em\relax כותרת}}}
+...\marks2{\__mark_value:nn {1}{\MakeUppercase    []{1\hskip 1em\relax כותרת}}}
+...\marks3{\__mark_value:nn {2}{\MakeUppercase    []{1\hskip 1em\relax כותרת}}}
 ...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {1}כותרת}{\thepage }{}\protected@file@percent }}
 ...\penalty 10000
 ...\glue 9.21916 plus 0.80165
@@ -64,6 +63,7 @@ Completed box being shipped out [1]
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
+...\glue -0.15
 ...\glue 0.0 plus 1.0fill
 ...\glue 0.0
 ...\glue 0.0 plus 0.0001fil

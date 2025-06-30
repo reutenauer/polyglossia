@@ -30,9 +30,8 @@ Completed box being shipped out [1]
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
-...\marks2{\__mark_id:n {1}\MakeUppercase    []{1\hskip 1em\relax Тест}}
-...\marks3{\__mark_id:n {2}\MakeUppercase    []{1\hskip 1em\relax Тест}}
-...\mark{{}{\MakeUppercase    []{1\hskip 1em\relax Тест}}}
+...\marks2{\__mark_value:nn {1}{\MakeUppercase    []{1\hskip 1em\relax Тест}}}
+...\marks3{\__mark_value:nn {2}{\MakeUppercase    []{1\hskip 1em\relax Тест}}}
 ...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {1}Тест}{\thepage }{}\protected@file@percent }}
 ...\penalty 10000
 ...\glue 9.913 plus 0.86198
@@ -109,7 +108,7 @@ Completed box being shipped out [2]
 .....\TU/NewCM10(0)/m/n/10 2
 ..\glue 25.0
 ..\glue(\lineskip) 0.0
-..\vbox(550.0+0.0)x345.0, glue set 497.95001fill
+..\vbox(550.0+0.0)x345.0, glue set 500.0fill
 ...\glue(\topskip) 3.06
 ...\hbox(6.94+0.10999)x345.0, glue set 272.62999fil
 ....\hbox(0.0+0.0)x15.0
@@ -159,6 +158,7 @@ Completed box being shipped out [2]
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
+...\glue -2.04999
 ...\glue 0.0 plus 1.0fill
 ...\glue 0.0
 ...\glue 0.0 plus 0.0001fil

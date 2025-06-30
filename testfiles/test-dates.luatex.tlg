@@ -52,8 +52,6 @@ l. ...\START\showbox0\showbox
 .\TU/lmr/m/n/10 v
 .\TU/lmr/m/n/10 r
 .\TU/lmr/m/n/10 i
-.\discretionary (penalty 50)
-..< \TU/lmr/m/n/10 -
 .\TU/lmr/m/n/10 g
 .\TU/lmr/m/n/10 l
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11

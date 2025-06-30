@@ -21,7 +21,7 @@ Completed box being shipped out [1]
 .....\TU/lmr/m/n/10 1
 ..\glue 25.0
 ..\glue(\lineskip) 0.0
-..\vbox(550.0+0.0)x345.0, glue set 518.02698fill, direction TLT
+..\vbox(550.0+0.0)x345.0, glue set 518.08704fill, direction TLT
 ...\write-{}
 ...\write1{\@writefile{toc}{\xpg@aux {}{english}}}
 ...\glue(\topskip) 0.00641
@@ -45,9 +45,8 @@ Completed box being shipped out [1]
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
-...\marks2{\__mark_id:n {1}\MakeUppercase    []{1\hskip 1em\relax Title}}
-...\marks3{\__mark_id:n {2}\MakeUppercase    []{1\hskip 1em\relax Title}}
-...\mark{{}{\MakeUppercase    []{1\hskip 1em\relax Title}}}
+...\marks2{\__mark_value:nn {1}{\MakeUppercase    []{1\hskip 1em\relax Title}}}
+...\marks3{\__mark_value:nn {2}{\MakeUppercase    []{1\hskip 1em\relax Title}}}
 ...\write1{\@writefile{toc}{\protect \contentsline {section}{\protect \numberline {1}Title}{\thepage }{}\protected@file@percent }}
 ...\penalty 10000
 ...\glue 9.913 plus 0.86198
@@ -69,6 +68,7 @@ Completed box being shipped out [1]
 ....\penalty 10000
 ....\glue(\parfillskip) 0.0 plus 1.0fil
 ....\glue(\rightskip) 0.0
+...\glue -0.06
 ...\glue 0.0 plus 1.0fill
 ...\glue 0.0
 ...\glue 0.0 plus 0.0001fil
