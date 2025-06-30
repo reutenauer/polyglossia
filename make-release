@@ -1,8 +1,8 @@
 #!/bin/bash
 # -*- coding: iso-8859-15 -*-
 
-VERSION="2.5"
-RELDATE="2025/05/12"
+VERSION="2.6"
+RELDATE="2025/06/30"
 
 RUNTESTS=true
 
