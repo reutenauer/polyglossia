@@ -82,5 +82,5 @@ Don't change this file in any respect.
 .\write1{\@writefile{toc}{\xpg@aux {}{russian}}}
 ! OK.
 <to be read again> 
-\begingroup 
+                   \begingroup 
 l. ...\START\showbox0\END

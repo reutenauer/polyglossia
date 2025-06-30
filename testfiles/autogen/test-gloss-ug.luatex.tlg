@@ -49,5 +49,5 @@ Package polyglossia Info: Default language is uyghur
 .\TU/lmr/m/n/10 .
 ! OK.
 <to be read again> 
-\begingroup 
+                   \begingroup 
 l. ...\TIMO\showbox0\END

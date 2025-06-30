@@ -23,9 +23,9 @@ Don't change this file in any respect.
 .\TU/lmr/m/n/10 .
 ! OK.
 <to be read again> 
-\showbox 
+                   \showbox 
 l. ...\START\showbox0\showbox
-                          2\END
+                            2\END
 > \box...=
 \vbox(48.0+2.05)x0.00002, direction TLT
 .\hbox(0.0+0.0)x0.00002, direction TLT
@@ -72,5 +72,5 @@ l. ...\START\showbox0\showbox
 ..\glue(\rightskip) 0.0
 ! OK.
 <to be read again> 
-\begingroup 
+                   \begingroup 
 l. ...\START\showbox0\showbox2\END

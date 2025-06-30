@@ -2,7 +2,7 @@ This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 ! Undefined control sequence.
 l. ...\START\showbox0\shobox
-                         2\END
+                           2\END
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -205,5 +205,5 @@ and I'll forget about whatever was undefined.
 ..\glue(\rightskip) 0.0
 ! OK.
 <to be read again> 
-\begingroup 
+                   \begingroup 
 l. ...\START\showbox0\shobox2\END

@@ -16,8 +16,6 @@ Lua-only attribute polyglossia_punct = 4
 Inserting `polyglossia-punct.process' in `pre_shaping_filter'.
 Package polyglossia Info: Activating Latin language variant "modern" on line ....
 Package polyglossia Info: Activating hyphenation patterns for modern Latin on line ....
-Package polyglossia Info: Activating Latin language variant "modern" on line ....
-Package polyglossia Info: Activating hyphenation patterns for modern Latin on line ....
 (babelsh.def
 File: babelsh.def ....-..-.. Babel common definitions for shorthands
  Taken verbatim from babel files (....-..-.. v...)
@@ -60,5 +58,5 @@ Package polyglossia Info: Default language is latin
 .\TU/lmr/m/n/10 .
 ! OK.
 <to be read again> 
-\begingroup 
+                   \begingroup 
 l. ...\TIMO\showbox0\END

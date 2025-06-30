@@ -1,7 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 (gloss-la-x-ecclesia.ldf
-File: gloss-la-xecclesiastic.ldf polyglossia: module for la-xecclesiastic (Latin)
+File: gloss-la-x-ecclesia.ldf polyglossia: module for la-x-ecclesia (Latin)
 (gloss-latin.ldf
 File: gloss-latin.ldf polyglossia: module for Latin
 Module polyglossia Info: Language data for latin
@@ -14,8 +14,6 @@ Module polyglossia Info: Language data for latin
 Module polyglossia Info: Language latin was not yet loaded; created with id 2 on input line ...
 Lua-only attribute polyglossia_punct = 4
 Inserting `polyglossia-punct.process' in `pre_shaping_filter'.
-Package polyglossia Info: Activating Latin language variant "modern" on line ....
-Package polyglossia Info: Activating hyphenation patterns for modern Latin on line ....
 Package polyglossia Info: Activating Latin language variant "modern" on line ....
 Package polyglossia Info: Activating hyphenation patterns for modern Latin on line ....
 (babelsh.def
@@ -59,5 +57,5 @@ Package polyglossia Info: Default language is latin
 .\TU/lmr/m/n/10 .
 ! OK.
 <to be read again> 
-\begingroup 
+                   \begingroup 
 l. ...\TIMO\showbox0\END

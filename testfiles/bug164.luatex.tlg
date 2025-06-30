@@ -466,9 +466,9 @@ Don't change this file in any respect.
 .\TU/lmr/m/n/10 ]
 ! OK.
 <to be read again> 
-\showbox 
+                   \showbox 
 l. ...\START\showbox0\showbox
-                          2\END
+                            2\END
 > \box...=
 \hbox(7.5+2.5)x1282.94032, direction TLT
 .\write1{\@writefile{toc}{\xpg@aux {}{russian}}}
@@ -847,5 +847,5 @@ l. ...\START\showbox0\showbox
 .\write1{\@writefile{toc}{\xpg@aux {}{english}}}
 ! OK.
 <to be read again> 
-\begingroup 
+                   \begingroup 
 l. ...\START\showbox0\showbox2\END

@@ -1,7 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 (gloss-la-x-medieval.ldf
-File: gloss-la-xmedieval.ldf polyglossia: module for la-xmedieval (Latin)
+File: gloss-la-x-medieval.ldf polyglossia: module for la-x-medieval (Latin)
 (gloss-latin.ldf
 File: gloss-latin.ldf polyglossia: module for Latin
 \g_polyglossia_latin_question_exclamation_class=\XeTeXcharclass1
@@ -10,8 +10,6 @@ File: gloss-latin.ldf polyglossia: module for Latin
 \g_polyglossia_latin_closing_guillemet_class=\XeTeXcharclass4
 \g_polyglossia_latin_opening_bracket_class=\XeTeXcharclass5
 \g_polyglossia_latin_closing_bracket_class=\XeTeXcharclass6
-Package polyglossia Info: Activating Latin language variant "modern" on line ....
-Package polyglossia Info: Activating hyphenation patterns for modern Latin on line ....
 Package polyglossia Info: Activating Latin language variant "modern" on line ....
 Package polyglossia Info: Activating hyphenation patterns for modern Latin on line ....
 (babelsh.def

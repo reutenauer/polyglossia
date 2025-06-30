@@ -130,9 +130,9 @@ Don't change this file in any respect.
 .\glue 10.0 plus 3.0 minus 5.0
 ! OK.
 <to be read again> 
-\showbox 
+                   \showbox 
 l. ...\START\showbox0\showbox
-                          2\showbox4\END
+                            2\showbox4\END
 > \box...=
 \vbox(65.8+0.0)x345.0, direction TLT
 .\penalty -51
@@ -257,9 +257,9 @@ l. ...\START\showbox0\showbox
 .\glue 10.0 plus 3.0 minus 5.0
 ! OK.
 <to be read again> 
-\showbox 
+                   \showbox 
 l. ...\START\showbox0\showbox2\showbox
-                                   4\END
+                                     4\END
 > \box...=
 \vbox(65.55+0.0)x345.0, direction TLT
 .\penalty -51
@@ -390,5 +390,5 @@ l. ...\START\showbox0\showbox2\showbox
 .\glue 10.0 plus 3.0 minus 5.0
 ! OK.
 <to be read again> 
-\begingroup 
+                   \begingroup 
 l. ...\START\showbox0\showbox2\showbox4\END
