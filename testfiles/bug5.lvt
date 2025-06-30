@@ -3,7 +3,7 @@
 \usepackage{polyglossia}
 \setmainlanguage{farsi}
 \setotherlanguage{english}
-\newfontfamily\farsifont[Script=Arabic]{Amiri}[%
+\newfontfamily\persianfont[Script=Arabic]{Amiri}[%
  UprightFont = *-Regular,
   BoldFont = *-Bold,
   Extension = .ttf,
