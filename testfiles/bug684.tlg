@@ -1,14 +1,14 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 > \box...=
-\vbox(7.2+2.37999)x345.0
-.\hbox(7.2+2.37999)x345.0, glue set 296.88fil
+\vbox(7.16+2.59999)x345.0
+.\hbox(7.16+2.59999)x345.0, glue set 290.84999fil
 ..\hbox(0.0+0.0)x15.0
-..\TU/LibertinusSerif(5)/m/n/10 ρʹ
-..\glue 2.5 plus 1.25 minus 0.83333
-..\TU/LibertinusSerif(5)/m/n/10 Ρʹ
-..\glue 2.5 plus 1.25 minus 0.83333
-..\TU/LibertinusSerif(5)/m/n/10 ΡΑʹ
+..\TU/NewCM10(0)/m/n/10 ρʹ
+..\glue 3.33 plus 1.665 minus 1.11
+..\TU/NewCM10(0)/m/n/10 Ρʹ
+..\glue 3.33 plus 1.665 minus 1.11
+..\TU/NewCM10(0)/m/n/10 ΡΑʹ
 ..\penalty 10000
 ..\glue(\parfillskip) 0.0 plus 1.0fil
 ..\glue(\rightskip) 0.0

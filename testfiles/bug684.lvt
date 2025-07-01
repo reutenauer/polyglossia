@@ -2,7 +2,12 @@
 \documentclass{article}
 \usepackage{polyglossia}
 \setmainlanguage[variant=ancient]{greek}
-\usepackage{libertinus-otf}
+\newfontfamily\greekfont[Script=Greek]{NewCM10}[%
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  Extension = .otf,
+  ItalicFont = *-Italic,
+  BoldItalicFont = *-BoldItalic]
 \begin{document}
 \global\setbox0=\vbox{%
 \greeknumeral{100} \Greeknumeral{100} \Greeknumeral{101}}
