@@ -1,0 +1,10 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage[variant=ancient]{greek}
+\usepackage{libertinus-otf}
+\begin{document}
+\global\setbox0=\vbox{%
+\greeknumeral{100} \Greeknumeral{100} \Greeknumeral{101}}
+\START\showbox0\END
+

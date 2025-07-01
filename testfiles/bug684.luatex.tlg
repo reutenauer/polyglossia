@@ -1,0 +1,28 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\vbox(7.2+2.38)x345.0, direction TLT
+.\hbox(7.2+2.38)x345.0, glue set 296.88fil, direction TLT
+..\localpar
+...\localinterlinepenalty=0
+...\localbrokenpenalty=0
+...\localleftbox=null
+...\localrightbox=null
+..\hbox(0.0+0.0)x15.0, direction TLT
+..\TU/LibertinusSerif(5)/m/n/10 ρ
+..\TU/LibertinusSerif(5)/m/n/10 ʹ
+..\glue(\spaceskip) 2.5 plus 1.25 minus 0.83333
+..\TU/LibertinusSerif(5)/m/n/10 Ρ
+..\TU/LibertinusSerif(5)/m/n/10 ʹ
+..\glue(\spaceskip) 2.5 plus 1.25 minus 0.83333
+..\TU/LibertinusSerif(5)/m/n/10 Ρ
+..\kern-0.6 (font)
+..\TU/LibertinusSerif(5)/m/n/10 Α
+..\TU/LibertinusSerif(5)/m/n/10 ʹ
+..\penalty 10000
+..\glue(\parfillskip) 0.0 plus 1.0fil
+..\glue(\rightskip) 0.0
+! OK.
+<to be read again> 
+                   \begingroup 
+l. ...\START\showbox0\END
