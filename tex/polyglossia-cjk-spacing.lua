@@ -390,6 +390,18 @@ local function insert_penalty_glue (head, curr, f, var, nobr, x)
 end
 
 --
+-- overwrite \inhibitglue which suppresses inter-character glue
+--
+local inhibitglue_attr  = luatexbase.new_attribute"polyglossia_inhibitglue_attr"
+local inhibitglue_index = luatexbase.new_luafunction"polyglossia_inhibitglue_func"
+lua.get_functions_table()[inhibitglue_index] = function ()
+    local n = get_new_glue(0)
+    node.set_attribute(n, inhibitglue_attr, 1)
+    node.write(n)
+end
+token.set_lua("inhibitglue", inhibitglue_index, "global", "protected")
+
+--
 -- main process for linebreak and inter-character spacing
 --
 local function cjk_break (head)
@@ -449,8 +461,10 @@ local function cjk_break (head)
 
                 elseif var > 0 and intercharclass[cc][0] then
                     local n = node.getnext(curr)
-                    if n and n.id == glue_id and n.subtype >= 13 and n.subtype <= 15 then
-                        goto skip_combining -- skip spaceskip, xspaceskkp, parfillskip
+                    if n and n.id == glue_id and (n.subtype >= 13 and n.subtype <= 15
+                        or node.has_attribute(n, inhibitglue_attr)) then
+                        -- skip spaceskip, xspaceskkp, parfillskip, inhibitglue
+                        goto skip_combining
                     end
                     head, curr = insert_cjk_penalty_glue(head, curr, f, var, cc, 0, false)
                 end
