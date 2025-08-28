@@ -373,7 +373,7 @@ local function insert_penalty_glue (head, curr, f, var, nobr, x)
     if nobr then
         local penalty = get_new_penalty(10000)
         head, curr = node.insert_after(head, curr, penalty)
-    elseif var == 0 or var == 2 then
+    elseif (var == 0 or var == 2) and curr.id ~= penalty_id then
         local penalty = get_new_penalty(50)
         head, curr = node.insert_after(head, curr, penalty)
     end
