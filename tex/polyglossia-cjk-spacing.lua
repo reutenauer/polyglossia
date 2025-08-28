@@ -407,8 +407,8 @@ local function cjk_break (head)
                 end
 
                 local next = node.getnext(curr)
-                while next and next.id == whatsit_id do -- skip whatsit nodes
-                    curr, next = next, node.getnext(next)
+                while next and (next.id == whatsit_id or next.id == penalty_id) do
+                    curr, next = next, node.getnext(next) -- skip whatsit/penalty nodes
                 end
 
                 if next and node.has_attribute(next, attr_cjk)
@@ -446,6 +446,13 @@ local function cjk_break (head)
                             end
                         end
                     end
+
+                elseif var > 0 and intercharclass[cc][0] then
+                    local n = node.getnext(curr)
+                    if n and n.id == glue_id and n.subtype >= 13 and n.subtype <= 15 then
+                        goto skip_combining -- skip spaceskip, xspaceskkp, parfillskip
+                    end
+                    head, curr = insert_cjk_penalty_glue(head, curr, f, var, cc, 0, false)
                 end
             end
         end
