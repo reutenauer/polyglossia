@@ -10,6 +10,7 @@ local glue_id  = node.id"glue"
 local penalty_id = node.id"penalty"
 local whatsit_id = node.id"whatsit"
 local math_id  = node.id"math"
+local localpar_id = node.id"local_par"
 
 --
 -- attr_cjk: variant = plain: 0, JP/classic: 1, KR/modern: 2, SC: 3, TC: 4
@@ -350,7 +351,7 @@ end
 --   nc:   charclass of next char
 --   nobr: linebreak is not allowed
 --
-local function insert_cjk_penalty_glue (head, curr, f, var, cc, nc, nobr)
+local function insert_cjk_penalty_glue (head, curr, f, var, cc, nc, nobr, before)
     if nobr or cc == 1 or nc > 1 then
         local penalty = get_new_penalty(10000)
         head, curr = node.insert_after(head, curr, penalty)
@@ -358,7 +359,11 @@ local function insert_cjk_penalty_glue (head, curr, f, var, cc, nc, nobr)
     local factor = get_font_size(f, var == 2)
     local t = intercharclass[cc][nc]
     local glue = get_new_glue(t[1]*factor, nil, t[2]*factor)
-    head, curr = node.insert_after(head, curr, glue)
+    if before then
+        head = node.insert_before(head, curr, glue)
+    else
+        head, curr = node.insert_after(head, curr, glue)
+    end
     return head, curr
 end
 
@@ -406,6 +411,18 @@ token.set_lua("inhibitglue", inhibitglue_index, "global", "protected")
 --
 local function cjk_break (head)
     local curr = head
+
+    if curr and curr.id == glyph_id then
+        local var = node.has_attribute(curr, attr_cjk)
+        if var and var > 0 then
+            local nc = get_charclass(var, curr.char)
+            if intercharclass[0][nc] then
+                -- insert glue before the first node that is an opening cjk_punct
+                head = insert_cjk_penalty_glue(head, curr, curr.font, var, 0, nc, false, true)
+            end
+        end
+    end
+
     while curr do
         if attr_cjk and (curr.id == glyph_id or curr.id == math_id and curr.subtype == 1) then
             local var = node.has_attribute(curr, attr_cjk)
@@ -460,13 +477,33 @@ local function cjk_break (head)
                     end
 
                 elseif var > 0 and intercharclass[cc][0] then
-                    local n = node.getnext(curr)
-                    if n and n.id == glue_id and (n.subtype >= 13 and n.subtype <= 15
-                        or node.has_attribute(n, inhibitglue_attr)) then
+                    if next and next.id == glue_id and (next.subtype >= 13 and next.subtype <= 15
+                        or node.has_attribute(next, inhibitglue_attr)) then
                         -- skip spaceskip, xspaceskkp, parfillskip, inhibitglue
-                        goto skip_combining
+                    else
+                        -- insert glue between cjk_punct and non-glyph node
+                        head, curr = insert_cjk_penalty_glue(head, curr, f, var, cc, 0, false)
                     end
-                    head, curr = insert_cjk_penalty_glue(head, curr, f, var, cc, 0, false)
+                end
+            end
+        elseif curr.id == localpar_id
+            or curr.id == whatsit_id
+            or curr.id == penalty_id
+            or curr.id == hbox_id and curr.subtype == 3 -- indentbox
+            or curr.id == glue_id and (curr.subtype >= 13 and curr.subtype <= 15
+                                      or node.has_attribute(curr, inhibitglue_attr))
+            then
+            -- skip
+        else
+            local n = node.getnext(curr)
+            if n and n.id == glyph_id then
+                local var = node.has_attribute(n, attr_cjk)
+                if var and var > 0 then
+                    local nc = get_charclass(var, n.char)
+                    if intercharclass[0][nc] then
+                        -- insert glue between non-glyph node and cjk_punct
+                        head, curr = insert_cjk_penalty_glue(head, curr, n.font, var, 0, nc, false)
+                    end
                 end
             end
         end
