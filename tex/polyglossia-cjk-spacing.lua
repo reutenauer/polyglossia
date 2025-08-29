@@ -11,6 +11,9 @@ local penalty_id = node.id"penalty"
 local whatsit_id = node.id"whatsit"
 local math_id  = node.id"math"
 local localpar_id = node.id"local_par"
+local ins_id = node.id"ins"
+local vadjust_id = node.id"adjust"
+local mark_id = node.id"mark"
 
 --
 -- attr_cjk: variant = plain: 0, JP/classic: 1, KR/modern: 2, SC: 3, TC: 4
@@ -425,6 +428,7 @@ local function cjk_break (head)
 
     while curr do
         if attr_cjk and (curr.id == glyph_id or curr.id == math_id and curr.subtype == 1) then
+
             local var = node.has_attribute(curr, attr_cjk)
             if var then
                 local c, f = curr.char or 0, curr.font
@@ -436,8 +440,11 @@ local function cjk_break (head)
                 end
 
                 local next = node.getnext(curr)
-                while next and (next.id == whatsit_id or next.id == penalty_id) do
-                    curr, next = next, node.getnext(next) -- skip whatsit/penalty nodes
+                while next and (next.id == whatsit_id or next.id == penalty_id
+                    or next.id == hbox_id and next.next and next.next.id == ins_id
+                    or next.id == ins_id or next.id == vadjust_id or next.id == mark_id) do
+                    -- skip whatsit/penalty/footnote/ins/vadjust/mark nodes
+                    curr, next = next, node.getnext(next)
                 end
 
                 if next and node.has_attribute(next, attr_cjk)
