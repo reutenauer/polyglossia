@@ -427,11 +427,20 @@ local function cjk_break (head)
     end
 
     while curr do
-        if attr_cjk and (curr.id == glyph_id or curr.id == math_id and curr.subtype == 1) then
+        if curr.id == glyph_id
+            or curr.id == math_id and curr.subtype == 1 -- math_off
+            or (curr.id == hbox_id or curr.id == vbox_id) and curr.subtype == 2 then -- normal box
 
             local var = node.has_attribute(curr, attr_cjk)
             if var then
                 local c, f = curr.char or 0, curr.font
+                if curr.id == hbox_id or curr.id == vbox_id then
+                    if var == 0 or var == 2 then
+                        goto skip_combining -- skip Korean : as they use inter-word space
+                    end
+                    local t = curr.list and node.tail(curr.list)
+                    c = t and t.char or 1 -- 1 : just another simple non-cjk char
+                end
                 local cc, cjkc = get_charclass(var, c), is_cjk(c)
 
                 -- compress cjk punctuations when charclass is 1 thru 4
@@ -447,10 +456,18 @@ local function cjk_break (head)
                     curr, next = next, node.getnext(next)
                 end
 
-                if next and node.has_attribute(next, attr_cjk)
-                    and (next.id == glyph_id or next.id == math_id and next.subtype == 0) then
+                if next and node.has_attribute(next, attr_cjk) and (next.id == glyph_id
+                    or next.id == math_id and next.subtype == 0 -- math_on
+                    or (next.id == hbox_id or next.id == vbox_id) and next.subtype == 2) then
 
                     local n = next.char or 0
+                    if next.id == hbox_id or next.id == vbox_id then
+                        if var == 0 or var == 2 then
+                            goto skip_combining -- skip Korean
+                        end
+                        local t = next.head
+                        n = t and t.char or 1
+                    end
                     f = f or next.font or 0 -- in case of curr == math_off
 
                     -- skip combining. or dash+dash case to suppress stretching
@@ -470,6 +487,10 @@ local function cjk_break (head)
 
                         -- if curr or next is cjk char
                         if cjkc or cjkn then
+
+                            if c == 1 or n == 1 then -- one of two is non-glyph box : 0pt glue
+                                cjkc, cjkn = true, true
+                            end
 
                             -- plain variant / cjk+cjk / nobr cjk+noncjk / after dash
                             --      : insert a 0pt glue
