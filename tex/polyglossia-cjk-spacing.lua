@@ -494,8 +494,6 @@ local function cjk_break (head)
                 end
             end
         elseif curr.id == localpar_id
-            or curr.id == whatsit_id
-            or curr.id == penalty_id
             or curr.id == hbox_id and curr.subtype == 3 -- indentbox
             or curr.id == glue_id and (curr.subtype >= 13 and curr.subtype <= 15
                                       or node.has_attribute(curr, inhibitglue_attr))
