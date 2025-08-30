@@ -583,13 +583,13 @@ Table~\ref{tab:BCP47-polyglossia} lists the currently supported tags.
 
 \begin{itemize}
 	\item \xpgboolkeyfalse[1.1.1]{babelshorthands}
-		Globally activates \pkg{babel} shorthands whenever available. 
+		Globally activates \pkg{babel} shorthands whenever available.
 		Please refer to sec.~\ref{shorthands} for details.
 
 	\item \xpgboolkeyfalse{localmarks} redefines the internal \LaTeX\ macros \cmd\markboth\ and
 		\cmd\markright\ to the effect that the header text is explicitly set in the currently
 		active language (\ie wrapped into \cmd\foreignlanguage\{\meta{lang}\}\{\meta{\ldots}\}).
-		
+
 		In earlier versions of \pkg{polyglossia},\new{1.2.0} this
 		option was enabled by default, but we now realize that it causes more problems
 		than it helps (since it breaks if a package or class redefines \cmd\markboth\ or
@@ -1002,7 +1002,7 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		       in input (trailing space is optional) and prints with a non-breakable thin space before
 	           and after the dash.
 		\item[¦"--\textasciitilde¦] Cyrillic dash for the use in compound names (surnames).
-		       As opposed to ¦"---¦ this removes any space before and after the dash. 
+		       As opposed to ¦"---¦ this removes any space before and after the dash.
 		\item[¦"--*¦] Cyrillic dash for denoting direct speech. This adds a larger space after
 		       the dash. Space before the dash is output as is.
 	\end{shorthands}
@@ -1095,7 +1095,7 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		             the two consecutive glyphs are output mimicking the digraph. Also available for
 		             ¦"Nj¦ (\charifavailable{01CB}{Nj}) and ¦"NJ¦ (\charifavailable{01CA}{NJ}).
 	\end{shorthands}
-	
+
 	Finally, there are also four shorthands for quotation marks:
 	\begin{shorthands}
 		\item[¦"`¦] for Croatian left double quotes („).
@@ -1338,7 +1338,7 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 			\item[¦"<¦] for French-style left double quotes (looks like <<).
 			\item[¦">¦] for French-style right double quotes (looks like >>).
 	    \end{shorthands}
-    
+
 		There are also three shorthands for the Cyrillic dash (\textrussian{тире}), which is shorter than the
 		emdash but longer than the endash (namely 0.8\,em).
 		Note that, since it is not covered by unicode, this character is faked by telescoping two endashes:
@@ -1347,7 +1347,7 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 			in input (trailing space is optional) and prints with a non-breakable thin space before
 			and after the dash.
 			\item[¦"--\textasciitilde¦] Cyrillic dash for the use in compound names (surnames).
-			As opposed to ¦"---¦ this removes any space before and after the dash. 
+			As opposed to ¦"---¦ this removes any space before and after the dash.
 			\item[¦"--*¦] Cyrillic dash for denoting direct speech. This adds a larger space after
 			the dash. Space before the dash is output as is.
 		\end{shorthands}
@@ -1394,7 +1394,7 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 		\item[¦"/¦] a slash that allows for a subsequent line break. As opposed to \cmd\slash, hyphenation at the breakpoints
 		           preset in the hyphenation patterns is still allowed.
 		\item[¦"*¦]\new{2.0} An asterisk which assures the word can still be hyphenated at its defined breakpoints.
-		            Useful if you want to employ gender-sensitive writing (,gender star`).					
+		            Useful if you want to employ gender-sensitive writing (,gender star`).
 		            Similar shorthands are available for the alternative gender-sensitive spellings, ¦":¦ and ¦"_¦.
 		\item[¦"x¦]\new{2.0} Inserts a gender mark which assures the word can still be hyphenated at its defined breakpoints.
 	                This is predefined to ¦*¦ but can be globally redefined by redefining the macro \cmd\mkgender\ (see below).
@@ -1496,8 +1496,8 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
         Section numbers always have a trailing punctuation in Hungarian (as in \emph{1.1.} as opposed to \emph{1.1}).
         For compatibility reasons, the default option is \xpgvalue{false}, thus \textsf{polyglossia}
         does not touch heading punctuation, so this will be whatever the class or a package determines.
-        Set this option to \xpgvalue{true}, 
-        and \textsf{polyglossia} appends a period after the section counters, 
+        Set this option to \xpgvalue{true},
+        and \textsf{polyglossia} appends a period after the section counters,
         and adjusts the header punctuation (as in \emph{1. fejezet.} as opposed to \emph{1. fejezet}).
 \end{itemize}
 \paragraph*{Commands:}
@@ -1653,7 +1653,7 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 			As many ecclesiastic documents and liturgical books use footnotes that are
 			very similar to the ordinary \LaTeX\ ones, we do not use this footnote style
 			as default even for the ¦ecclesiastic¦ variant.
-		
+
 			Note that this option is only possible if Latin is the main language of your
 			document.
 	\item \xpgboolkeyfalse[1.46]{usej}
@@ -1705,7 +1705,7 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 			¦\includegraphics[scale=2]{...}¦. Use \cmd{\shorthandoff\{=\}} before
 			such commands (and \cmd{\shorthandon\{=\}} thereafter) within every
 			environment with prosodic shorthands enabled.
-		
+
 			The following shorthands are available.
 			\begin{shorthands}
 				\item[¦=a¦] for ā (a with macron), also available for ē, ī, ō, ū, and ȳ
@@ -1780,7 +1780,7 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 		in input (trailing space is optional) and prints with a non-breakable thin space before
 		and after the dash.
 		\item[¦"--\textasciitilde¦] Cyrillic dash for the use in compound names (surnames).
-		As opposed to ¦"---¦ this removes any space before and after the dash. 
+		As opposed to ¦"---¦ this removes any space before and after the dash.
 		\item[¦"--*¦] Cyrillic dash for denoting direct speech. This adds a larger space after
 		the dash. Space before the dash is output as is.
 	\end{shorthands}
@@ -1863,7 +1863,7 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 		preset in the hyphenation patterns is still allowed.
 		\item[¦"`¦] for Polish left double quotes (looks like ,,).
 		\item[¦"'¦] for Polish right double quotes (looks like '').
-		\item[¦"<¦] for French left double guillemets (looks like << -- used in Polish as second level quotes). 
+		\item[¦"<¦] for French left double guillemets (looks like << -- used in Polish as second level quotes).
 		\item[¦">¦] for French right double guillemets (looks like >>).
 	\end{shorthands}
 	\item \xpgboolkeytrue[1.55]{splithyphens}
@@ -1943,7 +1943,7 @@ Currently, only the Khalkha variety in Cyrillic script is supported.
 		in input (trailing space is optional) and prints with a non-breakable thin space before
 		and after the dash.
 		\item[¦"--\textasciitilde¦] Cyrillic dash for the use in compound names (surnames).
-		As opposed to ¦"---¦ this removes any space before and after the dash. 
+		As opposed to ¦"---¦ this removes any space before and after the dash.
 		\item[¦"--*¦] Cyrillic dash for denoting direct speech. This adds a larger space after
 		the dash. Space before the dash is output as is.
 % These are commented out in gloss-russian
@@ -2215,7 +2215,7 @@ that comes with this package.
 		in input (trailing space is optional) and prints with a non-breakable thin space before
 		and after the dash.
 		\item[¦"--\textasciitilde¦] Cyrillic dash for the use in compound names (surnames).
-		As opposed to ¦"---¦ this removes any space before and after the dash. 
+		As opposed to ¦"---¦ this removes any space before and after the dash.
 		\item[¦"--*¦] Cyrillic dash for denoting direct speech. This adds a larger space after
 		the dash. Space before the dash is output as is.
 	\end{shorthands}
@@ -2274,7 +2274,7 @@ Ukrainian mathematical symbols.
 		Set this to \xpgvalue{true} if you want the \textit{abjad} form of the number three to
 		be \textarabic{ج‍} – as in the manuscript tradition – instead of the
 		modern usage \textarabic{ج}.
-\end{itemize}	
+\end{itemize}
 
 \subsection{uyghur}\label{uyghur}
 \paragraph*{Options:}
@@ -2480,17 +2480,17 @@ The following macros are provided:
 \begin{itemize}
     \item \Cmd\abjad outputs Arabic \textit{abjad} numbers according to the Mashriq varieties.
 			Example: ¦\abjad{1863}¦ yields \textarabic{\abjad{1863}}.
-			
+
 	\item \Cmd\abjadmaghribi outputs Arabic \textit{abjad} numbers according to the Maghrib varieties.
 			Example: ¦\abjadmaghribi{1863}¦ yields \textarabic{\abjadmaghribi{1863}}.
-			
+
 	\item \Cmd\abjadsyriac outputs Syriac abjad numerals.\footnote{%
 				A fine guide to numerals in Syriac can be found at \link{http://www.garzo.co.uk/documents/syriac-numerals.pdf}.}\\
 			Example: ¦\abjadsyriac{463}¦ yields \textsyriac{\abjadsyriac{463}}.
-	
+
 	\item \Cmd\armeniannumeral produces Armenian alphabetic numbering.
 	          Example: ¦\armeniannumeral{1863}¦ yields \textarmenian{\armeniannumeral{1863}}.
-	          
+
 	\item \Cmd\belarusiannumeral produces Belarusian numbering, with uppercased variant (for alphanumerical variant) via \Cmd\Belarusiannumeral.
 	          Depending on the ¦numerals¦ option in the Belarusian language selection, this is either Arabic digit or Cyrillic
 	          alphanumercial output.\\
@@ -2518,31 +2518,31 @@ The following macros are provided:
 			¦\hebrewnumeral{1750}¦ yields \texthebrew{\hebrewnumeral{1750}},
 			¦\Hebrewnumeral{1750}¦ yields \texthebrew{\Hebrewnumeral{1750}},
 			and ¦\Hebrewnumeralfinal{1750}¦ yields \texthebrew{\Hebrewnumeralfinal{1750}}.
-			
+
 	\item \Cmd\mongoliannumeral produces Mongolian numbering, with uppercased variant (for alphanumerical variant) via \Cmd\Mongoliannumeral.
             Depending on the ¦numerals¦ option in the Mongolian language selection, this is either Arabic digit or Cyrillic
             alphanumercial output.\\
             Example: With ¦numerals=latin¦ ¦\mongoliannumeral{19}¦ yields \textrussian{\russiannumeral{19}},
             with ¦numerals=cyrillic-trad¦ ¦\mongoliannumeral{19}¦ results in \textrussian[numerals=cyrillic-trad]{\russiannumeral{19}},\\
             with ¦numerals=cyrillic-alph¦ ¦\mongoliannumeral{19}¦ results in \textrussian[numerals=cyrillic-alph]{\russiannumeral{19}}.
-    
+
     \item \Cmd\punjabinumeral produces Punjabi numbering, depending on the setting of the ¦numerals¦ option in the Punjabi language
            selection, this is either Gurmukhi or Arabic (Western).
-	
+
 	\item \Cmd\russiannumeral produces Russian numbering, with uppercased variant (for alphanumerical variant) via \Cmd\Russiannumeral.
 	        Depending on the ¦numerals¦ option in the Russian language selection, this is either Arabic digit or Cyrillic
 	        alphanumercial output.\\
 	        Example: With ¦numerals=latin¦ ¦\russiannumeral{19}¦ yields \textrussian{\russiannumeral{19}},
 	        with ¦numerals=cyrillic-trad¦ ¦\russiannumeral{19}¦ results in \textrussian[numerals=cyrillic-trad]{\russiannumeral{19}},\\
 	        with ¦numerals=cyrillic-alph¦ ¦\russiannumeral{19}¦ results in \textrussian[numerals=cyrillic-alph]{\russiannumeral{19}}.
-			
+
 	\item \Cmd\serbiannumeral produces Serbian numbering, with uppercased variant (for alphanumerical variant) via \Cmd\Serbiannumeral.
 		    Depending on the ¦numerals¦ option in the Serbian language selection, this is either Arabic digit or Cyrillic
 		    alphanumercial output.\\
 		    Example: With ¦numerals=latin¦ ¦\serbiannumeral{19}¦ yields \textrussian{\serbiannumeral{19}},
 			with ¦numerals=cyrillic-trad¦ ¦\serbiannumeral{19}¦ results in \textrussian[numerals=cyrillic-trad]{\serbiannumeral{19}},\\
 			with ¦numerals=cyrillic-alph¦ ¦\serbiannumeral{19}¦ results in \textrussian[numerals=cyrillic-alph]{\serbiannumeral{19}}.
-			
+
 	\item \Cmd\ukrainiannumeral produces Ukrainian numbering, with uppercased variant (for alphanumerical variant) via \Cmd\Ukrainiannumeral.
 			Depending on the ¦numerals¦ option in the Ukrainian language selection, this is either Arabic digit or Cyrillic
 			alphanumercial output.\\
@@ -2684,7 +2684,7 @@ and the syntax is standardized at least between \pkg{babel} and \pkg{polyglossia
 \end{itemize}
 If a subtag is not defined for a given language, an empty string is returned.
 
-The values above return information for the language currently in use. If you need to access information for the 
+The values above return information for the language currently in use. If you need to access information for the
 main language of the document, prepend \xpgoption{main.} to the respective argument (\eg \xpgoption{main.language}). This works
 for all supported arguments.
 
@@ -2745,6 +2745,8 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \begin{itemize}
 	\item Fix PDF strings with captions (\TXI{685}).
 	\item Fix spacing issue in List of Table/Figures (\TXI{686}).
+	\item Fix a bug with spacing after CJK punctuations and introduce \cmd{\inhibitglue}
+    for \LuaLaTeX\ (\TXI{687}).
 \end{itemize}
 
 \subsection*{2.6 (2025/06/30)}
@@ -2798,7 +2800,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \begin{itemize}
 	\item Line-breaking for Japanese and Chinese has been implemented. This is still
 	      considered experimental, please test and report any issues (\TXI{635}).
-	\item Prevent the Latin gloss from writing undefined commands 
+	\item Prevent the Latin gloss from writing undefined commands
 	      to the aux file (\TXI{643}).
 	\item Fix use of \cmd\pghyphenation\ in preamble (\TXI{654}).
 	\item Fix handling of current language options in lists of figures/tables (\TXI{657}).
@@ -2824,7 +2826,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \subsubsection*{New Features}
 \begin{itemize}
 	\item Add possibility to associate a font to a language/variant with reference to
-	      a BCP-47 script tag (\TXI{636}). 
+	      a BCP-47 script tag (\TXI{636}).
 \end{itemize}
 
 \subsubsection*{Internal work}
@@ -2887,7 +2889,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Fix resetting of language specifications at the end of a local font
 	      set with \pkg{babel} legacy means (\cmd{\foreignlanguage} or \texttt{otherlanguage*}
 	      environment) (\TXI{607}).
-	\item Fix lowercasing of \cmd{\textlang}'s first mandatory argument. 
+	\item Fix lowercasing of \cmd{\textlang}'s first mandatory argument.
 		  Now the casing does not change (language tag was lower-cased always) (\TXI{608}).
 	\item Add missing BCP-47 alias for Khmer (\TXI{611}).
 	\item Stop \cmd{\charifavailable} from looking ahead for more numbers or gobbling a space (\TXI{613}).
@@ -3216,7 +3218,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \item Fix incompatibility of Marathi with \pkg{beamer}.
 \item Correct ¦\partname¦ in Hindi (\TXI{416}).
 \item Updates and improvements to Kurdish (\TXI{418}).
-\item Only activate shorthand character if \xpgoption{babelshorthands} is \xpgvalue{true} (\TXI{421}). 
+\item Only activate shorthand character if \xpgoption{babelshorthands} is \xpgvalue{true} (\TXI{421}).
 \item Fix whitespace issue in Czech and Slovak with \xpgvalue{vlna=true} (\TXI{423}).
 \item Fix whitespace issue in Danish (\TXI{424}).
 \item Fix catcode conflicts that might occur in language definition files
@@ -3483,7 +3485,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \item Introduce french option option \xpgoption{autospacetypewriter}
       alias \xpgoption{OriginalTypewriter}.
 \item Support ¦\aemph¦ with lualatex
-\item Rename \xpgoption{automaticspacesaroundguillemets} to \xpgoption{autospaceguillemets} 
+\item Rename \xpgoption{automaticspacesaroundguillemets} to \xpgoption{autospaceguillemets}
       The old option is kept for backwards compatibility.
 \end{itemize}
 
@@ -3525,7 +3527,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
       supposed to change dates.
 \item Fix French spacing leaking beyond French (\TXI{270}).
 \item Redefine font families for French only if language is loaded (\TXI{270}).
-\item ¦gloss-russian¦: 
+\item ¦gloss-russian¦:
      \begin{itemize}
 	 \item Check whether command exist before redefining (\TXI{280}).
 	 \item Fix some whitespace issues.
@@ -3580,12 +3582,12 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Merged pull request \TXI{116} for French (spacing around guillemets)
 	\item Fixed issue \TXI{115} (spurious spaces in Arabic)
 \end{itemize}
-	
+
 \subsection*{19-08-2015}
 \begin{itemize}
 	\item Fixed issue \TXI{107} for Marathi (labels and month names)
 \end{itemize}
-		
+
 \subsection*{1.42.0 (2015/08/06)}
 \begin{itemize}
 	\item Add Bengali digits package, and option to reset all numbering functions.
@@ -3595,22 +3597,22 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Fix for Latin with LuaTeX: all variants had same problems as Classic.
 	\item Fixed error with British variant of English and LuaTeX (issue \TXI{86}).
 \end{itemize}
-			
+
 \subsection*{1.41.0 (2015/07/16)}
 \begin{itemize}
 	\item Added support for Khmer, by \TA{Say Ol} (private email)
 \end{itemize}
-			
+
 \subsection*{1.40.1 (2015/07/14)}
 \begin{itemize}
 	\item Bugfix for Korean, by \TA{Dohyun Kim} (pull request \TXI{103})
 \end{itemize}
-			
+
 \subsection*{1.40.0 (2015/07/07)}
 \begin{itemize}
 	\item ¦gloss-korean.ldf¦ contributed by \TA{Dohyun Kim} (pull request \TXI{102})
 \end{itemize}
-			
+
 \subsection*{1.33.7 (2015/07/04)}
 \begin{itemize}
 	\item Release to CTAN, no code change
@@ -3634,7 +3636,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Add ¦\asbuk¦ and ¦\Asbuk¦ for Ukrainian (after their Russian counterpart)
 	\item Fix a number of bugs
 \end{itemize}
-					
+
 \subsection*{1.33.5 (2014/05/21)}
 \begin{itemize}
 	\item Option to disable hyphenation entirely, by \TA{Élie Roux}
@@ -3643,17 +3645,17 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Changes to the Croatian translations, by \TA{Ivan Kokan}
 	\item Correction to the Lithuanian translations, by \TA{Ignas Anikevičius}
 \end{itemize}
-					
+
 \subsection*{1.33.4 (2013/06/27)}
 \begin{itemize}
 	\item Emergency release for a bug introduced in ¦babelsh.def¦
 \end{itemize}
-					
+
 \subsection*{1.33.3 (2013/05/28)}
 \begin{itemize}
 	\item Changed formatting of some error messages (emergency fixes for TeX Live 2013)
 \end{itemize}
-					
+
 \subsection*{1.33.2 (2013/05/26)}
 \begin{itemize}
 	\item Added ¦\disablehyphenation¦ and ¦\enablehyphenation¦, contributed by
@@ -3663,20 +3665,20 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	      is no longer the case.
 	\item Removed spurious space introduced by ¦\captionswedish¦.
 \end{itemize}
-					
+
 \subsection*{1.33.1 (2013/05/23)}
 \begin{itemize}
 	\item Editorial changes to the documentation
 	\item Hunted and documented bugs
 \end{itemize}
-					
+
 \subsection*{1.33.0 (2013/05/20)}
 \begin{itemize}
 	\item Added support for N’Ko.
 	\item Bugfixes for LuaTeX
 	\item More work in progress on Bidi in LuaTeX.
 \end{itemize}
-					
+
 \subsection*{1.32.0 (2013/05/15)}
 \begin{itemize}
 	\item Transitional version to support right-to-left languages with LuaTeX.
@@ -3691,29 +3693,29 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	      to left.  Many thanks to \TA{Élie Roux} for his help.
 	\item Added support for Tibetan, contributed by \TA{Élie Roux} (end of lines are experimental).
 \end{itemize}
-					
+
 \subsection*{1.30 (2012/08/06)}
 \begin{itemize}
 	\item Added support for LuaTeX.  Many languages don’t work yet.  Please be patient.
 \end{itemize}
-					
+
 \subsection*{1.2.0e (2012/04/28)}
 \begin{itemize}
 	\item Fixed a number of outstanding and not very interesting bugs.
 	\item Added gloss files for Romansh and Friulan, contributed by \TA{Claudio Beccari}.
 \end{itemize}
-					
+
 \subsection*{1.2.0d (2012/01/12)}
 \begin{itemize}
 	\item Removed ¦\makeatletter¦ and ¦\makeother¦ from gloss files entirely.
 \end{itemize}
-					
+
 \subsection*{1.2.0c (2011/10/12) [First update by Arthur Reutenauer]}
 \begin{itemize}
 	\item Update to ¦gloss-italian.ldf¦ by \TA{Claudio Beccari}, incorporating changes
 	      by \TA{Enrico Gregorio}.
 	\item Conclude every gloss file with ¦\makeatother¦ to match the initial
-	      ¦\makeatletter¦.  (Not necessary from a technical point of vue, because of one 
+	      ¦\makeatletter¦.  (Not necessary from a technical point of vue, because of one
 	      of the changes by Enrico reported below, but I like it better that way :-)
 	\item Conclude ¦polyglossia.sty¦ with ¦\ExplSyntaxOff¦ to match the initial
 	      ¦\ExplSyntaxOn¦.
@@ -3737,14 +3739,14 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 				      the old behaviour would leave a category 11 @, which is wrong.
 				\item Added ¦\csuse{date#2}¦ to the definition of ¦otherlanguage*¦.
 			\end{itemize}
-\end{itemize}				
-						
+\end{itemize}
+
 \subsection*{1.2.0b (2011/10/03) [Update by Philipp Stephani]}
 \begin{itemize}
 	\item Load \pkg{xkeyval} package explicitly since newer versions
 	      of \pkg{fontspec} don't load it any more.
 \end{itemize}
-							
+
 \subsection*{1.2.0a (2010/07/27) [Last update by François Charette]}
 \begin{itemize}
 	\item Initialize ¦\fontfamily¦ acc to value of ¦\familydefault¦
@@ -3755,8 +3757,8 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Fix ¦\atticnumeral¦ in ¦gloss-greek¦
 	\item Small improvements and fixes in documentation
 \end{itemize}
-								
-								
+
+
 \subsection*{1.2.0 (2010/07/15)}
 \begin{itemize}
 	\item Adapted for \pkg{fontspec} 2.0 (will not work with earlier versions!)
@@ -3788,7 +3790,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Loading languages à la \pkg{babel} as package options is no longer possible (this
 	      feature was deprecated since v1.1.0).
 \end{itemize}
-							
+
 \subsection*{1.1.1 (2010/03/23)}
 \begin{itemize}
 	\item Bugfix for French: explicit spaces before/after double punctuation
@@ -3819,7 +3821,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Bugfix for ¦\datecatalan¦
 	\item Change ¦hyphenmins¦ for Sanskrit
 \end{itemize}
-							
+
 \subsection*{1.1.0b (2009/11/22)}
 \begin{itemize}
 	\item Modify ¦\hyphenmins¦ for Sanskrit (\TA{Yves Codet})
@@ -3864,7 +3866,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Fix ¦frenchspacing¦ for Vietnamese
 	\item Other minor bugfixes
 \end{itemize}
-							
+
 \subsection*{1.0.2 (2009/01/27)}
 \begin{itemize}
 	\item Captions corrected in Hebrew, Russian and Spanish
@@ -3873,7 +3875,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item New option \xpgoption{babelshorthands} for German
 	\item New option \xpgoption{Script} for Sanskrit
 \end{itemize}
-							
+
 \subsection*{1.0.1 (2008/07/31)}
 \begin{itemize}
 	\item Improved documentation (added sections on font setup and numeration mappings)
@@ -3882,7 +3884,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 	\item Extended the scope of ¦\syriacabjad¦
 	\item Added ¦gloss-amharic.ldf¦ (ported from ¦ethiop.ldf¦ in the package \pkg{ethiop})
 \end{itemize}
-							
+
 \subsection*{1.0 (2008/07/13)}
 \begin{itemize}
 	\item Initial release on CTAN.
