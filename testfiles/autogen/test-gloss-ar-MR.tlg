@@ -5,7 +5,7 @@ File: gloss-ar-MR.ldf polyglossia: module for ar-MR (Arabic)
 (gloss-arabic.ldf
 File: gloss-arabic.ldf polyglossia: module for Arabic
 (../bidi.sty
-Package: bidi ....-..-.. v... (Release Maryam Mirzakhani) Bidirectional typesetting in plain TeX and LaTeX
+Package: bidi ....-..-.. v... (Release Iran) Bidirectional typesetting in plain TeX and LaTeX
 (../biditools.sty
 Package: biditools ....-..-.. v... Programming tools for bidi package
 \@bidi@envbody=\toks...

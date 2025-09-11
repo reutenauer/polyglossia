@@ -5,7 +5,7 @@ File: gloss-he.ldf polyglossia: module for he (Hebrew)
 (gloss-hebrew.ldf
 File: gloss-hebrew.ldf polyglossia: module for Hebrew
 (../bidi.sty
-Package: bidi ....-..-.. v... (Release Maryam Mirzakhani) Bidirectional typesetting in plain TeX and LaTeX
+Package: bidi ....-..-.. v... (Release Iran) Bidirectional typesetting in plain TeX and LaTeX
 (../biditools.sty
 Package: biditools ....-..-.. v... Programming tools for bidi package
 \@bidi@envbody=\toks...

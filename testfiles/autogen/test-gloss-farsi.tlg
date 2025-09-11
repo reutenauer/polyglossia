@@ -5,7 +5,7 @@ File: gloss-farsi.ldf polyglossia: module for Farsi
 (gloss-persian.ldf
 File: gloss-persian.ldf polyglossia: module for Persian
 (../bidi.sty
-Package: bidi ....-..-.. v... (Release Maryam Mirzakhani) Bidirectional typesetting in plain TeX and LaTeX
+Package: bidi ....-..-.. v... (Release Iran) Bidirectional typesetting in plain TeX and LaTeX
 (../biditools.sty
 Package: biditools ....-..-.. v... Programming tools for bidi package
 \@bidi@envbody=\toks...

@@ -5,7 +5,7 @@ File: gloss-ug.ldf polyglossia: module for ug (Uyghur)
 (gloss-uyghur.ldf
 File: gloss-uyghur.ldf polyglossia: module for Uyghur
 (../bidi.sty
-Package: bidi ....-..-.. v... (Release Maryam Mirzakhani) Bidirectional typesetting in plain TeX and LaTeX
+Package: bidi ....-..-.. v... (Release Iran) Bidirectional typesetting in plain TeX and LaTeX
 (../biditools.sty
 Package: biditools ....-..-.. v... Programming tools for bidi package
 \@bidi@envbody=\toks...

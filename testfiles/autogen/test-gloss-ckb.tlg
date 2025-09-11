@@ -5,7 +5,7 @@ File: gloss-ckb.ldf polyglossia: module for ckb (Kurdish)
 (gloss-kurdish.ldf
 File: gloss-kurdish.ldf polyglossia: module for Kurdish
 (../bidi.sty
-Package: bidi ....-..-.. v... (Release Maryam Mirzakhani) Bidirectional typesetting in plain TeX and LaTeX
+Package: bidi ....-..-.. v... (Release Iran) Bidirectional typesetting in plain TeX and LaTeX
 (../biditools.sty
 Package: biditools ....-..-.. v... Programming tools for bidi package
 \@bidi@envbody=\toks...
