@@ -35,8 +35,11 @@ function update_tag(file,content,tagname,tagdate)
       "\n%-%- part of polyglossia v%d%.%d+ %-%- %d%d%d%d/%d%d/%d%d\n",
       "\n-- part of polyglossia v" .. tagname .. " -- " .. tagdate .. "\n")
   elseif file == "polyglossia.tex" then
-    return string.gsub(content,
+    content = string.gsub(content,
       "\n\\subsection%*{%d%.%d %(forthcoming%)}\n",
+      "\n\\subsection*{" .. tagname .. " (" .. tagdate .. ")}\n")
+    return string.gsub(content,
+      "\n\\subsection%*{%d%.%d %(Forthcoming%)}\n",
       "\n\\subsection*{" .. tagname .. " (" .. tagdate .. ")}\n")
   elseif file == "polyglossia.sty" then
     return string.gsub(content,
