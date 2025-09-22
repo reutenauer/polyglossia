@@ -1,5 +1,5 @@
 % !TEX encoding = UTF-8 Unicode
-% Language definition file (part of polyglossia v2.7 -- 2025/09/11)
+% Language definition file (part of polyglossia v2.8 -- 2025/09/22)
 %
 \ProvidesFile{gloss-piedmontese.ldf}[2013/02/12 v1.0 polyglossia: module for Piedmontese]
 \makeatletter
