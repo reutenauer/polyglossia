@@ -354,7 +354,7 @@ end
 --   nc:   charclass of next char
 --   nobr: linebreak is not allowed
 --
-local function insert_cjk_penalty_glue (head, curr, f, var, cc, nc, nobr, before)
+local function insert_cjk_penalty_glue (head, curr, f, var, cc, nc, nobr)
     if nobr or cc == 1 or nc > 1 then
         local penalty = get_new_penalty(10000)
         head, curr = node.insert_after(head, curr, penalty)
@@ -362,11 +362,7 @@ local function insert_cjk_penalty_glue (head, curr, f, var, cc, nc, nobr, before
     local factor = get_font_size(f, var == 2)
     local t = intercharclass[cc][nc]
     local glue = get_new_glue(t[1]*factor, nil, t[2]*factor)
-    if before then
-        head = node.insert_before(head, curr, glue)
-    else
-        head, curr = node.insert_after(head, curr, glue)
-    end
+    head, curr = node.insert_after(head, curr, glue)
     return head, curr
 end
 
@@ -415,36 +411,25 @@ token.set_lua("inhibitglue", inhibitglue_index, "global", "protected")
 local function cjk_break (head)
     local curr = head
 
-    if curr and curr.id == glyph_id then
-        local var = node.has_attribute(curr, attr_cjk)
-        if var and var > 0 then
-            local nc = get_charclass(var, curr.char)
-            if intercharclass[0][nc] then
-                -- insert glue before the first node that is an opening cjk_punct
-                head = insert_cjk_penalty_glue(head, curr, curr.font, var, 0, nc, false, true)
-            end
-        end
-    end
-
     while curr do
         if curr.id == glyph_id
             or curr.id == math_id and curr.subtype == 1 -- math_off
-            or (curr.id == hbox_id or curr.id == vbox_id) and curr.subtype == 2 then -- normal box
+            or curr.id == hbox_id and curr.subtype == 2 then -- normal box
 
             local var = node.has_attribute(curr, attr_cjk)
             if var then
-                local c, f = curr.char or 0, curr.font
-                if curr.id == hbox_id or curr.id == vbox_id then
-                    if var == 0 or var == 2 then
-                        goto skip_combining -- skip Korean : as they use inter-word space
-                    end
+                local c, f
+                if curr.id == hbox_id then
                     local t = curr.list and node.tail(curr.list)
-                    c = t and t.char or 1 -- 1 : just another simple non-cjk char
+                    c, f = t and node.has_attribute(t, attr_cjk) and t.char, t and t.font
+                    if not c then goto skip_combining end
+                else
+                    c, f = curr.char or 0, curr.font
                 end
                 local cc, cjkc = get_charclass(var, c), is_cjk(c)
 
                 -- compress cjk punctuations when charclass is 1 thru 4
-                if var > 0 and cc > 0 and cc < 5 then
+                if curr.char and var > 0 and cc > 0 and cc < 5 then
                     head, curr = glyph_to_box(head, curr, cc)
                 end
 
@@ -455,20 +440,20 @@ local function cjk_break (head)
                     -- skip whatsit/penalty/footnote/ins/vadjust/mark nodes
                     curr, next = next, node.getnext(next)
                 end
+                if not next then break end
 
-                if next and node.has_attribute(next, attr_cjk) and (next.id == glyph_id
+                if node.has_attribute(next, attr_cjk) and (next.id == glyph_id
                     or next.id == math_id and next.subtype == 0 -- math_on
-                    or (next.id == hbox_id or next.id == vbox_id) and next.subtype == 2) then
+                    or next.id == hbox_id and next.subtype == 2) then
 
-                    local n = next.char or 0
-                    if next.id == hbox_id or next.id == vbox_id then
-                        if var == 0 or var == 2 then
-                            goto skip_combining -- skip Korean
-                        end
+                    local n, f2
+                    if next.id == hbox_id then
                         local t = next.head
-                        n = t and t.char or 1
+                        n, f2 = t and node.has_attribute(t, attr_cjk) and t.char, t and t.font
+                        if not n then goto skip_combining end
+                    else
+                        n, f2 = next.char or 0, next.font
                     end
-                    f = f or next.font or 0 -- in case of curr == math_off
 
                     -- skip combining. or dash+dash case to suppress stretching
                     if nobr_before[n] == 2 or (nobr_before[c] == 0 and nobr_before[n] == 0) then
@@ -476,6 +461,8 @@ local function cjk_break (head)
                     end
 
                     local nc = get_charclass(var, n)
+                    f = nc > 0 and f2 or f or f2 -- priority to cjk punctuation font
+                    if not f then goto skip_combining end
                     local nobr = nobr_before[n] or nobr_after[c]
 
                     -- insert spacing as of intercharclass
@@ -487,10 +474,6 @@ local function cjk_break (head)
 
                         -- if curr or next is cjk char
                         if cjkc or cjkn then
-
-                            if c == 1 or n == 1 then -- one of two is non-glyph box : 0pt glue
-                                cjkc, cjkn = true, true
-                            end
 
                             -- plain variant / cjk+cjk / nobr cjk+noncjk / after dash
                             --      : insert a 0pt glue
@@ -505,7 +488,7 @@ local function cjk_break (head)
                     end
 
                 elseif var > 0 and intercharclass[cc][0] then
-                    if next and next.id == glue_id and (next.subtype >= 13 and next.subtype <= 15
+                    if next.id == glue_id and (next.subtype >= 13 and next.subtype <= 15
                         or node.has_attribute(next, inhibitglue_attr)) then
                         -- skip spaceskip, xspaceskkp, parfillskip, inhibitglue
                     else
