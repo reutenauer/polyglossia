@@ -446,14 +446,13 @@ local function cjk_break (head)
                     or next.id == math_id and next.subtype == 0 -- math_on
                     or next.id == hbox_id and next.subtype == 2) then
 
-                    local n
+                    local n, f2
                     if next.id == hbox_id then
                         local t = next.head
-                        n, f = t and node.has_attribute(t, attr_cjk) and t.char, f or t and t.font
+                        n, f2 = t and node.has_attribute(t, attr_cjk) and t.char, t and t.font
                         if not n then goto skip_combining end
                     else
-                        n, f = next.char or 0, f or next.font -- in case of curr == math_off
-                        if not f then goto skip_combining end
+                        n, f2 = next.char or 0, next.font
                     end
 
                     -- skip combining. or dash+dash case to suppress stretching
@@ -462,6 +461,8 @@ local function cjk_break (head)
                     end
 
                     local nc = get_charclass(var, n)
+                    f = nc > 0 and f2 or f or f2 -- priority to cjk punctuation font
+                    if not f then goto skip_combining end
                     local nobr = nobr_before[n] or nobr_after[c]
 
                     -- insert spacing as of intercharclass
