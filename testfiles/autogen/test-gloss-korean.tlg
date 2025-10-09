@@ -8,10 +8,10 @@ File: gloss-korean.ldf polyglossia: module for Korean
 (../load-unicode-xetex-classes.tex 
 load-unicode-xetex-classes.tex v... (....-..-..)
 Reading Unicode east Asian character class data
-# LineBreak-16.0.0.txt 
-# Date: ....-..-.., 16:26:55 GMT 
-# EastAsianWidth-16.0.0.txt 
-# Date: ....-..-.., 21:48:20 GMT 
+# LineBreak-17.0.0.txt 
+# Date: ....-..-.., 13:52:18 GMT 
+# EastAsianWidth-17.0.0.txt 
+# Date: ....-..-.., 00:12:54 GMT 
 )
 \XPGKOcharclassMD=\XeTeXcharclass4
 \XPGKOcharclassFS=\XeTeXcharclass5

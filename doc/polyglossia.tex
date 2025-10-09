@@ -1552,6 +1552,23 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
         \item ¦none¦: Do not redefine anything
       \end{itemize}
   \end{itemize}
+\paragraph*{Commands:}
+  \begin{itemize}
+      \def\josacmd#1{{\chinesefont\textbackslash#1}}
+    \item \josacmd 은 \josacmd 는 \josacmd 이 \josacmd 가 \josacmd 을 \josacmd 를
+      \josacmd 와 \josacmd 과 \josacmd 으 \josacmd 로 \josacmd 라:
+      commands for automatic selection of \textit{Josa} ({\chinesefont 조사},
+      a linguistic particle that depends on the pronunciation of previous character).
+      Be aware that the space after these commands will be swallowed up by \TeX.
+      To retain the space, you have to append \verb*!\ ! or \verb*!{} ! to the command.
+    \item \cmd\jung\ \cmd\jong\ \cmd\rieul:
+      when the automatic selection fails,
+      you can force the selection of \textit{Josa} by appending one of these commands
+      to the end of the text that will be referred to.
+      \cmd\jung\ represents medial vowels;
+      \cmd\rieul, the trailing consonant {\chinesefont ㄹ};
+      \cmd\jong, other trailing consonants.
+  \end{itemize}
 
 \subsection[kurdish]{kurdish\new{1.45}}\label{kurdish}
 
@@ -2745,6 +2762,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 \begin{itemize}
   \item Allow linebreak between a non-glyph box and CJK characters (\TXI{690}).
         This fix partly restores the functionality of v.\,2.7.
+  \item Fix and document the \textit{Josa} selection function in Korean language module (\TXI{691}).
 \end{itemize}
 
 \subsection*{2.8 (2025/09/22)}
