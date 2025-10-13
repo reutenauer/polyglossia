@@ -455,6 +455,10 @@
     \nokorean@headingsformat
 }
 
+% disable user commands for Josa upon hyperref package
+\AddToHook{package/hyperref/after}[polyglossia/korean]{%
+    \pdfstringdefDisableCommands{\let\rieul\relax \let\jung\relax \let\jong\relax}}
+
 \ifluatex % luatex
 \protected\def\inhibitglue{\hskip\z@skip}
 \ifdefined\newattribute\else
@@ -502,14 +506,18 @@
 \protected\def\라{\xpg@make@josa 라{이라}}
 \def\xpg@make@josa@II{\xpg@make@josa\relax 이}
 \def\xpg@make@josa@I{%
-    \ifcat\@let@token\xpg@catcode@letter
-        \expandafter\expandafter\expandafter\count@\expandafter
-        \xpg@letter@to@num\meaning\@let@token\relax
-        \ifnum 0\ifnum\count@>"ABFF \ifnum\count@<"D7A4 1\fi\fi>\z@
-            \expandafter\expandafter\expandafter\xpg@make@josa@II
+    \if\noexpand\@let@token\relax
+        \count@\m@ne
+    \else
+        \ifcat\xpg@catcode@letter\@let@token
+            \expandafter\expandafter\expandafter\count@\expandafter
+            \xpg@letter@to@num\meaning\@let@token\relax
         \else
-            \expandafter\expandafter\expandafter\가
+            \count@\m@ne
         \fi
+    \fi
+    \ifnum 0\ifnum\count@>"ABFF \ifnum\count@<"D7A4 1\fi\fi>\z@
+        \expandafter\xpg@make@josa@II
     \else
         \expandafter\가
     \fi
@@ -568,8 +576,8 @@
     \else #1% jung
     \fi
 }
-\expandafter\def\expandafter\xpg@character@to@num\detokenize{the character} #1#2\relax{`#1\relax}
-\expandafter\def\expandafter\xpg@letter@to@num\detokenize{the letter} #1#2\relax{`#1\relax}
+\def\xpg@character@to@num #1 #2 #3#4\relax{`#3\relax}
+\let\xpg@letter@to@num\xpg@character@to@num
 \begingroup
 \catcode`A=11 \catcode`0=12
 \global\let\xpg@catcode@letter=A \global\let\xpg@catcode@other=0

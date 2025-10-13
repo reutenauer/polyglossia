@@ -31,9 +31,12 @@ local nobr_after = {
     [0x28] = 1, -- ( LEFT PARENTHESIS
     [0x3C] = 1, -- < LESS-THAN SIGN
     [0x5B] = 1, -- [ LEFT SQUARE BRACKET
+    [0x5C] = 1, -- \ REVERSE SOLIDUS
     [0x60] = 1, -- ` GRAVE ACCENT
     [0x7B] = 1, -- { LEFT CURLY BRACKET
+    [0xA1] = 1, -- ¡ INVERTED EXCLAMATION MARK
     [0xAB] = 1, -- « LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+    [0xBF] = 1, -- ¿ INVERTED QUESTION MARK
     [0x2018] = 1, -- ‘ LEFT SINGLE QUOTATION MARK
     [0x201C] = 1, -- “ LEFT DOUBLE QUOTATION MARK
     [0x2329] = 1, -- 〈 LEFT-POINTING ANGLE BRACKET
@@ -59,12 +62,17 @@ local nobr_after = {
     [0xFE47] = 1, -- ﹇ PRESENTATION FORM FOR VERTICAL LEFT SQUARE BRACKET
     [0xFE59] = 1, -- ﹙ SMALL LEFT PARENTHESIS
     [0xFE5B] = 1, -- ﹛ SMALL LEFT CURLY BRACKET
+    [0xFF03] = 1, -- ＃ FULLWIDTH NUMBER SIGN
+    [0xFF04] = 1, -- ＄ FULLWIDTH DOLLAR SIGN
     [0xFE5D] = 1, -- ﹝ SMALL LEFT TORTOISE SHELL BRACKET
     [0xFF08] = 1, -- （ FULLWIDTH LEFT PARENTHESIS
     [0xFF3B] = 1, -- ［ FULLWIDTH LEFT SQUARE BRACKET
+    [0xFF40] = 1, -- ｀ FULLWIDTH GRAVE ACCENT
     [0xFF5B] = 1, -- ｛ FULLWIDTH LEFT CURLY BRACKET
     [0xFF5F] = 1, -- ｟ FULLWIDTH LEFT WHITE PARENTHESIS
     [0xFF62] = 1, -- ｢ HALFWIDTH LEFT CORNER BRACKET
+    [0xFFE5] = 1, -- ￥ FULLWIDTH YEN SIGN
+    [0xFFE6] = 1, -- ￦ FULLWIDTH WON SIGN
 }
 
 --
@@ -83,16 +91,21 @@ local nobr_before = setmetatable({
     [0x2C] = 1, -- , COMMA
     [0x2D] = 0, -- - HYPHEN-MINUS
     [0x2E] = 1, -- . FULL STOP
-    [0x2F] = 0, -- / SOLIDUS
+    [0x2F] = 1, -- / SOLIDUS
     [0x3A] = 1, -- : COLON
     [0x3B] = 1, -- ; SEMICOLON
     [0x3E] = 1, -- > GREATER-THAN SIGN
     [0x3F] = 1, -- ? QUESTION MARK
-    [0x5C] = 0, -- \ REVERSE SOLIDUS
     [0x5D] = 1, -- ] RIGHT SQUARE BRACKET
     [0x7D] = 1, -- } RIGHT CURLY BRACKET
-    [0x7E] = 0, -- ~ TILDE
+    [0x7E] = 1, -- ~ TILDE
+    [0xAA] = 1, -- ª FEMININE ORDINAL INDICATOR
+    [0xB0] = 1, -- ° DEGREE SIGN
+    [0xB2] = 1, -- ² SUPERSCRIPT TWO
+    [0xB3] = 1, -- ³ SUPERSCRIPT THREE
     [0xB7] = 1, -- · MIDDLE DOT
+    [0xB9] = 1, -- ¹ SUPERSCRIPT ONE
+    [0xBA] = 1, -- º MASCULINE ORDINAL INDICATOR
     [0xBB] = 1, -- » RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
     [0x2013] = 0, -- – EN DASH
     [0x2014] = 0, -- — EM DASH
@@ -179,6 +192,7 @@ local nobr_before = setmetatable({
     [0xFF1F] = 1, -- ？ FULLWIDTH QUESTION MARK
     [0xFF3D] = 1, -- ］ FULLWIDTH RIGHT SQUARE BRACKET
     [0xFF5D] = 1, -- ｝ FULLWIDTH RIGHT CURLY BRACKET
+    [0xFF5E] = 1, -- ～ FULLWIDTH TILDE
     [0xFF60] = 1, -- ｠ FULLWIDTH RIGHT WHITE PARENTHESIS
     [0xFF61] = 1, -- ｡ HALFWIDTH IDEOGRAPHIC FULL STOP
     [0xFF63] = 1, -- ｣ HALFWIDTH RIGHT CORNER BRACKET
@@ -200,6 +214,43 @@ local nobr_before = setmetatable({
 })
 
 --
+-- characters before/after which zero-width glue will be inserted
+--      except nobr_before == 0
+--
+local zero_spacing = {
+    [0x23] = 1, -- # NUMBER SIGN
+    [0x24] = 1, -- $ DOLLAR SIGN
+    [0x25] = 1, -- % PERCENT SIGN
+    [0x26] = 1, -- & AMPERSAND
+    [0x2A] = 1, -- * ASTERISK
+    [0x2B] = 1, -- + PLUS SIGN
+    [0x2F] = 1, -- / SOLIDUS
+    [0x3C] = 1, -- < LESS-THAN SIGN
+    [0x3D] = 1, -- = EQUALS SIGN
+    [0x3E] = 1, -- > GREATER-THAN SIGN
+    [0x40] = 1, -- @ COMMERCIAL AT
+    [0x5C] = 1, -- \ REVERSE SOLIDUS
+    [0x5E] = 1, -- ^ CIRCUMFLEX ACCENT
+    [0x5F] = 1, -- _ LOW LINE
+    [0x7C] = 1, -- | VERTICAL LINE
+    [0x7E] = 1, -- ~ TILDE
+    [0xA5] = 1, -- ¥ YEN SIGN
+    [0xB1] = 1, -- ± PLUS-MINUS SIGN
+    [0x2030] = 1, -- ‰ PER MILLE SIGN
+    [0x20A9] = 1, -- ₩ WON SIGN
+    [0x2103] = 1, -- ℃ DEGREE CELSIUS
+    [0x2109] = 1, -- ℉ DEGREE FAHRENHEIT
+    [0x223C] = 1, -- ∼ TILDE OPERATOR
+    [0x301C] = 1, -- 〜 WAVE DASH
+    [0xFF03] = 1, -- ＃ FULLWIDTH NUMBER SIGN
+    [0xFF04] = 1, -- ＄ FULLWIDTH DOLLAR SIGN
+    [0xFF05] = 1, -- ％ FULLWIDTH PERCENT SIGN
+    [0xFF5E] = 1, -- ～ FULLWIDTH TILDE
+    [0xFFE5] = 1, -- ￥ FULLWIDTH YEN SIGN
+    [0xFFE6] = 1, -- ￦ FULLWIDTH WON SIGN
+}
+
+--
 -- whether 'c' is a cjk character
 --
 local function is_cjk (c)
@@ -212,8 +263,7 @@ local function is_cjk (c)
     or     c >= 0xFE30  and c <= 0xFE6F
     or     c >= 0xFF00  and c <= 0xFFEF
     or     c >= 0x1F100 and c <= 0x1F2FF
-    or     c >= 0x20000 and c <= 0x2FA1F
-    or     c >= 0x30000 and c <= 0x323AF
+    or     c >= 0x20000 and c <= 0x3347F
     or     nobr_after[c]  and c > 0x2014
     or     nobr_before[c] and c > 0x2014
 end
@@ -515,8 +565,9 @@ local function cjk_break (head)
                         if c == 1 or n == 1 then -- non-glyph box: penalty only
                             head, curr = insert_penalty_glue(head, curr, false, var, nobr)
 
-                        -- plain variant / cjk+cjk / nobr cjk+noncjk / after dash : 0pt glue
-                        elseif var == 0 or (cjkc and cjkn) or nobr or nobr_before[c] == 0 then
+                        -- plain variant / cjk+cjk / nobr cjk+noncjk / around dash : 0pt glue
+                        elseif var == 0 or (cjkc and cjkn) or nobr or nobr_before[c] == 0
+                            or zero_spacing[c] or zero_spacing[n] then
                             head, curr = insert_penalty_glue(head, curr, f, var, nobr)
 
                         else -- other cases: insert a small glue
@@ -558,36 +609,6 @@ local function cjk_break (head)
 end
 
 --
--- process for reordering hangul tone marks (U+302E, U+302F)
---   some hangul fonts (eg. Noto CJK) are so designed that hangul tone marks
---   should be moved to the first position of a syllable.
---   Currently, this functionality is not provided by luaotfload.
---
-local function reorder_tm (head)
-    local curr, tone = node.slide(head)
-    while curr do
-        if curr.id == glyph_id and node.has_attribute(curr, attr_cjk) then
-            local f = font.getfont(curr.font) or font.fonts[curr.font]
-            if f and f.hb then -- harfbuzz do the right thing
-                tone = nil
-            else
-                local c, wd = curr.char or 0, curr.width or 0
-                if (c == 0x302E or c == 0x302F) and wd > 0 then
-                    tone = curr
-                elseif tone and not nobr_before[c] then
-                    head = node.remove(head, tone)
-                    tone.next, tone.prev = nil, nil
-                    head, curr = node.insert_before(head, curr, tone)
-                    tone = nil
-                end
-            end
-        end
-        curr = node.getprev(curr)
-    end
-    return head
-end
-
---
 -- automatic josa selection
 --
 local josa_table = {
@@ -601,11 +622,21 @@ local josa_table = {
 }
 
 --
--- helper function for number-like characters
+-- helper functions for josa_code
 --
-local function josa_char_num (t, c)
-    c = c % 10 + 0x30
-    return t[c] or 2
+local function josa_char_num (t, c, diff)
+    local j = t[(c - diff) % 10 + 0x30] or 2
+    t[c] = j; return j
+end
+local function josa_char_alph (t, c, diff)
+    local j = t[c - diff + 0x61] or 2
+    t[c] = j; return j
+end
+local function josa_char_jamo (t, c)
+    if c >= 0x1160 and c <= 0x11A7 or c >= 0xD7B0 and c <= 0xD7C6 then
+        t[c] = 2; return 2 -- HJF (0x1160) is in the main table below
+    end
+    t[c] = 3; return 3 -- ㄹ (0x1105, 0x11AF) is in the main table below
 end
 
 --
@@ -615,59 +646,64 @@ local josa_code = setmetatable({
     [0x30] = 3, [0x31] = 1, [0x33] = 3, [0x36] = 3, [0x37] = 1,
     [0x38] = 1, [0x4C] = 1, [0x4D] = 3, [0x4E] = 3, [0x6C] = 1,
     [0x6D] = 3, [0x6E] = 3, [0xFB02] = 1, [0xFB04] = 1,
+    [0x1105] = 1, [0x1160] = false, [0x11AF] = 1, [0x3139] = 1,
+    [0x3203] = 1, [0x321D] = 3, [0x3263] = 1,
 },{ __index = function(t,c)
-        if c >= 0xAC00 and c <= 0xD7A3 then
-            c = (c - 0xAC00) % 28 + 0x11A7
+    if c >= 0x30 and c <= 0x39 or c >= 0x41 and c <= 0x5A or c >= 0x61 and c <= 0x7A
+        or c >= 0xFB00 and c <= 0xFB06 then
+        t[c] = 2; return 2 -- 0, 1, 3, 6, 7, 8, M, N, L, m, n, l, fl, ffl in the main table
+    elseif c >= 0xAC00 and c <= 0xD7A3 then
+        local j = josa_char_jamo(t, (c - 0xAC00) % 28 + 0x11A7)
+        t[c] = j; return j
+    elseif c >= 0x1100 and c <= 0x11FF
+        or c >= 0xA960 and c <= 0xA97C
+        or c >= 0xD7B0 and c <= 0xD7FB then
+        return josa_char_jamo(t, c)
+    elseif c >= 0x3131 and c <= 0x318E then
+        if c >= 0x314F and c <= 0x3163 or c >= 0x3187 then t[c] = 2; return 2 end
+        t[c] = 3; return 3 -- ㄹ (0x3139) is in the main table
+    elseif c >= 0x3200 and c <= 0x321E then
+        if c >= 0x320E then t[c] = 2; return 2 end -- ㈝ (0x321D) is in the main table
+        t[c] = 3; return 3 -- ㈃ (0x3203) is in the main table
+    elseif c >= 0x3260 and c <= 0x327F then
+        if c >= 0x326E then t[c] = 2; return 2 end
+        t[c] = 3; return 3 -- ㉣ (0x3263) is in the main table
+    elseif c >= 0x2160 and c <= 0x217F then
+        if     c <= 0x216B then return josa_char_num(t, c, 0x215F)
+        elseif c <= 0x216F then t[c] = 3; return 3
+        elseif c <= 0x217B then return josa_char_num(t, c, 0x216F)
+        else                    t[c] = 3; return 3
         end
-        if c >= 0x11A8 and c <= 0x11FF then
-            if c == 0x11AF then return 1 end
-            return 3
+    elseif c >= 0x2460 and c <= 0x24E9 then
+        if     c <= 0x2473 then return josa_char_num(t, c, 0x245F)
+        elseif c <= 0x2487 then return josa_char_num(t, c, 0x2473)
+        elseif c <= 0x249B then return josa_char_num(t, c, 0x2487)
+        elseif c <= 0x24B5 then return josa_char_alph(t, c, 0x249C)
+        elseif c <= 0x24CF then return josa_char_alph(t, c, 0x24B6)
+        else                    return josa_char_alph(t, c, 0x24D0)
         end
-        if c >= 0xD7CB and c <= 0xD7FB then return 3 end
-        if c >= 0x2170 and c <= 0x217F then c = c - 0x10 end
-        if c >= 0x2160 and c <= 0x216F then
-            if c >= 0x216C then return 3 end
-            return josa_char_num(t, c - 0x215F)
-        end
-        if c >= 0x2460 and c <= 0x2473 then return josa_char_num(t, c - 0x245F) end
-        if c >= 0x2474 and c <= 0x2487 then return josa_char_num(t, c - 0x2473) end
-        if c >= 0x2488 and c <= 0x249B then return josa_char_num(t, c - 0x2487) end
-        if c >= 0x249C and c <= 0x24B5 then return t[c - 0x249C + 0x61] or 2 end
-        if c >= 0x24B6 and c <= 0x24CF then return t[c - 0x24B6 + 0x61] or 2 end
-        if c >= 0x24D0 and c <= 0x24E9 then return t[c - 0x24D0 + 0x61] or 2 end
-        if c >= 0x3131 and c <= 0x318E then
-            if c == 0x3139 then return 1 end
-            if c >= 0x314F and c <= 0x3163 or c >= 0x3187 then return 2 end
-            return 3
-        end
-        if c >= 0x3260 and c <= 0x327E then c = c - 0x60 end
-        if c >= 0x3200 and c <= 0x321E then
-            if c == 0x3203 then return 1 end
-            if c >= 0x320E then return 2 end
-            return 3
-        end
-        if c >= 0xFF10 and c <= 0xFF19 then return josa_char_num(t, c - 0xFF10) end
-        if c >= 0xFF21 and c <= 0xFF3A then return t[c - 0xFF21 + 0x61] or 2 end
-        if c >= 0xFF41 and c <= 0xFF5A then return t[c - 0xFF41 + 0x61] or 2 end
-        return 2
+    elseif c >= 0xFF10 and c <= 0xFF19 then return josa_char_num(t, c, 0xFF10)
+    elseif c >= 0xFF21 and c <= 0xFF3A then return josa_char_alph(t, c, 0xFF21)
+    elseif c >= 0xFF41 and c <= 0xFF5A then return josa_char_alph(t, c, 0xFF41)
+    elseif c >= 0x3400 and c <= 0x9FFF
+        or c >= 0xF900 and c <= 0xFAFF
+        or c >= 0x20000 and c <= 0x3347F then
+        t[c] = 2; return 2; -- TODO: need to parse UniHan database
     end
+end
 })
 
 --
 -- obtain char that comes just before the josa
 --
-local function get_prev_char (p)
+local function get_prev_josa_type (p)
     while p do
-        if p.id == glyph_id then
-            local pc = p.char or 0
-            if not nobr_after[pc] then
-                if not nobr_before[pc] or nobr_before[pc] >= 2 then
-                    return pc
-                end
-            end
-        elseif p.id == hbox_id or p.id == vbox_id then
-            local pc = get_prev_char(node.slide(p.head))
-            if pc then return pc end
+        if p.char then
+            local j = josa_code[p.char]
+            if j then return j end
+        elseif p.list then
+            local j = get_prev_josa_type(node.slide(p.list))
+            if j then return j end
         end
         p = node.getprev(p)
     end
@@ -680,30 +716,33 @@ local function auto_josa (head)
     local curr, tofree = head, {}
     while curr do
         if curr.id == glyph_id then
-            local josa = node.has_attribute(curr, attr_josa)
-            if josa then
-                local cc = curr.char or 0
-                if josa == 0 then
-                    josa = josa_code[get_prev_char(node.getprev(curr)) or 0x30]
-                end
-                if cc == 0xC774 then
-                    local n = node.getnext(curr)
-                    if n and n.char and n.char >= 0xAC00 and n.char <= 0xD7A3 then
-                    else
-                        cc = 0xAC00
+            local var = node.has_attribute(curr, attr_cjk)
+            if var and var <= 2 then
+                local josa = node.has_attribute(curr, attr_josa)
+                if josa then
+                    if josa == 0 then
+                        josa = get_prev_josa_type(node.getprev(curr)) or 2
                     end
-                end
-                local new = josa_table[cc]
-                if new then
-                    cc = new[josa]
-                    if cc then
-                        curr.char = cc
-                    else
-                        head = node.remove(head, curr)
-                        table.insert(tofree, curr)
+                    local cc = curr.char or 0
+                    if cc == 0xC774 then
+                        local n = node.getnext(curr)
+                        if n and n.char and n.char >= 0xAC00 and n.char <= 0xD7A3 then
+                        else
+                            cc = 0xAC00
+                        end
                     end
+                    local new = josa_table[cc]
+                    if new then
+                        cc = new[josa]
+                        if cc then
+                            curr.char = cc
+                        else
+                            head = node.remove(head, curr)
+                            table.insert(tofree, curr)
+                        end
+                    end
+                    node.unset_attribute(curr, attr_josa)
                 end
-                node.unset_attribute(curr, attr_josa)
             end
         end
         curr = node.getnext(curr)
@@ -721,7 +760,6 @@ luatexbase.add_to_callback( "pre_shaping_filter",
 function(head)
     if attr_josa then head = auto_josa(head) end
     head = cjk_break(head)
-    if attr_josa then head = reorder_tm(head) end
     return head
 end,
 "polyglossia.lang_cjk_spacing")
