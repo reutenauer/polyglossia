@@ -77,11 +77,10 @@ local nobr_after = {
 
 --
 -- characters before which linebreak is not allowed
---   (currently, not much differences among the followings)
 --   1: normal chars
 --   2: hangul jamo vowels and trailing consonants plus combinings
---   3: kana small letters
---   0: dashes (suppress visible spacing after this char)
+--   3: kana small letters (not suppressing char orphan)
+--   4: dashes and iterations (not suppressing char orphan)
 --
 local nobr_before = setmetatable({
     [0x21] = 1, -- ! EXCLAMATION MARK
@@ -89,7 +88,7 @@ local nobr_before = setmetatable({
     [0x27] = 1, -- ' APOSTROPHE
     [0x29] = 1, -- ) RIGHT PARENTHESIS
     [0x2C] = 1, -- , COMMA
-    [0x2D] = 0, -- - HYPHEN-MINUS
+    [0x2D] = 4, -- - HYPHEN-MINUS
     [0x2E] = 1, -- . FULL STOP
     [0x2F] = 1, -- / SOLIDUS
     [0x3A] = 1, -- : COLON
@@ -107,17 +106,17 @@ local nobr_before = setmetatable({
     [0xB9] = 1, -- ¹ SUPERSCRIPT ONE
     [0xBA] = 1, -- º MASCULINE ORDINAL INDICATOR
     [0xBB] = 1, -- » RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
-    [0x2013] = 0, -- – EN DASH
-    [0x2014] = 0, -- — EM DASH
-    [0x2015] = 0, -- ― HORIZONTAL BAR
+    [0x2013] = 4, -- – EN DASH
+    [0x2014] = 4, -- — EM DASH
+    [0x2015] = 4, -- ― HORIZONTAL BAR
     [0x2019] = 1, -- ’ RIGHT SINGLE QUOTATION MARK
     [0x201D] = 1, -- ” RIGHT DOUBLE QUOTATION MARK
-    [0x2025] = 0, -- ‥ TWO DOT LEADER
-    [0x2026] = 0, -- … HORIZONTAL ELLIPSIS
+    [0x2025] = 4, -- ‥ TWO DOT LEADER
+    [0x2026] = 4, -- … HORIZONTAL ELLIPSIS
     [0x232A] = 1, -- 〉 RIGHT-POINTING ANGLE BRACKET
     [0x3001] = 1, -- 、 IDEOGRAPHIC COMMA
     [0x3002] = 1, -- 。 IDEOGRAPHIC FULL STOP
-    [0x3005] = 1, -- 々 IDEOGRAPHIC ITERATION MARK
+    [0x3005] = 4, -- 々 IDEOGRAPHIC ITERATION MARK
     [0x3009] = 1, -- 〉 RIGHT ANGLE BRACKET
     [0x300B] = 1, -- 》 RIGHT DOUBLE ANGLE BRACKET
     [0x300D] = 1, -- 」 RIGHT CORNER BRACKET
@@ -127,12 +126,16 @@ local nobr_before = setmetatable({
     [0x3017] = 1, -- 〗 RIGHT WHITE LENTICULAR BRACKET
     [0x3019] = 1, -- 〙 RIGHT WHITE TORTOISE SHELL BRACKET
     [0x301B] = 1, -- 〛 RIGHT WHITE SQUARE BRACKET
-    [0x301C] = 1, -- 〜 WAVE DASH
+    [0x301C] = 4, -- 〜 WAVE DASH
     [0x301E] = 1, -- 〞 DOUBLE PRIME QUOTATION MARK
     [0x301F] = 1, -- 〟 LOW DOUBLE PRIME QUOTATION MARK
-    [0x3035] = 1, -- 〵 VERTICAL KANA REPEAT MARK LOWER HALF
-    [0x303B] = 1, -- 〻 VERTICAL IDEOGRAPHIC ITERATION MARK
-    [0x303C] = 1, -- 〼 MASU MARK
+    [0x3030] = 4, -- 〰 WAVY DASH
+    [0x3031] = 4, -- 〱 VERTICAL KANA REPEAT MARK
+    [0x3032] = 4, -- 〲 VERTICAL KANA REPEAT WITH VOICED SOUND MARK
+    [0x3033] = 4, -- 〳 VERTICAL KANA REPEAT MARK UPPER HALF
+    [0x3034] = 4, -- 〴 VERTICAL KANA REPEAT WITH VOICED SOUND MARK UPPER HALF
+    [0x3035] = 2, -- 〵 VERTICAL KANA REPEAT MARK LOWER HALF
+    [0x303B] = 4, -- 〻 VERTICAL IDEOGRAPHIC ITERATION MARK
     [0x3041] = 3, -- ぁ HIRAGANA LETTER SMALL A
     [0x3043] = 3, -- ぃ HIRAGANA LETTER SMALL I
     [0x3045] = 3, -- ぅ HIRAGANA LETTER SMALL U
@@ -147,11 +150,11 @@ local nobr_before = setmetatable({
     [0x3096] = 3, -- ゖ HIRAGANA LETTER SMALL KE
     [0x3099] = 2, --  COMBINING KATAKANA-HIRAGANA VOICED SOUND MARK
     [0x309A] = 2, --  COMBINING KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
-    [0x309B] = 2, -- ゛ KATAKANA-HIRAGANA VOICED SOUND MARK
-    [0x309C] = 2, -- ゜ KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
-    [0x309D] = 1, -- ゝ HIRAGANA ITERATION MARK
-    [0x309E] = 1, -- ゞ HIRAGANA VOICED ITERATION MARK
-    [0x30A0] = 1, -- ゠ KATAKANA-HIRAGANA DOUBLE HYPHEN
+    [0x309B] = 4, -- ゛ KATAKANA-HIRAGANA VOICED SOUND MARK
+    [0x309C] = 4, -- ゜ KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
+    [0x309D] = 4, -- ゝ HIRAGANA ITERATION MARK
+    [0x309E] = 4, -- ゞ HIRAGANA VOICED ITERATION MARK
+    [0x30A0] = 4, -- ゠ KATAKANA-HIRAGANA DOUBLE HYPHEN
     [0x30A1] = 3, -- ァ KATAKANA LETTER SMALL A
     [0x30A3] = 3, -- ィ KATAKANA LETTER SMALL I
     [0x30A5] = 3, -- ゥ KATAKANA LETTER SMALL U
@@ -164,13 +167,14 @@ local nobr_before = setmetatable({
     [0x30EE] = 3, -- ヮ KATAKANA LETTER SMALL WA
     [0x30F5] = 3, -- ヵ KATAKANA LETTER SMALL KA
     [0x30F6] = 3, -- ヶ KATAKANA LETTER SMALL KE
-    [0x30FB] = 1, -- ・ KATAKANA MIDDLE DOT
-    [0x30FC] = 1, -- ー KATAKANA-HIRAGANA PROLONGED SOUND MARK
-    [0x30FD] = 1, -- ヽ KATAKANA ITERATION MARK
-    [0x30FE] = 1, -- ヾ KATAKANA VOICED ITERATION MARK
-    [0xFE30] = 0, -- ︰ PRESENTATION FORM FOR VERTICAL TWO DOT LEADER
-    [0xFE31] = 0, -- ︱ PRESENTATION FORM FOR VERTICAL EM DASH
-    [0xFE32] = 0, -- ︲ PRESENTATION FORM FOR VERTICAL EN DASH
+    [0x30FB] = 4, -- ・ KATAKANA MIDDLE DOT
+    [0x30FC] = 4, -- ー KATAKANA-HIRAGANA PROLONGED SOUND MARK
+    [0x30FD] = 4, -- ヽ KATAKANA ITERATION MARK
+    [0x30FE] = 4, -- ヾ KATAKANA VOICED ITERATION MARK
+    [0xFE19] = 4, -- ︙ PRESENTATION FORM FOR VERTICAL HORIZONTAL ELLIPSIS
+    [0xFE30] = 4, -- ︰ PRESENTATION FORM FOR VERTICAL TWO DOT LEADER
+    [0xFE31] = 4, -- ︱ PRESENTATION FORM FOR VERTICAL EM DASH
+    [0xFE32] = 4, -- ︲ PRESENTATION FORM FOR VERTICAL EN DASH
     [0xFE36] = 1, -- ︶ PRESENTATION FORM FOR VERTICAL RIGHT PARENTHESIS
     [0xFE38] = 1, -- ︸ PRESENTATION FORM FOR VERTICAL RIGHT CURLY BRACKET
     [0xFE3A] = 1, -- ︺ PRESENTATION FORM FOR VERTICAL RIGHT TORTOISE SHELL BRACKET
@@ -192,7 +196,7 @@ local nobr_before = setmetatable({
     [0xFF1F] = 1, -- ？ FULLWIDTH QUESTION MARK
     [0xFF3D] = 1, -- ］ FULLWIDTH RIGHT SQUARE BRACKET
     [0xFF5D] = 1, -- ｝ FULLWIDTH RIGHT CURLY BRACKET
-    [0xFF5E] = 1, -- ～ FULLWIDTH TILDE
+    [0xFF5E] = 4, -- ～ FULLWIDTH TILDE
     [0xFF60] = 1, -- ｠ FULLWIDTH RIGHT WHITE PARENTHESIS
     [0xFF61] = 1, -- ｡ HALFWIDTH IDEOGRAPHIC FULL STOP
     [0xFF63] = 1, -- ｣ HALFWIDTH RIGHT CORNER BRACKET
@@ -215,7 +219,7 @@ local nobr_before = setmetatable({
 
 --
 -- characters before/after which zero-width glue will be inserted
---      except nobr_before == 0
+--      0: dashes (suppress stretching between dashes)
 --
 local zero_spacing = {
     [0x23] = 1, -- # NUMBER SIGN
@@ -224,6 +228,7 @@ local zero_spacing = {
     [0x26] = 1, -- & AMPERSAND
     [0x2A] = 1, -- * ASTERISK
     [0x2B] = 1, -- + PLUS SIGN
+    [0x2D] = 0, -- - HYPHEN-MINUS
     [0x2F] = 1, -- / SOLIDUS
     [0x3C] = 1, -- < LESS-THAN SIGN
     [0x3D] = 1, -- = EQUALS SIGN
@@ -236,12 +241,22 @@ local zero_spacing = {
     [0x7E] = 1, -- ~ TILDE
     [0xA5] = 1, -- ¥ YEN SIGN
     [0xB1] = 1, -- ± PLUS-MINUS SIGN
+    [0x2013] = 0, -- – EN DASH
+    [0x2014] = 0, -- — EM DASH
+    [0x2015] = 0, -- ― HORIZONTAL BAR
+    [0x2025] = 0, -- ‥ TWO DOT LEADER
+    [0x2026] = 0, -- … HORIZONTAL ELLIPSIS
     [0x2030] = 1, -- ‰ PER MILLE SIGN
     [0x20A9] = 1, -- ₩ WON SIGN
     [0x2103] = 1, -- ℃ DEGREE CELSIUS
     [0x2109] = 1, -- ℉ DEGREE FAHRENHEIT
     [0x223C] = 1, -- ∼ TILDE OPERATOR
     [0x301C] = 1, -- 〜 WAVE DASH
+    [0x3030] = 0, -- 〰 WAVY DASH
+    [0xFE19] = 0, -- ︙ PRESENTATION FORM FOR VERTICAL HORIZONTAL ELLIPSIS
+    [0xFE30] = 0, -- ︰ PRESENTATION FORM FOR VERTICAL TWO DOT LEADER
+    [0xFE31] = 0, -- ︱ PRESENTATION FORM FOR VERTICAL EM DASH
+    [0xFE32] = 0, -- ︲ PRESENTATION FORM FOR VERTICAL EN DASH
     [0xFF03] = 1, -- ＃ FULLWIDTH NUMBER SIGN
     [0xFF04] = 1, -- ＄ FULLWIDTH DOLLAR SIGN
     [0xFF05] = 1, -- ％ FULLWIDTH PERCENT SIGN
@@ -264,8 +279,8 @@ local function is_cjk (c)
     or     c >= 0xFF00  and c <= 0xFFEF
     or     c >= 0x1F100 and c <= 0x1F2FF
     or     c >= 0x20000 and c <= 0x3347F
-    or     nobr_after[c]  and c > 0x2014
-    or     nobr_before[c] and c > 0x2014
+    or     c > 0x2014 and nobr_after[c]
+    or     c > 0x2014 and nobr_before[c]
 end
 
 --
@@ -285,7 +300,8 @@ local charclass = setmetatable({
     [0x301D] = 1, [0xFE17] = 1, [0xFE35] = 1, [0xFE37] = 1,
     [0xFE39] = 1, [0xFE3B] = 1, [0xFE3D] = 1, [0xFE3F] = 1,
     [0xFE41] = 1, [0xFE43] = 1, [0xFE47] = 1, [0xFF08] = 1,
-    [0xFF3B] = 1, [0xFF5B] = 1, [0xFF5F] = 1, [0xFF62] = 1,
+    [0xFF3B] = 1, [0xFF5B] = 1, [0xFF5F] = 1,
+    --
     [0x2019] = 2, [0x201D] = 2, [0x232A] = 2, [0x3001] = 2,
     [0x3009] = 2, [0x300B] = 2, [0x300D] = 2, [0x300F] = 2,
     [0x3011] = 2, [0x3015] = 2, [0x3017] = 2, [0x3019] = 2,
@@ -294,12 +310,15 @@ local charclass = setmetatable({
     [0xFE3A] = 2, [0xFE3C] = 2, [0xFE3E] = 2, [0xFE40] = 2,
     [0xFE42] = 2, [0xFE44] = 2, [0xFE48] = 2, [0xFF09] = 2,
     [0xFF0C] = 2, [0xFF3D] = 2, [0xFF5D] = 2, [0xFF60] = 2,
-    [0xFF63] = 2, [0xFF64] = 2, [0x00B7] = 3, [0x30FB] = 3,
-    [0xFF1A] = 3, [0xFF1B] = 3, [0xFF65] = 3, [0x3002] = 4,
-    [0xFE12] = 4, [0xFF0E] = 4, [0xFF61] = 4, [0x2015] = 5,
-    [0x2025] = 5, [0x2026] = 5, [0xFE19] = 5, [0xFE30] = 5,
-    [0xFE31] = 5, [0xFE15] = 6, [0xFE16] = 6, [0xFF01] = 6,
-    [0xFF1F] = 6,
+    --
+    [0x00B7] = 3, [0x30FB] = 3, [0xFF1A] = 3, [0xFF1B] = 3,
+    --
+    [0x3002] = 4, [0xFE12] = 4, [0xFF0E] = 4,
+    --
+    [0x2015] = 5, [0x2025] = 5, [0x2026] = 5, [0xFE19] = 5,
+    [0xFE30] = 5, [0xFE31] = 5,
+    --
+    [0xFE15] = 6, [0xFE16] = 6, [0xFF01] = 6, [0xFF1F] = 6,
 }, { __index = function() return 0 end })
 
 --
@@ -423,12 +442,10 @@ end
 --   nobr: no linebreak
 --   x:    true between cjk and non-cjk (a little more spacing)
 --
-local function insert_penalty_glue (head, curr, f, var, nobr, x)
-    if nobr then
-        local penalty = get_new_penalty(10000)
-        head, curr = node.insert_after(head, curr, penalty)
-    elseif curr.id ~= penalty_id then
-        local penalty = (var == 0 or var == 2) and 50 or not f and 0
+local function insert_penalty_glue (head, curr, f, var, nobr, x, orph)
+    if curr.id ~= penalty_id then
+        local penalty = nobr and 10000 or orph and 1000
+                        or (var == 0 or var == 2) and 50 or not f and 0
         if penalty then
             head, curr = node.insert_after(head, curr, get_new_penalty(penalty))
         end
@@ -506,6 +523,7 @@ end
 --
 local function cjk_break (head)
     local curr = head
+    local para = head.id == localpar_id
 
     while curr do
         local var = node.has_attribute(curr, attr_cjk)
@@ -542,13 +560,13 @@ local function cjk_break (head)
                 end
                 if not (f or f2) then goto skip_combining end
 
+                local nbrn, zroc, zron = nobr_before[n], zero_spacing[c], zero_spacing[n]
+
                 -- skip combining. or dash+dash case to suppress stretching
-                if nobr_before[n] == 2 or (nobr_before[c] == 0 and nobr_before[n] == 0) then
-                    goto skip_combining
-                end
+                if nbrn == 2 or zroc == 0 and zron == 0 then goto skip_combining end
 
                 local nc = get_charclass(nvar, n)
-                local nobr = nobr_before[n] or nobr_after[c]
+                local nobr = nbrn or nobr_after[c]
 
                 f = nc > 0 and nvar ~= 2 and f2 or f or f2 -- priority to cjk punctuation font
                 if f == f2 then var = nvar end
@@ -565,13 +583,27 @@ local function cjk_break (head)
                         if c == 1 or n == 1 then -- non-glyph box: penalty only
                             head, curr = insert_penalty_glue(head, curr, false, var, nobr)
 
-                        -- plain variant / cjk+cjk / nobr cjk+noncjk / around dash : 0pt glue
-                        elseif var == 0 or (cjkc and cjkn) or nobr or nobr_before[c] == 0
-                            or zero_spacing[c] or zero_spacing[n] then
-                            head, curr = insert_penalty_glue(head, curr, f, var, nobr)
+                        else
+                            local orph
+                            if para and not nobr then
+                                local nn = node.getnext(next)
+                                while nn.char do
+                                    local nb = nobr_before[nn.char]
+                                    if not nb or nb >= 3 then break end
+                                    nn = node.getnext(nn)
+                                end
+                                if nn.penalty and nn.penalty == 10000 then
+                                    nn = node.getnext(nn)
+                                    if nn.id == glue_id and nn.subtype == 15 then -- parfillskip
+                                        orph = true -- suppress char orphan
+                                    end
+                                end
+                            end
 
-                        else -- other cases: insert a small glue
-                            head, curr = insert_penalty_glue(head, curr, f, var, nobr, true)
+                            -- plain variant / cjk+cjk / nobr cjk+noncjk / around dash : 0pt glue
+                            local x = not (var == 0 or cjkc and cjkn or nobr or zroc or zron)
+
+                            head, curr = insert_penalty_glue(head, curr, f, var, nobr, x, orph)
                         end
                     end
                 end
