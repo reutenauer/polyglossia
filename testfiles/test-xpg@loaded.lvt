@@ -1,0 +1,9 @@
+\input{regression-test.tex}
+\documentclass{article}
+\usepackage{polyglossia}
+\setmainlanguage{italian}
+\setotherlanguage{french}
+\makeatletter
+\START
+\show\xpg@loaded
+\END
