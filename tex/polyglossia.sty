@@ -986,13 +986,6 @@
 
 \DeclareDocumentCommand \setdefaultlanguage { O{} m }
 {
-  % latex is an internal language, so do not record
-  \str_if_eq:eeF{#2}{latex}
-  {
-    \clist_if_in:NeF \xpg@loaded {\xpg_alias_base_lang:n{##2}}{
-      \clist_gput_right:Ne \xpg@loaded {\xpg_alias_base_lang:n{##2}}
-    }
-  }
   \seq_if_in:NeF \g__xpg_langs_loaded_seq {#2}
   {
     \__xpg_load_lang_definition:nn{#1}{#2}
@@ -1004,6 +997,14 @@
     }
     \seq_gput_right:Ne \g__xpg_langs_loaded_seq {#2}
   }
+  % latex is an internal language, so do not record
+  \str_if_eq:eeF{#2}{latex}
+  {
+    \clist_if_in:NeF \xpg@loaded {\xpg_alias_base_lang:n{#2}}{
+      \clist_gput_right:Ne \xpg@loaded {\xpg_alias_base_lang:n{#2}}
+    }
+  }
+
   \cs_set_nopar:Npe \mainlanguagevariant { \prop_item:Ne \l_xpg_curropt_prop { \xpg_alias_base_lang:n{#2} / variant } }
    \exp_args:Nee \__xpg_set_default_language:nn {\xpg_alias_add_to_option_i:nn{#2}{#1}}
     {\xpg_alias_base_lang:n{#2}}
