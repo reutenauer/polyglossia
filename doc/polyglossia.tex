@@ -1442,6 +1442,9 @@ and that passing \xpgvalue{babelshorthands} (without value) is equivalent to pas
 	       and \MakeUppercase{ϟ} (uppercase ninety) -- or, with \xpgoption{koppa=arachaic}, ϙ (lowercase ninety),
 	       and \MakeUppercase{Ϙ} (uppercase ninety). You can redefine the macros if you need other
 	       representations.
+	 \item The macros \Cmd\greektoday and \Cmd\Greektoday produce the current date with the month and the day
+	       represented as Greek numerals instead of Arabic. The former command produces lowercase, the
+	       latter uppercase Greek numerals.
 	\end{itemize}
 
 \subsection{hebrew}\label{hebrew}
@@ -2767,6 +2770,11 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
     \textit{Orphan Character} here means a paragraph whose last line contains single character only.
   \item Issue \cmd{\iflanguageloaded} (and related) tests earlier so packages can be loaded conditionally (\TXI{696}).
   \item Fix \cmd{\xpg@loaded} missing the main language in the preamble.
+\end{itemize}
+
+\subsubsection*{Documentation improvements}
+\begin{itemize}
+	\item Document the previously hidden Greek commands \cmd\greektoday and \cmd\Greektoday (part of \TXI{695}).
 \end{itemize}
 
 \subsection*{2.8 (2025/09/22)}
