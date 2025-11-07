@@ -2764,7 +2764,8 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
         This fix partly restores the functionality of v.\,2.7.
   \item Fix and document the \textit{Josa} selection function in Korean language module (\TXI{691}).
   \item Suppress orphan character in CJK languages (\TXI{693}).
-    \textit{Orhpan Character} here means a paragraph whose last line contains single character only.
+    \textit{Orphan Character} here means a paragraph whose last line contains single character only.
+  \item Issue \cmd{\iflanguageloaded} (and related) tests earlier so packages can be loaded conditionally (\TXI{696}).
   \item Fix \cmd{\xpg@loaded} missing the main language in the preamble.
 \end{itemize}
 

@@ -1557,7 +1557,7 @@
 % Test if language is loaded
 \DeclareDocumentCommand \iflanguageloaded { m m m }
 {
-   \hook_gput_code:nnn {begindocument/end} {.}
+   \hook_gput_code:nnn {begindocument/before} {.}
    {
      \clist_if_in:NeTF \xpg@loaded{#1}{#2}{#3}
    }
@@ -1566,7 +1566,7 @@
 % Same for babellanguage is loaded
 \DeclareDocumentCommand \ifbabellanguageloaded { m m m }
 {
-  \hook_gput_code:nnn {begindocument/end} {.}
+  \hook_gput_code:nnn {begindocument/before} {.}
   {
      \clist_if_in:NeTF \xpg@bloaded{#1}{#2}{#3}
   }
@@ -1575,7 +1575,7 @@
 % Same for languageid
 \DeclareDocumentCommand \iflanguageidloaded { m m m m }
 {
-  \hook_gput_code:nnn {begindocument/end} {.}
+  \hook_gput_code:nnn {begindocument/before} {.}
   {
     \str_case:nnTF {#1}
       {
