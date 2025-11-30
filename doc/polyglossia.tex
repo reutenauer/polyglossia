@@ -160,7 +160,10 @@
 \RecordChanges
 % COMMENT THE NEXT LINE TO INCLUDE THE CODE
 \AtBeginDocument{\OnlyDescription}
-
+\ExplSyntaxOn
+\cs_gset_eq:NN \tbl_save_outer_table_cols: \scan_stop:
+\ExplSyntaxOff
+\partokencontext=0
 
 \begin{document}
 \hyphenation{Kha-li-ghi Reu-ten-auer new-zea-land}
