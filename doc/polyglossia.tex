@@ -160,6 +160,9 @@
 \RecordChanges
 % COMMENT THE NEXT LINE TO INCLUDE THE CODE
 \AtBeginDocument{\OnlyDescription}
+
+% Work around a bug presumably of bidi w/ microtype
+% See https://github.com/reutenauer/polyglossia/issues/696#issuecomment-3591727653
 \ExplSyntaxOn
 \cs_gset_eq:NN \tbl_save_outer_table_cols: \scan_stop:
 \ExplSyntaxOff
@@ -2777,7 +2780,7 @@ where \meta{type} is a supported language id type (such as ¦bcp-47¦) and \meta
 
 \subsubsection*{Documentation improvements}
 \begin{itemize}
-	\item Document the previously hidden Greek commands \cmd\greektoday and \cmd\Greektoday (part of \TXI{695}).
+	\item Document the previously hidden Greek commands \cmd\greektoday\ and \cmd\Greektoday\ (part of \TXI{695}).
 \end{itemize}
 
 \subsection*{2.8 (2025/09/22)}
